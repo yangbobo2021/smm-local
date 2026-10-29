@@ -45,6 +45,30 @@ def test_incremental_copy_survives_deletion_and_partial_line(tmp_path):
     assert db.search("晨星 恢复")["results"][0]["source_session_id"] == "s1"
 
 
+def test_long_conversation_preview_keeps_later_decision_and_its_question(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    path = root / "long.jsonl"
+    content = [line("session_meta", {"id": "long", "cwd": str(tmp_path / "Project")}, 1)]
+    for turn in range(61):
+        user = "BM25 规模 检索 的初步想法" if turn < 12 else f"第 {turn} 次普通进度"
+        answer = "先比较文档分段方案" if turn < 12 else "记录完成"
+        if turn == 60:
+            user = "BM25 规模 检索 的最终方向是什么？"
+            answer = "最终决定优先按项目过滤无关信息。"
+        content.append(line("response_item", {"type": "message", "id": f"u-{turn}", "role": "user", "content": [{"type": "input_text", "text": user}]}, turn * 2 + 2))
+        content.append(line("response_item", {"type": "message", "id": f"a-{turn}", "role": "assistant", "content": [{"type": "output_text", "text": answer}]}, turn * 2 + 3))
+    path.write_text("".join(content), encoding="utf-8")
+    db = Archive(tmp_path / "archive.sqlite3")
+    assert db.sync_codex(root)["messages_new"] == 122
+    result = db.search("BM25 规模 检索")["results"][0]
+    positions = [m["position"] for m in result["matched_messages"]]
+    assert result["source_session_id"] == "long"
+    assert positions == sorted(positions)
+    assert 122 in positions and 123 in positions
+    assert any("最终决定优先按项目过滤" in m["text"] for m in result["matched_messages"])
+
+
 def test_project_mapping_direct_links_and_current_exclusion(tmp_path):
     root = tmp_path / "sessions"
     root.mkdir()

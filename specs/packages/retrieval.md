@@ -26,8 +26,12 @@
 
 当用户读取某会话或指定消息区间时，系统应从独立副本返回按顺序保存的完整消息 [[archive-1](archive.md#archive-1)]，即使源文件已删除 [[archive-4](archive.md#archive-4)]。
 
+### retrieval-7
+
+当命中的对话包含大量消息时，系统应兼顾消息的词面相关性和时间分布，返回带原始位置的完整消息及其相邻问答，避免只展示较早的相似讨论。
+
 ## 验证
 
 ### retrieval-6
 
-隔离端到端流程应检查排序和命中位置 [[retrieval-1](#retrieval-1)]、项目与全局范围 [[retrieval-2](#retrieval-2)] [[retrieval-3](#retrieval-3)]、当前会话排除 [[retrieval-4](#retrieval-4)] 和源删除后的原文读取 [[retrieval-5](#retrieval-5)]。
+隔离端到端流程应检查排序和命中位置 [[retrieval-1](#retrieval-1)]、项目与全局范围 [[retrieval-2](#retrieval-2)] [[retrieval-3](#retrieval-3)]、当前会话排除 [[retrieval-4](#retrieval-4)]、源删除后的原文读取 [[retrieval-5](#retrieval-5)]，以及长对话的跨时段证据展示 [[retrieval-7](#retrieval-7)]。

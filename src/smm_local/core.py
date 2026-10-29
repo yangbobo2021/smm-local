@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import sqlite3
 import threading
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -58,6 +60,62 @@ def tokens(text: str) -> list[str]:
         else:
             out.append(word)
     return out
+
+
+def select_matched_messages(messages: list[sqlite3.Row], query_terms: list[str]) -> list[dict[str, Any]]:
+    """Show relevant turns across a conversation, including the original question/reply."""
+    if not messages:
+        return []
+    wanted = set(query_terms)
+    term_counts = [Counter(tokens(message["text"])) for message in messages]
+    lengths = [sum(counts.values()) for counts in term_counts]
+    document_frequency = Counter(term for counts in term_counts for term in counts.keys() & wanted)
+    average_length = max(1.0, sum(lengths) / len(lengths))
+    scores = []
+    for counts, length in zip(term_counts, lengths):
+        score = 0.0
+        for term in counts.keys() & wanted:
+            frequency = counts[term]
+            idf = math.log1p((len(messages) - document_frequency[term] + 0.5) / (document_frequency[term] + 0.5))
+            score += idf * frequency * 2.2 / (frequency + 1.2 * (0.25 + 0.75 * length / average_length))
+        scores.append(score)
+    ranked = sorted((i for i, score in enumerate(scores) if score > 0), key=lambda i: (-scores[i], -i))
+    if not ranked:
+        return []
+    if len(messages) <= 100:
+        anchors = ranked[:3]
+    else:
+        # A long discussion can revisit the same subject years later. Reserve
+        # places for both halves and the latest fifth, rather than allowing
+        # earlier high-frequency messages to occupy every preview slot.
+        halfway = len(messages) // 2
+        recent_start = len(messages) * 4 // 5
+        older = [i for i in ranked if i < halfway]
+        newer = [i for i in ranked if i >= halfway]
+        recent = [i for i in ranked if i >= recent_start]
+        anchors = [ranked[0], *(part[0] for part in (older, newer) if part), *recent[:2]]
+        anchors = list(dict.fromkeys(anchors))
+    turn_starts = []
+    current_start = 0
+    for i, message in enumerate(messages):
+        if message["role"] == "user":
+            current_start = i
+        turn_starts.append(current_start)
+    selected = set(anchors)
+    for anchor in anchors:
+        start = turn_starts[anchor]
+        end = next((i for i in range(anchor + 1, len(messages)) if messages[i]["role"] == "user"), len(messages))
+        if messages[anchor]["role"] == "assistant" and messages[start]["role"] == "user":
+            selected.add(start)
+            replies = [i for i in range(start + 1, end) if messages[i]["role"] == "assistant"]
+            if replies:
+                selected.add(replies[-1])
+        elif messages[anchor]["role"] == "user":
+            replies = [i for i in range(anchor + 1, end) if messages[i]["role"] == "assistant"]
+            if replies:
+                selected.add(max(replies, key=lambda i: (scores[i], i)))
+                selected.add(replies[-1])
+    return [dict(messages[i]) for i in sorted(selected)]
 
 
 class _ClosingConnection(sqlite3.Connection):
@@ -423,12 +481,10 @@ class Archive:
             results = []
             for index,row in enumerate(rows, 1):
                 messages = con.execute("SELECT position,role,text FROM messages WHERE conversation_id=? ORDER BY position,id", (row["id"],)).fetchall()
-                query_set = set(query_terms)
-                matches = sorted((m for m in messages if query_set.intersection(tokens(m["text"]))), key=lambda m: (-len(query_set.intersection(tokens(m["text"]))),m["position"]))[:3]
                 item = dict(row)
                 item["rank"] = index
                 item["bm25_score"] = -item.pop("rank_score")
-                item["matched_messages"] = [dict(m) for m in matches]
+                item["matched_messages"] = select_matched_messages(messages, query_terms)
                 results.append(item)
             effective = [] if project_ids is None else [dict(r) for r in con.execute("SELECT id,name FROM projects WHERE id IN ("+",".join("?" for _ in project_ids)+") ORDER BY id", project_ids)]
         return {"query": query, "scope": scope, "effective_projects": effective if scope == "project" else "all", "excluded_current_session_id": current_session_id if current_session_id and not include_current else None, "results": results}
