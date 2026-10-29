@@ -1,0 +1,124 @@
+import json
+from pathlib import Path
+
+import pytest
+from fastapi.testclient import TestClient
+
+from smm_local.api import create_app
+from smm_local.core import Archive
+
+
+def line(kind, payload, ordinal, timestamp="2026-10-29T08:00:00Z"):
+    return json.dumps({"type": kind, "ordinal": ordinal, "timestamp": timestamp, "payload": payload}, ensure_ascii=False) + "\n"
+
+
+def session(path: Path, sid: str, cwd: Path, user: str, assistant: str) -> None:
+    path.write_text(
+        line("session_meta", {"id": sid, "cwd": str(cwd)}, 1)
+        + line("response_item", {"type": "message", "id": sid+"-u", "role": "user", "content": [{"type": "input_text", "text": user}]}, 2)
+        + line("event_msg", {"type": "item_completed", "item": {"type": "UserMessage"}}, 3)
+        + line("response_item", {"type": "message", "id": sid+"-a", "role": "assistant", "content": [{"type": "output_text", "text": assistant}]}, 4),
+        encoding="utf-8",
+    )
+
+
+def test_incremental_copy_survives_deletion_and_partial_line(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    file = root / "one.jsonl"
+    session(file, "s1", tmp_path / "ProjectA", "晨星上线失败", "先恢复数据库快照")
+    db = Archive(tmp_path / "archive.sqlite3")
+    first = db.sync_codex(root)
+    assert (first["conversations_new"], first["messages_new"]) == (1, 2)
+    assert db.sync_codex(root)["messages_new"] == 0
+    with file.open("a", encoding="utf-8") as stream:
+        stream.write(line("response_item", {"type": "message", "id": "s1-u2", "role": "user", "content": [{"type": "input_text", "text": "回滚后检查索引"}]}, 5))
+        stream.write('{"type":"response_item"')
+    partial = db.sync_codex(root)
+    assert partial["messages_new"] == 1
+    assert partial["errors"]
+    with file.open("a", encoding="utf-8") as stream:
+        stream.write(',"ordinal":6,"payload":{"type":"message","id":"s1-a2","role":"assistant","content":[{"type":"output_text","text":"索引已经恢复"}]}}\n')
+    assert db.sync_codex(root)["messages_new"] == 1
+    file.unlink()
+    assert len(db.read(1)["messages"]) == 4
+    assert db.search("晨星 恢复")["results"][0]["source_session_id"] == "s1"
+
+
+def test_project_mapping_direct_links_and_current_exclusion(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    for sid, project, text in [("a", "Alpha", "部署晨星服务"), ("b", "Beta", "晨星联动测试"), ("c", "Gamma", "晨星远端记录")]:
+        session(root / f"{sid}.jsonl", sid, tmp_path / project, text, "记录完成")
+    db = Archive(tmp_path / "db.sqlite3")
+    db.sync_codex(root)
+    projects = {p["name"]: p["id"] for p in db.projects()}
+    a,b,c = (projects[x] for x in ("Alpha", "Beta", "Gamma"))
+    db.link_projects(a,b)
+    db.link_projects(b,c)
+    assert set(db.effective_projects(a)) == {a,b}
+    result = db.search("晨星", scope="project", project_id=a)
+    assert {r["source_session_id"] for r in result["results"]} == {"a", "b"}
+    assert {r["source_session_id"] for r in db.search("晨星", scope="all")["results"]} == {"a", "b", "c"}
+    assert {r["source_session_id"] for r in db.search("晨星", scope="project", project_id=a, current_session_id="a")["results"]} == {"b"}
+    assert {r["source_session_id"] for r in db.search("晨星", scope="project", project_id=a, current_session_id="a", include_current=True)["results"]} == {"a", "b"}
+    db.map_path(str(tmp_path / "Beta"), a)
+    assert {r["source_session_id"] for r in db.search("晨星", scope="project", project_id=a)["results"]} == {"a", "b"}
+    assert db.resolve_project(str(tmp_path / "Beta" / "src"))["id"] == a
+    db.link_projects(a,b,False)
+    assert db.effective_projects(a) == [a]
+    db.merge_projects(b,a)
+    assert db.resolve_project(str(tmp_path / "Beta"))["id"] == a
+    assert b not in {p["id"] for p in db.projects()}
+    assert {r["source_session_id"] for r in db.search("晨星", scope="project", project_id=a)["results"]} == {"a", "b", "c"}
+
+
+def test_parent_path_mapping_applies_to_existing_and_future_child_sessions(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    parent = tmp_path / "Product"
+    session(root / "old.jsonl", "old", parent / "module", "产品部署记录", "完成")
+    db = Archive(tmp_path / "db.sqlite3")
+    db.sync_codex(root)
+    other = tmp_path / "Other"
+    session(root / "other.jsonl", "other", other, "其他记录", "完成")
+    db.sync_codex(root)
+    target = db.resolve_project(str(other))["id"]
+    db.map_path(str(parent), target)
+    assert db.resolve_project(str(parent / "module"))["id"] == target
+    session(root / "new.jsonl", "new", parent / "new-module", "新增记录", "完成")
+    db.sync_codex(root)
+    assert db.resolve_project(str(parent / "new-module"))["id"] == target
+    assert {r["source_session_id"] for r in db.search("记录", scope="project", project_id=target)["results"]} == {"old", "other", "new"}
+
+
+def test_web_api_uses_same_archive(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    session(root / "one.jsonl", "web-1", tmp_path / "WebProject", "Web UI 搜索晨星", "已找到原文")
+    db = Archive(tmp_path / "db.sqlite3")
+    db.sync_codex(root)
+    with TestClient(create_app(db, auto_sync=False)) as client:
+        assert client.get("/").status_code == 200
+        assert "检索测试" in client.get("/").text
+        result = client.post("/api/search", json={"query": "晨星", "scope": "all"}).json()
+        assert result["results"][0]["source_session_id"] == "web-1"
+        assert client.get("/api/conversations/1").json()["messages"][0]["role"] == "user"
+        assert client.get("/api/status").json()["conversations"] == 1
+        assert client.get("/api/projects").json()[0]["name"] == "WebProject"
+        assert "合并同一项目" in client.get("/").text
+        assert client.post("/api/search", json={"query": "", "scope": "all"}).status_code == 400
+
+
+def test_source_file_rewrite_does_not_duplicate(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    path = root / "one.jsonl"
+    session(path, "same", tmp_path / "Proj", "项目故障", "检查日志")
+    db = Archive(tmp_path / "db.sqlite3")
+    db.sync_codex(root)
+    original = path.read_text()
+    path.write_text(original)
+    db.sync_codex(root)
+    assert db.status()["messages"] == 2
+    assert db.status()["conversations"] == 1

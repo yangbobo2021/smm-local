@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMM · 本地对话索引</title>
+  <style>
+    :root { color-scheme: light; font: 15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:#183047; background:#f4f7f7 }
+    * { box-sizing:border-box } body { margin:0 } header { background:#102b3e; color:white; padding:22px max(24px,calc((100vw - 1160px)/2)) }
+    header h1 { margin:0; font-size:23px } header p { margin:4px 0 0; opacity:.8 }
+    main { max-width:1160px; margin:auto; padding:20px 24px 80px }
+    nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px } nav button { border:1px solid #d2dcdf; background:white; color:#29475b; padding:9px 15px; border-radius:8px; cursor:pointer }
+    nav button.active { background:#0c6d71; color:white; border-color:#0c6d71 } section { display:none } section.active { display:block }
+    .card { background:white; border:1px solid #dbe4e6; border-radius:12px; padding:20px; margin:12px 0; box-shadow:0 2px 8px #1a405008 }
+    h2 { margin:0 0 12px; font-size:20px } h3 { margin:12px 0 8px; font-size:16px } .muted { color:#627987 }
+    .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:10px 0 } .row > label { min-width:95px }
+    input,select { border:1px solid #b9cbd0; border-radius:7px; padding:9px 10px; font:inherit; background:white; color:#183047 }
+    input[type=text],input[type=search] { flex:1; min-width:220px } button.primary { border:0; border-radius:7px; background:#0c6d71; color:white; padding:10px 16px; font:inherit; cursor:pointer }
+    button.secondary { border:1px solid #b9cbd0; border-radius:7px; background:white; padding:9px 13px; font:inherit; cursor:pointer }
+    button:hover { filter:brightness(.96) } button:disabled { opacity:.5; cursor:not-allowed }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px } .stat { background:#eaf3f3; padding:15px; border-radius:9px } .stat strong { display:block; font-size:25px }
+    .notice { min-height:24px; color:#0c6d71 } .error { color:#b32828 } .tag { display:inline-block; border-radius:5px; background:#e9f1f4; color:#315064; padding:2px 6px; margin-right:5px; font-size:12px }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; background:#f5f8f8; border:1px solid #e3ebec; border-radius:8px; padding:12px; margin:8px 0; max-height:400px; overflow:auto }
+    .result { border-top:1px solid #e5eded; padding:14px 0 } .result:first-child { border-top:0 } .result h3 { margin:0 0 3px }
+    .message { border-left:3px solid #9bc9c8; padding-left:12px; margin:12px 0 } .message small { color:#627987 }
+    code { background:#edf2f3; padding:2px 4px; border-radius:4px } .paths { overflow-wrap:anywhere; font-size:13px }
+  </style>
+</head>
+<body>
+<header><h1>SMM · 本地对话索引</h1><p>保存 Codex 对话副本，在明确的项目范围内查找原始信息。</p></header>
+<main>
+  <nav aria-label="页面">
+    <button data-tab="overview" class="active">导入进度</button><button data-tab="projects">项目</button><button data-tab="search">检索测试</button><button data-tab="settings">配置</button>
+  </nav>
+  <div id="notice" class="notice" role="status"></div>
+  <section id="overview" class="active">
+    <div class="card"><h2>Codex 对话导入</h2><div class="stats" id="stats"></div><p class="muted" id="last-sync"></p><button class="primary" id="sync-now">立即同步</button><p id="sync-state"></p></div>
+    <div class="card"><h2>导入问题</h2><div id="errors" class="muted">加载中…</div></div>
+  </section>
+  <section id="projects">
+    <div class="card"><h2>项目归属</h2><p class="muted">同一项目的多个目录映射到同一个项目；不同但相关的项目建立直接关联。检索只展开一层关联。</p><div class="row"><input id="project-filter" type="search" placeholder="按项目名或路径筛选"><span id="project-count" class="muted"></span></div><div id="project-list"></div></div>
+    <div class="card"><h2>路径映射</h2><div class="row"><input id="map-path" type="text" placeholder="已有来源工作目录的完整路径"><select id="map-project"></select><button id="map-save" class="primary">保存映射</button></div></div>
+    <div class="card"><h2>项目关联</h2><div class="row"><select id="link-a"></select><span>↔</span><select id="link-b"></select><button id="link-save" class="primary">建立关联</button><button id="unlink-save" class="secondary">取消关联</button></div></div>
+    <div class="card"><h2>合并同一项目</h2><p class="muted">来源项目的所有路径、对话和关联将转入目标项目。</p><div class="row"><label>来源</label><select id="merge-source"></select><label>目标</label><select id="merge-target"></select><button id="merge-save" class="primary">合并项目</button></div></div>
+  </section>
+  <section id="search">
+    <div class="card"><h2>检索测试</h2><form id="search-form"><div class="row"><input id="query" type="search" placeholder="例如：KeySync 同步 错误" required><button class="primary">搜索</button></div><div class="row"><label for="scope">检索范围</label><select id="scope"><option value="project">指定项目及关联项目</option><option value="all">所有项目</option></select><select id="search-project"></select><label for="limit">数量</label><select id="limit"><option>5</option><option>10</option><option>20</option></select></div></form><p id="effective" class="muted"></p><div id="results"></div></div>
+    <div class="card" id="reader-card" hidden><h2>对话原文</h2><div id="reader"></div></div>
+  </section>
+  <section id="settings">
+    <div class="card"><h2>同步配置</h2><div class="row"><label for="codex-root">Codex 会话目录</label><input type="text" id="codex-root"></div><div class="row"><label for="sync-interval">同步间隔（秒）</label><input type="number" id="sync-interval" min="10" max="3600"></div><button id="settings-save" class="primary">保存配置</button><p class="muted">服务仅监听本机地址；导入后的知识库数据不会因源对话删除而自动删除。</p></div>
+  </section>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  async function request(path, options={}) { const r=await fetch(path,{headers:{'Content-Type':'application/json'},...options}); const data=await r.json(); if(!r.ok) throw Error(data.detail || r.statusText); return data }
+  function notice(message,error=false) { $('notice').textContent=message; $('notice').className='notice'+(error?' error':'') }
+  let projectData=[];
+  async function refreshStatus() {
+    const s=await request('/api/status'); $('stats').innerHTML=[['对话',s.conversations],['消息',s.messages],['项目',s.projects],['来源文件',s.source_files]].map(([a,b])=>`<div class="stat"><span>${a}</span><strong>${b}</strong></div>`).join('');
+    $('last-sync').textContent='最近同步：'+(s.last_sync || '尚未同步'); $('sync-state').textContent=s.sync.running?'正在同步…':(s.sync.last_result?`上次处理 ${s.sync.last_result.files_seen || 0} 个文件，新增 ${s.sync.last_result.messages_new || 0} 条消息。`:'');
+    $('errors').innerHTML=s.errors.length?s.errors.map(e=>`<p class="error">${esc(e.error)}<br><small>${esc(e.path)}</small></p>`).join(''):'没有导入错误。';
+  }
+  async function refreshProjects() {
+    projectData=await request('/api/projects');
+    const options=projectData.map(p=>`<option value="${p.id}">${esc(p.name)} · #${p.id}</option>`).join('');
+    for(const id of ['map-project','link-a','link-b','search-project','merge-source','merge-target']) $(id).innerHTML=options;
+    renderProjects();
+  }
+  function renderProjects(){const q=$('project-filter').value.trim().toLowerCase();const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q)));const shown=matched.slice(0,60);$('project-count').textContent=`显示 ${shown.length} / ${matched.length} 个匹配项目（共 ${projectData.length} 个）`;$('project-list').innerHTML=shown.length?shown.map(p=>`<div class="result"><div class="row"><strong>${esc(p.name)}</strong><span class="tag">#${p.id}</span><span class="tag">${p.conversations} 段对话</span>${p.confirmed?'':'<span class="tag">待确认</span>'}</div><div class="paths">${p.paths.map(esc).join('<br>') || '无路径'}</div><p class="muted">直接关联：${p.linked_ids.map(i=>esc(projectData.find(x=>x.id===i)?.name || i)).join('、') || '无'}</p><div class="row"><input type="text" id="name-${p.id}" value="${esc(p.name)}" aria-label="项目名称"><button class="secondary" onclick="renameProject(${p.id})">重命名</button></div></div>`).join(''):'没有匹配项目。';}
+  async function renameProject(id) { try { await request(`/api/projects/${id}/rename`,{method:'POST',body:JSON.stringify({name:$('name-'+id).value})}); await refreshProjects(); notice('项目已重命名') } catch(e){notice(e.message,true)} }
+  async function showConversation(id) { try { const d=await request('/api/conversations/'+id); $('reader-card').hidden=false; $('reader').innerHTML=`<p><strong>${esc(d.title)}</strong> · ${esc(d.project_name || '未归属')} · ${esc(d.source)}</p>`+d.messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)} · ${esc(m.timestamp || '')}</small><pre>${esc(m.text)}</pre></div>`).join(''); $('reader-card').scrollIntoView({behavior:'smooth'}) } catch(e){notice(e.message,true)} }
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('nav button,main section').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $(b.dataset.tab).classList.add('active'); if(b.dataset.tab==='projects') refreshProjects().catch(e=>notice(e.message,true)); if(b.dataset.tab==='overview') refreshStatus().catch(e=>notice(e.message,true)); });
+  $('sync-now').onclick=async()=>{ try { const r=await request('/api/sync',{method:'POST'}); notice(r.started?'同步已启动':'同步正在进行'); setTimeout(refreshStatus,800) } catch(e){notice(e.message,true)} };
+  $('map-save').onclick=async()=>{ try { await request('/api/projects/map',{method:'POST',body:JSON.stringify({path:$('map-path').value,project_id:Number($('map-project').value)})}); await refreshProjects(); notice('路径映射已保存') } catch(e){notice(e.message,true)} };
+  async function setLink(linked) { try { await request('/api/projects/link',{method:'POST',body:JSON.stringify({one:Number($('link-a').value),other:Number($('link-b').value),linked})}); await refreshProjects(); notice(linked?'关联已建立':'关联已取消') } catch(e){notice(e.message,true)} }
+  $('link-save').onclick=()=>setLink(true); $('unlink-save').onclick=()=>setLink(false);
+  $('project-filter').oninput=renderProjects;
+  $('merge-save').onclick=async()=>{try{const source_id=Number($('merge-source').value),target_id=Number($('merge-target').value);if(source_id===target_id)throw Error('来源与目标必须不同');await request('/api/projects/merge',{method:'POST',body:JSON.stringify({source_id,target_id})});await refreshProjects();notice('项目已合并')}catch(e){notice(e.message,true)}};
+  $('scope').onchange=()=>{$('search-project').disabled=$('scope').value==='all'};
+  $('search-form').onsubmit=async e=>{ e.preventDefault(); try { const req={query:$('query').value,scope:$('scope').value,project_id:$('scope').value==='project'?Number($('search-project').value):null,limit:Number($('limit').value)}; const d=await request('/api/search',{method:'POST',body:JSON.stringify(req)}); $('effective').textContent=d.scope==='all'?'实际范围：所有项目':'实际范围：'+d.effective_projects.map(p=>p.name).join('、'); $('results').innerHTML=d.results.length?d.results.map(x=>`<div class="result"><h3>#${x.rank} ${esc(x.title)}</h3><p class="muted">${esc(x.project_name || '未归属')} · ${esc(x.source)} · ${esc(x.updated_at || '')} · BM25 ${x.bm25_score.toPrecision(3)}</p>${x.matched_messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)}</small><pre>${esc(m.text)}</pre></div>`).join('')}<button class="secondary" onclick="showConversation(${x.id})">查看完整对话</button></div>`).join(''):'没有匹配结果。'; $('reader-card').hidden=true; } catch(e){notice(e.message,true)} };
+  async function refreshSettings(){const s=await request('/api/settings');$('codex-root').value=s.codex_root;$('sync-interval').value=s.sync_interval_seconds}
+  $('settings-save').onclick=async()=>{try{await request('/api/settings',{method:'PUT',body:JSON.stringify({codex_root:$('codex-root').value,sync_interval_seconds:Number($('sync-interval').value)})});notice('配置已保存')}catch(e){notice(e.message,true)}};
+  Promise.all([refreshStatus(),refreshProjects(),refreshSettings()]).then(()=>$('scope').onchange()).catch(e=>notice(e.message,true));
+  setInterval(()=>{if($('overview').classList.contains('active'))refreshStatus().catch(()=>{})},3000);
+</script>
+</body>
+</html>

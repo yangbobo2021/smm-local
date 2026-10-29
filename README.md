@@ -1,0 +1,53 @@
+# SMM Local
+
+本地 Codex 对话档案与项目范围检索。导入后保存独立副本：删除 Codex 源会话不会删除知识库中的记录。
+
+## 安装与启动
+
+需要 Python 3.11+。
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -e '.[test]'
+.venv/bin/smm sync
+.venv/bin/smm serve
+```
+
+Web UI 默认地址为 `http://127.0.0.1:8766`。首次同步会扫描 `~/.codex/sessions`；可用 `SMM_CODEX_ROOT` 或 Web 配置覆盖。数据库默认保存在 `~/.local/share/smm-local/smm.sqlite3`，可用 `SMM_DB` 覆盖。服务运行时定期同步，也可在 Web UI 手动同步。
+
+macOS 上可将本地服务设为登录后自动启动：
+
+```bash
+python3 scripts/manage_service.py install
+python3 scripts/manage_service.py status
+```
+
+`uninstall` 只停用服务，不删除已保存的知识库。
+
+## 检索
+
+```bash
+.venv/bin/smm projects
+.venv/bin/smm resolve-project --cwd "$PWD"
+.venv/bin/smm search "KeySync 同步问题" --scope project --project-id 1 --limit 5
+.venv/bin/smm search "KeySync 同步问题" --scope all
+.venv/bin/smm read 1
+```
+
+项目检索包含直接关联项目，不递归扩大。Codex 环境中的 CLI/MCP 默认通过 `CODEX_THREAD_ID` 排除当前对话；手动 Web 检索默认包含全部对话。
+
+## Agent 接入
+
+同一个 [`skills/smm-search/SKILL.md`](skills/smm-search/SKILL.md) 可安装到 Claude Code 和 Codex 的用户技能目录：
+
+```bash
+python3 scripts/install_skill.py
+```
+
+更新本仓库的 Skill 后，运行 `python3 scripts/install_skill.py --update` 同步到两个 Agent。
+
+MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。在 Agent 的 MCP 配置中注册这一绝对路径。CLI 可作为没有 MCP 时的后备入口。首版只导入本机可读取的 Codex 历史；其他 Agent 的历史导入器是后续扩展。
+
+## 规约与验收
+
+SPEX 初始化的 [`specs/`](specs/map.md) 是需求和验证的事实来源。[整体交付报告](reports/delivery-report.md)逐项记录执行结果；[隔离端到端验收](reports/first-version-e2e.md)保留可重复执行的步骤。运行 `pytest` 和 `spex lint` 可复核本地实现。

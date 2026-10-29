@@ -1,0 +1,45 @@
+"""MCP stdio adapter over the same archive API."""
+
+from __future__ import annotations
+
+import json
+import os
+from mcp.server.fastmcp import FastMCP
+
+from .core import Archive
+
+
+def create_mcp(archive: Archive | None = None) -> FastMCP:
+    db = archive or Archive()
+    server = FastMCP("smm-local")
+
+    @server.tool()
+    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, include_current: bool = False) -> str:
+        """Search archived conversations. scope=project includes direct links; pass current_session_id to exclude the active conversation by default."""
+        current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID")
+        return json.dumps(db.search(query, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, include_current=include_current), ensure_ascii=False)
+
+    @server.tool()
+    def read_conversation(conversation_id: int, start: int | None = None, end: int | None = None) -> str:
+        """Read preserved original user/assistant messages from one archived conversation."""
+        return json.dumps(db.read(conversation_id, start=start, end=end), ensure_ascii=False)
+
+    @server.tool()
+    def list_projects() -> str:
+        """List project IDs, source paths, direct links, and conversation counts for choosing search scope."""
+        return json.dumps(db.projects(), ensure_ascii=False)
+
+    @server.tool()
+    def resolve_project(cwd: str) -> str:
+        """Find the configured project for a working directory or its nearest parent."""
+        return json.dumps(db.resolve_project(cwd), ensure_ascii=False)
+
+    return server
+
+
+def main() -> None:
+    create_mcp().run(transport="stdio")
+
+
+if __name__ == "__main__":
+    main()
