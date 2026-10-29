@@ -50,7 +50,7 @@ python3 scripts/install_skill.py
 
 MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。安装器自动注册到本机已有的 Agent。CLI 可作为没有 MCP 时的后备入口。来源导入器相互独立，后续可增加其他 Agent。
 
-MCP 默认返回完整命中消息。若要试用短预览，在 MCP 服务环境设置 `SMM_SEARCH_PREVIEW_CHARS=600`；`read_conversation` 仍可读取完整原文。该选项的效果与限制见[预览验证报告](reports/search-preview-001.md)。
+MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始位置；`read_conversation` 可读取完整原文。若要恢复完整搜索展示，在 MCP 服务环境设置 `SMM_SEARCH_PREVIEW_CHARS=0`。预览效果与限制见[验证报告](reports/search-preview-001.md)。
 
 ## 规约与验收
 

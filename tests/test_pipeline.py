@@ -97,7 +97,7 @@ def test_compact_search_preserves_rank_and_can_read_complete_message(tmp_path):
     assert any("晨星上线失败后" in m["preview"] for r in compact["results"] for m in r["matched_messages"])
 
 
-def test_mcp_keeps_full_default_and_allows_compact_configuration(tmp_path, monkeypatch):
+def test_mcp_defaults_to_compact_and_allows_full_configuration(tmp_path, monkeypatch):
     root = tmp_path / "sessions"
     root.mkdir()
     session(root / "one.jsonl", "one", tmp_path / "Project", "晨星恢复方案？", "先检查。" * 300 + "晨星从快照恢复。")
@@ -105,11 +105,12 @@ def test_mcp_keeps_full_default_and_allows_compact_configuration(tmp_path, monke
     db.sync_codex(root)
     server = create_mcp(db)
     monkeypatch.delenv("SMM_SEARCH_PREVIEW_CHARS", raising=False)
-    full = json.loads(asyncio.run(server.call_tool("search_conversations", {"query": "晨星 恢复"}))[0][0].text)
-    monkeypatch.setenv("SMM_SEARCH_PREVIEW_CHARS", "600")
     compact = json.loads(asyncio.run(server.call_tool("search_conversations", {"query": "晨星 恢复"}))[0][0].text)
+    monkeypatch.setenv("SMM_SEARCH_PREVIEW_CHARS", "0")
+    full = json.loads(asyncio.run(server.call_tool("search_conversations", {"query": "晨星 恢复"}))[0][0].text)
     assert compact["results"][0]["id"] == full["results"][0]["id"]
     assert "text" not in compact["results"][0]["matched_messages"][0]
+    assert any(m["preview_truncated"] and len(m["preview"]) <= 600 for m in compact["results"][0]["matched_messages"])
     assert "text" in full["results"][0]["matched_messages"][0]
 
 
