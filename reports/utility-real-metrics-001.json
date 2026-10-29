@@ -1,0 +1,268 @@
+{
+  "protocol": "SMM-UTILITY-REAL-001-V3",
+  "case_count": 8,
+  "source_sha256": "2743d62fcbf77bccd801f010ec1e7b4be96c963fbbe4e50bac62e31a25822b0d",
+  "cases": {
+    "R01": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 43.93,
+        "input_tokens": 207099,
+        "output_tokens": 1916,
+        "tool_calls": 3,
+        "search_calls": 0,
+        "answer_sha256": "feccc4e422bf6ed8c4aa224ae2c63f4344e0a21ab0e2a3e16c1741e54098e367"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 33.25,
+        "input_tokens": 238227,
+        "output_tokens": 1075,
+        "tool_calls": 6,
+        "search_calls": 6,
+        "answer_sha256": "e6d0e64ce0f032f22de106dc69582686c947a4e9d1a12a2cbcd525e5f199d505"
+      },
+      "session-search-bypass": {
+        "correct": true,
+        "elapsed_s": 128.82,
+        "input_tokens": 814877,
+        "output_tokens": 7147,
+        "tool_calls": 14,
+        "search_calls": 14,
+        "answer_sha256": "527ecee52b31d5650b68abb9cc2f48a985d80e662577faca205a6cff41c7ab1e"
+      }
+    },
+    "R02": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 53.11,
+        "input_tokens": 240604,
+        "output_tokens": 2371,
+        "tool_calls": 4,
+        "search_calls": 0,
+        "answer_sha256": "e712eedc79638ce4bb593f36c791ce83f8c1ba900331ada0786921ebbf35fc4a"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 47.58,
+        "input_tokens": 161793,
+        "output_tokens": 2629,
+        "tool_calls": 3,
+        "search_calls": 3,
+        "answer_sha256": "18da74f17266c8e5fb6931a4c2e02f9ecd99032bbb7ecd091c6054f6458265af"
+      },
+      "session-search-bypass": {
+        "correct": true,
+        "elapsed_s": 72.43,
+        "input_tokens": 532421,
+        "output_tokens": 4978,
+        "tool_calls": 10,
+        "search_calls": 10,
+        "answer_sha256": "008c2002b698a5352cfd193746fda1a3bc7336c5a701b4305683ec1d12491285"
+      }
+    },
+    "R03": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 51.65,
+        "input_tokens": 297334,
+        "output_tokens": 3430,
+        "tool_calls": 5,
+        "search_calls": 0,
+        "answer_sha256": "d12557a182b369a8284805be538269fb21989d672ef3457b07cb9d03cd93b8f8"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 42.22,
+        "input_tokens": 286482,
+        "output_tokens": 2103,
+        "tool_calls": 11,
+        "search_calls": 11,
+        "answer_sha256": "12daaa14dd50ff09cb31bccb5cabdd59bacdddf0826c1f50fce67c51d42d1c3b"
+      },
+      "session-search-bypass": {
+        "correct": true,
+        "elapsed_s": 75.18,
+        "input_tokens": 599859,
+        "output_tokens": 4864,
+        "tool_calls": 11,
+        "search_calls": 11,
+        "answer_sha256": "f73e6a89a387dfa51849bd6e339e39f97aa5947321931dfee5250625ef44fe45"
+      }
+    },
+    "R04": {
+      "baseline": {
+        "correct": false,
+        "elapsed_s": 68.14,
+        "input_tokens": 433655,
+        "output_tokens": 4413,
+        "tool_calls": 8,
+        "search_calls": 0,
+        "answer_sha256": "e09f108a5a453a181c4db56eb3411219f5cd0c01868076ae9b1f2abc8276eeb1"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 28.72,
+        "input_tokens": 159981,
+        "output_tokens": 1046,
+        "tool_calls": 6,
+        "search_calls": 5,
+        "answer_sha256": "2f92f76bccd1bc83d6780fb2f2f7931a0ec126e5ee465ee867b099db1e7af1c5"
+      },
+      "session-search-bypass": {
+        "correct": false,
+        "elapsed_s": 60.74,
+        "input_tokens": 360751,
+        "output_tokens": 3469,
+        "tool_calls": 9,
+        "search_calls": 9,
+        "answer_sha256": "6b5775646dec755db5ee8ce12fed87bc61ab5bb425540bae4213efbfad97176e"
+      }
+    },
+    "R05": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 49.46,
+        "input_tokens": 256124,
+        "output_tokens": 2631,
+        "tool_calls": 3,
+        "search_calls": 0,
+        "answer_sha256": "0ec91047b3fa63582258d00b846152e98be033997058f85955dd9b4d55875cba"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 36.21,
+        "input_tokens": 117624,
+        "output_tokens": 1575,
+        "tool_calls": 7,
+        "search_calls": 6,
+        "answer_sha256": "55cf7695df5357e89f475bb75edae002dcd647d7816dd2dad906667946be22fd"
+      },
+      "session-search-bypass": {
+        "correct": true,
+        "elapsed_s": 38.02,
+        "input_tokens": 257051,
+        "output_tokens": 2464,
+        "tool_calls": 5,
+        "search_calls": 2,
+        "answer_sha256": "8567a41ed36f5ed74212f2eec2182f144f9ea80a8283dc87a0dbd641f8193fb0"
+      }
+    },
+    "R06": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 57.21,
+        "input_tokens": 283906,
+        "output_tokens": 3536,
+        "tool_calls": 5,
+        "search_calls": 0,
+        "answer_sha256": "da20ea2d6a96e56af701340aafbd48b1fafe16656982b9f9bee3a7f5875b6b93"
+      },
+      "smm": {
+        "correct": false,
+        "elapsed_s": 59.62,
+        "input_tokens": 729414,
+        "output_tokens": 4290,
+        "tool_calls": 25,
+        "search_calls": 24,
+        "answer_sha256": "2708e9ff9254ee5c54abc0d62faaf8e55e016e3fe9337b10d42074fee6e803e7"
+      },
+      "session-search-bypass": {
+        "correct": false,
+        "elapsed_s": 62.5,
+        "input_tokens": 599316,
+        "output_tokens": 4469,
+        "tool_calls": 9,
+        "search_calls": 9,
+        "answer_sha256": "a1d1432c13a0e80b6a80195d2825e3e65590135639f7afdcac0f1cc30b015f6c"
+      }
+    },
+    "R07": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 65.43,
+        "input_tokens": 412477,
+        "output_tokens": 4536,
+        "tool_calls": 5,
+        "search_calls": 0,
+        "answer_sha256": "247a36c87b72d75d61e7fd7f50b4a54155ffd9084b50348226815b21d0e554df"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 71.35,
+        "input_tokens": 359559,
+        "output_tokens": 4806,
+        "tool_calls": 10,
+        "search_calls": 6,
+        "answer_sha256": "5ae061986d456f07355fe8ea26c2318ee2a377ad3af39461cd52183e22924fb8"
+      },
+      "session-search-bypass": {
+        "correct": true,
+        "elapsed_s": 50.84,
+        "input_tokens": 326349,
+        "output_tokens": 3246,
+        "tool_calls": 7,
+        "search_calls": 3,
+        "answer_sha256": "67fe289beb5c2d97aa106334290daedf4aa7f9cbf1eae254dd59fcb5739ca576"
+      }
+    },
+    "R08": {
+      "baseline": {
+        "correct": true,
+        "elapsed_s": 107.0,
+        "input_tokens": 754734,
+        "output_tokens": 6738,
+        "tool_calls": 12,
+        "search_calls": 0,
+        "answer_sha256": "3d2bbafbfec74d955d420a2033483cee394dc4f00d25366a116406e03bc4d060"
+      },
+      "smm": {
+        "correct": true,
+        "elapsed_s": 35.11,
+        "input_tokens": 186100,
+        "output_tokens": 2044,
+        "tool_calls": 8,
+        "search_calls": 8,
+        "answer_sha256": "4584469285b034249052ef9e846d82e708f761af05edbe6b2ecfecb72511b087"
+      },
+      "session-search-bypass": {
+        "correct": false,
+        "elapsed_s": 79.61,
+        "input_tokens": 774150,
+        "output_tokens": 5197,
+        "tool_calls": 11,
+        "search_calls": 11,
+        "answer_sha256": "57b8941254998d39d8db230f06794dcc68cf10d210ef04f4c2b1a653dbb1a0a1"
+      }
+    }
+  },
+  "aggregate": {
+    "baseline": {
+      "correct": 7,
+      "denominator": 8,
+      "median_elapsed_s": 55.16,
+      "input_tokens_total": 2885933,
+      "output_tokens_total": 29571,
+      "tool_calls_total": 45,
+      "cases_using_archive_search_tool": 0
+    },
+    "smm": {
+      "correct": 7,
+      "denominator": 8,
+      "median_elapsed_s": 39.215,
+      "input_tokens_total": 2239180,
+      "output_tokens_total": 19568,
+      "tool_calls_total": 76,
+      "cases_using_archive_search_tool": 8
+    },
+    "session-search-bypass": {
+      "correct": 5,
+      "denominator": 8,
+      "median_elapsed_s": 67.465,
+      "input_tokens_total": 4264774,
+      "output_tokens_total": 35834,
+      "tool_calls_total": 76,
+      "cases_using_archive_search_tool": 8
+    }
+  }
+}

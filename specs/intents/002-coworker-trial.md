@@ -2,7 +2,7 @@
 
 ## 状态
 
-试用候选版已实现；独立检索效果、Claude Code 的真实新会话实答验收和同事现场反馈待完成。验收计划见 [同事试用验收计划](../../reports/coworker-acceptance-plan.md)，执行边界见 [交付报告](../../reports/coworker-delivery-report.md)和[事后污染审计](../../reports/coworker-agent-audit-001.md)。
+试用候选版已实现；一轮公开数据与当前项目真实长对话的效用对照已完成，但尚未达到多使用者、多项目的正式验收。真实长对话暴露了“仅展示前三条匹配消息，后期结论被早期讨论挤掉”的检索短板。Claude Code 的真实新会话实答验收和同事现场反馈仍待完成。验收计划见 [同事试用验收计划](../../reports/coworker-acceptance-plan.md)，执行边界见 [交付报告](../../reports/coworker-delivery-report.md)、[事后污染审计](../../reports/coworker-agent-audit-001.md)和[效用对照结果](../../reports/utility-comparison-results-001.md)。
 
 ## 意图
 
