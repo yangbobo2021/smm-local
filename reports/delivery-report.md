@@ -17,7 +17,7 @@
 | 项目归属与关联 | 以最近 Git 根目录或记录的工作目录建立项目；可手动改名、把父路径及子路径归并到项目、合并误拆项目、建立或取消双向一跳关联 | 隔离验收验证 Alpha → Beta → Gamma 时，查 Alpha 只扩到 Beta；取消关联和合并后再查；回归测试验证父目录映射对已有及未来子目录生效 |
 | 检索接口 | 同一核心提供整段对话 BM25 排序、命中消息全文和位置、项目/全局范围、原文读取、当前 Codex 会话排除；CLI、MCP、HTTP 共用核心 | CLI 搜索命中隔离档案；真实 MCP stdio 握手发现 4 个工具并成功调用；HTTP 检索与原文读取通过 |
 | Web UI | 展示同步状态、项目归属/关联/合并、范围检索、原文阅读和设置；手动触发同步 | 测试客户端验证页面与 API；本机浏览器实际打开 8766，检查状态、项目页、搜索和原文页 |
-| 双 Agent Skill | 同一 [Skill 源文件](../skills/smm-search/SKILL.md)安装到 Codex 与 Claude Code；两端均注册 `smm-local` MCP，CLI 作为后备入口 | Skill validator 通过；两个安装副本 SHA-256 一致；`codex mcp get` 为 enabled，`claude mcp get` 为 Connected |
+| 双 Agent Skill | 同一 [Skill 源文件](../skills/smm-search/SKILL.md)安装到 Codex 与 Claude Code；两端均注册 `smm-local` MCP，CLI 作为后备入口 | Skill validator 通过；两个安装副本 SHA-256 一致；`codex mcp get` 为 enabled，`claude mcp get` 为 Connected；[新 Codex 会话实测](codex-skill-live-test.md)自动激活 Skill、完成 MCP 检索并正确引用原文 |
 | 本机自动运行 | 本机 `launchd` 登录后启动 Web 服务，服务定期执行增量同步 | `launchctl` 显示 running；8766 仅监听 `127.0.0.1`；`/api/status` 返回最近同步结果 |
 
 ## 真实本机数据烟测
@@ -39,7 +39,7 @@ python3 scripts/manage_service.py status
 curl http://127.0.0.1:8766/api/status
 ```
 
-端到端脚本只使用临时样本与临时数据库，并会重新生成两份验收记录。真实档案默认位于 `~/.local/share/smm-local/smm.sqlite3`，被 Git 忽略；报告中没有收录用户对话正文。
+端到端脚本只使用临时样本与临时数据库，并会重新生成两份验收记录。真实档案默认位于 `~/.local/share/smm-local/smm.sqlite3`，被 Git 忽略；报告中没有收录用户对话正文。新会话实测报告只保存所核对的短句与工具调用状态，不上传包含完整 MCP 结果的本机 JSONL 日志。
 
 ## 第一版边界与下一轮验证
 

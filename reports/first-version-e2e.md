@@ -1,6 +1,6 @@
 # SMM Local 第一版端到端验收
 
-执行时间：2026-10-29T00:39:54.659480+00:00。
+执行时间：2026-10-29T00:52:33.313123+00:00。
 执行环境：隔离临时 Codex JSONL 样本与独立 SQLite 数据库；没有读取或修改用户真实对话。
 结论：16/16 步通过。
 
@@ -18,9 +18,9 @@
 | 10 | 合并同一项目 | Beta 路径与对话转到 Alpha，来源项目被删除 | {"source_removed": true, "path_project": 1} | 通过 |
 | 11 | 删除来源后独立保留 | 原文 3 条仍可读取，搜索仍命中 | {"messages": 3, "source_exists": false} | 通过 |
 | 12 | CLI 共用知识库 | 同一档案可搜且排除当前会话 | {"results": 2, "excluded": "alpha-session"} | 通过 |
-| 13 | MCP 实际握手与工具调用 | 4 个工具可发现，自动排除当前会话 | {"tools": ["search_conversations", "read_conversation", "list_projects", "resolve_project"], "excluded": "alpha-session"} | 通过 |
+| 13 | MCP 实际握手与工具调用 | 4 个只读工具可发现，自动排除当前会话 | {"tools": ["search_conversations", "read_conversation", "list_projects", "resolve_project"], "read_only": true, "excluded": "alpha-session"} | 通过 |
 | 14 | Web 页面与 HTTP 检索 | 页面可加载、3 段对话可检索 | {"page_status": 200, "results": 3} | 通过 |
-| 15 | Web 配置可保存 | 目录与间隔可回读 | {"codex_root": "/private/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm-acceptance-att2urf1/sessions", "sync_interval_seconds": 30} | 通过 |
+| 15 | Web 配置可保存 | 目录与间隔可回读 | {"codex_root": "/private/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm-acceptance-64uzl_gk/sessions", "sync_interval_seconds": 30} | 通过 |
 | 16 | 同一 Skill 可安装到 Codex 和 Claude Code | 两个目录字节相同 | {"paths": ["home/.codex/skills/smm-search/SKILL.md", "home/.claude/skills/smm-search/SKILL.md"]} | 通过 |
 
 ## 审核边界

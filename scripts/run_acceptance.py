@@ -42,7 +42,7 @@ def make_session(path: Path, sid: str, cwd: Path, text: str) -> None:
     )
 
 
-async def mcp_search(db_path: Path) -> tuple[list[str], str]:
+async def mcp_search(db_path: Path) -> tuple[list[str], str, bool]:
     params = StdioServerParameters(
         command=str(ROOT / ".venv/bin/smm-mcp"),
         args=[],
@@ -51,10 +51,12 @@ async def mcp_search(db_path: Path) -> tuple[list[str], str]:
     async with stdio_client(params) as (reader, writer):
         async with ClientSession(reader, writer) as session:
             await session.initialize()
-            names = [t.name for t in (await session.list_tools()).tools]
+            tools = (await session.list_tools()).tools
+            names = [t.name for t in tools]
+            readonly = all(t.annotations and t.annotations.readOnlyHint is True for t in tools)
             response = await session.call_tool("search_conversations", {"query": "晨星", "scope": "all", "limit": 5})
             data = json.loads(response.content[0].text)
-            return names, data["excluded_current_session_id"]
+            return names, data["excluded_current_session_id"], readonly
 
 
 def run() -> None:
@@ -119,8 +121,8 @@ def run() -> None:
         cli_data = json.loads(subprocess.check_output(command, env=env, text=True))
         add("CLI 共用知识库", "同一档案可搜且排除当前会话", {"results": len(cli_data["results"]), "excluded": cli_data["excluded_current_session_id"]}, len(cli_data["results"]) == 2 and cli_data["excluded_current_session_id"] == "alpha-session")
 
-        names, current_id = asyncio.run(mcp_search(db_path))
-        add("MCP 实际握手与工具调用", "4 个工具可发现，自动排除当前会话", {"tools": names, "excluded": current_id}, len(names) == 4 and current_id == "alpha-session")
+        names, current_id, readonly = asyncio.run(mcp_search(db_path))
+        add("MCP 实际握手与工具调用", "4 个只读工具可发现，自动排除当前会话", {"tools": names, "read_only": readonly, "excluded": current_id}, len(names) == 4 and readonly and current_id == "alpha-session")
 
         with TestClient(create_app(db, auto_sync=False)) as client:
             page = client.get("/")

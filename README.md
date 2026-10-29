@@ -50,4 +50,4 @@ MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。在 Agent 的 
 
 ## 规约与验收
 
-SPEX 初始化的 [`specs/`](specs/map.md) 是需求和验证的事实来源。[整体交付报告](reports/delivery-report.md)逐项记录执行结果；[隔离端到端验收](reports/first-version-e2e.md)保留可重复执行的步骤。运行 `pytest` 和 `spex lint` 可复核本地实现。
+SPEX 初始化的 [`specs/`](specs/map.md) 是需求和验证的事实来源。[整体交付报告](reports/delivery-report.md)逐项记录执行结果；[隔离端到端验收](reports/first-version-e2e.md)保留可重复执行的步骤；[新 Codex 会话实测](reports/codex-skill-live-test.md)验证 Skill 自动激活与实际回答。运行 `pytest` 和 `spex lint` 可复核本地实现。
