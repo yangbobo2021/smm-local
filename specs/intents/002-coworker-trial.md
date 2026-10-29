@@ -2,7 +2,7 @@
 
 ## 状态
 
-试用候选版已实现；Claude Code 的真实新会话实答验收和同事现场反馈待完成。验收计划见 [同事试用验收计划](../../reports/coworker-acceptance-plan.md)，执行边界见 [交付报告](../../reports/coworker-delivery-report.md)。
+试用候选版已实现；独立检索效果、Claude Code 的真实新会话实答验收和同事现场反馈待完成。验收计划见 [同事试用验收计划](../../reports/coworker-acceptance-plan.md)，执行边界见 [交付报告](../../reports/coworker-delivery-report.md)和[事后污染审计](../../reports/coworker-agent-audit-001.md)。
 
 ## 意图
 
@@ -14,7 +14,8 @@
 - [x] 不依赖开发者个人路径的安装、诊断和卸载流程。
 - [ ] 两种 Agent 的新会话均能实际使用通用 Skill 与同一 MCP 服务。
 - [x] Web 空库提示和同事可执行的试用说明。
-- [x] 隔离迁移、Codex 真实新会话、检索正确性和隐私边界的验收证据。
+- [x] 隔离迁移、Codex 真实新会话原文读取和隐私边界的验收证据。
+- [ ] 不受先前测试答案污染的独立检索与真实任务收益验收。
 - [x] 可分发的版本包与复核报告。
 
 ## 任务
