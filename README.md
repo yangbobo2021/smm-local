@@ -50,6 +50,8 @@ python3 scripts/install_skill.py
 
 MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。安装器自动注册到本机已有的 Agent。CLI 可作为没有 MCP 时的后备入口。来源导入器相互独立，后续可增加其他 Agent。
 
+MCP 默认返回完整命中消息。若要试用短预览，在 MCP 服务环境设置 `SMM_SEARCH_PREVIEW_CHARS=600`；`read_conversation` 仍可读取完整原文。该选项的效果与限制见[预览验证报告](reports/search-preview-001.md)。
+
 ## 规约与验收
 
-SPEX 初始化的 [`specs/`](specs/map.md) 是需求和验证的事实来源。[整体交付报告](reports/delivery-report.md)逐项记录执行结果；[隔离端到端验收](reports/first-version-e2e.md)保留可重复执行的步骤；[新 Codex 会话实测](reports/codex-skill-live-test.md)验证 Skill 自动激活与实际回答；[效用对照报告](reports/utility-comparison-results-001.md)比较公开数据与真实项目历史中的回答效果；[长对话证据定位复验](reports/long-conversation-evidence-002.md)记录这次修复与独立题验证；[30 题历史材料对照](reports/natural-30-001.md)固定下一阶段优化前的版本。运行 `pytest` 和 `spex lint` 可复核本地实现。
+SPEX 初始化的 [`specs/`](specs/map.md) 是需求和验证的事实来源。[整体交付报告](reports/delivery-report.md)逐项记录执行结果；[隔离端到端验收](reports/first-version-e2e.md)保留可重复执行的步骤；[新 Codex 会话实测](reports/codex-skill-live-test.md)验证 Skill 自动激活与实际回答；[效用对照报告](reports/utility-comparison-results-001.md)比较公开数据与真实项目历史中的回答效果；[长对话证据定位复验](reports/long-conversation-evidence-002.md)记录这次修复与独立题验证；[30 题历史材料对照](reports/natural-30-001.md)固定下一阶段优化前的版本。[搜索预览收缩验证](reports/search-preview-001.md)记录输出量与回答质量的权衡。运行 `pytest` 和 `spex lint` 可复核本地实现。
