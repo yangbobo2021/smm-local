@@ -20,6 +20,7 @@ class SearchRequest(BaseModel):
     project_id: int | None = None
     limit: int = Field(default=5, ge=1, le=50)
     current_session_id: str | None = None
+    current_source: str | None = None
     include_current: bool = False
 
 
@@ -45,6 +46,7 @@ class RenameRequest(BaseModel):
 
 class SettingsRequest(BaseModel):
     codex_root: str | None = None
+    claude_root: str | None = None
     sync_interval_seconds: int | None = None
 
 
@@ -59,7 +61,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True) -> Fas
             return
         state["running"] = True
         try:
-            state["last_result"] = db.sync_codex()
+            state["last_result"] = db.sync_all()
         except Exception as exc:
             state["last_result"] = {"errors": [{"error": str(exc)}]}
         finally:
@@ -75,7 +77,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True) -> Fas
     async def lifespan(app: FastAPI):
         worker = None
         if auto_sync:
-            worker = threading.Thread(target=loop, name="smm-codex-sync", daemon=True)
+            worker = threading.Thread(target=loop, name="smm-source-sync", daemon=True)
             worker.start()
         yield
         stop.set()

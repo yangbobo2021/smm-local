@@ -28,6 +28,7 @@ meta.md       规约的规约
 | --- | --- | --- |
 | [DR-000](decisions/000-spec-structure-format.md) | 000-spec-structure-format.md | 规约结构、格式和命名约定 |
 | [DR-001](decisions/001-local-archive.md) | 001-local-archive.md | 本地独立对话档案与项目关联策略 |
+| [DR-002](decisions/002-coworker-trial.md) | 002-coworker-trial.md | 双来源与可搬迁试用版 |
 
 ## 规约包
 
@@ -39,3 +40,4 @@ meta.md       规约的规约
 | [projects.md](packages/projects.md) | 项目归属与显式关联 |
 | [retrieval.md](packages/retrieval.md) | 范围明确的原文检索与读取 |
 | [access.md](packages/access.md) | CLI、MCP、Web UI 与通用 Skill |
+| [distribution.md](packages/distribution.md) | 可搬迁安装、诊断、卸载与数据边界 |

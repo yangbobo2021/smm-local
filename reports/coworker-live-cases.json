@@ -1,0 +1,30 @@
+{
+  "frozen_at": "2026-10-29",
+  "purpose": "Verify two fresh agents retrieve archived original messages; no expected answer is provided to the agent.",
+  "cases": [
+    {
+      "id": "L1",
+      "question": "请从我过去的原始对话中查证：我对 SMM 导入后，删除 Agent 的源对话会怎样提出过什么要求？请给出处会话 ID 和消息位置。不要把本仓库文档当作证据。",
+      "expected_source": "codex",
+      "expected_conversation_id": 205,
+      "expected_position": 79585,
+      "expected_meaning": "The imported archive remains readable after the Agent source conversation is deleted."
+    },
+    {
+      "id": "L2",
+      "question": "请从我过去的原始对话中查证：我对 SMM 的项目关联检索提出过什么要求？请给出处会话 ID 和消息位置。不要把本仓库文档当作证据。",
+      "expected_source": "codex",
+      "expected_conversation_id": 205,
+      "expected_position": 79544,
+      "expected_meaning": "Queries of a project should also search linked projects; the original statement does not define recursive depth."
+    },
+    {
+      "id": "L3",
+      "question": "请从我过去的 Claude Code 对话中找到我要求记住的 MEM_ 开头的试验标记。给出完整标记、来源会话 ID 和消息位置。不要用本仓库文档作证据。",
+      "expected_source": "claude-code",
+      "expected_conversation_id": 3460,
+      "expected_position": 278,
+      "expected_meaning": "MEM_8eb00d81"
+    }
+  ]
+}

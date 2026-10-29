@@ -18,6 +18,11 @@ def _text_content(content: Any) -> str:
     return "\n".join(chunks)
 
 
+def _injected_context(text: str) -> bool:
+    return text.startswith(("# AGENTS.md instructions for ", "<environment_context>",
+                            "<external_codex_apps_open_page>"))
+
+
 class CodexAdapter:
     name = "codex"
 
@@ -32,6 +37,6 @@ class CodexAdapter:
             return {"kind": "session", "session_id": payload.get("id") or payload.get("session_id"), "cwd": payload.get("cwd"), "timestamp": item.get("timestamp")}
         if item.get("type") == "response_item" and payload.get("type") == "message" and payload.get("role") in {"user", "assistant"}:
             text = _text_content(payload.get("content"))
-            if text.strip():
+            if text.strip() and not (payload["role"] == "user" and _injected_context(text)):
                 return {"kind": "message", "key": str(payload.get("id") or f"offset:{byte_offset}"), "position": int(item.get("ordinal") or byte_offset), "role": payload["role"], "text": text, "timestamp": item.get("timestamp")}
         return None

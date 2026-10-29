@@ -1,6 +1,8 @@
 # SMM Local
 
-本地 Codex 对话档案与项目范围检索。导入后保存独立副本：删除 Codex 源会话不会删除知识库中的记录。
+本地 Codex 与 Claude Code 对话档案与项目范围检索。导入后保存独立副本：删除 Agent 源会话不会删除知识库中的记录。
+
+同事试用请从 [安装与使用指南](TRIAL_GUIDE.md) 开始。`python3 scripts/install.py` 完成用户级 Skill/MCP 注册与本机服务，`~/.local/bin/smm doctor` 检查实际状态。
 
 ## 安装与启动
 
@@ -13,7 +15,7 @@ python3 -m venv .venv
 .venv/bin/smm serve
 ```
 
-Web UI 默认地址为 `http://127.0.0.1:8766`。首次同步会扫描 `~/.codex/sessions`；可用 `SMM_CODEX_ROOT` 或 Web 配置覆盖。数据库默认保存在 `~/.local/share/smm-local/smm.sqlite3`，可用 `SMM_DB` 覆盖。服务运行时定期同步，也可在 Web UI 手动同步。
+Web UI 默认地址为 `http://127.0.0.1:8766`。首次同步会扫描 `~/.codex/sessions` 与 `~/.claude/projects`；可用 `SMM_CODEX_ROOT`、`SMM_CLAUDE_ROOT` 或 Web 配置覆盖。数据库默认保存在 `~/.local/share/smm-local/smm.sqlite3`，可用 `SMM_DB` 覆盖。服务运行时定期同步，也可在 Web UI 手动同步。
 
 macOS 上可将本地服务设为登录后自动启动：
 
@@ -34,7 +36,7 @@ python3 scripts/manage_service.py status
 .venv/bin/smm read 1
 ```
 
-项目检索包含直接关联项目，不递归扩大。Codex 环境中的 CLI/MCP 默认通过 `CODEX_THREAD_ID` 排除当前对话；手动 Web 检索默认包含全部对话。
+项目检索包含直接关联项目，不递归扩大。CLI/MCP 在 Agent 提供当前会话 ID 时排除当前对话；手动 Web 检索默认包含全部对话。
 
 ## Agent 接入
 
@@ -46,7 +48,7 @@ python3 scripts/install_skill.py
 
 更新本仓库的 Skill 后，运行 `python3 scripts/install_skill.py --update` 同步到两个 Agent。
 
-MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。在 Agent 的 MCP 配置中注册这一绝对路径。CLI 可作为没有 MCP 时的后备入口。首版只导入本机可读取的 Codex 历史；其他 Agent 的历史导入器是后续扩展。
+MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。安装器自动注册到本机已有的 Agent。CLI 可作为没有 MCP 时的后备入口。来源导入器相互独立，后续可增加其他 Agent。
 
 ## 规约与验收
 

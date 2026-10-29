@@ -122,3 +122,128 @@ def test_source_file_rewrite_does_not_duplicate(tmp_path):
     db.sync_codex(root)
     assert db.status()["messages"] == 2
     assert db.status()["conversations"] == 1
+
+
+def claude_line(kind, sid, cwd, uuid, content):
+    return json.dumps({
+        "type": kind, "sessionId": sid, "cwd": str(cwd), "uuid": uuid,
+        "timestamp": "2026-10-29T09:00:00Z",
+        "message": {"role": kind, "content": content},
+    }, ensure_ascii=False) + "\n"
+
+
+def test_codex_and_claude_share_durable_archive_without_tool_output(tmp_path, monkeypatch):
+    codex_root = tmp_path / "codex"
+    claude_root = tmp_path / "claude"
+    codex_root.mkdir()
+    claude_root.mkdir()
+    project = tmp_path / "SharedProject"
+    session(codex_root / "same.jsonl", "same", project, "晨星项目上线计划", "检查回滚流程")
+    claude_file = claude_root / "same.jsonl"
+    claude_file.write_text(
+        claude_line("user", "same", project, "c-u1", [{"type": "text", "text": "晨星项目值班人是谁？"}])
+        + claude_line("assistant", "same", project, "c-a1", [
+            {"type": "thinking", "thinking": "SECRET_THINKING_MARKER"},
+            {"type": "tool_use", "name": "Read", "input": {"path": "secret"}},
+            {"type": "text", "text": "值班人为周宁。"},
+        ])
+        + claude_line("user", "same", project, "c-tool", [{"type": "tool_result", "content": "SECRET_TOOL_MARKER"}])
+        + json.dumps({"type": "user", "sessionId": "same", "cwd": str(project), "uuid": "c-meta", "isMeta": True,
+                      "message": {"role": "user", "content": "SECRET_META_MARKER"}}) + "\n"
+        + json.dumps({"type": "user", "sessionId": "same", "cwd": str(project), "uuid": "c-compact", "isCompactSummary": True,
+                      "message": {"role": "user", "content": "SECRET_COMPACT_MARKER"}}) + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("SMM_CODEX_ROOT", str(codex_root))
+    monkeypatch.setenv("SMM_CLAUDE_ROOT", str(claude_root))
+    db = Archive(tmp_path / "db.sqlite3")
+    first = db.sync_all()
+    assert first["conversations_new"] == 2
+    assert first["messages_new"] == 4
+    assert db.sync_all()["messages_new"] == 0
+    project_id = db.resolve_project(str(project))["id"]
+    both = db.search("晨星", scope="project", project_id=project_id, limit=5)["results"]
+    assert {r["source"] for r in both} == {"codex", "claude-code"}
+    assert {r["source_session_id"] for r in both} == {"same"}
+    assert {r["source"] for r in db.search("晨星", scope="project", project_id=project_id,
+                                            current_session_id="same", current_source="codex")["results"]} == {"claude-code"}
+    assert not db.search("SECRET_TOOL_MARKER")["results"]
+    assert not db.search("SECRET_THINKING_MARKER")["results"]
+    assert not db.search("SECRET_META_MARKER")["results"]
+    assert not db.search("SECRET_COMPACT_MARKER")["results"]
+
+    with claude_file.open("a", encoding="utf-8") as stream:
+        stream.write(claude_line("assistant", "same", project, "c-a2", [{"type": "text", "text": "周宁负责周四。"}]))
+        stream.write('{"type":"assistant"')
+    partial = db.sync_all()
+    assert partial["messages_new"] == 1 and partial["errors"]
+    with claude_file.open("a", encoding="utf-8") as stream:
+        stream.write(',"uuid":"c-tool2","sessionId":"same","cwd":"'+str(project)+'","timestamp":"2026-10-29T09:01:00Z","message":{"role":"assistant","content":[{"type":"text","text":"交接完成"}]}}\n')
+    assert db.sync_all()["messages_new"] == 1
+    claude_file.unlink()
+    db.sync_all()
+    claude = next(r for r in both if r["source"] == "claude-code")
+    assert len(db.read(claude["id"])["messages"]) == 4
+    assert db.search("周宁", scope="project", project_id=project_id)["results"]
+
+
+def test_missing_claude_source_does_not_block_codex(tmp_path, monkeypatch):
+    codex_root = tmp_path / "codex"
+    codex_root.mkdir()
+    session(codex_root / "one.jsonl", "s1", tmp_path / "Project", "独立 Codex 来源", "已经导入")
+    monkeypatch.setenv("SMM_CODEX_ROOT", str(codex_root))
+    monkeypatch.setenv("SMM_CLAUDE_ROOT", str(tmp_path / "missing"))
+    db = Archive(tmp_path / "db.sqlite3")
+    result = db.sync_all()
+    assert result["messages_new"] == 2
+    assert result["sources"]["claude-code"]["available"] is False
+    assert result["sources"]["codex"]["available"] is True
+
+
+def test_web_sync_and_source_settings_share_one_archive(tmp_path, monkeypatch):
+    codex_root = tmp_path / "codex"
+    claude_root = tmp_path / "claude"
+    codex_root.mkdir()
+    claude_root.mkdir()
+    project = tmp_path / "Project"
+    session(codex_root / "a.jsonl", "codex-session", project, "青松项目上线安排", "周四执行")
+    (claude_root / "b.jsonl").write_text(claude_line("user", "claude-session", project, "u1", "青松项目回滚检查"), encoding="utf-8")
+    db = Archive(tmp_path / "archive.sqlite3")
+    with TestClient(create_app(db, auto_sync=False)) as client:
+        updated = client.put("/api/settings", json={"codex_root": str(codex_root), "claude_root": str(claude_root), "sync_interval_seconds": 30})
+        assert updated.status_code == 200
+        started = client.post("/api/sync").json()
+        assert started["started"] is True
+        import time
+        for _ in range(100):
+            status = client.get("/api/status").json()
+            if not status["sync"]["running"] and status["conversations"] == 2:
+                break
+            time.sleep(.01)
+        assert status["conversations"] == 2
+        assert status["by_source"]["codex"]["conversations"] == 1
+        assert status["by_source"]["claude-code"]["conversations"] == 1
+        results = client.post("/api/search", json={"query": "青松", "scope": "all"}).json()["results"]
+        assert {r["source"] for r in results} == {"codex", "claude-code"}
+
+
+def test_codex_injected_context_is_not_archived_and_old_copy_is_cleaned(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    file = root / "one.jsonl"
+    file.write_text(
+        line("session_meta", {"id": "s", "cwd": str(tmp_path / "Proj")}, 1)
+        + line("response_item", {"type": "message", "id": "injected", "role": "user", "content": [{"type": "input_text", "text": "# AGENTS.md instructions for /tmp/Proj\nSECRET_CONTEXT"}]}, 2)
+        + line("response_item", {"type": "message", "id": "real", "role": "user", "content": [{"type": "input_text", "text": "晨星上线计划"}]}, 3),
+        encoding="utf-8",
+    )
+    db = Archive(tmp_path / "db.sqlite3")
+    assert db.sync_codex(root)["messages_new"] == 1
+    with db.connect() as con:
+        con.execute("DELETE FROM schema_migrations WHERE name='codex-injected-context-v1'")
+        con.execute("INSERT INTO messages(conversation_id,source_key,position,role,text) VALUES(1,'legacy',1,'user',?)", ("<environment_context>SECRET_CONTEXT</environment_context>",))
+        db._reindex(con, 1)
+    reopened = Archive(tmp_path / "db.sqlite3")
+    assert not reopened.search("SECRET_CONTEXT")["results"]
+    assert len(reopened.read(1)["messages"]) == 1
+    assert reopened.search("晨星")["results"]

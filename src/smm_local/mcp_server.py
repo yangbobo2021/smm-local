@@ -16,10 +16,11 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
     readonly = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
 
     @server.tool(annotations=readonly)
-    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, include_current: bool = False) -> str:
+    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False) -> str:
         """Search archived conversations. scope=project includes direct links; pass current_session_id to exclude the active conversation by default."""
-        current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID")
-        return json.dumps(db.search(query, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, include_current=include_current), ensure_ascii=False)
+        current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
+        source = current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
+        return json.dumps(db.search(query, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def read_conversation(conversation_id: int, start: int | None = None, end: int | None = None) -> str:
