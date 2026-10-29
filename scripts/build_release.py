@@ -28,7 +28,7 @@ def members() -> list[Path]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", default="0.2.0-rc1")
+    parser.add_argument("--version", default="0.2.0-rc2")
     args = parser.parse_args()
     files = members()
     for path in files:
