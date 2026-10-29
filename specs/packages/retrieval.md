@@ -28,10 +28,14 @@
 
 ### retrieval-7
 
-当命中的对话包含大量消息时，系统应兼顾消息的词面相关性和时间分布，返回带原始位置的完整消息及其相邻问答，避免只展示较早的相似讨论。
+当命中的对话包含大量消息时，系统应兼顾消息的词面相关性和时间分布，选择带原始位置的相关消息及其相邻问答，避免只展示较早的相似讨论。
+
+### retrieval-8
+
+当 MCP 用户检索对话时，系统应默认返回有长度上限、标明原始位置及截断状态的消息预览，并允许由服务端配置完整搜索消息，同时保持排序和命中消息选择不变 [[retrieval-1](#retrieval-1)]。
 
 ## 验证
 
 ### retrieval-6
 
-隔离端到端流程应检查排序和命中位置 [[retrieval-1](#retrieval-1)]、项目与全局范围 [[retrieval-2](#retrieval-2)] [[retrieval-3](#retrieval-3)]、当前会话排除 [[retrieval-4](#retrieval-4)]、源删除后的原文读取 [[retrieval-5](#retrieval-5)]，以及长对话的跨时段证据展示 [[retrieval-7](#retrieval-7)]。
+隔离端到端流程应检查排序和命中位置 [[retrieval-1](#retrieval-1)]、项目与全局范围 [[retrieval-2](#retrieval-2)] [[retrieval-3](#retrieval-3)]、当前会话排除 [[retrieval-4](#retrieval-4)]、源删除后的原文读取 [[retrieval-5](#retrieval-5)]、长对话的跨时段证据展示 [[retrieval-7](#retrieval-7)]，以及预览与完整搜索消息的一致性 [[retrieval-8](#retrieval-8)]。

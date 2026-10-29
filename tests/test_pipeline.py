@@ -1,4 +1,5 @@
 import json
+import asyncio
 from pathlib import Path
 
 import pytest
@@ -6,6 +7,7 @@ from fastapi.testclient import TestClient
 
 from smm_local.api import create_app
 from smm_local.core import Archive
+from smm_local.mcp_server import create_mcp
 
 
 def line(kind, payload, ordinal, timestamp="2026-10-29T08:00:00Z"):
@@ -67,6 +69,48 @@ def test_long_conversation_preview_keeps_later_decision_and_its_question(tmp_pat
     assert positions == sorted(positions)
     assert 122 in positions and 123 in positions
     assert any("最终决定优先按项目过滤" in m["text"] for m in result["matched_messages"])
+
+
+def test_compact_search_preserves_rank_and_can_read_complete_message(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    evidence = "晨星上线失败后，先停写，再从昨日快照恢复。"
+    long_reply = "普通诊断记录。" * 300 + evidence + "恢复后核对索引。" * 100
+    session(root / "long.jsonl", "long", tmp_path / "Project", "晨星上线如何恢复？", long_reply)
+    session(root / "short.jsonl", "short", tmp_path / "Project", "晨星上线进度", "正在检查")
+    db = Archive(tmp_path / "archive.sqlite3")
+    db.sync_codex(root)
+    full = db.search("晨星 上线 恢复")
+    compact = db.search("晨星 上线 恢复", preview_chars=600)
+    assert [r["id"] for r in compact["results"]] == [r["id"] for r in full["results"]]
+    for old, new in zip(full["results"], compact["results"]):
+        assert old["bm25_score"] == new["bm25_score"]
+        assert [m["position"] for m in old["matched_messages"]] == [m["position"] for m in new["matched_messages"]]
+        for message in new["matched_messages"]:
+            assert "text" not in message
+            assert len(message["preview"]) <= 600
+            if message["preview_truncated"]:
+                assert message["text_chars"] > 600
+                assert db.read(new["id"], start=message["position"], end=message["position"])["messages"][0]["text"] == next(
+                    original["text"] for original in old["matched_messages"] if original["position"] == message["position"]
+                )
+    assert any("晨星上线失败后" in m["preview"] for r in compact["results"] for m in r["matched_messages"])
+
+
+def test_mcp_defaults_to_compact_preview_and_allows_full_override(tmp_path, monkeypatch):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    session(root / "one.jsonl", "one", tmp_path / "Project", "晨星恢复方案？", "先检查。" * 300 + "晨星从快照恢复。")
+    db = Archive(tmp_path / "archive.sqlite3")
+    db.sync_codex(root)
+    server = create_mcp(db)
+    monkeypatch.delenv("SMM_SEARCH_PREVIEW_CHARS", raising=False)
+    compact = json.loads(asyncio.run(server.call_tool("search_conversations", {"query": "晨星 恢复"}))[0][0].text)
+    monkeypatch.setenv("SMM_SEARCH_PREVIEW_CHARS", "0")
+    full = json.loads(asyncio.run(server.call_tool("search_conversations", {"query": "晨星 恢复"}))[0][0].text)
+    assert compact["results"][0]["id"] == full["results"][0]["id"]
+    assert "text" not in compact["results"][0]["matched_messages"][0]
+    assert "text" in full["results"][0]["matched_messages"][0]
 
 
 def test_project_mapping_direct_links_and_current_exclusion(tmp_path):

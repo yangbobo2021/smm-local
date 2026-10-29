@@ -9,7 +9,7 @@ Use the `smm-local` MCP tools when available. If MCP is unavailable and a local 
 
 1. Determine scope. For work tied to a project, call `resolve_project` with the current working directory, then search with `scope="project"` and that `project_id`. This includes directly linked projects. Use `scope="all"` when the user asks across projects, the project cannot be resolved, or a focused search misses relevant history. State the scope when it matters to the answer.
 2. Search with a few distinctive terms from the user's question. Adjust terms and search again if the results contain plausible leads but not the needed evidence. Do not infer that no information exists from a project-scoped miss alone.
-3. Examine the source, project, time, and matched message positions. Call `read_conversation` for the useful conversation, optionally passing a position range. Distinguish the archived user's statement from an assistant's proposal or speculation.
+3. Examine the source, project, time, and matched message positions. Search previews may be abbreviated; use `read_conversation` with the conversation ID and relevant positions to inspect complete messages before answering. Distinguish the archived user's statement from an assistant's proposal or speculation.
 4. Cite the source conversation ID and relevant position when using archived information. If the evidence is incomplete, say what is missing rather than presenting a search hit as a verified answer.
 
 MCP tools: `list_projects`, `resolve_project`, `search_conversations`, `read_conversation`.

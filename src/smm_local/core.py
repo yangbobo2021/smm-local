@@ -118,6 +118,53 @@ def select_matched_messages(messages: list[sqlite3.Row], query_terms: list[str])
     return [dict(messages[i]) for i in sorted(selected)]
 
 
+def compact_message(message: dict[str, Any], query_terms: list[str], limit: int) -> dict[str, Any]:
+    """Bound a search card while retaining source offsets for a full read."""
+    body = message["text"]
+    card = {key: value for key, value in message.items() if key != "text"}
+    card["preview_truncated"] = len(body) > limit
+    if len(body) <= limit:
+        card["preview"] = body
+        return card
+
+    card["text_chars"] = len(body)
+
+    terms = [term for term in query_terms if len(term) > 1]
+    lowered = body.lower()
+    hits: list[tuple[int, int, str]] = []
+    for term in terms:
+        start = 0
+        while len(hits) < 1000:
+            index = lowered.find(term, start)
+            if index < 0:
+                break
+            hits.append((index, index + len(term), term))
+            start = index + len(term)
+    if not hits:
+        ranges = [(0, limit)]
+    else:
+        # Choose two disjoint windows. Distinct query terms matter more than
+        # repetition, and a late tie is useful for evolving conversations.
+        width = (limit - 3) // 2
+        candidates = {max(0, min(len(body) - width, start - width // 3)) for start, _, _ in hits}
+        def score(start: int) -> tuple[int, int, int]:
+            inside = [term for a, b, term in hits if a < start + width and b > start]
+            return (len(set(inside)), len(inside), start)
+        first = max(candidates, key=score)
+        other = [start for start in candidates if start >= first + width or start + width <= first]
+        ranges = [(first, first + width)]
+        if other:
+            second = max(other, key=score)
+            ranges.append((second, second + width))
+        else:
+            start = max(0, min(len(body) - limit, first - width // 2))
+            ranges = [(start, start + limit)]
+    ranges.sort()
+    card["preview_ranges"] = [[start, end] for start, end in ranges]
+    card["preview"] = " … ".join(body[start:end] for start, end in ranges)
+    return card
+
+
 class _ClosingConnection(sqlite3.Connection):
     def __exit__(self, exc_type, exc_value, traceback):
         try:
@@ -448,7 +495,7 @@ class Archive:
                     return dict(row)
         return None
 
-    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False) -> dict[str, Any]:
+    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0) -> dict[str, Any]:
         query_terms = list(dict.fromkeys(tokens(query)))
         if not query_terms:
             raise ValueError("查询词不能为空")
@@ -456,6 +503,8 @@ class Archive:
             raise ValueError("范围必须是 all 或 project")
         if not 1 <= limit <= 50:
             raise ValueError("limit 必须在 1 到 50 之间")
+        if preview_chars != 0 and not 100 <= preview_chars <= 2000:
+            raise ValueError("preview_chars 必须为 0 或 100 到 2000")
         project_ids = None
         if scope == "project":
             if project_id is None:
@@ -484,7 +533,8 @@ class Archive:
                 item = dict(row)
                 item["rank"] = index
                 item["bm25_score"] = -item.pop("rank_score")
-                item["matched_messages"] = select_matched_messages(messages, query_terms)
+                matched = select_matched_messages(messages, query_terms)
+                item["matched_messages"] = [compact_message(m, query_terms, preview_chars) for m in matched] if preview_chars else matched
                 results.append(item)
             effective = [] if project_ids is None else [dict(r) for r in con.execute("SELECT id,name FROM projects WHERE id IN ("+",".join("?" for _ in project_ids)+") ORDER BY id", project_ids)]
         return {"query": query, "scope": scope, "effective_projects": effective if scope == "project" else "all", "excluded_current_session_id": current_session_id if current_session_id and not include_current else None, "results": results}
