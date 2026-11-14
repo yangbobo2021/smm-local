@@ -6,24 +6,32 @@ from __future__ import annotations
 
 import json
 import os
+import queue
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from contextlib import contextmanager
 from pathlib import Path
 from urllib.parse import urlsplit
 
 
-PACKAGE = "smm-local==0.2.0rc16"
+PACKAGE = "smm-local==0.2.0rc17"
 DEFAULT_INDEX = "https://pypi.org/simple"
 TEST_INDEX = "https://test.pypi.org/simple"
+PROGRESS_INTERVAL = 15
+INSTALL_ATTEMPTS = 3
+
+
+def progress(message: str) -> None:
+    print(f"SMM 安装：{message}", file=sys.stderr, flush=True)
 
 
 @contextmanager
 def install_lock(path: Path):
     with path.open("a+b") as lock:
-        deadline = time.monotonic() + 900
+        next_notice = time.monotonic() + PROGRESS_INTERVAL
         while True:
             try:
                 if os.name == "nt":
@@ -36,9 +44,12 @@ def install_lock(path: Path):
 
                     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 break
-            except OSError:
-                if time.monotonic() >= deadline:
-                    raise RuntimeError("等待另一会话完成 SMM 安装超时")
+            except OSError as exc:
+                if not isinstance(exc, BlockingIOError) and not (os.name == "nt" and exc.errno == 13):
+                    raise
+                if time.monotonic() >= next_notice:
+                    progress("另一会话正在安装，等待复用其结果")
+                    next_notice = time.monotonic() + PROGRESS_INTERVAL
                 time.sleep(0.25)
         yield
 
@@ -56,34 +67,100 @@ def installed_cli(manifest: Path) -> Path | None:
     return None
 
 
+def run_pip(command: list[str], env: dict[str, str], stage: str) -> None:
+    for attempt in range(1, INSTALL_ATTEMPTS + 1):
+        progress(f"{stage}（第 {attempt}/{INSTALL_ATTEMPTS} 次）")
+        started = time.monotonic()
+        next_notice = started + PROGRESS_INTERVAL
+        latest = ""
+        lines: queue.Queue[str | None] = queue.Queue()
+        with subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                              text=True, encoding="utf-8", errors="replace") as process:
+            assert process.stdout is not None
+
+            def read_output() -> None:
+                try:
+                    for line in process.stdout:
+                        lines.put(line)
+                finally:
+                    lines.put(None)
+
+            reader = threading.Thread(target=read_output, daemon=True)
+            reader.start()
+            try:
+                while True:
+                    try:
+                        line = lines.get(timeout=max(0, next_notice - time.monotonic()))
+                    except queue.Empty:
+                        line = ""
+                    if line is None:
+                        break
+                    if line.startswith("Progress "):
+                        latest = line.strip().removeprefix("Progress ") + " 字节"
+                    elif line:
+                        if line.lstrip().startswith(("Downloading ", "Using cached ")):
+                            latest = ""
+                        print(line, end="", file=sys.stderr, flush=True)
+                    now = time.monotonic()
+                    if now >= next_notice:
+                        detail = f"，当前文件 {latest}" if latest else ""
+                        progress(f"{stage}仍在进行，已等待 {int(now - started)} 秒{detail}")
+                        next_notice = now + PROGRESS_INTERVAL
+                code = process.wait()
+            except BaseException:
+                process.kill()
+                raise
+            finally:
+                reader.join()
+        if not code:
+            return
+        if attempt < INSTALL_ATTEMPTS:
+            progress("本次安装未完成，将自动重试并复用已下载的文件")
+            time.sleep(2 ** attempt)
+    raise subprocess.CalledProcessError(code, command)
+
+
 def install_package(data: Path) -> None:
     environment = data / "package"
     windows = os.name == "nt"
     python = environment / ("Scripts/python.exe" if windows else "bin/python")
     if not python.is_file():
+        progress("准备本机 Python 环境")
         subprocess.run([sys.executable, "-m", "venv", str(environment)],
                        check=True, stdout=sys.stderr, timeout=120)
     index = os.environ.get("SMM_PACKAGE_INDEX", DEFAULT_INDEX)
     source = urlsplit(index)
     if source.username or source.password:
         raise ValueError("请通过包管理器的认证配置提供凭证")
-    pip_env = {**os.environ, "PIP_CONFIG_FILE": os.devnull}
+    pip_env = {**os.environ, "PIP_CONFIG_FILE": os.devnull, "PYTHONIOENCODING": "utf-8"}
     pip = [str(python), "-I", "-m", "pip", "--isolated", "--disable-pip-version-check", "--no-input",
-           "--timeout", "15", "--retries", "1"]
-    options = {"env": pip_env, "check": True, "stdout": sys.stderr, "timeout": 900}
+           "--timeout", "30", "--retries", "2", "--cache-dir", str(data / "pip-cache")]
+    # A cancelled venv creation can leave the interpreter but not pip.
+    probe = subprocess.run([*pip, "--help"], env=pip_env, capture_output=True, text=True, timeout=20)
+    if probe.returncode:
+        progress("修复未完成的 Python 环境")
+        subprocess.run([str(python), "-I", "-m", "ensurepip", "--upgrade"],
+                       check=True, stdout=sys.stderr, timeout=120)
+        probe = subprocess.run([*pip, "--help"], env=pip_env, capture_output=True, text=True, check=True, timeout=20)
+    if "--resume-retries" in probe.stdout:
+        pip.extend(("--resume-retries", "5"))
+    install_options = ["--only-binary", ":all:", "--progress-bar",
+                       "raw" if "--resume-retries" in probe.stdout else "on"]
     with tempfile.TemporaryDirectory() as directory:
         package = PACKAGE
         if index.rstrip("/") == TEST_INDEX:
-            subprocess.run([*pip, "download", "--no-deps", "--only-binary", ":all:", "--index-url",
-                            index, "--dest", directory, PACKAGE], **options)
+            run_pip([*pip, "download", "--no-deps", *install_options, "--index-url", index,
+                     "--dest", directory, PACKAGE], pip_env, "下载测试包")
             wheel, = Path(directory).glob("*.whl")
             package = str(wheel)
             index = DEFAULT_INDEX
-        subprocess.run([*pip, "install", "--only-binary", ":all:", "--index-url", index, package], **options)
+        run_pip([*pip, "install", *install_options, "--index-url", index, package], pip_env, "下载并安装本机组件")
     register = [str(python), "-I", "-m", "smm_local.installation", "install"]
     if os.environ.get("SMM_NO_LOGIN_SERVICE") == "1":
         register.append("--no-service")
+    progress("配置本机入口")
     subprocess.run(register, check=True, stdout=sys.stderr, timeout=120)
+    progress("已完成，继续处理原请求")
 
 
 def ensure_cli() -> Path:
