@@ -28,22 +28,28 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      smm-local: ${{ steps.wheels.outputs.smm-local }}
+      smm-hub: ${{ steps.wheels.outputs.smm-hub }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.13.8"
       - run: python3 scripts/build_packages.py
-      - uses: actions/upload-artifact@v4
-        with:
-          name: smm-local
-          path: dist/packages/smm_local-*.whl
-          if-no-files-found: error
-      - uses: actions/upload-artifact@v4
-        with:
-          name: smm-hub
-          path: dist/packages/smm_hub-*.whl
-          if-no-files-found: error
+      - name: Pass wheels to the publish jobs
+        id: wheels
+        run: |
+          for package in smm-local smm-hub; do
+            wheels=(dist/packages/"${package//-/_}"-*.whl)
+            wheel="${wheels[0]}"
+            [[ ${#wheels[@]} -eq 1 && -f "$wheel" ]]
+            # Keep the base64 value within the Linux per-variable size limit.
+            [[ $(wc -c < "$wheel") -lt 90000 ]]
+            printf '%s=%s:' "$package" "${wheel##*/}" >> "$GITHUB_OUTPUT"
+            base64 -w 0 "$wheel" >> "$GITHUB_OUTPUT"
+            printf '\n' >> "$GITHUB_OUTPUT"
+          done
 
   publish:
     needs: build
@@ -56,10 +62,15 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: ${{ matrix.package }}
-          path: dist
+      - name: Restore the wheel for this package
+        env:
+          PACKAGE: ${{ matrix.package }}
+          WHEEL: ${{ needs.build.outputs[matrix.package] }}
+        run: |
+          filename="${WHEEL%%:*}"
+          [[ "$filename" =~ ^${PACKAGE//-/_}-[A-Za-z0-9_.+-]+\.whl$ && "$WHEEL" == *:* ]]
+          mkdir dist
+          printf '%s' "${WHEEL#*:}" | base64 --decode > "dist/$filename"
       - if: inputs.index == 'testpypi'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
