@@ -4,13 +4,7 @@ SMM 在本机保存 Codex 与 Claude Code 的可见对话文本，提供项目�
 
 ## 1. 安装
 
-把 [GitHub 上的 smm-search 目录](https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-search) 发给 Codex 或 Claude Code，请它安装。也可运行：
-
-```sh
-npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-search -g
-```
-
-首次使用时，Skill 会从 PyPI 安装它支持的 `smm-local` 版本，再执行原请求。首次安装需要网络和 Agent 的本机执行权限。脚本会使用已有的 Python，或自动准备用户级 Python。仓库访问需要 GitHub 权限，在线安装还需要相应版本已上传到 PyPI。
+按 [README 的快速开始](README.md#单台电脑快速开始)安装 `smm-search`。首次使用需要网络和 Agent 的本机执行权限。Skill 会使用已有的 Python，或自动准备用户级 Python。
 
 ## 2. 在 Agent 中管理同步
 
@@ -57,10 +51,10 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ### 通过包管理器部署汇总端
 
-管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。试用候选版需要允许预发布版本。
+管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。命令固定到当前试用候选版。
 
 ```sh
-uv tool install --prerelease allow smm-hub
+uv tool install smm-hub==0.2.0rc16
 smm-hub hub setup
 ```
 

@@ -1,8 +1,53 @@
 # SMM Local
 
-本地 Codex 与 Claude Code 对话档案与项目范围检索。导入后保存独立副本：删除 Agent 源会话不会删除知识库中的记录。
+在 Codex 或 Claude Code 里搜索以前的对话，并找到原始会话和消息位置。SMM 在本机保存独立的对话档案。删除 Agent 中的原始会话后，已经导入的记录仍可搜索。
 
-普通用户只需从 GitHub 安装 `smm-search` Skill。首次在 Codex 或 Claude Code 中使用时，Skill 从 Python 包索引安装 `smm-local` 并执行原请求。多台电脑需要汇总时，管理员另外安装 `smm-hub`。见[安装与使用指南](TRIAL_GUIDE.md)。
+## 单台电脑快速开始
+
+你需要已登录的 Codex 或 Claude Code，以及首次安装时的网络连接。
+
+1. 在 [GitHub 仓库首页](https://github.com/yangbobo2021/smm-local) 选择 **Code → Download ZIP**，解压后从 `skills/` 取出 `smm-search` 文件夹。手头已有单独的 Skill ZIP 时，解压即可得到这个文件夹。
+2. 将整个 `smm-search` 文件夹放到下表对应的位置。目录不存在时可自行创建。两个 Agent 都要使用时，各放一份。
+
+   | Agent | 安装后应能看到的文件 |
+   | --- | --- |
+   | Codex | `~/.agents/skills/smm-search/SKILL.md` |
+   | Claude Code | `~/.claude/skills/smm-search/SKILL.md` |
+
+   Windows 上的 `~` 是当前用户的个人文件夹，例如 `C:\Users\你的用户名`。请同时保留 Skill 文件夹中的 `scripts/`。
+
+3. 新开一个 Agent 会话，问一个你确实在旧对话里讨论过的问题。比如可以说：
+
+   > 请用 SMM 搜索以前的对话。我当时对发布回滚提了哪些要求？请引用原始会话和消息位置。
+
+   第一次使用时，Skill 会从 PyPI 自动安装本机端、启动同步服务并继续处理原请求。如果 Agent 提示需要运行 Skill 的安装脚本或访问网络，允许后即可继续。下载依赖和首次导入可能需要几分钟。如果首次导入仍在进行，可以让 Agent 查看同步状态，完成后重试。Codex 和 Claude Code 在同一个系统账户下共用一份档案和一个服务。
+
+已安装 Node.js 22.20 或更新版本的用户，也可以在终端运行以下命令，并在安装器中选择使用的 Agent。
+
+```sh
+npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-search -g
+```
+
+日常可以直接对 Agent 说「查看 SMM 同步状态」「打开 SMM 状态页」「立即同步一次」「暂停自动同步」或「恢复自动同步」。暂停时仍可搜索已有记录，服务重启后也会记住暂停状态。
+
+## 多台电脑共用档案
+
+先在每台电脑按上面的步骤安装 Skill。再由管理员选择一台可通过 HTTPS 访问的电脑安装汇总端。准备好客户端可访问的 HTTPS 地址、证书和私钥，并先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)。
+
+```sh
+uv tool install smm-hub==0.2.0rc16
+```
+
+如果终端找不到 `smm-hub`，运行 `uv tool update-shell` 后重新打开终端。然后完成向导并检查服务状态。
+
+```sh
+smm-hub hub setup
+smm-hub hub status
+```
+
+当前命令固定到已在 PyPI 发布的候选版。确认状态中的 `enabled` 和 `running` 都为 `true`，地址与向导中填写的 HTTPS 地址一致。向导会生成连接凭证文件。把文件交给获授权的用户，再在每台客户端对 Agent 说「把这台电脑叫办公室电脑，汇总地址是 https://hub.example.net:8770，凭证文件在这里」，并提供本机文件路径。接入后仍用同一句自然语言搜索。汇总端断开时会退回本机搜索，恢复连接后继续同步。
+
+证书信任、各平台服务配置、升级和卸载见[安装与使用指南](TRIAL_GUIDE.md)。
 
 ## 从源码开发
 
@@ -63,7 +108,7 @@ MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始�
 | `smm-local` | `testpypi` | `pypi` |
 | `smm-hub` | `testpypi-hub` | `pypi-hub` |
 
-公开安装需要对应版本已上传。TestPyPI 验证时可为 Skill 启动器设置 `SMM_PACKAGE_INDEX=https://test.pypi.org/simple`，本机端从 TestPyPI 取得，依赖从 PyPI 安装。汇总端可用 `uv tool install --index https://test.pypi.org/simple --prerelease allow smm-hub` 验证。私有 GitHub 仓库的 Skill 安装仍需仓库读取权限。
+公开安装需要对应版本已上传。TestPyPI 验证时可为 Skill 启动器设置 `SMM_PACKAGE_INDEX=https://test.pypi.org/simple`，本机端从 TestPyPI 取得，依赖从 PyPI 安装。汇总端可用 `uv tool install --index https://test.pypi.org/simple --prerelease allow smm-hub` 验证。
 
 ## 规约与验收
 
