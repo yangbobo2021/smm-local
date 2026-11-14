@@ -51,10 +51,10 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ### 通过包管理器部署汇总端
 
-管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。命令固定到当前试用候选版。
+管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。
 
 ```sh
-uv tool install smm-hub==0.2.0rc16
+uv tool install smm-hub==0.2.0
 smm-hub hub setup
 ```
 
@@ -64,7 +64,7 @@ smm-hub hub setup
 smm-hub hub status
 smm-hub hub disable
 smm-hub hub enable
-smm-hub hub upgrade --prerelease
+smm-hub hub upgrade
 ```
 
 升级命令调用 uv 并保留地址、凭证和数据库，升级前保存 SQLite 备份。保留包索引中的旧版本，以便升级失败时恢复。启用中的服务在升级后会重新启动并检查 HTTPS。使用自定义 uv 安装环境时，从同一个账户和环境运行升级。使用 `--version` 可显式切换包索引中的发行版本。Windows 向导为监听端口配置仅限本地子网的入站防火墙规则。

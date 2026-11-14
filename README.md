@@ -6,7 +6,7 @@
 
 你需要已登录的 Codex 或 Claude Code，以及首次安装时的网络连接。
 
-1. 在 [GitHub 仓库首页](https://github.com/yangbobo2021/smm-local) 选择 **Code → Download ZIP**，解压后从 `skills/` 取出 `smm-search` 文件夹。手头已有单独的 Skill ZIP 时，解压即可得到这个文件夹。
+1. 从 [GitHub 最新正式版](https://github.com/yangbobo2021/smm-local/releases/latest) 下载 `smm-search-0.2.0.zip`，解压得到 `smm-search` 文件夹。也可以下载源码 ZIP，从 `skills/` 取出这个文件夹。
 2. 将整个 `smm-search` 文件夹放到下表对应的位置。目录不存在时可自行创建。两个 Agent 都要使用时，各放一份。
 
    | Agent | 安装后应能看到的文件 |
@@ -35,7 +35,7 @@ npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-se
 先在每台电脑按上面的步骤安装 Skill。再由管理员选择一台可通过 HTTPS 访问的电脑安装汇总端。准备好客户端可访问的 HTTPS 地址、证书和私钥，并先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)。
 
 ```sh
-uv tool install smm-hub==0.2.0rc16
+uv tool install smm-hub==0.2.0
 ```
 
 如果终端找不到 `smm-hub`，运行 `uv tool update-shell` 后重新打开终端。然后完成向导并检查服务状态。
@@ -45,7 +45,7 @@ smm-hub hub setup
 smm-hub hub status
 ```
 
-当前命令固定到已在 PyPI 发布的候选版。确认状态中的 `enabled` 和 `running` 都为 `true`，地址与向导中填写的 HTTPS 地址一致。向导会生成连接凭证文件。把文件交给获授权的用户，再在每台客户端对 Agent 说「把这台电脑叫办公室电脑，汇总地址是 https://hub.example.net:8770，凭证文件在这里」，并提供本机文件路径。接入后仍用同一句自然语言搜索。汇总端断开时会退回本机搜索，恢复连接后继续同步。
+确认状态中的 `enabled` 和 `running` 都为 `true`，地址与向导中填写的 HTTPS 地址一致。向导会生成连接凭证文件。把文件交给获授权的用户，再在每台客户端对 Agent 说「把这台电脑叫办公室电脑，汇总地址是 https://hub.example.net:8770，凭证文件在这里」，并提供本机文件路径。接入后仍用同一句自然语言搜索。汇总端断开时会退回本机搜索，恢复连接后继续同步。
 
 证书信任、各平台服务配置、升级和卸载见[安装与使用指南](TRIAL_GUIDE.md)。
 
