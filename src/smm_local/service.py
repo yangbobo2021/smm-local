@@ -12,22 +12,17 @@ import subprocess
 import sys
 import time
 import webbrowser
-from contextlib import contextmanager
 from pathlib import Path
 from typing import Literal
 from urllib.parse import urlsplit
-from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
+from urllib.request import ProxyHandler, Request, build_opener
 
 from .core import Archive
+from .support import NoRedirect, _service_lock
 
 
 Action = Literal["status", "open", "sync", "pause", "resume"]
 DEFAULT_PORT = 8766
-
-
-class NoRedirect(HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        return None
 
 
 LOCAL_HTTP = build_opener(ProxyHandler({}), NoRedirect())
@@ -35,23 +30,6 @@ LOCAL_HTTP = build_opener(ProxyHandler({}), NoRedirect())
 
 def _service_file(db: Archive) -> Path:
     return db.db_path.resolve().with_suffix(db.db_path.suffix + ".service.json")
-
-
-@contextmanager
-def _service_lock(path: Path):
-    with path.open("a+b") as lock:
-        try:
-            if os.name == "nt":
-                import msvcrt
-
-                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
-            else:
-                import fcntl
-
-                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except OSError as exc:
-            raise RuntimeError("此档案已有同步服务正在启动或运行") from exc
-        yield
 
 
 def serve(db: Archive, host: str, port: int, *, on_demand: bool = False,

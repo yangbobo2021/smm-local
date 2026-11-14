@@ -22,10 +22,8 @@ import time
 from urllib.parse import urlsplit
 from urllib.request import HTTPSHandler, ProxyHandler, Request, build_opener
 
-from .core import shared_db_path
-from .federation import hub_url
 from .hub_os import Service, command as run_command
-from .service import NoRedirect, _service_lock
+from ._archive import Archive, NoRedirect, _service_lock, hub_url, shared_db_path
 
 
 def add_arguments(commands) -> None:
@@ -84,7 +82,7 @@ class Hub:
         try:
             return json.loads(self.profile.read_text(encoding="utf-8"))
         except FileNotFoundError as exc:
-            raise ValueError("汇总服务尚未配置，请运行 smm hub setup") from exc
+            raise ValueError("汇总服务尚未配置，请运行 smm-hub hub setup") from exc
 
     def setup(self, args):
         if self.profile.is_file():
@@ -155,7 +153,7 @@ class Hub:
         cfg = self.config()
         result = {"enabled": cfg["enabled"], "address": cfg["address"], "running": False,
                   "credential_file": str(self.token), "database": str(self.database),
-                  "version": cfg.get("version", version("smm-local")), "service": self.service.name,
+                  "version": cfg.get("version", version("smm-hub")), "service": self.service.name,
                   "log_file": str(self.root / "hub.log")}
         if self.ca.is_file():
             result["ca_file"] = str(self.ca)
@@ -177,10 +175,13 @@ class Hub:
     def enable(self):
         cfg = self.config()
         self.service.preflight()
+        # Older Windows hubs may store the interpreter of a staged smm-local upgrade.
+        if cfg.get("runtime_package") != "smm-hub":
+            for key in ("python", "base_python", "version"):
+                cfg.pop(key, None)
         self.service.install(cfg)
-        if not cfg["enabled"]:
-            cfg["enabled"] = True
-            write_file(self.profile, json.dumps(cfg, indent=2).encode())
+        cfg["enabled"] = True
+        write_file(self.profile, json.dumps(cfg, indent=2).encode())
         self.service.start()
         return self.status(wait=True)
 
@@ -209,11 +210,11 @@ class Hub:
             if source.username or source.password:
                 raise ValueError("请通过 uv 的认证配置提供包索引凭证")
         listing = run_command(*uv, "dir").stdout.strip()
-        if Path(sys.prefix).resolve() != (Path(listing).expanduser() / "smm-local").resolve():
+        if Path(sys.prefix).resolve() != (Path(listing).expanduser() / "smm-hub").resolve():
             raise ValueError("请在通过 uv tool 安装此汇总端的账户和环境中运行升级")
         if sys.platform == "win32":
             return self.upgrade_windows(cfg, args, uv)
-        current = version("smm-local")
+        current = version("smm-hub")
         base_python = sys._base_executable
         install = [*uv, "install", "--python", base_python]
         options = ["--index", args.index] if args.index else []
@@ -222,9 +223,9 @@ class Hub:
         if args.version:
             if not re.fullmatch(r"[0-9][A-Za-z0-9.!+_-]*", args.version):
                 raise ValueError("请输入有效的 SMM 版本号")
-            update = [*install, f"smm-local=={args.version}"]
+            update = [*install, f"smm-hub=={args.version}"]
         else:
-            update = [*uv, "upgrade", "smm-local"]
+            update = [*uv, "upgrade", "smm-hub"]
         backup = None
         attempted_start = False
         if cfg["enabled"]:
@@ -234,8 +235,8 @@ class Hub:
                 backup = self.backup()
             subprocess.run([*update, *options], check=True, stdout=sys.stderr)
             updated = run_command(sys.executable, "-c",
-                "from importlib.metadata import version; print(version('smm-local'))").stdout.strip()
-            run_command(sys.executable, "-m", "smm_local.cli", "hub", "--help")
+                "from importlib.metadata import version; print(version('smm-hub'))").stdout.strip()
+            run_command(sys.executable, "-m", "smm_hub.cli", "hub", "--help")
             if cfg["enabled"]:
                 self.service.install(cfg)
                 attempted_start = True
@@ -247,8 +248,14 @@ class Hub:
                     self.service.stop(disable=False)
                     if backup:
                         self.restore(backup)
-                subprocess.run([*install, "--reinstall", f"smm-local=={current}", *options],
-                               check=True, stdout=sys.stderr)
+                probe = run_command(sys.executable, "-c",
+                    "from importlib.metadata import version; print(version('smm-hub'))", check=False)
+                healthy = (probe.returncode == 0 and probe.stdout.strip() == current
+                           and run_command(sys.executable, "-m", "smm_hub.cli", "hub",
+                                           "--help", check=False).returncode == 0)
+                if not healthy:
+                    subprocess.run([*install, "--reinstall", f"smm-hub=={current}", *options],
+                                   check=True, stdout=sys.stderr)
                 if cfg["enabled"]:
                     self.service.install(cfg)
                     self.service.start()
@@ -267,7 +274,7 @@ class Hub:
         runtime = self.service.new_runtime_directory()
         env = {**os.environ, "UV_TOOL_DIR": str(runtime / "tools"),
                "UV_TOOL_BIN_DIR": str(runtime / "bin")}
-        package = f"smm-local=={args.version}" if args.version else "smm-local"
+        package = f"smm-hub=={args.version}" if args.version else "smm-hub"
         base = str(Path(sys.base_prefix) / "python.exe")
         options = ["--index", args.index] if args.index else []
         if args.prerelease:
@@ -277,11 +284,12 @@ class Hub:
                            check=True, env=env, stdout=sys.stderr)
         except subprocess.CalledProcessError as exc:
             raise RuntimeError("包管理器未能安装新版本，汇总服务继续使用旧版本") from exc
-        python = runtime / "tools" / "smm-local" / "Scripts" / "python.exe"
-        run_command(str(python), "-m", "smm_local.cli", "hub", "--help")
+        python = runtime / "tools" / "smm-hub" / "Scripts" / "python.exe"
+        run_command(str(python), "-m", "smm_hub.cli", "hub", "--help")
         installed = run_command(str(python), "-c",
-            "from importlib.metadata import version; print(version('smm-local'))").stdout.strip()
-        next_cfg = {**cfg, "python": str(python), "base_python": base, "version": installed}
+            "from importlib.metadata import version; print(version('smm-hub'))").stdout.strip()
+        next_cfg = {**cfg, "python": str(python), "base_python": base, "version": installed,
+                    "runtime_package": "smm-hub"}
         if cfg["enabled"]:
             self.service.stop(disable=False)
         backup = None
@@ -326,7 +334,6 @@ class Hub:
     def server(self):
         import uvicorn
 
-        from .core import Archive
         from .hub import create_hub
 
         cfg = self.config()

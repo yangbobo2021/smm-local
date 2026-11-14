@@ -10,7 +10,7 @@ Use the `smm-local` MCP tools when `configure_hub` is available. If this session
 - macOS and Linux: `sh "<skill-directory>/scripts/first_use.sh" <arguments>`
 - Windows: invoke `"<skill-directory>\scripts\first_use.ps1"` with `&` in PowerShell, followed by the arguments.
 
-The launcher installs the bundled SMM components on first use or finds the existing installation for this OS account. Allow time for dependency downloads. Continue the original request through the launcher even when the newly registered MCP tools are not visible yet. Do not ask the user to install Python, run an SMM command, or restart the Agent to complete the first request. If the launcher fails, explain the specific error.
+The launcher installs the supported SMM Local package from the Python package index on first use or finds the existing installation for this OS account. Allow time for dependency downloads. Continue the original request through the launcher even when the newly registered MCP tools are not visible yet. Do not ask the user to install Python, run an SMM command, or restart the Agent to complete the first request. If the launcher fails, explain the specific error.
 
 ## Maintain conversation sync
 

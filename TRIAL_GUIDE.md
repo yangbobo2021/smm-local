@@ -4,9 +4,13 @@ SMM 在本机保存 Codex 与 Claude Code 的可见对话文本，提供项目�
 
 ## 1. 安装
 
-解压发行版 `smm-search-<版本>.zip`，将完整的 `smm-search` 文件夹放入 Codex 的 `~/.agents/skills/` 或 Claude Code 的 `~/.claude/skills/`。如果两边都要用，分别放入各自的 Skill 目录。
+把 [GitHub 上的 smm-search 目录](https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-search) 发给 Codex 或 Claude Code，请它安装。也可运行：
 
-首次使用时，Agent 会执行 Skill 随附的安装脚本并继续原请求。首次安装需要网络和 Agent 的本机执行权限。脚本会使用已有的 Python，或自动准备用户级 Python。MCP 在宿主加载注册配置后可用，首次会话可直接通过随附脚本完成操作。
+```sh
+npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-search -g
+```
+
+首次使用时，Skill 会从 PyPI 安装它支持的 `smm-local` 版本，再执行原请求。首次安装需要网络和 Agent 的本机执行权限。脚本会使用已有的 Python，或自动准备用户级 Python。仓库访问需要 GitHub 权限，在线安装还需要相应版本已上传到 PyPI。
 
 ## 2. 在 Agent 中管理同步
 
@@ -39,13 +43,13 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ## 5. 结束试用
 
-先从各 Agent 的 Skill 目录移除自己放入的 `smm-search` 文件夹。若也要卸载本机组件，可请 Agent 读取 `~/.local/share/smm-local/install.json`，从其中的 `project_root` 运行 `scripts/uninstall.py`，以停用服务并移除 MCP 注册。卸载会保留数据库。
+先从各 Agent 的 Skill 目录移除自己放入的 `smm-search` 文件夹。若也要卸载本机组件，可请 Agent 读取 `~/.local/share/smm-local/install.json`，用其中 `package_environment` 指向的 Python 运行 `-m smm_local.installation uninstall`。从源码安装的旧版仍可从 `project_root` 运行 `scripts/uninstall.py`，以停用服务并移除 MCP 注册。卸载会保留数据库。
 
 请在试用反馈中记录：安装是否独立完成、一次自己的历史问题是否找对原文、一次跨 Agent 搜索是否找对、哪一步费时或困惑。不要把私人对话原文发到公共 issue。
 
 ## 多台电脑共用汇总档案
 
-汇总端通过下面的包管理流程部署，也可在自行管理进程时运行 `smm serve-hub`。汇总端使用独立数据库，远程连接使用 HTTPS。连接凭证允许上传和搜索汇总档案，应发给有权访问这些对话的使用者。
+汇总端通过下面的包管理流程部署，也可在自行管理进程时运行 `smm-hub serve-hub`。汇总端使用独立数据库，远程连接使用 HTTPS。连接凭证允许上传和搜索汇总档案，应发给有权访问这些对话的使用者。
 
 在每台电脑上安装新版 Skill。将管理员提供的凭证文件存到该账户的 `~/.local/share/smm-local/hub-token`，或在配置时告诉 Agent 文件路径。然后说「把这台电脑叫出差笔记本，汇总地址是 https://smm.example.net:8770」。汇总电脑若也要上传自己的本机对话，同样配置一次。
 
@@ -53,20 +57,22 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ### 通过包管理器部署汇总端
 
-管理员从提供 `smm-local` wheel 的 Python 包索引安装。将示例索引换成发布方提供的地址。试用候选版需要允许预发布版本。
+管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。试用候选版需要允许预发布版本。
 
 ```sh
-uv tool install --index https://packages.example.net/simple --prerelease allow smm-local
-smm hub setup
+uv tool install --prerelease allow smm-hub
+smm-hub hub setup
 ```
 
 向导询问客户端可访问的 HTTPS 地址、证书和私钥，例如 `https://hub.example.net:8770`。在 Linux 用户服务下使用 1024 以上的监听端口。它会复制 TLS 文件、生成连接凭证、准备数据库、注册系统服务并检查 HTTPS。私有 CA 可通过 `--ca-file` 提供，并应配置到客户端 Python 的信任链。指定全部参数可无交互部署。Windows 需要以管理员身份运行终端，并将 uv 工具环境和基础 Python 安装在 LocalService 可读取和执行的目录（例如管理员管理的 ProgramData 下），macOS 在注册系统级 launchd 服务时会请求 sudo，Linux 使用可在启动时运行的 systemd 用户服务。
 
 ```sh
-smm hub status
-smm hub disable
-smm hub enable
-smm hub upgrade --index https://packages.example.net/simple --prerelease
+smm-hub hub status
+smm-hub hub disable
+smm-hub hub enable
+smm-hub hub upgrade --prerelease
 ```
 
 升级命令调用 uv 并保留地址、凭证和数据库，升级前保存 SQLite 备份。保留包索引中的旧版本，以便升级失败时恢复。启用中的服务在升级后会重新启动并检查 HTTPS。使用自定义 uv 安装环境时，从同一个账户和环境运行升级。使用 `--version` 可显式切换包索引中的发行版本。Windows 向导为监听端口配置仅限本地子网的入站防火墙规则。
+
+已通过旧版 `smm-local` 部署汇总端时，先记下原来的数据目录和启停状态，安装 `smm-hub`，然后用旧命令停用旧服务。在原数据目录运行 `smm-hub hub --state-dir <原数据目录> enable` 接管原服务。原服务需要保持停用时，直接保留停用状态，日后再用新命令启用。两套命令使用同一份汇总端状态文件和数据库。

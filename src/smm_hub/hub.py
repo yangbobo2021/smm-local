@@ -15,7 +15,7 @@ from uuid import uuid4
 from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
-from .core import Archive
+from ._archive import Archive
 
 
 class Record(BaseModel):

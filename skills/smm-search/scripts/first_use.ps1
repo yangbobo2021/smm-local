@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 SubLang International <https://sublang.ai>
 $ErrorActionPreference = 'Stop'
-$probe = 'import sqlite3, sys, venv; assert sys.version_info >= (3, 11); sqlite3.connect('':memory:'').execute(''CREATE VIRTUAL TABLE t USING fts5(body)'')'
+$probe = 'import ensurepip, sqlite3, sys, venv; assert sys.version_info >= (3, 11); sqlite3.connect('':memory:'').execute(''CREATE VIRTUAL TABLE t USING fts5(body)'')'
 foreach ($candidate in @('python.exe', 'python3.exe', 'py.exe')) {
     $command = Get-Command $candidate -ErrorAction SilentlyContinue
     if (-not $command -or $command.Source -like '*\Microsoft\WindowsApps\*') { continue }

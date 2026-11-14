@@ -10,12 +10,12 @@ import socket
 import tempfile
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.parse import urlsplit
 from urllib.request import Request
 from uuid import uuid4
 
 from .core import Archive
 from .service import LOCAL_HTTP
+from .support import hub_url
 
 API = "/v1"
 BATCH_SIZE = 100
@@ -28,21 +28,6 @@ class HubUnavailable(RuntimeError):
 def hub_config(db: Archive) -> dict:
     path = db.db_path.resolve().with_suffix(db.db_path.suffix + ".hub.json")
     return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
-
-
-def hub_url(address: str) -> str:
-    address = address.strip().rstrip("/")
-    if "://" not in address:
-        address = "https://" + address
-    url = urlsplit(address)
-    if (not url.hostname or url.username is not None or url.query or url.fragment
-            or url.path or any(char.isspace() for char in address)
-            or url.scheme not in {"http", "https"}):
-        raise ValueError("请输入汇总服务的地址，例如 https://smm.example.net")
-    if url.scheme == "http" and url.hostname not in {"127.0.0.1", "::1", "localhost"}:
-        raise ValueError("跨电脑连接需要 HTTPS")
-    _ = url.port
-    return address
 
 
 def _request(config: dict, route: str, payload: dict | None = None) -> dict:

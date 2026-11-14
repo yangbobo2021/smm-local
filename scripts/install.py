@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,49 +13,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "smm-local"
-
-
-def run(*args: str, env: dict[str, str] | None = None, timeout: int = 30) -> subprocess.CompletedProcess[str]:
-    try:
-        return subprocess.run(args, text=True, capture_output=True, env=env, timeout=timeout)
-    except subprocess.TimeoutExpired as exc:
-        raise RuntimeError(f"命令执行超过 {timeout} 秒：{Path(args[0]).name}；请检查网络或服务状态后重试") from exc
-
-
-def owned_mcp(name: str, command: str, previous: str | None) -> bool:
-    result = run(name, "mcp", "get", NAME)
-    if result.returncode:
-        return False
-    output = result.stdout + result.stderr
-    if command in output or (previous and previous in output):
-        return True
-    raise RuntimeError(f"{name} 中已有非本安装管理的 {NAME} MCP；请手工检查后再运行")
-
-
-def register_mcp(name: str, command: str, previous: str | None) -> str:
-    if not shutil.which(name):
-        return "未安装"
-    existed = owned_mcp(name, command, previous)
-    if existed:
-        current = run(name, "mcp", "get", NAME)
-        if command in current.stdout + current.stderr:
-            return "已配置"
-        remove = [name, "mcp", "remove", NAME]
-        if name == "claude":
-            remove += ["-s", "user"]
-        result = run(*remove)
-        if result.returncode:
-            raise RuntimeError(f"{name} MCP 更新失败：{result.stderr.strip()}")
-    add = [name, "mcp", "add"]
-    if name == "claude":
-        add += ["--scope", "user", NAME, "--", command]
-    else:
-        add += [NAME, "--", command]
-    result = run(*add)
-    if result.returncode:
-        raise RuntimeError(f"{name} MCP 注册失败：{result.stderr.strip()}")
-    return "已更新" if existed else "已注册"
+sys.path.insert(0, str(ROOT / "src"))
+from smm_local.installation import install_wrapper, register_mcp, run
 
 
 def install() -> None:
@@ -90,17 +48,7 @@ def install() -> None:
         skill = run(sys.executable, str(ROOT / "scripts/install_skill.py"), "--home", str(home), "--update")
         if skill.returncode:
             raise RuntimeError(skill.stderr.strip() or skill.stdout.strip())
-    bin_dir = home / ".local/bin"
-    bin_dir.mkdir(parents=True, exist_ok=True)
-    wrapper = bin_dir / ("smm.cmd" if windows else "smm")
-    header = "@rem Managed by SMM Local\n" if windows else "#!/bin/sh\n# Managed by SMM Local\n"
-    if wrapper.exists() and not wrapper.read_text(encoding="utf-8").startswith(header):
-        raise RuntimeError(f"已有非本安装管理的命令：{wrapper}")
-    import shlex
-    command = f'@"{cli.replace("%", "%%")}" %*\n' if windows else "exec " + shlex.quote(cli) + ' "$@"\n'
-    wrapper.write_text(header + command, encoding="utf-8")
-    if not windows:
-        wrapper.chmod(0o755)
+    wrapper = install_wrapper(cli)
     agents = {}
     if not args.no_mcp:
         print("注册 Agent MCP 与 Skill…", flush=True)

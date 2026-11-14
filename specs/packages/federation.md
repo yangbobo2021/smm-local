@@ -38,7 +38,7 @@
 
 ### federation-8
 
-当管理员部署 Linux、Windows 或 macOS 汇总端时，系统应提供通过 Python 包管理器安装的同一管理入口。
+当管理员部署 Linux、Windows 或 macOS 汇总端时，系统应提供通过公开 Python 包索引安装的独立汇总端包和跨平台管理入口。
 
 ### federation-9
 

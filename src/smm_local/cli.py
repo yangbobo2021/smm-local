@@ -50,43 +50,7 @@ def main() -> None:
     configure.add_argument("address")
     configure.add_argument("device_name")
     configure.add_argument("--token-file")
-    hub = sub.add_parser("serve-hub", help="运行独立的多机汇总服务")
-    hub.add_argument("--host", default="127.0.0.1")
-    hub.add_argument("--port", type=int, default=8770)
-    hub.add_argument("--token-file", required=True)
-    hub.add_argument("--tls-cert")
-    hub.add_argument("--tls-key")
-    from .hub_admin import add_arguments, dispatch
-
-    add_arguments(sub)
     args = parser.parse_args()
-    if args.command == "hub":
-        try:
-            result = dispatch(args)
-        except (OSError, RuntimeError, ValueError) as exc:
-            parser.error(str(exc))
-        if result is not None:
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-        return
-    if args.command == "serve-hub":
-        import uvicorn
-        from .hub import create_hub
-
-        if bool(args.tls_cert) != bool(args.tls_key):
-            parser.error("TLS 证书和私钥必须一起提供")
-        if args.host not in {"127.0.0.1", "::1", "localhost"} and not args.tls_cert:
-            parser.error("非回环地址必须启用 TLS")
-        local_path = shared_db_path().resolve()
-        hub_path = Path(args.db or local_path.with_name("smm-hub.sqlite3")).expanduser().resolve()
-        if hub_path == local_path or (hub_path.exists() and local_path.exists() and hub_path.samefile(local_path)):
-            parser.error("汇总服务必须使用独立数据库")
-        try:
-            token = Path(args.token_file).expanduser().read_text(encoding="ascii").strip()
-            uvicorn.run(create_hub(Archive(hub_path), token), host=args.host, port=args.port,
-                        ssl_certfile=args.tls_cert, ssl_keyfile=args.tls_key)
-        except (OSError, ValueError) as exc:
-            parser.error(str(exc))
-        return
     db_path = Path(args.db or shared_db_path()).expanduser()
     if args.command == "stop-on-demand" and not db_path.is_file():
         print('{"ok": true}')
@@ -128,7 +92,10 @@ def main() -> None:
                     continue
                 check = subprocess.run([executable, "mcp", "get", "smm-local"], capture_output=True, text=True, timeout=15)
                 agents[agent] = {"installed": True, "mcp": check.returncode == 0 and bool(mcp_path) and mcp_path in check.stdout + check.stderr}
-            skills = {agent: (Path.home() / f".{agent}/skills/smm-search/SKILL.md").is_file() for agent in ("codex", "claude")}
+            home = Path.home()
+            skills = {"codex": any((home / directory / "skills/smm-search/SKILL.md").is_file()
+                                   for directory in (".agents", ".codex")),
+                      "claude": (home / ".claude/skills/smm-search/SKILL.md").is_file()}
             with db.connect() as con:
                 database_ok = con.execute("PRAGMA quick_check").fetchone()[0] == "ok"
             sources = {"codex": Path(settings["codex_root"]).is_dir(), "claude-code": Path(settings["claude_root"]).is_dir()}

@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 SubLang International <https://sublang.ai>
+
+name: Publish SMM packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      index:
+        description: Target Python package index
+        required: true
+        type: choice
+        options:
+          - testpypi
+          - pypi
+      package:
+        description: Package to publish
+        required: true
+        type: choice
+        options:
+          - both
+          - smm-local
+          - smm-hub
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+      - run: python3 scripts/build_packages.py
+      - name: Select packages
+        env:
+          SMM_PUBLISH_PACKAGE: ${{ inputs.package }}
+        run: |
+          mkdir dist/publish
+          case "$SMM_PUBLISH_PACKAGE" in
+            both) cp dist/packages/*.whl dist/publish/ ;;
+            smm-local) cp dist/packages/smm_local-*.whl dist/publish/ ;;
+            smm-hub) cp dist/packages/smm_hub-*.whl dist/publish/ ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-packages
+          path: dist/publish/*.whl
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.index }}
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-packages
+          path: dist
+      - if: inputs.index == 'testpypi'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+      - if: inputs.index == 'pypi'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true

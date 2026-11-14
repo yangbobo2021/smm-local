@@ -1,11 +1,16 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "smm-local"
-version = "0.2.0rc15"
+version = "0.2.0rc16"
 description = "Local, durable conversation archive and search for coding agents"
+readme = {text = """# SMM Local
+
+Import, index and search Codex and Claude Code conversation archives on one computer. Install the smm-search Skill to set up this package and use it from your agent.
+""", content-type = "text/markdown"}
+license = "Apache-2.0"
 requires-python = ">=3.11"
 dependencies = ["fastapi==0.162.0", "uvicorn==0.54.0", "mcp==1.30.0", "zstandard>=0.23; python_version < '3.14'"]
 
@@ -18,6 +23,7 @@ smm-mcp = "smm_local.mcp_server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["smm_local*"]
 
 [tool.setuptools.package-data]
 smm_local = ["static/*"]

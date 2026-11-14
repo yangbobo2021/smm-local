@@ -2,9 +2,9 @@
 
 本地 Codex 与 Claude Code 对话档案与项目范围检索。导入后保存独立副本：删除 Agent 源会话不会删除知识库中的记录。
 
-同事试用只需安装发行版 `smm-search` Skill。首次在 Codex 或 Claude Code 中使用时，Skill 自动安装本机组件并执行原请求。见[安装与使用指南](TRIAL_GUIDE.md)。
+普通用户只需从 GitHub 安装 `smm-search` Skill。首次在 Codex 或 Claude Code 中使用时，Skill 从 Python 包索引安装 `smm-local` 并执行原请求。多台电脑需要汇总时，管理员另外安装 `smm-hub`。见[安装与使用指南](TRIAL_GUIDE.md)。
 
-## 安装与启动
+## 从源码开发
 
 需要 Python 3.11+。
 
@@ -51,6 +51,12 @@ python3 scripts/install_skill.py
 MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。安装器自动注册到本机已有的 Agent。CLI 可作为没有 MCP 时的后备入口。来源导入器相互独立，后续可增加其他 Agent。
 
 MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始位置；`read_conversation` 可读取完整原文。若要恢复完整搜索展示，在 MCP 服务环境设置 `SMM_SEARCH_PREVIEW_CHARS=0`。预览效果与限制见[验证报告](reports/search-preview-001.md)。
+
+## Python 包发布
+
+`python3 scripts/build_packages.py` 使用 uv 构建 `smm-local` 和 `smm-hub`，产物位于 `dist/packages/`。本机端版本在根目录的 `pyproject.toml`，汇总端版本在 `packaging/hub/pyproject.toml`。更新 Skill 支持的本机端版本时，同时更新 `skills/smm-search/scripts/first_use.py`。
+
+维护者可运行 [Publish SMM packages](.github/workflows/publish-packages.yml)，先选择 TestPyPI，再选择 PyPI。可分别发布任一包。首次使用前，在目标包索引为两个项目配置 GitHub Actions Trusted Publisher，填写此仓库、`publish-packages.yml` 和对应的 `testpypi` 或 `pypi` 环境。公开安装需要对应版本已上传。TestPyPI 验证时可为 Skill 启动器设置 `SMM_PACKAGE_INDEX=https://test.pypi.org/simple`，本机端从 TestPyPI 取得，依赖从 PyPI 安装。汇总端可用 `uv tool install --index https://test.pypi.org/simple --prerelease allow smm-hub` 验证。私有 GitHub 仓库的 Skill 安装仍需仓库读取权限。
 
 ## 规约与验收
 

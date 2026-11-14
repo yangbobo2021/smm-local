@@ -46,6 +46,7 @@ def record_codex(root, session, messages):
 
 def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch):
     monkeypatch.setenv("SMM_SERVICE_PORT", "0")
+    monkeypatch.setenv("PYTHONPATH", str(Path(__file__).resolve().parents[1] / "src"))
     token = "isolated-test-only-" + "1" * 40
     token_file = tmp_path / "hub-token"
     token_file.write_text(token)
@@ -64,7 +65,7 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
 
     def start_hub():
         process = subprocess.Popen(
-            [sys.executable, "-m", "smm_local.cli", "--db", str(hub_db), "serve-hub",
+            [sys.executable, "-m", "smm_hub.cli", "--db", str(hub_db), "serve-hub",
              "--port", str(port), "--token-file", str(token_file)],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         )

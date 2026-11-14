@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 SubLang International <https://sublang.ai>
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smm-hub"
+version = "0.2.0rc16"
+description = "Self-hosted aggregation and search for SMM conversation archives"
+readme = {text = """# SMM Hub
+
+Run a self-hosted HTTPS archive for multiple SMM Local computers on Linux, Windows or macOS. Install with uv and run `smm-hub hub setup` to configure the managed service.
+""", content-type = "text/markdown"}
+license = "Apache-2.0"
+requires-python = ">=3.11"
+dependencies = ["fastapi==0.162.0", "uvicorn==0.54.0", "zstandard>=0.23; python_version < '3.14'"]
+
+[project.scripts]
+smm-hub = "smm_hub.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["smm_hub*"]

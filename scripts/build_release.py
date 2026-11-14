@@ -8,7 +8,6 @@ import hashlib
 import re
 import tarfile
 import tomllib
-from io import BytesIO
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
@@ -31,21 +30,12 @@ def members() -> list[Path]:
 
 def write_skill(version: str, files: list[Path]) -> Path:
     skill = ROOT / "skills/smm-search"
-    runtime = BytesIO()
-    with ZipFile(runtime, "w", ZIP_DEFLATED) as archive:
-        for path in files:
-            if not path.is_relative_to(skill) or path.name == "SKILL.md":
-                add_to_zip(archive, path.relative_to(ROOT).as_posix(), path.read_bytes())
-    bundle = runtime.getvalue()
     output = ROOT / "dist" / f"smm-search-{version}.zip"
     output.parent.mkdir(exist_ok=True)
     with ZipFile(output, "w", ZIP_DEFLATED) as archive:
         for path in files:
             if path.is_relative_to(skill):
                 add_to_zip(archive, f"smm-search/{path.relative_to(skill).as_posix()}", path.read_bytes())
-        add_to_zip(archive, "smm-search/scripts/runtime.zip", bundle)
-        add_to_zip(archive, "smm-search/scripts/runtime.sha256",
-                   hashlib.sha256(bundle).hexdigest().encode("ascii") + b"\n")
     return output
 
 
@@ -59,7 +49,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
     parser.add_argument("--version", default=version.replace("rc", "-rc"))
-    parser.add_argument("--skill", action="store_true", help="构建包含首次安装组件的独立 Skill")
+    parser.add_argument("--skill", action="store_true", help="构建可通过在线包源首次安装的 Skill")
     args = parser.parse_args()
     files = members()
     for path in files:

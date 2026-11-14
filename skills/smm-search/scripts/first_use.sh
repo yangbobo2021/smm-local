@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: 2026 SubLang International <https://sublang.ai>
 set -eu
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-probe_python='import sqlite3, sys, venv; assert sys.version_info >= (3, 11); sqlite3.connect(":memory:").execute("CREATE VIRTUAL TABLE t USING fts5(body)")'
+probe_python='import ensurepip, sqlite3, sys, venv; assert sys.version_info >= (3, 11); sqlite3.connect(":memory:").execute("CREATE VIRTUAL TABLE t USING fts5(body)")'
 for candidate in python3 python; do
     if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c "$probe_python" 2>/dev/null; then
         exec "$candidate" "$script_dir/first_use.py" "$@"

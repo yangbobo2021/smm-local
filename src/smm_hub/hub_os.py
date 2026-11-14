@@ -32,7 +32,7 @@ class Service:
         suffix = hashlib.sha256(str(root).encode()).hexdigest()[:12]
         self.name = "smm-hub-" + suffix
         self.launch_label = "ai.smm.hub." + suffix
-        self.args = [sys.executable, "-m", "smm_local.cli", "hub", "--state-dir", str(root), "run"]
+        self.args = [sys.executable, "-m", "smm_hub.cli", "hub", "--state-dir", str(root), "run"]
         self.unit = self.name + ".service"
         self.plist = Path("/Library/LaunchDaemons") / (self.launch_label + ".plist")
 
@@ -92,7 +92,7 @@ class Service:
             import pwd
             user = pwd.getpwuid(os.getuid()).pw_name
             if not os.getuid():
-                raise ValueError("请以普通管理员账户运行 smm，SMM 会单独请求 sudo")
+                raise ValueError("请以普通管理员账户运行 smm-hub，SMM 会单独请求 sudo")
             data = {"Label": self.launch_label, "ProgramArguments": self.args, "UserName": user,
                     "RunAtLoad": True, "KeepAlive": {"SuccessfulExit": False},
                     "StandardErrorPath": str(self.root / "launchd-error.log")}
@@ -112,7 +112,7 @@ class Service:
         # spawns a separate process before the service can register.
         worker = ("import sys; "
                   f"sys.path.insert(0, {str(site)!r}); "
-                  "from smm_local.windows_service import boot; boot()")
+                  "from smm_hub.windows_service import boot; boot()")
         image = subprocess.list2cmdline([base, "-I", "-S", "-c", worker, self.name, str(self.root)])
         present = command("sc.exe", "query", self.name, check=False).returncode == 0
         action = "config" if present else "create"

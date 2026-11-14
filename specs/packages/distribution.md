@@ -39,7 +39,7 @@
 当已安装的发行版 Skill 首次需要本机组件时，随附的启动脚本应在用户目录准备可用的 Python 环境并安装 SMM [[distribution-1](#distribution-1)]：
 
 - 复用同一账户的可用安装和档案 [[distribution-2](#distribution-2)] [[distribution-9](#distribution-9)]。
-- 从 Skill 随附的安装包安装，并在安装前校验其完整性 [[distribution-6](#distribution-6)]。
+- 从公开 Python 包索引安装 Skill 指定版本的独立本机端包 [[distribution-6](#distribution-6)]。
 - 如果缺少可用的 Python，则通过固定版本的 uv 准备用户级 Python。
 - 如果 MCP 注册或登录自启配置失败，则报告原因并保留可用的本机命令。
 - 如果安装失败，则报告原因并允许下次使用时重试。
@@ -60,4 +60,4 @@
 
 ### distribution-12
 
-在只放入发行版 Skill 的干净用户目录发起首次同步时，验收应检查本机组件由 Skill 准备，首个请求可以执行，两个 Skill 副本复用同一安装，且安装包损坏时拒绝安装 [[distribution-11](#distribution-11)]。
+在只放入 GitHub Skill 目录的干净用户目录发起首次检索时，验收应检查本机组件从包索引安装、首个请求可以执行、两个 Skill 副本复用同一安装，以及包源不可用后的重试 [[distribution-11](#distribution-11)]。
