@@ -21,7 +21,10 @@ def main() -> None:
     manifest_path = home / ".local/share/smm-local/install.json"
     if not manifest_path.is_file():
         parser.error("未找到 SMM 安装清单")
-    manifest = json.loads(manifest_path.read_text())
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    cli = Path(manifest["cli_path"])
+    if not args.no_service and cli.is_file():
+        subprocess.run([str(cli), "stop-on-demand"], check=True)
     mcp_path = manifest.get("mcp_path", "")
     for agent in ("codex", "claude"):
         executable = shutil.which(agent)
@@ -37,13 +40,16 @@ def main() -> None:
         if existing.is_file() and existing.read_bytes() == (ROOT / "skills/smm-search/SKILL.md").read_bytes():
             shutil.rmtree(target)
     wrapper = Path(manifest.get("wrapper_path", ""))
-    if wrapper.is_file() and wrapper.read_text().startswith("#!/bin/sh\n# Managed by SMM Local\n"):
+    if wrapper.is_file() and wrapper.read_text(encoding="utf-8").startswith(
+        ("#!/bin/sh\n# Managed by SMM Local\n", "@rem Managed by SMM Local\n")
+    ):
         wrapper.unlink()
     if not args.no_service and sys.platform == "darwin" and manifest.get("service") == "已启动":
         subprocess.run([sys.executable, str(ROOT / "scripts/manage_service.py"), "uninstall"], check=True)
     manifest_path.unlink()
     print(json.dumps({"uninstalled": True, "database_preserved": True,
-                      "database_path": str(home / ".local/share/smm-local/smm.sqlite3")}, ensure_ascii=False))
+                      "database_path": str(manifest.get("db_path") or manifest_path.with_name("smm.sqlite3"))},
+                     ensure_ascii=False))
 
 
 if __name__ == "__main__":

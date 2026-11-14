@@ -1,0 +1,84 @@
+{
+  "acceptance_id": "AT-SMM-MULTI-DEVICE-001",
+  "base_sha256": "6851c1812850a37e2801e825dd4cb9430e8e797d5f7e8766a59807a4b08c71f0",
+  "request_id": "freeze-hub-platforms",
+  "request_sha256": "447b4732b93e4d2294bd6db738bc1d965af95fdab9798f539865d60d63f2d1b9",
+  "requirements": {
+    "R1": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "用户在 Agent 对话里说明汇总电脑的地址和本机名称，Skill 自动配置。"
+      }
+    },
+    "R2": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "汇总电脑连不上时自动搜本机所有 Agent 的对话，连上后自动补传、去重并恢复汇总搜索。"
+      }
+    },
+    "R3": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "搜索结果要能追溯到哪台电脑、哪个 Agent 和原始会话。"
+      }
+    },
+    "R4": {
+      "source": {
+        "kind": "user",
+        "reference": "本轮确认的三系统汇总端交付标准",
+        "text": "汇总服务支持LINUX、WINDOWS、MAC三种不同操作系统。那你按这个要求标准进行验收。"
+      }
+    }
+  },
+  "revision_authorizations": {},
+  "scenarios": {
+    "SC1": {
+      "requirement_sha256": {
+        "R1": "23b304c9e718b0d1b212b902acb70b7a607bf59dae0833ac172b207355ca6870",
+        "R2": "3ec5818cec23b08778448babfa2213fdda65753c17d2a00037193673894510bc",
+        "R3": "b9a89919be9160b0c3d464a565a141bf876833b4b2794230f6b383a77db988c9"
+      },
+      "scenario_scope": {
+        "behavior": "两台电脑使用各自的本机档案和同一个汇总服务，服务发生断线和重连。",
+        "criteria": [
+          "Agent 工具保存汇总地址、本机名称和稳定设备 ID。",
+          "汇总离线时本机搜索覆盖各 Agent 并标明仅本机。",
+          "服务恢复后自动补传断线期间记录并恢复汇总搜索，重复来源去重。",
+          "汇总命中及原文标明实际电脑、Agent、原始会话和消息位置。"
+        ],
+        "title": "多机同步和离线搜索"
+      },
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "用户在 Agent 对话里说明汇总电脑的地址和本机名称，Skill 自动配置。汇总电脑连不上时自动搜本机所有 Agent 的对话，连上后自动补传、去重并恢复汇总搜索。搜索结果要能追溯到哪台电脑、哪个 Agent 和原始会话。"
+      }
+    },
+    "SC2": {
+      "requirement_sha256": {
+        "R4": "812a9701572c7db943252b89645cbdaa347617a580d92a46b8e4c50afcc5bd7f"
+      },
+      "scenario_scope": {
+        "behavior": "Linux、Windows、macOS 上，管理员从干净环境安装、配置、运维并升级汇总服务，另一台电脑通过 Skill 接入。",
+        "criteria": [
+          "三种系统使用同一流程从包管理发布源安装和升级。",
+          "首次配置向导准备 HTTPS、凭证和数据库，注册常驻服务并输出接入信息。",
+          "另一台电脑通过 Skill 接入并查询到汇总记录。",
+          "统一入口支持查看状态和停用；系统重启后分别保留启用与停用状态。",
+          "升级后原数据库、地址和凭证仍可用，服务恢复并完成检查。"
+        ],
+        "title": "三系统汇总端安装与运行"
+      },
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息，承接上一轮的安装、升级和验收流程",
+        "text": "那你按这个要求标准进行验收。"
+      }
+    }
+  },
+  "schema": "acceptance-native-definitions-v1",
+  "version": 2
+}

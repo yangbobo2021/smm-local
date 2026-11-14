@@ -37,7 +37,8 @@ from mcp import ClientSession,StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 async def check():
-    params=StdioServerParameters(command=os.environ["SMM_MCP_ENTRY"],args=[],env={**os.environ,"SMM_DB":os.environ["SMM_TEST_DB"]})
+    alternate=os.environ["SMM_TEST_DB"]+".ignored"
+    params=StdioServerParameters(command=os.environ["SMM_MCP_ENTRY"],args=[],env={**os.environ,"SMM_DB":alternate})
     async with stdio_client(params) as (reader,writer):
         async with ClientSession(reader,writer) as session:
             await session.initialize()
@@ -50,6 +51,7 @@ async def check():
             original=await session.call_tool("read_conversation",{"conversation_id":hit["id"],"start":3,"end":3})
             full=json.loads(original.content[0].text)["messages"][0]["text"]
             assert full==os.environ["SMM_EXPECTED_FULL_TEXT"]
+            assert not os.path.exists(alternate)
             print(json.dumps({"conversation_found":True,"preview_truncated":True,"full_read":True}))
 
 asyncio.run(check())
@@ -95,6 +97,7 @@ def main() -> None:
         manifest = home / ".local/share/smm-local/install.json"
         first = json.loads(manifest.read_text())
         check(first["mcp_path"].startswith(str(original.resolve())), "first MCP path")
+        check(first["db_path"] == str((home / ".local/share/smm-local/smm.sqlite3").resolve()), "shared archive path")
         for name in ("codex", "claude"):
             check((home / f".{name}/skills/smm-search/SKILL.md").is_file(), f"{name} skill")
             check((home / "fake-mcp" / f"{name}.json").is_file(), f"{name} MCP")
@@ -104,6 +107,7 @@ def main() -> None:
         run(moved, env, "install.py", "--no-service")
         second = json.loads(manifest.read_text())
         check(second["mcp_path"].startswith(str(moved.resolve())), "relocated MCP path")
+        check(second["db_path"] == first["db_path"], "relocation preserves shared archive path")
         wrapper = home / ".local/bin/smm"
         check(str(moved.resolve()) in wrapper.read_text(), "relocated CLI wrapper")
         db = home / ".local/share/smm-local/smm.sqlite3"

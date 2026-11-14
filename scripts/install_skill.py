@@ -26,9 +26,13 @@ def main() -> None:
                 print(target, "(已更新)")
             else:
                 raise SystemExit(f"已有不同版本；如需更新请加 --update：{target}")
-            continue
-        shutil.copytree(source, target)
-        print(target)
+        else:
+            target.mkdir()
+            shutil.copy2(source / "SKILL.md", target)
+            print(target)
+        if (source / "scripts").is_dir():
+            shutil.copytree(source / "scripts", target / "scripts", dirs_exist_ok=True,
+                            ignore=shutil.ignore_patterns("__pycache__"))
 
 
 if __name__ == "__main__":

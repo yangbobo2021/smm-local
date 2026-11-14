@@ -20,14 +20,21 @@ def _text_content(content: Any) -> str:
 
 def _injected_context(text: str) -> bool:
     return text.startswith(("# AGENTS.md instructions for ", "<environment_context>",
-                            "<external_codex_apps_open_page>"))
+                            "<external_codex_apps_open_page>", "<recommended_plugins>",
+                            "<skill>"))
 
 
 class CodexAdapter:
     name = "codex"
 
     def discover(self, root: Path) -> Iterable[Path]:
-        return root.rglob("*.jsonl")
+        roots = [root]
+        archived = root.parent / "archived_sessions"
+        if archived != root and archived.is_dir():
+            roots.append(archived)
+        for directory in roots:
+            yield from directory.rglob("*.jsonl")
+            yield from directory.rglob("*.jsonl.zst")
 
     def normalize(self, item: dict[str, Any], byte_offset: int) -> dict[str, Any] | None:
         payload = item.get("payload")

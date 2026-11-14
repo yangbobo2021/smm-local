@@ -45,15 +45,15 @@ def make_session(path: Path, sid: str, cwd: Path, text: str) -> None:
 async def mcp_search(db_path: Path) -> tuple[list[str], str, bool]:
     params = StdioServerParameters(
         command=str(ROOT / ".venv/bin/smm-mcp"),
-        args=[],
-        env={**os.environ, "SMM_DB": str(db_path), "CODEX_THREAD_ID": "alpha-session"},
+        args=["--db", str(db_path)],
+        env={**os.environ, "CODEX_THREAD_ID": "alpha-session"},
     )
     async with stdio_client(params) as (reader, writer):
         async with ClientSession(reader, writer) as session:
             await session.initialize()
             tools = (await session.list_tools()).tools
             names = [t.name for t in tools]
-            readonly = all(t.annotations and t.annotations.readOnlyHint is True for t in tools)
+            readonly = all(t.annotations and t.annotations.readOnlyHint is (t.name not in {"manage_sync", "configure_hub"}) for t in tools)
             response = await session.call_tool("search_conversations", {"query": "晨星", "scope": "all", "limit": 5})
             data = json.loads(response.content[0].text)
             return names, data["excluded_current_session_id"], readonly
@@ -116,13 +116,13 @@ def run() -> None:
         retained = db.read(alpha_id)
         add("删除来源后独立保留", "原文 3 条仍可读取，搜索仍命中", {"messages": len(retained["messages"]), "source_exists": source_file.exists()}, len(retained["messages"]) == 3 and not source_file.exists())
 
-        env = {**os.environ, "SMM_DB": str(db_path), "CODEX_THREAD_ID": "alpha-session"}
-        command = [str(ROOT / ".venv/bin/smm"), "search", "晨星", "--scope", "all"]
+        env = {**os.environ, "CODEX_THREAD_ID": "alpha-session"}
+        command = [str(ROOT / ".venv/bin/smm"), "--db", str(db_path), "search", "晨星", "--scope", "all"]
         cli_data = json.loads(subprocess.check_output(command, env=env, text=True))
         add("CLI 共用知识库", "同一档案可搜且排除当前会话", {"results": len(cli_data["results"]), "excluded": cli_data["excluded_current_session_id"]}, len(cli_data["results"]) == 2 and cli_data["excluded_current_session_id"] == "alpha-session")
 
         names, current_id, readonly = asyncio.run(mcp_search(db_path))
-        add("MCP 实际握手与工具调用", "4 个只读工具可发现，自动排除当前会话", {"tools": names, "read_only": readonly, "excluded": current_id}, len(names) == 4 and readonly and current_id == "alpha-session")
+        add("MCP 实际握手与工具调用", "4 个只读工具与 2 个管理工具可发现，自动排除当前会话", {"tools": names, "annotations_ok": readonly, "excluded": current_id}, len(names) == 6 and {"manage_sync", "configure_hub"} <= set(names) and readonly and current_id == "alpha-session")
 
         with TestClient(create_app(db, auto_sync=False)) as client:
             page = client.get("/")

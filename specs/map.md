@@ -41,3 +41,4 @@ meta.md       规约的规约
 | [retrieval.md](packages/retrieval.md) | 范围明确的原文检索与读取 |
 | [access.md](packages/access.md) | CLI、MCP、Web UI 与通用 Skill |
 | [distribution.md](packages/distribution.md) | 可搬迁安装、诊断、卸载与数据边界 |
+| [federation.md](packages/federation.md) | 多机增量汇总、离线检索和来源追溯 |

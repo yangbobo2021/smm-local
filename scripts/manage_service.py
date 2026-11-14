@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import plistlib
 import subprocess
@@ -16,10 +17,14 @@ DOMAIN = f"gui/{os.getuid()}"
 
 
 def plist_data() -> dict:
-    log_dir = Path.home() / ".local/share/smm-local/logs"
+    data_dir = Path.home() / ".local/share/smm-local"
+    manifest = data_dir / "install.json"
+    installation = json.loads(manifest.read_text(encoding="utf-8")) if manifest.is_file() else {}
+    db_path = Path(installation.get("db_path") or data_dir / "smm.sqlite3").resolve()
+    log_dir = data_dir / "logs"
     return {
         "Label": LABEL,
-        "ProgramArguments": [str(ROOT / ".venv/bin/smm"), "serve"],
+        "ProgramArguments": [str(ROOT / ".venv/bin/smm"), "--db", str(db_path), "serve"],
         "WorkingDirectory": str(ROOT),
         "RunAtLoad": True,
         "KeepAlive": True,

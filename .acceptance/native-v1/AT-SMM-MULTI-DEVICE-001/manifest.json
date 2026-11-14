@@ -1,0 +1,7 @@
+{
+  "acceptance_id": "AT-SMM-MULTI-DEVICE-001",
+  "created_at": "2026-11-13T03:20:22.856000+00:00",
+  "reference": "当前用户消息",
+  "request": "按这个意图实现并验收。用户在 Agent 对话里说明汇总电脑的地址和本机名称，Skill 自动配置。汇总电脑连不上时自动搜本机所有 Agent 的对话，连上后自动补传、去重并恢复汇总搜索。搜索结果要能追溯到哪台电脑、哪个 Agent 和原始会话。",
+  "schema": "acceptance-native-manifest-v1"
+}

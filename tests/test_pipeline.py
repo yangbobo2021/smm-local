@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 from smm_local.api import create_app
 from smm_local.core import Archive
 from smm_local.mcp_server import create_mcp
+from smm_local.importers.source_io import zstd
 
 
 def line(kind, payload, ordinal, timestamp="2026-10-29T08:00:00Z"):
@@ -45,6 +46,106 @@ def test_incremental_copy_survives_deletion_and_partial_line(tmp_path):
     file.unlink()
     assert len(db.read(1)["messages"]) == 4
     assert db.search("晨星 恢复")["results"][0]["source_session_id"] == "s1"
+
+
+@pytest.mark.parametrize("message_ids", [True, False])
+def test_compressed_history_migration_and_update_preserve_identity(tmp_path, message_ids):
+    root = tmp_path / "sessions"
+    archived = tmp_path / "archived_sessions"
+    root.mkdir()
+    archived.mkdir()
+    plain = root / "one.jsonl"
+    session(plain, "zcode-session", tmp_path / "Project", "ZCODE 接入参考晏超杰的历史思考", "核对真实事件。")
+    if not message_ids:
+        items = [json.loads(row) for row in plain.read_text().splitlines()]
+        for item in items:
+            item.pop("ordinal", None)
+            if item["type"] == "response_item":
+                item["payload"].pop("id", None)
+        plain.write_text("".join(json.dumps(item, ensure_ascii=False) + "\n" for item in items))
+    body = plain.read_bytes()
+    db = Archive(tmp_path / "archive.sqlite3")
+    assert db.sync_codex(root)["messages_new"] == 2
+    hit = db.search("ZCODE")["results"][0]
+    before = db.read(hit["id"])["messages"]
+    compressed = archived / "one.jsonl.zst"
+    with zstd.open(compressed, "wb") as stream:
+        stream.write(body)
+    # Both physical copies coexist during migration.
+    duplicate = db.sync_codex(root)
+    assert duplicate["conversations_new"] == duplicate["messages_new"] == 0
+    plain.unlink()
+    assert db.sync_codex(root)["messages_new"] == 0
+    assert db.read(hit["id"])["messages"] == before
+    extra = line("response_item", {"type": "message", "role": "assistant", "content": [{"type": "output_text", "text": "服务器收到 ZCODE 事件。"}]}, 5).encode()
+    if not message_ids:
+        item = json.loads(extra)
+        item.pop("ordinal")
+        extra = (json.dumps(item, ensure_ascii=False) + "\n").encode()
+    # Recompression is a full replay, with stable decompressed offsets.
+    with zstd.open(compressed, "wb") as stream:
+        stream.write(body + extra)
+    changed = db.sync_codex(root)
+    assert not changed["errors"] and changed["messages_new"] == 1
+    assert db.sync_codex(root)["messages_new"] == 0
+    assert db.read(hit["id"])["messages"][:2] == before
+    assert len(db.read(hit["id"])["messages"]) == 3
+    compressed.unlink()
+    db.sync_codex(root)
+    assert db.search("ZCODE")["results"][0]["source_session_id"] == "zcode-session"
+    assert len(db.read(hit["id"])["messages"]) == 3
+
+
+def test_compressed_partial_line_and_concatenated_frames_retry(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    compressed = root / "partial.jsonl.zst"
+    header = line("session_meta", {"id": "partial", "cwd": str(tmp_path)}, 1).encode()
+    message = line("response_item", {"type": "message", "role": "user", "content": "压缩历史重试"}, 2).encode()
+    split = len(message) // 2
+    with zstd.open(compressed, "wb") as stream:
+        stream.write(header + message[:split])
+    db = Archive(tmp_path / "archive.sqlite3")
+    assert db.sync_codex(root)["errors"]
+    assert db.status()["messages"] == 0
+    with zstd.open(compressed, "ab") as stream:
+        stream.write(message[split:])
+    result = db.sync_codex(root)
+    assert result["messages_new"] == 1 and not result["errors"]
+    assert db.sync_codex(root)["messages_new"] == 0
+    assert db.search("压缩历史重试")["results"][0]["source_session_id"] == "partial"
+
+
+def test_corrupt_compressed_file_does_not_block_other_histories(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    (root / "broken.jsonl.zst").write_bytes(b"not a zstd stream")
+    session(root / "good.jsonl", "good", tmp_path, "完整历史", "正常导入")
+    db = Archive(tmp_path / "archive.sqlite3")
+    result = db.sync_codex(root)
+    assert len(result["errors"]) == 1
+    assert "broken.jsonl.zst" in result["errors"][0]["path"]
+    assert result["messages_new"] == 2
+    assert db.search("完整历史")["results"][0]["source_session_id"] == "good"
+
+
+def test_plugin_and_skill_context_are_not_conversation_titles_or_evidence(tmp_path):
+    root = tmp_path / "sessions"
+    root.mkdir()
+    path = root / "context.jsonl"
+    path.write_text(
+        line("session_meta", {"id": "context", "cwd": str(tmp_path)}, 1)
+        + line("response_item", {"type": "message", "role": "user", "content": "<recommended_plugins>\nSECRET_PLUGIN_MARKER\n</recommended_plugins>"}, 2)
+        + line("response_item", {"type": "message", "role": "user", "content": "讨论 ZCODE 事件接入"}, 3)
+        + line("response_item", {"type": "message", "role": "user", "content": "<skill>\nSECRET_SKILL_MARKER\n</skill>"}, 4)
+        + line("response_item", {"type": "message", "role": "assistant", "content": "先确认事件契约"}, 5),
+        encoding="utf-8",
+    )
+    db = Archive(tmp_path / "archive.sqlite3")
+    assert db.sync_codex(root)["messages_new"] == 2
+    assert db.search("ZCODE")["results"][0]["title"] == "讨论 ZCODE 事件接入"
+    assert not db.search("SECRET_PLUGIN_MARKER")["results"]
+    assert not db.search("SECRET_SKILL_MARKER")["results"]
 
 
 def test_long_conversation_preview_keeps_later_decision_and_its_question(tmp_path):

@@ -1,0 +1,56 @@
+{
+  "acceptance_id": "AT-SMM-MULTI-DEVICE-001",
+  "base_sha256": null,
+  "request_id": "freeze-r1",
+  "request_sha256": "62bb992cbddeb9c0b9b5c32e0ea9d75e468a36d2c8cd1d62b3988b94be384be4",
+  "requirements": {
+    "R1": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "用户在 Agent 对话里说明汇总电脑的地址和本机名称，Skill 自动配置。"
+      }
+    },
+    "R2": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "汇总电脑连不上时自动搜本机所有 Agent 的对话，连上后自动补传、去重并恢复汇总搜索。"
+      }
+    },
+    "R3": {
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "搜索结果要能追溯到哪台电脑、哪个 Agent 和原始会话。"
+      }
+    }
+  },
+  "revision_authorizations": {},
+  "scenarios": {
+    "SC1": {
+      "requirement_sha256": {
+        "R1": "23b304c9e718b0d1b212b902acb70b7a607bf59dae0833ac172b207355ca6870",
+        "R2": "3ec5818cec23b08778448babfa2213fdda65753c17d2a00037193673894510bc",
+        "R3": "b9a89919be9160b0c3d464a565a141bf876833b4b2794230f6b383a77db988c9"
+      },
+      "scenario_scope": {
+        "behavior": "两台电脑使用各自的本机档案和同一个汇总服务，服务发生断线和重连。",
+        "criteria": [
+          "Agent 工具保存汇总地址、本机名称和稳定设备 ID。",
+          "汇总离线时本机搜索覆盖各 Agent 并标明仅本机。",
+          "服务恢复后自动补传断线期间记录并恢复汇总搜索，重复来源去重。",
+          "汇总命中及原文标明实际电脑、Agent、原始会话和消息位置。"
+        ],
+        "title": "多机同步和离线搜索"
+      },
+      "source": {
+        "kind": "user",
+        "reference": "当前用户消息",
+        "text": "用户在 Agent 对话里说明汇总电脑的地址和本机名称，Skill 自动配置。汇总电脑连不上时自动搜本机所有 Agent 的对话，连上后自动补传、去重并恢复汇总搜索。搜索结果要能追溯到哪台电脑、哪个 Agent 和原始会话。"
+      }
+    }
+  },
+  "schema": "acceptance-native-definitions-v1",
+  "version": 1
+}

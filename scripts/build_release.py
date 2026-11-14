@@ -7,7 +7,10 @@ import gzip
 import hashlib
 import re
 import tarfile
+import tomllib
+from io import BytesIO
 from pathlib import Path
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,14 +29,46 @@ def members() -> list[Path]:
                   and path.suffix not in {".pyc", ".sqlite3", ".db"})
 
 
+def write_skill(version: str, files: list[Path]) -> Path:
+    skill = ROOT / "skills/smm-search"
+    runtime = BytesIO()
+    with ZipFile(runtime, "w", ZIP_DEFLATED) as archive:
+        for path in files:
+            if not path.is_relative_to(skill) or path.name == "SKILL.md":
+                add_to_zip(archive, path.relative_to(ROOT).as_posix(), path.read_bytes())
+    bundle = runtime.getvalue()
+    output = ROOT / "dist" / f"smm-search-{version}.zip"
+    output.parent.mkdir(exist_ok=True)
+    with ZipFile(output, "w", ZIP_DEFLATED) as archive:
+        for path in files:
+            if path.is_relative_to(skill):
+                add_to_zip(archive, f"smm-search/{path.relative_to(skill).as_posix()}", path.read_bytes())
+        add_to_zip(archive, "smm-search/scripts/runtime.zip", bundle)
+        add_to_zip(archive, "smm-search/scripts/runtime.sha256",
+                   hashlib.sha256(bundle).hexdigest().encode("ascii") + b"\n")
+    return output
+
+
+def add_to_zip(archive: ZipFile, name: str, payload: bytes) -> None:
+    info = ZipInfo(name)
+    info.external_attr = 0o100644 << 16
+    archive.writestr(info, payload, compress_type=ZIP_DEFLATED)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", default="0.2.0-rc2")
+    version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+    parser.add_argument("--version", default=version.replace("rc", "-rc"))
+    parser.add_argument("--skill", action="store_true", help="构建包含首次安装组件的独立 Skill")
     args = parser.parse_args()
     files = members()
     for path in files:
         if SECRET.search(path.read_bytes()):
             raise SystemExit(f"疑似凭证，已中止打包：{path.relative_to(ROOT)}")
+    if args.skill:
+        output = write_skill(args.version, files)
+        print(f"{output}\nsha256 {hashlib.sha256(output.read_bytes()).hexdigest()}")
+        return
     output = ROOT / "dist" / f"smm-local-{args.version}.tar.gz"
     output.parent.mkdir(exist_ok=True)
     with output.open("wb") as raw:

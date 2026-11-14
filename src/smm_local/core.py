@@ -17,6 +17,7 @@ from typing import Any
 from .importers.base import SourceAdapter
 from .importers.codex import CodexAdapter
 from .importers.claude_code import ClaudeCodeAdapter
+from .importers.source_io import open_source
 
 
 def utcnow() -> str:
@@ -25,6 +26,15 @@ def utcnow() -> str:
 
 def default_db_path() -> Path:
     return Path(os.environ.get("SMM_DB", "~/.local/share/smm-local/smm.sqlite3")).expanduser()
+
+
+def shared_db_path() -> Path:
+    manifest = Path.home() / ".local/share/smm-local/install.json"
+    default_path = manifest.with_name("smm.sqlite3")
+    if manifest.is_file():
+        installation = json.loads(manifest.read_text(encoding="utf-8"))
+        return Path(installation.get("db_path") or default_path).expanduser().resolve()
+    return default_path.resolve()
 
 
 def default_codex_root() -> Path:
@@ -236,6 +246,19 @@ class Archive:
             if "source" not in source_columns:
                 con.execute("ALTER TABLE source_files ADD COLUMN source TEXT NOT NULL DEFAULT 'codex'")
             con.execute("BEGIN IMMEDIATE")
+            con.execute("INSERT OR IGNORE INTO settings(key,value) VALUES('message_sequence','0')")
+            con.execute("""
+                UPDATE settings SET value=MAX(CAST(value AS INTEGER),
+                    COALESCE((SELECT MAX(id) FROM messages),0))
+                WHERE key='message_sequence'
+            """)
+            con.execute("""
+                CREATE TRIGGER IF NOT EXISTS advance_message_sequence AFTER INSERT ON messages
+                BEGIN
+                    UPDATE settings SET value=MAX(CAST(value AS INTEGER),new.id)
+                    WHERE key='message_sequence';
+                END
+            """)
             if not con.execute("SELECT 1 FROM schema_migrations WHERE name='codex-injected-context-v1'").fetchone():
                 predicate = "m.text LIKE '# AGENTS.md instructions for %' OR m.text LIKE '<environment_context>%' OR m.text LIKE '<external_codex_apps_open_page>%'"
                 affected = [r[0] for r in con.execute(
@@ -244,17 +267,27 @@ class Archive:
                 for conversation_id in affected:
                     self._reindex(con, conversation_id)
                 con.execute("INSERT INTO schema_migrations(name,applied_at) VALUES(?,?)", ("codex-injected-context-v1", utcnow()))
+            if not con.execute("SELECT 1 FROM schema_migrations WHERE name='codex-injected-context-v2'").fetchone():
+                predicate = "text LIKE '<recommended_plugins>%' OR text LIKE '<skill>%'"
+                affected = [r[0] for r in con.execute(
+                    f"SELECT DISTINCT conversation_id FROM messages WHERE role='user' AND ({predicate})")]
+                con.execute(f"DELETE FROM messages WHERE role='user' AND ({predicate})")
+                for conversation_id in affected:
+                    self._reindex(con, conversation_id)
+                con.execute("INSERT INTO schema_migrations(name,applied_at) VALUES(?,?)", ("codex-injected-context-v2", utcnow()))
 
     def get_settings(self) -> dict[str, Any]:
         with self.connect() as con:
-            rows = con.execute("SELECT key,value FROM settings").fetchall()
+            rows = con.execute("SELECT key,value FROM settings WHERE key NOT IN ('last_sync_result', 'hub_identity', 'message_sequence') AND key NOT LIKE 'hub_cursor:%'").fetchall()
         result: dict[str, Any] = {r["key"]: json.loads(r["value"]) for r in rows}
         result.setdefault("codex_root", str(default_codex_root()))
         result.setdefault("claude_root", str(default_claude_root()))
         result.setdefault("sync_interval_seconds", 60)
+        result.setdefault("sync_paused", False)
         return result
 
-    def set_settings(self, *, codex_root: str | None = None, claude_root: str | None = None, sync_interval_seconds: int | None = None) -> dict[str, Any]:
+    def set_settings(self, *, codex_root: str | None = None, claude_root: str | None = None,
+                     sync_interval_seconds: int | None = None, sync_paused: bool | None = None) -> dict[str, Any]:
         updates: dict[str, Any] = {}
         if codex_root is not None:
             p = Path(codex_root).expanduser().resolve()
@@ -270,10 +303,23 @@ class Archive:
             if not 10 <= sync_interval_seconds <= 3600:
                 raise ValueError("同步间隔必须在 10 到 3600 秒之间")
             updates["sync_interval_seconds"] = sync_interval_seconds
+        if sync_paused is not None:
+            updates["sync_paused"] = sync_paused
+        self._save_settings(updates)
+        return self.get_settings()
+
+    def _save_settings(self, updates: dict[str, Any]) -> None:
         with self.connect() as con:
             for key, value in updates.items():
                 con.execute("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (key, json.dumps(value)))
-        return self.get_settings()
+
+    def record_sync_result(self, result: dict[str, Any]) -> None:
+        self._save_settings({"last_sync_result": result})
+
+    def last_sync_result(self) -> dict[str, Any] | None:
+        with self.connect() as con:
+            row = con.execute("SELECT value FROM settings WHERE key='last_sync_result'").fetchone()
+        return json.loads(row[0]) if row else None
 
     def _project_for_path(self, con: sqlite3.Connection, cwd: str | None) -> int | None:
         if not cwd:
@@ -337,21 +383,27 @@ class Archive:
 
     def _sync_file(self, path: Path, adapter: SourceAdapter) -> dict[str, Any]:
         stat = path.stat()
-        with path.open("rb") as stream:
-            head_hash = hashlib.sha256(stream.readline()).hexdigest()
         with self.connect() as con:
             previous = con.execute("SELECT * FROM source_files WHERE path=?", (str(path),)).fetchone()
             if previous and previous["size"] == stat.st_size and previous["mtime_ns"] == stat.st_mtime_ns and not previous["error"]:
                 return {"changed": False, "conversations_new": 0, "messages_new": 0, "error": None}
-            reset = not previous or previous["source"] != adapter.name or stat.st_size < previous["byte_offset"] or previous["inode"] != stat.st_ino or previous["head_hash"] != head_hash
+            with open_source(path) as stream:
+                head_hash = hashlib.sha256(stream.readline()).hexdigest()
+            # Positions and fallback message keys always use decompressed byte
+            # offsets, so compression/relocation preserves their identities.
+            # Changed compressed files are replayed: physical size is unrelated
+            # to the saved logical offset, and a rewrite may change earlier data.
+            reset = path.name.endswith(".jsonl.zst") or not previous or previous["source"] != adapter.name or stat.st_size < previous["byte_offset"] or previous["inode"] != stat.st_ino or previous["head_hash"] != head_hash
             offset = 0 if reset else int(previous["byte_offset"])
             source_session_id = None if reset else previous["source_session_id"]
             created = 0
             messages_new = 0
             changed_conversations: set[int] = set()
             error: str | None = None
-            with path.open("rb") as stream:
-                stream.seek(offset)
+            fallback_session_id = path.name.removesuffix(".zst").removesuffix(".jsonl")
+            with open_source(path) as stream:
+                if offset:
+                    stream.seek(offset)
                 while True:
                     line_start = stream.tell()
                     line = stream.readline()
@@ -359,17 +411,17 @@ class Archive:
                         break
                     if not line.endswith(b"\n"):
                         error = "末尾 JSONL 尚未写完，等待下次同步"
-                        stream.seek(line_start)
+                        offset = line_start
                         break
                     try:
                         item = json.loads(line)
                     except (UnicodeDecodeError, json.JSONDecodeError):
                         error = f"JSONL 第 {line_start} 字节解析失败"
-                        stream.seek(line_start)
+                        offset = line_start
                         break
                     normalized = adapter.normalize(item, line_start)
                     if normalized and normalized["kind"] == "session":
-                        source_session_id = str(normalized.get("session_id") or path.stem)
+                        source_session_id = str(normalized.get("session_id") or fallback_session_id)
                         cwd = normalized.get("cwd") if isinstance(normalized.get("cwd"), str) else None
                         project_path = project_path_for(cwd) if cwd else None
                         project_id = self._project_for_path(con, cwd)
@@ -381,7 +433,7 @@ class Archive:
                             con.execute("UPDATE conversations SET source_path=?,cwd=?,project_path=?,project_id=? WHERE id=?", (str(path), cwd, project_path, project_id, existing["id"]))
                     elif normalized and normalized["kind"] == "message":
                         if not source_session_id:
-                            source_session_id = str(normalized.get("session_id") or path.stem)
+                            source_session_id = str(normalized.get("session_id") or fallback_session_id)
                             cwd = normalized.get("cwd") if isinstance(normalized.get("cwd"), str) else None
                             project_path = project_path_for(cwd) if cwd else None
                             project_id = self._project_for_path(con, cwd)
@@ -390,12 +442,18 @@ class Archive:
                                 con.execute("INSERT INTO conversations(source,source_session_id,source_path,cwd,project_path,project_id,started_at,updated_at) VALUES(?,?,?,?,?,?,?,?)", (adapter.name, source_session_id, str(path), cwd, project_path, project_id, normalized.get("timestamp"), normalized.get("timestamp")))
                                 created += 1
                         conversation_id = int(con.execute("SELECT id FROM conversations WHERE source=? AND source_session_id=?", (adapter.name,source_session_id)).fetchone()[0])
-                        cur = con.execute("INSERT INTO messages(conversation_id,source_key,position,role,text,timestamp) VALUES(?,?,?,?,?,?) ON CONFLICT(conversation_id,source_key) DO NOTHING", (conversation_id, normalized["key"], normalized["position"], normalized["role"], normalized["text"], normalized.get("timestamp")))
+                        cur = con.execute("""
+                            INSERT INTO messages(id,conversation_id,source_key,position,role,text,timestamp)
+                            VALUES((SELECT CAST(value AS INTEGER)+1 FROM settings WHERE key='message_sequence'),?,?,?,?,?,?)
+                            ON CONFLICT(conversation_id,source_key) DO NOTHING
+                        """, (conversation_id, normalized["key"], normalized["position"], normalized["role"],
+                              normalized["text"], normalized.get("timestamp")))
                         if cur.rowcount:
                             messages_new += 1
                             changed_conversations.add(conversation_id)
                         con.execute("UPDATE conversations SET updated_at=? WHERE id=?", (normalized.get("timestamp"), conversation_id))
-                offset = stream.tell()
+                if not error:
+                    offset = stream.tell()
             for conversation_id in changed_conversations:
                 self._reindex(con, conversation_id)
             con.execute("INSERT INTO source_files(path,source,source_session_id,byte_offset,size,mtime_ns,inode,head_hash,last_synced_at,error) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET source=excluded.source,source_session_id=excluded.source_session_id,byte_offset=excluded.byte_offset,size=excluded.size,mtime_ns=excluded.mtime_ns,inode=excluded.inode,head_hash=excluded.head_hash,last_synced_at=excluded.last_synced_at,error=excluded.error", (str(path), adapter.name, source_session_id, offset, stat.st_size, stat.st_mtime_ns, stat.st_ino, head_hash, utcnow(), error))
@@ -411,10 +469,19 @@ class Archive:
 
     def status(self) -> dict[str, Any]:
         with self.connect() as con:
-            counts = {"conversations": con.execute("SELECT COUNT(*) FROM conversations").fetchone()[0], "messages": con.execute("SELECT COUNT(*) FROM messages").fetchone()[0], "projects": con.execute("SELECT COUNT(*) FROM projects").fetchone()[0], "source_files": con.execute("SELECT COUNT(*) FROM source_files").fetchone()[0]}
+            counts = {"projects": con.execute("SELECT COUNT(*) FROM projects").fetchone()[0],
+                      "source_files": con.execute("SELECT COUNT(*) FROM source_files").fetchone()[0]}
             errors = [dict(r) for r in con.execute("SELECT path,error,last_synced_at FROM source_files WHERE error IS NOT NULL ORDER BY last_synced_at DESC LIMIT 20")]
             last_sync = con.execute("SELECT MAX(last_synced_at) FROM source_files").fetchone()[0]
-            by_source = {r["source"]: {"conversations": r["conversations"], "messages": r["messages"]} for r in con.execute("SELECT c.source,COUNT(DISTINCT c.id) AS conversations,COUNT(m.id) AS messages FROM conversations c LEFT JOIN messages m ON m.conversation_id=c.id GROUP BY c.source")}
+            by_source = {r["source"]: {"conversations": r["conversations"], "messages": r["messages"]}
+                         for r in con.execute("""
+                SELECT c.source, COUNT(*) AS conversations, SUM(
+                    (SELECT COUNT(*) FROM messages m WHERE m.conversation_id = c.id)
+                ) AS messages
+                FROM conversations c GROUP BY c.source
+            """)}
+            for key in ("conversations", "messages"):
+                counts[key] = sum(source[key] for source in by_source.values())
         return {**counts, "by_source": by_source, "last_sync": last_sync, "errors": errors, "settings": self.get_settings()}
 
     def projects(self) -> list[dict[str, Any]]:
@@ -495,7 +562,7 @@ class Archive:
                     return dict(row)
         return None
 
-    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0) -> dict[str, Any]:
+    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False) -> dict[str, Any]:
         query_terms = list(dict.fromkeys(tokens(query)))
         if not query_terms:
             raise ValueError("查询词不能为空")
@@ -529,7 +596,8 @@ class Archive:
             rows = con.execute(sql, args).fetchall()
             results = []
             for index,row in enumerate(rows, 1):
-                messages = con.execute("SELECT position,role,text FROM messages WHERE conversation_id=? ORDER BY position,id", (row["id"],)).fetchall()
+                fields = "id AS _message_id,position,role,text" if include_message_ids else "position,role,text"
+                messages = con.execute(f"SELECT {fields} FROM messages WHERE conversation_id=? ORDER BY position,id", (row["id"],)).fetchall()
                 item = dict(row)
                 item["rank"] = index
                 item["bm25_score"] = -item.pop("rank_score")
@@ -539,13 +607,18 @@ class Archive:
             effective = [] if project_ids is None else [dict(r) for r in con.execute("SELECT id,name FROM projects WHERE id IN ("+",".join("?" for _ in project_ids)+") ORDER BY id", project_ids)]
         return {"query": query, "scope": scope, "effective_projects": effective if scope == "project" else "all", "excluded_current_session_id": current_session_id if current_session_id and not include_current else None, "results": results}
 
-    def read(self, conversation_id: int, *, start: int | None = None, end: int | None = None) -> dict[str, Any]:
+    def read(self, conversation_id: int, *, start: int | None = None, end: int | None = None,
+             include_message_ids: bool = False, message_id: int | None = None) -> dict[str, Any]:
         with self.connect() as con:
             row = con.execute("SELECT c.id,c.source,c.source_session_id,c.source_path,c.cwd,c.started_at,c.updated_at,c.title,c.project_id,p.name AS project_name FROM conversations c LEFT JOIN projects p ON p.id=c.project_id WHERE c.id=?", (conversation_id,)).fetchone()
             if row is None:
                 raise ValueError("对话不存在")
-            sql = "SELECT position,role,text,timestamp FROM messages WHERE conversation_id=?"
+            fields = "id AS _message_id,position,role,text,timestamp" if include_message_ids else "position,role,text,timestamp"
+            sql = f"SELECT {fields} FROM messages WHERE conversation_id=?"
             args: list[Any] = [conversation_id]
+            if message_id is not None:
+                sql += " AND id=?"
+                args.append(message_id)
             if start is not None:
                 sql += " AND position>=?"
                 args.append(start)

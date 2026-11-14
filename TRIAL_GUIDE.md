@@ -4,24 +4,22 @@ SMM 在本机保存 Codex 与 Claude Code 的可见对话文本，提供项目�
 
 ## 1. 安装
 
-适用 macOS，需 Python 3.11+、网络可安装 Python 依赖，以及已安装 Codex CLI 或 Claude Code CLI。把发行包解压到**打算长期保留的位置**，在该目录执行：
+解压发行版 `smm-search-<版本>.zip`，将完整的 `smm-search` 文件夹放入 Codex 的 `~/.agents/skills/` 或 Claude Code 的 `~/.claude/skills/`。如果两边都要用，分别放入各自的 Skill 目录。
 
-```bash
-python3 scripts/install.py
-```
+首次使用时，Agent 会执行 Skill 随附的安装脚本并继续原请求。首次安装需要网络和 Agent 的本机执行权限。脚本会使用已有的 Python，或自动准备用户级 Python。MCP 在宿主加载注册配置后可用，首次会话可直接通过随附脚本完成操作。
 
-安装器建立 `.venv`、用户级 Skill 和 MCP，启动仅监听 `127.0.0.1:8766` 的服务。它只配置已安装的 Agent。若移动发行目录，请在新位置再次执行同一命令。不会自动删除旧档案。
+## 2. 在 Agent 中管理同步
 
-## 2. 确认能用
+安装完成后，在新的 Codex 或 Claude Code 会话中直接说：
 
-```bash
-~/.local/bin/smm doctor
-~/.local/bin/smm sync
-```
+- 「查看 SMM 同步状态」看来源计数、上次同步和导入错误。
+- 「打开 SMM 状态页」打开本机页面。
+- 「现在同步一次我的对话」立即导入；初次同步可能需要一段时间。
+- 「暂停自动同步」或「恢复自动同步」管理后台导入。暂停后仍可查已有档案、查看状态页或明确同步一次；服务或电脑重启后暂停设置仍有效。
 
-`doctor` 中 `ready` 应为 `true`，至少一个 `sources` 为 `true`，已安装 Agent 的 `mcp` 和 `skills` 为 `true`，`service_ok` 为 `true`。这只确认本机接线正常；`model_auth_checked=false` 表示还需用一次真实新会话确认 Agent 自己的模型登录。打开 <http://127.0.0.1:8766>，查看来源计数、项目和导入错误。首次导入可能需要一些时间；只有本机已有的对话会出现。
+如果服务还没运行，Agent 会在需要时启动它。macOS 默认也会在登录后启动服务。
 
-Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/projects`。若历史放在别处，到 Web「配置」设置实际目录，再点「立即同步」。只使用一种 Agent 也可以。数据库位于 `~/.local/share/smm-local/smm.sqlite3`；请按公司敏感信息规则保护这份本机文件。
+Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/projects`。若历史放在别处，到 Web「配置」设置实际目录，再点「立即同步」。同一个系统账户下，两个 Agent 共用一个同步服务和一个档案，默认位于 `~/.local/share/smm-local/smm.sqlite3`。在任一 Agent 中暂停或恢复，另一边会看到同一个状态。
 
 ## 3. 实际提问
 
@@ -31,16 +29,44 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ## 4. 遇到问题
 
-- `sources` 都为 `false`：检查对应 Agent 的会话目录；使用 Web 配置实际位置。
-- 首次安装依赖下载很慢：按公司规定配置可用的 Python 包镜像（`PIP_INDEX_URL`），再运行同一安装命令；已保存的档案不会丢失。
-- Claude Code 报 401 或未登录：先独立运行 `claude -p '回复 READY'` 确认自己的模型服务可用；这一步与 SMM MCP 接入是两项检查。
-- `mcp` 为 `false`：在发行目录重新运行安装命令，然后新开 Agent 会话。
-- `service_ok` 为 `false`：查看 `~/.local/share/smm-local/logs/stderr.log`，或手动运行 `~/.local/bin/smm serve`。
+- 两个来源都显示不可用：让 Agent 打开状态页，在「配置」中检查会话目录。
+- 首次安装依赖下载失败：让 Agent 查看具体错误，恢复网络后在会话里重试原请求。
+- Claude Code 报 401 或未登录：先检查 Claude Code 自己的模型登录。
+- Agent 找不到 SMM：检查 Skill 文件夹是否完整放在所用 Agent 的技能目录，随后新开会话。
+- 服务启动失败：让 Agent 检查返回的日志路径并说明实际原因。
 - 搜不到预期对话：先确认导入计数和项目范围，再用显著的项目名、人物名或事件词重试。
 - Agent 给出没有原文支持的回答：要求它提供来源会话和位置，在 Web 读取原文；请把问题、实际结果与期望来源反馈给试用负责人。
 
 ## 5. 结束试用
 
-在发行目录执行 `python3 scripts/uninstall.py` 停用服务并移除由 SMM 安装的 Skill 与 MCP；这**不会删除数据库**。需要删除历史档案时，再由本人手工删除 `~/.local/share/smm-local/smm.sqlite3` 及同目录的 `-wal`、`-shm` 文件。
+先从各 Agent 的 Skill 目录移除自己放入的 `smm-search` 文件夹。若也要卸载本机组件，可请 Agent 读取 `~/.local/share/smm-local/install.json`，从其中的 `project_root` 运行 `scripts/uninstall.py`，以停用服务并移除 MCP 注册。卸载会保留数据库。
 
 请在试用反馈中记录：安装是否独立完成、一次自己的历史问题是否找对原文、一次跨 Agent 搜索是否找对、哪一步费时或困惑。不要把私人对话原文发到公共 issue。
+
+## 多台电脑共用汇总档案
+
+汇总端通过下面的包管理流程部署，也可在自行管理进程时运行 `smm serve-hub`。汇总端使用独立数据库，远程连接使用 HTTPS。连接凭证允许上传和搜索汇总档案，应发给有权访问这些对话的使用者。
+
+在每台电脑上安装新版 Skill。将管理员提供的凭证文件存到该账户的 `~/.local/share/smm-local/hub-token`，或在配置时告诉 Agent 文件路径。然后说「把这台电脑叫出差笔记本，汇总地址是 https://smm.example.net:8770」。汇总电脑若也要上传自己的本机对话，同样配置一次。
+
+连不上汇总电脑时，Skill 会说明当前只搜本机，范围包含本机已导入的所有 Agent。网络恢复后，后台会补传未确认的记录，搜索重新覆盖汇总档案。引用会注明来源电脑、Agent、原始会话 ID 和消息位置。
+
+### 通过包管理器部署汇总端
+
+管理员从提供 `smm-local` wheel 的 Python 包索引安装。将示例索引换成发布方提供的地址。试用候选版需要允许预发布版本。
+
+```sh
+uv tool install --index https://packages.example.net/simple --prerelease allow smm-local
+smm hub setup
+```
+
+向导询问客户端可访问的 HTTPS 地址、证书和私钥，例如 `https://hub.example.net:8770`。在 Linux 用户服务下使用 1024 以上的监听端口。它会复制 TLS 文件、生成连接凭证、准备数据库、注册系统服务并检查 HTTPS。私有 CA 可通过 `--ca-file` 提供，并应配置到客户端 Python 的信任链。指定全部参数可无交互部署。Windows 需要以管理员身份运行终端，并将 uv 工具环境和基础 Python 安装在 LocalService 可读取和执行的目录（例如管理员管理的 ProgramData 下），macOS 在注册系统级 launchd 服务时会请求 sudo，Linux 使用可在启动时运行的 systemd 用户服务。
+
+```sh
+smm hub status
+smm hub disable
+smm hub enable
+smm hub upgrade --index https://packages.example.net/simple --prerelease
+```
+
+升级命令调用 uv 并保留地址、凭证和数据库，升级前保存 SQLite 备份。保留包索引中的旧版本，以便升级失败时恢复。启用中的服务在升级后会重新启动并检查 HTTPS。使用自定义 uv 安装环境时，从同一个账户和环境运行升级。使用 `--version` 可显式切换包索引中的发行版本。Windows 向导为监听端口配置仅限本地子网的入站防火墙规则。

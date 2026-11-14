@@ -2,7 +2,7 @@
 
 本地 Codex 与 Claude Code 对话档案与项目范围检索。导入后保存独立副本：删除 Agent 源会话不会删除知识库中的记录。
 
-同事试用请从 [安装与使用指南](TRIAL_GUIDE.md) 开始。`python3 scripts/install.py` 完成用户级 Skill/MCP 注册与本机服务，`~/.local/bin/smm doctor` 检查实际状态。
+同事试用只需安装发行版 `smm-search` Skill。首次在 Codex 或 Claude Code 中使用时，Skill 自动安装本机组件并执行原请求。见[安装与使用指南](TRIAL_GUIDE.md)。
 
 ## 安装与启动
 
@@ -15,7 +15,7 @@ python3 -m venv .venv
 .venv/bin/smm serve
 ```
 
-Web UI 默认地址为 `http://127.0.0.1:8766`。首次同步会扫描 `~/.codex/sessions` 与 `~/.claude/projects`；可用 `SMM_CODEX_ROOT`、`SMM_CLAUDE_ROOT` 或 Web 配置覆盖。数据库默认保存在 `~/.local/share/smm-local/smm.sqlite3`，可用 `SMM_DB` 覆盖。服务运行时定期同步，也可在 Web UI 手动同步。
+Web UI 默认地址为 `http://127.0.0.1:8766`。首次同步会扫描 `~/.codex/sessions` 与 `~/.claude/projects`；可用 `SMM_CODEX_ROOT`、`SMM_CLAUDE_ROOT` 或 Web 配置覆盖。同一个系统账户安装的 Agent 和服务共享安装清单中的数据库，默认位于 `~/.local/share/smm-local/smm.sqlite3`。开发时可用 `--db` 指定独立测试数据库。服务运行时定期同步，也可在 Web UI 手动同步。
 
 macOS 上可将本地服务设为登录后自动启动：
 

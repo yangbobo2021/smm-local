@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-import os
 import threading
 from contextlib import asynccontextmanager
+from dataclasses import dataclass, field
 from importlib.resources import files
+from pathlib import Path
+from typing import Callable
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
-from .core import Archive
+from .core import Archive, shared_db_path, utcnow
+from .federation import HubUnavailable, push_pending
 
 
 class SearchRequest(BaseModel):
@@ -50,39 +53,84 @@ class SettingsRequest(BaseModel):
     sync_interval_seconds: int | None = None
 
 
-def create_app(archive: Archive | None = None, *, auto_sync: bool = True) -> FastAPI:
-    db = archive or Archive()
+class PauseRequest(BaseModel):
+    paused: bool
+
+
+@dataclass
+class SyncJob:
+    done: threading.Event = field(default_factory=threading.Event)
+    result: dict | None = None
+
+
+def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
+               sync_on_start: bool = True, service_token: str | None = None,
+               shutdown: Callable[[], None] | None = None) -> FastAPI:
+    db = archive or Archive(shared_db_path())
     stop = threading.Event()
     run_lock = threading.Lock()
-    state: dict[str, object] = {"running": False, "last_result": None}
+    active: SyncJob | None = None
 
-    def run_sync() -> None:
-        if not run_lock.acquire(blocking=False):
-            return
-        state["running"] = True
+    def run_sync(job: SyncJob) -> None:
+        nonlocal active
         try:
-            state["last_result"] = db.sync_all()
+            try:
+                result = db.sync_all()
+            except Exception as exc:
+                result = {"finished_at": utcnow(), "errors": [{"error": str(exc)}]}
+            try:
+                if not db.get_settings()["sync_paused"]:
+                    remote = push_pending(db)
+                    if remote is not None:
+                        result["hub"] = remote
+            except (HubUnavailable, OSError, ValueError) as exc:
+                result["hub"] = {"pending": True, "reason": str(exc)}
+            db.record_sync_result(result)
         except Exception as exc:
-            state["last_result"] = {"errors": [{"error": str(exc)}]}
+            result["errors"].append({"error": f"无法保存同步结果：{exc}"})
         finally:
-            state["running"] = False
-            run_lock.release()
+            with run_lock:
+                job.result = result
+                active = None
+                job.done.set()
+
+    def start_sync(*, automatic: bool = False) -> tuple[bool, SyncJob | None]:
+        # The caller holds run_lock so checking pause and scheduling are atomic.
+        nonlocal active
+        if stop.is_set() or (automatic and db.get_settings()["sync_paused"]):
+            return False, None
+        if active is not None:
+            return False, active
+        job = SyncJob()
+        active = job
+        threading.Thread(target=run_sync, args=(job,), daemon=True).start()
+        return True, job
 
     def loop() -> None:
-        run_sync()
         while not stop.wait(int(db.get_settings()["sync_interval_seconds"])):
-            run_sync()
+            with run_lock:
+                start_sync(automatic=True)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
+        stop.clear()
         worker = None
         if auto_sync:
+            if sync_on_start:
+                with run_lock:
+                    start_sync(automatic=True)
             worker = threading.Thread(target=loop, name="smm-source-sync", daemon=True)
             worker.start()
-        yield
-        stop.set()
-        if worker:
-            worker.join(timeout=2)
+        try:
+            yield
+        finally:
+            with run_lock:
+                stop.set()
+                job = active
+            if worker:
+                worker.join(timeout=2)
+            if job:
+                job.done.wait(5)
 
     app = FastAPI(title="SMM Local", lifespan=lifespan)
 
@@ -96,15 +144,50 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True) -> Fas
 
     @app.get("/api/status")
     def status():
-        return {**db.status(), "sync": dict(state)}
+        with run_lock:
+            running = active is not None
+        info = db.status()
+        sources = {}
+        for source, key in (("codex", "codex_root"), ("claude-code", "claude_root")):
+            root = info["settings"][key]
+            sources[source] = {"available": Path(root).is_dir(), "root": root, "conversations": 0,
+                               "messages": 0, **info["by_source"].get(source, {})}
+        return {**info, "sync": {"running": running, "paused": info["settings"]["sync_paused"],
+                                 "last_result": db.last_sync_result(), "sources": sources}}
 
     @app.post("/api/sync")
-    def sync():
-        if run_lock.locked():
-            return {"started": False, "reason": "同步已在进行"}
-        thread = threading.Thread(target=run_sync, daemon=True)
-        thread.start()
-        return {"started": True}
+    def sync(wait: bool = False):
+        with run_lock:
+            started, job = start_sync()
+        if job is None:
+            raise HTTPException(503, "同步服务正在停止")
+        if wait and job.done.wait(15):
+            return {"started": started, "running": False, "result": job.result}
+        return {"started": started, "running": True, "result": None}
+
+    @app.put("/api/sync/pause")
+    def pause(req: PauseRequest, request: Request):
+        if service_token is not None and request.headers.get("X-SMM-Service") != service_token:
+            raise HTTPException(404)
+        with run_lock:
+            db.set_settings(sync_paused=req.paused)
+            if not req.paused:
+                start_sync(automatic=True)
+            return {"paused": req.paused, "running": active is not None}
+
+    if service_token is not None:
+        @app.get("/api/service", include_in_schema=False)
+        def service(request: Request):
+            if request.headers.get("X-SMM-Service") != service_token:
+                raise HTTPException(404)
+            return {"service": "smm-local"}
+
+        @app.put("/api/service/stop", include_in_schema=False)
+        def stop_service(request: Request):
+            if shutdown is None or request.headers.get("X-SMM-Service") != service_token:
+                raise HTTPException(404)
+            shutdown()
+            return {"stopping": True}
 
     @app.get("/api/projects")
     def projects():
@@ -149,4 +232,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True) -> Fas
     return app
 
 
-app = create_app()
+def __getattr__(name: str):
+    if name == "app":
+        return create_app()
+    raise AttributeError(name)
