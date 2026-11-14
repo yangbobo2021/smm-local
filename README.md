@@ -56,7 +56,14 @@ MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始�
 
 `python3 scripts/build_packages.py` 使用 uv 构建 `smm-local` 和 `smm-hub`，产物位于 `dist/packages/`。本机端版本在根目录的 `pyproject.toml`，汇总端版本在 `packaging/hub/pyproject.toml`。更新 Skill 支持的本机端版本时，同时更新 `skills/smm-search/scripts/first_use.py`。
 
-维护者可运行 [Publish SMM packages](.github/workflows/publish-packages.yml)，先选择 TestPyPI，再选择 PyPI。可分别发布任一包。首次使用前，在目标包索引为两个项目配置 GitHub Actions Trusted Publisher，填写此仓库、`publish-packages.yml` 和对应的 `testpypi` 或 `pypi` 环境。公开安装需要对应版本已上传。TestPyPI 验证时可为 Skill 启动器设置 `SMM_PACKAGE_INDEX=https://test.pypi.org/simple`，本机端从 TestPyPI 取得，依赖从 PyPI 安装。汇总端可用 `uv tool install --index https://test.pypi.org/simple --prerelease allow smm-hub` 验证。私有 GitHub 仓库的 Skill 安装仍需仓库读取权限。
+维护者可运行 [Publish SMM packages](.github/workflows/publish-packages.yml)，先选择 TestPyPI，再选择 PyPI。可分别发布任一包。首次使用前，在目标包索引为两个项目配置 GitHub Actions Trusted Publisher。两者均使用此仓库和 `publish-packages.yml`，环境按包区分。
+
+| 包 | TestPyPI 环境 | PyPI 环境 |
+| --- | --- | --- |
+| `smm-local` | `testpypi` | `pypi` |
+| `smm-hub` | `testpypi-hub` | `pypi-hub` |
+
+公开安装需要对应版本已上传。TestPyPI 验证时可为 Skill 启动器设置 `SMM_PACKAGE_INDEX=https://test.pypi.org/simple`，本机端从 TestPyPI 取得，依赖从 PyPI 安装。汇总端可用 `uv tool install --index https://test.pypi.org/simple --prerelease allow smm-hub` 验证。私有 GitHub 仓库的 Skill 安装仍需仓库读取权限。
 
 ## 规约与验收
 

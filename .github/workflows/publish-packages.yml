@@ -34,32 +34,31 @@ jobs:
         with:
           version: "0.13.8"
       - run: python3 scripts/build_packages.py
-      - name: Select packages
-        env:
-          SMM_PUBLISH_PACKAGE: ${{ inputs.package }}
-        run: |
-          mkdir dist/publish
-          case "$SMM_PUBLISH_PACKAGE" in
-            both) cp dist/packages/*.whl dist/publish/ ;;
-            smm-local) cp dist/packages/smm_local-*.whl dist/publish/ ;;
-            smm-hub) cp dist/packages/smm_hub-*.whl dist/publish/ ;;
-          esac
       - uses: actions/upload-artifact@v4
         with:
-          name: python-packages
-          path: dist/publish/*.whl
+          name: smm-local
+          path: dist/packages/smm_local-*.whl
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smm-hub
+          path: dist/packages/smm_hub-*.whl
           if-no-files-found: error
 
   publish:
     needs: build
     runs-on: ubuntu-latest
-    environment: ${{ inputs.index }}
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(inputs.package == 'both' && '["smm-local","smm-hub"]' || format('["{0}"]', inputs.package)) }}
+    environment: ${{ matrix.package == 'smm-hub' && format('{0}-hub', inputs.index) || inputs.index }}
     permissions:
       id-token: write
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: python-packages
+          name: ${{ matrix.package }}
           path: dist
       - if: inputs.index == 'testpypi'
         uses: pypa/gh-action-pypi-publish@release/v1
