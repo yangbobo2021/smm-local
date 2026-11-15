@@ -6,6 +6,18 @@ SMM 在本机保存 Codex 与 Claude Code 的可见对话文本，提供项目�
 
 按 [README 的快速开始](README.md#单台电脑快速开始)安装 `smm-search`。首次使用需要网络和 Agent 的本机执行权限。Skill 会使用已有的 Python，或自动准备用户级 Python。
 
+### 升级本机端
+
+通过搜索 Skill 安装过旧版时，更新整个 `smm-search` Skill 文件夹，并在 `~/.local/share/smm-local/install.json` 中找到 `package_environment`。用该环境的 Python 执行下面三条命令。macOS 和 Linux 的解释器位于环境下的 `bin/python`，Windows 位于 `Scripts/python.exe`。
+
+```text
+<安装环境的 Python> -m smm_local.cli stop-on-demand
+<安装环境的 Python> -m pip install --upgrade smm-local==0.3.0
+<安装环境的 Python> -m smm_local.installation install
+```
+
+升级沿用安装清单中的档案路径。升级后新开 Agent 会话，查看 SMM 同步状态。从源码安装的用户可从新版本源码重新运行 `scripts/install.py`。
+
 ## 2. 在 Agent 中管理同步
 
 安装完成后，在新的 Codex 或 Claude Code 会话中直接说：
@@ -54,7 +66,7 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。
 
 ```sh
-uv tool install smm-hub==0.2.0
+uv tool install smm-hub==0.3.0
 smm-hub hub setup
 ```
 
