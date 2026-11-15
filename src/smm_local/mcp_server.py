@@ -10,7 +10,7 @@ from mcp.types import ToolAnnotations
 
 from .core import Archive, shared_db_path
 from .federation import configure_and_start, read_archive, search_archive
-from .service import Action, maintain
+from .service import Action, control_source, maintain
 
 
 def create_mcp(archive: Archive | None = None) -> FastMCP:
@@ -19,12 +19,17 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
     readonly = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
 
     @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
-    def manage_sync(action: Action) -> dict:
+    def manage_sync(action: Action, source: str | None = None) -> dict:
         """Manage local SMM sync. status starts/reuses the service and returns its state; open opens its status page; sync runs one sync; pause persists a pause for automatic sync; resume reenables it. A manual sync leaves the pause setting unchanged."""
         try:
-            return maintain(db, action)
+            return maintain(db, action, source)
         except (OSError, RuntimeError, ValueError) as exc:
             return {"ok": False, "error": str(exc)}
+
+    @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+    def set_source_enabled(source: str, enabled: bool) -> dict:
+        """Enable or disable a registered local conversation source by ID."""
+        return control_source(db, source, enabled)
 
     @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=True))
     def configure_hub(address: str, device_name: str, token_file: str | None = None) -> dict:
@@ -32,12 +37,12 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
         return configure_and_start(db, address, device_name, token_file)
 
     @server.tool(annotations=readonly)
-    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False) -> str:
+    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, local: bool = False) -> str:
         """Search archived conversations with 600-character message previews and original positions by default. read_conversation returns full evidence. scope=project includes direct links; pass current_session_id to exclude the active conversation by default."""
         current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
         source = current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
         size = int(os.environ.get("SMM_SEARCH_PREVIEW_CHARS", "600"))
-        return json.dumps(search_archive(db, query, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current, preview_chars=size), ensure_ascii=False)
+        return json.dumps(search_archive(db, query, local=local, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current, preview_chars=size), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def read_conversation(conversation_id: int, start: int | None = None, end: int | None = None,

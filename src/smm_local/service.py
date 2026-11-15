@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import secrets
@@ -14,7 +15,8 @@ import time
 import webbrowser
 from pathlib import Path
 from typing import Literal
-from urllib.parse import urlsplit
+from urllib.parse import urlencode, urlsplit
+from urllib.error import HTTPError
 from urllib.request import ProxyHandler, Request, build_opener
 
 from .core import Archive
@@ -23,6 +25,7 @@ from .support import NoRedirect, _service_lock
 
 Action = Literal["status", "open", "sync", "pause", "resume"]
 DEFAULT_PORT = 8766
+STARTUP_TIMEOUT = 30 if os.name == "nt" else 8
 
 
 LOCAL_HTTP = build_opener(ProxyHandler({}), NoRedirect())
@@ -98,6 +101,37 @@ def running_service(db: Archive) -> dict | None:
     return None
 
 
+def _windows_start_service(command: list[str], log: Path) -> None:
+    # A detached process can still belong to the Agent's Windows Job Object.
+    # Ask Windows to start the service under the same user, outside that job.
+    overrides = {name: os.environ[name] for name in ("SMM_CODEX_ROOT", "SMM_CLAUDE_ROOT", "CLAUDE_CONFIG_DIR")
+                 if name in os.environ}
+    bootstrap = (
+        "import os, runpy, sys\n"
+        f"os.environ.update({overrides!r})\n"
+        f"with open({str(log)!r}, 'a', encoding='utf-8', buffering=1) as stream:\n"
+        "    sys.stdout = sys.stderr = stream\n"
+        "    runpy.run_module(sys.argv.pop(1), run_name='__main__')\n"
+    )
+    arguments = subprocess.list2cmdline([command[0], "-c", bootstrap, *command[2:]])
+    quoted = arguments.replace("'", "''")
+    script = (
+        "$ErrorActionPreference = 'Stop'\n"
+        "$startup = New-CimInstance -ClassName Win32_ProcessStartup -ClientOnly "
+        "-Property @{CreateFlags=[uint32]8}\n"
+        "$result = Invoke-CimMethod -ClassName Win32_Process -MethodName Create "
+        f"-Arguments @{{CommandLine='{quoted}';ProcessStartupInformation=$startup}}\n"
+        "if ($result.ReturnValue -ne 0) { throw ('Win32_Process.Create: ' + $result.ReturnValue) }\n"
+    )
+    encoded = base64.b64encode(script.encode("utf-16-le")).decode("ascii")
+    result = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded],
+                            stdin=subprocess.DEVNULL, capture_output=True,
+                            creationflags=subprocess.CREATE_NO_WINDOW, timeout=STARTUP_TIMEOUT)
+    if result.returncode:
+        detail = result.stderr.decode(errors="replace").strip()
+        raise RuntimeError(f"Windows 无法启动本地同步服务，请检查日志 {log}。{detail}")
+
+
 def ensure_service(db: Archive, *, sync_on_start: bool = True) -> dict:
     endpoint = running_service(db)
     if endpoint is not None:
@@ -109,20 +143,28 @@ def ensure_service(db: Archive, *, sync_on_start: bool = True) -> dict:
                "serve", "--on-demand", "--port", str(port)]
     if not sync_on_start:
         command.append("--skip-initial-sync")
-    detach = ({"creationflags": subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP}
-              if os.name == "nt" else {"start_new_session": True})
-    with log.open("ab") as stream:
-        child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stream,
-                                 stderr=subprocess.STDOUT, **detach)
-    deadline = time.monotonic() + 8
+    deadline = time.monotonic() + STARTUP_TIMEOUT
+    child = None
+    if os.name == "nt":
+        try:
+            _windows_start_service(command, log)
+        except subprocess.TimeoutExpired as exc:
+            raise RuntimeError(f"等待 Windows 启动本地同步服务超时，请检查日志 {log}") from exc
+    else:
+        with log.open("ab") as stream:
+            child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stream,
+                                     stderr=subprocess.STDOUT, start_new_session=True)
     while time.monotonic() < deadline:
         endpoint = running_service(db)
         if endpoint is not None:
             return endpoint
         # Reap an unsuccessful child while another caller may be starting the service.
-        child.poll()
+        if child is not None:
+            child.poll()
         time.sleep(0.1)
-    raise RuntimeError(f"本地同步服务未能启动，请检查端口 {port} 和日志 {log}")
+    if child is not None and child.poll() is not None:
+        raise RuntimeError(f"本地同步服务未能启动，请检查端口 {port} 和日志 {log}")
+    raise RuntimeError(f"等待本地同步服务就绪超时（{STARTUP_TIMEOUT} 秒），请检查日志 {log}")
 
 
 def stop_on_demand(db: Archive) -> None:
@@ -136,7 +178,17 @@ def stop_on_demand(db: Archive) -> None:
             time.sleep(0.1)
 
 
-def maintain(db: Archive, action: Action) -> dict:
+def control_source(db: Archive, source: str, enabled: bool) -> dict:
+    from urllib.parse import quote
+
+    endpoint = ensure_service(db, sync_on_start=False)
+    return _request(endpoint, f"/api/sources/{quote(source, safe='')}/enabled", method="PUT",
+                    data={"enabled": enabled})
+
+
+def maintain(db: Archive, action: Action, source: str | None = None) -> dict:
+    if source is not None and action not in {"status", "sync"}:
+        raise ValueError("只有 status 和 sync 可指定来源")
     if action == "pause":
         endpoint = running_service(db)
         if endpoint is None:
@@ -148,6 +200,11 @@ def maintain(db: Archive, action: Action) -> dict:
     base = {"service_running": True, "url": endpoint["url"]}
     if action == "status":
         info = _request(endpoint, "/api/status", timeout=8)
+        if source is not None:
+            sources = info["sync"]["sources"]
+            if source not in sources:
+                raise ValueError("未知对话来源")
+            info["sync"]["sources"] = {source: sources[source]}
         return {**base, "conversations": info["conversations"], "messages": info["messages"],
                 "last_file_sync": info["last_sync"], "errors": info["errors"], "sync": info["sync"]}
     if action == "open":
@@ -157,6 +214,16 @@ def maintain(db: Archive, action: Action) -> dict:
             opened = False
         return {**base, "opened": opened}
     if action == "sync":
-        return {**base, **_request(endpoint, "/api/sync?wait=true", method="POST", timeout=20)}
+        params = {"wait": "true"}
+        if source is not None:
+            params["source"] = source
+        try:
+            return {**base, **_request(endpoint, "/api/sync?" + urlencode(params), method="POST", timeout=20)}
+        except HTTPError as exc:
+            try:
+                detail = json.load(exc).get("detail")
+            except (ValueError, AttributeError):
+                detail = None
+            raise ValueError(detail or str(exc)) from exc
     return {**base, **_request(endpoint, "/api/sync/pause", method="PUT",
                                data={"paused": action == "pause"})}

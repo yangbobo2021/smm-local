@@ -56,6 +56,14 @@
 
 当管理员通过包管理器升级汇总端时，系统应保留数据库、地址、连接凭证和启停状态，并检查已启用服务升级后的可用性。
 
+### federation-14
+
+给定本机已接入现场插件 [[source-plugins-3](source-plugins.md#source-plugins-3)]，当系统上传记录时，系统应仅提交可汇总的内置来源记录。
+
+### federation-15
+
+当用户明确选择本机档案时，系统应从本机检索并标明实际范围。
+
 ## 验证
 
 ### federation-7
@@ -66,3 +74,7 @@
 ### federation-13
 
 在 Linux、Windows 和 macOS 上，验收应从包源安装并配置汇总端 [[federation-8](#federation-8)] [[federation-9](#federation-9)]，从另一台电脑通过 Skill 接入并查询 [[federation-1](#federation-1)] [[federation-5](#federation-5)]，重启后核对启停状态和服务可用性 [[federation-10](#federation-10)] [[federation-11](#federation-11)]，并升级后使用原地址和凭证读取已有会话 [[federation-12](#federation-12)]。
+
+### federation-16
+
+在接入旧汇总端的本机上，验收应检查现场插件的本机记录不会阻塞内置来源上传 [[federation-14](#federation-14)]，并通过明确选择本机检索读回插件对话 [[federation-15](#federation-15)]。

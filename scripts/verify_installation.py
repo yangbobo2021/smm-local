@@ -100,6 +100,8 @@ def main() -> None:
         check(first["db_path"] == str((home / ".local/share/smm-local/smm.sqlite3").resolve()), "shared archive path")
         for name in ("codex", "claude"):
             check((home / f".{name}/skills/smm-search/SKILL.md").is_file(), f"{name} skill")
+            check((home / f".{name}/skills/smm-source-adapter/scripts/accept.py").is_file(),
+                  f"{name} source adapter acceptance script")
             check((home / "fake-mcp" / f"{name}.json").is_file(), f"{name} MCP")
         run(original, env, "install.py", "--no-service")
         moved = base / "relocated-package"
@@ -133,6 +135,8 @@ def main() -> None:
         run(moved, env, "uninstall.py", "--no-service")
         check(db.exists() and hashlib.sha256(db.read_bytes()).hexdigest() == before, "archive was not preserved")
         check(not manifest.exists() and not wrapper.exists(), "entry points remain")
+        for name in ("codex", "claude"):
+            check(not (home / f".{name}/skills/smm-source-adapter").exists(), f"{name} adapter skill remains")
         print(json.dumps({"clean_install": True, "reinstall": True, "relocation": True,
                           "codex_mcp": True, "claude_mcp": True, "deleted_source_preserved": True,
                           "default_preview": True, "full_read": True, "uninstall_preserves_db": True}, ensure_ascii=False))

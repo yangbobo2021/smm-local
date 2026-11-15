@@ -142,7 +142,7 @@ def push_pending(db: Archive) -> dict | None:
                                AND (earlier.position<m.position OR (earlier.position=m.position AND earlier.id<=m.id))
                        ) END AS occurrence
                 FROM messages m JOIN conversations c ON c.id = m.conversation_id
-                WHERE m.id > ? ORDER BY m.id LIMIT ?
+                WHERE m.id > ? AND c.source IN ('codex','claude-code') ORDER BY m.id LIMIT ?
             """, (cursor, BATCH_SIZE))]
         if not rows:
             if sent == 0:
@@ -176,14 +176,16 @@ def _with_local_origins(conversation: dict, message_field: str, config: dict) ->
     return {**conversation, "origins": [origin]}
 
 
-def search_archive(db: Archive, query: str, **options) -> dict:
+def search_archive(db: Archive, query: str, *, local: bool = False, **options) -> dict:
     config = hub_config(db)
     reason = None
-    if config:
+    if config and not local:
         try:
+            source = options.get("current_source")
+            hub_source = source if source in {None, "codex", "claude-code"} else None
             result = _request(config, "/search", {
-                "query": query, "current_session_id": options.get("current_session_id"),
-                "current_source": options.get("current_source"), "include_current": options.get("include_current", False),
+                "query": query, "current_session_id": options.get("current_session_id") if source == hub_source else None,
+                "current_source": hub_source, "include_current": options.get("include_current", False),
                 "limit": options.get("limit", 5), "preview_chars": options.get("preview_chars", 0),
             })
             if not isinstance(result.get("results"), list) or not result.get("hub_id"):

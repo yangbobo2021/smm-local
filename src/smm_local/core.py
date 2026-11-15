@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from .importers import registry
 from .importers.base import SourceAdapter
 from .importers.codex import CodexAdapter
 from .importers.claude_code import ClaudeCodeAdapter
@@ -239,6 +240,7 @@ class Archive:
                 CREATE TABLE IF NOT EXISTS schema_migrations (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL);
                 CREATE VIRTUAL TABLE IF NOT EXISTS conversation_fts USING fts5(terms, tokenize='unicode61');
             """)
+            con.executescript(registry.SCHEMA)
             columns = {row[1] for row in con.execute("PRAGMA table_info(conversations)")}
             if "project_path" not in columns:
                 con.execute("ALTER TABLE conversations ADD COLUMN project_path TEXT")
@@ -278,7 +280,7 @@ class Archive:
 
     def get_settings(self) -> dict[str, Any]:
         with self.connect() as con:
-            rows = con.execute("SELECT key,value FROM settings WHERE key NOT IN ('last_sync_result', 'hub_identity', 'message_sequence') AND key NOT LIKE 'hub_cursor:%'").fetchall()
+            rows = con.execute("SELECT key,value FROM settings WHERE key NOT IN ('last_sync_result', 'hub_identity', 'message_sequence') AND key NOT LIKE 'hub_cursor:%' AND key NOT LIKE 'source_result:%'").fetchall()
         result: dict[str, Any] = {r["key"]: json.loads(r["value"]) for r in rows}
         result.setdefault("codex_root", str(default_codex_root()))
         result.setdefault("claude_root", str(default_claude_root()))
@@ -321,6 +323,8 @@ class Archive:
             row = con.execute("SELECT value FROM settings WHERE key='last_sync_result'").fetchone()
         return json.loads(row[0]) if row else None
 
+    project_path = staticmethod(project_path_for)
+
     def _project_for_path(self, con: sqlite3.Connection, cwd: str | None) -> int | None:
         if not cwd:
             return None
@@ -343,30 +347,111 @@ class Archive:
         root_path = Path(root or self.get_settings()["claude_root"]).expanduser()
         return self.sync_source(ClaudeCodeAdapter(), root_path)
 
-    def sync_all(self) -> dict[str, Any]:
+    def configured_sources(self) -> dict:
         settings = self.get_settings()
-        sources = {"codex": (CodexAdapter(), Path(settings["codex_root"]).expanduser()),
-                   "claude-code": (ClaudeCodeAdapter(), Path(settings["claude_root"]).expanduser())}
-        result: dict[str, Any] = {"sources": {}, "files_seen": 0, "files_changed": 0,
-                                  "conversations_new": 0, "messages_new": 0, "errors": [], "finished_at": None}
-        for name, (adapter, root) in sources.items():
-            if not root.is_dir():
-                result["sources"][name] = {"available": False, "root": str(root), "reason": "目录不存在"}
+        disabled = settings.get("disabled_builtin_sources", [])
+        builtins = {
+            "codex": {"id": "codex", "name": "Codex", "root": settings["codex_root"]},
+            "claude-code": {"id": "claude-code", "name": "Claude Code", "root": settings["claude_root"]},
+        }
+        return {**{key: {**value, "enabled": key not in disabled, "plugin": False}
+                   for key, value in builtins.items()}, **registry.sources(self)}
+
+    def _builtin_enabled(self, source: str, con: sqlite3.Connection | None = None) -> bool:
+        if con is None:
+            with self.connect() as connection:
+                return self._builtin_enabled(source, connection)
+        row = con.execute("SELECT value FROM settings WHERE key='disabled_builtin_sources'").fetchone()
+        return row is None or source not in json.loads(row[0])
+
+    def set_source_enabled(self, source: str, enabled: bool) -> None:
+        if source not in ("codex", "claude-code"):
+            registry.set_enabled(self, source, enabled)
+            return
+        with self.connect() as con:
+            con.execute("BEGIN IMMEDIATE")
+            key = "disabled_builtin_sources"
+            row = con.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
+            disabled = set(json.loads(row[0])) if row else set()
+            if enabled:
+                disabled.discard(source)
+            else:
+                disabled.add(source)
+            con.execute("INSERT OR REPLACE INTO settings(key,value) VALUES(?,?)",
+                        (key, json.dumps(sorted(disabled))))
+
+    @staticmethod
+    def _source_available(source: dict) -> bool:
+        root = Path(source["root"]).expanduser()
+        try:
+            return root.exists() if source["plugin"] else root.is_dir()
+        except OSError:
+            return False
+
+    def source_status(self, counts: dict | None = None) -> dict:
+        if counts is None:
+            counts = self.status()["by_source"]
+        with self.connect() as con:
+            history = {row["key"].removeprefix("source_result:"): json.loads(row["value"])
+                       for row in con.execute("SELECT key,value FROM settings WHERE key LIKE 'source_result:%'")}
+        return {
+            name: {**source, "available": self._source_available(source),
+                   "conversations": 0, "messages": 0, **counts.get(name, {}),
+                   **history.get(name, {})}
+            for name, source in self.configured_sources().items()
+        }
+
+    def sync_all(self, source_id: str | None = None, *, eligible: frozenset[str] | None = None) -> dict[str, Any]:
+        sources = self.configured_sources()
+        if source_id is not None:
+            if source_id not in sources:
+                raise ValueError("未知对话来源")
+            sources = {source_id: sources[source_id]}
+        fields = ("files_seen", "files_changed", "conversations_new", "messages_new")
+        result: dict[str, Any] = {"sources": {}, **dict.fromkeys(fields, 0), "errors": []}
+        adapters = {"codex": CodexAdapter, "claude-code": ClaudeCodeAdapter}
+        for name, source in sources.items():
+            root = Path(source["root"]).expanduser()
+            available = self._source_available(source)
+            if not source["enabled"] or not available:
+                result["sources"][name] = {"available": available, "root": str(root),
+                                           "reason": "来源已停用" if not source["enabled"] else "来源路径不存在"}
                 continue
-            one = self.sync_source(adapter, root)
-            result["sources"][name] = {**one, "available": True}
-            for field in ("files_seen", "files_changed", "conversations_new", "messages_new"):
+            if eligible is not None and name not in eligible:
+                result["sources"][name] = {"available": available, "root": str(root),
+                                           "reason": "来源在本轮启动后启用"}
+                continue
+            try:
+                one = (registry.sync(self, name) if source["plugin"]
+                       else self.sync_source(adapters[name](), root))
+            except (OSError, ValueError, RuntimeError, sqlite3.Error) as exc:
+                one = {**dict.fromkeys(fields, 0), "errors": [{"error": str(exc)}]}
+            status = {**one, "available": True, "root": str(root), "finished_at": utcnow()}
+            if "revision" in source:
+                status["revision"] = source["revision"]
+            result["sources"][name] = status
+            key = f"source_result:{name}"
+            with self.connect() as con:
+                previous = con.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
+                last_success = (json.loads(previous[0]).get("last_success") if previous else None)
+                saved = {"last_result": status, "last_success": last_success if one["errors"] else status["finished_at"]}
+                con.execute("INSERT OR REPLACE INTO settings(key,value) VALUES(?,?)", (key, json.dumps(saved)))
+            for field in fields:
                 result[field] += one[field]
-            result["errors"].extend(one["errors"])
+            result["errors"].extend({**error, "source": name} for error in one["errors"])
         result["finished_at"] = utcnow()
         return result
 
     def sync_source(self, adapter: SourceAdapter, root_path: Path) -> dict[str, Any]:
+        if not self.configured_sources().get(adapter.name, {}).get("enabled", True):
+            raise ValueError("来源已停用")
         if not root_path.is_dir():
             raise ValueError(f"会话目录不存在: {root_path}")
         result = {"root": str(root_path), "files_seen": 0, "files_changed": 0, "conversations_new": 0, "messages_new": 0, "errors": [], "finished_at": None}
         with self._write_lock:
             for path in adapter.discover(root_path):
+                if adapter.name in {"codex", "claude-code"} and not self._builtin_enabled(adapter.name):
+                    break
                 result["files_seen"] += 1
                 try:
                     outcome = self._sync_file(path, adapter)
@@ -454,6 +539,9 @@ class Archive:
                         con.execute("UPDATE conversations SET updated_at=? WHERE id=?", (normalized.get("timestamp"), conversation_id))
                 if not error:
                     offset = stream.tell()
+            if not self._builtin_enabled(adapter.name, con):
+                con.rollback()
+                return {"changed": False, "conversations_new": 0, "messages_new": 0, "error": None}
             for conversation_id in changed_conversations:
                 self._reindex(con, conversation_id)
             con.execute("INSERT INTO source_files(path,source,source_session_id,byte_offset,size,mtime_ns,inode,head_hash,last_synced_at,error) VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET source=excluded.source,source_session_id=excluded.source_session_id,byte_offset=excluded.byte_offset,size=excluded.size,mtime_ns=excluded.mtime_ns,inode=excluded.inode,head_hash=excluded.head_hash,last_synced_at=excluded.last_synced_at,error=excluded.error", (str(path), adapter.name, source_session_id, offset, stat.st_size, stat.st_mtime_ns, stat.st_ino, head_hash, utcnow(), error))
@@ -478,7 +566,10 @@ class Archive:
                 SELECT c.source, COUNT(*) AS conversations, SUM(
                     (SELECT COUNT(*) FROM messages m WHERE m.conversation_id = c.id)
                 ) AS messages
-                FROM conversations c GROUP BY c.source
+                FROM conversations c
+                WHERE c.source IN ('codex','claude-code')
+                   OR EXISTS (SELECT 1 FROM messages m WHERE m.conversation_id=c.id)
+                GROUP BY c.source
             """)}
             for key in ("conversations", "messages"):
                 counts[key] = sum(source[key] for source in by_source.values())
@@ -486,7 +577,7 @@ class Archive:
 
     def projects(self) -> list[dict[str, Any]]:
         with self.connect() as con:
-            rows = con.execute("SELECT p.*,COUNT(DISTINCT c.id) AS conversations FROM projects p LEFT JOIN conversations c ON c.project_id=p.id GROUP BY p.id ORDER BY conversations DESC,p.name,p.id").fetchall()
+            rows = con.execute("SELECT p.*,COUNT(DISTINCT c.id) AS conversations FROM projects p LEFT JOIN conversations c ON c.project_id=p.id AND (c.source IN ('codex','claude-code') OR EXISTS (SELECT 1 FROM messages m WHERE m.conversation_id=c.id)) GROUP BY p.id ORDER BY conversations DESC,p.name,p.id").fetchall()
             out = []
             for row in rows:
                 project = dict(row)
@@ -611,20 +702,29 @@ class Archive:
              include_message_ids: bool = False, message_id: int | None = None) -> dict[str, Any]:
         with self.connect() as con:
             row = con.execute("SELECT c.id,c.source,c.source_session_id,c.source_path,c.cwd,c.started_at,c.updated_at,c.title,c.project_id,p.name AS project_name FROM conversations c LEFT JOIN projects p ON p.id=c.project_id WHERE c.id=?", (conversation_id,)).fetchone()
-            if row is None:
+            if row is None or (row["source"] not in {"codex", "claude-code"} and not con.execute(
+                "SELECT 1 FROM messages WHERE conversation_id=? LIMIT 1", (conversation_id,)
+            ).fetchone()):
                 raise ValueError("对话不存在")
-            fields = "id AS _message_id,position,role,text,timestamp" if include_message_ids else "position,role,text,timestamp"
-            sql = f"SELECT {fields} FROM messages WHERE conversation_id=?"
+            fields = "m.position,m.role,m.text,m.timestamp"
+            if include_message_ids:
+                fields += ",m.id AS _message_id"
+            joins = ""
+            if row["source"] not in {"codex", "claude-code"}:
+                fields += ",pm.origin,b.id AS import_batch,b.version AS plugin_revision"
+                joins = (" LEFT JOIN plugin_messages pm ON pm.id=m.id"
+                         " LEFT JOIN plugin_batches b ON b.id=pm.batch")
+            sql = f"SELECT {fields} FROM messages m{joins} WHERE m.conversation_id=?"
             args: list[Any] = [conversation_id]
             if message_id is not None:
-                sql += " AND id=?"
+                sql += " AND m.id=?"
                 args.append(message_id)
             if start is not None:
-                sql += " AND position>=?"
+                sql += " AND m.position>=?"
                 args.append(start)
             if end is not None:
-                sql += " AND position<=?"
+                sql += " AND m.position<=?"
                 args.append(end)
-            sql += " ORDER BY position,id"
+            sql += " ORDER BY m.position,m.id"
             messages = [dict(m) for m in con.execute(sql,args)]
         return {**dict(row), "messages": messages}

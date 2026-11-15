@@ -35,10 +35,12 @@ def main() -> None:
                 if agent == "claude":
                     command += ["-s", "user"]
                 subprocess.run(command, check=True)
-        target = home / f".{agent}/skills/smm-search"
-        existing = target / "SKILL.md"
-        if existing.is_file() and existing.read_bytes() == (ROOT / "skills/smm-search/SKILL.md").read_bytes():
-            shutil.rmtree(target)
+        for name in ("smm-search", "smm-source-adapter"):
+            target = home / f".{agent}/skills" / name
+            existing = target / "SKILL.md"
+            bundled = ROOT / "skills" / name / "SKILL.md"
+            if existing.is_file() and existing.read_bytes() == bundled.read_bytes():
+                shutil.rmtree(target)
     wrapper = Path(manifest.get("wrapper_path", ""))
     if wrapper.is_file() and wrapper.read_text(encoding="utf-8").startswith(
         ("#!/bin/sh\n# Managed by SMM Local\n", "@rem Managed by SMM Local\n")

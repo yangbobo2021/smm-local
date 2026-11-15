@@ -14,7 +14,7 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOW_FILES = ("README.md", "TRIAL_GUIDE.md", "LICENSE", "pyproject.toml")
-ALLOW_DIRS = ("src/smm_local", "scripts", "skills/smm-search")
+ALLOW_DIRS = ("src/smm_local", "scripts", "skills/smm-search", "skills/smm-source-adapter")
 DENY_PARTS = {"__pycache__", ".venv", ".git", ".acceptance", ".acceptance-local", "dist"}
 SECRET = re.compile(rb"(?:sk-[A-Za-z0-9_-]{20,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|(?i:api[_-]?key)\s*[:=]\s*['\"][A-Za-z0-9]{20,})")
 
@@ -28,14 +28,14 @@ def members() -> list[Path]:
                   and path.suffix not in {".pyc", ".sqlite3", ".db"})
 
 
-def write_skill(version: str, files: list[Path]) -> Path:
-    skill = ROOT / "skills/smm-search"
-    output = ROOT / "dist" / f"smm-search-{version}.zip"
+def write_skill(version: str, files: list[Path], name: str) -> Path:
+    skill = ROOT / "skills" / name
+    output = ROOT / "dist" / f"{name}-{version}.zip"
     output.parent.mkdir(exist_ok=True)
     with ZipFile(output, "w", ZIP_DEFLATED) as archive:
         for path in files:
             if path.is_relative_to(skill):
-                add_to_zip(archive, f"smm-search/{path.relative_to(skill).as_posix()}", path.read_bytes())
+                add_to_zip(archive, f"{name}/{path.relative_to(skill).as_posix()}", path.read_bytes())
     return output
 
 
@@ -50,13 +50,14 @@ def main() -> None:
     version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
     parser.add_argument("--version", default=version.replace("rc", "-rc"))
     parser.add_argument("--skill", action="store_true", help="构建可通过在线包源首次安装的 Skill")
+    parser.add_argument("--adapter-skill", action="store_true", help="构建本机来源适配 Skill")
     args = parser.parse_args()
     files = members()
     for path in files:
         if SECRET.search(path.read_bytes()):
             raise SystemExit(f"疑似凭证，已中止打包：{path.relative_to(ROOT)}")
-    if args.skill:
-        output = write_skill(args.version, files)
+    if args.skill or args.adapter_skill:
+        output = write_skill(args.version, files, "smm-source-adapter" if args.adapter_skill else "smm-search")
         print(f"{output}\nsha256 {hashlib.sha256(output.read_bytes()).hexdigest()}")
         return
     output = ROOT / "dist" / f"smm-local-{args.version}.tar.gz"

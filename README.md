@@ -97,6 +97,12 @@ MCP 服务使用 stdio，命令是本仓库 `.venv/bin/smm-mcp`。安装器自�
 
 MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始位置；`read_conversation` 可读取完整原文。若要恢复完整搜索展示，在 MCP 服务环境设置 `SMM_SEARCH_PREVIEW_CHARS=0`。预览效果与限制见[验证报告](reports/search-preview-001.md)。
 
+## 接入其他本机 Agent
+
+安装含 `smm source` 命令的 SMM 试用包，再将 [smm-source-adapter Skill 目录](skills/smm-source-adapter) 整体放进 Agent 的技能目录。从源码安装时，`python3 scripts/install_skill.py --update` 会把整个适配 Skill 安装到 Codex 和 Claude Code。用该 Skill 接入能持续读取的本机对话来源。对 Agent 说「把 X Agent 在这台电脑的对话接进 SMM，以后自动同步」。Skill 生成标准库 Python 适配器，用本机样本通过验收后注册。脚本使用 SMM 已安装的 Python，适配 Skill 在各平台使用同一份。
+
+在导入页或用 `smm source list` 查看来源状态。用 `smm maintenance sync --source <ID>` 单独同步，用 `smm source disable <ID>` 停用。已导入内容可用 `smm search "关键词" --local` 检索，即使配置了多机汇总。现场插件使用本机用户的文件和网络权限，请只验收和注册受信任的脚本。
+
 ## Python 包发布
 
 `python3 scripts/build_packages.py` 使用 uv 构建 `smm-local` 和 `smm-hub`，产物位于 `dist/packages/`。本机端版本在根目录的 `pyproject.toml`，汇总端版本在 `packaging/hub/pyproject.toml`。更新 Skill 支持的本机端版本时，同时更新 `skills/smm-search/scripts/first_use.py`。

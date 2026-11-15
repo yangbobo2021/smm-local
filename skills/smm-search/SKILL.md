@@ -1,6 +1,6 @@
 ---
 name: smm-search
-description: Search archived Codex and Claude Code conversations, manage SMM sync, or configure a multi-computer archive hub. Use for prior project decisions, fixes and preferences, or to check, sync, pause or resume the archive. Do not use for information only in the current chat.
+description: Search archived Agent conversations, manage SMM sync, or configure a multi-computer archive hub. Use for prior project decisions, fixes and preferences, or to check, sync, pause or resume the archive. Do not use for information only in the current chat.
 ---
 
 # SMM conversation archive
@@ -24,9 +24,11 @@ Call `manage_sync` with the action that matches the user's request:
 | 暂停同步 / pause automatic sync | `pause` | Confirm the saved pause. An in-flight sync can finish. Explicit one-off sync and searches are still available. |
 | 恢复同步 / resume automatic sync | `resume` | Confirm the change and whether sync is in progress. |
 
+For a specific source, find its ID in status and pass `source` with status or sync. To enable or disable it, call `set_source_enabled` with the ID, or pass `source enable|disable <ID>` to the launcher. The source state and global pause are independent. To add a new source, use `smm-source-adapter`.
+
 For maintenance requests, the management tool result is sufficient. Zero archived conversations can be a valid status; report what SMM sees and ask before investigating unrelated directories or configuration.
 
-If MCP or this tool is unavailable, pass `maintenance <action>` to the launcher. Use an argument vector or quote paths for the current shell.
+If MCP or this tool is unavailable, pass `maintenance <action> [--source ID]` to the launcher. Use an argument vector or quote paths for the current shell.
 
 The local tool starts the service when needed and reuses it if running. Only use `resume` when the user asks to resume automatic sync. Treat a failed tool response as a failure, not as confirmation.
 
@@ -38,6 +40,8 @@ Before searching, call `manage_sync(action="status")` (or `maintenance status` t
 2. Search with a few distinctive terms from the user's question. Adjust terms and search again if the results contain plausible leads but not the needed evidence. Do not infer that no information exists from a project-scoped miss alone.
 3. Examine the source, project, time, and matched message positions. Search previews may be abbreviated; use `read_conversation` with the conversation ID and relevant positions to inspect complete messages before answering. Distinguish the archived user's statement from an assistant's proposal or speculation.
 4. Cite the computer name, Agent type, original source conversation ID and original message position. For a hub result, use that message's `origins` and `source_position`. Pass the exact returned `hub_id` to `read_conversation` or launcher `read --hub-id`. Read the entire conversation, or pass the returned `hub_message_id` (launcher `--hub-message-id`) for an exact message. If reading remote evidence fails, search again and report the actual scope; never use the same numeric ID against another archive.
+
+When the user requests this computer or a local plugin source, pass `local=true` to MCP or `--local` to the launcher.
 
 If `archive_scope` is `hub`, search covered all devices in the hub. Local project IDs do not filter the hub. If `archive_scope` is `local` and `fallback_reason` is present, tell the user that the hub was unavailable and this search covered only this computer. An empty hub result is not a connection failure.
 

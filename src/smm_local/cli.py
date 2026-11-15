@@ -9,15 +9,16 @@ from pathlib import Path
 
 from .core import Archive, shared_db_path
 from .federation import configure_and_start, read_archive, search_archive
-from .service import DEFAULT_PORT, maintain, running_service, serve as run_service, stop_on_demand
+from .importers import registry
+from .service import DEFAULT_PORT, control_source, ensure_service, maintain, running_service, serve as run_service, stop_on_demand
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="smm", description="本地 Codex / Claude Code 对话知识库")
+    parser = argparse.ArgumentParser(prog="smm", description="本机 Agent 对话知识库")
     parser.add_argument("--db", help="知识库 SQLite 路径")
     sub = parser.add_subparsers(dest="command", required=True)
     sync = sub.add_parser("sync", help="立即导入新增对话")
-    sync.add_argument("--source", choices=["all", "codex", "claude-code"], default="all")
+    sync.add_argument("--source", default="all")
     sync.add_argument("--root", help="所选单个来源的会话目录")
     sub.add_parser("status", help="查看导入状态")
     sub.add_parser("doctor", help="检查安装、来源和 Agent 接入")
@@ -30,7 +31,8 @@ def main() -> None:
     search.add_argument("--project-id", type=int)
     search.add_argument("--limit", type=int, default=5)
     search.add_argument("--current-session-id")
-    search.add_argument("--current-source", choices=["codex", "claude-code"])
+    search.add_argument("--current-source")
+    search.add_argument("--local", action="store_true", help="明确检索本机档案")
     search.add_argument("--include-current", action="store_true")
     read = sub.add_parser("read", help="读取对话原文")
     read.add_argument("conversation_id", type=int)
@@ -45,6 +47,19 @@ def main() -> None:
     serve.add_argument("--skip-initial-sync", action="store_true", help=argparse.SUPPRESS)
     maintenance = sub.add_parser("maintenance", help="管理本机同步与状态页")
     maintenance.add_argument("action", choices=["status", "open", "sync", "pause", "resume"])
+    maintenance.add_argument("--source")
+    source = sub.add_parser("source", help="验收、注册或管理本机来源")
+    actions = source.add_subparsers(dest="source_action", required=True)
+    actions.add_parser("list")
+    for action in ("validate", "register"):
+        candidate = actions.add_parser(action)
+        candidate.add_argument("manifest", type=Path)
+        candidate.add_argument("--fixture", type=Path, required=True)
+    for action in ("enable", "disable", "rollback", "batches", "purge-batch"):
+        control = actions.add_parser(action)
+        control.add_argument("source_id")
+        if action == "purge-batch":
+            control.add_argument("batch", type=int)
     sub.add_parser("stop-on-demand", help="停止按需启动的后台服务")
     configure = sub.add_parser("configure-hub", help="配置汇总电脑和本机名称")
     configure.add_argument("address")
@@ -62,25 +77,47 @@ def main() -> None:
                         sync_on_start=not args.skip_initial_sync)
             return
         if args.command == "maintenance":
-            result = maintain(db, args.action)
+            result = maintain(db, args.action, args.source)
         elif args.command == "configure-hub":
             result = configure_and_start(db, args.address, args.device_name, args.token_file)
         elif args.command == "stop-on-demand":
             stop_on_demand(db)
             result = {"ok": True}
         elif args.command == "sync":
-            if args.source == "all":
-                if args.root:
-                    parser.error("--root 需要同时指定 --source codex 或 claude-code")
-                result = db.sync_all()
-            elif args.source == "codex":
-                result = db.sync_codex(args.root)
+            if args.root:
+                if args.source not in ("codex", "claude-code"):
+                    parser.error("--root 只支持 Codex 或 Claude Code 的一次性导入")
+                if not db.configured_sources()[args.source]["enabled"]:
+                    raise ValueError("来源已停用")
+                # Compatibility for explicit one-off fixture imports.
+                result = (db.sync_codex if args.source == "codex" else db.sync_claude)(args.root)
             else:
-                result = db.sync_claude(args.root)
+                round_result = maintain(db, "sync", None if args.source == "all" else args.source)
+                result = round_result["result"] if round_result["result"] is not None else round_result
+                if args.source in {"codex", "claude-code"} and "sources" in result:
+                    result = result["sources"].get(args.source, result)
         elif args.command == "status":
-            result = db.status()
+            result = {**db.status(), "sources": db.source_status()}
+        elif args.command == "source":
+            action = args.source_action
+            if action == "list":
+                result = db.source_status()
+            elif action in {"validate", "register"}:
+                result = registry.configure(db, args.manifest, args.fixture, register=action == "register")
+                if action == "register":
+                    try:
+                        result["service_url"] = ensure_service(db, sync_on_start=False)["url"]
+                    except (OSError, RuntimeError, ValueError) as exc:
+                        result["service_error"] = str(exc)
+            elif action in {"enable", "disable"}:
+                result = control_source(db, args.source_id, action == "enable")
+            elif action == "rollback":
+                result = registry.rollback(db, args.source_id)
+            elif action == "batches":
+                result = registry.batches(db, args.source_id)
+            else:
+                result = registry.purge_batch(db, args.source_id, args.batch)
         elif args.command == "doctor":
-            settings = db.get_settings()
             manifest = Path.home() / ".local/share/smm-local/install.json"
             installation = json.loads(manifest.read_text()) if manifest.is_file() else {}
             mcp_path = installation.get("mcp_path", "")
@@ -98,7 +135,7 @@ def main() -> None:
                       "claude": (home / ".claude/skills/smm-search/SKILL.md").is_file()}
             with db.connect() as con:
                 database_ok = con.execute("PRAGMA quick_check").fetchone()[0] == "ok"
-            sources = {"codex": Path(settings["codex_root"]).is_dir(), "claude-code": Path(settings["claude_root"]).is_dir()}
+            sources = {name: source["available"] for name, source in db.source_status().items()}
             endpoint = running_service(db)
             service_ok = endpoint is not None
             result = {"database_ok": database_ok, "database_path": str(db.db_path), "sources": sources,
@@ -113,7 +150,7 @@ def main() -> None:
         elif args.command == "search":
             current_id = args.current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
             current_source = args.current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
-            result = search_archive(db, args.query, scope=args.scope, project_id=args.project_id, limit=args.limit, current_session_id=current_id, current_source=current_source, include_current=args.include_current)
+            result = search_archive(db, args.query, local=args.local, scope=args.scope, project_id=args.project_id, limit=args.limit, current_session_id=current_id, current_source=current_source, include_current=args.include_current)
         elif args.command == "read":
             result = read_archive(db, args.conversation_id, start=args.start, end=args.end,
                                   hub_id=args.hub_id, hub_message_id=args.hub_message_id)

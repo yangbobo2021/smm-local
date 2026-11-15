@@ -20,6 +20,10 @@
     button:hover { filter:brightness(.96) } button:disabled { opacity:.5; cursor:not-allowed }
     .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px } .stat { background:#eaf3f3; padding:15px; border-radius:9px } .stat strong { display:block; font-size:25px }
     .notice { min-height:24px; color:#0c6d71 } .error { color:#b32828 } .tag { display:inline-block; border-radius:5px; background:#e9f1f4; color:#315064; padding:2px 6px; margin-right:5px; font-size:12px }
+    .source-table { overflow:auto; margin-top:16px }
+    table { border-collapse:collapse; width:100%; text-align:left }
+    th,td { border-bottom:1px solid #e5eded; padding:10px 12px; vertical-align:top }
+    td .row { margin:0; gap:6px } summary { cursor:pointer }
     pre { white-space:pre-wrap; overflow-wrap:anywhere; background:#f5f8f8; border:1px solid #e3ebec; border-radius:8px; padding:12px; margin:8px 0; max-height:400px; overflow:auto }
     .result { border-top:1px solid #e5eded; padding:14px 0 } .result:first-child { border-top:0 } .result h3 { margin:0 0 3px }
     .message { border-left:3px solid #9bc9c8; padding-left:12px; margin:12px 0 } .message small { color:#627987 }
@@ -27,14 +31,14 @@
   </style>
 </head>
 <body>
-<header><h1>SMM · 本地对话索引</h1><p>保存 Codex 与 Claude Code 对话副本，在明确的项目范围内查找原始信息。</p></header>
+<header><h1>SMM · 本地对话索引</h1><p>保存本机 Agent 对话副本，在明确的项目范围内查找原始信息。</p></header>
 <main>
   <nav aria-label="页面">
     <button data-tab="overview" class="active">导入进度</button><button data-tab="projects">项目</button><button data-tab="search">检索测试</button><button data-tab="settings">配置</button>
   </nav>
   <div id="notice" class="notice" role="status"></div>
   <section id="overview" class="active">
-    <div class="card"><h2>对话导入</h2><div class="stats" id="stats"></div><p id="source-stats" class="muted"></p><p class="muted" id="last-sync"></p><button class="primary" id="sync-now">立即同步</button><p id="sync-state"></p></div>
+    <div class="card"><h2>对话导入</h2><div class="stats" id="stats"></div><p class="muted" id="last-sync"></p><div class="row"><button class="primary" id="sync-now">立即同步全部</button><button class="secondary" id="pause-sync">暂停自动同步</button></div><p id="sync-state"></p><div class="source-table"><table><thead><tr><th>来源</th><th>状态</th><th>已归档</th><th>最近一次</th><th>操作</th></tr></thead><tbody id="source-stats"></tbody></table></div><p class="muted">接入其他 Agent 时，在支持 Skill 的 Agent 中使用 <code>smm-source-adapter</code>。</p></div>
     <div class="card"><h2>导入问题</h2><div id="errors" class="muted">加载中…</div></div>
   </section>
   <section id="projects">
@@ -44,7 +48,7 @@
     <div class="card"><h2>合并同一项目</h2><p class="muted">来源项目的所有路径、对话和关联将转入目标项目。</p><div class="row"><label>来源</label><select id="merge-source"></select><label>目标</label><select id="merge-target"></select><button id="merge-save" class="primary">合并项目</button></div></div>
   </section>
   <section id="search">
-    <div class="card"><h2>检索测试</h2><form id="search-form"><div class="row"><input id="query" type="search" placeholder="例如：KeySync 同步 错误" required><button class="primary">搜索</button></div><div class="row"><label for="scope">检索范围</label><select id="scope"><option value="all">所有项目</option><option value="project">指定项目及关联项目</option></select><input id="search-project-filter" type="search" placeholder="按项目名或路径查找" aria-label="查找检索项目"><select id="search-project" aria-label="选择检索项目"></select><label for="limit">数量</label><select id="limit"><option>5</option><option>10</option><option>20</option></select></div></form><p id="effective" class="muted"></p><div id="results"></div></div>
+    <div class="card"><h2>检索本机对话</h2><form id="search-form"><div class="row"><input id="query" type="search" placeholder="例如：KeySync 同步 错误" required><button class="primary">搜索</button></div><div class="row"><label for="scope">检索范围</label><select id="scope"><option value="all">所有项目</option><option value="project">指定项目及关联项目</option></select><input id="search-project-filter" type="search" placeholder="按项目名或路径查找" aria-label="查找检索项目"><select id="search-project" aria-label="选择检索项目"></select><label for="limit">数量</label><select id="limit"><option>5</option><option>10</option><option>20</option></select></div></form><p id="effective" class="muted"></p><div id="results"></div></div>
     <div class="card" id="reader-card" hidden><h2>对话原文</h2><div id="reader"></div></div>
   </section>
   <section id="settings">
@@ -54,13 +58,40 @@
 <script>
   const $ = id => document.getElementById(id);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  async function request(path, options={}) { const r=await fetch(path,{headers:{'Content-Type':'application/json'},...options}); const data=await r.json(); if(!r.ok) throw Error(data.detail || r.statusText); return data }
+  async function request(path, options={}) { const r=await fetch(path,{headers:{'Content-Type':'application/json','X-SMM-UI':'1'},...options}); const data=await r.json(); if(!r.ok) throw Error(data.detail || r.statusText); return data }
   function notice(message,error=false) { $('notice').textContent=message; $('notice').className='notice'+(error?' error':'') }
   let projectData=[];
+  let sourceNames={};
+  const localTime = time => new Date(time).toLocaleString('zh-CN', {hour12:false});
+  let syncPaused=false;
+  let sourceMarkup;
   async function refreshStatus() {
-    const s=await request('/api/status'); $('stats').innerHTML=[['对话',s.conversations],['消息',s.messages],['项目',s.projects],['来源文件',s.source_files]].map(([a,b])=>`<div class="stat"><span>${a}</span><strong>${b}</strong></div>`).join('');
-    $('source-stats').textContent=['codex','claude-code'].map(name=>{const info=s.by_source?.[name] || {conversations:0,messages:0};const source=s.sync.sources?.[name];return `${name}: ${info.conversations} 段对话、${info.messages} 条消息${source && !source.available?'（未找到会话目录，可在配置中修改）':''}`}).join('；')+(s.conversations===0?'。尚无对话：检查来源目录，然后点击“立即同步”。':'');
-    $('last-sync').textContent='最近同步：'+(s.sync.last_result?.finished_at || s.last_sync || '尚未同步'); $('sync-state').textContent=(s.sync.paused?'自动同步已暂停。':'')+(s.sync.running?'正在同步…':(s.sync.last_result?`上次处理 ${s.sync.last_result.files_seen || 0} 个文件，新增 ${s.sync.last_result.messages_new || 0} 条消息。`:''));
+    const s=await request('/api/status'); $('stats').innerHTML=[['对话',s.conversations],['消息',s.messages],['项目',s.projects],['来源',Object.keys(s.sync.sources || {}).length]].map(([a,b])=>`<div class="stat"><span>${a}</span><strong>${b}</strong></div>`).join('');
+    const sources=Object.values(s.sync.sources || {});
+    sourceNames=Object.fromEntries(sources.map(source=>[source.id,source.name]));
+    syncPaused=s.sync.paused;
+    $('pause-sync').textContent=syncPaused?'恢复自动同步':'暂停自动同步';
+    const expanded = new Set([...$('source-stats').querySelectorAll('details[open]')].map(item=>item.dataset.id));
+    const markup=sources.map(source=>{
+      const latest=source.last_result;
+      const failed=latest?.errors?.length;
+      const state=!source.enabled?'已停用':!source.available?'来源不可用':failed?'同步失败':!source.last_success?'从未成功':'就绪';
+      const outcome=latest?(failed?latest.errors[0].error:`新增 ${latest.messages_new} 条消息`):'尚未同步';
+      return `<tr><td><strong>${esc(source.name)}</strong>${source.plugin?'<br><small class="muted">仅本机</small>':''}</td>
+        <td>${esc(state)}</td><td>${source.conversations} 段对话<br>${source.messages} 条消息</td>
+        <td>${esc(outcome)}${latest?`<br><small class="muted">${esc(localTime(latest.finished_at))}</small>`:''}</td>
+        <td><div class="row"><button class="secondary" data-action="sync" data-source="${esc(source.id)}" ${source.enabled&&source.available?'':'disabled'}>${failed?'重试':'同步'}</button>
+        <button class="secondary" data-action="toggle" data-source="${esc(source.id)}" data-enabled="${!source.enabled}">${source.enabled?'停用':'启用'}</button></div>
+        <details data-id="${esc(source.id)}"><summary>详情</summary><div class="paths">${esc(source.root)}</div>
+        <small>${source.plugin?`插件版本 ${source.revision} · `:''}最近成功 ${source.last_success?esc(localTime(source.last_success)):'无'}</small></details></td></tr>`;
+    }).join('');
+    if(markup!==sourceMarkup){
+      $('source-stats').innerHTML=markup;
+      $('source-stats').querySelectorAll('details').forEach(item=>item.open=expanded.has(item.dataset.id));
+      sourceMarkup=markup;
+    }
+    const last=s.sync.last_result?.finished_at || s.last_sync;
+    $('last-sync').textContent='最近同步：'+(last?localTime(last):'尚未同步'); $('sync-state').textContent=(s.sync.paused?'自动同步已暂停。':'')+(s.sync.running?'正在同步…':(s.sync.last_result?`上次处理 ${s.sync.last_result.files_seen || 0} 个文件，新增 ${s.sync.last_result.messages_new || 0} 条消息。`:''));
     $('errors').innerHTML=s.errors.length?s.errors.map(e=>`<p class="error">${esc(e.error)}<br><small>${esc(e.path)}</small></p>`).join(''):'没有导入错误。';
   }
   async function refreshProjects() {
@@ -73,9 +104,33 @@
   function renderProjects(){const q=$('project-filter').value.trim().toLowerCase();const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q)));const shown=matched.slice(0,60);$('project-count').textContent=`显示 ${shown.length} / ${matched.length} 个匹配项目（共 ${projectData.length} 个）`;$('project-list').innerHTML=shown.length?shown.map(p=>`<div class="result"><div class="row"><strong>${esc(p.name)}</strong><span class="tag">#${p.id}</span><span class="tag">${p.conversations} 段对话</span>${p.confirmed?'':'<span class="tag">待确认</span>'}</div><div class="paths">${p.paths.map(esc).join('<br>') || '无路径'}</div><p class="muted">直接关联：${p.linked_ids.map(i=>esc(projectData.find(x=>x.id===i)?.name || i)).join('、') || '无'}</p><div class="row"><input type="text" id="name-${p.id}" value="${esc(p.name)}" aria-label="项目名称"><button class="secondary" onclick="renameProject(${p.id})">重命名</button></div></div>`).join(''):'没有匹配项目。';}
   function filterSearchProjects(){const q=$('search-project-filter').value.trim().toLowerCase();const selected=$('search-project').value;const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q))).slice(0,60);$('search-project').innerHTML=matched.map(p=>`<option value="${p.id}">${esc(p.name)} · #${p.id}</option>`).join('');if(matched.some(p=>String(p.id)===selected))$('search-project').value=selected;}
   async function renameProject(id) { try { await request(`/api/projects/${id}/rename`,{method:'POST',body:JSON.stringify({name:$('name-'+id).value})}); await refreshProjects(); notice('项目已重命名') } catch(e){notice(e.message,true)} }
-  async function showConversation(id) { try { const d=await request('/api/conversations/'+id); $('reader-card').hidden=false; $('reader').innerHTML=`<p><strong>${esc(d.title)}</strong> · ${esc(d.project_name || '未归属')} · ${esc(d.source)}</p>`+d.messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)} · ${esc(m.timestamp || '')}</small><pre>${esc(m.text)}</pre></div>`).join(''); $('reader-card').scrollIntoView({behavior:'smooth'}) } catch(e){notice(e.message,true)} }
+  async function showConversation(id) { try { const d=await request('/api/conversations/'+id); $('reader-card').hidden=false; $('reader').innerHTML=`<p><strong>${esc(d.title)}</strong> · ${esc(d.project_name || '未归属')} · ${esc(sourceNames[d.source] || d.source)}</p>`+d.messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)} · ${esc(m.timestamp || '')}</small><pre>${esc(m.text)}</pre></div>`).join(''); $('reader-card').scrollIntoView({behavior:'smooth'}) } catch(e){notice(e.message,true)} }
   document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('nav button,main section').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $(b.dataset.tab).classList.add('active'); if(b.dataset.tab==='projects') refreshProjects().catch(e=>notice(e.message,true)); if(b.dataset.tab==='overview') refreshStatus().catch(e=>notice(e.message,true)); });
-  $('sync-now').onclick=async()=>{ try { const r=await request('/api/sync',{method:'POST'}); notice(r.started?'同步已启动':'同步正在进行'); setTimeout(refreshStatus,800) } catch(e){notice(e.message,true)} };
+  async function synchronize(source) {
+    try {
+      const query=source?'?source='+encodeURIComponent(source):'';
+      const r=await request('/api/sync'+query,{method:'POST'});
+      notice(r.started?'同步已启动':'同步已受理');
+      await refreshStatus();
+    } catch(e){notice(e.message,true)}
+  }
+  $('sync-now').onclick=()=>synchronize();
+  $('pause-sync').onclick=async()=>{
+    try {
+      await request('/api/sync/pause',{method:'PUT',body:JSON.stringify({paused:!syncPaused})});
+      await refreshStatus();
+    } catch(e){notice(e.message,true)}
+  };
+  $('source-stats').onclick=async event=>{
+    const button=event.target.closest('button[data-source]');
+    if(!button)return;
+    const {source,action,enabled}=button.dataset;
+    if(action==='sync')return synchronize(source);
+    try {
+      await request('/api/sources/'+encodeURIComponent(source)+'/enabled',{method:'PUT',body:JSON.stringify({enabled:enabled==='true'})});
+      await refreshStatus();
+    } catch(e){notice(e.message,true)}
+  };
   $('map-save').onclick=async()=>{ try { await request('/api/projects/map',{method:'POST',body:JSON.stringify({path:$('map-path').value,project_id:Number($('map-project').value)})}); await refreshProjects(); notice('路径映射已保存') } catch(e){notice(e.message,true)} };
   async function setLink(linked) { try { await request('/api/projects/link',{method:'POST',body:JSON.stringify({one:Number($('link-a').value),other:Number($('link-b').value),linked})}); await refreshProjects(); notice(linked?'关联已建立':'关联已取消') } catch(e){notice(e.message,true)} }
   $('link-save').onclick=()=>setLink(true); $('unlink-save').onclick=()=>setLink(false);
@@ -83,7 +138,7 @@
   $('search-project-filter').oninput=filterSearchProjects;
   $('merge-save').onclick=async()=>{try{const source_id=Number($('merge-source').value),target_id=Number($('merge-target').value);if(source_id===target_id)throw Error('来源与目标必须不同');await request('/api/projects/merge',{method:'POST',body:JSON.stringify({source_id,target_id})});await refreshProjects();notice('项目已合并')}catch(e){notice(e.message,true)}};
   $('scope').onchange=()=>{$('search-project').disabled=$('scope').value==='all';$('search-project-filter').disabled=$('scope').value==='all'};
-  $('search-form').onsubmit=async e=>{ e.preventDefault(); try { if($('scope').value==='project'&&!$('search-project').value)throw Error('请先选择检索项目'); const req={query:$('query').value,scope:$('scope').value,project_id:$('scope').value==='project'?Number($('search-project').value):null,limit:Number($('limit').value)}; const d=await request('/api/search',{method:'POST',body:JSON.stringify(req)}); $('effective').textContent=d.scope==='all'?'实际范围：所有项目':'实际范围：'+d.effective_projects.map(p=>p.name).join('、'); $('results').innerHTML=d.results.length?d.results.map(x=>`<div class="result"><h3>#${x.rank} ${esc(x.title)}</h3><p class="muted">${esc(x.project_name || '未归属')} · ${esc(x.source)} · ${esc(x.updated_at || '')} · BM25 ${x.bm25_score.toPrecision(3)}</p>${x.matched_messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)}</small><pre>${esc(m.text)}</pre></div>`).join('')}<button class="secondary" onclick="showConversation(${x.id})">查看完整对话</button></div>`).join(''):'没有匹配结果。'; $('reader-card').hidden=true; } catch(e){notice(e.message,true)} };
+  $('search-form').onsubmit=async e=>{ e.preventDefault(); try { if($('scope').value==='project'&&!$('search-project').value)throw Error('请先选择检索项目'); const req={query:$('query').value,scope:$('scope').value,project_id:$('scope').value==='project'?Number($('search-project').value):null,limit:Number($('limit').value)}; const d=await request('/api/search',{method:'POST',body:JSON.stringify(req)}); $('effective').textContent=d.scope==='all'?'实际范围：本机所有项目':'实际范围：本机 · '+d.effective_projects.map(p=>p.name).join('、'); $('results').innerHTML=d.results.length?d.results.map(x=>`<div class="result"><h3>#${x.rank} ${esc(x.title)}</h3><p class="muted">${esc(x.project_name || '未归属')} · ${esc(sourceNames[x.source] || x.source)} · ${esc(x.updated_at || '')} · BM25 ${x.bm25_score.toPrecision(3)}</p>${x.matched_messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)}</small><pre>${esc(m.text)}</pre></div>`).join('')}<button class="secondary" onclick="showConversation(${x.id})">查看完整对话</button></div>`).join(''):'没有匹配结果。'; $('reader-card').hidden=true; } catch(e){notice(e.message,true)} };
   async function refreshSettings(){const s=await request('/api/settings');$('codex-root').value=s.codex_root;$('claude-root').value=s.claude_root;$('sync-interval').value=s.sync_interval_seconds}
   $('settings-save').onclick=async()=>{try{await request('/api/settings',{method:'PUT',body:JSON.stringify({codex_root:$('codex-root').value,claude_root:$('claude-root').value,sync_interval_seconds:Number($('sync-interval').value)})});notice('配置已保存')}catch(e){notice(e.message,true)}};
   Promise.all([refreshStatus(),refreshProjects(),refreshSettings()]).then(()=>$('scope').onchange()).catch(e=>notice(e.message,true));

@@ -6,10 +6,9 @@ import threading
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from importlib.resources import files
-from pathlib import Path
 from typing import Callable
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
@@ -59,6 +58,9 @@ class PauseRequest(BaseModel):
 
 @dataclass
 class SyncJob:
+    source: str | None = None
+    covered: frozenset[str] = frozenset()
+    automatic: bool = False
     done: threading.Event = field(default_factory=threading.Event)
     result: dict | None = None
 
@@ -70,12 +72,13 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
+    pending: dict[str | None, SyncJob] = {}
 
     def run_sync(job: SyncJob) -> None:
         nonlocal active
         try:
             try:
-                result = db.sync_all()
+                result = db.sync_all(job.source, eligible=job.covered)
             except Exception as exc:
                 result = {"finished_at": utcnow(), "errors": [{"error": str(exc)}]}
             try:
@@ -93,17 +96,39 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                 job.result = result
                 active = None
                 job.done.set()
+                while pending and not stop.is_set():
+                    next_job = pending.pop(next(iter(pending)))
+                    if next_job.automatic and db.get_settings()["sync_paused"]:
+                        next_job.done.set()
+                        continue
+                    launch(next_job)
+                    break
 
-    def start_sync(*, automatic: bool = False) -> tuple[bool, SyncJob | None]:
-        # The caller holds run_lock so checking pause and scheduling are atomic.
+    def launch(job: SyncJob) -> None:
         nonlocal active
+        job.covered = frozenset(name for name, source in db.configured_sources().items()
+                                if source["enabled"] or name == job.source)
+        active = job
+        threading.Thread(target=run_sync, args=(job,), daemon=True).start()
+
+    def start_sync(*, automatic: bool = False, source: str | None = None,
+                   queue: bool = False) -> tuple[bool, SyncJob | None]:
+        # The caller holds run_lock so checking pause and scheduling are atomic.
         if stop.is_set() or (automatic and db.get_settings()["sync_paused"]):
             return False, None
         if active is not None:
-            return False, active
-        job = SyncJob()
-        active = job
-        threading.Thread(target=run_sync, args=(job,), daemon=True).start()
+            if (active.source == source or (active.source is None and source in active.covered)
+                    or (automatic and not queue)):
+                return False, active
+            if None in pending and source is not None:
+                job = pending[None]
+            else:
+                job = pending.setdefault(source, SyncJob(source, automatic=automatic))
+            if not automatic:
+                job.automatic = False
+            return False, job
+        job = SyncJob(source, automatic=automatic)
+        launch(job)
         return True, job
 
     def loop() -> None:
@@ -126,6 +151,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
         finally:
             with run_lock:
                 stop.set()
+                pending.clear()
                 job = active
             if worker:
                 worker.join(timeout=2)
@@ -147,32 +173,48 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
         with run_lock:
             running = active is not None
         info = db.status()
-        sources = {}
-        for source, key in (("codex", "codex_root"), ("claude-code", "claude_root")):
-            root = info["settings"][key]
-            sources[source] = {"available": Path(root).is_dir(), "root": root, "conversations": 0,
-                               "messages": 0, **info["by_source"].get(source, {})}
+        sources = db.source_status(info["by_source"])
         return {**info, "sync": {"running": running, "paused": info["settings"]["sync_paused"],
                                  "last_result": db.last_sync_result(), "sources": sources}}
 
     @app.post("/api/sync")
-    def sync(wait: bool = False):
+    def sync(wait: bool = False, source: str | None = None):
         with run_lock:
-            started, job = start_sync()
+            if source is not None:
+                sources = db.configured_sources()
+                if source not in sources:
+                    raise HTTPException(404, "未知对话来源")
+                if not sources[source]["enabled"]:
+                    raise HTTPException(409, "来源已停用")
+            started, job = start_sync(source=source)
         if job is None:
             raise HTTPException(503, "同步服务正在停止")
         if wait and job.done.wait(15):
             return {"started": started, "running": False, "result": job.result}
         return {"started": started, "running": True, "result": None}
 
+    def require_local_control(request: Request) -> None:
+        if service_token is None or request.headers.get("X-SMM-Service") == service_token:
+            return
+        if (request.url.hostname not in {"127.0.0.1", "::1", "localhost"}
+                or request.headers.get("Origin") != f"{request.url.scheme}://{request.url.netloc}"
+                or request.headers.get("X-SMM-UI") != "1"):
+            raise HTTPException(403, "请从本机状态页执行此操作")
+
+    @app.put("/api/sources/{source}/enabled")
+    def enable_source(source: str, request: Request, enabled: bool = Body(embed=True)):
+        require_local_control(request)
+        with run_lock:
+            db.set_source_enabled(source, enabled)
+        return {"id": source, "enabled": enabled}
+
     @app.put("/api/sync/pause")
     def pause(req: PauseRequest, request: Request):
-        if service_token is not None and request.headers.get("X-SMM-Service") != service_token:
-            raise HTTPException(404)
+        require_local_control(request)
         with run_lock:
             db.set_settings(sync_paused=req.paused)
             if not req.paused:
-                start_sync(automatic=True)
+                start_sync(automatic=True, queue=True)
             return {"paused": req.paused, "running": active is not None}
 
     if service_token is not None:

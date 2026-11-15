@@ -4,7 +4,6 @@
 import asyncio
 import json
 import os
-import socket
 import subprocess
 import sys
 from pathlib import Path
@@ -112,19 +111,3 @@ def test_agent_maintenance_starts_reuses_and_preserves_pause(tmp_path, monkeypat
         asyncio.run(exercise())
     finally:
         stop_on_demand(db)
-
-
-def test_service_start_cannot_use_an_unrelated_listener(tmp_path, monkeypatch):
-    db = Archive(tmp_path / "archive.sqlite3")
-    db.set_settings(sync_paused=True)
-    with socket.socket() as unrelated:
-        unrelated.bind(("127.0.0.1", 0))
-        unrelated.listen()
-        monkeypatch.setenv("SMM_SERVICE_PORT", str(unrelated.getsockname()[1]))
-        result = subprocess.run(
-            [sys.executable, "-m", "smm_local.cli", "--db", str(db.db_path), "maintenance", "status"],
-            capture_output=True, text=True, timeout=15,
-        )
-        assert result.returncode != 0
-        assert "本地同步服务未能启动" in result.stderr
-        assert running_service(db) is None

@@ -38,10 +38,12 @@
 
 ### access-8
 
-当 Skill 为历史检索、查看状态、打开状态页、立即同步或恢复同步请求本机服务时，系统应复用同一档案的已有服务，或在本机后台启动服务并等待就绪：
+当 Skill 为注册来源、历史检索、查看状态、打开状态页、立即同步或恢复同步请求本机服务时，系统应复用同一档案的已有服务，或在本机后台启动服务并等待就绪：
 
 - 启动不可用时，报告原因，档案检索仍可读取已有索引 [[retrieval-1](retrieval.md#retrieval-1)]。
 - 启动服务时遵守已保存的暂停设置 [[archive-14](archive.md#archive-14)]。
+- Windows 后台启动等待同一档案服务的本机就绪响应，启动等待期限为 30 秒。
+- 后台启动的服务应独立于请求启动的 Agent 进程运行。
 
 ### access-10
 
@@ -51,6 +53,14 @@
 
 如果当前 Agent 会话缺少 SMM MCP，当用户通过已安装的 Skill 请求同步或检索时，Skill 应通过随附脚本准备或定位本机组件 [[distribution-11](distribution.md#distribution-11)]，并在当前会话用 CLI 执行原请求 [[access-1](#access-1)]。
 
+### access-15
+
+当用户在 Web、CLI 或 Skill 管理来源时，各入口应使用同一后台调度 [[source-plugins-8](source-plugins.md#source-plugins-8)]。
+
+### access-16
+
+当用户打开本机导入页时，系统应按来源显示导入状态 [[source-plugins-7](source-plugins.md#source-plugins-7)]。
+
 ## 验证
 
 ### access-5
@@ -59,7 +69,7 @@
 
 ### access-9
 
-在使用同一 Skill 与 MCP 的两个 Agent 接入路径执行同步维护时，验收应检查自然语言操作与工具的对应关系及页面地址 [[access-7](#access-7)]，并在服务关闭、运行、暂停和启动失败时核对后台启动、复用与失败反馈 [[access-8](#access-8)]。
+在使用同一 Skill 与 MCP 的两个 Agent 接入路径执行同步维护时，验收应检查自然语言操作与工具的对应关系及页面地址 [[access-7](#access-7)]，并在服务关闭、运行、暂停、启动失败和 Windows 慢启动时核对后台启动、复用与失败反馈 [[access-8](#access-8)]。
 
 ### access-11
 
@@ -72,3 +82,7 @@
 ### access-14
 
 在已有档案且服务停止时，验收应只提出需要查阅旧对话的问题，并检查 Agent 在同一会话启动服务、读取原文，以及在自动同步已暂停的情况下不导入暂停期间新增的对话 [[access-8](#access-8)]。
+
+### access-17
+
+多来源端到端验收应核对 Web、CLI 和 Skill 的定向控制使用同一后台任务 [[access-15](#access-15)]，并核对状态页能区分零新增、从未成功、失败和停用 [[access-16](#access-16)]。

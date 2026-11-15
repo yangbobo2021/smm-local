@@ -180,8 +180,8 @@ def ensure_cli() -> Path:
 
 def main() -> int:
     args = sys.argv[1:]
-    if not args or args[0] not in {"maintenance", "configure-hub", "projects", "resolve-project", "search", "read"}:
-        print("用法：first_use <maintenance|configure-hub|projects|resolve-project|search|read> [参数]", file=sys.stderr)
+    if not args or args[0] not in {"maintenance", "configure-hub", "projects", "resolve-project", "search", "read", "source"}:
+        print("用法：first_use <maintenance|configure-hub|projects|resolve-project|search|read|source> [参数]", file=sys.stderr)
         return 2
     try:
         cli = ensure_cli()
