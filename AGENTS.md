@@ -19,7 +19,8 @@
 维护者确认当前阶段的产物后，将该版本提交到 Git，再进入下一阶段。
 
 1. **意图 `intent.md`**。说明现有问题、受影响的用户、期望结果、范围和约束，
-   并列出待确认的问题。
+   并列出待确认的问题。起草时使用 [意图模板](changes/_templates/intent.md)
+   和 [起草 Prompt](changes/_templates/intent.prompt.md)。
 2. **规格 `spec.md`**。根据已确认的意图，定义本次变更的可观察行为、
    关键边界和验收条件。编写或审阅规格时，使用 [规格模板](changes/_templates/spec.md)。
 3. **计划 `plan.md`**。根据已确认的规格，列出要修改的位置、实施顺序、
