@@ -351,6 +351,76 @@ def test_faults_do_not_block_other_sources_or_advance_cursor(archive, tmp_path, 
         assert web.post("/api/sync?source=custom-json&wait=true").json()["result"]["messages_new"] == 0
 
 
+def append_empty_batches(archive, sources):
+    with archive.connect() as con:
+        versions = dict(con.execute("SELECT id, live_version FROM plugin_sources"))
+        return [
+            con.execute(
+                "INSERT INTO plugin_batches (source, version, imported_at) VALUES (?, ?, ?)",
+                (source, versions[source], "2026-01-01T12:00:00+00:00"),
+            ).lastrowid
+            for source in sources
+        ]
+
+
+def test_source_batches_finds_and_purges_batch_older_than_latest_100(archive, tmp_path):
+    source = "custom-json"
+    manifest, fixture, live, data, extra = json_source(tmp_path, source)
+    registry.configure(archive, manifest, fixture, register=True)
+    assert archive.sync_all(source)["messages_new"] == 3
+    target, = cli(archive, "source", "batches", source)
+    dump(live, data + extra)
+    assert archive.sync_all(source)["messages_new"] == 1
+    newer, _ = cli(archive, "source", "batches", source)
+    empty_batch_ids = append_empty_batches(archive, [source] * 99)
+
+    latest = cli(archive, "source", "batches", source)
+    assert [row["id"] for row in latest] == [*reversed(empty_batch_ids), newer["id"]]
+    assert latest[-1] == newer
+    older = cli(archive, "source", "batches", source, "--before", latest[-1]["id"])
+    assert older == [target]
+    target_id = older[-1]["id"]
+    assert cli(archive, "source", "batches", source, "--before", target_id) == []
+    assert archive.source_status()[source]["enabled"]
+
+    assert "清理前请停用插件来源" in cli(archive, "source", "purge-batch", source, target_id, ok=False)
+    assert cli(archive, "source", "batches", source, "--before", latest[-1]["id"]) == [target]
+    assert cli(archive, "source", "disable", source)["enabled"] is False
+    assert cli(archive, "source", "purge-batch", source, target_id)["messages_deleted"] == 3
+    assert cli(archive, "source", "batches", source, "--before", latest[-1]["id"]) == [
+        {**target, "messages": 0}
+    ]
+    assert cli(archive, "source", "batches", source)[-1] == newer
+    assert archive.source_status()[source]["messages"] == 1
+
+
+def test_source_batches_pages_keep_id_order_and_source(archive, tmp_path):
+    source, other_source = "custom-json", "other-json"
+    for source_id in (source, other_source):
+        manifest, fixture, *_ = json_source(tmp_path / source_id, source_id)
+        registry.configure(archive, manifest, fixture, register=True)
+    ids = append_empty_batches(archive, [source, other_source] * 205)
+
+    found = []
+    page = cli(archive, "source", "batches", source)
+    for length in (100, 100, 5):
+        assert len(page) == length
+        found.extend(row["id"] for row in page)
+        page = cli(archive, "source", "batches", source, "--before", page[-1]["id"])
+    assert page == []
+    assert found == ids[::2][::-1]
+
+
+@pytest.mark.parametrize(
+    "cursor", [(), ("abc",), ("0",), ("-1",), (str(2**63),)],
+    ids=["missing", "non-integer", "zero", "negative", "out-of-range"],
+)
+def test_source_batches_rejects_invalid_cursor(archive, cursor):
+    error = cli(archive, "source", "batches", "custom-json", "--before", *cursor, ok=False)
+    assert "argument --before:" in error
+    assert "unrecognized arguments" not in error
+
+
 def test_source_controls_compete_for_one_job_and_preserve_archive(archive, tmp_path):
     manifest, fixture, live, data, extra = json_source(tmp_path)
     registry.configure(archive, manifest, fixture, register=True)
