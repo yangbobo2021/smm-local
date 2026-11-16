@@ -115,15 +115,20 @@ def rollback(archive, source: str) -> dict:
     return {"id": source, "revision": previous}
 
 
-def batches(archive, source: str) -> list[dict]:
+def batches(archive, source: str, *, before: int | None = None) -> list[dict]:
     with archive.connect() as con:
         if not _active(con, source):
             raise ValueError("未知插件来源")
-        return [dict(row) for row in con.execute("""
+        where = "b.source=?"
+        params = (source,)
+        if before is not None:
+            where += " AND b.id < ?"
+            params = (source, before)
+        return [dict(row) for row in con.execute(f"""
             SELECT b.id,b.version AS revision,b.imported_at,COUNT(m.id) AS messages
             FROM plugin_batches b LEFT JOIN plugin_messages m ON m.batch=b.id
-            WHERE b.source=? GROUP BY b.id ORDER BY b.id DESC LIMIT 100
-        """, (source,))]
+            WHERE {where} GROUP BY b.id ORDER BY b.id DESC LIMIT 100
+        """, params)]
 
 
 def purge_batch(archive, source: str, batch: int) -> dict:

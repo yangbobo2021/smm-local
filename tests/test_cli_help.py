@@ -29,12 +29,24 @@ from smm_local.core import Archive
             id="source",
         ),
         pytest.param(
+            ["source", "batches", "--help"],
+            (
+                "source_id 插件来源 ID。用 smm source list 查找对应来源。",
+                "默认显示最近 100 批",
+                "按导入时间 (imported_at)、版本 (revision) 和消息数 (messages) 辨认批次，取记录的 id。",
+                "--before 批次ID 填当前页最后一条记录的 id，查询更早的批次。返回 [] 表示已查到末尾。",
+                "清理前的停用要求见 smm source purge-batch --help。",
+            ),
+            id="batches",
+        ),
+        pytest.param(
             ["source", "purge-batch", "--help"],
             (
                 "source_id batch",
                 "source_id 待清理批次所属的插件来源 ID。用 smm source list 查找对应来源。",
                 "batch 要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，"
-                "取目标批次记录的 id。",
+                "取目标批次记录的 id。默认只显示最近 100 批。用 --before 查询更早的批次，"
+                "详见 smm source batches --help。",
                 "从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源。",
                 "使用 smm source disable <来源ID> 停用该来源。",
             ),

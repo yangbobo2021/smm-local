@@ -13,6 +13,16 @@ from .importers import registry
 from .service import DEFAULT_PORT, control_source, ensure_service, maintain, running_service, serve as run_service, stop_on_demand
 
 
+def _before_batch_id(value: str) -> int:
+    try:
+        batch_id = int(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError("必须是有效的正整数批次 ID") from None
+    if not 0 < batch_id < 2**63:
+        raise argparse.ArgumentTypeError("必须是有效的正整数批次 ID")
+    return batch_id
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="smm", description="本机 Agent 对话知识库")
     parser.add_argument("--db", help="知识库 SQLite 路径")
@@ -62,10 +72,22 @@ def main() -> None:
         ("enable", "启用指定来源的导入"),
         ("disable", "停用指定来源的导入，保留已导入的记录"),
         ("rollback", "将指定插件来源的适配器切回上一版"),
-        ("batches", "查看指定插件来源的导入批次"),
     ):
         control = actions.add_parser(action, help=help_text)
         control.add_argument("source_id")
+    batches = actions.add_parser(
+        "batches",
+        help="查看指定插件来源的导入批次",
+        description="默认显示最近 100 批。按导入时间 (imported_at)、版本 (revision) 和消息数 (messages) "
+        "辨认批次，取记录的 id。清理前的停用要求见 smm source purge-batch --help。",
+    )
+    batches.add_argument("source_id", help="插件来源 ID。用 smm source list 查找对应来源。")
+    batches.add_argument(
+        "--before",
+        type=_before_batch_id,
+        metavar="批次ID",
+        help="填当前页最后一条记录的 id，查询更早的批次。返回 [] 表示已查到末尾。",
+    )
     purge_help = "从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源"
     purge = actions.add_parser(
         "purge-batch", help=purge_help,
@@ -77,7 +99,8 @@ def main() -> None:
     purge.add_argument(
         "batch", type=int,
         help="要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，"
-        "取目标批次记录的 id。",
+        "取目标批次记录的 id。默认只显示最近 100 批。用 --before 查询更早的批次，"
+        "详见 smm source batches --help。",
     )
     sub.add_parser("stop-on-demand", help="停止按需启动的后台服务")
     configure = sub.add_parser("configure-hub", help="配置汇总电脑和本机名称")
@@ -133,7 +156,7 @@ def main() -> None:
             elif action == "rollback":
                 result = registry.rollback(db, args.source_id)
             elif action == "batches":
-                result = registry.batches(db, args.source_id)
+                result = registry.batches(db, args.source_id, before=args.before)
             else:
                 result = registry.purge_batch(db, args.source_id, args.batch)
         elif args.command == "doctor":
