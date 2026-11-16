@@ -6,7 +6,7 @@
 2026-11-15 的同版三平台复测另见 [ZCode 三平台最终版交付验收](zcode-final-delivery-2026-11-15.md)。以下保留首轮试用结果。
 
 范围来自用户确认的现场 Python 适配方案及分角色验收讨论。
-行为依据为 [来源插件规约](../specs/packages/source-plugins.md)、[导入档案规约](../specs/packages/archive.md)、[入口规约](../specs/packages/access.md)和[汇总规约](../specs/packages/federation.md)。
+行为依据为 [来源插件规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/source-plugins.md)、[导入档案规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/archive.md)、[入口规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/access.md)和[汇总规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/federation.md)。
 
 | 角色 | 验收场景 | 执行范围与证据 |
 | --- | --- | --- |

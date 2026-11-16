@@ -12,7 +12,7 @@
 
 | 阶段 | 要求与实际动作 | 验收结果 |
 | --- | --- | --- |
-| 需求与规约 | 新建 Git 工作目录；用 SPEX 初始化 `specs/`，冻结 [IR-001](../specs/intents/001-first-local-version.md) 与四个行为规约包 | `spex lint: no problems found` |
+| 需求与规约 | 新建 Git 工作目录；用 SPEX 初始化 `specs/`，冻结 [IR-001](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/intents/001-first-local-version.md) 与四个行为规约包 | `spex lint: no problems found` |
 | 持久导入 | Codex JSONL 适配器识别会话、可见消息、来源、顺序、时间和工作目录；用字节偏移增量同步，重复同步幂等 | 隔离样本首次 3 段/6 条；追加只增 1 条；重同步增 0 条；未写完行等待重试；删除来源后仍可读 3 条并搜索命中 |
 | 项目归属与关联 | 以最近 Git 根目录或记录的工作目录建立项目；可手动改名、把父路径及子路径归并到项目、合并误拆项目、建立或取消双向一跳关联 | 隔离验收验证 Alpha → Beta → Gamma 时，查 Alpha 只扩到 Beta；取消关联和合并后再查；回归测试验证父目录映射对已有及未来子目录生效 |
 | 检索接口 | 同一核心提供整段对话 BM25 排序、命中消息全文和位置、项目/全局范围、原文读取、当前 Codex 会话排除；CLI、MCP、HTTP 共用核心 | CLI 搜索命中隔离档案；真实 MCP stdio 握手发现 4 个工具并成功调用；HTTP 检索与原文读取通过 |

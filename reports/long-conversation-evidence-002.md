@@ -9,7 +9,7 @@
 
 本轮保持**整段对话的 BM25 候选排序不变**，只修改命中对话内部的证据展示：用消息级 BM25 衡量词面相关性，为较早、较新和最后五分之一的讨论保留展示名额；每个命中点带上所在问答的用户消息、相关回复和最终回复，并按原始位置输出完整原文。
 这一规则不依赖 SMM 项目词或测试题的答案。
-实现见 [`core.py`](../src/smm_local/core.py)，行为规约见 [`retrieval.md`](../specs/packages/retrieval.md)。
+实现见 [`core.py`](../src/smm_local/core.py)，行为规约见 [`retrieval.md`](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/retrieval.md)。
 
 ## 固定材料和验收口径
 
