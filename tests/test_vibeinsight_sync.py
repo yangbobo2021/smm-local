@@ -556,11 +556,14 @@ def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tm
         def page(self, *args):
             raise AssertionError("streaming source must avoid repeated project queries")
 
-        def stream(self, after, through, *, stopped=lambda: False):
+        def stream(self, after, through, *, project_bounds, stopped=lambda: False):
             self.lower_bounds = after
+            self.project_bounds = project_bounds
             projects = set(self.visible) | set(self.visible_only_during_stream)
             visible = sorted((row for row in self.rows if row["project"] in projects
                               and (after is None or position(row) > after)
+                              and (row["project"] not in project_bounds
+                                   or position(row) > project_bounds[row["project"]])
                               and position(row) <= through), key=position)
             for i, row in enumerate(visible):
                 if self.fail and i == 3:
@@ -592,6 +595,7 @@ def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tm
     resumed = synchronizer(database)
     resumed.run(source)
     assert source.lower_bounds is None
+    assert set(source.project_bounds) == {alpha, beta}
     assert resumed.db.search("older-history")["results"]
     assert resumed.db.search("shared")["results"][0]["id"] == shared["id"]
     assert [message["text"] for message in resumed.db.read(shared["id"])["messages"]] == [

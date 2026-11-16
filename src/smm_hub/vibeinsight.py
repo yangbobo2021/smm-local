@@ -168,13 +168,24 @@ class PostgresSource:
             {order} LIMIT {int(limit)}
         """)
 
-    def stream(self, after: Position | None, through: Position, *, stopped=lambda: False):
-        common, order = self._events_sql(after, through)
+    def stream(self, after: Position | None, through: Position, *,
+               project_bounds: dict[str, Position] | None = None, stopped=lambda: False):
+        common, _ = self._events_sql(after, through)
+        bounds = json.dumps([
+            {"project": project, "created_at": position[0], "id": position[1]}
+            for project, position in (project_bounds or {}).items()
+        ])
         sql = f"""
             COPY (
                 {common}
                 SELECT replace(encode(convert_to(row_to_json(events)::text,'UTF8'),'base64'),
-                               E'\\n','') FROM events {order}
+                               E'\\n','') FROM events
+                LEFT JOIN jsonb_to_recordset({_literal(bounds)}::jsonb)
+                    AS checkpoint(project text, created_at timestamp, id text)
+                    ON checkpoint.project=events.project
+                WHERE checkpoint.project IS NULL
+                    OR (events.created_at,events.id)>(checkpoint.created_at,checkpoint.id)
+                ORDER BY events.created_at,events.id
             ) TO STDOUT
         """
         args, env = self._command()
@@ -272,7 +283,7 @@ class VibeInsightSync:
         if not projects or stopped():
             return
         previous = after
-        with closing(stream(after, end, stopped=stopped)) as rows:
+        with closing(stream(after, end, project_bounds=lower_bounds, stopped=stopped)) as rows:
             for row in rows:
                 if stopped():
                     return

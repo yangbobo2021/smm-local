@@ -41,6 +41,8 @@
 
 在隔离 PostgreSQL 中用少量合成事件执行实际 COPY 流和分页对照查询，核对只读账号能查询、项目和会话标识正确、时间与事件 ID 边界正确分页，以及追加轮次和窗口内延迟事件能够被选中。初次接通上游和以后修改查询或连接方式时执行，可由开发者本机按需运行。默认 CI 无需安装 `psql`、启动 PostgreSQL 或连接 VibeInsight。后续如需自动化，可独立配置带临时 PostgreSQL 的 CI 任务。
 
+staging 首次流式拉取达到单次查询时间上限后，从已提交的项目进度续跑。将各项目的回看窗口下界传给上游 COPY 查询，使已推进的项目无需重新传输窗口前的历史，尚无进度的项目继续读取可见历史。验证续跑能保留已归档内容并完成整轮。
+
 ### 回归与构建命令
 
 先运行 `pytest -q tests/test_federation.py tests/test_vibeinsight_sync.py tests/test_cli_help.py tests/test_service_startup.py`，再运行 `pytest -q`。运行 `python3 scripts/build_packages.py`，将两个 wheel 分别装到干净环境，验证 Hub 能读取配置并运行同步，本机端能通过 CLI 和 MCP 查询。用发行版 Hub 执行首次 PostgreSQL 查询验证，检查连接依赖和服务账号环境。
