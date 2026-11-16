@@ -3,7 +3,7 @@
 
 # ZCode 三平台最终版交付验收
 
-执行日期为 2026-11-15。三台机器安装同一份 SMM Local 0.2.0 验收 wheel，SHA-256 为 `ac3970af76a4fb6a68d9a7c37f71f99984c851eb592f16aa3b6a41ac5067e950`。覆盖用户指定的现场生成、首次注册、进程退出重开、定时导入和原文检索。三平台指定链路均通过。Ubuntu 覆盖官方 app-server，桌面端验收覆盖 macOS 和 Windows。行为依据见 [来源适配与验收规约](../specs/packages/source-plugins.md#source-plugins-13) 和 [后台服务就绪规约](../specs/packages/access.md#access-8)。
+执行日期为 2026-11-15。三台机器安装同一份 SMM Local 0.2.0 验收 wheel，SHA-256 为 `ac3970af76a4fb6a68d9a7c37f71f99984c851eb592f16aa3b6a41ac5067e950`。覆盖用户指定的现场生成、首次注册、进程退出重开、定时导入和原文检索。三平台指定链路均通过。Ubuntu 覆盖官方 app-server，桌面端验收覆盖 macOS 和 Windows。行为依据见 [来源适配与验收规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/source-plugins.md#source-plugins-13) 和 [后台服务就绪规约](https://github.com/yangbobo2021/smm-local/blob/90824f3410428c8fd3024a082d18c184b9b3490f/specs/packages/access.md#access-8)。
 
 | 系统和 ZCode 入口 | 现场适配与注册 | 退出重开后仍就绪的 SMM | 后台归档及 ZCode 读回 |
 | --- | --- | --- | --- |
