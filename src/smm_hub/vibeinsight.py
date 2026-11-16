@@ -178,7 +178,9 @@ class PostgresSource:
             ) TO STDOUT
         """
         args, env = self._command()
-        transaction = self._transaction(sql, "0").encode("utf-8")
+        # The client stops a stalled stream sooner; bound server work even if
+        # a disconnected backend cannot immediately observe its closed socket.
+        transaction = self._transaction(sql, "4h").encode("utf-8")
         with tempfile.TemporaryFile() as contents, tempfile.TemporaryFile() as errors:
             contents.write(transaction)
             contents.seek(0)
