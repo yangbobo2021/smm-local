@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """Project identity and membership in the aggregation archive."""
 
+from __future__ import annotations
+
 from collections import defaultdict
 
 from ._archive import Archive, tokens

@@ -289,7 +289,8 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         if effective is not None:
             result.update(scope="project", effective_projects=effective)
         for hit in result["results"]:
-            add_projects(hit, ids)
+            message_ids = tuple(message["_message_id"] for message in hit["matched_messages"])
+            add_projects(hit, ids, message_ids)
             add_origins(hit, "matched_messages", ids)
         return {**result, "hub_id": hub_id}
 

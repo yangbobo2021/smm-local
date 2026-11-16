@@ -120,10 +120,14 @@ class PostgresSource:
                     CASE WHEN COUNT(DISTINCT project)=1 THEN MIN(project) END AS sole_project
                 FROM prompts GROUP BY user_id,platform_code,session_id
             ), trace_projects AS (
-                SELECT DISTINCT ON (user_id,platform_code,session_id,trace_key)
-                       user_id,platform_code,session_id,trace_key,project
-                FROM prompts ORDER BY user_id,platform_code,session_id,trace_key,
-                                     (project='{self.UNASSIGNED}'),event_timestamp,id
+                SELECT DISTINCT ON (user_id,platform_code,session_id,COALESCE(trace_id,id))
+                       user_id,platform_code,session_id,COALESCE(trace_id,id) AS trace_key,
+                       {self._repo()} AS project
+                FROM fact_events
+                WHERE (created_at,id)<={upper} AND NULLIF(btrim(repo_path),'') IS NOT NULL
+                  AND event_type IN ('trace.started','trace.completed')
+                ORDER BY user_id,platform_code,session_id,COALESCE(trace_id,id),
+                         (event_type<>'trace.started'),event_timestamp,id
             )
             SELECT row_to_json(page) FROM (
                 SELECT e.id,e.created_at,e.user_id,e.platform_code,e.session_id,e.trace_id,
@@ -248,7 +252,7 @@ class VibeInsightSync:
             ON CONFLICT(conversation_id,source_key) DO NOTHING RETURNING id
         """, (conversation, source_key, role, row["message"], timestamp)).fetchone()
         if saved is None:
-            return None
+            return self._reassign_provenance(con, conversation, source_key, row["id"], project_id)
         self.projects.assign(con, conversation, SOURCE, self.source_id, project_id)
         con.execute("""
             INSERT INTO hub_vibeinsight_messages(id,project_id,event_id,trace_key) VALUES(?,?,?,?)
@@ -257,6 +261,25 @@ class VibeInsightSync:
             UPDATE conversations SET started_at=MIN(started_at,?),updated_at=MAX(updated_at,?) WHERE id=?
         """, (timestamp, timestamp, conversation))
         return conversation
+
+    def _reassign_provenance(self, con, conversation: int, key: str, event: str, project: int) -> int | None:
+        previous = con.execute("""
+            SELECT v.id,v.project_id FROM messages m JOIN hub_vibeinsight_messages v ON v.id=m.id
+            WHERE m.conversation_id=? AND m.source_key=? AND v.event_id=? AND v.project_id<>?
+        """, (conversation, key, event, project)).fetchone()
+        if previous is None:
+            return None
+        con.execute("UPDATE hub_vibeinsight_messages SET project_id=? WHERE id=?", (project, previous[0]))
+        self.projects.assign(con, conversation, SOURCE, self.source_id, project)
+        con.execute("""
+            DELETE FROM hub_project_memberships
+            WHERE conversation_id=? AND kind=? AND owner=? AND project_id=?
+              AND NOT EXISTS(SELECT 1 FROM hub_project_messages existing
+                             WHERE existing.conversation_id=hub_project_memberships.conversation_id
+                               AND existing.project_id=hub_project_memberships.project_id)
+        """, (conversation, SOURCE, self.source_id, previous[1]))
+        return conversation
+
 
 def record_failure(archive: Archive, error: Exception) -> None:
     reason = str(error)[:500]

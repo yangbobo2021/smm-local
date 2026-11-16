@@ -497,3 +497,32 @@ def test_scoped_shared_conversations_keep_only_matching_project_messages(tmp_pat
                                           "message_id":message_id}).json()
         assert exact["project_name"] == "beta-repo"
         assert exact["messages"][0]["origins"][0]["source_event_id"] == "event-0003"
+        manager.link(first["id"], second["id"])
+        both_projects, = scoped("orion")
+        assert both_projects["project_name"] == "Bravo"
+        assert {p["name"] for p in both_projects["projects"]} == {"Bravo"}
+
+
+def test_late_repository_attribution_moves_provenance_without_editing_body(tmp_path):
+    rows = [
+        event(0, "late-project", "user", "alpha", trace="started"),
+        event(1, "late-project", "assistant", "alpha", trace="late"),
+    ]
+    source = FixtureSource(rows, ["alpha"])
+    sync = synchronizer(tmp_path / "archive.sqlite3")
+    sync.run(source)
+    rows.append(event(2, "late-project", "user", "beta", trace="late"))
+    source.visible.append("beta")
+    rows[1].update(project="beta", message="an upstream in-place edit")
+    sync.run(source)
+    hit, = sync.db.search("late-project")["results"]
+    messages = sync.db.read(hit["id"])["messages"]
+    assert [message["text"] for message in messages] == [
+        "evidence late-project 0", "evidence late-project 2", "evidence late-project 1",
+    ]
+    with sync.db.connect() as connection:
+        repo = connection.execute("""
+            SELECT p.name FROM hub_vibeinsight_messages v JOIN projects p ON p.id=v.project_id
+            WHERE v.event_id='event-0001'
+        """).fetchone()
+        assert repo[0] == "beta"
