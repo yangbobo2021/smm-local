@@ -110,7 +110,7 @@ class PostgresSource:
             SELECT to_json(project) FROM (
                 SELECT DISTINCT {self._repo()} AS project FROM fact_events
                 WHERE event_type IN ('trace.started','trace.completed')
-                  AND NULLIF(btrim(message),'') IS NOT NULL {bound}
+                  AND (NULLIF(btrim(message),'') IS NOT NULL OR NULLIF(btrim(repo_path),'') IS NOT NULL) {bound}
                 UNION SELECT '{self.UNASSIGNED}'
             ) projects ORDER BY project
         """)
