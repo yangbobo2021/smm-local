@@ -9,10 +9,11 @@ import os
 import sqlite3
 import subprocess
 import tempfile
+import time
 from collections import defaultdict
 from contextlib import closing
 from datetime import UTC, datetime, timedelta
-from threading import Timer
+from threading import Event, Thread
 from typing import Protocol
 
 from ._archive import Archive
@@ -167,7 +168,7 @@ class PostgresSource:
             {order} LIMIT {int(limit)}
         """)
 
-    def stream(self, after: Position | None, through: Position):
+    def stream(self, after: Position | None, through: Position, *, stopped=lambda: False):
         common, order = self._events_sql(after, through)
         sql = f"""
             COPY (
@@ -177,24 +178,38 @@ class PostgresSource:
             ) TO STDOUT
         """
         args, env = self._command()
-        transaction = self._transaction(sql, "900s").encode("utf-8")
+        transaction = self._transaction(sql, "0").encode("utf-8")
         with tempfile.TemporaryFile() as contents, tempfile.TemporaryFile() as errors:
             contents.write(transaction)
             contents.seek(0)
             with subprocess.Popen(args, stdin=contents, stdout=subprocess.PIPE, stderr=errors, env=env) as process:
                 assert process.stdout is not None
-                deadline = Timer(910, process.kill)
-                deadline.daemon = True
-                deadline.start()
+                finished = Event()
+                last_output = time.monotonic()
+
+                def interrupt():
+                    while not finished.wait(0.25):
+                        if stopped() or time.monotonic() - last_output >= 300:
+                            if process.poll() is None:
+                                process.kill()
+                            return
+
+                watcher = Thread(target=interrupt, daemon=True)
+                watcher.start()
                 try:
                     for line in process.stdout:
+                        last_output = time.monotonic()
+                        if stopped():
+                            return
                         if line.strip():
                             yield json.loads(base64.b64decode(line))
-                    if (code := process.wait()) != 0:
+                    code = process.wait()
+                    if code != 0 and not stopped():
                         errors.seek(0)
                         raise self._error(code, errors.read().decode("utf-8", errors="replace"))
                 finally:
-                    deadline.cancel()
+                    finished.set()
+                    watcher.join()
                     if process.poll() is None:
                         process.kill()
 
@@ -243,6 +258,7 @@ class VibeInsightSync:
             for project in projects if project in checkpoints
         }
         after = min(lower_bounds.values()) if lower_bounds and len(lower_bounds) == len(projects) else None
+        known_projects = set(projects)
         queued: dict[str, list[dict]] = defaultdict(list)
         size = 0
 
@@ -254,7 +270,7 @@ class VibeInsightSync:
         if not projects or stopped():
             return
         previous = after
-        with closing(stream(after, end)) as rows:
+        with closing(stream(after, end, stopped=stopped)) as rows:
             for row in rows:
                 if stopped():
                     return
@@ -263,6 +279,10 @@ class VibeInsightSync:
                     raise RuntimeError("VibeInsight 返回了无效的流式同步位置")
                 previous = position
                 project = row["project"]
+                # Discovery and COPY are separate snapshots. A later-visible
+                # project needs its history before it can have a checkpoint.
+                if project not in known_projects:
+                    continue
                 if project in lower_bounds and position <= lower_bounds[project]:
                     continue
                 queued[project].append(row)

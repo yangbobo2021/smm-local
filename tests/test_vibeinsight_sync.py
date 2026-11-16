@@ -551,13 +551,15 @@ def test_late_repository_attribution_moves_provenance_without_editing_body(tmp_p
 def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tmp_path):
     class StreamSource(FixtureSource):
         lower_bounds = None
+        visible_only_during_stream = ()
 
         def page(self, *args):
             raise AssertionError("streaming source must avoid repeated project queries")
 
-        def stream(self, after, through):
+        def stream(self, after, through, *, stopped=lambda: False):
             self.lower_bounds = after
-            visible = sorted((row for row in self.rows if row["project"] in self.visible
+            projects = set(self.visible) | set(self.visible_only_during_stream)
+            visible = sorted((row for row in self.rows if row["project"] in projects
                               and (after is None or position(row) > after)
                               and position(row) <= through), key=position)
             for i, row in enumerate(visible):
@@ -599,3 +601,46 @@ def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tm
     assert source.lower_bounds is not None
     with resumed.db.connect() as connection:
         assert connection.execute("SELECT count(*) FROM messages").fetchone()[0] == 5
+
+    # Discovery and streaming have separate upstream snapshots.
+    rows.extend((
+        event(8, "between-snapshots", "user", "delta", created="2026-09-14T00:06:00"),
+        event(9, "project-backfill", "user", "delta", created="2026-09-10T00:00:00"),
+    ))
+    source.visible_only_during_stream = ("delta",)
+    resumed.run(source)
+    with resumed.db.connect() as connection:
+        assert connection.execute("SELECT 1 FROM hub_vibeinsight_cursors WHERE project='delta'").fetchone() is None
+    source.visible.append("delta")
+    resumed.run(source)
+    assert source.lower_bounds is None
+    assert resumed.db.search("project-backfill")["results"]
+
+
+def test_stop_cancels_postgres_stream_while_stdout_is_blocked(tmp_path, monkeypatch):
+    import os
+    import sys
+    import time
+    from threading import Event, Thread
+
+    from smm_hub.vibeinsight import PostgresSource
+
+    started = tmp_path / "child-started"
+    child = "from pathlib import Path; import sys,time; Path(sys.argv[1]).touch(); time.sleep(30)"
+    source = PostgresSource({}, "fixture")
+    monkeypatch.setattr(source, "_command", lambda: ([sys.executable, "-c", child, str(started)], dict(os.environ)))
+    stopped = Event()
+
+    def stop_after_launch():
+        deadline = time.monotonic() + 4
+        while not started.exists() and time.monotonic() < deadline:
+            time.sleep(0.02)
+        stopped.set()
+
+    watchdog = Thread(target=stop_after_launch)
+    watchdog.start()
+    begin = time.monotonic()
+    assert list(source.stream(None, ("2026-09-14T00:00:00", "001"), stopped=stopped.is_set)) == []
+    watchdog.join()
+    assert started.exists()
+    assert time.monotonic() - begin < 5
