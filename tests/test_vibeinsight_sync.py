@@ -502,6 +502,26 @@ def test_scoped_shared_conversations_keep_only_matching_project_messages(tmp_pat
         assert both_projects["project_name"] == "Bravo"
         assert {p["name"] for p in both_projects["projects"]} == {"Bravo"}
 
+        for device, name, role, body in [
+            (device_a, "Alpha", "user", "background from Alpha"),
+            (device_b, "Bravo", "assistant", "long response " * 60 + " 猫"),
+        ]:
+            address = {"device_id": device, "device_name": name, "hub_id": hub_id}
+            upload = hub.post("/v1/upload", json={**address, "records": [
+                {"source":"codex", "source_session_id":"preview-shared", "started_at":None,
+                 "source_key":role, "position":1, "source_order":1, "timestamp":None,
+                 "role":role, "text":body}
+            ]})
+            assert upload.status_code == 200
+            metadata = hub.post("/v1/project-metadata", json={**address, "projects":[],
+                "memberships":[{"source":"codex","source_session_id":"preview-shared","project_id":1}]})
+            assert metadata.status_code == 200
+        result = hub.post("/v1/search", json={"query":"猫", "device_id":device_a, "project_id":1}).json()
+        exact_hit, = result["results"]
+        assert "猫" not in exact_hit["matched_messages"][-1]["preview"]
+        assert exact_hit["project_name"] == "Bravo"
+        assert "_query_match" not in exact_hit["matched_messages"][-1]
+
 
 def test_late_repository_attribution_moves_provenance_without_editing_body(tmp_path):
     rows = [

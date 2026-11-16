@@ -727,6 +727,9 @@ class Archive:
                 item["rank"] = index
                 item["bm25_score"] = -item.pop("rank_score")
                 matched = select_matched_messages(messages, query_terms)
+                if include_message_ids:
+                    for message in matched:
+                        message["_query_match"] = not set(query_terms).isdisjoint(tokens(message["text"]))
                 item["matched_messages"] = [compact_message(m, query_terms, preview_chars) for m in matched] if preview_chars else matched
                 results.append(item)
             effective = [] if project_ids is None else [dict(r) for r in con.execute("SELECT id,name FROM projects WHERE id IN ("+",".join("?" for _ in project_ids)+") ORDER BY id", project_ids)]

@@ -15,7 +15,7 @@ from uuid import uuid4
 from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
-from ._archive import Archive, tokens
+from ._archive import Archive
 from .projects import HubProjects
 from .vibeinsight import SOURCE as VIBEINSIGHT
 
@@ -288,12 +288,9 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             raise HTTPException(400, str(exc)) from exc
         if effective is not None:
             result.update(scope="project", effective_projects=effective)
-        query_terms = set(tokens(req.query))
         for hit in result["results"]:
             matched = hit["matched_messages"]
-            anchors = tuple(item["_message_id"] for item in matched if query_terms.intersection(
-                tokens(item.get("text", item.get("preview", "")))
-            ))
+            anchors = tuple(item["_message_id"] for item in matched if item.pop("_query_match", False))
             add_projects(hit, ids, anchors or tuple(item["_message_id"] for item in matched))
             add_origins(hit, "matched_messages", ids)
         return {**result, "hub_id": hub_id}
