@@ -6,8 +6,10 @@ import sys
 import pytest
 
 from smm_local.cli import main
+from smm_local.core import Archive
 
 
+@pytest.mark.parametrize("existing_archive", [False, True], ids=["new-path", "existing-archive"])
 @pytest.mark.parametrize(
     ("args", "expected_text"),
     [
@@ -28,13 +30,23 @@ from smm_local.cli import main
         ),
         pytest.param(
             ["source", "purge-batch", "--help"],
-            ("source_id batch", "清理批次前须先停用对应的插件来源"),
+            (
+                "source_id batch",
+                "source_id 待清理批次所属的插件来源 ID。用 smm source list 查找对应来源。",
+                "batch 要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，"
+                "取目标批次记录的 id。",
+                "从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源。",
+                "使用 smm source disable <来源ID> 停用该来源。",
+            ),
             id="purge-batch",
         ),
     ],
 )
-def test_source_help(args, expected_text, monkeypatch, capsys, tmp_path):
+def test_source_help(args, expected_text, existing_archive, monkeypatch, capsys, tmp_path):
     database = tmp_path / "archive.sqlite3"
+    if existing_archive:
+        Archive(database)
+    before = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
     monkeypatch.setattr(sys, "argv", ["smm", "--db", str(database), *args])
 
     with pytest.raises(SystemExit) as exc_info:
@@ -43,7 +55,7 @@ def test_source_help(args, expected_text, monkeypatch, capsys, tmp_path):
     assert exc_info.value.code == 0
     output = capsys.readouterr()
     assert not output.err
-    assert not database.exists()
+    assert {path.name: path.read_bytes() for path in tmp_path.iterdir()} == before
     help_text = "".join(output.out.split())
     for expected in expected_text:
         assert "".join(expected.split()) in help_text

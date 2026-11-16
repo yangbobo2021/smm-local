@@ -67,9 +67,18 @@ def main() -> None:
         control = actions.add_parser(action, help=help_text)
         control.add_argument("source_id")
     purge_help = "从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源"
-    purge = actions.add_parser("purge-batch", help=purge_help, description=purge_help)
-    purge.add_argument("source_id")
-    purge.add_argument("batch", type=int)
+    purge = actions.add_parser(
+        "purge-batch", help=purge_help,
+        description=f"{purge_help}。使用 smm source disable <来源ID> 停用该来源。",
+    )
+    purge.add_argument(
+        "source_id", help="待清理批次所属的插件来源 ID。用 smm source list 查找对应来源。",
+    )
+    purge.add_argument(
+        "batch", type=int,
+        help="要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，"
+        "取目标批次记录的 id。",
+    )
     sub.add_parser("stop-on-demand", help="停止按需启动的后台服务")
     configure = sub.add_parser("configure-hub", help="配置汇总电脑和本机名称")
     configure.add_argument("address")
