@@ -50,16 +50,35 @@ def main() -> None:
     maintenance.add_argument("--source")
     source = sub.add_parser("source", help="验收、注册或管理本机来源")
     actions = source.add_subparsers(dest="source_action", required=True)
-    actions.add_parser("list")
-    for action in ("validate", "register"):
-        candidate = actions.add_parser(action)
+    actions.add_parser("list", help="列出本机对话来源及其状态")
+    for action, help_text in (
+        ("validate", "验收候选来源适配器"),
+        ("register", "验收并注册来源适配器"),
+    ):
+        candidate = actions.add_parser(action, help=help_text)
         candidate.add_argument("manifest", type=Path)
         candidate.add_argument("--fixture", type=Path, required=True)
-    for action in ("enable", "disable", "rollback", "batches", "purge-batch"):
-        control = actions.add_parser(action)
+    for action, help_text in (
+        ("enable", "启用指定来源的导入"),
+        ("disable", "停用指定来源的导入，保留已导入的记录"),
+        ("rollback", "将指定插件来源的适配器切回上一版"),
+        ("batches", "查看指定插件来源的导入批次"),
+    ):
+        control = actions.add_parser(action, help=help_text)
         control.add_argument("source_id")
-        if action == "purge-batch":
-            control.add_argument("batch", type=int)
+    purge_help = "从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源"
+    purge = actions.add_parser(
+        "purge-batch", help=purge_help,
+        description=f"{purge_help}。使用 smm source disable <来源ID> 停用该来源。",
+    )
+    purge.add_argument(
+        "source_id", help="待清理批次所属的插件来源 ID。用 smm source list 查找对应来源。",
+    )
+    purge.add_argument(
+        "batch", type=int,
+        help="要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，"
+        "取目标批次记录的 id。",
+    )
     sub.add_parser("stop-on-demand", help="停止按需启动的后台服务")
     configure = sub.add_parser("configure-hub", help="配置汇总电脑和本机名称")
     configure.add_argument("address")
