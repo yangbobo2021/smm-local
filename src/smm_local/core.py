@@ -653,7 +653,7 @@ class Archive:
                     return dict(row)
         return None
 
-    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False) -> dict[str, Any]:
+    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False, hub_project_ids: tuple[int, ...] | None = None) -> dict[str, Any]:
         query_terms = list(dict.fromkeys(tokens(query)))
         if not query_terms:
             raise ValueError("查询词不能为空")
@@ -674,6 +674,14 @@ class Archive:
         if project_ids is not None:
             sql += " AND c.project_id IN (" + ",".join("?" for _ in project_ids) + ")"
             args.extend(project_ids)
+        if hub_project_ids is not None:
+            if hub_project_ids:
+                sql += (" AND EXISTS (SELECT 1 FROM hub_project_memberships membership "
+                        "WHERE membership.conversation_id=c.id AND membership.project_id IN ("
+                        + ",".join("?" for _ in hub_project_ids) + "))")
+                args.extend(hub_project_ids)
+            else:
+                sql += " AND 0"
         if current_session_id and not include_current:
             if current_source:
                 sql += " AND NOT (c.source=? AND c.source_session_id=?)"

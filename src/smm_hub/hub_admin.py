@@ -46,6 +46,25 @@ def add_arguments(commands) -> None:
     upgrade.add_argument("--index", help="Python 包索引")
     upgrade.add_argument("--prerelease", action="store_true")
     upgrade.add_argument("--version", help="切换到指定的发行版本")
+    projects = actions.add_parser("project", help="管理汇总项目及直接关联")
+    project_actions = projects.add_subparsers(dest="project_action", required=True)
+    project_actions.add_parser("list", help="列出设备和 VibeInsight 项目")
+    project_actions.add_parser("links", help="列出双向项目关联")
+    for operation, help_text in (("link", "关联两个项目"), ("unlink", "解除项目关联")):
+        relation = project_actions.add_parser(operation, help=help_text)
+        relation.add_argument("one", type=int)
+        relation.add_argument("other", type=int)
+    vibeinsight = actions.add_parser("vibeinsight", help="配置 VibeInsight 只读同步")
+    vibeinsight_actions = vibeinsight.add_subparsers(dest="vibeinsight_action", required=True)
+    configure = vibeinsight_actions.add_parser("configure", help="验证并保存连接，启用同步")
+    configure.add_argument("--host", required=True)
+    configure.add_argument("--port", type=int, default=5432)
+    configure.add_argument("--database", required=True)
+    configure.add_argument("--user", required=True)
+    configure.add_argument("--interval", type=int, default=300, help="同步周期，单位为秒")
+    configure.add_argument("--psql", default="psql", help="PostgreSQL 客户端的路径")
+    configure.add_argument("--password-file", type=Path, help="从凭据文件读取密码，否则交互输入")
+    vibeinsight_actions.add_parser("status", help="查看同步状态")
     actions.add_parser("run", help=argparse.SUPPRESS)
 
 
@@ -331,14 +350,46 @@ class Hub:
             with closing(sqlite3.connect(self.database)) as target:
                 source.backup(target)
 
+    def project(self, args):
+        from .projects import HubProjects
+
+        projects = HubProjects(Archive(self.database))
+        if args.project_action in ("list", "links"):
+            return getattr(projects, args.project_action)()
+        projects.link(args.one, args.other, linked=args.project_action == "link")
+        return projects.links()
+
+    def vibeinsight(self, args):
+        from getpass import getpass
+
+        from .vibeinsight_settings import Connection, VibeInsightSettings
+
+        settings = VibeInsightSettings(self.root, Archive(self.database))
+        if args.vibeinsight_action == "status":
+            return settings.status()
+        self.service.protect_state()
+        if args.password_file:
+            password = args.password_file.expanduser().read_text(encoding="utf-8").rstrip("\r\n")
+        elif sys.stdin.isatty():
+            password = getpass("VibeInsight 数据库密码：")
+        else:
+            raise ValueError("请在交互终端输入密码，或传入 --password-file")
+        return settings.configure(
+            Connection(args.host, args.port, args.database, args.user, args.interval, args.psql),
+            password,
+        )
+
     def server(self):
         import uvicorn
 
         from .hub import create_hub
+        from .vibeinsight_settings import VibeInsightSettings
 
         cfg = self.config()
         token = self.token.read_text(encoding="ascii").strip()
-        return uvicorn.Server(uvicorn.Config(create_hub(Archive(self.database), token),
+        archive = Archive(self.database)
+        sync = VibeInsightSettings(self.root, archive)
+        return uvicorn.Server(uvicorn.Config(create_hub(archive, token, lifespan=sync.lifespan),
             host=cfg["bind"], port=cfg["port"], ssl_certfile=str(self.certificate),
             ssl_keyfile=str(self.key)))
 
@@ -359,6 +410,6 @@ def dispatch(args: argparse.Namespace):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)
     with _service_lock(hub.root / "admin.lock"):
-        if action in ("setup", "upgrade"):
+        if action in ("setup", "upgrade", "project", "vibeinsight"):
             return getattr(hub, action)(args)
         return getattr(hub, action)()

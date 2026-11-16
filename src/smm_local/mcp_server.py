@@ -38,7 +38,7 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
 
     @server.tool(annotations=readonly)
     def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, local: bool = False) -> str:
-        """Search archived conversations with 600-character message previews and original positions by default. read_conversation returns full evidence. scope=project includes direct links; pass current_session_id to exclude the active conversation by default."""
+        """Search archived conversations with 600-character message previews and original positions by default. read_conversation returns full evidence. scope=project includes direct links in the archive being searched; pass current_session_id to exclude the active conversation by default."""
         current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
         source = current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
         size = int(os.environ.get("SMM_SEARCH_PREVIEW_CHARS", "600"))

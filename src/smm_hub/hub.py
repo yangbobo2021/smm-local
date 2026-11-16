@@ -16,6 +16,8 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 from ._archive import Archive
+from .projects import HubProjects
+from .vibeinsight import SOURCE as VIBEINSIGHT
 
 
 class Record(BaseModel):
@@ -45,6 +47,27 @@ class Search(BaseModel):
     include_current: bool = False
     limit: int = Field(default=5, ge=1, le=50)
     preview_chars: int = 600
+    device_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
+    project_id: int | str | None = None
+
+
+class DeviceProject(BaseModel):
+    id: int | str
+    name: str = Field(min_length=1)
+
+
+class Membership(BaseModel):
+    source: Literal["codex", "claude-code"]
+    source_session_id: str
+    project_id: int | str | None
+
+
+class ProjectMetadata(BaseModel):
+    hub_id: str
+    device_id: str = Field(pattern=r"^[a-f0-9]{32}$")
+    device_name: str = Field(min_length=1, max_length=120)
+    projects: list[DeviceProject] = Field(max_length=100)
+    memberships: list[Membership] = Field(max_length=100)
 
 
 class Read(BaseModel):
@@ -91,9 +114,10 @@ def order_messages(con, conversation_id: int) -> None:
                     enumerate(ordered, 1))
 
 
-def create_hub(db: Archive, token: str) -> FastAPI:
+def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
     if not token.isascii() or len(token) < 32 or any(not 33 <= ord(char) <= 126 for char in token):
         raise ValueError("汇总服务需要至少 32 字符的连接凭证")
+    projects = HubProjects(db)
     with db.connect() as con:
         con.executescript("""
             CREATE TABLE IF NOT EXISTS hub_devices (id TEXT PRIMARY KEY, name TEXT NOT NULL);
@@ -114,7 +138,7 @@ def create_hub(db: Archive, token: str) -> FastAPI:
             raise HTTPException(401, "需要有效的汇总服务凭证")
 
     app = FastAPI(title="SMM Hub", docs_url=None, redoc_url=None, openapi_url=None,
-                  dependencies=[Depends(authorize)])
+                  dependencies=[Depends(authorize)], lifespan=lifespan)
 
     def require_hub(expected: str) -> None:
         if expected != hub_id:
@@ -122,7 +146,7 @@ def create_hub(db: Archive, token: str) -> FastAPI:
 
     @app.get("/v1/info")
     def info():
-        return {"protocol": 1, "hub_id": hub_id}
+        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects"]}
 
     @app.post("/v1/upload")
     def upload(batch: Upload):
@@ -174,7 +198,60 @@ def create_hub(db: Archive, token: str) -> FastAPI:
                 db._reindex(con, conversation_id)
         return {"accepted": len(batch.records)}
 
+    @app.post("/v1/project-metadata")
+    def project_metadata(batch: ProjectMetadata):
+        require_hub(batch.hub_id)
+        with db.connect() as con:
+            con.execute("BEGIN IMMEDIATE")
+            con.execute("""
+                INSERT INTO hub_devices(id,name) VALUES(?,?)
+                ON CONFLICT(id) DO UPDATE SET name=excluded.name
+            """, (batch.device_id, batch.device_name))
+            for project in batch.projects:
+                projects.upsert(con, "device", batch.device_id, str(project.id), project.name)
+            for item in batch.memberships:
+                row = con.execute("""
+                    SELECT c.id FROM conversations c WHERE c.source=? AND c.source_session_id=?
+                    AND EXISTS (
+                        SELECT 1 FROM messages m JOIN hub_origins o ON o.message_id=m.id
+                        WHERE m.conversation_id=c.id AND o.device_id=?
+                    )
+                """, (item.source, item.source_session_id, batch.device_id)).fetchone()
+                if row is None:
+                    raise HTTPException(409, "设备需先上传会话")
+                project_id = None
+                if item.project_id is not None:
+                    project = con.execute("""
+                        SELECT id FROM hub_projects WHERE kind='device' AND owner=? AND source_key=?
+                    """, (batch.device_id, str(item.project_id))).fetchone()
+                    if project is None:
+                        raise HTTPException(409, "设备需先上传项目")
+                    project_id = project[0]
+                projects.assign(con, row[0], "device", batch.device_id, project_id)
+        return {"projects": len(batch.projects), "memberships": len(batch.memberships)}
+
+    def add_projects(conversation: dict, within: tuple[int, ...] | None = None) -> None:
+        assigned = projects.memberships(conversation["id"], within)
+        conversation["projects"] = assigned
+        if assigned:
+            conversation["project_id"] = assigned[0]["id"]
+            conversation["project_name"] = assigned[0]["name"]
+
     def add_origins(conversation: dict, message_field: str) -> dict:
+        if conversation["source"] == VIBEINSIGHT:
+            source_id, _, platform, original_session = json.loads(conversation["source_session_id"])
+            conversation["source_session_id"] = original_session
+            origin = {"source": VIBEINSIGHT, "source_id": source_id, "platform": platform}
+            with db.connect() as con:
+                for message in conversation[message_field]:
+                    message_id = message.pop("_message_id")
+                    event = con.execute("SELECT event_id FROM hub_vibeinsight_messages WHERE id=?",
+                                        (message_id,)).fetchone()
+                    message["hub_message_id"] = message_id
+                    message["origins"] = [{**origin, "source_position": message["position"],
+                                           "source_event_id": event[0]}]
+            conversation["origins"] = [origin]
+            return conversation
         devices = {}
         with db.connect() as con:
             for message in conversation[message_field]:
@@ -196,10 +273,21 @@ def create_hub(db: Archive, token: str) -> FastAPI:
     @app.post("/v1/search")
     def search(req: Search):
         try:
-            result = db.search(**req.model_dump(), include_message_ids=True)
+            effective = None
+            ids = None
+            if req.project_id is not None:
+                if req.device_id is None:
+                    raise ValueError("项目检索需要设备标识")
+                effective = projects.effective(req.device_id, str(req.project_id))
+                ids = tuple(project["id"] for project in effective)
+            result = db.search(**req.model_dump(exclude={"project_id", "device_id"}),
+                               include_message_ids=True, hub_project_ids=ids)
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
+        if effective is not None:
+            result.update(scope="project", effective_projects=effective)
         for hit in result["results"]:
+            add_projects(hit, ids)
             add_origins(hit, "matched_messages")
         return {**result, "hub_id": hub_id}
 
@@ -211,6 +299,7 @@ def create_hub(db: Archive, token: str) -> FastAPI:
                              include_message_ids=True, message_id=req.message_id)
         except ValueError as exc:
             raise HTTPException(404, str(exc)) from exc
+        add_projects(result)
         return add_origins(result, "messages")
 
     return app

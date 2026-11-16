@@ -82,3 +82,26 @@ smm-hub hub upgrade
 升级命令调用 uv 并保留地址、凭证和数据库，升级前保存 SQLite 备份。保留包索引中的旧版本，以便升级失败时恢复。启用中的服务在升级后会重新启动并检查 HTTPS。使用自定义 uv 安装环境时，从同一个账户和环境运行升级。使用 `--version` 可显式切换包索引中的发行版本。Windows 向导为监听端口配置仅限本地子网的入站防火墙规则。
 
 已通过旧版 `smm-local` 部署汇总端时，先记下原来的数据目录和启停状态，安装 `smm-hub`，然后用旧命令停用旧服务。在原数据目录运行 `smm-hub hub --state-dir <原数据目录> enable` 接管原服务。原服务需要保持停用时，直接保留停用状态，日后再用新命令启用。两套命令使用同一份汇总端状态文件和数据库。
+
+### 从 VibeInsight 同步对话
+
+在运行汇总服务的电脑上安装 PostgreSQL 客户端 `psql`，让运行汇总服务的系统账户可执行它。用 VibeInsight 数据库的只读账户配置连接。管理命令会验证读取权限，并提示输入密码。若服务环境找不到客户端，可用 `--psql` 指定绝对路径。
+
+```sh
+smm-hub hub vibeinsight configure --host db.example.net --port 5432 --database vibeinsight --user reader
+smm-hub hub vibeinsight status
+```
+
+如果使用自定义状态目录，在 `hub` 后加 `--state-dir <状态目录>`。同步周期默认 300 秒，可用 `--interval` 调整。启用同步后，汇总服务拉取连接可读的全部项目，随后同步新会话及旧会话追加的轮次。服务重启会读取已保存的凭据和进度继续。状态命令显示最近成功时间和失败原因。源端原地改写历史消息而未产生新事件时，汇总档案保留已导入的原内容。
+
+### 管理汇总端的项目关联
+
+本机客户端至少完成一次与汇总端的同步后，运行 `smm-hub hub project list` 查看项目 ID、来源和设备名称。用以下命令管理关系，示例中的 `1` 和 `2` 换成汇总端给出的项目 ID。
+
+```sh
+smm-hub hub project links
+smm-hub hub project link 1 2
+smm-hub hub project unlink 1 2
+```
+
+在 Agent 中要求按当前项目搜索时，CLI 和 MCP 会查询汇总端保存的当前项目及直接关联项目。关系双向生效。命中 VibeInsight 对话时，可以用同一个读取入口取得原文和源事件位置。需扩大范围时，明确要求搜索所有项目。汇总端断开时，CLI 和 MCP 回退到本机所有项目，并返回回退原因。
