@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 """Project identity and membership in the aggregation archive."""
 
-from ._archive import Archive
+from collections import defaultdict
+
+from ._archive import Archive, tokens
 
 
 class HubProjects:
@@ -10,6 +12,13 @@ class HubProjects:
         with db.connect() as con:
             con.executescript("""
                 CREATE TABLE IF NOT EXISTS hub_devices (id TEXT PRIMARY KEY, name TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS hub_origins (
+                    message_id INTEGER NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
+                    device_id TEXT NOT NULL REFERENCES hub_devices(id),
+                    source_position INTEGER NOT NULL,
+                    source_order INTEGER NOT NULL,
+                    PRIMARY KEY (message_id,device_id,source_position)
+                );
                 CREATE TABLE IF NOT EXISTS hub_projects (
                     id INTEGER PRIMARY KEY REFERENCES projects(id),
                     kind TEXT NOT NULL,
@@ -22,10 +31,31 @@ class HubProjects:
                     kind TEXT NOT NULL,
                     owner TEXT NOT NULL,
                     project_id INTEGER NOT NULL REFERENCES hub_projects(id),
-                    PRIMARY KEY(conversation_id,kind,owner)
+                    PRIMARY KEY(conversation_id,kind,owner,project_id)
                 );
                 CREATE INDEX IF NOT EXISTS hub_membership_by_project
                   ON hub_project_memberships(project_id,conversation_id);
+                CREATE TABLE IF NOT EXISTS hub_vibeinsight_messages (
+                    id INTEGER PRIMARY KEY REFERENCES messages(id) ON DELETE CASCADE,
+                    project_id INTEGER NOT NULL REFERENCES hub_projects(id),
+                    event_id TEXT NOT NULL, trace_key TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS hub_project_documents (
+                    id INTEGER PRIMARY KEY,
+                    conversation_id INTEGER NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+                    project_id INTEGER NOT NULL REFERENCES hub_projects(id),
+                    UNIQUE(conversation_id,project_id)
+                );
+                CREATE INDEX IF NOT EXISTS hub_documents_by_project ON hub_project_documents(project_id,id);
+                CREATE VIRTUAL TABLE IF NOT EXISTS hub_project_fts USING fts5(terms, tokenize='unicode61');
+                CREATE VIEW IF NOT EXISTS hub_project_messages AS
+                    SELECT DISTINCT m.id AS message_id, m.conversation_id, pm.project_id
+                    FROM hub_project_memberships pm JOIN messages m ON m.conversation_id=pm.conversation_id
+                    JOIN hub_origins o ON o.message_id=m.id AND o.device_id=pm.owner
+                    WHERE pm.kind='device'
+                    UNION ALL
+                    SELECT m.id,m.conversation_id,v.project_id FROM hub_vibeinsight_messages v
+                    JOIN messages m ON m.id=v.id;
             """)
 
     @staticmethod
@@ -44,15 +74,37 @@ class HubProjects:
 
     @staticmethod
     def assign(con, conversation: int, kind: str, owner: str, project: int | None) -> None:
-        if project is None:
-            con.execute("DELETE FROM hub_project_memberships WHERE conversation_id=? AND kind=? AND owner=?",
-                        (conversation, kind, owner))
-        else:
+        if kind == "device":
             con.execute("""
-                INSERT INTO hub_project_memberships(conversation_id,kind,owner,project_id)
-                VALUES(?,?,?,?) ON CONFLICT(conversation_id,kind,owner)
-                DO UPDATE SET project_id=excluded.project_id
+                DELETE FROM hub_project_memberships WHERE conversation_id=? AND kind=? AND owner=?
+                  AND project_id IS NOT ?
             """, (conversation, kind, owner, project))
+        if project is not None:
+            con.execute("""
+                INSERT OR IGNORE INTO hub_project_memberships(conversation_id,kind,owner,project_id)
+                VALUES(?,?,?,?)
+            """, (conversation, kind, owner, project))
+
+    @staticmethod
+    def reindex(con, conversation: int) -> None:
+        con.execute("""
+            DELETE FROM hub_project_fts WHERE rowid IN (
+              SELECT id FROM hub_project_documents WHERE conversation_id=?
+            )
+        """, (conversation,))
+        con.execute("DELETE FROM hub_project_documents WHERE conversation_id=?", (conversation,))
+        by_project = defaultdict(list)
+        for project, body in con.execute("""
+            SELECT pm.project_id,m.text FROM hub_project_messages pm JOIN messages m ON m.id=pm.message_id
+            WHERE pm.conversation_id=? ORDER BY m.position,m.id
+        """, (conversation,)):
+            by_project[project].append(body)
+        for project, bodies in by_project.items():
+            document = con.execute("""
+                INSERT INTO hub_project_documents(conversation_id,project_id) VALUES(?,?) RETURNING id
+            """, (conversation, project)).fetchone()[0]
+            terms = " ".join(tokens("\n".join(bodies)))
+            con.execute("INSERT INTO hub_project_fts(rowid,terms) VALUES(?,?)", (document, terms))
 
     def list(self) -> list[dict]:
         with self.db.connect() as con:
@@ -69,11 +121,18 @@ class HubProjects:
             query += " WHERE h.id IN (" + ",".join("?" for _ in ids) + ")"
         return [dict(row) for row in con.execute(query + " ORDER BY p.id", ids or ())]
 
-    def memberships(self, conversation: int, within: tuple[int, ...] | None = None) -> list[dict]:
+    def memberships(self, conversation: int, within: tuple[int, ...] | None = None,
+                    messages: tuple[int, ...] | None = None) -> list[dict]:
         with self.db.connect() as con:
-            ids = tuple(row[0] for row in con.execute(
-                "SELECT project_id FROM hub_project_memberships WHERE conversation_id=?", (conversation,)
-            ) if within is None or row[0] in within)
+            if messages:
+                placeholders = ",".join("?" for _ in messages)
+                query = (f"SELECT DISTINCT project_id FROM hub_project_messages "
+                         f"WHERE conversation_id=? AND message_id IN ({placeholders})")
+                args = (conversation, *messages)
+            else:
+                query = "SELECT DISTINCT project_id FROM hub_project_memberships WHERE conversation_id=?"
+                args = (conversation,)
+            ids = tuple(row[0] for row in con.execute(query, args) if within is None or row[0] in within)
             return self._list(con, ids) if ids else []
 
     def effective(self, device: str, key: str) -> list[dict]:

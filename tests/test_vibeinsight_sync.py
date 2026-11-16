@@ -27,6 +27,9 @@ class FixtureSource:
         self.visible = projects
         self.fail = False
 
+    def validate(self):
+        return None
+
     def projects(self, through=None):
         return self.visible
 
@@ -435,3 +438,62 @@ def test_delayed_reply_keeps_source_turns_grouped(tmp_path):
     assert [m["text"] for m in sync.db.read(hit["id"])["messages"]] == [
         f"evidence grouped {n}" for n in (0, 3, 1, 2)
     ]
+
+
+def test_scoped_shared_conversations_keep_only_matching_project_messages(tmp_path):
+    from fastapi.testclient import TestClient
+    from smm_hub.hub import create_hub
+    from smm_hub.projects import HubProjects
+
+    archive = Archive(tmp_path / "hub.sqlite3")
+    token = "x" * 40
+    device_a, device_b = "a" * 32, "b" * 32
+    with TestClient(create_hub(archive, token), headers={"Authorization": "Bearer " + token}) as hub:
+        hub_id = hub.get("/v1/info").json()["hub_id"]
+        for device, project, word in [(device_a, "Alpha", "quasar"), (device_b, "Bravo", "orion")]:
+            address = {"device_id": device, "device_name": project, "hub_id": hub_id}
+            upload = hub.post("/v1/upload", json={**address, "records": [
+                {"source":"codex", "source_session_id":"same-archive", "started_at":None,
+                 "source_key":word, "position":1, "source_order":1, "timestamp":None,
+                 "role":"user", "text":f"common {word}"}
+            ]})
+            assert upload.status_code == 200
+            metadata = hub.post("/v1/project-metadata", json={**address, "projects":[{"id":1,"name":project}],
+                "memberships":[{"source":"codex","source_session_id":"same-archive","project_id":1}]})
+            assert metadata.status_code == 200
+
+        def scoped(word):
+            return hub.post("/v1/search", json={
+                "query": word, "device_id": device_a, "project_id": 1, "preview_chars": 0,
+            }).json()["results"]
+
+        assert scoped("orion") == []
+        hit, = scoped("common")
+        assert [message["text"] for message in hit["matched_messages"]] == ["common quasar"]
+        assert hit["matched_messages"][0]["origins"][0]["project_name"] == "Alpha"
+
+        first, second = HubProjects(archive).list()
+        projects = FixtureSource([
+            event(0, "cross-repo", "user", "alpha-repo", text="nebula alphaonly"),
+            event(1, "cross-repo", "assistant", "alpha-repo", text="nebula firstreply"),
+            event(2, "cross-repo", "user", "beta-repo", text="nebula betaonly"),
+            event(3, "cross-repo", "assistant", "beta-repo", text="nebula secondreply"),
+        ], ["alpha-repo", "beta-repo"])
+        synchronizer(archive.db_path).run(projects)
+        global_hit, = hub.post("/v1/search", json={"query":"nebula"}).json()["results"]
+        assert {p["name"] for p in global_hit["projects"]} == {"alpha-repo", "beta-repo"}
+        project_ids = {p["name"]: p["id"] for p in HubProjects(archive).list()}
+        manager = HubProjects(archive)
+        manager.link(first["id"], project_ids["beta-repo"])
+        manager.link(second["id"], project_ids["alpha-repo"])
+        assert scoped("alphaonly") == []
+        beta, = scoped("nebula")
+        assert beta["id"] == global_hit["id"] and beta["project_name"] == "beta-repo"
+        assert [msg["text"] for msg in beta["matched_messages"]] == [
+            "nebula betaonly", "nebula secondreply",
+        ]
+        message_id = beta["matched_messages"][1]["hub_message_id"]
+        exact = hub.post("/v1/read", json={"hub_id":hub_id,"conversation_id":beta["id"],
+                                          "message_id":message_id}).json()
+        assert exact["project_name"] == "beta-repo"
+        assert exact["messages"][0]["origins"][0]["source_event_id"] == "event-0003"

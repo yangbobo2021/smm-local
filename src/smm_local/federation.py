@@ -275,8 +275,9 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
             if options.get("scope") == "project":
                 if options.get("project_id") is None:
                     raise ValueError("项目范围必须指定 project_id")
-                payload.update(device_id=config["device_id"],
-                               project_id=_remote_project_key(db, options["project_id"]))
+                if "projects" in _hub_info(config).get("capabilities", ()):
+                    payload.update(device_id=config["device_id"],
+                                   project_id=_remote_project_key(db, options["project_id"]))
             result = _request(config, "/search", payload)
             if not isinstance(result.get("results"), list) or not result.get("hub_id"):
                 raise HubUnavailable("汇总服务返回了无效搜索结果")

@@ -59,7 +59,7 @@ class VibeInsightSettings:
             raise ValueError("VibeInsight 数据库密码不能为空")
         prior = self.load()
         config = {**vars(connection), "psql": str(Path(binary).resolve()) if binary else connection.psql}
-        self.source_factory(config, password).projects()
+        self.source_factory(config, password).validate()
         config["credential_file"] = f"vibeinsight-credential-{uuid4().hex}"
         credential = self.root / config["credential_file"]
         write_file(credential, password.encode("utf-8"))

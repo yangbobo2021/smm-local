@@ -20,6 +20,7 @@ BATCH_SIZE = 500
 
 
 class Source(Protocol):
+    def validate(self) -> None: ...
     def projects(self, through: Position | None = None) -> list[str]: ...
     def upper(self) -> Position | None: ...
     def page(self, project: str, after: Position | None, through: Position, limit: int) -> list[dict]: ...
@@ -39,12 +40,15 @@ def event_position(row: dict) -> Position:
 
 
 class PostgresSource:
-    # VibeInsight populates repo_hostname/repo_path from the Git remote when it is known.
-    REPO = """CASE WHEN NULLIF(btrim(repo_path), '') IS NULL THEN '(无仓库)'
-                   ELSE COALESCE(NULLIF(lower(btrim(repo_hostname)), ''), '(本机)')
-                      || COALESCE(':' || repo_port::text,'')
-                      || '/' || trim(both '/' from btrim(repo_path)) END"""
+    UNASSIGNED = "(无仓库)"
     PROMPT = "event_type='trace.started' AND NULLIF(btrim(message),'') IS NOT NULL"
+
+    @classmethod
+    def _repo(cls, alias: str = "") -> str:
+        return f"""CASE WHEN NULLIF(btrim({alias}repo_path), '') IS NULL THEN '{cls.UNASSIGNED}'
+                   ELSE COALESCE(NULLIF(lower(btrim({alias}repo_hostname)), ''), '(本机)')
+                      || COALESCE(':' || {alias}repo_port::text,'')
+                      || '/' || trim(both '/' from btrim({alias}repo_path)) END"""
 
     def __init__(self, config: dict, password: str):
         self.config = config
@@ -74,10 +78,25 @@ class PostgresSource:
             raise RuntimeError(f"VibeInsight 查询失败：{reason[:400]}")
         return [json.loads(line) for line in result.stdout.split("\n") if line.strip()]
 
+    def validate(self) -> None:
+        # PostgreSQL checks privileges on every referenced column even with LIMIT 0.
+        self._query("""
+            SELECT row_to_json(probe) FROM (
+                SELECT id,created_at,user_id,platform_code,session_id,trace_id,event_type,
+                       event_timestamp,message,repo_hostname,repo_port,repo_path FROM fact_events LIMIT 0
+            ) probe
+        """)
+
     def projects(self, through: Position | None = None) -> list[str]:
         bound = "" if through is None else f" AND (created_at,id)<={_position_sql(through)}"
-        return self._query(f"SELECT to_json(project) FROM (SELECT DISTINCT {self.REPO} AS project "
-                           f"FROM fact_events WHERE {self.PROMPT}{bound}) projects ORDER BY project")
+        return self._query(f"""
+            SELECT to_json(project) FROM (
+                SELECT DISTINCT {self._repo()} AS project FROM fact_events
+                WHERE event_type IN ('trace.started','trace.completed')
+                  AND NULLIF(btrim(message),'') IS NOT NULL {bound}
+                UNION SELECT '{self.UNASSIGNED}'
+            ) projects ORDER BY project
+        """)
 
     def upper(self) -> Position | None:
         bounds = self._query("""
@@ -88,19 +107,23 @@ class PostgresSource:
     def page(self, project: str, after: Position | None, through: Position, limit: int) -> list[dict]:
         lower = "" if after is None else f"AND (e.created_at,e.id)>{_position_sql(after)}"
         upper = _position_sql(through)
-        # Assistant events may lack repo metadata. Resolve the project via a user prompt in the same session.
+        # Trace prompts supply the repository for their replies. For a reply with
+        # an unmatched trace, retain explicit repository metadata or use the sole
+        # project of its session. Ambiguous replies are still available globally.
         return self._query(f"""
-            WITH candidates AS MATERIALIZED (
-                SELECT DISTINCT user_id,platform_code,session_id FROM fact_events
-                WHERE {self.PROMPT} AND (created_at,id)<={upper} AND ({self.REPO})={_literal(project)}
-            ), sessions AS MATERIALIZED (
-                SELECT c.* FROM candidates c
-                JOIN LATERAL (
-                    SELECT {self.REPO} AS project FROM fact_events
-                    WHERE session_id=c.session_id AND user_id IS NOT DISTINCT FROM c.user_id
-                      AND platform_code=c.platform_code AND {self.PROMPT} AND (created_at,id)<={upper}
-                    ORDER BY (NULLIF(btrim(repo_path),'') IS NULL),event_timestamp,id LIMIT 1
-                ) chosen ON chosen.project={_literal(project)}
+            WITH prompts AS MATERIALIZED (
+                SELECT user_id,platform_code,session_id,COALESCE(trace_id,id) AS trace_key,
+                       {self._repo()} AS project, event_timestamp,id
+                FROM fact_events WHERE {self.PROMPT} AND (created_at,id)<={upper}
+            ), sessions AS (
+                SELECT user_id,platform_code,session_id,
+                    CASE WHEN COUNT(DISTINCT project)=1 THEN MIN(project) END AS sole_project
+                FROM prompts GROUP BY user_id,platform_code,session_id
+            ), trace_projects AS (
+                SELECT DISTINCT ON (user_id,platform_code,session_id,trace_key)
+                       user_id,platform_code,session_id,trace_key,project
+                FROM prompts ORDER BY user_id,platform_code,session_id,trace_key,
+                                     (project='{self.UNASSIGNED}'),event_timestamp,id
             )
             SELECT row_to_json(page) FROM (
                 SELECT e.id,e.created_at,e.user_id,e.platform_code,e.session_id,e.trace_id,
@@ -108,7 +131,11 @@ class PostgresSource:
                 FROM fact_events e JOIN sessions s
                     ON e.session_id=s.session_id AND e.platform_code=s.platform_code
                        AND e.user_id IS NOT DISTINCT FROM s.user_id
+                LEFT JOIN trace_projects t ON t.session_id=e.session_id AND t.platform_code=e.platform_code
+                    AND t.user_id IS NOT DISTINCT FROM e.user_id AND t.trace_key=COALESCE(e.trace_id,e.id)
                 WHERE (e.created_at,e.id)<={upper} {lower}
+                  AND COALESCE(t.project,NULLIF({self._repo("e.")},'{self.UNASSIGNED}'),
+                               s.sole_project,'{self.UNASSIGNED}')={_literal(project)}
                   AND e.event_type IN ('trace.started','trace.completed')
                   AND NULLIF(btrim(e.message),'') IS NOT NULL
                 ORDER BY e.created_at,e.id LIMIT {int(limit)}
@@ -127,10 +154,6 @@ class VibeInsightSync:
                 CREATE TABLE IF NOT EXISTS hub_vibeinsight_cursors (
                     source_id TEXT NOT NULL, project TEXT NOT NULL, timestamp TEXT NOT NULL,
                     event_id TEXT NOT NULL, PRIMARY KEY(source_id,project)
-                );
-                CREATE TABLE IF NOT EXISTS hub_vibeinsight_messages (
-                    id INTEGER PRIMARY KEY REFERENCES messages(id) ON DELETE CASCADE,
-                    event_id TEXT NOT NULL, trace_key TEXT NOT NULL
                 );
             """)
 
@@ -174,12 +197,13 @@ class VibeInsightSync:
     def _commit(self, project: str, rows: list[dict], cursor: Position) -> None:
         with self.db.connect() as con:
             con.execute("BEGIN IMMEDIATE")
-            project_id = self.projects.upsert(con, SOURCE, self.source_id, project, project)
             changed: set[int] = set()
-            for row in rows:
-                conversation = self._archive(con, row, project_id)
-                if conversation is not None:
-                    changed.add(conversation)
+            if rows:
+                project_id = self.projects.upsert(con, SOURCE, self.source_id, project, project)
+                for row in rows:
+                    conversation = self._archive(con, row, project_id)
+                    if conversation is not None:
+                        changed.add(conversation)
             for conversation in changed:
                 ordering = con.execute("""
                     SELECT id FROM (
@@ -196,6 +220,7 @@ class VibeInsightSync:
                 con.executemany("UPDATE messages SET position=? WHERE id=?",
                                 ((number, row[0]) for number, row in enumerate(ordering, 1)))
                 self.db._reindex(con, conversation)
+                self.projects.reindex(con, conversation)
             con.execute("""
                 INSERT INTO hub_vibeinsight_cursors(source_id,project,timestamp,event_id)
                 VALUES(?,?,?,?) ON CONFLICT(source_id,project) DO UPDATE
@@ -222,11 +247,12 @@ class VibeInsightSync:
             INSERT INTO messages(conversation_id,source_key,position,role,text,timestamp) VALUES(?,?,0,?,?,?)
             ON CONFLICT(conversation_id,source_key) DO NOTHING RETURNING id
         """, (conversation, source_key, role, row["message"], timestamp)).fetchone()
-        self.projects.assign(con, conversation, SOURCE, self.source_id, project_id)
         if saved is None:
             return None
-        con.execute("INSERT INTO hub_vibeinsight_messages(id,event_id,trace_key) VALUES(?,?,?)",
-                    (saved[0], row["id"], trace_key))
+        self.projects.assign(con, conversation, SOURCE, self.source_id, project_id)
+        con.execute("""
+            INSERT INTO hub_vibeinsight_messages(id,project_id,event_id,trace_key) VALUES(?,?,?,?)
+        """, (saved[0], project_id, row["id"], trace_key))
         con.execute("""
             UPDATE conversations SET started_at=MIN(started_at,?),updated_at=MAX(updated_at,?) WHERE id=?
         """, (timestamp, timestamp, conversation))

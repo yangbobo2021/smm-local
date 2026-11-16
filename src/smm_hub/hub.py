@@ -119,16 +119,6 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         raise ValueError("汇总服务需要至少 32 字符的连接凭证")
     projects = HubProjects(db)
     with db.connect() as con:
-        con.executescript("""
-            CREATE TABLE IF NOT EXISTS hub_devices (id TEXT PRIMARY KEY, name TEXT NOT NULL);
-            CREATE TABLE IF NOT EXISTS hub_origins (
-                message_id INTEGER NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-                device_id TEXT NOT NULL REFERENCES hub_devices(id),
-                source_position INTEGER NOT NULL,
-                source_order INTEGER NOT NULL,
-                PRIMARY KEY (message_id, device_id, source_position)
-            );
-        """)
         con.execute("INSERT OR IGNORE INTO settings(key,value) VALUES('hub_identity',?)",
                     (json.dumps(uuid4().hex),))
         hub_id = json.loads(con.execute("SELECT value FROM settings WHERE key='hub_identity'").fetchone()[0])
@@ -196,6 +186,7 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             for conversation_id in changed:
                 order_messages(con, conversation_id)
                 db._reindex(con, conversation_id)
+                projects.reindex(con, conversation_id)
         return {"accepted": len(batch.records)}
 
     @app.post("/v1/project-metadata")
@@ -228,16 +219,18 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                         raise HTTPException(409, "设备需先上传项目")
                     project_id = project[0]
                 projects.assign(con, row[0], "device", batch.device_id, project_id)
+                projects.reindex(con, row[0])
         return {"projects": len(batch.projects), "memberships": len(batch.memberships)}
 
-    def add_projects(conversation: dict, within: tuple[int, ...] | None = None) -> None:
-        assigned = projects.memberships(conversation["id"], within)
+    def add_projects(conversation: dict, within: tuple[int, ...] | None = None,
+                     messages: tuple[int, ...] | None = None) -> None:
+        assigned = projects.memberships(conversation["id"], within, messages)
         conversation["projects"] = assigned
         if assigned:
             conversation["project_id"] = assigned[0]["id"]
             conversation["project_name"] = assigned[0]["name"]
 
-    def add_origins(conversation: dict, message_field: str) -> dict:
+    def add_origins(conversation: dict, message_field: str, within: tuple[int, ...] | None = None) -> dict:
         if conversation["source"] == VIBEINSIGHT:
             source_id, _, platform, original_session = json.loads(conversation["source_session_id"])
             conversation["source_session_id"] = original_session
@@ -245,11 +238,14 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             with db.connect() as con:
                 for message in conversation[message_field]:
                     message_id = message.pop("_message_id")
-                    event = con.execute("SELECT event_id FROM hub_vibeinsight_messages WHERE id=?",
-                                        (message_id,)).fetchone()
+                    event = con.execute("""
+                        SELECT v.event_id,v.project_id,p.name FROM hub_vibeinsight_messages v
+                        JOIN projects p ON p.id=v.project_id WHERE v.id=?
+                    """, (message_id,)).fetchone()
                     message["hub_message_id"] = message_id
                     message["origins"] = [{**origin, "source_position": message["position"],
-                                           "source_event_id": event[0]}]
+                                           "source_event_id": event[0], "project_id": event[1],
+                                           "project_name": event[2]}]
             conversation["origins"] = [origin]
             return conversation
         devices = {}
@@ -258,10 +254,16 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                 message_id = message.pop("_message_id")
                 message["hub_message_id"] = message_id
                 origins = [dict(row) for row in con.execute("""
-                    SELECT d.id AS device_id, d.name AS device_name, o.source_position
+                    SELECT d.id AS device_id, d.name AS device_name,o.source_position,
+                           pm.project_id,p.name AS project_name
                     FROM hub_origins o JOIN hub_devices d ON d.id=o.device_id
+                    LEFT JOIN hub_project_memberships pm ON pm.kind='device' AND pm.owner=d.id
+                        AND pm.conversation_id=?
+                    LEFT JOIN projects p ON p.id=pm.project_id
                     WHERE o.message_id=? ORDER BY d.name,d.id,o.source_position
-                """, (message_id,))]
+                """, (conversation["id"], message_id))]
+                if within is not None:
+                    origins = [origin for origin in origins if origin["project_id"] in within]
                 message["origins"] = origins
                 for origin in origins:
                     devices[origin["device_id"]] = {
@@ -288,7 +290,7 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             result.update(scope="project", effective_projects=effective)
         for hit in result["results"]:
             add_projects(hit, ids)
-            add_origins(hit, "matched_messages")
+            add_origins(hit, "matched_messages", ids)
         return {**result, "hub_id": hub_id}
 
     @app.post("/v1/read")
@@ -299,7 +301,9 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                              include_message_ids=True, message_id=req.message_id)
         except ValueError as exc:
             raise HTTPException(404, str(exc)) from exc
-        add_projects(result)
+        # A single-message citation carries the actual project of that message
+        # even when the conversation has been seen in several projects.
+        add_projects(result, messages=(req.message_id,) if req.message_id is not None else None)
         return add_origins(result, "messages")
 
     return app
