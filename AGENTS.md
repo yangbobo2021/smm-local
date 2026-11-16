@@ -1,9 +1,42 @@
-## Specs (Source of Truth)
+# SMM Local 项目指南
 
-- Canonical specs live in @specs/.
-  Start with @specs/map.md for a quick-reference index and @specs/meta.md for the spec format; spec packages live in @specs/packages.
-- Before making changes or suggestions in an area that has a spec, read the relevant spec file(s) first and follow them.
-- Whenever your changes involve any spec, or you make a decision worth recording, keep the specs in sync — don't let them drift.
-- Resolve conflicts spec-first, then iterate freely: an intended change that conflicts with existing spec items is resolved in the specs — or dropped — before coding against it; implementing first to explore an approach is fine, and implementation lessons update this intent's specs, but no intent completes until its specs and code agree.
-- Keep specs lawful per @specs/meta.md — the law itself, not this summary: complete and exact (meta-34), minimal (meta-23), one requirement per item (meta-29), cohesive packages for a shared intent (meta-13), sections per meta-30, relationships and test evidence only as inline citations (meta-14, meta-16, meta-20), integration/system tests only (meta-21, meta-32).
-- Run `spex lint` to check structure, item IDs, and citations after editing specs; never add trace lines to satisfy an older checker.
+## 模块与关系
+
+- **本机端**（`src/smm_local/`）导入各来源的对话，负责本机归档、项目关联和检索。
+  CLI、MCP 和 Web UI 共用本机档案及检索逻辑。配置汇总服务后，本机端向 Hub 上传
+  可汇总的记录，并通过 Hub 执行跨设备检索。
+- **多机汇总端**（`src/smm_hub/`）接收多台设备上传的记录，提供跨设备检索。
+  Hub 不可用时，本机端可回退到本机档案。
+- **检索技能**（`skills/smm-search/`）指导 Agent 通过本机端的 MCP 或 CLI
+  搜索历史对话、读取原文和维护同步。
+- **来源适配技能**（`skills/smm-source-adapter/`）指导当前 Agent 为自身实现本机来源插件，
+  使 SMM 本机端能够导入该 Agent 的对话记录。
+
+## 开发流程
+
+本项目采用 Anthropic 的 AI-native SDLC 实践。每项变更在
+`changes/<id>-<short-name>/` 下记录意图、规格和实施计划。
+维护者确认当前阶段的产物后，将该版本提交到 Git，再进入下一阶段。
+
+1. **意图 `intent.md`**。说明现有问题、受影响的用户、期望结果、范围和约束，
+   并列出待确认的问题。
+2. **规格 `spec.md`**。根据已确认的意图，定义本次变更的可观察行为、
+   关键边界和验收条件。
+3. **计划 `plan.md`**。根据已确认的规格，列出要修改的位置、实施顺序、
+   验证方法和通过条件。
+4. **实现与验收**。按已确认的 `plan.md` 实施变更。需要改变已确认的行为或验收条件时，
+   先更新 `spec.md` 并重新确认，再更新 `plan.md`。
+   如果实际改动的模块、采用的方案或验证方法与 `plan.md` 中的约定不同，
+   在提交相关改动时一并更新 `plan.md`，写明调整内容和原因。
+   完成后，逐项核对 `spec.md` 的验收条件，执行 `plan.md` 约定的验证，
+   并在 PR 中记录通过项、失败项和未验证项。维护者根据验收结果决定是否合并。
+
+## 常用验证命令
+
+- 代码变更使用 `pytest` 运行适用的测试。
+- 涉及发布包构建时，运行 `python3 scripts/build_packages.py`。
+
+## 指南维护
+
+修改 `AGENTS.md` 或 `CLAUDE.md` 的 PR 须说明会改变 Agent 的哪项行为，
+以及该变化在哪些场景生效。纯文字修订须注明行为无变化。
