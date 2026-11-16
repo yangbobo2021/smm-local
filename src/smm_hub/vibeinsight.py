@@ -3,11 +3,16 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import sqlite3
 import subprocess
+import tempfile
+from collections import defaultdict
+from contextlib import closing
 from datetime import UTC, datetime, timedelta
+from threading import Timer
 from typing import Protocol
 
 from ._archive import Archive
@@ -54,15 +59,30 @@ class PostgresSource:
         self.config = config
         self.password = password
 
-    def _query(self, sql: str) -> list:
+    def _command(self) -> tuple[list[str], dict[str, str]]:
         config = self.config
         env = {key: value for key, value in os.environ.items() if not key.startswith("PG")}
         env.update(PGPASSWORD=self.password, PGCONNECT_TIMEOUT="5")
         args = [config["psql"], "--no-psqlrc", "--no-password", "--quiet", "--tuples-only",
                 "--no-align", "--set=ON_ERROR_STOP=1", f"--host={config['host']}",
                 f"--port={config['port']}", f"--dbname={config['database']}", f"--username={config['user']}"]
-        transaction = ("BEGIN READ ONLY; SET LOCAL statement_timeout='25s'; "
-                       "SET LOCAL standard_conforming_strings=on; " + sql + "; COMMIT;")
+        return args, env
+
+    @staticmethod
+    def _transaction(sql: str, timeout: str) -> str:
+        return (f"BEGIN READ ONLY; SET LOCAL statement_timeout='{timeout}'; "
+                "SET LOCAL standard_conforming_strings=on; " + sql + "; COMMIT;")
+
+    def _error(self, code: int, stderr: str) -> RuntimeError:
+        lines = [line for line in stderr.splitlines() if line.strip()]
+        reason = lines[0] if lines else f"退出码 {code}"
+        if self.password:
+            reason = reason.replace(self.password, "***")
+        return RuntimeError(f"VibeInsight 查询失败：{reason[:400]}")
+
+    def _query(self, sql: str) -> list:
+        args, env = self._command()
+        transaction = self._transaction(sql, "25s")
         try:
             result = subprocess.run(args, input=transaction, capture_output=True, text=True,
                                     encoding="utf-8", errors="replace", env=env, timeout=30)
@@ -71,11 +91,7 @@ class PostgresSource:
         except OSError as exc:
             raise RuntimeError("无法启动 PostgreSQL 客户端 psql") from exc
         if result.returncode:
-            lines = [line for line in result.stderr.splitlines() if line.strip()]
-            reason = lines[0] if lines else f"退出码 {result.returncode}"
-            if self.password:
-                reason = reason.replace(self.password, "***")
-            raise RuntimeError(f"VibeInsight 查询失败：{reason[:400]}")
+            raise self._error(result.returncode, result.stderr)
         return [json.loads(line) for line in result.stdout.split("\n") if line.strip()]
 
     def validate(self) -> None:
@@ -104,16 +120,14 @@ class PostgresSource:
         """)
         return tuple(bounds[0]) if bounds else None
 
-    def page(self, project: str, after: Position | None, through: Position, limit: int) -> list[dict]:
+    def _events_sql(self, after: Position | None, through: Position) -> tuple[str, str]:
         lower = "" if after is None else f"AND (e.created_at,e.id)>{_position_sql(after)}"
         upper = _position_sql(through)
-        # Trace prompts supply the repository for their replies. For a reply with
-        # an unmatched trace, retain explicit repository metadata or use the sole
-        # project of its session. Ambiguous replies are still available globally.
-        return self._query(f"""
+        # A trace's prompt supplies its project. If no matching prompt has
+        # usable project metadata, retain the known reply or session project.
+        common = f"""
             WITH prompts AS MATERIALIZED (
-                SELECT user_id,platform_code,session_id,COALESCE(trace_id,id) AS trace_key,
-                       {self._repo()} AS project, event_timestamp,id
+                SELECT user_id,platform_code,session_id,{self._repo()} AS project
                 FROM fact_events WHERE {self.PROMPT} AND (created_at,id)<={upper}
             ), sessions AS (
                 SELECT user_id,platform_code,session_id,
@@ -128,23 +142,62 @@ class PostgresSource:
                   AND event_type IN ('trace.started','trace.completed')
                 ORDER BY user_id,platform_code,session_id,COALESCE(trace_id,id),
                          (event_type<>'trace.started'),event_timestamp,id
-            )
-            SELECT row_to_json(page) FROM (
+            ), events AS (
                 SELECT e.id,e.created_at,e.user_id,e.platform_code,e.session_id,e.trace_id,
-                       e.event_type,e.event_timestamp,e.message
+                       e.event_type,e.event_timestamp,e.message,
+                       COALESCE(t.project,NULLIF({self._repo("e.")},'{self.UNASSIGNED}'),
+                                s.sole_project,'{self.UNASSIGNED}') AS project
                 FROM fact_events e JOIN sessions s
                     ON e.session_id=s.session_id AND e.platform_code=s.platform_code
                        AND e.user_id IS NOT DISTINCT FROM s.user_id
                 LEFT JOIN trace_projects t ON t.session_id=e.session_id AND t.platform_code=e.platform_code
                     AND t.user_id IS NOT DISTINCT FROM e.user_id AND t.trace_key=COALESCE(e.trace_id,e.id)
                 WHERE (e.created_at,e.id)<={upper} {lower}
-                  AND COALESCE(t.project,NULLIF({self._repo("e.")},'{self.UNASSIGNED}'),
-                               s.sole_project,'{self.UNASSIGNED}')={_literal(project)}
                   AND e.event_type IN ('trace.started','trace.completed')
                   AND NULLIF(btrim(e.message),'') IS NOT NULL
-                ORDER BY e.created_at,e.id LIMIT {int(limit)}
-            ) page
+            )
+        """
+        return common, "ORDER BY created_at,id"
+
+    def page(self, project: str, after: Position | None, through: Position, limit: int) -> list[dict]:
+        common, order = self._events_sql(after, through)
+        return self._query(f"""
+            {common}
+            SELECT to_jsonb(events)-'project' FROM events WHERE project={_literal(project)}
+            {order} LIMIT {int(limit)}
         """)
+
+    def stream(self, after: Position | None, through: Position):
+        common, order = self._events_sql(after, through)
+        sql = f"""
+            COPY (
+                {common}
+                SELECT replace(encode(convert_to(row_to_json(events)::text,'UTF8'),'base64'),
+                               E'\\n','') FROM events {order}
+            ) TO STDOUT
+        """
+        args, env = self._command()
+        transaction = self._transaction(sql, "900s").encode("utf-8")
+        with tempfile.TemporaryFile() as contents, tempfile.TemporaryFile() as errors:
+            contents.write(transaction)
+            contents.seek(0)
+            with subprocess.Popen(args, stdin=contents, stdout=subprocess.PIPE, stderr=errors, env=env) as process:
+                assert process.stdout is not None
+                deadline = Timer(910, process.kill)
+                deadline.daemon = True
+                deadline.start()
+                try:
+                    for line in process.stdout:
+                        if line.strip():
+                            yield json.loads(base64.b64decode(line))
+                    if (code := process.wait()) != 0:
+                        errors.seek(0)
+                        raise self._error(code, errors.read().decode("utf-8", errors="replace"))
+                finally:
+                    deadline.cancel()
+                    if process.poll() is None:
+                        process.kill()
+
 
 
 class VibeInsightSync:
@@ -165,16 +218,62 @@ class VibeInsightSync:
         try:
             end = source.upper()
             if end is not None:
-                for project in source.projects(end):
-                    if stopped():
-                        return
-                    self._sync_project(source, project, end, stopped)
+                projects = source.projects(end)
+                if callable(stream := getattr(source, "stream", None)):
+                    self._sync_stream(stream, projects, end, stopped)
+                else:
+                    for project in projects:
+                        if stopped():
+                            return
+                        self._sync_project(source, project, end, stopped)
         except (OSError, RuntimeError, ValueError, sqlite3.Error) as exc:
             record_failure(self.db, exc)
             raise
         if not stopped():
             self.db._save_settings({"vibeinsight_last_success": datetime.now(UTC).isoformat(),
                                     "vibeinsight_error": None})
+
+    def _sync_stream(self, stream, projects: list[str], end: Position, stopped) -> None:
+        with self.db.connect() as con:
+            checkpoints = {row[0]: (row[1], row[2]) for row in con.execute("""
+                SELECT project,timestamp,event_id FROM hub_vibeinsight_cursors WHERE source_id=?
+            """, (self.source_id,))}
+        lower_bounds = {
+            project: ((datetime.fromisoformat(checkpoints[project][0]) - OVERLAP).isoformat(), "")
+            for project in projects if project in checkpoints
+        }
+        after = min(lower_bounds.values()) if lower_bounds and len(lower_bounds) == len(projects) else None
+        queued: dict[str, list[dict]] = defaultdict(list)
+        size = 0
+
+        def flush():
+            for project, rows in queued.items():
+                self._commit(project, rows, event_position(rows[-1]))
+            queued.clear()
+
+        if not projects or stopped():
+            return
+        previous = after
+        with closing(stream(after, end)) as rows:
+            for row in rows:
+                if stopped():
+                    return
+                position = event_position(row)
+                if position > end or (previous is not None and position <= previous):
+                    raise RuntimeError("VibeInsight 返回了无效的流式同步位置")
+                previous = position
+                project = row["project"]
+                if project in lower_bounds and position <= lower_bounds[project]:
+                    continue
+                queued[project].append(row)
+                size += 1
+                if size == self.batch_size:
+                    flush()
+                    size = 0
+        if not stopped():
+            flush()
+            for project in projects:
+                self._commit(project, [], end)
 
     def _sync_project(self, source: Source, project: str, end: Position, stopped) -> None:
         with self.db.connect() as con:

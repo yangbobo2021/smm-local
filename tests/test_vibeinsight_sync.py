@@ -546,3 +546,56 @@ def test_late_repository_attribution_moves_provenance_without_editing_body(tmp_p
             WHERE v.event_id='event-0001'
         """).fetchone()
         assert repo[0] == "beta"
+
+
+def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tmp_path):
+    class StreamSource(FixtureSource):
+        lower_bounds = None
+
+        def page(self, *args):
+            raise AssertionError("streaming source must avoid repeated project queries")
+
+        def stream(self, after, through):
+            self.lower_bounds = after
+            visible = sorted((row for row in self.rows if row["project"] in self.visible
+                              and (after is None or position(row) > after)
+                              and position(row) <= through), key=position)
+            for i, row in enumerate(visible):
+                if self.fail and i == 3:
+                    raise RuntimeError("stream interrupted")
+                yield row
+
+    alpha, beta, gamma = "alpha", "beta", "gamma"
+    rows = [
+        event(4, "shared", "user", alpha, trace="t1"),
+        event(5, "other", "user", beta),
+        event(6, "shared", "assistant", alpha, trace="t1"),
+        event(7, "shared", "user", alpha, trace="t2"),
+        event(1, "older-history", "user", gamma),
+    ]
+    source = StreamSource(rows, [alpha, beta])
+    database = tmp_path / "hub.sqlite3"
+    source.fail = True
+    sync = synchronizer(database)
+    with pytest.raises(RuntimeError, match="stream interrupted"):
+        sync.run(source)
+    with sync.db.connect() as connection:
+        counts = connection.execute("SELECT count(*) FROM messages").fetchone()[0]
+        assert counts == 2
+        saved = dict(connection.execute("SELECT project,event_id FROM hub_vibeinsight_cursors"))
+        assert saved == {"alpha":"event-0004", "beta":"event-0005"}
+    shared, = sync.db.search("shared")["results"]
+    source.fail = False
+    source.visible.append(gamma)
+    resumed = synchronizer(database)
+    resumed.run(source)
+    assert source.lower_bounds is None
+    assert resumed.db.search("older-history")["results"]
+    assert resumed.db.search("shared")["results"][0]["id"] == shared["id"]
+    assert [message["text"] for message in resumed.db.read(shared["id"])["messages"]] == [
+        "evidence shared 4", "evidence shared 6", "evidence shared 7",
+    ]
+    resumed.run(source)
+    assert source.lower_bounds is not None
+    with resumed.db.connect() as connection:
+        assert connection.execute("SELECT count(*) FROM messages").fetchone()[0] == 5
