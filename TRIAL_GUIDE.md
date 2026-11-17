@@ -35,7 +35,9 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 在新的 Codex 或 Claude Code 会话中问一个**必须依靠旧对话**才能回答的问题，例如：“我以前对某项目的上线回滚提出过什么要求？请查原始对话并引用来源会话和消息位置。”Agent 应调用 `smm-local` 的检索及读取工具，答案应能在 Web「检索测试」中复核。首次尝试可明确说“请使用 SMM 搜索过去对话”，再试不点名工具的自然提问。
 
-项目检索默认只包含当前项目及直接关联项目。跨项目提问时，让 Agent 使用全局范围；也可以在 Web「项目」中建立关联。检索结果保留来源、时间和命中位置；每条命中消息默认只预览前 600 字，较长消息会标明省略。需要依据后半段内容作答时，让 Agent 调用 `read_conversation` 读取该轮完整原文。命中一段对话不等于其中每句都是事实，须读原文核对。
+项目检索默认只包含当前项目及直接关联项目。跨项目提问时，让 Agent 使用全局范围。本机项目关联可在 Web「项目」中配置；连接 Hub 后，CLI/MCP 的在线检索使用 Hub 保存的关联，由汇总端维护者统一配置。[管理汇总端的项目关联](#管理汇总端的项目关联)
+
+检索结果保留来源、时间和命中位置；每条命中消息默认只预览前 600 字，较长消息会标明省略。需要依据后半段内容作答时，让 Agent 调用 `read_conversation` 读取该轮完整原文。命中一段对话不等于其中每句都是事实，须读原文核对。
 
 ## 4. 遇到问题
 
@@ -87,6 +89,8 @@ smm-hub hub upgrade
 
 先用上一节的 `smm-hub hub setup` 配置汇总服务。在运行汇总服务的电脑上安装 PostgreSQL 客户端 `psql`，让运行汇总服务的系统账户可执行它。用 VibeInsight 数据库的只读账户配置连接。管理命令会验证读取权限，并提示输入密码。若服务环境找不到客户端，可用 `--psql` 指定绝对路径。
 
+向 VibeInsight 数据库维护者取得 PostgreSQL 主机、端口、数据库名及只读账户，确认该账户可以读取的项目均获准归档到本 Hub。当前适配器读取 `fact_events` 的 `id`、`created_at`、`user_id`、`platform_code`、`session_id`、`trace_id`、`event_type`、`event_timestamp`、`message`、`repo_hostname`、`repo_port`、`repo_path` 字段。数据库维护者需确认部署使用这套事件结构，并授予所需读取权限。连接密码在命令提示中输入。
+
 ```sh
 smm-hub hub vibeinsight configure --host db.example.net --port 5432 --database vibeinsight --user reader
 smm-hub hub vibeinsight status
@@ -105,3 +109,9 @@ smm-hub hub project unlink 1 2
 ```
 
 在 Agent 中要求按当前项目搜索时，CLI 和 MCP 会查询汇总端保存的当前项目及直接关联项目。关系双向生效。命中 VibeInsight 对话时，可以用同一个读取入口取得原文和源事件位置。需扩大范围时，明确要求搜索所有项目。汇总端断开时，CLI 和 MCP 回退到本机所有项目，并返回回退原因。
+
+### 项目改名与仓库身份变化
+
+设备项目修改显示名后，Hub 沿用原项目身份及关联。VibeInsight 项目以仓库主机、端口和路径的组合标识身份，该标识变化时会发现一个新项目。旧项目的归档及关联继续保留，已同步的新项目对话可通过全局检索找到。
+
+仓库身份变化后，维护者用 `smm-hub hub project list` 找到新仓库项目和相关设备项目，再用 `smm-hub hub project link <设备项目ID> <新仓库项目ID>` 建立关系，并按当前项目检索确认新对话已纳入。需要移除旧项目的关联时，用 `project unlink` 解除该关系，旧对话仍可全局检索。

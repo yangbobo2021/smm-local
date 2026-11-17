@@ -43,7 +43,7 @@ Before searching, call `manage_sync(action="status")` (or `maintenance status` t
 
 When the user requests this computer or a local plugin source, pass `local=true` to MCP or `--local` to the launcher.
 
-If `archive_scope` is `hub`, search covered all devices in the hub. Local project IDs do not filter the hub. If `archive_scope` is `local` and `fallback_reason` is present, tell the user that the hub was unavailable and this search covered only this computer. An empty hub result is not a connection failure.
+If `archive_scope` is `hub`, report the returned `scope` and `effective_projects`. A project request to a Hub with project support covers the current project and its directly linked Hub projects. A global request covers the Hub archive. An older Hub may return global scope for a project request, so use the actual response when describing coverage. Hub project links are managed by the Hub administrator through `smm-hub hub project`; the local Web project page manages local links. If `archive_scope` is `local` and `fallback_reason` is present, tell the user that the hub was unavailable and this search covered only this computer. An empty hub result is not a connection failure.
 
 MCP tools: `list_projects`, `resolve_project`, `search_conversations`, `read_conversation`.
 

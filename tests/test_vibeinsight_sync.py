@@ -1,9 +1,29 @@
 """Synthetic source fixtures for Hub synchronization through its normal archive."""
+import json
+import os
 from pathlib import Path
 
 import pytest
 
 from smm_local.core import Archive
+
+
+
+@pytest.fixture
+def record_evidence(request, tmp_path):
+    """Export synthetic acceptance data only when an output directory is requested."""
+    def record(**evidence):
+        directory = os.environ.get("ACCEPTANCE_EVIDENCE_DIR")
+        if directory:
+            output = Path(directory)
+            output.mkdir(parents=True, exist_ok=True)
+            data = {"test": request.node.nodeid, "fixture": "synthetic", "evidence": evidence}
+            encoded = json.dumps(data, ensure_ascii=False, indent=2)
+            fixture_root = json.dumps(str(tmp_path), ensure_ascii=False)[1:-1]
+            (output / f"{request.node.name}.json").write_text(
+                encoded.replace(fixture_root, "<fixture>") + "\n", encoding="utf-8"
+            )
+    return record
 
 
 def event(number, session, role, project="git.example/team/alpha", *, trace=None, created=None, text=None):
@@ -50,7 +70,7 @@ def synchronizer(path: Path):
     return VibeInsightSync(Archive(path), "fixture", batch_size=2)
 
 
-def test_all_visible_projects_and_historical_discovery(tmp_path):
+def test_all_visible_projects_and_historical_discovery(tmp_path, record_evidence):
     alpha, beta, gamma = ("git.example/team/" + name for name in ("alpha", "beta", "gamma"))
     source = FixtureSource(
         [event(8, "alpha", "user", alpha), event(9, "beta", "user", beta),
@@ -65,6 +85,7 @@ def test_all_visible_projects_and_historical_discovery(tmp_path):
     assert {Archive(database).read(hit["id"])["messages"][0]["text"] for hit in hits} == {
         "evidence alpha 8", "evidence beta 9",
     }
+    initial_hits = hits
     source.visible.append(gamma)
     run.run(source)
     hits = Archive(database).search("evidence")["results"]
@@ -72,8 +93,11 @@ def test_all_visible_projects_and_historical_discovery(tmp_path):
         "evidence alpha 8", "evidence beta 9", "evidence gamma 1",
     }
 
+    record_evidence(initial_hits=initial_hits, discovered_hits=hits,
+                    read_back=[run.db.read(hit["id"]) for hit in hits])
 
-def test_resume_appends_to_same_conversation_in_source_order(tmp_path):
+
+def test_resume_appends_to_same_conversation_in_source_order(tmp_path, record_evidence):
     alpha = "git.example/team/alpha"
     rows = [event(n, "old", "user" if n % 2 == 0 else "assistant") for n in range(6)]
     source = FixtureSource(rows, [alpha])
@@ -95,8 +119,12 @@ def test_resume_appends_to_same_conversation_in_source_order(tmp_path):
         ("user" if n % 2 == 0 else "assistant", f"evidence old {n}") for n in range(10)
     ]
 
+    with resumed.db.connect() as connection:
+        checkpoints = [dict(row) for row in connection.execute("SELECT * FROM hub_vibeinsight_cursors")]
+    record_evidence(conversation_id=original["id"], before=before, after=after, checkpoints=checkpoints)
 
-def test_failed_batch_retries_and_late_event_is_read_once(tmp_path):
+
+def test_failed_batch_retries_and_late_event_is_read_once(tmp_path, record_evidence):
     alpha = "git.example/team/alpha"
     rows = [event(0, "old", "user"), event(1, "old", "assistant")]
     source = FixtureSource(rows, [alpha])
@@ -119,6 +147,9 @@ def test_failed_batch_retries_and_late_event_is_read_once(tmp_path):
     assert [msg["text"] for msg in store.read(hit["id"])["messages"]] == [
         f"evidence old {n}" for n in range(4)
     ]
+
+    record_evidence(read_back=store.read(hit["id"]), historical_edit_preserved=True,
+                    search=store.search("evidence"))
 
 
 def fixture_source(config, password):
@@ -153,7 +184,7 @@ def run_test_entry():
         main()
 
 
-def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monkeypatch):
+def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monkeypatch, record_evidence):
     import asyncio
     import json
     import os
@@ -260,11 +291,15 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         initially = eventually(lambda: hits if len(hits := query()) == 2 else None)
         assert {hit["source_session_id"] for hit in initially} == {"vibe-A", "vibe-B"}
         a = next(hit for hit in initially if hit["source_session_id"] == "vibe-A")
-        assert admin("vibeinsight", "status")["last_success"]
+        initial_status = admin("vibeinsight", "status")
+        assert initial_status["last_success"]
+        initial_read = hub_call("read", {"hub_id": hub_call("info")["hub_id"], "conversation_id": a["id"]})
         hub_id = hub_call("info")["hub_id"]
         write_source([alpha, beta, gamma])
         eventually(lambda: any(hit["source_session_id"] == "vibe-C" for hit in query()))
         stop(service)
+        with Archive(state / "smm-hub.sqlite3").connect() as connection:
+            before_restart = [dict(row) for row in connection.execute("SELECT * FROM hub_vibeinsight_cursors")]
 
         rows.extend(event(n, "vibe-A", "user" if n % 2 == 0 else "assistant", alpha) for n in range(20, 24))
         rows.append(event(24, "independent", "user", beta))
@@ -348,6 +383,8 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             "query":"evidence", "scope":"project", "project_id":project_a, "limit":20,
         }))
         assert via_mcp["effective_projects"] == scoped["effective_projects"]
+        exact_reads = {}
+        cli_reads = {}
         for session in ("device-a", "vibe-A"):
             hit = next(row for row in via_mcp["results"] if row["source_session_id"] == session)
             message = hit["matched_messages"][0]
@@ -357,11 +394,23 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             assert exact["messages"][0]["position"] == message["position"]
             assert exact["messages"][0]["text"] == message["preview"]
             assert exact["project_name"] == hit["project_name"]
+            source_number = [10, 11, 12, 13, 14, 15, 20, 21, 22, 23][message["position"] - 1]
+            expected_text = "evidence from device-a" if session == "device-a" else f"evidence vibe-A {source_number}"
+            assert exact["messages"][0]["text"] == expected_text
+            assert exact["messages"][0]["role"] == ("user" if session == "device-a" or source_number % 2 == 0 else "assistant")
+            cli_exact = cli(client_a.db_path, "read", str(hit["id"]), "--hub-id", hub_id,
+                            "--hub-message-id", str(message["hub_message_id"]))
+            assert cli_exact == exact
+            exact_reads[session] = exact
+            cli_reads[session] = cli_exact
         original = hub_call("read", {"hub_id":hub_id,"conversation_id":historical["id"]})
         assert [msg["text"] for msg in original["messages"]] == ["evidence from device-a"]
         admin("project", "unlink", str(vibe_a["id"]), str(device_a["id"]))
         assert {hit["source_session_id"] for hit in scope(client_a, project_a)["results"]} == {"device-a", "device-b"}
         assert "vibe-A" in {hit["source_session_id"] for hit in query()}
+        after_unlink = scope(client_a, project_a)
+        with Archive(state / "smm-hub.sqlite3").connect() as connection:
+            checkpoints = [dict(row) for row in connection.execute("SELECT * FROM hub_vibeinsight_cursors")]
 
         stop(service)
         other = tmp_path / "different-project"
@@ -379,11 +428,16 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         assert offline_mcp["scope"] == "all" and offline_mcp["fallback_reason"]
         for result in (offline, offline_mcp):
             assert {hit["source_session_id"] for hit in result["results"]} == {"device-a", "offline-local"}
+        record_evidence(initial_status=initial_status, initial_read=initial_read, resumed_read=later,
+                        recovered_status=recovered, before_restart=before_restart, checkpoints=checkpoints,
+                        project_list=names, links=links, cli_a=scoped, cli_b=scoped_b,
+                        mcp_a=via_mcp, exact_reads=exact_reads, cli_reads=cli_reads, old_reference=original,
+                        after_unlink=after_unlink, offline_cli=offline, offline_mcp=offline_mcp)
     finally:
         stop(service)
 
 
-def test_archive_and_cursor_rollback_together(tmp_path, monkeypatch):
+def test_archive_and_cursor_rollback_together(tmp_path, monkeypatch, record_evidence):
     rows = [event(0, "baseline", "user"), event(1, "baseline", "assistant")]
     source = FixtureSource(rows, ["git.example/team/alpha"])
     database = tmp_path / "hub.sqlite3"
@@ -414,7 +468,8 @@ def test_archive_and_cursor_rollback_together(tmp_path, monkeypatch):
         changes.setattr(sync, "_archive", fail_after_first_write)
         with pytest.raises(RuntimeError, match="rollback this page"):
             sync.run(source)
-    assert cursor() == committed
+    failed_cursor = cursor()
+    assert failed_cursor == committed
     assert sync.db.search("batch")["results"] == []
     assert sync.db.search("baseline")["results"]
     sync.run(source)
@@ -423,6 +478,10 @@ def test_archive_and_cursor_rollback_together(tmp_path, monkeypatch):
     assert [item["text"] for item in sync.db.read(result["id"])["messages"]] == [
         "evidence batch 2", "evidence batch 3",
     ]
+
+    record_evidence(before_cursor=committed, failed_cursor=failed_cursor, after_cursor=cursor(),
+                    recovered_read=sync.db.read(result["id"]))
+
 
 def test_delayed_reply_keeps_source_turns_grouped(tmp_path):
     directory = tmp_path / "hub.sqlite3"
@@ -619,6 +678,66 @@ def test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects(tm
     resumed.run(source)
     assert source.lower_bounds is None
     assert resumed.db.search("project-backfill")["results"]
+
+
+@pytest.mark.parametrize("new_identity", [
+    pytest.param("other.example/team/alpha", id="host"),
+    pytest.param("git.example:2222/team/alpha", id="port"),
+    pytest.param("git.example/team/renamed", id="path"),
+])
+def test_repository_identity_change_requires_new_link(tmp_path, new_identity, record_evidence):
+    from fastapi.testclient import TestClient
+    from smm_hub.hub import create_hub
+    from smm_hub.projects import HubProjects
+
+    old_identity = "git.example/team/alpha"
+    archive = Archive(tmp_path / "hub.sqlite3")
+    sync = synchronizer(archive.db_path)
+    rows = [event(0, "old-repository", "user", old_identity, text="boundary old")]
+    source = FixtureSource(rows, [old_identity])
+    sync.run(source)
+    projects = HubProjects(archive)
+    token, device = "boundary-fixture-" + "x" * 32, "1" * 32
+    with TestClient(create_hub(archive, token), headers={"Authorization": "Bearer " + token}) as hub:
+        hub_id = hub.get("/v1/info").json()["hub_id"]
+        metadata = hub.post("/v1/project-metadata", json={
+            "hub_id": hub_id, "device_id": device, "device_name": "fixture-device",
+            "projects": [{"id": "workspace", "name": "workspace"}], "memberships": [],
+        })
+        assert metadata.status_code == 200
+        old_project = next(p for p in projects.list() if p["source_key"] == old_identity)
+        device_project = next(p for p in projects.list() if p["source"] == "device")
+        projects.link(device_project["id"], old_project["id"])
+
+        def query(scoped):
+            payload = {"query": "boundary"}
+            if scoped:
+                payload.update(device_id=device, project_id="workspace")
+            response = hub.post("/v1/search", json=payload)
+            assert response.status_code == 200
+            return response.json()
+
+        before = query(True)
+        old_hit, = before["results"]
+        rows.append(event(2, "new-repository", "user", new_identity, text="boundary new"))
+        source.visible.append(new_identity)
+        sync.run(source)
+        new_project = next(p for p in projects.list() if p["source_key"] == new_identity)
+        assert new_project["id"] != old_project["id"]
+        before_relink = query(True)
+        global_result = query(False)
+        assert {hit["source_session_id"] for hit in before_relink["results"]} == {"old-repository"}
+        assert {hit["source_session_id"] for hit in global_result["results"]} == {"old-repository", "new-repository"}
+        assert projects.links() == [{"a": min(device_project["id"], old_project["id"]),
+                                     "b": max(device_project["id"], old_project["id"])}]
+        projects.link(device_project["id"], new_project["id"])
+        after_relink = query(True)
+        assert {hit["source_session_id"] for hit in after_relink["results"]} == {"old-repository", "new-repository"}
+        original = hub.post("/v1/read", json={"hub_id": hub_id, "conversation_id": old_hit["id"]}).json()
+        assert original["messages"][0]["text"] == "boundary old"
+        record_evidence(old_identity=old_identity, new_identity=new_identity,
+                        before=before, before_relink=before_relink,
+                        global_result=global_result, after_relink=after_relink, old_reference=original)
 
 
 def test_stop_cancels_postgres_stream_while_stdout_is_blocked(tmp_path, monkeypatch):
