@@ -72,3 +72,10 @@ v2 的文本调整见 [revision-v2.md](revision-v2.md)，结果见 [comparison-v
 v3 的结果见 [comparison-v3.md](comparison-v3.md)。
 最新候选为 [candidate-v4.md](prompts/candidate-v4.md)，调整依据见 [revision-v4.md](revision-v4.md)，
 完整比较见 [comparison-v4.md](comparison-v4.md)。复跑最新候选时，将命令的 `--candidate` 指向 `prompts/candidate-v4.md`。
+
+匿名评分进程超时时，`grade.py` 可能在写入评分回执前退出。
+此时按 `--private-logs` 指定的目录检查对应 case 的 `grader.input`、`grader.stdout` 和 `grader.stderr`，
+确认已发送的输入和进程输出。`replay.py` 的错误提示会给出该目录。
+
+各轮 `round.json` 中的 `replay_sha256` 记录当时执行的复跑器版本。
+PR 复审后修正了复跑器的失败诊断提示，历史版本可查阅[评估执行时的 replay.py](https://github.com/yangbobo2021/smm-local/blob/8f149173ed7d2f359a3b5415957bbccd7e8fcb24/evals/pr-review/002-vibeinsight-entry/replay.py)。

@@ -87,7 +87,10 @@ def main():
         with ThreadPoolExecutor(max_workers=2) as pool:
             codes = list(pool.map(grade, ("01", "02", "03", "04")))
         if any(codes):
-            raise RuntimeError("A grading session failed; inspect its preserved receipt")
+            raise RuntimeError(
+                f"A grading session failed. Inspect input/stdout/stderr logs in {private}. "
+                "A timed-out grader may exit before writing its receipt."
+            )
 
 
 if __name__ == "__main__":
