@@ -1,0 +1,176 @@
+[
+  {
+    "action": "start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--state-dir",
+      "<task>/standalone-p-cb2d25ab12f5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50458,
+    "at": "2026-11-17T11:23:56.859831+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50458,
+    "exit_code": -15,
+    "at": "2026-11-17T11:23:59.976535+00:00"
+  },
+  {
+    "action": "start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--state-dir",
+      "<task>/standalone-p-cb2d25ab12f5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50534,
+    "at": "2026-11-17T11:24:00.031486+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50534,
+    "exit_code": -15,
+    "at": "2026-11-17T11:24:01.850900+00:00"
+  },
+  {
+    "action": "start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--state-dir",
+      "<task>/standalone-p-cb2d25ab12f5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50559,
+    "at": "2026-11-17T11:24:01.855568+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50559,
+    "exit_code": -15,
+    "at": "2026-11-17T11:24:02.497387+00:00"
+  },
+  {
+    "action": "start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--state-dir",
+      "<task>/standalone-p-cb2d25ab12f5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50580,
+    "at": "2026-11-17T11:24:02.499294+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50580,
+    "exit_code": -15,
+    "at": "2026-11-17T11:24:04.226561+00:00"
+  },
+  {
+    "action": "legacy-start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "--db",
+      "<task>/legacy.sqlite3",
+      "serve-hub",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50708,
+    "at": "2026-11-17T11:24:04.229247+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50708,
+    "exit_code": -15,
+    "at": "2026-11-17T11:24:04.656406+00:00"
+  },
+  {
+    "action": "start",
+    "argv": [
+      "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--state-dir",
+      "<task>/standalone-p-cb2d25ab12f5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "18875",
+      "--token-file",
+      "<task>/standalone-p-cb2d25ab12f5/hub-token",
+      "--tls-cert",
+      "<checkout>/.acceptance-local/platform-round/test-cert.pem",
+      "--tls-key",
+      "<checkout>/.acceptance-local/platform-round/test-key.pem"
+    ],
+    "pid": 50710,
+    "at": "2026-11-17T11:24:04.660498+00:00"
+  },
+  {
+    "action": "exit",
+    "pid": 50710,
+    "exit_code": -15,
+    "at": "2026-11-17T11:24:05.256168+00:00"
+  }
+]

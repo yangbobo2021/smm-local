@@ -1,0 +1,48 @@
+{
+  "before": {
+    "mode": "system-launchd",
+    "plist": {
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "Label": "ai.smm.hub.85cc08086783",
+      "ProgramArguments": [
+        "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "--state-dir",
+        "<task>/state-native-0168e86a35e6",
+        "run"
+      ],
+      "RunAtLoad": true,
+      "StandardErrorPath": "<task>/state-native-0168e86a35e6/launchd-error.log",
+      "UserName": "<service-user>"
+    },
+    "pid": 20838,
+    "process": "  UID   PID  PPID STARTED                      COMMAND\n  501 20838     1 Tue Nov 17 18:55:23 2026     /opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m smm_hub.cli hub --state-dir <task>/state-native-0168e86a35e6 run\n"
+  },
+  "after": {
+    "mode": "system-launchd",
+    "plist": {
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "Label": "ai.smm.hub.85cc08086783",
+      "ProgramArguments": [
+        "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "--state-dir",
+        "<task>/state-native-0168e86a35e6",
+        "run"
+      ],
+      "RunAtLoad": true,
+      "StandardErrorPath": "<task>/state-native-0168e86a35e6/launchd-error.log",
+      "UserName": "<service-user>"
+    },
+    "pid": 20893,
+    "process": "  UID   PID  PPID STARTED                      COMMAND\n  501 20893     1 Tue Nov 17 18:55:24 2026     /opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m smm_hub.cli hub --state-dir <task>/state-native-0168e86a35e6 run\n"
+  }
+}

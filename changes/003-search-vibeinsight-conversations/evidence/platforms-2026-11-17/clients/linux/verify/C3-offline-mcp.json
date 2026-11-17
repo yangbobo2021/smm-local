@@ -1,0 +1,118 @@
+{
+  "tool": "search_conversations",
+  "arguments": {
+    "query": "platform",
+    "scope": "project",
+    "project_id": 2,
+    "limit": 50
+  },
+  "response": {
+    "query": "platform",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "related-linux",
+        "title": "platform evidence related-linux",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "local-related",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence related-linux",
+            "origins": [
+              {
+                "device_name": "linux",
+                "device_id": "67f29d9844ff4946a796e2dfd0145e3d",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "linux",
+            "device_id": "67f29d9844ff4946a796e2dfd0145e3d"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "device-linux",
+        "title": "platform evidence device-linux",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "duplicate name",
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence device-linux",
+            "origins": [
+              {
+                "device_name": "linux",
+                "device_id": "67f29d9844ff4946a796e2dfd0145e3d",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "linux",
+            "device_id": "67f29d9844ff4946a796e2dfd0145e3d"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "other-linux",
+        "title": "platform evidence other-linux",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 3,
+        "project_name": "other",
+        "rank": 3,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence other-linux",
+            "origins": [
+              {
+                "device_name": "linux",
+                "device_id": "67f29d9844ff4946a796e2dfd0145e3d",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "linux",
+            "device_id": "67f29d9844ff4946a796e2dfd0145e3d"
+          }
+        ]
+      }
+    ],
+    "archive_scope": "local",
+    "fallback_reason": "无法连接汇总服务"
+  }
+}

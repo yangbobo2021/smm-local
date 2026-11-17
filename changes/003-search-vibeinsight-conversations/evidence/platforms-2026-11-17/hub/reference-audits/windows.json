@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "old_before_append": 6,
+  "post_append_anchors": 16,
+  "phases": [
+    "retained-originals-10.json",
+    "retained-originals-11.json",
+    "retained-originals-12.json",
+    "retained-originals-7.json",
+    "retained-originals-8.json",
+    "retained-originals-9.json"
+  ],
+  "note": "Compared the original message IDs and full objects with actual single-message HTTP reads after restart, credential replacement and faults; not merely body equality."
+}

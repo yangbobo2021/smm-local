@@ -1,0 +1,73 @@
+{
+  "id": 7,
+  "source": "vibeinsight",
+  "source_session_id": "recovery-2",
+  "source_path": "",
+  "cwd": null,
+  "started_at": "2026-09-10T02:14:00",
+  "updated_at": "2026-09-10T02:15:00",
+  "title": "platform evidence C recovery-2 134",
+  "project_id": 1,
+  "project_name": "git.example:0/team/C",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "platform evidence C recovery-2 134",
+      "timestamp": "2026-09-10T02:14:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 21,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59762, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 1,
+          "source_event_id": "E000134",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "role": "assistant",
+      "text": "platform evidence C recovery-2 135",
+      "timestamp": "2026-09-10T02:15:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 22,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59762, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 2,
+          "source_event_id": "E000135",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "git.example:0/team/C",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59762, \"postgres\"]",
+      "source_key": "git.example:0/team/C",
+      "device_name": null
+    }
+  ],
+  "origins": [
+    {
+      "source": "vibeinsight",
+      "source_id": "[\"<fixture-host>\", 59762, \"postgres\"]",
+      "platform": "codex"
+    }
+  ]
+}

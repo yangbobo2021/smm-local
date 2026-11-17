@@ -1,0 +1,115 @@
+{
+  "id": 28,
+  "source": "vibeinsight",
+  "source_session_id": "same-time",
+  "source_path": "",
+  "cwd": null,
+  "started_at": "2026-09-10T13:20:00",
+  "updated_at": "2026-09-10T13:23:00",
+  "title": "platform evidence C same-time 800",
+  "project_id": 1,
+  "project_name": "git.example:0/team/C",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "platform evidence C same-time 800",
+      "timestamp": "2026-09-10T13:20:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 48,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 1,
+          "source_event_id": "E000800",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "role": "assistant",
+      "text": "platform evidence C same-time 801",
+      "timestamp": "2026-09-10T13:21:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 49,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 2,
+          "source_event_id": "E000801",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    },
+    {
+      "position": 3,
+      "role": "user",
+      "text": "platform evidence C same-time 802",
+      "timestamp": "2026-09-10T13:22:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 50,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 3,
+          "source_event_id": "E000802",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    },
+    {
+      "position": 4,
+      "role": "assistant",
+      "text": "platform evidence C same-time 803",
+      "timestamp": "2026-09-10T13:23:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 51,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 4,
+          "source_event_id": "E000803",
+          "project_id": 1,
+          "project_name": "git.example:0/team/C"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "git.example:0/team/C",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "source_key": "git.example:0/team/C",
+      "device_name": null
+    }
+  ],
+  "origins": [
+    {
+      "source": "vibeinsight",
+      "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "platform": "codex"
+    }
+  ]
+}

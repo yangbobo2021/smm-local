@@ -1,0 +1,118 @@
+{
+  "tool": "search_conversations",
+  "arguments": {
+    "query": "platform",
+    "scope": "project",
+    "project_id": 2,
+    "limit": 50
+  },
+  "response": {
+    "query": "platform",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": "<current-session>",
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "other-mac",
+        "title": "platform evidence other-mac",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "other",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence other-mac",
+            "origins": [
+              {
+                "device_name": "mac",
+                "device_id": "3e83442e6a1e47f28aace978b3f11370",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "mac",
+            "device_id": "3e83442e6a1e47f28aace978b3f11370"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "device-mac",
+        "title": "platform evidence device-mac",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "duplicate name",
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence device-mac",
+            "origins": [
+              {
+                "device_name": "mac",
+                "device_id": "3e83442e6a1e47f28aace978b3f11370",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "mac",
+            "device_id": "3e83442e6a1e47f28aace978b3f11370"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "related-mac",
+        "title": "platform evidence related-mac",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 3,
+        "project_name": "local-related",
+        "rank": 3,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence related-mac",
+            "origins": [
+              {
+                "device_name": "mac",
+                "device_id": "3e83442e6a1e47f28aace978b3f11370",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "mac",
+            "device_id": "3e83442e6a1e47f28aace978b3f11370"
+          }
+        ]
+      }
+    ],
+    "archive_scope": "local",
+    "fallback_reason": "无法连接汇总服务"
+  }
+}

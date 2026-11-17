@@ -1,0 +1,34 @@
+{
+  "cases": {
+    "TC-standalone-compatibility": {
+      "status": "passed",
+      "reason": "独立正式执行复审，仅SC8本TC。已读取AGENTS.md、已确认intent/spec/plan及本轮第10节调整、scripts/acceptance/README和Reviewer规程；核对design-standalone-full-v1、match-standalone-full-v2、runtime-standalone-full-v2、review-standalone-full-v2。定义000003摘要1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9；正式目标SHA256 b24024952750ff222aeb7c3279ba0cc9cd45d2db9af6c410a26113c5b15b3f09，70个artifacts逐文件摘要全匹配，全部bindings当前字节一致。以下判断用本次正式run.stdout/附件及实际断言，不用debug的passed替代。tests/test_hub_standalone.py:71–87实际两参数legacy/matching-explicit-db均执行，正式命令2026-11-17T11:23:54.835000+00:00至11:23:55.270000+00:00、exit0，run.stdout为2 passed。两个独立tmp目录分别从公开CLI使用旧--db入口、以及与--state-dir相同的显式db；断言目标库实际存在且uvicorn收到应用一次。支持兼容参数和构建目标档案；该层mock uvicorn，不冒充真实监听进程，其实际进程路径由SQL TC认领。 不判整体需求或PR交付通过。",
+      "covers": [
+        "compatibility"
+      ]
+    },
+    "TC-standalone-conflict": {
+      "status": "passed",
+      "reason": "独立正式执行复审，仅SC8本TC。已读取AGENTS.md、已确认intent/spec/plan及本轮第10节调整、scripts/acceptance/README和Reviewer规程；核对design-standalone-full-v1、match-standalone-full-v2、runtime-standalone-full-v2、review-standalone-full-v2。定义000003摘要1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9；正式目标SHA256 b24024952750ff222aeb7c3279ba0cc9cd45d2db9af6c410a26113c5b15b3f09，70个artifacts逐文件摘要全匹配，全部bindings当前字节一致。以下判断用本次正式run.stdout/附件及实际断言，不用debug的passed替代。tests/test_hub_standalone.py:56–68以不存在的state/other数据库和缺Token进入公开CLI，正式11:23:55.270000至11:23:55.547000+00:00、exit0、run.stdout 1 passed。用例实际断言SystemExit2、--db与--state-dir冲突说明及两个目标均未创建，故不只检验相同错误输出而漏副作用。源码cli.py先比目录/db后读token及创建Archive；只认领此冲突检查。 不判整体需求或PR交付通过。",
+      "covers": [
+        "conflict"
+      ]
+    },
+    "TC-standalone-lifecycle": {
+      "status": "passed",
+      "reason": "独立正式执行复审，仅SC8本TC。已读取AGENTS.md、已确认intent/spec/plan及本轮第10节调整、scripts/acceptance/README和Reviewer规程；核对design-standalone-full-v1、match-standalone-full-v2、runtime-standalone-full-v2、review-standalone-full-v2。定义000003摘要1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9；正式目标SHA256 b24024952750ff222aeb7c3279ba0cc9cd45d2db9af6c410a26113c5b15b3f09，70个artifacts逐文件摘要全匹配，全部bindings当前字节一致。以下判断用本次正式run.stdout/附件及实际断言，不用debug的passed替代。tests/test_hub_standalone.py:11–53从独立目录保存来源配置和受限凭据，公开serve-hub main构建应用并实际进入其lifespan，FixtureSource只替换来源读取，不替换同步/归档。正式11:23:55.548000至11:23:55.893000+00:00、exit0、1 passed；断言恰一会话、独立正文standalone persisted message、last_success已提交、没有hub.json系统服务配置。该层mock uvicorn但真实运行共用lifespan，不冒充本机psql/后台进程。 不判整体需求或PR交付通过。",
+      "covers": [
+        "lifecycle"
+      ]
+    },
+    "TC-standalone-sql": {
+      "status": "passed",
+      "reason": "独立正式执行复审，仅SC8本TC。已读取AGENTS.md、已确认intent/spec/plan及本轮第10节调整、scripts/acceptance/README和Reviewer规程；核对design-standalone-full-v1、match-standalone-full-v2、runtime-standalone-full-v2、review-standalone-full-v2。定义000003摘要1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9；正式目标SHA256 b24024952750ff222aeb7c3279ba0cc9cd45d2db9af6c410a26113c5b15b3f09，70个artifacts逐文件摘要全匹配，全部bindings当前字节一致。以下判断用本次正式run.stdout/附件及实际断言，不用debug的passed替代。本次原始附件在execute/execution-standalone-v1/TC-standalone-sql/attachments/report/，正式外层11:23:55.893000至11:24:05.432000+00:00、exit0；底层实际Mac15.3.1 arm64、Python3.14.2、self-managed从11:23:56.632825至11:24:05.111880+00:00。installed-identity中候选ff816bd5acf5efc9e9b7ba7632693219063d95c2及files逐个与源码吻合，21个实际Hub安装模块=候选清单=Hub wheel全部模块，wheel SHA2564719167205238c98cdf2dfd6b01d5d83bf4271ec615f45c440fad3a5444d3590。已核对contracts.py、Run和run-p-v2的实际顺序；使用真实公开serve-hub --state-dir进程、同目录保存凭据、真实本机psql、有效interval1，不注册服务，不要求此P重复H的默认300秒。H1两项目分别T6/other2，H2 scheduled104/105自动归档及后续成功轮次确立周期持续；H6真停进程后追加6..9和N110/111，原T会话ID1、完整十条角色/正文/顺序与Fixture.rows独立清单相同，每条新增独有6/7/8/9各有search命中，N ID4两条正确，再轮次仍十条。H6-repeat/H7无新增重启/H5换同目标凭据后的完整项目进度均一致E000111；H7/H5逐会话完整原文及16条精确消息读取保留。contracts在任何追加前保存T6/other2全部8条锚定引用；本次P-pre-append-references-retained与P-initial-references-after-legacy两份各8条实际单条HTTP读回，逐项匹配原conversation_id、hub_message_id及完整消息对象，排除H6重编号盲点。换<readonly-B>并重启后，P-persisted-credential-new-original实际新会话140/141恰两条独立角色/正文、ID17/18，证明持久凭据用于真实继续同步。冲突命令实际exit2、明确--db与--state-dir必须指同档案，Run断言冲突库未创建；旧无state-dir入口使用独立legacy.sqlite3、健康可查，独立hub_id=1614d20cbf0d4a8c9e5ced3a771f1c3d且搜索空，随后原目录恢复原hub_id。P-full-originals-after-legacy完整5会话18条，逐会话消息ID/位置/role/text/timestamp/origins与动作前T10、other2、scheduled2、N2、凭据续跑2的完整对象相等；retained-originals-9实际18个精确单条HTTP读回也全部相等，不以条数或正文相等代替引用保持。P-process-events六次真实启动各有argv/PID及对应exit -15：50458、50534、50559、50580、legacy50708、恢复50710，健康检查后poll存活，退出为本任务主动SIGTERM；启动/退出均完整，未把外层exit0冒充子进程正常exit0。readonly-sql显式事务外查询0，计数BEGIN37/SET74/SELECT26/COMMIT36/COPY11，按PID的审计实现与BEGIN READ ONLY样例一致；未读取原始PG日志。全部分配sql-lifecycle/sql-conflict/sql-compatibility有本次实际证据。 不判整体需求或PR交付通过。",
+      "covers": [
+        "sql-compatibility",
+        "sql-conflict",
+        "sql-lifecycle"
+      ]
+    }
+  }
+}

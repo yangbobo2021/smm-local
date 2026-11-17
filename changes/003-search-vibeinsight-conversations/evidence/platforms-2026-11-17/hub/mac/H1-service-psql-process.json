@@ -1,0 +1,27 @@
+{
+  "service": {
+    "mode": "system-launchd",
+    "plist": {
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "Label": "ai.smm.hub.85cc08086783",
+      "ProgramArguments": [
+        "<checkout>/.acceptance-local/platform-round/mac-hub-env/bin/python",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "--state-dir",
+        "<task>/state-native-0168e86a35e6",
+        "run"
+      ],
+      "RunAtLoad": true,
+      "StandardErrorPath": "<task>/state-native-0168e86a35e6/launchd-error.log",
+      "UserName": "<service-user>"
+    },
+    "pid": 14215,
+    "process": "  UID   PID  PPID STARTED                      COMMAND\n  501 14215     1 Tue Nov 17 18:49:58 2026     /opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m smm_hub.cli hub --state-dir <task>/state-native-0168e86a35e6 run\n"
+  },
+  "psql_child": "20379 14215   501 <task>/pg-client/bin/psql --no-psqlrc --no-password --quiet --tuples-only --no-align --set=ON_ERROR_STOP=1 --host=<fixture-host> --port=59760 --dbname=postgres --username=<readonly-A>",
+  "observation": "SELECT waits for a fixture-only table lock; controller uses <fixture-admin>, service uses its configured read-only role"
+}

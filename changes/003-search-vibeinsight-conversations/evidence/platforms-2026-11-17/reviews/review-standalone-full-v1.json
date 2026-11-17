@@ -1,0 +1,33 @@
+{
+  "cases": {
+    "TC-standalone-compatibility": {
+      "status": "passed",
+      "reason": "对应SPEC既有serve-hub兼容与PLAN P；设计分别覆盖旧无state-dir及匹配显式db。match绑定test_hub_standalone.py:71–87，真实pytest两参数均通过（run.stdout 2 passed、exit0）；每参数独立tmp目录/Token，最后断言应用调用一次且目标库存在，首参数正确而第二拒绝/未建库会在第二次:87失败。此为CLI建应用单测，未把mock uvicorn当实际进程；实际运行另由SQL TC覆盖。定义000003摘要与design/match/runtime/debug一致，日志及附件摘要核对相符。",
+      "covers": [
+        "compatibility"
+      ]
+    },
+    "TC-standalone-conflict": {
+      "status": "passed",
+      "reason": "对应SPEC独立档案与PLAN P的冲突拒绝；test_hub_standalone.py:56–68先准备不存在的state/other、缺Token，然后对公开CLI断言exit2、冲突说明、两目标均不创建。真实pytest 1 passed/exit0。若只一前置目标提前存在，末尾不存在断言失败；如果产品先写库再拒绝，也会在:68失败；错误原因相同不能替代该副作用断言。认领冲突拒绝，不扩展到系统服务。",
+      "covers": [
+        "conflict"
+      ]
+    },
+    "TC-standalone-lifecycle": {
+      "status": "passed",
+      "reason": "对应SPEC121自行管理同目录自动同步。test_hub_standalone.py:11–53保存有效配置/秘密后，从公开serve-hub main取得应用并实际进入lifespan；固定FixtureSource仅替换来源，非替换同步。归档独立正文、last_success、无hub.json均断言；正文同错不能由另一产品响应作为期望遮蔽。pytest实际1 passed/exit0；仅认领该共用lifespan单测层，真实psql/进程见独立SQL TC。",
+      "covers": [
+        "lifecycle"
+      ]
+    },
+    "TC-standalone-sql": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "首轮R5已闭环：platform.py:177–199/514–521记录每次argv/PID/退出码并在健康后断言alive；P-process-events所有启动/退出成对，实际Mac安装包+SQL、默认缺依赖/自定义周期、两项目、3→5完整角色正文、新N两条、每个新增词检索、PID变化、无新增与换凭据完整cursor比较、显式只读SQL审计及exit0均有附件。冲突:508–510实际exit2且不建库可认领。但设计要求全部旧精确引用在续跑后有效：:289采集的旧retained只在非法配置阶段assert_committed，H6追加后:329重新从产品采集committed，H7/H5只验证这批新引用。反事实：H6保持会话ID和十条正文正确却重编号原六条hub_message_id，:315–316仍通过，随后:329/332/344只测试新ID，旧精确引用失效没有首个拦截点。最早应在H6之前保留完整旧精确引用，H6之后逐一读回并对独立预期比较。另旧方式启动后恢复原状态仅:527检查条数10，未按sql-compatibility设计核对完整十条角色正文及原引用；仅后半内容错误可漏过。应恢复后assert完整独立清单并重用动作前引用。当前实际附件原六条消息ID看起来保留，但不能把实现缺少的引用操作说成执行过。故不是产品失败，而是准备实现需修订；不把本次debug判为正式交付通过。",
+      "covers": [
+        "sql-conflict"
+      ]
+    }
+  }
+}

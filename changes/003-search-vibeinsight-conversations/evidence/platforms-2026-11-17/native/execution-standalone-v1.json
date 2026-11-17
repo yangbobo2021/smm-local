@@ -1,0 +1,375 @@
+{
+  "acceptance_id": "AT-SMM-VIBEINSIGHT-003",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/run.process.json": "f5ccdf58da2106ddcf7652c3680d8e549644111e69f0f5d484ac381cbe61ac9f",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/run.stdout": "ac84d31254b1f0be729bbe2e90dcf691256875726c8d4a6bf0802d69e59cc6ed",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/run.process.json": "987617a599d4ec5c1e87baaf38d78e3ff402e79a1589b16dd8e92255b332b4da",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/run.stdout": "c91dad03511eb111dba9f317cdb7962c64ec389c7d259de488e167c78aac1b31",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/run.process.json": "605a9d694bfa36a2ba6c80012a89457c050080ab74d4243cbfe042a6fe15e84d",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/run.stdout": "76af71df60bb5f93ea635e8763126ecf98e837672c9980e80aefde989b203765",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-missing-default-client.json": "def88d8cf010583e472c489f02d32cd84decc28c83ee73450e69d5e6093eb897",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-original.json": "9f18bd0d56af825a760f9bc8dd2393de4dfa1b296df9846b5a36d0b2ba9542b4",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-other-project-original.json": "304e577cbc902a5c6dffc93ec3f85fd5716db21ddc0246726c7bba66fc2e8c14",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-service.json": "694866f1fb3f5d2bfe62d7f6798e1fd037b3932f3266eaaf8ab46aad9d16578c",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H2-scheduled-original.json": "b3e3ba8a12a73e4ea3c0ae4127391c3d0ae1a9403e7b2d1586ab2878f58d9d5b",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H2-status.json": "1dfe36d8adccfb5da50894e9044acfa21788b9a31dbb713e48f4d5fda93f6eb2",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H3-status.json": "b6be542d1bb94cc6ced0c00ce192cdc1252d65f195dc8813e3074a2763102fe4",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H5-replaced-and-restarted.json": "7868bdae371b25f1a3009f65fa78338a8663c796d212007ef7e137bc551de19e",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H5-restarted.json": "a73f920dca4aca32a6b5fe70182e684871766fd063e1f4de185af00293c3808d",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-after-original.json": "f5e6bdf736e5327189de685c24347ec8954c86f2fb702f28e78e80ed8de4605c",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-before.json": "b6be542d1bb94cc6ced0c00ce192cdc1252d65f195dc8813e3074a2763102fe4",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-6.json": "a6731cddbe9a6607b0a42076d661faae37bb674dfd502cd029c8edddaad1e8b3",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-7.json": "61627f032b16e9235b3de7674328fd143d8db4c3ac2221a9eec79629ceeaf922",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-8.json": "c07eb95fe5eae68e4cd7cc67aee923dd38d3ab6d3e4e3608d80788deea2be93d",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-9.json": "28ffcf6fb11bdf103c01142f58dc05afbf14fc25b2d4efb794c2fda98dc68da5",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new.json": "9c40d526a9c3a734f29420c815096dbefcba289b4299a77b8fe7d2361afdf78d",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-repeat.json": "4707e2fac18d3d1b0e37d5be9af92a487e8289e8f7e0e2382e861343cc39911f",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-restarted.json": "4ace49ced9fbab053bf29e0bdf5cf093de2ebf6a2272bbd15a6625e60cb84912",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-source-append.json": "e9252f4a4c99b3701cc354bdd52bb16f358a48ed139783c1bb7ab386a4fcd2bc",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-stopped.json": "47dc9e7b80cf8f1d3b7c2138809b97598003ab8f67e45685e3d62a7dac7b5bf7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H7-no-new-restart.json": "74b2a59b569dfb0a5bf79cc1d0e7dea1588c5d64ce5185c972bcce1e00845dfb",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H7-restarted.json": "9d2a99bf9ad3c190f224b5336af812bec12b98ca100713dd1acef5d3b0b18a06",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-full-originals-after-legacy.json": "1795051e8817c09b8e66f27fcade3433896228034e1b1dbaf1ad18090395a349",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-initial-references-after-legacy.json": "49b89d245135338a7ed96922d39f8475e577019ea7f234301d6507f2ce4d3764",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-legacy.json": "60bd15b56ab5aca422d0f9666d05cdcc54d02f937c0b4f1b7da480cc5e9f32f7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-original-retained.json": "72370de1503980b664e57fb6481eea06270c0868b6f3dda22819a0be1a6dd7ac",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-persisted-credential-new-original.json": "4f707158b37919cdc11e6116ecd51f38187e2296af27e498b7f11c7634e0fa9e",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-pre-append-references-retained.json": "49b89d245135338a7ed96922d39f8475e577019ea7f234301d6507f2ce4d3764",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-process-events.json": "6323130550f1c67f7be2a3a81c06f0439deda73a7795fc226841ab59d025a73a",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/commands.jsonl": "4044677970ce81931a363e284e42ecbd1ae419ac2e764b5cef41ef00cb5a8791",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/final-service.json": "dadcd7974db3626b40071270a71a22fa934003e76591b34da9e393fcc38b2b10",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/installed-identity.json": "ff37bc9dbea23e9bf2612fbc03b5699c6ffc27374635b0d9e673d689bef8b797",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/legacy.log": "8e7aa43e56724f36bdd293d3406cbe7a132b0f75048facd857fb3c51e3b1e092",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_client.py": "1219efddcd22d2a12f9d19bd3a3fe2c0aca2de5ffc5e27425fabcb6a2e1249d9",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_contracts.py": "7ec1bf0d2ca98ddfc07c5d191146d76f73bedd76fd6798a68b386061237c45d5",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_denied_read.py": "823d79a03dd85e7978892fa6205599384f9a88711aa5db5477b69bb6bae55b09",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_fixture.py": "75add66d9d65b6255edf949eff75dddb66be27cdfeeb74a220369d240ace7069",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_mcp_process.py": "38059abb23a1c804b944c6f3f923f07d1c7c592d645dd8718e71d58df99a13b9",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_platform.py": "8fe7ad45e61d3bbfd7d39904b3ca79608fae3a9cfb2cd56bc490b7da35bd2f9a",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_postgres.py": "cfb9e91f96f9770e68eceb15d70de2aee33f35c6dec2085b2d6d4225a28d3008",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_probe_support.py": "41e0bfe8257917bbda6b1847cd89dbe939c03c3b99587f9c25040436a3e75bc6",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_readonly_audit.py": "748eb4f440c8053e3412438cddb82c0c19c689b82d4ad7cd35d9d551a258f4a6",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_shared.py": "29dd38627416c4b2eff0e7a40576261ff77e50be340c3adbeb266d44a0903056",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_upgrade.py": "166783cff730843a59914e676fa0289ebc1600d30eb5ec66bb90cb395f0dc4c1",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_windows_limited.py": "8fa701741c6219c11cf7406afb91ef2215013a2a52e27b16cf5742ff81c152cb",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/readonly-sql.json": "55e1053292a58ce1ef0d83ad5b1905445d544ea7fce6a04f3088460d366e6379",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/result.json": "fed3b1d3c08da0353ab15718ba719b355e40f29c138e9f56514acb948a6424ba",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-1.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-2.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-3.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-4.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-5.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-6.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-7.json": "3ca2ff4999d574b9b2aa3ca3fd976ea98e4b1a30d2ad1e59cd27b0398f72e419",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-8.json": "3ca2ff4999d574b9b2aa3ca3fd976ea98e4b1a30d2ad1e59cd27b0398f72e419",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-9.json": "54c979086b84ec4fca30516d001181d49568066a47d566c9e3895d2dae77e84e",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/standalone.log": "2565c7ec092ef2d328b26dbc2ba8909e7ec06a63f535ddb31df1643569dbd4c3",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/run.process.json": "73a592a31fbd8587ddb7c958fdb36fec7dd72ae6e27486d33c6ed5994faab236",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/run.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/request.json": "5a7660185445146b9788507b4562b56ddf641dbac35664eb66225bac67d7a3b2"
+  },
+  "bindings": {
+    ".acceptance-local/platform-round/baseline.py": "0c78d74f9672fb653ec6eae3c9bb2e3e3101c0aaebd16d1d98e812042950c2f7",
+    ".acceptance-local/platform-round/cohort.py": "53dd317f5be64005bbdf643dcbadc6ecf9980b84355471d797972936d8d62b64",
+    ".acceptance-local/platform-round/linux-baseline.py": "7fd10112d0e4fc966868871bba9fcd52e2973d96966201b6ac7371f79b6d8f13",
+    ".acceptance-local/platform-round/run-g-v2.py": "4417e827f1d519a5058c841a1d89cb693c0ca5d6a69a37c03b9c81d004ff33af",
+    ".acceptance-local/platform-round/run-p-v2.py": "cefb785466a26f48ad2bd252673db54ba54b26db90cc1d6d16c614637e03c552",
+    "scripts/acceptance/vibeinsight_client.py": "1219efddcd22d2a12f9d19bd3a3fe2c0aca2de5ffc5e27425fabcb6a2e1249d9",
+    "scripts/acceptance/vibeinsight_contracts.py": "7ec1bf0d2ca98ddfc07c5d191146d76f73bedd76fd6798a68b386061237c45d5",
+    "scripts/acceptance/vibeinsight_denied_read.py": "823d79a03dd85e7978892fa6205599384f9a88711aa5db5477b69bb6bae55b09",
+    "scripts/acceptance/vibeinsight_fixture.py": "75add66d9d65b6255edf949eff75dddb66be27cdfeeb74a220369d240ace7069",
+    "scripts/acceptance/vibeinsight_mcp_process.py": "38059abb23a1c804b944c6f3f923f07d1c7c592d645dd8718e71d58df99a13b9",
+    "scripts/acceptance/vibeinsight_platform.py": "8fe7ad45e61d3bbfd7d39904b3ca79608fae3a9cfb2cd56bc490b7da35bd2f9a",
+    "scripts/acceptance/vibeinsight_postgres.py": "cfb9e91f96f9770e68eceb15d70de2aee33f35c6dec2085b2d6d4225a28d3008",
+    "scripts/acceptance/vibeinsight_probe_support.py": "41e0bfe8257917bbda6b1847cd89dbe939c03c3b99587f9c25040436a3e75bc6",
+    "scripts/acceptance/vibeinsight_readonly_audit.py": "748eb4f440c8053e3412438cddb82c0c19c689b82d4ad7cd35d9d551a258f4a6",
+    "scripts/acceptance/vibeinsight_shared.py": "29dd38627416c4b2eff0e7a40576261ff77e50be340c3adbeb266d44a0903056",
+    "scripts/acceptance/vibeinsight_upgrade.py": "166783cff730843a59914e676fa0289ebc1600d30eb5ec66bb90cb395f0dc4c1",
+    "scripts/acceptance/vibeinsight_windows_limited.py": "8fa701741c6219c11cf7406afb91ef2215013a2a52e27b16cf5742ff81c152cb",
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "0db13e71d6dc8e230c794e0d6bb9910e600e0c86af26924eb98e6599bfd8402f",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "e46bf0a9d8131a79e1c6e831b7b84790666f8188ee906a73ce9959b1912acce0",
+    "src/smm_hub/hub_admin.py": "6e6b0eb631f2676cd5b185c79f3c52f7681a1e5f42847775591d45c05cdb8874",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "0d24f1058c18a2b34d0715f71831c974ff1a08803657c7e4433ed035c16a37bf",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "6fa73b845e1f4de4eacc852e226bffb097956849acd97238015e5e8975adda2a",
+    "src/smm_local/api.py": "7ac432bba84c9451dd4e9251bc64e9ce393ac5ac306bcbc792feef15ec2c695f",
+    "src/smm_local/cli.py": "9775c8051559ede7ec3e506a49844e29ec214e08c422e93f84ad9f294247cac6",
+    "src/smm_local/core.py": "1ff25e0f497b72d86315162af2453619312835ab220ef6b684ff39f03b041c8a",
+    "src/smm_local/federation.py": "ccee27da3b3adbbc4dc194bef536c3206cf7daea87d88e33444208af2e9eb3dc",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "59f28af7bf67dfb8d9ab588905803af5dd033254797b5eaa79040227fa1ebb6b",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "ec4582ab357537ac86d7e6fc4e1da52d184a62c57c9aeed1bac424181c537224",
+    "src/smm_local/mcp_server.py": "af226bb8da7b6610077e91d7678f82abd7f16db84dcb18cdf691a25c15bff9bb",
+    "src/smm_local/service.py": "bd65c0bb34a809cc55fd38e9bae712b22fdc68999703febb274efee35215549a",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "tests/test_hub_standalone.py": "1c9b1e4b8864868d2a21721ac0750dd04259593f5ac53cb71cc1a7fde6a9cc8c"
+  },
+  "case_design": {
+    "id": "design-standalone-full-v1",
+    "record": ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/case-design/design-standalone-full-v1/result.json",
+    "sha256": "8d42a6b918fdce9eed7fb8f5bfccf1b486495a1949910055cf1ca14cbfdc61bd"
+  },
+  "case_obligations": {
+    "TC-standalone-compatibility": [
+      "compatibility"
+    ],
+    "TC-standalone-conflict": [
+      "conflict"
+    ],
+    "TC-standalone-lifecycle": [
+      "lifecycle"
+    ],
+    "TC-standalone-sql": [
+      "sql-compatibility",
+      "sql-conflict",
+      "sql-lifecycle"
+    ]
+  },
+  "cwd": ".",
+  "definitions_sha256": "1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9",
+  "design_review": "review-standalone-full-v2",
+  "designed_case_ids": [
+    "TC-standalone-compatibility",
+    "TC-standalone-conflict",
+    "TC-standalone-lifecycle",
+    "TC-standalone-sql"
+  ],
+  "implementation_sha256": {
+    "TC-standalone-compatibility": "8bcc3e268adbb4d52a50cba213776f805d9cd8e8976d4cc0c0898a484ff8d3a7",
+    "TC-standalone-conflict": "a3b7a86b98cec17f6813215b3e46ffea1452df3b0690bf344ae57c5758ffa732",
+    "TC-standalone-lifecycle": "50b706f27b99e2dc6410b24dd54d85ede0942aee397776adbd2b47f87b087d38",
+    "TC-standalone-sql": "16d0e291f6ece7c363d44aa168a46609fe0bff751379c1aada90a1bf9653df98"
+  },
+  "obligations": {
+    "compatibility": "旧无来源启动及相同数据库的显式参数继续可用。",
+    "conflict": "目录与显式数据库冲突时在写入前拒绝启动。",
+    "lifecycle": "同目录配置的来源随自行管理进程自动同步。",
+    "sql-compatibility": "旧无来源启动及相同数据库的显式参数继续可用。",
+    "sql-conflict": "目录与显式数据库冲突时在写入前拒绝启动。",
+    "sql-lifecycle": "同目录配置的来源随自行管理进程自动同步。"
+  },
+  "operation": "execute",
+  "record": ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/result.json",
+  "recorded_at": "2026-11-17T11:24:05.455000+00:00",
+  "request_id": "execution-standalone-v1",
+  "request_sha256": "5a7660185445146b9788507b4562b56ddf641dbac35664eb66225bac67d7a3b2",
+  "results": {
+    "TC-standalone-compatibility": {
+      "attachments": {},
+      "business_command": [
+        "env",
+        "PYTHONPATH=src",
+        "<checkout>/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_hub_standalone.py::test_standalone_explicit_archive_remains_supported"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          "env",
+          "PYTHONPATH=src",
+          "<checkout>/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_hub_standalone.py::test_standalone_explicit_archive_remains_supported"
+        ],
+        "cwd": "<checkout>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<checkout>/.acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/attachments"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-17T11:23:55.270000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-compatibility/run.stdout": "ac84d31254b1f0be729bbe2e90dcf691256875726c8d4a6bf0802d69e59cc6ed"
+        },
+        "started_at": "2026-11-17T11:23:54.835000+00:00"
+      }
+    },
+    "TC-standalone-conflict": {
+      "attachments": {},
+      "business_command": [
+        "env",
+        "PYTHONPATH=src",
+        "<checkout>/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_hub_standalone.py::test_standalone_rejects_conflicting_archive_before_writing"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          "env",
+          "PYTHONPATH=src",
+          "<checkout>/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_hub_standalone.py::test_standalone_rejects_conflicting_archive_before_writing"
+        ],
+        "cwd": "<checkout>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<checkout>/.acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/attachments"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-17T11:23:55.547000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-conflict/run.stdout": "c91dad03511eb111dba9f317cdb7962c64ec389c7d259de488e167c78aac1b31"
+        },
+        "started_at": "2026-11-17T11:23:55.270000+00:00"
+      }
+    },
+    "TC-standalone-lifecycle": {
+      "attachments": {},
+      "business_command": [
+        "env",
+        "PYTHONPATH=src",
+        "<checkout>/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_hub_standalone.py::test_standalone_runs_saved_source_lifecycle"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          "env",
+          "PYTHONPATH=src",
+          "<checkout>/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_hub_standalone.py::test_standalone_runs_saved_source_lifecycle"
+        ],
+        "cwd": "<checkout>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<checkout>/.acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/attachments"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-17T11:23:55.893000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-lifecycle/run.stdout": "76af71df60bb5f93ea635e8763126ecf98e837672c9980e80aefde989b203765"
+        },
+        "started_at": "2026-11-17T11:23:55.548000+00:00"
+      }
+    },
+    "TC-standalone-sql": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-missing-default-client.json": "def88d8cf010583e472c489f02d32cd84decc28c83ee73450e69d5e6093eb897",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-original.json": "9f18bd0d56af825a760f9bc8dd2393de4dfa1b296df9846b5a36d0b2ba9542b4",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-other-project-original.json": "304e577cbc902a5c6dffc93ec3f85fd5716db21ddc0246726c7bba66fc2e8c14",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H1-service.json": "694866f1fb3f5d2bfe62d7f6798e1fd037b3932f3266eaaf8ab46aad9d16578c",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H2-scheduled-original.json": "b3e3ba8a12a73e4ea3c0ae4127391c3d0ae1a9403e7b2d1586ab2878f58d9d5b",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H2-status.json": "1dfe36d8adccfb5da50894e9044acfa21788b9a31dbb713e48f4d5fda93f6eb2",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H3-status.json": "b6be542d1bb94cc6ced0c00ce192cdc1252d65f195dc8813e3074a2763102fe4",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H5-replaced-and-restarted.json": "7868bdae371b25f1a3009f65fa78338a8663c796d212007ef7e137bc551de19e",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H5-restarted.json": "a73f920dca4aca32a6b5fe70182e684871766fd063e1f4de185af00293c3808d",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-after-original.json": "f5e6bdf736e5327189de685c24347ec8954c86f2fb702f28e78e80ed8de4605c",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-before.json": "b6be542d1bb94cc6ced0c00ce192cdc1252d65f195dc8813e3074a2763102fe4",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-6.json": "a6731cddbe9a6607b0a42076d661faae37bb674dfd502cd029c8edddaad1e8b3",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-7.json": "61627f032b16e9235b3de7674328fd143d8db4c3ac2221a9eec79629ceeaf922",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-8.json": "c07eb95fe5eae68e4cd7cc67aee923dd38d3ab6d3e4e3608d80788deea2be93d",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new-content-search-9.json": "28ffcf6fb11bdf103c01142f58dc05afbf14fc25b2d4efb794c2fda98dc68da5",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-new.json": "9c40d526a9c3a734f29420c815096dbefcba289b4299a77b8fe7d2361afdf78d",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-repeat.json": "4707e2fac18d3d1b0e37d5be9af92a487e8289e8f7e0e2382e861343cc39911f",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-restarted.json": "4ace49ced9fbab053bf29e0bdf5cf093de2ebf6a2272bbd15a6625e60cb84912",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-source-append.json": "e9252f4a4c99b3701cc354bdd52bb16f358a48ed139783c1bb7ab386a4fcd2bc",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H6-stopped.json": "47dc9e7b80cf8f1d3b7c2138809b97598003ab8f67e45685e3d62a7dac7b5bf7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H7-no-new-restart.json": "74b2a59b569dfb0a5bf79cc1d0e7dea1588c5d64ce5185c972bcce1e00845dfb",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/H7-restarted.json": "9d2a99bf9ad3c190f224b5336af812bec12b98ca100713dd1acef5d3b0b18a06",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-full-originals-after-legacy.json": "1795051e8817c09b8e66f27fcade3433896228034e1b1dbaf1ad18090395a349",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-initial-references-after-legacy.json": "49b89d245135338a7ed96922d39f8475e577019ea7f234301d6507f2ce4d3764",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-legacy.json": "60bd15b56ab5aca422d0f9666d05cdcc54d02f937c0b4f1b7da480cc5e9f32f7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-original-retained.json": "72370de1503980b664e57fb6481eea06270c0868b6f3dda22819a0be1a6dd7ac",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-persisted-credential-new-original.json": "4f707158b37919cdc11e6116ecd51f38187e2296af27e498b7f11c7634e0fa9e",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-pre-append-references-retained.json": "49b89d245135338a7ed96922d39f8475e577019ea7f234301d6507f2ce4d3764",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/P-process-events.json": "6323130550f1c67f7be2a3a81c06f0439deda73a7795fc226841ab59d025a73a",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/commands.jsonl": "4044677970ce81931a363e284e42ecbd1ae419ac2e764b5cef41ef00cb5a8791",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/final-service.json": "dadcd7974db3626b40071270a71a22fa934003e76591b34da9e393fcc38b2b10",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/installed-identity.json": "ff37bc9dbea23e9bf2612fbc03b5699c6ffc27374635b0d9e673d689bef8b797",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/legacy.log": "8e7aa43e56724f36bdd293d3406cbe7a132b0f75048facd857fb3c51e3b1e092",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_client.py": "1219efddcd22d2a12f9d19bd3a3fe2c0aca2de5ffc5e27425fabcb6a2e1249d9",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_contracts.py": "7ec1bf0d2ca98ddfc07c5d191146d76f73bedd76fd6798a68b386061237c45d5",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_denied_read.py": "823d79a03dd85e7978892fa6205599384f9a88711aa5db5477b69bb6bae55b09",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_fixture.py": "75add66d9d65b6255edf949eff75dddb66be27cdfeeb74a220369d240ace7069",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_mcp_process.py": "38059abb23a1c804b944c6f3f923f07d1c7c592d645dd8718e71d58df99a13b9",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_platform.py": "8fe7ad45e61d3bbfd7d39904b3ca79608fae3a9cfb2cd56bc490b7da35bd2f9a",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_postgres.py": "cfb9e91f96f9770e68eceb15d70de2aee33f35c6dec2085b2d6d4225a28d3008",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_probe_support.py": "41e0bfe8257917bbda6b1847cd89dbe939c03c3b99587f9c25040436a3e75bc6",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_readonly_audit.py": "748eb4f440c8053e3412438cddb82c0c19c689b82d4ad7cd35d9d551a258f4a6",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_shared.py": "29dd38627416c4b2eff0e7a40576261ff77e50be340c3adbeb266d44a0903056",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_upgrade.py": "166783cff730843a59914e676fa0289ebc1600d30eb5ec66bb90cb395f0dc4c1",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/probe-source/vibeinsight_windows_limited.py": "8fa701741c6219c11cf7406afb91ef2215013a2a52e27b16cf5742ff81c152cb",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/readonly-sql.json": "55e1053292a58ce1ef0d83ad5b1905445d544ea7fce6a04f3088460d366e6379",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/result.json": "fed3b1d3c08da0353ab15718ba719b355e40f29c138e9f56514acb948a6424ba",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-1.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-2.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-3.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-4.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-5.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-6.json": "734adb3757fd9e54b413bede14bdbd6c94e7fa6629e956b7e9af905c19f8e5e7",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-7.json": "3ca2ff4999d574b9b2aa3ca3fd976ea98e4b1a30d2ad1e59cd27b0398f72e419",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-8.json": "3ca2ff4999d574b9b2aa3ca3fd976ea98e4b1a30d2ad1e59cd27b0398f72e419",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/retained-originals-9.json": "54c979086b84ec4fca30516d001181d49568066a47d566c9e3895d2dae77e84e",
+        ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments/report/standalone.log": "2565c7ec092ef2d328b26dbc2ba8909e7ec06a63f535ddb31df1643569dbd4c3"
+      },
+      "business_command": [
+        "<checkout>/.venv/bin/python",
+        ".acceptance-local/platform-round/run-p-v2.py"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          "<checkout>/.venv/bin/python",
+          ".acceptance-local/platform-round/run-p-v2.py"
+        ],
+        "cwd": "<checkout>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<checkout>/.acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/attachments"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-17T11:24:05.432000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-standalone-v1/TC-standalone-sql/run.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "started_at": "2026-11-17T11:23:55.893000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC8",
+  "selection": "all_designed_cases",
+  "status": "executed"
+}

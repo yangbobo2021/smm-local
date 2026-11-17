@@ -1,0 +1,34 @@
+{
+  "cases": {
+    "TC-standalone-compatibility": {
+      "status": "passed",
+      "covers": [
+        "compatibility"
+      ],
+      "reason": "对应SPEC既有serve-hub兼容与PLAN P；设计分别覆盖旧无state-dir及匹配显式db。match绑定test_hub_standalone.py:71–87，真实pytest两参数均通过（run.stdout 2 passed、exit0）；每参数独立tmp目录/Token，最后断言应用调用一次且目标库存在，首参数正确而第二拒绝/未建库会在第二次:87失败。此为CLI建应用单测，未把mock uvicorn当实际进程；实际运行另由SQL TC覆盖。定义000003摘要与design/match/runtime/debug一致，日志及附件摘要核对相符。 本轮保持原design-v1/TC语义，match/runtime/debug为v2且定义摘要不变；test_hub_standalone.py绑定字节不变，重新真实执行exit0，兼容两参数2 passed、冲突及lifespan各1 passed，已核对本轮日志摘要。只认领对应单测层，不将mock服务器当实际系统服务。"
+    },
+    "TC-standalone-conflict": {
+      "status": "passed",
+      "covers": [
+        "conflict"
+      ],
+      "reason": "对应SPEC独立档案与PLAN P的冲突拒绝；test_hub_standalone.py:56–68先准备不存在的state/other、缺Token，然后对公开CLI断言exit2、冲突说明、两目标均不创建。真实pytest 1 passed/exit0。若只一前置目标提前存在，末尾不存在断言失败；如果产品先写库再拒绝，也会在:68失败；错误原因相同不能替代该副作用断言。认领冲突拒绝，不扩展到系统服务。 本轮保持原design-v1/TC语义，match/runtime/debug为v2且定义摘要不变；test_hub_standalone.py绑定字节不变，重新真实执行exit0，兼容两参数2 passed、冲突及lifespan各1 passed，已核对本轮日志摘要。只认领对应单测层，不将mock服务器当实际系统服务。"
+    },
+    "TC-standalone-lifecycle": {
+      "status": "passed",
+      "covers": [
+        "lifecycle"
+      ],
+      "reason": "对应SPEC121自行管理同目录自动同步。test_hub_standalone.py:11–53保存有效配置/秘密后，从公开serve-hub main取得应用并实际进入lifespan；固定FixtureSource仅替换来源，非替换同步。归档独立正文、last_success、无hub.json均断言；正文同错不能由另一产品响应作为期望遮蔽。pytest实际1 passed/exit0；仅认领该共用lifespan单测层，真实psql/进程见独立SQL TC。 本轮保持原design-v1/TC语义，match/runtime/debug为v2且定义摘要不变；test_hub_standalone.py绑定字节不变，重新真实执行exit0，兼容两参数2 passed、冲突及lifespan各1 passed，已核对本轮日志摘要。只认领对应单测层，不将mock服务器当实际系统服务。"
+    },
+    "TC-standalone-sql": {
+      "status": "passed",
+      "covers": [
+        "sql-compatibility",
+        "sql-conflict",
+        "sql-lifecycle"
+      ],
+      "reason": "原design-v1语义不变，对应SPEC自行管理同目录配置、周期、重启续跑及PLAN P。v2 match绑定contracts.py SHA7ec1bf0…，runtime ready、debug真实Mac安装包/SQL控制命令exit0；全部记录附件与runlog摘要核对一致。上一轮implementation缺口闭环：contracts:25在任何追加前保存全部两会话8条旧引用，:27/12–18按原conversation_id+原message_id逐条HTTP读回并比较完整消息对象；附件P-pre-append-references-retained8条逐项等于H1原始6+2，首目标正确而其余任何旧引用失效/重编号/正文或角色错误都会在对应:18失败。:28–31在换凭据/重启后的真实服务轮次中归档独立140/141两条，独立角色正文匹配；不是只做配置验证。:33保存旧入口切换前全部五会话18条，:35经Run.assert_committed同时比较完整原文及每个精确引用；:36再次读取最初8个旧引用，附件全部等于原始对象；P-full-originals-after-legacy中T完整10条独立角色正文正确，其余四会话各两条，无仅验条数缺口。若旧入口恢复只前半正确，:35的完整消息对象比较先失败；若两次产品返回同错，生命周期:315–316和新增:31的独立fixture期望及保存于动作前的旧锚仍拦截。底层Run的真实进程健康后poll、每次argv/PID/退出码、H6/7/5 PID改变、完整cursor保留、每条新内容搜索、冲突exit2且不建库和旧无来源空Hub保持执行；本轮六次启动均有对应exit -15，最后原Hub/全部原文恢复。readonly-sql为零显式只读事务外查询。只认领本目标当前分配的P检查，不代表三平台H或整需求正式交付通过。"
+    }
+  }
+}

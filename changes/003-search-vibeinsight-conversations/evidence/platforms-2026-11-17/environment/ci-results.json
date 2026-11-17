@@ -1,0 +1,337 @@
+{
+  "conclusion": "success",
+  "databaseId": 44071472208,
+  "event": "pull_request",
+  "headSha": "ff816bd5acf5efc9e9b7ba7632693219063d95c2",
+  "jobs": [
+    {
+      "completedAt": "2026-11-17T11:13:23Z",
+      "conclusion": "success",
+      "databaseId": 133998498476,
+      "name": "tests (windows-2022)",
+      "startedAt": "2026-11-17T11:09:45Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-17T11:09:47Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-17T11:09:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:48Z",
+          "conclusion": "success",
+          "name": "Preserve repository source bytes",
+          "number": 2,
+          "startedAt": "2026-11-17T11:09:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:53Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 3,
+          "startedAt": "2026-11-17T11:09:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:55Z",
+          "conclusion": "success",
+          "name": "Run astral-sh/setup-uv@v6",
+          "number": 4,
+          "startedAt": "2026-11-17T11:09:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:59Z",
+          "conclusion": "success",
+          "name": "Run uv sync --extra test",
+          "number": 5,
+          "startedAt": "2026-11-17T11:09:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:14Z",
+          "conclusion": "success",
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "number": 6,
+          "startedAt": "2026-11-17T11:09:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:17Z",
+          "conclusion": "success",
+          "name": "Run uv run python scripts/build_packages.py",
+          "number": 7,
+          "startedAt": "2026-11-17T11:13:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:19Z",
+          "conclusion": "success",
+          "name": "Install wheels separately",
+          "number": 8,
+          "startedAt": "2026-11-17T11:13:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:20Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 9,
+          "startedAt": "2026-11-17T11:13:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:20Z",
+          "conclusion": "success",
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "number": 17,
+          "startedAt": "2026-11-17T11:13:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:22Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 18,
+          "startedAt": "2026-11-17T11:13:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:13:22Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-11-17T11:13:22Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/yangbobo2021/smm-local/actions/runs/44071472208/job/133998498476"
+    },
+    {
+      "completedAt": "2026-11-17T11:17:31Z",
+      "conclusion": "success",
+      "databaseId": 133998498948,
+      "name": "tests (macos-15)",
+      "startedAt": "2026-11-17T11:14:58Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-17T11:15:01Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-17T11:14:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:15:01Z",
+          "conclusion": "success",
+          "name": "Preserve repository source bytes",
+          "number": 2,
+          "startedAt": "2026-11-17T11:15:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:15:03Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 3,
+          "startedAt": "2026-11-17T11:15:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:15:06Z",
+          "conclusion": "success",
+          "name": "Run astral-sh/setup-uv@v6",
+          "number": 4,
+          "startedAt": "2026-11-17T11:15:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:15:08Z",
+          "conclusion": "success",
+          "name": "Run uv sync --extra test",
+          "number": 5,
+          "startedAt": "2026-11-17T11:15:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:21Z",
+          "conclusion": "success",
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "number": 6,
+          "startedAt": "2026-11-17T11:15:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:23Z",
+          "conclusion": "success",
+          "name": "Run uv run python scripts/build_packages.py",
+          "number": 7,
+          "startedAt": "2026-11-17T11:17:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:25Z",
+          "conclusion": "success",
+          "name": "Install wheels separately",
+          "number": 8,
+          "startedAt": "2026-11-17T11:17:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:27Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 9,
+          "startedAt": "2026-11-17T11:17:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:27Z",
+          "conclusion": "success",
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "number": 17,
+          "startedAt": "2026-11-17T11:17:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:28Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 18,
+          "startedAt": "2026-11-17T11:17:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:17:28Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-11-17T11:17:28Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/yangbobo2021/smm-local/actions/runs/44071472208/job/133998498948"
+    },
+    {
+      "completedAt": "2026-11-17T11:11:38Z",
+      "conclusion": "success",
+      "databaseId": 133998499136,
+      "name": "tests (ubuntu-24.04)",
+      "startedAt": "2026-11-17T11:09:45Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-17T11:09:47Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-17T11:09:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:47Z",
+          "conclusion": "success",
+          "name": "Preserve repository source bytes",
+          "number": 2,
+          "startedAt": "2026-11-17T11:09:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:48Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 3,
+          "startedAt": "2026-11-17T11:09:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:50Z",
+          "conclusion": "success",
+          "name": "Run astral-sh/setup-uv@v6",
+          "number": 4,
+          "startedAt": "2026-11-17T11:09:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:09:52Z",
+          "conclusion": "success",
+          "name": "Run uv sync --extra test",
+          "number": 5,
+          "startedAt": "2026-11-17T11:09:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:32Z",
+          "conclusion": "success",
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "number": 6,
+          "startedAt": "2026-11-17T11:09:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:33Z",
+          "conclusion": "success",
+          "name": "Run uv run python scripts/build_packages.py",
+          "number": 7,
+          "startedAt": "2026-11-17T11:11:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:34Z",
+          "conclusion": "success",
+          "name": "Install wheels separately",
+          "number": 8,
+          "startedAt": "2026-11-17T11:11:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:35Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 9,
+          "startedAt": "2026-11-17T11:11:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:35Z",
+          "conclusion": "success",
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "number": 17,
+          "startedAt": "2026-11-17T11:11:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:35Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 18,
+          "startedAt": "2026-11-17T11:11:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T11:11:35Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-11-17T11:11:35Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/yangbobo2021/smm-local/actions/runs/44071472208/job/133998499136"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/44071472208",
+  "test_summaries": [
+    "tests (windows-2022)\tRun uv run python -m pytest -q --junitxml=test-results.xml\t2026-11-17T11:13:14.4096770Z 84 passed, 1 warning in 193.23s (0:03:13)",
+    "tests (macos-15)\tRun uv run python -m pytest -q --junitxml=test-results.xml\t2026-11-17T11:17:21.2656270Z 83 passed, 1 skipped, 1 warning in 131.28s (0:02:11)",
+    "tests (ubuntu-24.04)\tRun uv run python -m pytest -q --junitxml=test-results.xml\t2026-11-17T11:11:32.3966880Z 83 passed, 1 skipped, 1 warning in 99.32s (0:01:39)"
+  ],
+  "note": "Hosted tests/build/separate-wheel smoke only; actual system services and native clients have independent machine evidence."
+}

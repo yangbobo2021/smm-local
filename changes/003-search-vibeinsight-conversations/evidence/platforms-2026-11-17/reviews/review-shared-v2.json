@@ -1,0 +1,21 @@
+{
+  "cases": {
+    "TC-boundaries-default": {
+      "status": "passed",
+      "covers": [
+        "boundaries-default-0",
+        "boundaries-default-2"
+      ],
+      "reason": "design/match/runtime/debug均绑定定义000003摘要1be6849c…；真实pytest run.stdout六项通过/exit0，覆盖回查、host/port/database三种目标和两个非法周期，未当成真实SQL实测。测试:23–37的独立事件时间/必有会话集合使首项目正确而另项目窗口内或边界遗漏在:36失败，:39–40重读身份及每会话单条拦截重复。窗口外不要求必排除。每个连接字段参数使用独立tmp档案，:60比较换凭据前后完整cursor，:65/:68分别比旧正文和独立早期新正文，:67/:71检查新会话和来源键；仅第二字段参数错误会在其独立实例失败，不会被首参数通过遮盖。该单测没有独立断言每次cursor UPDATE行数，实际SQL TC的:32/:34逐行前置核验补此层；不将它单独表述成真实服务/权限证明。 本轮design-shared-v1保持，match/runtime/debug升级v2，定义000003摘要不变，boundaries测试字节与上一轮相同且重新真实执行6 passed/exit0；已核对本轮日志与文件摘要。只认领共用回归，不当成服务身份或跨UID实测。"
+    },
+    "TC-shared-sql": {
+      "status": "passed",
+      "covers": [
+        "shared-sql-0",
+        "shared-sql-1",
+        "shared-sql-2"
+      ],
+      "reason": "保持design-shared-v1两TC语义，v2绑定contracts SHA7ec1bf0…，原shared/Run为其显式依赖；runtime ready、真实Linux安装Hub/systemd+SQL命令exit0，全部原始附件和日志摘要核对一致。原G3逐source/project UPDATE恰一行且(K,event_id)独立相等检查、十条独立正文基线、七个必有迟到/跨天/新发现目标逐项角色正文、隐藏后再可见、窗口外不要求必须排除、同时间重读，以及G6每个直接项目独立命中/唯一关系/解除后完整结果和旧会话引用保持执行；前置仅一行错首先shared:32/34失败，后目标遗漏在:54或其:59失败，旧/新两响应同错不能绕过独立fixture。上一轮shared-sql-2缺口已闭环：contracts:50–53独立比较clone中other-target完整0/1两条角色正文，首条正确其余错误在:52失败；:55保存完整cursor及全部会话，:57显式同一clone database内换<readonly-B>，:58立即比较全部cursor，:59–62重启后等待实际成功轮次并重新比较全部cursor、全部完整原文和旧精确引用。实际retained-originals-1含30会话/55个精确HTTP读回，与动作前消息对象比较。:63–67向clone造07-01T00:00:02/03、早于原连接09-28位置的两条独立新增会话，实际服务用<readonly-B>归档，完整角色正文与独立input相等；:68保留clone旧原文，:70保留原连接全部进度行。实际G4-progress同一clone名/host/port、user=<readonly-B>、last_success推进且无last_error，旧来源键和进度保留；新来源两条及新续跑两条原文人工独立核对一致。只配置成功但服务仍旧凭据、误切回原库或只导入首条，分别会在新会话等待/逐条全文断言失败。底层shared尾部切回仅清理，未冒充同目标换凭据证据；contracts finally亦为清理。三连接字段仍按PLAN认可的三字段参数化+真实换库等价组合，不要求额外三套SQL目标。已只读baseline.py/linux-baseline.py及PLAN第10节：SQLite backup/合成Q复位限定两轮之间停止的任务夹具，没有穿插此被验收恢复过程，不能认领产品恢复/升级。readonly SQL审计外事务查询为0；本结论仅当前G分配准备检查，不包办正式H或整需求。"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "service": {
+    "mode": "LocalService",
+    "owner": {
+      "Domain": "NT AUTHORITY",
+      "ReturnValue": 0,
+      "User": "LOCAL SERVICE",
+      "PSComputerName": null
+    },
+    "service": {
+      "Name": "smm-hub-57abce1e0307",
+      "StartName": "NT AUTHORITY\\LocalService",
+      "State": "Running",
+      "ProcessId": 2860,
+      "PathName": "<task>\\Python\\python.exe -I -S -c \"import sys; sys.path.insert(0, 'C:\\\\ProgramData\\\\SmmVibeInsight003-20261117\\\\hub-env\\\\Lib\\\\site-packages'); from smm_hub.windows_service import boot; boot()\" smm-hub-57abce1e0307 <task>\\state-native-37bbfe459456"
+    },
+    "pid": 2860
+  },
+  "psql_child": {
+    "ProcessId": 1308,
+    "ParentProcessId": 2860,
+    "ExecutablePath": "<task>\\pg-client\\bin\\psql.exe",
+    "CommandLine": "<task>\\pg-client\\bin\\psql.exe --no-psqlrc --no-password --quiet --tuples-only --no-align --set=ON_ERROR_STOP=1 --host=<fixture-host> --port=59762 --dbname=postgres --username=<readonly-A>"
+  },
+  "observation": "SELECT waits for a fixture-only table lock; controller uses <fixture-admin>, service uses its configured read-only role"
+}

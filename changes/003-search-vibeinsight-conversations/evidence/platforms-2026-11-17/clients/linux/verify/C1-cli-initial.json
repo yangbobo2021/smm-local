@@ -1,0 +1,321 @@
+{
+  "query": "platform",
+  "scope": "project",
+  "effective_projects": [
+    {
+      "id": 2,
+      "name": "git.example:0/team/D",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "source_key": "git.example:0/team/D",
+      "device_name": null
+    },
+    {
+      "id": 4,
+      "name": "duplicate name",
+      "source": "device",
+      "owner": "3e83442e6a1e47f28aace978b3f11370",
+      "source_key": "a9ec19130946c73c0b383039fbbe2c12",
+      "device_name": "mac"
+    },
+    {
+      "id": 7,
+      "name": "duplicate name",
+      "source": "device",
+      "owner": "67f29d9844ff4946a796e2dfd0145e3d",
+      "source_key": "783a2f4ddf4161e8bdc61c7ae8b7211f",
+      "device_name": "linux"
+    }
+  ],
+  "excluded_current_session_id": null,
+  "results": [
+    {
+      "id": 4,
+      "source": "vibeinsight",
+      "source_session_id": "new",
+      "title": "platform evidence D new 110",
+      "started_at": "2026-09-10T01:50:00",
+      "updated_at": "2026-09-10T01:51:00",
+      "project_id": 2,
+      "project_name": "git.example:0/team/D",
+      "rank": 1,
+      "bm25_score": 1.356164383561644e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "platform evidence D new 110",
+          "hub_message_id": 15,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "E000110",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "platform evidence D new 111",
+          "hub_message_id": 16,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 2,
+              "source_event_id": "E000111",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "git.example:0/team/D",
+          "source": "vibeinsight",
+          "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "source_key": "git.example:0/team/D",
+          "device_name": null
+        }
+      ],
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "source": "vibeinsight",
+      "source_session_id": "scheduled",
+      "title": "platform evidence D scheduled 104",
+      "started_at": "2026-09-10T01:44:00",
+      "updated_at": "2026-09-10T01:45:00",
+      "project_id": 2,
+      "project_name": "git.example:0/team/D",
+      "rank": 2,
+      "bm25_score": 1.356164383561644e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "platform evidence D scheduled 104",
+          "hub_message_id": 9,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "E000104",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "platform evidence D scheduled 105",
+          "hub_message_id": 10,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 2,
+              "source_event_id": "E000105",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "git.example:0/team/D",
+          "source": "vibeinsight",
+          "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "source_key": "git.example:0/team/D",
+          "device_name": null
+        }
+      ],
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "source": "vibeinsight",
+      "source_session_id": "other",
+      "title": "platform evidence D other 100",
+      "started_at": "2026-09-10T01:40:00",
+      "updated_at": "2026-09-10T01:41:00",
+      "project_id": 2,
+      "project_name": "git.example:0/team/D",
+      "rank": 3,
+      "bm25_score": 1.356164383561644e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "platform evidence D other 100",
+          "hub_message_id": 7,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "E000100",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "platform evidence D other 101",
+          "hub_message_id": 8,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 2,
+              "source_event_id": "E000101",
+              "project_id": 2,
+              "project_name": "git.example:0/team/D"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "git.example:0/team/D",
+          "source": "vibeinsight",
+          "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "source_key": "git.example:0/team/D",
+          "device_name": null
+        }
+      ],
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "source": "codex",
+      "source_session_id": "device-mac",
+      "title": "platform evidence device-mac",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 4,
+      "project_name": "duplicate name",
+      "rank": 4,
+      "bm25_score": 1.3112582781456953e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "platform evidence device-mac",
+          "hub_message_id": 26,
+          "origins": [
+            {
+              "device_id": "3e83442e6a1e47f28aace978b3f11370",
+              "device_name": "mac",
+              "source_position": 1,
+              "project_id": 4,
+              "project_name": "duplicate name"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 4,
+          "name": "duplicate name",
+          "source": "device",
+          "owner": "3e83442e6a1e47f28aace978b3f11370",
+          "source_key": "a9ec19130946c73c0b383039fbbe2c12",
+          "device_name": "mac"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "3e83442e6a1e47f28aace978b3f11370",
+          "device_name": "mac"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "source": "codex",
+      "source_session_id": "device-linux",
+      "title": "platform evidence device-linux",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 7,
+      "project_name": "duplicate name",
+      "rank": 5,
+      "bm25_score": 1.3112582781456953e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "platform evidence device-linux",
+          "hub_message_id": 29,
+          "origins": [
+            {
+              "device_id": "67f29d9844ff4946a796e2dfd0145e3d",
+              "device_name": "linux",
+              "source_position": 1,
+              "project_id": 7,
+              "project_name": "duplicate name"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 7,
+          "name": "duplicate name",
+          "source": "device",
+          "owner": "67f29d9844ff4946a796e2dfd0145e3d",
+          "source_key": "783a2f4ddf4161e8bdc61c7ae8b7211f",
+          "device_name": "linux"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "67f29d9844ff4946a796e2dfd0145e3d",
+          "device_name": "linux"
+        }
+      ]
+    }
+  ],
+  "hub_id": "0868da6356a443b9abf6f5db8cfc55e4",
+  "archive_scope": "hub",
+  "requested_scope": "project"
+}

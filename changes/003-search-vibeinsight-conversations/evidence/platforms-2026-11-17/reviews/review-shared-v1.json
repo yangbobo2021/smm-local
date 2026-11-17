@@ -1,0 +1,21 @@
+{
+  "cases": {
+    "TC-boundaries-default": {
+      "status": "passed",
+      "reason": "design/match/runtime/debug均绑定定义000003摘要1be6849c…；真实pytest run.stdout六项通过/exit0，覆盖回查、host/port/database三种目标和两个非法周期，未当成真实SQL实测。测试:23–37的独立事件时间/必有会话集合使首项目正确而另项目窗口内或边界遗漏在:36失败，:39–40重读身份及每会话单条拦截重复。窗口外不要求必排除。每个连接字段参数使用独立tmp档案，:60比较换凭据前后完整cursor，:65/:68分别比旧正文和独立早期新正文，:67/:71检查新会话和来源键；仅第二字段参数错误会在其独立实例失败，不会被首参数通过遮盖。该单测没有独立断言每次cursor UPDATE行数，实际SQL TC的:32/:34逐行前置核验补此层；不将它单独表述成真实服务/权限证明。",
+      "covers": [
+        "boundaries-default-0",
+        "boundaries-default-2"
+      ]
+    },
+    "TC-shared-sql": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "真实Linux systemd/安装Hub/SQL执行exit0、附件及冻结source摘要相符，人工核对原始记录。首轮R1/R4已闭环：shared.py:16独立十条基线；:29–34逐来源/项目核对UPDATE恰一行和独立K；:54/:59逐个必有边界/内/跨天/新项目角色正文，首目标正确其余错会在集合或对应逐行断言失败；:61/64权限隐藏，:66独立迟可见正文；:76以独立fixture0–9而非产品旧响应比较改写边界。G6 :100–103检查重复/唯一，:109–113各方向范围与实际每目标，:117–124解除后完整会话集合、全局及旧会话引用，保存实际响应。两项目K若只有一行不正确首先:32/34阻断；起点/结果两边同错也不能绕过独立时间/正文。窗口外未扩大承诺。但本TC分配shared-sql-2包含同目标换凭据沿用进度；:156最终configure <readonly-B>后立即返回，没有保存/比较换前后完整cursor，也没有等待服务用替换账号成功新轮次并核对旧档案，配置校验成功不等于实际服务续跑。本TC cannot independently claim此分配，不能以另TC默认回归通过冒充本SQL动作已验证。另外:146向新目标造两条，:150仅检查会话存在，:155存原文没有独立两条角色/正文断言；首条正确而其余缺失/错误仍可通过。实际G4附件两条均与独立规则一致，不是产品失败；最早需在:146保存独立rows并于:150后比较完整读回，再对:156保存/比较完整cursor及旧档案、观察replacement账号自动轮次。这是implementation补强，设计已给正确期望；不扩大到SQL重复测试host/port三套环境，三字段回归+实际换库是PLAN认可等价方法。",
+      "covers": [
+        "shared-sql-0",
+        "shared-sql-1"
+      ]
+    }
+  }
+}

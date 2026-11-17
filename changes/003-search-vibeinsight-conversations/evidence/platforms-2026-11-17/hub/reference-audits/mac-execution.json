@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "<checkout>/.venv/bin/python",
+    "scripts/acceptance/vibeinsight_contracts.py",
+    "references",
+    "--evidence-dir",
+    "<checkout>/.acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/execute/execution-services-v1/TC-hub-mac-lifecycle/attachments/report",
+    "--output",
+    "<checkout>/.acceptance-local/platform-round/formal-reference-audits/mac.json"
+  ],
+  "exit_code": 0,
+  "started_epoch": 1794913595.6457589,
+  "ended_epoch": 1794913595.6990888,
+  "auditor_sha256": "7ec1bf0d2ca98ddfc07c5d191146d76f73bedd76fd6798a68b386061237c45d5",
+  "output_sha256": "850ebd7312402ab95cee21b6bbde8ce83bd05153ba7541ee81ad99950e87ff63"
+}

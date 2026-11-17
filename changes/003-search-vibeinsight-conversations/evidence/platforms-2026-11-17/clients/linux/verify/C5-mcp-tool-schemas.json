@@ -1,0 +1,230 @@
+{
+  "manage_sync": {
+    "properties": {
+      "action": {
+        "enum": [
+          "status",
+          "open",
+          "sync",
+          "pause",
+          "resume"
+        ],
+        "title": "Action",
+        "type": "string"
+      },
+      "source": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Source"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "title": "manage_syncArguments",
+    "type": "object"
+  },
+  "set_source_enabled": {
+    "properties": {
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "enabled": {
+        "title": "Enabled",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "source",
+      "enabled"
+    ],
+    "title": "set_source_enabledArguments",
+    "type": "object"
+  },
+  "configure_hub": {
+    "properties": {
+      "address": {
+        "title": "Address",
+        "type": "string"
+      },
+      "device_name": {
+        "title": "Device Name",
+        "type": "string"
+      },
+      "token_file": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Token File"
+      }
+    },
+    "required": [
+      "address",
+      "device_name"
+    ],
+    "title": "configure_hubArguments",
+    "type": "object"
+  },
+  "search_conversations": {
+    "properties": {
+      "query": {
+        "title": "Query",
+        "type": "string"
+      },
+      "scope": {
+        "default": "all",
+        "title": "Scope",
+        "type": "string"
+      },
+      "project_id": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Project Id"
+      },
+      "limit": {
+        "default": 5,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "current_session_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Current Session Id"
+      },
+      "current_source": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Current Source"
+      },
+      "include_current": {
+        "default": false,
+        "title": "Include Current",
+        "type": "boolean"
+      },
+      "local": {
+        "default": false,
+        "title": "Local",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "query"
+    ],
+    "title": "search_conversationsArguments",
+    "type": "object"
+  },
+  "read_conversation": {
+    "properties": {
+      "conversation_id": {
+        "title": "Conversation Id",
+        "type": "integer"
+      },
+      "start": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Start"
+      },
+      "end": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "End"
+      },
+      "hub_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Hub Id"
+      },
+      "hub_message_id": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Hub Message Id"
+      }
+    },
+    "required": [
+      "conversation_id"
+    ],
+    "title": "read_conversationArguments",
+    "type": "object"
+  },
+  "list_projects": {
+    "properties": {},
+    "title": "list_projectsArguments",
+    "type": "object"
+  },
+  "resolve_project": {
+    "properties": {
+      "cwd": {
+        "title": "Cwd",
+        "type": "string"
+      }
+    },
+    "required": [
+      "cwd"
+    ],
+    "title": "resolve_projectArguments",
+    "type": "object"
+  }
+}

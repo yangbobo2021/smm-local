@@ -1,0 +1,55 @@
+{
+  "tool": "read_conversation",
+  "arguments": {
+    "conversation_id": 10,
+    "hub_id": "0868da6356a443b9abf6f5db8cfc55e4",
+    "hub_message_id": 26
+  },
+  "response": {
+    "id": 10,
+    "source": "codex",
+    "source_session_id": "device-mac",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "platform evidence device-mac",
+    "project_id": 4,
+    "project_name": "duplicate name",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "platform evidence device-mac",
+        "timestamp": null,
+        "hub_message_id": 26,
+        "origins": [
+          {
+            "device_id": "3e83442e6a1e47f28aace978b3f11370",
+            "device_name": "mac",
+            "source_position": 1,
+            "project_id": 4,
+            "project_name": "duplicate name"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "id": 4,
+        "name": "duplicate name",
+        "source": "device",
+        "owner": "3e83442e6a1e47f28aace978b3f11370",
+        "source_key": "a9ec19130946c73c0b383039fbbe2c12",
+        "device_name": "mac"
+      }
+    ],
+    "origins": [
+      {
+        "device_id": "3e83442e6a1e47f28aace978b3f11370",
+        "device_name": "mac"
+      }
+    ],
+    "archive_scope": "hub"
+  }
+}

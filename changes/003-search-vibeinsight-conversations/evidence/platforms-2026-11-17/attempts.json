@@ -1,0 +1,409 @@
+{
+  "scope": "debug history; not formal acceptance statuses",
+  "attempts": [
+    {
+      "id": "debug-clients-v1",
+      "scene": "SC11",
+      "status": "debugged",
+      "sha256": "06b07bd209a49aa34949e5411da86f1f9dea7835281e8b32dfb502f7fe7649a5",
+      "results": {
+        "TC-client-linux": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-client-mac": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-client-windows": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-clients-v2",
+      "scene": "SC11",
+      "status": "debugged",
+      "sha256": "87ca07c6755ef2e8eeeef858aa91ab0c8b5bbd5859fd282d69cd1463c67c5c79",
+      "results": {
+        "TC-client-linux": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-client-mac": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-client-windows": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-services-all-v2",
+      "scene": "SC10",
+      "status": "debugged",
+      "sha256": "f530dbc93b37d286d74b1431db645d314fa4f870c272ece529eb033c8ca5a251",
+      "results": {
+        "TC-hub-linux-initial": {
+          "exit_code": 1,
+          "error": null
+        },
+        "TC-hub-linux-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-mac-initial": {
+          "exit_code": 1,
+          "error": null
+        },
+        "TC-hub-mac-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-windows-initial": {
+          "exit_code": 1,
+          "error": null
+        },
+        "TC-hub-windows-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-services-all-v3",
+      "scene": "SC10",
+      "status": "debugged",
+      "sha256": "1d0d7fe07196a16ca88ad9984cc72d8ad9054b357a3291c435f71ac4154f6567",
+      "results": {
+        "TC-hub-linux-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-linux-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-mac-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-mac-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-windows-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-windows-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-services-mac-v1",
+      "scene": "SC10",
+      "status": "debugged",
+      "sha256": "4897e7b6b7fca89f1026550ab724efd8479028aa945a308a67217fe632126ced",
+      "results": {
+        "TC-hub-mac-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-mac-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-services-remote-v1",
+      "scene": "SC10",
+      "status": "debugged",
+      "sha256": "091a680c4b1a3dfe00859592b266e35c4352e6b12d793d37939d7ef5b4b0068a",
+      "results": {
+        "TC-hub-linux-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-linux-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-windows-initial": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-hub-windows-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-shared-v1",
+      "scene": "SC9",
+      "status": "debugged",
+      "sha256": "b57080aca400198d551fc47aecf7d1e2245ddcfa534cf6adcca0d83a63dec7f5",
+      "results": {
+        "TC-boundaries-default": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-shared-sql": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-shared-v2",
+      "scene": "SC9",
+      "status": "debugged",
+      "sha256": "a59e4b636a32cef7192a81a32aefd1f1ab6adb7ce98318c9b7067fc9188e53a6",
+      "results": {
+        "TC-boundaries-default": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-shared-sql": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-standalone-full-v1",
+      "scene": "SC8",
+      "status": "debugged",
+      "sha256": "09470531853f598a1c7b7f6820ab47c89f37884b9e131464f613aa5fed7f1459",
+      "results": {
+        "TC-standalone-compatibility": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-conflict": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-sql": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "debug-standalone-full-v2",
+      "scene": "SC8",
+      "status": "debugged",
+      "sha256": "6a4ab4dfcc08d4ee71841d61c65f2e182099b343e90e6ac7f6f9f37d4ca10cca",
+      "results": {
+        "TC-standalone-compatibility": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-conflict": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-lifecycle": {
+          "exit_code": 0,
+          "error": null
+        },
+        "TC-standalone-sql": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-1",
+      "scene": "SC1",
+      "status": "debugged",
+      "sha256": "0da1e800cd93abeb798633aba314f38ceb7af3cc72f0541be9890355a2f8c67f",
+      "results": {
+        "TC-1": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-2",
+      "scene": "SC2",
+      "status": "debugged",
+      "sha256": "9bdd536f492b634dfaa30ac37205e95a6369ffcf83f390a52490f433f62b1b10",
+      "results": {
+        "TC-2": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-3",
+      "scene": "SC3",
+      "status": "debugged",
+      "sha256": "8cffdd70dbdea475fef8344ef36188ede4a6ce5e86e21a804888dc536a7288d9",
+      "results": {
+        "TC-3": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-4",
+      "scene": "SC4",
+      "status": "debugged",
+      "sha256": "90d19fd09e6be5762a9576875daca42c7474edb970b3ce17fa9a5b1c856404b2",
+      "results": {
+        "TC-4": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-5",
+      "scene": "SC5",
+      "status": "debugged",
+      "sha256": "f2f6a1f4135090b820cadd57e2ec55f2a24d644f1baea39254543aa7d7d48e68",
+      "results": {
+        "TC-5": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-6",
+      "scene": "SC6",
+      "status": "debugged",
+      "sha256": "4c168af3f50f7a77193e4345c74bff49e779703a7b0866f3332239dcbb1a242e",
+      "results": {
+        "TC-6": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "final-debug-7",
+      "scene": "SC7",
+      "status": "debugged",
+      "sha256": "bf8bb028029b66eb83d910f6de9b116b382ef9f2725075b30f5f0f07d857bfa4",
+      "results": {
+        "TC-7": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "implementation-debug-4",
+      "scene": "SC4",
+      "status": "debugged",
+      "sha256": "63a8501b0be986e374fc57bb33f2a3d11725b0b95844043345f42001c5600a67",
+      "results": {
+        "TC-4": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-1",
+      "scene": "SC1",
+      "status": "debugged",
+      "sha256": "36057b06406ba4347ff56cf4267df5faa94c363539324ffdf5f4d5500bbfb06f",
+      "results": {
+        "TC-1": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-2",
+      "scene": "SC2",
+      "status": "debugged",
+      "sha256": "177dfff823c531f50c06f8bc2385a28bfa876a18f2b07ae77e7b64b27e1c878e",
+      "results": {
+        "TC-2": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-3",
+      "scene": "SC3",
+      "status": "debugged",
+      "sha256": "98f832f8e1f9ab1a5c44765a8d872cd49b7b079ef579415fd1bd99f07a3a435f",
+      "results": {
+        "TC-3": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-4",
+      "scene": "SC4",
+      "status": "debugged",
+      "sha256": "f966d79aad0577c17044d78f4cfae6c09f164a6b56aaa621355a111bc88e4126",
+      "results": {
+        "TC-4": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-5",
+      "scene": "SC5",
+      "status": "debugged",
+      "sha256": "88fc7aec92abb933688c4c852513acbcc821375577f114889fd70c068dcc5050",
+      "results": {
+        "TC-5": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-6",
+      "scene": "SC6",
+      "status": "debugged",
+      "sha256": "49e8779ccd02883d3c4a29b3d33d660a232620c731c852fc7d0748d34d5a9480",
+      "results": {
+        "TC-6": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "revised-debug-7",
+      "scene": "SC7",
+      "status": "debugged",
+      "sha256": "048d90d4f78a2d3c63baa738139df7a672de6696532d105691af9433afef8a8a",
+      "results": {
+        "TC-7": {
+          "exit_code": 0,
+          "error": null
+        }
+      }
+    }
+  ]
+}

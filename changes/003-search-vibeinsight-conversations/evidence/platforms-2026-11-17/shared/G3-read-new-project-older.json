@@ -1,0 +1,52 @@
+{
+  "id": 20,
+  "source": "vibeinsight",
+  "source_session_id": "new-project-older",
+  "source_path": "",
+  "cwd": null,
+  "started_at": "2026-09-10T10:00:00",
+  "updated_at": "2026-09-10T10:00:00",
+  "title": "platform evidence gamma new-project-older 600",
+  "project_id": 14,
+  "project_name": "git.example:0/team/gamma",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "platform evidence gamma new-project-older 600",
+      "timestamp": "2026-09-10T10:00:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 38,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 1,
+          "source_event_id": "E000600",
+          "project_id": 14,
+          "project_name": "git.example:0/team/gamma"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 14,
+      "name": "git.example:0/team/gamma",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "source_key": "git.example:0/team/gamma",
+      "device_name": null
+    }
+  ],
+  "origins": [
+    {
+      "source": "vibeinsight",
+      "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "platform": "codex"
+    }
+  ]
+}

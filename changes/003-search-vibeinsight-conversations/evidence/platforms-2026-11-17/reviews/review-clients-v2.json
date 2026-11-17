@@ -1,0 +1,34 @@
+{
+  "cases": {
+    "TC-client-linux": {
+      "status": "passed",
+      "reason": "保持design-clients-v1/原TC身份与SPEC三平台两入口语义；定义000003摘要1be6849c…一致，v2 match绑定client.py SHA1219efdd…与实际冻结probe-source和当前字节一致。runtime ready；本轮原生UID1000、非root，CLI/真实stdio MCP及外层debug均exit0；该TC全部附件/runlog摘要核对无差异。此前已闭环部分本轮重新实证：:151–156分别比较Hub有效/实际项目集合并逐独立expected_hits检查每直接目标会话与正文；首次目标正确而后一目标漏掉会首先在:152或其:154失败。scope的opaque Hub ID由prepared device_id映射，预期正文来自固定fixture而非search返回。两入口各自global→自身hub_id/message引用→read，保存CLI argv/MCP arguments与各自search响应对应，独立正文/角色/设备或Vibe平台/事件位置正确；只MCP引用错会在其真实read/独立原文校验失败，两个入口同错不能靠相互相等蒙混。两入口分别验证透明中继断线后的本机全三会话/原因、恢复Hub直接范围、显式本机两项目关系；真实schema及stdio退出0均留存。改名前duplicate name、后为renamed-linux-31b87998，两个入口返回新名且本机/Hub稳定ID、范围与必有历史命中保持；单入口忽略改名会在其独立名称断言失败。 上一轮X-3 implementation缺口已闭环：旧进程:98–100从Hub完整读取本设备三个会话并要求数量3；实际core SHA0c1514adc424d6a58ea293e3b2626d4452b940638067286cb1c34d23e38ee13f、federation SHA4791b0132de2ce6c6ae0e13e1d6bcdce02cc05e943c2eda2c9ef22f722e695f2，均与git baseline d2dee18逐字节摘要相同。原始三个完整会话补传前projects均为空，当前目标:109明确前置断言；:116集合独立要求device/other/related三会话，:119逐会话对独立合成单条user正文，随后:120–123在同一Hub/原conversation_id完整读回并比较hub_message_id/position/role/text/timestamp整个序列；列表等式同时比较全部数量和顺序，重复/少条/改ID不再被搜索命中上限遮蔽。仅第二或第三会话在补传后多插一条，首先会在该目标:122失败；若旧/新读回两端同样多条或正文错误，:119的独立单条期望先失败。本轮三份前后完整响应每会话均恰一条、五字段全相等，已逐行复算；本机原始计数3、补传后:128保持，旧精确引用继续可读。三平台本轮prepare全部prepared，verify全部passed，属于本轮新cohort/新Hub ID，不复用上一轮Mac连接重置重试的prepare收据。已认可两轮间停止任务夹具的backup/Q复位仅构造前置状态，不是产品恢复或升级；未读取私有target/manifest/数据库。仅认领此TC分配X-0/1/2/3的本轮准备检查，不将Linux DAC推论说成跨UID open，不包办H或整需求正式交付结论。",
+      "covers": [
+        "linux-0",
+        "linux-1",
+        "linux-2",
+        "linux-3"
+      ]
+    },
+    "TC-client-mac": {
+      "status": "passed",
+      "reason": "保持design-clients-v1/原TC身份与SPEC三平台两入口语义；定义000003摘要1be6849c…一致，v2 match绑定client.py SHA1219efdd…与实际冻结probe-source和当前字节一致。runtime ready；本轮原生UID501、非root，CLI/真实stdio MCP及外层debug均exit0；该TC全部附件/runlog摘要核对无差异。此前已闭环部分本轮重新实证：:151–156分别比较Hub有效/实际项目集合并逐独立expected_hits检查每直接目标会话与正文；首次目标正确而后一目标漏掉会首先在:152或其:154失败。scope的opaque Hub ID由prepared device_id映射，预期正文来自固定fixture而非search返回。两入口各自global→自身hub_id/message引用→read，保存CLI argv/MCP arguments与各自search响应对应，独立正文/角色/设备或Vibe平台/事件位置正确；只MCP引用错会在其真实read/独立原文校验失败，两个入口同错不能靠相互相等蒙混。两入口分别验证透明中继断线后的本机全三会话/原因、恢复Hub直接范围、显式本机两项目关系；真实schema及stdio退出0均留存。改名前duplicate name、后为renamed-mac-433af7ff，两个入口返回新名且本机/Hub稳定ID、范围与必有历史命中保持；单入口忽略改名会在其独立名称断言失败。 上一轮X-3 implementation缺口已闭环：旧进程:98–100从Hub完整读取本设备三个会话并要求数量3；实际core SHA0c1514adc424d6a58ea293e3b2626d4452b940638067286cb1c34d23e38ee13f、federation SHA4791b0132de2ce6c6ae0e13e1d6bcdce02cc05e943c2eda2c9ef22f722e695f2，均与git baseline d2dee18逐字节摘要相同。原始三个完整会话补传前projects均为空，当前目标:109明确前置断言；:116集合独立要求device/other/related三会话，:119逐会话对独立合成单条user正文，随后:120–123在同一Hub/原conversation_id完整读回并比较hub_message_id/position/role/text/timestamp整个序列；列表等式同时比较全部数量和顺序，重复/少条/改ID不再被搜索命中上限遮蔽。仅第二或第三会话在补传后多插一条，首先会在该目标:122失败；若旧/新读回两端同样多条或正文错误，:119的独立单条期望先失败。本轮三份前后完整响应每会话均恰一条、五字段全相等，已逐行复算；本机原始计数3、补传后:128保持，旧精确引用继续可读。三平台本轮prepare全部prepared，verify全部passed，属于本轮新cohort/新Hub ID，不复用上一轮Mac连接重置重试的prepare收据。已认可两轮间停止任务夹具的backup/Q复位仅构造前置状态，不是产品恢复或升级；未读取私有target/manifest/数据库。仅认领此TC分配X-0/1/2/3的本轮准备检查，不将Linux DAC推论说成跨UID open，不包办H或整需求正式交付结论。",
+      "covers": [
+        "mac-0",
+        "mac-1",
+        "mac-2",
+        "mac-3"
+      ]
+    },
+    "TC-client-windows": {
+      "status": "passed",
+      "reason": "保持design-clients-v1/原TC身份与SPEC三平台两入口语义；定义000003摘要1be6849c…一致，v2 match绑定client.py SHA1219efdd…与实际冻结probe-source和当前字节一致。runtime ready；本轮原生普通交互Limited token、elevated_admin=false，CLI/真实stdio MCP及外层debug均exit0；该TC全部附件/runlog摘要核对无差异。此前已闭环部分本轮重新实证：:151–156分别比较Hub有效/实际项目集合并逐独立expected_hits检查每直接目标会话与正文；首次目标正确而后一目标漏掉会首先在:152或其:154失败。scope的opaque Hub ID由prepared device_id映射，预期正文来自固定fixture而非search返回。两入口各自global→自身hub_id/message引用→read，保存CLI argv/MCP arguments与各自search响应对应，独立正文/角色/设备或Vibe平台/事件位置正确；只MCP引用错会在其真实read/独立原文校验失败，两个入口同错不能靠相互相等蒙混。两入口分别验证透明中继断线后的本机全三会话/原因、恢复Hub直接范围、显式本机两项目关系；真实schema及stdio退出0均留存。改名前duplicate name、后为renamed-windows-2cddeaab，两个入口返回新名且本机/Hub稳定ID、范围与必有历史命中保持；单入口忽略改名会在其独立名称断言失败。 上一轮X-3 implementation缺口已闭环：旧进程:98–100从Hub完整读取本设备三个会话并要求数量3；实际core SHA0c1514adc424d6a58ea293e3b2626d4452b940638067286cb1c34d23e38ee13f、federation SHA4791b0132de2ce6c6ae0e13e1d6bcdce02cc05e943c2eda2c9ef22f722e695f2，均与git baseline d2dee18逐字节摘要相同。原始三个完整会话补传前projects均为空，当前目标:109明确前置断言；:116集合独立要求device/other/related三会话，:119逐会话对独立合成单条user正文，随后:120–123在同一Hub/原conversation_id完整读回并比较hub_message_id/position/role/text/timestamp整个序列；列表等式同时比较全部数量和顺序，重复/少条/改ID不再被搜索命中上限遮蔽。仅第二或第三会话在补传后多插一条，首先会在该目标:122失败；若旧/新读回两端同样多条或正文错误，:119的独立单条期望先失败。本轮三份前后完整响应每会话均恰一条、五字段全相等，已逐行复算；本机原始计数3、补传后:128保持，旧精确引用继续可读。三平台本轮prepare全部prepared，verify全部passed，属于本轮新cohort/新Hub ID，不复用上一轮Mac连接重置重试的prepare收据。已认可两轮间停止任务夹具的backup/Q复位仅构造前置状态，不是产品恢复或升级；未读取私有target/manifest/数据库。仅认领此TC分配X-0/1/2/3的本轮准备检查，不将Linux DAC推论说成跨UID open，不包办H或整需求正式交付结论。",
+      "covers": [
+        "windows-0",
+        "windows-1",
+        "windows-2",
+        "windows-3"
+      ]
+    }
+  }
+}

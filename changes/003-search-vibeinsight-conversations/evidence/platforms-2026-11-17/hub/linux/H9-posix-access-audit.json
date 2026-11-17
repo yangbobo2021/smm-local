@@ -1,0 +1,19 @@
+{
+  "method": "actual owner, mode and complete POSIX ACL audit",
+  "other_uid_open_executed": false,
+  "evidence": [
+    {
+      "path": "<task>/state-native-9d4134453f93",
+      "uid": 1000,
+      "mode": "0o700",
+      "acl": "# file: <task>/state-native-9d4134453f93\n# owner: 1000\n# group: 1000\nuser::rwx\ngroup::---\nother::---\n\n"
+    },
+    {
+      "path": "<task>/state-native-9d4134453f93/vibeinsight-credential-735717b5fe7e4b20b9b34cbd66e9571c",
+      "uid": 1000,
+      "mode": "0o600",
+      "acl": "# file: <task>/state-native-9d4134453f93/vibeinsight-credential-735717b5fe7e4b20b9b34cbd66e9571c\n# owner: 1000\n# group: 1000\nuser::rw-\ngroup::---\nother::---\n\n"
+    }
+  ],
+  "inference": "No named/default ACL grants; group and other have no access. Under Linux DAC, other unprivileged UIDs cannot read; authorized owner and privileged administration are outside that exclusion."
+}
