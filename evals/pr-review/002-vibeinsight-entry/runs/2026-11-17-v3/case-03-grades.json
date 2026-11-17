@@ -1,0 +1,77 @@
+{
+  "case": "Case 03",
+  "answers": [
+    {
+      "label": "R1",
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "quote": "实际新增 `docs/index.md`，并将 `README.md:50` 改为要求首次使用从该首页选择流程",
+          "reason": "识别文档首页是声明的主要操作入口。"
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "quote": "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。",
+          "reason": "确认 README 经文档首页进入同步和关联指南的路径可达。"
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "quote": "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。\n`TRIAL_GUIDE.md:88–93` 要求数据库只读账户，并给出示例主机、数据库名及用户名\n`TRIAL_GUIDE.md:99–105` 提供列表、建立和解除命令",
+          "reason": "引用了 README 链接、文档首页两项能力入口及详细指南操作位置。"
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "quote": "首页第7、8行分别提供同步与关联入口，可以继续。",
+          "reason": "没有因 README 未重复能力介绍而报告入口缺失。"
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "quote": "假定管理员另行提供上述信息，命令入口存在；",
+          "reason": "接受现有导航及操作入口，没有强制 README 重复说明；另提的是连接前置资料取得问题。"
+        }
+      ],
+      "other_findings": "另报告 Skill 范围指引冲突、本机 Web 关联说明歧义、PLAN 文档范围及验收证据对应问题；这些不替代本次导航检查。"
+    },
+    {
+      "label": "R2",
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "quote": "新增 `docs/index.md`、修改 README 导航未列入 PLAN 修改位置，也未说明新增统一入口的原因。",
+          "reason": "识别文档首页承担统一使用入口。"
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "quote": "从 README 第50行可以到达 `docs/index.md:7`，再进入 `TRIAL_GUIDE.md:86–95`。\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`",
+          "reason": "明确回放同步和项目关联的可达路径。"
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "quote": "从 README 第50行可以到达 `docs/index.md:7`，再进入 `TRIAL_GUIDE.md:86–95`。该路径明确介绍了能力、对象、依赖、配置命令和状态确认，不能认定本功能缺少入口。\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`",
+          "reason": "引用了 README、首页能力说明及两项指南的操作依据。"
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "quote": "该路径明确介绍了能力、对象、依赖、配置命令和状态确认，不能认定本功能缺少入口。",
+          "reason": "明确排除了新功能入口缺失的误报。"
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "quote": "新首页已提供清晰的 Hub CLI 路径，因此不是整体导航阻断；建议第38行限定本机关联与汇总端关联的适用范围。",
+          "reason": "接受已有路径，建议针对局部歧义，没有要求 README 重复指南或虚构文档缺失。"
+        }
+      ],
+      "other_findings": "另报告 VibeInsight 项目身份与改名保证的规格差异、Skill 指引冲突及连接资料取得说明不足，均与导航判断分开。"
+    }
+  ]
+}
