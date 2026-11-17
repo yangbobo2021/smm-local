@@ -235,6 +235,8 @@ class Run:
             # Real scheduling observation, no sleep/clock patch in the product.
             eventually(lambda:self.admin("vibeinsight","status")["last_success"]!=success,seconds=340)
         self.configure(interval=1)
+        if self.args.mode != "self-managed":
+            self.audit_psql_process()
         self.fixture.rows(104,106,session="scheduled",repo="D")
         eventually(lambda:len(self.session("scheduled"))==1)
         live=self.read(self.session("scheduled")[0])
@@ -312,20 +314,21 @@ class Run:
             assert len(self.read(self.original)["messages"])==10
         finally: renamed.rename(binary)
         eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
-        if os.name!="nt":
+        if os.name=="nt":
+            # Deny this task's service SID on the dedicated executable only.
+            self.command(["icacls.exe",str(binary),"/deny","*S-1-5-19:RX"])
+            try:
+                eventually(lambda:self.admin("vibeinsight","status")["last_error"])
+                self.snapshot("H4-client-not-executable")
+            finally:self.command(["icacls.exe",str(binary),"/remove:d","*S-1-5-19"])
+            eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
+        else:
             mode=binary.stat().st_mode
             binary.chmod(0o600)
             try:
                 eventually(lambda:self.admin("vibeinsight","status")["last_error"])
                 self.snapshot("H4-client-not-executable")
             finally:binary.chmod(mode)
-            eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
-        else:
-            self.command(["icacls.exe",str(binary),"/deny","*S-1-5-19:(X)"])
-            try:
-                eventually(lambda:self.admin("vibeinsight","status")["last_error"])
-                self.snapshot("H4-client-not-executable")
-            finally:self.command(["icacls.exe",str(binary),"/remove:d","*S-1-5-19"])
             eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
         # Disable only this fixture's reader login, not the shared PostgreSQL server.
         self.fixture.sql("ALTER ROLE replacement_reader NOLOGIN")
@@ -335,6 +338,40 @@ class Run:
         finally:self.fixture.sql("ALTER ROLE replacement_reader LOGIN")
         eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
         self.snapshot("H4-restored")
+
+    def audit_psql_process(self):
+        """Hold one fixture table lock so the real service child remains observable."""
+        service=self.service_identity()
+        parent=service["pid"]
+        cfg=self.cfg
+        env=dict(self.env,PGPASSWORD=cfg["admin_password"],PGAPPNAME="smm-fixture-process-audit")
+        args=[self.target["psql"],"-XqAt","-v","ON_ERROR_STOP=1","-h",cfg["host"],"-p",str(cfg["port"]),
+              "-U","probe_admin","-d",cfg["database"],"-c",
+              "BEGIN; LOCK TABLE fact_events IN ACCESS EXCLUSIVE MODE; SELECT pg_sleep(15); COMMIT;"]
+        lock=subprocess.Popen(args,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        try:
+            eventually(lambda:self.fixture.sql("SELECT count(*) FROM pg_stat_activity WHERE application_name='smm-fixture-process-audit' AND wait_event='PgSleep'").strip()=="1",seconds=8)
+            if os.name=="nt":
+                query=("Get-CimInstance Win32_Process -Filter \"ParentProcessId="+str(parent)+"\" | "
+                       "Where-Object Name -eq 'psql.exe' | Select-Object ProcessId,ParentProcessId,ExecutablePath,CommandLine | ConvertTo-Json")
+                def observe():
+                    data=self.command(["powershell","-NoProfile","-Command",query]).stdout.strip()
+                    return json.loads(data) if data else None
+                child=eventually(observe,seconds=10)
+                if isinstance(child,list):child=child[0]
+                assert child["ParentProcessId"]==parent
+            else:
+                def observe():
+                    children=self.command(["pgrep","-P",str(parent)],expected=None).stdout.split()
+                    for pid in children:
+                        record=self.command(["ps","-p",pid,"-o","pid=,ppid=,uid=,command="],expected=None).stdout.strip()
+                        if "psql" in record and int(record.split()[1])==parent:return record
+                child=eventually(observe,seconds=10)
+            self.save("H1-service-psql-process",{"service":service,"psql_child":child,
+                "observation":"SELECT waits for a fixture-only table lock; controller uses probe_admin, service uses its configured read-only role"})
+        finally:
+            stdout,stderr=lock.communicate(timeout=25)
+            assert lock.returncode==0,self.redact(stderr.decode(errors="replace"))
 
     def permissions(self):
         config=json.loads((self.state/"vibeinsight.json").read_text())
