@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-17T12:00:25.921146+00:00",
+  "generated_at": "2026-11-17T12:12:21.271208+00:00",
   "acceptance_id": "AT-SMM-VIBEINSIGHT-003",
   "definition_sha256": "1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9",
-  "transformation": "Literal task/home paths, private IPv4 and private/synthetic connection account names replaced with consistent aliases; source bodies, synthetic IDs, counts, statuses and code/wheel hashes retained. Original hashes refer to immutable input bytes; public hashes refer to redacted files. Controller sources and credentials are not published.",
+  "transformation": "Literal task/home paths, private IPv4 and private/synthetic connection account names and test-account SID replaced with consistent aliases; source bodies, synthetic IDs, counts, statuses and code/wheel hashes retained. Original hashes refer to immutable input bytes; public hashes refer to redacted files. Controller sources and credentials are not published.",
   "generated_secret_scan_hits": 0,
   "files": [
     {
@@ -2034,6 +2034,36 @@
       "path": "reviews/preparation-review.md",
       "original_sha256": "c22cebf9225e1dd55d930c32b2e9ab3fd4d0520a1f611efbdcc212d1f7cf93fc",
       "public_sha256": "6866e39cf16e8270495e8fde78d26e0fcf068be37c00f3aaca23368cfdd31fcf"
+    },
+    {
+      "path": "native/delivery-r8-platform-v1.json",
+      "original_sha256": "9481799117417194eebffd7fbbb49223211ee8f3c77522b95378e3e37863a3bc",
+      "public_sha256": "9481799117417194eebffd7fbbb49223211ee8f3c77522b95378e3e37863a3bc"
+    },
+    {
+      "path": "reviews/delivery-r8-platform-v1.json",
+      "original_sha256": "71b5836e7095ce788cadb7547ab0ce2b811945fad4598857cef54286f161b34e",
+      "public_sha256": "71b5836e7095ce788cadb7547ab0ce2b811945fad4598857cef54286f161b34e"
+    },
+    {
+      "path": "native/delivery-r9-standalone-v1.json",
+      "original_sha256": "df60b4004d27cacdccacc013a2e42e8afe3036bfef57501083cd0db2a3744b3a",
+      "public_sha256": "df60b4004d27cacdccacc013a2e42e8afe3036bfef57501083cd0db2a3744b3a"
+    },
+    {
+      "path": "reviews/delivery-r9-standalone-v1.json",
+      "original_sha256": "805c840593a6748045fc2a81d95480299b62d63b0848f094d3d5628e2fc161d2",
+      "public_sha256": "805c840593a6748045fc2a81d95480299b62d63b0848f094d3d5628e2fc161d2"
+    },
+    {
+      "path": "reviews/final-pr-review.md",
+      "original_sha256": "b51045468f5807aef99c87a44b0112853258736bdd58ef860c3902bbd90d9d9f",
+      "public_sha256": "b51045468f5807aef99c87a44b0112853258736bdd58ef860c3902bbd90d9d9f"
+    },
+    {
+      "path": "environment/ci-evidence-commit.json",
+      "original_sha256": "e9398caed0723f241f8ee2da2b5a845a0dc2b4d2b0f4157c2b0ac6a134c9c2b5",
+      "public_sha256": "e9398caed0723f241f8ee2da2b5a845a0dc2b4d2b0f4157c2b0ac6a134c9c2b5"
     },
     {
       "path": "acceptance-definition.json",

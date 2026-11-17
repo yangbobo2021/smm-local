@@ -2,7 +2,7 @@
 
 本轮按已合并的 SPEC #24、PLAN #25 补齐 PR #21。验收 ID：`AT-SMM-VIBEINSIGHT-003`，采用定义快照摘要 `1be6849c…6db9`。
 
-**正式执行与独立执行复审：15/15 通过。最终需求交付判定与 PR Review：见本目录后续独立审查记录。**
+**正式执行与独立执行复审：15/15 通过。完整平台规格 R8、自行管理 Hub R9 的独立交付判定均通过；最终 PR 独立审查没有需返修的问题。**
 
 | 范围 | 实际环境/入口 | 结果及原始响应 |
 |---|---|---|
@@ -18,6 +18,10 @@
 C 的每个入口分别验证自己的项目范围、每个直接关联目标的独立命中、自己返回的两类精确引用、旧引用、本机关系、断线全局回退与恢复、实际不同显示名及稳定身份。旧进程实际加载模块的 SHA 对照 `d2dee18`；本设备三段会话在补传前后从 Hub 完整读回，逐条核对 ID、位置、角色、正文、时间和总数。[示例：Windows 补传前](clients/windows/prepare/C6-before-metadata.json)、[补传后](clients/windows/prepare/C6-after-metadata-full-conversations.json)。
 
 ## 复审及复算
+
+- 需求级独立判定：[完整平台规格 R8](reviews/delivery-r8-platform-v1.json)、[自行管理 Hub R9](reviews/delivery-r9-standalone-v1.json)；[原生 R8 收据](native/delivery-r8-platform-v1.json)、[R9 收据](native/delivery-r9-standalone-v1.json)分别登记为 passed。
+- [最终 PR 独立审查](reviews/final-pr-review.md)按当前 PR Review Prompt 回放用户入口、规格、计划与实际证据；审查提交 `ccce1f1`，基线 `af65cb4`。该审查复算的 576 个正式原始附件和首批 407 个公开文件摘要均相符。后续仅发布审查、交付收据与索引，不改写已审执行字节。
+- [证据提交的三平台 CI](environment/ci-evidence-commit.json)绑定 `ccce1f1`，实际三平台回归、构建及独立 wheel 安装全部通过；较早的 `ff816bd` CI 收据仍保留原版本。
 
 - 正式收据：[三平台服务](native/execution-services-v1.json)、[自行管理](native/execution-standalone-v1.json)、[三平台客户端](native/execution-clients-v1.json)、[共用边界](native/execution-shared-v1.json)。包含实际命令、退出码、时间及输入/附件摘要。
 - 独立执行复审：[H](reviews/review-execution-services-v1.json)、[P](reviews/review-execution-standalone-v1.json)、[C](reviews/review-execution-clients-v1.json)、[G](reviews/review-execution-shared-v1.json)。每项仅认领自己的检查。
