@@ -105,6 +105,20 @@ print(json.dumps({name: hashlib.sha256((root / name).read_bytes()).hexdigest() f
 
 
 def save_report(args, evidence, identities):
+    def redact(value):
+        if isinstance(value, dict):
+            return {
+                key: (
+                    "<current-session>"
+                    if key == "excluded_current_session_id" and item
+                    else redact(item)
+                )
+                for key, item in value.items()
+            }
+        if isinstance(value, list):
+            return [redact(item) for item in value]
+        return value
+
     revision = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
     ).strip()
@@ -141,7 +155,7 @@ def save_report(args, evidence, identities):
             for name in files
         },
         "wheel_sha256": wheels,
-        "evidence": evidence,
+        "evidence": redact(evidence),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

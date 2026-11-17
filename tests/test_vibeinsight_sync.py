@@ -7,17 +7,23 @@ import pytest
 
 from smm_local.core import Archive
 
-
-
 @pytest.fixture
 def record_evidence(request, tmp_path):
     """Export synthetic acceptance data only when an output directory is requested."""
+    def redact(value):
+        if isinstance(value, dict):
+            return {key: "<current-session>" if key == "excluded_current_session_id" and item
+                    else redact(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [redact(item) for item in value]
+        return value
+
     def record(**evidence):
         directory = os.environ.get("ACCEPTANCE_EVIDENCE_DIR")
         if directory:
             output = Path(directory)
             output.mkdir(parents=True, exist_ok=True)
-            data = {"test": request.node.nodeid, "fixture": "synthetic", "evidence": evidence}
+            data = {"test": request.node.nodeid, "fixture": "synthetic", "evidence": redact(evidence)}
             encoded = json.dumps(data, ensure_ascii=False, indent=2)
             fixture_root = json.dumps(str(tmp_path), ensure_ascii=False)[1:-1]
             (output / f"{request.node.name}.json").write_text(
