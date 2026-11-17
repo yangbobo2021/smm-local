@@ -248,3 +248,5 @@ Windows 使用对应安装环境的 `python`。所有命令在候选检出目录
 - Ubuntu 维护者确认本轮没有管理员认证方式；无可用 `newuidmap`/容器执行器可切换到另一宿主 UID。Linux H9 改为实际服务读凭据 + 原文件/目录所有者、模式、完整数字 POSIX ACL 核验：要求服务 UID 所有、无组/其他权限且无命名或默认 ACL 授权。结合 Linux DAC 判定其他非特权 UID 不可读，报告注明该判断为权限审计推论、没有执行跨 UID open；交独立审查判断是否足以支持相同 SPEC 条件。macOS/Windows 仍做实际另一身份拒绝读取。此项只调整验证方法，不扩大秘密访问范围或改变产品权限行为。
 
 - 默认 CI 的 macOS runner 改用 `macos-15`。首轮实际执行返回 `macos-14-arm64-us-default is not supported`；核对 [GitHub runner-images 官方清单](https://github.com/actions/runner-images/blob/main/README.md)，macOS 14 已于 2026-11-02 退役。保留首轮失败记录，使用可用 runner 复跑。此调整不替代本机系统级 launchd 验收。
+
+- 首次全系统 CI 暴露测试夹具使用 JSON 字符串替换 Windows 路径、手写未转义反斜杠的问题；改由 `json.dumps` 生成路径，不更改产品解析器。CI 明确使用 UTF-8 Python/stdio，与对话协议及平台探针环境一致，并关闭 checkout 的自动 CRLF 转换以保持 EVAL 的冻结源码摘要。此 CI 结果不证明旧式 ANSI 控制台的字符编码兼容性；公开证据保留实际编码环境与首轮失败。

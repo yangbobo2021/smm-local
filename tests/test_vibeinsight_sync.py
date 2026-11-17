@@ -335,9 +335,7 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             working.mkdir(parents=True)
             sessions.mkdir()
             # Original project is determined by cwd, while the file resides in the import root.
-            record_codex(sessions, name, [(0, name, f"evidence from {name}")])
-            history = sessions / f"{name}.jsonl"
-            history.write_text(history.read_text().replace(str(sessions), str(working)), encoding="utf-8")
+            record_codex(sessions, name, [(0, name, f"evidence from {name}")], cwd=working)
             archive = Archive(tmp_path / name / "local.sqlite3")
             archive.set_settings(codex_root=str(sessions))
             archive.sync_codex()
@@ -422,9 +420,7 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         other = tmp_path / "different-project"
         other.mkdir()
         sessions = tmp_path / "device-a" / "sessions"
-        record_codex(sessions, "offline-local", [(0, "new", "evidence only in another local project")])
-        history = sessions / "offline-local.jsonl"
-        history.write_text(history.read_text().replace(str(sessions), str(other)), encoding="utf-8")
+        record_codex(sessions, "offline-local", [(0, "new", "evidence only in another local project")], cwd=other)
         client_a.sync_codex()
         offline = scope(client_a, project_a)
         assert offline["scope"] == "all" and offline["archive_scope"] == "local" and offline["fallback_reason"]

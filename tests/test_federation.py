@@ -35,8 +35,8 @@ def eventually(check, seconds=20):
     pytest.fail("等待同步超时")
 
 
-def record_codex(root, session, messages):
-    events = [{"type": "session_meta", "payload": {"id": session, "cwd": str(root)}}]
+def record_codex(root, session, messages, *, cwd=None):
+    events = [{"type": "session_meta", "payload": {"id": session, "cwd": str(cwd if cwd is not None else root)}}]
     events += [{"type": "response_item", "ordinal": i, "payload": {
         "type": "message", **({"id": key} if key else {}), "role": "user",
         "content": [{"type": "input_text", "text": body}]}}
