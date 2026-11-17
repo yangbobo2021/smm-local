@@ -75,7 +75,7 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
                 pytest.fail(f"汇总服务退出：{process.returncode}")
             try:
                 return hub_call("info")
-            except URLError:
+            except (URLError, TimeoutError):
                 return False
         try:
             eventually(ready, 8)
