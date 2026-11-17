@@ -24,16 +24,19 @@
 非交互执行参数参考 [OpenAI Docs](https://learn.chatgpt.com/docs/developer-commands#codex-exec)，
 项目指令读取限制参考[官方配置说明](https://learn.chatgpt.com/docs/config-file/config-advanced#project-instructions-discovery)。
 
-重跑使用已有 Codex CLI 认证和 Python 3.11+，从仓库根目录运行，输出目录必须为新路径：
+重跑使用已有 Codex CLI 认证和 Python 3.11+，从仓库根目录运行，输出目录必须为新路径。
+采用后经独立审查，复跑示例修正为每次新建私有日志目录；本候选的修订依据和原始运行记录保持不变：
 
 ```sh
+eval_private_logs="$(mktemp -d /tmp/smm-spec-eval-private.XXXXXX)" || exit 1
+printf '本次私有日志：%s\n' "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py run \
   --output evals/spec-generation/002-platform-acceptance/runs/new-comparison \
   --candidate evals/spec-generation/002-platform-acceptance/templates/candidate-spec-v1.md \
-  --private-logs /tmp/smm-spec-eval-private
+  --private-logs "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py grade \
   --output evals/spec-generation/002-platform-acceptance/runs/new-comparison \
-  --private-logs /tmp/smm-spec-eval-private
+  --private-logs "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py summarize \
   --output evals/spec-generation/002-platform-acceptance/runs/new-comparison
 ```
@@ -42,3 +45,5 @@ python3 evals/spec-generation/002-platform-acceptance/compare.py summarize \
 运行中不修改候选或规则。技术失败单独保存，不能算成内容失败；处理失败保留原始记录。
 原始过程日志保存在私有目录，回答、回执、匿名映射及评分在运行目录。
 每个调用最多 15 分钟；`--resume` 只续接缺失调用，不覆盖已有回答或失败记录。
+恢复尝试也须新建私有目录，保留此前中断时可能留下的日志。引文核正后的完整恢复步骤见
+[当前说明](README.md#引文核正后的汇总)。

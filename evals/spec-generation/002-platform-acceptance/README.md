@@ -26,16 +26,21 @@
 ## 复跑候选 v3
 
 需要已认证的 Codex CLI 和 Python 3.11+。从仓库根目录运行，指定全新的输出目录。
+每轮、每次恢复尝试都须使用新的空私有日志目录，并记录该路径与对应输出；不能复用已有同名日志的目录。
+历史冻结执行器不会保护私有日志免于覆盖。下方是带有 `mktemp` 的 POSIX shell 示例，自动创建独立目录，
+生成与评分在同一次尝试内共用该变量，避免固定路径覆盖上一轮日志。
 执行器的历史默认候选是 v1，复跑 v3 须明确传入 `--candidate`：
 
 ```sh
+eval_private_logs="$(mktemp -d /tmp/smm-spec-eval-private.XXXXXX)" || exit 1
+printf '本次私有日志：%s\n' "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py run \
   --output evals/spec-generation/002-platform-acceptance/runs/new-v3 \
   --candidate evals/spec-generation/002-platform-acceptance/templates/candidate-spec-v3.md \
-  --private-logs /tmp/smm-spec-eval-private
+  --private-logs "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py grade \
   --output evals/spec-generation/002-platform-acceptance/runs/new-v3 \
-  --private-logs /tmp/smm-spec-eval-private
+  --private-logs "$eval_private_logs"
 python3 evals/spec-generation/002-platform-acceptance/compare.py summarize \
   --output evals/spec-generation/002-platform-acceptance/runs/new-v3
 python3 evals/spec-generation/002-platform-acceptance/verify_results.py \
@@ -43,8 +48,28 @@ python3 evals/spec-generation/002-platform-acceptance/verify_results.py \
 ```
 
 每个调用最多 15 分钟，默认三个并发。技术失败单独诊断并保留原记录，不能算内容失败。
-若评分引文校验失败，保留原始评分，审查对应回答后单独记录 `citation-audit.json`，
-不能修改原始答案或评分来绕过校验。首轮实际例子见 [核正记录](runs/2026-11-17-v1/citation-audit.json)。
+若评分引文校验失败，停止普通的 `summarize` 路径，使用下面的引文恢复步骤。
+
+## 引文核正后的汇总
+
+先对照匿名回答确认问题仅为非逐字引文、原评分的语义判断仍成立，再另存 `citation-audit.json`。
+格式参照[首轮真实核正记录](runs/2026-11-17-v1/citation-audit.json)：`score_changes` 必须为空；
+每条 `corrections` 写明原评分文件与 SHA-256、匿名标签、检查 ID、从 0 开始的引文索引、
+原引文、回答中实际存在的替代引文、回答文件及核正理由。不能修改原始答案、评分或分值。
+若评分判断本身有误，不能用引文核正掩盖，须保留原结果另行独立重评。
+
+冻结的 `summarize` 不读取核正记录，不能在核正后再次用它完成汇总。改用独立的离线辅助工具：
+
+```sh
+python3 evals/spec-generation/002-platform-acceptance/build_audited_scores.py \
+  --runs evals/spec-generation/002-platform-acceptance/runs/new-v3
+python3 evals/spec-generation/002-platform-acceptance/verify_results.py \
+  --runs evals/spec-generation/002-platform-acceptance/runs/new-v3 --write-report
+```
+
+辅助工具从原始评分重算分数，在隔离副本用原核验器验证核正及汇总，全部通过后才创建
+`scores-audited.json`，拒绝覆盖；不写原始评分、不调用模型。无效核正不产生汇总文件。
+以后只读核对使用不带 `--write-report` 的命令；已有正式记录无需重新写入。
 
 只复核现有结果、不调用模型：将下列命令的 `v3` 换为 `v1`/`v2` 可核对其他轮次。
 默认只读，不更新已有回执；`--write-report` 仅用于保存新的核验记录，拒绝覆盖。
