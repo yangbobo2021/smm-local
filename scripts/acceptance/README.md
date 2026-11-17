@@ -121,3 +121,22 @@ python scripts/acceptance/vibeinsight_fixture.py stop --manifest <private-fixtur
 H/P 保存完整已提交原文和精确旧引用的重启/故障读回、各项目完整进度、服务重启 PID、失败期间最近成功状态及每类故障恢复后的独立新增内容；P 另记录真实公开启动 argv/PID/退出码。C 的 CLI 与 MCP 分别使用各自搜索返回的引用，名称修改前后必须不同。默认 CI 明确使用 UTF-8 Python/stdio；此结果不宣称验证了旧式 ANSI 控制台兼容性。
 
 `vibeinsight_readonly_audit.py --fixture-log <隔离实例日志> --output <新文件>` 逐 PostgreSQL 后端 PID 核对读账号的 SELECT/COPY 均在 `BEGIN READ ONLY` 内。只导出计数和每类首个合成 SQL 示例，不导出管理员语句、连接元数据或含随机密码的原始服务端日志。H 使用短暂的合成表锁让服务自己的 psql 子进程可观察，控制器与服务分别使用夹具管理账号和 SELECT 账号；不修改查询实现。
+
+### 完整 P/G 合同及旧引用复核
+
+复用平台控制器的完整 P/G 验收入口为：
+
+```text
+python scripts/acceptance/vibeinsight_contracts.py standalone --target-config target.json --fixture-manifest private-fixture.json --output <新输出目录>
+python scripts/acceptance/vibeinsight_contracts.py shared --target-config target.json --fixture-manifest private-fixture.json --output <新输出目录>
+```
+
+它在共用控制器之上，额外保留**追加之前**的每条精确消息引用并在追加后、旧入口恢复后读取；完整比较旧入口恢复的全部原文；并在新来源目标中替换同目标凭据、核对完整进度、重启并实际归档更早时间轴上的新增消息。原 `platform.py` 的低层模式保留，完整 P/G 结论采用本入口。
+
+每轮 H 结束后，再针对该轮原始材料复算追加前的原消息 ID 与后续真实精确 HTTP 读回，防止只比较新取得的引用：
+
+```text
+python scripts/acceptance/vibeinsight_contracts.py references --evidence-dir <H输出目录> --output <新的引用审计JSON>
+```
+
+C 准备阶段记录旧进程实际加载的 core/federation SHA，并从 Hub 完整读回本设备的三段会话；补传后再次完整读回，逐条比较消息 ID、位置、角色、正文、时间和总数。项目元数据允许从空变为有效归属，消息不允许增加或重写。

@@ -50,7 +50,7 @@ def client_main(args):
     target=json.loads(args.target_config.read_text(encoding='utf-8-sig'))
     os.environ['SSL_CERT_FILE']=target['cert']
     from smm_local.core import Archive
-    from smm_local.federation import hub_config,push_pending
+    from smm_local.federation import hub_config,push_pending,read_archive
     from mcp import ClientSession,StdioServerParameters
     from mcp.client.stdio import stdio_client
 
@@ -89,12 +89,15 @@ import json,sys,hashlib
 from pathlib import Path
 from smm_local import core,federation
 from smm_local.core import Archive
-from smm_local.federation import configure_hub,push_pending,search_archive
+from smm_local.federation import configure_hub,push_pending,search_archive,read_archive
 path,history,address,name,token=sys.argv[1:]
 db=Archive(path); db.set_settings(codex_root=history,claude_root=history+'/empty',sync_paused=False)
 db.sync_codex(); result=configure_hub(db,address,name,token); assert result['connected'],result
 push_pending(db)
 result=search_archive(db,'platform',scope='all',limit=50)
+owned={'device-'+name,'other-'+name,'related-'+name}
+result['full_device_conversations']=[read_archive(db,hit['id'],hub_id=result['hub_id']) for hit in result['results'] if hit['source']=='codex' and hit['source_session_id'] in owned]
+assert len(result['full_device_conversations'])==3
 result['client_identity']={module.__name__:{'path':module.__file__,'sha256':hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()} for module in (core,federation)}
 print(json.dumps(result))
 """
@@ -109,6 +112,17 @@ print(json.dumps(result))
             db=Archive(db_path)
             count_before=sum(len(db.read(h['id'])['messages']) for h in db.search('platform',limit=50)['results'])
             push_pending(db)
+            originals=old['full_device_conversations']
+            assert {item['source_session_id'] for item in originals}=={session,'other-'+name,'related-'+name}
+            after_metadata=[]
+            for original in originals:
+                assert [(m['role'],m['text']) for m in original['messages']]==[('user','platform evidence '+original['source_session_id'])]
+                restored=read_archive(db,original['id'],hub_id=old['hub_id'])
+                fields=('hub_message_id','position','role','text','timestamp')
+                assert [tuple(m[k] for k in fields) for m in restored['messages']]==[tuple(m[k] for k in fields) for m in original['messages']]
+                assert restored['source_session_id']==original['source_session_id']
+                after_metadata.append(restored)
+            run.save('C6-after-metadata-full-conversations',after_metadata)
             main_id=db.resolve_project(str(working))['id']; related_id=db.resolve_project(str(related))['id']
             db.link_projects(main_id,related_id)
             assert sum(len(db.read(h['id'])['messages']) for h in db.search('platform',limit=50)['results'])==count_before
