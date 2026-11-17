@@ -85,20 +85,25 @@ def client_main(args):
             (history/'empty').mkdir(exist_ok=True)
             # Generate/upload with the real old source, then upgrade the same archive without a new message.
             legacy="""
-import json,sys
+import json,sys,hashlib
+from pathlib import Path
+from smm_local import core,federation
 from smm_local.core import Archive
 from smm_local.federation import configure_hub,push_pending,search_archive
 path,history,address,name,token=sys.argv[1:]
 db=Archive(path); db.set_settings(codex_root=history,claude_root=history+'/empty',sync_paused=False)
 db.sync_codex(); result=configure_hub(db,address,name,token); assert result['connected'],result
 push_pending(db)
-print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
+result=search_archive(db,'platform',scope='all',limit=50)
+result['client_identity']={module.__name__:{'path':module.__file__,'sha256':hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()} for module in (core,federation)}
+print(json.dumps(result))
 """
             env=dict(run.env,PYTHONPATH=t['baseline_src'])
             old=json.loads(run.command([t['local_python'],'-c',legacy,str(db_path),str(history),t['address'],
                                        name,t['hub_token_file']],env=env).stdout)
             run.save('C6-before-metadata',old)
             hit=next(h for h in old['results'] if h['source_session_id']==session)
+            assert not hit['projects'], 'legacy upload must precede metadata backfill'
             old_message=next(m for m in hit['matched_messages'] if m['text']==expected_main)
             old_ref={'conversation_id':hit['id'],'hub_id':old['hub_id'],'hub_message_id':old_message['hub_message_id']}
             db=Archive(db_path)
