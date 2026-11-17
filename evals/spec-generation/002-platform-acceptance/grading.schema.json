@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "case": {"type": "string"},
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"},
+                "score": {"type": "integer", "enum": [0, 1]},
+                "quotes": {"type": "array", "items": {"type": "string"}},
+                "reason": {"type": "string"}
+              },
+              "required": ["id", "score", "quotes", "reason"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["label", "checks"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["case", "answers"],
+  "additionalProperties": false
+}

@@ -1,0 +1,148 @@
+{
+  "eval_id": "spec-generation/002-platform-acceptance",
+  "version": 1,
+  "defined_at": "2026-11-17",
+  "status": "defined_not_executed",
+  "baseline_revision": "f62352b556a2edc242b579f90a729ebf2874fb40",
+  "cases": [
+    {
+      "id": "case-01",
+      "input": "cases/case-01.md",
+      "kind": "historical-derived",
+      "required_checks": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ]
+    },
+    {
+      "id": "case-02",
+      "input": "cases/case-02.md",
+      "kind": "controlled",
+      "required_checks": [
+        "T1",
+        "T2",
+        "T3"
+      ]
+    },
+    {
+      "id": "case-03",
+      "input": "cases/case-03.md",
+      "kind": "controlled",
+      "required_checks": [
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "id": "case-04",
+      "input": "cases/case-04.md",
+      "kind": "controlled",
+      "required_checks": [
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ]
+    },
+    {
+      "id": "case-05",
+      "input": "cases/case-05.md",
+      "kind": "controlled",
+      "required_checks": [
+        "U1",
+        "U2",
+        "U3"
+      ]
+    },
+    {
+      "id": "case-06",
+      "input": "cases/case-06.md",
+      "kind": "existing-regression",
+      "required_checks": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ]
+    }
+  ],
+  "historical_sources": [
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "changes/003-search-vibeinsight-conversations/intent.md",
+      "sha256": "94c7355ff0dbe111afecf2de4b369616d648023019eeeea2cc9fd4c21630ceed"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "changes/003-search-vibeinsight-conversations/spec.md",
+      "sha256": "2f2185b17ee1ac18326f45a6e61a5b890450f75217bb9d17a4c6bea5447289fd"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "changes/003-search-vibeinsight-conversations/plan.md",
+      "sha256": "1a5ec95090079dd2615603e849b2831e8de035bb22af7fb94a4b085452ee3d9b"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "TRIAL_GUIDE.md",
+      "sha256": "1f9e4d3238696af67a2851a77472b398d9c2c8f9fa324f782981129d5e02e699"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "src/smm_hub/hub_os.py",
+      "sha256": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "changes/003-search-vibeinsight-conversations/evidence/execution.json",
+      "sha256": "bb69d59bbe0ef45b651d959d3d4d5c084dfad199ec7811ec1bcc3d4705a4448c"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "changes/003-search-vibeinsight-conversations/evidence/README.md",
+      "sha256": "fc09df8eb1b62aef13a7479fba84a57e3a275577073cd960c0816adae364cb6c"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "changes/003-search-vibeinsight-conversations/evidence/review-final.md",
+      "sha256": "962c9abc023240669bf4640839354645190958f116a7c10fc071ada55e3cf834"
+    },
+    {
+      "revision": "f62352b556a2edc242b579f90a729ebf2874fb40",
+      "path": "changes/_templates/spec.md",
+      "sha256": "4b11b4be6983781c6a11e1ac02ae0fb90ef5e40d64593b520aa9e978cb52ac3c"
+    },
+    {
+      "revision": "f62352b556a2edc242b579f90a729ebf2874fb40",
+      "path": "evals/spec-generation/001-source-cli-help/input.md",
+      "sha256": "478150eeb6bfcd7f799f4636656914dd4cac5f66b38645f5b1bb76608814deaf"
+    },
+    {
+      "revision": "f62352b556a2edc242b579f90a729ebf2874fb40",
+      "path": "evals/spec-generation/001-source-cli-help/rubric.md",
+      "sha256": "457f7449b2aa909abeba9d53a5dcfd7cda87c65e7333d30e09544ca7ba8ebd22"
+    }
+  ],
+  "sha256": {
+    "cases/case-01.md": "1eae7216cd3bbe0d354386801dd59044678887dde8a17231b8a7296961749106",
+    "cases/case-02.md": "6d5cfe8de11125e0845f49f83350207294cc4aa7f5dcae856728ddf08346e895",
+    "cases/case-03.md": "2999f16acd60ebf8d63f4050080618b6debc8f838f4631f9cb406853a64feedf",
+    "cases/case-04.md": "e52eb4dc652d40ddd3fe7828b3d5af4e994e6c71c420c98f35a4136f3d695ad1",
+    "cases/case-05.md": "6cb647ecd7a263fb8222392b6654743e2ad177643b1d7d2b407fed429e39b1c1",
+    "cases/case-06.md": "478150eeb6bfcd7f799f4636656914dd4cac5f66b38645f5b1bb76608814deaf",
+    "input.md": "803464c80fd0b5680988dd471643fd55b345a5fad0dd1e7f916d25d0feb5dfdf",
+    "provenance.md": "bc2a698a5c39b02d42a9c53fb0dbede090247a5b6ac022fcc1140208e2aba34b",
+    "rubric.md": "acce7e0333491e1c63ad139a2140995dc368121f682562484d2937274b9c6b20",
+    "templates/current-spec.md": "4b11b4be6983781c6a11e1ac02ae0fb90ef5e40d64593b520aa9e978cb52ac3c"
+  },
+  "external_sha256": {
+    "evals/spec-generation/001-source-cli-help/rubric.md": "457f7449b2aa909abeba9d53a5dcfd7cda87c65e7333d30e09544ca7ba8ebd22"
+  }
+}

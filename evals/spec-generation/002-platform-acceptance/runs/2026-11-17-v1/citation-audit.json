@@ -1,0 +1,17 @@
+{
+  "kind": "manual citation audit after blind grading",
+  "score_changes": [],
+  "corrections": [
+    {
+      "file": "case-01-grades.json",
+      "raw_sha256": "4ceb04bda2d59f3cc3ab93c1b37c46a30894934f15fcc93c17120d486fd93447",
+      "label": "A3",
+      "check": "H6",
+      "quote_index": 6,
+      "original": "首版不主动发现没有新增事件的历史正文原地改写。",
+      "replacement": "首版支持新增会话事件与已有会话追加轮次；不要求发现没有新增事件的历史正文原地改写。",
+      "answer": "case-01-current-1.md",
+      "reason": "Raw grader paraphrased this boundary. The original answer contains the quoted equivalent; citation corrected without changing score or reason."
+    }
+  ]
+}
