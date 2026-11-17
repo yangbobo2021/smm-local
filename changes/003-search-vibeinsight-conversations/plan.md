@@ -246,3 +246,5 @@ Windows 使用对应安装环境的 `python`。所有命令在候选检出目录
 - G4 的主机、端口、库名三种变化均由默认参数化测试验证。实际服务的 SQL 端到端切换库名，覆盖同一来源键构造路径的新来源早期历史与旧档案保留；避免三次重复搭建等价连接目标，三个字段的判据不减。具体运行结果及必要项缺口写入本轮证据，不用这些方法调整代替未执行的平台验收。
 
 - Ubuntu 维护者确认本轮没有管理员认证方式；无可用 `newuidmap`/容器执行器可切换到另一宿主 UID。Linux H9 改为实际服务读凭据 + 原文件/目录所有者、模式、完整数字 POSIX ACL 核验：要求服务 UID 所有、无组/其他权限且无命名或默认 ACL 授权。结合 Linux DAC 判定其他非特权 UID 不可读，报告注明该判断为权限审计推论、没有执行跨 UID open；交独立审查判断是否足以支持相同 SPEC 条件。macOS/Windows 仍做实际另一身份拒绝读取。此项只调整验证方法，不扩大秘密访问范围或改变产品权限行为。
+
+- 默认 CI 的 macOS runner 改用 `macos-15`。首轮实际执行返回 `macos-14-arm64-us-default is not supported`；核对 [GitHub runner-images 官方清单](https://github.com/actions/runner-images/blob/main/README.md)，macOS 14 已于 2026-11-02 退役。保留首轮失败记录，使用可用 runner 复跑。此调整不替代本机系统级 launchd 验收。
