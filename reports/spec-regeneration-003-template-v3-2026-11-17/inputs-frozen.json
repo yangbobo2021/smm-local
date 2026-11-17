@@ -1,0 +1,57 @@
+{
+  "purpose": "Real-project SPEC regeneration and comparison to PR #21; no product execution",
+  "template_revision": "8e7ee1b4686dc9eea60ed3d77ffc4e3d68769af1",
+  "pr21_revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+  "project_baseline_revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+  "sources": [
+    {
+      "revision": "8e7ee1b4686dc9eea60ed3d77ffc4e3d68769af1",
+      "path": "changes/_templates/spec.md",
+      "sha256": "ed742e45e06b3e736c19bde915e85c3cf8f27a90192aadeb4cc90564fd65f681"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "changes/003-search-vibeinsight-conversations/intent.md",
+      "sha256": "94c7355ff0dbe111afecf2de4b369616d648023019eeeea2cc9fd4c21630ceed"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "changes/003-search-vibeinsight-conversations/spec.md",
+      "sha256": "9540ecded5b3e885f78a903a07bfb81c00722594ef78c9de95f0088b992e71e1"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "TRIAL_GUIDE.md",
+      "sha256": "1f9e4d3238696af67a2851a77472b398d9c2c8f9fa324f782981129d5e02e699"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "src/smm_hub/hub_os.py",
+      "sha256": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "TRIAL_GUIDE.md",
+      "sha256": "fb133330c8720d60df9d66e7f261c86728dbc293b21e480b12f138c6804a6fe4"
+    },
+    {
+      "revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+      "path": "AGENTS.md",
+      "sha256": "e93069c4772e63e3303453f4b58d21afea931e848c0b9b681a9f3e9a3755e7c1"
+    }
+  ],
+  "generation_materials": [
+    "template.md",
+    "input.md"
+  ],
+  "comparison_only": [
+    "spec-pr21.md"
+  ],
+  "method": "One fresh context. No old acceptance text, evaluation results or rubric provided. Confirmed behavior/design decisions were extracted as explicit input; support statements are actual repository excerpts. This compares to a historical document, not a controlled same-input template A/B experiment.",
+  "sha256": {
+    "template.md": "ed742e45e06b3e736c19bde915e85c3cf8f27a90192aadeb4cc90564fd65f681",
+    "input.md": "3355497210f4ef094fac615702e610a7072367a4ef8f2c115fa5d7d31e34747f",
+    "intent.md": "94c7355ff0dbe111afecf2de4b369616d648023019eeeea2cc9fd4c21630ceed",
+    "spec-pr21.md": "9540ecded5b3e885f78a903a07bfb81c00722594ef78c9de95f0088b992e71e1"
+  }
+}

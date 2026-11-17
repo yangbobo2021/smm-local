@@ -1,0 +1,29 @@
+{
+  "purpose": "SPEC proposal submission; human curation distinct from original model generation",
+  "base_revision": "8e7ee1b4686dc9eea60ed3d77ffc4e3d68769af1",
+  "pr21_revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+  "template_revision": "8e7ee1b4686dc9eea60ed3d77ffc4e3d68769af1",
+  "original_model_output_sha256": "6904e0669e130877f521fdf820094bd6b5571e9d5dfee943e060cb322b18ec88",
+  "proposed_spec_path": "changes/003-search-vibeinsight-conversations/spec.md",
+  "proposed_spec_sha256": "ffc58f2e6a9ae5540c58c32ca1a6a6ec95ffd2d0e9610628ed9771b3b9ded67e",
+  "curation_diff_sha256": "81261c7805512c92eb8a6ebda38df49d0b56a3efbaaf864fd3b5c8947a44e2d2",
+  "static_design_sources": [
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "src/smm_hub/vibeinsight.py",
+      "sha256": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "src/smm_hub/vibeinsight_settings.py",
+      "sha256": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df"
+    },
+    {
+      "revision": "cd8f9aaaec66ac4a5d779eec69fd9c41e40131cd",
+      "path": "src/smm_hub/hub_admin.py",
+      "sha256": "6e6b0eb631f2676cd5b185c79f3c52f7681a1e5f42847775591d45c05cdb8874"
+    }
+  ],
+  "plan_and_runtime_unchanged": true,
+  "new_platform_tests_executed": false
+}
