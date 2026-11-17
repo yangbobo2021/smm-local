@@ -250,3 +250,5 @@ Windows 使用对应安装环境的 `python`。所有命令在候选检出目录
 - 默认 CI 的 macOS runner 改用 `macos-15`。首轮实际执行返回 `macos-14-arm64-us-default is not supported`；核对 [GitHub runner-images 官方清单](https://github.com/actions/runner-images/blob/main/README.md)，macOS 14 已于 2026-11-02 退役。保留首轮失败记录，使用可用 runner 复跑。此调整不替代本机系统级 launchd 验收。
 
 - 首次全系统 CI 暴露测试夹具使用 JSON 字符串替换 Windows 路径、手写未转义反斜杠的问题；改由 `json.dumps` 生成路径，不更改产品解析器。CI 明确使用 UTF-8 Python/stdio，与对话协议及平台探针环境一致，并关闭 checkout 的自动 CRLF 转换以保持 EVAL 的冻结源码摘要。此 CI 结果不证明旧式 ANSI 控制台的字符编码兼容性；公开证据保留实际编码环境与首轮失败。
+
+- 三平台 pytest 在修正夹具后均实际通过；Windows 独立安装步骤另发现传给 `uv --python` 的路径必须显式带 `.exe`，已按系统选择真实解释器文件。此为 CI 命令修正，包代码不变。

@@ -32,12 +32,12 @@ jobs:
         run: |
           uv venv hub-env
           uv venv local-env
-          if [[ "$RUNNER_OS" == Windows ]]; then bin=Scripts; else bin=bin; fi
-          uv pip install --python "hub-env/$bin/python" dist/packages/smm_hub-*.whl
-          uv pip install --python "local-env/$bin/python" dist/packages/smm_local-*.whl
-          "hub-env/$bin/python" -m smm_hub.cli serve-hub --help
-          "local-env/$bin/python" -m smm_local.cli search --help
-          "local-env/$bin/python" -m smm_local.mcp_server --help
+          if [[ "$RUNNER_OS" == Windows ]]; then interpreter=Scripts/python.exe; else interpreter=bin/python; fi
+          uv pip install --python "hub-env/$interpreter" dist/packages/smm_hub-*.whl
+          uv pip install --python "local-env/$interpreter" dist/packages/smm_local-*.whl
+          "hub-env/$interpreter" -m smm_hub.cli serve-hub --help
+          "local-env/$interpreter" -m smm_local.cli search --help
+          "local-env/$interpreter" -m smm_local.mcp_server --help
       - uses: actions/upload-artifact@v4
         if: always()
         with:
