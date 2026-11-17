@@ -1,0 +1,38 @@
+{
+  "method": "Manual documentation review against current local Web API and already executed CLI/MCP read responses, plus file/hash checks; no new service or staging execution.",
+  "checked_at": "2026-11-17T02:35:35.553378+00:00",
+  "documentation_revision": "3c9435362277d3b1d8dead477e973992000d4aa4",
+  "automated_execution_revision": "3053de7768caa083ccb33b3817b1f7eddcc1a41f",
+  "changed_bound_files": {
+    "TRIAL_GUIDE.md": {
+      "executed_sha256": "96723138051fc4b73fefe1d23da7decdcd9058fe108d77b55961c4489e7bb7be",
+      "current_sha256": "fb133330c8720d60df9d66e7f261c86728dbc293b21e480b12f138c6804a6fe4"
+    },
+    "changes/003-search-vibeinsight-conversations/plan.md": {
+      "executed_sha256": "29b32499f720d36baa2bf9e34b0bf6b2ea50d47337d41089ac5b69cf5c5cc366",
+      "current_sha256": "465ff5dd69e4e41c2c2919bff1840b4f55b02f62797c2d1edac79e092ba6afc5"
+    }
+  },
+  "unchanged_bound_files": 44,
+  "all_original_source_hashes_match_execution_commit": true,
+  "observations": {
+    "local_web_search_and_read": "src/smm_local/api.py:258-264 call db.search and db.read on the local archive",
+    "hub_read_responses": "pytest/test_managed_hub_credential_restart_and_mixed_project_search.json: exact_reads and cli_reads both preserve the Hub archive and exact message reference",
+    "general_question_guidance": {
+      "file": "TRIAL_GUIDE.md",
+      "line": 36,
+      "text": "在新的 Codex 或 Claude Code 会话中问一个**必须依靠旧对话**才能回答的问题，例如：“我以前对某项目的上线回滚提出过什么要求？请查原始对话并引用来源会话和消息位置。”Agent 应调用 `smm-local` 的检索及读取工具。本机档案的答案可在 Web「检索测试」中复核；汇总端结果由 Agent 保留搜索返回的汇总端和消息引用，通过同一读取工具打开原文。Web「检索测试」查询本机档案。首次尝试可明确说“请使用 SMM 搜索过去对话”，再试不点名工具的自然提问。"
+    },
+    "troubleshooting_guidance": {
+      "file": "TRIAL_GUIDE.md",
+      "line": 50,
+      "text": "- Agent 给出没有原文支持的回答：要求它提供来源会话和位置。本机结果可在 Web 读取原文；汇总端结果让 Agent 使用搜索返回的汇总端和消息引用读取原文。请把问题、实际结果与期望来源反馈给试用负责人。"
+    }
+  },
+  "scope": "Clarifies existing entry points only. Product, tests and probes are byte-identical to the executed version. Formal release-channel installation, production and Windows remain unverified.",
+  "review_publication": {
+    "initial_original_sha256": "e70ae31173be7d2e47e627639cde57f6b5d1c1f4befd1af6e7f4be171ca63a35",
+    "initial_public_sha256": "6b4c2eabcfc8a3cc6ecbdeb1d5f553bfc744534cd783f3f7bb649c1670af7d4d",
+    "redaction": "Machine-specific repository prefixes removed from public review copy; findings and conclusions unchanged."
+  }
+}

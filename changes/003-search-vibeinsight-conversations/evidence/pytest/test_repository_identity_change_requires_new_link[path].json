@@ -1,0 +1,449 @@
+{
+  "test": "tests/test_vibeinsight_sync.py::test_repository_identity_change_requires_new_link[path]",
+  "fixture": "synthetic",
+  "evidence": {
+    "old_identity": "git.example/team/alpha",
+    "new_identity": "git.example/team/renamed",
+    "before": {
+      "query": "boundary",
+      "scope": "project",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "git.example/team/alpha",
+          "source": "vibeinsight",
+          "owner": "fixture",
+          "source_key": "git.example/team/alpha",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "workspace",
+          "source": "device",
+          "owner": "11111111111111111111111111111111",
+          "source_key": "workspace",
+          "device_name": "fixture-device"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 1,
+          "source": "vibeinsight",
+          "source_session_id": "old-repository",
+          "title": "boundary old",
+          "started_at": "2026-09-14T00:00:00",
+          "updated_at": "2026-09-14T00:00:00",
+          "project_id": 1,
+          "project_name": "git.example/team/alpha",
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary old",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0000",
+                  "project_id": 1,
+                  "project_name": "git.example/team/alpha"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 1,
+              "name": "git.example/team/alpha",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/alpha",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        }
+      ],
+      "hub_id": "330c515d955c4ed2a41332dd2d0e3c62"
+    },
+    "before_relink": {
+      "query": "boundary",
+      "scope": "project",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "git.example/team/alpha",
+          "source": "vibeinsight",
+          "owner": "fixture",
+          "source_key": "git.example/team/alpha",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "workspace",
+          "source": "device",
+          "owner": "11111111111111111111111111111111",
+          "source_key": "workspace",
+          "device_name": "fixture-device"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 1,
+          "source": "vibeinsight",
+          "source_session_id": "old-repository",
+          "title": "boundary old",
+          "started_at": "2026-09-14T00:00:00",
+          "updated_at": "2026-09-14T00:00:00",
+          "project_id": 1,
+          "project_name": "git.example/team/alpha",
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary old",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0000",
+                  "project_id": 1,
+                  "project_name": "git.example/team/alpha"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 1,
+              "name": "git.example/team/alpha",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/alpha",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        }
+      ],
+      "hub_id": "330c515d955c4ed2a41332dd2d0e3c62"
+    },
+    "global_result": {
+      "query": "boundary",
+      "scope": "all",
+      "effective_projects": "all",
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 2,
+          "source": "vibeinsight",
+          "source_session_id": "new-repository",
+          "title": "boundary new",
+          "started_at": "2026-09-14T00:02:00",
+          "updated_at": "2026-09-14T00:02:00",
+          "project_id": 3,
+          "project_name": "git.example/team/renamed",
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary new",
+              "hub_message_id": 2,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0002",
+                  "project_id": 3,
+                  "project_name": "git.example/team/renamed"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 3,
+              "name": "git.example/team/renamed",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/renamed",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "source": "vibeinsight",
+          "source_session_id": "old-repository",
+          "title": "boundary old",
+          "started_at": "2026-09-14T00:00:00",
+          "updated_at": "2026-09-14T00:00:00",
+          "project_id": 1,
+          "project_name": "git.example/team/alpha",
+          "rank": 2,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary old",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0000",
+                  "project_id": 1,
+                  "project_name": "git.example/team/alpha"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 1,
+              "name": "git.example/team/alpha",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/alpha",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        }
+      ],
+      "hub_id": "330c515d955c4ed2a41332dd2d0e3c62"
+    },
+    "after_relink": {
+      "query": "boundary",
+      "scope": "project",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "git.example/team/alpha",
+          "source": "vibeinsight",
+          "owner": "fixture",
+          "source_key": "git.example/team/alpha",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "workspace",
+          "source": "device",
+          "owner": "11111111111111111111111111111111",
+          "source_key": "workspace",
+          "device_name": "fixture-device"
+        },
+        {
+          "id": 3,
+          "name": "git.example/team/renamed",
+          "source": "vibeinsight",
+          "owner": "fixture",
+          "source_key": "git.example/team/renamed",
+          "device_name": null
+        }
+      ],
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 2,
+          "source": "vibeinsight",
+          "source_session_id": "new-repository",
+          "title": "boundary new",
+          "started_at": "2026-09-14T00:02:00",
+          "updated_at": "2026-09-14T00:02:00",
+          "project_id": 3,
+          "project_name": "git.example/team/renamed",
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary new",
+              "hub_message_id": 2,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0002",
+                  "project_id": 3,
+                  "project_name": "git.example/team/renamed"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 3,
+              "name": "git.example/team/renamed",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/renamed",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "source": "vibeinsight",
+          "source_session_id": "old-repository",
+          "title": "boundary old",
+          "started_at": "2026-09-14T00:00:00",
+          "updated_at": "2026-09-14T00:00:00",
+          "project_id": 1,
+          "project_name": "git.example/team/alpha",
+          "rank": 2,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "boundary old",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "source": "vibeinsight",
+                  "source_id": "fixture",
+                  "platform": "codex",
+                  "source_position": 1,
+                  "source_event_id": "event-0000",
+                  "project_id": 1,
+                  "project_name": "git.example/team/alpha"
+                }
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": 1,
+              "name": "git.example/team/alpha",
+              "source": "vibeinsight",
+              "owner": "fixture",
+              "source_key": "git.example/team/alpha",
+              "device_name": null
+            }
+          ],
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex"
+            }
+          ]
+        }
+      ],
+      "hub_id": "330c515d955c4ed2a41332dd2d0e3c62"
+    },
+    "old_reference": {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "old-repository",
+      "source_path": "",
+      "cwd": null,
+      "started_at": "2026-09-14T00:00:00",
+      "updated_at": "2026-09-14T00:00:00",
+      "title": "boundary old",
+      "project_id": 1,
+      "project_name": "git.example/team/alpha",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "boundary old",
+          "timestamp": "2026-09-14T00:00:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null,
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "fixture",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "event-0000",
+              "project_id": 1,
+              "project_name": "git.example/team/alpha"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "git.example/team/alpha",
+          "source": "vibeinsight",
+          "owner": "fixture",
+          "source_key": "git.example/team/alpha",
+          "device_name": null
+        }
+      ],
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "fixture",
+          "platform": "codex"
+        }
+      ]
+    }
+  }
+}

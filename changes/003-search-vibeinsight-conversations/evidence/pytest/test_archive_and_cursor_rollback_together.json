@@ -1,0 +1,50 @@
+{
+  "test": "tests/test_vibeinsight_sync.py::test_archive_and_cursor_rollback_together",
+  "fixture": "synthetic",
+  "evidence": {
+    "before_cursor": [
+      "2026-09-14T00:01:00",
+      "event-0001"
+    ],
+    "failed_cursor": [
+      "2026-09-14T00:01:00",
+      "event-0001"
+    ],
+    "after_cursor": [
+      "2026-09-14T00:01:00",
+      "event-0003"
+    ],
+    "recovered_read": {
+      "id": 2,
+      "source": "vibeinsight",
+      "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"batch\"]",
+      "source_path": "",
+      "cwd": null,
+      "started_at": "2026-09-14T00:02:00",
+      "updated_at": "2026-09-14T00:03:00",
+      "title": "evidence batch 2",
+      "project_id": null,
+      "project_name": null,
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "evidence batch 2",
+          "timestamp": "2026-09-14T00:02:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "evidence batch 3",
+          "timestamp": "2026-09-14T00:03:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,457 @@
+{
+  "status": "passed",
+  "acceptance_id": "AT-SMM-VIBEINSIGHT-003",
+  "fixture": "isolated synthetic data",
+  "executed_at": "2026-11-17T02:27:49.692585+00:00",
+  "revision": "3053de7768caa083ccb33b3817b1f7eddcc1a41f",
+  "legacy_revision": "d2dee18fcc050dcf20bd4108429975477399db8d",
+  "installed_source_sha256": {
+    "src/smm_hub/hub.py": "e46bf0a9d8131a79e1c6e831b7b84790666f8188ee906a73ce9959b1912acce0",
+    "src/smm_hub/hub_admin.py": "6e6b0eb631f2676cd5b185c79f3c52f7681a1e5f42847775591d45c05cdb8874",
+    "src/smm_hub/projects.py": "0d24f1058c18a2b34d0715f71831c974ff1a08803657c7e4433ed035c16a37bf",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_local/core.py": "1ff25e0f497b72d86315162af2453619312835ab220ef6b684ff39f03b041c8a",
+    "src/smm_local/federation.py": "ccee27da3b3adbbc4dc194bef536c3206cf7daea87d88e33444208af2e9eb3dc",
+    "src/smm_local/mcp_server.py": "af226bb8da7b6610077e91d7678f82abd7f16db84dcb18cdf691a25c15bff9bb",
+    "src/smm_local/cli.py": "9775c8051559ede7ec3e506a49844e29ec214e08c422e93f84ad9f294247cac6"
+  },
+  "source_files_sha256": {
+    "README.md": "0a8feada8dadc77bc7282015e56228a6f3429232e4a47d35630565b61813b83a",
+    "TRIAL_GUIDE.md": "96723138051fc4b73fefe1d23da7decdcd9058fe108d77b55961c4489e7bb7be",
+    "changes/003-search-vibeinsight-conversations/plan.md": "29b32499f720d36baa2bf9e34b0bf6b2ea50d47337d41089ac5b69cf5c5cc366",
+    "changes/003-search-vibeinsight-conversations/spec.md": "9540ecded5b3e885f78a903a07bfb81c00722594ef78c9de95f0088b992e71e1",
+    "scripts/acceptance/README.md": "f0bf31156b74529252b9ef8b25a548b57e7dee81848d70346ebb706bf519ad2b",
+    "scripts/acceptance/vibeinsight_postgres.py": "cfb9e91f96f9770e68eceb15d70de2aee33f35c6dec2085b2d6d4225a28d3008",
+    "scripts/acceptance/vibeinsight_probe_support.py": "41e0bfe8257917bbda6b1847cd89dbe939c03c3b99587f9c25040436a3e75bc6",
+    "scripts/acceptance/vibeinsight_upgrade.py": "166783cff730843a59914e676fa0289ebc1600d30eb5ec66bb90cb395f0dc4c1",
+    "skills/smm-search/SKILL.md": "6d4a9ab311834931682b970cf2ff57f905ba4cc5ac3ac0c29ddfc38890b3a7e6",
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "0db13e71d6dc8e230c794e0d6bb9910e600e0c86af26924eb98e6599bfd8402f",
+    "src/smm_hub/cli.py": "6a51436b7b0cdc7d9ee5401c2dd981b7df89ad4c19727690037878f3949975cd",
+    "src/smm_hub/hub.py": "e46bf0a9d8131a79e1c6e831b7b84790666f8188ee906a73ce9959b1912acce0",
+    "src/smm_hub/hub_admin.py": "6e6b0eb631f2676cd5b185c79f3c52f7681a1e5f42847775591d45c05cdb8874",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "0d24f1058c18a2b34d0715f71831c974ff1a08803657c7e4433ed035c16a37bf",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "6fa73b845e1f4de4eacc852e226bffb097956849acd97238015e5e8975adda2a",
+    "src/smm_local/api.py": "7ac432bba84c9451dd4e9251bc64e9ce393ac5ac306bcbc792feef15ec2c695f",
+    "src/smm_local/cli.py": "9775c8051559ede7ec3e506a49844e29ec214e08c422e93f84ad9f294247cac6",
+    "src/smm_local/core.py": "1ff25e0f497b72d86315162af2453619312835ab220ef6b684ff39f03b041c8a",
+    "src/smm_local/federation.py": "ccee27da3b3adbbc4dc194bef536c3206cf7daea87d88e33444208af2e9eb3dc",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "59f28af7bf67dfb8d9ab588905803af5dd033254797b5eaa79040227fa1ebb6b",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "ec4582ab357537ac86d7e6fc4e1da52d184a62c57c9aeed1bac424181c537224",
+    "src/smm_local/mcp_server.py": "af226bb8da7b6610077e91d7678f82abd7f16db84dcb18cdf691a25c15bff9bb",
+    "src/smm_local/service.py": "bd65c0bb34a809cc55fd38e9bae712b22fdc68999703febb274efee35215549a",
+    "src/smm_local/static/index.html": "263b6c23deb9742b7769ef2e9bcf8d9e75ad9f276b27a1f701d45d527282426d",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "tests/test_cli_help.py": "355468c0783ed01394d9f5a8a2bb9e3092e94c4899a654e8b745beef8e028bc1",
+    "tests/test_federation.py": "5f61b14e11618ab62181782866ba46ea0d0de50023f4ef29fc02f44183bf7f5d",
+    "tests/test_maintenance.py": "63171d761ca0a60acc35bafb16f1581491090418da7039a42389988294f069e4",
+    "tests/test_pipeline.py": "a32651aa7f6d0dc6f4b84ee782121d4e08b6f2ee304628335ccf80d71b67668f",
+    "tests/test_service_startup.py": "79df1235e260a6323af648062df9d4b9694f9352b3a39567b2d8787ff1bfa223",
+    "tests/test_source_plugins.py": "2872b100b64caa358667cfb8556c53853e9160393982f9e02101b16335b87883",
+    "tests/test_vibeinsight_sync.py": "3d66e56eb385b456b2ba30e0df4a45b090d3d3cf66d443929702516c03b05165"
+  },
+  "wheel_sha256": {
+    "smm_local-0.3.0-py3-none-any.whl": "d7b006696a9a0069da46ba0c71df68cc7b9b1a4647a99c9fd2cc7470e0e97164",
+    "smm_hub-0.3.0-py3-none-any.whl": "1f943e7005898e7423ea944c94916f1667924c9af50a67522ee372cf561136e5"
+  },
+  "evidence": {
+    "before_upgrade": {
+      "query": "shared",
+      "scope": "all",
+      "effective_projects": "all",
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 1,
+          "source": "codex",
+          "source_session_id": "laptop",
+          "title": "shared laptop",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": null,
+          "project_name": null,
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "shared laptop",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "device_id": "11111111111111111111111111111111",
+                  "device_name": "laptop",
+                  "source_position": 1
+                }
+              ]
+            }
+          ],
+          "origins": [
+            {
+              "device_id": "11111111111111111111111111111111",
+              "device_name": "laptop"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "source": "codex",
+          "source_session_id": "desktop",
+          "title": "shared desktop",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": null,
+          "project_name": null,
+          "rank": 2,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "shared desktop",
+              "hub_message_id": 2,
+              "origins": [
+                {
+                  "device_id": "22222222222222222222222222222222",
+                  "device_name": "desktop",
+                  "source_position": 1
+                }
+              ]
+            }
+          ],
+          "origins": [
+            {
+              "device_id": "22222222222222222222222222222222",
+              "device_name": "desktop"
+            }
+          ]
+        }
+      ],
+      "hub_id": "e32390118e7c431a961b9b06008c88ba"
+    },
+    "after_upgrade": {
+      "query": "shared",
+      "scope": "all",
+      "effective_projects": "all",
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 1,
+          "source": "codex",
+          "source_session_id": "laptop",
+          "title": "shared laptop",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": null,
+          "project_name": null,
+          "rank": 1,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "shared laptop",
+              "hub_message_id": 1,
+              "origins": [
+                {
+                  "device_id": "11111111111111111111111111111111",
+                  "device_name": "laptop",
+                  "source_position": 1,
+                  "project_id": null,
+                  "project_name": null
+                }
+              ]
+            }
+          ],
+          "projects": [],
+          "origins": [
+            {
+              "device_id": "11111111111111111111111111111111",
+              "device_name": "laptop"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "source": "codex",
+          "source_session_id": "desktop",
+          "title": "shared desktop",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": null,
+          "project_name": null,
+          "rank": 2,
+          "bm25_score": 1e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "preview_truncated": false,
+              "preview": "shared desktop",
+              "hub_message_id": 2,
+              "origins": [
+                {
+                  "device_id": "22222222222222222222222222222222",
+                  "device_name": "desktop",
+                  "source_position": 1,
+                  "project_id": null,
+                  "project_name": null
+                }
+              ]
+            }
+          ],
+          "projects": [],
+          "origins": [
+            {
+              "device_id": "22222222222222222222222222222222",
+              "device_name": "desktop"
+            }
+          ]
+        }
+      ],
+      "hub_id": "e32390118e7c431a961b9b06008c88ba"
+    },
+    "project_scopes": {
+      "laptop": {
+        "query": "shared",
+        "scope": "project",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "same name",
+            "source": "device",
+            "owner": "11111111111111111111111111111111",
+            "source_key": "1",
+            "device_name": "laptop"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "results": [
+          {
+            "id": 1,
+            "source": "codex",
+            "source_session_id": "laptop",
+            "title": "shared laptop",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 1,
+            "project_name": "same name",
+            "rank": 1,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "preview_truncated": false,
+                "preview": "shared laptop",
+                "hub_message_id": 1,
+                "origins": [
+                  {
+                    "device_id": "11111111111111111111111111111111",
+                    "device_name": "laptop",
+                    "source_position": 1,
+                    "project_id": 1,
+                    "project_name": "same name"
+                  }
+                ]
+              }
+            ],
+            "projects": [
+              {
+                "id": 1,
+                "name": "same name",
+                "source": "device",
+                "owner": "11111111111111111111111111111111",
+                "source_key": "1",
+                "device_name": "laptop"
+              }
+            ],
+            "origins": [
+              {
+                "device_id": "11111111111111111111111111111111",
+                "device_name": "laptop"
+              }
+            ]
+          }
+        ],
+        "hub_id": "e32390118e7c431a961b9b06008c88ba"
+      },
+      "desktop": {
+        "query": "shared",
+        "scope": "project",
+        "effective_projects": [
+          {
+            "id": 2,
+            "name": "same name",
+            "source": "device",
+            "owner": "22222222222222222222222222222222",
+            "source_key": "1",
+            "device_name": "desktop"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "results": [
+          {
+            "id": 2,
+            "source": "codex",
+            "source_session_id": "desktop",
+            "title": "shared desktop",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 2,
+            "project_name": "same name",
+            "rank": 1,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "preview_truncated": false,
+                "preview": "shared desktop",
+                "hub_message_id": 2,
+                "origins": [
+                  {
+                    "device_id": "22222222222222222222222222222222",
+                    "device_name": "desktop",
+                    "source_position": 1,
+                    "project_id": 2,
+                    "project_name": "same name"
+                  }
+                ]
+              }
+            ],
+            "projects": [
+              {
+                "id": 2,
+                "name": "same name",
+                "source": "device",
+                "owner": "22222222222222222222222222222222",
+                "source_key": "1",
+                "device_name": "desktop"
+              }
+            ],
+            "origins": [
+              {
+                "device_id": "22222222222222222222222222222222",
+                "device_name": "desktop"
+              }
+            ]
+          }
+        ],
+        "hub_id": "e32390118e7c431a961b9b06008c88ba"
+      }
+    },
+    "old_references": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "laptop",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "shared laptop",
+        "project_id": 1,
+        "project_name": "same name",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "shared laptop",
+            "timestamp": null,
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "11111111111111111111111111111111",
+                "device_name": "laptop",
+                "source_position": 1,
+                "project_id": 1,
+                "project_name": "same name"
+              }
+            ]
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "same name",
+            "source": "device",
+            "owner": "11111111111111111111111111111111",
+            "source_key": "1",
+            "device_name": "laptop"
+          }
+        ],
+        "origins": [
+          {
+            "device_id": "11111111111111111111111111111111",
+            "device_name": "laptop"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "desktop",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "shared desktop",
+        "project_id": 2,
+        "project_name": "same name",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "shared desktop",
+            "timestamp": null,
+            "hub_message_id": 2,
+            "origins": [
+              {
+                "device_id": "22222222222222222222222222222222",
+                "device_name": "desktop",
+                "source_position": 1,
+                "project_id": 2,
+                "project_name": "same name"
+              }
+            ]
+          }
+        ],
+        "projects": [
+          {
+            "id": 2,
+            "name": "same name",
+            "source": "device",
+            "owner": "22222222222222222222222222222222",
+            "source_key": "1",
+            "device_name": "desktop"
+          }
+        ],
+        "origins": [
+          {
+            "device_id": "22222222222222222222222222222222",
+            "device_name": "desktop"
+          }
+        ]
+      }
+    ]
+  }
+}

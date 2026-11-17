@@ -1,0 +1,217 @@
+Building wheel...
+running egg_info
+creating src/smm_local.egg-info
+writing src/smm_local.egg-info/PKG-INFO
+writing dependency_links to src/smm_local.egg-info/dependency_links.txt
+writing entry points to src/smm_local.egg-info/entry_points.txt
+writing requirements to src/smm_local.egg-info/requires.txt
+writing top-level names to src/smm_local.egg-info/top_level.txt
+writing manifest file 'src/smm_local.egg-info/SOURCES.txt'
+reading manifest file 'src/smm_local.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src/smm_local.egg-info/SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build/lib/smm_local
+copying src/smm_local/login_service.py -> build/lib/smm_local
+copying src/smm_local/service.py -> build/lib/smm_local
+copying src/smm_local/support.py -> build/lib/smm_local
+copying src/smm_local/installation.py -> build/lib/smm_local
+copying src/smm_local/__init__.py -> build/lib/smm_local
+copying src/smm_local/core.py -> build/lib/smm_local
+copying src/smm_local/api.py -> build/lib/smm_local
+copying src/smm_local/cli.py -> build/lib/smm_local
+copying src/smm_local/federation.py -> build/lib/smm_local
+copying src/smm_local/mcp_server.py -> build/lib/smm_local
+creating build/lib/smm_local/importers
+copying src/smm_local/importers/plugin_scope.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/codex.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/registry.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/source_io.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/__init__.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/plugin.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/zcode_fixture.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/base.py -> build/lib/smm_local/importers
+copying src/smm_local/importers/claude_code.py -> build/lib/smm_local/importers
+running egg_info
+writing src/smm_local.egg-info/PKG-INFO
+writing dependency_links to src/smm_local.egg-info/dependency_links.txt
+writing entry points to src/smm_local.egg-info/entry_points.txt
+writing requirements to src/smm_local.egg-info/requires.txt
+writing top-level names to src/smm_local.egg-info/top_level.txt
+reading manifest file 'src/smm_local.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src/smm_local.egg-info/SOURCES.txt'
+creating build/lib/smm_local/static
+copying src/smm_local/static/index.html -> build/lib/smm_local/static
+installing to build/bdist.macosx-11.1-arm64/wheel
+running install
+running install_lib
+creating build/bdist.macosx-11.1-arm64/wheel
+creating build/bdist.macosx-11.1-arm64/wheel/smm_local
+copying build/lib/smm_local/login_service.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/service.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/support.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+creating build/bdist.macosx-11.1-arm64/wheel/smm_local/importers
+copying build/lib/smm_local/importers/plugin_scope.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/codex.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/registry.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/source_io.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/__init__.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/plugin.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/zcode_fixture.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/base.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/importers/claude_code.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/importers
+copying build/lib/smm_local/installation.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/__init__.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/core.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/api.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/cli.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+creating build/bdist.macosx-11.1-arm64/wheel/smm_local/static
+copying build/lib/smm_local/static/index.html -> build/bdist.macosx-11.1-arm64/wheel/./smm_local/static
+copying build/lib/smm_local/federation.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+copying build/lib/smm_local/mcp_server.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_local
+running install_egg_info
+Copying src/smm_local.egg-info to build/bdist.macosx-11.1-arm64/wheel/./smm_local-0.3.0-py3.12.egg-info
+running install_scripts
+creating build/bdist.macosx-11.1-arm64/wheel/smm_local-0.3.0.dist-info/WHEEL
+creating '/private/tmp/smm-vibeinsight-impl/dist/packages/.tmp-r0v4c3cr/smm_local-0.3.0-py3-none-any.whl' and adding 'build/bdist.macosx-11.1-arm64/wheel' to it
+adding 'smm_local/__init__.py'
+adding 'smm_local/api.py'
+adding 'smm_local/cli.py'
+adding 'smm_local/core.py'
+adding 'smm_local/federation.py'
+adding 'smm_local/installation.py'
+adding 'smm_local/login_service.py'
+adding 'smm_local/mcp_server.py'
+adding 'smm_local/service.py'
+adding 'smm_local/support.py'
+adding 'smm_local/importers/__init__.py'
+adding 'smm_local/importers/base.py'
+adding 'smm_local/importers/claude_code.py'
+adding 'smm_local/importers/codex.py'
+adding 'smm_local/importers/plugin.py'
+adding 'smm_local/importers/plugin_scope.py'
+adding 'smm_local/importers/registry.py'
+adding 'smm_local/importers/source_io.py'
+adding 'smm_local/importers/zcode_fixture.py'
+adding 'smm_local/static/index.html'
+adding 'smm_local-0.3.0.dist-info/licenses/LICENSE'
+adding 'smm_local-0.3.0.dist-info/METADATA'
+adding 'smm_local-0.3.0.dist-info/WHEEL'
+adding 'smm_local-0.3.0.dist-info/entry_points.txt'
+adding 'smm_local-0.3.0.dist-info/top_level.txt'
+adding 'smm_local-0.3.0.dist-info/RECORD'
+removing build/bdist.macosx-11.1-arm64/wheel
+Successfully built /private/tmp/smm-vibeinsight-impl/dist/packages/smm_local-0.3.0-py3-none-any.whl
+Building wheel...
+running egg_info
+creating src/smm_hub.egg-info
+writing src/smm_hub.egg-info/PKG-INFO
+writing dependency_links to src/smm_hub.egg-info/dependency_links.txt
+writing entry points to src/smm_hub.egg-info/entry_points.txt
+writing requirements to src/smm_hub.egg-info/requires.txt
+writing top-level names to src/smm_hub.egg-info/top_level.txt
+writing manifest file 'src/smm_hub.egg-info/SOURCES.txt'
+reading manifest file 'src/smm_hub.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src/smm_hub.egg-info/SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build/lib/smm_hub
+copying src/smm_hub/windows_service.py -> build/lib/smm_hub
+copying src/smm_hub/__init__.py -> build/lib/smm_hub
+copying src/smm_hub/hub.py -> build/lib/smm_hub
+copying src/smm_hub/hub_admin.py -> build/lib/smm_hub
+copying src/smm_hub/cli.py -> build/lib/smm_hub
+copying src/smm_hub/vibeinsight_settings.py -> build/lib/smm_hub
+copying src/smm_hub/hub_os.py -> build/lib/smm_hub
+copying src/smm_hub/vibeinsight.py -> build/lib/smm_hub
+copying src/smm_hub/projects.py -> build/lib/smm_hub
+creating build/lib/smm_hub/_archive
+copying src/smm_hub/_archive/support.py -> build/lib/smm_hub/_archive
+copying src/smm_hub/_archive/__init__.py -> build/lib/smm_hub/_archive
+copying src/smm_hub/_archive/core.py -> build/lib/smm_hub/_archive
+creating build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/plugin_scope.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/codex.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/registry.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/source_io.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/__init__.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/plugin.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/zcode_fixture.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/base.py -> build/lib/smm_hub/_archive/importers
+copying src/smm_hub/_archive/importers/claude_code.py -> build/lib/smm_hub/_archive/importers
+running egg_info
+writing src/smm_hub.egg-info/PKG-INFO
+writing dependency_links to src/smm_hub.egg-info/dependency_links.txt
+writing entry points to src/smm_hub.egg-info/entry_points.txt
+writing requirements to src/smm_hub.egg-info/requires.txt
+writing top-level names to src/smm_hub.egg-info/top_level.txt
+reading manifest file 'src/smm_hub.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src/smm_hub.egg-info/SOURCES.txt'
+installing to build/bdist.macosx-11.1-arm64/wheel
+running install
+running install_lib
+creating build/bdist.macosx-11.1-arm64/wheel
+creating build/bdist.macosx-11.1-arm64/wheel/smm_hub
+copying build/lib/smm_hub/windows_service.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/__init__.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/hub.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/hub_admin.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/cli.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/vibeinsight_settings.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/hub_os.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/vibeinsight.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+copying build/lib/smm_hub/projects.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub
+creating build/bdist.macosx-11.1-arm64/wheel/smm_hub/_archive
+copying build/lib/smm_hub/_archive/support.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive
+creating build/bdist.macosx-11.1-arm64/wheel/smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/plugin_scope.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/codex.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/registry.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/source_io.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/__init__.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/plugin.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/zcode_fixture.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/base.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/importers/claude_code.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive/importers
+copying build/lib/smm_hub/_archive/__init__.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive
+copying build/lib/smm_hub/_archive/core.py -> build/bdist.macosx-11.1-arm64/wheel/./smm_hub/_archive
+running install_egg_info
+Copying src/smm_hub.egg-info to build/bdist.macosx-11.1-arm64/wheel/./smm_hub-0.3.0-py3.12.egg-info
+running install_scripts
+creating build/bdist.macosx-11.1-arm64/wheel/smm_hub-0.3.0.dist-info/WHEEL
+creating '/private/tmp/smm-vibeinsight-impl/dist/packages/.tmp-gtj3urbw/smm_hub-0.3.0-py3-none-any.whl' and adding 'build/bdist.macosx-11.1-arm64/wheel' to it
+adding 'smm_hub/__init__.py'
+adding 'smm_hub/cli.py'
+adding 'smm_hub/hub.py'
+adding 'smm_hub/hub_admin.py'
+adding 'smm_hub/hub_os.py'
+adding 'smm_hub/projects.py'
+adding 'smm_hub/vibeinsight.py'
+adding 'smm_hub/vibeinsight_settings.py'
+adding 'smm_hub/windows_service.py'
+adding 'smm_hub/_archive/__init__.py'
+adding 'smm_hub/_archive/core.py'
+adding 'smm_hub/_archive/support.py'
+adding 'smm_hub/_archive/importers/__init__.py'
+adding 'smm_hub/_archive/importers/base.py'
+adding 'smm_hub/_archive/importers/claude_code.py'
+adding 'smm_hub/_archive/importers/codex.py'
+adding 'smm_hub/_archive/importers/plugin.py'
+adding 'smm_hub/_archive/importers/plugin_scope.py'
+adding 'smm_hub/_archive/importers/registry.py'
+adding 'smm_hub/_archive/importers/source_io.py'
+adding 'smm_hub/_archive/importers/zcode_fixture.py'
+adding 'smm_hub-0.3.0.dist-info/licenses/LICENSE'
+adding 'smm_hub-0.3.0.dist-info/METADATA'
+adding 'smm_hub-0.3.0.dist-info/WHEEL'
+adding 'smm_hub-0.3.0.dist-info/entry_points.txt'
+adding 'smm_hub-0.3.0.dist-info/top_level.txt'
+adding 'smm_hub-0.3.0.dist-info/RECORD'
+removing build/bdist.macosx-11.1-arm64/wheel
+Successfully built /private/tmp/smm-vibeinsight-impl/dist/packages/smm_hub-0.3.0-py3-none-any.whl

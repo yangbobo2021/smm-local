@@ -1,0 +1,176 @@
+{
+  "test": "tests/test_vibeinsight_sync.py::test_all_visible_projects_and_historical_discovery",
+  "fixture": "synthetic",
+  "evidence": {
+    "initial_hits": [
+      {
+        "id": 2,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"beta\"]",
+        "title": "evidence beta 9",
+        "started_at": "2026-09-14T00:09:00",
+        "updated_at": "2026-09-14T00:09:00",
+        "project_id": null,
+        "project_name": null,
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence beta 9"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"alpha\"]",
+        "title": "evidence alpha 8",
+        "started_at": "2026-09-14T00:08:00",
+        "updated_at": "2026-09-14T00:08:00",
+        "project_id": null,
+        "project_name": null,
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence alpha 8"
+          }
+        ]
+      }
+    ],
+    "discovered_hits": [
+      {
+        "id": 2,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"beta\"]",
+        "title": "evidence beta 9",
+        "started_at": "2026-09-14T00:09:00",
+        "updated_at": "2026-09-14T00:09:00",
+        "project_id": null,
+        "project_name": null,
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence beta 9"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"alpha\"]",
+        "title": "evidence alpha 8",
+        "started_at": "2026-09-14T00:08:00",
+        "updated_at": "2026-09-14T00:08:00",
+        "project_id": null,
+        "project_name": null,
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence alpha 8"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"gamma\"]",
+        "title": "evidence gamma 1",
+        "started_at": "2026-09-14T00:01:00",
+        "updated_at": "2026-09-14T00:01:00",
+        "project_id": null,
+        "project_name": null,
+        "rank": 3,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence gamma 1"
+          }
+        ]
+      }
+    ],
+    "read_back": [
+      {
+        "id": 2,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"beta\"]",
+        "source_path": "",
+        "cwd": null,
+        "started_at": "2026-09-14T00:09:00",
+        "updated_at": "2026-09-14T00:09:00",
+        "title": "evidence beta 9",
+        "project_id": null,
+        "project_name": null,
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence beta 9",
+            "timestamp": "2026-09-14T00:09:00",
+            "origin": null,
+            "import_batch": null,
+            "plugin_revision": null
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"alpha\"]",
+        "source_path": "",
+        "cwd": null,
+        "started_at": "2026-09-14T00:08:00",
+        "updated_at": "2026-09-14T00:08:00",
+        "title": "evidence alpha 8",
+        "project_id": null,
+        "project_name": null,
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence alpha 8",
+            "timestamp": "2026-09-14T00:08:00",
+            "origin": null,
+            "import_batch": null,
+            "plugin_revision": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "vibeinsight",
+        "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"gamma\"]",
+        "source_path": "",
+        "cwd": null,
+        "started_at": "2026-09-14T00:01:00",
+        "updated_at": "2026-09-14T00:01:00",
+        "title": "evidence gamma 1",
+        "project_id": null,
+        "project_name": null,
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "evidence gamma 1",
+            "timestamp": "2026-09-14T00:01:00",
+            "origin": null,
+            "import_batch": null,
+            "plugin_revision": null
+          }
+        ]
+      }
+    ]
+  }
+}
