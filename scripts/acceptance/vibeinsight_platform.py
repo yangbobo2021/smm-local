@@ -130,7 +130,7 @@ class Run:
             return json.load(response)
 
     def hits(self,word="platform"):
-        return self.api("search",{"query":word,"limit":50})
+        return self.api("search",{"query":word,"limit":50,"preview_chars":0})
 
     def read(self,hit):
         return self.api("read",{"hub_id":getattr(self,"expected_hub_id",None) or self.api("info")["hub_id"],"conversation_id":hit["id"]})
@@ -146,7 +146,7 @@ class Run:
             assert current["source_session_id"]==old["source_session_id"]
             exact_reads=[]
             for message in old["messages"]:
-                exact=self.api("read",{"hub_id":self.expected_hub_id,"conversation_id":old["id"],"hub_message_id":message["hub_message_id"]})
+                exact=self.api("read",{"hub_id":self.expected_hub_id,"conversation_id":old["id"],"message_id":message["hub_message_id"]})
                 assert exact["messages"]==[message]
                 exact_reads.append(exact)
             observed.append({"original_reference":{"hub_id":self.expected_hub_id,"conversation_id":old["id"]},"read":current,"exact_reads":exact_reads})
@@ -318,7 +318,9 @@ class Run:
         new=self.read(self.session("new")[0])
         assert [(m["role"],m["text"]) for m in new["messages"]]==[("user","platform evidence D new 110"),("assistant","platform evidence D new 111")]
         for n in range(6,10):
-            assert any(m["text"]==f"platform evidence C turns {n}" for h in self.hits(f"turns {n}")["results"] for m in h["matched_messages"])
+            new_hit=self.hits(str(n))
+            assert any(m.get("text")==f"platform evidence C turns {n}" for h in new_hit["results"] for m in h["matched_messages"])
+            self.save("H6-new-content-search-"+str(n),new_hit)
         self.save("H6-after-original",after); self.save("H6-new",self.read(self.session("new")[0]))
         done=self.admin("vibeinsight","status")["last_success"]
         eventually(lambda:self.admin("vibeinsight","status")["last_success"]!=done)

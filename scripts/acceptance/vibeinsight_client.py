@@ -134,7 +134,7 @@ print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
             for expected in t['expected_hits']:
                 assert any(h['source']==expected['source'] and h['source_session_id']==expected['session']
                            and any(p['id']==expected['project_id'] for p in h['projects'])
-                           and any(m['text'] in expected['texts'] for m in h['matched_messages']) for h in data['results'])
+                           and any(m.get('text') in expected['texts'] for m in h['matched_messages']) for h in data['results'])
             assert any(h['source_session_id']==session for h in data['results'])
             assert any(h['source']=='vibeinsight' for h in data['results'])
 
