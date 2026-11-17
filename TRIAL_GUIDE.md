@@ -96,7 +96,26 @@ smm-hub hub vibeinsight configure --host db.example.net --port 5432 --database v
 smm-hub hub vibeinsight status
 ```
 
-如果使用自定义状态目录，在 `hub` 后加 `--state-dir <状态目录>`。同步周期默认 300 秒，可用 `--interval` 调整。启用同步后，汇总服务拉取连接可读的全部项目，随后同步新会话及旧会话追加的轮次。服务重启会读取已保存的凭据和进度继续。状态命令显示最近成功时间和失败原因。源端原地改写历史消息而未产生新事件时，汇总档案保留已导入的原内容。
+如果使用自定义状态目录，在 `hub` 后加 `--state-dir <状态目录>`，并与服务实际使用的目录保持一致。同步周期默认 300 秒，`--interval` 为不小于 1 的整数秒；它表示轮次调度间隔，不承诺整轮导入在该时间内完成。非法值或连接验证失败不会替换有效配置。
+
+配置成功后，汇总服务自动拉取连接可读的全部项目，随后同步新会话及旧会话追加的轮次。服务重启会读取已保存的凭据和进度继续。状态命令显示最近成功时间和失败原因。每个项目从已提交位置向前回查 24 小时并去重；窗口外的迟到事件不保证发现。停服超过一天仍从持久位置继续，新发现项目会补齐更早的历史。源端原地改写历史消息而未产生新事件时，汇总档案保留已导入的原内容。
+
+仅更换同一数据库目标的账号或密码会保留进度。数据库主机、端口或库名的配置组合变化时按不同来源导入，原归档保留；连接目标的别名不会自动合并。这与下文项目的仓库身份是两套标识。
+
+终端配置成功后，还应在实际服务中检查 `vibeinsight status` 的最近成功时间，并通过检索和读取原文确认结果。macOS 的 launchd、Linux 的 systemd 用户服务以及 Windows 的 LocalService 可能有不同的 PATH 和文件访问权限。Windows 上 Python、psql 及其动态库需对 LocalService 可读可执行，专用凭据文件则限制为服务账户和管理员可读。出现依赖、权限或连接错误时，既有归档仍可检索；修复后服务自动重试。
+
+### 自行管理 Hub 进程
+
+自行管理进程时无需执行 `hub setup` 注册系统服务。准备独立状态目录、至少 32 字符的 ASCII Token 文件，以及客户端可访问的 HTTPS 地址、证书和私钥；Token 文件的原值由获授权客户端使用。按上一节取得数据库连接信息，然后在交互终端配置来源，密码由提示输入：
+
+```sh
+smm-hub hub --state-dir /path/to/hub-state vibeinsight configure --host db.example.net --database vibeinsight --user reader --psql /path/to/psql
+smm-hub serve-hub --state-dir /path/to/hub-state --host 0.0.0.0 --port 8770 --token-file /path/to/hub-token --tls-cert /path/to/cert.pem --tls-key /path/to/key.pem
+```
+
+把示例路径换成运行账户可访问的本机路径；Windows 可使用带引号的绝对路径。`serve-hub --state-dir` 读取同目录的来源配置/凭据，并使用其中的 `smm-hub.sqlite3`。启动后自动同步，停止后用相同命令和目录重新启动，无需重输数据库密码。查看状态或管理项目时，仍使用 `hub --state-dir <同目录> ...`。
+
+若同时提供顶层 `--db`，它必须指向该目录中的同一档案，否则启动被拒绝。使用不同服务管理方式时先停旧进程，避免两个进程并用同一档案和端口。旧的无 `--state-dir` 启动方式保留独立归档/检索行为；要读取保存的 VibeInsight 配置，需显式指定目录。
 
 ### 管理汇总端的项目关联
 

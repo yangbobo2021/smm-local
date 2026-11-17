@@ -1,0 +1,40 @@
+name: Test packages
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-14, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+          python-version: "3.14"
+      - run: uv sync --extra test
+      - run: uv run python -m pytest -q --junitxml=test-results.xml
+        env:
+          PYTHONPATH: src
+      - run: uv run python scripts/build_packages.py
+      - name: Install wheels separately
+        shell: bash
+        run: |
+          uv venv hub-env
+          uv venv local-env
+          if [[ "$RUNNER_OS" == Windows ]]; then bin=Scripts; else bin=bin; fi
+          uv pip install --python "hub-env/$bin/python" dist/packages/smm_hub-*.whl
+          uv pip install --python "local-env/$bin/python" dist/packages/smm_local-*.whl
+          "hub-env/$bin/python" -m smm_hub.cli serve-hub --help
+          "local-env/$bin/python" -m smm_local.cli search --help
+          "local-env/$bin/python" -m smm_local.mcp_server --help
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tests-${{ matrix.os }}
+          path: test-results.xml
