@@ -1,0 +1,378 @@
+{
+  "generation_configuration": [
+    "gpt-6.1-sol",
+    "none",
+    "codex-cli 0.166.0-alpha.5.1"
+  ],
+  "quote_validation": "all grading quotes found verbatim in their own answer",
+  "results": [
+    {
+      "case": "case-01",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 7,
+      "maximum": 7,
+      "failed_checks": []
+    },
+    {
+      "case": "case-01",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 7,
+      "maximum": 7,
+      "failed_checks": []
+    },
+    {
+      "case": "case-01",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": false,
+      "score": 6,
+      "maximum": 7,
+      "failed_checks": [
+        "H5"
+      ]
+    },
+    {
+      "case": "case-01",
+      "variant": "current",
+      "repeat": 1,
+      "passed": false,
+      "score": 3,
+      "maximum": 7,
+      "failed_checks": [
+        "H3",
+        "H4",
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "case": "case-01",
+      "variant": "current",
+      "repeat": 2,
+      "passed": false,
+      "score": 3,
+      "maximum": 7,
+      "failed_checks": [
+        "H3",
+        "H4",
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "case": "case-01",
+      "variant": "current",
+      "repeat": 3,
+      "passed": false,
+      "score": 3,
+      "maximum": 7,
+      "failed_checks": [
+        "H3",
+        "H4",
+        "H5",
+        "H7"
+      ]
+    },
+    {
+      "case": "case-02",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-02",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-02",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-02",
+      "variant": "current",
+      "repeat": 1,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "T2"
+      ]
+    },
+    {
+      "case": "case-02",
+      "variant": "current",
+      "repeat": 2,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "T2"
+      ]
+    },
+    {
+      "case": "case-02",
+      "variant": "current",
+      "repeat": 3,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "T2"
+      ]
+    },
+    {
+      "case": "case-03",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-03",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-03",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-03",
+      "variant": "current",
+      "repeat": 1,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "L2"
+      ]
+    },
+    {
+      "case": "case-03",
+      "variant": "current",
+      "repeat": 2,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "L2"
+      ]
+    },
+    {
+      "case": "case-03",
+      "variant": "current",
+      "repeat": 3,
+      "passed": false,
+      "score": 2,
+      "maximum": 3,
+      "failed_checks": [
+        "L2"
+      ]
+    },
+    {
+      "case": "case-04",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 4,
+      "maximum": 4,
+      "failed_checks": []
+    },
+    {
+      "case": "case-04",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 4,
+      "maximum": 4,
+      "failed_checks": []
+    },
+    {
+      "case": "case-04",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": true,
+      "score": 4,
+      "maximum": 4,
+      "failed_checks": []
+    },
+    {
+      "case": "case-04",
+      "variant": "current",
+      "repeat": 1,
+      "passed": false,
+      "score": 3,
+      "maximum": 4,
+      "failed_checks": [
+        "S3"
+      ]
+    },
+    {
+      "case": "case-04",
+      "variant": "current",
+      "repeat": 2,
+      "passed": false,
+      "score": 3,
+      "maximum": 4,
+      "failed_checks": [
+        "S3"
+      ]
+    },
+    {
+      "case": "case-04",
+      "variant": "current",
+      "repeat": 3,
+      "passed": false,
+      "score": 3,
+      "maximum": 4,
+      "failed_checks": [
+        "S3"
+      ]
+    },
+    {
+      "case": "case-05",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-05",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-05",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-05",
+      "variant": "current",
+      "repeat": 1,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-05",
+      "variant": "current",
+      "repeat": 2,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-05",
+      "variant": "current",
+      "repeat": 3,
+      "passed": true,
+      "score": 3,
+      "maximum": 3,
+      "failed_checks": []
+    },
+    {
+      "case": "case-06",
+      "variant": "candidate",
+      "repeat": 1,
+      "passed": true,
+      "score": 5,
+      "maximum": 5,
+      "failed_checks": []
+    },
+    {
+      "case": "case-06",
+      "variant": "candidate",
+      "repeat": 2,
+      "passed": true,
+      "score": 5,
+      "maximum": 5,
+      "failed_checks": []
+    },
+    {
+      "case": "case-06",
+      "variant": "candidate",
+      "repeat": 3,
+      "passed": true,
+      "score": 5,
+      "maximum": 5,
+      "failed_checks": []
+    },
+    {
+      "case": "case-06",
+      "variant": "current",
+      "repeat": 1,
+      "passed": false,
+      "score": 3,
+      "maximum": 5,
+      "failed_checks": [
+        "R3",
+        "R4"
+      ]
+    },
+    {
+      "case": "case-06",
+      "variant": "current",
+      "repeat": 2,
+      "passed": false,
+      "score": 3,
+      "maximum": 5,
+      "failed_checks": [
+        "R3",
+        "R4"
+      ]
+    },
+    {
+      "case": "case-06",
+      "variant": "current",
+      "repeat": 3,
+      "passed": false,
+      "score": 3,
+      "maximum": 5,
+      "failed_checks": [
+        "R3",
+        "R4"
+      ]
+    }
+  ]
+}

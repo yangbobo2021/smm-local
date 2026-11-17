@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "case": {"type": "string"},
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {"type": "string"},
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"},
+                "score": {"type": "integer", "enum": [0, 1]},
+                "quote": {"type": "string"},
+                "reason": {"type": "string"}
+              },
+              "required": ["id", "score", "quote", "reason"],
+              "additionalProperties": false
+            }
+          },
+          "other_findings": {"type": "string"}
+        },
+        "required": ["label", "checks", "other_findings"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["case", "answers"],
+  "additionalProperties": false
+}

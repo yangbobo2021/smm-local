@@ -1,0 +1,71 @@
+{
+  "case": "Case 01",
+  "answers": [
+    {
+      "label": "R1",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未指出 README 缺少新能力介绍和明确入口及其用户影响。"},
+        {"id": "P2", "score": 0, "quote": "新增 Hub 管理章节确实提供了可用操作：先列出项目，再以返回的 ID 建立关联", "reason": "承认指南已有操作说明，但未承认 README 已有通用指南链接。"},
+        {"id": "P3", "score": 0, "quote": "`README.md` 第84行同样只笼统描述“直接关联”。", "reason": "未引用 README 多机说明或通用指南链接位置。"},
+        {"id": "P4", "score": 0, "quote": "并从第38行链接到 Hub 管理章节。", "reason": "建议修复指南内部跳转，未建议主入口介绍新能力并直达指南。"},
+        {"id": "P5", "score": 0, "quote": "已能确认的问题是局部入口未交代关联的作用位置，增加了误配和排查成本。", "reason": "识别的是本机关联与 Hub 关联指引歧义，未识别本项要求的 README 发现缺口。"}
+      ],
+      "other_findings": "另报告项目改名身份、Skill 范围说明和指南关联位置问题。五项未全部通过。"
+    },
+    {
+      "label": "R2",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未发现 README 新能力介绍及明确入口缺口。"},
+        {"id": "P2", "score": 0, "quote": "第97–105行已有可用的 Hub CLI 路径，并说明项目 ID 从 `project list` 取得", "reason": "承认指南已有操作路径，未承认 README 通用指南链接。"},
+        {"id": "P3", "score": 0, "quote": "位置：`TRIAL_GUIDE.md:38`、`:97–107`。", "reason": "有指南依据，但缺少要求的 README 位置依据。"},
+        {"id": "P4", "score": 0, "quote": "建议在第38行区分本机与 Hub 关联，并链接“管理汇总端的项目关联”。", "reason": "修复建议针对指南内部歧义，未涉及主入口能力介绍。"},
+        {"id": "P5", "score": 0, "quote": "具体缺口是第38行没有说明适用范围，也没有跳转到该路径", "reason": "未识别 README 用户发现或上手入口缺口。"}
+      ],
+      "other_findings": "另报告项目身份、Skill 范围解释及本机 Web 关联指引问题。五项未全部通过。"
+    },
+    {
+      "label": "R3",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未指出 README 未介绍新能力且缺少明确功能入口。"},
+        {"id": "P2", "score": 1, "quote": "`README.md:33–50` 提供部署入口和指南链接，可以继续。\n`TRIAL_GUIDE.md:88–92` 直接要求只读账户并给出示例地址\n`TRIAL_GUIDE.md:99–105` 提供入口", "reason": "承认 README 指南链接，以及指南现有配置和关联操作。"},
+        {"id": "P3", "score": 1, "quote": "`README.md:33–50` 提供部署入口和指南链接，可以继续。\n`TRIAL_GUIDE.md:99–105` 提供入口", "reason": "引用了 README 多机及指南链接位置和新增指南位置。"},
+        {"id": "P4", "score": 0, "quote": "", "reason": "未建议在主入口介绍能力并直达详细指南。"},
+        {"id": "P5", "score": 0, "quote": "对首次配置缺口的分类：现有 SPEC 未覆盖的用户路径缺口。", "reason": "所指缺口是连接信息和凭据获取，非本项 README 发现缺口。"}
+      ],
+      "other_findings": "另报告凭据申请路径、项目改名、Skill 冲突及验收证据问题。五项未全部通过。"
+    },
+    {
+      "label": "R4",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未发现 README 能力介绍和明确入口缺口。"},
+        {"id": "P2", "score": 1, "quote": "`README.md:50` 链接指南，`TRIAL_GUIDE.md:86–93` 给出安装 `psql` 和配置命令。\n后续命令见 `TRIAL_GUIDE.md:95–107`", "reason": "承认 README 指南链接和指南内配置、关联路径。"},
+        {"id": "P3", "score": 1, "quote": "`README.md:50` 链接指南，`TRIAL_GUIDE.md:86–93` 给出安装 `psql` 和配置命令。", "reason": "提供了要求的 README 链接及新增功能指南位置。"},
+        {"id": "P4", "score": 0, "quote": "", "reason": "未建议主入口增加能力介绍和直达指南链接。"},
+        {"id": "P5", "score": 0, "quote": "这属于**现有 SPEC 未覆盖的用户路径缺口**", "reason": "该判断针对取得上游连接信息和权限，未识别指定的发现入口缺口。"}
+      ],
+      "other_findings": "另报告上游连接资料获取、项目身份、Skill 冲突和证据完整性问题。五项未全部通过。"
+    },
+    {
+      "label": "R5",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未指出 README 缺少新能力介绍及功能入口。"},
+        {"id": "P2", "score": 0, "quote": "`README.md:33–50` 给出部署、凭证交付和状态检查路径。", "reason": "承认指南已有配置和关联说明，但未明确承认 README 通用指南链接。"},
+        {"id": "P3", "score": 1, "quote": "`README.md:33–50` 给出部署、凭证交付和状态检查路径。\n`TRIAL_GUIDE.md:86–93` 给出依赖、示例地址、数据库名、账号和密码输入方式。", "reason": "引用 README 多机说明位置及新增指南功能位置。"},
+        {"id": "P4", "score": 0, "quote": "", "reason": "未提出主入口能力介绍和直达指南的适度修复。"},
+        {"id": "P5", "score": 0, "quote": "第 3 步属于现有 SPEC 未覆盖的用户路径缺口，不能直接判成实现违反规格。", "reason": "第3步讨论实际连接资料和授权范围获取，不是 README 发现缺口。"}
+      ],
+      "other_findings": "另报告连接前置条件、项目改名、Skill 指引和验收证据问题。五项未全部通过。"
+    },
+    {
+      "label": "R6",
+      "checks": [
+        {"id": "P1", "score": 0, "quote": "", "reason": "未指出 README 未介绍新能力且缺少明确入口所造成的影响。"},
+        {"id": "P2", "score": 1, "quote": "README 第 50 行提供了进入使用指南的入口，指南也提供了连接配置、`psql` 前置条件、项目 ID 获取、关联操作和断线行为", "reason": "完整承认 README 通用链接及指南已有配置和关联说明。"},
+        {"id": "P3", "score": 1, "quote": "README 第 50 行提供了进入使用指南的入口\n新增的第 99–107 行说明，在线项目检索使用 **Hub 保存的关联**", "reason": "引用了 README 指南链接和新增关联指南位置。"},
+        {"id": "P4", "score": 0, "quote": "建议在第 38 行区分本机与 Hub 关联，并链接本指南的“管理汇总端的项目关联”。", "reason": "仅建议修改指南内部入口，未建议主入口介绍新能力。"},
+        {"id": "P5", "score": 0, "quote": "缺口在于旧入口没有限定适用档案，也没有引向正确入口。", "reason": "讨论的是指南中 Web 关联适用范围，未识别指定的 README 发现缺口。"}
+      ],
+      "other_findings": "另报告 Skill 范围冲突、本机 Web 关联歧义和项目改名规格问题。五项未全部通过。"
+    }
+  ]
+}

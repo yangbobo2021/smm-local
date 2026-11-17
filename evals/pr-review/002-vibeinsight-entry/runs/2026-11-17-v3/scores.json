@@ -1,0 +1,728 @@
+{
+  "grading": "Independent anonymous grader, with main reviewer criterion and literal-source-excerpt verification.",
+  "adjudications": 0,
+  "quote_excerpt_corrections": [
+    {
+      "answer": "case-02-current-1.md",
+      "check": "C3"
+    },
+    {
+      "answer": "case-02-current-1.md",
+      "check": "C5"
+    },
+    {
+      "answer": "case-02-candidate-1.md",
+      "check": "C2"
+    },
+    {
+      "answer": "case-03-current-1.md",
+      "check": "D3"
+    },
+    {
+      "answer": "case-03-candidate-1.md",
+      "check": "D2"
+    },
+    {
+      "answer": "case-03-candidate-1.md",
+      "check": "D3"
+    },
+    {
+      "answer": "case-04-candidate-1.md",
+      "check": "1"
+    },
+    {
+      "answer": "case-04-candidate-1.md",
+      "check": "2"
+    },
+    {
+      "answer": "case-04-candidate-1.md",
+      "check": "3"
+    },
+    {
+      "answer": "case-04-candidate-1.md",
+      "check": "4"
+    },
+    {
+      "answer": "case-04-current-1.md",
+      "check": "1"
+    },
+    {
+      "answer": "case-04-current-1.md",
+      "check": "2"
+    },
+    {
+      "answer": "case-04-current-1.md",
+      "check": "5"
+    }
+  ],
+  "results": [
+    {
+      "case": "01",
+      "prompt": "candidate",
+      "repeat": 1,
+      "answer": "case-01-candidate-1.md",
+      "score": 3,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 1,
+          "reason": "指出主入口缺少新增能力介绍及功能导向，说明用户发现成本，并承认已有通用入口。",
+          "grader_quote": "README 本身没有介绍新增能力，增加发现成本，但已有指南入口，不能认定不可发现。",
+          "verified_quotes": [
+            "README 本身没有介绍新增能力，增加发现成本，但已有指南入口，不能认定不可发现。"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "承认通用指南链接、同步配置说明，并另确认指南项目关联管理路径。",
+          "grader_quote": "README 第 33–50 行介绍 Hub 部署并链接指南；指南第 86–95 行提供明确章节、依赖、配置命令和状态检查。",
+          "verified_quotes": [
+            "README 第 33–50 行介绍 Hub 部署并链接指南；指南第 86–95 行提供明确章节、依赖、配置命令和状态检查。"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "结合 README 第33–50行、指南第86–95行的引用，覆盖入口与新增功能位置。",
+          "grader_quote": "指南第 99 行要求先同步，通过 `project list` 取得实际 ID，再在第 102–104 行查看、建立和解除关系",
+          "verified_quotes": [
+            "指南第 99 行要求先同步，通过 `project list` 取得实际 ID，再在第 102–104 行查看、建立和解除关系"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "没有提出主入口能力介绍及直达详细指南的修复建议。",
+          "grader_quote": "",
+          "verified_quotes": []
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "未明确将首页发现问题定性为 PLAN/SPEC 明文验收之外的缺口。",
+          "grader_quote": "",
+          "verified_quotes": []
+        }
+      ],
+      "other_findings": "另报告 Skill 指令冲突、连接资料说明和本机/Hub 关联指引问题。"
+    },
+    {
+      "case": "01",
+      "prompt": "candidate",
+      "repeat": 2,
+      "answer": "case-01-candidate-2.md",
+      "score": 3,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 1,
+          "reason": "在 VibeInsight 配置路径中指出首页缺少能力介绍及明确功能入口，并说明发现成本；同时承认通用路径可达。",
+          "grader_quote": "存在可达入口。README未介绍新能力，增加发现成本",
+          "verified_quotes": [
+            "存在可达入口。README未介绍新能力，增加发现成本"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "承认 README 的通用指南链接，并在后续路径中确认指南已有配置和项目关联操作。",
+          "grader_quote": "README第33–50行介绍多机 Hub，并链接安装指南；指南第86行有明确同步标题",
+          "verified_quotes": [
+            "README第33–50行介绍多机 Hub，并链接安装指南；指南第86行有明确同步标题"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "结合所引 README 第33–50行及指南第86、99–105行，提供两端可复核位置。",
+          "grader_quote": "指南第99–105行先 list，再 links/link/unlink",
+          "verified_quotes": [
+            "指南第99–105行先 list，再 links/link/unlink"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "没有建议在主入口介绍能力并直接链接详细指南。",
+          "grader_quote": "但不足以判定无法发现或必须修改 README",
+          "verified_quotes": [
+            "但不足以判定无法发现或必须修改 README"
+          ]
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "未将 README 的发现缺口明确识别为 PLAN/SPEC 明文验收之外的问题；其他配置缺口的定性不能替代。",
+          "grader_quote": "",
+          "verified_quotes": []
+        }
+      ],
+      "other_findings": "另报告项目身份、Skill 范围指令、指南作用域及连接前置条件问题，不替代本轮检查项。"
+    },
+    {
+      "case": "01",
+      "prompt": "candidate",
+      "repeat": 3,
+      "answer": "case-01-candidate-3.md",
+      "score": 3,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 1,
+          "reason": "明确指出能力介绍及功能导向入口不足，并说明发现成本，未否认通用路径可达。",
+          "grader_quote": "README 未介绍新增的 VibeInsight 能力，链接文字主要指向证书、服务与升级，增加发现成本；不足以认定入口不可达。",
+          "verified_quotes": [
+            "README 未介绍新增的 VibeInsight 能力，链接文字主要指向证书、服务与升级，增加发现成本；不足以认定入口不可达。"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "承认通用链接，并回放指南第86–95行配置及第97–107行关联路径。",
+          "grader_quote": "README `:33–50` 介绍多机汇总并链接指南",
+          "verified_quotes": [
+            "README `:33–50` 介绍多机汇总并链接指南"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "同时提供 README 多机说明位置和指南新增配置、关联位置。",
+          "grader_quote": "指南 `:97–99` 说明先同步，再用 project list 取得 Hub 项目 ID → `:102–104` 查看、建立、解除关系",
+          "verified_quotes": [
+            "指南 `:97–99` 说明先同步，再用 project list 取得 Hub 项目 ID → `:102–104` 查看、建立、解除关系"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "虽然指出发现成本，但未建议主入口介绍新能力并直接链接详细指南。",
+          "grader_quote": "",
+          "verified_quotes": []
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "未将 README 发现缺口明确归为 PLAN/SPEC 明文验收之外的问题；其他局部指引问题的定性不替代此项。",
+          "grader_quote": "",
+          "verified_quotes": []
+        }
+      ],
+      "other_findings": "另报告项目身份、Skill 指令、本机/Hub 关联作用域、连接准备和发行版本说明问题。"
+    },
+    {
+      "case": "01",
+      "prompt": "current",
+      "repeat": 1,
+      "answer": "case-01-current-1.md",
+      "score": 2,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 0,
+          "reason": "未明确指出 README 缺少能力介绍与明确入口所造成的用户发现或上手影响。",
+          "grader_quote": "VibeInsight 专用入口主要在指南中。可以继续。",
+          "verified_quotes": [
+            "VibeInsight 专用入口主要在指南中。可以继续。"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "路径回放承认 README 到指南的入口，以及指南中的同步配置和关联命令。",
+          "grader_quote": "`README.md:33–50` 提供 Hub 部署与客户端连接入口",
+          "verified_quotes": [
+            "`README.md:33–50` 提供 Hub 部署与客户端连接入口"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "同时引用 README 第33–50行和指南第86–93、99–105行，依据可复核。",
+          "grader_quote": "`TRIAL_GUIDE.md:86–93` 要求安装 `psql`，准备数据库主机、端口、库名、只读账号及密码。",
+          "verified_quotes": [
+            "`TRIAL_GUIDE.md:86–93` 要求安装 `psql`，准备数据库主机、端口、库名、只读账号及密码。"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "开头泛称补齐用户入口，未具体建议主入口介绍能力并直达指南。",
+          "grader_quote": "",
+          "verified_quotes": []
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "该定性针对连接资料准备，未针对本项首页发现缺口。",
+          "grader_quote": "第 3 步属于**现有 SPEC 未覆盖的用户路径缺口**",
+          "verified_quotes": [
+            "第 3 步属于**现有 SPEC 未覆盖的用户路径缺口**"
+          ]
+        }
+      ],
+      "other_findings": "重点报告连接资料取得、项目身份、Skill 指令和验收证据问题。"
+    },
+    {
+      "case": "01",
+      "prompt": "current",
+      "repeat": 2,
+      "answer": "case-01-current-2.md",
+      "score": 2,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 0,
+          "reason": "未指出 README 缺少新能力介绍和明确功能入口及其用户影响。",
+          "grader_quote": "`README.md:33–50` 提供安装、setup、status 和指南入口。已有 Hub 用户可以继续。",
+          "verified_quotes": [
+            "`README.md:33–50` 提供安装、setup、status 和指南入口。已有 Hub 用户可以继续。"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "承认 README 指南入口，并确认指南已有配置及第99–105行关联说明。",
+          "grader_quote": "`TRIAL_GUIDE.md:90–95` 给出命令；实现验证读取权限、保存凭据并自动同步。",
+          "verified_quotes": [
+            "`TRIAL_GUIDE.md:90–95` 给出命令；实现验证读取权限、保存凭据并自动同步。"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "结合 README 第33–50行和指南第88、90–95行引用，位置可复核。",
+          "grader_quote": "`TRIAL_GUIDE.md:99–105` 提供入口",
+          "verified_quotes": [
+            "`TRIAL_GUIDE.md:99–105` 提供入口"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "未提出主入口能力介绍和直达指南的适度修复。",
+          "grader_quote": "",
+          "verified_quotes": []
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "此处指连接资料和授权准备，不是首页发现缺口。",
+          "grader_quote": "这是现有 SPEC 未覆盖的用户路径前置条件",
+          "verified_quotes": [
+            "这是现有 SPEC 未覆盖的用户路径前置条件"
+          ]
+        }
+      ],
+      "other_findings": "另报告项目身份、Skill 范围指引、授权前置条件和验收证据问题。"
+    },
+    {
+      "case": "01",
+      "prompt": "current",
+      "repeat": 3,
+      "answer": "case-01-current-3.md",
+      "score": 2,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "P1",
+          "score": 0,
+          "reason": "没有指出首页缺少新能力介绍及功能入口带来的发现影响。",
+          "grader_quote": "`README.md:33–50` 提供 Hub 安装、HTTPS、凭证分发和使用指南链接，可以继续。",
+          "verified_quotes": [
+            "`README.md:33–50` 提供 Hub 安装、HTTPS、凭证分发和使用指南链接，可以继续。"
+          ]
+        },
+        {
+          "id": "P2",
+          "score": 1,
+          "reason": "承认 README 通用链接，并确认指南已有配置、状态及关联操作。",
+          "grader_quote": "`TRIAL_GUIDE.md:101–107` 和 Skill 第 39–42 行提供操作及引用读取路径",
+          "verified_quotes": [
+            "`TRIAL_GUIDE.md:101–107` 和 Skill 第 39–42 行提供操作及引用读取路径"
+          ]
+        },
+        {
+          "id": "P3",
+          "score": 1,
+          "reason": "结合 README 第33–50行及指南第101–107行引用，覆盖所需依据。",
+          "grader_quote": "`TRIAL_GUIDE.md:88–93` 要求数据库地址、库名、只读账户和密码",
+          "verified_quotes": [
+            "`TRIAL_GUIDE.md:88–93` 要求数据库地址、库名、只读账户和密码"
+          ]
+        },
+        {
+          "id": "P4",
+          "score": 0,
+          "reason": "没有建议在主入口介绍能力并直接指向指南。",
+          "grader_quote": "",
+          "verified_quotes": []
+        },
+        {
+          "id": "P5",
+          "score": 0,
+          "reason": "识别的是上游资料取得问题，未识别本项首页发现缺口的性质。",
+          "grader_quote": "首次配置所需的上游信息没有取得入口",
+          "verified_quotes": [
+            "首次配置所需的上游信息没有取得入口"
+          ]
+        }
+      ],
+      "other_findings": "另报告项目改名、连接前置条件、Skill 指令及证据归属问题。"
+    },
+    {
+      "case": "02",
+      "prompt": "candidate",
+      "repeat": 1,
+      "answer": "case-02-candidate-1.md",
+      "score": 5,
+      "maximum": 5,
+      "passed": true,
+      "checks": [
+        {
+          "id": "C1",
+          "score": 1,
+          "reason": "明确确认首页已介绍新能力、适用对象并提供具体入口。",
+          "grader_quote": "README 第 52–57 行介绍能力、对象和负责人，并直链指南",
+          "verified_quotes": [
+            "README 第 52–57 行介绍能力、对象和负责人，并直链指南"
+          ]
+        },
+        {
+          "id": "C2",
+          "score": 1,
+          "reason": "确认指南覆盖连接依赖、配置、状态和项目关联操作。",
+          "grader_quote": "指南第 88 行要求先部署 Hub、准备 `psql` 和账户；第 91–95 行提供配置、状态、周期及重启行为。\n指南第 99 行要求客户端先同步，通过 `project list` 获取 Hub 项目 ID；第 102–105 行列出查看、建立、解除命令。",
+          "verified_quotes": [
+            "指南第 99 行要求客户端先同步，通过 `project list` 获取 Hub 项目 ID；第 102–105 行列出查看、建立、解除命令。"
+          ]
+        },
+        {
+          "id": "C3",
+          "score": 1,
+          "reason": "同时引用新增首页直达入口与实际指南操作位置。",
+          "grader_quote": "README 第 57 行直达项目关联指南；指南第 99 行要求客户端先同步，通过 `project list` 获取 Hub 项目 ID；第 102–105 行列出查看、建立、解除命令。",
+          "verified_quotes": [
+            "README 第 57 行直达项目关联指南；指南第 99 行要求客户端先同步，通过 `project list` 获取 Hub 项目 ID；第 102–105 行列出查看、建立、解除命令。"
+          ]
+        },
+        {
+          "id": "C4",
+          "score": 1,
+          "reason": "没有误报首页能力介绍或入口缺失，并明确区分局部说明问题与入口缺失。",
+          "grader_quote": "第 97–107 行已提供清晰的 Hub CLI 路径，Skill 第 39 行也说明 Hub 关系来源，因此不能认定关联配置无入口。",
+          "verified_quotes": [
+            "第 97–107 行已提供清晰的 Hub CLI 路径，Skill 第 39 行也说明 Hub 关系来源，因此不能认定关联配置无入口。"
+          ]
+        },
+        {
+          "id": "C5",
+          "score": 1,
+          "reason": "承认路径完整，其他问题均提供独立文件或实现依据，未强制重复指南或机械修改固定文件。",
+          "grader_quote": "正向路径完整；第 46 行产生范围解释冲突。",
+          "verified_quotes": [
+            "正向路径完整；第 46 行产生范围解释冲突。"
+          ]
+        }
+      ],
+      "other_findings": "另讨论数据库接入前提、Skill 范围说明冲突及最终提交验收归属；不影响本次导航检查得分。"
+    },
+    {
+      "case": "02",
+      "prompt": "current",
+      "repeat": 1,
+      "answer": "case-02-current-1.md",
+      "score": 5,
+      "maximum": 5,
+      "passed": true,
+      "checks": [
+        {
+          "id": "C1",
+          "score": 1,
+          "reason": "确认首页有 VibeInsight 接入说明和可继续使用的指南入口。",
+          "grader_quote": "| 进入功能 | 从 README 找到 VibeInsight 接入说明 | `README.md:52–57` 提供指南链接，可以继续。 |",
+          "verified_quotes": [
+            "| 进入功能 | 从 README 找到 VibeInsight 接入说明 | `README.md:52–57` 提供指南链接，可以继续。 |"
+          ]
+        },
+        {
+          "id": "C2",
+          "score": 1,
+          "reason": "确认指南已有连接依赖、配置、状态检查及项目关联操作。",
+          "grader_quote": "| 配置并等待同步 | 安装服务账户可执行的 `psql`，运行 configure，检查 status | 命令和参数已有说明；在连接信息已由外部提供的前提下，可继续。 |\n   | 建立关联 | 客户端同步后列出项目，选择 ID，建立直接关联 | `TRIAL_GUIDE.md:99–105` 提供入口；代码列表包含来源身份和设备信息。 |",
+          "verified_quotes": [
+            "| 配置并等待同步 | 安装服务账户可执行的 `psql`，运行 configure，检查 status | 命令和参数已有说明；在连接信息已由外部提供的前提下，可继续。 |\n   | 建立关联 | 客户端同步后列出项目，选择 ID，建立直接关联 | `TRIAL_GUIDE.md:99–105` 提供入口；代码列表包含来源身份和设备信息。 |"
+          ]
+        },
+        {
+          "id": "C3",
+          "score": 1,
+          "reason": "引用新增首页入口以及实际指南的配置和关联位置。",
+          "grader_quote": "`README.md:52–57` 提供指南链接，可以继续。\n`TRIAL_GUIDE.md:88–95`\n`TRIAL_GUIDE.md:99–105` 提供入口",
+          "verified_quotes": [
+            "`README.md:52–57` 提供指南链接，可以继续。"
+          ]
+        },
+        {
+          "id": "C4",
+          "score": 1,
+          "reason": "没有误报首页未介绍能力或缺少入口；提出的是上游连接准备等独立问题。",
+          "grader_quote": "`README.md:52–57` 提供指南链接，可以继续。",
+          "verified_quotes": [
+            "`README.md:52–57` 提供指南链接，可以继续。"
+          ]
+        },
+        {
+          "id": "C5",
+          "score": 1,
+          "reason": "路径回放承认首页至指南及操作入口可达，将阻碍定位在连接授权准备，并另引独立依据讨论其他缺陷；未要求机械更新 README 或复制指南。",
+          "grader_quote": "命令和参数已有说明；在连接信息已由外部提供的前提下，可继续。\n这是现有规格未覆盖的用户路径缺口，不能直接当作实现违反 SPEC。",
+          "verified_quotes": [
+            "这是现有规格未覆盖的用户路径缺口，不能直接当作实现违反 SPEC。"
+          ]
+        }
+      ],
+      "other_findings": "另提出项目身份保证、Skill 范围说明冲突和验收附件及版本归属问题；这些不替代本次导航检查项。"
+    },
+    {
+      "case": "03",
+      "prompt": "candidate",
+      "repeat": 1,
+      "answer": "case-03-candidate-1.md",
+      "score": 5,
+      "maximum": 5,
+      "passed": true,
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "reason": "识别文档首页承担统一使用入口。",
+          "grader_quote": "新增 `docs/index.md`、修改 README 导航未列入 PLAN 修改位置，也未说明新增统一入口的原因。",
+          "verified_quotes": [
+            "新增 `docs/index.md`、修改 README 导航未列入 PLAN 修改位置，也未说明新增统一入口的原因。"
+          ]
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "reason": "明确回放同步和项目关联的可达路径。",
+          "grader_quote": "从 README 第50行可以到达 `docs/index.md:7`，再进入 `TRIAL_GUIDE.md:86–95`。\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`",
+          "verified_quotes": [
+            "\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`"
+          ]
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "reason": "引用了 README、首页能力说明及两项指南的操作依据。",
+          "grader_quote": "从 README 第50行可以到达 `docs/index.md:7`，再进入 `TRIAL_GUIDE.md:86–95`。该路径明确介绍了能力、对象、依赖、配置命令和状态确认，不能认定本功能缺少入口。\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`",
+          "verified_quotes": [
+            "\n| Hub 维护者：关联项目 | 如何找到两个项目及其 ID、查看和调整关联 | docs/index:8 → TRIAL_GUIDE:97–105 → `project list/links/link/unlink`"
+          ]
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "reason": "明确排除了新功能入口缺失的误报。",
+          "grader_quote": "该路径明确介绍了能力、对象、依赖、配置命令和状态确认，不能认定本功能缺少入口。",
+          "verified_quotes": [
+            "该路径明确介绍了能力、对象、依赖、配置命令和状态确认，不能认定本功能缺少入口。"
+          ]
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "reason": "接受已有路径，建议针对局部歧义，没有要求 README 重复指南或虚构文档缺失。",
+          "grader_quote": "新首页已提供清晰的 Hub CLI 路径，因此不是整体导航阻断；建议第38行限定本机关联与汇总端关联的适用范围。",
+          "verified_quotes": [
+            "新首页已提供清晰的 Hub CLI 路径，因此不是整体导航阻断；建议第38行限定本机关联与汇总端关联的适用范围。"
+          ]
+        }
+      ],
+      "other_findings": "另报告 VibeInsight 项目身份与改名保证的规格差异、Skill 指引冲突及连接资料取得说明不足，均与导航判断分开。"
+    },
+    {
+      "case": "03",
+      "prompt": "current",
+      "repeat": 1,
+      "answer": "case-03-current-1.md",
+      "score": 5,
+      "maximum": 5,
+      "passed": true,
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "reason": "识别文档首页是声明的主要操作入口。",
+          "grader_quote": "实际新增 `docs/index.md`，并将 `README.md:50` 改为要求首次使用从该首页选择流程",
+          "verified_quotes": [
+            "实际新增 `docs/index.md`，并将 `README.md:50` 改为要求首次使用从该首页选择流程"
+          ]
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "reason": "确认 README 经文档首页进入同步和关联指南的路径可达。",
+          "grader_quote": "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。",
+          "verified_quotes": [
+            "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。"
+          ]
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "reason": "引用了 README 链接、文档首页两项能力入口及详细指南操作位置。",
+          "grader_quote": "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。\n`TRIAL_GUIDE.md:88–93` 要求数据库只读账户，并给出示例主机、数据库名及用户名\n`TRIAL_GUIDE.md:99–105` 提供列表、建立和解除命令",
+          "verified_quotes": [
+            "`README.md:50` 指向 `docs/index.md`；首页第7、8行分别提供同步与关联入口，可以继续。"
+          ]
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "reason": "没有因 README 未重复能力介绍而报告入口缺失。",
+          "grader_quote": "首页第7、8行分别提供同步与关联入口，可以继续。",
+          "verified_quotes": [
+            "首页第7、8行分别提供同步与关联入口，可以继续。"
+          ]
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "reason": "接受现有导航及操作入口，没有强制 README 重复说明；另提的是连接前置资料取得问题。",
+          "grader_quote": "假定管理员另行提供上述信息，命令入口存在；",
+          "verified_quotes": [
+            "假定管理员另行提供上述信息，命令入口存在；"
+          ]
+        }
+      ],
+      "other_findings": "另报告 Skill 范围指引冲突、本机 Web 关联说明歧义、PLAN 文档范围及验收证据对应问题；这些不替代本次导航检查。"
+    },
+    {
+      "case": "04",
+      "prompt": "candidate",
+      "repeat": 1,
+      "answer": "case-04-candidate-1.md",
+      "score": 5,
+      "maximum": 5,
+      "passed": true,
+      "checks": [
+        {
+          "id": "1",
+          "score": 1,
+          "reason": "明确判断符合计划，并结合 CLI 帮助改动、提示复用和回归测试说明依据。",
+          "grader_quote": "本次改动符合 PLAN，材料支持 SPEC 三项验收通过，未发现未说明的实施偏差。\n`purge_help` 同时传入 `help` 和 `description`\n`tests/test_cli_help.py::test_source_help` 覆盖这几项，并断言标准错误为空",
+          "verified_quotes": [
+            "`tests/test_cli_help.py::test_source_help` 覆盖这几项，并断言标准错误为空"
+          ]
+        },
+        {
+          "id": "2",
+          "score": 1,
+          "reason": "逐项核对三项验收的用途、两处提示、参数和退出状态，并明确区分历史记录与本次执行。",
+          "grader_quote": "| 8 个现有子命令各有准确用途说明 | `cli.py` 的 8 条文案、总帮助实际输出、新测试预期文本 | 覆盖，含义与规格一致 |\n| 总帮助提示清理前须停用对应插件来源 | `purge_help`、总帮助 `purge-batch` 条目 | 覆盖 |\n| 清理帮助保留两个位置参数及同一提示，正常退出 | 参数定义、清理帮助输出、测试退出码断言；PR 记录退出码为 0 | 覆盖 |\n本次是材料回放，未重新执行测试。",
+          "verified_quotes": [
+            "| 8 个现有子命令各有准确用途说明 | `cli.py` 的 8 条文案、总帮助实际输出、新测试预期文本 | 覆盖，含义与规格一致 |\n| 总帮助提示清理前须停用对应插件来源 | `purge_help`、总帮助 `purge-batch` 条目 | 覆盖 |\n| 清理帮助保留两个位置参数及同一提示，正常退出 | 参数定义、清理帮助输出、测试退出码断言；PR 记录退出码为 0 | 覆盖 |\n"
+          ]
+        },
+        {
+          "id": "3",
+          "score": 1,
+          "reason": "引用局部帮助只有参数名的事实，明确指出来源 ID 的识别及取得指引缺失，并承认总帮助提供探索线索。",
+          "grader_quote": "验收证据“清理批次的帮助”中，`positional arguments` 下只有 `source_id`、`batch`，没有解释或获取指引。\n`source_id` 应如何识别、从哪里查得；",
+          "verified_quotes": [
+            "验收证据“清理批次的帮助”中，`positional arguments` 下只有 `source_id`、`batch`，没有解释或获取指引。\n"
+          ]
+        },
+        {
+          "id": "4",
+          "score": 1,
+          "reason": "明确指出批次参数只有名称，缺少选择目标批次及取得批次 ID 的指引。",
+          "grader_quote": "验收证据“清理批次的帮助”中，`positional arguments` 下只有 `source_id`、`batch`，没有解释或获取指引。\n`batch` 应填写哪个批次标识，如何确认它属于目标来源。\n在清理帮助中解释两个参数，并指向实际用于取得来源 ID、批次 ID 的命令",
+          "verified_quotes": [
+            "验收证据“清理批次的帮助”中，`positional arguments` 下只有 `source_id`、`batch`，没有解释或获取指引。\n"
+          ]
+        },
+        {
+          "id": "5",
+          "score": 1,
+          "reason": "将两个参数的局部帮助缺口归为旧规格未覆盖的用户路径问题，并要求维护者确认是否扩展范围。",
+          "grader_quote": "**性质：SPEC 未覆盖的局部指引不足；建议维护者决定是否纳入本次变更。**",
+          "verified_quotes": [
+            "**性质：SPEC 未覆盖的局部指引不足；建议维护者决定是否纳入本次变更。**"
+          ]
+        }
+      ],
+      "other_findings": "五项均通过。"
+    },
+    {
+      "case": "04",
+      "prompt": "current",
+      "repeat": 1,
+      "answer": "case-04-current-1.md",
+      "score": 2,
+      "maximum": 5,
+      "passed": false,
+      "checks": [
+        {
+          "id": "1",
+          "score": 1,
+          "reason": "明确判断符合计划，并引用帮助实现及测试证据。",
+          "grader_quote": "当前改动符合已确认的 PLAN\n8 个子命令增加 `help`；`purge_help` 同时用于总帮助条目和子命令 `description`。\n新测试通过 `main()` 捕获退出码和输出，检查临时数据库未创建；历史记录报告指定两组测试共 19 项通过。",
+          "verified_quotes": [
+            "8 个子命令增加 `help`；`purge_help` 同时用于总帮助条目和子命令 `description`。"
+          ]
+        },
+        {
+          "id": "2",
+          "score": 1,
+          "reason": "覆盖三项验收的全部要点，且将测试结果和退出状态明确归于提供的历史记录。",
+          "grader_quote": "**验收项 1：充分。** 总帮助实际输出列出全部 8 个命令，用途与规格逐项一致。\n**验收项 2：充分。** `purge-batch` 条目明确显示停用前置条件。\n**验收项 3：充分。** 子命令实际输出保留两个位置参数并显示同一提示；记录声明两条命令退出码均为 `0`。",
+          "verified_quotes": [
+            "**验收项 3：充分。** 子命令实际输出保留两个位置参数并显示同一提示；记录声明两条命令退出码均为 `0`。"
+          ]
+        },
+        {
+          "id": "3",
+          "score": 0,
+          "reason": "将问题判断为缺少查询输出的证据，未明确指出清理子命令帮助只有 source_id 名称、无法在该页确认其取值及取得方式。",
+          "grader_quote": "材料没有 `list` 的输出，无法确认用户能否从中取得来源 ID，并辨认其为目标插件来源。",
+          "verified_quotes": [
+            "材料没有 `list` 的输出，无法确认用户能否从中取得来源 ID，并辨认其为目标插件来源。"
+          ]
+        },
+        {
+          "id": "4",
+          "score": 0,
+          "reason": "确认参数存在并指出材料不足，但没有明确认定该局部帮助只有 batch 名称，缺少应填哪个批次 ID 及如何取得的说明。",
+          "grader_quote": "`purge-batch --help` 显示 `source_id batch`，但材料没有 `disable`、`batches` 的帮助或实际输出，无法复核停用确认、批次选择及后续操作。",
+          "verified_quotes": [
+            "`purge-batch --help` 显示 `source_id batch`，但材料没有 `disable`、`batches` 的帮助或实际输出，无法复核停用确认、批次选择及后续操作。"
+          ]
+        },
+        {
+          "id": "5",
+          "score": 0,
+          "reason": "仅条件性地将其他命令可能无法提供信息视为规格外缺口，未将已经展示的两个参数局部帮助缺口作此定性。",
+          "grader_quote": "若上述信息在现有命令输出中确实无法取得，则属于现有 SPEC 未覆盖的用户路径缺口。\n请维护者决定是否将其纳入本次变更。",
+          "verified_quotes": [
+            "若上述信息在现有命令输出中确实无法取得，则属于现有 SPEC 未覆盖的用户路径缺口。"
+          ]
+        }
+      ],
+      "other_findings": "承认总帮助已有 list、batches 和 disable 等线索是合理的，但不能替代对清理帮助本身取值指引缺失的判断。五项未全部通过。"
+    }
+  ]
+}

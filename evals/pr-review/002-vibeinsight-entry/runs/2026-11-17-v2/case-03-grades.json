@@ -1,0 +1,77 @@
+{
+  "case": "Case 03",
+  "answers": [
+    {
+      "label": "R1",
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "quote": "`README.md:50` 要求首次使用从 `docs/index.md` 选择流程",
+          "reason": "明确识别文档首页为声明的首次使用入口。"
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "quote": "`README.md:50` → `docs/index.md:7–8` → 两段使用指南，入口可达。",
+          "reason": "明确确认 README 经文档首页到两段详细指南的路径可达。"
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "quote": "`README.md:50` → `docs/index.md:7–8` → 两段使用指南，入口可达。\n按 `TRIAL_GUIDE.md:88–95` 安装 `psql`、配置连接并查看状态。\n按 `TRIAL_GUIDE.md:99–105` 列出项目，用 Hub 项目 ID 建立关联。",
+          "reason": "引用了 README 入口、文档首页两项能力所在位置及指南中的具体操作。"
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "quote": "这里缺少的不是示例密码，而是**取得并确认连接前置条件的操作入口**。",
+          "reason": "已承认现有导航可达，另报的问题是凭据前置条件，并未因 README 没有重复介绍能力而误报入口缺失。"
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "quote": "后续路径总体可走通：",
+          "reason": "接受现有文档导航及后续操作路径，没有强制 README 重复详细说明，也没有声称现有指南不存在。"
+        }
+      ],
+      "other_findings": "另提出凭据取得流程、Skill 范围说明冲突、计划及验收留证、项目改名边界等问题；这些不替代本次导航检查项。"
+    },
+    {
+      "label": "R2",
+      "checks": [
+        {
+          "id": "D1",
+          "score": 1,
+          "quote": "新增 README 导航和文档首页未列入修改位置表，可补记其用途",
+          "reason": "结合其完整导航回放，识别了 README 引导至文档首页的入口安排。"
+        },
+        {
+          "id": "D2",
+          "score": 1,
+          "quote": "`README.md:50 → docs/index.md:8 → TRIAL_GUIDE.md` 的导航也确实能发现它，因此不能认定整体操作路径被阻断。",
+          "reason": "明确确认经文档首页到项目关联指南的路径可达。"
+        },
+        {
+          "id": "D3",
+          "score": 1,
+          "quote": "位置：`TRIAL_GUIDE.md:38`、`:99–107`。\n后面的第99–107行提供了可用的 Hub CLI 管理路径；`README.md:50 → docs/index.md:8 → TRIAL_GUIDE.md` 的导航也确实能发现它",
+          "reason": "引用了 README 文档站入口、首页项目关联能力所在行及指南操作位置。"
+        },
+        {
+          "id": "D4",
+          "score": 1,
+          "quote": "因此不能认定整体操作路径被阻断。",
+          "reason": "明确控制了导航误报，没有因 README 未重复能力介绍而判定入口缺失。"
+        },
+        {
+          "id": "D5",
+          "score": 1,
+          "quote": "建议在该处区分本机关联与 Hub 关联，并链接现有管理章节。",
+          "reason": "接受现有路径，建议限定于指南内部的适用范围澄清，没有要求 README 复制指南或虚构文档缺失。"
+        }
+      ],
+      "other_findings": "另提出项目身份延续、Skill 范围说明和本机 Web 关联指引冲突；均有独立论述，不作为导航缺失。"
+    }
+  ]
+}
