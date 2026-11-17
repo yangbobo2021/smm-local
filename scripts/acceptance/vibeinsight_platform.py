@@ -61,6 +61,7 @@ class Run:
         for key in ("hub_token_file",):
             if self.target.get(key):self.secrets.append(Path(self.target[key]).read_text().strip())
         self.service=None
+        self.process_events=[]
 
     def installed_identity(self):
         candidate=self.target["candidate"]
@@ -132,7 +133,34 @@ class Run:
         return self.api("search",{"query":word,"limit":50})
 
     def read(self,hit):
-        return self.api("read",{"hub_id":self.api("info")["hub_id"],"conversation_id":hit["id"]})
+        return self.api("read",{"hub_id":getattr(self,"expected_hub_id",None) or self.api("info")["hub_id"],"conversation_id":hit["id"]})
+
+    def committed(self):
+        return [self.read(hit) for hit in self.hits()["results"]]
+
+    def assert_committed(self, records):
+        observed=[]
+        for old in records:
+            current=self.api("read",{"hub_id":self.expected_hub_id,"conversation_id":old["id"]})
+            assert current["messages"]==old["messages"]
+            assert current["source_session_id"]==old["source_session_id"]
+            exact_reads=[]
+            for message in old["messages"]:
+                exact=self.api("read",{"hub_id":self.expected_hub_id,"conversation_id":old["id"],"hub_message_id":message["hub_message_id"]})
+                assert exact["messages"]==[message]
+                exact_reads.append(exact)
+            observed.append({"original_reference":{"hub_id":self.expected_hub_id,"conversation_id":old["id"]},"read":current,"exact_reads":exact_reads})
+        self.retained_checks=getattr(self,"retained_checks",0)+1
+        self.save("retained-originals-"+str(self.retained_checks),observed)
+
+    def configuration_bytes(self):
+        return {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in self.state.glob("vibeinsight*") if p.is_file()}
+
+    def assert_restart(self, before, label):
+        after=self.service_identity()
+        assert before["pid"]!=after["pid"]
+        assert self.api("info")["hub_id"]==self.expected_hub_id
+        self.save(label,{"before":before,"after":after})
 
     def session(self,name):
         return [h for h in self.hits()["results"] if h["source"]=="vibeinsight" and h["source_session_id"]==name]
@@ -153,9 +181,12 @@ class Run:
                   "--host","0.0.0.0","--port",str(self.target["port"]),"--token-file",str(self.state/"hub-token"),
                   "--tls-cert",self.target["cert"],"--tls-key",self.target["key"]]
             self.process=subprocess.Popen(argv,env=self.env,stdout=out,stderr=out)
+            self.process_events.append({"action":"start","argv":argv,"pid":self.process.pid,"at":now()})
+            self.save("P-process-events",self.process_events)
             out.close()
         else: self.admin("enable")
         eventually(lambda:self.api("info"))
+        if self.args.mode=="self-managed":assert self.process.poll() is None
 
     def stop(self):
         if self.args.mode=="self-managed":
@@ -163,6 +194,9 @@ class Run:
                 self.process.terminate()
                 try:self.process.wait(timeout=20)
                 except subprocess.TimeoutExpired:self.process.kill();self.process.wait(timeout=10);raise
+                self.process_events.append({"action":"exit","pid":self.process.pid,"exit_code":self.process.returncode,"at":now()})
+                self.save("P-process-events",self.process_events)
+                assert self.process.returncode in (0,-15)
         else:self.admin("disable")
 
     def service_identity(self):
@@ -211,11 +245,16 @@ class Run:
             self.missing_default_client()
             self.configure()  # default 300, no --interval
         self.save("H1-service",self.service_identity())
+        self.expected_hub_id=self.api("info")["hub_id"]
         eventually(lambda:len(self.session("turns"))==1)
         hit=self.session("turns")[0]; old=self.read(hit)
         assert [m["text"] for m in old["messages"]]==[f"platform evidence C turns {n}" for n in range(6)]
         self.save("H1-original",old)
         self.original=hit
+        other=eventually(lambda:self.session("other"))
+        other=self.read(other[0])
+        assert [(m["role"],m["text"]) for m in other["messages"]]==[("user","platform evidence D other 100"),("assistant","platform evidence D other 101")]
+        self.save("H1-other-project-original",other)
 
     def missing_default_client(self):
         empty=self.root/"empty-path";empty.mkdir(exist_ok=True)
@@ -246,40 +285,61 @@ class Run:
         eventually(lambda:self.admin("vibeinsight","status")["last_success"]!=cycle)
         profile=self.state/"vibeinsight.json"
         before=profile.read_bytes()
+        protected=self.configuration_bytes()
+        retained=self.committed(); saved_positions=self.checkpoints()
         for invalid in (0,-1,"1.5"):
             self.configure(interval=invalid,expected=2)
             assert profile.read_bytes()==before
+            assert self.configuration_bytes()==protected and self.checkpoints()==saved_positions
+            self.assert_committed(retained)
         self.snapshot("H2-status")
         for invalid in ({"password":"wrong-synthetic-password"},{"user":"limited_reader"},{"port":1}):
             self.configure(interval=1,expected=2,**invalid)
             assert profile.read_bytes()==before
+            assert self.configuration_bytes()==protected and self.checkpoints()==saved_positions
+            self.assert_committed(retained)
         self.snapshot("H3-status")
         saved=self.snapshot("H6-before"); old_id=self.original["id"]
+        before_identity=self.service_identity()
         self.stop()
-        before_identity=self.observed.get("H1-service")
+        if self.args.mode!="self-managed":assert not self.admin("status")["running"]
+        self.save("H6-stopped",{"before_identity":before_identity,"checkpoints":self.checkpoints()})
         appended=self.fixture.rows(6,10)+self.fixture.rows(110,112,session="new",repo="D")
         self.save("H6-source-append",appended)
         assert not self.password.exists()
         self.start()
+        self.assert_restart(before_identity,"H6-restarted")
         eventually(lambda:len(self.read(self.original)["messages"])==10)
         after=self.read(self.original)
         assert after["id"]==old_id
         assert [(m["role"],m["text"]) for m in after["messages"]]==[
             ("user" if n%2==0 else "assistant",f"platform evidence C turns {n}") for n in range(10)]
         assert len(self.session("new"))==1
+        new=self.read(self.session("new")[0])
+        assert [(m["role"],m["text"]) for m in new["messages"]]==[("user","platform evidence D new 110"),("assistant","platform evidence D new 111")]
+        for n in range(6,10):
+            assert any(m["text"]==f"platform evidence C turns {n}" for h in self.hits(f"turns {n}")["results"] for m in h["matched_messages"])
         self.save("H6-after-original",after); self.save("H6-new",self.read(self.session("new")[0]))
         done=self.admin("vibeinsight","status")["last_success"]
         eventually(lambda:self.admin("vibeinsight","status")["last_success"]!=done)
         assert len(self.read(self.original)["messages"])==10
         self.snapshot("H6-repeat")
+        committed=self.committed(); no_new_positions=self.checkpoints(); identity=self.service_identity()
         self.stop(); self.start()
+        self.assert_restart(identity,"H7-restarted")
+        self.assert_committed(committed)
+        assert self.checkpoints()==no_new_positions
         assert self.read(self.original)["messages"]==after["messages"]
         self.snapshot("H7-no-new-restart")
         prior=self.checkpoints()
         self.configure(interval=1,user="replacement_reader",password=self.cfg["replacement_password"])
+        assert self.checkpoints()==prior
+        identity=self.service_identity()
         self.stop(); self.start()
+        self.assert_restart(identity,"H5-restarted")
         eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
-        assert {r["source_id"] for r in self.checkpoints()}=={r["source_id"] for r in prior}
+        assert self.checkpoints()==prior
+        self.assert_committed(committed)
         assert len(self.read(self.original)["messages"])==10
         self.snapshot("H5-replaced-and-restarted")
 
@@ -287,6 +347,7 @@ class Run:
         # Trigger tests an actual incomplete transaction in the service's archive.
         database=self.state/"smm-hub.sqlite3"
         before=self.checkpoints()
+        retained=self.committed()
         with sqlite3.connect(database) as con:
             con.execute("""CREATE TRIGGER smm_fixture_abort BEFORE INSERT ON messages
                 WHEN NEW.text='platform evidence C failed 121'
@@ -296,12 +357,14 @@ class Run:
         eventually(lambda:"fixture uncommitted batch" in str(self.admin("vibeinsight","status")["last_error"]))
         assert not self.session("failed")
         assert self.checkpoints()==before
+        self.assert_committed(retained)
         self.snapshot("H8-failed")
         with sqlite3.connect(database) as con: con.execute("DROP TRIGGER smm_fixture_abort")
         eventually(lambda:len(self.session("failed"))==1)
         read=self.read(self.session("failed")[0]); assert len(read["messages"])==2
         assert [m["text"] for m in read["messages"]]==[f"platform evidence C failed {n}" for n in (120,121)]
         self.save("H8-recovered-original",read); self.snapshot("H8-recovered")
+        retained=self.committed()
         # Only the task-owned client distribution is disrupted, never a system psql.
         binary=Path(self.target["psql"])
         if not binary.is_relative_to(self.root):
@@ -310,34 +373,51 @@ class Run:
         binary.rename(renamed)
         try:
             eventually(lambda:self.admin("vibeinsight","status")["last_error"])
-            self.snapshot("H4-client-missing")
+            self.observe_failure("H4-client-missing",retained)
             assert len(self.read(self.original)["messages"])==10
         finally: renamed.rename(binary)
         eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
+        self.recovery_increment(132, "recovery-1")
         if os.name=="nt":
-            # Deny this task's service SID on the dedicated executable only.
             self.command(["icacls.exe",str(binary),"/deny","*S-1-5-19:RX"])
             try:
                 eventually(lambda:self.admin("vibeinsight","status")["last_error"])
-                self.snapshot("H4-client-not-executable")
+                self.observe_failure("H4-client-not-executable",retained)
             finally:self.command(["icacls.exe",str(binary),"/remove:d","*S-1-5-19"])
-            eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
         else:
             mode=binary.stat().st_mode
             binary.chmod(0o600)
             try:
                 eventually(lambda:self.admin("vibeinsight","status")["last_error"])
-                self.snapshot("H4-client-not-executable")
+                self.observe_failure("H4-client-not-executable",retained)
             finally:binary.chmod(mode)
-            eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
-        # Disable only this fixture's reader login, not the shared PostgreSQL server.
+        eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
+        self.recovery_increment(134,"recovery-2")
         self.fixture.sql("ALTER ROLE replacement_reader NOLOGIN")
         try:
             eventually(lambda:self.admin("vibeinsight","status")["last_error"])
-            self.snapshot("H4-connection-failed")
+            self.observe_failure("H4-connection-failed",retained)
         finally:self.fixture.sql("ALTER ROLE replacement_reader LOGIN")
         eventually(lambda:not self.admin("vibeinsight","status")["last_error"])
+        self.recovery_increment(136,"recovery-3")
         self.snapshot("H4-restored")
+
+
+    def observe_failure(self,label,retained):
+        self.assert_committed(retained)
+        failure=self.snapshot(label)
+        error=failure["status"]["last_error"].lower()
+        assert "psql" in error or "role" in error
+        success=failure["status"]["last_success"]
+        time.sleep(1.1)
+        assert self.admin("vibeinsight","status")["last_success"]==success
+
+    def recovery_increment(self, number, name):
+        expected=self.fixture.rows(number,number+2,session=name)
+        eventually(lambda:len(self.session(name))==1)
+        original=self.read(self.session(name)[0])
+        assert [(m["role"],m["text"]) for m in original["messages"]]==[(m["role"],m["text"]) for m in expected]
+        self.save("H4-"+name+"-new-original",original)
 
     def audit_psql_process(self):
         """Hold one fixture table lock so the real service child remains observable."""
@@ -432,8 +512,11 @@ class Run:
         self.process=subprocess.Popen([self.target["hub_python"],"-m","smm_hub.cli","--db",str(self.root/"legacy.sqlite3"),
              "serve-hub","--host","0.0.0.0","--port",str(self.target["port"]),"--token-file",str(self.state/"hub-token"),
              "--tls-cert",self.target["cert"],"--tls-key",self.target["key"]],env=self.env,stdout=log,stderr=log)
+        self.process_events.append({"action":"legacy-start","argv":self.process.args,"pid":self.process.pid,"at":now()})
+        self.save("P-process-events",self.process_events)
         log.close()
         eventually(lambda:self.api("info"))
+        assert self.process.poll() is None
         assert self.api("info")["hub_id"]!=old
         assert self.hits()["results"]==[]
         self.save("P-legacy",self.api("info"))

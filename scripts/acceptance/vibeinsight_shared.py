@@ -10,8 +10,11 @@ from vibeinsight_platform import eventually
 
 def shared(run):
     run.start()
+    run.expected_hub_id=run.api("info")["hub_id"]
     original=run.session('turns')[0]
     old=run.read(original)
+    assert [(m["role"],m["text"]) for m in old["messages"]]==[("user" if n%2==0 else "assistant",f"platform evidence C turns {n}") for n in range(10)]
+    run.save("G5-independent-before",old)
     run.stop()
     # Two projects have different valid committed batch positions after partial work.
     source=run.fixture
@@ -23,8 +26,12 @@ def shared(run):
     with sqlite3.connect(run.state/'smm-hub.sqlite3') as con:
         for key,timestamp,event in [('git.example:0/team/late-A','2026-09-20T12:00:01','E000201'),
                                     ('git.example:0/team/late-B','2026-09-21T12:00:01','E000301')]:
-            con.execute('UPDATE hub_vibeinsight_cursors SET timestamp=?,event_id=? WHERE project=?',
-                        (timestamp,event,key))
+            source_id=json.dumps([run.cfg['host'],run.cfg['port'],run.cfg['database']])
+            changed=con.execute('UPDATE hub_vibeinsight_cursors SET timestamp=?,event_id=? WHERE source_id=? AND project=?',
+                        (timestamp,event,source_id,key))
+            assert changed.rowcount==1
+            actual=con.execute('SELECT timestamp,event_id FROM hub_vibeinsight_cursors WHERE source_id=? AND project=?',(source_id,key)).fetchone()
+            assert tuple(actual)==(timestamp,event)
     run.save('G3-starting-positions',run.checkpoints())
     rows=[]
     for n,session,repo,created in [
@@ -55,7 +62,9 @@ def shared(run):
     source.sql("ALTER POLICY visibility ON fact_events USING (repo_path <> 'team/never')")
     eventually(lambda:len(run.session('later-visible'))==1)
     assert not run.session('never-visible')
-    run.save('G1-later-visible-original',run.read(run.session('later-visible')[0]))
+    later=run.read(run.session('later-visible')[0])
+    assert [(m['role'],m['text']) for m in later['messages']]==[('user','platform evidence hidden later-visible 700')]
+    run.save('G1-later-visible-original',later)
     run.snapshot('G3-after')
     # A body edit without a new event is outside the supported increment type.
     run.stop()
@@ -64,7 +73,7 @@ def shared(run):
     run.start()
     eventually(lambda:len(run.read(original)['messages'])==12)
     read=run.read(original)
-    assert [m['text'] for m in read['messages'][:10]]==[m['text'] for m in old['messages']]
+    assert [(m['role'],m['text']) for m in read['messages'][:10]]==[('user' if n%2==0 else 'assistant',f'platform evidence C turns {n}') for n in range(10)]
     assert [m['text'] for m in read['messages'][10:]]==[r['text'] for r in appended]
     run.save('G5-original-edit-boundary',read)
     # Identical created_at values exercise the production COPY ordering.
@@ -81,21 +90,36 @@ def shared(run):
     run.save('G2-same-time-and-repeat',run.read(same_hit))
     # Verify actual link CLI, reverse scopes and unlink without loss of old references.
     projects=run.admin('project','list')
-    a=next(p for p in projects if p['device_name']=='mac' and p['name']=='renamed-mac')
-    b=next(p for p in projects if p['device_name']=='linux' and p['name']=='renamed-linux')
+    a=next(p for p in projects if p['id']==run.target['device_projects']['mac'])
+    b=next(p for p in projects if p['id']==run.target['device_projects']['linux'])
     c=next(p for p in projects if p['source']=='vibeinsight' and p['source_key']=='git.example:0/team/C')
     d=next(p for p in projects if p['source']=='vibeinsight' and p['source_key']=='git.example:0/team/D')
-    for one,two in [(a,b),(a,c),(b,d),(a,b)]:run.admin('project','link',str(one['id']),str(two['id']))
-    links=run.admin('project','links');run.save('G6-links',links)
+    for one,two in [(a,b),(a,c),(b,d)]:run.admin('project','link',str(one['id']),str(two['id']))
+    links=run.admin('project','links')
+    run.admin('project','link',str(a['id']),str(b['id']))
+    assert run.admin('project','links')==links
+    pairs=[tuple(sorted((link['a'],link['b']))) for link in links]
+    assert len(pairs)==len(set(pairs))
+    assert {tuple(sorted(pair)) for pair in [(a['id'],b['id']),(a['id'],c['id']),(b['id'],d['id'])]} <= set(pairs)
+    run.save('G6-links',links)
     def scoped(project):
         return run.api('search',{'query':'platform','limit':50,'device_id':project['owner'],'project_id':project['source_key']})
     for project,ids in [(a,{a['id'],b['id'],c['id']}),(b,{b['id'],a['id'],d['id']})]:
         data=scoped(project)
         assert {p['id'] for p in data['effective_projects']}==ids
-        assert {p['id'] for h in data['results'] for p in h['projects']}<=ids
+        assert {p['id'] for h in data['results'] for p in h['projects']}==ids
+        required={(a['id'],'device-mac'),(b['id'],'device-linux'),((c if project['id']==a['id'] else d)['id'],'turns' if project['id']==a['id'] else 'other')}
+        for project_id,session in required:
+            assert any(h['source_session_id']==session and any(p['id']==project_id for p in h['projects']) for h in data['results'])
         run.save('G6-scope-'+project['device_name'],data)
     run.admin('project','unlink',str(a['id']),str(c['id']))
-    assert {p['id'] for p in scoped(a)['effective_projects']}=={a['id'],b['id']}
+    unlinked=scoped(a)
+    assert {p['id'] for p in unlinked['effective_projects']}=={a['id'],b['id']}
+    assert {p['id'] for h in unlinked['results'] for p in h['projects']}=={a['id'],b['id']}
+    assert {h['source_session_id'] for h in unlinked['results']}=={'device-mac','device-linux'}
+    global_after=run.hits()
+    assert any(h['source_session_id']=='turns' and any(p['id']==c['id'] for p in h['projects']) for h in global_after['results'])
+    run.save('G6-unlinked-search',unlinked);run.save('G6-unlinked-global',global_after)
     assert run.read(original)['messages']==read['messages']
     run.save('G6-unlinked-old-reference',run.read(original))
     run.admin('project','link',str(a['id']),str(c['id']))
@@ -126,6 +150,7 @@ def shared(run):
     eventually(lambda:len(run.session('other-target'))==1)
     assert run.read(original)['messages']==read['messages']
     cursors=run.checkpoints()
+    assert all(row in cursors for row in old_cursors)
     assert {r['source_id'] for r in cursors}=={r['source_id'] for r in old_cursors}|{json.dumps([run.cfg['host'],run.cfg['port'],database])}
     run.save('G4-new-target-original',run.read(run.session('other-target')[0]));run.snapshot('G4-new-target-cursors')
     run.configure(interval=1,user='replacement_reader',password=run.cfg['replacement_password'])

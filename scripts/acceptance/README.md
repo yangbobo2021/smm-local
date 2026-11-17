@@ -115,3 +115,9 @@ python scripts/acceptance/vibeinsight_fixture.py stop --manifest <private-fixtur
 ```
 
 默认 CI 不运行这些管理员/数据库任务。手动 SQL 工作流运行原可选 SQL/升级探针；系统服务矩阵仍由具备实际权限的测试机执行并导出证据。
+
+修订后的 C 配置还需 `expected_hits`：每项包含独立夹具声明的 `project_id`、`source`、`session`、`texts`（允许的完整合成正文），逐一核对每个关联目标确实命中。`shared` 需 `device_projects: {"mac": <甲的Hub项目ID>, "linux": <乙的Hub项目ID>}`，避免用可修改显示名寻找稳定身份。
+
+H/P 保存完整已提交原文和精确旧引用的重启/故障读回、各项目完整进度、服务重启 PID、失败期间最近成功状态及每类故障恢复后的独立新增内容；P 另记录真实公开启动 argv/PID/退出码。C 的 CLI 与 MCP 分别使用各自搜索返回的引用，名称修改前后必须不同。默认 CI 明确使用 UTF-8 Python/stdio；此结果不宣称验证了旧式 ANSI 控制台兼容性。
+
+`vibeinsight_readonly_audit.py --fixture-log <隔离实例日志> --output <新文件>` 逐 PostgreSQL 后端 PID 核对读账号的 SELECT/COPY 均在 `BEGIN READ ONLY` 内。只导出计数和每类首个合成 SQL 示例，不导出管理员语句、连接元数据或含随机密码的原始服务端日志。H 使用短暂的合成表锁让服务自己的 psql 子进程可观察，控制器与服务分别使用夹具管理账号和 SELECT 账号；不修改查询实现。

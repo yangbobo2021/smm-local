@@ -11,6 +11,7 @@ import ssl
 import subprocess
 import sys
 import threading
+import uuid
 from urllib.parse import urlsplit
 
 from vibeinsight_platform import Run
@@ -129,7 +130,11 @@ print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
         def assert_project(data):
             assert data['archive_scope']=='hub' and data['scope']=='project'
             assert {p['id'] for p in data['effective_projects']}==expected_ids
-            assert {p['id'] for h in data['results'] for p in h['projects']}<=expected_ids
+            assert {p['id'] for h in data['results'] for p in h['projects']}==expected_ids
+            for expected in t['expected_hits']:
+                assert any(h['source']==expected['source'] and h['source_session_id']==expected['session']
+                           and any(p['id']==expected['project_id'] for p in h['projects'])
+                           and any(m['text'] in expected['texts'] for m in h['matched_messages']) for h in data['results'])
             assert any(h['source_session_id']==session for h in data['results'])
             assert any(h['source']=='vibeinsight' for h in data['results'])
 
@@ -146,6 +151,11 @@ print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
             async with stdio_client(params) as (reader,writer):
                 async with ClientSession(reader,writer) as mcp:
                     await mcp.initialize()
+                    tools=await mcp.list_tools()
+                    schemas={item.name:item.inputSchema for item in tools.tools}
+                    assert {'scope','project_id','local'} <= schemas['search_conversations']['properties'].keys()
+                    assert {'hub_id','hub_message_id','conversation_id'} <= schemas['read_conversation']['properties'].keys()
+                    run.save('C5-mcp-tool-schemas',schemas)
                     async def tool(label,toolname,arguments):
                         reply=await mcp.call_tool(toolname,arguments)
                         assert not reply.isError
@@ -155,14 +165,23 @@ print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
                     resolved=await tool('C1-resolve','resolve_project',{'cwd':str(working)})
                     assert resolved['id']==prepared['main_id']
                     query={'query':'platform','scope':'project','project_id':prepared['main_id'],'limit':50}
+                    old_scope=cli('search','platform','--scope','project','--project-id',prepared['main_id'],'--limit',50)
+                    old_name=next(p['name'] for p in old_scope['effective_projects'] if p['id']==t['expected_projects'][0])
+                    renamed='renamed-'+name+'-'+uuid.uuid4().hex[:8]
+                    assert renamed!=old_name
                     for label in ('initial','recovered','renamed'):
                         if label=='recovered':relay.offline=False
                         if label=='renamed':
-                            db.rename_project(prepared['main_id'],'renamed-'+name); push_pending(db)
+                            db.rename_project(prepared['main_id'],renamed); push_pending(db)
                         scoped=cli('search','platform','--scope','project','--project-id',prepared['main_id'],'--limit',50)
                         assert_project(scoped); run.save('C1-cli-'+label,scoped)
                         via=await tool('C1-mcp-'+label,'search_conversations',query)
                         assert_project(via)
+                        if label=='renamed':
+                            for data in (scoped,via):
+                                current=next(p for p in data['effective_projects'] if p['id']==t['expected_projects'][0])
+                                assert current['name']==renamed and current['name']!=old_name
+                            run.save('C6-display-name-change',{'before':old_name,'after':renamed,'stable_local_id':prepared['main_id'],'stable_hub_id':t['expected_projects'][0]})
                         if label!='initial':continue
                         global_cli=cli('search','platform','--scope','all','--limit',50)
                         global_mcp=await tool('C2-global-mcp','search_conversations',{'query':'platform','scope':'all','limit':50})
@@ -170,26 +189,27 @@ print(json.dumps(search_archive(db,'platform',scope='all',limit=50)))
                         for data in (global_cli,global_mcp):
                             assert {'codex','vibeinsight'} <= {h['source'] for h in data['results']}
                             assert all(h['projects'] and h['source_session_id'] and h['matched_messages'] for h in data['results'])
-                        for source in ('codex','vibeinsight'):
-                            hit=next(h for h in global_cli['results'] if (h['source_session_id']==session if source=='codex' else h['source']=='vibeinsight' and h['source_session_id']=='turns'))
-                            message=hit['matched_messages'][0]
-                            ref={'conversation_id':hit['id'],'hub_id':global_cli['hub_id'],'hub_message_id':message['hub_message_id']}
-                            read_cli=cli('read',hit['id'],'--hub-id',global_cli['hub_id'],'--hub-message-id',message['hub_message_id'])
-                            read_mcp=await tool('C2-read-mcp-'+source,'read_conversation',ref)
-                            expected=expected_main if source=='codex' else f"platform evidence C turns {message['position']-1}"
-                            for data in (read_cli,read_mcp):
-                                assert len(data['messages'])==1
-                                assert data['messages'][0]['text']==expected
-                                assert data['messages'][0]['role']==('user' if source=='codex' or (message['position']-1)%2==0 else 'assistant')
-                                assert data['source']==source and data['source_session_id']==(session if source=='codex' else 'turns')
-                                assert data['messages'][0]['hub_message_id']==message['hub_message_id']
-                                origins=data['messages'][0]['origins']
+                        for entry,data in [('cli',global_cli),('mcp',global_mcp)]:
+                            for source in ('codex','vibeinsight'):
+                                hit=next(h for h in data['results'] if (h['source_session_id']==session if source=='codex' else h['source']=='vibeinsight' and h['source_session_id']=='turns'))
+                                message=hit['matched_messages'][0]
+                                ref={'conversation_id':hit['id'],'hub_id':data['hub_id'],'hub_message_id':message['hub_message_id']}
+                                if entry=='cli':
+                                    read=cli('read',hit['id'],'--hub-id',data['hub_id'],'--hub-message-id',message['hub_message_id'])
+                                    run.save('C2-read-cli-'+source,read)
+                                else:read=await tool('C2-read-mcp-'+source,'read_conversation',ref)
+                                expected=expected_main if source=='codex' else f"platform evidence C turns {message['position']-1}"
+                                assert len(read['messages'])==1
+                                assert read['messages'][0]['text']==expected
+                                assert read['messages'][0]['role']==('user' if source=='codex' or (message['position']-1)%2==0 else 'assistant')
+                                assert read['source']==source and read['source_session_id']==(session if source=='codex' else 'turns')
+                                assert read['messages'][0]['hub_message_id']==message['hub_message_id']
+                                origins=read['messages'][0]['origins']
                                 if source=='codex':
                                     assert any(o['device_id']==prepared['device_id'] and o['device_name']==name and o['source_position']==1 and o['project_id']==t['expected_projects'][0] for o in origins)
                                 else:
                                     assert any(o['source']=='vibeinsight' and o['platform']=='codex' and o['source_position']==message['position'] and o['source_event_id']==f"E{message['position']-1:06d}" for o in origins)
-                                    assert any(p['source_key']=='git.example:0/team/C' for p in data['projects'])
-                            run.save('C2-read-cli-'+source,read_cli)
+                                    assert any(p['source_key']=='git.example:0/team/C' for p in read['projects'])
                         old=prepared['old_reference']
                         old_cli=cli('read',old['conversation_id'],'--hub-id',old['hub_id'],'--hub-message-id',old['hub_message_id'])
                         old_mcp=await tool('C2-old-reference-mcp','read_conversation',old)
