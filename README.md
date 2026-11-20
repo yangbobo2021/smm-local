@@ -6,7 +6,7 @@
 
 你需要已登录的 Codex 或 Claude Code，以及首次安装时的网络连接。
 
-1. 从 [GitHub 最新正式版](https://github.com/yangbobo2021/smm-local/releases/latest) 下载 `smm-search-0.3.0.zip`，解压得到 `smm-search` 文件夹。也可以下载源码 ZIP，从 `skills/` 取出这个文件夹。
+1. 从 [GitHub 最新正式版](https://github.com/yangbobo2021/smm-local/releases/latest) 下载 `smm-search-0.4.0.zip`，解压得到 `smm-search` 文件夹。也可以下载源码 ZIP，从 `skills/` 取出这个文件夹。
 2. 将整个 `smm-search` 文件夹放到下表对应的位置。目录不存在时可自行创建。两个 Agent 都要使用时，各放一份。
 
    | Agent | 安装后应能看到的文件 |
@@ -35,7 +35,7 @@ npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-se
 先在每台电脑按上面的步骤安装 Skill。再由管理员选择一台可通过 HTTPS 访问的电脑安装汇总端。准备好客户端可访问的 HTTPS 地址、证书和私钥，并先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)。
 
 ```sh
-uv tool install smm-hub==0.3.0
+uv tool install smm-hub==0.4.0
 ```
 
 如果终端找不到 `smm-hub`，运行 `uv tool update-shell` 后重新打开终端。然后完成向导并检查服务状态。
@@ -105,7 +105,7 @@ MCP 搜索默认返回每条命中消息最多 600 字的预览，保留原始�
 
 ## 接入其他本机 Agent
 
-先按上面的步骤安装 SMM 0.3.0。已有 0.2.0 的用户按[本机端升级步骤](TRIAL_GUIDE.md#升级本机端)更新。再从 [GitHub 正式版](https://github.com/yangbobo2021/smm-local/releases/tag/v0.3.0)下载 `smm-source-adapter-0.3.0.zip`，解压后把整个 `smm-source-adapter` 文件夹放进目标 Agent 的技能目录。也可以从源码取出 [适配 Skill 目录](skills/smm-source-adapter)。从源码安装时，`python3 scripts/install_skill.py --update` 会把整个适配 Skill 安装到 Codex 和 Claude Code。用该 Skill 接入能持续读取的本机对话来源。对 Agent 说「把 X Agent 在这台电脑的对话接进 SMM，以后自动同步」。Skill 生成标准库 Python 适配器，用本机样本通过验收后注册。脚本使用 SMM 已安装的 Python，适配 Skill 在各平台使用同一份。
+先按上面的步骤安装 SMM 0.4.0。已有旧版的用户按[本机端升级步骤](TRIAL_GUIDE.md#升级本机端)更新。再从 [GitHub 正式版](https://github.com/yangbobo2021/smm-local/releases/tag/v0.4.0)下载 `smm-source-adapter-0.4.0.zip`，解压后把整个 `smm-source-adapter` 文件夹放进目标 Agent 的技能目录。也可以从源码取出 [适配 Skill 目录](skills/smm-source-adapter)。从源码安装时，`python3 scripts/install_skill.py --update` 会把整个适配 Skill 安装到 Codex 和 Claude Code。用该 Skill 接入能持续读取的本机对话来源。对 Agent 说「把 X Agent 在这台电脑的对话接进 SMM，以后自动同步」。Skill 生成标准库 Python 适配器，用本机样本通过验收后注册。脚本使用 SMM 已安装的 Python，适配 Skill 在各平台使用同一份。
 
 在导入页或用 `smm source list` 查看来源状态。用 `smm maintenance sync --source <ID>` 单独同步，用 `smm source disable <ID>` 停用。已导入内容可用 `smm search "关键词" --local` 检索，即使配置了多机汇总。现场插件使用本机用户的文件和网络权限，请只验收和注册受信任的脚本。现场适配器导入的记录保留在本机档案。
 
