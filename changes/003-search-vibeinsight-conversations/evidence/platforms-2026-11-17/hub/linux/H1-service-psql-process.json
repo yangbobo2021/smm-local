@@ -1,0 +1,11 @@
+{
+  "service": {
+    "mode": "systemd-user",
+    "unit": "MainPID=74216\nExecStart={ path=<task>/hub-env/bin/python ; argv[]=<task>/hub-env/bin/python -m smm_hub.cli hub --state-dir <task>/state-native-9d4134453f93 run ; ignore_errors=no ; start_time=[Tue 2026-11-17 18:50:03 CST] ; stop_time=[n/a] ; pid=74216 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+    "process": "  UID     PID    PPID                  STARTED COMMAND\n 1000   74216    1044 Tue Nov 17 18:50:03 2026 <task>/hub-env/bin/python -m smm_hub.cli hub --state-dir <task>/state-native-9d4134453f93 run\n",
+    "definition": "# <home>/.config/systemd/user/smm-hub-76f7a5e920ec.service\n[Unit]\nDescription=SMM aggregation server\n[Service]\nExecStart=\"<task>/hub-env/bin/python\" \"-m\" \"smm_hub.cli\" \"hub\" \"--state-dir\" \"<task>/state-native-9d4134453f93\" \"run\"\nRestart=on-failure\nRestartSec=2s\nUMask=0077\n[Install]\nWantedBy=default.target\n",
+    "pid": 74216
+  },
+  "psql_child": "75467   74216  1000 <task>/pg-client/usr/lib/postgresql/14/bin/psql --no-psqlrc --no-password --quiet --tuples-only --no-align --set=ON_ERROR_STOP=1 --host=<fixture-host> --port=59761 --dbname=postgres --username=<readonly-A>",
+  "observation": "SELECT waits for a fixture-only table lock; controller uses <fixture-admin>, service uses its configured read-only role"
+}

@@ -1,0 +1,61 @@
+{
+  "tool": "read_conversation",
+  "arguments": {
+    "conversation_id": 1,
+    "hub_id": "0868da6356a443b9abf6f5db8cfc55e4",
+    "hub_message_id": 11
+  },
+  "response": {
+    "id": 1,
+    "source": "vibeinsight",
+    "source_session_id": "turns",
+    "source_path": "",
+    "cwd": null,
+    "started_at": "2026-09-10T00:00:00",
+    "updated_at": "2026-09-10T00:09:00",
+    "title": "platform evidence C turns 0",
+    "project_id": 1,
+    "project_name": "git.example:0/team/C",
+    "messages": [
+      {
+        "position": 7,
+        "role": "user",
+        "text": "platform evidence C turns 6",
+        "timestamp": "2026-09-10T00:06:00",
+        "origin": null,
+        "import_batch": null,
+        "plugin_revision": null,
+        "hub_message_id": 11,
+        "origins": [
+          {
+            "source": "vibeinsight",
+            "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+            "platform": "codex",
+            "source_position": 7,
+            "source_event_id": "E000006",
+            "project_id": 1,
+            "project_name": "git.example:0/team/C"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "name": "git.example:0/team/C",
+        "source": "vibeinsight",
+        "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+        "source_key": "git.example:0/team/C",
+        "device_name": null
+      }
+    ],
+    "origins": [
+      {
+        "source": "vibeinsight",
+        "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+        "platform": "codex"
+      }
+    ],
+    "archive_scope": "hub"
+  }
+}

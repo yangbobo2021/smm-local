@@ -1,0 +1,32 @@
+name: Isolated VibeInsight SQL acceptance
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sql:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+          python-version: "3.14"
+      - run: sudo apt-get update && sudo apt-get install -y postgresql-16 openssl
+      - run: uv run --extra test python scripts/build_packages.py
+      - name: Add PostgreSQL tools
+        run: echo "/usr/lib/postgresql/16/bin" >> "$GITHUB_PATH"
+      - name: Run disposable SQL and upgrade probes
+        shell: bash
+        run: |
+          uv venv hub-env
+          uv venv local-env
+          uv pip install --python hub-env/bin/python dist/packages/smm_hub-*.whl
+          uv pip install --python local-env/bin/python dist/packages/smm_local-*.whl
+          python3 scripts/acceptance/vibeinsight_postgres.py --hub-env hub-env --local-env local-env --output sql-evidence/postgres.json
+          python3 scripts/acceptance/vibeinsight_upgrade.py --hub-env hub-env --local-env local-env --output sql-evidence/upgrade.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: isolated-sql
+          path: sql-evidence/

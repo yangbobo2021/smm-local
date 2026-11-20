@@ -1,0 +1,33 @@
+{
+  "acceptance_id": "AT-SMM-VIBEINSIGHT-003",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/delivery-judge/delivery-r8-platform-v1/reviewer.json": "71b5836e7095ce788cadb7547ab0ce2b811945fad4598857cef54286f161b34e"
+  },
+  "definitions_sha256": "1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9",
+  "judgment": {
+    "reason": "独立需求级判定R8；范围是定义000003的SPEC99–191完整五节及SC8–11，不将R1–R7历史成功翻作当前平台通过。已实际读取AGENTS.md、PR Review Prompt、intent/spec/plan（含第10节方法变化）、Reviewer规程，以及当前产品diff、H/P/G/C实际断言和原始响应。定义实算SHA256为1be6849cdb9134e38205f236f0c333e4675d0949fea9db3c91dd92df5c056db9。正式execute/execution-{services,standalone,shared,clients}-v1/result.json共15项实际exit0；分别269/70/53/184个artifacts逐文件实算全匹配，全部bindings当前字节匹配；已读取四份独立执行review-inbox意见，其认领与case_obligations一致。公开platforms-2026-11-17/manifest.json的407份文件public_sha256全部实算匹配；原始与脱敏摘要分列，不能互换。服务result.candidate.files逐文件与当前源码实算一致，不把旧revision/dirty改成当前提交。\n实测环境：H各自真实systemd用户服务UID1000、system级launchd UID501、Windows LocalService。原始H1-service-psql-process记录的psql父进程分别74216、14215、2860与对应服务PID相同，读角色参数不含密码；三者原始H1完整T6条与D2条均正确、H2默认300秒真实等待及自定义1秒后连续调度；H3错误密码/缺列权限/坏端口实际拒绝且原配置/凭据字节/完整进度及旧原文保持。H6真正停止后追加T4条及新N2条，恢复同目录服务PID改变，T同会话ID、完整10条角色/正文/顺序独立相等、新增独有内容均命中，再轮次不增加；H7无新增及H5同目标换凭据重启完整进度及归档保持。独立执行后在本审查只读复算三个平台原始report：H1前6条对象/ID=H6前缀，并以16个原ID核对retained-originals-7至12的六阶段实际单条HTTP读回，全部相等，排除追加后新取引用掩盖重编号。H8触发器要求同事务第一条存在时第二条ABORT；实际错误fixture uncommitted batch、失败会话不见、进度=失败前；移除后120/121完整且唯一。H4缺失/不可执行任务psql及NOLOGIN三类实际运行中故障有可识别原因，last_success不冒进、旧原文/引用保持，每类恢复有独立新2条导入。Windows部分本地化前缀有乱码，但保留“无法启动 PostgreSQL 客户端 psql”或英文“FATAL: role ... is not permitted to log in”，足以识别失败含义，SPEC未指定精确语种。\n凭据保护：Mac/Windows H9另一普通身份actual attempted=true/denied=true；Linux没有跨UID open，不能表述为实读拒绝。Linux H9-posix-access-audit原始完整数字ACL显示目录0700/文件0600，owner均1000，无named/default ACL、group/other均---；真实该UID服务已实际使用凭据同步。由Linux DAC可推出其他非特权UID无读取权限，该推论足以支持“限制非授权账户访问”，不涵盖有能力绕过DAC的管理员；这是明确权限审计推论而非跨UID实测。三平台H9原始secret-scan数据库/日志均0命中，命令输出逐条检查秘密；PostgresSource._command只通过子进程env传密码，status只白名单字段，_error替换秘密。所有查询由_transaction包装BEGIN READ ONLY；H1-readonly-sql按PID导出事务外查询0。未访问真实staging或其私有正文/PG原始敏感日志；旧staging保留原日期范围。\n共用逻辑实测：SC9真实Linux服务G与默认6项回归。两个不同项目K的K−24h边界/内1秒原始7份必有原文逐条对G3-independent-source-rows独立复算均正确；早期新项目及后来权限可见项目补齐，never不可见，长停服通过固定事件时间构造验证持久起点，不谎称墙钟等候多日。相同created_at四条及重读去重、旧文原地改写仍保留并追加新事件。连接host/port/database三字段分别参数化回归，实际SQL切库补7月0/1早期历史；contracts shared在同一新库换凭据、完整进度相等、真实restart并导入2/3，旧来源进度/档案及55条精确读取保留。未声称三种连接变化都实际SQL。G6保存唯一双向关系，A/B有效及实际命中集合严格A/B/C与B/A/D且每目标独立命中；解除后A仅A/B、C全局可查且旧原文完整；G7实际path身份改变的新项目显式重关联后命中，host/port/path三变化另有默认参数化测试。\n三平台客户端实测：SC11普通本机进程（Windows elevated_admin=false的Limited交互任务），各自CLI与真实stdio MCP，实际exit0。已直接复算三平台原始prepare/verify：旧版三会话projects为空、补传后完整消息hub_message_id/position/role/text/timestamp及数量逐条不变且有归属；C1初始/恢复/改名两个入口范围和命中严格Mac{4,7,1}、Linux{7,4,2}、Windows{9,1,2}，每个关联目标均由实际断言核对独立session/正文。C2各自global同时含两类来源，各自精确引用读回一条准确原文/角色/来源/原会话、项目及源事件位置；旧引用有效。C3真实透明relay断线后两入口恰返回本机三项目及fallback_reason，恢复重新Hub范围；C4显式本机只按独立本机关联返回两项目；名称确实改变但身份和关系保持。C5真实schema/help与stdio退出0。旧客户端无范围请求在真实旧d2dee18进程中走全局上传/搜索/读取；代码Hub.Search无project_id时ids=None进入全局，不把旧请求误当空项目。P自行管理实测与R9四项正式执行共同满足一个平台的通用生命周期。\n未逐输入穷举范围的源码支持：VibeInsightSync.run固定upper；_sync_stream在已知项目逐个构造持久K−24h，未知项目无界并在成功尾部才提交end；_commit在同一SQLite事务归档和推进max游标，异常不提交未归档数据。来源键由host/port/database共同json构造，与凭据无关；仓库_repo将host/port/path共同构造项目键，HubProjects.upsert按kind/owner/source_key保持身份并只更新显示名。上述输入差异没有额外OS路径，进入同一分支；RLS/只读由实际SQL补证，OS身份/权限分支由各H覆盖。HubProjects.effective使用Archive直接一层关系，core.search在项目FTS及消息层限定集合；federation._push_projects没有新消息也检查元数据，search_archive发送稳定键、HubUnavailable时回本机all，local=true沿本机项目关系；这些分支均有对应C/G实测，而非仅看响应互相一致。PLAN第10节解释脚本拆分、Linux权限方法、Windows安装/普通进程、CI编码/路径、两轮间夹具复位等偏差，未改变确认的业务行为。材料没有确认的产品失败或与需求相关的未排除必需缺口，R8 passed；通过范围限定上述实际环境、UTF8、24h窗口和无新增原地改写边界。",
+    "status": "passed"
+  },
+  "operation": "delivery-judge",
+  "record": ".acceptance-local/native-v1/AT-SMM-VIBEINSIGHT-003/delivery-judge/delivery-r8-platform-v1/result.json",
+  "recorded_at": "2026-11-17T12:06:29.924000+00:00",
+  "request_id": "delivery-r8-platform-v1",
+  "request_sha256": "7cd23f404530e60ba0829798695edaeed47d8b2d700e6128eb31bbc88086f221",
+  "requirement_ids": [
+    "R8"
+  ],
+  "reviewer_session": "/root/review_delivery_pr21_final",
+  "scene_evidence": {
+    "SC10": "9a083d5f1ed375c02f3aef68d9d955a71e2ff37bb5ef65c362010b7b308b7664",
+    "SC11": "0a42cc425b12c0ce6bfa7ad1e0d29ec2fde1c86e4afee443e55b6c278ef6cb4f",
+    "SC8": "e2df385935351d74de2cd70cb07f8012a4c830e21dd4047a4d734804875b204d",
+    "SC9": "731ae2a6b6fca755cd2a6ec1e51983e8e8520760816e86d9765e588d9bca8b0a"
+  },
+  "scene_status": {
+    "SC10": "passed",
+    "SC11": "passed",
+    "SC8": "passed",
+    "SC9": "passed"
+  },
+  "status": "judged"
+}

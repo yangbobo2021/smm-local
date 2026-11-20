@@ -49,6 +49,12 @@ smm-hub hub status
 
 证书信任、各平台服务配置、升级和卸载见[安装与使用指南](TRIAL_GUIDE.md)。
 
+### 搜索 VibeInsight 和关联项目
+
+汇总端可以自动归档 VibeInsight 的对话，并将其他电脑上传的项目和 VibeInsight 项目纳入当前项目的关联检索。由汇总端维护者配置来源和项目关系，日常使用者继续在 Agent 中搜索并读取原文。
+
+按当前项目搜索会包含 Hub 保存的直接关联项目，需要扩大范围时可要求搜索所有项目。维护者的连接准备、同步配置和关联操作见[从 VibeInsight 同步对话](TRIAL_GUIDE.md#从-vibeinsight-同步对话)和[管理汇总端的项目关联](TRIAL_GUIDE.md#管理汇总端的项目关联)。
+
 ## 从源码开发
 
 需要 Python 3.11+。

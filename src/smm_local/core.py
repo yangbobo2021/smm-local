@@ -653,7 +653,7 @@ class Archive:
                     return dict(row)
         return None
 
-    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False) -> dict[str, Any]:
+    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False, hub_project_ids: tuple[int, ...] | None = None) -> dict[str, Any]:
         query_terms = list(dict.fromkeys(tokens(query)))
         if not query_terms:
             raise ValueError("查询词不能为空")
@@ -669,8 +669,29 @@ class Archive:
                 raise ValueError("项目范围必须指定 project_id")
             project_ids = self.effective_projects(project_id)
         match = " OR ".join('"'+term.replace('"','')+'"' for term in query_terms)
-        sql = "SELECT c.id,c.source,c.source_session_id,c.title,c.started_at,c.updated_at,c.project_id,p.name AS project_name,bm25(conversation_fts) AS rank_score FROM conversation_fts JOIN conversations c ON c.id=conversation_fts.rowid LEFT JOIN projects p ON p.id=c.project_id WHERE conversation_fts MATCH ?"
+        columns = ("c.id,c.source,c.source_session_id,c.title,c.started_at,c.updated_at,c.project_id,"
+                   "p.name AS project_name")
         args: list[Any] = [match]
+        if hub_project_ids:
+            placeholders = ",".join("?" for _ in hub_project_ids)
+            sql = f"""
+                WITH matched AS MATERIALIZED (
+                    SELECT d.conversation_id,bm25(hub_project_fts) AS score FROM hub_project_fts
+                    JOIN hub_project_documents d ON d.id=hub_project_fts.rowid
+                    WHERE hub_project_fts MATCH ? AND d.project_id IN ({placeholders})
+                ), ranked AS (
+                    SELECT conversation_id,MIN(score) AS rank_score FROM matched GROUP BY conversation_id
+                )
+                SELECT {columns},r.rank_score FROM ranked r JOIN conversations c ON c.id=r.conversation_id
+                LEFT JOIN projects p ON p.id=c.project_id WHERE 1
+            """
+            args.extend(hub_project_ids)
+        else:
+            sql = (f"SELECT {columns},bm25(conversation_fts) AS rank_score FROM conversation_fts "
+                   "JOIN conversations c ON c.id=conversation_fts.rowid "
+                   "LEFT JOIN projects p ON p.id=c.project_id WHERE conversation_fts MATCH ?")
+            if hub_project_ids == ():
+                sql += " AND 0"
         if project_ids is not None:
             sql += " AND c.project_id IN (" + ",".join("?" for _ in project_ids) + ")"
             args.extend(project_ids)
@@ -688,11 +709,27 @@ class Archive:
             results = []
             for index,row in enumerate(rows, 1):
                 fields = "id AS _message_id,position,role,text" if include_message_ids else "position,role,text"
-                messages = con.execute(f"SELECT {fields} FROM messages WHERE conversation_id=? ORDER BY position,id", (row["id"],)).fetchall()
+                message_sql = f"SELECT {fields} FROM messages WHERE conversation_id=?"
+                message_args = (row["id"],)
+                if hub_project_ids:
+                    message_sql += (
+                        " AND id IN (SELECT message_id FROM hub_project_messages WHERE conversation_id=? "
+                        f"AND project_id IN ({placeholders}))"
+                    )
+                    message_args = (row["id"], row["id"], *hub_project_ids)
+                messages = con.execute(message_sql + " ORDER BY position,id", message_args).fetchall()
                 item = dict(row)
+                if hub_project_ids:
+                    item["title"] = next(
+                        (message["text"].strip().splitlines()[0][:120] for message in messages
+                         if message["role"] == "user" and message["text"].strip()), "(无用户消息)"
+                    )
                 item["rank"] = index
                 item["bm25_score"] = -item.pop("rank_score")
                 matched = select_matched_messages(messages, query_terms)
+                if include_message_ids:
+                    for message in matched:
+                        message["_query_match"] = not set(query_terms).isdisjoint(tokens(message["text"]))
                 item["matched_messages"] = [compact_message(m, query_terms, preview_chars) for m in matched] if preview_chars else matched
                 results.append(item)
             effective = [] if project_ids is None else [dict(r) for r in con.execute("SELECT id,name FROM projects WHERE id IN ("+",".join("?" for _ in project_ids)+") ORDER BY id", project_ids)]

@@ -1,0 +1,73 @@
+{
+  "id": 4,
+  "source": "vibeinsight",
+  "source_session_id": "new",
+  "source_path": "",
+  "cwd": null,
+  "started_at": "2026-09-10T01:50:00",
+  "updated_at": "2026-09-10T01:51:00",
+  "title": "platform evidence D new 110",
+  "project_id": 2,
+  "project_name": "git.example:0/team/D",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "platform evidence D new 110",
+      "timestamp": "2026-09-10T01:50:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 15,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59760, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 1,
+          "source_event_id": "E000110",
+          "project_id": 2,
+          "project_name": "git.example:0/team/D"
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "role": "assistant",
+      "text": "platform evidence D new 111",
+      "timestamp": "2026-09-10T01:51:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 16,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59760, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 2,
+          "source_event_id": "E000111",
+          "project_id": 2,
+          "project_name": "git.example:0/team/D"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 2,
+      "name": "git.example:0/team/D",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59760, \"postgres\"]",
+      "source_key": "git.example:0/team/D",
+      "device_name": null
+    }
+  ],
+  "origins": [
+    {
+      "source": "vibeinsight",
+      "source_id": "[\"<fixture-host>\", 59760, \"postgres\"]",
+      "platform": "codex"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "E000400",
+    "session": "boundary-A",
+    "repo": "late-A",
+    "trace": "boundary-A-200",
+    "role": "user",
+    "text": "platform evidence late-A boundary-A 400",
+    "created_at": "2026-09-19T12:00:01",
+    "timestamp": "2026-09-10T06:40:00"
+  },
+  {
+    "id": "E000402",
+    "session": "inside-A",
+    "repo": "late-A",
+    "trace": "inside-A-201",
+    "role": "user",
+    "text": "platform evidence late-A inside-A 402",
+    "created_at": "2026-09-19T12:00:02",
+    "timestamp": "2026-09-10T06:42:00"
+  },
+  {
+    "id": "E000404",
+    "session": "outside-A",
+    "repo": "late-A",
+    "trace": "outside-A-202",
+    "role": "user",
+    "text": "platform evidence late-A outside-A 404",
+    "created_at": "2026-09-19T12:00:00",
+    "timestamp": "2026-09-10T06:44:00"
+  },
+  {
+    "id": "E000410",
+    "session": "boundary-B",
+    "repo": "late-B",
+    "trace": "boundary-B-205",
+    "role": "user",
+    "text": "platform evidence late-B boundary-B 410",
+    "created_at": "2026-09-20T12:00:01",
+    "timestamp": "2026-09-10T06:50:00"
+  },
+  {
+    "id": "E000412",
+    "session": "inside-B",
+    "repo": "late-B",
+    "trace": "inside-B-206",
+    "role": "user",
+    "text": "platform evidence late-B inside-B 412",
+    "created_at": "2026-09-20T12:00:02",
+    "timestamp": "2026-09-10T06:52:00"
+  },
+  {
+    "id": "E000414",
+    "session": "outside-B",
+    "repo": "late-B",
+    "trace": "outside-B-207",
+    "role": "user",
+    "text": "platform evidence late-B outside-B 414",
+    "created_at": "2026-09-20T12:00:00",
+    "timestamp": "2026-09-10T06:54:00"
+  },
+  {
+    "id": "E000500",
+    "session": "during-downtime",
+    "repo": "late-A",
+    "trace": "during-downtime-250",
+    "role": "user",
+    "text": "platform evidence late-A during-downtime 500",
+    "created_at": "2026-09-22T12:00:00",
+    "timestamp": "2026-09-10T08:20:00"
+  },
+  {
+    "id": "E000502",
+    "session": "after-days",
+    "repo": "late-A",
+    "trace": "after-days-251",
+    "role": "user",
+    "text": "platform evidence late-A after-days 502",
+    "created_at": "2026-09-25T12:00:00",
+    "timestamp": "2026-09-10T08:22:00"
+  },
+  {
+    "id": "E000600",
+    "session": "new-project-older",
+    "repo": "gamma",
+    "trace": "new-project-older-300",
+    "role": "user",
+    "text": "platform evidence gamma new-project-older 600",
+    "created_at": "2026-08-01T00:00:00",
+    "timestamp": "2026-09-10T10:00:00"
+  },
+  {
+    "id": "E000700",
+    "session": "later-visible",
+    "repo": "hidden",
+    "trace": "later-visible-350",
+    "role": "user",
+    "text": "platform evidence hidden later-visible 700",
+    "created_at": "2026-08-01T00:00:00",
+    "timestamp": "2026-09-10T11:40:00"
+  },
+  {
+    "id": "E000702",
+    "session": "never-visible",
+    "repo": "never",
+    "trace": "never-visible-351",
+    "role": "user",
+    "text": "platform evidence never never-visible 702",
+    "created_at": "2026-08-01T00:00:00",
+    "timestamp": "2026-09-10T11:42:00"
+  }
+]

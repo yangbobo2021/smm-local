@@ -50,11 +50,15 @@ def _request(config: dict, route: str, payload: dict | None = None) -> dict:
         raise HubUnavailable("无法连接汇总服务") from exc
 
 
-def _hub_identity(config: dict) -> str:
+def _hub_info(config: dict) -> dict:
     response = _request(config, "/info")
     if response.get("protocol") != 1 or not response.get("hub_id"):
         raise HubUnavailable("该地址没有可用的 SMM 汇总服务")
-    return response["hub_id"]
+    return response
+
+
+def _hub_identity(config: dict) -> str:
+    return _hub_info(config)["hub_id"]
 
 
 def configure_hub(db: Archive, address: str, device_name: str, token_file: str | None = None) -> dict:
@@ -116,7 +120,8 @@ def push_pending(db: Archive) -> dict | None:
     config = hub_config(db)
     if not config:
         return None
-    hub_id = _hub_identity(config)
+    info = _hub_info(config)
+    hub_id = info["hub_id"]
     key = f"hub_cursor:{hub_id}:{config['device_id']}"
     with db.connect() as con:
         saved = con.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
@@ -147,7 +152,8 @@ def push_pending(db: Archive) -> dict | None:
         if not rows:
             if sent == 0:
                 _register_device(config, hub_id)
-            return {"uploaded": sent, "pending": False}
+            pending = "projects" in info.get("capabilities", ()) and _push_projects(db, config, hub_id, cursor)
+            return {"uploaded": sent, "pending": pending}
         response = _request(config, "/upload", {
             "hub_id": hub_id, "device_id": config["device_id"],
             "device_name": config["device_name"], "records": rows,
@@ -161,7 +167,85 @@ def push_pending(db: Archive) -> dict | None:
                 ON CONFLICT(key) DO UPDATE SET value=MAX(CAST(settings.value AS INTEGER), CAST(excluded.value AS INTEGER))
             """, (key, str(cursor)))
         sent += len(rows)
+    if "projects" in info.get("capabilities", ()):
+        _push_projects(db, config, hub_id, cursor)
     return {"uploaded": sent, "pending": True}
+
+
+def _project_keys(con) -> None:
+    con.execute("""
+        CREATE TABLE IF NOT EXISTS hub_local_project_keys (
+            id INTEGER PRIMARY KEY REFERENCES projects(id) ON DELETE CASCADE,
+            remote_key TEXT NOT NULL UNIQUE
+        )
+    """)
+    con.execute("""
+        INSERT INTO hub_local_project_keys(id,remote_key)
+        SELECT id,lower(hex(randomblob(16))) FROM projects
+        WHERE id NOT IN (SELECT id FROM hub_local_project_keys)
+    """)
+
+
+def _push_projects(db: Archive, config: dict, hub_id: str, cursor: int) -> bool:
+    device = config["device_id"]
+    with db.connect() as con:
+        con.execute("BEGIN IMMEDIATE")
+        _project_keys(con)
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS hub_metadata_uploads (
+                hub_id TEXT NOT NULL, device_id TEXT NOT NULL, kind TEXT NOT NULL,
+                local_key TEXT NOT NULL, value TEXT NOT NULL,
+                PRIMARY KEY(hub_id,device_id,kind,local_key)
+            )
+        """)
+    for _ in range(25):
+        if db.get_settings()["sync_paused"] or hub_config(db) != config:
+            return True
+        with db.connect() as con:
+            names = list(con.execute("""
+                SELECT k.remote_key,p.name FROM projects p JOIN hub_local_project_keys k ON k.id=p.id
+                LEFT JOIN hub_metadata_uploads a ON a.hub_id=? AND a.device_id=? AND a.kind='project'
+                  AND a.local_key=k.remote_key
+                WHERE a.value IS NOT p.name ORDER BY p.id LIMIT ?
+            """, (hub_id, device, BATCH_SIZE)))
+            memberships = [] if names else list(con.execute("""
+                SELECT c.source,c.source_session_id,k.remote_key FROM conversations c
+                LEFT JOIN hub_local_project_keys k ON k.id=c.project_id
+                LEFT JOIN hub_metadata_uploads a ON a.hub_id=? AND a.device_id=? AND a.kind='membership'
+                  AND a.local_key=c.source || ':' || c.source_session_id
+                WHERE a.value IS NOT COALESCE(k.remote_key,'')
+                  AND c.source IN ('codex','claude-code')
+                  AND EXISTS(SELECT 1 FROM messages m WHERE m.conversation_id=c.id AND m.id<=?)
+                ORDER BY c.id LIMIT ?
+            """, (hub_id, device, cursor, BATCH_SIZE)))
+        if not names and not memberships:
+            return False
+        response = _request(config, "/project-metadata", {
+            "hub_id": hub_id, "device_id": device, "device_name": config["device_name"],
+            "projects": [{"id": key, "name": name} for key, name in names],
+            "memberships": [{"source": source, "source_session_id": session, "project_id": key}
+                            for source, session, key in memberships],
+        })
+        if response.get("projects") != len(names) or response.get("memberships") != len(memberships):
+            raise HubUnavailable("汇总服务未确认整批项目资料")
+        with db.connect() as con:
+            con.executemany("""
+                INSERT INTO hub_metadata_uploads(hub_id,device_id,kind,local_key,value) VALUES(?,?,?,?,?)
+                ON CONFLICT(hub_id,device_id,kind,local_key) DO UPDATE SET value=excluded.value
+            """, [(hub_id, device, "project", key, name) for key, name in names] +
+                 [(hub_id, device, "membership", f"{source}:{session}", key or "")
+                  for source, session, key in memberships])
+    return True
+
+
+def _remote_project_key(db: Archive, project_id: int) -> str:
+    with db.connect() as con:
+        con.execute("BEGIN IMMEDIATE")
+        _project_keys(con)
+        row = con.execute("SELECT remote_key FROM hub_local_project_keys WHERE id=?", (project_id,)).fetchone()
+        if row is None:
+            raise ValueError("项目不存在")
+        return row[0]
 
 
 def _local_origin(config: dict) -> dict:
@@ -183,11 +267,18 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         try:
             source = options.get("current_source")
             hub_source = source if source in {None, "codex", "claude-code"} else None
-            result = _request(config, "/search", {
+            payload = {
                 "query": query, "current_session_id": options.get("current_session_id") if source == hub_source else None,
                 "current_source": hub_source, "include_current": options.get("include_current", False),
                 "limit": options.get("limit", 5), "preview_chars": options.get("preview_chars", 0),
-            })
+            }
+            if options.get("scope") == "project":
+                if options.get("project_id") is None:
+                    raise ValueError("项目范围必须指定 project_id")
+                if "projects" in _hub_info(config).get("capabilities", ()):
+                    payload.update(device_id=config["device_id"],
+                                   project_id=_remote_project_key(db, options["project_id"]))
+            result = _request(config, "/search", payload)
             if not isinstance(result.get("results"), list) or not result.get("hub_id"):
                 raise HubUnavailable("汇总服务返回了无效搜索结果")
             return {**result, "archive_scope": "hub", "requested_scope": options.get("scope", "all")}

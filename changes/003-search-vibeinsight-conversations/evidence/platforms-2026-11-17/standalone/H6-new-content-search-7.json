@@ -1,0 +1,74 @@
+{
+  "query": "7",
+  "scope": "all",
+  "effective_projects": "all",
+  "excluded_current_session_id": null,
+  "results": [
+    {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "turns",
+      "title": "platform evidence C turns 0",
+      "started_at": "2026-09-10T00:00:00",
+      "updated_at": "2026-09-10T00:09:00",
+      "project_id": 1,
+      "project_name": "git.example:0/team/C",
+      "rank": 1,
+      "bm25_score": 0.5250859979864362,
+      "matched_messages": [
+        {
+          "position": 7,
+          "role": "user",
+          "text": "platform evidence C turns 6",
+          "hub_message_id": 11,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 7,
+              "source_event_id": "E000006",
+              "project_id": 1,
+              "project_name": "git.example:0/team/C"
+            }
+          ]
+        },
+        {
+          "position": 8,
+          "role": "assistant",
+          "text": "platform evidence C turns 7",
+          "hub_message_id": 12,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+              "platform": "codex",
+              "source_position": 8,
+              "source_event_id": "E000007",
+              "project_id": 1,
+              "project_name": "git.example:0/team/C"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "git.example:0/team/C",
+          "source": "vibeinsight",
+          "owner": "[\"<fixture-host>\", 62184, \"postgres\"]",
+          "source_key": "git.example:0/team/C",
+          "device_name": null
+        }
+      ],
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+          "platform": "codex"
+        }
+      ]
+    }
+  ],
+  "hub_id": "b4cfb77067cb431e819c8aa181967fb8"
+}

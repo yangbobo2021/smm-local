@@ -1,0 +1,34 @@
+{
+  "cases": {
+    "TC-client-linux": {
+      "status": "needs_revision",
+      "reason": "定义000003摘要1be6849c…在design/match/runtime/debug一致，client.py冻结SHA77adaded…与实际probe-source/当前源相等；原生UID1000、非root，真实CLI与stdio MCP进程exit0。已复核该平台全部记录附件SHA及原始请求/响应。首轮R1/R2/R3闭环：:137–142比较有效/实际项目集合并逐独立expected_hits查会话/正文，首目标正确而第二目标无命中先在:138或其:140失败；cohort.py:63–79按prepared device_id绑定列表ID，正文/来源期望由独立fixture生成，不由search返回生成；同名未关联/二跳的独有会话不在结果。:197–217每入口使用自身全局search的hub_id/消息引用，CLI argv与MCP arguments均对得上各自响应；两来源角色/正文及设备/平台/事件位置独立核对。仅MCP引用错会在其真实read/独立内容校验失败，不再被CLI引用替代；两端同错也不能绕过独立正文/来源位置。:147–152两入口各验离线本机三会话/原因及显式本机两个直接项目，恢复重新使用Hub集合。:159–163真实schema和:233实际stdio退出0已保存。:174–189改名前duplicate name，后为renamed-linux-fcd88d77，本机ID/Hub ID/范围/独立会话保留且两个入口都返回新名；仅一入口忽略改名在其:188失败。旧进程实际加载core SHA0c1514ad…与federation SHA4791b013…已逐项同git baseline d2dee18比较相等；补传前三个本机会话在原始全局响应都projects=[]，:106断言当前目标前置空归属，旧引用正文仍可读，本机计数3且:114不变。 仍有设计linux-3的实现缺口：其期望明确本机与Hub的消息数/旧历史保留，但:110–114只计算并比较本机Archive，verify仅沿单条精确引用读回；没有对本设备三会话的Hub完整消息清单/总数作补传前后比较。若补传在Hub额外插入相同正文消息，旧引用仍能读，项目集合/必有命中/名称/精确单条read也都可通过；不存在第一个拦截点。本轮全局搜索实际每设备会话各显示一条命中，但搜索命中有数量上限，不能当全会话消息数证明。最早应在prepare旧上传后保存本设备各目标Hub完整原文/消息标识，push_pending后逐目标比较完整消息清单和数量（允许仅增加项目元数据），再在改名后确认保留；不能用另一产品search计数当独立全文期望。这是implementation补证/断言修订，非产品已重复，也非要求扩大场景。故本TC认领已实证的linux-0/1/2，linux-3暂不认领完整通过；本轮不是正式产品/整需求交付。",
+      "covers": [
+        "linux-0",
+        "linux-1",
+        "linux-2"
+      ],
+      "revision_target": "implementation"
+    },
+    "TC-client-mac": {
+      "status": "needs_revision",
+      "reason": "定义000003摘要1be6849c…在design/match/runtime/debug一致，client.py冻结SHA77adaded…与实际probe-source/当前源相等；原生UID501、非root，真实CLI与stdio MCP进程exit0。已复核该平台全部记录附件SHA及原始请求/响应。首轮R1/R2/R3闭环：:137–142比较有效/实际项目集合并逐独立expected_hits查会话/正文，首目标正确而第二目标无命中先在:138或其:140失败；cohort.py:63–79按prepared device_id绑定列表ID，正文/来源期望由独立fixture生成，不由search返回生成；同名未关联/二跳的独有会话不在结果。:197–217每入口使用自身全局search的hub_id/消息引用，CLI argv与MCP arguments均对得上各自响应；两来源角色/正文及设备/平台/事件位置独立核对。仅MCP引用错会在其真实read/独立内容校验失败，不再被CLI引用替代；两端同错也不能绕过独立正文/来源位置。:147–152两入口各验离线本机三会话/原因及显式本机两个直接项目，恢复重新使用Hub集合。:159–163真实schema和:233实际stdio退出0已保存。:174–189改名前duplicate name，后为renamed-mac-d6af765b，本机ID/Hub ID/范围/独立会话保留且两个入口都返回新名；仅一入口忽略改名在其:188失败。旧进程实际加载core SHA0c1514ad…与federation SHA4791b013…已逐项同git baseline d2dee18比较相等；补传前三个本机会话在原始全局响应都projects=[]，:106断言当前目标前置空归属，旧引用正文仍可读，本机计数3且:114不变。 已读同cohort保留的prepare-mac-failure-connection-reset/result.json，失败为HubUnavailable、已取得旧路径输出；canonical prepare-mac是同档案resume后prepared收据。既有失败不被覆盖，准备后collector IndentationError不作为产品失败；当前debug也不冒充正式新Hub prepare。 仍有设计mac-3的实现缺口：其期望明确本机与Hub的消息数/旧历史保留，但:110–114只计算并比较本机Archive，verify仅沿单条精确引用读回；没有对本设备三会话的Hub完整消息清单/总数作补传前后比较。若补传在Hub额外插入相同正文消息，旧引用仍能读，项目集合/必有命中/名称/精确单条read也都可通过；不存在第一个拦截点。本轮全局搜索实际每设备会话各显示一条命中，但搜索命中有数量上限，不能当全会话消息数证明。最早应在prepare旧上传后保存本设备各目标Hub完整原文/消息标识，push_pending后逐目标比较完整消息清单和数量（允许仅增加项目元数据），再在改名后确认保留；不能用另一产品search计数当独立全文期望。这是implementation补证/断言修订，非产品已重复，也非要求扩大场景。故本TC认领已实证的mac-0/1/2，mac-3暂不认领完整通过；本轮不是正式产品/整需求交付。",
+      "covers": [
+        "mac-0",
+        "mac-1",
+        "mac-2"
+      ],
+      "revision_target": "implementation"
+    },
+    "TC-client-windows": {
+      "status": "needs_revision",
+      "reason": "定义000003摘要1be6849c…在design/match/runtime/debug一致，client.py冻结SHA77adaded…与实际probe-source/当前源相等；原生普通交互Limited token、elevated_admin=false，真实CLI与stdio MCP进程exit0。已复核该平台全部记录附件SHA及原始请求/响应。首轮R1/R2/R3闭环：:137–142比较有效/实际项目集合并逐独立expected_hits查会话/正文，首目标正确而第二目标无命中先在:138或其:140失败；cohort.py:63–79按prepared device_id绑定列表ID，正文/来源期望由独立fixture生成，不由search返回生成；同名未关联/二跳的独有会话不在结果。:197–217每入口使用自身全局search的hub_id/消息引用，CLI argv与MCP arguments均对得上各自响应；两来源角色/正文及设备/平台/事件位置独立核对。仅MCP引用错会在其真实read/独立内容校验失败，不再被CLI引用替代；两端同错也不能绕过独立正文/来源位置。:147–152两入口各验离线本机三会话/原因及显式本机两个直接项目，恢复重新使用Hub集合。:159–163真实schema和:233实际stdio退出0已保存。:174–189改名前duplicate name，后为renamed-windows-2fdca027，本机ID/Hub ID/范围/独立会话保留且两个入口都返回新名；仅一入口忽略改名在其:188失败。旧进程实际加载core SHA0c1514ad…与federation SHA4791b013…已逐项同git baseline d2dee18比较相等；补传前三个本机会话在原始全局响应都projects=[]，:106断言当前目标前置空归属，旧引用正文仍可读，本机计数3且:114不变。 仍有设计windows-3的实现缺口：其期望明确本机与Hub的消息数/旧历史保留，但:110–114只计算并比较本机Archive，verify仅沿单条精确引用读回；没有对本设备三会话的Hub完整消息清单/总数作补传前后比较。若补传在Hub额外插入相同正文消息，旧引用仍能读，项目集合/必有命中/名称/精确单条read也都可通过；不存在第一个拦截点。本轮全局搜索实际每设备会话各显示一条命中，但搜索命中有数量上限，不能当全会话消息数证明。最早应在prepare旧上传后保存本设备各目标Hub完整原文/消息标识，push_pending后逐目标比较完整消息清单和数量（允许仅增加项目元数据），再在改名后确认保留；不能用另一产品search计数当独立全文期望。这是implementation补证/断言修订，非产品已重复，也非要求扩大场景。故本TC认领已实证的windows-0/1/2，windows-3暂不认领完整通过；本轮不是正式产品/整需求交付。",
+      "covers": [
+        "windows-0",
+        "windows-1",
+        "windows-2"
+      ],
+      "revision_target": "implementation"
+    }
+  }
+}

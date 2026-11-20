@@ -1,0 +1,52 @@
+{
+  "id": 21,
+  "source": "vibeinsight",
+  "source_session_id": "boundary-A",
+  "source_path": "",
+  "cwd": null,
+  "started_at": "2026-09-10T06:40:00",
+  "updated_at": "2026-09-10T06:40:00",
+  "title": "platform evidence late-A boundary-A 400",
+  "project_id": 12,
+  "project_name": "git.example:0/team/late-A",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "platform evidence late-A boundary-A 400",
+      "timestamp": "2026-09-10T06:40:00",
+      "origin": null,
+      "import_batch": null,
+      "plugin_revision": null,
+      "hub_message_id": 39,
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+          "platform": "codex",
+          "source_position": 1,
+          "source_event_id": "E000400",
+          "project_id": 12,
+          "project_name": "git.example:0/team/late-A"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 12,
+      "name": "git.example:0/team/late-A",
+      "source": "vibeinsight",
+      "owner": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "source_key": "git.example:0/team/late-A",
+      "device_name": null
+    }
+  ],
+  "origins": [
+    {
+      "source": "vibeinsight",
+      "source_id": "[\"<fixture-host>\", 59761, \"postgres\"]",
+      "platform": "codex"
+    }
+  ]
+}

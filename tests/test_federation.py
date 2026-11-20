@@ -35,8 +35,8 @@ def eventually(check, seconds=20):
     pytest.fail("等待同步超时")
 
 
-def record_codex(root, session, messages):
-    events = [{"type": "session_meta", "payload": {"id": session, "cwd": str(root)}}]
+def record_codex(root, session, messages, *, cwd=None):
+    events = [{"type": "session_meta", "payload": {"id": session, "cwd": str(cwd if cwd is not None else root)}}]
     events += [{"type": "response_item", "ordinal": i, "payload": {
         "type": "message", **({"id": key} if key else {}), "role": "user",
         "content": [{"type": "input_text", "text": body}]}}
@@ -75,7 +75,7 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
                 pytest.fail(f"汇总服务退出：{process.returncode}")
             try:
                 return hub_call("info")
-            except URLError:
+            except (URLError, TimeoutError):
                 return False
         try:
             eventually(ready, 8)
@@ -203,3 +203,79 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         if hub.poll() is None:
             hub.terminate()
             hub.wait(timeout=10)
+
+
+def test_project_links_filter_before_ranking_and_follow_only_one_hop(tmp_path):
+    from fastapi.testclient import TestClient
+    from smm_hub.hub import create_hub
+
+    token = "t" * 40
+    with TestClient(create_hub(Archive(tmp_path / "hub.sqlite3"), token),
+                    headers={"Authorization": "Bearer " + token}) as hub:
+        info = hub.get("/v1/info").json()
+        assert "projects" in info.get("capabilities", [])
+        for index, label in enumerate(("alpha", "bravo", "charlie", "delta"), 1):
+            payload = {
+                "hub_id": info["hub_id"], "device_id": f"{index:032x}", "device_name": label,
+                "records": [{"source": "codex", "source_session_id": label, "started_at": None,
+                             "source_key": label, "position": 0, "source_order": 1, "timestamp": None,
+                             "role": "user", "text": f"asteroid {label}"}],
+            }
+            assert hub.post("/v1/upload", json=payload).status_code == 200
+            assert hub.post("/v1/project-metadata", json={
+                **{k: payload[k] for k in ("hub_id", "device_id", "device_name")},
+                "projects": [{"id": 1, "name": "Same name"}],
+                "memberships": [{"source": "codex", "source_session_id": label, "project_id": 1}],
+            }).status_code == 200
+
+        from smm_hub.projects import HubProjects
+
+        manager = HubProjects(Archive(tmp_path / "hub.sqlite3"))
+        projects = {p["device_name"]: p["id"] for p in manager.list()}
+        a, b, c, d = (projects[label] for label in ("alpha", "bravo", "charlie", "delta"))
+        for one, other in [(a, b), (b, a), (a, c), (b, d)]:
+            manager.link(one, other)
+        assert len(manager.links()) == 3
+
+        def check(label, expected):
+            result = hub.post("/v1/search", json={
+                "query": "asteroid", "device_id": f"{label:032x}", "project_id": 1, "limit": len(expected),
+            })
+            assert result.status_code == 200, result.text
+            data = result.json()
+            assert {p["id"] for p in data["effective_projects"]} == expected
+            assert {hit["project_id"] for hit in data["results"]} == expected
+
+        check(1, {a, b, c})
+        check(2, {a, b, d})
+        manager.link(c, a, linked=False)
+        check(1, {a, b})
+        assert len(hub.post("/v1/search", json={"query": "asteroid"}).json()["results"]) == 4
+
+
+def test_project_request_reports_actual_scope_before_any_links(tmp_path):
+    from fastapi.testclient import TestClient
+    from smm_hub.hub import create_hub
+
+    token = "s" * 40
+    device = "0" * 32
+    with TestClient(create_hub(Archive(tmp_path / "hub.sqlite3"), token),
+                    headers={"Authorization": "Bearer " + token}) as hub:
+        info = hub.get("/v1/info").json()
+        if "projects" in info.get("capabilities", []):
+            result = hub.post("/v1/project-metadata", json={
+                "hub_id": info["hub_id"], "device_id": device, "device_name": "Laptop",
+                "projects": [{"id": 1, "name": "Empty"}], "memberships": [],
+            })
+            assert result.status_code == 200
+        result = hub.post("/v1/search", json={"query": "evidence", "device_id": device, "project_id": 1})
+        assert result.status_code == 200
+        assert result.json()["scope"] == "project"
+        assert [p["name"] for p in result.json()["effective_projects"]] == ["Empty"]
+
+
+def test_vibeinsight_configuration_has_managed_hub_entry_point():
+    command = [sys.executable, "-m", "smm_hub.cli", "hub", "vibeinsight", "--help"]
+    result = subprocess.run(command, capture_output=True, text=True, timeout=10)
+    assert result.returncode == 0, result.stderr
+    assert "configure" in result.stdout and "status" in result.stdout

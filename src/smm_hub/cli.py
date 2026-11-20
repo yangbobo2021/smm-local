@@ -19,6 +19,8 @@ def main() -> None:
     hub.add_argument("--token-file", required=True)
     hub.add_argument("--tls-cert")
     hub.add_argument("--tls-key")
+    hub.add_argument("--state-dir", type=Path,
+                     help="读取此目录的 VibeInsight 配置和凭据，默认使用其中的 smm-hub.sqlite3")
     from .hub_admin import add_arguments, dispatch
 
     add_arguments(sub)
@@ -39,12 +41,23 @@ def main() -> None:
     if args.host not in {"127.0.0.1", "::1", "localhost"} and not args.tls_cert:
         parser.error("非回环地址必须启用 TLS")
     local_path = shared_db_path().resolve()
-    hub_path = Path(args.db or local_path.with_name("smm-hub.sqlite3")).expanduser().resolve()
+    state = args.state_dir.expanduser().resolve() if args.state_dir is not None else None
+    configured_db = state / "smm-hub.sqlite3" if state is not None else None
+    hub_path = Path(args.db or configured_db or local_path.with_name("smm-hub.sqlite3")).expanduser().resolve()
+    if configured_db is not None and hub_path != configured_db and not (
+            hub_path.exists() and configured_db.exists() and hub_path.samefile(configured_db)):
+        parser.error("--db 与 --state-dir 必须指向同一汇总档案")
     if hub_path == local_path or (hub_path.exists() and local_path.exists() and hub_path.samefile(local_path)):
         parser.error("汇总服务必须使用独立数据库")
     try:
         token = Path(args.token_file).expanduser().read_text(encoding="ascii").strip()
-        uvicorn.run(create_hub(Archive(hub_path), token), host=args.host, port=args.port,
+        archive = Archive(hub_path)
+        lifespan = None
+        if state is not None:
+            from .vibeinsight_settings import VibeInsightSettings
+
+            lifespan = VibeInsightSettings(state, archive).lifespan
+        uvicorn.run(create_hub(archive, token, lifespan=lifespan), host=args.host, port=args.port,
                     ssl_certfile=args.tls_cert, ssl_keyfile=args.tls_key)
     except (OSError, ValueError) as exc:
         parser.error(str(exc))

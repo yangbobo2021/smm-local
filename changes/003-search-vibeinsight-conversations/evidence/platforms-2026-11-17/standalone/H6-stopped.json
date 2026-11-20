@@ -1,0 +1,26 @@
+{
+  "before_identity": {
+    "mode": "serve-hub",
+    "pid": 50458
+  },
+  "checkpoints": [
+    {
+      "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+      "project": "(无仓库)",
+      "timestamp": "2026-09-10T01:45:00",
+      "event_id": "E000105"
+    },
+    {
+      "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+      "project": "git.example:0/team/C",
+      "timestamp": "2026-09-10T01:45:00",
+      "event_id": "E000105"
+    },
+    {
+      "source_id": "[\"<fixture-host>\", 62184, \"postgres\"]",
+      "project": "git.example:0/team/D",
+      "timestamp": "2026-09-10T01:45:00",
+      "event_id": "E000105"
+    }
+  ]
+}

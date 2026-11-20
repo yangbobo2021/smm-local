@@ -348,7 +348,7 @@ def test_codex_and_claude_share_durable_archive_without_tool_output(tmp_path, mo
     partial = db.sync_all()
     assert partial["messages_new"] == 1 and partial["errors"]
     with claude_file.open("a", encoding="utf-8") as stream:
-        stream.write(',"uuid":"c-tool2","sessionId":"same","cwd":"'+str(project)+'","timestamp":"2026-10-29T09:01:00Z","message":{"role":"assistant","content":[{"type":"text","text":"交接完成"}]}}\n')
+        stream.write(',"uuid":"c-tool2","sessionId":"same","cwd":"'+json.dumps(str(project))[1:-1]+'","timestamp":"2026-10-29T09:01:00Z","message":{"role":"assistant","content":[{"type":"text","text":"交接完成"}]}}\n')
     assert db.sync_all()["messages_new"] == 1
     claude_file.unlink()
     db.sync_all()

@@ -1,0 +1,95 @@
+{
+  "tool": "search_conversations",
+  "arguments": {
+    "query": "platform",
+    "scope": "project",
+    "project_id": 1,
+    "limit": 50,
+    "local": true
+  },
+  "response": {
+    "query": "platform",
+    "scope": "project",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "duplicate name"
+      },
+      {
+        "id": 3,
+        "name": "local-related"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "device-windows",
+        "title": "platform evidence device-windows",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "duplicate name",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence device-windows",
+            "origins": [
+              {
+                "device_name": "windows",
+                "device_id": "2e1b14a09e0d4b12a7032d834e73f4e2",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "windows",
+            "device_id": "2e1b14a09e0d4b12a7032d834e73f4e2"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "related-windows",
+        "title": "platform evidence related-windows",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 3,
+        "project_name": "local-related",
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "preview_truncated": false,
+            "preview": "platform evidence related-windows",
+            "origins": [
+              {
+                "device_name": "windows",
+                "device_id": "2e1b14a09e0d4b12a7032d834e73f4e2",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "windows",
+            "device_id": "2e1b14a09e0d4b12a7032d834e73f4e2"
+          }
+        ]
+      }
+    ],
+    "archive_scope": "local",
+    "fallback_reason": null
+  }
+}

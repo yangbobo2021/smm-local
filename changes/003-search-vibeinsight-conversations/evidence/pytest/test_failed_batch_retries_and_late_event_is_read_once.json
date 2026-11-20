@@ -1,0 +1,118 @@
+{
+  "test": "tests/test_vibeinsight_sync.py::test_failed_batch_retries_and_late_event_is_read_once",
+  "fixture": "synthetic",
+  "evidence": {
+    "read_back": {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"old\"]",
+      "source_path": "",
+      "cwd": null,
+      "started_at": "2026-09-14T00:00:00",
+      "updated_at": "2026-09-14T00:03:00",
+      "title": "evidence old 0",
+      "project_id": null,
+      "project_name": null,
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "evidence old 0",
+          "timestamp": "2026-09-14T00:00:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "evidence old 1",
+          "timestamp": "2026-09-14T00:01:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        },
+        {
+          "position": 3,
+          "role": "user",
+          "text": "evidence old 2",
+          "timestamp": "2026-09-14T00:02:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        },
+        {
+          "position": 4,
+          "role": "assistant",
+          "text": "evidence old 3",
+          "timestamp": "2026-09-14T00:03:00",
+          "origin": null,
+          "import_batch": null,
+          "plugin_revision": null
+        }
+      ]
+    },
+    "historical_edit_preserved": true,
+    "search": {
+      "query": "evidence",
+      "scope": "all",
+      "effective_projects": "all",
+      "excluded_current_session_id": null,
+      "results": [
+        {
+          "id": 1,
+          "source": "vibeinsight",
+          "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"old\"]",
+          "title": "evidence old 0",
+          "started_at": "2026-09-14T00:00:00",
+          "updated_at": "2026-09-14T00:03:00",
+          "project_id": null,
+          "project_name": null,
+          "rank": 1,
+          "bm25_score": 1.5331010452961673e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "text": "evidence old 0"
+            },
+            {
+              "position": 2,
+              "role": "assistant",
+              "text": "evidence old 1"
+            },
+            {
+              "position": 3,
+              "role": "user",
+              "text": "evidence old 2"
+            },
+            {
+              "position": 4,
+              "role": "assistant",
+              "text": "evidence old 3"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "source": "vibeinsight",
+          "source_session_id": "[\"fixture\",\"owner\",\"codex\",\"other\"]",
+          "title": "evidence other 4",
+          "started_at": "2026-09-14T00:04:00",
+          "updated_at": "2026-09-14T00:04:00",
+          "project_id": null,
+          "project_name": null,
+          "rank": 2,
+          "bm25_score": 1.3253012048192773e-06,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "text": "evidence other 4"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

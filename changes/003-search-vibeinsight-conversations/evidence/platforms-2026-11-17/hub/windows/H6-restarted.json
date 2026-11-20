@@ -1,0 +1,36 @@
+{
+  "before": {
+    "mode": "LocalService",
+    "owner": {
+      "Domain": "NT AUTHORITY",
+      "ReturnValue": 0,
+      "User": "LOCAL SERVICE",
+      "PSComputerName": null
+    },
+    "service": {
+      "Name": "smm-hub-57abce1e0307",
+      "StartName": "NT AUTHORITY\\LocalService",
+      "State": "Running",
+      "ProcessId": 2860,
+      "PathName": "<task>\\Python\\python.exe -I -S -c \"import sys; sys.path.insert(0, 'C:\\\\ProgramData\\\\SmmVibeInsight003-20261117\\\\hub-env\\\\Lib\\\\site-packages'); from smm_hub.windows_service import boot; boot()\" smm-hub-57abce1e0307 <task>\\state-native-37bbfe459456"
+    },
+    "pid": 2860
+  },
+  "after": {
+    "mode": "LocalService",
+    "owner": {
+      "Domain": "NT AUTHORITY",
+      "ReturnValue": 0,
+      "User": "LOCAL SERVICE",
+      "PSComputerName": null
+    },
+    "service": {
+      "Name": "smm-hub-57abce1e0307",
+      "StartName": "NT AUTHORITY\\LocalService",
+      "State": "Running",
+      "ProcessId": 11508,
+      "PathName": "<task>\\Python\\python.exe -I -S -c \"import sys; sys.path.insert(0, 'C:\\\\ProgramData\\\\SmmVibeInsight003-20261117\\\\hub-env\\\\Lib\\\\site-packages'); from smm_hub.windows_service import boot; boot()\" smm-hub-57abce1e0307 <task>\\state-native-37bbfe459456"
+    },
+    "pid": 11508
+  }
+}
