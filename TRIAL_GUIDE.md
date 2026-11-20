@@ -12,7 +12,7 @@ SMM 在本机保存 Codex 与 Claude Code 的可见对话文本，提供项目�
 
 ```text
 <安装环境的 Python> -m smm_local.cli stop-on-demand
-<安装环境的 Python> -m pip install --upgrade smm-local==0.3.0
+<安装环境的 Python> -m pip install --upgrade smm-local==0.4.0
 <安装环境的 Python> -m smm_local.installation install
 ```
 
@@ -68,7 +68,7 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 管理员通过 uv 从 PyPI 安装独立的 `smm-hub` 包。
 
 ```sh
-uv tool install smm-hub==0.3.0
+uv tool install smm-hub==0.4.0
 smm-hub hub setup
 ```
 

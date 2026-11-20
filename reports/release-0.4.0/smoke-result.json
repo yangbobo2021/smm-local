@@ -1,0 +1,132 @@
+{
+  "version": "0.4.0",
+  "python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "checks": {
+    "smm-local": {
+      "version": "0.4.0",
+      "other_absent": true
+    },
+    "smm-hub": {
+      "version": "0.4.0",
+      "other_absent": true
+    },
+    "public_help": true,
+    "smm-search-zip": true,
+    "smm-source-adapter-zip": true,
+    "cli_import_search_original": true,
+    "stdio_mcp_search_original_schema": true,
+    "original_sha256": "7c5de4c5dace0c6199da5cf8deee8a684a0589bf4d8676f1837990531a876ee3"
+  },
+  "commands": [
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-c",
+        "import importlib.metadata as m,importlib.util as u,json;print(json.dumps({\"version\":m.version(\"smm-local\"),\"other_absent\":u.find_spec(\"smm_hub\") is None}))"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<hub-env>/bin/python",
+        "-I",
+        "-c",
+        "import importlib.metadata as m,importlib.util as u,json;print(json.dumps({\"version\":m.version(\"smm-hub\"),\"other_absent\":u.find_spec(\"smm_local\") is None}))"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<hub-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_hub.cli",
+        "serve-hub",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<hub-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "vibeinsight",
+        "configure",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_local.cli",
+        "source",
+        "batches",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_local.mcp_server",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_local.cli",
+        "--db",
+        "/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm040-smoke-joal3gla/archive.sqlite3",
+        "sync",
+        "--source",
+        "codex",
+        "--root",
+        "/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm040-smoke-joal3gla/source"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_local.cli",
+        "--db",
+        "/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm040-smoke-joal3gla/archive.sqlite3",
+        "search",
+        "releaseproof040",
+        "--local"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "<local-env>/bin/python",
+        "-I",
+        "-m",
+        "smm_local.cli",
+        "--db",
+        "/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/smm040-smoke-joal3gla/archive.sqlite3",
+        "read",
+        "1"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "status": "passed",
+  "original_report_sha256": "11e860bfa3a0f8229d7107420ec39d033e4596ef2315a36973004aa631950620",
+  "path_redaction": "Only ephemeral environment and fixture paths replaced; assertions, command exits and synthetic body hash retained."
+}

@@ -17,7 +17,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 
-PACKAGE = "smm-local==0.3.0"
+PACKAGE = "smm-local==0.4.0"
 DEFAULT_INDEX = "https://pypi.org/simple"
 TEST_INDEX = "https://test.pypi.org/simple"
 PROGRESS_INTERVAL = 15
