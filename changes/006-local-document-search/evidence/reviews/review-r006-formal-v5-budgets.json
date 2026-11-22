@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-budgets",
+  "target_sha256": "49df106da6b50487a8365d995477eaa6d921ddce02e0d8f85921ae19e78fd8e2",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "按SPEC B2/A2、PLAN §3.2/§4和当前test_budgets逐断言重核v5正式原件。stdout11passed、stderr空、exit0；169 artifacts/48 bindings及设计摘要匹配9cfd619 documents390880bf…。从11份source_bytes独立重算候选/计费，2MiB/2MiB+1、1000/1001、16MiB/16MiB+1真实数值正确，1000ready完整路径等于源名单。17MiB混合正反序4候选13字节且只基线可用；坏编码/NUL/后续拒读累计超限正反序整源failed，与数量/正常累计超限均零发布；stat失败计候选不计字节。33search/25read/8reject原响应全核，文档/版本/原SHA与返回来源限原stamp，恢复后失败旧ref仍拒绝、连续正控可读。仅当前selector，无XML/附加回归，不将旧产品通过或历史TDD绿灯当本轮证据。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    }
+  }
+}

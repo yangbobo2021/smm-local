@@ -1,0 +1,13 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC1判据来自SPEC B1/A1，没有添加原文未规定的产品行为。自然设计要求完整替换及逐字段独立预期，方向有效；实际sources.py:17-23只覆盖从默认配置替换成显式非空名单/排除/非递归，没有从已有非空名单/排除/非递归状态执行省略这些选项的set。SPEC B1操作表明确“未给名单即空名单，未给no-recursive即递归”；若实现只对显式字段赋值、遗漏字段继续沿用旧值，现有21-23的字段断言仍全部通过，其他本组用例也没有该动作前配置+省略输入组合。最小修订：在changed状态下执行不带这些字段的完整set，独立断言project_ids=[]、exclude=[]、recursive=True、revision递增及pending；不是增加等价标识样本。另17-23只针对单文件安装正文读取哨兵，设计列了目录目标但未对目录add/set的未采集行为做同等哨兵与pending/空files断言；只在单文件正确、目录add暗扫的反例仍可通过本TC，最小补目录add/set哨兵检查。现有已覆盖分支中，非法输入改当前配置会首先在29/32行完整sources比较拦截，同名项目合并身份会在16行独立不等式拦截。红灯原件run.stdout与00001-api-001.json证明13行POST /api/projects实际405 Method Not Allowed，Fixture.request:52失败，是B1项目创建能力尚缺；后续source/add/set/非法输入/持久/移除断言均未到达。原件SHA一致，runtime smoke正常；保留该真实业务红灯事实，但本候选有上述实现缺口，不能整项授予expected_failure。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

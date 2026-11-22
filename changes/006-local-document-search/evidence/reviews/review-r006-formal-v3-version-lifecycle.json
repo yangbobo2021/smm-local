@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-version-lifecycle",
+  "target_sha256": "3ed1613214f2ecb2c1624f752b1b670809cc50914abc27d70ef543be717fe4a9",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "本次v3重新阅读SPEC B3/B4/A4、PLAN §4 A4、design-v5-sc4和test_version_lifecycle，并直接核查本轮6search/9read/8reject原响应。17:55:57.223–57.573Z exit0、stdout1 passed、stderr空。两个适用文件one/two分别保持自身ID，00003/05/08/12/18版本链逐个为1/1/1/2/3；不变刷新后原ref可读，编辑未refresh仍有captured_at并返回旧original，refresh后精确updated、各旧v1失效，改回原字节后精确original但v1/v2仍400。00026移动后仅moved且ID不同，旧one/two的v3在00027/28均拒绝，00029准确original one正文。所有实际read正文独立SHA复算及ref payload文档/版本对应，search原路径/ID去重和区间字符数已核。33 artifacts/47 bindings及设计摘要均匹配当前a66deeb documents87e25466…；只判实际本轮selector，无XML/附加正式回归，未把旧v2意见或历史绿灯当新证据。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    }
+  }
+}

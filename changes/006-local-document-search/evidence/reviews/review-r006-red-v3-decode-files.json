@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "expected_failure",
+      "reason": "SC2及design-r006-v5-sc2的逐文件解码/失败恢复预期来自SPEC B1/B2/B6/A2，场景自然设计准确，无新增契约。独立核对match-r006-v4-sc2、manifest-v3、tests/test_document_scanning.py:40-74和红灯冻结source、所有artifacts/绑定SHA，均一致。首次partial以54行4 ready/3 failed、55-59逐错误UTF/NUL/权限语义以及empty.txt ready且text_length=0、60行完整三非空目标、61-64逐独立cases正文和原字节SHA核对，不能只处理首个目标。恢复阶段67行缓存limit=50完整results，68行独立六个非空文件名集合，70-73遍历同一完整集合逐一读取并与recovered[name]及源SHA比较；前轮默认limit=5漏第六目标已闭合，第六文件错正文现在72行必失败，错误换成另一目标正文也被不同独立字面串拦截。空文本在57行另有状态与长度断言，不借总ready数猜测。已有正常/失败后恢复的判定差异已落实，更多等价文件为可选补测。原始tdd-red/red-r006-v3-decode-files/TC-006-decode-files/run.stdout及00001-api-001.json显示45行首次来源add真实404 Not Found，Fixture.request:52首先失败，属于SPEC B1要求的新来源入口缺失，非环境或错误预期。拒读注入、refresh、partial、正文/空文本及恢复全部未执行。expected_failure确认有效候选及真实能力缺失红灯，不代表这些后续行为已通过；平台人工项不作预判。",
+      "covers": []
+    }
+  }
+}

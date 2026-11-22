@@ -1,0 +1,65 @@
+{
+  "method": "GET",
+  "path": "/api/documents/files?source_id=23fa2643f852414d90e4f92ebe219062",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "424234f29f8d4fc39aad9e8b6ab650c5",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.736086+00:00",
+      "captured_by_source_id": "23fa2643f852414d90e4f92ebe219062"
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-denied.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "synthetic access rejected",
+      "id": "2003ed17a5464fb9b77ccbe6ec8acc7a",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-denied.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-encoding.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件不是严格 UTF-8 文本",
+      "id": "7b781569b70a423b90e844c888e50f8c",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-encoding.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-large.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件超过2MiB",
+      "id": "369ce06e64ab4805ac3a350c2c23f3ee",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-large.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    }
+  ]
+}

@@ -1,0 +1,2347 @@
+[
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:13.753933+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:24:11.634599+00:00",
+        "finished_at": "2026-11-22T19:24:11.637288+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6130,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:13.849619+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:13.849984+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"name\":\"Web创建项目R\"}",
+    "json": {
+      "id": 3,
+      "name": "Web创建项目R",
+      "confirmed": 1,
+      "kind": "ordinary",
+      "conversations": 0,
+      "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+      "paths": [],
+      "linked_ids": []
+    },
+    "time": "2026-11-22T19:24:13.869651+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 3,
+        "name": "Web创建项目R",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:13.873140+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"project_ids\":[1],\"exclude\":[],\"recursive\":true,\"path\":\"/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md\"}",
+    "json": {
+      "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "pending",
+      "resume_status": "pending",
+      "refresh_id": null,
+      "request_seq": 0,
+      "started_at": null,
+      "finished_at": null,
+      "error": null,
+      "counts": {},
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    "time": "2026-11-22T19:24:13.936402+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:24:11.634599+00:00",
+        "finished_at": "2026-11-22T19:24:11.637288+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6130,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "pending",
+        "resume_status": "pending",
+        "refresh_id": null,
+        "request_seq": 0,
+        "started_at": null,
+        "finished_at": null,
+        "error": null,
+        "counts": {},
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:13.938281+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/refresh",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"source_id\":\"0e9dbfda452d4dc9ba8f4939d4c15d57\"}",
+    "json": {
+      "sources": [
+        {
+          "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+          "request_seq": 3,
+          "started_at": "2026-11-22T19:24:14.055710+00:00",
+          "finished_at": "2026-11-22T19:24:14.057273+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 80,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ],
+      "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+    },
+    "time": "2026-11-22T19:24:14.070188+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:24:11.634599+00:00",
+        "finished_at": "2026-11-22T19:24:11.637288+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6130,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+        "request_seq": 3,
+        "started_at": "2026-11-22T19:24:14.055710+00:00",
+        "finished_at": "2026-11-22T19:24:14.057273+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 80,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:14.072719+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/search",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"query\":\"needle\",\"scope\":\"project\",\"project_id\":1,\"limit\":50}",
+    "json": {
+      "results": [
+        {
+          "id": "fd0731949ba74e7abf6ac086b8baf143",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+          "version": 1,
+          "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+          "text_length": 23,
+          "captured_at": "2026-11-22T19:24:11.637264+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle nested original\n",
+          "start": 0,
+          "end": 23,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c",
+          "bm25_score": 1.6876727613927424e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a05664b44ab8423b82d004d219de6bb5",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "version": 1,
+          "sha256": "eb8cb2ca869136f0ddf2afe4bdc32e03df5b32a27f4ac7ae802da84e52c20d27",
+          "text_length": 64,
+          "captured_at": "2026-11-22T19:24:14.057087+00:00",
+          "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+          "text": "needle 中文😀 é\n第二行 <script>window.__docExecution=1</script>\nlast\n",
+          "start": 0,
+          "end": 64,
+          "start_line": 1,
+          "end_line": 3,
+          "source_ids": [
+            "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04",
+          "bm25_score": 1.6678779980451619e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:24:11.636244+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+          "bm25_score": 4.5139147951951054e-07,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "project",
+      "effective_project_ids": [
+        1
+      ],
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 3,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+            "request_seq": 1,
+            "started_at": "2026-11-22T19:24:11.634599+00:00",
+            "finished_at": "2026-11-22T19:24:11.637288+00:00",
+            "error": null,
+            "counts": {
+              "ready": 3,
+              "failed": 0,
+              "candidates": 3,
+              "billed_bytes": 6130,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+            "request_seq": 3,
+            "started_at": "2026-11-22T19:24:14.055710+00:00",
+            "finished_at": "2026-11-22T19:24:14.057273+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 80,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    },
+    "time": "2026-11-22T19:24:14.154035+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c\"}",
+    "json": {
+      "id": "fd0731949ba74e7abf6ac086b8baf143",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+      "version": 1,
+      "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+      "text_length": 23,
+      "captured_at": "2026-11-22T19:24:11.637264+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle nested original\n",
+      "start": 0,
+      "end": 23,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:14.219572+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 1,
+      "sha256": "eb8cb2ca869136f0ddf2afe4bdc32e03df5b32a27f4ac7ae802da84e52c20d27",
+      "text_length": 64,
+      "captured_at": "2026-11-22T19:24:14.057087+00:00",
+      "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "text": "needle 中文😀 é\n第二行 <script>window.__docExecution=1</script>\nlast\n",
+      "start": 0,
+      "end": 64,
+      "start_line": 1,
+      "end_line": 3,
+      "source_ids": [
+        "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:14.270202+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c\"}",
+    "json": {
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:11.636244+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:14.319901+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 1,
+      "sha256": "eb8cb2ca869136f0ddf2afe4bdc32e03df5b32a27f4ac7ae802da84e52c20d27",
+      "text_length": 64,
+      "captured_at": "2026-11-22T19:24:14.057087+00:00",
+      "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "text": "needle 中文😀 é\n第二行 <script>window.__docExecution=1</script>\nlast\n",
+      "start": 0,
+      "end": 64,
+      "start_line": 1,
+      "end_line": 3,
+      "source_ids": [
+        "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:14.370468+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04\",\"start\":7,\"end\":14}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 1,
+      "sha256": "eb8cb2ca869136f0ddf2afe4bdc32e03df5b32a27f4ac7ae802da84e52c20d27",
+      "text_length": 64,
+      "captured_at": "2026-11-22T19:24:14.057087+00:00",
+      "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "text": "中文😀 é\n",
+      "start": 7,
+      "end": 14,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:14.517962+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/search",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"query\":\"nonexistentuniqueterm\",\"scope\":\"project\",\"project_id\":1,\"limit\":50}",
+    "json": {
+      "results": [],
+      "scope": "project",
+      "effective_project_ids": [
+        1
+      ],
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 3,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+            "request_seq": 1,
+            "started_at": "2026-11-22T19:24:11.634599+00:00",
+            "finished_at": "2026-11-22T19:24:11.637288+00:00",
+            "error": null,
+            "counts": {
+              "ready": 3,
+              "failed": 0,
+              "candidates": 3,
+              "billed_bytes": 6130,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+            "request_seq": 3,
+            "started_at": "2026-11-22T19:24:14.055710+00:00",
+            "finished_at": "2026-11-22T19:24:14.057273+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 80,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    },
+    "time": "2026-11-22T19:24:14.568194+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/search",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"query\":\"needle\",\"scope\":\"project\",\"project_id\":1,\"limit\":50}",
+    "json": {
+      "results": [
+        {
+          "id": "fd0731949ba74e7abf6ac086b8baf143",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+          "version": 1,
+          "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+          "text_length": 23,
+          "captured_at": "2026-11-22T19:24:11.637264+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle nested original\n",
+          "start": 0,
+          "end": 23,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c",
+          "bm25_score": 1.6876727613927424e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a05664b44ab8423b82d004d219de6bb5",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "version": 1,
+          "sha256": "eb8cb2ca869136f0ddf2afe4bdc32e03df5b32a27f4ac7ae802da84e52c20d27",
+          "text_length": 64,
+          "captured_at": "2026-11-22T19:24:14.057087+00:00",
+          "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+          "text": "needle 中文😀 é\n第二行 <script>window.__docExecution=1</script>\nlast\n",
+          "start": 0,
+          "end": 64,
+          "start_line": 1,
+          "end_line": 3,
+          "source_ids": [
+            "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04",
+          "bm25_score": 1.6678779980451619e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:24:11.636244+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+          "bm25_score": 4.5139147951951054e-07,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "project",
+      "effective_project_ids": [
+        1
+      ],
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 3,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+            "request_seq": 1,
+            "started_at": "2026-11-22T19:24:11.634599+00:00",
+            "finished_at": "2026-11-22T19:24:11.637288+00:00",
+            "error": null,
+            "counts": {
+              "ready": 3,
+              "failed": 0,
+              "candidates": 3,
+              "billed_bytes": 6130,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+            "request_seq": 3,
+            "started_at": "2026-11-22T19:24:14.055710+00:00",
+            "finished_at": "2026-11-22T19:24:14.057273+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 80,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    },
+    "time": "2026-11-22T19:24:14.718436+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 400,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04\"}",
+    "json": {
+      "detail": "采集版本已失效，请重新检索"
+    },
+    "time": "2026-11-22T19:24:18.737993+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/search",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"query\":\"needle\",\"scope\":\"project\",\"project_id\":1,\"limit\":50}",
+    "json": {
+      "results": [
+        {
+          "id": "fd0731949ba74e7abf6ac086b8baf143",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+          "version": 1,
+          "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+          "text_length": 23,
+          "captured_at": "2026-11-22T19:24:16.670645+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle nested original\n",
+          "start": 0,
+          "end": 23,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c",
+          "bm25_score": 1.6876620405673326e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a05664b44ab8423b82d004d219de6bb5",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "version": 2,
+          "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+          "text_length": 39,
+          "captured_at": "2026-11-22T19:24:16.670604+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle edited 中文😀 é\nnew captured text\n",
+          "start": 0,
+          "end": 39,
+          "start_line": 1,
+          "end_line": 2,
+          "source_ids": [
+            "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6",
+          "bm25_score": 1.6784468375549828e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:24:16.669986+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+          "bm25_score": 4.5062507635297476e-07,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "project",
+      "effective_project_ids": [
+        1
+      ],
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 3,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "8cdb50e797f0468a85aa2adedd7a60be",
+            "request_seq": 4,
+            "started_at": "2026-11-22T19:24:16.668362+00:00",
+            "finished_at": "2026-11-22T19:24:16.670670+00:00",
+            "error": null,
+            "counts": {
+              "ready": 3,
+              "failed": 0,
+              "candidates": 3,
+              "billed_bytes": 6098,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "73139c4a05b5422daf8178c2159355d9",
+            "request_seq": 3,
+            "started_at": "2026-11-22T19:24:14.055710+00:00",
+            "finished_at": "2026-11-22T19:24:14.057273+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 80,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    },
+    "time": "2026-11-22T19:24:18.870165+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c\"}",
+    "json": {
+      "id": "fd0731949ba74e7abf6ac086b8baf143",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+      "version": 1,
+      "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+      "text_length": 23,
+      "captured_at": "2026-11-22T19:24:16.670645+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle nested original\n",
+      "start": 0,
+      "end": 23,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:18.936033+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:16.670604+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:18.986639+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c\"}",
+    "json": {
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:16.669986+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:19.035888+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:16.670604+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:19.086389+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources/0e9dbfda452d4dc9ba8f4939d4c15d57",
+    "status": 200,
+    "method": "PUT",
+    "request": "{\"project_ids\":[1,2],\"exclude\":[\"private/**\"],\"recursive\":false}",
+    "json": {
+      "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "kind": "file",
+      "recursive": false,
+      "exclude": [
+        "private/**"
+      ],
+      "revision": 2,
+      "status": "pending",
+      "resume_status": "pending",
+      "refresh_id": null,
+      "request_seq": 3,
+      "started_at": "2026-11-22T19:24:14.055710+00:00",
+      "finished_at": "2026-11-22T19:24:14.057273+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 80,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        1,
+        2
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    "time": "2026-11-22T19:24:19.302821+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "8cdb50e797f0468a85aa2adedd7a60be",
+        "request_seq": 4,
+        "started_at": "2026-11-22T19:24:16.668362+00:00",
+        "finished_at": "2026-11-22T19:24:16.670670+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6098,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+        "kind": "file",
+        "recursive": false,
+        "exclude": [
+          "private/**"
+        ],
+        "revision": 2,
+        "status": "pending",
+        "resume_status": "pending",
+        "refresh_id": null,
+        "request_seq": 3,
+        "started_at": "2026-11-22T19:24:14.055710+00:00",
+        "finished_at": "2026-11-22T19:24:14.057273+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 80,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1,
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:19.305505+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/refresh",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"source_id\":\"0e9dbfda452d4dc9ba8f4939d4c15d57\"}",
+    "json": {
+      "sources": [
+        {
+          "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "kind": "file",
+          "recursive": false,
+          "exclude": [
+            "private/**"
+          ],
+          "revision": 2,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "3c1c3e9389ba4e539cac3501b9198010",
+          "request_seq": 5,
+          "started_at": "2026-11-22T19:24:19.353537+00:00",
+          "finished_at": "2026-11-22T19:24:19.355224+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 48,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            1,
+            2
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ],
+      "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+    },
+    "time": "2026-11-22T19:24:19.368900+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "8cdb50e797f0468a85aa2adedd7a60be",
+        "request_seq": 4,
+        "started_at": "2026-11-22T19:24:16.668362+00:00",
+        "finished_at": "2026-11-22T19:24:16.670670+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6098,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+        "kind": "file",
+        "recursive": false,
+        "exclude": [
+          "private/**"
+        ],
+        "revision": 2,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "3c1c3e9389ba4e539cac3501b9198010",
+        "request_seq": 5,
+        "started_at": "2026-11-22T19:24:19.353537+00:00",
+        "finished_at": "2026-11-22T19:24:19.355224+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 48,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1,
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:19.371842+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources/0e9dbfda452d4dc9ba8f4939d4c15d57",
+    "status": 200,
+    "method": "DELETE",
+    "request": null,
+    "json": {
+      "removed": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "message": "已取消此来源；独占材料退出检索/读取，原文件未改变"
+    },
+    "time": "2026-11-22T19:24:19.452882+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "8cdb50e797f0468a85aa2adedd7a60be",
+        "request_seq": 4,
+        "started_at": "2026-11-22T19:24:16.668362+00:00",
+        "finished_at": "2026-11-22T19:24:16.670670+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 6098,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:19.455876+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:19.355042+00:00",
+      "captured_by_source_id": "0e9dbfda452d4dc9ba8f4939d4c15d57",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:20.135830+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 3,
+        "name": "Web创建项目R",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:24.793651+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 3,
+        "name": "Web创建项目R",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:24.881547+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "partial",
+        "resume_status": "partial",
+        "refresh_id": "5bde960f9046477bb36826fb75726b3b",
+        "request_seq": 8,
+        "started_at": "2026-11-22T19:24:21.842248+00:00",
+        "finished_at": "2026-11-22T19:24:21.844662+00:00",
+        "error": null,
+        "counts": {
+          "ready": 2,
+          "failed": 2,
+          "candidates": 4,
+          "billed_bytes": 6094,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:24.882713+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52797/api/documents/files?source_id=cb93f7da39974e9b9f60edd92cef455f",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+        "relative_path": "bad.txt",
+        "status": "failed",
+        "qualification": 1,
+        "error": "文件不是严格 UTF-8 文本",
+        "id": "40bcb94498714873960b6e2ee475d8f8",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+        "version": 1,
+        "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+        "text_length": 15,
+        "captured_at": "2026-11-22T19:24:21.603974+00:00",
+        "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+      },
+      {
+        "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+        "relative_path": "control.txt",
+        "status": "ready",
+        "qualification": 1,
+        "error": null,
+        "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+        "version": 1,
+        "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+        "text_length": 3027,
+        "captured_at": "2026-11-22T19:24:21.843981+00:00",
+        "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+      },
+      {
+        "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+        "relative_path": "denied.txt",
+        "status": "failed",
+        "qualification": 1,
+        "error": "[Errno 13] Permission denied: '/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt'",
+        "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+        "version": 1,
+        "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+        "text_length": 17,
+        "captured_at": "2026-11-22T19:24:21.603946+00:00",
+        "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+      },
+      {
+        "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+        "relative_path": "nested/notes.txt",
+        "status": "missing",
+        "qualification": 1,
+        "error": "本轮未在来源范围发现",
+        "id": "fd0731949ba74e7abf6ac086b8baf143",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+        "version": 1,
+        "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+        "text_length": 23,
+        "captured_at": "2026-11-22T19:24:16.670645+00:00",
+        "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+      },
+      {
+        "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+        "relative_path": "指南.md",
+        "status": "ready",
+        "qualification": 1,
+        "error": null,
+        "id": "a05664b44ab8423b82d004d219de6bb5",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+        "version": 2,
+        "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+        "text_length": 39,
+        "captured_at": "2026-11-22T19:24:21.844590+00:00",
+        "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+      }
+    ],
+    "time": "2026-11-22T19:24:24.970182+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 3,
+        "name": "Web创建项目R",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:30.493859+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/projects",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": 3,
+        "name": "Web创建项目R",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "e03b0ad5b92b9bf92523976d2e350882",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 1,
+        "name": "文档项目P",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "b057d79185ca72ef878b6dd77edcc54f",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      },
+      {
+        "id": 2,
+        "name": "文档项目Q",
+        "confirmed": 1,
+        "kind": "ordinary",
+        "conversations": 0,
+        "stable_key": "850e25ff4027d918711b4a3c4fd5bb5c",
+        "paths": [],
+        "linked_ids": [],
+        "upload_selected": false,
+        "upload_allowed": false
+      }
+    ],
+    "time": "2026-11-22T19:24:30.581897+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/sources",
+    "status": 200,
+    "method": "GET",
+    "request": null,
+    "json": [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "6d7813ba1373401298570a07a2ef39fc",
+        "request_seq": 9,
+        "started_at": "2026-11-22T19:24:25.283902+00:00",
+        "finished_at": "2026-11-22T19:24:25.286550+00:00",
+        "error": null,
+        "counts": {
+          "ready": 4,
+          "failed": 0,
+          "candidates": 4,
+          "billed_bytes": 6107,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "time": "2026-11-22T19:24:30.583123+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/search",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"query\":\"needle\",\"scope\":\"all\",\"project_id\":null,\"limit\":50}",
+    "json": {
+      "results": [
+        {
+          "id": "40bcb94498714873960b6e2ee475d8f8",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+          "version": 1,
+          "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+          "text_length": 15,
+          "captured_at": "2026-11-22T19:24:25.286520+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle repaired",
+          "start": 0,
+          "end": 15,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+          "version": 1,
+          "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+          "text_length": 17,
+          "captured_at": "2026-11-22T19:24:25.286497+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle unreadable",
+          "start": 0,
+          "end": 17,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "acfc5ce4406743c197d14bb00242cabf",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+          "version": 1,
+          "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+          "text_length": 19,
+          "captured_at": "2026-11-22T19:24:11.639198+00:00",
+          "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855",
+          "text": "needle unrelated Q\n",
+          "start": 0,
+          "end": 19,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "a6a760fcb345419fa0b404aa65285855"
+          ],
+          "project_ids": [
+            2
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e",
+          "bm25_score": 1.6865065258239807e-06,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a05664b44ab8423b82d004d219de6bb5",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "version": 2,
+          "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+          "text_length": 39,
+          "captured_at": "2026-11-22T19:24:25.286457+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle edited 中文😀 é\nnew captured text\n",
+          "start": 0,
+          "end": 39,
+          "start_line": 1,
+          "end_line": 2,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3",
+          "bm25_score": 1.6750226974679712e-06,
+          "rank": 4,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:24:25.285836+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+          "bm25_score": 3.808764666077921e-07,
+          "rank": 5,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "all",
+      "effective_project_ids": null,
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 5,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "6d7813ba1373401298570a07a2ef39fc",
+            "request_seq": 9,
+            "started_at": "2026-11-22T19:24:25.283902+00:00",
+            "finished_at": "2026-11-22T19:24:25.286550+00:00",
+            "error": null,
+            "counts": {
+              "ready": 4,
+              "failed": 0,
+              "candidates": 4,
+              "billed_bytes": 6107,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "a6a760fcb345419fa0b404aa65285855",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+            "request_seq": 2,
+            "started_at": "2026-11-22T19:24:11.638343+00:00",
+            "finished_at": "2026-11-22T19:24:11.639295+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 19,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              2
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    },
+    "time": "2026-11-22T19:24:30.704865+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651\"}",
+    "json": {
+      "id": "40bcb94498714873960b6e2ee475d8f8",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:24:25.286520+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle repaired",
+      "start": 0,
+      "end": 15,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:30.753377+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302\"}",
+    "json": {
+      "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:24:25.286497+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle unreadable",
+      "start": 0,
+      "end": 17,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:30.819913+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e\"}",
+    "json": {
+      "id": "acfc5ce4406743c197d14bb00242cabf",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:24:11.639198+00:00",
+      "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855",
+      "text": "needle unrelated Q\n",
+      "start": 0,
+      "end": 19,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "a6a760fcb345419fa0b404aa65285855"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:30.868768+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3\"}",
+    "json": {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:25.286457+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:30.920935+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:52838/api/documents/read",
+    "status": 200,
+    "method": "POST",
+    "request": "{\"reference\":\"r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c\"}",
+    "json": {
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:25.285836+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    "time": "2026-11-22T19:24:30.971165+00:00"
+  }
+]

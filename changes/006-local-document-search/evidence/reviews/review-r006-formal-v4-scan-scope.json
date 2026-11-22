@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-scan-scope",
+  "target_sha256": "1e87543d4b42ecd11ac4aefb4d80996e773ed36c4e4bfbe92727328d605984a4",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "本次v4按SPEC B2/A2、PLAN §3.2/§4与当前test_scan_scope断言独立复核。stdout1 passed、stderr空、exit0；31 artifacts/48 bindings及designSHA重算一致，当前产品4c706b3 documents43d3762c…。00003原results相对路径恰root.MD/sub深层markdown及open/branch keep/star-dir keep五目标，00004–08逐正文与独立预期一致；完整集合排除全部隐藏/默认目录/格式及自定义* ? **/尾斜杠目标。00012非递归仅根文件，00015/18/21显式build单文件、隐藏文件、隐藏目录成功；00023内层links2被忽略、00024独有逃逸词零命中、00025根链接400。源字节/mtime全量不变断言执行。仅本开发机分支和当前selector，无XML/附加回归；未沿用旧通过，不判断平台或R006。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

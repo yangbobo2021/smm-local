@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "SC7隔离判据来自SPEC B1/B4/A7（文档操作不改变对话来源开关、暂停、上传选择或归档），没有新增行为。自然设计列已有对话/控制数据及none/hub/paused三种状态，但没有分配已有对话来源启用/停用这两个会影响归档保留的动作前状态；tests/test_document_compatibility.py:21只建立一个Codex对话，26在三个参数中都将Codex停用。test_005_contracts.py:17-40的pair夹具仅Codex histories有该数据，Claude指向空目录。因此若文档流程只保留停用来源归档、误删启用来源已有归档，或只保留首个既有对话，当前40行完整表相等和42独立原串仍可全部通过，因为不存在这些应保留目标。依据是A7对既有对话归档及来源状态的普遍保留承诺；最小补充应有带不同独立正文/身份的多个已有目标，并至少一个在动作前属于启用来源，逐项/全表核保留。这不是仅增加同条件ID，而是补有/无既有数据及启用/停用的业务状态。当前三种Hub/暂停状态、29及34出站拒绝哨兵、40全settings/messages/conversations/upload表与远端及calls前后对照均有实际断言，能拦已在夹具内目标的改变；两边同错原串可被42独立conversationnonce全文拦截。原red收据/argv、3份api-001、stdout/stderr/进程及绑定SHA已核：none/hub/paused均实际走到36行合法文件add后404 Not Found，helper:52失败，非网络哨兵/环境错误。文档refresh/search/read/set/remove和保留断言尚未到达；已配Hub/暂停准备成功不等于隔离业务通过。",
+      "covers": []
+    }
+  }
+}

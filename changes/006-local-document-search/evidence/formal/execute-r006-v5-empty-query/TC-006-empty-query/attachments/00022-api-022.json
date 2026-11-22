@@ -1,0 +1,66 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "nonexistentuniqueterm"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 0,
+      "sources": [
+        {
+          "id": "965ce9f3ed284658be95f15eb3eb6f76",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1014/test_empty_query0/docs/one.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "failed",
+          "resume_status": "failed",
+          "refresh_id": "69e5717d36554460a9de2bc9671d7faa",
+          "request_seq": 3,
+          "started_at": "2026-11-22T19:19:00.165214+00:00",
+          "finished_at": "2026-11-22T19:19:00.166202+00:00",
+          "error": "[Errno 2] No such file or directory: '<REVIEW_TEMP>/pytest-of-boboyang/pytest-1014/test_empty_query0/docs/one.txt'",
+          "counts": {
+            "ready": 0,
+            "failed": 0,
+            "candidates": 0,
+            "billed_bytes": 0,
+            "ignored_entries": 0
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "1b8498d91c1f470fae82dc08ca2aa8dc",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1014/test_empty_query0/docs/untouched.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "pending",
+          "resume_status": "pending",
+          "refresh_id": null,
+          "request_seq": 0,
+          "started_at": null,
+          "finished_at": null,
+          "error": null,
+          "counts": {},
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

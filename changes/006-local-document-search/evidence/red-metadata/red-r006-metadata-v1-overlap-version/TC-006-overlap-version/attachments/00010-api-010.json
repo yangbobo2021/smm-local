@@ -1,0 +1,79 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "needle",
+    "scope": "project",
+    "project_id": 2,
+    "limit": 50
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "eddc1348091e4973ba984c95af587cc8",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-919/test_overlap_version_remove_0/docs/shared.txt",
+        "version": 2,
+        "sha256": "d152ff73b15533c7c624ea5eed69aeff5008b28aa891b4a615209ca96048e16b",
+        "text_length": 9,
+        "captured_at": "2026-11-22T18:26:40.964488+00:00",
+        "captured_by_source_id": "1c332927a4de4d1283356a65bc730692",
+        "text": "needle v2",
+        "start": 0,
+        "end": 9,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "1c332927a4de4d1283356a65bc730692"
+        ],
+        "project_ids": [
+          2
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMmI1NjdlZmJhMWNmNDZjNGFlMTU1YWFkM2NmMDE4NzgiLCJkb2N1bWVudF9pZCI6ImVkZGMxMzQ4MDkxZTQ5NzNiYTk4NGM5NWFmNTg3Y2M4IiwiZW5kIjo5LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMWMzMzI5MjdhNGRlNGQxMjgzMzU2YTY1YmM3MzA2OTIiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6Mn0.00fba99d5cbd743cdd327f02485fbdf2699331e2d1bcd978d58935c9676804bd",
+        "bm25_score": 1e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "project",
+    "effective_project_ids": [
+      2
+    ],
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 1,
+      "sources": [
+        {
+          "id": "1c332927a4de4d1283356a65bc730692",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-919/test_overlap_version_remove_0/docs/shared.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "2c6be480042d4ce9aa9eb6cd1c41e5ea",
+          "request_seq": 3,
+          "started_at": "2026-11-22T18:26:40.963684+00:00",
+          "finished_at": "2026-11-22T18:26:40.964595+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 9,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            2
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

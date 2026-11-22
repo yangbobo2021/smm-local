@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-source-config",
+  "target_sha256": "f01029d5cee9dc09451d484ca3129eba2c12e59322e38e38c4cf711f7eee9337",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2（非沿用v1）：SPEC B1/A1、PLAN §3.1/§4 A1、design-r006-v5-sc1及tests/test_document_sources.py:8-49已对照。run.stdout为1 passed，stderr为空、exit 0；00001/00002同名普通项目具有不同ID/稳定键，00003–00014逐次显示单文件及目录pending、完整替换/清空项目与排除/递归，files与search为空；正文打开哨兵覆盖保存及查询，重开Archive读回完整配置。00015–00035非法路径/项目/排除/根替换及空名实际400/422且每次后来源集合不变，00036–00039移除后空集合及源指纹不变。43份artifacts与47份bindings均重算一致，case-design SHA一致；本轮只执行该selector，无XML及附加旧引用回归，不将green阶段回归冒称为formal。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

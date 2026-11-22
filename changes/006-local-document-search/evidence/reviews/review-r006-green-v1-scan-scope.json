@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2与SC2，递归/非递归、默认/自定义排除、显式隐藏单文件/目录及链接拒绝的自然设计有效。tests/test_document_scanning.py:7起从独立五路径/全文字面值验证全部命中与逐文件read；包含所有默认目录、隐藏、未知格式、*不得跨段、?、**零/多层及尾斜杠；set非递归只剩root.MD，另加build文件/.secret/.hidden目录可见；链接目标有独有marker，检索必须为空，链接根add须4xx，所有原件SHA/mtime不变。反例：只索引首个正常文件被五项完整集合拦截；一律排隐藏使显式来源失效被对应搜索拦截；跟随目录/文件链接被escapeuniquemarker零命中拦截。原始00027-scan-expected.json与API逐文件正文、00025-rejected-024.json根链接400支撑，产品documents.py:_scan/_glob按相同业务边界实现。这里只是本机共享测试，不认领Windows junction或三平台原件项。 同版TDD：red-r006-v3-scan-scope原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-scan-scope与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

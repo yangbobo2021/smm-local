@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-project-maintenance",
+  "target_sha256": "9cd31b69040ae3603165bac199e12cd7e3bbb593a4c539b48c06924cdc1c8f19",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "对当前v3重新核实正式原件及test_project_maintenance，SPEC B3/A3、PLAN §3.1/§4、design-v5-sc3可追溯。17:55:55.534–55.882Z实际exit0、stdout1 passed、stderr空。00004/05 P在rename前后均恰both/one，00006保持P绑定；merge后00007/08两来源唯一Q绑定，00009同两路径保留、原两资格00010/11均400拒绝。逐项重新比较00012/13/15/16/17完整来源集合相等，映射到G后00014零命中且非法普通/全局合并由pytest ValueError断言拒绝，来源仍ready，未暗改绑定。全部4次搜索原结果去重，签名payload文档/版本/source集合及片段区间核对无错配。21 artifacts/47 bindings与设计SHA重算一致，包含当前a66deeb的documents87e25466…；重读证据只支持直接Archive维护动作和API读回，不冒称API合并调用。正式仅目标selector，无XML/附加回归，没有沿用v2结论。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    }
+  }
+}

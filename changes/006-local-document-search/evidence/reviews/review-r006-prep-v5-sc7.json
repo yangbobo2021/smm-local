@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/6及本次glob/前两次需求failed保留说明、design-r006-v5-sc7和match-r006-v9-sc7分工；自然设计及实际断言有原文依据，人工user-discovery未在此判。当前src逐字等于9cfd619，runtime-product-v5/自身测试冻结绑定与所有artifacts SHA重算吻合，已实际读stdout/process/stderr及完整业务原件，不凭status，不继承旧包成功。test_isolation当前三参数passed/exit0。none/hub/paused、Codex停用/Claude启用两独立会话，guard前持久portal建立，文档全周期及末尾本地/远端/上传/开关/暂停检查都在guard；federation及全部新IP连接被拒，回环/外网两真实负例保留。完整归档与逐第二会话独立原串/source断言防只首目标正确或两读同错，三参数防只首模式正确。当前三complete-state原件本地/远端before==after，两独立正文原样保留、出站新增0、两网络负例通过，私有文档正文正控准确。本次_glob未引入网络/对话路径，read资格与collector分离逻辑保持。 当前设计/实现及实际调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台、用户发现、最终CI或R006，保留两次failed与其余历史TDD，不冒称本轮新23绿灯。",
+      "covers": [
+        "isolation-c1"
+      ]
+    },
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/6及本次glob/前两次需求failed保留说明、design-r006-v5-sc7和match-r006-v9-sc7分工；自然设计及实际断言有原文依据，人工user-discovery未在此判。当前src逐字等于9cfd619，runtime-product-v5/自身测试冻结绑定与所有artifacts SHA重算吻合，已实际读stdout/process/stderr及完整业务原件，不凭status，不继承旧包成功。test_compatibility当前1 passed/exit0。两个Codex/Claude独立ID/session/source/正文，完整两ID结果和逐旧数字ID/ref两读的身份/独立原串及旧DTO断言防仅首目标正确或两响应同错首会话。当前legacy-source-help九项source/list/validate/register/enable/disable/rollback/batches/purge-batch全old/new exit0且stdout逐字一致；冻结旧CLI SHA仍由实际代码核验且此前已独立对git f797字节，不冒称旧整包。现测试声明/文件绑定仍对应baseline-r006-compatibility-v3，历史基线只追溯，当前9c产品的兼容依据本轮debug实际执行，非历史TDD重新绿灯。 当前设计/实现及实际调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台、用户发现、最终CI或R006，保留两次failed与其余历史TDD，不冒称本轮新23绿灯。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    },
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/6及本次glob/前两次需求failed保留说明、design-r006-v5-sc7和match-r006-v9-sc7分工；自然设计及实际断言有原文依据，人工user-discovery未在此判。当前src逐字等于9cfd619，runtime-product-v5/自身测试冻结绑定与所有artifacts SHA重算吻合，已实际读stdout/process/stderr及完整业务原件，不凭status，不继承旧包成功。当前真实包探针exit0，commands.json十五条构建/两个独立环境安装/模块核验及业务命令全exit0。26项Local/24项Hub独立src字典=wheel=已安装解释器stdout=package-result模块SHA全量相同，新安装documents.py为390880bf58192317846ed1db29f271b9c5f6c7530b3811736634fa7aa4f74d66，精确等于当前9cfd619源文件，包含本轮_glob及既有Unicode/read修复。Local真实创建/add pending/refresh/search→原样ref read准确needle package 中文😀加LF；Hub实际无smm_local、Archive创建合并后仅standalone-B及serve-hub帮助成功。全量独立src比较防wheel/安装同错旧源，逐模块全集防只首项正确，构建扫描拒数据/私钥；未以相同版本字符串或旧wheel判当前包通过。此共用包检查不等同新平台闭环。 当前设计/实现及实际调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台、用户发现、最终CI或R006，保留两次failed与其余历史TDD，不冒称本轮新23绿灯。",
+      "covers": [
+        "packages-c2"
+      ]
+    }
+  }
+}

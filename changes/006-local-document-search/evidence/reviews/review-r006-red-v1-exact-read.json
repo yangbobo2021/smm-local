@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "场景SC5第二判据与SPEC B5/B6/A5一致，design-r006-v3-sc5准确要求缺省窗口及扩读的独立码点/行号预期。tests/test_document_search.py:38-42对每个指定范围直接以归一化原串断言文本、start/end、起止行，含非BMP/组合字符、CRLF/CR、尾LF和无尾LF；即使read与search同错正文，37行先与原串切片比较可拦截正文错误，40-42行可拦截指定扩读坐标同错。但缺省观察面只有37行的文本等式、46行长度，没有核对search命中或缺省read返回的start/end/start_line/end_line。反例：指定扩读全部正确，缺省read返回准确text但所有坐标/行号固定0/1，search的行号亦错；现有全部断言仍通过，违反B5“片段给出文本字符区间和行号”和B6“返回…实际字符及行号区间”。这与已有指定扩读是会改变判定的调用状态，不是仅换ID的可选样例；应补两观察面独立坐标与行号断言。原始red-r006-v1-exact-read的3份api-001附件、stdout/stderr及进程/收据已读，三个参数均实际在34行合法文件add因404 Not Found终止，共享helper:52断言报错，非导入或环境失败；刷新/search/read与上述坐标断言尚未到达，不能将缺失入口红灯当作完整候选有效。",
+      "covers": []
+    }
+  }
+}

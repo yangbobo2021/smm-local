@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "expected_failure",
+      "reason": "已独立核SPEC B3/B5/A3、PLAN4与SC3/design-r006-v5-sc3：零/多绑定、普通/全局、同名身份、双向直接一层及共享不建关联均由原文支持，场景和自然设计准确。match-r006-v4-sc3、manifest-v3、tests/test_document_projects.py:6-22与红灯source及当前运行绑定一致，全部artifacts SHA一致。13行独立expected按P/Q/R/G分配不同文件集合，15逐项目核集合；只对首项目/首文件正确或P误展开到R都会在15行失败；同名P/Q混合因集合不同也失败。16行逐目标needle+文件名独立正文，避免两响应同错或两边指同目标；17行all包括零绑定资料，18行整个links独立快照不变。19行重复纳入后的20-21行检查原始结果长度、path/id唯一数及独立3目标数，可拦字典吞重复。已有前置绑定/关联差异已区分，同条件增加等价ID不构成必测阻塞。原始tdd-red/red-r006-v3-project-scope/TC-006-project-scope/run.stdout及00001-api-001.json显示11行首来源POST /api/documents/sources实际404 Not Found，Fixture.request:52首先失败；为SPEC B1新增来源入口尚缺，非环境/错误预期。其余来源准备、刷新、项目集合/正文、关系和重复断言均未执行。expected_failure只确认有效候选与可信红灯，不声明上述项目行为或任何平台人工项已通过。",
+      "covers": []
+    }
+  }
+}

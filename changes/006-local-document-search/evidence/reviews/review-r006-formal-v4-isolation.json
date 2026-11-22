@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-isolation",
+  "target_sha256": "7a4027578778bcbd3ed3029b8fd33703aea92a6e3f9b88207a2a247ad31890d8",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B5/A7、PLAN §4及Windows测试环境修订、design-r006-v5-sc7，对照当前test_document_compatibility.py:29-71、pair和Fixture的关闭自动同步配置。none/hub/paused三组实际3passed/exit0/stderr空；全部文档add/refresh/search/read/set/refresh/remove均在网络guard内。原00004/12/20是200且独立正文docprivateneedle 本机文件 😀，三个read来源字段逐签名解码均仅原当次有效单源。原00008/16/24本机settings/messages/conversations及各上传表前后完整相等、远端相等、marker后calls0；两独立Codex/Claude正文及source逐目标legacy断言到达，codex停用/claude启用和暂停值保留。with f.client仅在guard前建立复用portal，仍无条件阻断全部AF_INET/6 connect和federation._request；127.0.0.1与203.0.113.1两个真实负例在业务前执行，不放行回环Hub。本次read返回元信息返修未影响对话或外发边界。28 artifacts/48 bindings。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "isolation-c1"
+      ]
+    }
+  }
+}

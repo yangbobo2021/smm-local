@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc5准备结果。已核定义000002 sha6b524c88…、SPEC B5/B6/A5及B3元信息约定、PLAN最新返修说明、design-r006-v5-sc5和match-r006-v8-sc5的本TC分工；自然设计有原文依据、具体数据/步骤在用例。当前37个src逐字等于4c706b3，runtime-product-v4及本TC冻结源码绑定、全部artifacts SHA重算均一致，已实际读取原stdout/process/stderr及API/预期原件。documents.read现只从原payload.sources逐个核member/source状态、revision、qualification后收集valid IDs；未引入新资格或改变历史captured_by_source_id，失效原资格仍拒。该B3特定重叠撤源新断言归SC3另审，不由本意见替代。本TC实际1 passed/exit0。test_search_rank完整50文件路径/唯一ID拦只首目标正确，六special各独立源字符串与query-in-read拦search/read同错。当前原件排序000..049两次稳定，文件名词零命中、高低相关顺序正确；stopuniquemarker实际原位置3400返回[3200,3421)长221，İ前缀后marker原位置3001返回[2801,3026)长225，均独立原串切片正确且含真正查询词，保留两Unicode反例修复。lower.find→原码点映射逻辑本次未改；不按历史TDDgreen冒称本轮重新TDD。 本TC设计/实现与当前调试证据有效，无有据必测缺口，等价样本可选；认领全部分配检查，准备passed，可进入全新正式执行。未判formal、新平台、用户发现、最终CI或R006，保留首次R006 failed。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    },
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc5准备结果。已核定义000002 sha6b524c88…、SPEC B5/B6/A5及B3元信息约定、PLAN最新返修说明、design-r006-v5-sc5和match-r006-v8-sc5的本TC分工；自然设计有原文依据、具体数据/步骤在用例。当前37个src逐字等于4c706b3，runtime-product-v4及本TC冻结源码绑定、全部artifacts SHA重算均一致，已实际读取原stdout/process/stderr及API/预期原件。documents.read现只从原payload.sources逐个核member/source状态、revision、qualification后收集valid IDs；未引入新资格或改变历史captured_by_source_id，失效原资格仍拒。该B3特定重叠撤源新断言归SC3另审，不由本意见替代。本TC实际3 passed/exit0。test_exact_read三独立body/多个范围以原文码点切片和LF端点公式逐项断言，独立body拦两个观察面同错，参数循环拦仅首字符串/首范围正确；长行核两个窗口观察面，扩读16000正控、16001与旧版本拒绝。当前原附件30个命中/读取已重新按独立三body或long计算text/start/end/start_line/end_line全部吻合；BOM/CRLF/CR/LF、非BMP/组合码点、有/无末尾LF保留，默认2000、扩读16000和400拒绝实际到达。来源元信息过滤未影响文本/_range。 本TC设计/实现与当前调试证据有效，无有据必测缺口，等价样本可选；认领全部分配检查，准备passed，可进入全新正式执行。未判formal、新平台、用户发现、最终CI或R006，保留首次R006 failed。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    },
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc5准备结果。已核定义000002 sha6b524c88…、SPEC B5/B6/A5及B3元信息约定、PLAN最新返修说明、design-r006-v5-sc5和match-r006-v8-sc5的本TC分工；自然设计有原文依据、具体数据/步骤在用例。当前37个src逐字等于4c706b3，runtime-product-v4及本TC冻结源码绑定、全部artifacts SHA重算均一致，已实际读取原stdout/process/stderr及API/预期原件。documents.read现只从原payload.sources逐个核member/source状态、revision、qualification后收集valid IDs；未引入新资格或改变历史captured_by_source_id，失效原资格仍拒。该B3特定重叠撤源新断言归SC3另审，不由本意见替代。本TC实际1 passed/exit0。test_invalid_read两个同档案独立正文与外档案，逐字段合法外观/非法值保留签名篡改，逐范围和真实对话ref/改配置旧ref拒绝；两个alpha独立正控拦全拒或错读首目标，字段循环拦仅首字段正确。当前23个拒绝原件分别为损坏/跨档案400、范围400/422、对话kind400和旧配置资格400；两正控均准确needle alpha 😀 é加second行并只列本次有效单来源。read的valid列表仍要求至少一个原资格合格，没有借用其他正文/来源。 本TC设计/实现与当前调试证据有效，无有据必测缺口，等价样本可选；认领全部分配检查，准备passed，可进入全新正式执行。未判formal、新平台、用户发现、最终CI或R006，保留首次R006 failed。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    },
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc5准备结果。已核定义000002 sha6b524c88…、SPEC B5/B6/A5及B3元信息约定、PLAN最新返修说明、design-r006-v5-sc5和match-r006-v8-sc5的本TC分工；自然设计有原文依据、具体数据/步骤在用例。当前37个src逐字等于4c706b3，runtime-product-v4及本TC冻结源码绑定、全部artifacts SHA重算均一致，已实际读取原stdout/process/stderr及API/预期原件。documents.read现只从原payload.sources逐个核member/source状态、revision、qualification后收集valid IDs；未引入新资格或改变历史captured_by_source_id，失效原资格仍拒。该B3特定重叠撤源新断言归SC3另审，不由本意见替代。本TC实际1 passed/exit0。test_empty_query逐无来源/pending/ready/partial/refreshing/failed状态核完整来源ID映射和独立计数，持续pending第二来源防只首目标正确，合法查询正控防全拒；原文状态预期未降低。当前11项非法请求400/422含义正确，合法零命中200空；zero-hit-states为pending0/ready1/partial0/refreshing0/failed0，另一来源一直pending。documents.search的输入/同事务覆盖逻辑未被read元信息修复改变。 本TC设计/实现与当前调试证据有效，无有据必测缺口，等价样本可选；认领全部分配检查，准备passed，可进入全新正式执行。未判formal、新平台、用户发现、最终CI或R006，保留首次R006 failed。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

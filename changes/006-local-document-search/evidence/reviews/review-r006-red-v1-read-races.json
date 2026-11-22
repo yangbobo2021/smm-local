@@ -1,0 +1,13 @@
+{
+  "cases": {
+    "TC-006-read-races": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC2读取变化/预算后变化判据由SPEC B2、B4、B6及PLAN 3.2/A2支撑，没有新增行为。design-r006-v3-sc2已写“读中变化/路径更换”、未变正控仍可用；实际limits.py:65-82只改变同一文件字节/大小，没有路径替换/打开fd仍指旧inode的输入。仅读前后fd元信息、漏查路径已指另一文件的实现可全过现有用例，却违反PLAN明确的读取后路径身份检查与B2不采不稳定内容。最小补在已打开后原子替换路径（保留旧fd）并断言该成员failed、新旧正文均不发布、旧ref拒绝。另98-99在非枚举分支刻意跳过z-control旧ref；97只以新引用读正控，若单文件failed错误地换掉整个来源全部成员资格，正常文件fresh search仍可用但原control ref被永久拒绝，现有检查全过，违反B6每来源对“文件”的连续资格及PLAN 3.2逐成员失效。最小补在三个partial分支立刻用old[control]精确读取；整来源enumeration及后续total失败时仍应拒绝，保留这些区分。枚举失败后未枚举成员不能误标missing也未查files状态；可在该分支补原成员诊断，避免只用零搜索掩盖B2禁止误删承诺。现有只拒首个变化文件的反例在before-open-total的96行failed=n与98-99逐ref首先拦截；发布改变的racy文件在97行独立正控正文集合拦截；两边同错并不能绕过这些独立值。原件4参数run.stdout及4附件均在60行首次add实际404，所有屏障、竞态、预算和恢复断言尚未到达；SHA一致、runtime正常，404是真实新增能力缺失但候选需修订。SC2-platform-files仍只负责后续E1真实文件差异，不可把本测试的故障注入标为平台实测。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

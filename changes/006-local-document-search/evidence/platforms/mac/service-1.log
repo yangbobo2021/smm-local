@@ -1,0 +1,52 @@
+INFO:     Started server process [58418]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:52800 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52803 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "GET /api/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52805 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52803 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52803 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52803 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:52804 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "PUT /api/documents/sources/0e9dbfda452d4dc9ba8f4939d4c15d57 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "DELETE /api/documents/sources/0e9dbfda452d4dc9ba8f4939d4c15d57 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52804 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52826 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52829 - "GET /api/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52828 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52826 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52827 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52827 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52826 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52827 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52827 - "GET /api/documents/files?source_id=cb93f7da39974e9b9f60edd92cef455f HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58418]

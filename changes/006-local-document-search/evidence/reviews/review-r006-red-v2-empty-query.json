@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "expected_failure",
+      "reason": "SC5输入/覆盖判据及v5自然设计来自SPEC B5/B7，无新增产品要求。首轮缺口已修正：tests/test_document_search.py:101–102先在无来源档案查合法非空词，103–107建立两个来源并核完整ID→pending集合；113–120在ready/partial/refreshing来源与另一个pending并存时逐完整集合及独立成功文件数判定，122–123再核failed/pending。108–111逐空白、无词法内容、scope、项目及limit负例拒绝，合法零命中均要求成功响应。反例只返回首来源而遗漏第二来源：107或114的完整字典等式首先拦截；把所有零命中都当未处理：113的indexed_files=1及114实际ready/pending拦截；状态只对首轮正确：相应后续字典断言拦截。与两产品结果互相比不同，这些状态和数量取自夹具操作独立预期。无据要求再增加同状态等价来源。已读red-r006-v2-empty-query完整stdout/stderr/进程、api-001及匹配/绑定原件并核SHA：当前首次失败已由旧版add改为101行合法无来源search，真实POST /api/documents/search返回404 Not Found，helper:52业务断言失败；src/smm_local/api.py缺文档查询入口，非环境错误。无来源响应契约即未满足；add、各输入拒绝和覆盖状态后续断言均未到达。可信预期红灯，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

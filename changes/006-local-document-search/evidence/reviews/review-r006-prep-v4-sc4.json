@@ -1,0 +1,28 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "SPEC B3/B4/A4及SC4设计v5有效。当前29份API原件两文件初始版1、编辑版2/更新全文、回旧字节版3，全部旧引用400；moved是新身份版1且正文needle original one.txt，删除另一文件后完整集合仅moved。test_version_lifecycle逐文件独立正文/ID/version检查，拦只更新首文件；刷新前仍读原正文且captured_at明确；旧字节不复活由版号不在两旧版集合与逐ref4xx双重检查，移动不猜同ID。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc4本TC原始1 passed/exit0；本轮29/108/34份相应原件重新核两目标版本/全文、三资格中断前态与持续资格、配置移出/最后来源清理实际副作用，全部分配检查均实际到达。新read来源过滤不改变原资格授权和旧ref拒绝，本TC实证继续覆盖这些条件。旧失败和历史TDD收据保留；本项是当前准备调试复审，不称新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    },
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "SPEC B6/A4及SC4设计v5有效。当前108份API原件file/source/missing三前态均旧P引用400、持续Q/all仍needle qualification，同配置同字节恢复仍版1但旧P继续拒绝，全部原来源移除后新来源不能使旧ref复活，独立control准确。test_qualification分别操作OS拒读、扫描失败及物理缺失，并逐P/Q/all固定预期检查，能拦借未包含来源冒充P资格、一律撤销连续Q/all、同字节恢复沿旧代次。额外等价标识样本为可选补测。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc4本TC原始3 passed/exit0；本轮29/108/34份相应原件重新核两目标版本/全文、三资格中断前态与持续资格、配置移出/最后来源清理实际副作用，全部分配检查均实际到达。新read来源过滤不改变原资格授权和旧ref拒绝，本TC实证继续覆盖这些条件。旧失败和历史TDD收据保留；本项是当前准备调试复审，不称新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    },
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "SPEC B1/B4/B6/A4及SC4设计v5有效。当前34份原件A配置变Q/排one/非递归后pending/P空、原P逐ref拒绝，而持续B的Q/all读needle shared；刷新A后取新all，移B后旧Q/all拒绝、新all通过新A继续读；最后移A来源/检索均空。test_source_lifecycle遍历所有P旧ref拦只退出首文件，移B后旧all4xx拦借新A复活，直接SQL正文/FTS计数0及三文件指纹不变拦只改响应假清理。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc4本TC原始1 passed/exit0；本轮29/108/34份相应原件重新核两目标版本/全文、三资格中断前态与持续资格、配置移出/最后来源清理实际副作用，全部分配检查均实际到达。新read来源过滤不改变原资格授权和旧ref拒绝，本TC实证继续覆盖这些条件。旧失败和历史TDD收据保留；本项是当前准备调试复审，不称新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

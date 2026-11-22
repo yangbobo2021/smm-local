@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-decode-files",
+  "target_sha256": "acd9bd040e4956ec9d09c0b14f24acc0284d5e6bfc074dabdef6aa3faa94806b",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B1/B2/B6/A2、PLAN §4 A2、design-r006-v5-sc2与CI修复后的tests/test_document_scanning.py:40-74逐项对照。stdout 1 passed、stderr空、exit 0。00002–00004真实partial、7候选4 ready/3 failed：bad为严格UTF-8错误、binary为NUL、denied为注入os.open PermissionError；空文件ready且长度0。00005–00009正常三非空文件逐路径读回独立BOM去除/CRLF及CR归LF的中英emoji组合字符正文，原字节SHA与夹具重算一致。00010–00013修复编码/NUL且撤销权限注入后7 ready，limit50完整六非空路径（不是默认limit截断），00014–00019每个目标逐字与独立预期、SHA一致；不把合成PermissionError当普通账户平台实测。24份artifacts、48份bindings及设计SHA重算一致；未使用v1 passed。本轮正式selector无XML或额外旧引用回归；旧资格不复活由专责TC另验。",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ]
+    }
+  }
+}

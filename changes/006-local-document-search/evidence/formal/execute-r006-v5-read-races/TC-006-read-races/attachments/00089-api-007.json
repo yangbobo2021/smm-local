@@ -1,0 +1,37 @@
+{
+  "method": "GET",
+  "path": "/api/documents/files?source_id=d4ece8d6b29d448f8d66540955d82da0",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "source_id": "d4ece8d6b29d448f8d66540955d82da0",
+      "relative_path": "racy-0.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "目录枚举失败: synthetic enumeration denied",
+      "id": "b2c68d5726964d158ff7457af200140a",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1004/test_read_races_enumeration_0/docs/racy-0.txt",
+      "version": 1,
+      "sha256": "40cb9d958e26c2a699431cf616e5daac36ebc827808180c0b79ffcebbd4b52a6",
+      "text_length": 20,
+      "captured_at": "2026-11-22T19:18:51.865684+00:00",
+      "captured_by_source_id": "d4ece8d6b29d448f8d66540955d82da0"
+    },
+    {
+      "source_id": "d4ece8d6b29d448f8d66540955d82da0",
+      "relative_path": "z-control.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "目录枚举失败: synthetic enumeration denied",
+      "id": "a6d76db5f0d0429bb0f004cd9fda7d44",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1004/test_read_races_enumeration_0/docs/z-control.txt",
+      "version": 1,
+      "sha256": "797becfda4ef4b2570a543202b2b981c9cfb90cebf60955f0485502ed2cc63d0",
+      "text_length": 23,
+      "captured_at": "2026-11-22T19:18:51.865564+00:00",
+      "captured_by_source_id": "d4ece8d6b29d448f8d66540955d82da0"
+    }
+  ]
+}

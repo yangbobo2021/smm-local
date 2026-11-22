@@ -1,0 +1,119 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "relevancemarker"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "734914ad03924c1988577010f0c59e0b",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-866/test_search_rank0/docs/z-high.txt",
+        "version": 1,
+        "sha256": "4470d448e7401875515209f0b0b7de9bd9416960757d3b684920134b130236c7",
+        "text_length": 47,
+        "captured_at": "2026-11-22T17:44:06.045085+00:00",
+        "captured_by_source_id": "d29c1136a0a449f08e16d7118e243ed2",
+        "text": "relevancemarker relevancemarker relevancemarker",
+        "start": 0,
+        "end": 47,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "d29c1136a0a449f08e16d7118e243ed2"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiM2IzMGY1M2RlZDFiNDVlNmIwZDU1MWY1Yjg1ODUwYmQiLCJkb2N1bWVudF9pZCI6IjczNDkxNGFkMDM5MjRjMTk4ODU3NzAxMGYwYzU5ZTBiIiwiZW5kIjo0NywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImQyOWMxMTM2YTBhNDQ5ZjA4ZTE2ZDcxMThlMjQzZWQyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.538243a9cfa04e9e988fc5d3eb64dcfc0a0783addb99f9bcbffe15ea40cccc41",
+        "bm25_score": 6.2305466570117325,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "0f3b7e3ce6fa4dd49698c07d8cb2af1d",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-866/test_search_rank0/docs/a-low.txt",
+        "version": 1,
+        "sha256": "c5f9f32eb287cecf6b6de13566d0bbde3ff084937699c8c2620813253f0a2a3c",
+        "text_length": 4516,
+        "captured_at": "2026-11-22T17:44:06.047020+00:00",
+        "captured_by_source_id": "d29c1136a0a449f08e16d7118e243ed2",
+        "text": "relevancemarker dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilution dilu",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "d29c1136a0a449f08e16d7118e243ed2"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiM2IzMGY1M2RlZDFiNDVlNmIwZDU1MWY1Yjg1ODUwYmQiLCJkb2N1bWVudF9pZCI6IjBmM2I3ZTNjZTZmYTRkZDQ5Njk4YzA3ZDhjYjJhZjFkIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZDI5YzExMzZhMGE0NDlmMDhlMTZkNzExOGUyNDNlZDIiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.d78fc7acc3e887fb0b0281d11fa6d94ab1bab3c858773d696136ec4518e71975",
+        "bm25_score": 1.4143749052830674,
+        "rank": 2,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 59,
+      "sources": [
+        {
+          "id": "d29c1136a0a449f08e16d7118e243ed2",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-866/test_search_rank0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "b76053db807a49ba8ca8af3e4dde973f",
+          "request_seq": 1,
+          "started_at": "2026-11-22T17:44:06.039361+00:00",
+          "finished_at": "2026-11-22T17:44:06.047513+00:00",
+          "error": null,
+          "counts": {
+            "ready": 59,
+            "failed": 0,
+            "candidates": 59,
+            "billed_bytes": 35779,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "a3503fc710aa4a1ca77ea7095af22a5b",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-866/test_search_rank0/docs/file-000.md",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "059d7282ed5b4916951b8203be3f2f20",
+          "request_seq": 2,
+          "started_at": "2026-11-22T17:44:06.053105+00:00",
+          "finished_at": "2026-11-22T17:44:06.054087+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 13,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

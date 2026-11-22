@@ -1,0 +1,16 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-files-v2",
+  "target_sha256": "6838d93886a7c304195ac48a3ccbc870f976a8f846781cd56b7760dcfa54668c",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-platform-files": {
+      "status": "passed",
+      "reason": "独立复审本次manual-r006-cross-files-v2，只判SC2平台文件边界，不替三个E1用例或R006授通过。实际case_obligations及design-v5-sc2均分配platform-files-c1/c2，已按SPEC B2/A2、PLAN E1.1/E1.6/E1.7与acceptance/platform-files步骤核对。44 artifacts、37 bindings及全部operations.evidence原件SHA重算一致；三平台installation的26个已装模块/HTML逐个对当前src重算相符，documents.py=87e2546613a108cf176823a9aeffc1efe501b4e3b798e23e36695f172c6b8381（a66deeb）。实际业务时间Mac17:56:41.602–17:57:05.837Z、Linux17:58:38.416–18:00:11.164Z、Windows18:00:12.816–18:04:46.875Z，与本次只读观察18:06:32.400Z分列，不是新业务执行。\n独立解析三份commands原stdout及base64原字节，按夹具字面原文重算Mac/Linux各59、Windows61处正文原SHA、BOM/CRLF规范化、Unicode码点切片/含端点行号全部准确；含3000个İ的control末尾needle在[2801,3027)合法可读，未将lower展开坐标用于原文本。各平台根linked-directory add实际exit2拒绝，内层ignored_links=1，两次escapeuniquemarker均成功零命中；Windows有真实cmd mklink /J exit0，body-read-audit未读链接/外部目标且所有源打开仅explicit-refresh阶段。Mac/Linux普通UID501/1000产品各103进程；Windows102产品进程均is_admin=false/session1，控制身份也一致。Mac/Linux native-file-errors实际bad/denied失败（Permission denied，runner确用chmod0），Windows仅bad失败且denied ready、permission_failure_expected=false，不声称ACL不可读。正常control/guide仍ready且CLI/MCP成功集合有独立断言。\n已实际打开work/platform-mac-formal-v2及platform-linux-formal-v2/probe、platform-windows-formal-v2/probe各自web-original.png与web-partial.png六张原图：三张original均显示本机原文中文/emoji/组合字符、惰性script纯文本、采集版本/范围[0,64)；control片段末尾needle可见。两Unix partial画面2成功2失败1忽略，bad严格UTF8与denied权限红字；Windows partial为3成功1失败1忽略，denied ready，与JSON一致。source-before-edit/initial-read-after、errors-before/after、restart-before/after完整SHA/字节/mtime集合逐对相同。restart-checkpoint配置与前后文档ID/版本/SHA/采集时间/有效来源一致；services实际PID Mac88581→88909、Linux160681→161076、Windows12608→9088，首次actual_alive=false且port_closed=true的核验时刻早于第二服务启动，末次同样真实退出且端口关闭早于业务结束。Windows区分wrapper PID12692/5992与实际子PID。以上覆盖本人工项两检查，不把result.status代替原始证据。",
+      "covers": [
+        "platform-files-c1",
+        "platform-files-c2"
+      ]
+    }
+  }
+}

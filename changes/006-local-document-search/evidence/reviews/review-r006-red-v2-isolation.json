@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "expected_failure",
+      "reason": "SC7隔离判据及v5设计可从SPEC B1/B4/A7推出，未增行为。首轮缺少启用来源真实归档/非首对话的问题已补：tests/test_document_compatibility.py:32–33分别建Codex及Claude独立身份/原文，39–40明确Codex停用而Claude启用；31覆盖none/hub/paused，35–37在Hub场景真实配置上传规则/先推送，再取完整保留表快照。43–49以federation请求及Internet socket双哨兵阻止文档外发；50–55实际设计文档add/refresh/search/read/set/refresh/remove闭环，56完整settings/messages/conversations及上传表、远端和calls对照；57–61逐独立正文/来源读取并核来源配置、暂停状态。若只保留首个或停用来源会话而损伤启用Claude，56全表比较及59独立Claude原文拦；如果两种读取误用首会话，59对应第二原串拦；若只改上传/暂停或外发，56/61或请求/socket哨兵拦。相同条件继续加ID为可选。red-r006-v2-isolation三参数原stdout/stderr/进程/api-001、设计/匹配及绑定SHA已核，none/hub/paused准备均走至51行首合法文档add后404 Not Found（helper:52）；API无文档路由，非网络哨兵、导入或环境错误。文档全周期及隔离保留断言尚未到达，准备Hub成功不等于隔离业务通过。候选有效且能力缺失红灯可信，expected_failure，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

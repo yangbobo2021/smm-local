@@ -1,0 +1,215 @@
+{
+  "acceptance_id": "AT-SMM-006",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00001-api-001.json": "52977bb31c62acb2e86e218435530d6cde1e9b2ec0ef7e4802a8fe0af7c38ecc",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00002-api-002.json": "67eb40f8b97034a8693f3a4273caccac1b624ea929d60a4396c5fe948309959d",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00003-api-003.json": "c15773c458e1938dfe6ee86bb49a5b93f32a802188277e14e5cbb15a01199882",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00004-api-004.json": "7b26fef3abf02f94334afccb42815292d84597882ad49840441eb349f69c8de6",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00005-api-005.json": "0340821d8465b87bcb7747ec89034fe15aa61c4b23bb5a0c51bf072c30b39c4e",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00006-api-006.json": "db79e440105530dc6d9374e718953458cd70fbc1f411a0c4d139f44c9b5bb20c",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00007-api-007.json": "db79e440105530dc6d9374e718953458cd70fbc1f411a0c4d139f44c9b5bb20c",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00008-api-008.json": "dc9d429e770edba2883ea7fc700831db01a98cbc30a9dc4f16ceef13ac0af158",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00009-api-009.json": "9071a9f38f13b328944198482de4ff4056497a1df02d0b7579efe10384f785e4",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00010-api-010.json": "dd457eacac70b4c6cae4fca857a1a285048a05211c448f5bf46b8ae1c45336cb",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/run.process.json": "7a2e19d3528a8026de24ff6191c79c74095e3abb8f39f70f01e90cb504874061",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/run.stdout": "91a94c5951b7af17b64d38f9b45a569719c414a0099a37d236f911b855148afc",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/request.json": "8af41f8b1e29a01640941e03bb3efcad87be172645089c3202497d576c47cc71",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/source/tests/document_helpers.py": "dcb22c02f4fa07146e085fa4e2a945251e951f33dadd6304daf3d1434625e259",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/source/tests/fixtures/document_legacy_cli.json": "fceb9a0cc9864cb5196e55dd6a7e85896bae5ef9e4517d486e8b9f59edddc4a3",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/source/tests/fixtures/document_legacy_cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/source/tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/source/tests/test_document_search.py": "f13133a27e8f0437a4f7d7dba50047298936c5e6f70edf41bdfa8ea5c9c9bebd"
+  },
+  "bindings": {
+    "pyproject.toml": "7ab3e013af44008196b8565da6e403b4f43f1f64093f6bd09a7e7647653b2e1a",
+    "scripts/build_packages.py": "99e4fa3587a12b1309d2517b1b3c51b10d149b9a38c03241229625810028eae1",
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "5f6257e91084d259de6edcb315ddb1db7e8e8ada8d9f293719939381a1205749",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "62329fea59ee37567300ab188d30f03670cf8487b34e21a8faf9699ca03ca3fc",
+    "src/smm_local/core.py": "a304d3c4c05e7158a9e5a5357177092c96ae683678132bc6379d362a293aa58c",
+    "src/smm_local/documents.py": "4340661c9b51cb1ae5e4498ac929c18935346f9cec3e5cde54292ec793b71254",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "0f42aea37d0e5ee915f8e43d1366c5b33318307b1c24db76a20050ae9d0abcf2",
+    "src/smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "a3ae667c35923092e22a4ccd06bb31c13ad89f330784b14e942e843301e5a4ff",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/document_helpers.py": "dcb22c02f4fa07146e085fa4e2a945251e951f33dadd6304daf3d1434625e259",
+    "tests/fixtures/document_legacy_cli.json": "fceb9a0cc9864cb5196e55dd6a7e85896bae5ef9e4517d486e8b9f59edddc4a3",
+    "tests/fixtures/document_legacy_cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_document_search.py": "f13133a27e8f0437a4f7d7dba50047298936c5e6f70edf41bdfa8ea5c9c9bebd",
+    "uv.lock": "f32fd4621255200f24128d20642912d72d338ecfe960b8ced2be4d7768f94b28"
+  },
+  "case_design": {
+    "id": "design-r006-v5-sc5",
+    "record": ".acceptance-local/native-v1/AT-SMM-006/case-design/design-r006-v5-sc5/result.json",
+    "sha256": "b56496c16d319aa5fa97edccfc706e8635fd5ca708227b3e69b2c7098d888f79"
+  },
+  "cases": {
+    "TC-006-search-rank": {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_document_search.py::test_search_rank"
+      ],
+      "covers": {
+        "search-rank-c1": "def test_search_rank(tmp_path):\n    f=Fixture(tmp_path)\n    for i in range(51):f.file(f'file-{i:03d}.md','needle common')\n    f.file('needle-filenameonlyuniquemarker.txt','unrelated document')\n    special={'unicode-lower.txt':'İ'*3000+' lowerexpansionmarker tail',\n             'tail.txt':'padding '*1000+'tailuniquemarker',\n             'boundary.txt':'x '*997+' crossboundaryword ending',\n             'long.txt':'padding '*1800+'longuniquemarker suffix',\n             'chinese.txt':'说明：中文检索资料，保留原始内容。',\n             'a-low.txt':'relevancemarker '+'dilution '*500,\n             'z-high.txt':'relevancemarker relevancemarker relevancemarker'}\n    for name,text in special.items():f.file(name,text)\n    source=f.add(tmp_path/'docs');f.refresh(source)\n    duplicate=f.add(tmp_path/'docs'/'file-000.md');f.refresh(duplicate)\n    first=f.search('needle',limit=1)['results'];fifty=f.search('needle',limit=50)['results']\n    assert len(first)==1 and Path(first[0]['path']).name=='file-000.md'\n    assert [Path(h['path']).name for h in fifty]==[f'file-{i:03d}.md' for i in range(50)]\n    assert len({h['id'] for h in fifty})==50\n    assert [(h['id'],h['bm25_score']) for h in fifty]==[(h['id'],h['bm25_score']) for h in f.search('needle',limit=50)['results']]\n    assert all(math.isfinite(h['bm25_score']) for h in fifty)\n    assert f.search('filenameonlyuniquemarker')['results']==[]\n    ranked=f.search('relevancemarker')['results']\n    assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']\n    for filename,query in [('unicode-lower.txt','lowerexpansionmarker'),('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:\n        result=f.search(query)['results'];assert len(result)==1 and Path(result[0]['path']).name==filename\n        h=result[0];read=f.read(h);text=special[filename]\n        assert read['text']==text[h['start']:h['end']] and query in read['text'] and len(read['text'])<=2000\n        assert h['text']==read['text'] and h['end']<=len(text)\n    observe('rank-independent-expected',{'tie_paths':[f'file-{i:03d}.md' for i in range(50)],'special':special,'first':first,'fifty':fifty})\n"
+      },
+      "files": [
+        "tests/test_document_search.py",
+        "tests/document_helpers.py",
+        "tests/fixtures/document_legacy_cli.py",
+        "tests/fixtures/document_legacy_cli.json",
+        "tests/test_005_contracts.py"
+      ],
+      "source": {
+        "first": 9,
+        "kind": "file",
+        "last": 37,
+        "path": "tests/test_document_search.py",
+        "sha256": "f13133a27e8f0437a4f7d7dba50047298936c5e6f70edf41bdfa8ea5c9c9bebd",
+        "text": "def test_search_rank(tmp_path):\n    f=Fixture(tmp_path)\n    for i in range(51):f.file(f'file-{i:03d}.md','needle common')\n    f.file('needle-filenameonlyuniquemarker.txt','unrelated document')\n    special={'unicode-lower.txt':'İ'*3000+' lowerexpansionmarker tail',\n             'tail.txt':'padding '*1000+'tailuniquemarker',\n             'boundary.txt':'x '*997+' crossboundaryword ending',\n             'long.txt':'padding '*1800+'longuniquemarker suffix',\n             'chinese.txt':'说明：中文检索资料，保留原始内容。',\n             'a-low.txt':'relevancemarker '+'dilution '*500,\n             'z-high.txt':'relevancemarker relevancemarker relevancemarker'}\n    for name,text in special.items():f.file(name,text)\n    source=f.add(tmp_path/'docs');f.refresh(source)\n    duplicate=f.add(tmp_path/'docs'/'file-000.md');f.refresh(duplicate)\n    first=f.search('needle',limit=1)['results'];fifty=f.search('needle',limit=50)['results']\n    assert len(first)==1 and Path(first[0]['path']).name=='file-000.md'\n    assert [Path(h['path']).name for h in fifty]==[f'file-{i:03d}.md' for i in range(50)]\n    assert len({h['id'] for h in fifty})==50\n    assert [(h['id'],h['bm25_score']) for h in fifty]==[(h['id'],h['bm25_score']) for h in f.search('needle',limit=50)['results']]\n    assert all(math.isfinite(h['bm25_score']) for h in fifty)\n    assert f.search('filenameonlyuniquemarker')['results']==[]\n    ranked=f.search('relevancemarker')['results']\n    assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']\n    for filename,query in [('unicode-lower.txt','lowerexpansionmarker'),('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:\n        result=f.search(query)['results'];assert len(result)==1 and Path(result[0]['path']).name==filename\n        h=result[0];read=f.read(h);text=special[filename]\n        assert read['text']==text[h['start']:h['end']] and query in read['text'] and len(read['text'])<=2000\n        assert h['text']==read['text'] and h['end']<=len(text)\n    observe('rank-independent-expected',{'tie_paths':[f'file-{i:03d}.md' for i in range(50)],'special':special,'first':first,'fifty':fifty})\n"
+      }
+    }
+  },
+  "cwd": ".",
+  "definitions_sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c",
+  "implementation_sha256": {
+    "TC-006-empty-query": "37660ebb45fe90fdee3b9a869b9ecb035247163b4e7978b9cf85a386f5d3c14f",
+    "TC-006-exact-read": "f8896d93252728f6feaf9119f8f2174f53175043618f1563ab92f6065f313481",
+    "TC-006-invalid-read": "258c206f1df4bfade5d3a55aec362e672adae926c811147194392bcb1d8d90dc",
+    "TC-006-search-rank": "6175824ecb49ce32b701d5ad061eed690a8653778e989343c2540ecbf909fcc7"
+  },
+  "obligations": {},
+  "operation": "tdd-red",
+  "product_bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "5f6257e91084d259de6edcb315ddb1db7e8e8ada8d9f293719939381a1205749",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "62329fea59ee37567300ab188d30f03670cf8487b34e21a8faf9699ca03ca3fc",
+    "src/smm_local/core.py": "a304d3c4c05e7158a9e5a5357177092c96ae683678132bc6379d362a293aa58c",
+    "src/smm_local/documents.py": "4340661c9b51cb1ae5e4498ac929c18935346f9cec3e5cde54292ec793b71254",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "0f42aea37d0e5ee915f8e43d1366c5b33318307b1c24db76a20050ae9d0abcf2",
+    "src/smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "a3ae667c35923092e22a4ccd06bb31c13ad89f330784b14e942e843301e5a4ff",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006"
+  },
+  "reason": null,
+  "record": ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/result.json",
+  "recorded_at": "2026-11-22T17:44:06.154000+00:00",
+  "request_id": "red-r006-unicode-v1-search-rank",
+  "request_sha256": "8af41f8b1e29a01640941e03bb3efcad87be172645089c3202497d576c47cc71",
+  "results": {
+    "TC-006-search-rank": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00001-api-001.json": "52977bb31c62acb2e86e218435530d6cde1e9b2ec0ef7e4802a8fe0af7c38ecc",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00002-api-002.json": "67eb40f8b97034a8693f3a4273caccac1b624ea929d60a4396c5fe948309959d",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00003-api-003.json": "c15773c458e1938dfe6ee86bb49a5b93f32a802188277e14e5cbb15a01199882",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00004-api-004.json": "7b26fef3abf02f94334afccb42815292d84597882ad49840441eb349f69c8de6",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00005-api-005.json": "0340821d8465b87bcb7747ec89034fe15aa61c4b23bb5a0c51bf072c30b39c4e",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00006-api-006.json": "db79e440105530dc6d9374e718953458cd70fbc1f411a0c4d139f44c9b5bb20c",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00007-api-007.json": "db79e440105530dc6d9374e718953458cd70fbc1f411a0c4d139f44c9b5bb20c",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00008-api-008.json": "dc9d429e770edba2883ea7fc700831db01a98cbc30a9dc4f16ceef13ac0af158",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00009-api-009.json": "9071a9f38f13b328944198482de4ff4056497a1df02d0b7579efe10384f785e4",
+        ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments/00010-api-010.json": "dd457eacac70b4c6cae4fca857a1a285048a05211c448f5bf46b8ae1c45336cb"
+      },
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_document_search.py::test_search_rank"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_document_search.py::test_search_rank"
+        ],
+        "cwd": "/private/tmp/smm-006-impl",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/attachments"
+        },
+        "exit_code": 1,
+        "finished_at": "2026-11-22T17:44:06.149000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-006/tdd-red/red-r006-unicode-v1-search-rank/TC-006-search-rank/run.stdout": "91a94c5951b7af17b64d38f9b45a569719c414a0099a37d236f911b855148afc"
+        },
+        "started_at": "2026-11-22T17:44:04.996000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC5",
+  "status": "red_observed",
+  "test_bindings": {
+    "tests/document_helpers.py": "dcb22c02f4fa07146e085fa4e2a945251e951f33dadd6304daf3d1434625e259",
+    "tests/fixtures/document_legacy_cli.json": "fceb9a0cc9864cb5196e55dd6a7e85896bae5ef9e4517d486e8b9f59edddc4a3",
+    "tests/fixtures/document_legacy_cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_document_search.py": "f13133a27e8f0437a4f7d7dba50047298936c5e6f70edf41bdfa8ea5c9c9bebd"
+  }
+}

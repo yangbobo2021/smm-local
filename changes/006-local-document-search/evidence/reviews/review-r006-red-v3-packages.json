@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-packages": {
+      "status": "expected_failure",
+      "reason": "独立核SC7 packages判据、SPEC A7/边界及PLAN P9/§4/§6，Local/Hub独立构建安装且共享core不依赖Local documents均有依据。design-r006-v5-sc7分配包检查，用户发现/三平台由其他实际TC承担。scripts/acceptance/local_documents_packages.py:27–47真实构建两wheel、两个全新环境分别安装；34–43独立从src建立全部.py/.html摘要，显式处理Hub _archive shim及共享模块映射，43比较完整wheel集合；45–46在各已安装隔离解释器中核每个模块摘要。若wheel与安装都同错旧源码，43拦；只首模块正确或漏第二模块由43/46完整集合和逐摘要拦。51–60设计Local真实文档闭环、Hub无smm_local的Archive/创建合并/既有CLI入口，且documents只属Local；build_packages.py另对源数据/私钥作扫描，包不依版本字符串判身份。无有据必测缺口，更多等价模块样例可选。已读match-r006-v4-sc7、red-r006-v3-packages、绑定源、原完整stderr/stdout、commands.json和两source-wheel，并核全部SHA；两源码/wheel映射各25/24项完全相等，前7条真实命令构建/两环境/两安装/两已安装模块检查均exit0。真实首失败为第8条已安装Local documents --help退出2，原stderr明确invalid choice documents，51行run在23行断言失败；非构建/安装/环境故障。52之后Local闭环、Hub独立Archive合并/帮助及最终模块职责断言均未执行，不能混称包业务已全通过。基线缺B1文档CLI形成可信expected_failure，候选设计实现有效，TDD covers为空；不预判CI或平台通过。",
+      "covers": []
+    }
+  }
+}

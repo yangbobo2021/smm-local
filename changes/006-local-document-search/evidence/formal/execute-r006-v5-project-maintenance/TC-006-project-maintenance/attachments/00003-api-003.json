@@ -1,0 +1,73 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": null
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "3fda4275039e47ad81c2c0ce4243c47b",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1006/test_project_maintenance0/docs/one.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7801afa2443647aabaf3bb985a9d64d7",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:18:53.311042+00:00",
+        "finished_at": "2026-11-22T19:18:53.312362+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 10,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "d2c253b0028545e99e852f03f9ffa37f",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1006/test_project_maintenance0/docs/both.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "94c10c29bf2848dbb986342f931aece1",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:18:53.313552+00:00",
+        "finished_at": "2026-11-22T19:18:53.314684+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 11,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1,
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

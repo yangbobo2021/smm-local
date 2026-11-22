@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "按SPEC B3/B4/B6/A4及PLAN生命周期映射独立读正式.venv/bin/python -m pytest -q tests/test_document_lifecycle.py::test_version_lifecycle，16:20:06.576至16:20:06.927Z退出0，stdout 1 passed、stderr空。test_document_lifecycle.py:7-37同时对one/two两目标执行并逐目标核独立正文、ID/版本关系和所有旧ref拒绝；不是仅单个样例。00003/00005正式原响应同ID/version1，不变刷新后00006/7旧ref精确原文可读。夹具改写但未刷新时00008-00010仍明确captured_at原快照/原文；00012-00016同ID/version2及updated正文、两旧ref400；00018-00024改回字节version3，逐目标读original且version1/2旧ref均400，未复活。00025-00029移动one为moved和删除two后完整集合只moved、新ID/旧refs400、正文独立为needle original one.txt。33个artifacts和89个bindings重算全相符，定义000002/设计v5-sc4及源码测试同版。仅认领version-lifecycle-c1/c2本次实际执行证据，不以绿灯或平台结果补断言。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    }
+  }
+}

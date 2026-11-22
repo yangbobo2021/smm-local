@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-source-config",
+  "target_sha256": "68263584da8e17b57cc10e3760020196d729c96d14abc5069113f44fa1280761",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "本意见重新审查execute-r006-v3-source-config本次原件。SPEC B1/A1、PLAN §3.1/§4、design-v5-sc1和当前test_source_config及正文打开哨兵已读；17:55:46.791–47.329Z实际exit0、stdout 1 passed、stderr空。独立重核39个附件：同名P两身份/稳定键不同；单文件和目录add/set均pending，完整替换及省略字段复位正确，files/search为空；11次非法提交实际400（根替换422），每次之后完整来源集合均等于原baseline。重开Archive配置比较、移除后空来源及指纹不变断言实际到达；独立重算原29字节SHA一致。43 artifacts/47 bindings和设计摘要均核实，documents.py为当前a66deeb的87e25466…，非旧源；本轮没有XML/额外旧引用回归，不将历史TDD或v2意见授予新源。covers仅本次实际分配2项。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

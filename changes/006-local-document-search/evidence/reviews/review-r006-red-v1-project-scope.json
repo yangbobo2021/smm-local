@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC3首判据从SPEC B3/B5/A3推出，普通/全局、零/多绑定、双向一层与同名身份边界准确；自然设计还明确重复文件只一次，预期有依据。实际projects.py:13-18按独立集合逐P/Q/R/G及all核对，并逐命中读独立正文：仅首个项目/文件正确会先在15行相应集合或16行字面文本被挡；P-Q-Q-R展开过深在P查询15行挡；同名P/Q错误用同一目标，由于两者expected分别排除/包含r.txt，也在15行挡；共享增加links在18行完整links比较挡。缺口是19-20重复来源后通过names()字典再len==3，document_helpers.py:128按basename先消除重复。产品每来源返回shared.txt一份、造成原始结果重复时，字典仍只3项，本TC全部通过，违反B3查询不得因重复纳入而重复文件与设计“重复文件只一次”。最小补保存原始results，断言raw长度、规范path/id唯一及独立路径集合，再逐目标比正文；不能用已去重字典证明产品去重。原件run.stdout及00001-api-001.json显示11行首个p.txt来源POST真实404，后续项目查询/共享/去重未到达。原件SHA核对一致，runtime正常。保留可信业务缺失红灯，但该候选实现需修订，不授予完整expected_failure。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    }
+  }
+}

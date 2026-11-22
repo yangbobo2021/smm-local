@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmQ2ZTZmZGFkNzI3NGQzYWJjMzJhOGVmYjk5YzM2ZGEiLCJkb2N1bWVudF9pZCI6IjAxNGYyOGY0ZTVkMzRhNTZiYWQ0Y2VkZmYzOWMzNTM4IiwiZW5kIjoxMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdhZDRiMTVkYjdhNTQyZDhhMTM3ZDY3ODkyNmFiNWRiIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.afa2e054aabb526b0ebfce3df4f5f14dac3211da494f14ca45414b8d62ad9e3a"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "014f28f4e5d34a56bad4cedff39c3538",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1002/test_decode_files0/docs/denied.txt",
+    "version": 1,
+    "sha256": "759e1e3d2760b5a81fc54fdb8b4f73212eb2074561df775f263ff5fa63b2618e",
+    "text_length": 13,
+    "captured_at": "2026-11-22T19:18:48.510514+00:00",
+    "captured_by_source_id": "7ad4b15db7a542d8a137d678926ab5db",
+    "text": "needle denied",
+    "start": 0,
+    "end": 13,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "7ad4b15db7a542d8a137d678926ab5db"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

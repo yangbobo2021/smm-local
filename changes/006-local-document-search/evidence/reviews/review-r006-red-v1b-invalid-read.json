@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "expected_failure",
+      "reason": "SC5引用判据由SPEC B6/A5推出；design-r006-v3-sc5分配invalid-read-c3的拒绝/正控设计有效。实际tests/test_document_search.py:54-57建立两个正文不同的文件和另一档案；62-74逐档案/文档/版本/kind及来源id/revision/qualification保持其他字段不动，合法其他文档ID及域外ID分别传入；75-76逐负数/反序/空区间/越界/非整型拒绝，77和85正控直接对独立alpha全文，81真实同档案对话ref拒绝，83-84实际配置失效ref拒绝。推演两个响应都误用同一个beta文件：77首个独立alpha文本断言阻止；只拒首篡改而放行其余，69/74循环中的相应bad断言阻止；另一合法文档与alpha字段同错也会由60的payload身份核对或77的独立正文拦截。本项一个签发来源只有一个stamp，其他多源连续资格差异由SC4及SC6分工，新增等价ref样本为可选。本次red结果、命令、原始stdout/stderr、api-001附件和绑定原件均核对：55行合法目录add返回404 Not Found，helper:52失败；当前API源码没有文档路由，是真实新能力缺失而非环境/测试故障。refresh、签名篡改及读正控等后续断言均未到达；covers为已审设计/实现覆盖，不声称已执行通过。",
+      "covers": []
+    }
+  }
+}

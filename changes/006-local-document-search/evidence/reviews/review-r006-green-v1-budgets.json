@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2、SC2与PLAN3.2/4，真实单文件2MiB/2MiB+1、1000/1001候选、16MiB/16MiB+1与计费优先级设计有效。tests/test_document_limits.py:test_budgets的11参数实际写对应字节/数量，不缩常量；先建baseline旧ref，再独立fingerprint求候选/可计费字节，完整1000ready路径集合与真实上下限逐项断言；正反scandir顺序的混合17MiB/坏编码/拒读应partial且只有baseline可查，编码/NUL/后续拒读参与16777217字节总预算而整源failed；stat失败计候选字节0。反例：以首文件代替完整1000集合被set(files ready)==set(originals)拦截；顺序提前发布好文件被整源搜索空/旧ref拒绝拦截；错误文件不计预算被billed_bytes独立总和及failed拦截。原始各budget-actual附件明确1000ready、1001failed、16777216ready、16777217failed、正反混合集合一致；超限后恢复并继续拒绝旧ref。产品documents.py:_scan先全量计数计费后读取/_publish整源失败撤资格，与证据一致。 同版TDD：red-r006-v3-budgets原始日志在公开POST /api/documents/sources返回404的业务断言失败，11参数均为该缺失行为，原红灯独立意见为expected_failure。green-r006-v1-budgets与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志11 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

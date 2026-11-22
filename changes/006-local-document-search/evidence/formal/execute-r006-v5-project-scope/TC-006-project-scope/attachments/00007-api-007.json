@@ -1,0 +1,187 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": null
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "c5bd5974b73b4432a83b528231b26d2d",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/p.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "b03ec3f33bc843d4be483d9e869cfdae",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:18:52.594718+00:00",
+        "finished_at": "2026-11-22T19:18:52.595692+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 12,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "8cb131de18bc495d95b2f831158d82af",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/q.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "ee216163d3674eb8822ecaab8a2ee9b2",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:18:52.596648+00:00",
+        "finished_at": "2026-11-22T19:18:52.597547+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 12,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "840742a921824164bf0dec71f2687469",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/r.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "e3401deb13c74d3c96c9587bd8747eeb",
+        "request_seq": 3,
+        "started_at": "2026-11-22T19:18:52.598542+00:00",
+        "finished_at": "2026-11-22T19:18:52.599488+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 12,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          3
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "73d73714b3484261b00bb0691cd83525",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/global.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "5d4b9805d22040b5b382735a67cf8123",
+        "request_seq": 4,
+        "started_at": "2026-11-22T19:18:52.600447+00:00",
+        "finished_at": "2026-11-22T19:18:52.601347+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 17,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          4
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "e066aeb99fc046ac8f0bd473523f494e",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/free.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "6f06ddc6090b4ee2b03e3ceff698c62f",
+        "request_seq": 5,
+        "started_at": "2026-11-22T19:18:52.602327+00:00",
+        "finished_at": "2026-11-22T19:18:52.603227+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 15,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a57e70f93d5642f0be09f64f1ea7f543",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/shared.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "6936e639cc68492db31dd5429a96137c",
+        "request_seq": 6,
+        "started_at": "2026-11-22T19:18:52.604267+00:00",
+        "finished_at": "2026-11-22T19:18:52.605191+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 17,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1,
+          3
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

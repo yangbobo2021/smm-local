@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc7本TC，已读原stdout/process/stderr和全部业务附件，artifacts及当前bindings SHA均核实一致；定义sha6b524c88…、设计v5、match v5和实际断言一致。SPEC B1/B4/B5/A7与SC7设计要求三Hub/暂停状态、两独立Agent启停、旧归档/上传及出站隔离。已读Windows原CI日志：三个isolation失败在Starlette新portal→asyncio _make_self_pipe→socketpair回环connect，非文档业务；修订tests/test_document_compatibility.py:44先进入持久TestClient，已实际核安装版starlette/testclient.py:486–491后续复用portal、557后先建portal，Fixture关闭auto_sync/sync_on_start而api.py:213–232不启动同步线程。46–68全部文档操作及最终核对仍在guard，51无条件拒AF_INET/AF_INET6，54–56实际回环和外网connect负例均执行；未对回环Hub放行。62完整归档/远端/上传表比较、63–67逐独立会话原串/source与开关/暂停，65拦误读首会话，另一mode参数拦只首状态正确。新red-r006-ci-v1-isolation三个参数合法add404，已读review-r006-ci-red-v1b-isolation；provenance的36个基线src摘要逐个核git f797一致，red不含documents模块。green-r006-v2-isolation复用修订后同版测试，原stdout 3 passed/exit0，三complete-state原件各本地/远端before==after、两独立正文保留、出站新增0且两网络负例通过。产品仍f896，不将测试前提修复冒称产品改变。 当前debug本身分别真实3参数/包探针/1参数exit0；isolation三模式原件本地及远端状态完全相等、网络负例通过且出站新增0；packages本轮15命令全exit0，源码/wheel/安装26/24项全相同且真实Local/Hub闭环完成；compatibility九层帮助与双独立会话都实际验证。仅认领本TC已分配检查，无有据必测缺口，准备passed，准许全新正式执行；不将其替代人工用户发现、E1、最终CI或R006交付结论。",
+      "covers": [
+        "isolation-c1"
+      ]
+    },
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc7本TC，已读原stdout/process/stderr和全部业务附件，artifacts及当前bindings SHA均核实一致；定义sha6b524c88…、设计v5、match v5和实际断言一致。SPEC A7/边界、PLAN P9/§4/§6由SC7设计分配真实Local/Hub独立构建/安装。scripts/acceptance/local_documents_packages.py:27–47按src独立全量模块/HTML字典与wheel/安装SHA核，43拦wheel与安装同错旧源码，46完整字典拦只首模块正确；51–60核Local CLI独立原文与Hub无smm_local的归档创建/合并和既有帮助，build_packages.py另拒用户数据/私钥。green-r006-v2-packages原stdout报26/24模块，已重读commands.json全部15条真实命令exit0，Local创建/add pending/refresh/search/ref读取为needle package 中文😀加LF，Hub find_spec(smm_local)为空且合并后仅standalone-B、serve-hub帮助成功。source-wheel两附件的26/24模块全量与wheel、命令stdout的安装摘要及package-result一致，不用同0.4.0版本串代替身份。原red-r006-v3-packages第8命令实际缺documents帮助exit2、其前7构建/安装/模块核验exit0，独立红灯与同测试吻合；Local/Hub后续闭环本版已实际执行。 当前debug本身分别真实3参数/包探针/1参数exit0；isolation三模式原件本地及远端状态完全相等、网络负例通过且出站新增0；packages本轮15命令全exit0，源码/wheel/安装26/24项全相同且真实Local/Hub闭环完成；compatibility九层帮助与双独立会话都实际验证。仅认领本TC已分配检查，无有据必测缺口，准备passed，准许全新正式执行；不将其替代人工用户发现、E1、最终CI或R006交付结论。",
+      "covers": [
+        "packages-c2"
+      ]
+    },
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc7本TC，已读原stdout/process/stderr和全部业务附件，artifacts及当前bindings SHA均核实一致；定义sha6b524c88…、设计v5、match v5和实际断言一致。SPEC B1/A7、SC7与design-r006-v5-sc7/match-r006-v5-sc7的compatibility-c2要求旧对话查询/数字ID与reference及来源帮助兼容。tests/test_document_compatibility.py:71–101业务函数未改，整文件因isolation封装改变SHA；79完整两ID集合、82/85/86逐Codex/Claude source/session/id及独立正文断言，85/86拦只首目标正确、两读取同错首目标；87核旧DTO。88–101核冻结旧CLI源码SHA，再九层source帮助分别执行旧入口和当前入口，99逐stdout与exit比较。旧CLI实际逐字等于git f797:src/smm_local/cli.py，不冒称旧整包。已核baseline-r006-compatibility-v3 purpose=tdd-baseline原stdout 1 passed/exit0及全部artifacts，36个src绑定和provenance逐个等于git f797，当前测试SHA与baseline完全一致；review-r006-ci-baseline-v1b-compatibility原意见一致。本次debug-r006-v2-sc7兼容原stdout 1 passed/exit0，九层legacy-source-help原件均old/new exit0且stdout逐字相同，双会话所有独立断言确已执行。此项独立覆盖旧帮助，不将它假报为每绿灯仅四项旧引用回归的一部分。 当前debug本身分别真实3参数/包探针/1参数exit0；isolation三模式原件本地及远端状态完全相等、网络负例通过且出站新增0；packages本轮15命令全exit0，源码/wheel/安装26/24项全相同且真实Local/Hub闭环完成；compatibility九层帮助与双独立会话都实际验证。仅认领本TC已分配检查，无有据必测缺口，准备passed，准许全新正式执行；不将其替代人工用户发现、E1、最终CI或R006交付结论。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

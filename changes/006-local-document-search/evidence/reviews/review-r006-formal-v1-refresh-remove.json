@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-refresh-remove 独立复核通过。SPEC B3/B4/B6、A6 与 PLAN §3.2/§4、design-r006-v5-sc6 的来源移除竞态要求，已反查 tests/test_document_concurrency.py:60-74 和共用屏障/完整状态辅助函数。2026-11-22T16:20:12.412–12.739Z 本次 selector exit 0，stdout 1 passed。发布前等待的S1含独占exclusive与共享shared，移除后00006晚到响应published:false；源码在释放/线程结束之后断言完整持久状态等于移除后的快照并且来源只剩S2，防止旧任务复活或残留索引。00008 P空集、00009–00011 Q仅shared且正文为 needle shared original，00012/00013原P的独占与共享两个ref均400，00014 forbidden新正文零命中。覆盖了所有本次适用目标及共享正控，没有仅检首文件或把来源消失当正文正确。18 artifacts、89 bindings、定义/设计摘要已全部重算一致，以上均为本正式轮原响应与实际已到达断言。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    }
+  }
+}

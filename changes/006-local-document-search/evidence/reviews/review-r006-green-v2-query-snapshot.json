@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B5/B6/A6与SC6设计要求同次范围/版本/资格固定，后续按旧签名资格读。tests/test_document_concurrency.py:102–148覆盖links与source两种改变结论的条件，在_query_scope后改关联或配置/正文；128完整P/Q集合，129–135逐原目标独立正文、ID/version/SHA及资格，136–147下一次范围/独立原文与旧ref正反控，130/134拦只冻关联未冻来源，145/147拦全拒旧ref。新green-r006-v2-query-snapshot原stdout 2 passed；原frozen-query-scope当次均P/Q original v1，next为P/R original v1或加Q changed v2；links旧Q读200原文，source旧Q400，P均保持可读。red-r006-v3-query-snapshot合法add404及独立意见仍对应同测试。documents.py:367–390同读事务构造结果，392后依原签名不重展关联。 本版绿灯及回归有效，无有据必测缺口，passed；更多等价项目/文件可选，不预判人工平台/用户入口、最终CI与R006交付。",
+      "covers": []
+    }
+  }
+}

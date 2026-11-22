@@ -1,0 +1,238 @@
+{
+  "expected": {
+    "root.MD": "needle 根😀\n",
+    "sub/deep.markdown": "needle 深层\n",
+    "sub/open.txt": "needle open\n",
+    "branch/keep.txt": "needle keep\n",
+    "star-dir/keep.txt": "needle star cannot cross directory\n"
+  },
+  "before": {
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/skip1.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371538490
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.secret.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370170812
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/root.MD": {
+      "sha256": "5180ef9095f19b68c9c8c1c066a19dab0f60dbf080fbd27b6b65615d9a53a6f5",
+      "bytes": 15,
+      "mtime_ns": 1795375127369367846
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/private.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371254655
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/star-only.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371668325
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/README.pdf": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127371189571
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.hidden/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370292896
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.svn/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370631316
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/branch/skip2.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371603824
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/branch/keep.txt": {
+      "sha256": "36873bd33644eae50c0706d44ea3de8e4c59c69d86bfde765cfbd6e7d2a4fc60",
+      "bytes": 12,
+      "mtime_ns": 1795375127369663224
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/cache/child.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371765451
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/dist/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127371122653
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/node_modules/a.md": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370735817
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/sub/deep.markdown": {
+      "sha256": "066c8e4877c4fef8c117f394eabf89349950987e6e9bea4814c988b7204f7ac6",
+      "bytes": 14,
+      "mtime_ns": 1795375127369483972
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/sub/open.txt": {
+      "sha256": "757401ef91bc6a68a36b4804356b7693eb06e9aedbec0adf955857629e6f39b9",
+      "bytes": 12,
+      "mtime_ns": 1795375127369561431
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/sub/private.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371328447
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.venv/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370829484
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.hg/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370530857
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/venv/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370926152
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/build/a.txt": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127371025944
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.git/a.md": {
+      "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+      "bytes": 14,
+      "mtime_ns": 1795375127370407647
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/star-dir/keep.txt": {
+      "sha256": "fd07cea7911ea9e6cf0629b8448ca92996e4e86684a4a5268c67fec3336403ea",
+      "bytes": 35,
+      "mtime_ns": 1795375127370069269
+    },
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/a/b/private.txt": {
+      "sha256": "5e89f7a7bfa5264a9212919193f18f7632ef08c28d42bff9143ad3a4a612d4fd",
+      "bytes": 22,
+      "mtime_ns": 1795375127371469615
+    }
+  },
+  "sources": [
+    {
+      "id": "bd96b7772f4240b09c089b747323a35b",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [],
+      "revision": 3,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "049a45c529cd4f77b2b57dddbff2ad71",
+      "request_seq": 6,
+      "started_at": "2026-11-22T19:18:47.426337+00:00",
+      "finished_at": "2026-11-22T19:18:47.428786+00:00",
+      "error": null,
+      "counts": {
+        "ready": 12,
+        "failed": 0,
+        "candidates": 12,
+        "billed_bytes": 242,
+        "ignored_entries": 13,
+        "ignored_format": 1,
+        "ignored_excluded": 10,
+        "ignored_links": 2
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "b7814146f5f148359af88e29dd45b2cb",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/build/a.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "59dbd31617084648a3d19e7d1eaabd07",
+      "request_seq": 3,
+      "started_at": "2026-11-22T19:18:47.403564+00:00",
+      "finished_at": "2026-11-22T19:18:47.404475+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 14,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "8f0aee6240724ac38d5d410801d6ac41",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.secret.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "d2fadf5ca05b4b7e80f661a8ce86424d",
+      "request_seq": 4,
+      "started_at": "2026-11-22T19:18:47.410839+00:00",
+      "finished_at": "2026-11-22T19:18:47.411758+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 14,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "9827f6ef61424ecdbbff64e5203c9e8b",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/.hidden",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "cde7af3be59a493eae2b8b7b7a04a95b",
+      "request_seq": 5,
+      "started_at": "2026-11-22T19:18:47.418611+00:00",
+      "finished_at": "2026-11-22T19:18:47.419522+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 14,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

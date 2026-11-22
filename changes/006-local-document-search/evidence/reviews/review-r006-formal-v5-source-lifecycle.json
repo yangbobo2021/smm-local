@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-source-lifecycle",
+  "target_sha256": "ec3718e7a671075cd9a48d3004c273253b2d4aeac5d8a998f737d1a8866d80e4",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "独立重核v5本轮SPEC B1 set/B3/B4/B6/A4、PLAN §3.2/§4及test_source_lifecycle。stdout1passed、stderr空、exit0；38 artifacts/47 bindings和designSHA重算匹配9cfd619 documents390880bf…。10search/5read/9reject原响应全解析；完整set到Q/排one/非递归后pending且旧P退出，原P三ref刷新前后400。00014/15/18/19旧Q与旧all精确needle shared且source_ids仅未失效B，没有借改配置重纳入A的新资格；00023新all后移除B，旧Q/all拒绝，新all00028仅新A仍可读。最终A移除后来源/结果空、finalref拒绝，正文及FTS均0和三原件SHA/字节/mtime不变SQL/指纹断言到达。所有正文独立字面/SHA、文档版本与原stamp来源字段相符。仅本selector，无XML/附加回归，不以旧源passed或历史TDD授当前通过，不判平台/R006。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

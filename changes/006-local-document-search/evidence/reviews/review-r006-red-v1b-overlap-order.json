@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "expected_failure",
+      "reason": "SC6跨源晚到判据直接来自SPEC B3/B4/A6，design-r006-v3-sc6要求P/Q/all所有文件保持较新文件级版本，无新增产品要求。tests/test_document_concurrency.py:77-99覆盖旧来源原先pending与ready两种不同状态，两个独立目标one/two均先准备旧内容再由S2发布新内容；91比较完整documents持久快照，92-97逐P/Q/all核完整文件集、逐文件独立newwinner全文、采集来源two，ready还逐目标核ID保留且版本更换，98禁止旧词。反例只有one正确two被旧任务覆盖：91首先拦截，97按name独立正文再拦截；两个查询都同错正文或误用one：93完整名字集与97独立name正文拦截；只ready状态错误或只pending状态错误在各参数自己的91/93/97失败。适用前状态已有分别覆盖后，追加同条件ID/来源数量为可选。原red两参数stdout、stderr、两份api-001、request及进程/绑定原件已读且SHA相符：81行第一次合法add均实际404 Not Found，helper:52失败，当前API无文档路由；非导入/环境/屏障错误。新旧刷新、P/Q/all及读取断言均未到达，covers认领设计实现而非已执行通过。",
+      "covers": []
+    }
+  }
+}

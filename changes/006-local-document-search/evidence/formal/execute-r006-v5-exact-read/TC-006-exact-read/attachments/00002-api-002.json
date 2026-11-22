@@ -1,0 +1,41 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "2444093a1cc347679656d02cb4808983"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "2444093a1cc347679656d02cb4808983",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1012/test_exact_read_needle__U0001f0/docs/位置.md",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "5913a7f5a32745bba95ba632b708219e",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:18:58.522752+00:00",
+        "finished_at": "2026-11-22T19:18:58.523975+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 37,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

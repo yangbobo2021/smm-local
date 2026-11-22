@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc6准备。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/3.3/4及两次failed保留/本次glob说明、design-r006-v5-sc6和match-r006-v9-sc6已核；自然设计和实际断言有原文依据。当前37个src逐字等于9cfd619，runtime-product-v5/自身测试绑定及全部artifacts SHA重算一致，stdout/process/stderr、API/完整快照和独立预期附件实际读取。仅_glob本轮修改，发布/冻结事务和原签名资格检查逻辑未改变；本份不代审SC2新glob或SC3撤源专项。当前两参数2 passed/exit0。test_refresh_order发布屏障内分别先完成新刷新/新配置，独立newwinner正文或pending/空集合先拦两快照同错，再全来源/绑定/文档/成员/meta/FTS比较拦任意晚写，第二参数防只首前置状态正确。当前两晚响应published:false；获胜原件分别ready/revision1、新正文v2和pending/revision2、正文NULL；newwinner read准确且只列该有效来源，collector一致。refresh/_publish的revision/refresh_id核验支持证据。 当前设计/实现/调试有效，无有据必测缺口，等价目标可选；认领全部本TC分配检查，准备passed，可新的正式执行。不判formal/平台/最终CI/R006，不把历史TDD冒称本轮新绿灯，前两次failed保留。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    },
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc6准备。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/3.3/4及两次failed保留/本次glob说明、design-r006-v5-sc6和match-r006-v9-sc6已核；自然设计和实际断言有原文依据。当前37个src逐字等于9cfd619，runtime-product-v5/自身测试绑定及全部artifacts SHA重算一致，stdout/process/stderr、API/完整快照和独立预期附件实际读取。仅_glob本轮修改，发布/冻结事务和原签名资格检查逻辑未改变；本份不代审SC2新glob或SC3撤源专项。当前1 passed/exit0。test_refresh_remove独占/共享两文件和另一有效来源，移除后释放晚任务；全持久状态与仅余另一来源，P空/Q仅shared、独立原文和逐P旧ref拒绝，防仅首文件正确或快照同错。当前晚响应published:false，共享原文needle shared original且仅剩Q来源，两P旧ref400，forbidden零召回断言到达。read未借Q的有效资格使原P引用可用。 当前设计/实现/调试有效，无有据必测缺口，等价目标可选；认领全部本TC分配检查，准备passed，可新的正式执行。不判formal/平台/最终CI/R006，不把历史TDD冒称本轮新绿灯，前两次failed保留。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    },
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc6准备。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/3.3/4及两次failed保留/本次glob说明、design-r006-v5-sc6和match-r006-v9-sc6已核；自然设计和实际断言有原文依据。当前37个src逐字等于9cfd619，runtime-product-v5/自身测试绑定及全部artifacts SHA重算一致，stdout/process/stderr、API/完整快照和独立预期附件实际读取。仅_glob本轮修改，发布/冻结事务和原签名资格检查逻辑未改变；本份不代审SC2新glob或SC3撤源专项。当前pending/ready两参数2 passed/exit0。test_overlap_order两文件S1旧请求阻塞、S2新请求先发布，完整documents相等，逐P/Q/all的完整集合、独立newwinner+文件名/ID/version/采集者断言拦只首目标或两边同错。当前两winner各one/two新正文版本1或2，十二次P/Q/all原文准确；P原引用source_ids仅S1而collector仍S2，Q仅S2且collector S2，all列两个仍有效原来源；实际将现存资格与历史采集者分开，没有把collector当资格。publish_seq分支保持。 当前设计/实现/调试有效，无有据必测缺口，等价目标可选；认领全部本TC分配检查，准备passed，可新的正式执行。不判formal/平台/最终CI/R006，不把历史TDD冒称本轮新绿灯，前两次failed保留。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    },
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc6准备。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/3.3/4及两次failed保留/本次glob说明、design-r006-v5-sc6和match-r006-v9-sc6已核；自然设计和实际断言有原文依据。当前37个src逐字等于9cfd619，runtime-product-v5/自身测试绑定及全部artifacts SHA重算一致，stdout/process/stderr、API/完整快照和独立预期附件实际读取。仅_glob本轮修改，发布/冻结事务和原签名资格检查逻辑未改变；本份不代审SC2新glob或SC3撤源专项。当前links/source两参数2 passed/exit0。test_query_snapshot在_scope后改关联或再改Q配置/正文，当次完整P/Q和逐独立原文/id/version/SHA/签名资格，下一次新范围/独立原文及P正控/Q正反旧ref检查，拦只首P正确/只冻结关联而未冻结来源、以及全拒旧ref。原件当次均P/Q original v1，下次links=P/R original v1、source再加Q changed v2；旧Q分别200原文/400资格失效，P可读，当前read只列原签名有效来源，未因新关联借权限。 当前设计/实现/调试有效，无有据必测缺口，等价目标可选；认领全部本TC分配检查，准备passed，可新的正式执行。不判formal/平台/最终CI/R006，不把历史TDD冒称本轮新绿灯，前两次failed保留。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    },
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc6准备。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/3.3/4及两次failed保留/本次glob说明、design-r006-v5-sc6和match-r006-v9-sc6已核；自然设计和实际断言有原文依据。当前37个src逐字等于9cfd619，runtime-product-v5/自身测试绑定及全部artifacts SHA重算一致，stdout/process/stderr、API/完整快照和独立预期附件实际读取。仅_glob本轮修改，发布/冻结事务和原签名资格检查逻辑未改变；本份不代审SC2新glob或SC3撤源专项。当前1 passed/exit0。test_interrupted_refresh单文件/目录两来源持久refreshing注入、新Archive明确重刷和control连续资格；完整集合/两个ready防仅首目标正确，独立one变化/added新增原文防只改status或两响应同错，control旧ref防全清资格。当前one recovered v2/added newly discovered v1/control continuous v1，三read准确且旧one400。one列文件和目录两有效资格，added仅目录；control旧ref仍仅原单来源，而历史collector可为后来成功采集的目录，原件确认二者并非混用。只称数据库持久状态注入，不冒称真实崩溃。 当前设计/实现/调试有效，无有据必测缺口，等价目标可选；认领全部本TC分配检查，准备passed，可新的正式执行。不判formal/平台/最终CI/R006，不把历史TDD冒称本轮新绿灯，前两次failed保留。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

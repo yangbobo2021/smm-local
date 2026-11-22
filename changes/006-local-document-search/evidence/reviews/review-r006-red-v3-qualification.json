@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "expected_failure",
+      "reason": "已独立核SPEC B6/A4/A6、PLAN3.2/4及SC4/design-r006-v5-sc4；无变化保留连续资格、file/source/missing中断后不可复活与多来源连续资格设计准确有原始依据。match-r006-v4-sc4、manifest-v3、tests/test_document_lifecycle.py:40-76与红灯冻结source、全部运行绑定及artifacts SHA一致。45-48行明确正常refresh两来源后逐P/Q/all旧ref精确可读且版本不变，错误每次刷新重置资格将首先47行失败。54-63行分别触发来源失败、文件拒读、缺失，64旧P拒绝而65旧Q/all仍精确needle qualification，能区分只撤失败成员与误撤连续成员；66-69同配置同字节恢复后旧P仍拒绝、Q/all持续可读，拦借恢复新代次复活旧ref。71-75全部原资格移除后，replacement可产生新ref但任何旧P/Q/all仍拒绝；76独立control保持。两产品结果同错或误指control仍被47/65/69等独立字面正文拦截；适用三个中断状态均已覆盖，新增同条件等价来源是可选补测。原始tdd-red/red-r006-v3-qualification/TC-006-qualification/run.stdout及三个api附件证明file/source/missing三参数均在43行首次one来源add实际404 Not Found，Fixture.request:52首先失败，属于SPEC B1新入口尚缺，非环境/导入错误。后续正常刷新、故障注入、恢复/移除和所有资格断言未执行。expected_failure仅确认候选有效和可信业务缺失红灯，不声明上述资格行为或人工平台已通过。",
+      "covers": []
+    }
+  }
+}

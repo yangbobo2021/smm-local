@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzAxNTcxMjdlMzJmNGE5Y2I5ZTI5YzNhYWE5NTdhMDMiLCJkb2N1bWVudF9pZCI6IjE3YzAzNWYxMzY4NTQzY2E5MDVkM2RjZDg1ZWEwODk1IiwiZW5kIjoyMDE5LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMjMxMjE0MTliYzQ0NGUxNjkwNjc3ZDY0MGIyMDI3ZmUiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MTc5NSwidmVyc2lvbiI6MX0.e7b4ccc36a60c2333f0012a3590bd8a94f2b7f8df37a3f3a0c64318e56b70c66"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "17c035f1368543ca905d3dcd85ea0895",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1011/test_search_rank0/docs/boundary.txt",
+    "version": 1,
+    "sha256": "8f1e71c903429f6926570837dcf6efbd49a52c29c0080e92ec0810e7810d6dbd",
+    "text_length": 2019,
+    "captured_at": "2026-11-22T19:18:57.779723+00:00",
+    "captured_by_source_id": "23121419bc444e1690677d640b2027fe",
+    "text": " x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x  crossboundaryword ending",
+    "start": 1795,
+    "end": 2019,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "23121419bc444e1690677d640b2027fe"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

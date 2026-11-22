@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "expected_failure",
+      "reason": "独立从SC6第三判据反查SPEC B5/B6/A6及design-r006-v5-sc6：同次项目范围/来源资格/内容版本固定，关联变化后按原资格读取，设计有据。tests/test_document_concurrency.py:102–148参数化仅关联变化与关联+来源配置/正文变化，107–114准备P/Q/R各独立正文和原资格；118–127在_query_scope取得旧范围后改变关联，source分支另改Q配置并刷新新正文。128要求当前完整集合P/Q，129–135逐目标核独立旧正文、对应ID/version/SHA、source_ids和签名资格，136–144逐目标核下一次新集合、独立新旧原串及SHA/版本；145–147分别核持续P可读、Q仅关联变化可读/来源版本变化拒绝。只P正确、把Q错误替换R或两响应同读P，分别在128/130/131拦；只冻结关联未冻结来源正文/资格的分支由130/134拦；不能以全拒旧ref伪装正确，145及links分支147提供正控。两个会改变读取结论的前置变化均覆盖，额外同条件标识属可选。已核match-r006-v4-sc6及red-r006-v3-query-snapshot与全部绑定/artifacts SHA。原两参数stdout、空stderr和两api-001显示108行循环第一个P来源合法add返回404 Not Found，helper:52失败；尚未建立Q/R来源/初始刷新，更未触发_query_scope钩子或并发断言。基线缺B1新文档入口，非测试或环境错误；有效候选给expected_failure，covers为空，不将入口红灯当查询冻结行为已实测通过。",
+      "covers": []
+    }
+  }
+}

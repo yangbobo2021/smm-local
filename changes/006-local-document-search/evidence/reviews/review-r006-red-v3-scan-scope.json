@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "expected_failure",
+      "reason": "独立核对SPEC B2/A2、PLAN4、SC2当前判据及design-r006-v5-sc2，目录范围、通配排除和不跟随链接均有原始依据；场景与自然设计准确。match-r006-v4-sc2、manifest-v3定位tests/test_document_scanning.py:7-37，与红灯source选段及绑定SHA一致，原始artifacts SHA全部一致。本轮9行expected加入star-dir/keep.txt独立正文，13/15行star-only.txt仍被star-*.txt排除；若星号跨路径段匹配，18行完整独立路径集合缺star-dir/keep.txt将失败，前轮缺口闭合。仅处理首个合法文件会同在18行失败；任一返回文件正文错或两响应误指同文件由19行按路径对独立expected文本拦截。**零/单/多层目标在13行，递归/非递归完整集合18/22行，显式隐藏单文件/目录及默认排除例外23-28行，内层文件/目录链接独有正文不得召回34行、根链接拒绝35行，36行独立源指纹保留。当前已区分必测通配边界，其余等价目标可选补测；真实Windows junction/权限由未执行人工平台项承担，未预判通过。原始tdd-red/red-r006-v3-scan-scope/TC-006-scan-scope/run.stdout及00001-api-001.json显示15行首次POST /api/documents/sources真实404 Not Found，Fixture.request:52首先失败，属于SPEC B1新增来源入口缺失，非测试或环境故障。刷新、集合/通配、链接与指纹后置断言均未执行；expected_failure仅确认候选有效和可信能力缺失红灯。",
+      "covers": []
+    }
+  }
+}

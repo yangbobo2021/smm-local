@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC4判据/design-r006-v5-sc4来自SPEC B1/B4/B6/A4，配置变更、移除及多来源连续资格的不同预期准确，无额外行为。v1b最早自然设计缺口已补P/Q/all旧引用分工；tests/test_document_lifecycle.py:84取得旧Q/all，85-89在A set pending后拒旧P而沿连续B读旧Q/all，93-96移除B后拒旧Q/all且新A的before_remove继续读，97-102最后来源移除及正文/FTS清理均有独立断言。只处理首个独占文件会在87集合/88逐旧P拒绝失败，两响应同错正文会在89或96的独立needle shared失败。但首轮明确要求的“A新配置刷新后，原Q/all仍沿连续B可读”尚未落实：90-91刷新A后只核fresh Q集合与拒旧P，没有再次读取old_q/old_all；随后93移除B，94-95直接要求它们拒绝。反例：A新配置refresh错误地重置未中断B的旧引用资格，fresh查询仍正确，当前全部断言仍通过，违反B6至少一个当次连续资格存在便可读以及设计分工。最小在90刷新A完成后、93移除B之前明确用old_q和old_all分别读取needle shared；保留后续拒绝，证明该状态边界。设计已写沿B保持至B移除，最早修订implementation。原始red-r006-v2-source-lifecycle/TC-006-source-lifecycle/run.stdout与00001-api-001.json显示82行首次A add实际404；set、refresh、移除/清理与所有引用断言均未执行。artifacts SHA一致，当前测试与match-r006-v3-sc4一致，src未改；真实能力缺失保留，但候选需修订。",
+      "covers": []
+    }
+  }
+}

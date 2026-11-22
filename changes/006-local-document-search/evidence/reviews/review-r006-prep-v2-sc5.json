@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc5的本TC；已独立读取其原stdout/process/stderr与全部附件，并核全部artifacts及当前bindings SHA。SPEC B5/A5，SC5与自然设计的正文召回/排序边界有依据。tests/test_document_search.py:9–36以51文件、重叠来源、文件名反例与高低相关文本；24–25完整50路径/唯一ID拦仅首文件正确，30独立高相关顺序、31–35各自special原串切片拦两响应同错。新green-r006-v2-search-rank原stdout 1 passed，api-005为file-000，api-006/007完整000..049且id/score稳定；api-008文件名词零命中，009 z-high先a-low；四个正文特殊查询分别命中正确文件且窗口含查询词。原red-r006-v3-search-rank合法add404和独立红灯意见仍与同测试一致。产品documents.py:360–390完整FTS和稳定路径/ID排序支持所测行为。 调试本身对应1/3/1/1参数真实通过；debug排序000..049/文件名零命中/高低相关顺序、30个码点读取观察面、23项引用拒绝与正控、11项输入拒绝及完整状态覆盖均实际吻合独立预期。定义sha6b524c88…、设计v5及match v5未增加或降低SPEC承诺，实际当前测试及产品分支与上文一致。认领本TC全部分配检查，准备passed，可全新正式执行；不等于人工平台、用户入口、最终CI或需求交付通过。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    },
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc5的本TC；已独立读取其原stdout/process/stderr与全部附件，并核全部artifacts及当前bindings SHA。SPEC B5/B6/A5，SC5与自然设计的码点/行端点/2000窗口/16000扩读有依据。tests/test_document_search.py:39–68三原串和每个扩读范围用独立Python切片/LF公式断言，46拦search/read同错；长行61–64分别核两个观察面，65/66测16000/16001，67拒旧版本。新green-r006-v2-exact-read原stdout 3 passed；重新逐条以三独立body或long核附件全部30个命中/读取的文本、start/end和行号吻合，各长窗口[0,2000)、扩读[0,16000)，超限及旧版本均400。red-r006-v3-exact-read三个参数合法add404和独立红灯仍匹配同测试。documents.py:145–149、392–411以Python码点及采集快照读取。 调试本身对应1/3/1/1参数真实通过；debug排序000..049/文件名零命中/高低相关顺序、30个码点读取观察面、23项引用拒绝与正控、11项输入拒绝及完整状态覆盖均实际吻合独立预期。定义sha6b524c88…、设计v5及match v5未增加或降低SPEC承诺，实际当前测试及产品分支与上文一致。认领本TC全部分配检查，准备passed，可全新正式执行；不等于人工平台、用户入口、最终CI或需求交付通过。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    },
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc5的本TC；已独立读取其原stdout/process/stderr与全部附件，并核全部artifacts及当前bindings SHA。SPEC B6/A5，SC5与自然设计的签名/档案/内容配置资格/范围拒绝有依据，连续资格生命周期另由SC4专项。tests/test_document_search.py:71–103准备两个不同正文与外档案，逐字段合法外观/非法值保留原签名篡改，逐范围拒绝，95/103独立alpha正控拦全拒或同错首目标，真实对话ref和改配置旧ref亦拒。新green-r006-v2-invalid-read原stdout 1 passed，原附件23个拒绝分别为损坏/跨档案、范围400/422、真实对话400与配置旧ref400，两次正控准确needle alpha 😀 é及second正文；无返回替代正文。red-r006-v3-invalid-read首合法add404及独立意见仍与同测试吻合。references.decode和documents.py:392–411按签名、档案、版本与原来源资格读取。 调试本身对应1/3/1/1参数真实通过；debug排序000..049/文件名零命中/高低相关顺序、30个码点读取观察面、23项引用拒绝与正控、11项输入拒绝及完整状态覆盖均实际吻合独立预期。定义sha6b524c88…、设计v5及match v5未增加或降低SPEC承诺，实际当前测试及产品分支与上文一致。认领本TC全部分配检查，准备passed，可全新正式执行；不等于人工平台、用户入口、最终CI或需求交付通过。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    },
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc5的本TC；已独立读取其原stdout/process/stderr与全部附件，并核全部artifacts及当前bindings SHA。SPEC B5/B7/A5，SC5与自然设计要求拒非法输入并区分合法零命中覆盖。tests/test_document_search.py:106–131逐无来源/pending/ready/partial/refreshing/failed状态，完整来源ID映射及独立0/1计数拦只首来源正确和两响应同错，持续pending第二来源作正控；115–118逐输入拒绝，合法查询防一概拒绝。新green-r006-v2-empty-query原stdout 1 passed；11项非法请求400/422且含义正确；zero-hit-states实际为pending0、ready1、partial0、refreshing0、failed0，另一来源持续pending，合法结果均200空。red-r006-v3-empty-query首合法search404及独立红灯仍吻合同测试。documents.py:360–390验证输入且同事务构造有效成员与覆盖。 调试本身对应1/3/1/1参数真实通过；debug排序000..049/文件名零命中/高低相关顺序、30个码点读取观察面、23项引用拒绝与正控、11项输入拒绝及完整状态覆盖均实际吻合独立预期。定义sha6b524c88…、设计v5及match v5未增加或降低SPEC承诺，实际当前测试及产品分支与上文一致。认领本TC全部分配检查，准备passed，可全新正式执行；不等于人工平台、用户入口、最终CI或需求交付通过。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

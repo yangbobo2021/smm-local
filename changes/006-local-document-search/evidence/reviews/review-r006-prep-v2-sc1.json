@@ -1,0 +1,21 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "依据SPEC B1/A1、SC1及design-r006-v5-sc1，明确添加、完整替换、非法输入不改配置和不暗读正文的设计有效。tests/test_document_sources.py:8–49分别验证两个同名不同身份项目、单文件/目录、指定配置与省略名单恢复默认；deny_source_reads覆盖builtins/io/os.open，files/search为空；所有非法add/set后比较完整sources，重新打开同档案一致，移除后源SHA/mtime不变。反例：只正确处理首个来源会被directory_reset及两次移除断言拦截；返回假pending但读正文会被哨兵拦截，配置两侧同错会被独立字段值断言拦截。src/smm_local/documents.py:add/set仅校验/存配置，api.py:318–348及Web表单调用同一后端。原始附件00039-source-config-expected.json显示P/不同stable_key、revision1→2、项目[1]→[2]及pending，39份API/拒绝附件与原始日志支持断言；本项不是浏览器画面验收。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc1的本TC为全新原始进程日志1 passed/exit0，附件为当前轮：来源配置P同名不同ID、pending项目[1]改[2]与目录重置；CLI保存和读取固定全文均核对相符。自然设计仍v5，本轮重新核match-v5精确选段和当前断言，适用反例拦截点未改变。全部分配检查实际到达，准许按当前候选正式执行；本意见不是正式交付、平台或CI意见。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    },
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "依据SPEC B1/B7/A1与SC1，自然设计中的CLI输入、完整配置和三只读MCP发现有效。tests/test_document_sources.py:52起实际创建两项目、CLI add多绑定/排除/非递归，与API持久来源逐字段比较，set省略恢复空名单/递归后明确刷新；search返回的reference原样交CLI read并独立断言全文needle CLI 中文😀\\nline 2\\n；相对路径exit2。MCP工厂真实list_tools逐一断言三个readOnlyHint及旧工具存在。反例：只保留首绑定会被集合{两ID}拦截；CLI/API返回同一错误配置会被独立项目、recursive、exclude预期拦截；两边同错正文会被固定全文拦截。附件00003/00005/00007/00010/00012/00013-cli及00015-new-help保留完整argv/JSON/帮助，实际exit0及相对路径exit2；产品cli.py与mcp_server.py明确进入Documents后端。本项只验证工具发现/声明，真实stdio及Web画面另属E1。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc1的本TC为全新原始进程日志1 passed/exit0，附件为当前轮：来源配置P同名不同ID、pending项目[1]改[2]与目录重置；CLI保存和读取固定全文均核对相符。自然设计仍v5，本轮重新核match-v5精确选段和当前断言，适用反例拦截点未改变。全部分配检查实际到达，准许按当前候选正式执行；本意见不是正式交付、平台或CI意见。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

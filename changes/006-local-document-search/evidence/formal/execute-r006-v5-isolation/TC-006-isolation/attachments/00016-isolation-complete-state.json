@@ -1,0 +1,493 @@
+{
+  "mode": "hub",
+  "before": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/histories/original.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/OriginalProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/OriginalProject",
+        "project_id": 1,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      },
+      {
+        "id": 2,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/other.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/OtherProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/OtherProject",
+        "project_id": 2,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      }
+    ],
+    "local_upload_batches": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "batch_id": "2ee6ecee4d4b467abcc0f6fcbfe56b6f",
+        "generation": 1,
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "policy_revision": 1,
+        "digest": "5bf3b0ca5a2155c5cfeb48654be56e2715e13ecd30410c98c6b712d0898da867",
+        "payload": null,
+        "state": "confirmed"
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "batch_id": "475899176d8844f281a0cdbe13971092",
+        "generation": 1,
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "policy_revision": 1,
+        "digest": "28821c62cf2e7da0ae486d73da25acd168ffe737050fd5ad3d3d580c5b5a3adc",
+        "payload": null,
+        "state": "confirmed"
+      }
+    ],
+    "local_upload_origin_receipts": [],
+    "local_upload_policies": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "desired": "{\"mode\": \"only\", \"projects\": [\"57e44d2e9bc88a665a8171559e08cd11\", \"97b8b1a28e0fd22195d13c0236772edd\"]}",
+        "generation": 1,
+        "submission_id": "1af1c570a1fc4ecfb18e30d19da23c67",
+        "ack_revision": 1,
+        "ack_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "ack_generation": 1,
+        "state": "confirmed",
+        "problem": null,
+        "remote": "{\"hub_id\": \"434bc0ba7e9a451e828989e529e323e8\", \"device_id\": \"5f1e6a8694604c89b23b1d0b7fa765be\", \"revision\": 1, \"policy\": {\"mode\": \"only\", \"projects\": [\"57e44d2e9bc88a665a8171559e08cd11\", \"97b8b1a28e0fd22195d13c0236772edd\"]}, \"submission_id\": \"1af1c570a1fc4ecfb18e30d19da23c67\", \"control_epoch\": \"dbfce4f16b7944c4b985c6a8be45ee95\", \"restore_pending\": false, \"conflict\": false}",
+        "next_project": "97b8b1a28e0fd22195d13c0236772edd"
+      }
+    ],
+    "local_upload_project_receipts": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "project_key": "57e44d2e9bc88a665a8171559e08cd11",
+        "source_position": 0,
+        "source_order": 1
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "project_key": "97b8b1a28e0fd22195d13c0236772edd",
+        "source_position": 1,
+        "source_order": 1
+      }
+    ],
+    "local_upload_receipts": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95"
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95"
+      }
+    ],
+    "local_upload_submissions": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "submission_id": "1af1c570a1fc4ecfb18e30d19da23c67",
+        "generation": 1
+      }
+    ],
+    "local_upload_transfer": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "last_attempt": "2026-11-22T19:19:04.974776+00:00",
+        "last_success": "2026-11-22T19:19:04.974776+00:00",
+        "problem": null
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "original-message",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "second-message",
+        "position": 0,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "codex_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/histories\""
+      },
+      {
+        "key": "claude_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/empty\""
+      },
+      {
+        "key": "archive:identity",
+        "value": "\"1fa21ab354f640929da6bf8729d28376\""
+      },
+      {
+        "key": "disabled_builtin_sources",
+        "value": "[\"codex\"]"
+      }
+    ],
+    "upload_message_catalog": [
+      {
+        "message_id": 1,
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "source_order": 1,
+        "occurrence": null
+      },
+      {
+        "message_id": 2,
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "source_order": 1,
+        "occurrence": null
+      }
+    ]
+  },
+  "after": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/histories/original.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/OriginalProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/OriginalProject",
+        "project_id": 1,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      },
+      {
+        "id": 2,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/other.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/OtherProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/claude-fixture/OtherProject",
+        "project_id": 2,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      }
+    ],
+    "local_upload_batches": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "batch_id": "2ee6ecee4d4b467abcc0f6fcbfe56b6f",
+        "generation": 1,
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "policy_revision": 1,
+        "digest": "5bf3b0ca5a2155c5cfeb48654be56e2715e13ecd30410c98c6b712d0898da867",
+        "payload": null,
+        "state": "confirmed"
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "batch_id": "475899176d8844f281a0cdbe13971092",
+        "generation": 1,
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "policy_revision": 1,
+        "digest": "28821c62cf2e7da0ae486d73da25acd168ffe737050fd5ad3d3d580c5b5a3adc",
+        "payload": null,
+        "state": "confirmed"
+      }
+    ],
+    "local_upload_origin_receipts": [],
+    "local_upload_policies": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "desired": "{\"mode\": \"only\", \"projects\": [\"57e44d2e9bc88a665a8171559e08cd11\", \"97b8b1a28e0fd22195d13c0236772edd\"]}",
+        "generation": 1,
+        "submission_id": "1af1c570a1fc4ecfb18e30d19da23c67",
+        "ack_revision": 1,
+        "ack_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "ack_generation": 1,
+        "state": "confirmed",
+        "problem": null,
+        "remote": "{\"hub_id\": \"434bc0ba7e9a451e828989e529e323e8\", \"device_id\": \"5f1e6a8694604c89b23b1d0b7fa765be\", \"revision\": 1, \"policy\": {\"mode\": \"only\", \"projects\": [\"57e44d2e9bc88a665a8171559e08cd11\", \"97b8b1a28e0fd22195d13c0236772edd\"]}, \"submission_id\": \"1af1c570a1fc4ecfb18e30d19da23c67\", \"control_epoch\": \"dbfce4f16b7944c4b985c6a8be45ee95\", \"restore_pending\": false, \"conflict\": false}",
+        "next_project": "97b8b1a28e0fd22195d13c0236772edd"
+      }
+    ],
+    "local_upload_project_receipts": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "project_key": "57e44d2e9bc88a665a8171559e08cd11",
+        "source_position": 0,
+        "source_order": 1
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95",
+        "project_key": "97b8b1a28e0fd22195d13c0236772edd",
+        "source_position": 1,
+        "source_order": 1
+      }
+    ],
+    "local_upload_receipts": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95"
+      },
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "control_epoch": "dbfce4f16b7944c4b985c6a8be45ee95"
+      }
+    ],
+    "local_upload_submissions": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "submission_id": "1af1c570a1fc4ecfb18e30d19da23c67",
+        "generation": 1
+      }
+    ],
+    "local_upload_transfer": [
+      {
+        "hub_id": "434bc0ba7e9a451e828989e529e323e8",
+        "device_id": "5f1e6a8694604c89b23b1d0b7fa765be",
+        "last_attempt": "2026-11-22T19:19:04.974776+00:00",
+        "last_success": "2026-11-22T19:19:04.974776+00:00",
+        "problem": null
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "original-message",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "second-message",
+        "position": 0,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "codex_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/histories\""
+      },
+      {
+        "key": "claude_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_hub_0/empty\""
+      },
+      {
+        "key": "archive:identity",
+        "value": "\"1fa21ab354f640929da6bf8729d28376\""
+      },
+      {
+        "key": "disabled_builtin_sources",
+        "value": "[\"codex\"]"
+      }
+    ],
+    "upload_message_catalog": [
+      {
+        "message_id": 1,
+        "logical_id": "4fc24fad75da69f7164b995cbad98de137e08755b7b24fed30e2524723528c27",
+        "version": "8a27df8080d1f06238057a945cf1f84b8de9417b869e84c8f9af2a2d8c40308e",
+        "source_order": 1,
+        "occurrence": null
+      },
+      {
+        "message_id": 2,
+        "logical_id": "eec1a0dde1dc19d1564c7c6316947fc4cfec5514fbd66db6a56ad198038939ae",
+        "version": "4534205383ab2c46650d54c447def963adcddf77a21d4fc8fb8d0bcfcef2a39e",
+        "source_order": 1,
+        "occurrence": null
+      }
+    ]
+  },
+  "remote_before": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "",
+        "cwd": null,
+        "project_path": null,
+        "project_id": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "",
+        "cwd": null,
+        "project_path": null,
+        "project_id": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "4eb09f35ebc44ce9a9b69543ac92cad6505b38c82a017be41a8444afc1f1fece",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "879faec77f2b0737b0615cc3d49549da837d157cdd4200ca4771cc93db34bbd6",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "hub_identity",
+        "value": "\"434bc0ba7e9a451e828989e529e323e8\""
+      }
+    ]
+  },
+  "remote_after": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "",
+        "cwd": null,
+        "project_path": null,
+        "project_id": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "",
+        "cwd": null,
+        "project_path": null,
+        "project_id": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "4eb09f35ebc44ce9a9b69543ac92cad6505b38c82a017be41a8444afc1f1fece",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "879faec77f2b0737b0615cc3d49549da837d157cdd4200ca4771cc93db34bbd6",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "hub_identity",
+        "value": "\"434bc0ba7e9a451e828989e529e323e8\""
+      }
+    ]
+  },
+  "outbound_calls_after_marker": 0,
+  "guard_blocks_loopback_and_external_ip": true
+}

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "已核SPEC B3/B6/A3、当前定义000002(SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c)、design-r006-v5-sc3、match-r006-v8-sc3及test_overlap_version当前完整实际断言。新增p/all read.source_ids与captured_by断言直接来自当前资格来源与历史采集者区分，无新增产品要求。实际红灯red-r006-metadata-v1-overlap-version在remove/failed的set(all_read[source_ids])多出已退出S2，2 failed/1 passed，独立review-r006-red-metadata-v1-overlap-version认可expected_failure；该历史失败保留。green-r006-v4-overlap-version与红灯全部test_bindings及命令相同，当前src逐字4c706b3；产品diff仅将通过原stamp的source_ids收集返回，仍逐项验证document/version/member状态/source状态/revision/qualification，未改历史captured_by、未借新来源。当前151份绿灯原件：remove的00025/00026 p/all均仅058c71294ec24893a331ddc7c3714a5e，collector仍63bea0f5e80945c89780f2cea4548a40；failed的00079/00080均仅59f14f297142463f8bdbefc93776da51，collector仍88d332ed8da249528132cf9f149a9f5e；continuous的00131 p仅S1/00132 all双源且collector S2。三分支正文均needle v2，其后v3与旧ref拒绝、最后资格退出正控仍完整通过。反例：一律删S2会被continuous双源拦截；返回全部payload旧来源会被remove/failed精确集合拦截；错误collector会被独立S2 ID断言拦截；把旧all改拒绝会在Fixture.read成功状态断言失败。原始run.stdout 3 passed/exit0；全部artifact及当前bindings逐项SHA复算一致，匹配源码选段/implementation摘要精确一致。实际regression命令仅tests/test_archive_references.py，原始4 passed，覆盖篡改/跨档案/参数冲突、签发间内容变化、跨项目冻结范围及旧参数。只认定此TC当前同版绿灯和该4项回归；不扩张为其余TC新TDD-green、平台/CI或R006结论。",
+      "covers": []
+    }
+  }
+}

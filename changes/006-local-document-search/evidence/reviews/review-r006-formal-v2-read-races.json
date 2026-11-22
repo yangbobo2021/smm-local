@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-read-races",
+  "target_sha256": "6ddccb89c3faabef2b3680290ef18176c8b037b3013efb71615a68c4fb493f78",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B2/B4/B6/A2、PLAN §3.2预算与打开一致性屏障、design-r006-v5-sc2及tests/test_document_limits.py:99-165已对照。stdout 5 passed、stderr空、exit 0。00010/00034明确after-budget-before-open事件及实际2097153字节/九个2097152字节，变化者分别1/9 failed，正控1 ready、仅control可查/可读，变化者原ref400。00037下一轮重新预算累计超限整源failed；00060/00076实打开后fstat钩子改正文/替换路径均partial且不发布新体。00092枚举异常整源failed、全零命中且无假missing；恢复每轮完整2或10路径，曾终态失败的旧资格仍400，只有未中断正控ref可继续。错误与成功正控同次证据区分产品行为和故障注入，不冒称真实平台权限或崩溃。102份artifacts、48份bindings及设计SHA重算一致；本正式仅目标selector，无XML或附加旧引用回归，不沿用v1通过。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

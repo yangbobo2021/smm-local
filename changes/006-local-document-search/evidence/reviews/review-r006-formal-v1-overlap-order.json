@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-overlap-order 独立复核通过。对照 SPEC B3/B4/A6、PLAN §3.2/§4 A6、design-r006-v5-sc6，已读 tests/test_document_concurrency.py:77-99 及发布屏障。2026-11-22T16:20:13.076–13.458Z 本次 pending/ready 两种S1前态执行 exit 0、stdout 2 passed。S1旧请求先准备但等待，S2较新请求先发布，释放S1后实际断言整个documents表与获胜快照相等。00006–00016 与00024–00034分别对P/Q/all逐个查询/读取 one.txt 与 two.txt；12份读取均精确为 newwinneruniqueterm+各自文件名，采集出处为S2，各项目只带自己的来源资格，all合两来源且每文件去重，oldloser词均零命中。00017/00035独立核对全部获胜正文和最终两目标，ready分支还逐目标保持原ID/换版本，防止仅首目标正确。39 artifacts、89 bindings 及定义/设计SHA逐一重算一致；本轮正式附件与候选源码绑定相符，没有用旧执行替代。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-refresh-remove",
+  "target_sha256": "a58162613046b0236f7748136db7a9fd3bc66960c97c5022afc888bf79f5dc13",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B3/B4/B6/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:60-74。S1/P有独占exclusive和shared，S2/Q有shared；S1发布前屏障等待时移除，00006旧任务published:false。第70行释放/join后来源、项目、文档、成员、meta、FTS完整等于移除后状态且仅S2，不能残留旧任务副作用。原00008 P空、00009/10 Q仅shared、00011准确正文needle shared original，source_ids仅原Q/S2当次连续资格，未列退出S1；00012/13原P两个ref400（版本/资格失效），00014 forbidden零命中。共享正控、独占和共享旧ref拒绝均实际到达。stdout1passed/exit0/stderr空，18 artifacts/47 bindings。移除S2后旧all保留S1的新增专项归SC3，本意见不越界。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    }
+  }
+}

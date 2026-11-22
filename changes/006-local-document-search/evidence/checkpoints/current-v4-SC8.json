@@ -1,0 +1,20 @@
+{
+  "step": "current-v4-readback-SC8",
+  "scene_id": "SC8",
+  "observed_at": "2026-11-22T18:54:49.398567+00:00",
+  "note": "Current readback of existing matched/prepared/executed/reviewed records; not a past-time screenshot or a new business run",
+  "definitions": {
+    "version": 2,
+    "sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c"
+  },
+  "status": "passed",
+  "stages": {
+    "match": {
+      "record": ".acceptance-local/native-v1/AT-SMM-006/match/match-r006-v8-sc8/result.json",
+      "sha256": "be4a22503ca1192a0ee7684b0d55679998133aef35ef9a5c6bd36e3cdb9d8e5e"
+    },
+    "current_cases": {}
+  },
+  "screenshot": "current-v4-SC8-scope-match-prepare-execute-review.png",
+  "screenshot_sha256": "b10808bc7210f857fe9f05baaf4d39fda8ecd208647f024636ef03102a8e95c8"
+}

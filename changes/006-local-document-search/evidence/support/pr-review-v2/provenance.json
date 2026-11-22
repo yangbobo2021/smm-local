@@ -1,0 +1,46 @@
+{
+  "reviewer": "/root/review_006_pr_final",
+  "product_commit": "4c706b304e904b126ea3103523069b265d101b31",
+  "collected_at": "2026-11-22T18:58:27.299754+00:00",
+  "classification": "Independent PR review supplemental checks; not a new formal TC or acceptance execution",
+  "records": [
+    {
+      "kind": "cli",
+      "original_path": "<REVIEW_TEMP>/smm006-prreview-tog2acvu/review-cli.json",
+      "copy": ".acceptance-local/native-v1/AT-SMM-006/work/pr-review-v2/review-cli.json",
+      "sha256": "debac2f79547cf575f22751fe41a45832411a2309c77fe929c3faafe894eb281",
+      "bytes": 18288,
+      "original_file_birthtime_utc": "2026-11-22T18:56:33.505793+00:00",
+      "original_file_mtime_utc": "2026-11-22T18:56:33.505883+00:00",
+      "timing_note": "Original JSON was written after successful calls; command-level timestamps were not instrumented. Filesystem timestamps are not presented as business start/finish."
+    },
+    {
+      "kind": "mcp",
+      "original_path": "<REVIEW_TEMP>/smm006-prreview-mcp-xc_qe63_/review-mcp.json",
+      "copy": ".acceptance-local/native-v1/AT-SMM-006/work/pr-review-v2/review-mcp.json",
+      "sha256": "3c58c28eeb2f9fbe872d8728321047bfa90ed3844ca03c088e72fc56d1529984",
+      "bytes": 3997,
+      "original_file_birthtime_utc": "2026-11-22T18:57:02.502102+00:00",
+      "original_file_mtime_utc": "2026-11-22T18:57:02.502158+00:00",
+      "timing_note": "Original JSON was written after successful calls; command-level timestamps were not instrumented. Filesystem timestamps are not presented as business start/finish."
+    }
+  ],
+  "pytest": {
+    "argv": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_document_projects.py",
+      "tests/test_document_search.py",
+      "tests/test_document_compatibility.py",
+      "tests/test_document_project_control_extra.py"
+    ],
+    "cwd": "/private/tmp/smm-006-impl",
+    "observed_exit_code": 0,
+    "observed_summary": "17 passed, 1 warning in 2.39s",
+    "raw_disk_log_saved": false,
+    "evidence_note": "Actual stdout and exit observed from exec/write_stdin tool output during this reviewer turn. No disk stdout log was requested; not reconstructed or claimed as raw persisted evidence."
+  },
+  "mcp_note": "JSON saves decoded responses from a real stdio ClientSession and successful assertions; it is not a byte-level protocol transcript. ListTools readonly annotations were asserted during execution."
+}

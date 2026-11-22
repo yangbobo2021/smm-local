@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "documents",
+    "search",
+    "needle",
+    "--scope",
+    "project",
+    "--project-id",
+    1
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"results\": [\n    {\n      \"id\": \"15101653230a4a329aff68b70290be83\",\n      \"path\": \"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1000/test_entrance_contract0/docs/cli space 中文.txt\",\n      \"version\": 1,\n      \"sha256\": \"1157b31a6f49d0b1791e4747b4fc27ac3343e865755a8e2cdc2752b806c8cce7\",\n      \"text_length\": 22,\n      \"captured_at\": \"2026-11-22T19:18:46.021580+00:00\",\n      \"captured_by_source_id\": \"eb7c9de79e5a4495a90de1410544a5e2\",\n      \"text\": \"needle CLI 中文😀\\nline 2\\n\",\n      \"start\": 0,\n      \"end\": 22,\n      \"start_line\": 1,\n      \"end_line\": 2,\n      \"source_ids\": [\n        \"eb7c9de79e5a4495a90de1410544a5e2\"\n      ],\n      \"project_ids\": [\n        1\n      ],\n      \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiNjJkNzZlMDViZTRiNDc1MjhjNDgyMmMwMmUxZWFhODMiLCJkb2N1bWVudF9pZCI6IjE1MTAxNjUzMjMwYTRhMzI5YWZmNjhiNzAyOTBiZTgzIiwiZW5kIjoyMiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImViN2M5ZGU3OWU1YTQ0OTVhOTBkZTE0MTA1NDRhNWUyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjR9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.6763e90fec4ff298a9fd532b58dbd376bdec2b4a7f22b50e4b3865138a38cf02\",\n      \"bm25_score\": 1e-06,\n      \"rank\": 1,\n      \"snapshot_kind\": \"采集版本（仅本机）\"\n    }\n  ],\n  \"scope\": \"project\",\n  \"effective_project_ids\": [\n    1\n  ],\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 1,\n    \"sources\": [\n      {\n        \"id\": \"eb7c9de79e5a4495a90de1410544a5e2\",\n        \"path\": \"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1000/test_entrance_contract0/docs/cli space 中文.txt\",\n        \"kind\": \"file\",\n        \"recursive\": true,\n        \"exclude\": [],\n        \"revision\": 4,\n        \"status\": \"ready\",\n        \"resume_status\": \"ready\",\n        \"refresh_id\": \"274933b5f9d24764bd68a1b2a798358d\",\n        \"request_seq\": 1,\n        \"started_at\": \"2026-11-22T19:18:46.020492+00:00\",\n        \"finished_at\": \"2026-11-22T19:18:46.021716+00:00\",\n        \"error\": null,\n        \"counts\": {\n          \"ready\": 1,\n          \"failed\": 0,\n          \"candidates\": 1,\n          \"billed_bytes\": 29,\n          \"ignored_entries\": 0,\n          \"ignored_format\": 0,\n          \"ignored_excluded\": 0,\n          \"ignored_links\": 0\n        },\n        \"project_ids\": [\n          1\n        ],\n        \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n      }\n    ]\n  }\n}\n",
+  "stderr": ""
+}

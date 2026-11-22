@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B3/B4/A4、SC4，自然设计把两独立文件在无变化、编辑、回旧字节及移动/删除状态分别核对有效。tests/test_document_lifecycle.py:7–37先完整两文件集合，逐文件read独立原文；不变刷新ID/version相等且旧ref可读；物理改字节但未刷新仍读原快照并有captured_at；刷新后每文件同ID新version/新全文且旧ref4xx；回旧字节版号不属前两版且两代ref均拒绝；移动生成新ID、删另一文件后只留moved，全部旧ref拒绝，moved全文明确等于原one内容。反例：只更新首个文件被updated循环逐文件断言拦截；两次读取同错文件被文件名拼接独立正文拦截；sha决定旧版本复活被version不在旧集合及旧ref4xx拦截。29份API附件原文显示两文件版本1→2→3、moved新ID版1及旧ref400，与documents.py:_publish按文件递增版本、不猜移动身份和read版本核验一致。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-version-lifecycle与red-r006-v3-version-lifecycle全部test_bindings及实际命令相同；旧红灯来源API404，当前新绿灯1 passed/exit0。本轮29份API原件重核两文件原全文、编辑后逐文件version2/更新全文、回旧字节version3与双代旧ref4xx，最后moved新身份version1全文needle original one.txt，符合原始独立断言及快照语义。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

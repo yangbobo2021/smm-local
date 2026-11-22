@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "场景SC5及design-r006-v5-sc5的正文召回/稳定排序判据可由SPEC B5/A5推出，无新增产品要求。首轮指出的不等相关性、中文及分数符号问题已修正：tests/test_document_search.py:28–29以独立强弱文本要求z-high先于a-low，30–34独立核中文及三个长文目标原串，27只要求有限分数；24完整50路径与25唯一ID也能拦只处理首文件。仍有实现缺口：12行仅创建needle-only-filename.txt负例，22只以needle查询limit1/50，而11行已有51个正文真命中。反例为正文召回正确、同时把文件名needle误当正文命中，但将文件名命中排在正文命中之后（或相同分数按路径排序）；这个错误文件排第52名，23–26全部通过，30的其他查询亦不会命中它。B5明确“文件名展示为出处，不以文件名命中冒充正文命中”，设计也明确要求该负例；须增加不会被limit截断隐藏的独立仅文件名词查询并断言零命中，最上游修订位置为implementation。已读red-r006-v2-search-rank收据、绑定源码、原stdout/stderr/api-001并核SHA：20行合法add实际404 Not Found，helper:52失败，为基线缺少新入口；排序/文件名/读取断言均未到达。该404可信，但不能据此授予有上述缺口的完整候选expected_failure。",
+      "covers": []
+    }
+  }
+}

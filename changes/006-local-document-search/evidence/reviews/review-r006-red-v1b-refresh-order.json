@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "expected_failure",
+      "reason": "SC6首判据来自SPEC B4/A6的配置版本与刷新身份发布边界；design-r006-v3-sc6分别新刷新先完成和set-config后旧任务提交，符合原始约定。tests/test_document_concurrency.py:36-57实际参数化两种新意图，9-17于Documents._publish前设置确定屏障；新刷新分支46行直接对独立newwinner全文，配置分支49行独立pending且结果空，50记录完整来源/绑定/文件/成员/元数据/FTS，52逐表比较旧任务释放前后。推演较晚旧任务覆盖正文、任一成员或来源字段：52的完整document_state等式首个拦截；推演两快照同错旧正文：46独立newwinner文本先拦截，54独立新词一命中/旧词零命中再拦截；配置分支若旧任务复活旧材料49/52/56拦截。两个会改变预期的业务状态均覆盖，额外只换同条件来源ID属于可选。原red收据/参数、两份api-001、完整stdout/stderr/进程已读且SHA一致；两个参数均在39行合法add返回404 Not Found，helper:52失败，源码API确实无文档入口。是真实新能力缺失，不是屏障超时/导入/环境失败；尚未运行refresh或屏障及后续断言。covers认领已核设计与实现范围，不把未到达项说成执行通过。",
+      "covers": []
+    }
+  }
+}

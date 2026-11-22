@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc5准备结果。已对照定义000002 sha6b524c88…、SPEC B3/B5/B6/A5、PLAN两次需求failed保留及glob返修说明、design-r006-v5-sc5和match-r006-v9-sc5分工。场景/自然设计有需求依据、具体样例在用例，未降低承诺。当前37个src逐字等于9cfd619，runtime-product-v5与本TC测试绑定、全部原artifacts SHA逐项重算一致；原stdout/process/stderr及API/预期附件实际已读。此次产品仅_glob改末尾**/连续**/LF语义；Unicode lower映射、read按原资格返回valid sourceIDs及保留历史collector均未改。扫描新专项归SC2另审，B3撤源专项归SC3另审，不由本意见代判。当前1 passed/exit0。test_search_rank完整50路径/唯一ID拦仅首目标正确，六special逐独立原文切片和真实词出现拦search/read同错。当前附件两次000..049路径稳定，高低相关/文件名零命中断言执行；真实ASCII stop词原位置3400→[3200,3421)221码点，İ长前缀后marker原位置3001→[2801,3026)225码点，text与read逐独立原串匹配且含真实查询词。既有Unicode两缺陷无复发，lower.find及原码点映射分支保持。 当前设计/实现/调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台/最终CI/R006，前两次failed和其余历史TDD不被覆盖或冒称本轮重绿。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    },
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc5准备结果。已对照定义000002 sha6b524c88…、SPEC B3/B5/B6/A5、PLAN两次需求failed保留及glob返修说明、design-r006-v5-sc5和match-r006-v9-sc5分工。场景/自然设计有需求依据、具体样例在用例，未降低承诺。当前37个src逐字等于9cfd619，runtime-product-v5与本TC测试绑定、全部原artifacts SHA逐项重算一致；原stdout/process/stderr及API/预期附件实际已读。此次产品仅_glob改末尾**/连续**/LF语义；Unicode lower映射、read按原资格返回valid sourceIDs及保留历史collector均未改。扫描新专项归SC2另审，B3撤源专项归SC3另审，不由本意见代判。当前3 passed/exit0。test_exact_read三原串和多个范围逐独立Python码点切片/LF端点公式，独立body拦两观察面同错、参数循环拦仅首状态/范围正确；长行分别核search/read窗口，16000正控及16001/旧版本拒绝。30个当前命中/读取观察面重新按三body或long计算text/start/end/行号全吻合，非BMP/组合字符、BOM/CRLF/CR/LF、有/无末尾LF保留；默认2000、扩读16000和400拒绝实际执行。read来源过滤未改变_range或正文。 当前设计/实现/调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台/最终CI/R006，前两次failed和其余历史TDD不被覆盖或冒称本轮重绿。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    },
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc5准备结果。已对照定义000002 sha6b524c88…、SPEC B3/B5/B6/A5、PLAN两次需求failed保留及glob返修说明、design-r006-v5-sc5和match-r006-v9-sc5分工。场景/自然设计有需求依据、具体样例在用例，未降低承诺。当前37个src逐字等于9cfd619，runtime-product-v5与本TC测试绑定、全部原artifacts SHA逐项重算一致；原stdout/process/stderr及API/预期附件实际已读。此次产品仅_glob改末尾**/连续**/LF语义；Unicode lower映射、read按原资格返回valid sourceIDs及保留历史collector均未改。扫描新专项归SC2另审，B3撤源专项归SC3另审，不由本意见代判。当前1 passed/exit0。test_invalid_read两独立文档及外档案，逐字段保留原签名篡改、范围负例、对话kind与配置旧ref拒绝；两个独立alpha正控防全拒/错读首目标，字段循环防只首字段正确。当前23项拒绝原件含损坏/跨档案400、范围400/422、对话400和原配置资格失效400；两正控原文均准确needle alpha 😀 é与second行，返回同一当次有效来源。read仍只校验原payload资格，不从其他来源借权限或替换正文。 当前设计/实现/调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台/最终CI/R006，前两次failed和其余历史TDD不被覆盖或冒称本轮重绿。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    },
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v5-sc5准备结果。已对照定义000002 sha6b524c88…、SPEC B3/B5/B6/A5、PLAN两次需求failed保留及glob返修说明、design-r006-v5-sc5和match-r006-v9-sc5分工。场景/自然设计有需求依据、具体样例在用例，未降低承诺。当前37个src逐字等于9cfd619，runtime-product-v5与本TC测试绑定、全部原artifacts SHA逐项重算一致；原stdout/process/stderr及API/预期附件实际已读。此次产品仅_glob改末尾**/连续**/LF语义；Unicode lower映射、read按原资格返回valid sourceIDs及保留历史collector均未改。扫描新专项归SC2另审，B3撤源专项归SC3另审，不由本意见代判。当前1 passed/exit0。test_empty_query完整来源ID映射/独立0或1计数及持续pending第二来源防仅首目标正确或两响应同错，合法查询正控防一概拒绝。11项非法输入400/422且含义吻合，合法零命中200空；当前coverage依次pending0/ready1/partial0/refreshing0/failed0，另一来源持续pending。_glob修复未改变输入验证/同事务覆盖逻辑。 当前设计/实现/调试有效，无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行。不判formal/新平台/最终CI/R006，前两次failed和其余历史TDD不被覆盖或冒称本轮重绿。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

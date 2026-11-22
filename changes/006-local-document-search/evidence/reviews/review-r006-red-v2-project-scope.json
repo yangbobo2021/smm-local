@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "expected_failure",
+      "reason": "SC3/design-r006-v5-sc3由SPEC B3/B5/A3直接支持，同名、普通/全局、零/多绑定、双向直接一层与不新建关联均准确。tests/test_document_projects.py:13-18按独立项目到文件名集合逐P/Q/R/G及all核对，任一遗漏目标首先在15或17行失败，只对首个项目/首文件正确也不能全过；P展开两层会在15行误含r而失败，同名P/Q混用会因两集合不同失败。每个命中16行按needle+文件名独立正文比较，两响应同错会失败；新增共享造成关联会在18行完整links比较失败。v1b的names字典吞重复已由20-21的raw结果长度==path唯一数==id唯一数==3修正，重复纳入后每来源重复返回共享文件会直接失败。当前既有不同绑定/关联状态已有区分性输入，不再因只换文件标识追加等价样例。原始red-r006-v2-project-scope/TC-006-project-scope/run.stdout和00001-api-001.json显示11行首个来源POST实际404，Fixture.request:52失败，为SPEC B1能力缺失；后续刷新、项目范围/文本/关联/去重均未执行。所有artifacts SHA一致，当前测试与match-r006-v3-sc3一致，src未改。候选设计与断言有效，expected_failure只认该真实缺失红灯。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC1的CLI/Web同一完整配置、来源维护与只读MCP来自SPEC B1/B7/A1，没有新增场景行为。自然设计要求通过CLI配置且stdout JSON对应同份来源，另分工TC-006-user-discovery人工核帮助语义与E1真实Web/stdio，故不把未在本TC断言的全部文案或实际MCP调用重复当缺口。实际sources.py:47-48只走单文件CLI add +单project-id并只核pending/project_ids；既没有非默认exclude/recursive/多项目配置的CLI输入和持久独立字段断言，也没有CLI set的实际完整替换。若CLI仅正确保存首个project-id、丢弃exclude/no-recursive，或set只改输出不改配置，64-66的--help成功与后续单文件检索仍可全过，违反本项c1/c2明确的完整配置/替换承诺。最小修订通过CLI保存非默认多项目/排除/非递归配置，并在公开sources中逐字段按独立预期核对；再CLI set替换并核同一source ID持久配置、revision/pending及默认清空语义。这里的单/多项目、递归/非递归和有/无排除是B1列明会改变查询范围的状态，非等价标识补样。现有仅首个MCP工具readOnly正确会在58-59其余工具首先失败；CLI读错文件会在52规范路径、54独立正文拦截，而不是只比较两份可能同错响应。原件run.stdout/00001-cli-000.json证明45行真实project create退出2，stderr明确invalid choice create，Fixture.cli:110失败；是B1新命令尚缺失，后续CLI文档/MCP/help都未到达。原件SHA一致、runtime正常；保留真实红灯，候选覆盖仍需修订。",
+      "covers": []
+    }
+  }
+}

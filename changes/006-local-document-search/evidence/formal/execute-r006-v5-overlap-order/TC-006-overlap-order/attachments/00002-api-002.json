@@ -1,0 +1,32 @@
+{
+  "method": "POST",
+  "path": "/api/documents/sources",
+  "request": {
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1017/test_overlap_order_pending_0/docs",
+    "project_ids": [
+      2
+    ]
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "b37bead59f104c238982cd417d800b4a",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1017/test_overlap_order_pending_0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [
+      2
+    ],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

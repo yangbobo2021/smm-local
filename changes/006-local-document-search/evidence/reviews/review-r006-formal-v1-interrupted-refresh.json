@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-interrupted-refresh 独立复核通过。依据 SPEC B4/B6/A6、PLAN §3.2/§4 A6及已审 design-r006-v5-sc6，读取 tests/test_document_concurrency.py:151-173，本项明确是数据库持久refreshing状态故障注入，未声称实测进程崩溃/平台重启。2026-11-22T16:20:14.559–14.899Z 本次 selector exit 0、stdout 1 passed；新Archive/Documents实例先确认持久状态，再明确重刷单文件及目录，真实发现新增added及one更新。00009/00016的完整集合为one/added/control，one保留ID但v1→v2，00012/00013分别精确回 recovered change/newly discovered；00014未变化正控原ref仍读continuous，00015变化前旧ref400。源码另逐一断言两被中断来源最终ready，证明恢复有采集效果而不只是改status。已独立重算00016的全部集合、身份/版本和原文本，20 artifacts、89 bindings 以及定义/设计SHA均匹配正式本轮和当前候选。平台实际重启仍由范围外E1另验，本项不替代它。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

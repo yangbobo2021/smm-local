@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-query-snapshot",
+  "target_sha256": "7fd8698dc2cb04906088dcc8f37b17f9dd466a5b18bdf7b92b0c21053ee4af15",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B5/B6/A6、PLAN §3.3/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:102-148。links/source两参数实际2passed/exit0/stderr空，33 artifacts/47 bindings。查询建立范围后由P-Q变P-R，source组另改q配置/正文刷新，当前00007/22仍旧P/Q原独立正文/ID/version/SHA/source stamp（129-135行全结果校验），下次00008P/R、00023P/Q/R且q新版changed。00013/29本轮冻结原件逐独立正文核；8次read逐ref解码source_ids准确为原有效单源，不借新范围资格，collector与实际版本正确。仅links变化旧q可读original；source变化旧q00028为400版本失效，旧p正控仍正确。断言同时覆盖完整集合和原文，不以两响应同错比较。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    }
+  }
+}

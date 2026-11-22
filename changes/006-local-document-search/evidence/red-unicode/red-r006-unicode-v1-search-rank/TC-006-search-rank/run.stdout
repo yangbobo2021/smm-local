@@ -1,0 +1,63 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________________ test_search_rank _______________________________
+
+tmp_path = PosixPath('<REVIEW_TEMP>/pytest-of-boboyang/pytest-866/test_search_rank0')
+
+    def test_search_rank(tmp_path):
+        f=Fixture(tmp_path)
+        for i in range(51):f.file(f'file-{i:03d}.md','needle common')
+        f.file('needle-filenameonlyuniquemarker.txt','unrelated document')
+        special={'unicode-lower.txt':'İ'*3000+' lowerexpansionmarker tail',
+                 'tail.txt':'padding '*1000+'tailuniquemarker',
+                 'boundary.txt':'x '*997+' crossboundaryword ending',
+                 'long.txt':'padding '*1800+'longuniquemarker suffix',
+                 'chinese.txt':'说明：中文检索资料，保留原始内容。',
+                 'a-low.txt':'relevancemarker '+'dilution '*500,
+                 'z-high.txt':'relevancemarker relevancemarker relevancemarker'}
+        for name,text in special.items():f.file(name,text)
+        source=f.add(tmp_path/'docs');f.refresh(source)
+        duplicate=f.add(tmp_path/'docs'/'file-000.md');f.refresh(duplicate)
+        first=f.search('needle',limit=1)['results'];fifty=f.search('needle',limit=50)['results']
+        assert len(first)==1 and Path(first[0]['path']).name=='file-000.md'
+        assert [Path(h['path']).name for h in fifty]==[f'file-{i:03d}.md' for i in range(50)]
+        assert len({h['id'] for h in fifty})==50
+        assert [(h['id'],h['bm25_score']) for h in fifty]==[(h['id'],h['bm25_score']) for h in f.search('needle',limit=50)['results']]
+        assert all(math.isfinite(h['bm25_score']) for h in fifty)
+        assert f.search('filenameonlyuniquemarker')['results']==[]
+        ranked=f.search('relevancemarker')['results']
+        assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']
+        for filename,query in [('unicode-lower.txt','lowerexpansionmarker'),('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:
+>           result=f.search(query)['results'];assert len(result)==1 and Path(result[0]['path']).name==filename
+                   ^^^^^^^^^^^^^^^
+
+tests/test_document_search.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/document_helpers.py:93: in search
+    return self.request('POST', '/api/documents/search', {'query': query, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <document_helpers.Fixture object at 0x105448bc0>, method = 'POST'
+path = '/api/documents/search', body = {'query': 'lowerexpansionmarker'}
+status = 200
+
+    def request(self, method, path, body=None, status=200):
+        response = self.client.request(method, path, json=body) if body is not None else self.client.request(method, path)
+        self.calls += 1
+        observe(f'api-{self.calls:03d}', {'method': method, 'path': path, 'request': body, 'expected_status': status,
+                                        'status': response.status_code, 'response': response.json()})
+>       assert response.status_code == status, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"detail":"范围须为整个采集文本的Unicode码点 [start,end)，一次1至16000字符"}
+
+tests/document_helpers.py:52: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /private/tmp/smm-006-impl/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_document_search.py::test_search_rank - AssertionError: {"de...
+1 failed, 1 warning in 0.54s

@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-exact-read 通过独立复核。对照 SPEC B5/B6、A5、PLAN §3.3/§4、design-r006-v5-sc5 与 tests/test_document_search.py:39-68。本次 test_exact_read 三参数在 2026-11-22T16:20:09.563–09.986Z 完成，exit 0，原 stdout 3 passed。48个业务附件按三组实际响应核对：CRLF/CR归一化和BOM后文本长度19、16、11，各缺省search/read及指定范围逐项等于独立原字符串的码点切片；a\nb\n 的 [0,2)、[2,4) 末行分别为1、2，末LF没有虚增行号。每组20007码点长行缺省窗口2000，0..16000读出完整16000码点，其SHA等于独立预期 f8f1aa17…；16001及改版前旧ref均400，未返回正文。无源文件读取哨兵在短文本读取期间有效，断言全部到达。已重新计算52个正式 artifacts、89个 bindings、定义及设计摘要，全部匹配，当前源码与本次证据同版；未用准备/绿灯代替正式结果。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    }
+  }
+}

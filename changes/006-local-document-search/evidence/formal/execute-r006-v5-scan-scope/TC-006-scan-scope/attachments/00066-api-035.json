@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiOGVkYTU5ZmFmMGRkNDc3ZTk1OTU4Mjk3ODc5YmNkOTgiLCJkb2N1bWVudF9pZCI6ImQwZTk4YTE1OWExZjQ3YTk5YjM0MDc4NmJhODU1NzY5IiwiZW5kIjoyNiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE3MTNjZDg0MGNmMTQ1ZDA4ZGQ2OTliYmM5MWVkMGYxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjZ9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.fcd09403f4d1d5c7226dc3bcfa8e99171c89c02eae3ad1d330cc70584bd3bb88"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "d0e98a159a1f47a99b340786ba855769",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/glob-cases/docs/cachex/keep.txt",
+    "version": 1,
+    "sha256": "12e6382df39cab88fbae49a66311cb7f6076b469bc60ebcc5cc2e6a611d828e7",
+    "text_length": 26,
+    "captured_at": "2026-11-22T19:18:47.517974+00:00",
+    "captured_by_source_id": "1713cd840cf145d08dd699bbc91ed0f1",
+    "text": "globneedle cachex/keep.txt",
+    "start": 0,
+    "end": 26,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "1713cd840cf145d08dd699bbc91ed0f1"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

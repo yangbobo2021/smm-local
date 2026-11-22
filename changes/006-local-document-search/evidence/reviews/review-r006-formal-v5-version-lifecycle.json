@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-version-lifecycle",
+  "target_sha256": "5e99741ebd9c50607c648bb318810e2e5db391cc289337d632665be21b7b6e3b",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "当前v5按SPEC B3/B4/A4、PLAN §4及test_version_lifecycle独立逐字段复核。stdout1passed、stderr空、exit0；33 artifacts/47 bindings与designSHA重算匹配9cfd619 documents390880bf…。6search/9read/8reject原响应完整解析，one/two各保留自身ID，00003/05/08/12/18版本链均1/1/1/2/3；无变化ref仍可读，编辑未刷新返回有captured_at的original；刷新后精确updated，改回原字节又精确original但v1/v2ref仍400。移动/删除后仅moved新ID，旧两v3ref拒绝，moved为独立original one正文。每read字面正文/原SHA、签名文档版本/返回来源限原stamp及区间核对无误。仅本轮selector，无XML/额外回归，不沿用旧产品通过或历史TDD绿灯，不判平台/R006。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    }
+  }
+}

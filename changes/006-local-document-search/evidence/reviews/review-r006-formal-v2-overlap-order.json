@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-overlap-order",
+  "target_sha256": "d8602fec86aeddd5b110b57ddf7b4a6627c858fb88480ad3f3dd7cfcbc781749",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B3/B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照tests/test_document_concurrency.py:77-99。S1原pending和ready两种状态，两个独立路径one/two均实际执行；S1旧正文在发布前等待，S2先发布不同新正文，然后释放S1。第91行文件级完整状态等于S2发布快照；第92-97行逐P/Q/all、逐两个目标核新正文与采集出处S2，ready组还核ID不变/版本更新。原00006–00014及00024–00032分别实际返回两个newwinner正文（pending版本1/ready版本2），P/Q来源资格各正确、all合并两源；00015/33 oldloser零命中，原00017/35记录winner及完整最终命中。旧请求允许补纳入资格但没有覆盖较新正文，不能仅凭旧刷新响应200判断缺陷。stdout2 passed/exit0/stderr空，39 artifacts/47 bindings与match摘要重算一致。本正式轮无XML/附回归；对应green-v2旧引用回归原stdout4 passed且摘要一致，full-regression-v3 XML四项通过（301 passed/1 skipped）。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "method": "GET",
+  "path": "/api/documents/files?source_id=e5b68676efc14f30818102807806b2bd",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "source_id": "e5b68676efc14f30818102807806b2bd",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "87a88696227b41b1b28eb290953ecfe8",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:49.274940+00:00",
+      "captured_by_source_id": "e5b68676efc14f30818102807806b2bd"
+    },
+    {
+      "source_id": "e5b68676efc14f30818102807806b2bd",
+      "relative_path": "large.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件超过2MiB",
+      "id": "2b012db07fa247d5ae0b5dd3e3b772c6",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs/large.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    }
+  ]
+}

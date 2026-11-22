@@ -1,0 +1,36 @@
+{
+  "method": "PUT",
+  "path": "/api/documents/sources/cad8a3827fe14a75a5920513a2a4ed90",
+  "request": {
+    "project_ids": []
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "cad8a3827fe14a75a5920513a2a4ed90",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/document-client/docs/private-document.txt",
+    "kind": "file",
+    "recursive": true,
+    "exclude": [],
+    "revision": 2,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 1,
+    "started_at": "2026-11-22T19:19:04.845480+00:00",
+    "finished_at": "2026-11-22T19:19:04.846517+00:00",
+    "error": null,
+    "counts": {
+      "ready": 1,
+      "failed": 0,
+      "candidates": 1,
+      "billed_bytes": 34,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

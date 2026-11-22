@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNjNhYTVjZTM4YWIwNDM0MzlkOTAxYjFmMWExZWFiYjIiLCJkb2N1bWVudF9pZCI6IjhlODk1Y2NkNmQ1NTRkYjk5ZGJlMDE5ZjIxODc3ZThjIiwiZW5kIjoxMiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6Ijg0MDc0MmE5MjE4MjQxNjRiZjBkZWM3MWYyNjg3NDY5IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.39e9dfe8b01d01378266b09b06d02e4d298d517eb686fe6b0dcfac0859de452f"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "8e895ccd6d554db99dbe019f21877e8c",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1005/test_project_scope0/docs/r.txt",
+    "version": 1,
+    "sha256": "a45f63238f965e0e222c48668e33926b0f0e8b999a187c62c27c49338e2f5bac",
+    "text_length": 12,
+    "captured_at": "2026-11-22T19:18:52.599398+00:00",
+    "captured_by_source_id": "840742a921824164bf0dec71f2687469",
+    "text": "needle r.txt",
+    "start": 0,
+    "end": 12,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "840742a921824164bf0dec71f2687469"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

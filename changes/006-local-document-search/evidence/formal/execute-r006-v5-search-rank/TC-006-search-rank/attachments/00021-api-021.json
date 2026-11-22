@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzAxNTcxMjdlMzJmNGE5Y2I5ZTI5YzNhYWE5NTdhMDMiLCJkb2N1bWVudF9pZCI6IjUxYzAxMzMyZGE1MTQ4ZWZhMTFlODc4YTQ4YTMwZmJkIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjIzMTIxNDE5YmM0NDRlMTY5MDY3N2Q2NDBiMjAyN2ZlIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.e4095e823464fd4909f007e896c1ad19a31109d5b3642acc9bf8d2f5a69ce06f"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "51c01332da5148efa11e878a48a30fbd",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1011/test_search_rank0/docs/chinese.txt",
+    "version": 1,
+    "sha256": "b74075b813762a9800e72cff7d4d989bb4dcd00e16e34254006720d1ae213c44",
+    "text_length": 17,
+    "captured_at": "2026-11-22T19:18:57.780191+00:00",
+    "captured_by_source_id": "23121419bc444e1690677d640b2027fe",
+    "text": "说明：中文检索资料，保留原始内容。",
+    "start": 0,
+    "end": 17,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "23121419bc444e1690677d640b2027fe"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

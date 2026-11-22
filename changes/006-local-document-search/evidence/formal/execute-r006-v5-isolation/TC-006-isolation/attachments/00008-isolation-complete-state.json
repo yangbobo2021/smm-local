@@ -1,0 +1,177 @@
+{
+  "mode": "none",
+  "before": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/histories/original.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/OriginalProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/OriginalProject",
+        "project_id": 1,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      },
+      {
+        "id": 2,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/other.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/OtherProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/OtherProject",
+        "project_id": 2,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "original-message",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "second-message",
+        "position": 0,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "codex_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/histories\""
+      },
+      {
+        "key": "claude_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/empty\""
+      },
+      {
+        "key": "archive:identity",
+        "value": "\"bf2622a0b3874dc59d52407fa2dc0fa7\""
+      },
+      {
+        "key": "disabled_builtin_sources",
+        "value": "[\"codex\"]"
+      }
+    ]
+  },
+  "after": {
+    "conversations": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "original",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/histories/original.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/OriginalProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/OriginalProject",
+        "project_id": 1,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce original",
+        "search_text": "conversationnonce original"
+      },
+      {
+        "id": 2,
+        "source": "claude-code",
+        "source_session_id": "second-session",
+        "source_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/other.jsonl",
+        "cwd": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/OtherProject",
+        "project_path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/claude-fixture/OtherProject",
+        "project_id": 2,
+        "started_at": null,
+        "updated_at": null,
+        "title": "conversationnonce second independent",
+        "search_text": "conversationnonce second independent"
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "conversation_id": 1,
+        "source_key": "original-message",
+        "position": 1,
+        "role": "user",
+        "text": "conversationnonce original",
+        "timestamp": null
+      },
+      {
+        "id": 2,
+        "conversation_id": 2,
+        "source_key": "second-message",
+        "position": 0,
+        "role": "user",
+        "text": "conversationnonce second independent",
+        "timestamp": null
+      }
+    ],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "2"
+      },
+      {
+        "key": "codex_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/histories\""
+      },
+      {
+        "key": "claude_root",
+        "value": "\"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/empty\""
+      },
+      {
+        "key": "archive:identity",
+        "value": "\"bf2622a0b3874dc59d52407fa2dc0fa7\""
+      },
+      {
+        "key": "disabled_builtin_sources",
+        "value": "[\"codex\"]"
+      }
+    ]
+  },
+  "remote_before": {
+    "conversations": [],
+    "messages": [],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "0"
+      },
+      {
+        "key": "hub_identity",
+        "value": "\"0736eb6339ee4c1caf57552b13063921\""
+      }
+    ]
+  },
+  "remote_after": {
+    "conversations": [],
+    "messages": [],
+    "settings": [
+      {
+        "key": "message_sequence",
+        "value": "0"
+      },
+      {
+        "key": "hub_identity",
+        "value": "\"0736eb6339ee4c1caf57552b13063921\""
+      }
+    ]
+  },
+  "outbound_calls_after_marker": 0,
+  "guard_blocks_loopback_and_external_ip": true
+}

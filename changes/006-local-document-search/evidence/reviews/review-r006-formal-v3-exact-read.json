@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-exact-read",
+  "target_sha256": "d30d167136b8cc73d8a28b7c905770816b740a4c1afd4e01ee8c43f94d44afff",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照当前tests/test_document_search.py:41-70及deny_source_reads。实际stdout3 passed/exit0/stderr空，52 artifacts/47 bindings。重新读取本正式48份业务附件，从00016/32/48独立normalized三正文及独立long字符串重算所有读取/命中码点切片、起止行号和窗口：BOM/CRLF/CR、非BMP emoji/组合码点、有/无末尾LF全部吻合；a+LF [0,2)第1行、b+LF [2,4)第2行、尾LF第3行。三组长默认窗口2000内且准确，扩读16000等于long[:16000]，16001及旧版本ref每组均400；无源I/O哨兵在短文全部读取区间启用。Unicode定位修复后仍满足B6原文坐标含义，而非search/read两边同错比较。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    }
+  }
+}

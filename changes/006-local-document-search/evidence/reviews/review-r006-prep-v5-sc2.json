@@ -1,0 +1,35 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "SPEC B2/A2及SC2自然设计v5有效；当前27份原件及test_scan_scope独立五路径集合/逐文件全文覆盖默认目录/隐藏/未知格式、* ? **零/多层与目录尾斜杠，非递归只root.MD，显式build文件/隐藏单文件/目录可纳入。任务内链接有唯一escape marker，检索空且根链接400，原件SHA/mtime逐一不变。五路径完整集合可拦只处理首正常文件，显式来源检查拦一律排隐藏，唯一marker拦跟随链接。Windows junction及平台人工项不在本debug。 当前测试新增独立七路径/五模式，实际71份原件00037/44/53/60/71对应cache/**/、**/cache/**/、outer/**/cache/**/、连续**及大写CACHE，完整actual与独立wanted分别5/3/5/3/7路径一致；逐命中globneedle+相对路径正文准确，cachex及外层正控防过排，根/深层cache防漏排/只处理首目标，LF仅纯匹配语义断言。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc2本TC原始日志1 passed/exit0；本轮165/20/98/71份相应原件重核真实预算边界、三错误分类、五屏障和完整扫描路径/逐正文与当前断言相符，全部分配检查实际达到。只有scan-scope有本轮新同版TDD绿灯，其余为准备复审。平台文件人工项未在本debug，不认领。旧failed保留，仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    },
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "SPEC B2/B6/A2及SC2设计v5仍准确。当前20份原件显示7候选95字节、partial 4ready/3failed，binary-nul.txt明确文件含二进制NUL、bad.txt严格UTF8错误及denied.txt实际注入OS拒读；正常BOM/中英emoji/组合码点/CRLF/CR/LF逐全文/SHA准确，empty ready长度0。修复后7ready与全部名称/逐全文/SHA断言保留。test_decode_files完整集合和逐字独立normal(cases)拦只处理首目标/丢尾LF或组合码点，分类与计数拦将失败伪ready。合法NUL文件名修订未削弱NUL边界；真实平台权限另验。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc2本TC原始日志1 passed/exit0；本轮165/20/98/71份相应原件重核真实预算边界、三错误分类、五屏障和完整扫描路径/逐正文与当前断言相符，全部分配检查实际达到。只有scan-scope有本轮新同版TDD绿灯，其余为准备复审。平台文件人工项未在本debug，不认领。旧failed保留，仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ]
+    },
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "SPEC B2/A2与PLAN3.2/4的真实上限和计费优先设计v5有效。当前165份附件显示1000候选ready1000、1001候选整源failed且ready0；16777216字节ready9、16777217整源failed；混合17MiB/坏编码/拒读正反枚举各4候选13计费字节partial1ready，invalid-total两顺序整源失败，stat失败计候选/不计字节。11参数实际创建数量/字节、独立fingerprint求计费，不缩常量。test_budgets精确1000ready路径集合拦只处理首文件；预算超限search空/旧ref拒绝拦提前发布；独立billed_bytes拦不计失败候选；恢复及旧资格永久拒绝均实际达到。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc2本TC原始日志11 passed/exit0；本轮165/20/98/71份相应原件重核真实预算边界、三错误分类、五屏障和完整扫描路径/逐正文与当前断言相符，全部分配检查实际达到。只有scan-scope有本轮新同版TDD绿灯，其余为准备复审。平台文件人工项未在本debug，不认领。旧failed保留，仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    },
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "SPEC B2/B4/A2及PLAN3.2自然设计v5有效。当前98份原件真实事件分别为after-budget-before-open、during-opened-read和enumeration-error；单个增长2097153导致partial1failed，多文件9×2097152导致partial9failed，正文/路径替换各partial1failed，枚举整源failed；控制全文controlneedle unchanged可读，逐旧ref拒绝。test_read_races五参数先建旧快照与正控，完整集合和9失败计数拦只拒首个变化目标，正控全文拦一律撤销，枚举不标missing防假完整，下一轮新预算及恢复旧ref不复活有实际断言。不是进程崩溃实测。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc2本TC原始日志5 passed/exit0；本轮165/20/98/71份相应原件重核真实预算边界、三错误分类、五屏障和完整扫描路径/逐正文与当前断言相符，全部分配检查实际达到。只有scan-scope有本轮新同版TDD绿灯，其余为准备复审。平台文件人工项未在本debug，不认领。旧failed保留，仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

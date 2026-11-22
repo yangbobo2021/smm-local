@@ -1,0 +1,78 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "docprivateneedle",
+    "scope": "project",
+    "project_id": 1
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "050dd5091e3947dcb60b16e20de240fc",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/document-client/docs/private-document.txt",
+        "version": 1,
+        "sha256": "7fbd2108e39266a20380e733ed6cf920d7c0063469ffc5d7eb8cc06bb384a548",
+        "text_length": 23,
+        "captured_at": "2026-11-22T19:19:04.846386+00:00",
+        "captured_by_source_id": "cad8a3827fe14a75a5920513a2a4ed90",
+        "text": "docprivateneedle 本机文件 😀",
+        "start": 0,
+        "end": 23,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "cad8a3827fe14a75a5920513a2a4ed90"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmYyNjIyYTBiMzg3NGRjNTlkNTI0MDdmYTJkYzBmYTciLCJkb2N1bWVudF9pZCI6IjA1MGRkNTA5MWUzOTQ3ZGNiNjBiMTZlMjBkZTI0MGZjIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNhZDhhMzgyN2ZlMTRhNzVhNTkyMDUxM2EyYTRlZDkwIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.399a17a19bc8965ffcd90b34701f4edcfd6cddbd88dc0749fdd909ddf83d4b49",
+        "bm25_score": 1e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "project",
+    "effective_project_ids": [
+      1
+    ],
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 1,
+      "sources": [
+        {
+          "id": "cad8a3827fe14a75a5920513a2a4ed90",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_none_0/document-client/docs/private-document.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "9faf127c272c4458a9ae62921a24b74c",
+          "request_seq": 1,
+          "started_at": "2026-11-22T19:19:04.845480+00:00",
+          "finished_at": "2026-11-22T19:19:04.846517+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 34,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

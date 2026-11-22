@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B5/A5，SC5与自然设计的正文召回/排序边界有依据。tests/test_document_search.py:9–36以51文件、重叠来源、文件名反例与高低相关文本；24–25完整50路径/唯一ID拦仅首文件正确，30独立高相关顺序、31–35各自special原串切片拦两响应同错。新green-r006-v2-search-rank原stdout 1 passed，api-005为file-000，api-006/007完整000..049且id/score稳定；api-008文件名词零命中，009 z-high先a-low；四个正文特殊查询分别命中正确文件且窗口含查询词。原red-r006-v3-search-rank合法add404和独立红灯意见仍与同测试一致。产品documents.py:360–390完整FTS和稳定路径/ID排序支持所测行为。 本次绿灯业务和所附回归均有效，未见有据必测缺口，passed；新增等价目标为可选，人工平台/用户入口、最终CI和R006交付不由本意见预判。",
+      "covers": []
+    }
+  }
+}

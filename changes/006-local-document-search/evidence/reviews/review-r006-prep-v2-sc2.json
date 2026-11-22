@@ -1,0 +1,35 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2与SC2，递归/非递归、默认/自定义排除、显式隐藏单文件/目录及链接拒绝的自然设计有效。tests/test_document_scanning.py:7起从独立五路径/全文字面值验证全部命中与逐文件read；包含所有默认目录、隐藏、未知格式、*不得跨段、?、**零/多层及尾斜杠；set非递归只剩root.MD，另加build文件/.secret/.hidden目录可见；链接目标有独有marker，检索必须为空，链接根add须4xx，所有原件SHA/mtime不变。反例：只索引首个正常文件被五项完整集合拦截；一律排隐藏使显式来源失效被对应搜索拦截；跟随目录/文件链接被escapeuniquemarker零命中拦截。原始00027-scan-expected.json与API逐文件正文、00025-rejected-024.json根链接400支撑，产品documents.py:_scan/_glob按相同业务边界实现。这里只是本机共享测试，不认领Windows junction或三平台原件项。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc2本TC新原始日志1 passed/exit0。重新核当前附件业务数值：decode为binary-nul真实NUL错误、7候选95字节/4ready3failed后7ready；预算上下限和正反顺序、五个真实屏障、scan五独立全文及根链接拒绝均与实际断言吻合。SC2业务判据和自然设计v5不变；match-v5当前source选段及SHA与实际测试一致。全部本TC分配检查均实际到达。平台文件人工项不在该debug，未认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    },
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "依据SPEC B2/B6/A2与SC2，大小写扩展、BOM/CRLF/CR/LF/组合字符/emoji、错误编码/NUL/拒读及恢复的自然设计有效。tests/test_document_scanning.py:test_decode_files逐一校验三非空正常文件的独立规范化全文及原始字节SHA，空文件ready长度0；坏编码、NUL、os.open拒绝各failed且错误分类可见，partial精确4ready/3failed与完整命中集合；修复再刷7ready并逐文件核全文/SHA。反例：只解码首个正常文件会被完整名称集合与循环读取拦截；丢组合码点或尾LF会被normal(cases[name])独立值拦截；将三失败伪ready会被状态/计数/集合拦截。原始00020-decode-expected.json记录7候选、95字节、每文件错误，API read返回needle 中文😀\\n组合é\\n末行\\n及恢复全文，和实际断言相符。documents.py:_read_file严格utf-8-sig解码并仅规范换行，错误不发布半份正文。权限为确定性OS故障注入，真实普通账户权限归平台项。 本轮仅将夹具nul.txt改为binary-nul.txt，仍write_bytes(b'needle\\x00body')；当前v2绿灯及debug原件明确binary-nul.txt failed/文件含二进制NUL，7候选95字节、4ready/3failed及修复7ready断言完全保留。真实Windows旧日志的failed=2与设备名夹具问题相符，本项没有删除NUL边界。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc2本TC新原始日志1 passed/exit0。重新核当前附件业务数值：decode为binary-nul真实NUL错误、7候选95字节/4ready3failed后7ready；预算上下限和正反顺序、五个真实屏障、scan五独立全文及根链接拒绝均与实际断言吻合。SC2业务判据和自然设计v5不变；match-v5当前source选段及SHA与实际测试一致。全部本TC分配检查均实际到达。平台文件人工项不在该debug，未认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ]
+    },
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2、SC2与PLAN3.2/4，真实单文件2MiB/2MiB+1、1000/1001候选、16MiB/16MiB+1与计费优先级设计有效。tests/test_document_limits.py:test_budgets的11参数实际写对应字节/数量，不缩常量；先建baseline旧ref，再独立fingerprint求候选/可计费字节，完整1000ready路径集合与真实上下限逐项断言；正反scandir顺序的混合17MiB/坏编码/拒读应partial且只有baseline可查，编码/NUL/后续拒读参与16777217字节总预算而整源failed；stat失败计候选字节0。反例：以首文件代替完整1000集合被set(files ready)==set(originals)拦截；顺序提前发布好文件被整源搜索空/旧ref拒绝拦截；错误文件不计预算被billed_bytes独立总和及failed拦截。原始各budget-actual附件明确1000ready、1001failed、16777216ready、16777217failed、正反混合集合一致；超限后恢复并继续拒绝旧ref。产品documents.py:_scan先全量计数计费后读取/_publish整源失败撤资格，与证据一致。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc2本TC新原始日志11 passed/exit0。重新核当前附件业务数值：decode为binary-nul真实NUL错误、7候选95字节/4ready3failed后7ready；预算上下限和正反顺序、五个真实屏障、scan五独立全文及根链接拒绝均与实际断言吻合。SC2业务判据和自然设计v5不变；match-v5当前source选段及SHA与实际测试一致。全部本TC分配检查均实际到达。平台文件人工项不在该debug，未认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    },
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "依据SPEC B2/B4/A2及PLAN3.2，预算后变化不得发布、枚举失败整源撤资格和下一轮恢复设计有效。tests/test_document_limits.py:test_read_races五参数先建racy与独立control快照，再于_read_file入口屏障把单个增2097153或9个各增2097152；fstat屏障分别改正文/替换路径；scandir实际抛枚举异常。每分支断言屏障发生、partial精确n失败/1ready且唯一正文controlneedle unchanged，旧racy引用逐一4xx；枚举failed时搜索空且不标missing。下一轮按新总量failed，然后恢复原字节仍不得复活已失效ref。反例：只拒首个变动文件由9失败计数、完整命中集合和逐ref拒绝拦截；把正控也撤销由独立控制全文拦截；新ref等于旧ref假成功由bad断言拦截。原始read-race-observation五份记录真实屏障事件/大小/状态，API原文/4xx相符。documents.py:_read_file比较预检/fd/路径身份大小mtime与有界读，_scan枚举错误不发布，支持共享逻辑结论，不冒称真实平台崩溃。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc2本TC新原始日志5 passed/exit0。重新核当前附件业务数值：decode为binary-nul真实NUL错误、7候选95字节/4ready3failed后7ready；预算上下限和正反顺序、五个真实屏障、scan五独立全文及根链接拒绝均与实际断言吻合。SC2业务判据和自然设计v5不变；match-v5当前source选段及SHA与实际测试一致。全部本TC分配检查均实际到达。平台文件人工项不在该debug，未认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

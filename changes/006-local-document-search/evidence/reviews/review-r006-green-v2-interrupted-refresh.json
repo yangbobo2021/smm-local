@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B4/B6/A6、PLAN §3.2/§4与SC6设计允许数据库持久refreshing注入核共用恢复，真实进程重启另归E1。tests/test_document_concurrency.py:151–173单文件/目录均注入、改one增added，创建新Archive/Documents明确刷新；166/168全文件集合和两个来源ready拦仅首目标正确，169/170独立变化/新增正文拦只恢复status或两响应同错，171未变control旧ref正控、172变化one旧ref拒绝。新green-r006-v2-interrupted-refresh原stdout 1 passed；persistent-interruption原件明确状态注入，after为one recovered v2、added newly discovered v1、control continuous v1；三read准确，旧one400。red-r006-v3-interrupted-refresh合法add404及独立红灯与同测试一致。documents.py:308–321下一明确刷新重新分配身份，不依赖旧进程。 本版业务及回归有效，passed，无有据必测缺口；明确只认领持久状态故障注入，不冒称实际进程崩溃，真实平台、用户入口、最终CI和R006交付另需证据。",
+      "covers": []
+    }
+  }
+}

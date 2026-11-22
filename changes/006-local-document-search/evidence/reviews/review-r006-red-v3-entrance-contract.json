@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "expected_failure",
+      "reason": "SC1判据与design-r006-v5-sc1可从SPEC B1操作表、B7/A1推出，CLI配置与只读MCP契约自然设计准确，无额外行为。已核match-r006-v4-sc1、manifest-v3、tests/test_document_sources.py:52-89与红灯冻结选段一致；所有artifacts及运行绑定SHA一致。57-64行从CLI传入多项目/两个排除/nonrecursive并由公开sources核持久配置，错误仅回显不能通过63行；本轮65-67行执行无选项CLI set并独立断言project_ids=[]、exclude=[]、recursive=True、pending、revision递增，已拦截前轮“CLI省略名单沿用旧值”反例。只接受首项目在60行失败，任一排除丢失在61行失败；73-74行独立字面正文拦截两个产品响应同错/错文件，78-80逐一核三只读工具与旧工具，84-88实际帮助退出及必要输入说明。对当前已区分的输入状态只换等价标识属于可选补测，不再阻塞。原始tdd-red/red-r006-v3-entrance-contract/TC-006-entrance-contract/run.stdout及00001-cli-000.json显示54行真实project create退出2，stderr为invalid choice create；Fixture.cli:110业务退出断言首先失败，符合SPEC B1新增命令尚缺，非环境故障。55行以后CLI配置、刷新、查询读取、MCP、帮助均未执行。故候选有效且为expected_failure，不能视为后续已通过；人工Web和平台未预判。",
+      "covers": []
+    }
+  }
+}

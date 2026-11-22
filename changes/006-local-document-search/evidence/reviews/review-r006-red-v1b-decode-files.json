@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC2编码/失败判据由SPEC B1/B2/B6/A2支持；design-r006-v3-sc2要求逐路径独立文本、正常文件不丢和实际错误原因，方向正确。实际scanning.py:50信任ready计数，53-56只遍历产品返回的hits，没有先断言首次partial状态下应命中的完整集合{a.MD,b.markdown,c.TXT}。反例：首次有错误文件时产品只返回第一个a.MD，仍报告ready=4；53-56仅检查a便通过；修复后返回59行要求的完整文件名集合但不读取各文件，此时其余目标的错误文本/先前漏索引仍未受检。该差异正是B2“单文件失败不妨碍成功文件索引”及设计“每个支持目标”的适用状态，不是等价样本增量。最小修订是在partial及恢复两阶段先按独立文件集合断言所有可检索目标，再逐目标读取比较文本/原始字节SHA，空文件另查ready/长度。另52行仅error非空，UTF8/NUL/权限三者一律返回泛化错误也能通过，不能证明B2分别报告失败、B7保留原错误；需核对可区分的诊断含义及合成PermissionError原因。现有逐命中正文核对的两边同错会在55行独立normal(cases[name])预期被拦截，SHA同错会在56行独立源fingerprint被拦截，缺口在未返回的目标和恢复后未读的正文。原件run.stdout/00001-api-001.json显示41行首次来源POST真实404；尚未执行解码/注入拒读/partial/恢复，不能称这些已实测。所有原件SHA核对一致，runtime正常，保留该业务缺失红灯，候选实现仍需修订。",
+      "covers": []
+    }
+  }
+}

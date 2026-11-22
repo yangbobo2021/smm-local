@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "expected_failure",
+      "reason": "独立红灯复审，reviewer_session=/root/review_006_delivery；target_operation=tdd-red，target=red-r006-metadata-v1-overlap-version，实际result.json SHA-256=18bd6e465aeffa1479b474fb20044a7061b26dd3a5427244d058f49fc0d4ad9b。仅判TC-006-overlap-version新断言和本次红灯，不覆盖delivery-r006-v1 failed、不预判修复/新包/正式交付。\n实际读SPEC B3/B6/A3、已审design-r006-v5-sc3、当前match-r006-v8-sc3与implementation-manifest-v7，以及tests/test_document_projects.py:42-99和Fixture.read/bad。新增断言直接来自B3当前资格来源与历史采集者必须区分：remove/failed状态旧all引用仍应准确读needle v2，但当前source_ids只能含连续有效S1；continuous正控应保留S1/S2；p引用始终只能含S1，captured_by_source_id仍是实际采到v2的S2。没有将正确旧all读取改成拒绝，也没有新增规格行为。\n本次真实执行2026-11-22T18:26:39.960–18:26:41.243 UTC，命令.venv/bin/python -m pytest -q tests/test_document_projects.py::test_overlap_version，exit1、stderr空、stdout 2 failed/1 passed。两个失败均精确发生于第75行set(all_read[source_ids])独立期望：remove分支00019实际删除S2=1c332927a4de4d1283356a65bc730692，00025 p_read仅S1、00026 all_read仍多S2；failed分支source/项目查询已显示S2=63a6b0d4ce784bd1a7a868ebc6e956c2为failed、Q零命中，00052 p_read仅S1、00053 all_read仍多失败S2。两响应都准确为v2、历史采集者S2，正文及p来源断言已到达且正确。continuous参数完整通过，00077/78/79分别p/all/q读取与双来源正控符合预期。remove/failed的第76行采集者断言及后续v3流程因第75行失败未到达，不将其记passed；不过本次失败前原read响应确可核采集者仍S2。\n已重算106个artifacts、45个bindings、37个product_bindings和5个test_bindings，全部与当前实际字节一致；37产品文件另逐项与git a66deeb比对一致，documents.py仍为87e2546613a108cf176823a9aeffc1efe501b4e3b798e23e36695f172c6b8381，确认产品尚未修。当前测试冻结片段/摘要及match-v8指向新断言。documents.py:412-420校验任一有效stamp后却返回payload全部source ID，完整解释实际错误；这是当前产品的需求行为失败，非环境、导入、夹具错误或把不同版本证据拼接。认可expected_failure；TDD不认领正式检查项，covers为空。",
+      "covers": []
+    }
+  }
+}

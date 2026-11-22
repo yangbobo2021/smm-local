@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "expected_failure",
+      "reason": "已读006 SPEC B5/A7及PLAN A7、000002定义SC7、design-r006-v5-sc7和match-r006-v5-sc7。原Windows CI日志:114-131、344-361显示请求到业务前由asyncio proactor_events._make_self_pipe→socket._fallback_socketpair→127.0.0.1 connect触发原网络哨兵。本轮仅在guard前进入with f.client建立持久portal：已实际读安装版starlette/testclient.py:486-491、557-572，后续请求使用现有portal；Fixture创建app明确auto_sync=False/sync_on_start=False，api.py:213-232此配置不启动同步worker。文档add/refresh/search/read/set/remove和对话/远端/开关/暂停状态核对全部位于guard内，guard恢复后才关闭portal；没有允许回环Hub连接。no_network仍按AF_INET/AF_INET6无条件拒绝，federation._request也拒绝；新增127.0.0.1:18770和203.0.113.1:443两个真实connect负例均在到达add前已执行，若哨兵漏放其中一类将先于业务失败。原两个独立来源正文与完整归档/上传状态比较、none/hub/paused三种状态均保留；第二来源误读首来源会被逐项独立正文/source断言拦截。red-r006-ci-v1-isolation/TC-006-isolation/run.stdout实际三个参数都于test_document_compatibility.py:58进入document_helpers.py:52，三个附件00001至00003均POST /api/documents/sources响应404 {detail: Not Found}，退出1；不是新哨兵误拦/导入错误。刷新及隔离最终状态断言均未到达，不能宣称已绿灯。已核全部artifact/test摘要、match实际选段及36个src product_bindings完全等于git f797fe843430b48faf379cd76b4ae18fd52f5c64；当前/备份37个src逐字等于f89623b。认可因旧产品缺少需求文档入口产生的expected_failure；本次封装修订没有降低所审隔离检查，最终Windows CI未在此预判。",
+      "covers": []
+    }
+  }
+}

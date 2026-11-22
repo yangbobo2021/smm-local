@@ -1,0 +1,41 @@
+{
+  "acceptance_id": "AT-SMM-006",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-006/delivery-judge/delivery-r006-v2/reviewer.json": "3c21db72dc8a734f9d532c4bcfba7c6e1600f95d4962035a74a11ee323b92bac"
+  },
+  "definitions_sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c",
+  "judgment": {
+    "reason": "R006 failed。采用已确认006 intent/spec/plan及原生定义000002（SHA256 6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c）；当前产品提交4c706b304e904b126ea3103523069b265d101b31，documents.py SHA256 43d3762cd9d413bc5954df362bf99132beed242bb30348cd6911de470e5930a0。已实际运行records show/results view：SC1–SC8、29TC均passed、R006仍pending_delivery_review；这些汇总不代替需求原文判定。\n\n确认失败 A2/B2：spec.md:29规定“**匹配零个或多个目录段；以/结束的模式排除对应目录及全部后代”。当前合法排除cache/**/在**取零目录段时应匹配cache目录并排除其全部后代。另一全新独立PR Reviewer的真实当前产品原件work/pr-review-v2/glob-trailing-recursive.json（本意见中work均相对.acceptance-local/native-v1/AT-SMM-006；SHA256 aba525c7925296dd5ac8621b1946b3de194149cbb5c9e71225c692539000ea88）记录2026-11-22T19:00:50.596433Z至19:00:50.613042Z：add实际保存exclude=[\"cache/**/\"]；refresh返回ready、2候选/2成功；search实际命中cache/direct.txt的needle direct和visible.txt的needle control，独立预期仅visible.txt。本人实际打开原JSON并逐值核对输入、结果、提交；另在当前模块只读求值_glob('cache/**/')得到^cache/.*$，fullmatch('cache')为False而fullmatch('cache/sub')为True，documents源码摘要仍为上述4c字节。documents.py:80–90在末尾**前固定插入/；_scan按目录相对路径cache（无尾斜线）匹配，故进入cache并发布其直接文件。不是缺图、仅推测、旧包证据或新增需求。tests/test_document_scanning.py:13–21仅分别覆盖**/private.txt零层/多层和cache/目录模式，遗漏尾随**与目录尾/组合，所以当前scan-scope正式passed会放过该违反原文的行为。A2不得判通过；应补有独立预期的真实红灯、修当前实现并重新取得受影响同版正式/独立证据。不得以29TC均passed或修改规格降低**语义来消除此失败。\n\n逐A/E核查与其余结论边界：\nA1：已读test_document_sources全部断言、documents.add/set、API/MCP实际路由与工具、CLI及真实帮助。当前v4-source-config/entrance-contract正式均exit0，源I/O哨兵下保存pending不采集，两个同名普通项目身份不同，单文件/目录及名单省略复位、非法输入后完整配置不变、Archive重开、CLI exact reference读回和三工具readonly有实际证据。Web配置完整替换/项目选择/刷新另由三个正式E1真按钮证实。未发现A1新增失败。\nA2其余：实际读扫描/预算/读取竞态用例与_current_scan/_read_file。v4-budgets实际11passed，包含2097152/2097153字节、1000/1001文件、16777216/16777217计费字节及正反枚举混合/错误编码/NUL/拒读预算优先；v4-read-races实际5passed，预算后增长、读中修改/替换、枚举失败和恢复均核旧资格及正控。大小写扩展/BOM/严格UTF8/换行/中英emoji与逐文件错误原响应支持已有分支；真实Mac/Linux权限和Win junction另读platform formal-v3原件与PNG。上述不覆盖已确认cache/**/失败。\nA3：已读project-scope、project-maintenance、overlap-version的独立集合/正文/资格断言及当前正式原件。零/一/多项目、同名ID、G独立、P-Q-Q-R仅直接一层、共享不建link、路径映射不推断、改名/合并去重均有实际证据；core/project_control条件访问Local文档表、迁移绑定及确认摘要代码与当前回归相符。v4-overlap-version三个remove/failed/continuous分支实际3passed；本人直接核attachments/00025、00026、00079、00080、00131、00132等成功读回：旧all在S2退出后只返连续S1，captured_by_source_id仍保留历史S2；continuous仍返两资格，v3后v2引用拒绝。当前metadata旧失败已修，不把其历史failed覆写为过去通过。\nA4：v4-version-lifecycle/source-lifecycle/qualification实际1/1/3passed。断言逐两个文件核同ID换版、原字节改回不复活、移动新身份、删/排除/完整配置/末源移除、数据库正文/FTS清理；file/source/missing三状态同配置同字节恢复后旧单源ref拒绝，多源all只用连续资格，原资格全失效后新source不能复活旧ref。本人核实际qualification成功read返回source_ids始终是原引用集合子集；B3 remove/failed/continuous完整时间线由SC3正式覆盖。当前read遍历原payload stamps并逐存在/状态/配置版本/qualification校验，返回仅valid来源，不借新来源；后续未实测同条件标识由同分支支持。\nA5：v4-search-rank/invalid-read/empty-query实际各1passed，exact-read三参数3passed；已实际读全部断言和原附件。51文件limit1/50、稳定平局和相关性、正文尾/边界/长行、中文、非BMP/组合码点、末LF/无末LF、16000/16001及篡改/跨档案/对话引用/旧配置/非法范围都有独立预期。Unicode İ长前缀与ſ不抢ASCII命中在当前search-rank及三个新平台正控，源码lower展开后按原码点长度映射，未使用额外IGNORECASE等价。_range用原Python码点与end-1之前LF，查询/读取仅读数据库快照；I/O哨兵和平台open审计支持。未发现A5新增失败。\nA6：已读全部确定屏障断言；v4-refresh-order(2)/refresh-remove(1)/overlap-order(2)/query-snapshot(2)/interrupted-refresh(1)实际passed。同源晚到、新配置、移除、两个文件跨源新发布先赢以完整持久状态核对；查询冻结P/Q/R范围/版本/原资格后下一次才见变化；持久refreshing注入后新Archive明确重刷真正取得变化及新增，正控旧ref继续可读。中断用例是数据库持久状态注入，不冒称平台进程崩溃；真实服务停启由E1另证。资格终态中断由SC4同版原件支持。\nA7：v4-isolation none/hub/paused实际3passed、compatibility实际1passed；两独立Agent来源/正文、启停/上传/暂停与两端完整状态保持，网络哨兵同时禁止新回环与外网连接且有负控，旧数字ID与ref逐目标精确读取、9层旧帮助字节一致。v4-packages实际exit0，Local26/Hub24源码→wheel→独立安装摘要和新Local/独立Hub方法有真实命令；没有宣称重跑005管理员服务矩阵。full-regression-v5原stdout/JUnit/起止exit0为301passed1skipped；ci-4c两原元数据head均4c706b3，push45055455773与PR45055463340各macOS/Ubuntu/Windows全部success，原日志含pytest/双包构建/分别安装。本人读当前README→TRIAL_GUIDE→CLI/Web/skills/smm-search及scripts/acceptance/README实际入口，未发布/0.4.0不支持、ID/路径、明确refresh、配置全替换/排除/版本/失效/移除/恢复及维护复跑前提可发现。user-discovery-v4第6步a66是沿用文字笔误，entry/product_version/两CI实际head为4c，保留原件且公开索引明确更正；不能据此把旧CI冒认为当前。\nA8/E1：本人实际打开三个work/platform-{mac,linux,windows}-formal-v3（Mac直接根，远端probe）原始JSON、安装/身份/服务、CLI响应与MCP/trace；26实际安装模块及HTML逐值等于当前src，统一wheel SHA256 c8422b57c4e5de4fb5a1089bac1165df83a0c96ad805bf50e3a60eb35a393d4e，不能以0.4.0字符串判同包。产品进程逐条身份Mac104个UID501、Linux104个UID1000、Win103个is_admin=false/session1；每OS84条命令、20轮真实stdio及20个server exit0/alivefalse收据。已实际查看每OS web-original.png和web-partial.png原图：文档主导航、当前项目与规范路径、采集原文/坐标/惰性script纯文本、partial及各文件错误可见，Mac/Linux permission denied与Windows坏编码分别展示。9原trace以zip原事件/网络资源只读解析，主trace137动作、partial13、restarted50且无动作错误，实际create/configure/refresh/search/read/扩读/400旧ref/PUT/remove/旧ref200与重启后5次read有序；旧Playwright trace CLI版本不支持新版trace，未用失败viewer输出冒称看图或成功。三平台overlap-survivor独立逐值验证raw2全文/字节SHA/Unicode与LF坐标、当前唯一S1/历史S2；CLI argv及trace request确用原original_hit.reference，trace响应等于web_read，无重新搜索偷换ref。平台旧双源P引用只证明此入口路径，完整all三时间线由SC3正式原件承担。body-read-audit每OS23次open均仅explicit-refresh阶段；源字节/mtime时间线、修改/删除/失败恢复、旧ref拒绝与同档案无刷新重启、末源移除有当前原件。首次actualPID消失+port_closed检查时间严格早于新服务started_at，末尾两真实服务均停止；Windows未以launcher退出代替真实PID。Windows仅宣称实际junction/坏编码，不冒称ACL权限实验。已登记的三个正式独立意见与cross-files-v3/user-discovery-v4齐全。\n\n证据适用性：本人核24当前正式原件artifacts/bindings全部SHA一致、实际exit/stdout及API预期/实际状态无差异，另实际运行公开verify --raw-root，2148公开文件与私有原SHA通过。实际需求判定仍因新确认A2失败为failed。首次delivery-r006-v1因a66 read混入退出S2的真实failed保留；metadata红灯原stdout为2failed1passed，当前4c三分支已绿，不能复用旧版通过。此次新增glob反例为另一个当前4c失败，需另保留，不能覆盖旧failed。本人未实现/改产品/改AT、未重新执行三平台业务、未自行登记需求判定；只读审查与意见写入。最终PR文档提交CI/合并尚由主流程完成；发布/升级/007/008/用户实际资料/staging均范围外。详见reviews/delivery-review-v2.md。",
+    "status": "failed"
+  },
+  "operation": "delivery-judge",
+  "record": ".acceptance-local/native-v1/AT-SMM-006/delivery-judge/delivery-r006-v2/result.json",
+  "recorded_at": "2026-11-22T19:06:05.057000+00:00",
+  "request_id": "delivery-r006-v2",
+  "request_sha256": "6f27783789f5992eb7bfd5854346c9420d7691733182f40b1d1f91083b977fb3",
+  "requirement_ids": [
+    "R006"
+  ],
+  "reviewer_session": "/root/review_006_delivery_v2",
+  "scene_evidence": {
+    "SC1": "e715c7ce17ebc985e7b2b6823765c64947f04f59501732421256a9df993b95ca",
+    "SC2": "5d8374725e42f6cc1142498eb286de90d3b6488d929983705c17cc4ebe89dac1",
+    "SC3": "7123f62720578cdf9d63fd34143c622bfe46d3b4c3e3a93b644c662a15bde55d",
+    "SC4": "74ee628e51d9c8ee878b300facb42cf9f0134739c13c76cdfb9dbc42183ceeba",
+    "SC5": "08ddc4d2a633327e7f6e489832b2fe03c4a095598d58e1ba2392d3f975cc7bf3",
+    "SC6": "1ea9ec807749a736ce212d751c734a694f9d496ffed5bde292e659367ee4c14d",
+    "SC7": "c190f2e81bf1973a93599551b270ec488c8877651e9624aaf957a524086bef16",
+    "SC8": "cc9c1d28cfa32d8a74e2173120c995fcea2291c56c39e7629340672c40f72ec3"
+  },
+  "scene_status": {
+    "SC1": "passed",
+    "SC2": "passed",
+    "SC3": "passed",
+    "SC4": "passed",
+    "SC5": "passed",
+    "SC6": "passed",
+    "SC7": "passed",
+    "SC8": "passed"
+  },
+  "status": "judged"
+}

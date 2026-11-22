@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "定义000002 SC6第三判据来自SPEC B5/B6/A6、PLAN §3.3/§4；design-r006-v5-sc6与match-r006-v4-sc6的冻结范围/资格/版本及后续读取预期有据。tests/test_document_concurrency.py:102–148分别覆盖仅关联变化和关联+来源配置/正文变化；118–127在_query_scope取得旧范围后改关联或来源，128–135对当次P/Q逐目标核独立原串、id/version/SHA、source_ids及原签名资格，136–144核下一次P/R或P/Q/R及独立原文/SHA/版本，145–147核连续P正控、Q仅关联变化可读或配置/正文变化拒绝。只首P正确、错读首目标或两响应同错由128/130/131拦；只冻关联不冻内容/资格由130/134拦；全拒旧ref被145/147正控拦。两种会改变结论的状态均已覆盖，额外等价目标可选。产品documents.py:367 BEGIN后同连接_scope/来源/成员/FTS，read按原签名来源而不重展关联。red-r006-v3-query-snapshot两参数原add404及独立review-r006-red-v3-query-snapshot已核；green-r006-v1-query-snapshot复用相同测试绑定、声明和命令，全部artifacts/当前bindings SHA无差异。绿灯原stdout 2 passed/exit0；frozen-query-scope两原附件当次均P/Q原文v1，next分别P/R原文v1与P/R原文v1+Q changed v2；links的Q旧ref200，source的Q旧ref400，P始终原文可读。所附regression.stdout实际5 passed/exit0，已读四项旧引用以及两Agent数字ID/ref、九层旧来源CLI帮助断言。无有据必测缺口；同版绿灯及回归passed，不代表正式执行、真实平台或R006整体交付。",
+      "covers": []
+    }
+  }
+}

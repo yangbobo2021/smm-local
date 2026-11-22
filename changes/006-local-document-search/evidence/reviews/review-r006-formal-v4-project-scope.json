@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-project-scope",
+  "target_sha256": "3026ace9e1702908652daa4534d864e122bf995bdf7213dd07507161d214152e",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "独立重新对照SPEC B3/B5/A3、PLAN §4、当前test_project_scope与设计分配，并核本轮v4原件。stdout1 passed、stderr空、exit0；31 artifacts/47 bindings和设计SHA重算匹配4c706b3 documents43d3762c…。6次search集合独立核为P:p/q/shared，Q:p/q/r/shared，R:q/r/shared，G:global，all六文件含free；同名P/Q不混淆、P不穿透R且不隐含G。11次read逐字为needle+对应文件名、原SHA准确；每引用payload文档/版本/来源集合与结果对应，read只返回原资格。links共享前后完整集合断言未变；重复纳入后原results路径/ID均恰3，没有字典去重掩盖。仅当前正式selector，无XML/附加回归，不用旧TDD或旧意见推定新源通过。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    }
+  }
+}

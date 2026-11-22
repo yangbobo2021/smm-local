@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-project-scope",
+  "target_sha256": "6f98ca323d1f3252f0a21e616818686758312efb9a7f1ce9b6fa007149101fa5",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "本轮v5按SPEC B3/B5/A3、PLAN §4和test_project_scope/设计分配独立重核。stdout1passed、stderr空、exit0；31 artifacts/47 bindings与设计SHA重算匹配9cfd619 documents390880bf…。6search完整原集合独立核：P=p/q/shared，Q=p/q/r/shared，R=q/r/shared，G仅global，all六文件含free；同名不同身份不混合、P不穿透R且G不隐含。11read逐字needle+对应文件名、原SHA准确；search签名文档/版本/source集合及读取来源限原stamp正确。共享前后完整links不变断言执行；重复纳入shared后原results路径/ID恰3，未字典去重掩盖重复。仅本轮selector无XML/附加回归，不拿旧产品或旧TDD结论授当前通过。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    }
+  }
+}

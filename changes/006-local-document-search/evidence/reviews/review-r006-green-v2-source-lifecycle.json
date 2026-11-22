@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B1/B4/B6/A4、SC4，配置移出、重叠资格保留及最后来源清理的自然设计有效。tests/test_document_lifecycle.py:79–105先A目录P含one/deep/shared、B单文件Q取P/Q/all旧ref；A完整set改Q、排one且非递归后pending/P空，逐P旧ref拒绝，而旧Q/all借持续B仍读固定shared；刷新A后旧P仍拒绝；取新all再移B，旧Q/all拒绝但新all沿新A可读；最后移A sources/search皆空、最后ref拒绝，数据库可用正文与FTS均0，三源文件SHA/mtime逐一不变。反例：只使首P文件退出被old.values逐一4xx拦截；借新A复活旧all由移B后旧all4xx拦截；只改响应未清实际索引由SQL计数和search空拦截。34份API原件及00034-source-lifecycle.json保存旧/新ref与源指纹，400资格/版本拒绝及成功needle shared符合预期。documents.py:set/remove/_prune与read按引用原资格判定，支撑共享实现结论。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-source-lifecycle与red-r006-v3-source-lifecycle全部test_bindings及实际命令相同；旧红灯来源API404，当前新绿灯1 passed/exit0。当前34份API附件重核配置pending旧P引用逐一拒绝、持续B资格的旧Q/all正文needle shared可读；移B后旧Q/all拒绝、新all读shared，最后source/search皆空。原始测试直接SQL核正文与FTS为0及三文件指纹不变，覆盖实际副作用。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

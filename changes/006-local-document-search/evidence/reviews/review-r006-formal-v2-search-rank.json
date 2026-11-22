@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-search-rank",
+  "target_sha256": "0b8c31b17a3ef1246cf0de781b56f65b4f7cff2b7ef748a26c36ed1e88c23f0a",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；依据SPEC B5/B6、A5与PLAN §4、design-r006-v5-sc5。已实际读tests/test_document_search.py:9-36及Fixture请求/读取辅助。00005–00007原响应分别为limit1的file-000和limit50完整file-000至049，ID不重复且同分重复查询稳定；00008文件名独有词零命中；00009 z-high在a-low之前且相关分数不同。00010–00017分别真实命中尾部、分片边界、长行和中文，原文按独立special字符串切片逐项断言，非仅search/read同错比较。stdout为1 passed，exit0、stderr空；22 artifacts及47 bindings全部重算一致，匹配/实现摘要与当前v5一致。本正式轮没有XML或附带回归；对应green-v2的旧对话引用回归原stdout为4 passed（摘要已核），full-regression-v3原XML四项旧引用均通过，全集301 passed/1 skipped。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "expected_failure",
+      "reason": "SC6跨源旧请求不得覆盖较新版本的场景判据来自SPEC B3/B4/A6，v5自然设计要求P/Q/all的所有目标与正确采集出处，无额外承诺。tests/test_document_concurrency.py:77–99分别覆盖S1原pending与ready；两个正文可区分的文件均由S2发布新内容，再放行S1。91核完整documents快照，92–97逐P/Q/all完整集合/每文件采集来源two及独立含文件名newwinner正文，ready还逐目标核原ID和换版，98禁止旧词。只首one正确而two被旧任务覆盖会被91或97拦；两结果同错或误用one会被93完整名字集合及97对应name原串拦；只一个前状态有错误在该参数自己的断言失败。首轮有效结论已对当前版本重核，新增同状态等价目标不构成阻塞。已读red-r006-v2-overlap-order设计/匹配/绑定原件、两份api-001和完整stdout/stderr/进程，并核全部登记摘要；pending/ready均81行第一次合法add真实404 Not Found（helper:52），API无文档路由，为新能力缺失而非导入/线程/环境错误。新旧刷新、各项目查询/读取尚未到达；expected_failure仅确认当前可信入口红灯及候选有效，不意味着并发功能通过。TDD covers为空。",
+      "covers": []
+    }
+  }
+}

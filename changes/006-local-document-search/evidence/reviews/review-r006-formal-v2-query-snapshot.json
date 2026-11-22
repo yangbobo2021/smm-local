@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-query-snapshot",
+  "target_sha256": "860d7af18d330dbea9f9250a7cd06911a690aeeda534fce8a0735ba0d982ad74",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B5/B6/A6、PLAN §3.3/§4、design-r006-v5-sc6，对照tests/test_document_concurrency.py:102-148。links与source两参数在查询范围读取后执行关联变更，source还改q配置/正文并刷新。当前00007/00022均仍为旧P/Q两文件、原正文和版本；第129-135行逐结果核独立original正文、ID/version/SHA、source_ids及签名sources的旧revision/qualification，不仅比较范围。随后00008为P/R，00023为P/Q/R且q新版本新正文；第138-144行从独立expected逐文件核正文SHA及版本关系。00011/12旧P及旧Q在仅links变化仍准确可读；source组00027旧P可读、00028旧Q400版本失效。00013/29冻结与下次范围汇总符合原响应，未错档/错版本、未重展开旧引用。stdout2 passed/exit0/stderr空；33 artifacts、47 bindings与match实现摘要重算一致。本正式轮无XML/附回归；对应green-v2旧引用regression原stdout4 passed且摘要一致，full-regression-v3 XML四项通过（301 passed/1 skipped）。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    }
+  }
+}

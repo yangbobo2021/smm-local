@@ -1,0 +1,16 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-files-v4",
+  "target_sha256": "81b0dc86006c6f040fbfbadf84bb9dc4b54aac05466e0f08ce7c00a6b2785365",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-platform-files": {
+      "status": "passed",
+      "reason": "本次独立重审manual-r006-cross-files-v4当前同版原件，covers仅实际分配platform-files-c1/c2；不沿用旧人工通过、不代判三个平台E1或R006。按SPEC B2/A2、PLAN E1.1/E1.6/E1.7、design-v5-sc2及platform-files.md核对。50 artifacts、37 bindings、operation全部原evidence及designSHA重算一致；三平台各26个已装模块/HTML逐个对当前src重算相符，documents=390880bf58192317846ed1db29f271b9c5f6c7530b3811736634fa7aa4f74d66（9cfd619）。实际业务Mac19:24:10.837–19:24:35.148Z、Linux19:26:13.145–19:27:48.136Z、Windows19:28:29.951–19:33:14.480Z，与本次只读观察19:35:50.097Z分列，未当作另一次业务。\n已实际打开work/platform-mac-formal-v4以及platform-linux-formal-v4/probe、platform-windows-formal-v4/probe各自web-original.png和web-partial.png六张新原图。三张original路径/来源ID均属于formal-v4，显示excluded/**/配置、中文emoji组合字符/惰性script纯文本、采集原文[0,64)及控制文件末尾needle。Mac/Linux partial为2成功2失败2忽略，UTF8坏编码和Permission denied红字；Windows为3成功1失败2忽略、denied ready，与native-file-errors一致，未假称Windows ACL。独立按原夹具字面字符串解析全部新CLI stdout/base64，Mac/Linux各59、Windows61处原SHA/正文规范化/码点切片/行号准确；根链接add各exit2，内层ignored_links1、逃逸词两次零命中，Windows实际cmd mklink /J exit0。产品身份逐进程核：Mac105个UID501、Linux105个UID1000、Windows104个is_admin=false/session1；控制身份同为普通。Unix为真实chmod0不可读，正常文件持续可读；失败修复同ID/version/SHA后旧bad（Unix另denied）ref在失败及修复阶段仍exit2拒绝。\n三组source-before-edit/initial-read-after、errors-before/after、restart-before/after全量SHA/字节/mtime逐对相同；restart-checkpoint配置、文档ID/版本/SHA/采集时间/有效来源保持。服务实际PID Mac58418→58793、Linux164023→164420、Windows1176→10884（wrapper5576/15876另列），首次actual_alive=false/port_closed=true时刻早于第二服务启动，末次真实退出/端口关闭早于业务结束。body-read-audit全部仅explicit-refresh阶段，未读取链接/外部目标。\n附加B2交叉证据glob-exclusion.json已独立从source-configured-before的原文件大小筛出guide/note/control三个候选，80+23+6027=6130，不以产品counts自证；三平台raw marker查询均零命中且ready coverage4，counts为3候选/6130字节、ignored_excluded1+ignored_links1。excluded/direct.txt独立51字节字面原SHA一致，10个source快照均相同SHA/bytes/mtime，审计没有excluded根或后代正文open。此为真实常规路径排除，不虚构OS LF文件名。survivor也回查CLI argv、实际stdio MCP records和解码后的Web原请求，三入口均原样传移除前ref，返回相同独立edited正文且仅持续S1来源，captured_by_source_id保留已移除S2；不借新资格。以上只支撑本人工两检查及相关交叉材料。",
+      "covers": [
+        "platform-files-c1",
+        "platform-files-c2"
+      ]
+    }
+  }
+}

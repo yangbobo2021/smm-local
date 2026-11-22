@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-qualification",
+  "target_sha256": "0aeaa6e7032bfe74bcaf3307759c86648e0596682cab6b92f2c096c4a50f3f6a",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "独立重审当前v3正式证据及test_qualification三参数，按SPEC B6连续资格/B4/A4、PLAN §3.2/§4、design-v5-sc4逐项判定。17:55:57.911–58.483Z exit0、stdout3 passed、stderr空。27search/27read/18reject原响应全量重新解析；file/source/missing三组分别0/36/72偏移，正常无变化后P/Q/all原ref均精确needle qualification/version1。失败后及相同配置/字节恢复后各旧P均400，连续Q/all仍精确可读，version不变；移除两原来源后oldall拒绝，新来源同字节新ref可读而原P/Q/all各ref仍400，control每组精确needle control。实际file为partial、source/missing为failed，missing是根单文件删除，未声称目录成员missing或平台权限实测；注入故障与真实文件删除有区分。每实际正文SHA和payload文档/版本另核，搜索来源集合及区间对应正确。112 artifacts/47 bindings和设计SHA均匹配a66deeb documents87e25466…。仅本轮selector，无XML/额外回归，不复制旧通过或判R006整体。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    }
+  }
+}

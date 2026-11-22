@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzAxNTcxMjdlMzJmNGE5Y2I5ZTI5YzNhYWE5NTdhMDMiLCJkb2N1bWVudF9pZCI6IjIwZDk2NWU0NDQ1NjQ4NGZhMmYzNGM1ZGNmODg5NmM0IiwiZW5kIjozMDI2LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMjMxMjE0MTliYzQ0NGUxNjkwNjc3ZDY0MGIyMDI3ZmUiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.1bf9c118b5dba0ff8b47e140ccb61c4f914f4455c1eb0b3fbcea8215591a7765"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "20d965e44456484fa2f34c5dcf8896c4",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1011/test_search_rank0/docs/unicode-lower.txt",
+    "version": 1,
+    "sha256": "eb73b30ea4f598153c64933658162629deb4daef4b483fb637e68c559073849c",
+    "text_length": 3026,
+    "captured_at": "2026-11-22T19:18:57.780838+00:00",
+    "captured_by_source_id": "23121419bc444e1690677d640b2027fe",
+    "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ lowerexpansionmarker tail",
+    "start": 2801,
+    "end": 3026,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "23121419bc444e1690677d640b2027fe"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

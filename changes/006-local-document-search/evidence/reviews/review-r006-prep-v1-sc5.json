@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "已实际读取AGENTS、006 SPEC B5/B6/A5、PLAN §3.3/§4、design-r006-v5-sc5及match-r006-v4-sc5。场景判据与自然设计有原文依据，具体数据/步骤在用例。tests/test_document_search.py:9–36以51文件和重叠来源核limit1/50，24行完整50文件序列及25行唯一ID阻止仅首目标正确；30行要求高相关z-high先于低相关a-low，31–35对尾部/边界/长行/中文分别核各自独立special原文，不能靠search/read同错而通过。文件名反例28行独立零命中。核实red-r006-v3-search-rank与green-r006-v1-search-rank的test_bindings、测试声明及命令完全一致，原红灯为合法add的404 Not Found，既有独立review-r006-red-v3-search-rank与原API证据一致；非导入或环境错误。产品documents.py:360–390以完整FTS召回、路径/ID稳定平局和签名窗口实现。绿灯run.stdout实际1 passed/exit0，附件api-005/006/007显示file-000及完整000..049且重复稳定，api-008文件名词零命中、api-009高低相关顺序正确，api-010..017四种命中/读取对应独立源文本。全部绑定和artifacts SHA已逐项核实且当前源码一致。regression.stdout实际5 passed/exit0；原回归命令包含test_archive_references.py四项及test_compatibility，核其断言覆盖旧引用篡改/跨档案/项目范围和旧参数、两独立Agent会话数字ID/ref与九层旧来源CLI帮助，不能仅凭status推定。判本TC同版TDD绿灯及所附兼容回归通过；更多等价样本可选，不代表正式执行、人工入口、三平台或R006交付通过。 本份另实际复核debug/debug-r006-v1-sc5对应TC的run.stdout/process/stderr、全部API与独立预期附件及完整artifacts/当前bindings SHA；四TC各1/3/1/1参数通过且无跳过。debug的排序000..049、高低相关和文件名零命中、三组码点/长行与范围400、篡改/跨档案/对话/配置旧ref拒绝和alpha正控、六种覆盖状态均与上述设计/源码断言吻合。本准备意见认领本TC全部分配项，准许以全新正式运行验证；不将调试意见当正式交付。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    },
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "从SPEC B5/B6/A5、PLAN §3.3/§4反查SC5、design-r006-v5-sc5及match-r006-v4-sc5，码点/换行端点、2000窗口、16000扩读均有依据。自然设计完整、实现tests/test_document_search.py:39–68以三独立原串覆盖BOM/CRLF/CR/LF、非BMP、组合字符、末尾LF和无末尾LF；45–54对每个参数和每个范围分别以独立body切片/LF计数断言，只有首目标正确会被后续参数/循环拦截；search/read同错正文会被46行独立body拦截。56–64对长行两个观察面分别核窗口、独立long切片、整数码点与行号，65独立16000切片、66拒16001、67拒旧版本。已核red-r006-v3-exact-read原日志三参数合法add均404、既有独立review-r006-red-v3-exact-read；green-r006-v1-exact-read复用完全相同test_bindings/声明/命令，全部绑定与artifacts SHA吻合当前文件。产品documents.py:145–149按Python码点切片和B6公式算行，392–411仅读快照。绿灯原run.stdout实际3 passed/exit0，附件api-004/020/036分别返回独立归一化正文，api-038/040的a\\n和b\\n均末行为实际所属行；长行各api-012返回[0,2000)，各api-013返回[0,16000)；三次16001与旧版本均400且含义符合原文。regression.stdout实际5 passed/exit0，对应四项旧引用契约与两Agent旧数字ID/ref及九层来源帮助兼容，断言已读，不以摘要状态代替。未见有据必测缺口；同版TDD绿灯及所附回归通过，等价Unicode样本可选。本意见不认领正式执行、真实平台或R006交付。 本份另实际复核debug/debug-r006-v1-sc5对应TC的run.stdout/process/stderr、全部API与独立预期附件及完整artifacts/当前bindings SHA；四TC各1/3/1/1参数通过且无跳过。debug的排序000..049、高低相关和文件名零命中、三组码点/长行与范围400、篡改/跨档案/对话/配置旧ref拒绝和alpha正控、六种覆盖状态均与上述设计/源码断言吻合。本准备意见认领本TC全部分配项，准许以全新正式运行验证；不将调试意见当正式交付。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    },
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "已从SPEC B6/A5、PLAN §3.3/§4核SC5与design-r006-v5-sc5/match-r006-v4-sc5；签名、档案、内容/配置资格、引用类型和范围拒绝有原文依据，生命周期连续资格由SC4专项承担。tests/test_document_search.py:71–103两个同档案独立正文、真实另一档案ref及真实对话ref；75拒跨档案，80–92逐字段合法外观/非法值篡改保留原签名，93–94逐范围拒绝，95/103以独立alpha正文正控，99拒对话ref，102拒改配置的原ref。仅首字段/首目标正确会被逐字段循环及独立目标值拦截，一概拒绝会被95/103拦，两响应同错会被独立alpha原串拦。已读red-r006-v3-invalid-read合法add404原日志/附件及独立review-r006-red-v3-invalid-read；green-r006-v1-invalid-read的test_bindings/声明/命令与红灯完全相同，全部artifacts SHA和当前绑定吻合。产品references.decode验证签名及档案，documents.py:392–411核kind、当前版本及至少一个原来源revision/qualification。绿灯原run.stdout实际1 passed/exit0；附件rejected-004..017均400损坏引用，范围400/422，真实对话ref400不能混用，api-026和api-032均准确alpha正文，配置后旧ref400当次资格失效，未回退其他正文。regression.stdout实际5 passed/exit0；已读四项旧引用契约与兼容用例两独立Agent会话旧数字ID/ref及九层来源帮助的逐目标独立断言。未见有据必测缺口；同版TDD绿灯及所附回归passed，更多等价目标可选，不预判正式执行、人工平台或R006交付。 本份另实际复核debug/debug-r006-v1-sc5对应TC的run.stdout/process/stderr、全部API与独立预期附件及完整artifacts/当前bindings SHA；四TC各1/3/1/1参数通过且无跳过。debug的排序000..049、高低相关和文件名零命中、三组码点/长行与范围400、篡改/跨档案/对话/配置旧ref拒绝和alpha正控、六种覆盖状态均与上述设计/源码断言吻合。本准备意见认领本TC全部分配项，准许以全新正式运行验证；不将调试意见当正式交付。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    },
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "已核SC5、SPEC B5/B7/A5、PLAN §4及design-r006-v5-sc5/match-r006-v4-sc5；非法输入明确拒绝、合法零命中同时呈现真实覆盖为原文要求，设计不增加行为。tests/test_document_search.py:106–131从无来源、两个pending、ready+pending、partial+pending、refreshing+pending、failed+pending逐动作前状态断言独立来源id→状态与文件数；持续pending第二来源使仅首来源正确在114/121/124/126/130完整映射处失败；109/114/120/123/127的独立0或1预期防两响应同错。115–118逐拒空/空白/无词法项、非法scope、项目缺失/不存在及limit0/-1/51/小数/bool，合法零命中正控防一概拒绝。红灯red-r006-v3-empty-query原日志首合法search404，独立review-r006-red-v3-empty-query一致；green-r006-v1-empty-query复用相同测试绑定/声明/命令，全部artifacts与当前绑定SHA已核。绿灯run.stdout实际1 passed/exit0，原附件api-001无来源覆盖空，zero-hit-states逐状态为文件数0/1/0/0/0并持续保留pending，非法输入400/422且错误含义明确；合法查询均200空结果。产品documents.py:360–390验证词法输入/limit并按同一事务构造有效成员和coverage。所附regression.stdout实际5 passed/exit0，对应四项旧引用及兼容用例的两Agent旧数字ID/ref与九层来源帮助断言；已核实际原日志及测试，不依status推定。没有有据必测缺口；同版绿灯及所附回归passed，等价状态样本可选。正式轮、人工平台/用户发现和R006交付不在本意见。 本份另实际复核debug/debug-r006-v1-sc5对应TC的run.stdout/process/stderr、全部API与独立预期附件及完整artifacts/当前bindings SHA；四TC各1/3/1/1参数通过且无跳过。debug的排序000..049、高低相关和文件名零命中、三组码点/长行与范围400、篡改/跨档案/对话/配置旧ref拒绝和alpha正控、六种覆盖状态均与上述设计/源码断言吻合。本准备意见认领本TC全部分配项，准许以全新正式运行验证；不将调试意见当正式交付。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

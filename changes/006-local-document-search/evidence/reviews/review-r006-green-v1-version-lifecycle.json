@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B3/B4/A4、SC4，自然设计把两独立文件在无变化、编辑、回旧字节及移动/删除状态分别核对有效。tests/test_document_lifecycle.py:7–37先完整两文件集合，逐文件read独立原文；不变刷新ID/version相等且旧ref可读；物理改字节但未刷新仍读原快照并有captured_at；刷新后每文件同ID新version/新全文且旧ref4xx；回旧字节版号不属前两版且两代ref均拒绝；移动生成新ID、删另一文件后只留moved，全部旧ref拒绝，moved全文明确等于原one内容。反例：只更新首个文件被updated循环逐文件断言拦截；两次读取同错文件被文件名拼接独立正文拦截；sha决定旧版本复活被version不在旧集合及旧ref4xx拦截。29份API附件原文显示两文件版本1→2→3、moved新ID版1及旧ref400，与documents.py:_publish按文件递增版本、不猜移动身份和read版本核验一致。 同版TDD：red-r006-v3-version-lifecycle原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-version-lifecycle与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

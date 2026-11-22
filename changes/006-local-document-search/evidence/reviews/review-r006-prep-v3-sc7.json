@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本意见目标debug-r006-v3-sc7；已核定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/§6与design-r006-v5-sc7、match-r006-v7-sc7的自动项检查分配。自然设计及实际断言有需求依据，人工user-discovery分开保留未判。当前src逐字等于a66deeb，runtime-v3/各自测试绑定及全部原artifacts SHA已重算一致；实际读取每TC stdout/process/stderr和业务原附件，不凭status。test_isolation当前3参数passed/exit0。none/hub/paused及Codex停用/Claude启用两独立正文，guard前建持久TestClient portal、guard内拦federation请求和全部新IP连接且真实回环/外网两个负例保留；所有文档操作和末尾归档/远端/上传/开关/暂停比较均在guard内。完整状态与逐第二会话独立原串使只首Agent正确或两读取同错不能过，三mode防只首前置状态正确。当前三complete-state原件逐模式本地/远端before==after、原两正文保留、出站新增0和两个网络负例通过，文档私有正文独立正控准确。Unicode定位修复未引入网络/对话路由，api文档入口仍直接Documents。 无有据必测缺口，更多等价目标属可选；认领本TC全部分配检查，准备passed，准许全新正式执行；不预判人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "isolation-c1"
+      ]
+    },
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本意见目标debug-r006-v3-sc7；已核定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/§6与design-r006-v5-sc7、match-r006-v7-sc7的自动项检查分配。自然设计及实际断言有需求依据，人工user-discovery分开保留未判。当前src逐字等于a66deeb，runtime-v3/各自测试绑定及全部原artifacts SHA已重算一致；实际读取每TC stdout/process/stderr和业务原附件，不凭status。test_compatibility实际1 passed/exit0。Codex/Claude两独立id/session/source/正文，完整两ID集合与逐目标旧数字ID/新reference两读的身份和独立原串断言拦仅首目标正确或两边同错；旧DTO保留。当前legacy-source-help原件九项source/list/validate/register/enable/disable/rollback/batches/purge-batch均old/new exit0、stdout逐字相等；冻结旧CLI字节此前已实际核git f797原件，本TC仍核其SHA，不冒称旧整包。测试声明及整文件当前绑定与baseline-r006-compatibility-v3所用测试一致，历史purpose=tdd-baseline和独立意见仍可追溯；当前最终产品兼容结论来自这次v3 debug真实执行，而非继承旧产品状态。 无有据必测缺口，更多等价目标属可选；认领本TC全部分配检查，准备passed，准许全新正式执行；不预判人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    },
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "本意见目标debug-r006-v3-sc7；已核定义000002 sha6b524c88…、SPEC B1/B4/B5/A7、PLAN§4/§6与design-r006-v5-sc7、match-r006-v7-sc7的自动项检查分配。自然设计及实际断言有需求依据，人工user-discovery分开保留未判。当前src逐字等于a66deeb，runtime-v3/各自测试绑定及全部原artifacts SHA已重算一致；实际读取每TC stdout/process/stderr和业务原附件，不凭status。独立包探针当前exit0。已读15条真实命令全exit0，26项Local/24项Hub源码字典=wheel=安装命令stdout=package-result的全量SHA字典；Local安装documents.py摘要87e25466…实际等于本轮a66deeb源码，不能继承旧wheel通过。Local真实创建/add pending/refresh/search原样ref读得needle package 中文😀加LF；Hub实际断言无smm_local、创建合并后仅standalone-B、serve-hub帮助成功。脚本按独立src全量字典防wheel与安装同错旧源码、逐模块集合防只首项正确；build扫描拒数据/私钥。现有构建/安装/独立入口判据均实证支持，不拿0.4.0字符串代替包身份。 无有据必测缺口，更多等价目标属可选；认领本TC全部分配检查，准备passed，准许全新正式执行；不预判人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "packages-c2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC2判据由SPEC B1/B2/B6/A2支持，design-r006-v5-sc2要求每个支持目标独立原文与失败诊断，未加码。v1b首次partial完整集合及区分UTF/NUL/权限诊断已在tests/test_document_scanning.py:57-63修正；首次只处理a.MD会在59行完整集合拦截，正文/SHA两边同错被62-63独立字符串和源字节SHA拦截。恢复阶段66行用limit=50验证六个非空文件集合，但68行重新调用默认limit=5的search，仅读取五个正文/SHA。若恢复阶段第六个目标被错误文本替代但仍返回正确路径（例如该目标先前失败后恢复正文损坏），66行集合仍通过，68-71未遍历它，全部断言可通过；B2成功恢复及设计每个支持目标的精确文本承诺尚未落实。这是已有恢复状态的未观察目标，不是等价新增样例。最小修订缓存limit=50恢复results，在同一完整集合上逐一按recovered[name]及源SHA读取；空文件另用files ready及字符长度确认，当前仅ready总数不能独立证明空文件状态。原始red-r006-v2-decode-files/TC-006-decode-files/run.stdout及00001-api-001.json显示45行首次add真实404，后续解码/拒读注入/partial/恢复均未到达；不能把新增后置断言称为实测。artifacts SHA均一致，当前测试与match-r006-v3-sc2一致；真实能力缺失成立，但候选需修订implementation。",
+      "covers": []
+    }
+  }
+}

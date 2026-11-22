@@ -1,0 +1,186 @@
+[
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:24.604990+00:00",
+    "finished_at": "2026-11-22T19:38:24.727370+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents}\n           ...\n\n本机 Agent 对话知识库\n\npositional arguments:\n  {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents}\n    sync                立即导入新增对话\n    status              查看导入状态\n    doctor              检查安装、来源和 Agent 接入\n    projects            列出项目及关联\n    resolve-project     按当前目录确定项目\n    search              BM25 检索\n    read                读取对话原文\n    serve               启动本地 Web UI\n    maintenance         管理本机同步与状态页\n    source              验收、注册或管理本机来源\n    stop-on-demand      停止按需启动的后台服务\n    configure-hub       配置汇总电脑和本机名称\n    upload              选择对话上传范围并查看 Hub 确认；停止不撤回旧副本\n    project             管理明确的全局项目和会话归属\n    documents           仅本机Markdown/UTF-8文本采集与检索；添加后需明确refresh\n\noptions:\n  -h, --help            show this help message and exit\n  --db DB               知识库 SQLite 路径\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:24.727398+00:00",
+    "finished_at": "2026-11-22T19:38:24.797918+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents [-h]\n                     {add,set,sources,files,refresh,remove,search,read} ...\n\n仅本机采集版本，不查询或上传Hub。仅 .md/.markdown/.txt；源正文不改写。保存后明确refresh；查询不会读当前文件。\n\npositional arguments:\n  {add,set,sources,files,refresh,remove,search,read}\n    add                 添加来源（pending）\n    set                 完整替换配置并使旧来源资格失效\n    sources             查看来源id/完整配置、pending/refreshing/ready/partial/failed、真实\n                        计数和错误\n    files               查看已发现文件元信息、ready/failed/missing及原因，不返回正文\n    refresh             明确读取并刷新采集快照；旧版本ref失效，失败后可重试\n    remove              取消来源；独占材料立即退出检索/读取，不删除原文件\n    search              按正文检索本机已采集文档，不扫描当前文件或发送Hub\n    read                按搜索返回的reference准确读取采集版本\n\noptions:\n  -h, --help            show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "project",
+      "create",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:24.797934+00:00",
+    "finished_at": "2026-11-22T19:38:24.867931+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm project create [-h] name\n\npositional arguments:\n  name        非空显示名称；返回本机ID和stable_key，用于documents --project-id\n\noptions:\n  -h, --help  show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "add",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:24.867963+00:00",
+    "finished_at": "2026-11-22T19:38:24.938553+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents add [-h] [--project-id PROJECT_ID] [--exclude EXCLUDE]\n                         [--no-recursive]\n                         path\n\n来源项目ID用 smm projects 取得，无项目时先 smm project create 名称。名单可重复，省略即空名单；省略--no-\nrecursive即递归。保存只为pending，随后运行 smm documents refresh。\n\npositional arguments:\n  path                  服务器所在本机的可读绝对文件/目录路径（非链接）\n\noptions:\n  -h, --help            show this help message and exit\n  --project-id PROJECT_ID\n                        现有本机项目ID（smm projects），可重复；省略只参加全部文档检索\n  --exclude EXCLUDE     相对POSIX路径，可重复；*单段、?单字符、**零/多目录，尾/排目录。禁止绝对路径、..和反斜杠\n  --no-recursive        仅根直接文件；不跟随链接/junction，默认跳过隐藏与构建目录\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "set",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:24.938582+00:00",
+    "finished_at": "2026-11-22T19:38:25.010379+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents set [-h] [--project-id PROJECT_ID] [--exclude EXCLUDE]\n                         [--no-recursive]\n                         source_id\n\n来源项目ID用 smm projects 取得，无项目时先 smm project create 名称。名单可重复，省略即空名单；省略--no-\nrecursive即递归。保存只为pending，随后运行 smm documents refresh。\n\npositional arguments:\n  source_id             smm documents sources 返回的来源id；不能改变根路径\n\noptions:\n  -h, --help            show this help message and exit\n  --project-id PROJECT_ID\n                        现有本机项目ID（smm projects），可重复；省略只参加全部文档检索\n  --exclude EXCLUDE     相对POSIX路径，可重复；*单段、?单字符、**零/多目录，尾/排目录。禁止绝对路径、..和反斜杠\n  --no-recursive        仅根直接文件；不跟随链接/junction，默认跳过隐藏与构建目录\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "sources",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.010414+00:00",
+    "finished_at": "2026-11-22T19:38:25.080953+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents sources [-h]\n\noptions:\n  -h, --help  show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "files",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.080989+00:00",
+    "finished_at": "2026-11-22T19:38:25.152180+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents files [-h] [--source-id SOURCE_ID]\n\noptions:\n  -h, --help            show this help message and exit\n  --source-id SOURCE_ID\n                        来源id取自documents sources，省略看全部\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "refresh",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.152214+00:00",
+    "finished_at": "2026-11-22T19:38:25.223661+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents refresh [-h] [--source-id SOURCE_ID]\n\n仅此操作读取来源正文。每文件2MiB、每来源1000候选和16MiB；个别失败partial，枚举/来源预算失败failed。修复后再次明确刷新。\n\noptions:\n  -h, --help            show this help message and exit\n  --source-id SOURCE_ID\n                        来源id取自documents sources，省略逐来源刷新全部\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "search",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.223681+00:00",
+    "finished_at": "2026-11-22T19:38:25.295134+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents search [-h] [--scope {all,project}]\n                            [--project-id PROJECT_ID] [--limit LIMIT]\n                            query\n\npositional arguments:\n  query                 非空中英文正文查询词\n\noptions:\n  -h, --help            show this help message and exit\n  --scope {all,project}\n  --project-id PROJECT_ID\n                        smm projects的本机ID，project必填；仅本机双向直接一层关联；全局不隐式加入\n  --limit LIMIT         1至50，默认5；按文件去重和词法相关性排序\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "read",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.295165+00:00",
+    "finished_at": "2026-11-22T19:38:25.365968+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents read [-h] --reference REFERENCE [--start START]\n                          [--end END]\n\n缺省读命中片段。start/end是整个规范化采集文本的Unicode码点\n[start,end)，非字节或UTF-16；最多16000字符。仅去BOM并CRLF/CR转LF，其他原样。旧版本/来源资格失效须重新检索，不读历史版本。\n\noptions:\n  -h, --help            show this help message and exit\n  --reference REFERENCE\n                        原样复制documents search返回的reference，不能用对话ID\n  --start START         Unicode起始码点（含，0开始）\n  --end END             Unicode结束码点（不含）\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-mac-local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "remove",
+      "--help"
+    ],
+    "started_at": "2026-11-22T19:38:25.365984+00:00",
+    "finished_at": "2026-11-22T19:38:25.435333+00:00",
+    "exit_code": 0,
+    "stdout": "usage: smm documents remove [-h] source_id\n\npositional arguments:\n  source_id   来源id取自documents sources；其他有效重叠来源继续保留当前版本\n\noptions:\n  -h, --help  show this help message and exit\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B5/B6/A5，SC5与自然设计的码点/行端点/2000窗口/16000扩读有依据。tests/test_document_search.py:39–68三原串和每个扩读范围用独立Python切片/LF公式断言，46拦search/read同错；长行61–64分别核两个观察面，65/66测16000/16001，67拒旧版本。新green-r006-v2-exact-read原stdout 3 passed；重新逐条以三独立body或long核附件全部30个命中/读取的文本、start/end和行号吻合，各长窗口[0,2000)、扩读[0,16000)，超限及旧版本均400。red-r006-v3-exact-read三个参数合法add404和独立红灯仍匹配同测试。documents.py:145–149、392–411以Python码点及采集快照读取。 本版业务及所附回归有效，未见有据必测缺口，passed；等价Unicode样本可选，不预判人工平台/用户入口、最终CI或R006交付。",
+      "covers": []
+    }
+  }
+}

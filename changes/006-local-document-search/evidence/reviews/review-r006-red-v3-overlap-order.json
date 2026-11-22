@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "expected_failure",
+      "reason": "SC6重叠来源并发判据和design-r006-v5-sc6由SPEC B3/B4/A6、PLAN §3.2推出，pending/ready动作前状态分别保留，无无据约束。tests/test_document_concurrency.py:77–99在这两种状态下各准备one/two文件，旧S1/P在_publish屏障等待，S2/Q以新请求先采新正文；90释放旧任务后91要求文件级documents完整等于winner。92–97对P/Q/all每个范围完整核两个文件，逐目标独立核newwinner原串+文件名及采集来源S2；ready分支95核各自ID不变/版本已变，98旧正文词零命中。只第一文件或首范围正确会由93/97拦；P/Q/all全部同错旧正文会由97独立预期拦；晚旧任务改元信息会由91/96拦。两个动作前业务状态已有覆盖，等价路径样本属可选。已核match-r006-v4-sc6及red-r006-v3-overlap-order、全部绑定/原始artifacts SHA。两参数原stdout、空stderr和两api-001均证明81行合法第一来源add实际404 Not Found，在helper:52失败；尚未运行初始refresh/第二来源、屏障、新旧发布或任何P/Q/all断言。当前基线缺B1来源入口，非导入/环境错误；候选有效，给expected_failure，TDD covers为空。此结论不声称跨源竞态或平台已经通过。",
+      "covers": []
+    }
+  }
+}

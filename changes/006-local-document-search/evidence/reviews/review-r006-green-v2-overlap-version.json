@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "依据SPEC B3确定时间线、A3/A4与SC3，S1/P/v1→S2/Q/v2，S2移除/failed/持续有效三前置状态及S1后刷v3的设计有效。tests/test_document_projects.py:test_overlap_version的unique直接核raw results数量、ID/路径去重与完整集合，P/Q/all各独立读v2、版本改变、captured_by=S2及资格来源；S2退出不回退v1且Q旧ref拒绝、P/all继续v2；S1采v3后三范围逐结果核v3、全部旧v2 ref拒绝；退出分支再使最后S1失败，只留独立control。反例：只有P更新而Q/all停v1被current.values全文循环拦截；S2退出时借Q其他资格或回退v1被Q空与P/all固定v2拦截；两边同错由字面v1/v2/v3预期拦截。151份附件及三份overlap-time-line明确v1版1/v2版2，各P/Q/all相应source_ids，remove/failed最终仅control，continuous最终shared v3；documents.py:_publish文件级唯一快照与search/read资格分开，证据一致。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-overlap-version与red-r006-v3-overlap-version全部test_bindings及实际命令相同；旧红灯来源API404，当前新绿灯3 passed/exit0。重新核当前151份附件三条时间线：P/Q/all均needle v2版2，remove/failed分支最后仅control，continuous最终shared为needle v3；对应v1版1/v2旧ref4xx、资格source_ids与独立正文预期相符。三状态及逐命中反例拦截未被夹具修订影响。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

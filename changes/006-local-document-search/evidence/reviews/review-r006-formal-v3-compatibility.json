@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-compatibility",
+  "target_sha256": "5da0a2048833faa61ba2c566bad521b5b337da3acb5f65594525b3cfd6c87481",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B1/A7、PLAN §4、design-r006-v5-sc7，对照重新打开的当前test_compatibility及两独立夹具、冻结legacy CLI。本轮实际1 passed/exit0/stderr空，所有逐目标断言执行：Codex/documents-compat-session与Claude/second-session各自ID、source、session及独立original/second independent正文均正确，数字ID旧读和reference新读分别验证；local archive_scope/matched_messages与无document content_kind保持旧DTO。直接对话读响应未另存JSON，本意见明确依赖真实运行及当前绑定断言，不虚构原响应。00001附件九层source/list/validate/register/enable/disable/rollback/batches/purge-batch旧/新stdout均完全相等且双exit0；冻结cli.py元数据及git基线原件在前轮已核，当前文件/元数据摘要再次绑定匹配，未将该夹具冒称完整旧发行包。5 artifacts/48 bindings。此为既有兼容项不要求基线红灯。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

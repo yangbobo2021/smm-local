@@ -1,0 +1,17 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-entrance-contract",
+  "target_sha256": "02d5c08eb1262ddaab4419f45f1e2dd23f2061f72a4a8980f26b32556a9c6677",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B1/B7/A1、PLAN §4 A1与design-r006-v5-sc1、tests/test_document_sources.py:52-89及document_helpers.py CLI工厂逐项对照。本次stdout 1 passed、stderr空、exit 0。00001–00011真实新CLI创建项目、重复项目/排除配置及完整替换/清空、refresh和API同档案读回相符；00012搜索返回reference被00013原样传给read，路径/独立Unicode原文needle CLI 中文😀\\nline 2\\n准确；00014非法相对路径exit 2且有stderr。00015保存七层真实帮助，add说明ID取得/pending/refresh，read说明Unicode码点/上限/旧引用；同次实际list_tools断言三个新工具readOnlyHint为True并保留四个旧工具（本项未声称真实stdio三工具调用，归E1）。19份artifacts、47份bindings及case-design SHA重算一致。仅目标selector正式执行，未冒称XML或本轮附4项旧引用回归。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

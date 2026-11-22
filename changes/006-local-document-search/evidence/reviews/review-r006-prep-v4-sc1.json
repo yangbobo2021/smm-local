@@ -1,0 +1,21 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "SPEC B1/A1及SC1的自然设计v5有效：测试来源配置明确使用单文件和目录、两同名不同身份项目、完整替换/默认重置及非法输入全量sources不变。当前39份原件显示pending、项目[1]→[2]、recursive false及明确非法路径400；deny_source_reads覆盖builtins/io/os.open且files/search为空，重新开同档案配置一致，移除后源SHA/mtime不变。test_source_config分别检查目录重置与两次移除，可拦只处理首来源；独立字段值拦截响应与存储两边同错；正文哨兵拦假pending暗读。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc1本TC原始1 passed/exit0；当前15/39份相应原件重新核CLI固定全文、配置pending[1]→[2]、错误400与完整字段断言，全部分配检查均实际到达。旧失败/历史TDD收据保留；本项是当前准备调试复审，不是新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    },
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "SPEC B1/B7/A1及SC1自然设计v5有效。当前15份原件包含两项目、CLI多绑定/排除/非递归、set省略名单恢复默认、明确refresh、search原reference直接read；00013-cli-012全文为needle CLI 中文😀\\nline 2\\n，独立字面值准确，非法相对路径exit2。MCP真实工厂list_tools逐一断言三个readOnlyHint和旧工具存在；帮助stdout可查输入。tests/test_document_sources.py:test_entrance_contract独立多ID集合/配置字段与固定全文分别拦只处理首绑定及API/CLI同错。真实stdio/Web画面仍属E1，未认领。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc1本TC原始1 passed/exit0；当前15/39份相应原件重新核CLI固定全文、配置pending[1]→[2]、错误400与完整字段断言，全部分配检查均实际到达。旧失败/历史TDD收据保留；本项是当前准备调试复审，不是新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

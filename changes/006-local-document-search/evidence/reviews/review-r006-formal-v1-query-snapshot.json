@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-query-snapshot 独立复核通过。SPEC B5/B6/A6、PLAN §3.3/§4 A6 和 design-r006-v5-sc6 与 tests/test_document_concurrency.py:102-148 已逐项对照。本次 links/source 两参数在2026-11-22T16:20:13.806–14.210Z exit 0，stdout 2 passed。查询已取得P/Q范围后真实修改关联，source分支另改q绑定和正文再刷新；00007/00022当次结果仍仅p/q，逐目标原ID、版本、SHA、原文、source_ids和签名sources/revision与初始快照一致。00008次查为p/r；00023次查为p/q/r且仅q换版换文。已从00013/00029实际保存的old/next逐文重算独立正文SHA与签名payload版本/来源，并确认上述集合。00011/00012关联变化后原p/q引用仍能按冻结资格读取；00027/00028来源变化后p正控可读、旧q明确400失效，不能拿新来源或新正文替代。33 artifacts、89 bindings、定义/设计SHA重新计算全部一致，实际本轮证据与现版测试/产品绑定。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    }
+  }
+}

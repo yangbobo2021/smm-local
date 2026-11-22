@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "expected_failure",
+      "reason": "已独立从SPEC B3确定时间线/A3/A4、PLAN4反查SC3及design-r006-v5-sc3：重叠来源共享当前版本、退出不回退、P/Q/all资格差异准确有据。match-r006-v4-sc3、manifest-v3、tests/test_document_projects.py:42-95与红灯冻结source、当前绑定及所有artifacts SHA一致。本轮49-54行unique直接检查v2原始results完整路径集合、长度、path/id唯一数；71行在S2 remove/failed/continuous后的P/Q/all重复检查，可拦只在v2阶段重复返回、v3正常去重的前轮反例。55-60行逐P/Q/all独立needle v2、ID/版本关系、captured_by=S2和各自source_ids，能拦误用另一来源或两响应同错；72-75行连续S1/all读v2、撤S2的Q拒绝与正控。76-85行S1采v3后覆盖持续S2时Q也更新及撤S2时Q无命中，逐旧v2 ref拒绝。撤S2两分支87行保存P/all最新v3 ref，91-94行最后S1失败后仅control可查且所有final_refs拒绝，已闭合前轮“search正确退出但read沿缓存资格可用”。任一只处理首个项目/来源或错误回退正文会在上述独立集合、文本或资格断言失败。已有三个适用前置状态差异已区分，更多等价来源可选。原始tdd-red/red-r006-v3-overlap-version/TC-006-overlap-version/run.stdout及三个api附件证明三withdraw参数全在46行首次S1 add真实404 Not Found，Fixture.request:52首先失败，为SPEC B1新增入口缺失，非环境/测试错误。v1/v2/v3采集、去重/资格与失败后置断言全部未执行。expected_failure仅认定候选有效与真实缺失红灯，不声称时间线或人工平台已经通过。",
+      "covers": []
+    }
+  }
+}

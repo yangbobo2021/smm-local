@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-scan-scope",
+  "target_sha256": "cb6624e1a095df81581d892f9be8d33aa9e0ddd1dc47393a5ae412db333cbae2",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B2/A2、PLAN §3.2/§4 A2、design-r006-v5-sc2和当前tests/test_document_scanning.py:7-37（CI修复后版本）已对照。stdout 1 passed、stderr空、exit 0。00003及00004–00008在递归轮完整命中且逐文读取独立五路径/正文：root.MD、sub/deep.markdown、sub/open.txt、branch/keep.txt、star-dir/keep.txt；默认隐藏/各排除目录、未知格式和自定义**/?/*/尾斜杠均由集合相等排除。00012非递归仅root.MD；00013–00021显式build单文件、隐藏单文件及隐藏目录均实际纳入。00023 ignored_links=2、00024逃逸独有词零命中、00025根链接400拒绝；末尾原始文件SHA/字节/mtime断言不变。31份artifacts、48份bindings及设计SHA重算一致，不使用旧v1通过意见；本结论仅开发机实际分支，不判Windows junction或平台总验收。无XML及附加正式回归。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

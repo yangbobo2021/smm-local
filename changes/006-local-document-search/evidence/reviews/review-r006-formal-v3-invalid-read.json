@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-invalid-read",
+  "target_sha256": "263b3b8130936865bbff92270986a0f4df7cc3fade57eb840a5f9cd4336ff9ac",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照当前tests/test_document_search.py:73-105与Fixture.bad。原00003/4是独立alpha/beta两文档，00007确为foreign档案；本轮00008跨档案、00009–22各绑定字段篡改均400损坏引用，00023–26非法范围400、00027/28布尔/小数422，00029原ref准确读alpha正文。00030同档案真实对话ref400明确不能混用；配置替换并刷新后00033旧配置资格ref400，00034/35新ref仍返回独立alpha完整正文。23项拒绝没有回退另一正文，读取期间源I/O哨兵实际启用。stdout1 passed/exit0/stderr空，39 artifacts/47 bindings；连续资格专项仍由SC4分工，不对未分配检查越界认领。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "SPEC B3/B5/A3及SC3设计v5有效。当前27份原件独立P={p,q,shared}、Q={p,q,r,shared}、R={q,r,shared}、G={global}与links1-2-3准确，逐文件read固定needle+文件名；all含六完整集合，重复来源后raw results数量/ID/路径均3。test_project_scope遍历全部范围与独立正文拦递归展开R/同名混合/隐式全局/只首目标及两读同错，添加共享前后全量links比较拦自动建项目关系。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc3本TC原始日志1 passed/exit0；本轮27/17/151份相应原件核独立项目集合、两来源迁移、三前态全文/来源/collector及旧引用拒绝均与当前断言相符，全部分配检查实际达到。旧failed与历史TDD保留，本份为当前准备复审，不称本TC新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    },
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "SPEC B3/A3及SC3设计v5有效。当前17份API原件和test_project_maintenance先使one(P)、both(P/Q)就绪，改P名后P完整集合保留；合并后两来源精确[Q]且Q完整集合，全部旧P引用400资格失效；map_path后完整sources不变/G空，普通全局混并拒绝后状态保留。分别核one/both拦只迁移首来源，精确[Q]拦重复绑定，全量sources+G空拦路径误推断。独立Hub包另验。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc3本TC原始日志1 passed/exit0；本轮27/17/151份相应原件核独立项目集合、两来源迁移、三前态全文/来源/collector及旧引用拒绝均与当前断言相符，全部分配检查实际达到。旧failed与历史TDD保留，本份为当前准备复审，不称本TC新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    },
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "SPEC B3确定时间线/A3/A4及SC3设计v5有效。当前151份原件三参数remove/failed/continuous均P/Q/all needle v2版2，S2退出后P/all保持v2/Q拒绝；S1采v3后连续Q也读v3、已退出Q空，全部旧v2引用拒绝；退出分支最后S1失败仅留control，continuous最终shared v3。test_overlap_version以unique核raw数量/ID/路径及独立固定v1/v2/v3逐范围全文，拦重复命中、仅P更新、两响应同错和S2退出回退v1；各自source_ids与captured_by区分资格和采集出处。 当前test_overlap_version读来源/collector独立断言保留：本轮00025/00026 remove的p/all仅ed295d60a17b4714ac6269417e08e5f0而collector仍dd3dcaf2cf6a46d1aa94c0e7aed12c26，00079/00080 failed仅9f3d13b324eb42a89de8a495c5897d05而collector仍7773ac9a86014318a634cc8163dac8fc；00131/00132 continuous分别仅S1/双源、collector仍S2。精确集合/独立采集者断言拦回退旧metadata错误与一律删除仍有效S2，旧all继续准确读v2。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及自然设计v5；已核match-v9当前源选段/文件SHA/implementation摘要与debug一致，全部本次artifacts及bindings逐项SHA复算吻合，没有沿用旧绑定。src逐字当前9cfd619；实际diff仅_glob终端**零目录、连续**、LF字符类语义，read有效stamp列表与历史collector修复保持。runtime-product-v5真实Python3.12.10/SQLite3.47.1导入当前documents成功。 当前debug-r006-v5-sc3本TC原始日志3 passed/exit0；本轮27/17/151份相应原件核独立项目集合、两来源迁移、三前态全文/来源/collector及旧引用拒绝均与当前断言相符，全部分配检查实际达到。旧failed与历史TDD保留，本份为当前准备复审，不称本TC新TDD-green。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

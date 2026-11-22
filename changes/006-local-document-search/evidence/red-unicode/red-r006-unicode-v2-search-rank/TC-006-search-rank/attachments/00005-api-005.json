@@ -1,0 +1,99 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "needle",
+    "limit": 1
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "3cdabb75686044cf825a370d4f40a2a1",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs/file-000.md",
+        "version": 1,
+        "sha256": "b9d7fb8b16e891ca84b7e38a31ad89dec36adbbd233bb849d5be0edd0c515d72",
+        "text_length": 13,
+        "captured_at": "2026-11-22T17:48:06.066502+00:00",
+        "captured_by_source_id": "322d58b723104ab1b9fa576122f0d6d8",
+        "text": "needle common",
+        "start": 0,
+        "end": 13,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "2d537460964d458ba614b480b86d04c9",
+          "322d58b723104ab1b9fa576122f0d6d8"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNTQwMTdmMTlmYmNhNDMzYThhY2M5NjFjYmMwODM2YzciLCJkb2N1bWVudF9pZCI6IjNjZGFiYjc1Njg2MDQ0Y2Y4MjVhMzcwZDRmNDBhMmExIiwiZW5kIjoxMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJkNTM3NDYwOTY0ZDQ1OGJhNjE0YjQ4MGI4NmQwNGM5IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiIzMjJkNThiNzIzMTA0YWIxYjlmYTU3NjEyMmYwZDZkOCIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.ad6ca65f6259b68ef24198fcc0c2d06b0b1b4081f26e2167073e30f17e7bd46d",
+        "bm25_score": 1.6741012282466856e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 60,
+      "sources": [
+        {
+          "id": "2d537460964d458ba614b480b86d04c9",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "546f025980d041f5b562d1ef3bc4ed1a",
+          "request_seq": 1,
+          "started_at": "2026-11-22T17:48:06.050889+00:00",
+          "finished_at": "2026-11-22T17:48:06.059538+00:00",
+          "error": null,
+          "counts": {
+            "ready": 60,
+            "failed": 0,
+            "candidates": 60,
+            "billed_bytes": 39400,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "322d58b723104ab1b9fa576122f0d6d8",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs/file-000.md",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "e6eeeee1502c400a91dbdf71767200d8",
+          "request_seq": 2,
+          "started_at": "2026-11-22T17:48:06.065614+00:00",
+          "finished_at": "2026-11-22T17:48:06.066624+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 13,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

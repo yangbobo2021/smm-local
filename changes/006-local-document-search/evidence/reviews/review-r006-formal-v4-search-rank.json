@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-search-rank",
+  "target_sha256": "44eab61e5f0af1c4cc40416692960de88b17d5325c0a33c91a5e9b3bcb155446",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。依据SPEC B5/B6/A5、PLAN §3.3/§4与design-r006-v5-sc5，当前test_document_search.py:9-38实际1passed/exit0/stderr空，26 artifacts/47 bindings。原00005–07 limit1=file000、limit50完整000..049/唯一ID/稳定排序均到达，00008文件名独有词零命中，00009 z-high在a-low之前且分数不同。重新按00022独立special原串计算六special命中/读取：长s前缀后ASCII词位置3400→[3200,3421)、İ前缀后marker位置3001→[2801,3026)，两窗口准确含真实词，不由regex等价抢位或lower展开错位；尾/边界/长行/中文原文切片/2000上限均吻合。本次6份read source_ids逐一解码原reference核为仅一个原当次有效来源，collector保持原采集者。定位代码保留lower.find回映，本次read过滤返修未改变正文/排名/坐标。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    }
+  }
+}

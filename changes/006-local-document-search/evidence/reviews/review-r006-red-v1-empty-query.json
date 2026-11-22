@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC5输入/覆盖判据源于SPEC B5/B7，无新增产品要求；自然设计明确列无来源及pending/ready/partial/failed/refreshing真实状态。tests/test_document_search.py:89先add，90才首次查询，所以“无来源”前状态未落实；91/98/101/103仅断言coverage.sources[0]，且整个夹具始终只有同一个来源，没断言完整来源ID→状态集合。推演只有首来源计入覆盖、其余来源全部省略的实现：现有各状态和indexed_files断言全可通过，却违反B7“检索覆盖提供成功文件数、待刷新/运行/部分失败/失败来源”。最小补充是空档案合法零命中和同次存在多来源不同状态时的完整来源集合/成功文件数；这里缺的是会改变覆盖输出的前状态与目标，不是换同条件ID。92-95逐非法参数都调用bad，各坏输入不会被首项断言代替；97对合法零命中用独立1文件预期也有效。原red命令、stdout/stderr和api-001已读，本次89行有效文件add返回404（helper:52），非环境/测试导入失败；输入拒绝和零命中覆盖尚未到达，当前候选不授expected_failure有效设计结论。",
+      "covers": []
+    }
+  }
+}

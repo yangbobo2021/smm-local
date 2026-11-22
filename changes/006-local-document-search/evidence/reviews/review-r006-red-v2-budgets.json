@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-budgets": {
+      "status": "expected_failure",
+      "reason": "SC2预算判据与design-r006-v5-sc2来自SPEC B2/A2的真实数值、失败候选计费和集合优先级，无额外行为。v1b最早设计缺口已补：tests/test_document_limits.py:30-38的8个2MiB候选含坏UTF8/NUL/后续拒读，加baseline使预检正好16MiB+1；只按成功文本计费会在63或66行独立数值/failed状态失败。stat-failure在39-47、79-81以取大小失败但候选计一、计费0及错误语义独立核对；若不计该候选63行失败。48-61在scandir边界强制并记录正反顺序，不再仅靠改文件名。count-equal的78行完整ready路径集合对照1000个独立源文件，不再只看前50。2MiB和+1、1000和+1、16MiB和+1由12-19及82-87真实字节/数量算出；超限却部分发布由66-68的状态、无结果及旧ref拒绝拦截，恢复误复活旧资格由94-95拦截；合法partial误撤正常baseline资格由73和96精确原文拦截。自然设计与实际独立断言已落实既有缺口。原始red-r006-v2-budgets/TC-006-budgets/run.stdout及11个api-001附件证明11参数全在9行首次add真实404；边界大文件尚未创建，预算、注入、顺序、发布与恢复均未执行。artifacts SHA全一致，当前绑定与match-r006-v3-sc2一致，src未改。expected_failure仅确认此业务缺失红灯与候选有效，不是预算行为通过。",
+      "covers": []
+    }
+  }
+}

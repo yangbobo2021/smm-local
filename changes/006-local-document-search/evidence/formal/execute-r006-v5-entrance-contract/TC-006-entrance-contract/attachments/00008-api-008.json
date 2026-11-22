@@ -1,0 +1,27 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "eb7c9de79e5a4495a90de1410544a5e2",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1000/test_entrance_contract0/docs/cli space 中文.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 3,
+      "status": "pending",
+      "resume_status": "pending",
+      "refresh_id": null,
+      "request_seq": 0,
+      "started_at": null,
+      "finished_at": null,
+      "error": null,
+      "counts": {},
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

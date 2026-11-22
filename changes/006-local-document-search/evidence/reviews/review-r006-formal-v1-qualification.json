@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "按SPEC B4/B6/A4及PLAN连续资格映射独立审阅本次正式.venv/bin/python -m pytest -q tests/test_document_lifecycle.py::test_qualification，16:20:07.263至16:20:07.820Z退出0，stdout 3 passed、stderr空。test_document_lifecycle.py:40-76真实file/source/missing三分支，两个来源同路径分别P/Q、all双资格，control独立正控；不变刷新后逐原P/Q/all ref仍可读且版本未变。正式00016/00052/00088分别文件partial、来源failed、缺失根failed；原P ref在00017/00053/00089均400，原Q/all各独立needle qualification可读。00020-00024及+36/+72对应同配置同字节恢复，版本仍1而旧P永久400，原Q/all继续沿连续资格读；全部原来源移除后旧all拒绝，新来源加入且新ref原文正确后，00032-00034/00068-00070/00104-00106逐旧P/Q/all仍400，control每分支末精确needle control。已核完整实际输入/断言/逐响应而非status，112个artifacts/89个bindings SHA均匹配，定义000002和设计v5-sc4/当前源码同版。分配qualification-c1/c3本次执行均证实，注入读取/扫描错误不冒称平台文件权限。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    }
+  }
+}

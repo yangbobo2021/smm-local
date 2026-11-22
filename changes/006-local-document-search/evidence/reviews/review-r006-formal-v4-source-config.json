@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-source-config",
+  "target_sha256": "8820692a4e3748235a8216e4607380995ce111b33e57cca81df74f0c26373b5f",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "本次v4独立复核SPEC B1/A1、PLAN §3.1/§4、当前test_source_config与正文打开哨兵及design分配。stdout1 passed、stderr空、exit0；43 artifacts/47 bindings及设计SHA重算一致，产品documents43d3762c…对应4c706b3。独立重解析39附件：同名P身份/稳定键不同、单文件/目录完整替换与省略字段复位均pending，无files/search；11种坏输入400/422后每次完整来源集合仍为baseline，重开档案配置/移除后空集合/源指纹不变断言均执行。原29字节SHA另算一致。当前covers2项均有本轮证据；正式只目标selector，无XML/附加回归，未将旧TDD或旧意见授予新源。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "pattern": "cache/**/",
+  "wanted": [
+    "cachex/keep.txt",
+    "outer/cache/direct.txt",
+    "outer/cachex/keep.txt",
+    "outer/deep/cache/deep.txt",
+    "visible.txt"
+  ],
+  "actual": [
+    "cachex/keep.txt",
+    "outer/cache/direct.txt",
+    "outer/cachex/keep.txt",
+    "outer/deep/cache/deep.txt",
+    "visible.txt"
+  ]
+}

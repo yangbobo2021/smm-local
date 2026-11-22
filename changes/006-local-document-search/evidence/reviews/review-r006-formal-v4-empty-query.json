@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-empty-query",
+  "target_sha256": "18805cd839b43147c5ff2c6d10a4eb4734eba525be4721631a64e3f7be8cde55",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B5/B7/A5、PLAN §4、design-r006-v5-sc5，对照当前test_document_search.py:108-133的完整ID→状态/独立数量断言。00001无来源合法非空不存在词为200空/0；00004两来源pending如实保留；00005–15空/空白/无词、非法scope、缺/不存在项目、limit0/-1/51/浮点/布尔均按实际请求400或422。合法零命中00017 ready+pending为1成功文件，00019 partial+pending、00020 refreshing+pending、00022 failed+pending均0且保留真实状态/失败原因，另一个来源始终pending。原00023汇总与逐步响应一致，没有把0命中掩盖未处理/失败。当前read.source_ids过滤未改本项覆盖计算；本项不执行原文读取，也不认领读来源专项。stdout1passed/exit0/stderr空，27 artifacts/47 bindings。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

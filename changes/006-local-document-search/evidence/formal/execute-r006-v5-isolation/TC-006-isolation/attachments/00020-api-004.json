@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiODRmYzNkMWQ4NDJhNGFmOTljN2EyMTNjZjAwOWU4M2EiLCJkb2N1bWVudF9pZCI6Ijc3OTRjNjQ3MDMxZjRkZmY5Y2M0OGE5MDI3YjI5MzhkIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImVhYjNjMTJhNzk1ZTQ4ZWU5YjQ0MjFmMjUxYjNlOWYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7b3dff84dc53b3d63ff148fb478e94d5e2c381cb83c14e23995a8cf57435e4ea"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "7794c647031f4dff9cc48a9027b2938d",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1020/test_isolation_paused_0/document-client/docs/private-document.txt",
+    "version": 1,
+    "sha256": "7fbd2108e39266a20380e733ed6cf920d7c0063469ffc5d7eb8cc06bb384a548",
+    "text_length": 23,
+    "captured_at": "2026-11-22T19:19:05.131250+00:00",
+    "captured_by_source_id": "eab3c12a795e48ee9b4421f251b3e9f2",
+    "text": "docprivateneedle 本机文件 😀",
+    "start": 0,
+    "end": 23,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "eab3c12a795e48ee9b4421f251b3e9f2"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

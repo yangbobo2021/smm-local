@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-packages 独立复核通过。依据 SPEC A7及边界约束、PLAN P9/§6.1、design-r006-v5-sc7，已读 scripts/acceptance/local_documents_packages.py:15-62 和 scripts/build_packages.py 的实际构建/安装/摘要断言。2026-11-22T16:20:17.920–23.727Z 本次包探针exit 0；commands.json保留15条完整argv/stdout/stderr，真实build、两独立venv离线安装、模块核验和入口命令全部exit0。独立重算当前Local 26个、Hub 24个模块/HTML（含Hub共用代码vendoring变换），与source-wheel附件、安装解释器原stdout、package-result三处全表完全一致；并非以相同0.4.0版本串判同包。Local安装版创建项目→add pending→refresh ready→search原样ref→read返回 needle package 中文😀\n，原始CRLF字节SHA相符；Hub安装版在-I隔离进程断言无smm_local，独立创建/合并项目后只剩standalone-B，serve-hub帮助可用。源码实际检查wheel无用户档案/密钥扩展及构建源码秘密模式，Hub无documents模块。8 artifacts、90 bindings、定义/设计SHA全部重新计算一致；wheel临时目录随探针退出清理，本次保留的原始安装/module/业务响应足以复核结论，不将本自动包项外推为CI/平台/用户发现通过。",
+      "covers": [
+        "packages-c2"
+      ]
+    }
+  }
+}

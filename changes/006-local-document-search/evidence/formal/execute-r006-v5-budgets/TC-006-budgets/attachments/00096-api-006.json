@@ -1,0 +1,65 @@
+{
+  "method": "GET",
+  "path": "/api/documents/files?source_id=f77c555e28e1436ba607366888073a8f",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "source_id": "f77c555e28e1436ba607366888073a8f",
+      "relative_path": "aaa-denied.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "synthetic access rejected",
+      "id": "9da9af2089e441f29e05b65a7cbe6b56",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_first_0/docs/aaa-denied.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "f77c555e28e1436ba607366888073a8f",
+      "relative_path": "aaa-encoding.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件不是严格 UTF-8 文本",
+      "id": "c65ce2f824b1483a89be68eabfd29125",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_first_0/docs/aaa-encoding.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "f77c555e28e1436ba607366888073a8f",
+      "relative_path": "aaa-large.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件超过2MiB",
+      "id": "7510da52d4794d05aa0bfaa7381ab204",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_first_0/docs/aaa-large.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "f77c555e28e1436ba607366888073a8f",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "8f12f5dd27cf4572af6423cfd161dd97",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_first_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.667006+00:00",
+      "captured_by_source_id": "f77c555e28e1436ba607366888073a8f"
+    }
+  ]
+}

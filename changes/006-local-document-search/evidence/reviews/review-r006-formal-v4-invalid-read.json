@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-invalid-read",
+  "target_sha256": "b252491fb647eed55f0465be486ddfa125b845553902ce69460a445d1ce59bc8",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照当前test_document_search.py:73-105。00003/4原alpha/beta及00007 foreign是独立目标；原00008跨档案、00009–22保留签名篡改archive/document/version/kind/source id/revision/qualification均400损坏引用；00023–26非法范围400，00027/28布尔/小数422，错误含义符合请求。00029原引用正控准确读alpha完整文本，00030真实对话ref400不能混用，配置变更后00033原资格失效400、00034/35新ref仍读准确alpha。23个拒绝均不返回替代正文，正控read的source_ids解码后仅原当次有效单源，collector不串档；源I/O哨兵实际启用。stdout1passed/exit0/stderr空，39 artifacts/47 bindings。连续资格中断及退出重叠源的新专项分配在SC3/4，本项不把未运行检查算作自己的覆盖。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1689 @@
+{
+  "count": 104,
+  "all_ordinary": true,
+  "processes": [
+    {
+      "pid": 13064,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "project",
+        "create",
+        "文档项目P"
+      ],
+      "time": 1795375711.6707947,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9092,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "project",
+        "create",
+        "文档项目Q"
+      ],
+      "time": 1795375713.3779185,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16020,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "add",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\资料 空格",
+        "--project-id",
+        "1",
+        "--exclude",
+        "excluded/**/"
+      ],
+      "time": 1795375714.100954,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16032,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "add",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\other.txt",
+        "--project-id",
+        "2"
+      ],
+      "time": 1795375715.6754413,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 12332,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375717.0809286,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9524,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375718.5907931,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 10372,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "add",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\资料 空格\\linked-directory"
+      ],
+      "time": 1795375720.2449622,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 7800,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle"
+      ],
+      "time": 1795375721.790193,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4572,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh"
+      ],
+      "time": 1795375723.4979486,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 8016,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--scope",
+        "project",
+        "--project-id",
+        "1",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375724.186287,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16772,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "escapeuniquemarker"
+      ],
+      "time": 1795375725.0153553,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4840,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "globexcludeduniquemarker"
+      ],
+      "time": 1795375726.6254063,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 13020,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImJiNTNhNDI2ZGNjODQzZmRhN2RmMmFiYzA2ZTY4M2YzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.3d02743da2eaf652cb1a838307b70f2b6891dcf597437dc25edcd6f262d90587"
+      ],
+      "time": 1795375728.1927826,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 2632,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.237f58680298d699adabee226f92e477ea7a7eb7dcee3676a9c91b12a1f814e7"
+      ],
+      "time": 1795375729.7506118,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 1416,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375731.4487364,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6984,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.237f58680298d699adabee226f92e477ea7a7eb7dcee3676a9c91b12a1f814e7"
+      ],
+      "time": 1795375733.117852,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15516,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.237f58680298d699adabee226f92e477ea7a7eb7dcee3676a9c91b12a1f814e7",
+        "--start",
+        "7",
+        "--end",
+        "14"
+      ],
+      "time": 1795375733.8156502,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 3408,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "nonexistentuniqueterm"
+      ],
+      "time": 1795375734.8482099,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 1176,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "serve",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "65315",
+        "--skip-initial-sync"
+      ],
+      "time": 1795375737.081876,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 17016,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375756.9066732,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 320,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375761.7936018,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15588,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375767.527614,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14592,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375772.5510757,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11292,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--scope",
+        "project",
+        "--project-id",
+        "1",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375773.85619,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 10480,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375775.170117,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14324,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImJiNTNhNDI2ZGNjODQzZmRhN2RmMmFiYzA2ZTY4M2YzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.3d02743da2eaf652cb1a838307b70f2b6891dcf597437dc25edcd6f262d90587"
+      ],
+      "time": 1795375780.2866619,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6160,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImM2ZjljNDdlMDFiYTRkZjhiYTBhMTY4NTcwMzQ1NWMyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJlNDdiNDkyOGQxMzI0NzcwOWM3NmEzYTcxZWY5ZTBkNCIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.0462d2f2dc236c39e32e983fee0a683a855b71e51883f4944a913f1abb703612"
+      ],
+      "time": 1795375781.7599144,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15596,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375783.6752908,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 1888,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375784.5104694,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 17352,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.237f58680298d699adabee226f92e477ea7a7eb7dcee3676a9c91b12a1f814e7"
+      ],
+      "time": 1795375790.2600152,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 1552,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375792.382508,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15524,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImM2ZjljNDdlMDFiYTRkZjhiYTBhMTY4NTcwMzQ1NWMyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJlNDdiNDkyOGQxMzI0NzcwOWM3NmEzYTcxZWY5ZTBkNCIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.0462d2f2dc236c39e32e983fee0a683a855b71e51883f4944a913f1abb703612"
+      ],
+      "time": 1795375801.829858,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4284,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375802.5918982,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16888,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375813.8244803,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16516,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375814.4592655,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 10260,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375815.7311869,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11356,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375817.3057935,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15568,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375818.7773304,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4172,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImJiNTNhNDI2ZGNjODQzZmRhN2RmMmFiYzA2ZTY4M2YzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.3d02743da2eaf652cb1a838307b70f2b6891dcf597437dc25edcd6f262d90587"
+      ],
+      "time": 1795375820.2503371,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15868,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375822.328755,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 2740,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "continuous"
+      ],
+      "time": 1795375828.195827,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15796,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImM2ZjljNDdlMDFiYTRkZjhiYTBhMTY4NTcwMzQ1NWMyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJlNDdiNDkyOGQxMzI0NzcwOWM3NmEzYTcxZWY5ZTBkNCIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.0462d2f2dc236c39e32e983fee0a683a855b71e51883f4944a913f1abb703612"
+      ],
+      "time": 1795375829.6950176,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6940,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375831.431567,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 324,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "repaired"
+      ],
+      "time": 1795375832.922034,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9104,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "unreadable"
+      ],
+      "time": 1795375834.6504295,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 3988,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375836.0171492,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14428,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375837.5333385,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14692,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "files",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375839.0732095,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11792,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375840.6275342,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15824,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjRiMThkNDhmNGM1YjQwMWI4NDMzOGY3MTI5NGZmZTZjIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.953e10dbb7cc93c32e6ca9b920172d884bb1adda49110fd6167d4240f6be7fb2"
+      ],
+      "time": 1795375842.3694646,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11620,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375844.3297827,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16184,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375845.1279106,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14340,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375845.7987912,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16792,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375848.0257313,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9072,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375854.4738195,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6360,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.155de5bdf05e5c35ba99d1be94e769586d51e58f3c9461b36ccc6b8c24f94e0c"
+      ],
+      "time": 1795375860.2109296,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6960,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375862.9045916,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4700,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "escapeuniquemarker"
+      ],
+      "time": 1795375867.496005,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 5508,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwOCwidmVyc2lvbiI6MX0.3da965ebcd36627bf48338e157ffa1d8013d2f9cca6504584cfb4827967acdd0"
+      ],
+      "time": 1795375868.728752,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6160,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375878.719197,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6184,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375880.0257206,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9280,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375881.573039,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 8828,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375883.098329,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14524,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4d4b05644f6cd5542f7ec9886d2afb466f0c60808465d6412e9bbab9f205973"
+      ],
+      "time": 1795375884.841063,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 7648,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjRiMThkNDhmNGM1YjQwMWI4NDMzOGY3MTI5NGZmZTZjIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.953e10dbb7cc93c32e6ca9b920172d884bb1adda49110fd6167d4240f6be7fb2"
+      ],
+      "time": 1795375885.7824676,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 5708,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375887.3584926,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15700,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375888.9535542,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15024,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375890.5339682,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6060,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.155de5bdf05e5c35ba99d1be94e769586d51e58f3c9461b36ccc6b8c24f94e0c"
+      ],
+      "time": 1795375892.2219877,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15968,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375894.6079159,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 10884,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "serve",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "58646",
+        "--skip-initial-sync"
+      ],
+      "time": 1795375900.5320473,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15504,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375905.240562,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15264,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375906.8554754,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15000,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375907.411099,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15320,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4d4b05644f6cd5542f7ec9886d2afb466f0c60808465d6412e9bbab9f205973"
+      ],
+      "time": 1795375908.6254091,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 8960,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjRiMThkNDhmNGM1YjQwMWI4NDMzOGY3MTI5NGZmZTZjIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.953e10dbb7cc93c32e6ca9b920172d884bb1adda49110fd6167d4240f6be7fb2"
+      ],
+      "time": 1795375910.158301,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6704,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375911.877303,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14304,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375913.3059776,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 4920,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375914.8810503,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6288,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375915.736157,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 12676,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375921.1276433,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11924,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4d4b05644f6cd5542f7ec9886d2afb466f0c60808465d6412e9bbab9f205973"
+      ],
+      "time": 1795375925.836441,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 104,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjRiMThkNDhmNGM1YjQwMWI4NDMzOGY3MTI5NGZmZTZjIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.953e10dbb7cc93c32e6ca9b920172d884bb1adda49110fd6167d4240f6be7fb2"
+      ],
+      "time": 1795375927.516221,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14208,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375929.244457,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 8196,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375930.781808,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14848,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375932.5174363,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 6000,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375934.8895,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16792,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "remove",
+        "e47b4928d13247709c76a3a71ef9e0d4"
+      ],
+      "time": 1795375949.6327982,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 1376,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImQ4ZWE3Y2JiNzhjMTQ1OTJiNmQ4NTg4NDU3MmM1MTU4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4d4b05644f6cd5542f7ec9886d2afb466f0c60808465d6412e9bbab9f205973"
+      ],
+      "time": 1795375950.4376018,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 8992,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjRiMThkNDhmNGM1YjQwMWI4NDMzOGY3MTI5NGZmZTZjIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.953e10dbb7cc93c32e6ca9b920172d884bb1adda49110fd6167d4240f6be7fb2"
+      ],
+      "time": 1795375952.1243625,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 7252,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6ImVmOTIwM2EzMWNhZDQ0ZjNiMTgxMWUzYzJiOTMxOTlkIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImU0N2I0OTI4ZDEzMjQ3NzA5Yzc2YTNhNzFlZjllMGQ0IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.87c06b624cb23c11008023acd0548a6416727a3af4ebb7ee00db054d82de82eb"
+      ],
+      "time": 1795375953.615396,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11424,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjM2YmMxZDc4OWM5MDQ2MTRiN2E1MjdjY2IzN2VkMjEyIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiZTQ3YjQ5MjhkMTMyNDc3MDljNzZhM2E3MWVmOWUwZDQiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.6b57970ece38a229384573816e200494196f88e397d9621e831611a90e2f9b5a"
+      ],
+      "time": 1795375955.3859026,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14000,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375956.9613802,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 240,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375961.048376,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16200,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375962.3512416,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 11516,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375964.9642918,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 5580,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375970.97553,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9684,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "remove",
+        "188d489d5faf42058fe6d061e18adc3f"
+      ],
+      "time": 1795375975.9568415,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14872,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiZjMzZDY3ZWEyMDlhNDQ2MzlhMTM3NWM2YjdlZDlkYzAiLCJkb2N1bWVudF9pZCI6IjU2ODc2ZmFmNTUwNjQ3Mjk5NDkwNGEwMTAxNzdlMDgyIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE4OGQ0ODlkNWZhZjQyMDU4ZmU2ZDA2MWUxOGFkYzNmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.ade44f7f012d9f61afbbf299bc4748f965cbda3d5ba88b2ed7e73e100fa55ca6"
+      ],
+      "time": 1795375977.221634,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 17272,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375979.446534,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 16216,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375985.3649948,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 14572,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375985.958844,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 15460,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375986.621826,
+      "is_admin": false,
+      "session_id": 1
+    },
+    {
+      "pid": 9696,
+      "platform": "win32",
+      "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\local-env\\Scripts\\python.exe",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\archive.sqlite3"
+      ],
+      "time": 1795375987.7426066,
+      "is_admin": false,
+      "session_id": 1
+    }
+  ]
+}

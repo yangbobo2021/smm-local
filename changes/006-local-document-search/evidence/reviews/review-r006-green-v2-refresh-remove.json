@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B3/B4/A6的移除不复活、独占退出与共享保留均由SC6设计承接。tests/test_document_concurrency.py:60–74同时准备两文件/两来源，发布屏障中移除；70全持久表比较拦来源/成员/索引复活，71核P空/Q仅shared，72独立shared original原串拦两快照同错或只首文件正确，73逐P旧ref拒绝，74禁旧forbidden正文。新green-r006-v2-refresh-remove原stdout 1 passed；晚响应published:false，共享read为needle shared original，两个P旧ref均400。red-r006-v3-refresh-remove首合法add404及独立红灯仍对应同版测试。documents.py:237–243/325–329事务移除并拒旧来源发布。 同版业务和附带回归有效，passed，无有据必测缺口；等价文件可选，不预判人工平台/用户发现、最终CI与R006交付。",
+      "covers": []
+    }
+  }
+}

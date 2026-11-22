@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "documents",
+    "add",
+    "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1000/test_entrance_contract0/docs/cli space 中文.txt",
+    "--project-id",
+    1,
+    "--project-id",
+    2,
+    "--no-recursive",
+    "--exclude",
+    "skip?.txt",
+    "--exclude",
+    "**/private/"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"id\": \"eb7c9de79e5a4495a90de1410544a5e2\",\n  \"path\": \"<REVIEW_TEMP>/pytest-of-boboyang/pytest-1000/test_entrance_contract0/docs/cli space 中文.txt\",\n  \"kind\": \"file\",\n  \"recursive\": false,\n  \"exclude\": [\n    \"skip?.txt\",\n    \"**/private/\"\n  ],\n  \"revision\": 1,\n  \"status\": \"pending\",\n  \"resume_status\": \"pending\",\n  \"refresh_id\": null,\n  \"request_seq\": 0,\n  \"started_at\": null,\n  \"finished_at\": null,\n  \"error\": null,\n  \"counts\": {},\n  \"project_ids\": [\n    1,\n    2\n  ],\n  \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n}\n",
+  "stderr": ""
+}

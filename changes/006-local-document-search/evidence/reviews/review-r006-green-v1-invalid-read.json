@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "已从SPEC B6/A5、PLAN §3.3/§4核SC5与design-r006-v5-sc5/match-r006-v4-sc5；签名、档案、内容/配置资格、引用类型和范围拒绝有原文依据，生命周期连续资格由SC4专项承担。tests/test_document_search.py:71–103两个同档案独立正文、真实另一档案ref及真实对话ref；75拒跨档案，80–92逐字段合法外观/非法值篡改保留原签名，93–94逐范围拒绝，95/103以独立alpha正文正控，99拒对话ref，102拒改配置的原ref。仅首字段/首目标正确会被逐字段循环及独立目标值拦截，一概拒绝会被95/103拦，两响应同错会被独立alpha原串拦。已读red-r006-v3-invalid-read合法add404原日志/附件及独立review-r006-red-v3-invalid-read；green-r006-v1-invalid-read的test_bindings/声明/命令与红灯完全相同，全部artifacts SHA和当前绑定吻合。产品references.decode验证签名及档案，documents.py:392–411核kind、当前版本及至少一个原来源revision/qualification。绿灯原run.stdout实际1 passed/exit0；附件rejected-004..017均400损坏引用，范围400/422，真实对话ref400不能混用，api-026和api-032均准确alpha正文，配置后旧ref400当次资格失效，未回退其他正文。regression.stdout实际5 passed/exit0；已读四项旧引用契约与兼容用例两独立Agent会话旧数字ID/ref及九层来源帮助的逐目标独立断言。未见有据必测缺口；同版TDD绿灯及所附回归passed，更多等价目标可选，不预判正式执行、人工平台或R006交付。",
+      "covers": []
+    }
+  }
+}

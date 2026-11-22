@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiOGVkYTU5ZmFmMGRkNDc3ZTk1OTU4Mjk3ODc5YmNkOTgiLCJkb2N1bWVudF9pZCI6IjQ4ZjZiNjdiOWQwMTQ1MDliYzExZGQ3YzRlMGIxOGM4IiwiZW5kIjozNiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjE3MTNjZDg0MGNmMTQ1ZDA4ZGQ2OTliYmM5MWVkMGYxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjZ9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.853a9cc184f49a9e48f5154862df0814eb61d05a5e48ea7f0f4543ae87f116b7"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "48f6b67b9d014509bc11dd7c4e0b18c8",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/glob-cases/docs/outer/deep/cache/deep.txt",
+    "version": 1,
+    "sha256": "4448c59ae5df0dcdb6e83ca1d7d39c2b9132a723a35dc0e9bb1c433a545fbefd",
+    "text_length": 36,
+    "captured_at": "2026-11-22T19:18:47.517954+00:00",
+    "captured_by_source_id": "1713cd840cf145d08dd699bbc91ed0f1",
+    "text": "globneedle outer/deep/cache/deep.txt",
+    "start": 0,
+    "end": 36,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "1713cd840cf145d08dd699bbc91ed0f1"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

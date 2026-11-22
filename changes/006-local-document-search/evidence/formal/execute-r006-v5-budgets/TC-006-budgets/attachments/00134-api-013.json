@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiN2MzMTYyNWI4ZDJhNDc3NDk1ZDEyMmQ3Y2ZlODhlYzEiLCJkb2N1bWVudF9pZCI6ImU1ZWM2ZDQ3ZmQ3MDQzMTE4ODM2ZTBhM2FlMTZjOTYzIiwiZW5kIjoxLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMmZlNjA1MWNjNDAyNDkwOTkyNDZkODRkM2NjOTA5MGYiLCJxdWFsaWZpY2F0aW9uIjoyLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.02574ee67d8b4c5d03ac0e929cba1625ec5b42654b15d4cd6eece337687257c2"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "e5ec6d47fd7043118836e0a3ae16c963",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_invalid_total_fir0/docs/baseline.txt",
+    "version": 1,
+    "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+    "text_length": 1,
+    "captured_at": "2026-11-22T19:18:50.835398+00:00",
+    "captured_by_source_id": "2fe6051cc40249099246d84d3cc9090f",
+    "text": "x",
+    "start": 0,
+    "end": 1,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "2fe6051cc40249099246d84d3cc9090f"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

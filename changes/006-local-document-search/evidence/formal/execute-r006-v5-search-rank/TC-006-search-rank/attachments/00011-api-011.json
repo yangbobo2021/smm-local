@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzAxNTcxMjdlMzJmNGE5Y2I5ZTI5YzNhYWE5NTdhMDMiLCJkb2N1bWVudF9pZCI6ImI0ODUxZTg0N2M1MDRiM2I4ODViNjFmYTUxYzhiODM0IiwiZW5kIjozNDIxLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMjMxMjE0MTliYzQ0NGUxNjkwNjc3ZDY0MGIyMDI3ZmUiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MzIwMCwidmVyc2lvbiI6MX0.48c25c84aa91f22a69e466a19dea5dcf8a907a6a536b05d5296b7713eb3f5f35"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "b4851e847c504b3b885b61fa51c8b834",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1011/test_search_rank0/docs/unicode-equivalence.txt",
+    "version": 1,
+    "sha256": "e22af40f81588d98ee4f7ebab3274772f61bcb93f80e960c89f63c91fef130c3",
+    "text_length": 3421,
+    "captured_at": "2026-11-22T19:18:57.780064+00:00",
+    "captured_by_source_id": "23121419bc444e1690677d640b2027fe",
+    "text": "uniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker stopuniquemarker tail",
+    "start": 3200,
+    "end": 3421,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "23121419bc444e1690677d640b2027fe"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

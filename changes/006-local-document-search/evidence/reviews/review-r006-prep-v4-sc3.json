@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "SPEC B3/B5/A3及SC3设计v5有效。当前27份原件独立P={p,q,shared}、Q={p,q,r,shared}、R={q,r,shared}、G={global}与links1-2-3准确，逐文件read固定needle+文件名；all含六完整集合，重复来源后raw results数量/ID/路径均3。test_project_scope遍历全部范围与独立正文拦递归展开R/同名混合/隐式全局/只首目标及两读同错，添加共享前后全量links比较拦自动建项目关系。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc3本TC原始1 passed/exit0；本轮27/17/151份相应API原件重新核独立项目集合、两来源迁移、三时间线原文/资格和新read来源/历史collector断言，全部分配检查实际到达。只有overlap-version另有当前新TDD绿灯；本份为三TC准备调试复审，不把其余TC说成新绿灯。旧需求failed结论保留，只有当前证据可交给需求复审重新判定。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    },
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "SPEC B3/A3及SC3设计v5有效。当前17份API原件和test_project_maintenance先使one(P)、both(P/Q)就绪，改P名后P完整集合保留；合并后两来源精确[Q]且Q完整集合，全部旧P引用400资格失效；map_path后完整sources不变/G空，普通全局混并拒绝后状态保留。分别核one/both拦只迁移首来源，精确[Q]拦重复绑定，全量sources+G空拦路径误推断。独立Hub包另验。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc3本TC原始1 passed/exit0；本轮27/17/151份相应API原件重新核独立项目集合、两来源迁移、三时间线原文/资格和新read来源/历史collector断言，全部分配检查实际到达。只有overlap-version另有当前新TDD绿灯；本份为三TC准备调试复审，不把其余TC说成新绿灯。旧需求failed结论保留，只有当前证据可交给需求复审重新判定。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    },
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "SPEC B3确定时间线/A3/A4及SC3设计v5有效。当前151份原件三参数remove/failed/continuous均P/Q/all needle v2版2，S2退出后P/all保持v2/Q拒绝；S1采v3后连续Q也读v3、已退出Q空，全部旧v2引用拒绝；退出分支最后S1失败仅留control，continuous最终shared v3。test_overlap_version以unique核raw数量/ID/路径及独立固定v1/v2/v3逐范围全文，拦重复命中、仅P更新、两响应同错和S2退出回退v1；各自source_ids与captured_by区分资格和采集出处。 本轮新增test_document_projects.py:73–76的read元数据独立断言：p来源始终S1；旧all仅持续有效stamp，remove/failed后仅S1、continuous双源；collector始终实际S2。当前debug00025/00026仅ff7b9e2013214c439995d5a4daf96fac而collector为987cf7b8771041f99063955d1adf079d，00079/00080仅36128663f84644998d557a43052670f6而collector b1eeb900974f4f7d94e9cb833c2b69dc，00131/00132分别仅S1/双源且collector S2。精确集合/固定collector分别拦旧来源泄漏、一律丢S2与混淆历史采集者；不得把旧all改为拒绝。 本轮依据仍为定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c及design-r006-v5；已重核match-r006-v8源码选段/文件SHA/implementation摘要与当前debug一致。产品当前逐字4c706b3，实际diff只把read通过原stamp的ID列表返回，保留原document/version/来源状态/revision/资格代次校验、原文/坐标和captured_by；不借引用未带的新来源。runtime-r006-product-v4实际Python3.12.10/SQLite3.47.1导入当前documents成功，debug全部bindings/artifacts逐项SHA复算无差异，未沿用旧binding。 当前debug-r006-v4-sc3本TC原始3 passed/exit0；本轮27/17/151份相应API原件重新核独立项目集合、两来源迁移、三时间线原文/资格和新read来源/历史collector断言，全部分配检查实际到达。只有overlap-version另有当前新TDD绿灯；本份为三TC准备调试复审，不把其余TC说成新绿灯。旧需求failed结论保留，只有当前证据可交给需求复审重新判定。仅准许正式重执行，不预判平台/CI/R006。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

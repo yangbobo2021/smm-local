@@ -1,0 +1,36 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "d4ece8d6b29d448f8d66540955d82da0",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1004/test_read_races_enumeration_0/docs",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "failed",
+      "resume_status": "failed",
+      "refresh_id": "b8e75c436a3f437eabf1c0704e2bca4d",
+      "request_seq": 2,
+      "started_at": "2026-11-22T19:18:51.869995+00:00",
+      "finished_at": "2026-11-22T19:18:51.870751+00:00",
+      "error": "目录枚举失败: synthetic enumeration denied",
+      "counts": {
+        "ready": 0,
+        "failed": 0,
+        "candidates": 0,
+        "billed_bytes": 0,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

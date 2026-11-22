@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "独立按SPEC B1/B4/B7、A1和PLAN P2/P6核对本次execute-r006-v1-source-config。真实命令为.venv/bin/python -m pytest -q tests/test_document_sources.py::test_source_config，2026-11-22T16:19:56.306至16:19:57.398Z退出0，stdout为1 passed且stderr空。tests/test_document_sources.py:8-49及document_helpers.py的正文打开哨兵、HTTP状态断言、完整来源集合比较实际执行；附件00001/00002证明普通同名项目身份各异且conversations/paths/linked_ids为空，00003-00013证明文件/目录add、完整替换与清空均pending且files/results为空，00015-00035逐项400及后续完整配置不变，00036-00038删除后空来源，00039保存源字节/mtime指纹且末断言原样。重建Archive后配置读回有代码末段断言与完整测试通过支持。已逐一重算43个artifacts和89个bindings SHA，均匹配当前文件；definition 000002、设计v5-sc1及该正式记录绑定一致。两项分配均有本次执行证据；未借绿灯记录替代正式结果，也不据此判平台或整体验收。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

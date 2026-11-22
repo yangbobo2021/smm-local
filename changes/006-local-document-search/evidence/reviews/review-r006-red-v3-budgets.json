@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-budgets": {
+      "status": "expected_failure",
+      "reason": "已独立核SPEC B2/A2、PLAN3.2/4、SC2与design-r006-v5-sc2；真实大小/数量上限、失败候选计费及集合优先级设计均准确有据。match-r006-v4-sc2与manifest-v3的tests/test_document_limits.py:7-96匹配红灯冻结源码和当前绑定，全部原始artifacts SHA一致。12-19行真实构建2MiB及+1、1000及+1、16MiB及+1，41/63行以独立源指纹算候选/计费且82-87反核上限，不能以产品两个结果同错替代数值预期。30-38坏UTF8/NUL/后续拒读仍凑16MiB+1，若只对成功文本计费会在63或66失败；stat失败候选计一/字节零由43-47/63/79-81核对；48-61强制正反scandir，集合顺序敏感会被状态/计费/集合断言发现。count-equal的78行核完整1000 ready路径集合，不能只处理首个或前50；66-68超限不发布且旧ref失效，73行正常baseline独立正文及94-96恢复后旧资格区别，拦截误撤或复活。已有条件差异已区分，追加等价大小文件是可选。原始tdd-red/red-r006-v3-budgets/TC-006-budgets/run.stdout和11个api附件证明11个参数均首先在9行add真实404 Not Found（Fixture.request:52），符合SPEC B1新来源能力缺失，非导入/环境故障。大边界文件、计费、故障注入、枚举顺序、发布、恢复均尚未执行；expected_failure只确认候选有效及预期红灯，不声明预算验收通过，人工平台项未预判。",
+      "covers": []
+    }
+  }
+}

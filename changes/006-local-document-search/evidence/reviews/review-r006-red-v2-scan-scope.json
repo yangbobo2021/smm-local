@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC2判据及design-r006-v5-sc2准确来自SPEC B2/A2，要求*单段、**零到多层及显式隐藏文件，有依据。v1b的**多层与显式隐藏目标已由tests/test_document_scanning.py:13的a/b/private.txt及25-28修正。新增star-*.txt只配star-only.txt正例，仍没有该*跨斜杠的保留目标。反例：匹配器把*当作可跨段的.*，既能排除star-only.txt，也会错误排除star-dir/keep.txt；当前夹具没有后者，18行独立预期集合仍全部正确，其他断言也不拦截，违反B2明确*只匹配一个路径段。最小修订加入应保留的star-dir/keep.txt（独立正文）并纳入完整expected集合；现有star-only.txt继续为排除正例。这是已规定通配语义的正反边界，不增加新契约。设计已要求星号边界，最早需修订implementation。已覆盖部分中，只扫描首个合法文件会在18行完整路径集合失败，任一已返回文件正文错误在19行独立expected文本失败，跟随现有链接会在34行独有文本查询失败。原始red-r006-v2-scan-scope/TC-006-scan-scope/run.stdout及00001-api-001.json显示15行首次POST /api/documents/sources真实404；之后刷新、通配、链接与mtime断言均未到达。所列artifacts SHA一致，当前测试与match-r006-v3-sc2一致；404为真实能力缺失，仍需补上述测试边界再认定完整候选。",
+      "covers": []
+    }
+  }
+}

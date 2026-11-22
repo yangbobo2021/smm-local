@@ -1,0 +1,15 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-user-v4",
+  "target_sha256": "2a97e97acb90d1f8d3c9895fc43fe4c354e7dfb3c65fc1ee815629cfec7cdb71",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-user-discovery": {
+      "status": "passed",
+      "reason": "正式人工manual-r006-cross-user-v4独立复审passed，仅认领user-discovery-c3；依据SPEC B7/A8、PLAN §6.4/§6.6、design-r006-v5-sc7及user-discovery第1-6步。41 bindings/35 artifacts本轮重算全匹配当前4c706b3，未沿用a66人工/CI。\n实际回放README:33-48→TRIAL_GUIDE:58-82→scripts/acceptance/README首段→evidence/README：006未发布/0.4.0安装器不含与源码/独立wheel环境明确；服务器本机绝对路径/项目ID入口、pending后刷新、零/多/全局/一层、排除与完整替换、reference读取、码点/采集快照/旧ref/移除边界可找到。README Agent接入链接Skill，三个只读工具、CLI后备、不可混对话引用/默扫/上传边界清楚。work/user-discovery-v4的11份安装环境帮助为本轮真实新执行，全部exit0/stderr空，字段/原文/范围/状态说明已实际读取。维护说明有控制依赖/全新环境/目标字段/普通Token/摘要/清理及复跑方法；证据页明确current4c、autoformal-v4/platform-v3/cross-files-v3/user-v4，逐A1-A8/E1/29TC可到当前业务、JUnit、双包、两CI run及平台CLI/Web/安装/身份/服务退出/PNG/意见。最终重查本地Markdown导航无断链，Windows正式意见已导出；29TC不重复，审查时27passed/2pending（platform-files与本user），待意见链接明确pending，不冒称已过。本人实际运行verify.py --raw-root通过2122公开文件及全部私有原SHA；当前JUnit只把hostname改TEST-HOST，原/导出双SHA保持。索引SHA8b436fa9afbad9ebc16346df13acb45b8f501429f77cefc9cea2ebd9f4b31d3b，coverage SHA02a10f81f5b71c676516f61f8eb035ea541f3a96252d9121bfd217c36333acc2。首次delivery-r006-v1 judgment.status=failed原文保留；red-metadata实际remove/failed失败、continuous通过（2failed1passed），未覆盖历史或由索引预判R006。\n本轮重新打开8张formal-v3原PNG：Mac pending有文档主导航、服务器本机路径/项目ID/排除/完整替换及pending提示；三平台original显示项目范围、采集版本/来源/SHA/字符[0,64)/行1-3和脚本纯文本；partial显示坏编码/missing及适用Unix权限错误，未假报Windows权限失败；Mac旧ref图明确要求重新检索。实际用兼容Playwright1.65.1打开Mac主trace并查动作/失败请求；直接解析三平台9trace，主trace各137动作/34请求/0工具错误，真实主导航→建项目→保存→刷新→项目检索→原文/扩读→旧ref400→配置→影响confirm/DELETE→同旧ref按钮read均可追溯；partial13/restarted50动作。此为回放本轮真实原件，未冒称本次观察新跑Web。三平台安装26模块/HTML逐项重算等于4c源码，documents.py SHA43d3762cd9d413bc5954df362bf99132beed242bb30348cd6911de470e5930a0，同平台wheel SHA c8422b57c4e5de4fb5a1089bac1165df83a0c96ad805bf50e3a60eb35a393d4e。三份overlap-survivor逐字段实读：移除S2后同旧ref的CLI/真实stdio MCP/Web均准确edited正文，source_ids仅连续S1，captured_by_source_id保留被移除S2，区分当前资格与历史采集。\nfull-regression-v5真实301pass1skip/exit0、四旧引用通过，绑定本会话已重算；execute-v4-packages的15命令及Local26/Hub24 source-wheel-install已独立核。ci-4c runs45055455773/45055463340原元数据均headSha4c706b304e904b126ea3103523069b265d101b31、六job success；重新读两.log，各run mac/Ubuntu301pass1skip、Windows302pass，均两个wheel构建及分别安装成功，原日志SHAa9e4306b13b2d3e73e1faba6ff26348a3e301b4d9a6ace77aafb4c13479262ba、33e15533c1b3e8b3f6c5128d4e75d7d904b3185f94557bb5b4a4ecfe18d98fc4。observation第6步仍写“当前a66”为沿用标签笔误；entry=ci-4c、product_version和真实head均4c，本意见按实证更正且保留原记录，不借a66CI。以上支持当前用户/Agent/维护者可发现并完成对应流程；其他待复审项、平台完整合格及R006最终判定仍归相应阶段。",
+      "covers": [
+        "user-discovery-c3"
+      ]
+    }
+  }
+}

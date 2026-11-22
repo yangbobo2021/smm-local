@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-invalid-read 的独立复核通过。依据 SPEC B6/A5、PLAN §3.3/§4 和 design-r006-v5-sc5，已读 tests/test_document_search.py:71-103 的原输入、逐字段篡改与正控断言。本次 test_invalid_read 在 2026-11-22T16:20:10.331–10.697Z exit 0、stdout 1 passed。00008–00022显示跨档案以及archive_id/document_id/version/kind与来源id/revision/qualification的各篡改均400且只回诊断；00023–00028对应负数、反序、空范围、越界、bool/非整数范围400或422。00029原ref返回独立预期 needle alpha 😀 é\nsecond\n，00030真实同档案对话签名明确拒绝混用，00033设置来源再刷新后的原资格被拒，00034–00035新ref仍精确返回原文。因此拒绝不是读取入口全坏，也没有回退第二文档正文。读取期间文件I/O哨兵启用；断言完整执行。已逐一重新计算39 artifacts、89 bindings、定义和设计SHA，均吻合本正式轮与当前候选；没有把debug/green当作运行证据。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    }
+  }
+}

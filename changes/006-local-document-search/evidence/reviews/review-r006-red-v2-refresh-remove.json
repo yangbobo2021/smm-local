@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "expected_failure",
+      "reason": "SC6移除后旧任务不能复活来源的判据来自SPEC B4/A6，B3规定仍有效来源保留共享文件；v5自然设计和exclusive/shared差异相符，未增加行为。tests/test_document_concurrency.py:62–74实际建立独占/共享目标，在one发布前阻塞后移除来源；70逐完整document_state比较并独立断言仅剩two来源，71逐P/Q完整文件集合，72对shared原始正文，73逐P旧ref拒绝，74晚到词零命中。若只首exclusive处理正确而shared被晚到更新，70状态等式先拦，72原文再次拦；若前后都同错删除共享材料，71独立Q集合拦；若复活来源/成员/FTS，70完整状态/来源集合和74拦。已覆盖该分配项不同资格状态，额外等价文件为可选。首轮有效结论在当前版经独立复核。red-r006-v2-refresh-remove收据/命令、绑定源码、原stdout/stderr/进程及api-001摘要全部一致，63行合法目录add实际404 Not Found，helper:52业务断言失败；API源码未有文档入口，非环境/屏障错误。refresh、删除、共享保留及引用拒绝均未到达；入口缺失为可信预期失败，不宣称完整业务已运行。TDD covers为空。",
+      "covers": []
+    }
+  }
+}

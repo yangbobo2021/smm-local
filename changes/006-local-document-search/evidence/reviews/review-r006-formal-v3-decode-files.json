@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-decode-files",
+  "target_sha256": "4b48195b788b2f270b465e5c2a8088efbbb949e3f96905da9b6972dcaa17a129",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "独立重新审查execute-v3本次运行及当前test_decode_files，SPEC B1/B2/B6/A2、PLAN §4 A2与design-v5-sc2已对照。17:55:50.820–51.191Z exit0、stdout1 passed、stderr空，24 artifacts/48 bindings与设计摘要重算一致，documents.py为a66deeb的87e25466…。直接解析00002–00004及00020：7候选4ready/3failed、空文件ready长度0，三错误分别严格UTF-8/NUL/synthetic read access denied，均有独立错误且不混入成功集合。00007–00009与00014–00019逐正常及恢复目标独立重算UTF8原字节SHA，并将BOM去除、CRLF/CR转LF后与实际正文逐字比较全部一致；非BMP emoji/组合码点未丢失。00010恢复7ready，00013 limit50恰六非空文件，完整集合防默认limit漏验；os.open拒绝为注入而非平台权限。仅当次selector、无XML或附加回归；不从v2或历史绿灯直接推新源通过。",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ]
+    }
+  }
+}

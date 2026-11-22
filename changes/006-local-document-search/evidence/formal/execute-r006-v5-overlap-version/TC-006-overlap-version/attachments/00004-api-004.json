@@ -1,0 +1,43 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "3946bec2f5e94f54b4580707179606f8"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "3946bec2f5e94f54b4580707179606f8",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1007/test_overlap_version_remove_0/docs/control.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "5668123eee4c40059c18f6ed3bfc2c9e",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:18:54.042431+00:00",
+        "finished_at": "2026-11-22T19:18:54.043765+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 14,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

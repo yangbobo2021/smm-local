@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-exact-read",
+  "target_sha256": "3b189e02a4d4011514b312ec615aff6cf27f73cb13d9a3ff87d9ed82936451ab",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B6/A5、PLAN §3.4/§4与design-r006-v5-sc5，对照tests/test_document_search.py:39-68和deny_source_reads。三组真实参数均执行，stdout3 passed/exit0/stderr空。实际打开原响应并从00016/00032/00048冻结的独立正文重新计算码点切片及B6行号：BOM/CRLF/CR归一化、非BMP emoji/组合码点、有无尾LF均准确；00038 [0,2) a+LF为第1行、00040 [2,4) b+LF为第2行、00041尾LF属于第3行。每组长行默认引用与读取均为准确<=2000码点窗口，扩读16000与独立long[:16000]一致，16001均400并解释范围，旧版本ref均400。原文读取哨兵在短文全部范围时启用，未访问源文件。52 artifacts/47 bindings及match实现摘要重算一致。本正式执行只含selector，无XML/附回归；对应green-v2旧引用回归原stdout4 passed且摘要核实，full-regression-v3原XML四旧引用均通过（全集301 passed/1 skipped）。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    }
+  }
+}

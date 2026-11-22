@@ -1,0 +1,178 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "needle"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "c1a0fc62e58c41e2984a785008491cb9",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/.secret.txt",
+        "version": 1,
+        "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+        "text_length": 14,
+        "captured_at": "2026-11-22T19:07:06.314125+00:00",
+        "captured_by_source_id": "4cc9cd9da534482ca42e161f4c4c25c8",
+        "text": "needle ignored",
+        "start": 0,
+        "end": 14,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "4cc9cd9da534482ca42e161f4c4c25c8"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6ImMxYTBmYzYyZTU4YzQxZTI5ODRhNzg1MDA4NDkxY2I5IiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjRjYzljZDlkYTUzNDQ4MmNhNDJlMTYxZjRjNGMyNWM4IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.332ba1115b861c6040085d5fb65bd71596c74d026d6409682d31b06b52e8d51e",
+        "bm25_score": 1e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "d20bf59c998c4f7f8061c6e0374d3525",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/build/a.txt",
+        "version": 1,
+        "sha256": "f6aa0f7e57a50722ab5e54e0f0b6730e2ead3a1daa64339317f29bf97e7c4ad5",
+        "text_length": 14,
+        "captured_at": "2026-11-22T19:07:06.306739+00:00",
+        "captured_by_source_id": "9557fb79831c482790e966593234c1fb",
+        "text": "needle ignored",
+        "start": 0,
+        "end": 14,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "9557fb79831c482790e966593234c1fb"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6ImQyMGJmNTljOTk4YzRmN2Y4MDYxYzZlMDM3NGQzNTI1IiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6Ijk1NTdmYjc5ODMxYzQ4Mjc5MGU5NjY1OTMyMzRjMWZiIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.0fbab8651b85bb66d830cb4a5efd1f54817daf63f9a93805311b021a0a0c292b",
+        "bm25_score": 1e-06,
+        "rank": 2,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "f88dff62b2274842ace9d3b220ad9839",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/root.MD",
+        "version": 1,
+        "sha256": "5180ef9095f19b68c9c8c1c066a19dab0f60dbf080fbd27b6b65615d9a53a6f5",
+        "text_length": 10,
+        "captured_at": "2026-11-22T19:07:06.299028+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle 根😀\n",
+        "start": 0,
+        "end": 10,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6ImY4OGRmZjYyYjIyNzQ4NDJhY2U5ZDNiMjIwYWQ5ODM5IiwiZW5kIjoxMCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjJ9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.29b8b16c5427f87aadd44148870a342876b5893bfddbc17c2447cdfba3c78f68",
+        "bm25_score": 1e-06,
+        "rank": 3,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 3,
+      "sources": [
+        {
+          "id": "e065cc6383c44d2fa03d73635e45ab17",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs",
+          "kind": "directory",
+          "recursive": false,
+          "exclude": [
+            "**/private.txt",
+            "skip?.txt",
+            "branch/skip?.txt",
+            "star-*.txt",
+            "cache/"
+          ],
+          "revision": 2,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "8a9f3032d2ba42a6a506d20d0b979564",
+          "request_seq": 2,
+          "started_at": "2026-11-22T19:07:06.298034+00:00",
+          "finished_at": "2026-11-22T19:07:06.299154+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 15,
+            "ignored_entries": 19,
+            "ignored_format": 1,
+            "ignored_excluded": 14,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "9557fb79831c482790e966593234c1fb",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/build/a.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "d6a6929b6acd4dd7ab5ac9b87b2a7de7",
+          "request_seq": 3,
+          "started_at": "2026-11-22T19:07:06.305924+00:00",
+          "finished_at": "2026-11-22T19:07:06.306841+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 14,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "4cc9cd9da534482ca42e161f4c4c25c8",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/.secret.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "76e5433f07a04bb18b8feef4b8db4250",
+          "request_seq": 4,
+          "started_at": "2026-11-22T19:07:06.313224+00:00",
+          "finished_at": "2026-11-22T19:07:06.314222+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 14,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

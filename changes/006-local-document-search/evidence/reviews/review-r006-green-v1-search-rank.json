@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "已实际读取AGENTS、006 SPEC B5/B6/A5、PLAN §3.3/§4、design-r006-v5-sc5及match-r006-v4-sc5。场景判据与自然设计有原文依据，具体数据/步骤在用例。tests/test_document_search.py:9–36以51文件和重叠来源核limit1/50，24行完整50文件序列及25行唯一ID阻止仅首目标正确；30行要求高相关z-high先于低相关a-low，31–35对尾部/边界/长行/中文分别核各自独立special原文，不能靠search/read同错而通过。文件名反例28行独立零命中。核实red-r006-v3-search-rank与green-r006-v1-search-rank的test_bindings、测试声明及命令完全一致，原红灯为合法add的404 Not Found，既有独立review-r006-red-v3-search-rank与原API证据一致；非导入或环境错误。产品documents.py:360–390以完整FTS召回、路径/ID稳定平局和签名窗口实现。绿灯run.stdout实际1 passed/exit0，附件api-005/006/007显示file-000及完整000..049且重复稳定，api-008文件名词零命中、api-009高低相关顺序正确，api-010..017四种命中/读取对应独立源文本。全部绑定和artifacts SHA已逐项核实且当前源码一致。regression.stdout实际5 passed/exit0；原回归命令包含test_archive_references.py四项及test_compatibility，核其断言覆盖旧引用篡改/跨档案/项目范围和旧参数、两独立Agent会话数字ID/ref与九层旧来源CLI帮助，不能仅凭status推定。判本TC同版TDD绿灯及所附兼容回归通过；更多等价样本可选，不代表正式执行、人工入口、三平台或R006交付通过。",
+      "covers": []
+    }
+  }
+}

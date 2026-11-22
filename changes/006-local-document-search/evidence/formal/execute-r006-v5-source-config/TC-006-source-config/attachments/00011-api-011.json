@@ -1,0 +1,25 @@
+{
+  "method": "PUT",
+  "path": "/api/documents/sources/c4c8c491bd5d41b8b380432155b00230",
+  "request": {},
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "c4c8c491bd5d41b8b380432155b00230",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-999/test_source_config0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 2,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

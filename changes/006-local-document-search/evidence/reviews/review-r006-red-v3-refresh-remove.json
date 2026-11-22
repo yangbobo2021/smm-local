@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "expected_failure",
+      "reason": "独立核对SC6、SPEC B3/B4/A6、PLAN §3.2与design-r006-v5-sc6，移除来源后晚到旧任务不得复活来源/独占正文，共享目标仍依其他有效资格保留，设计未增加行为。tests/test_document_concurrency.py:62–74同时准备exclusive与shared和独立Q来源，65对两个文件均改为forbidden，66–69在旧任务发布屏障中移除来源后记录完整持久集合，70对来源/绑定/文档/成员/meta/FTS全量相等及仅剩two来源作断言，71分别核P空/Q仅shared，72独立核shared原始正文，73循环拒全部P旧ref，74要求forbidden零召回。仅第一独占目标正确、共享目标被旧任务改写时72拦；只保留状态却错误恢复来源/第二文件/索引时70拦；两次快照同错共享正文仍被72独立预期拦截。已覆盖独占消失与共享保留两类动作前条件，更多相同条件文件/来源为可选。已核match-r006-v4-sc6和red-r006-v3-refresh-remove，保存测试/当前绑定及原始证据SHA一致。原stdout、空stderr与00001-api-001.json显示首失败为63行第一个合法add返回404 Not Found，helper:52断言失败。第二来源添加、初始refresh、屏障/移除和保留/拒绝断言均未执行，不能由此判断移除竞态已通过。当前API缺B1文档入口形成可信红灯，无环境或测试故障；设计与实现有效，expected_failure，covers为空。",
+      "covers": []
+    }
+  }
+}

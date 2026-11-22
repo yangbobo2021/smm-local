@@ -1,0 +1,43 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "1713cd840cf145d08dd699bbc91ed0f1"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "1713cd840cf145d08dd699bbc91ed0f1",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/glob-cases/docs",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "**/**/cache/**/**/"
+        ],
+        "revision": 5,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "59fda2153606426cb212f9dda4db7fd4",
+        "request_seq": 4,
+        "started_at": "2026-11-22T19:18:47.503195+00:00",
+        "finished_at": "2026-11-22T19:18:47.504515+00:00",
+        "error": null,
+        "counts": {
+          "ready": 3,
+          "failed": 0,
+          "candidates": 3,
+          "billed_bytes": 80,
+          "ignored_entries": 3,
+          "ignored_format": 0,
+          "ignored_excluded": 3,
+          "ignored_links": 0
+        },
+        "project_ids": [],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

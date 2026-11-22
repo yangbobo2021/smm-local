@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC5第二判据与SPEC B5/B6/A5一致，v5设计要求独立码点、默认片段和扩读预期。首轮遗漏的短文本search与默认read坐标/行号已在tests/test_document_search.py:44–48补齐，45以独立归一化原串拦两响应同错；49–53逐范围独立核码点与LF端点，三种尾LF/无尾LF输入均在设计内。尚有长行窗口状态的实现缺口：55–58建立超过2000码点且含非BMP/组合字符的长行，但57对默认read只验len(text)<=2000，58只验指定扩读的正文，不核长行默认search/read的文本与其start/end、行号或query。推演短文及指定扩读完全正确，只有超过2000窗口在非BMP时用UTF16截取或返回空/错正文，仍给看似正常的坐标；57长度检查通过，58独立扩读也通过，SC5 search-rank的长行材料仅ASCII，无法拦截此状态。B5要求长行命中位置附近原始片段、B6要求默认命中片段准确且非BMP不移位；这是设计已列的2000边界和字符语义差异，不能靠短文或扩读通过代替。应对long当前hit及默认read按独立long原串/码点范围核正文、坐标和行号，保证命中词且有效非空，最上游为implementation。原red-r006-v2-exact-read三份api-001/完整输出、进程和绑定SHA已核：三参数均40行合法add实际404 Not Found（helper:52），非导入或环境问题；所有refresh/search/read及新增坐标断言未到达。404证明新入口缺失，但完整候选待上述修订。",
+      "covers": []
+    }
+  }
+}

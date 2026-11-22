@@ -1,0 +1,40 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "63a6b0d4ce784bd1a7a868ebc6e956c2"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "63a6b0d4ce784bd1a7a868ebc6e956c2",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-919/test_overlap_version_failed_0/docs/shared.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "failed",
+        "resume_status": "failed",
+        "refresh_id": "c40e516aa65544f2b9709ff2a7a37a87",
+        "request_seq": 4,
+        "started_at": "2026-11-22T18:26:41.068756+00:00",
+        "finished_at": "2026-11-22T18:26:41.069499+00:00",
+        "error": "synthetic S2 enumeration/read unavailable",
+        "counts": {
+          "ready": 0,
+          "failed": 0,
+          "candidates": 0,
+          "billed_bytes": 0,
+          "ignored_entries": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

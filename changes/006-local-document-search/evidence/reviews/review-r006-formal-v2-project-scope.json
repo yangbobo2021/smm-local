@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-project-scope",
+  "target_sha256": "6a93b21b7ba52514c8371306d1b658b27da47a96d73e63987b14aa921c834778",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B3/B5/A3、PLAN §4 A3、design-r006-v5-sc3与tests/test_document_projects.py:6-25已对照。stdout 1 passed、stderr空、exit 0。00001–00006明确六路径各自P/Q/R/G/空名单/[P,R]配置；00008/12/17/21依独立项目ID范围分别仅p,q,shared／p,q,r,shared／q,r,shared／global，00009–00022逐目标原文等于needle+文件名，00023 all完整六文件。P/Q同名不同身份不混淆，P不穿透到R且G不隐式加入；实际原links在共享后断言不变。00024–00026再纳入shared，原始results同时按路径及ID恰3个，无字典去重掩盖重复；逐search解码引用payload与每个命中文档/版本/source_ids一致。31份artifacts、47份bindings及设计SHA重算一致，覆盖本次完整分配项；正式仅该selector，无XML或额外回归，不使用v1结论。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-scan-scope",
+  "target_sha256": "53b5e9dd81f032995eb80cad76acc6fbdaf7a7cd2595c4a34df7eb2622d3f392",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "当前v3正式原件重新核验：17:55:49.558–50.306Z exit0、stdout1 passed、stderr空；31 artifacts/48 bindings和设计SHA重算一致，指向修复后的documents.py87e25466…及实际test_scan_scope。SPEC B2/A2、PLAN §3.2/§4、design-v5-sc2适用。独立从00003完整results恢复相对路径，恰为root.MD/sub深层markdown及open/branch keep/star-dir keep五个独立目标；00004–00008逐正文与原件字面预期一致，集合断言排除了全部默认/隐藏/未知格式及自定义* ? **/尾斜杠排除项。00012非递归仅根文件，00015/18/21另纳入build单文件/隐藏单文件/显式隐藏目录成功。00023实际ignored_links2，00024独有逃逸词零命中、00025链接根400；原文件字节与mtime整体断言已到达。只认本开发机实际链接分支，不对Windows或平台作结论；本次仅selector无XML/附加回归，未沿用v2passed。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

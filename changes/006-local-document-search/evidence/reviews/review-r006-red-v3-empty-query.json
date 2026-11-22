@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "expected_failure",
+      "reason": "独立对照SC5首判据、SPEC B5/B7/A5与design-r006-v5-sc5，输入拒绝与合法零命中必须分开，覆盖状态预期均有原文依据。tests/test_document_search.py:108–131先验无来源合法零命中，再准备一个会变化来源及一个持续pending正控；114/121/124/126/130逐次比较完整来源id→状态映射，不能只第一来源状态正确。109/114/120/123/127逐状态独立核成功文件数0或1，并要求实际results为空。115–118逐拒空/空白/无词法项、非法scope、缺/不存在项目、limit0/-1/51/小数/bool；合法查询与ready状态正控使一概拒绝不能全过，原状态前提分别覆盖pending/ready/partial/refreshing/failed，不会两次响应同错而只比较彼此。等价来源标识或重复同状态样例属可选；真实平台差异由E1负责。已读match-r006-v4-sc5及red-r006-v3-empty-query、绑定源与原stdout/stderr/API证据，并核全部SHA一致。真实首失败在108行无来源时合法非空POST /api/documents/search返回404 Not Found，helper:52断言失败，00001-api-001.json与原日志吻合；尚未到109的零命中断言，也未执行add/任何非法输入或覆盖状态检查。当前API缺少新增文档查询入口，非环境故障或错误预期，设计与测试有效；给expected_failure，TDD covers为空，不预判后续状态或平台通过。",
+      "covers": []
+    }
+  }
+}

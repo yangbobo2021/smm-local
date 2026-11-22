@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "独立按SPEC B3确定时间线/B4/B6/A3与PLAN重叠当前版本，读本次真实.venv/bin/python -m pytest -q tests/test_document_projects.py::test_overlap_version，16:20:05.580至16:20:06.201Z退出0，stdout 3 passed、stderr空。test_document_projects.py:42-95实际执行remove/failed/continuous三分支；unique对原results的完整路径集合及长度/ID/路径唯一性断言，逐P/Q/all读取独立needle v1/v2/v3，避免只比可能同错响应。正式附件00053/00107/00151时间线与逐步API原件对应：v2均同文件ID、version2、captured_by=S2，而P来源仅S1、Q仅S2、all两者；旧v1均400。S2移除或失败后00020-00029及00074-00083的P/all仍v2且Q空/旧Q400、control正确；S1采v3后各范围独立读取v3并逐旧v2拒绝，S2持续有效分支00142/00145/00146证明Q也v3。两撤销分支最后S1失败仅control可查且最终shared ref均400；持续分支仍保留shared3。155个artifacts和89个bindings重算全匹配，定义000002/设计v5-sc3同版。认领本次overlap-version-c3，不借其他TC或平台记录补结论。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

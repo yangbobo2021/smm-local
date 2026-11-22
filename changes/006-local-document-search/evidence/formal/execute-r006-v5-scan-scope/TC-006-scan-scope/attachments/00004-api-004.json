@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2YzMzJiNzM1OWZjNDJmZjk0NjkxMjQxY2I1ZjFjOTQiLCJkb2N1bWVudF9pZCI6ImRkMGNkOGQ4ZmIyYzQzNmU4YTY0Y2RhNmRhM2FmNGFiIiwiZW5kIjoxMiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImJkOTZiNzc3MmY0MjQwYjA5YzA4OWI3NDczMjNhMzViIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.dc32358e8460c98670003d15401473e05f59447a830866a648af27f8cfda2b83"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "dd0cd8d8fb2c436e8a64cda6da3af4ab",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/branch/keep.txt",
+    "version": 1,
+    "sha256": "36873bd33644eae50c0706d44ea3de8e4c59c69d86bfde765cfbd6e7d2a4fc60",
+    "text_length": 12,
+    "captured_at": "2026-11-22T19:18:47.378929+00:00",
+    "captured_by_source_id": "bd96b7772f4240b09c089b747323a35b",
+    "text": "needle keep\n",
+    "start": 0,
+    "end": 12,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "bd96b7772f4240b09c089b747323a35b"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "TESTER@LINUX_HOST",
+    "/home/TESTER/smm-006-20261122/control-env/bin/python /home/TESTER/smm-006-20261122/probes-9c/local_documents_platform.py --target-config /home/TESTER/smm-006-20261122/smm-006-linux-target.json --output /tmp/SmmDocuments006-20261122/formal-v4"
+  ],
+  "started_at": "2026-11-22T19:26:12.117076+00:00",
+  "finished_at": "2026-11-22T19:27:48.275972+00:00",
+  "exit_code": 0,
+  "platform": "linux",
+  "phase": "formal",
+  "remote_business_output": "/tmp/SmmDocuments006-20261122/formal-v4"
+}

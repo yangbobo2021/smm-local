@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-project-maintenance",
+  "target_sha256": "51a7cea00917add447a88ac05ce37a2d540af62feadc8dafcc1e663d42280175",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "当前v4独立核SPEC B3/A3、PLAN §3.1/§4、test_project_maintenance断言和设计分配。stdout1 passed、stderr空、exit0，21 artifacts/47 bindings及设计SHA重新核算相符，产品documents43d3762c…为4c706b3。00004/05 rename前后P恰one/both且00006保留P身份绑定；merge后00007/08两来源唯一Q绑定，00009同两文件保留，00010/11原两ref400资格失效。map_path到G和非法普通/全局混并前后00012/13/15/16/17完整来源集合相等，G零命中、来源仍ready，ValueError断言实际到达。4次search原路径/ID去重及payload文档版本/来源集合核对一致。维护动作是直接Archive调用与API读回，不冒称API合并；正式仅当前selector，无XML/额外回归，没有以旧绿灯或旧意见授予新源通过。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    }
+  }
+}

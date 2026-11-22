@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-read-races": {
+      "status": "expected_failure",
+      "reason": "SC2原始判据及design-r006-v5-sc2的预算后/读取期间变化、枚举失败预期来自SPEC B2/B4/B6及PLAN3.2方案，场景与自然设计有据且准确。match-r006-v4-sc2、manifest-v3、tests/test_document_limits.py:99-159与红灯冻结选段/运行绑定及全部artifacts SHA一致。108-116行在_read_file入口预算后增加一个到2MiB+1或九个到总18MiB；143-147行独立n失败/一正控、仅正控正文和每个旧ref拒绝，若只拒首个变化目标其余仍发布，failed==n或逐ref检查即拦截。117-128行fstat期间编辑/replace路径覆盖fd仍旧但路径已换的状态，漏核路径则143-147失败。枚举失败140-141行整来源不可查且不将未枚举成员标missing。两产品响应同错仍不能满足144/147的独立controlneedle unchanged；正控旧ref逐阶段保留，误撤整源资格会失败。149-159在下一刷新和修复后分别核总量failed及不可复活旧资格，已有会改变判定的故障状态均有区分性断言，更多同条件样例可选。原始tdd-red/red-r006-v3-read-races/TC-006-read-races/run.stdout和五api附件证明五参数全在103行首次add实际404 Not Found，Fixture.request:52首先失败，属于SPEC B1新增入口缺失，非测试导入/环境错误；后续Documents导入、屏障/文件变化、预算、发布与恢复均未执行。expected_failure仅确认设计/实现有效和该真实缺失红灯，故障注入不冒称E1真实平台结果，人工平台项未判通过。",
+      "covers": []
+    }
+  }
+}

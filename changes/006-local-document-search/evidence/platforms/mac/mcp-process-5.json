@@ -1,0 +1,20 @@
+{
+  "wrapper_pid": 58573,
+  "pid": 58574,
+  "argv": [
+    "/private/tmp/smm-006-mac-local/bin/python",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "-c",
+    "import sys,os,json,runpy,time\nroots=json.loads(os.environ['SMM_DOC_PROBE_ROOTS']); logfile=os.environ['SMM_DOC_PROBE_AUDIT'];phasefile=os.environ['SMM_DOC_PROBE_PHASE_FILE']\nidentity={'pid':os.getpid(),'platform':sys.platform,'python':sys.executable,'argv':sys.argv[1:],'time':time.time()}\nif sys.platform=='win32':\n import ctypes\n sid=ctypes.c_ulong();assert ctypes.windll.kernel32.ProcessIdToSessionId(os.getpid(),ctypes.byref(sid))\n identity.update(is_admin=bool(ctypes.windll.shell32.IsUserAnAdmin()),session_id=sid.value)\nelse:identity['uid']=os.getuid()\nwith open(os.environ['SMM_DOC_PROBE_IDENTITIES'],'a',encoding='utf-8') as f:f.write(json.dumps(identity)+'\\n')\ndef audit(event,args):\n if event=='open' and isinstance(args[0],(str,bytes)):\n  p=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))\n  if any(p==r or p.startswith(r+os.sep) for r in roots):\n   with open(phasefile,encoding='utf-8') as f:phase=f.read()\n   with open(logfile,'a',encoding='utf-8') as f:f.write(json.dumps({'time':time.time(),'pid':os.getpid(),'phase':phase,'path':p,'mode':args[1],'flags':args[2]})+'\\n')\nsys.addaudithook(audit)\nmodule=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__main__')\n",
+    "smm_local.mcp_server",
+    "--db",
+    "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+  ],
+  "started_at": 1795375457.545656,
+  "finished_at": 1795375458.0649521,
+  "exit_code": 0,
+  "alive": false
+}

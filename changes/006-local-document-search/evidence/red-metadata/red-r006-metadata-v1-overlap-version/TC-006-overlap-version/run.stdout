@@ -1,0 +1,106 @@
+FF.                                                                      [100%]
+=================================== FAILURES ===================================
+_________________________ test_overlap_version[remove] _________________________
+
+tmp_path = PosixPath('<REVIEW_TEMP>/pytest-of-boboyang/pytest-919/test_overlap_version_remove_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107be4f20>
+withdraw = 'remove'
+
+    @pytest.mark.parametrize('withdraw',['remove','failed','continuous'])
+    def test_overlap_version(tmp_path,monkeypatch,withdraw):
+        f=Fixture(tmp_path);p=f.project('P');q=f.project('Q')
+        file=f.file('shared.txt','needle v1');other=f.file('control.txt','needle control')
+        s1=f.add(file,[p]);s3=f.add(other,[p]);f.refresh(s1);f.refresh(s3)
+        v1=names(f,project=p)['shared.txt'];assert f.read(v1)['text']=='needle v1'
+        file.write_text('needle v2',encoding='utf-8');s2=f.add(file,[q]);f.refresh(s2)
+        def unique(project,wanted):
+            result=f.search(scope='project',project_id=project,limit=50)['results'] if project else f.search(limit=50)['results']
+            assert {Path(h['path']).name for h in result}==wanted
+            assert len(result)==len(wanted)==len({h['id'] for h in result})==len({h['path'] for h in result})
+            return {Path(h['path']).name:h for h in result}
+        unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'});unique(None,{'shared.txt','control.txt'})
+        current={key:names(f,project=project)['shared.txt'] for key,project in [('p',p),('q',q),('all',None)]}
+        for h in current.values():
+            assert h['id']==v1['id'] and h['version']!=v1['version']
+            assert f.read(h)['text']=='needle v2' and h['captured_by_source_id']==s2['id']
+        assert current['p']['source_ids']==[s1['id']] and current['q']['source_ids']==[s2['id']]
+        assert set(current['all']['source_ids'])=={s1['id'],s2['id']}
+        f.bad('POST','/api/documents/read',{'reference':v1['reference']})
+        if withdraw=='remove':f.remove(s2)
+        elif withdraw=='failed':
+            from smm_local.documents import Documents
+            def failure(*a,**kw):raise PermissionError('synthetic S2 enumeration/read unavailable')
+            with monkeypatch.context() as patch:
+                patch.setattr(Documents,'_scan',failure);f.refresh(s2)
+            assert f.source(s2)['status']=='failed'
+        assert set(names(f,project=p))=={'shared.txt','control.txt'}
+        assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
+        unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'} if withdraw=='continuous' else set());unique(None,{'shared.txt','control.txt'})
+        p_read=f.read(current['p']);all_read=f.read(current['all'])
+        assert p_read['text']==all_read['text']=='needle v2'
+        assert p_read['source_ids']==[s1['id']]
+>       assert set(all_read['source_ids'])==({s1['id'],s2['id']} if withdraw=='continuous' else {s1['id']})
+E       AssertionError: assert {'1c332927a4d...e05a8db73835'} == {'e06ccf28b03...e05a8db73835'}
+E         
+E         Extra items in the left set:
+E         '1c332927a4de4d1283356a65bc730692'
+E         Use -v to get more diff
+
+tests/test_document_projects.py:75: AssertionError
+_________________________ test_overlap_version[failed] _________________________
+
+tmp_path = PosixPath('<REVIEW_TEMP>/pytest-of-boboyang/pytest-919/test_overlap_version_failed_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107d4b080>
+withdraw = 'failed'
+
+    @pytest.mark.parametrize('withdraw',['remove','failed','continuous'])
+    def test_overlap_version(tmp_path,monkeypatch,withdraw):
+        f=Fixture(tmp_path);p=f.project('P');q=f.project('Q')
+        file=f.file('shared.txt','needle v1');other=f.file('control.txt','needle control')
+        s1=f.add(file,[p]);s3=f.add(other,[p]);f.refresh(s1);f.refresh(s3)
+        v1=names(f,project=p)['shared.txt'];assert f.read(v1)['text']=='needle v1'
+        file.write_text('needle v2',encoding='utf-8');s2=f.add(file,[q]);f.refresh(s2)
+        def unique(project,wanted):
+            result=f.search(scope='project',project_id=project,limit=50)['results'] if project else f.search(limit=50)['results']
+            assert {Path(h['path']).name for h in result}==wanted
+            assert len(result)==len(wanted)==len({h['id'] for h in result})==len({h['path'] for h in result})
+            return {Path(h['path']).name:h for h in result}
+        unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'});unique(None,{'shared.txt','control.txt'})
+        current={key:names(f,project=project)['shared.txt'] for key,project in [('p',p),('q',q),('all',None)]}
+        for h in current.values():
+            assert h['id']==v1['id'] and h['version']!=v1['version']
+            assert f.read(h)['text']=='needle v2' and h['captured_by_source_id']==s2['id']
+        assert current['p']['source_ids']==[s1['id']] and current['q']['source_ids']==[s2['id']]
+        assert set(current['all']['source_ids'])=={s1['id'],s2['id']}
+        f.bad('POST','/api/documents/read',{'reference':v1['reference']})
+        if withdraw=='remove':f.remove(s2)
+        elif withdraw=='failed':
+            from smm_local.documents import Documents
+            def failure(*a,**kw):raise PermissionError('synthetic S2 enumeration/read unavailable')
+            with monkeypatch.context() as patch:
+                patch.setattr(Documents,'_scan',failure);f.refresh(s2)
+            assert f.source(s2)['status']=='failed'
+        assert set(names(f,project=p))=={'shared.txt','control.txt'}
+        assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
+        unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'} if withdraw=='continuous' else set());unique(None,{'shared.txt','control.txt'})
+        p_read=f.read(current['p']);all_read=f.read(current['all'])
+        assert p_read['text']==all_read['text']=='needle v2'
+        assert p_read['source_ids']==[s1['id']]
+>       assert set(all_read['source_ids'])==({s1['id'],s2['id']} if withdraw=='continuous' else {s1['id']})
+E       AssertionError: assert {'335fc6bbb5f...68ebc6e956c2'} == {'335fc6bbb5f...bf0d72f6cb77'}
+E         
+E         Extra items in the left set:
+E         '63a6b0d4ce784bd1a7a868ebc6e956c2'
+E         Use -v to get more diff
+
+tests/test_document_projects.py:75: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /private/tmp/smm-006-impl/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_document_projects.py::test_overlap_version[remove] - Assert...
+FAILED tests/test_document_projects.py::test_overlap_version[failed] - Assert...
+2 failed, 1 passed, 1 warning in 0.71s

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "expected_failure",
+      "reason": "SC3第二判据/design-r006-v5-sc3准确对应SPEC B3/A3及PLAN3.1/4，项目改名/合并转移去重/映射不推断和普通全局不混并有依据；自然语言设计准确。match-r006-v4-sc3、manifest-v3、tests/test_document_projects.py:25-39与红灯冻结source和运行绑定SHA一致，全部artifacts SHA已核。27行预置只P、P/Q两种动作前状态，29行改名后完整两文件集合、30行绑定ID、32行合并后每个来源独立[q]，能拦只迁首来源/丢第二或重复Q绑定。33行目标项目应含两文件、34行所有旧配置ref拒绝，不沿新资格误读；35行路径映射前后完整sources不变且36行G无资料，37-38非法混并应抛错且不改变来源。两响应同错不能同时满足独立[q]与明确两文件集合；已有差异状态覆盖后只换等价名称/ID属于可选补测。原始tdd-red/red-r006-v3-project-maintenance/TC-006-project-maintenance/run.stdout及00001-api-001.json显示27行首来源add实际404 Not Found，Fixture.request:52首先失败，属SPEC B1新增来源入口缺失，非导入/环境错误。第二来源准备、refresh、改名、合并、旧ref、映射与拒绝均未执行；expected_failure确认候选有效及真实能力缺失红灯，不代表这些后续行为通过；人工平台未预判。",
+      "covers": []
+    }
+  }
+}

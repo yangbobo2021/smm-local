@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-budgets",
+  "target_sha256": "1e16f4a666a56713b473ae626ad826db22abdcc1d8eed9379e63a82762ac89ff",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "按SPEC B2/A2、PLAN §3.2/§4、当前test_budgets和设计分配重新复核v4正式执行。stdout11 passed、stderr空、exit0；169 artifacts/48 bindings及设计SHA重算匹配4c706b3 documents43d3762c…。11份budget-actual全部从原source_bytes独立复算候选/计费，真实2MiB/2MiB+1、1000/1001、16MiB/16MiB+1正确；1000ready完整路径集合等于原文件名单。混合17MiB组正反序4候选13字节且仅基线成功，坏编码/NUL/后续拒读累计16MiB+1正反序整源failed，数量/累计超限零发布；stat失败计候选而不计字节。33search/25read/8reject原响应逐项核，正文SHA/签名文档版本、有效source为原stamp非空子集正确；恢复基线后曾失败旧ref仍拒绝，连续资格仍可读。仅本轮selector无XML/额外正式回归，未使用旧TDD或旧意见替代当次证据。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    }
+  }
+}

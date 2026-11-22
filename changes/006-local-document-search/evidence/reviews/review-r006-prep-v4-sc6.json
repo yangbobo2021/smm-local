@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc6准备结果。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4及最新返修说明、design-r006-v5-sc6与match-r006-v8-sc6已实际对照；场景/自然设计有原文依据，具体屏障/样例落于用例。当前src逐字等于4c706b3，runtime-product-v4/自身测试绑定和全部artifacts SHA重算一致；已读原stdout/process/stderr及API、完整快照/预期附件。read本次只将原payload内仍通过资格校验的ID列入返回，不重展项目或借新来源；该SC3元信息撤源专项由另一Reviewer审，本份不越界判断。test_refresh_order两参数实际2 passed/exit0。发布屏障分别让较新刷新或配置先生效；独立newwinner正文及pending/空结果先拦前后两快照同错，全部来源/绑定/文档/成员/meta/FTS相等拦晚任务任意副作用，第二参数防仅首动作前状态正确。当前两个晚响应published:false，获胜快照分别ready/revision1、新正文v2与pending/revision2、正文NULL；正控read准确newwinner、返回其单个有效来源。refresh/_publish身份及revision核验本次未改。 本TC当前设计/实现与调试证据有效，无有据必测缺口，额外等价目标可选；认领全部分配检查，准备passed，可全新正式执行。不判formal/新平台、最终CI或R006，不把历史TDDgreen冒称本轮新绿灯。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    },
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc6准备结果。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4及最新返修说明、design-r006-v5-sc6与match-r006-v8-sc6已实际对照；场景/自然设计有原文依据，具体屏障/样例落于用例。当前src逐字等于4c706b3，runtime-product-v4/自身测试绑定和全部artifacts SHA重算一致；已读原stdout/process/stderr及API、完整快照/预期附件。read本次只将原payload内仍通过资格校验的ID列入返回，不重展项目或借新来源；该SC3元信息撤源专项由另一Reviewer审，本份不越界判断。test_refresh_remove实际1 passed/exit0。独占/共享两文件与另一有效来源，屏障中移除旧来源再释放；全持久集合及仅余另一来源，P空/Q仅shared，独立shared原文与逐P旧ref拒绝，拦只首目标正确或两快照同错正文。当前晚响应published:false，共享read准确needle shared original且只列剩余Q来源，两P旧ref400，forbidden零召回断言到达；未借另一来源使原P引用通过。 本TC当前设计/实现与调试证据有效，无有据必测缺口，额外等价目标可选；认领全部分配检查，准备passed，可全新正式执行。不判formal/新平台、最终CI或R006，不把历史TDDgreen冒称本轮新绿灯。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    },
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc6准备结果。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4及最新返修说明、design-r006-v5-sc6与match-r006-v8-sc6已实际对照；场景/自然设计有原文依据，具体屏障/样例落于用例。当前src逐字等于4c706b3，runtime-product-v4/自身测试绑定和全部artifacts SHA重算一致；已读原stdout/process/stderr及API、完整快照/预期附件。read本次只将原payload内仍通过资格校验的ID列入返回，不重展项目或借新来源；该SC3元信息撤源专项由另一Reviewer审，本份不越界判断。test_overlap_order pending/ready两参数实际2 passed/exit0。两文件S1旧请求阻塞、S2新请求先发布，完整documents相等，逐P/Q/all完整集合/独立newwinner+文件名与ID/version/采集出处断言，拦首文件/首范围才正确或所有结果同错。当前两winner各one/two新正文，pending版本1、ready版本2，十二次P/Q/all读取准确；P/Q读分别原单来源，all读为两个当次仍有效来源，采集者仍S2。发布publish_seq比较未被本次read元信息修复改变。 本TC当前设计/实现与调试证据有效，无有据必测缺口，额外等价目标可选；认领全部分配检查，准备passed，可全新正式执行。不判formal/新平台、最终CI或R006，不把历史TDDgreen冒称本轮新绿灯。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    },
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc6准备结果。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4及最新返修说明、design-r006-v5-sc6与match-r006-v8-sc6已实际对照；场景/自然设计有原文依据，具体屏障/样例落于用例。当前src逐字等于4c706b3，runtime-product-v4/自身测试绑定和全部artifacts SHA重算一致；已读原stdout/process/stderr及API、完整快照/预期附件。read本次只将原payload内仍通过资格校验的ID列入返回，不重展项目或借新来源；该SC3元信息撤源专项由另一Reviewer审，本份不越界判断。test_query_snapshot links/source两参数实际2 passed/exit0。_query_scope后改关联或同时Q配置/正文，当次P/Q逐独立原串、ID/version/SHA/签名资格，下一次新集合/独立正文和P正控/Q可读或拒绝分支；逐Q断言拦只冻关联/只首P正确，P及links旧Q正控拦全拒。当前原件当次均P/Q original v1；下次links为P/R original v1，source加Q changed v2；旧Q分别200原文/400资格失效，P仍准确且返回原单来源。read valid列表仍沿原签名、不用新项目集合。 本TC当前设计/实现与调试证据有效，无有据必测缺口，额外等价目标可选；认领全部分配检查，准备passed，可全新正式执行。不判formal/新平台、最终CI或R006，不把历史TDDgreen冒称本轮新绿灯。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    },
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc6准备结果。定义000002 sha6b524c88…、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4及最新返修说明、design-r006-v5-sc6与match-r006-v8-sc6已实际对照；场景/自然设计有原文依据，具体屏障/样例落于用例。当前src逐字等于4c706b3，runtime-product-v4/自身测试绑定和全部artifacts SHA重算一致；已读原stdout/process/stderr及API、完整快照/预期附件。read本次只将原payload内仍通过资格校验的ID列入返回，不重展项目或借新来源；该SC3元信息撤源专项由另一Reviewer审，本份不越界判断。test_interrupted_refresh实际1 passed/exit0。单文件/目录两个持久refreshing状态，新Archive/Documents明确重刷，独立control连续资格；完整集合/两个来源ready防只首目标正确，变化one和新增added独立原串防只改status或两响应同错，control旧ref防全清资格。当前after为one recovered v2、added newly discovered v1、control continuous v1，三read准确而旧one400；one当前文件/目录两资格均返回，added仅目录、control仅自身资格。证据明确数据库状态注入，不冒称真实进程崩溃，下一明确刷新身份逻辑保持。 本TC当前设计/实现与调试证据有效，无有据必测缺口，额外等价目标可选；认领全部分配检查，准备passed，可全新正式执行。不判formal/新平台、最终CI或R006，不把历史TDDgreen冒称本轮新绿灯。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

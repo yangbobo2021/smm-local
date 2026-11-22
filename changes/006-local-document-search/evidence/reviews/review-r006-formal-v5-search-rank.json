@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-search-rank",
+  "target_sha256": "47b113749b67f85d3cadabd666e0ed0c0e17a0857ad2a10c1833cf4518638006",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；依据SPEC B5/B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照已读当前test_document_search.py:9-38及独立special夹具。实际1passed/exit0/stderr空，26 artifacts/47 bindings。原00005–07 limit1/file000与limit50完整000..049/唯一ID/稳定排序已核；00008文件名独有词零命中，00009 z-high高相关先于a-low。六special按本轮原串重新计算：长s后ASCII实际词3400→[3200,3421)，İ展开前缀后marker3001→[2801,3026)，search/read准确原串切片且含真词；尾/边界/长行/中文位置与2000上限均通过。6次read逐解码原ref核有效source_ids单源、collector保持，未借其他资格。仅_glob返修没有改变本项定位/文本/排名契约。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    }
+  }
+}

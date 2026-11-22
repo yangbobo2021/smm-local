@@ -1,0 +1,17 @@
+{
+  "path": "/api/documents/sources/472eef61ae8b4358a6150240f70e5f51",
+  "status": 422,
+  "response": {
+    "detail": [
+      {
+        "type": "extra_forbidden",
+        "loc": [
+          "body",
+          "path"
+        ],
+        "msg": "Extra inputs are not permitted",
+        "input": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-999/test_source_config0"
+      }
+    ]
+  }
+}

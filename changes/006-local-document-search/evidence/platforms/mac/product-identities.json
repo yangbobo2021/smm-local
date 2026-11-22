@@ -1,0 +1,1601 @@
+{
+  "count": 105,
+  "all_ordinary": true,
+  "processes": [
+    {
+      "pid": 58383,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "project",
+        "create",
+        "文档项目P"
+      ],
+      "time": 1795375450.960593,
+      "uid": 501
+    },
+    {
+      "pid": 58384,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "project",
+        "create",
+        "文档项目Q"
+      ],
+      "time": 1795375451.0468538,
+      "uid": 501
+    },
+    {
+      "pid": 58385,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "add",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "--project-id",
+        "1",
+        "--exclude",
+        "excluded/**/"
+      ],
+      "time": 1795375451.122418,
+      "uid": 501
+    },
+    {
+      "pid": 58386,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "add",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "--project-id",
+        "2"
+      ],
+      "time": 1795375451.2031481,
+      "uid": 501
+    },
+    {
+      "pid": 58387,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375451.277807,
+      "uid": 501
+    },
+    {
+      "pid": 58388,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375451.351734,
+      "uid": 501
+    },
+    {
+      "pid": 58389,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "add",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/linked-directory"
+      ],
+      "time": 1795375451.4255419,
+      "uid": 501
+    },
+    {
+      "pid": 58390,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle"
+      ],
+      "time": 1795375451.500129,
+      "uid": 501
+    },
+    {
+      "pid": 58391,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh"
+      ],
+      "time": 1795375451.577891,
+      "uid": 501
+    },
+    {
+      "pid": 58392,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--scope",
+        "project",
+        "--project-id",
+        "1",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375451.659669,
+      "uid": 501
+    },
+    {
+      "pid": 58393,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "escapeuniquemarker"
+      ],
+      "time": 1795375451.736626,
+      "uid": 501
+    },
+    {
+      "pid": 58394,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "globexcludeduniquemarker"
+      ],
+      "time": 1795375451.8127701,
+      "uid": 501
+    },
+    {
+      "pid": 58405,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c"
+      ],
+      "time": 1795375451.8916302,
+      "uid": 501
+    },
+    {
+      "pid": 58408,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4225fe6ebae8e7704d835f61ba48ea3a794121cf5146ba4280c0b8d07c9d4c2"
+      ],
+      "time": 1795375451.974169,
+      "uid": 501
+    },
+    {
+      "pid": 58410,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375452.065581,
+      "uid": 501
+    },
+    {
+      "pid": 58415,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4225fe6ebae8e7704d835f61ba48ea3a794121cf5146ba4280c0b8d07c9d4c2"
+      ],
+      "time": 1795375452.146571,
+      "uid": 501
+    },
+    {
+      "pid": 58416,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4225fe6ebae8e7704d835f61ba48ea3a794121cf5146ba4280c0b8d07c9d4c2",
+        "--start",
+        "7",
+        "--end",
+        "14"
+      ],
+      "time": 1795375452.2234712,
+      "uid": 501
+    },
+    {
+      "pid": 58417,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "nonexistentuniqueterm"
+      ],
+      "time": 1795375452.300969,
+      "uid": 501
+    },
+    {
+      "pid": 58418,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "serve",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "52797",
+        "--skip-initial-sync"
+      ],
+      "time": 1795375452.417365,
+      "uid": 501
+    },
+    {
+      "pid": 58453,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375454.972696,
+      "uid": 501
+    },
+    {
+      "pid": 58560,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375455.555558,
+      "uid": 501
+    },
+    {
+      "pid": 58562,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375456.096541,
+      "uid": 501
+    },
+    {
+      "pid": 58565,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375456.611975,
+      "uid": 501
+    },
+    {
+      "pid": 58566,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--scope",
+        "project",
+        "--project-id",
+        "1",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375456.692193,
+      "uid": 501
+    },
+    {
+      "pid": 58568,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375456.790459,
+      "uid": 501
+    },
+    {
+      "pid": 58570,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c"
+      ],
+      "time": 1795375457.3079581,
+      "uid": 501
+    },
+    {
+      "pid": 58571,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6"
+      ],
+      "time": 1795375457.3858502,
+      "uid": 501
+    },
+    {
+      "pid": 58572,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375457.463725,
+      "uid": 501
+    },
+    {
+      "pid": 58574,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375457.558503,
+      "uid": 501
+    },
+    {
+      "pid": 58586,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c4225fe6ebae8e7704d835f61ba48ea3a794121cf5146ba4280c0b8d07c9d4c2"
+      ],
+      "time": 1795375458.1065001,
+      "uid": 501
+    },
+    {
+      "pid": 58588,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375458.2039979,
+      "uid": 501
+    },
+    {
+      "pid": 58600,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6"
+      ],
+      "time": 1795375459.48825,
+      "uid": 501
+    },
+    {
+      "pid": 58602,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375459.5919611,
+      "uid": 501
+    },
+    {
+      "pid": 58609,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375460.382447,
+      "uid": 501
+    },
+    {
+      "pid": 58610,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375460.4638999,
+      "uid": 501
+    },
+    {
+      "pid": 58611,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375460.5431292,
+      "uid": 501
+    },
+    {
+      "pid": 58612,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375460.6223722,
+      "uid": 501
+    },
+    {
+      "pid": 58613,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375460.701304,
+      "uid": 501
+    },
+    {
+      "pid": 58614,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkMDczMTk0OWJhNzRlN2FiZjZhYzA4NmI4YmFmMTQzIiwiZW5kIjoyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2d8a3091240394905d5eb2fc5be8aea49c87c3ccef7acf8a04256c0a0f70ea2c"
+      ],
+      "time": 1795375460.7824671,
+      "uid": 501
+    },
+    {
+      "pid": 58616,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375460.878998,
+      "uid": 501
+    },
+    {
+      "pid": 58617,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "continuous"
+      ],
+      "time": 1795375461.388001,
+      "uid": 501
+    },
+    {
+      "pid": 58618,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoyfQ.9f7f2cc4986fd95d3538128ac3729317adf18e66fe9ba25f5b34d335762fb4b6"
+      ],
+      "time": 1795375461.4669561,
+      "uid": 501
+    },
+    {
+      "pid": 58619,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375461.544946,
+      "uid": 501
+    },
+    {
+      "pid": 58620,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "repaired"
+      ],
+      "time": 1795375461.625431,
+      "uid": 501
+    },
+    {
+      "pid": 58622,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "unreadable"
+      ],
+      "time": 1795375461.705548,
+      "uid": 501
+    },
+    {
+      "pid": 58623,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375461.785814,
+      "uid": 501
+    },
+    {
+      "pid": 58624,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375461.866556,
+      "uid": 501
+    },
+    {
+      "pid": 58625,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "files",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375461.944293,
+      "uid": 501
+    },
+    {
+      "pid": 58637,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375462.02754,
+      "uid": 501
+    },
+    {
+      "pid": 58638,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375462.108415,
+      "uid": 501
+    },
+    {
+      "pid": 58640,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375462.188489,
+      "uid": 501
+    },
+    {
+      "pid": 58641,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375462.267585,
+      "uid": 501
+    },
+    {
+      "pid": 58643,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375462.3635368,
+      "uid": 501
+    },
+    {
+      "pid": 58651,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375462.906754,
+      "uid": 501
+    },
+    {
+      "pid": 58652,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f3e68bd849108763a4c6e398ddb45d23babc0d187dd518ea90b57534a37e299b"
+      ],
+      "time": 1795375463.424157,
+      "uid": 501
+    },
+    {
+      "pid": 58653,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2a5cd11aa93858f34c1c61f425017f4e3bbd9c75d406ec9f73a53448697336f4"
+      ],
+      "time": 1795375463.504879,
+      "uid": 501
+    },
+    {
+      "pid": 58656,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375463.608803,
+      "uid": 501
+    },
+    {
+      "pid": 58658,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "escapeuniquemarker"
+      ],
+      "time": 1795375464.134538,
+      "uid": 501
+    },
+    {
+      "pid": 58659,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwOCwidmVyc2lvbiI6MX0.ea868fca32e2b6b6162836e6c5848b4af6ae67d60225fa0e37c85ac24eb7f0a2"
+      ],
+      "time": 1795375464.2183309,
+      "uid": 501
+    },
+    {
+      "pid": 58673,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "refresh",
+        "--source-id",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375465.2259278,
+      "uid": 501
+    },
+    {
+      "pid": 58674,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375465.309501,
+      "uid": 501
+    },
+    {
+      "pid": 58675,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375465.388234,
+      "uid": 501
+    },
+    {
+      "pid": 58676,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375465.468998,
+      "uid": 501
+    },
+    {
+      "pid": 58726,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651"
+      ],
+      "time": 1795375465.555765,
+      "uid": 501
+    },
+    {
+      "pid": 58783,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302"
+      ],
+      "time": 1795375465.6399732,
+      "uid": 501
+    },
+    {
+      "pid": 58784,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375465.7214699,
+      "uid": 501
+    },
+    {
+      "pid": 58785,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375465.801688,
+      "uid": 501
+    },
+    {
+      "pid": 58786,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375465.881218,
+      "uid": 501
+    },
+    {
+      "pid": 58787,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f3e68bd849108763a4c6e398ddb45d23babc0d187dd518ea90b57534a37e299b"
+      ],
+      "time": 1795375465.961271,
+      "uid": 501
+    },
+    {
+      "pid": 58788,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.2a5cd11aa93858f34c1c61f425017f4e3bbd9c75d406ec9f73a53448697336f4"
+      ],
+      "time": 1795375466.041627,
+      "uid": 501
+    },
+    {
+      "pid": 58790,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375466.13844,
+      "uid": 501
+    },
+    {
+      "pid": 58793,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "serve",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "52838",
+        "--skip-initial-sync"
+      ],
+      "time": 1795375466.848898,
+      "uid": 501
+    },
+    {
+      "pid": 58794,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375467.3600588,
+      "uid": 501
+    },
+    {
+      "pid": 58795,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375467.439408,
+      "uid": 501
+    },
+    {
+      "pid": 58796,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375467.5178409,
+      "uid": 501
+    },
+    {
+      "pid": 58797,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651"
+      ],
+      "time": 1795375467.600582,
+      "uid": 501
+    },
+    {
+      "pid": 58798,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302"
+      ],
+      "time": 1795375467.6814919,
+      "uid": 501
+    },
+    {
+      "pid": 58799,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375467.762795,
+      "uid": 501
+    },
+    {
+      "pid": 58800,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375467.845147,
+      "uid": 501
+    },
+    {
+      "pid": 58801,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375467.92577,
+      "uid": 501
+    },
+    {
+      "pid": 58803,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375468.023092,
+      "uid": 501
+    },
+    {
+      "pid": 58805,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375468.5584168,
+      "uid": 501
+    },
+    {
+      "pid": 58806,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651"
+      ],
+      "time": 1795375469.0799968,
+      "uid": 501
+    },
+    {
+      "pid": 58807,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302"
+      ],
+      "time": 1795375469.163718,
+      "uid": 501
+    },
+    {
+      "pid": 58808,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375469.245347,
+      "uid": 501
+    },
+    {
+      "pid": 58809,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375469.3248482,
+      "uid": 501
+    },
+    {
+      "pid": 58810,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375469.4055748,
+      "uid": 501
+    },
+    {
+      "pid": 58812,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375469.504174,
+      "uid": 501
+    },
+    {
+      "pid": 58825,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "remove",
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "time": 1795375471.264332,
+      "uid": 501
+    },
+    {
+      "pid": 58826,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651"
+      ],
+      "time": 1795375471.346494,
+      "uid": 501
+    },
+    {
+      "pid": 58827,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302"
+      ],
+      "time": 1795375471.431618,
+      "uid": 501
+    },
+    {
+      "pid": 58828,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3"
+      ],
+      "time": 1795375471.5118122,
+      "uid": 501
+    },
+    {
+      "pid": 58829,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c"
+      ],
+      "time": 1795375471.595349,
+      "uid": 501
+    },
+    {
+      "pid": 58831,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375471.696157,
+      "uid": 501
+    },
+    {
+      "pid": 58832,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375472.2206929,
+      "uid": 501
+    },
+    {
+      "pid": 58833,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375472.302103,
+      "uid": 501
+    },
+    {
+      "pid": 58835,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375472.399678,
+      "uid": 501
+    },
+    {
+      "pid": 58837,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375472.93359,
+      "uid": 501
+    },
+    {
+      "pid": 58838,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "remove",
+        "a6a760fcb345419fa0b404aa65285855"
+      ],
+      "time": 1795375473.445737,
+      "uid": 501
+    },
+    {
+      "pid": 58839,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "read",
+        "--reference",
+        "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e"
+      ],
+      "time": 1795375473.526198,
+      "uid": 501
+    },
+    {
+      "pid": 58841,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375473.624133,
+      "uid": 501
+    },
+    {
+      "pid": 58846,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "search",
+        "needle",
+        "--limit",
+        "50"
+      ],
+      "time": 1795375474.14022,
+      "uid": 501
+    },
+    {
+      "pid": 58847,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "sources"
+      ],
+      "time": 1795375474.221365,
+      "uid": 501
+    },
+    {
+      "pid": 58848,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.cli",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3",
+        "documents",
+        "files"
+      ],
+      "time": 1795375474.302494,
+      "uid": 501
+    },
+    {
+      "pid": 58850,
+      "platform": "darwin",
+      "python": "/private/tmp/smm-006-mac-local/bin/python",
+      "argv": [
+        "smm_local.mcp_server",
+        "--db",
+        "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3"
+      ],
+      "time": 1795375474.400306,
+      "uid": 501
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "target_operation": "tdd-red",
+  "target": "red-r006-glob-v1-scan-scope",
+  "target_sha256": "e3fc4592001ef35da5e0476046811ca657d8e6961af9b6af6de873ac46e2c318",
+  "reviewer_session": "/root/review_006_pr_final",
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "expected_failure",
+      "reason": "独立复审SPEC B2/A2、PLAN §3.2/§4与pr-finding-glob-v1原件：本次不沿用旧scan-scope passed。新增七路径的新Fixture档案独立于先前默认排除夹具；cache与cachex/外层正控按明确路径集合分别列出，五模式覆盖根/嵌套/零与多目录段、连续**及大小写敏感，逐命中按独立字面正文核对；末尾LF仅纯匹配语义补查，不冒称Windows实际LF文件名。45 bindings、40 artifacts、37 product_bindings及5 test_bindings全部原SHA重新计算一致，37产品输入另逐一对git4c706b3核SHA，documents.py43d3762c…保持原产品，测试a73c67e2…是新增断言。实际命令.venv/bin/python -m pytest -q tests/test_document_scanning.py::test_scan_scope于19:07:05.272–19:07:06.436Z执行，exit1/stderr空/stdout1failed；不是导入或环境错误。前置原扫描递归/排除/正文/隐藏显式例外/链接与源指纹均已到达，00027独立scan-expected原件存在；新增段00029保存合法cache/**/配置、00030 refresh200 ready6/candidates6/ignored_excluded1，00031 search200真实返回六路径，额外cache/direct.txt及其globneedle字面正文可见。test_document_scanning.py:55首模式完整集合断言因额外cache/direct.txt失败，独立wanted仅五路径、并非把当前产品响应当预期，精确复现B2零目录段不成立。后续四模式、其后正文核对与终端LF断言本轮尚未到达，不借此次红灯预判其通过或完整覆盖。expected_failure仅确认真实新增断言、可信现有能力缺口与红灯；covers为空，不授SC2/R006passed。",
+      "covers": []
+    }
+  }
+}

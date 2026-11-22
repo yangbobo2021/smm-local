@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本份目标debug-r006-v3-sc6；已对照定义000002 sha6b524c88…的SC6、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4与design-r006-v5-sc6、match-r006-v7-sc6。本次自然设计及具体断言有原文依据；当前src逐字等于a66deeb，runtime-v3及自身测试绑定、全部artifacts SHA均核实当前一致；已实际读stdout/process/stderr、API及独立预期附件。test_refresh_order两参数实际2 passed/exit0，_publish事件屏障中分别让新刷新/新配置获胜。独立newwinner正文和pending/空结果先拦两快照同错，再完整来源/绑定/文档/成员/meta/FTS前后比较拦任一晚写；两动作前条件拦只首状态正确。当前debug两个晚响应published:false；获胜原件分别ready/revision1、newwinner v2和pending/revision2、正文NULL。documents.refresh发布时核revision/refresh_id，Unicode定位变更未改该发布屏障。 无有据必测缺口，额外等价目标为可选；认领本TC全部分配检查，准备passed，准许全新正式执行，人工平台/用户发现、最终CI和R006交付未判。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    },
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本份目标debug-r006-v3-sc6；已对照定义000002 sha6b524c88…的SC6、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4与design-r006-v5-sc6、match-r006-v7-sc6。本次自然设计及具体断言有原文依据；当前src逐字等于a66deeb，runtime-v3及自身测试绑定、全部artifacts SHA均核实当前一致；已实际读stdout/process/stderr、API及独立预期附件。test_refresh_remove实际1 passed/exit0。独占/共享两个动作前目标、两来源，移除后释放晚任务；完整持久集合相等及P空/Q仅共享，独立shared original正文与逐P旧ref拒绝，使只首文件正确或前后快照同错也不能过。当前debug晚响应published:false、shared读取needle shared original、两个旧ref400，forbidden零召回断言执行；documents.remove事务删除与_publish存在性核验仍对应所测结果。 无有据必测缺口，额外等价目标为可选；认领本TC全部分配检查，准备passed，准许全新正式执行，人工平台/用户发现、最终CI和R006交付未判。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    },
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本份目标debug-r006-v3-sc6；已对照定义000002 sha6b524c88…的SC6、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4与design-r006-v5-sc6、match-r006-v7-sc6。本次自然设计及具体断言有原文依据；当前src逐字等于a66deeb，runtime-v3及自身测试绑定、全部artifacts SHA均核实当前一致；已实际读stdout/process/stderr、API及独立预期附件。test_overlap_order pending/ready两参数实际2 passed/exit0。两个文件先由S2较新请求发布，再放S1旧任务，完整documents相等，逐P/Q/all核两目标身份/版本/采集出处及独立newwinner+文件名原串；完整集合/逐原串会拦只首目标或两范围同错。当前debug两winner原件分别one/two newwinner版本1或2，十二次P/Q/all读取准确且采集来源S2，旧词零召回。documents._publish的publish_seq分支不让旧任务覆新正文，同时保留来源成员资格。 无有据必测缺口，额外等价目标为可选；认领本TC全部分配检查，准备passed，准许全新正式执行，人工平台/用户发现、最终CI和R006交付未判。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    },
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本份目标debug-r006-v3-sc6；已对照定义000002 sha6b524c88…的SC6、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4与design-r006-v5-sc6、match-r006-v7-sc6。本次自然设计及具体断言有原文依据；当前src逐字等于a66deeb，runtime-v3及自身测试绑定、全部artifacts SHA均核实当前一致；已实际读stdout/process/stderr、API及独立预期附件。test_query_snapshot links/source两参数实际2 passed/exit0，在_query_scope后改关联或同时改Q配置/正文；当次逐P/Q独立原串、id/version/SHA/签名资格与完整集合，下一次新范围/独立原文及P正控、Q可读/拒绝分支。只首P正确或只冻结关联不冻来源分别被逐Q内容/资格断言拦，全拒旧ref被连续P和links旧Q正控拦。当前debug当次均P/Q original v1，下次links为P/R original v1，source另含Q changed v2；旧Q分别200/400且P均可读。documents.search/read的读事务和原签名资格逻辑仍符合。 无有据必测缺口，额外等价目标为可选；认领本TC全部分配检查，准备passed，准许全新正式执行，人工平台/用户发现、最终CI和R006交付未判。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    },
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本份目标debug-r006-v3-sc6；已对照定义000002 sha6b524c88…的SC6、SPEC B3–B6/A6、PLAN§3.2/§3.3/§4与design-r006-v5-sc6、match-r006-v7-sc6。本次自然设计及具体断言有原文依据；当前src逐字等于a66deeb，runtime-v3及自身测试绑定、全部artifacts SHA均核实当前一致；已实际读stdout/process/stderr、API及独立预期附件。test_interrupted_refresh实际1 passed/exit0，两个文件/目录来源写持久refreshing并以新Archive/Documents明确重刷，另有连续control旧ref正控。完整集合与两个来源ready拦只首目标正确，变化one/新增added独立原串拦仅恢复status或两响应同错，control旧ref拦清除全部资格。当前debug原件明确数据库状态注入，after=one recovered v2/added newly discovered v1/control continuous v1，三read原文准确而旧one400；不冒称真实进程崩溃。documents.refresh下一次分配新身份和序号与恢复证据一致。 无有据必测缺口，额外等价目标为可选；认领本TC全部分配检查，准备passed，准许全新正式执行，人工平台/用户发现、最终CI和R006交付未判。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

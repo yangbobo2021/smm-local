@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzAxNTcxMjdlMzJmNGE5Y2I5ZTI5YzNhYWE5NTdhMDMiLCJkb2N1bWVudF9pZCI6ImNkYTNjZGU1Yzk0ODQzMzI4NzM5YjNjOTQ2ODFmZTc2IiwiZW5kIjoxNDQyMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjIzMTIxNDE5YmM0NDRlMTY5MDY3N2Q2NDBiMjAyN2ZlIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjE0MjAwLCJ2ZXJzaW9uIjoxfQ.2fd5c41ef3d5c79b09a74d11806243f9f056f53aba60da8d2c0bfd02f30812ba"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "cda3cde5c94843328739b3c94681fe76",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1011/test_search_rank0/docs/long.txt",
+    "version": 1,
+    "sha256": "01d89da9d7e1fd3bf6a7cb72b277dba161a0139d210b9e6e7502b5a33476b180",
+    "text_length": 14423,
+    "captured_at": "2026-11-22T19:18:57.781390+00:00",
+    "captured_by_source_id": "23121419bc444e1690677d640b2027fe",
+    "text": "padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding padding longuniquemarker suffix",
+    "start": 14200,
+    "end": 14423,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "23121419bc444e1690677d640b2027fe"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

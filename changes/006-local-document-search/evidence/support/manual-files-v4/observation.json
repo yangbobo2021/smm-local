@@ -1,0 +1,75 @@
+{
+  "observed_at": "2026-11-22T19:35:50.096813+00:00",
+  "kind": "read-only cross-check of actual formal originals, not a new business run",
+  "platforms": {
+    "mac": {
+      "actual_business_started": "2026-11-22T19:24:10.837258+00:00",
+      "actual_business_finished": "2026-11-22T19:24:35.148411+00:00",
+      "observed_originals_at": "2026-11-22T19:35:50.096813+00:00",
+      "ordinary_identity": {
+        "platform": "darwin",
+        "system": "macOS-15.3.1-arm64-arm-64bit",
+        "user": "TESTER",
+        "pid": 58368,
+        "python": "/private/tmp/smm-006-impl/.venv/bin/python",
+        "time": "2026-11-22T19:24:10.848987+00:00",
+        "uid": 501
+      },
+      "cli_exact_body_coordinate_witnesses": 59,
+      "root_link_add_rejected": 1,
+      "ignored_inner_links": 1,
+      "failed_files": [
+        "bad.txt",
+        "denied.txt"
+      ],
+      "windows_acl_not_claimed": false,
+      "source_fingerprints_equal_across_product_operations": true
+    },
+    "linux": {
+      "actual_business_started": "2026-11-22T19:26:13.144680+00:00",
+      "actual_business_finished": "2026-11-22T19:27:48.136343+00:00",
+      "observed_originals_at": "2026-11-22T19:35:50.096813+00:00",
+      "ordinary_identity": {
+        "platform": "linux",
+        "system": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+        "user": "TESTER",
+        "pid": 164001,
+        "python": "/home/TESTER/smm-006-20261122/control-env/bin/python",
+        "time": "2026-11-22T19:26:13.153985+00:00",
+        "uid": 1000
+      },
+      "cli_exact_body_coordinate_witnesses": 59,
+      "root_link_add_rejected": 1,
+      "ignored_inner_links": 1,
+      "failed_files": [
+        "bad.txt",
+        "denied.txt"
+      ],
+      "windows_acl_not_claimed": false,
+      "source_fingerprints_equal_across_product_operations": true
+    },
+    "windows": {
+      "actual_business_started": "2026-11-22T19:28:29.950559+00:00",
+      "actual_business_finished": "2026-11-22T19:33:14.480140+00:00",
+      "observed_originals_at": "2026-11-22T19:35:50.096813+00:00",
+      "ordinary_identity": {
+        "platform": "win32",
+        "system": "Windows-11-10.0.26100-SP0",
+        "user": "TESTER",
+        "pid": 2764,
+        "python": "C:\\Users\\TESTER\\SmmDocuments006-20261122\\control-env\\Scripts\\python.exe",
+        "time": "2026-11-22T19:28:30.219440+00:00",
+        "is_admin": false,
+        "session_id": 1
+      },
+      "cli_exact_body_coordinate_witnesses": 61,
+      "root_link_add_rejected": 1,
+      "ignored_inner_links": 1,
+      "failed_files": [
+        "bad.txt"
+      ],
+      "windows_acl_not_claimed": true,
+      "source_fingerprints_equal_across_product_operations": true
+    }
+  }
+}

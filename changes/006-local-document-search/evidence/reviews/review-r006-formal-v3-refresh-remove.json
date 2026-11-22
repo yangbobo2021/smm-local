@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-refresh-remove",
+  "target_sha256": "b0946c1a6b57715647febccbbd9f162960d237fcda2c9329bcffa94b949d1efe",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B3/B4/B6、A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:60-74及document_state。初始S1/P有exclusive与shared、S2/Q保shared；发布屏障等待时移除S1，00006晚到请求published:false。第70行线程结束后完整来源/项目/文档/成员/meta/FTS等于移除后快照，且来源只剩S2。当前原00008 P空，00009/10 Q仅shared，00011准确读needle shared original；00012/13 P的两个旧ref均400，分别版本失效/原资格失效，00014新forbidden正文零命中。全部适用目标及共享正控均执行，未只检首文件。stdout1 passed/exit0/stderr空，18 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    }
+  }
+}

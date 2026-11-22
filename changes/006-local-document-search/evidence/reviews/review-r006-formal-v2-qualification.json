@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-qualification",
+  "target_sha256": "0592e00a4010ad297c6cb1025bdcb3223a9ed2c4be30ec0614b150c0d7a99858",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B6连续资格/B4/A4、PLAN §3.2/§4 A4、design-r006-v5-sc4及tests/test_document_lifecycle.py的test_qualification三参数实际断言已对照。stdout 3 passed、stderr空、exit 0。00001–00036 file、00037–00072 source、00073–00108 missing分别独立档案：先无变化刷新后P/Q/all旧ref均可读且version1不变；单个来源文件读取PermissionError/整源_scan失败/明确删除根单文件后刷新，旧P均400，旧Q与all持续准确读needle qualification。同配置同字节恢复仍version1，旧P仍400而Q/all持续可读；移除两原来源后旧all400，新来源同字节可新查读但原P/Q/all三个ref全部400，control始终准确可用。缺失根单文件本次实际来源failed，未冒称目录成员missing实测；文件与整源错误为确定注入。逐search原results去重和签名payload文档/版本/source_ids已独立核对。112份artifacts、47份bindings及设计SHA重算一致。正式仅目标selector，无XML/附加回归，不作平台或R006总判定。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    }
+  }
+}

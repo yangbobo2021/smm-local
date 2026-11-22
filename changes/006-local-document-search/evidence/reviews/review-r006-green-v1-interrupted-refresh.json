@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "已核定义000002 SC6、SPEC B4/B6/A6、PLAN §3.2/§4、design-r006-v5-sc6/match-r006-v4-sc6；持久refreshing后明确刷新恢复有据，PLAN明确允许数据库状态注入，共用逻辑不冒充平台进程崩溃。tests/test_document_concurrency.py:151–173同时覆盖单文件/目录的持久状态，独立control连续资格；157修改one并新增added，158–162注入状态并新建Archive/Documents读回，163–170分别真实重刷、核完整集合、one同ID换版、两个来源ready及两独立原串，171连续control旧ref准确可读、172变更one旧ref拒绝。只恢复status被169拦、不发现新增被166拦、仅首来源正确被168拦、清所有资格被171拦，两响应同错仍由独立原文拦。产品documents.py:308–321下一明确刷新重新分配身份和序号，不依赖旧进程。red-r006-v3-interrupted-refresh真实合法add404及review-r006-red-v3-interrupted-refresh已核；green-r006-v1-interrupted-refresh复用完全相同测试绑定/声明/命令，全部artifacts与当前bindings SHA已核。绿灯run.stdout实际1 passed/exit0；persistent-interruption原附件明确database refreshing state injection，after为one recovered v2、added新文v1、control continuous v1，api-012/013/014分别准确原串，旧one400。所附regression.stdout实际5 passed/exit0，对应已读四项旧引用及两Agent旧数字ID/ref和九层来源帮助断言。设计、实现及实际证据有效，无有据必测缺口；同版绿灯与回归passed，平台真正进程重启和R006交付另待独立验收。",
+      "covers": []
+    }
+  }
+}
