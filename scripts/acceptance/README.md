@@ -164,3 +164,14 @@ uv run python scripts/acceptance/selective_upload_platform.py self-managed --tar
 目标配置中的解释器、TLS 文件与目录必须能被实际 Hub 服务账户访问；Windows LocalService 的叶子文件 ACL 也需核对。配置与 Token 保持私有，脚本只导出脱敏的合成资料。
 
 这些探针只证明实际执行的检查，完整矩阵仍对照[005 PLAN](../../changes/005-selective-conversation-upload/plan.md)填写；R1–R6、新旧真实版本组合和剩余边界不能仅以某次核心流程通过替代。
+
+`selective_upload_recovery.py` 在独立档案上执行 R1/R2/R3 的实际 `prepare-restore`→停服务→恢复清单→重启→查看差异→明确采用 Hub→允许补传。R3 要求 `hub-service`，同时恢复旧 `hub.json`，保留排除的保护文件。R4 在真实 Linux systemd 用户服务中调用已安装候选的 `Hub.upgrade`，以离线安装成功桩避免访问发布仓库，在真实服务启动后确认一条新停止规则，再注入健康失败；验证实际恢复路径保留该限制。它不模拟已发布新包安装成功，包字节始终是本次候选，证据明确记录这一边界。R4 的 Hub 环境放在任务自己的 `tools/smm-hub` 下，使实际升级入口的环境检查仍正常执行。
+
+```text
+<控制端Python> scripts/acceptance/selective_upload_recovery.py self-managed --case R1 --target-config <新配置> --output <新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py self-managed --case R2 --target-config <另一新配置> --output <另一新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py hub-service --case R3 --target-config <另一新配置> --output <另一新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py hub-service --case R4 --target-config <另一新配置> --output <另一新证据目录>
+```
+
+Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` 在当前已登录用户的 Limited 交互任务中运行，配置增加 `controller_python`；对应 Hub 服务探针用 `--mode hub-service` 的 Highest 交互任务，仍核对服务实际为 LocalService。包装器保存实际 token 判定和退出码，结束后移除本任务。不能把管理员控制端当成本机普通用户的证明。
