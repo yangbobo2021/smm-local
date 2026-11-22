@@ -180,11 +180,15 @@ def ensure_cli() -> Path:
 
 def main() -> int:
     args = sys.argv[1:]
-    if not args or args[0] not in {"maintenance", "configure-hub", "projects", "resolve-project", "search", "read", "source"}:
-        print("用法：first_use <maintenance|configure-hub|projects|resolve-project|search|read|source> [参数]", file=sys.stderr)
+    if not args or args[0] not in {"maintenance", "configure-hub", "projects", "project", "upload", "resolve-project", "search", "read", "source"}:
+        print("用法：first_use <maintenance|configure-hub|projects|project|upload|resolve-project|search|read|source> [参数]", file=sys.stderr)
         return 2
     try:
         cli = ensure_cli()
+        if args[0] in {"upload", "project"} or (args[0] == "read" and "--reference" in args):
+            probe = subprocess.run([str(cli), "upload", "--help"], capture_output=True, text=True, timeout=15)
+            if probe.returncode:
+                raise RuntimeError("当前已安装版本不支持项目上传规则和新引用；请安装包含 005 功能的新版本。正式版 0.4.0 不具备此能力，重复安装它不能启用新功能。")
         if args[0] == "search":
             deadline = time.monotonic() + 15
             while True:

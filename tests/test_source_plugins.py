@@ -504,7 +504,7 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
     assert archive.sync_all()["messages_new"] == 3
     codex = Path(archive.get_settings()["codex_root"])
     rows = [
-        {"type": "session_meta", "payload": {"id": "builtin-local"}},
+        {"type": "session_meta", "payload": {"id": "builtin-local", "cwd": str(codex)}},
         {"type": "response_item", "ordinal": 1, "payload": {
             "type": "message", "id": "original-1", "role": "user",
             "content": [{"type": "input_text", "text": "旧汇总风车回归"}]}},
@@ -525,7 +525,9 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
             assert response.status_code == 200, response.text
             return response.json()
 
+        config["bound_hub_id"] = request(config, "/info")["hub_id"]
         monkeypatch.setattr(federation, "_request", request)
+        federation.choose_upload(archive, "all", [])
         assert federation.push_pending(archive)["uploaded"] == 1
         assert federation.push_pending(archive)["uploaded"] == 0
         assert federation.search_archive(archive, "旧汇总风车回归")["results"][0]["source"] == "codex"

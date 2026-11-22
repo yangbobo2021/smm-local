@@ -123,6 +123,8 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         # B uploads a partial copy before A sends the complete conversation.
         assert cli(b.db_path, "configure-hub", address, "Desktop B", "--token-file", str(token_file))["connected"]
         cli(b.db_path, "maintenance", "sync")
+        cli(b.db_path, "upload", "set", "--mode", "all")
+        cli(b.db_path, "maintenance", "sync")
         configured = asyncio.run(mcp_call(a, "configure_hub", {
             "address": address, "device_name": "Laptop A", "token_file": str(token_file),
         }))
@@ -132,9 +134,10 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         assert before["address"] == address and before["device_name"] == "Laptop A"
         assert cli(a.db_path, "configure-hub", address, "Laptop A")["connected"]
         assert json.loads(config_path.read_text())["device_id"] == before["device_id"]
+        cli(a.db_path, "upload", "set", "--mode", "all")
         cli(a.db_path, "maintenance", "sync")
         online = cli(a.db_path, "search", "Northstar")
-        assert online["archive_scope"] == "hub"
+        assert online["archive_scope"] == "combined"
         assert {r["source_session_id"] for r in online["results"]} == {"duplicate-session", "only-b"}
         duplicate = next(r for r in online["results"] if r["source_session_id"] == "duplicate-session")
         matches = duplicate["matched_messages"]
@@ -146,15 +149,20 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         offsets = cli(a.db_path, "search", "Snowfinch")
         offset_hit, = offsets["results"]
         assert offset_hit["source_session_id"] == "offset-session"
-        original = cli(b.db_path, "read", str(offset_hit["id"]), "--hub-id", offsets["hub_id"])
+        original = cli(a.db_path, "read", "--reference", offset_hit["reference"])
         assert [m["text"] for m in original["messages"]] == ["Snowfinch first", "Snowfinch second"]
         last = original["messages"][1]
-        assert {o["source_position"] for o in last["origins"]} == {9, 98}
-        match_id = next(m["hub_message_id"] for m in offset_hit["matched_messages"]
+        assert {o["source_position"] for o in last["origins"]} == {9}  # This citation selects the local archive.
+        second = next(m for m in offset_hit["matched_messages"] if m["text"] == "Snowfinch second")
+        assert {o["source_position"] for o in second["origins"]} == {9, 98}
+        legacy_offset = hub_call("search", {"query": "Snowfinch", "preview_chars": 0})["results"][0]
+        legacy_original = hub_call("read", {"hub_id": offsets["hub_id"], "conversation_id": legacy_offset["id"]})
+        assert {o["source_position"] for o in legacy_original["messages"][1]["origins"]} == {9, 98}
+        match_id = next(m["hub_message_id"] for m in legacy_offset["matched_messages"]
                         if m["text"] == "Snowfinch second")
-        exact = cli(b.db_path, "read", str(offset_hit["id"]), "--hub-id", offsets["hub_id"],
+        exact = cli(b.db_path, "read", str(legacy_offset["id"]), "--hub-id", offsets["hub_id"],
                     "--hub-message-id", str(match_id))
-        assert exact["messages"] == [last]
+        assert exact["messages"] == [legacy_original["messages"][1]]
         hub.terminate()
         hub.wait(timeout=10)
         record_codex(a_codex, "duplicate-session", [(11, "u1", "Northstar amber"),
@@ -167,11 +175,11 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         assert result["result"]["hub"]["pending"]
         with a.connect() as con:
             # Simulate a committed upload whose acknowledgement was not saved locally.
-            con.execute("DELETE FROM settings WHERE key LIKE 'hub_cursor:%'")
+            con.execute("DELETE FROM local_upload_receipts")
         project = a.resolve_project(str(a_codex))["id"]
         offline = cli(a.db_path, "search", "Northstar", "--scope", "project", "--project-id", str(project))
         assert offline["archive_scope"] == "local" and offline["fallback_reason"]
-        assert {r["source"] for r in offline["results"]} == {"codex", "claude-code"}
+        assert {r["source"] for r in offline["results"]} == {"codex"}
         assert {r["source_session_id"] for r in offline["results"]} == {"duplicate-session"}
         assert all(r["origins"][0]["device_name"] == "Laptop A" for r in offline["results"])
         # No explicit sync after reconnect; the periodic local service retries.
@@ -181,7 +189,7 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         ) if (hits := hub_call("search", {"query": "Northstar"})) else False)
         assert caught_up["hub_id"] == online["hub_id"]
         restored = asyncio.run(mcp_call(b, "search_conversations", {"query": "Northstar"}))
-        assert restored["archive_scope"] == "hub"
+        assert restored["archive_scope"] == "combined"
         by_session = {(r["source"], r["source_session_id"]): r for r in restored["results"]}
         assert set(by_session) == {("codex", "duplicate-session"), ("codex", "only-b"),
                                    ("claude-code", "duplicate-session")}
@@ -190,7 +198,7 @@ def test_federation_offline_recovery_dedup_and_provenance(tmp_path, monkeypatch)
         claude_message = claude_hit["matched_messages"][0]
         assert [(o["device_name"], o["source_position"]) for o in claude_message["origins"]] == [("Laptop A", 0)]
         full = asyncio.run(mcp_call(b, "read_conversation", {
-            "conversation_id": by_session["codex", "duplicate-session"]["id"], "hub_id": restored["hub_id"],
+            "reference": by_session["codex", "duplicate-session"]["reference"],
         }))
         assert full["source_session_id"] == "duplicate-session" and full["source"] == "codex"
         assert len(full["messages"]) == 2

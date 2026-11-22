@@ -33,23 +33,24 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
 
     @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=True))
     def configure_hub(address: str, device_name: str, token_file: str | None = None) -> dict:
-        """Configure a user's SMM hub and this computer's name. Use a local credential file; never ask for its contents in chat."""
+        """Configure Hub lookup and this computer's name. New connections do not upload dialogue until a Web/CLI upload choice. Use a credential file, never its contents in chat."""
         return configure_and_start(db, address, device_name, token_file)
 
     @server.tool(annotations=readonly)
     def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, local: bool = False) -> str:
-        """Search archived conversations with 600-character message previews and original positions by default. read_conversation returns full evidence. scope=project includes direct links in the archive being searched; pass current_session_id to exclude the active conversation by default."""
+        """Search local and configured Hub candidates together, reranked locally; unuploaded local conversations participate. Project scope uses Hub direct links online, only the requested local project on Hub failure; local=true uses local links. Pass the returned reference to read_conversation for exact evidence. Previews default to 600 characters."""
         current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
         source = current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
         size = int(os.environ.get("SMM_SEARCH_PREVIEW_CHARS", "600"))
         return json.dumps(search_archive(db, query, local=local, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current, preview_chars=size), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
-    def read_conversation(conversation_id: int, start: int | None = None, end: int | None = None,
-                          hub_id: str | None = None, hub_message_id: int | None = None) -> str:
-        """Read original messages. Pass the exact hub_id from hub search results; omit it for local results."""
+    def read_conversation(conversation_id: int | None = None, start: int | None = None, end: int | None = None,
+                          hub_id: str | None = None, hub_message_id: int | None = None,
+                          reference: str | None = None) -> str:
+        """Read original messages using the exact search reference. Old integer/hub_id/message_id calls remain supported; never reuse another archive's numeric ID."""
         return json.dumps(read_archive(db, conversation_id, start=start, end=end, hub_id=hub_id,
-                                       hub_message_id=hub_message_id), ensure_ascii=False)
+                                       hub_message_id=hub_message_id, reference=reference), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def list_projects() -> str:

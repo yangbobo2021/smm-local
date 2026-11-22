@@ -1,0 +1,42 @@
+name: Selective upload installed-package acceptance
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  installed-entrances:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+          python-version: "3.14"
+      - run: uv sync --extra test --extra acceptance
+      - run: uv run python -m playwright install --with-deps chromium
+      - run: uv run python scripts/build_packages.py
+      - name: Run CLI, stdio MCP and browser against independent wheels
+        shell: bash
+        run: |
+          uv venv "$RUNNER_TEMP/local-env"
+          uv venv "$RUNNER_TEMP/hub-env"
+          if [[ "$RUNNER_OS" == Windows ]]; then interpreter=Scripts/python.exe; else interpreter=bin/python; fi
+          local_wheel=$(find dist/packages -name 'smm_local-*.whl' -print -quit)
+          hub_wheel=$(find dist/packages -name 'smm_hub-*.whl' -print -quit)
+          uv pip install --python "$RUNNER_TEMP/local-env/$interpreter" "$local_wheel"
+          uv pip install --python "$RUNNER_TEMP/hub-env/$interpreter" "$hub_wheel"
+          uv run python scripts/acceptance/selective_upload_prepare.py --work "$RUNNER_TEMP/005-task" --local-python "$RUNNER_TEMP/local-env/$interpreter" --hub-python "$RUNNER_TEMP/hub-env/$interpreter" --local-wheel "$local_wheel" --hub-wheel "$hub_wheel"
+          uv run python scripts/acceptance/selective_upload_platform.py self-managed --target-config "$RUNNER_TEMP/005-task/target.json" --output "$RUNNER_TEMP/005-evidence"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selective-upload-${{ matrix.os }}
+          path: ${{ runner.temp }}/005-evidence

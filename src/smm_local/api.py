@@ -13,7 +13,11 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from .core import Archive, shared_db_path, utcnow
-from .federation import HubUnavailable, push_pending
+from .federation import (HubUnavailable, push_pending, upload_status, choose_upload, upload_control,
+                         search_archive, read_archive, hub_config, project_status, _request)
+from .upload import LocalUpload
+from .project_control import change as change_project
+from . import references
 
 
 class SearchRequest(BaseModel):
@@ -24,11 +28,13 @@ class SearchRequest(BaseModel):
     current_session_id: str | None = None
     current_source: str | None = None
     include_current: bool = False
+    local: bool = False
 
 
 class MapRequest(BaseModel):
     path: str
     project_id: int
+    confirmation: str | None = None
 
 
 class LinkRequest(BaseModel):
@@ -40,6 +46,33 @@ class LinkRequest(BaseModel):
 class MergeRequest(BaseModel):
     source_id: int
     target_id: int
+    confirmation: str | None = None
+
+
+class UploadChoice(BaseModel):
+    mode: str
+    project_ids: list[int] = Field(default_factory=list)
+    expected_generation: int | None = None
+
+
+class ReconcileRequest(BaseModel):
+    use: str | None = None
+    expected_hub_revision: int | None = None
+
+
+class AssignRequest(BaseModel):
+    conversation_id: int
+    project_id: int
+    confirmation: str | None = None
+
+
+class ReadRequest(BaseModel):
+    conversation_id: int | None = None
+    reference: str | None = None
+    start: int | None = None
+    end: int | None = None
+    hub_id: str | None = None
+    hub_message_id: int | None = None
 
 
 class RenameRequest(BaseModel):
@@ -69,6 +102,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                sync_on_start: bool = True, service_token: str | None = None,
                shutdown: Callable[[], None] | None = None) -> FastAPI:
     db = archive or Archive(shared_db_path())
+    references.material(db)
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
@@ -82,10 +116,9 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
             except Exception as exc:
                 result = {"finished_at": utcnow(), "errors": [{"error": str(exc)}]}
             try:
-                if not db.get_settings()["sync_paused"]:
-                    remote = push_pending(db)
-                    if remote is not None:
-                        result["hub"] = remote
+                remote = push_pending(db)
+                if remote is not None:
+                    result["hub"] = remote
             except (HubUnavailable, OSError, ValueError) as exc:
                 result["hub"] = {"pending": True, "reason": str(exc)}
             db.record_sync_result(result)
@@ -133,6 +166,12 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     def loop() -> None:
         while not stop.wait(int(db.get_settings()["sync_interval_seconds"])):
+            if db.get_settings()["sync_paused"]:
+                try:
+                    push_pending(db, control_only=True)
+                except (HubUnavailable, OSError, RuntimeError, ValueError):
+                    pass
+                continue
             with run_lock:
                 start_sync(automatic=True)
 
@@ -160,6 +199,11 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     app = FastAPI(title="SMM Local", lifespan=lifespan)
 
+    @app.exception_handler(HubUnavailable)
+    async def hub_unavailable(request: Request, exc: HubUnavailable):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=503, content={"detail": str(exc)})
+
     @app.exception_handler(ValueError)
     async def value_error_handler(request, exc: ValueError):
         return __import__("fastapi").responses.JSONResponse(status_code=400, content={"detail": str(exc)})
@@ -174,7 +218,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
             running = active is not None
         info = db.status()
         sources = db.source_status(info["by_source"])
-        return {**info, "sync": {"running": running, "paused": info["settings"]["sync_paused"],
+        return {**info, "upload": upload_status(db), "sync": {"running": running, "paused": info["settings"]["sync_paused"],
                                  "last_result": db.last_sync_result(), "sources": sources}}
 
     @app.post("/api/sync")
@@ -233,12 +277,44 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     @app.get("/api/projects")
     def projects():
-        return db.projects()
+        return project_status(db)
+
+    @app.get("/api/upload")
+    def upload_info():
+        return upload_status(db)
+
+    @app.put("/api/upload")
+    def set_upload(req: UploadChoice, request: Request):
+        require_local_control(request)
+        return choose_upload(db, req.mode, req.project_ids, req.expected_generation)
+
+    @app.post("/api/upload/reconcile")
+    def reconcile_upload(req: ReconcileRequest, request: Request):
+        require_local_control(request)
+        return upload_control(db).reconcile(_request, use=req.use, expected_hub_revision=req.expected_hub_revision)
+
+    @app.post("/api/upload/prepare-restore")
+    def prepare_local_restore(request: Request):
+        require_local_control(request)
+        config = hub_config(db)
+        controller = LocalUpload(db, config, config["bound_hub_id"]) if config.get("bound_hub_id") else upload_control(db)
+        return controller.prepare_restore()
+
+    @app.post("/api/projects/global")
+    def global_project(request: Request):
+        require_local_control(request)
+        return db.ensure_global_project()
+
+    @app.post("/api/projects/assign")
+    def assign_project(req: AssignRequest, request: Request):
+        require_local_control(request)
+        return change_project(db, "assign", {"conversation_id": req.conversation_id, "target_id": req.project_id},
+                              req.confirmation, always_preview=True)
 
     @app.post("/api/projects/map")
-    def map_path(req: MapRequest):
-        db.map_path(req.path, req.project_id)
-        return {"ok": True}
+    def map_path(req: MapRequest, request: Request):
+        require_local_control(request)
+        return {"ok": True, **change_project(db, "map", {"path": req.path, "target_id": req.project_id}, req.confirmation)}
 
     @app.post("/api/projects/link")
     def link(req: LinkRequest):
@@ -246,9 +322,9 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
         return {"ok": True}
 
     @app.post("/api/projects/merge")
-    def merge(req: MergeRequest):
-        db.merge_projects(req.source_id, req.target_id)
-        return {"ok": True}
+    def merge(req: MergeRequest, request: Request):
+        require_local_control(request)
+        return {"ok": True, **change_project(db, "merge", {"source_id": req.source_id, "target_id": req.target_id}, req.confirmation)}
 
     @app.post("/api/projects/{project_id}/rename")
     def rename(project_id: int, req: RenameRequest):
@@ -257,7 +333,11 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     @app.post("/api/search")
     def search(req: SearchRequest):
-        return db.search(**req.model_dump())
+        return search_archive(db, **req.model_dump())
+
+    @app.post("/api/read")
+    def read_reference(req: ReadRequest):
+        return read_archive(db, **req.model_dump())
 
     @app.get("/api/conversations/{conversation_id}")
     def read(conversation_id: int, start: int | None = None, end: int | None = None):

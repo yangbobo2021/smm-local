@@ -12,6 +12,7 @@ import threading
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from contextlib import nullcontext
 from typing import Any
 
 from .importers import registry
@@ -238,6 +239,15 @@ class Archive:
                 );
                 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS schema_migrations (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS hub_local_project_keys (
+                    id INTEGER PRIMARY KEY REFERENCES projects(id) ON DELETE CASCADE,
+                    remote_key TEXT NOT NULL UNIQUE
+                );
+                CREATE TABLE IF NOT EXISTS conversation_assignments (
+                    conversation_id INTEGER PRIMARY KEY REFERENCES conversations(id) ON DELETE CASCADE,
+                    project_id INTEGER NOT NULL REFERENCES projects(id),
+                    revision INTEGER NOT NULL DEFAULT 1
+                );
                 CREATE VIRTUAL TABLE IF NOT EXISTS conversation_fts USING fts5(terms, tokenize='unicode61');
             """)
             con.executescript(registry.SCHEMA)
@@ -248,6 +258,8 @@ class Archive:
             if "source" not in source_columns:
                 con.execute("ALTER TABLE source_files ADD COLUMN source TEXT NOT NULL DEFAULT 'codex'")
             con.execute("BEGIN IMMEDIATE")
+            if "kind" not in {row[1] for row in con.execute("PRAGMA table_info(projects)")}:
+                con.execute("ALTER TABLE projects ADD COLUMN kind TEXT NOT NULL DEFAULT 'ordinary'")
             con.execute("INSERT OR IGNORE INTO settings(key,value) VALUES('message_sequence','0')")
             con.execute("""
                 UPDATE settings SET value=MAX(CAST(value AS INTEGER),
@@ -280,7 +292,7 @@ class Archive:
 
     def get_settings(self) -> dict[str, Any]:
         with self.connect() as con:
-            rows = con.execute("SELECT key,value FROM settings WHERE key NOT IN ('last_sync_result', 'hub_identity', 'message_sequence') AND key NOT LIKE 'hub_cursor:%' AND key NOT LIKE 'source_result:%'").fetchall()
+            rows = con.execute("SELECT key,value FROM settings WHERE key NOT IN ('last_sync_result', 'hub_identity', 'message_sequence') AND key NOT LIKE 'hub_cursor:%' AND key NOT LIKE 'source_result:%' AND key NOT LIKE 'archive:%' AND key NOT LIKE 'upload:%'").fetchall()
         result: dict[str, Any] = {r["key"]: json.loads(r["value"]) for r in rows}
         result.setdefault("codex_root", str(default_codex_root()))
         result.setdefault("claude_root", str(default_claude_root()))
@@ -515,7 +527,7 @@ class Archive:
                             con.execute("INSERT INTO conversations(source,source_session_id,source_path,cwd,project_path,project_id,started_at,updated_at) VALUES(?,?,?,?,?,?,?,?)", (adapter.name, source_session_id, str(path), cwd, project_path, project_id, normalized.get("timestamp"), normalized.get("timestamp")))
                             created += 1
                         else:
-                            con.execute("UPDATE conversations SET source_path=?,cwd=?,project_path=?,project_id=? WHERE id=?", (str(path), cwd, project_path, project_id, existing["id"]))
+                            con.execute("UPDATE conversations SET source_path=?,cwd=?,project_path=?,project_id=COALESCE((SELECT project_id FROM conversation_assignments WHERE conversation_id=conversations.id),project_id,?) WHERE id=?", (str(path), cwd, project_path, project_id, existing["id"]))
                     elif normalized and normalized["kind"] == "message":
                         if not source_session_id:
                             source_session_id = str(normalized.get("session_id") or fallback_session_id)
@@ -577,14 +589,33 @@ class Archive:
 
     def projects(self) -> list[dict[str, Any]]:
         with self.connect() as con:
+            con.execute("INSERT INTO hub_local_project_keys SELECT id,lower(hex(randomblob(16))) FROM projects WHERE id NOT IN (SELECT id FROM hub_local_project_keys)")
             rows = con.execute("SELECT p.*,COUNT(DISTINCT c.id) AS conversations FROM projects p LEFT JOIN conversations c ON c.project_id=p.id AND (c.source IN ('codex','claude-code') OR EXISTS (SELECT 1 FROM messages m WHERE m.conversation_id=c.id)) GROUP BY p.id ORDER BY conversations DESC,p.name,p.id").fetchall()
             out = []
             for row in rows:
                 project = dict(row)
+                project["stable_key"] = con.execute("SELECT remote_key FROM hub_local_project_keys WHERE id=?", (row["id"],)).fetchone()[0]
                 project["paths"] = [r[0] for r in con.execute("SELECT path FROM project_paths WHERE project_id=? ORDER BY path", (row["id"],))]
                 project["linked_ids"] = [r[0] for r in con.execute("SELECT CASE WHEN a=? THEN b ELSE a END FROM project_links WHERE a=? OR b=? ORDER BY 1", (row["id"],row["id"],row["id"]))]
                 out.append(project)
         return out
+
+    def ensure_global_project(self) -> dict[str, Any]:
+        with self.connect() as con:
+            con.execute("BEGIN IMMEDIATE")
+            row = con.execute("SELECT id FROM projects WHERE kind='global' ORDER BY id LIMIT 1").fetchone()
+            project_id = row[0] if row else con.execute("INSERT INTO projects(name,kind,confirmed) VALUES('全局项目','global',1) RETURNING id").fetchone()[0]
+        return next(project for project in self.projects() if project["id"] == project_id)
+
+    def assign_conversation(self, conversation_id: int, project_id: int, *, connection=None) -> None:
+        with nullcontext(connection) if connection is not None else self.connect() as con:
+            if not con.in_transaction:
+                con.execute("BEGIN IMMEDIATE")
+            if not con.execute("SELECT 1 FROM projects WHERE id=?", (project_id,)).fetchone():
+                raise ValueError("项目不存在")
+            if not con.execute("UPDATE conversations SET project_id=? WHERE id=? RETURNING id", (project_id, conversation_id)).fetchone():
+                raise ValueError("对话不存在")
+            con.execute("INSERT INTO conversation_assignments(conversation_id,project_id) VALUES(?,?) ON CONFLICT(conversation_id) DO UPDATE SET project_id=excluded.project_id,revision=revision+1", (conversation_id, project_id))
 
     def rename_project(self, project_id: int, name: str) -> None:
         if not name.strip():
@@ -594,9 +625,9 @@ class Archive:
             if not cur.rowcount:
                 raise ValueError("项目不存在")
 
-    def map_path(self, path: str, project_id: int) -> None:
+    def map_path(self, path: str, project_id: int, *, connection=None) -> None:
         canonical = str(Path(path).expanduser().absolute())
-        with self.connect() as con:
+        with nullcontext(connection) if connection is not None else self.connect() as con:
             if not con.execute("SELECT 1 FROM projects WHERE id=?", (project_id,)).fetchone():
                 raise ValueError("项目不存在")
             con.execute("INSERT INTO project_paths(path,project_id) VALUES(?,?) ON CONFLICT(path) DO UPDATE SET project_id=excluded.project_id", (canonical, project_id))
@@ -607,6 +638,7 @@ class Archive:
                 source_path = row["project_path"] or row["cwd"]
                 if source_path and Path(source_path).is_relative_to(canonical):
                     con.execute("UPDATE conversations SET project_id=? WHERE id=?", (project_id, row["id"]))
+                    con.execute("UPDATE conversation_assignments SET project_id=?,revision=revision+1 WHERE conversation_id=?", (project_id, row["id"]))
 
     def link_projects(self, one: int, other: int, linked: bool = True) -> None:
         if one == other:
@@ -620,15 +652,18 @@ class Archive:
             else:
                 con.execute("DELETE FROM project_links WHERE a=? AND b=?", (a,b))
 
-    def merge_projects(self, source_id: int, target_id: int) -> None:
+    def merge_projects(self, source_id: int, target_id: int, *, connection=None) -> None:
         if source_id == target_id:
             raise ValueError("不能合并项目自身")
-        with self.connect() as con:
+        with nullcontext(connection) if connection is not None else self.connect() as con:
             if con.execute("SELECT COUNT(*) FROM projects WHERE id IN (?,?)", (source_id,target_id)).fetchone()[0] != 2:
                 raise ValueError("项目不存在")
+            if con.execute("SELECT COUNT(DISTINCT kind) FROM projects WHERE id IN (?,?)", (source_id,target_id)).fetchone()[0] != 1:
+                raise ValueError("普通项目与全局项目不能合并")
             peers = [r[0] for r in con.execute("SELECT CASE WHEN a=? THEN b ELSE a END FROM project_links WHERE a=? OR b=?", (source_id,source_id,source_id))]
             con.execute("UPDATE project_paths SET project_id=? WHERE project_id=?", (target_id,source_id))
             con.execute("UPDATE conversations SET project_id=? WHERE project_id=?", (target_id,source_id))
+            con.execute("UPDATE conversation_assignments SET project_id=?,revision=revision+1 WHERE project_id=?", (target_id,source_id))
             con.execute("DELETE FROM project_links WHERE a=? OR b=?", (source_id,source_id))
             for peer in peers:
                 if peer != target_id:
@@ -653,7 +688,7 @@ class Archive:
                     return dict(row)
         return None
 
-    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False, hub_project_ids: tuple[int, ...] | None = None) -> dict[str, Any]:
+    def search(self, query: str, *, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, preview_chars: int = 0, include_message_ids: bool = False, hub_project_ids: tuple[int, ...] | None = None, exact_project_ids: tuple[int, ...] | None = None) -> dict[str, Any]:
         query_terms = list(dict.fromkeys(tokens(query)))
         if not query_terms:
             raise ValueError("查询词不能为空")
@@ -667,7 +702,7 @@ class Archive:
         if scope == "project":
             if project_id is None:
                 raise ValueError("项目范围必须指定 project_id")
-            project_ids = self.effective_projects(project_id)
+            project_ids = list(exact_project_ids) if exact_project_ids is not None else self.effective_projects(project_id)
         match = " OR ".join('"'+term.replace('"','')+'"' for term in query_terms)
         columns = ("c.id,c.source,c.source_session_id,c.title,c.started_at,c.updated_at,c.project_id,"
                    "p.name AS project_name")
@@ -708,7 +743,7 @@ class Archive:
             rows = con.execute(sql, args).fetchall()
             results = []
             for index,row in enumerate(rows, 1):
-                fields = "id AS _message_id,position,role,text" if include_message_ids else "position,role,text"
+                fields = "id AS _message_id,source_key,position,role,text,timestamp" if include_message_ids else "position,role,text"
                 message_sql = f"SELECT {fields} FROM messages WHERE conversation_id=?"
                 message_args = (row["id"],)
                 if hub_project_ids:
@@ -745,7 +780,7 @@ class Archive:
                 raise ValueError("对话不存在")
             fields = "m.position,m.role,m.text,m.timestamp"
             if include_message_ids:
-                fields += ",m.id AS _message_id"
+                fields += ",m.id AS _message_id,m.source_key"
             joins = ""
             if row["source"] not in {"codex", "claude-code"}:
                 fields += ",pm.origin,b.id AS import_batch,b.version AS plugin_revision"

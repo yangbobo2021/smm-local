@@ -140,3 +140,27 @@ python scripts/acceptance/vibeinsight_contracts.py references --evidence-dir <H�
 ```
 
 C 准备阶段记录旧进程实际加载的 core/federation SHA，并从 Hub 完整读回本设备的三段会话；补传后再次完整读回，逐条比较消息 ID、位置、角色、正文、时间和总数。项目元数据允许从空变为有效归属，消息不允许增加或重写。
+
+## 005 上传规则与联合检索（可选）
+
+`selective_upload_fixture.py` 仅生成任务目录内的合成 Agent/插件历史及本机 Hub 的 VibeInsight 归档，不连接 PostgreSQL 或实际来源服务器。
+`selective_upload_prepare.py` 要求候选提交干净，记录两个实际 wheel 的摘要及全部安装模块预期，生成任务 HTTPS 证书及私有目标配置。
+`selective_upload_platform.py` 在两个独立 wheel 环境上核验实际模块，再通过 CLI、独立 stdio MCP、真实浏览器按钮完成范围/原文、断线恢复、停止保留及补传；保存请求审计、截图、trace 和清理退出结果。输出目录必须全新。
+
+```text
+uv sync --extra test --extra acceptance
+uv run python scripts/build_packages.py
+uv venv <local环境>
+uv venv <hub环境>
+uv pip install --python <LocalPython> <本次LocalWheel>
+uv pip install --python <HubPython> <本次HubWheel>
+uv run python -m playwright install chromium
+uv run python scripts/acceptance/selective_upload_prepare.py --work <新任务目录> --local-python <LocalPython> --hub-python <HubPython> --local-wheel <本次LocalWheel> --hub-wheel <本次HubWheel>
+uv run python scripts/acceptance/selective_upload_platform.py self-managed --target-config <任务目录>/target.json --output <新证据目录>
+```
+
+浏览器可用 `prepare --browser <实际Chrome或Edge路径>`；否则使用本环境 Playwright Chromium。Linux 缺少系统依赖时先由有权限的环境准备，不能跳过浏览器后称通过。
+`hub-service` 模式通过实际 Hub setup/enable/disable 执行 E3，需各平台相应服务管理权限；`login-service` 仅 macOS，使用内部 label/logs 参数注册任务专用 LaunchAgent，保留日常 `ai.smm.local`。`client` 在本系统普通用户运行，Windows 不能以管理员进程冒充普通交互用户。
+目标配置中的解释器、TLS 文件与目录必须能被实际 Hub 服务账户访问；Windows LocalService 的叶子文件 ACL 也需核对。配置与 Token 保持私有，脚本只导出脱敏的合成资料。
+
+这些探针只证明实际执行的检查，完整矩阵仍对照[005 PLAN](../../changes/005-selective-conversation-upload/plan.md)填写；R1–R6、新旧真实版本组合和剩余边界不能仅以某次核心流程通过替代。
