@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "covers": [
+        "whole-batch-failure"
+      ],
+      "reason": "SPEC B4/A4/D1及PLAN 3.1-3.2直接规定整批失败、部分无效回执不能确认未知/未提交消息或永久跳过；设计与实现有效，原合同没有因新增混批而遗漏。冻结test_required_snapshot_and_batch_boundaries.py:188-215保留两个不同会话消息同批派发，:196每次记录数2；before-commit在真实Hub调用前抛错，partial-receipt先真实提交后accepted变正数1，:203/205分别要求错误保留/ControlConflict。:207-209独立要求确认0、待确认2、在途2，且Hub为零/完整两条；只确认首条、未知报成功首次在:207失败，两个故障状态不可彼此冒充。恢复后:212-214确认2/待确认与在途0、独立完整两正文且重复不增；只有首条恢复正确或两目标误用同正文不能通过完整列表。原始2 passed；本轮batch-before-commit附件25次有界尝试、partial-receipt一次真实提交，失败状态均(0,2,2)、恢复均(2,0,0)，最终两独立正文保留。已核本轮artifacts/当前bindings及design-required22-sc4、runtime-required23一致。认领whole-batch-failure全分配，不据此补签其他旧case/全部A4身份与平台gaps。"
+    },
+    "TC-005-mixed-batch": {
+      "status": "passed",
+      "covers": [
+        "mixed-batch-atomic"
+      ],
+      "reason": "SPEC D1/A4及PLAN 3.2明确混合项目批次任一记录不合法须整体拒绝，不能部分接受推进；design-required22-sc4要求已登记A/B、仅B允许、初始Hub空正文与纯B正控有据。冻结test_required_snapshot_and_batch_boundaries.py:218-243现:223真实control_only登记，:225-226按当前设备owner和稳定source_key独立核实A/B均已存在Hub；:232-234取当前真实revision/epoch，不再误把未知项目拒绝当原子性。allowed-first/forbidden-first分别发送两记录，:236首先要求403/project_disabled这个许可校验错误，:237完整前后正文恰空及:239接收回执空拦截提交允许前缀/任何被禁正文；只在首记录做许可检查而允许前缀已提交，会在allowed-first的拒绝或完整正文断言首先失败。:241-242纯允许B必须200/accepted1且完整Hub正文唯一B，拒绝全部请求或两端都空的错误不能通过正控。两个顺序、已登记允许/禁止状态与正控真实提交差异均实际经历，上轮unknown_project前提缺口关闭，未新增产品要求。原始2 passed；两mixed-batch附件均403/project_disabled、receipts=[]、正控accepted1且final_body仅allowed batch B。已核全部冻结artifacts及当前bindings/设计摘要/runtime-required23一致，mixed-batch-atomic全部分配有效；只审此新TC，其他旧case和真实平台/gaps不扩称通过。"
+    }
+  }
+}

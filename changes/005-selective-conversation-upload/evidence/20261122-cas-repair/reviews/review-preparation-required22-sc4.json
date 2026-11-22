@@ -1,0 +1,17 @@
+{
+  "cases": {
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "covers": [
+        "whole-batch-failure"
+      ],
+      "reason": "SPEC B4/A4及D1明确整批失败、部分无效回执时未提交或未知消息不能确认/永久跳过；PLAN 3.1/3.2整批匹配确认和同事务回执为直接依据，新场景/自然设计/实现有效。冻结test_required_snapshot_and_batch_boundaries.py:175-202对两条不同会话消息实际整批派发：before-commit在调用真实Hub upload前抛故障，partial-receipt先真实归档两条再把正数accepted改1，:183断言每次恰2记录。:190/192先要求已保留故障或ControlConflict，:194-196独立要求confirmed0、allowed_pending2、inflight2及Hub正文为零/完整两条；故只确认首条或将未知当成功首先失败:194。恢复后:199-201确认2、待确认/在途0和两轮完整独立正文顺序不增，首条重试正确但漏第二条或两个目标同错合成相同正文均不能通过:200；两个故障状态及恢复成功状态分别实际经历。原始日志2 passed；batch-before-commit附件25次有界尝试且failed(0,2,2)、恢复(2,0,0)，partial-receipt附件一次真实提交后相同未确认状态，最终两条正文完整。已核本轮artifacts/当前bindings一致。认领whole-batch-failure全部分配，仅此故障/补齐合同，不扩大为全部A4身份/平台及其他旧case/gaps。"
+    },
+    "TC-005-mixed-batch": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "covers": [],
+      "reason": "SPEC D1/A4及PLAN 3.2明文混合项目批次不能部分接受推进；新场景与自然设计的“已登记A/B、当前仅B允许、Hub空正文，允许/禁止两顺序混批整体拒绝且纯允许成功”正确有据。冻结test_required_snapshot_and_batch_boundaries.py:205-226实现却只在:209选择规则、:210取得本机稳定键，未把两个最小项目登记至Hub；connect/choose_upload不等于最小登记。当前原始两参数均在:224允许正控收到409而失败；目标此前:220的混批>=400/全正文空和:222无receipt只证明请求被某种校验拒绝，不足证明混批原子性。实际独立诊断work/required22-mixed-diagnostic.json的两次/v1/upload均409 code=unknown_project/message=设备需先登记稳定项目身份，与冻结输入未发project-metadata一致；不能据此将两次混批拒绝当产品原子性通过，也不能将正控失败归产品缺陷。反例：产品正确对未知项目整批拒绝，但已登记项目的allowed-first错误先提交允许前缀；当前夹具从未达到已登记状态，:220/222仍可全过，:224只报前提错误。最早implementation须先真实完成A/B最小登记并独立核实，保持Hub正文为空，再以当前revision/epoch分别提交两顺序混批；:220/222完整副作用断言及:224-225纯允许正控保留。这样only首目标正确/允许前缀漏提交将在正文或receipt断言拦住，拒绝所有写的错误由允许正控拦住。所有本轮冻结artifacts及bindings一致，实际2 failed，无附件到达最终evidence调用。仅审此新TC，不据未建前提的拒绝认领mixed-batch-atomic。"
+    }
+  }
+}

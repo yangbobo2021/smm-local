@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-reference-boundaries": {
+      "status": "passed",
+      "reason": "正式执行复审，依据SPEC B7/A8和已审design-required23-sc8的删除、实际目标切换与重复position检查。独立打开冻结test_required_snapshot_and_batch_boundaries.py:73-141、当前references.py:62-128及federation.py:559-635；引用按每条实际message ID/source_key/version验证，Hub身份不同在/read派发前拒绝。本次七参数日志7 passed、所有分支尾部附件均存在。四个删除分支先独立断言整段两条不同正文且position=[1,1]，然后确实删除saved首条或非首条ID，旧完整引用须异常且完整物理正文仅剩独立对侧；附件local/hub-deleted-first均删id1留second，local/hub-deleted-last均删id2留first，不能靠仅核第一stamp通过。两个重复position分支:101-107对两条消息逐条签发单消息引用、start=end=1，实际断言各自唯一独立正文，并核stamp恰一条/id等于所选_message_id/version等于所选消息版本；附件whole_read保留first/second两正文同position1。单消息read/stamp结果未另写附件，本次pytest成功与冻结的循环断言共同证明两轮均实际到达，不将旧公开source_key字段假设作为判据。换Hub分支真实配置另一hub_id，其newHub与本机均预置同号错误正文；:136-140旧引用实际报切换异常、没有新Hub/read，两个错误正文哨兵不变；本次reference-hub-switched.json记录old=1d019c31c456494895b52080a3cd4a2f、new=122d6258bd8a47a79aa2766d1a5a500b、read_calls_to_new_hub=[]。run.stderr空、pid=7818、exit_code=0，实际时段2026-11-22T09:14:39.552000+00:00至2026-11-22T09:14:40.326000+00:00。已核唯一TC request、全部artifacts/bindings/7附件摘要、设计摘要、match-required23-sc8冻结source与当前一致，且执行bindings与已登记独立preparation-required23相同；产品ba8c6d5未变。只认领citation-extra-boundaries在本自然设计分配的三类检查，不将未选旧TC、其他参数冲突/共享范围检查或真实平台/full1-3 gaps补签；required22缺口与原件保留，不判产品失败。",
+      "covers": [
+        "citation-extra-boundaries"
+      ]
+    }
+  }
+}

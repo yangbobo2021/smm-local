@@ -1,0 +1,210 @@
+{
+  "commits": [
+    {
+      "request": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "expected_revision": 0,
+        "submission_id": "0af765f5f0334049b9dfe54068e13f5e",
+        "reconcile": false
+      },
+      "receipt": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "revision": 1,
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "submission_id": "0af765f5f0334049b9dfe54068e13f5e",
+        "control_epoch": "93474f7512fa439590914fdb13c0b1fe"
+      }
+    },
+    {
+      "request": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "expected_revision": 1,
+        "submission_id": "a4ddca93a09b4a59b958d31f5e8e0f05",
+        "reconcile": false
+      },
+      "receipt": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "revision": 2,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "a4ddca93a09b4a59b958d31f5e8e0f05",
+        "control_epoch": "93474f7512fa439590914fdb13c0b1fe"
+      }
+    },
+    {
+      "request": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "expected_revision": 2,
+        "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+        "reconcile": false
+      },
+      "receipt": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "revision": 3,
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+        "control_epoch": "93474f7512fa439590914fdb13c0b1fe"
+      }
+    }
+  ],
+  "return_revisions": [
+    3,
+    2,
+    1
+  ],
+  "nested_states": [
+    {
+      "configured": true,
+      "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+      "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+      "hub_address": "http://localhost:18770",
+      "device_name": "synthetic-device",
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "generation": 3,
+      "state": "confirmed",
+      "hub_revision": 3,
+      "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 1,
+      "inflight_messages": 0,
+      "unsent_messages": 1,
+      "problem": null,
+      "remote": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "revision": 3,
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+        "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "backfilling",
+      "transfer_problem": null,
+      "allowed_pending_messages": 1,
+      "last_transfer_attempt": null,
+      "last_transfer_success": null
+    },
+    {
+      "configured": true,
+      "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+      "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+      "hub_address": "http://localhost:18770",
+      "device_name": "synthetic-device",
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "generation": 3,
+      "state": "confirmed",
+      "hub_revision": 3,
+      "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 1,
+      "inflight_messages": 0,
+      "unsent_messages": 1,
+      "problem": null,
+      "remote": {
+        "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+        "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+        "revision": 3,
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+        "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "backfilling",
+      "transfer_problem": null,
+      "allowed_pending_messages": 1,
+      "last_transfer_attempt": null,
+      "last_transfer_success": null
+    }
+  ],
+  "final": {
+    "configured": true,
+    "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+    "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+    "hub_address": "http://localhost:18770",
+    "device_name": "synthetic-device",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 3,
+    "state": "confirmed",
+    "hub_revision": 3,
+    "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+    "confirmed_messages": 1,
+    "not_confirmed_messages": 0,
+    "inflight_messages": 0,
+    "unsent_messages": 0,
+    "problem": null,
+    "remote": {
+      "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+      "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+      "revision": 3,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+      "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T09:08:59.835818+00:00",
+    "last_transfer_success": "2026-11-22T09:08:59.835818+00:00"
+  },
+  "hub_head": {
+    "hub_id": "8ff0cefac00f494c815e11252cea02dd",
+    "device_id": "d59f67ddb35b4fb2b823e4ed16ab15dc",
+    "revision": 3,
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "submission_id": "25eb46f4eab642f7bf01614c62374f88",
+    "control_epoch": "93474f7512fa439590914fdb13c0b1fe",
+    "restore_pending": false,
+    "conflict": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_ids": [
+    "TC-005-cas",
+    "TC-005-policy-triple-order",
+    "TC-005-reconcile-fresh",
+    "TC-005-reconcile-inflight",
+    "TC-005-reconcile-remote-race",
+    "TC-005-reconcile-stale-local",
+    "TC-005-reconcile-target-dispatch",
+    "TC-005-reconcile-write-window",
+    "TC-005-target-dispatch"
+  ],
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-required23-sc2/result.json",
+  "request_id": "match-required23-sc2",
+  "result_sha256": "cebfe820bc983fba5055c6bc61213af8bbbd5d445e8b5717d2e1b44220ca0954",
+  "scene": "SC2",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

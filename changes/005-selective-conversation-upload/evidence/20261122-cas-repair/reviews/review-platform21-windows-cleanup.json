@@ -1,0 +1,49 @@
+{
+  "review_kind": "independent_readonly_cleanup_addendum",
+  "task": "AT-SMM-005",
+  "run": "windows-reconcile21",
+  "candidate": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+  "status": "clean_observed_at_snapshot_with_scope_limits",
+  "observation_at": "2026-11-22T08:40:53.8926777Z",
+  "ssh_exit_code": 0,
+  "observed": {
+    "tasks": [],
+    "processes": [],
+    "service_files": {
+      "local": false,
+      "remote": false
+    },
+    "hub_listeners": [],
+    "at": "2026-11-22T08:40:53.8926777Z"
+  },
+  "scope": {
+    "task_root": "<task-root>",
+    "task_name_filter": "SmmSelective005-* with action arguments containing task_root",
+    "process_filter": "python.exe with command line containing task_root",
+    "hub_port": 18921,
+    "service_files": [
+      "reconcile21\\local\\archive.sqlite3.service.json",
+      "reconcile21\\remote\\archive.sqlite3.service.json"
+    ]
+  },
+  "seconds_after_original_run_finished": 294.08026,
+  "original_worker_exit_code": 0,
+  "original_hub_exit_code": 1,
+  "original_hub_stop_requested": true,
+  "query_readonly": true,
+  "original_review_preserved": true,
+  "supersedes_only_prior_evidence_limit": "No post-cleanup scheduler absence snapshot had been available when original review was written",
+  "historical_archives_deleted_claim": false,
+  "overall_acceptance_claim": false,
+  "nativecases_registration_input": false,
+  "limits": [
+    "Snapshot at one observed time, only stated filters and paths",
+    "Port query reports empty listener set; no connection probe claim",
+    "Does not prove deletion of historical archives or other paths",
+    "Does not change body backfill or R005 acceptance limits"
+  ],
+  "evidence_sha256": {
+    "windows.json": "98fb9e722bd61605d874ada37c874daeb7a43d684d4b046c278d6e0cffd3d7aa",
+    "windows-command.ps1": "6be96fe3068f58a0295843c25de2c5328875750a889dd51f5ecd7fbcfc7c1929"
+  }
+}

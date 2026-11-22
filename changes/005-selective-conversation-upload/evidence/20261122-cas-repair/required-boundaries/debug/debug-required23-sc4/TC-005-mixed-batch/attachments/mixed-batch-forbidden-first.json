@@ -1,0 +1,73 @@
+{
+  "request": {
+    "hub_id": "1640b771b42e4756866424a674c6c7f6",
+    "device_id": "b9252b0a15f148649e3cde027a86a785",
+    "device_name": "synthetic-device",
+    "policy_revision": 1,
+    "control_epoch": "20388de5d7844f6492cb79c3a1130d45",
+    "batch_id": "mixed-forbidden-first",
+    "records": [
+      {
+        "source": "codex",
+        "source_session_id": "forbidden-a",
+        "started_at": null,
+        "source_key": "forbidden-a-message",
+        "position": 1,
+        "source_order": 1,
+        "role": "user",
+        "text": "forbidden batch A",
+        "timestamp": null,
+        "project_id": "6e005db7bbade5120233fc1fecf00590"
+      },
+      {
+        "source": "codex",
+        "source_session_id": "allowed-b",
+        "started_at": null,
+        "source_key": "allowed-b-message",
+        "position": 1,
+        "source_order": 1,
+        "role": "user",
+        "text": "allowed batch B",
+        "timestamp": null,
+        "project_id": "577f5e332c6474cbc9f31716fbd6e02b"
+      }
+    ]
+  },
+  "rejection": {
+    "status": 403,
+    "body": {
+      "detail": {
+        "code": "project_disabled",
+        "message": "该项目不允许上传"
+      }
+    }
+  },
+  "receipts_after_rejection": {
+    "hub_id": "1640b771b42e4756866424a674c6c7f6",
+    "device_id": "b9252b0a15f148649e3cde027a86a785",
+    "revision": 1,
+    "policy": {
+      "mode": "only",
+      "projects": [
+        "577f5e332c6474cbc9f31716fbd6e02b"
+      ]
+    },
+    "submission_id": "d2f4cee72bbe4553b10a4e9152a36eca",
+    "control_epoch": "20388de5d7844f6492cb79c3a1130d45",
+    "restore_pending": false,
+    "conflict": false,
+    "receipts": []
+  },
+  "permitted_control": {
+    "accepted": 1,
+    "hub_id": "1640b771b42e4756866424a674c6c7f6",
+    "device_id": "b9252b0a15f148649e3cde027a86a785",
+    "policy_revision": 1,
+    "control_epoch": "20388de5d7844f6492cb79c3a1130d45",
+    "batch_id": "valid-forbidden-first",
+    "batch_digest": "d0976f521f930bffd5acb6513f2cd404a4e4275d5ddb060037d15ff9f8c1ddb1"
+  },
+  "final_body": [
+    "allowed batch B"
+  ]
+}

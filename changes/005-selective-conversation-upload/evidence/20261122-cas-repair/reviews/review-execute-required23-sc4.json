@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "reason": "正式执行复审，依据SPEC B4/A4/D1和已审design-required22-sc4的whole-batch-failure。独立打开冻结test_required_snapshot_and_batch_boundaries.py:188-215及upload.py:452-482的批次/ack核验。本次两不同会话消息真实组成同批，before-commit在实际Hub调用前抛错、partial-receipt先真正归档两条后仅将accepted改正数1；每次均先断言records数2。:203/205分别要求错误或ControlConflict，:207-209明确confirmed=0、allowed_pending=2、inflight=2，Hub分别零正文或完整两正文，未知/未提交不能被确认首条或当成功。恢复真实请求后:212-214明确confirmed2、pending/inflight0、完整独立两正文且二次同步不增。本次batch-before-commit.json有25次有界两记录尝试、失败(0,2,2)后恢复(2,0,0)；batch-partial-receipt.json有1次真实两记录提交，失败同为(0,2,2)，恢复亦(2,0,0)且两正文恰为first/second original。两个参数全部到达尾部写附件；不据状态计数宣称未断言的每个历史批次内部行都已终结。 run.stdout为2 passed，stderr空、pid=7856、exit_code=0，实际时段2026-11-22T09:14:41.206000+00:00至2026-11-22T09:14:42.053000+00:00。已核本execute request恰选两新TC、全部artifacts/bindings/各2附件摘要、设计摘要、match-required23-sc4冻结source与当前一致，执行bindings与已登记独立review-preparation-required23-sc4相同，产品ba8c6d5未变。仅认领本TC本次实际证明的分配项，不含收据未选旧TC、A4其余内容/身份矩阵及真实平台gaps；required22测试缺口和原件保留，不判产品失败。",
+      "covers": [
+        "whole-batch-failure"
+      ]
+    },
+    "TC-005-mixed-batch": {
+      "status": "passed",
+      "reason": "正式执行复审，依据SPEC D1/A4、PLAN3.2及已审design-required22-sc4的mixed-batch-atomic。独立打开冻结test_required_snapshot_and_batch_boundaries.py:218-243、Hub upload.py:185-218及hub.py:288-348。事务在yield归档前遍历全批校验许可与真实登记身份。本次:223-226先control_only真实登记并按当前设备owner/source_key核实A/B均已存在，:232-234取当前revision/epoch，所以不是unknown_project或旧版本拒绝冒充混批原子性。allowed-first/forbidden-first各实际提交两记录，:236均明确403/project_disabled，:237全正文前后恰空、:239当前batch接收回执空；任何允许前缀提交或误确认均被拦截。:240-242纯允许B正控实际200/accepted1且完整正文恰B，排除拒绝所有请求假通过。本次两mixed-batch附件真实请求顺序相反、均403/project_disabled、receipts=[]，正控accepted1/final_body=[allowed batch B]，所有尾部断言到达。 run.stdout为2 passed，stderr空、pid=7863、exit_code=0，实际时段2026-11-22T09:14:42.053000+00:00至2026-11-22T09:14:42.537000+00:00。已核本execute request恰选两新TC、全部artifacts/bindings/各2附件摘要、设计摘要、match-required23-sc4冻结source与当前一致，执行bindings与已登记独立review-preparation-required23-sc4相同，产品ba8c6d5未变。仅认领本TC本次实际证明的分配项，不含收据未选旧TC、A4其余内容/身份矩阵及真实平台gaps；required22测试缺口和原件保留，不判产品失败。",
+      "covers": [
+        "mixed-batch-atomic"
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-005-reference-boundaries": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "SPEC B7/A8及PLAN 3.3/A8明确实际消息身份、重复position、被删除消息、Hub切换应正确读取或明确失败；场景所需行为有据，没有公共read必须暴露source_key的规定。当前自然设计正确列出本机/Hub删除、真实换Hub及两条同position消息，但删除动作仅“删除被旧引用选中的一条消息”，实现test_required_snapshot_and_batch_boundaries.py:108固定删除saved[0]，缺少被选集合非首消息删除的有据目标差异。反例：正常两条读取均正确，却只核验引用首stamp是否仍存在，后续stamp删除时静默漏出该消息；:97双正文、:102正常单条读取都仍可成立，当前:108仅删首项会触发正确错误，三种已运行负例和其余正常读取仍可全过。B7明确消息不存在应准确错误，references.py:111-116本来逐stamp校验，首/非首是集合检查位置的差异；最早须在design将local/Hub首及非首选中消息删除分配清楚，再用最少参数化区分该错误，非单纯换ID补测。另实现还有已复现测试错误：原始日志..FF.为3 passed、2 failed，两次重复position均在:102第一个独立正文已通过后，:103因public read.messages[0][source_key] KeyError而中止，第二条精确引用尚未执行。自然设计只要求准确源消息，B7/A8没有该公开字段承诺，federation.py:631-632明确移除内部source_key；这不能登记成产品缺陷。修订实现应以已定义公开身份/独立两条正文逐条核对（必要时解码所签引用作内部身份自检），避免增加公开字段产品要求，且保留两条目标的检查与数量。已通过的local/hub删除附件分别显示只剩第二正文且旧引用拒绝；真实换Hub附件old/new hub_id不同，:130-134异常、无新端/read且新Hub/本机哨兵原文不变，证明未错误回退。两边都误用同档案或同正文会先失败:97/102；但上述测试错误和非首删除缺口仍使本TC整体needs_revision/design。所有本轮artifacts与当前bindings一致；仅审新TC，不认领旧cases或平台/gaps。",
+      "covers": []
+    }
+  }
+}

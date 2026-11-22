@@ -1,0 +1,69 @@
+{
+  "removed_message": {
+    "id": 1,
+    "conversation_id": 1,
+    "source_key": "citation-message",
+    "position": 1,
+    "role": "user",
+    "text": "common first original",
+    "timestamp": null
+  },
+  "before": {
+    "id": 1,
+    "source": "codex",
+    "source_session_id": "citation",
+    "source_path": "<pytest-fixture>",
+    "cwd": "<pytest-fixture>",
+    "started_at": null,
+    "updated_at": null,
+    "title": "common first original",
+    "project_id": 1,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "common first original",
+        "timestamp": null,
+        "canonical_id": "70ed33beaf9c9d5873ebcac00979f54aa894794d0d54c1c1395fb849d0c8bbee",
+        "content_version": "4aba0f19d125aba2441b6d63ee42eee339c1b615a1060c58eecfe8196f17044b",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOWQ0OTUzODYyOTgyNDdjNDkyOTJiZmMyNzQ3MTQ3NWIiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoiY2l0YXRpb24tbWVzc2FnZSIsInZlcnNpb24iOiI0YWJhMGYxOWQxMjVhYmEyNDQxYjZkNjNlZTQyZWVlMzM5YzFiNjE1YTEwNjBjNThlZWNmZTgxOTZmMTcwNDRiIn0seyJpZCI6MiwicG9zaXRpb24iOjEsInNvdXJjZV9rZXkiOiJjaXRhdGlvbi1zZWNvbmQiLCJ2ZXJzaW9uIjoiNjVjYzg5ZWQ1OGY2ZWQyMjk1ZGYyY2YzZDhhZWJjYWU0NzdmNGVjMjNkMjRmZWY2Nzg4NDMzZWM1N2UzZTQ3YSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNTg1ZTlhMTc1ZDBlYmRiY2JmZTU5MDZkOTNhYjM2OWUwZGQzMWY2OTdhMzFiN2RlZGQ1ZjNlMTNiNmY2Y2E3ZCIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.c6b9817caa800ba15a5c9305244e934b359311775cc53d8ef459251ebd67b3d4",
+        "source_order": 1,
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "036daa14904d4c4dabc20395cf2dd474",
+            "source_position": 1
+          }
+        ]
+      },
+      {
+        "position": 1,
+        "role": "user",
+        "text": "common second original",
+        "timestamp": null,
+        "canonical_id": "95c5fabf56d569da8e0f1d206a5330983ab89e1288c2dfc994a6789adf92e554",
+        "content_version": "65cc89ed58f6ed2295df2cf3d8aebcae477f4ec23d24fef6788433ec57e3e47a",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOWQ0OTUzODYyOTgyNDdjNDkyOTJiZmMyNzQ3MTQ3NWIiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoiY2l0YXRpb24tbWVzc2FnZSIsInZlcnNpb24iOiI0YWJhMGYxOWQxMjVhYmEyNDQxYjZkNjNlZTQyZWVlMzM5YzFiNjE1YTEwNjBjNThlZWNmZTgxOTZmMTcwNDRiIn0seyJpZCI6MiwicG9zaXRpb24iOjEsInNvdXJjZV9rZXkiOiJjaXRhdGlvbi1zZWNvbmQiLCJ2ZXJzaW9uIjoiNjVjYzg5ZWQ1OGY2ZWQyMjk1ZGYyY2YzZDhhZWJjYWU0NzdmNGVjMjNkMjRmZWY2Nzg4NDMzZWM1N2UzZTQ3YSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNTg1ZTlhMTc1ZDBlYmRiY2JmZTU5MDZkOTNhYjM2OWUwZGQzMWY2OTdhMzFiN2RlZGQ1ZjNlMTNiNmY2Y2E3ZCIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.c6b9817caa800ba15a5c9305244e934b359311775cc53d8ef459251ebd67b3d4",
+        "source_order": 2,
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "036daa14904d4c4dabc20395cf2dd474",
+            "source_position": 1
+          }
+        ]
+      }
+    ],
+    "origins": [
+      {
+        "device_name": "synthetic-device",
+        "device_id": "036daa14904d4c4dabc20395cf2dd474"
+      }
+    ],
+    "archive_scope": "local"
+  },
+  "remaining_body": [
+    "common second original"
+  ]
+}

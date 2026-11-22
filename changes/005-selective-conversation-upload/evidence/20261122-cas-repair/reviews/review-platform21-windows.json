@@ -1,0 +1,134 @@
+{
+  "review_kind": "independent_readonly_actual_platform_evidence",
+  "task": "AT-SMM-005",
+  "revision_label": "R005",
+  "reviewed_at": "2026-11-22T08:41:52.775605+00:00",
+  "status": "scoped_evidence_supported_with_cleanup_limit",
+  "candidate": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+  "overall_acceptance_claim": false,
+  "new_product_runs_performed_by_reviewer": 0,
+  "nativecases_registration_input": false,
+  "findings_in_scope": [],
+  "runs": [
+    {
+      "run": "windows-reconcile21",
+      "status": "supported_with_limits",
+      "scope": "E1 installed CLI/Web reconciliation supplement only",
+      "identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "all_module_verification": {
+        "local": 25,
+        "hub": 24,
+        "candidate_manifest_command_wheel_clean_source_git_match": true
+      },
+      "old_to_new_changes": {
+        "local": [
+          "smm_local/upload.py"
+        ],
+        "hub": []
+      },
+      "original_pngs_viewed": 3,
+      "trace_six_post_requests_responses_verified": true,
+      "cli_use_hub_without_versions": {
+        "configured": true,
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "hub_address": "https://localhost:52019",
+        "device_name": "005-local",
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "generation": 5,
+        "state": "confirmed",
+        "hub_revision": 6,
+        "control_epoch": "666b2ada45a64d7e97c1cc8a176f96e0",
+        "confirmed_messages": 0,
+        "not_confirmed_messages": 5,
+        "inflight_messages": 0,
+        "unsent_messages": 5,
+        "problem": null,
+        "remote": {
+          "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+          "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+          "revision": 6,
+          "policy": {
+            "mode": "none",
+            "projects": []
+          },
+          "submission_id": "359448370bdb4d96829fdd4124be8548",
+          "control_epoch": "666b2ada45a64d7e97c1cc8a176f96e0"
+        },
+        "transfer_state": "failed",
+        "transfer_problem": "Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异",
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": "2026-11-22T08:35:20.722183+00:00",
+        "last_transfer_success": "2026-11-22T08:34:17.150176+00:00"
+      },
+      "final_local": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "359448370bdb4d96829fdd4124be8548",
+        "control_epoch": "666b2ada45a64d7e97c1cc8a176f96e0",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "outer_process": {
+        "pid": 13852,
+        "exit_code": 0,
+        "session": "current interactive user; controlled task token"
+      },
+      "service_events": [
+        {
+          "event": "start",
+          "mode": "serve-hub",
+          "pid": 12824,
+          "at": "2026-11-22T08:29:48.933307+00:00"
+        },
+        {
+          "event": "process-exit",
+          "pid": 12824,
+          "exit_code": 1,
+          "stop_requested": true,
+          "at": "2026-11-22T08:35:59.780414+00:00"
+        }
+      ],
+      "cleanup_failures": [],
+      "scheduler_cleanup": {
+        "finally_stop_unregister_present": true,
+        "post_cleanup_absence_snapshot_provided": false,
+        "status": "not_independently_confirmed"
+      },
+      "limits": [
+        "Final policy confirmed/none but transfer_state failed; no body backfill success claim",
+        "No runtime injection at later Hub-read/CAS race windows",
+        "Not full E1 or R005 acceptance",
+        "Old platform15 remains original 7c72c92 execution"
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "manifest.json": "66d3fbc41fafd5a1b7b13e8c8a1ad709469a36d4a5995a4661025aa4c55e51ee",
+    "commands.jsonl": "82d929c97bd3362bf33c8e12c744ed60b3e240b71d0aac53074878cb00b7c4c0",
+    "reconcile-result.json": "bc4ee857a053f5e534ac2db951e1f554e8028483e6490828db3c602b3c1f3886",
+    "reconcile-browser-trace.zip": "1609d45ac6b7e84d990f68afdccaf3a125ca69b4ecb7a9e14061cca046933a07",
+    "outer-process.json": "0868cfbc0f27128729ada44e4022f8341c58761b6f1d1e2fbe30ea0afd2f0650",
+    "cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8"
+  }
+}

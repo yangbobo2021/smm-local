@@ -1,0 +1,137 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-deleted-first.json": "6bf63b5309ffa654e19ea92a8bb6f68b5ef2560650c2a6dc8e763d209f049e59",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-deleted-last.json": "8b3eaaed9c9453b9f7e8b4b4b36cb00749a2be63db4683f533ac7ae27befe559",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-repeated-position.json": "ec44bbc4b6911cb416a078e41198442c36e6422a016e2fb3144b22d6552def82",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-switched.json": "44b3099d921561f2d4e6c44f52413401a19841d5d5747f27784da3e07791046c",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-deleted-first.json": "f12d6b89d24f14c349219174bd06a38f9fdd2bd7019c28347bbcc9c50491caa2",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-deleted-last.json": "09a7a3125ca797abf45290c2f7807ca847f00122ff049de935e35bb0fb7e5058",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-repeated-position.json": "21b94f2acebacc4a6d223d1a8bfffd1301ef1338145b59a4a1d85b10bebeac98",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/run.process.json": "29f3ea954293916fedc4d6e57ceaa1b21cc1ce3ffb483ab8d47c94ae3c87f07a",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/run.stdout": "54de685282ee539f83f6cf18438316b184be22bb53fff642868a4d318984999e",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/request.json": "af893d6855ad35b97cdec3173d7d6c82910ebc100f1c40b129156cbf28e781d0"
+  },
+  "bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_required_snapshot_and_batch_boundaries.py": "8413d7ae8bc17d5f84361f850c64c2973125c389ab3999172970f996645e4c5d"
+  },
+  "case_design": {
+    "id": "design-required23-sc8",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-required23-sc8/result.json",
+    "sha256": "0aca1ddeda536653d12c01a24b34a9ea4a15ce1b303dc819e317412dac781756"
+  },
+  "case_obligations": {
+    "TC-005-reference-boundaries": [
+      "citation-extra-boundaries"
+    ]
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design_review": "review-preparation-required23-sc8",
+  "designed_case_ids": [
+    "TC-005-reference-boundaries"
+  ],
+  "implementation_sha256": {
+    "TC-005-reference": "36160858c322bd28d321bfe51b320f67bd5b569f13fdbc2834fe5aac3b761c3e",
+    "TC-005-reference-boundaries": "04dc6dd4f27fcd510f76c36ed8e4ca0872ed0f5bc5f99685dd8cf9ca6c65e11d",
+    "TC-005-scoped-title": "8d102e4d903f6eceffe54c242e82ad723ac38ab5fe0349e7629b5c1f4d04f63e"
+  },
+  "obligations": {
+    "citation-extra-boundaries": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "full1": "新引用精确区分实际档案、消息和内容版本；同整数 ID 不误读，远端失败不读本机同号。",
+    "full2": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "full3": "旧 CLI/MCP/Web 引用和调用形式继续可用；各 E1 三入口及 E3/E4 实际读取满足范围。",
+    "scope-title": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "tdd-core": "新引用精确区分实际档案、消息和内容版本；同整数 ID 不误读，远端失败不读本机同号。"
+  },
+  "operation": "execute",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/result.json",
+  "recorded_at": "2026-11-22T09:14:40.329000+00:00",
+  "request_id": "execute-required23-sc8",
+  "request_sha256": "af893d6855ad35b97cdec3173d7d6c82910ebc100f1c40b129156cbf28e781d0",
+  "results": {
+    "TC-005-reference-boundaries": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-deleted-first.json": "6bf63b5309ffa654e19ea92a8bb6f68b5ef2560650c2a6dc8e763d209f049e59",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-deleted-last.json": "8b3eaaed9c9453b9f7e8b4b4b36cb00749a2be63db4683f533ac7ae27befe559",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-repeated-position.json": "ec44bbc4b6911cb416a078e41198442c36e6422a016e2fb3144b22d6552def82",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-hub-switched.json": "44b3099d921561f2d4e6c44f52413401a19841d5d5747f27784da3e07791046c",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-deleted-first.json": "f12d6b89d24f14c349219174bd06a38f9fdd2bd7019c28347bbcc9c50491caa2",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-deleted-last.json": "09a7a3125ca797abf45290c2f7807ca847f00122ff049de935e35bb0fb7e5058",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/attachments/reference-local-repeated-position.json": "21b94f2acebacc4a6d223d1a8bfffd1301ef1338145b59a4a1d85b10bebeac98"
+      },
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_required_snapshot_and_batch_boundaries.py::test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_required_snapshot_and_batch_boundaries.py::test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T09:14:40.326000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-required23-sc8/TC-005-reference-boundaries/run.stdout": "54de685282ee539f83f6cf18438316b184be22bb53fff642868a4d318984999e"
+        },
+        "started_at": "2026-11-22T09:14:39.552000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC8",
+  "selection": "all_designed_cases",
+  "status": "executed"
+}

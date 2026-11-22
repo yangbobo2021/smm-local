@@ -1,0 +1,223 @@
+{
+  "review_kind": "independent_readonly_actual_platform_evidence",
+  "task": "AT-SMM-005",
+  "revision_label": "R005",
+  "reviewed_at": "2026-11-22T08:35:35.378875+00:00",
+  "status": "scoped_evidence_supported_not_overall_acceptance",
+  "candidate": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+  "overall_acceptance_claim": false,
+  "new_product_runs_performed_by_reviewer": 0,
+  "nativecases_registration_input": false,
+  "findings_in_scope": [],
+  "excluded_pending_runs": [
+    "windows-reconcile21"
+  ],
+  "runs": [
+    {
+      "run": "mac-reconcile21",
+      "status": "supported_with_limits",
+      "scope": "E1 installed CLI/Web reconciliation supplement only",
+      "candidate": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:28:06.809614+00:00",
+        "finished_at": "2026-11-22T08:28:13.185573+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "all_modules_verified": {
+        "local": 25,
+        "hub": 24,
+        "against": [
+          "candidate",
+          "installed manifest",
+          "actual command stdout",
+          "final wheel",
+          "clean source checkout",
+          "git object"
+        ]
+      },
+      "old_to_new_product_module_changes": {
+        "local": [
+          "smm_local/upload.py"
+        ],
+        "hub": []
+      },
+      "original_pngs_viewed": 3,
+      "trace_request_response_match": true,
+      "cli_use_hub_without_versions": {
+        "configured": true,
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "hub_address": "https://localhost:52252",
+        "device_name": "005-local",
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "generation": 5,
+        "state": "confirmed",
+        "hub_revision": 6,
+        "control_epoch": "44ceaa4b1990499ba6a7f78d5b1061f8",
+        "confirmed_messages": 0,
+        "not_confirmed_messages": 5,
+        "inflight_messages": 0,
+        "unsent_messages": 5,
+        "problem": null,
+        "remote": {
+          "hub_id": "487006252e76409688f14c54931bab67",
+          "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+          "revision": 6,
+          "policy": {
+            "mode": "none",
+            "projects": []
+          },
+          "submission_id": "9700597d8e3543cc9a1b3bc56f476f19",
+          "control_epoch": "44ceaa4b1990499ba6a7f78d5b1061f8"
+        },
+        "transfer_state": "complete",
+        "transfer_problem": null,
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": null,
+        "last_transfer_success": null
+      },
+      "final_local": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "9700597d8e3543cc9a1b3bc56f476f19",
+        "control_epoch": "44ceaa4b1990499ba6a7f78d5b1061f8",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "cleanup_failures": [],
+      "limits": [
+        "Not a body backfill success assertion",
+        "No runtime injection at later Hub-read/CAS race windows",
+        "Not full E1 or R005 acceptance",
+        "Old platform15 runs keep original 7c72c92 identity"
+      ]
+    },
+    {
+      "run": "linux-reconcile21",
+      "status": "supported_with_limits",
+      "scope": "E1 installed CLI/Web reconciliation supplement only",
+      "candidate": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:29:36.541502+00:00",
+        "finished_at": "2026-11-22T08:30:01.968174+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "all_modules_verified": {
+        "local": 25,
+        "hub": 24,
+        "against": [
+          "candidate",
+          "installed manifest",
+          "actual command stdout",
+          "final wheel",
+          "clean source checkout",
+          "git object"
+        ]
+      },
+      "old_to_new_product_module_changes": {
+        "local": [
+          "smm_local/upload.py"
+        ],
+        "hub": []
+      },
+      "original_pngs_viewed": 3,
+      "trace_request_response_match": true,
+      "cli_use_hub_without_versions": {
+        "configured": true,
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "hub_address": "https://localhost:43283",
+        "device_name": "005-local",
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "generation": 5,
+        "state": "confirmed",
+        "hub_revision": 6,
+        "control_epoch": "85d2e3f05a4847abbea75648d11a1de2",
+        "confirmed_messages": 0,
+        "not_confirmed_messages": 5,
+        "inflight_messages": 0,
+        "unsent_messages": 5,
+        "problem": null,
+        "remote": {
+          "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+          "device_id": "25ffac1828de4414b36cf4db32816d00",
+          "revision": 6,
+          "policy": {
+            "mode": "none",
+            "projects": []
+          },
+          "submission_id": "cc67360bc0044855b5db5364f11d1d53",
+          "control_epoch": "85d2e3f05a4847abbea75648d11a1de2"
+        },
+        "transfer_state": "complete",
+        "transfer_problem": null,
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": "2026-11-22T08:29:53.570730+00:00",
+        "last_transfer_success": "2026-11-22T08:29:53.570730+00:00"
+      },
+      "final_local": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "cc67360bc0044855b5db5364f11d1d53",
+        "control_epoch": "85d2e3f05a4847abbea75648d11a1de2",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "cleanup_failures": [],
+      "limits": [
+        "Not a body backfill success assertion",
+        "No runtime injection at later Hub-read/CAS race windows",
+        "Not full E1 or R005 acceptance",
+        "Old platform15 runs keep original 7c72c92 identity"
+      ]
+    }
+  ]
+}

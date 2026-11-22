@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-policy-triple-order": {
+      "status": "passed",
+      "reason": "正式执行复审，依据SPEC B4/A2、D1及已审design-required22-sc2的three-choice-order。独立读取冻结test_required_snapshot_and_batch_boundaries.py:144-185、当前upload.py:180-234；每个真实Hub set已提交后才嵌套新选择，源程序重取权威head并对当前generation/提交身份确认，不将迟到receipt直接覆盖。本次:163-164明确实际提交all/none/all、revision=[1,2,3]且回执返回=[3,2,1]，非仅模拟相同all。关键断言在任何正文push之前：:165-174先要求final confirmed/all/gen3、Hub head3/all，并按第三次真实receipt逐项核final.hub_revision=3、control_epoch、remote.submission_id/revision、持久row.submission_id、ack_generation==generation==3、ack_revision=3及ack_epoch；所以旧ACK即使保留mode/gen/state也不能等后续同步自愈后蒙混通过。:175-181分别重放两个已提交旧请求仍得其原revision而完整Hub head保持第三次，再发未提交旧版本stop明确409，完整head仍不变。:183-184两轮同步后完整Hub正文恰为一份独立字符串。本次policy-triple-order.json三次不同submission依次15c6a0d22e2a4fd2a5cd08789e9fb307/56940c86eb534bae9592b4b3306674e9/58ead08f61e64754811971575d15439f，return_revisions=[3,2,1]，nested_states与最终head均保第三次receipt，epoch=5b3c8fda731e4c0aab8c9a8091078762；最终确认正文1。附件final在同步后写出，正文前ACK正确性依据本次已全部到达的:169-174断言，不把附件后态替代前态。run.stdout为1 passed，stderr空、pid=7841、exit_code=0，实际时段2026-11-22T09:14:40.527000+00:00至2026-11-22T09:14:41.001000+00:00。已核request唯一TC、所有artifacts/bindings/附件及设计摘要、match-required23-sc2冻结source与当前一致，执行bindings与独立review-preparation-required23-sc2相同；产品ba8c6d5。只认领本次新TC的three-choice-order，不含收据未选旧TC、所有其他竞态及full1-4/实际平台gaps，required22缺口和原件保留不判产品失败。",
+      "covers": [
+        "three-choice-order"
+      ]
+    }
+  }
+}
