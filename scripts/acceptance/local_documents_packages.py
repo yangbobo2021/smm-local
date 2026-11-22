@@ -33,6 +33,15 @@ def main():
             with zipfile.ZipFile(wheel) as z:
                 expected={n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.startswith('smm_'+kind+'/') and n.endswith(('.py','.html'))}
                 assert not any(n.endswith(('.sqlite3','.jsonl','.pem','.key')) for n in z.namelist())
+            source={str(p.relative_to(ROOT/'src')).replace(os.sep,'/'):hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in (ROOT/'src'/('smm_'+kind)).rglob('*') if p.suffix in ['.py','.html'] and '__pycache__' not in p.parts}
+            if kind=='hub':
+                shim=source.pop('smm_hub/_archive.py')
+                source['smm_hub/_archive/__init__.py']=hashlib.sha256((ROOT/'src/smm_hub/_archive.py').read_text(encoding='utf-8').replace('from smm_local.','from .').encode()).hexdigest()
+                for p in [*(ROOT/'src/smm_local'/name for name in ['core.py','support.py','archive_protocol.py','references.py']),*(ROOT/'src/smm_local/importers').rglob('*.py')]:
+                    source['smm_hub/_archive/'+p.relative_to(ROOT/'src/smm_local').as_posix()]=hashlib.sha256(p.read_bytes()).hexdigest()
+            assert expected==source,{'source':source,'wheel':expected}
+            save(kind+'-source-wheel',{'source':source,'wheel':expected})
             inspect="import importlib.util,pathlib,hashlib,json,sys;r=pathlib.Path(importlib.util.find_spec('smm_'+sys.argv[1]).origin).parent.parent;print(json.dumps({n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])}))"
             actual=json.loads(run([python,'-I','-B','-c',inspect,kind,json.dumps(list(expected))]));assert actual==expected
             installed[kind]={'python':str(python),'modules':actual};wheel_meta[kind]={'wheel':wheel.name,'sha256':hashlib.sha256(wheel.read_bytes()).hexdigest()}

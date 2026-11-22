@@ -10,6 +10,17 @@ from test_005_contracts import pair, add_local, connect
 from smm_local import federation
 
 
+def second_conversation(db,root):
+    root.mkdir(parents=True,exist_ok=True)
+    record={'type':'user','uuid':'second-message','sessionId':'second-session','cwd':str(root/'OtherProject'),
+            'message':{'role':'user','content':'conversationnonce second independent'}}
+    (root/'other.jsonl').write_text(json.dumps(record)+'\n',encoding='utf-8')
+    db.sync_claude(root)
+    with db.connect() as c:
+        row=c.execute("SELECT id,project_id,source,source_session_id FROM conversations WHERE source_session_id='second-session'").fetchone()
+    return dict(row)
+
+
 def retained_state(db):
     with db.connect() as c:
         tables=[r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table'") if r[0] in ['settings','messages','conversations'] or r[0].startswith(('local_upload_','upload_message_'))]
@@ -19,11 +30,14 @@ def retained_state(db):
 @pytest.mark.parametrize('mode',['none','hub','paused'])
 def test_isolation(pair,tmp_path,monkeypatch,mode):
     original=add_local(pair,'original','OriginalProject','conversationnonce original')
+    second=second_conversation(pair.local,tmp_path/'claude-fixture')
     f=Fixture(tmp_path/'document-client',db=pair.local)
     if mode!='none':
-        connect(pair);federation.choose_upload(pair.local,'only',[original['project_id']]);federation.push_pending(pair.local)
+        connect(pair);federation.choose_upload(pair.local,'only',[original['project_id'],second['project_id']]);federation.push_pending(pair.local)
     if mode=='paused':f.db.set_settings(sync_paused=True)
     f.db.set_source_enabled('codex',False)
+    f.db.set_source_enabled('claude-code',True)
+    sources_before=f.db.configured_sources()
     before=retained_state(f.db);remote=retained_state(pair.remote);calls=len(pair.calls)
     def reject(*args,**kwargs):raise AssertionError('document operation attempted a Hub/network call')
     monkeypatch.setattr(federation,'_request',reject)
@@ -38,19 +52,31 @@ def test_isolation(pair,tmp_path,monkeypatch,mode):
     assert f.read(hit)['text']=='docprivateneedle 本机文件 😀'
     f.set(source,project_ids=[]);f.refresh(source);f.remove(source)
     assert retained_state(f.db)==before and retained_state(pair.remote)==remote and len(pair.calls)==calls
-    legacy=federation.read_archive(f.db,original['id'])
-    assert [m['text'] for m in legacy['messages']]==['conversationnonce original']
-    assert f.db.configured_sources()['codex']['enabled'] is False
-    assert f.db.settings()['sync_paused']==(mode=='paused')
+    for item,expected,source_name in [(original,'conversationnonce original','codex'),(second,'conversationnonce second independent','claude-code')]:
+        legacy=federation.read_archive(f.db,item['id'])
+        assert [m['text'] for m in legacy['messages']]==[expected] and legacy['source']==source_name
+    assert f.db.configured_sources()==sources_before
+    assert f.db.get_settings()['sync_paused']==(mode=='paused')
     observe('isolation-complete-state',{'mode':mode,'before':before,'after':retained_state(f.db),'remote_before':remote,'remote_after':retained_state(pair.remote),'outbound_calls_after_marker':len(pair.calls)-calls})
 
 
 def test_compatibility(tmp_path):
     # This existing behavior is a pre-development baseline, not an expected red.
     f=Fixture(tmp_path);hit=seed_conversation(f)
-    old=federation.read_archive(f.db,hit['id']);new=federation.read_archive(f.db,reference=hit['reference'])
-    assert old['messages'][0]['text']==new['messages'][0]['text']=='conversationnonce original'
-    assert hit['archive_scope']=='local' and 'matched_messages' in hit and 'content_kind' not in hit
+    second=second_conversation(f.db,tmp_path/'other-fixture')
+    with f.db.connect() as c:
+        first=dict(c.execute("SELECT id,source,source_session_id FROM conversations WHERE source_session_id='documents-compat-session'").fetchone())
+    expected={first['id']:('codex','documents-compat-session','conversationnonce original'),second['id']:('claude-code','second-session','conversationnonce second independent')}
+    results=federation.search_archive(f.db,'conversationnonce',local=True)['results']
+    assert len(results)==2 and {h['id'] for h in results}==set(expected)
+    for hit in results:
+        source_name,session,text=expected[hit['id']]
+        assert hit['source']==source_name and hit['source_session_id']==session
+        old=federation.read_archive(f.db,hit['id']);new=federation.read_archive(f.db,reference=hit['reference'])
+        for read in [old,new]:
+            assert read['source']==source_name and read['source_session_id']==session and read['id']==hit['id']
+            assert [m['text'] for m in read['messages']]==[text]
+        assert hit['archive_scope']=='local' and 'matched_messages' in hit and 'content_kind' not in hit
     legacy=ROOT/'tests/fixtures/document_legacy_cli.py'
     metadata=json.loads(legacy.with_suffix('.json').read_text())
     import hashlib

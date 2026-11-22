@@ -1,5 +1,6 @@
 import base64
 import json
+import math
 from pathlib import Path
 import pytest
 from document_helpers import Fixture, normal, observe, deny_source_reads
@@ -11,7 +12,10 @@ def test_search_rank(tmp_path):
     f.file('needle-only-filename.txt','unrelated document')
     special={'tail.txt':'padding '*1000+'tailuniquemarker',
              'boundary.txt':'x '*997+' crossboundaryword ending',
-             'long.txt':'padding '*1800+'longuniquemarker suffix'}
+             'long.txt':'padding '*1800+'longuniquemarker suffix',
+             'chinese.txt':'说明：中文检索资料，保留原始内容。',
+             'a-low.txt':'relevancemarker '+'dilution '*500,
+             'z-high.txt':'relevancemarker relevancemarker relevancemarker'}
     for name,text in special.items():f.file(name,text)
     source=f.add(tmp_path/'docs');f.refresh(source)
     duplicate=f.add(tmp_path/'docs'/'file-000.md');f.refresh(duplicate)
@@ -20,8 +24,10 @@ def test_search_rank(tmp_path):
     assert [Path(h['path']).name for h in fifty]==[f'file-{i:03d}.md' for i in range(50)]
     assert len({h['id'] for h in fifty})==50
     assert [(h['id'],h['bm25_score']) for h in fifty]==[(h['id'],h['bm25_score']) for h in f.search('needle',limit=50)['results']]
-    assert all(h['bm25_score']>0 for h in fifty)
-    for filename,query in [('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker')]:
+    assert all(math.isfinite(h['bm25_score']) for h in fifty)
+    ranked=f.search('relevancemarker')['results']
+    assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']
+    for filename,query in [('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:
         result=f.search(query)['results'];assert len(result)==1 and Path(result[0]['path']).name==filename
         h=result[0];read=f.read(h);text=special[filename]
         assert read['text']==text[h['start']:h['end']] and query in read['text'] and len(read['text'])<=2000
@@ -34,7 +40,12 @@ def test_exact_read(tmp_path,monkeypatch,text):
     f=Fixture(tmp_path);path=f.file('位置.md','\ufeff'+text);source=f.add(path);f.refresh(source)
     h=f.search('needle')['results'][0];body=normal('\ufeff'+text)
     deny_source_reads(monkeypatch,path)
-    assert h['text']==body[h['start']:h['end']] and f.read(h)['text']==h['text']
+    default=f.read(h)
+    assert h['start']==0 and h['end']==len(body) and h['text_length']==len(body)
+    assert h['text']==default['text']==body
+    for item in [h,default]:
+        assert item['start']==0 and item['end']==len(body)
+        assert item['start_line']==1 and item['end_line']==1+body[:-1].count('\n')
     for start,end in [(0,len(body)),(0,2),(1,3),(2,min(4,len(body))),(len(body)-1,len(body))]:
         r=f.read(h,start=start,end=end)
         assert r['text']==body[start:end] and r['start']==start and r['end']==end
@@ -86,23 +97,28 @@ def test_invalid_read(tmp_path,monkeypatch):
 
 
 def test_empty_query(tmp_path):
-    f=Fixture(tmp_path);p=f.project('P');path=f.file('one.txt','needle real');source=f.add(path,[p])
+    f=Fixture(tmp_path);p=f.project('P')
+    empty=f.search('nonexistentuniqueterm')
+    assert empty['results']==[] and empty['coverage']['indexed_files']==0 and empty['coverage']['sources']==[]
+    path=f.file('one.txt','needle real');source=f.add(path,[p])
+    untouched=f.add(f.file('untouched.txt','needle pending'),[p])
+    def states(result):return {s['id']:s['status'] for s in result['coverage']['sources']}
     pending=f.search('nonexistentuniqueterm');assert pending['results']==[]
-    assert pending['coverage']['indexed_files']==0 and pending['coverage']['sources'][0]['status']=='pending'
+    assert pending['coverage']['indexed_files']==0 and states(pending)=={source['id']:'pending',untouched['id']:'pending'}
     for args in [{'query':''},{'query':'  '},{'query':'!!!'},{'query':'needle','scope':'invalid'},
                  {'query':'needle','scope':'project'},{'query':'needle','scope':'project','project_id':99999},
                  *[{'query':'needle','limit':x} for x in [0,-1,51,2.5,True]]]:
         f.bad('POST','/api/documents/search',args)
     f.refresh(source)
     valid=f.search('nonexistentuniqueterm');assert valid['results']==[] and valid['coverage']['indexed_files']==1
-    assert valid['coverage']['sources'][0]['status']=='ready'
+    assert states(valid)=={source['id']:'ready',untouched['id']:'pending'}
     path.write_bytes(b'\xff\xfe');f.refresh(source)
     partial=f.search('nonexistentuniqueterm');assert partial['results']==[] and partial['coverage']['indexed_files']==0
-    assert partial['coverage']['sources'][0]['status']=='partial'
+    assert states(partial)=={source['id']:'partial',untouched['id']:'pending'}
     with f.db.connect() as c:c.execute("UPDATE document_sources SET status='refreshing' WHERE id=?",(source['id'],))
-    refreshing=f.search('nonexistentuniqueterm');assert refreshing['coverage']['sources'][0]['status']=='refreshing'
+    refreshing=f.search('nonexistentuniqueterm');assert states(refreshing)=={source['id']:'refreshing',untouched['id']:'pending'}
     assert refreshing['coverage']['indexed_files']==0
-    path.unlink();(tmp_path/'docs').rmdir()
+    path.unlink()
     f.refresh(source);failed=f.search('nonexistentuniqueterm')
-    assert failed['coverage']['sources'][0]['status']=='failed' and failed['results']==[]
+    assert states(failed)=={source['id']:'failed',untouched['id']:'pending'} and failed['results']==[]
     observe('zero-hit-states',{'pending':pending,'ready':valid,'partial':partial,'refreshing':refreshing,'failed':failed})

@@ -21,6 +21,15 @@ def test_source_config(tmp_path, monkeypatch):
     changed = f.set(source, project_ids=[other['id']], exclude=['private/**'], recursive=False)
     assert changed['status'] == 'pending' and changed['revision'] > source['revision']
     assert changed['project_ids'] == [other['id']] and changed['exclude'] == ['private/**'] and changed['recursive'] is False
+    assert f.sources() == [changed]
+    reset = f.set(source)
+    assert reset['project_ids'] == [] and reset['exclude'] == [] and reset['recursive'] is True
+    assert f.sources() == [reset]
+    directory = f.add(path.parent, [project['id']], recursive=False, exclude=['private/**'])
+    directory_reset = f.set(directory)
+    assert directory_reset['status'] == 'pending' and directory_reset['project_ids'] == []
+    assert directory_reset['recursive'] is True and directory_reset['exclude'] == []
+    assert f.files() == [] and f.search()['results'] == []
     baseline = f.sources()
     for payload in [dict(path='relative.md'), dict(path=str(tmp_path / 'absent.md')), dict(path=str(path), project_ids=[9999]),
                     dict(path=str(path), exclude=['/absolute']), dict(path=str(path), exclude=['../up']),
@@ -34,7 +43,7 @@ def test_source_config(tmp_path, monkeypatch):
     from smm_local.core import Archive
     from smm_local.documents import Documents
     assert Documents(Archive(f.db.db_path)).sources() == baseline
-    f.remove(source); assert f.sources() == []
+    f.remove(source); f.remove(directory); assert f.sources() == []
     monkeypatch.undo()
     assert fingerprint(path) == original
     observe('source-config-expected', {'project': project, 'other': other, 'original': original, 'source': source, 'changed': changed})
@@ -44,8 +53,15 @@ def test_entrance_contract(tmp_path):
     f = Fixture(tmp_path); file = f.file('cli space 中文.txt', 'needle CLI 中文😀\nline 2\n')
     project = f.cli('project', 'create', 'CLI文档项目')
     assert project['name'] == 'CLI文档项目' and project['kind'] == 'ordinary'
-    source = f.cli('documents', 'add', file, '--project-id', project['id'])
-    assert source['status'] == 'pending' and f.source(source)['project_ids'] == [project['id']]
+    other = f.cli('project', 'create', 'Other')
+    source = f.cli('documents', 'add', file, '--project-id', project['id'], '--project-id', other['id'], '--no-recursive', '--exclude', 'skip?.txt', '--exclude', '**/private/')
+    stored = f.source(source)
+    assert source == stored and stored['status'] == 'pending'
+    assert set(stored['project_ids']) == {project['id'], other['id']} and stored['recursive'] is False
+    assert stored['exclude'] == ['skip?.txt', '**/private/']
+    changed = f.cli('documents', 'set', source['id'], '--project-id', project['id'], '--exclude', 'else/**')
+    assert f.source(source) == changed and changed['project_ids'] == [project['id']]
+    assert changed['recursive'] is True and changed['exclude'] == ['else/**'] and changed['status'] == 'pending'
     f.cli('documents', 'refresh', '--source-id', source['id'])
     assert f.source(source)['status'] == 'ready'
     result = f.cli('documents', 'search', 'needle', '--scope', 'project', '--project-id', project['id'])

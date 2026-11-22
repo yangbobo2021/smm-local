@@ -17,7 +17,8 @@ def test_project_scope(tmp_path):
     assert set(names(f))=={'p.txt','q.txt','r.txt','global.txt','free.txt','shared.txt'}
     assert {x['id']:x['linked_ids'] for x in f.db.projects()}==original_links
     duplicate=f.add(tmp_path/'docs'/'shared.txt',[p]);f.refresh(duplicate)
-    assert len(names(f,project=p))==3
+    raw=f.search(scope='project',project_id=p)['results']
+    assert len(raw)==len({h['path'] for h in raw})==len({h['id'] for h in raw})==3
     observe('project-expected',{'P':p,'Q':q,'R':r,'G':g,'expected':{str(k):sorted(v) for k,v in expected.items()},'links':original_links})
 
 
@@ -38,7 +39,7 @@ def test_project_maintenance(tmp_path):
     assert f.source(one)['status']=='ready' and f.source(both)['status']=='ready'
 
 
-@pytest.mark.parametrize('withdraw',['remove','failed'])
+@pytest.mark.parametrize('withdraw',['remove','failed','continuous'])
 def test_overlap_version(tmp_path,monkeypatch,withdraw):
     f=Fixture(tmp_path);p=f.project('P');q=f.project('Q')
     file=f.file('shared.txt','needle v1');other=f.file('control.txt','needle control')
@@ -53,18 +54,32 @@ def test_overlap_version(tmp_path,monkeypatch,withdraw):
     assert set(current['all']['source_ids'])=={s1['id'],s2['id']}
     f.bad('POST','/api/documents/read',{'reference':v1['reference']})
     if withdraw=='remove':f.remove(s2)
-    else:
+    elif withdraw=='failed':
         from smm_local.documents import Documents
         def failure(*a,**kw):raise PermissionError('synthetic S2 enumeration/read unavailable')
         with monkeypatch.context() as patch:
             patch.setattr(Documents,'_scan',failure);f.refresh(s2)
         assert f.source(s2)['status']=='failed'
-    assert set(names(f,project=p))=={'shared.txt','control.txt'} and names(f,project=q)=={}
+    assert set(names(f,project=p))=={'shared.txt','control.txt'}
+    assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
     assert f.read(current['p'])['text']==f.read(current['all'])['text']=='needle v2'
-    f.bad('POST','/api/documents/read',{'reference':current['q']['reference']})
+    if withdraw!='continuous':f.bad('POST','/api/documents/read',{'reference':current['q']['reference']})
+    else:assert f.read(current['q'])['text']=='needle v2'
     assert f.read(names(f,project=p)['control.txt'])['text']=='needle control'
     file.write_text('needle v3',encoding='utf-8');f.refresh(s1)
     assert f.read(names(f,project=p)['shared.txt'])['text']=='needle v3'
     for h in current.values():f.bad('POST','/api/documents/read',{'reference':h['reference']})
-    assert names(f,project=q)=={}
+    assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
+    for project in [p,q,None]:
+        hits=f.search(scope='project',project_id=project)['results'] if project else f.search()['results']
+        assert len(hits)==len({h['id'] for h in hits})==len({h['path'] for h in hits})
+        shared=[h for h in hits if Path(h['path']).name=='shared.txt']
+        assert len(shared)==(0 if project==q and withdraw!='continuous' else 1)
+        for h in shared:assert f.read(h)['text']=='needle v3'
+    if withdraw!='continuous':
+        from smm_local.documents import Documents
+        def failure(*a,**kw):raise PermissionError('synthetic final S1 failure')
+        with monkeypatch.context() as patch:
+            patch.setattr(Documents,'_scan',failure);f.refresh(s1)
+        assert set(names(f))=={'control.txt'} and names(f,project=q)=={}
     observe('overlap-time-line',{'withdraw':withdraw,'v1':v1,'v2':current,'sources':f.sources(),'final':names(f)})

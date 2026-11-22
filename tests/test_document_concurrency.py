@@ -107,6 +107,11 @@ def test_query_snapshot(tmp_path,monkeypatch,change):
     for project,name in [(p,'p.txt'),(q,'q.txt'),(r,'r.txt')]:
         path=f.file(name,'needle original '+name);paths[name]=path;sources[name]=f.add(path,[project])
     f.refresh()
+    initial=names(f)
+    stamps={}
+    for name,h in initial.items():
+        encoded=h['reference'].split('.')[1]
+        stamps[name]=json.loads(base64.urlsafe_b64decode(encoded+'='*(-len(encoded)%4)))['sources']
     from smm_local import documents as module
     original=module._query_scope;done=[]
     original_revisions={s['id']:s['revision'] for s in f.sources()}
@@ -123,10 +128,20 @@ def test_query_snapshot(tmp_path,monkeypatch,change):
     assert set(current)=={'p.txt','q.txt'}
     for name,h in current.items():
         assert h['text']=='needle original '+name
+        assert h['id']==initial[name]['id'] and h['version']==initial[name]['version'] and h['sha256']==initial[name]['sha256']
+        assert h['source_ids']==[sources[name]['id']]
         encoded=h['reference'].split('.')[1];payload=json.loads(base64.urlsafe_b64decode(encoded+'='*(-len(encoded)%4)))
+        assert payload['version']==initial[name]['version'] and payload['sources']==stamps[name]
         for stamp in payload['sources']:assert stamp['revision']==original_revisions[stamp['id']]
     after=names(f,project=p)
     assert set(after)==({'p.txt','r.txt'} if change=='links' else {'p.txt','r.txt','q.txt'})
+    for name,h in after.items():
+        expected='needle changed q.txt' if change=='source' and name=='q.txt' else 'needle original '+name
+        assert f.read(h)['text']==expected
+        import hashlib
+        assert h['sha256']==hashlib.sha256(expected.encode()).hexdigest()
+        if change=='source' and name=='q.txt':assert h['version']!=initial[name]['version']
+        else:assert h['version']==initial[name]['version']
     assert f.read(current['p.txt'])['text']=='needle original p.txt'
     if change=='source':f.bad('POST','/api/documents/read',{'reference':current['q.txt']['reference']})
     else:assert f.read(current['q.txt'])['text']=='needle original q.txt'
@@ -136,14 +151,23 @@ def test_query_snapshot(tmp_path,monkeypatch,change):
 def test_interrupted_refresh(tmp_path):
     f=Fixture(tmp_path);path=f.file('one.txt','needle persistent');source=f.add(path);f.refresh(source)
     old=f.search()['results'][0]
+    directory=f.add(tmp_path/'docs');f.refresh(directory)
+    control=f.file('control.txt','needle continuous');other=f.add(control);f.refresh(other)
+    control_ref=names(f)['control.txt']
+    path.write_text('needle recovered change',encoding='utf-8');added=f.file('added.txt','needle newly discovered')
     with f.db.connect() as c:c.execute("UPDATE document_sources SET status='refreshing' WHERE id=?",(source['id'],))
+    with f.db.connect() as c:c.execute("UPDATE document_sources SET status='refreshing' WHERE id=?",(directory['id'],))
     from smm_local.core import Archive
     from smm_local.documents import Documents
     restarted=Documents(Archive(f.db.db_path))
-    assert restarted.sources()[0]['status']=='refreshing'
-    f.bad('POST','/api/documents/read',{'reference':old['reference']})
+    assert {s['id']:s['status'] for s in restarted.sources()}[source['id']]=='refreshing'
     restarted.refresh(source['id'])
-    after=f.search()['results'][0]
-    assert after['id']==old['id'] and after['version']==old['version'] and f.source(source)['status']=='ready'
-    assert f.read(old)['text']=='needle persistent'
+    restarted.refresh(directory['id']);after=names(f)
+    assert set(after)=={'one.txt','added.txt','control.txt'}
+    assert after['one.txt']['id']==old['id'] and after['one.txt']['version']!=old['version']
+    assert f.source(source)['status']==f.source(directory)['status']=='ready'
+    assert f.read(after['one.txt'])['text']=='needle recovered change'
+    assert f.read(after['added.txt'])['text']=='needle newly discovered'
+    assert f.read(control_ref)['text']=='needle continuous'
+    f.bad('POST','/api/documents/read',{'reference':old['reference']})
     observe('persistent-interruption',{'scope':'database refreshing state injection, not a claimed process crash','old':old,'after':after})

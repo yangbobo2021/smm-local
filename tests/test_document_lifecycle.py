@@ -8,21 +8,27 @@ def test_version_lifecycle(tmp_path):
     f=Fixture(tmp_path);p=f.project()
     files=[f.file(n,'needle original '+n) for n in ['one.txt','two.txt']];source=f.add(tmp_path/'docs',[p]);f.refresh(source)
     initial=names(f,project=p)
+    assert set(initial)=={'one.txt','two.txt'}
     f.refresh(source);same=names(f,project=p)
+    assert set(same)==set(initial)
     assert {k:(v['id'],v['version']) for k,v in initial.items()}=={k:(v['id'],v['version']) for k,v in same.items()}
     for n,h in initial.items():assert f.read(h)['text']=='needle original '+n
     for file in files:file.write_text('needle updated '+file.name,encoding='utf-8')
     # Before refresh, the result is explicitly a captured snapshot, not a live read.
     before=names(f,project=p)
+    assert set(before)==set(initial)
     for n,h in before.items():assert h['captured_at'] and f.read(h)['text']=='needle original '+n
     f.refresh(source);updated=names(f,project=p)
+    assert set(updated)==set(initial)
     for n,h in updated.items():
         assert h['id']==initial[n]['id'] and h['version']!=initial[n]['version']
         assert f.read(h)['text']=='needle updated '+n
         f.bad('POST','/api/documents/read',{'reference':initial[n]['reference']})
     for file in files:file.write_text('needle original '+file.name,encoding='utf-8')
     f.refresh(source);reverted=names(f,project=p)
+    assert set(reverted)==set(initial)
     for n,h in reverted.items():
+        assert f.read(h)['text']=='needle original '+n
         assert h['version'] not in {initial[n]['version'],updated[n]['version']}
         for old in [initial[n],updated[n]]:f.bad('POST','/api/documents/read',{'reference':old['reference']})
     moved=files[0].with_name('moved.txt');files[0].rename(moved);files[1].unlink();f.refresh(source)
@@ -36,6 +42,10 @@ def test_qualification(tmp_path,monkeypatch,failure):
     f=Fixture(tmp_path);p=f.project('P');q=f.project('Q');file=f.file('shared.txt','needle qualification')
     one=f.add(file,[p]);two=f.add(file,[q]);control=f.add(f.file('control.txt','needle control'),[q]);f.refresh()
     oldp=names(f,project=p)['shared.txt'];oldq=names(f,project=q)['shared.txt'];oldall=names(f)['shared.txt']
+    f.refresh(one);f.refresh(two)
+    for old in [oldp,oldq,oldall]:
+        assert f.read(old)['text']=='needle qualification'
+        assert names(f)['shared.txt']['version']==old['version']
     from smm_local.documents import Documents
     original=Documents._scan
     def fail(self,source,*a,**kw):
@@ -71,12 +81,19 @@ def test_source_lifecycle(tmp_path):
     one=f.file('one.txt','needle one');deep=f.file('sub/deep.txt','needle deep');shared=f.file('shared.txt','needle shared')
     a=f.add(tmp_path/'docs',[p]);b=f.add(shared,[q]);f.refresh()
     originals={str(x):fingerprint(x) for x in [one,deep,shared]};old=names(f,project=p)
+    old_q=names(f,project=q)['shared.txt'];old_all=names(f)['shared.txt']
     f.set(a,project_ids=[q],exclude=['one.txt'],recursive=False)
     assert f.source(a)['status']=='pending' and names(f,project=p)=={}
     assert set(names(f,project=q))=={'shared.txt'}
     for h in old.values():f.bad('POST','/api/documents/read',{'reference':h['reference']})
+    assert f.read(old_q)['text']==f.read(old_all)['text']=='needle shared'
     f.refresh(a);assert set(names(f,project=q))=={'shared.txt'}
+    for h in old.values():f.bad('POST','/api/documents/read',{'reference':h['reference']})
+    before_remove=names(f)['shared.txt']
     f.remove(b);assert set(names(f,project=q))=={'shared.txt'}
+    f.bad('POST','/api/documents/read',{'reference':old_q['reference']})
+    f.bad('POST','/api/documents/read',{'reference':old_all['reference']})
+    assert f.read(before_remove)['text']=='needle shared'
     final=names(f,project=q)['shared.txt'];f.remove(a)
     assert f.sources()==[] and f.search()['results']==[]
     f.bad('POST','/api/documents/read',{'reference':final['reference']})

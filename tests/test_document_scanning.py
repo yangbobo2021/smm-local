@@ -8,20 +8,24 @@ def test_scan_scope(tmp_path):
     f = Fixture(tmp_path); p = f.project()
     expected = {'root.MD':'needle 根😀\n', 'sub/deep.markdown':'needle 深层\n', 'sub/open.txt':'needle open\n', 'branch/keep.txt':'needle keep\n'}
     for name,text in expected.items(): f.file(name,text)
-    for name in ['.secret.txt','.hidden/a.txt','.git/a.md','node_modules/a.md','.venv/a.txt','venv/a.txt','build/a.txt','dist/a.txt','README.pdf']:
+    for name in ['.secret.txt','.hidden/a.txt','.git/a.md','.hg/a.txt','.svn/a.txt','node_modules/a.md','.venv/a.txt','venv/a.txt','build/a.txt','dist/a.txt','README.pdf']:
         f.file(name,'needle ignored')
-    for name in ['private.txt','sub/private.txt','skip1.txt','branch/skip2.txt','cache/child.txt']:
+    for name in ['private.txt','sub/private.txt','a/b/private.txt','skip1.txt','branch/skip2.txt','star-only.txt','cache/child.txt']:
         f.file(name,'needle custom excluded')
-    source=f.add(tmp_path/'docs',[p],exclude=['**/private.txt','skip?.txt','branch/skip?.txt','cache/'])
+    source=f.add(tmp_path/'docs',[p],exclude=['**/private.txt','skip?.txt','branch/skip?.txt','star-*.txt','cache/'])
     before={str(x):fingerprint(x) for x in (tmp_path/'docs').rglob('*') if x.is_file()}
     f.refresh(source); hits=f.search('needle')['results']
     assert {Path(h['path']).relative_to(tmp_path/'docs').as_posix() for h in hits}==set(expected)
     for h in hits: assert f.read(h)['text']==expected[Path(h['path']).relative_to(tmp_path/'docs').as_posix()]
     assert f.source(source)['counts']['ignored_entries']>=10
-    f.set(source, project_ids=[p],exclude=['**/private.txt','skip?.txt','branch/skip?.txt','cache/'],recursive=False)
+    f.set(source, project_ids=[p],exclude=['**/private.txt','skip?.txt','branch/skip?.txt','star-*.txt','cache/'],recursive=False)
     f.refresh(source);assert {Path(h['path']).name for h in f.search()['results']}=={'root.MD'}
     explicit=f.add(tmp_path/'docs'/'build'/'a.txt');f.refresh(explicit)
     assert 'a.txt' in {Path(h['path']).name for h in f.search()['results']}
+    hidden=f.add(tmp_path/'docs'/'.secret.txt');f.refresh(hidden)
+    assert '.secret.txt' in {Path(h['path']).name for h in f.search()['results']}
+    explicit_dir=f.add(tmp_path/'docs'/'.hidden');f.refresh(explicit_dir)
+    assert str((tmp_path/'docs'/'.hidden'/'a.txt').resolve()) in {h['path'] for h in f.search()['results']}
     if os.name!='nt':
         outside=tmp_path/'outside';outside.mkdir();(outside/'escape.txt').write_text('escapeuniquemarker',encoding='utf-8')
         (tmp_path/'docs'/'link').symlink_to(outside,target_is_directory=True)
@@ -50,6 +54,9 @@ def test_decode_files(tmp_path, monkeypatch):
     status=f.source(source);assert status['status']=='partial' and status['counts']['ready']==4 and status['counts']['failed']==3
     files={Path(x['path']).name:x for x in f.files(source)}
     assert all(files[n]['status']=='failed' and files[n]['error'] for n in ['bad.txt','nul.txt','denied.txt'])
+    assert 'utf' in files['bad.txt']['error'].lower() and 'nul' in files['nul.txt']['error'].lower()
+    assert any(word in files['denied.txt']['error'].lower() for word in ['denied','permission'])
+    assert {Path(h['path']).name for h in f.search()['results']} == set(cases)-{'empty.txt'}
     for h in f.search()['results']:
         name=Path(h['path']).name
         assert name in cases and f.read(h)['text']==normal(cases[name])
@@ -57,4 +64,9 @@ def test_decode_files(tmp_path, monkeypatch):
     f.file('bad.txt','needle recovered');f.file('nul.txt','needle repaired');f.refresh(source)
     assert f.source(source)['status']=='ready' and f.source(source)['counts']['ready']==7
     assert {Path(h['path']).name for h in f.search(limit=50)['results']}==set(cases)-{'empty.txt'}|{'bad.txt','nul.txt','denied.txt'}
+    recovered={**cases,'bad.txt':'needle recovered','nul.txt':'needle repaired','denied.txt':'needle denied'}
+    for h in f.search()['results']:
+        name=Path(h['path']).name
+        assert f.read(h)['text']==normal(recovered[name])
+        assert h['sha256']==fingerprint(tmp_path/'docs'/name)['sha256']
     observe('decode-expected',{'cases':cases,'status':status,'files':files})
