@@ -68,6 +68,7 @@ class Compatibility(Run):
         scoped = self.cli(newdb, 'search', 'selective', '--scope', 'project', '--project-id', str(project))
         assert {h['source_session_id'] for h in scoped['results']} == {'new-device'} and scoped['fallback_reason']
         self.save('new-local-old-hub', {'sync': sync, 'combined': combined, 'scoped': scoped})
+        self.cli(newdb, 'stop-on-demand')
         self.stop_hub()
         # Keep the old server archive and identity, upgrade its runtime only.
         self.start_compat_hub(self.active_hub_python, self.root / 'old-hub-state')
@@ -102,12 +103,14 @@ class Compatibility(Run):
         same = self.t['address'].replace('localhost', '127.0.0.1')
         self.cli(olddb, 'configure-hub', same, 'legacy-device', '--token-file', self.root / 'input-token')
         assert self.cli(olddb, 'upload', 'status')['policy']['mode'] == 'none'
+        for db in self.clients: self.cli(db, 'stop-on-demand')
         self.stop_hub(); self.start_compat_hub(self.active_hub_python, self.root / 'new-identity-hub')
         self.cli(olddb, 'configure-hub', self.t['address'], 'legacy-device', '--token-file', self.root / 'input-token')
         newstate = self.cli(olddb, 'upload', 'status'); assert newstate['state'] == 'needs_selection'
         assert self.sync_at(self.t['local_python'], olddb)['exit_code'] == 0
+        legacy_after_registration = self.sync_at(self.old_local, olddb, expect_failure=True)
         assert not self.hub_hits()
-        self.save('actual-hub-change', newstate)
+        self.save('actual-hub-change', {'state': newstate, 'old_write_rejected_after_registration': legacy_after_registration})
 
     def run(self):
         failure = None
