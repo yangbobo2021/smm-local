@@ -84,6 +84,7 @@ class Run:
         """Wait for the actual job/data state, separately from rule confirmation."""
         triggered = self.cli(db, 'maintenance', 'sync')
         address = triggered['url']
+        fresh_started = triggered.get('started', True)
         until = time.monotonic() + seconds
         if not hasattr(self, 'sync_observations'): self.sync_observations = []
         previous = None
@@ -97,6 +98,11 @@ class Run:
                 self.sync_observations.append({'at': now(), 'archive': str(db), 'state': current})
                 self.save('sync-observations', self.sync_observations); previous = current
             if not current['running']:
+                if not fresh_started:
+                    # An existing automatic job may have scanned a file before
+                    # the fixture update. Require a job started by this request.
+                    fresh_started = self.api(address, '/api/sync', {}, local=True).get('started', False)
+                    continue
                 if not wait_for_upload or (upload.get('state') == 'confirmed'
                         and upload.get('transfer_state') == 'complete'
                         and upload.get('allowed_pending_messages') == 0

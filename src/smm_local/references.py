@@ -116,4 +116,6 @@ def read(db, reference, *, start=None, end=None):
             raise ValueError("引用的原消息或内容版本已改变，请重新检索")
         if (start is None or message["position"] >= start) and (end is None or message["position"] <= end):
             selected.append(message)
-    return {**result, "messages": selected}
+    title = next((m["text"].strip().splitlines()[0][:120] for m in selected
+                  if m["role"] == "user" and m["text"].strip()), "(无用户消息)")
+    return {**result, "title": title, "messages": selected}

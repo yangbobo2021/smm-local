@@ -17,7 +17,7 @@ def probe(monkeypatch, states):
     sequence = iter(states)
     def api(address, route, payload=None, **kwargs):
         requests.append(route)
-        return next(sequence) if route == '/api/status' else {'running': True}
+        return next(sequence) if route == '/api/status' else {'running': True, 'started': True}
     runner.api = api
     monkeypatch.setattr(module.time, 'sleep', lambda _: None)
     return module, runner, requests
@@ -41,6 +41,14 @@ def test_probe_can_wait_for_control_only_without_requiring_body_permission(monke
     _, runner, requests = probe(monkeypatch, [state(True, 0, 'blocked'), stopped])
     assert runner.sync_done('task-archive') is stopped
     assert requests == ['/api/status', '/api/status']
+
+
+def test_probe_starts_fresh_scan_after_joining_an_older_automatic_job(monkeypatch):
+    complete = state(False, 0, 'complete')
+    _, runner, requests = probe(monkeypatch, [complete, state(True, 0, 'complete'), complete])
+    runner.cli = lambda *args: {'url': 'http://127.0.0.1:1', 'running': False, 'started': False}
+    assert runner.sync_done('task-archive', wait_for_upload=True) is complete
+    assert requests == ['/api/status', '/api/sync', '/api/status', '/api/status']
 
 
 def test_probe_never_turns_pending_transfer_into_success_at_timeout(monkeypatch):

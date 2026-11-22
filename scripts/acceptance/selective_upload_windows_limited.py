@@ -12,15 +12,15 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--target-config',type=Path,required=True)
     p.add_argument('--mode',choices=['client','hub-service'],default='client')
-    p.add_argument('--probe',choices=['platform','compatibility','isolation'],default='platform')
+    p.add_argument('--probe',choices=['platform','compatibility','isolation','scope'],default='platform')
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
     assert sys.platform=='win32'
     if a.output.exists():raise ValueError('use a new output directory')
     config=json.loads(a.target_config.read_text(encoding='utf-8-sig'))
     actor=Path(__file__).with_name('selective_upload_' + a.probe + '.py').resolve()
-    if a.probe != 'platform' and a.mode != 'client': raise ValueError('supplemental probes run as an ordinary client')
-    argv=[str(actor),*([a.mode] if a.probe == 'platform' else []),'--target-config',str(a.target_config.resolve()),'--output',str(a.output.resolve())]
+    if a.probe not in ('platform', 'scope') and a.mode != 'client': raise ValueError('supplemental probes run as an ordinary client')
+    argv=[str(actor),*([a.mode] if a.probe in ('platform', 'scope') else []),'--target-config',str(a.target_config.resolve()),'--output',str(a.output.resolve())]
     base=a.output.resolve();base.parent.mkdir(parents=True,exist_ok=True)
     bootstrap=Path(str(base)+'.worker.py');receipt=Path(str(base)+'.process.json')
     log=Path(str(base)+'.worker.log');driver=Path(str(base)+'.driver.ps1')
