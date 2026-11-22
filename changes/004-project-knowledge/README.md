@@ -2,14 +2,14 @@
 
 更新日期：2026-11-22。
 
-本目录记录[父意图](intent.md)及六项独立变更的关系。维护者已确认目录组织、六项拆分，以及 005 的全部六项建议。005 已更新为已确认意图；父意图已同步相关共同边界，其余范围和 006–010 仍为草稿。005 的 SPEC 与实施计划均已确认；尚未进入实施或验收，其他子项尚未生成 SPEC。
+本目录记录[父意图](intent.md)及六项独立变更的关系。005已由[PR #30](https://github.com/yangbobo2021/smm-local/pull/30)实现、验收并合并。维护者于2026-11-22授权代理自主推进006的SPEC、PLAN、实现与验证，每阶段经PR合并后继续；本轮正在形成006规格，007–010仍为草稿，不将其余范围一并视为确认。
 
 ## 子意图
 
 | 编号 | 子意图 | 交付关系 | 当前阶段 | 功能 PR / 验收证据 |
 |---|---|---|---|---|
-| 005 | [对话上传控制与本机 / Hub 联合检索](../005-selective-conversation-upload/intent.md) | 首先形成对话联合检索语义；与 007 对齐上传边界 | [SPEC 已确认](../005-selective-conversation-upload/spec.md)，[计划已确认](../005-selective-conversation-upload/plan.md)，待实施 | 尚无 |
-| 006 | [本机文档检索](../006-local-document-search/intent.md) | 提供基本文档检索；首批格式待确认 | 意图草稿 | 尚无 |
+| 005 | [对话上传控制与本机 / Hub 联合检索](../005-selective-conversation-upload/intent.md) | 首先形成对话联合检索语义；与 007 对齐上传边界 | 已实现并验收 | [PR #30](https://github.com/yangbobo2021/smm-local/pull/30)；[证据](../005-selective-conversation-upload/evidence/20261122-native-completion/README.md) |
+| 006 | [本机文档检索](../006-local-document-search/intent.md) | Markdown/UTF-8文本、本机明确纳入与刷新 | [SPEC自主定稿](../006-local-document-search/spec.md)，待阶段PR | 尚无 |
 | 007 | [Hub 文档检索与同步](../007-hub-document-search/intent.md) | 承接 006 的文档能力；与 005 协调上传选择 | 意图草稿 | 尚无 |
 | 008 | [常用文档格式支持](../008-document-format-support/intent.md) | 扩展 006 / 007；覆盖 Word、Excel、PDF、图片 | 意图草稿 | 尚无 |
 | 009 | [本机飞书聊天历史检索](../009-feishu-history-search/intent.md) | 可独立调研和交付；与 006 协调新增内容的检索路径 | 意图草稿 | 尚无 |
