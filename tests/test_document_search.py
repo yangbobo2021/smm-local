@@ -10,7 +10,8 @@ def test_search_rank(tmp_path):
     f=Fixture(tmp_path)
     for i in range(51):f.file(f'file-{i:03d}.md','needle common')
     f.file('needle-filenameonlyuniquemarker.txt','unrelated document')
-    special={'unicode-lower.txt':'İ'*3000+' lowerexpansionmarker tail',
+    special={'unicode-equivalence.txt':('ſtopuniquemarker '*200)+'stopuniquemarker tail',
+             'unicode-lower.txt':'İ'*3000+' lowerexpansionmarker tail',
              'tail.txt':'padding '*1000+'tailuniquemarker',
              'boundary.txt':'x '*997+' crossboundaryword ending',
              'long.txt':'padding '*1800+'longuniquemarker suffix',
@@ -29,7 +30,7 @@ def test_search_rank(tmp_path):
     assert f.search('filenameonlyuniquemarker')['results']==[]
     ranked=f.search('relevancemarker')['results']
     assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']
-    for filename,query in [('unicode-lower.txt','lowerexpansionmarker'),('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:
+    for filename,query in [('unicode-equivalence.txt','stopuniquemarker'),('unicode-lower.txt','lowerexpansionmarker'),('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:
         result=f.search(query)['results'];assert len(result)==1 and Path(result[0]['path']).name==filename
         h=result[0];read=f.read(h);text=special[filename]
         assert read['text']==text[h['start']:h['end']] and query in read['text'] and len(read['text'])<=2000

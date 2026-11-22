@@ -378,10 +378,18 @@ class Documents:
                 stamps=sorted(qualified.get(row['pk'],[]),key=lambda x:x['id'])
                 if not stamps or row['text'] is None:continue
                 text=row['text']
-                # Match in the original snapshot: lower() can expand Unicode
-                # codepoints (e.g. İ), so its offsets cannot index this text.
-                found=re.search('|'.join(re.escape(t) for t in terms),text,re.IGNORECASE)
-                point=found.start() if found else 0;start=max(0,point-200);end=min(len(text),start+2000)
+                lower=text.lower();positions=[p for t in terms if (p:=lower.find(t))>=0]
+                point=min(positions,default=0)
+                # Keep the tokenizer's lower() semantics, mapping expanded
+                # Unicode offsets (e.g. İ -> i + dot) to original codepoints.
+                if len(lower)!=len(text):
+                    offset=0
+                    for index,char in enumerate(text):
+                        width=len(char.lower())
+                        if offset+width>point:
+                            point=index;break
+                        offset+=width
+                start=max(0,point-200);end=min(len(text),start+2000)
                 payload={'format':1,'kind':'document','archive_id':identity,'document_id':row['id'],'version':row['version'],'sources':stamps,'start':start,'end':end}
                 result={k:row[k] for k in ['id','path','version','sha256','text_length','captured_at','captured_by_source_id']}
                 results.append({**result,**_range(text,start,end),'source_ids':[s['id'] for s in stamps],
