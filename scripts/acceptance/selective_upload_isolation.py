@@ -1,5 +1,6 @@
 """Installed-package A5 isolation probe against an independent real HTTPS Hub."""
 import argparse
+import asyncio
 import json
 from pathlib import Path
 
@@ -63,12 +64,67 @@ d=Archive(Path(sys.argv[1])); print(json.dumps(VibeInsightSync(d,'synthetic-005-
         self.save('isolation-result', {'scope': 'A5 only; fixture D is the related permitted project B',
             'stopped': stopped, 'expected_bodies': expected, 'hub_search': hits, 'reads': reads,
             'old_reference_read': retained, 'local_search': local, 'vibe_sync': vibe, 'requests_after_stop': sent, 'final_state': state})
+        if self.t.get('extra_entrances'): self.extra_interfaces(expected)
+
+    def extra_interfaces(self, hub_bodies):
+        expected = {**hub_bodies, 'local-A': ['selective common local-A original', 'selective forbidden A isolation append'],
+            'local-A-private': ['selective forbidden A isolation new'],
+            **{'local-' + n: ['selective common local-' + n + ' original'] for n in ['G', 'U', 'U2']},
+            'plugin-history': ['selective common plugin-only original', 'selective common plugin-only appended']}
+        local_names = {'local-A', 'local-A-private', 'local-D', 'local-G', 'local-U', 'local-U2', 'plugin-history'}
+        cases = [('local-project', True, 'project', {'local-A', 'local-A-private', 'local-D'}),
+                 ('local-all', True, 'all', local_names), ('combined-all', False, 'all', set(expected))]
+        def check(result, names):
+            assert {h['source_session_id'] for h in result['results']} == names
+        def check_read(read, session):
+            assert read['source_session_id'] == session
+            assert [m['text'] for m in read['messages']] == expected[session]
+        for stage, local, scope, names in cases:
+            marker = len(self.requests)
+            options = {'query': 'selective', 'local': local, 'scope': scope, 'limit': 20}
+            args = ['search', 'selective', '--scope', scope, '--limit', '20']
+            if local: args += ['--local']
+            if scope == 'project':
+                args += ['--project-id', str(self.projects['A'])]; options['project_id'] = self.projects['A']
+            cli = self.cli(self.db, *args); check(cli, names)
+            mcp = asyncio.run(self.mcp('search_conversations', options)); check(mcp, names)
+            reads = {}
+            for channel, result in [('cli', cli), ('mcp', mcp)]:
+                reads[channel] = []
+                for hit in result['results']:
+                    read = self.cli(self.db, 'read', '--reference', hit['reference']) if channel == 'cli' else asyncio.run(self.mcp('read_conversation', {'reference': hit['reference']}))
+                    check_read(read, hit['source_session_id']); reads[channel].append(read)
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                kwargs = {'headless': True}
+                if self.t.get('browser'): kwargs['executable_path'] = self.t['browser']
+                browser = p.chromium.launch(**kwargs); context = browser.new_context(viewport={'width': 1440, 'height': 1100})
+                context.tracing.start(screenshots=True, snapshots=True, sources=True); page = context.new_page()
+                try:
+                    page.goto(self.web); page.locator('nav button[data-tab=search]').click()
+                    page.locator('#archive-mode').select_option('local' if local else 'combined')
+                    page.locator('#query').fill('selective'); page.locator('#scope').select_option(scope)
+                    if scope == 'project': page.locator('#search-project').select_option(str(self.projects['A']))
+                    page.locator('#limit').select_option('20')
+                    with page.expect_response(lambda r: r.url.endswith('/api/search')) as answer: page.locator('#search-form button').click()
+                    web = answer.value.json(); check(web, names); web_reads = []
+                    for i, hit in enumerate(web['results']):
+                        with page.expect_response(lambda r: r.url.endswith('/api/read')) as answer:
+                            page.locator('#results .result').nth(i).get_by_role('button', name='读取命中及允许的上下文').click()
+                        read = answer.value.json(); check_read(read, hit['source_session_id']); web_reads.append(read)
+                    page.screenshot(path=str(self.output / (stage + '.png')), full_page=True)
+                finally:
+                    context.tracing.stop(path=str(self.output / (stage + '-browser-trace.zip'))); browser.close()
+            requests = self.requests[marker:]
+            if local: assert not any(r['route'] in ('/v1/search', '/v1/read', '/v1/query-scope') for r in requests)
+            self.save(stage, {'expected_sessions': sorted(names), 'expected_bodies': expected, 'cli': cli, 'mcp': mcp,
+                'reads': reads, 'browser': web, 'browser_reads': web_reads, 'requests': requests})
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--target-config', type=Path, required=True); p.add_argument('--output', type=Path, required=True)
-    args = p.parse_args(); args.mode = 'self-managed'; Isolation(args).run()
+    args = p.parse_args(); args.mode = 'client'; Isolation(args).run()
 
 
 if __name__ == '__main__': main()

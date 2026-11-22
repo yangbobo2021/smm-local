@@ -183,3 +183,5 @@ Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` �
 记录收回后可用 `selective_upload_audit.py --evidence-dir <原始运行目录> --local-wheel <该轮LocalWheel> --hub-wheel <该轮HubWheel> --output <新审计文件>` 独立核对包摘要、完整合成原文、范围、排序公式、补齐进度和请求形状。此工具只读原始文件，不重新运行产品；不能替代截图审阅或 A1–A12/E1–E5 的完整验收。其自检用例包含正文缺失、错误排序、排序候选外发、假补齐和错误原文等负例。
 
 A5 可运行 `selective_upload_isolation.py --target-config <独立新配置> --output <新目录>`，只验证真实 HTTPS Hub 下同设备关联项目、其他设备与合成 VibeInsight 继续推进，禁止 A 不外发且旧副本保留；它不覆盖三入口或整个验收矩阵。
+
+在上述隔离配置增加 `extra_entrances: true`，还会通过 CLI、真实 stdio MCP 和浏览器实际选择“仅本机按项目/全部项目、联合全部项目”，逐条读取并与合成夹具完整正文比较。Windows 包装器支持 `--probe isolation --mode client`，仍必须使用普通交互身份。
