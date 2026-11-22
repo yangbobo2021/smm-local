@@ -325,12 +325,12 @@ class Run:
         self.cli(db, 'stop-on-demand')
         self.login_label = 'ai.smm.local.acceptance.' + hashlib.sha256(str(self.root).encode()).hexdigest()[:12]
         wrapper = self.root / 'login-candidate'
-        wrapper.write_text('#!' + self.t['local_python'] + '\nimport os,sys\nos.environ["SSL_CERT_FILE"]=' + repr(self.t['cert']) + '\nos.execv(sys.executable,[sys.executable,"-I","-m","smm_local.cli",*sys.argv[1:]])\n', encoding='utf-8')
+        wrapper.write_text('#!' + self.t['local_python'] + '\nimport os,sys\nos.environ["SSL_CERT_FILE"]=' + repr(self.t['cert']) + '\nos.execv(sys.executable,[sys.executable,"-I","-m","smm_local.cli",*sys.argv[1:],"--port","0"]])\n', encoding='utf-8')
         wrapper.chmod(0o700)
         code = "from pathlib import Path; import sys; from smm_local.login_service import install; install(Path(sys.argv[1]),Path(sys.argv[2]),label=sys.argv[3],logs=Path(sys.argv[4]))"
         self.command([self.t['local_python'], '-I', '-c', code, wrapper, db, self.login_label, self.root / 'login-logs'])
-        self.login_action('inspect')
         eventually(lambda: Path(str(db) + '.service.json').exists())
+        self.login_action('inspect')
 
     def login_action(self, action):
         import plistlib, re
