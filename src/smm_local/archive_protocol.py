@@ -108,9 +108,6 @@ def control_lock(path: Path, timeout: float = 5):
     """A bounded inter-process lock; never keep it across a network request."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with os.fdopen(os.open(path, os.O_RDWR | os.O_CREAT, 0o600), "r+b") as stream:
-        if not stream.tell():
-            stream.write(b"\0")
-            stream.flush()
         deadline = time.monotonic() + timeout
         while True:
             try:
@@ -127,6 +124,11 @@ def control_lock(path: Path, timeout: float = 5):
                     raise RuntimeError("上传控制正在处理其他操作，请稍后重试") from exc
                 time.sleep(.01)
         try:
+            # Windows permits locking beyond EOF. Initializing before taking
+            # the lock would itself write another process's locked byte.
+            if os.fstat(stream.fileno()).st_size == 0:
+                stream.write(b"\0")
+                stream.flush()
             yield
         finally:
             if os.name == "nt":
