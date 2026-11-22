@@ -34,23 +34,45 @@ def test_bm25_matches_independent_formula_and_ignores_archive_scores():
     assert len(merge_candidates([a], [duplicate, b], 'amber', 5)[0]['matched_messages']) == 1
     duplicate['matched_messages'][0]['content_version'] = 'v2'
     assert len(merge_candidates([a], [duplicate], 'amber', 5)[0]['matched_messages']) == 2
+    other_session = candidate('same-body-other-session', a['matched_messages'][0]['text'], scope='hub')
+    another_turn = copy.deepcopy(a)
+    another_turn.update(archive_scope='hub', reference='second-turn-reference')
+    another_turn['matched_messages'][0].update(canonical_id='a-m2', position=2)
+    separate = {h['source_session_id']: h for h in merge_candidates([a, b], [other_session, another_turn], 'amber', 10)}
+    assert set(separate) == {'a', 'b', 'same-body-other-session'}
+    assert {m['canonical_id'] for m in separate['a']['matched_messages']} == {'a-m1', 'a-m2'}
+    assert [m['text'] for m in separate['a']['matched_messages']] == [a['matched_messages'][0]['text']] * 2
+    assert len(separate['same-body-other-session']['matched_messages']) == 1
 
 
 def test_ties_use_latest_timestamp_then_stable_identity():
     a = candidate('a', 'amber', stamp='2026-01-01T01:00:00+01:00')
     b = candidate('b', 'amber', stamp='2026-01-01T00:00:00Z')
     c = candidate('c', 'amber', stamp='2026-01-02T00:00:00Z')
-    assert [h['source_session_id'] for h in merge_candidates([b], [c, a], 'amber', 5)] == ['c', 'a', 'b']
+    d = candidate('d', 'amber', stamp=None)
+    e = candidate('e', 'amber'); e['matched_messages'][0].pop('timestamp')
+    assert [h['source_session_id'] for h in merge_candidates([b, d], [c, a, e], 'amber', 5)] == ['c', 'a', 'b', 'd', 'e']
 
 
 def test_long_preview_does_not_change_rank_or_original(pair):
-    text = 'amber ' + 'longword ' * 2000 + ' amber final original'
+    text = 'paddingword ' * 2000 + 'tailonly'
+    assert 'tailonly' not in text[:100]
     add_local(pair, 'long', 'A', text)
-    seed_remote(pair, 'amber short original')
+    seed_remote(pair, 'tailonly short original')
     connect(pair)
-    full = federation.search_archive(pair.local, 'amber', preview_chars=0)
-    short = federation.search_archive(pair.local, 'amber', preview_chars=100)
+    full = federation.search_archive(pair.local, 'tailonly', preview_chars=0)
+    short = federation.search_archive(pair.local, 'tailonly', preview_chars=100)
     assert [(h['source_session_id'], h['rerank_score']) for h in full['results']] == [(h['source_session_id'], h['rerank_score']) for h in short['results']]
+    # Both copies could accidentally score the same truncated bodies. Compare
+    # independently against the fixture's complete 2001/3-token documents.
+    average = (2001 + 3) / 2
+    idf = math.log(1 + .5 / 2.5)
+    expected = {'long': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 2001 / average)),
+                'remote': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 3 / average))}
+    for result in (full, short):
+        assert {h['source_session_id'] for h in result['results']} == set(expected)
+        for hit in result['results']:
+            assert hit['rerank_score'] == pytest.approx(expected[hit['source_session_id']])
     long = next(h for h in short['results'] if h['source_session_id'] == 'long')
     assert len(long['matched_messages'][0]['preview']) < len(text)
     assert federation.read_archive(pair.local, reference=long['reference'])['messages'][0]['text'] == text

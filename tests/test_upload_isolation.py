@@ -3,6 +3,7 @@ import json
 
 from smm_local import federation
 from smm_hub.vibeinsight import VibeInsightSync
+from smm_hub.projects import HubProjects
 from test_005_contracts import pair, add_local, connect, seed_remote, bodies
 from test_vibeinsight_sync import FixtureSource, event
 
@@ -17,6 +18,11 @@ def test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress(pair
     sync.run(source)
     connect(pair); federation.choose_upload(pair.local, 'all', [])
     federation.push_pending(pair.local)
+    pair.local.link_projects(a['project_id'], b['project_id'])
+    projects = HubProjects(pair.remote)
+    ids = {p['name']: p['id'] for p in projects.list()}
+    projects.link(ids['A'], ids['B'])
+    assert projects.links()
     old = next(h for h in pair.client.post('/v1/search', json={'query': 'isolation'}).json()['results']
                if h['source_session_id'] == 'a')
     federation.choose_upload(pair.local, 'only', [b['project_id']])

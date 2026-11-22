@@ -135,13 +135,21 @@ def test_expanding_project_change_requires_bound_preview_and_preserves_assignmen
     a = add_local(pair, 'a', 'A', 'A private')
     b = add_local(pair, 'b', 'B', 'B allowed')
     connect(pair); federation.choose_upload(pair.local, 'only', [b['project_id']])
+    def persisted_affiliation():
+        with pair.local.connect() as con:
+            return (con.execute('SELECT project_id FROM conversations WHERE id=?', (a['id'],)).fetchone()[0],
+                    [tuple(r) for r in con.execute('SELECT * FROM conversation_assignments WHERE conversation_id=?', (a['id'],))])
+    original_affiliation = persisted_affiliation()
     data = {'conversation_id': a['id'], 'target_id': b['project_id']}
     preview = project_control.change(pair.local, 'assign', data, always_preview=True)
     assert not preview['applied'] and preview['newly_allowed_conversations'] == [a['id']]
+    assert persisted_affiliation() == original_affiliation
     federation.choose_upload(pair.local, 'none', [])
     with pytest.raises(ValueError, match='重新预览'):
         project_control.change(pair.local, 'assign', data, preview['confirmation'])
+    assert persisted_affiliation() == original_affiliation
     fresh = project_control.change(pair.local, 'assign', data, always_preview=True)
+    assert persisted_affiliation() == original_affiliation
     assert project_control.change(pair.local, 'assign', data, fresh['confirmation'])['applied']
     pair.local.sync_codex(pair.histories)
     assert pair.local.read(a['id'])['project_id'] == b['project_id']
@@ -327,3 +335,18 @@ def test_bounded_backfill_keeps_search_and_other_project_available(pair, monkeyp
     assert any(h['source_session_id'] == 'a-later' for h in federation.search_archive(pair.local, 'later', local=True)['results'])
     assert federation.push_pending(pair.local)['uploaded'] == 10
     assert len(bodies(pair.remote)) == 35
+    expected = {('a', 1, 'user', 'common A initial', None),
+                ('b', 1, 'user', 'common B progress', None),
+                ('a-later', 1, 'user', 'common A later import', None)}
+    expected.update(('a', n, 'user', f'common A backlog {n}', None) for n in range(2, 34))
+    with pair.remote.connect() as con:
+        actual = {tuple(r) for r in con.execute('SELECT c.source_session_id,m.position,m.role,m.text,m.timestamp FROM messages m JOIN conversations c ON c.id=m.conversation_id')}
+        snapshot = [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')]
+    assert actual == expected
+    status = federation.upload_status(pair.local)
+    assert status['allowed_pending_messages'] == 0 and status['inflight_messages'] == 0
+    assert status['confirmed_messages'] == 35
+    repeated = federation.push_pending(pair.local)
+    assert repeated['uploaded'] == 0 and repeated['pending'] is False
+    with pair.remote.connect() as con:
+        assert [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')] == snapshot
