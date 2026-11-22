@@ -47,6 +47,7 @@ class Run:
         self.env.update(PYTHONUTF8='1', PYTHONIOENCODING='utf-8', SSL_CERT_FILE=self.t['cert'], SMM_SERVICE_PORT='0')
         self.token = 'synthetic-005-' + os.urandom(24).hex()
         self.commands = []; self.requests = []; self.process = None; self.browser = None
+        self.process_stop_requested = False
         self.protocol_only = bool(self.t.get('protocol_only'))
         if self.protocol_only and args.mode != 'hub-service': raise ValueError('protocol_only is restricted to E3 Hub service probes, not E1 client acceptance')
         self.clients = []; self.login_label = None; self.relay = None; self.offline = False; self.started = now(); self.identities = []
@@ -154,6 +155,7 @@ class Run:
         if self.args.mode == 'hub-service':
             self.admin('enable')
         else:
+            self.process_stop_requested = False
             log = (self.output / 'hub.log').open('a', encoding='utf-8')
             self.process = subprocess.Popen([self.t['hub_python'], '-I', '-X', 'utf8', '-m', 'smm_hub.cli', 'serve-hub', '--state-dir', str(self.state),
                 '--host', '127.0.0.1', '--port', str(self.t['port']), '--token-file', str(self.root / 'input-token'),
@@ -164,11 +166,17 @@ class Run:
 
     def stop_hub(self):
         if self.args.mode == 'hub-service': self.admin('disable')
-        elif self.process and self.process.poll() is None:
-            self.process.terminate(); self.process.wait(timeout=20)
-            self.identities.append({'event': 'process-exit', 'pid': self.process.pid, 'exit_code': self.process.returncode, 'at': now()})
-            assert self.process.returncode in (0, -15)
+        elif self.process:
+            already_exited = self.process.poll() is not None
+            if not already_exited:
+                self.process_stop_requested = True
+                self.process.terminate(); self.process.wait(timeout=20)
+            self.identities.append({'event': 'process-exit', 'pid': self.process.pid,
+                'exit_code': self.process.returncode, 'stop_requested': self.process_stop_requested, 'at': now()})
             self.save('service-events', self.identities)
+            assert self.process_stop_requested, 'Hub exited before an explicit stop was requested'
+            expected = (0, 1) if sys.platform == 'win32' else (0, -15)
+            assert self.process.returncode in expected, f'Hub stop exit code {self.process.returncode}; expected {expected}'
 
     def hub_identity(self):
         if self.args.mode != 'hub-service': return {'event': 'start', 'mode': 'serve-hub', 'pid': self.process.pid, 'at': now()}
@@ -531,6 +539,54 @@ class Run:
         assert [m['text'] for m in old_version['messages']] == ['versionprobe original archived version']
         self.save('retained-version-original', old_version)
         self.save('backfill', {'state': allowed, 'hub': self.hub_hits(), 'old-reference-read': old})
+        self.affiliation_propagation()
+
+    def affiliation_propagation(self):
+        """Actual package path: retained body gains a separately permitted project."""
+        device = self.cli(self.db, 'upload', 'status')['device_id']
+        projects = {p['name']: p for p in self.admin('project', 'list') if p['owner'] == device}
+        def hits(name):
+            scope = self.api(self.t['address'], '/v1/query-scope', {'hub_id': self.hub_id,
+                'device_id': device, 'project_id': projects[name]['source_key']})
+            result = self.api(self.t['address'], '/v1/search', {'query': 'selective', 'device_id': device,
+                'scope_reference': scope['scope_reference'], 'limit': 50, 'preview_chars': 0})
+            return {h['source_session_id']: h for h in result['results']}
+        code = "import sqlite3,json,sys; from pathlib import Path; c=sqlite3.connect(Path(sys.argv[1]).as_uri()+'?mode=ro',uri=True); print(json.dumps(c.execute(\"SELECT m.id,m.source_key,m.position,m.role,m.text,m.timestamp FROM messages m JOIN conversations c ON c.id=m.conversation_id WHERE c.source_session_id='local-A' ORDER BY m.id\").fetchall()))"
+        def physical():
+            return json.loads(self.command([self.t['hub_python'], '-I', '-X', 'utf8', '-c', code,
+                self.state / 'smm-hub.sqlite3']).stdout)
+        before = physical(); assert len(before) == 2
+        original = self.cli(self.db, 'search', 'selective', '--local', '--scope', 'project',
+            '--project-id', str(self.projects['A']), '--limit', '50')
+        conversation = next(h['id'] for h in original['results'] if h['source_session_id'] == 'local-A')
+        self.cli(self.db, 'upload', 'set', '--mode', 'only', '--project-id', str(self.projects['A']))
+        preview = self.cli(self.db, 'project', 'assign-conversation', str(conversation), '--project-id', str(self.projects['D']))
+        assert preview['requires_confirmation'] and not preview['applied']
+        applied = self.cli(self.db, 'project', 'assign-conversation', str(conversation), '--project-id',
+            str(self.projects['D']), '--confirm', preview['confirmation']); assert applied['applied']
+        marker = len(self.requests); self.sync_done(self.db, wait_for_upload=True)
+        forbidden_requests = self.requests[marker:]
+        assert not any(r['route'] == '/v1/known-upload-messages' or
+            (r['route'] == '/v1/upload' and r['payload'].get('records')) for r in forbidden_requests)
+        assert 'local-A' not in hits('D') and 'local-A' in hits('A')
+        marker = len(self.requests)
+        self.cli(self.db, 'upload', 'set', '--mode', 'only', '--project-id', str(self.projects['D']))
+        self.sync_done(self.db, wait_for_upload=True)
+        allowed_requests = self.requests[marker:]; new = hits('D')
+        assert 'local-A' in new and 'local-A' in hits('A')
+        read = self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': new['local-A']['reference']})
+        assert [m['text'] for m in read['messages']] == ['selective common local-A original', 'selective common local-A appended while stopped']
+        old = self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': self.old_reference})
+        assert [m['text'] for m in old['messages']] == ['selective common local-A original']
+        assert physical() == before
+        assert any(r['route'] == '/v1/known-upload-messages' for r in allowed_requests)
+        assert not any(r['route'] == '/v1/upload' and r['payload'].get('records') for r in allowed_requests)
+        self.sync_done(self.db, wait_for_upload=True); after = physical(); assert after == before
+        self.save('affiliation-propagation', {'meaning': 'fixture D exercises destination B in SPEC',
+            'preview': preview, 'applied': applied, 'forbidden_requests': forbidden_requests,
+            'allowed_requests': allowed_requests, 'destination_search': new, 'destination_read': read,
+            'old_reference_read': old, 'before_physical_rows': before, 'after_physical_rows': after,
+            'final_state': self.cli(self.db, 'upload', 'status')})
 
     def cleanup(self):
         failures = []

@@ -47,6 +47,12 @@ class LocalUpload:
                     source_position INTEGER NOT NULL, source_order INTEGER NOT NULL,
                     PRIMARY KEY(hub_id,device_id,logical_id,version,control_epoch,source_position,source_order)
                 );
+                CREATE TABLE IF NOT EXISTS local_upload_project_receipts (
+                    hub_id TEXT NOT NULL, device_id TEXT NOT NULL,
+                    logical_id TEXT NOT NULL, version TEXT NOT NULL, control_epoch TEXT NOT NULL,
+                    project_key TEXT NOT NULL, source_position INTEGER NOT NULL, source_order INTEGER NOT NULL,
+                    PRIMARY KEY(hub_id,device_id,logical_id,version,control_epoch,project_key,source_position,source_order)
+                );
                 CREATE TABLE IF NOT EXISTS local_upload_transfer (
                     hub_id TEXT NOT NULL, device_id TEXT NOT NULL,
                     last_attempt TEXT, last_success TEXT, problem TEXT,
@@ -269,12 +275,13 @@ class LocalUpload:
                            c.source,c.source_session_id,c.started_at,u.logical_id,u.version,u.source_order,u.occurrence
                     FROM upload_message_catalog u JOIN messages m ON m.id=u.message_id
                     JOIN conversations c ON c.id=m.conversation_id
-                    LEFT JOIN local_upload_origin_receipts a ON a.hub_id=? AND a.device_id=?
+                    LEFT JOIN local_upload_project_receipts a ON a.hub_id=? AND a.device_id=?
                         AND a.logical_id=u.logical_id AND a.version=u.version AND a.control_epoch=?
+                        AND a.project_key=?
                         AND a.source_position=m.position AND a.source_order=u.source_order
                     WHERE c.project_id=? AND c.source IN ('codex','claude-code') AND a.logical_id IS NULL
                     ORDER BY m.id LIMIT ?
-                """, (self.hub_id, self.device, epoch, project["id"], limit)).fetchall()
+                """, (self.hub_id, self.device, epoch, project["stable_key"], project["id"], limit)).fetchall()
                 if rows:
                     con.execute("UPDATE local_upload_policies SET next_project=? WHERE hub_id=? AND device_id=?",
                                 (project["stable_key"], self.hub_id, self.device))
@@ -312,8 +319,9 @@ class LocalUpload:
                 JOIN conversations c ON c.id=m.conversation_id
                 LEFT JOIN hub_local_project_keys k ON k.id=c.project_id
                 LEFT JOIN upload_message_catalog u ON u.message_id=m.id
-                LEFT JOIN local_upload_origin_receipts a ON a.hub_id=? AND a.device_id=?
+                LEFT JOIN local_upload_project_receipts a ON a.hub_id=? AND a.device_id=?
                     AND a.logical_id=u.logical_id AND a.version=u.version AND a.control_epoch=?
+                    AND a.project_key=k.remote_key
                     AND a.source_position=m.position AND a.source_order=u.source_order
                 WHERE c.source IN ('codex','claude-code')""", (self.hub_id, self.device, row['ack_epoch'])):
                 if record['logical_id'] is None and permits(row['desired'], record['remote_key']):
@@ -410,9 +418,9 @@ class LocalUpload:
     def _record_receipts(self, con, rows, epoch):
         con.executemany('INSERT OR IGNORE INTO local_upload_receipts VALUES(?,?,?,?,?)',
                         [(self.hub_id, self.device, r['logical_id'], r['version'], epoch) for r in rows])
-        con.executemany('INSERT OR IGNORE INTO local_upload_origin_receipts VALUES(?,?,?,?,?,?,?)',
+        con.executemany('INSERT OR IGNORE INTO local_upload_project_receipts VALUES(?,?,?,?,?,?,?,?)',
                         [(self.hub_id, self.device, r['logical_id'], r['version'], epoch,
-                          r['position'], r['source_order']) for r in rows])
+                          r['project_id'], r['position'], r['source_order']) for r in rows])
 
     def acknowledge_known(self, rows, verified, epoch):
         with self.db.connect() as con:

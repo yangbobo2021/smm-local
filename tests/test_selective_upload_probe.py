@@ -3,6 +3,7 @@ import importlib.util
 from pathlib import Path
 
 import pytest
+from types import SimpleNamespace
 
 
 def probe(monkeypatch, states):
@@ -47,3 +48,34 @@ def test_probe_never_turns_pending_transfer_into_success_at_timeout(monkeypatch)
     ticks = iter([0, 1, 3]); monkeypatch.setattr(module.time, 'monotonic', lambda: next(ticks))
     with pytest.raises(AssertionError, match='did not complete'):
         runner.sync_done('task-archive', wait_for_upload=True, seconds=2)
+
+
+@pytest.mark.parametrize('platform,code', [('win32', 1), ('linux', -15)])
+def test_probe_accepts_platform_exit_only_after_requested_stop(monkeypatch, platform, code):
+    module, runner, _ = probe(monkeypatch, [])
+    monkeypatch.setattr(module, 'sys', SimpleNamespace(platform=platform))
+    process = SimpleNamespace(pid=123, returncode=None)
+    process.poll = lambda: process.returncode
+    process.terminate = lambda: setattr(process, 'returncode', code)
+    process.wait = lambda **kwargs: code
+    runner.process = process; runner.process_stop_requested = False
+    runner.args = SimpleNamespace(mode='client'); runner.identities = []
+    runner.stop_hub()
+    runner.stop_hub()  # Idempotent final cleanup after the explicit stop.
+    assert runner.identities[-1]['stop_requested'] is True
+    assert runner.identities[-1]['exit_code'] == code
+
+
+@pytest.mark.parametrize('early,code', [(True, 1), (True, 0), (False, 7)])
+def test_probe_keeps_early_or_unexpected_hub_exit_as_failure(monkeypatch, early, code):
+    module, runner, _ = probe(monkeypatch, [])
+    monkeypatch.setattr(module, 'sys', SimpleNamespace(platform='win32'))
+    process = SimpleNamespace(pid=123, returncode=code if early else None)
+    process.poll = lambda: process.returncode
+    process.terminate = lambda: setattr(process, 'returncode', code)
+    process.wait = lambda **kwargs: code
+    runner.process = process; runner.process_stop_requested = False
+    runner.args = SimpleNamespace(mode='client'); runner.identities = []
+    with pytest.raises(AssertionError):
+        runner.stop_hub()
+    assert runner.identities[-1]['exit_code'] == code

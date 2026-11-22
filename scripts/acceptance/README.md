@@ -179,3 +179,5 @@ Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` �
 005 Windows 旧版本组合同样必须以普通交互身份运行，包装器支持 `--probe compatibility --mode client`，调用实际四环境控制器。Windows VM 启动 Python/浏览器较慢，任务允许最多 30 分钟，调度器硬上限 32 分钟；必须保留过程收据，超时不能算完成，并核对任务服务/后台是否已清理。
 
 `selective_upload_recorded.py` 将每次原生验收调试/正式执行绑定到新的实际业务运行，自动创建新任务状态，把原始安装摘要、命令、接口结果、截图与清理结果收进 `ACCEPTANCE_EVIDENCE_DIR`。私有目标可用 execution 指定 SSH 测试机/控制解释器/脚本目录；SSH 保持严格主机校验，Windows 仍经交互任务核对实际身份。它不会把先前通过的 JSON 重新包装成新执行。
+
+记录收回后可用 `selective_upload_audit.py --evidence-dir <原始运行目录> --local-wheel <该轮LocalWheel> --hub-wheel <该轮HubWheel> --output <新审计文件>` 独立核对包摘要、完整合成原文、范围、排序公式、补齐进度和请求形状。此工具只读原始文件，不重新运行产品；不能替代截图审阅或 A1–A12/E1–E5 的完整验收。其自检用例包含正文缺失、错误排序、排序候选外发、假补齐和错误原文等负例。
