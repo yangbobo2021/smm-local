@@ -172,7 +172,7 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
         self.p=self.cli('project','create','文档项目P');self.q=self.cli('project','create','文档项目Q')
         self.guide=self.docs/'指南.md';self.note=self.docs/'nested'/'notes.txt';self.control=self.docs/'control.txt';self.other=self.out/'other.txt'
         self.raw='needle 中文😀 e\u0301\r\n第二行 <script>window.__docExecution=1</script>\r\nlast\n'.encode()
-        self.put(self.guide,self.raw);self.put(self.note,b'needle nested original\n');self.put(self.control,b'needle continuous control\n');self.put(self.other,b'needle unrelated Q\n')
+        self.put(self.guide,self.raw);self.put(self.note,b'needle nested original\n');self.put(self.control,('İ'*3000+' needle continuous control\n').encode());self.put(self.other,b'needle unrelated Q\n')
         outside=self.out/'outside';self.put(outside/'escape.txt',b'escapeuniquemarker must never be read')
         self.link=self.docs/'linked-directory'
         if sys.platform=='win32':self.run(['cmd','/c','mklink','/J',str(self.link),str(outside)])
@@ -212,17 +212,49 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
             assert self.process.poll() is None,'service exited before ready'
             try:
                 with urllib.request.urlopen(self.url+'/api/documents/sources',timeout=1) as r:
-                    if r.status==200:return
+                    if r.status==200:
+                        identities=[json.loads(s) for s in (self.out/'product-processes.jsonl').read_text().splitlines()]
+                        actual=next(v for v in reversed(identities) if '--port' in v['argv'] and str(port) in v['argv'])
+                        self.services[-1]['actual_pid']=actual['pid'];self.save('services',self.services)
+                        return
             except OSError:time.sleep(.2)
         raise AssertionError('service not ready')
 
     def stop_service(self):
         if self.process is None:return
-        self.process.terminate()
+        if sys.platform=='win32':
+            # A venv python.exe may launch a second Python process. Terminate
+            # the owned tree, then independently check the real PID and port.
+            result=subprocess.run(['taskkill','/PID',str(self.process.pid),'/T','/F'],capture_output=True)
+            self.services[-1]['taskkill']={'exit_code':result.returncode,'stdout':result.stdout.decode(errors='replace'),'stderr':result.stderr.decode(errors='replace')}
+            assert result.returncode==0
+        else:self.process.terminate()
         try:code=self.process.wait(timeout=20)
         except subprocess.TimeoutExpired:self.process.kill();code=self.process.wait(timeout=20)
-        self.services[-1].update(finished_at=now(),exit_code=code,alive=self.process.poll() is None)
+        actual_pid=self.services[-1]['actual_pid'];port=int(self.url.rsplit(':',1)[1])
+        for _ in range(100):
+            if sys.platform=='win32':
+                from ctypes import wintypes
+                kernel=ctypes.WinDLL('kernel32',use_last_error=True)
+                kernel.OpenProcess.restype=wintypes.HANDLE
+                handle=kernel.OpenProcess(0x100000,False,actual_pid)
+                if handle:
+                    kernel.WaitForSingleObject.argtypes=[wintypes.HANDLE,wintypes.DWORD]
+                    actual_alive=kernel.WaitForSingleObject(handle,0)==258
+                    kernel.CloseHandle.argtypes=[wintypes.HANDLE];kernel.CloseHandle(handle)
+                else:
+                    assert ctypes.get_last_error()==87
+                    actual_alive=False
+            else:
+                try:os.kill(actual_pid,0);actual_alive=True
+                except ProcessLookupError:actual_alive=False
+            with socket.socket() as sock:
+                sock.settimeout(.2);port_closed=sock.connect_ex(('127.0.0.1',port))!=0
+            if not actual_alive and port_closed:break
+            time.sleep(.1)
+        self.services[-1].update(finished_at=now(),exit_code=code,alive=self.process.poll() is None,actual_alive=actual_alive,port_closed=port_closed,actual_exit_checked_at=now())
         self.save('services',self.services);self.service_log.close();self.process=None
+        assert not actual_alive and port_closed,'actual service must stop before restart/cleanup'
 
     async def mcp(self,steps):
         from mcp import ClientSession,StdioServerParameters
@@ -454,7 +486,7 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
             identities=[json.loads(s) for s in (self.out/'product-processes.jsonl').read_text().splitlines()] if (self.out/'product-processes.jsonl').exists() else []
             for value in identities:identity(value,self.config['expected_platform'])
             self.save('product-identities',{'count':len(identities),'all_ordinary':bool(identities),'processes':identities})
-            self.save('result',{'status':outcome,'started_at':self.started,'finished_at':now(),'platform':sys.platform,'cleanup':{'all_owned_services_stopped':all(not x.get('alive',True) for x in self.services)},'scope':'fresh synthetic files, installed Local only; no Hub or daily archive'})
+            self.save('result',{'status':outcome,'started_at':self.started,'finished_at':now(),'platform':sys.platform,'cleanup':{'all_owned_services_stopped':all(not x.get('alive',True) and not x.get('actual_alive',True) and x.get('port_closed',False) for x in self.services)},'scope':'fresh synthetic files, installed Local only; no Hub or daily archive'})
 
 
 def main():
