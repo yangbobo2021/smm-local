@@ -227,14 +227,23 @@ class Run:
         self.command([self.t['local_python'], '-I', HERE / 'selective_upload_fixture.py', 'append', '--root', self.root / 'local'])
         self.cli(self.db, 'maintenance', 'sync')
         assert not any('appended while stopped' in m['text'] or 'new while stopped' in m['text'] for h in self.hub_hits() for m in h['matched_messages'])
+        self.reject_old_requests('initial-stop')
+        self.save('stopped-state', stop)
+
+    def reject_old_requests(self, label):
+        before = self.hub_hits()
+        observations = []
         for versioned in (True, False):
             batch = dict(self.old_batch)
             if not versioned:
                 for key in ('policy_revision', 'control_epoch', 'batch_id'): batch.pop(key, None)
             try: self.api(self.t['address'], '/v1/upload', batch)
-            except HTTPError as exc: assert exc.code in (403, 409)
+            except HTTPError as exc:
+                assert exc.code in (403, 409)
+                observations.append({'versioned': versioned, 'status': exc.code, 'response': exc.read().decode('utf-8')})
             else: raise AssertionError('stale/legacy body accepted after confirmed stop')
-        self.save('stopped-state', stop)
+        after = self.hub_hits(); assert before == after
+        self.save(label + '-replay', {'attempts': observations, 'before': before, 'after': after})
 
     async def mcp(self, tool, arguments):
         from mcp import ClientSession, StdioServerParameters
@@ -354,6 +363,7 @@ class Run:
             self.cli(self.db, 'maintenance', 'sync')
             assert self.cli(self.db, 'upload', 'status')['policy']['mode'] == 'none'
             self.save('hub-restart-rule', self.cli(self.db, 'upload', 'status'))
+            self.reject_old_requests('after-hub-restart')
         after_stop = self.requests[self.stop_index:]
         sent = json.dumps([r['payload'] for r in after_stop])
         for secret in ('local-A-new', 'appended while stopped', 'new while stopped', 'plugin-only original'):

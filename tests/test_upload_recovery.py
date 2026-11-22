@@ -178,3 +178,62 @@ def test_existing_legacy_upload_migrates_on_background_restart_without_reconfigu
     state = federation.upload_status(pair.local)
     assert state['policy']['mode'] == 'all' and state['state'] == 'confirmed'
     assert bodies(pair.remote) == ['legacy verified history']
+
+
+def test_late_policy_reply_cannot_replace_a_newer_local_stop(pair, monkeypatch):
+    add_local(pair, 'a', 'A', 'private')
+    config = connect(pair)
+    original = federation._request
+    intercepted = False
+    def request(config, route, payload=None):
+        nonlocal intercepted
+        result = original(config, route, payload)
+        if route == '/upload-policy/set' and payload['policy']['mode'] == 'all' and not intercepted:
+            intercepted = True
+            state = federation.choose_upload(pair.local, 'none', [])
+            assert state['state'] == 'confirmed'
+        return result
+    monkeypatch.setattr(federation, '_request', request)
+    result = federation.choose_upload(pair.local, 'all', [])
+    assert result['state'] == 'confirmed' and result['policy']['mode'] == 'none'
+    assert federation.push_pending(pair.local)['uploaded'] == 0
+    assert bodies(pair.remote) == []
+
+
+def test_pause_does_not_block_control_or_resume_imports(pair):
+    add_local(pair, 'a', 'A', 'private')
+    config = connect(pair)
+    pair.local.set_settings(sync_paused=True)
+    result = federation.choose_upload(pair.local, 'all', [])
+    assert result['state'] == 'confirmed'
+    assert federation.push_pending(pair.local, control_only=True)['uploaded'] == 0
+    result = federation.choose_upload(pair.local, 'none', [])
+    assert result['state'] == 'confirmed' and pair.local.get_settings()['sync_paused']
+    assert bodies(pair.remote) == []
+
+
+def test_cross_process_save_and_dispatch_share_one_durable_fence(pair):
+    import os
+    import subprocess
+    import sys
+    import time
+    from pathlib import Path
+    from smm_local.archive_protocol import control_lock
+    a = add_local(pair, 'a', 'A', 'private')
+    config = connect(pair); federation.choose_upload(pair.local, 'all', [])
+    local = LocalUpload(pair.local, config, pair.hub_id); local.catalog()
+    rows = local.candidates(local.row()['ack_epoch'])
+    script = "from smm_local.core import Archive; from smm_local.federation import hub_config; from smm_local.upload import LocalUpload; import sys; db=Archive(sys.argv[1]); c=hub_config(db); LocalUpload(db,c,c['bound_hub_id']).choose('none',[]); print('saved',flush=True)"
+    env = dict(os.environ, PYTHONPATH=str(Path(__file__).resolve().parents[1] / 'src'))
+    with control_lock(local.guard.lock):
+        process = subprocess.Popen([sys.executable, '-c', script, str(pair.local.db_path)], env=env,
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        time.sleep(.15)
+        assert process.poll() is None  # The second process cannot commit its save across our boundary.
+    stdout, stderr = process.communicate(timeout=10)
+    assert process.returncode == 0 and stdout.strip() == 'saved', stderr
+    assert local.row()['desired']['mode'] == 'none'
+    assert local.dispatch(rows) is None
+    local.sync_policy(federation._request)
+    assert local.status()['state'] == 'confirmed'
+    assert bodies(pair.remote) == []
