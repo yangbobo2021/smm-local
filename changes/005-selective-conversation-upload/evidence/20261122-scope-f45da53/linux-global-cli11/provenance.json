@@ -1,0 +1,30 @@
+{
+  "source": "AT-SMM-005 private actual linux-global-cli11",
+  "redactions": "account, network and absolute private paths; fixture bodies unchanged",
+  "controllers": {
+    "selective_upload_platform.py": "ec5329e6240493ad8142bb359478fe2cfd52612ca8eb9f6e0af2553a06f70a8f",
+    "selective_upload_global_cli.py": "94d6ed7f057e354c80f7127f281f29f17000dab991ff9b73e15f8551971958fc"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012",
+      "export_sha256": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012"
+    },
+    {
+      "file": "global-cli.json",
+      "original_sha256": "ccc4dea3b8544452eff8a33207733fdd525033c21326b427b008efe795c06e9d",
+      "export_sha256": "ccc4dea3b8544452eff8a33207733fdd525033c21326b427b008efe795c06e9d"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "d5c0c8c028c3ff185a447bc3db5a00152718ae681ab7dee2e3043c29a23788c2",
+      "export_sha256": "ab2b16f4f5b5f758e1e6e9f223864a30a6fad31e0a2455deffb081e7d538d07a"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "a8c60e7ddf40d1807f47c579779380677f1bd5b59db9e94bc27dd4ccf2c5c4dd",
+      "export_sha256": "a8c60e7ddf40d1807f47c579779380677f1bd5b59db9e94bc27dd4ccf2c5c4dd"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-register": {
+      "status": "passed",
+      "reason": "设计adoption有A10/D2/B2原文依据，原断言未改：真实TestClient以另一未迁移设备旧写200、当前待选择设备旧写409，完整Hub正文仅合法other-device，旧式精确读取正文独立预期；只首设备正确/两设备混用/一律拒绝均被200/409与完整集合拦截。当前debug28 PID52112、exit0、1passed、bindings/artifacts全部SHA实算一致，全部adoption到达；详细原文/夹具依据见前轮意见，本轮人工准备另MD。",
+      "covers": [
+        "adoption"
+      ]
+    },
+    "TC-005-legacy-links": {
+      "status": "passed",
+      "reason": "SPEC A10/E5要求真实旧库升级保旧关系/游标/引用，不要求扩展JSON全等。修订scripts/acceptance/selective_upload_completion.py::legacy_links在比较前保存upgrade-read-observation.json两侧原始read，逐source_session/固定codex及每条position/role/独立text/timestamp比较，conversation ID列表保持；实际两个旧引用{conv2,msg2}/{conv1,msg1}前后分别准确读old-related/old-device各完整一条。A/D非空Local双向linked_ids、ID/name/paths与Hub owner/source_key/name、links完整集合、cursor2均前后保持；后续A查询实际同时返回old-device/old-related、同Hub策略confirmed/all、重复同步Hub全hits不变，27未达步骤现在均执行。只首项目/原文保留将被完整项目dict/links与逐session独立正文列表断言拦截；两侧同错不能通过固定expected原文，误用同一对象由两session全集/ID和独立正文拦截。当前真实ba8 Local25/Hub24模块逐字节等candidate，v0.4.0两个真实包模块自检；Mac独立任务HTTPS同目录Hub PID52124→52132，debug28 PID52113/exit0，24附件含完整before/after/query/status/commands/service/cleanup全部SHA一致、cleanup failures=[]。target SHA 782299a44f844cc349d7af4c8c4e40b0f693dd8531d5e4fdf9cbda61a8e4b1de，全部additional-legacy-links到达。该E5共享迁移状态一个支持平台足够；原三OS组合另由人工complete1/2核，不扩大此auto。",
+      "covers": [
+        "additional-legacy-links"
+      ]
+    }
+  }
+}

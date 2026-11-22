@@ -1,0 +1,15 @@
+{
+  "cases": {
+    "TC-005-sc1-evidence": {
+      "status": "passed",
+      "reason": "新目标manual-complete32-sc1按原design27/match30/准备MD30核验，未改原manual30缺证意见。操作/observation的本轮时间为2026-11-22T11:46:28Z，原业务13事件保留原提交、安装与命令时间；未声称重跑旧包。74 bindings/551 artifacts及549原位inventory SHA全实核一致；旧SC1已有原件和33张PNG摘要未变，本Reviewer此前已实际打开相应四模式/三平台九张对账关键原图及trace，本次核其字节连续性并读新附件。full3缺口现已补齐：三compat-run8原字节JSON/commands/manifest/身份/清理显式附入，且SC5正式manual30c及review-manual-complete30-sc5跨记录引用均在附件，review真实target_sha与30c原字节相符。独立打开真实0.4.0两wheel ZIP：Local SHA a58154fc…/Hub e96af131…，每个平台installed.version0.4.0且全19 Local/21 Hub py模块与旧candidate及wheel逐项相等；新包全25/24模块亦candidate==installed，Mac uid501/Linux uid1000/Windows普通非提权<ordinary-user>身份区分。原commands时间分别05:54:42–48Z、05:54:45–55:01Z、05:55:30–59:13Z，有实际旧解释器创建/同步/配置、原状态目录切换至新解释器。三份migrated-old-device upgraded exit0/uploaded0、generation1/all/confirmed/confirmed_messages1，before==after且独立old-device user完整正文及稳定身份/旧read保留；没有新包仿造旧库。各自随后localhost→127.0.0.1仍同hub/device且none confirmed；切到新状态目录后hub_id确实改变、device_id不变、generation0/policyNone/needs_selection，旧程序写exit1/HTTP409，新端无正文的实际末尾定位断言已到达。三个run服务启停/PID与stop_requested、cleanup.failures空实核，Windows请求停止后的exit1不冒充业务失败。当前适用性：实际d80→ba8 diff仅Local双版本reconcile/控制派发检查和范围标题等，federation迁移分支(legacy_candidate+generation0核既有同Hub)及导入/正文身份不变；新增_verify_target在原配置稳定的这些输入通过同一锁/写边界，不改变迁移all/换Hub待选择结果。变化的对账/CAS/派发由ba8三reconcile21和当前专门正式TC补，标题由scope11/15补，未凭Hub相等推Local全等。full3其余来源/暂停用当前四mode pause-source逐次保存全settings/sources/持久messages、normal push0、sync_all哨兵实际断言，以及29原JUnit同Hub address/token/device_name三参数规则保留支持。full1仍以七主流程首个policy/set前全部请求无非空upload、最小字段白名单/memberships空、待选择policyNone及远端可查独立核；full2三E1真实六保存only空/onlyA/exceptA/all/none/only空的独立输入与CLI/Web规则代次、原29 mode_matrix/空名单/非法状态不变断言；full4实际安装/命令/浏览器trace共享状态，已打开三E1config-0-only/2-except/3-all/4-none原图，模式、勾选A及普通/全局项目同级可见。complete-5三ba8原CLI缺参/旧generation exit2，Web旧本机/Hub版本400且无policy/set，fresh CLI all与刷新Web采用Hub none200；stale-local/stale-hub/adopted原图所见重新查看诊断及confirmed none，trace实际diff/use按钮和双版本POST/响应、final gen5/rev6一致。原29全套251pass1skip按原时间及真实JUnit/源码使用，未当32新跑；本意见仅认本项五checks，不授R005或其他场景通过。",
+      "covers": [
+        "complete-5",
+        "full1",
+        "full2",
+        "full3",
+        "full4"
+      ]
+    }
+  }
+}

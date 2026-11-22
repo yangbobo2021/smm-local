@@ -1,0 +1,152 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-reconcile-complete19/request.json": "7ab684ef5f76479771e562b3806f225b56430b71e6597b31b0479a5c07e2a629",
+    ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-reconcile-complete19/reviewer.txt": "562a064262e0ae318f1976d1dc7193fb3c2aaa7e02fc94ffbb08462e5566a671"
+  },
+  "bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_archive_references.py": "2bc5e24bd8b61cd155745309e4ad29c7dec596dc7766c1564c79208efa8b1482",
+    "tests/test_cli_help.py": "355468c0783ed01394d9f5a8a2bb9e3092e94c4899a654e8b745beef8e028bc1",
+    "tests/test_combined_search.py": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+    "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+    "tests/test_federation_tls.py": "fea404b497ac6f1c71bb4fb6529a8a819f7c5a5e2da6778f31fea2fe51f79516",
+    "tests/test_hub_standalone.py": "3c7741ae2d762a5aa7d7498a25201860741135ef7bb897951017e47259a377cb",
+    "tests/test_maintenance.py": "63171d761ca0a60acc35bafb16f1581491090418da7039a42389988294f069e4",
+    "tests/test_pipeline.py": "2564b4d1bfdb81b81c58ef790f070129adbe8fc1363564969ac320b43d49c332",
+    "tests/test_project_identity_boundaries.py": "16a6b46ed7a32470c316f5748e4849eee9784bc6db6b83d9f7b058252542dac2",
+    "tests/test_project_preview_coverage.py": "1b5954122e7d221c25bc7de06e96ea397c355a36f0d96b54814f21d1f5235b7c",
+    "tests/test_reconcile_boundaries.py": "1215497c31beebc1f81ab81de4cc35d022aa918c7176404576c91dad78b7bc84",
+    "tests/test_reconcile_dispatch.py": "9fc53738cf45201c3a7f93fe3345405e93f5d7ab746beee5b259301472beaab3",
+    "tests/test_reconcile_remote_race.py": "b1f8c2fd4cf4578d91bd67a2f17041f5d0485022a573e8f0ce0d092940a2fe38",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+    "tests/test_reconcile_uncertain.py": "6ad019a7a09254c0e2f6f090b7bb0667fc900a46f37b8eae8af2dfe13be04d6c",
+    "tests/test_scoped_read_metadata.py": "504194f3f20a11390aa13df2b0918d301d9644d665649caeb6a95d9dda11b918",
+    "tests/test_selective_upload_audit.py": "5e49f5bbac6cddb391afae148ee18617704f045ece8fb5179c82d65a93c1dee4",
+    "tests/test_selective_upload_probe.py": "d7103d8595a37fd08d0af7b16263610bbf4dcdaa469f32e48438a38ced553898",
+    "tests/test_service_startup.py": "79df1235e260a6323af648062df9d4b9694f9352b3a39567b2d8787ff1bfa223",
+    "tests/test_source_plugins.py": "4d7f9f61a505811117c6f4d2d106ca6205fe6131bc25331809e23c3d8cab82d0",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+    "tests/test_upload_dispatch_fence.py": "c9bbcdf0fa832eb4bd0b6388e23078cd1f2a1b829a61d675880eb2d63b4fc4de",
+    "tests/test_upload_interfaces.py": "41acfd8f711c0b92b431e71d90e06f1fb41b341801104381ab2ad4b9fd0f41d2",
+    "tests/test_upload_isolation.py": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899",
+    "tests/test_upload_mode_matrix.py": "dee64fb7cdf7dc793c59245111ccd18b472b3e76c36c9a9465c393f3c8d760ef",
+    "tests/test_upload_policy.py": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309",
+    "tests/test_upload_project_moves.py": "9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56",
+    "tests/test_upload_recovery.py": "00cc38f24899e3d135b6af97737e3631e522babdf8397ebd8b9a99b0d1eba39d",
+    "tests/test_upload_registration.py": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39",
+    "tests/test_upload_review_regressions.py": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586",
+    "tests/test_vibeinsight_boundaries.py": "24f69ae463941de27b66df97a01dcf5fb297817c74721c3ef7f2ba6b9e4600de",
+    "tests/test_vibeinsight_fixture_guard.py": "ea90372e8ee793da977aa2f7cfcb763646dc0309c9e44858aecd57b143874267",
+    "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "judgments": {
+    "TC-005-cas": {
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效，tdd-core落实B4/D1确认后旧版本和无版本请求一律拒绝且历史不变。自然设计明确有效同项目正控，避免因无效项目而伪拒绝；没有把系统服务要求塞入该自动用例。实现结论：有效，test_005_contracts.py:102创建旧历史，:103-120真实登记项目并成功接收当前版本消息，独立正文预期在:120为两个指定字符串；:121-128持久none后拒绝旧all；:130分别发无版本和旧版本正文，:133拒绝，:134对每次请求比较全部历史，:136-137当前revision和完整none。原始日志1 passed in 0.19s，全部检查到达。\n边界推演：只拒绝无版本却允许旧版本，在第二循环:133首拦；反向在第一循环:133首拦。拒绝后误写正文在:134首拦；丢掉确认前任一既有历史在:134首拦，非只保留首条。Hub和返回头共同被错误旧all覆盖时:137独立none预期首拦，版本/状态比较不只两边相等。适用动作前状态已分为当前all可接收、none持久确认后旧/无版本被拒绝。更换同一设备下等价合法项目或增加同条件设备ID可选：该已分配项判定的是版本门禁，源码smm_hub/upload.py:154-160在项目正文处理前按设备核验版本；当前无版本/旧版本两种不同门禁都已实测，未发现需新增另一个业务条件才能区分的依据。本TC不证明多项目四模式或服务重启。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-fresh": {
+      "covers": [
+        "fresh"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效。fresh是与旧对账拒绝相配的正控，来自B1明确重新提交所显示本机规则，而非新增一种产品义务；none/all/onlyA/exceptA四种已保存待确认状态有不同完整policy输入。实现结论：有效，test_reconcile_snapshot.py:117在测试开始前保存模式，:119冻结实际显示本机policy，:120独立检查模式参数，:122-123以准确显示的双版本提交，:124-125成功且confirmed，:126对响应/本机持久desired/真实Hub policy逐一比对动作前完整显示值，:127-128另检查实际set只派发该完整值，:129无正文派发。原始日志4 passed in 0.52s，四模式均到达全部断言。\n边界推演：只正确处理首个none而拒绝其余模式，其余参数:124首拦；把only和except变为all，:126首拦；只提交第一个project而遗漏该动作前显示名单的其他键，:126或:128会拦（当前名单仅A，增加同条件第二键属于可选扩展，此处不认领多键选择）。两边误用同一个不同policy时仍须与动作前expected比较，:126首拦；若连准备阶段choose和显示共同选错A，属于规则选择入口的独立范围，本用例承诺是重新提交所显示的完整规则，不以本TC证明选择映射正确。仅首目标正确/其余适用目标出错：这里目标是该设备已显示的完整policy，不是逐项目执行正文；none/all/only/except均已分别实测，A/B正文允许集合与全局项目另由其他SC设计负责。未单独断言ack_generation等内部字段，不把其认作本次实测。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-inflight": {
+      "covers": [
+        "inflight-result"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效。来自B4/A2旧响应不覆盖最新意图、未知不报成功，以及PLAN12.1已发CAS提交身份仅用于识别在途、未知须明确fresh对账；两种会改变期望的动作前状态/窗口分开：已真实提交all但回执丢失，或已真实提交all后在回执前本机另存none。实现结论：有效，test_reconcile_uncertain.py:13先存待确认all、:16先真正执行远端请求、:18冻结真实回执，随后:20丢回执或:21-22在返回前另存none并冻结完整row。:29丢回执不能HTTP成功，:30-31回执与真实Hub独立mode为all，避免未实际提交的假注入；:33-34未知不改原desired且不confirmed，或:36新none的generation/desired/submission_id逐字段不被旧回执覆盖；:38正常push重试，:39全Hub正文空，:40所有正文派发空；丢回执:42仍conflict，:43-46fresh显示后明确采用Hub方可confirmed all；新选择:48真实Hub及本机最终均none。日志2 passed in 0.41s，两个分支全部到达。\n边界推演：只保护丢回执而旧成功回执覆盖新none，new-local-choice在:36首拦；只保护新none却把unknown当成功，lost-receipt在:29/34首拦。普通重试自动接受未知all再上传，:39首拦（即使Hub拒收，也有:40请求载荷断言拦）；仅首项目阻断而B偷传，setup_control已有A/B两条不同项目正文，:39全表空/:40所有请求会拦，不只检查首样本。两边共同误用all时，新选择:36比较动作前已保存none和提交身份而非两边相等；后续:48又以字面none拦。unknown与new-none为不同业务状态，分别独立验证，fresh显式操作前unknown仍conflict，动作后confirmed/all有明确断言。新none分支:48证明Hub最终持久规则和本机desired均收紧；未另断言普通重试后的本机state/ack_generation，不扩大认领其内部确认字段。增加另一等价mode或另一同条件Hub身份可选；重启、损坏回执字段与全平台场景另列gaps，不因这些同义扩展阻塞本分配项。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-remote-race": {
+      "covers": [
+        "remote-reject-no-save"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效。B1/A11过期拒绝不改两端规则与PLAN12.1真实远端CAS竞争直接支撑，remote-reject-no-save虽然quote采用full3片段，完整原始B1/A11的拒绝承诺同样已核对，非新增要求。实现结论：有效，test_reconcile_remote_race.py:12-14显式覆盖CLI/Web×local/hub×first-status/second-status/cas共12组合，:18-23从本机none/远端all的不同业务状态开始；:26-31真实Hub另一提交none并冻结完整status；:34-47真实CAS和真实409映射；:58-59 Web拒绝诊断或:64-66 CLI非零/无成功stdout诊断；:67注入发生；:68完整本机row不变、:69完整最终Hub头等于独立注入后status、:70全部正文快照不变、:71无正文派发。日志12 passed in 1.26s，12组合全部到达最后断言。\n边界推演：仅首次读取后安全、第二次/真正CAS前仍先保存，本机:68首拦；只local拒绝而hub覆盖，hub各参数:58/64或:68拦；两边共同错为旧all，远端独立newer-stop/none快照使:69首拦；仅保留首项目正文、破坏其他历史，:70全表快照拦；任何一个正文派发，:71拦。完整policy是设备级规则，不逐项目执行，本机none/远端all/并发none三种与预期有关状态已存在于动作前或真实注入时，未用额外等价ID要求无限样本。独立tdd-red19在:68真实失败，green19同一冻结测试12 passed以及80项回归单独留档，此处只认领本调试收据。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-stale-local": {
+      "covers": [
+        "stale-local"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效，直接落实B1/A2/A11“Hub版本不变、本机代次变了也拒绝”，与远端版本过期分开。前态是显示none/gen1后本机另存all/gen2且Hub通道失败保持旧revision。实现结论：有效，test_reconcile_snapshot.py:40-41冻结显示；:42-49制造并核对pending新代次及Hub不变；:50独立冻结调用前完整两端row/head；:51-54分别use local/hub返回400和可识别重新查看原因；:55完整两端快照不变，:56没有策略set。日志2 passed in 0.35s，全部到达。\n边界推演：只在use local核对代次、采用hub时覆盖新all，hub参数:53首拦，若假报失败却仍写则:55首拦；只在首入口初始值有效、或先保存再拒绝，同样:55拦。两端都误回none不能用相等蒙混，因为:55对独立动作前before/all与remote_before/none分别比较。保护状态是动作前已存在的新pending all，非动作后才变成all，满足保留已有新保存的要求。将all换成only/except的等价旧代次拒绝样例可选，本机generation差异是这里分支条件；四模式新鲜提交由fresh另测。CLI同义路径和真实旧页面操作不在本TC的Web TestClient证据内，不声称跨入口/跨平台完成。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "covers": [
+        "target-control-dispatch"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效。B1规则绑定稳定Hub/设备与B2换目标重新选择、B4在途边界支撑其公开预期。设计保留“条件保存后”的旧措辞，但末尾明确第二次读取时不约定是否已有暂存，结合PLAN12.1含义明确为第二次远端读取后的派发边界，不增加产品内部顺序要求。实现结论：有效，test_reconcile_dispatch.py:23-24真实第二Hub且身份不同；:33-40第二次status返回时configure到第二Hub并记录真实绑定；:47注入必须发生；:48旧对账400；:49完整旧Hub头不变；:50无任何set；:51原目标desired不替换；:53当前新Hub身份/needs_selection/policy None独立预期；:54新Hub零正文。日志1 passed in 0.26s，全部到达。\n已对照原HEAD该声明：只删“第二次读取已generation增加/pending”两内部先后断言；原“不应旧目标confirmed”改为desired保持，旧目标在拒绝前本就confirmed none、无新提交时保留这个旧确认合法，不能钉死变pending。原各自可失败的公开安全检查均仍在:48-50、:53-54，无检查被丢弃；原冻结红绿灯继续保留。\n边界推演：只保护新Hub却仍写旧Hub，:49或:50首拦；旧/新两目标都误显示已确认，:53以other_id和needs_selection/None独立值首拦；仅首目标有保护而第二Hub收到正文，:54拦。动作前旧Hub已confirmed none、新Hub首次连接needs_selection，两种业务状态分别观察，没有用动作后状态替代前态；新增第三Hub只是同条件标识变化，可选。网络派发之后换目标按B4在途处理不要求撤回，本用例注入在下一次派发之前，范围明确。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-write-window": {
+      "covers": [
+        "write-window"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效，将初始核对通过后至条件保存前的新本机修改单独落实，直接来自B1同锁数据库边界及A2/A11。实现结论：有效，test_reconcile_snapshot.py:65先执行真实status，:66-68返回调用者前另存all并冻结完整row，:75核对注入后desired确为all，:76明确拒绝，:77同时检查最新本机完整row与独立旧Hub完整头保持，:78没有set；use local/hub各一例。日志2 passed in 0.32s，全部到达。\n边界推演：仅开头检查代次却在后续覆盖，:76（若误成功）或:77（报失败但覆盖）首拦；仅local安全而hub不安全，第二参数同断言拦；两个结果共同错为旧none时，动作前changed.row的all使:77首拦。目标是该Hub/设备的完整上传规则，完整row断言覆盖代次、提交身份、ack和状态，不只首字段。pending all在对账继续之前已保存，因此证明保护已有新状态。其他同样过期代次下的等价mode可选；独立远端变化窗口由remote-race承担，派发后新选择由inflight承担，没有用此用例冒充两者。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    },
+    "TC-005-target-dispatch": {
+      "covers": [
+        "review-target-dispatch"
+      ],
+      "reason": "独立只读设计/实现/调试复审，目标debug-reconcile-complete19，result原始字节SHA256=bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c；baseline003原始字节SHA256=493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e。已实际读取真实AGENTS、SPEC B1/B4/D1/A2/A11、PLAN12.1、技能development/reviewer/design及000003 SC2原文；本轮全部场景判据能由上述原文推出，未增行为。design-reconcile-complete19摘要069894b0f2efc6ca89ad59792523c861d5de514240518fe78799605682ee99f0、match-reconcile-complete19摘要b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f及debug全部artifacts重新计算吻合；调试bindings与当前文件吻合，6份冻结测试原始字节与所审源码相同，产品upload.py=b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006。匹配/调试收据的源段、单独命令和本用例分配项已核对，以下断言行号均指冻结source/tests/同名文件。每个TC的原始run.stdout/run.process.json/空stderr均已打开，execution exit0；仅TestClient/httpx弃用警告，没有跳过/xfail。设计和实现分别核对如下。\n设计结论：有效，来自B1/B2稳定目标与B4保存/切换后不启动新的冲突正文，目标切换在已排队、尚未派发时发生，与控制set派发用例分开。实现结论：有效，test_upload_review_regressions.py:37-38准备实际本机正文且旧目标已all；:50-54真实known消息核对返回后连接另一真实Hub；:57注入必须发生；:58独立检查旧Hub全部正文为空，:59独立检查第二Hub全部正文为空，:60当前新目标仍待选择。日志1 passed in 0.28s，全部到达。\n边界推演：只保护首目标、不保护另一个，若旧端偷发:58拦，若新端继承旧all或偷发:59或:60拦。两边同错都收到同一条正文不能用“两边相等”掩盖，因为各自分别比较独立空列表。动作前旧目标已允许、第二Hub首次连接，两种影响结果的目标状态已覆盖；仅仅增加另一个同条件第二Hub或同项目第二条待发消息是可选，正文总列表断言不会只检查首消息。该测试证明未新存正文；它没有记录所有旧端请求路由以单独断言没有尝试被拒绝的upload，因此不认领网络字节召回或全SC停止竞态。旧派发门禁源码federation.py:244及upload.dispatch再核目标与该结果一致，已有实际正文副作用断言不是正常日志替代。\n范围：只认领本TC case_obligations所分配项。design中的full1/full2/full3/full4仍明确列gaps，本轮八TC没有补齐整SC2；完整暂停、崩溃/重启、允许停止允许乱序、真实E1/E3/E4服务身份与安装包/浏览器/旧批次重放，仍须相应独立记录，不能以这些TestClient共用测试替代。只写本轮意见，不改原始材料。",
+      "status": "passed"
+    }
+  },
+  "operation": "review",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-reconcile-complete19/result.json",
+  "recorded_at": "2026-11-22T08:19:46.115000+00:00",
+  "request_id": "review-preparation-reconcile-complete19",
+  "request_sha256": "7ab684ef5f76479771e562b3806f225b56430b71e6597b31b0479a5c07e2a629",
+  "reviewer_response": ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-reconcile-complete19/reviewer.txt",
+  "reviewer_session": "/root/review_005_cas19_green",
+  "revision": null,
+  "scene": "SC2",
+  "status": "reviewed",
+  "target": "debug-reconcile-complete19",
+  "target_operation": "debug",
+  "target_sha256": "bfaae9b53322d7d54598706ccbd93cfdc041304165cf0813f0b69a7c7ac83f3c"
+}

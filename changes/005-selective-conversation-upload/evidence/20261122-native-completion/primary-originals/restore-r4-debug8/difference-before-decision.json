@@ -1,0 +1,53 @@
+{
+  "local": {
+    "configured": true,
+    "hub_id": "a3f62cc05eca4a1eb1f6ce34317a3198",
+    "device_id": "fb6916b703594d28a5367d4a65d527c2",
+    "hub_address": "https://localhost:38021",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "conflict",
+    "hub_revision": 1,
+    "control_epoch": "b77530fdcc164deca084559f1427cdbe",
+    "confirmed_messages": 3,
+    "not_confirmed_messages": 4,
+    "inflight_messages": 0,
+    "unsent_messages": 4,
+    "problem": "Hub 与本机规则不一致，请查看差异",
+    "remote": {
+      "hub_id": "a3f62cc05eca4a1eb1f6ce34317a3198",
+      "device_id": "fb6916b703594d28a5367d4a65d527c2",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "controlled-health-stop",
+      "control_epoch": "faec765b1f574c189c150b4f02bb6e00",
+      "restore_pending": true,
+      "conflict": true
+    },
+    "transfer_state": "blocked",
+    "transfer_problem": null,
+    "allowed_pending_messages": 2,
+    "last_transfer_attempt": "2026-11-22T06:00:26.813078+00:00",
+    "last_transfer_success": "2026-11-22T06:00:26.813078+00:00"
+  },
+  "hub": {
+    "hub_id": "a3f62cc05eca4a1eb1f6ce34317a3198",
+    "device_id": "fb6916b703594d28a5367d4a65d527c2",
+    "revision": 2,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "controlled-health-stop",
+    "control_epoch": "faec765b1f574c189c150b4f02bb6e00",
+    "restore_pending": true,
+    "conflict": true
+  }
+}

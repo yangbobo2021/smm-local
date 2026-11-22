@@ -1,0 +1,983 @@
+{
+  "changed_links": [
+    [
+      {
+        "a": 1,
+        "b": 3
+      },
+      {
+        "a": 1,
+        "b": 5
+      }
+    ]
+  ],
+  "frozen": {
+    "query": "common",
+    "scope": "project",
+    "requested_scope": "project",
+    "archive_scope": "combined",
+    "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "886f9303473b40738943231bb1b8cd46",
+        "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57",
+        "device_name": "synthetic-device"
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "886f9303473b40738943231bb1b8cd46",
+        "source_key": "7ff8c9721654faaf74e79e5713c96a92",
+        "device_name": "synthetic-device"
+      },
+      {
+        "id": 4,
+        "name": "RemoteB",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "source_key": "remote-b-project",
+        "device_name": "other-device"
+      }
+    ],
+    "local_effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      },
+      {
+        "id": 2,
+        "name": "D"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 2,
+      "hub_count": 2,
+      "hub_returned_count": 2,
+      "method": "BM25"
+    },
+    "results": [
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "remote-b",
+        "title": "common RemoteB",
+        "started_at": null,
+        "updated_at": "2026-11-01T00:00:00Z",
+        "project_id": 4,
+        "project_name": "RemoteB",
+        "rank": 1,
+        "bm25_score": 0.14181954802880337,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common RemoteB",
+            "timestamp": "2026-11-01T00:00:00Z",
+            "canonical_id": "be99b15b6f2c6deecd4d476ad8e019aac3b307589df6640de06c066a18d948af",
+            "content_version": "b5f277fd0cda4d862898f0a76b4d0c841ace42ad0e5ac78561f21d939165c31b",
+            "hub_message_id": 3,
+            "origins": [
+              {
+                "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "device_name": "other-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 4,
+                "project_name": "RemoteB"
+              }
+            ],
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f"
+          }
+        ],
+        "projects": [
+          {
+            "id": 4,
+            "name": "RemoteB",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "source_key": "remote-b-project",
+            "device_name": "other-device"
+          }
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f",
+        "origin_session_key": "remote-b",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "device_name": "other-device"
+          }
+        ],
+        "archive_scope": "hub",
+        "rerank_score": 0.14181954802880337,
+        "origin_references": [
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "local-d",
+        "title": "common D",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "D",
+        "rank": 2,
+        "bm25_score": 0.14181954802880337,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common D",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "synthetic-device",
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "source_position": 1
+              },
+              {
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 2,
+                "project_name": "D"
+              }
+            ],
+            "canonical_id": "daa88984191ff7b81dbe15f43b75cb2b1c50b9e8f267de5b7f581922f10553d2",
+            "content_version": "46b20353ae50e33974b154912953513fdfb826b7d3cfb94004fafad04e74d5a6",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZC1tZXNzYWdlIiwidmVyc2lvbiI6IjQ2YjIwMzUzYWU1MGUzMzk3NGIxNTQ5MTI5NTM1MTNmZGZiODI2YjdkM2NmYjk0MDA0ZmFmYWQwNGU3NGQ1YTYifV0sIm9yaWdpbl9pZGVudGl0eSI6ImU3MGFkMTQ5N2ZlOGM5NWY5MjhhNjgwNGVmZDlmYzI3MjI1MDU4NWQxNThhY2FkMWYyZTM5MTQ3Y2ExNzAzNDEiLCJwcm9qZWN0X2lkcyI6WzJdLCJzb3VyY2UiOiJjb2RleCJ9.783ed95ddf490192300b39acbbd01d36e34d4c1cd147ceb207a8efd5fcf825d6"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "886f9303473b40738943231bb1b8cd46"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-d",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZC1tZXNzYWdlIiwidmVyc2lvbiI6IjQ2YjIwMzUzYWU1MGUzMzk3NGIxNTQ5MTI5NTM1MTNmZGZiODI2YjdkM2NmYjk0MDA0ZmFmYWQwNGU3NGQ1YTYifV0sIm9yaWdpbl9pZGVudGl0eSI6ImU3MGFkMTQ5N2ZlOGM5NWY5MjhhNjgwNGVmZDlmYzI3MjI1MDU4NWQxNThhY2FkMWYyZTM5MTQ3Y2ExNzAzNDEiLCJwcm9qZWN0X2lkcyI6WzJdLCJzb3VyY2UiOiJjb2RleCJ9.783ed95ddf490192300b39acbbd01d36e34d4c1cd147ceb207a8efd5fcf825d6",
+        "rerank_score": 0.14181954802880337,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZC1tZXNzYWdlIiwidmVyc2lvbiI6IjQ2YjIwMzUzYWU1MGUzMzk3NGIxNTQ5MTI5NTM1MTNmZGZiODI2YjdkM2NmYjk0MDA0ZmFmYWQwNGU3NGQ1YTYifV0sIm9yaWdpbl9pZGVudGl0eSI6ImU3MGFkMTQ5N2ZlOGM5NWY5MjhhNjgwNGVmZDlmYzI3MjI1MDU4NWQxNThhY2FkMWYyZTM5MTQ3Y2ExNzAzNDEiLCJwcm9qZWN0X2lkcyI6WzJdLCJzb3VyY2UiOiJjb2RleCJ9.783ed95ddf490192300b39acbbd01d36e34d4c1cd147ceb207a8efd5fcf825d6"
+          },
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImZkZTFjYjU1YzFlMzE0ZDdjMzEzZmY4MTAwOTAyMDliNDkwYjVkOWY3OTA1NThkZDE0NDBjMzMzNjIzMzIxMDkiLCJ2ZXJzaW9uIjoiNDZiMjAzNTNhZTUwZTMzOTc0YjE1NDkxMjk1MzUxM2ZkZmI4MjZiN2QzY2ZiOTQwMDRmYWZhZDA0ZTc0ZDVhNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiZTcwYWQxNDk3ZmU4Yzk1ZjkyOGE2ODA0ZWZkOWZjMjcyMjUwNTg1ZDE1OGFjYWQxZjJlMzkxNDdjYTE3MDM0MSIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.07e3d6d9ebbad6fb879195315659d2900cf1a99c6586be1afcbc2da99941995a"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "local-a",
+        "title": "common private A",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 3,
+        "bm25_score": 0.11955717711730514,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common private A",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "synthetic-device",
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "8cf937780f2bbff722d349fa6a1984a605869bc1808bf3c989b1cf90d40d511e",
+            "content_version": "c6df5b768c38ce9d2e7cde81b76390a6158a8f88d78de82f56be9cf3a447da6f",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "886f9303473b40738943231bb1b8cd46"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-a",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838",
+        "rerank_score": 0.11955717711730514,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838"
+          }
+        ]
+      }
+    ]
+  },
+  "reads": {
+    "remote-b": {
+      "id": 3,
+      "source": "codex",
+      "source_session_id": "remote-b",
+      "source_path": "",
+      "cwd": null,
+      "started_at": null,
+      "updated_at": "2026-11-01T00:00:00Z",
+      "title": "common RemoteB",
+      "project_id": 4,
+      "project_name": "RemoteB",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "common RemoteB",
+          "timestamp": "2026-11-01T00:00:00Z",
+          "canonical_id": "be99b15b6f2c6deecd4d476ad8e019aac3b307589df6640de06c066a18d948af",
+          "content_version": "b5f277fd0cda4d862898f0a76b4d0c841ace42ad0e5ac78561f21d939165c31b",
+          "hub_message_id": 3,
+          "origins": [
+            {
+              "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "device_name": "other-device",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 4,
+              "project_name": "RemoteB"
+            }
+          ],
+          "source_order": 1,
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f"
+        }
+      ],
+      "projects": [
+        {
+          "id": 4,
+          "name": "RemoteB",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "source_key": "remote-b-project",
+          "device_name": "other-device"
+        }
+      ],
+      "origin_session_key": "remote-b",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "device_name": "other-device"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    "local-d": {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "local-d",
+      "source_path": "<pytest-fixture>",
+      "cwd": "<pytest-fixture>",
+      "started_at": null,
+      "updated_at": null,
+      "title": "common D",
+      "project_id": 2,
+      "project_name": "D",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "common D",
+          "timestamp": null,
+          "canonical_id": "daa88984191ff7b81dbe15f43b75cb2b1c50b9e8f267de5b7f581922f10553d2",
+          "content_version": "46b20353ae50e33974b154912953513fdfb826b7d3cfb94004fafad04e74d5a6",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZC1tZXNzYWdlIiwidmVyc2lvbiI6IjQ2YjIwMzUzYWU1MGUzMzk3NGIxNTQ5MTI5NTM1MTNmZGZiODI2YjdkM2NmYjk0MDA0ZmFmYWQwNGU3NGQ1YTYifV0sIm9yaWdpbl9pZGVudGl0eSI6ImU3MGFkMTQ5N2ZlOGM5NWY5MjhhNjgwNGVmZDlmYzI3MjI1MDU4NWQxNThhY2FkMWYyZTM5MTQ3Y2ExNzAzNDEiLCJwcm9qZWN0X2lkcyI6WzJdLCJzb3VyY2UiOiJjb2RleCJ9.783ed95ddf490192300b39acbbd01d36e34d4c1cd147ceb207a8efd5fcf825d6",
+          "source_order": 1,
+          "origins": [
+            {
+              "device_name": "synthetic-device",
+              "device_id": "886f9303473b40738943231bb1b8cd46",
+              "source_position": 1
+            }
+          ]
+        }
+      ],
+      "origins": [
+        {
+          "device_name": "synthetic-device",
+          "device_id": "886f9303473b40738943231bb1b8cd46"
+        }
+      ],
+      "archive_scope": "local"
+    },
+    "local-a": {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "local-a",
+      "source_path": "<pytest-fixture>",
+      "cwd": "<pytest-fixture>",
+      "started_at": null,
+      "updated_at": null,
+      "title": "common private A",
+      "project_id": 1,
+      "project_name": "A",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "common private A",
+          "timestamp": null,
+          "canonical_id": "8cf937780f2bbff722d349fa6a1984a605869bc1808bf3c989b1cf90d40d511e",
+          "content_version": "c6df5b768c38ce9d2e7cde81b76390a6158a8f88d78de82f56be9cf3a447da6f",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838",
+          "source_order": 1,
+          "origins": [
+            {
+              "device_name": "synthetic-device",
+              "device_id": "886f9303473b40738943231bb1b8cd46",
+              "source_position": 1
+            }
+          ]
+        }
+      ],
+      "origins": [
+        {
+          "device_name": "synthetic-device",
+          "device_id": "886f9303473b40738943231bb1b8cd46"
+        }
+      ],
+      "archive_scope": "local"
+    }
+  },
+  "fresh": {
+    "query": "common",
+    "scope": "project",
+    "requested_scope": "project",
+    "archive_scope": "combined",
+    "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "886f9303473b40738943231bb1b8cd46",
+        "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57",
+        "device_name": "synthetic-device"
+      },
+      {
+        "id": 3,
+        "name": "E",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "886f9303473b40738943231bb1b8cd46",
+        "source_key": "edf14928429bad387cf12d4b7b3a6a5f",
+        "device_name": "synthetic-device"
+      },
+      {
+        "id": 5,
+        "name": "RemoteC",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "source_key": "remote-c-project",
+        "device_name": "other-device"
+      }
+    ],
+    "local_effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      },
+      {
+        "id": 3,
+        "name": "E"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 2,
+      "hub_count": 2,
+      "hub_returned_count": 2,
+      "method": "BM25"
+    },
+    "results": [
+      {
+        "id": 4,
+        "source": "codex",
+        "source_session_id": "remote-c",
+        "title": "common RemoteC",
+        "started_at": null,
+        "updated_at": "2026-11-01T00:00:00Z",
+        "project_id": 5,
+        "project_name": "RemoteC",
+        "rank": 1,
+        "bm25_score": 0.14181954802880337,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common RemoteC",
+            "timestamp": "2026-11-01T00:00:00Z",
+            "canonical_id": "f925ba6001ffd2149c2b4af557e2d356da92a7fd13fd925930b3f2360a15c392",
+            "content_version": "95c9c69153676ccf32b83960bdd2772edaf2970d9fcb98b5ea669fb89267208c",
+            "hub_message_id": 4,
+            "origins": [
+              {
+                "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "device_name": "other-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 5,
+                "project_name": "RemoteC"
+              }
+            ],
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjhmMjZmNDk5ZmU5ZWJiZTUzZGUyNzgwOThmYmM0YzJmZTRjNGZkNGM2ZDM1NDhlMDU0YThjZDM4ZTcyMDJiNWIiLCJ2ZXJzaW9uIjoiOTVjOWM2OTE1MzY3NmNjZjMyYjgzOTYwYmRkMjc3MmVkYWYyOTcwZDlmY2I5OGI1ZWE2NjlmYjg5MjY3MjA4YyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODc2OTg2ZGNiNTFiZDRjOGVjZTAxZWFlNTg4OGMzYzJhZTI2NDczYTBkZDVlNWMzYTdlYzQyYmE4YWJkMWQ5MCIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.a23f5261be5dbb8b1ed2e9747dbcdaae1036a8883c511e80d5988ecf0ead4696"
+          }
+        ],
+        "projects": [
+          {
+            "id": 5,
+            "name": "RemoteC",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "source_key": "remote-c-project",
+            "device_name": "other-device"
+          }
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjhmMjZmNDk5ZmU5ZWJiZTUzZGUyNzgwOThmYmM0YzJmZTRjNGZkNGM2ZDM1NDhlMDU0YThjZDM4ZTcyMDJiNWIiLCJ2ZXJzaW9uIjoiOTVjOWM2OTE1MzY3NmNjZjMyYjgzOTYwYmRkMjc3MmVkYWYyOTcwZDlmY2I5OGI1ZWE2NjlmYjg5MjY3MjA4YyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODc2OTg2ZGNiNTFiZDRjOGVjZTAxZWFlNTg4OGMzYzJhZTI2NDczYTBkZDVlNWMzYTdlYzQyYmE4YWJkMWQ5MCIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.a23f5261be5dbb8b1ed2e9747dbcdaae1036a8883c511e80d5988ecf0ead4696",
+        "origin_session_key": "remote-c",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "device_name": "other-device"
+          }
+        ],
+        "archive_scope": "hub",
+        "rerank_score": 0.14181954802880337,
+        "origin_references": [
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjhmMjZmNDk5ZmU5ZWJiZTUzZGUyNzgwOThmYmM0YzJmZTRjNGZkNGM2ZDM1NDhlMDU0YThjZDM4ZTcyMDJiNWIiLCJ2ZXJzaW9uIjoiOTVjOWM2OTE1MzY3NmNjZjMyYjgzOTYwYmRkMjc3MmVkYWYyOTcwZDlmY2I5OGI1ZWE2NjlmYjg5MjY3MjA4YyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODc2OTg2ZGNiNTFiZDRjOGVjZTAxZWFlNTg4OGMzYzJhZTI2NDczYTBkZDVlNWMzYTdlYzQyYmE4YWJkMWQ5MCIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.a23f5261be5dbb8b1ed2e9747dbcdaae1036a8883c511e80d5988ecf0ead4696"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "local-e",
+        "title": "common E",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 3,
+        "project_name": "E",
+        "rank": 2,
+        "bm25_score": 0.14181954802880337,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common E",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "synthetic-device",
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "source_position": 1
+              },
+              {
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 3,
+                "project_name": "E"
+              }
+            ],
+            "canonical_id": "0ff8e40a98a1be1bf350d277f15c5514aac6b1c356e576a332ed4215138a1841",
+            "content_version": "341efef5fa7a88847ad33f5a81d8ec1b63c65db289650c699bd16d8e3e76ed66",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjMsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjMsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZS1tZXNzYWdlIiwidmVyc2lvbiI6IjM0MWVmZWY1ZmE3YTg4ODQ3YWQzM2Y1YTgxZDhlYzFiNjNjNjVkYjI4OTY1MGM2OTliZDE2ZDhlM2U3NmVkNjYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjA2NDlkY2M2MTExYjU5OTc4NTc3ZWMzOWQ5ODg0MTA1MzdjMTYxMmNlZjBhNmI0NjhmMDE1NjczZjMwMmUzOTciLCJwcm9qZWN0X2lkcyI6WzNdLCJzb3VyY2UiOiJjb2RleCJ9.888d8e0577224170b19db6052f7b939b5ce8d1c74c938e1fc2c97dbc17dae556"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "886f9303473b40738943231bb1b8cd46"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-e",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjMsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjMsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZS1tZXNzYWdlIiwidmVyc2lvbiI6IjM0MWVmZWY1ZmE3YTg4ODQ3YWQzM2Y1YTgxZDhlYzFiNjNjNjVkYjI4OTY1MGM2OTliZDE2ZDhlM2U3NmVkNjYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjA2NDlkY2M2MTExYjU5OTc4NTc3ZWMzOWQ5ODg0MTA1MzdjMTYxMmNlZjBhNmI0NjhmMDE1NjczZjMwMmUzOTciLCJwcm9qZWN0X2lkcyI6WzNdLCJzb3VyY2UiOiJjb2RleCJ9.888d8e0577224170b19db6052f7b939b5ce8d1c74c938e1fc2c97dbc17dae556",
+        "rerank_score": 0.14181954802880337,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjMsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjMsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtZS1tZXNzYWdlIiwidmVyc2lvbiI6IjM0MWVmZWY1ZmE3YTg4ODQ3YWQzM2Y1YTgxZDhlYzFiNjNjNjVkYjI4OTY1MGM2OTliZDE2ZDhlM2U3NmVkNjYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjA2NDlkY2M2MTExYjU5OTc4NTc3ZWMzOWQ5ODg0MTA1MzdjMTYxMmNlZjBhNmI0NjhmMDE1NjczZjMwMmUzOTciLCJwcm9qZWN0X2lkcyI6WzNdLCJzb3VyY2UiOiJjb2RleCJ9.888d8e0577224170b19db6052f7b939b5ce8d1c74c938e1fc2c97dbc17dae556"
+          },
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImEzYjcxYjgwZjRjZTI0ZGVjNGI3OTg4ZDI2NzI5MzlhYmE3Y2JhZWFkYTA0NTg4YzlhOTczNmZlYzA5MTk3YTIiLCJ2ZXJzaW9uIjoiMzQxZWZlZjVmYTdhODg4NDdhZDMzZjVhODFkOGVjMWI2M2M2NWRiMjg5NjUwYzY5OWJkMTZkOGUzZTc2ZWQ2NiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMDY0OWRjYzYxMTFiNTk5Nzg1NzdlYzM5ZDk4ODQxMDUzN2MxNjEyY2VmMGE2YjQ2OGYwMTU2NzNmMzAyZTM5NyIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.28b9eb6c1111ac93d02f870563184b272daa352a49e4a7bc7558ab83e4a50c4d"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "local-a",
+        "title": "common private A",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 3,
+        "bm25_score": 0.11955717711730514,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "common private A",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "synthetic-device",
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "8cf937780f2bbff722d349fa6a1984a605869bc1808bf3c989b1cf90d40d511e",
+            "content_version": "c6df5b768c38ce9d2e7cde81b76390a6158a8f88d78de82f56be9cf3a447da6f",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "886f9303473b40738943231bb1b8cd46"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-a",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838",
+        "rerank_score": 0.11955717711730514,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiOTU3YTI4MGY4ZTllNDdjZDk0ZTFiZGMyZmY4NGY3MzkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtYS1tZXNzYWdlIiwidmVyc2lvbiI6ImM2ZGY1Yjc2OGMzOGNlOWQyZTdjZGU4MWI3NjM5MGE2MTU4YThmODhkNzhkZTgyZjU2YmU5Y2YzYTQ0N2RhNmYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjdkYzI1MTk2MTA4YjU0ZTQ3YzM1NjMyNWJmOWIzY2RjNDMxOGY0NGNkZDU1ZDIwYWRiNTY5YjRlZDMxMTcwMzMiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.ca117e69453b27f9b3f183a8a8d2e9c404748c799240b13d89700df77ecd8838"
+          }
+        ]
+      }
+    ]
+  },
+  "endpoint_responses": {
+    "scope": [
+      {
+        "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57",
+            "device_name": "synthetic-device"
+          },
+          {
+            "id": 2,
+            "name": "D",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "source_key": "7ff8c9721654faaf74e79e5713c96a92",
+            "device_name": "synthetic-device"
+          },
+          {
+            "id": 4,
+            "name": "RemoteB",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "source_key": "remote-b-project",
+            "device_name": "other-device"
+          }
+        ],
+        "scope_reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJkZXZpY2VfaWQiOiI4ODZmOTMwMzQ3M2I0MDczODk0MzIzMWJiMWI4Y2Q0NiIsImZvcm1hdCI6MSwiaHViX2lkIjoiNDgyN2ZhOWQxNTRhNDJjNmE4ODdiM2M3ODNjNzBmYTYiLCJraW5kIjoicXVlcnlfc2NvcGUiLCJwcm9qZWN0X2tleSI6ImU2YmM3MmY0N2VhNmY0ZWUyNDU2YjQxZDZhMjliZDU3IiwicHJvamVjdHMiOlt7ImRldmljZV9uYW1lIjoic3ludGhldGljLWRldmljZSIsImlkIjoxLCJuYW1lIjoiQSIsIm93bmVyIjoiODg2ZjkzMDM0NzNiNDA3Mzg5NDMyMzFiYjFiOGNkNDYiLCJwcm9qZWN0X2tpbmQiOiJvcmRpbmFyeSIsInNvdXJjZSI6ImRldmljZSIsInNvdXJjZV9rZXkiOiJlNmJjNzJmNDdlYTZmNGVlMjQ1NmI0MWQ2YTI5YmQ1NyJ9LHsiZGV2aWNlX25hbWUiOiJzeW50aGV0aWMtZGV2aWNlIiwiaWQiOjIsIm5hbWUiOiJEIiwib3duZXIiOiI4ODZmOTMwMzQ3M2I0MDczODk0MzIzMWJiMWI4Y2Q0NiIsInByb2plY3Rfa2luZCI6Im9yZGluYXJ5Iiwic291cmNlIjoiZGV2aWNlIiwic291cmNlX2tleSI6IjdmZjhjOTcyMTY1NGZhYWY3NGU3OWU1NzEzYzk2YTkyIn0seyJkZXZpY2VfbmFtZSI6Im90aGVyLWRldmljZSIsImlkIjo0LCJuYW1lIjoiUmVtb3RlQiIsIm93bmVyIjoiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmIiLCJwcm9qZWN0X2tpbmQiOiJvcmRpbmFyeSIsInNvdXJjZSI6ImRldmljZSIsInNvdXJjZV9rZXkiOiJyZW1vdGUtYi1wcm9qZWN0In1dfQ.25a3f1940d175daf2babd08a3ba52d8eea2a83cad30d048ae7218272c268cf4c"
+      },
+      {
+        "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57",
+            "device_name": "synthetic-device"
+          },
+          {
+            "id": 3,
+            "name": "E",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "source_key": "edf14928429bad387cf12d4b7b3a6a5f",
+            "device_name": "synthetic-device"
+          },
+          {
+            "id": 5,
+            "name": "RemoteC",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "source_key": "remote-c-project",
+            "device_name": "other-device"
+          }
+        ],
+        "scope_reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJkZXZpY2VfaWQiOiI4ODZmOTMwMzQ3M2I0MDczODk0MzIzMWJiMWI4Y2Q0NiIsImZvcm1hdCI6MSwiaHViX2lkIjoiNDgyN2ZhOWQxNTRhNDJjNmE4ODdiM2M3ODNjNzBmYTYiLCJraW5kIjoicXVlcnlfc2NvcGUiLCJwcm9qZWN0X2tleSI6ImU2YmM3MmY0N2VhNmY0ZWUyNDU2YjQxZDZhMjliZDU3IiwicHJvamVjdHMiOlt7ImRldmljZV9uYW1lIjoic3ludGhldGljLWRldmljZSIsImlkIjoxLCJuYW1lIjoiQSIsIm93bmVyIjoiODg2ZjkzMDM0NzNiNDA3Mzg5NDMyMzFiYjFiOGNkNDYiLCJwcm9qZWN0X2tpbmQiOiJvcmRpbmFyeSIsInNvdXJjZSI6ImRldmljZSIsInNvdXJjZV9rZXkiOiJlNmJjNzJmNDdlYTZmNGVlMjQ1NmI0MWQ2YTI5YmQ1NyJ9LHsiZGV2aWNlX25hbWUiOiJzeW50aGV0aWMtZGV2aWNlIiwiaWQiOjMsIm5hbWUiOiJFIiwib3duZXIiOiI4ODZmOTMwMzQ3M2I0MDczODk0MzIzMWJiMWI4Y2Q0NiIsInByb2plY3Rfa2luZCI6Im9yZGluYXJ5Iiwic291cmNlIjoiZGV2aWNlIiwic291cmNlX2tleSI6ImVkZjE0OTI4NDI5YmFkMzg3Y2YxMmQ0YjdiM2E2YTVmIn0seyJkZXZpY2VfbmFtZSI6Im90aGVyLWRldmljZSIsImlkIjo1LCJuYW1lIjoiUmVtb3RlQyIsIm93bmVyIjoiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmIiLCJwcm9qZWN0X2tpbmQiOiJvcmRpbmFyeSIsInNvdXJjZSI6ImRldmljZSIsInNvdXJjZV9rZXkiOiJyZW1vdGUtYy1wcm9qZWN0In1dfQ.891480d7ebf53043f560e1f25090b3eb811ebbfd8b4ee4f3846162fceec60a20"
+      }
+    ],
+    "hub": [
+      {
+        "query": "common",
+        "scope": "project",
+        "effective_projects": [
+          {
+            "device_name": "synthetic-device",
+            "id": 1,
+            "name": "A",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57"
+          },
+          {
+            "device_name": "synthetic-device",
+            "id": 2,
+            "name": "D",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "7ff8c9721654faaf74e79e5713c96a92"
+          },
+          {
+            "device_name": "other-device",
+            "id": 4,
+            "name": "RemoteB",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "remote-b-project"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "results": [
+          {
+            "id": 3,
+            "source": "codex",
+            "source_session_id": "remote-b",
+            "title": "common RemoteB",
+            "started_at": null,
+            "updated_at": "2026-11-01T00:00:00Z",
+            "project_id": 4,
+            "project_name": "RemoteB",
+            "rank": 1,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "common RemoteB",
+                "timestamp": "2026-11-01T00:00:00Z",
+                "canonical_id": "be99b15b6f2c6deecd4d476ad8e019aac3b307589df6640de06c066a18d948af",
+                "content_version": "b5f277fd0cda4d862898f0a76b4d0c841ace42ad0e5ac78561f21d939165c31b",
+                "hub_message_id": 3,
+                "origins": [
+                  {
+                    "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                    "device_name": "other-device",
+                    "source_position": 1,
+                    "source_order": 1,
+                    "project_id": 4,
+                    "project_name": "RemoteB"
+                  }
+                ],
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f"
+              }
+            ],
+            "projects": [
+              {
+                "id": 4,
+                "name": "RemoteB",
+                "project_kind": "ordinary",
+                "source": "device",
+                "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_key": "remote-b-project",
+                "device_name": "other-device"
+              }
+            ],
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjE4NDkwYWE3YWFlODJjZTI4OGUyMTIzNzMzNjVkMjE0MTQ1NDdlMTVmMmI0Yzc2YzIyNzQ0NTZmYTg1ZTdkMmIiLCJ2ZXJzaW9uIjoiYjVmMjc3ZmQwY2RhNGQ4NjI4OThmMGE3NmI0ZDBjODQxYWNlNDJhZDBlNWFjNzg1NjFmMjFkOTM5MTY1YzMxYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiN2E4ZDI4OTIwODYxZjAyYWJhYmNiYWMwODhlOTk3YjdiYzgyODNhOWNlYWNlOTBiNTA0NmYwZjAxZmNkYzdiYiIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.6528a6a25ed42fa2ae5addfba7c0a5e6bef70e17784cfc69d3fed7b3c2b8379f",
+            "origin_session_key": "remote-b",
+            "identity_namespace": "agent",
+            "origins": [
+              {
+                "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "device_name": "other-device"
+              }
+            ],
+            "archive_scope": "hub"
+          },
+          {
+            "id": 1,
+            "source": "codex",
+            "source_session_id": "local-d",
+            "title": "common D",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 2,
+            "project_name": "D",
+            "rank": 2,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "common D",
+                "timestamp": null,
+                "canonical_id": "daa88984191ff7b81dbe15f43b75cb2b1c50b9e8f267de5b7f581922f10553d2",
+                "content_version": "46b20353ae50e33974b154912953513fdfb826b7d3cfb94004fafad04e74d5a6",
+                "hub_message_id": 1,
+                "origins": [
+                  {
+                    "device_id": "886f9303473b40738943231bb1b8cd46",
+                    "device_name": "synthetic-device",
+                    "source_position": 1,
+                    "source_order": 1,
+                    "project_id": 2,
+                    "project_name": "D"
+                  }
+                ],
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImZkZTFjYjU1YzFlMzE0ZDdjMzEzZmY4MTAwOTAyMDliNDkwYjVkOWY3OTA1NThkZDE0NDBjMzMzNjIzMzIxMDkiLCJ2ZXJzaW9uIjoiNDZiMjAzNTNhZTUwZTMzOTc0YjE1NDkxMjk1MzUxM2ZkZmI4MjZiN2QzY2ZiOTQwMDRmYWZhZDA0ZTc0ZDVhNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiZTcwYWQxNDk3ZmU4Yzk1ZjkyOGE2ODA0ZWZkOWZjMjcyMjUwNTg1ZDE1OGFjYWQxZjJlMzkxNDdjYTE3MDM0MSIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.07e3d6d9ebbad6fb879195315659d2900cf1a99c6586be1afcbc2da99941995a"
+              }
+            ],
+            "projects": [
+              {
+                "id": 2,
+                "name": "D",
+                "project_kind": "ordinary",
+                "source": "device",
+                "owner": "886f9303473b40738943231bb1b8cd46",
+                "source_key": "7ff8c9721654faaf74e79e5713c96a92",
+                "device_name": "synthetic-device"
+              }
+            ],
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImZkZTFjYjU1YzFlMzE0ZDdjMzEzZmY4MTAwOTAyMDliNDkwYjVkOWY3OTA1NThkZDE0NDBjMzMzNjIzMzIxMDkiLCJ2ZXJzaW9uIjoiNDZiMjAzNTNhZTUwZTMzOTc0YjE1NDkxMjk1MzUxM2ZkZmI4MjZiN2QzY2ZiOTQwMDRmYWZhZDA0ZTc0ZDVhNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiZTcwYWQxNDk3ZmU4Yzk1ZjkyOGE2ODA0ZWZkOWZjMjcyMjUwNTg1ZDE1OGFjYWQxZjJlMzkxNDdjYTE3MDM0MSIsInByb2plY3RfaWRzIjpbMSwyLDRdLCJzb3VyY2UiOiJjb2RleCJ9.07e3d6d9ebbad6fb879195315659d2900cf1a99c6586be1afcbc2da99941995a",
+            "origin_session_key": "local-d",
+            "identity_namespace": "agent",
+            "origins": [
+              {
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "device_name": "synthetic-device"
+              }
+            ],
+            "archive_scope": "hub"
+          }
+        ],
+        "candidate_failures": [],
+        "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+        "returned_count": 2
+      },
+      {
+        "query": "common",
+        "scope": "project",
+        "effective_projects": [
+          {
+            "device_name": "synthetic-device",
+            "id": 1,
+            "name": "A",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "e6bc72f47ea6f4ee2456b41d6a29bd57"
+          },
+          {
+            "device_name": "synthetic-device",
+            "id": 3,
+            "name": "E",
+            "owner": "886f9303473b40738943231bb1b8cd46",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "edf14928429bad387cf12d4b7b3a6a5f"
+          },
+          {
+            "device_name": "other-device",
+            "id": 5,
+            "name": "RemoteC",
+            "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "project_kind": "ordinary",
+            "source": "device",
+            "source_key": "remote-c-project"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "results": [
+          {
+            "id": 4,
+            "source": "codex",
+            "source_session_id": "remote-c",
+            "title": "common RemoteC",
+            "started_at": null,
+            "updated_at": "2026-11-01T00:00:00Z",
+            "project_id": 5,
+            "project_name": "RemoteC",
+            "rank": 1,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "common RemoteC",
+                "timestamp": "2026-11-01T00:00:00Z",
+                "canonical_id": "f925ba6001ffd2149c2b4af557e2d356da92a7fd13fd925930b3f2360a15c392",
+                "content_version": "95c9c69153676ccf32b83960bdd2772edaf2970d9fcb98b5ea669fb89267208c",
+                "hub_message_id": 4,
+                "origins": [
+                  {
+                    "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                    "device_name": "other-device",
+                    "source_position": 1,
+                    "source_order": 1,
+                    "project_id": 5,
+                    "project_name": "RemoteC"
+                  }
+                ],
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjhmMjZmNDk5ZmU5ZWJiZTUzZGUyNzgwOThmYmM0YzJmZTRjNGZkNGM2ZDM1NDhlMDU0YThjZDM4ZTcyMDJiNWIiLCJ2ZXJzaW9uIjoiOTVjOWM2OTE1MzY3NmNjZjMyYjgzOTYwYmRkMjc3MmVkYWYyOTcwZDlmY2I5OGI1ZWE2NjlmYjg5MjY3MjA4YyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODc2OTg2ZGNiNTFiZDRjOGVjZTAxZWFlNTg4OGMzYzJhZTI2NDczYTBkZDVlNWMzYTdlYzQyYmE4YWJkMWQ5MCIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.a23f5261be5dbb8b1ed2e9747dbcdaae1036a8883c511e80d5988ecf0ead4696"
+              }
+            ],
+            "projects": [
+              {
+                "id": 5,
+                "name": "RemoteC",
+                "project_kind": "ordinary",
+                "source": "device",
+                "owner": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_key": "remote-c-project",
+                "device_name": "other-device"
+              }
+            ],
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjhmMjZmNDk5ZmU5ZWJiZTUzZGUyNzgwOThmYmM0YzJmZTRjNGZkNGM2ZDM1NDhlMDU0YThjZDM4ZTcyMDJiNWIiLCJ2ZXJzaW9uIjoiOTVjOWM2OTE1MzY3NmNjZjMyYjgzOTYwYmRkMjc3MmVkYWYyOTcwZDlmY2I5OGI1ZWE2NjlmYjg5MjY3MjA4YyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODc2OTg2ZGNiNTFiZDRjOGVjZTAxZWFlNTg4OGMzYzJhZTI2NDczYTBkZDVlNWMzYTdlYzQyYmE4YWJkMWQ5MCIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.a23f5261be5dbb8b1ed2e9747dbcdaae1036a8883c511e80d5988ecf0ead4696",
+            "origin_session_key": "remote-c",
+            "identity_namespace": "agent",
+            "origins": [
+              {
+                "device_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "device_name": "other-device"
+              }
+            ],
+            "archive_scope": "hub"
+          },
+          {
+            "id": 2,
+            "source": "codex",
+            "source_session_id": "local-e",
+            "title": "common E",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 3,
+            "project_name": "E",
+            "rank": 2,
+            "bm25_score": 1e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "common E",
+                "timestamp": null,
+                "canonical_id": "0ff8e40a98a1be1bf350d277f15c5514aac6b1c356e576a332ed4215138a1841",
+                "content_version": "341efef5fa7a88847ad33f5a81d8ec1b63c65db289650c699bd16d8e3e76ed66",
+                "hub_message_id": 2,
+                "origins": [
+                  {
+                    "device_id": "886f9303473b40738943231bb1b8cd46",
+                    "device_name": "synthetic-device",
+                    "source_position": 1,
+                    "source_order": 1,
+                    "project_id": 3,
+                    "project_name": "E"
+                  }
+                ],
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImEzYjcxYjgwZjRjZTI0ZGVjNGI3OTg4ZDI2NzI5MzlhYmE3Y2JhZWFkYTA0NTg4YzlhOTczNmZlYzA5MTk3YTIiLCJ2ZXJzaW9uIjoiMzQxZWZlZjVmYTdhODg4NDdhZDMzZjVhODFkOGVjMWI2M2M2NWRiMjg5NjUwYzY5OWJkMTZkOGUzZTc2ZWQ2NiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMDY0OWRjYzYxMTFiNTk5Nzg1NzdlYzM5ZDk4ODQxMDUzN2MxNjEyY2VmMGE2YjQ2OGYwMTU2NzNmMzAyZTM5NyIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.28b9eb6c1111ac93d02f870563184b272daa352a49e4a7bc7558ab83e4a50c4d"
+              }
+            ],
+            "projects": [
+              {
+                "id": 3,
+                "name": "E",
+                "project_kind": "ordinary",
+                "source": "device",
+                "owner": "886f9303473b40738943231bb1b8cd46",
+                "source_key": "edf14928429bad387cf12d4b7b3a6a5f",
+                "device_name": "synthetic-device"
+              }
+            ],
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiZDFmMzE3MjA0YTMzNGQ2NzlhOWUxZmZjMmNmMTUzNDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjQ4MjdmYTlkMTU0YTQyYzZhODg3YjNjNzgzYzcwZmE2Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImEzYjcxYjgwZjRjZTI0ZGVjNGI3OTg4ZDI2NzI5MzlhYmE3Y2JhZWFkYTA0NTg4YzlhOTczNmZlYzA5MTk3YTIiLCJ2ZXJzaW9uIjoiMzQxZWZlZjVmYTdhODg4NDdhZDMzZjVhODFkOGVjMWI2M2M2NWRiMjg5NjUwYzY5OWJkMTZkOGUzZTc2ZWQ2NiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMDY0OWRjYzYxMTFiNTk5Nzg1NzdlYzM5ZDk4ODQxMDUzN2MxNjEyY2VmMGE2YjQ2OGYwMTU2NzNmMzAyZTM5NyIsInByb2plY3RfaWRzIjpbMSwzLDVdLCJzb3VyY2UiOiJjb2RleCJ9.28b9eb6c1111ac93d02f870563184b272daa352a49e4a7bc7558ab83e4a50c4d",
+            "origin_session_key": "local-e",
+            "identity_namespace": "agent",
+            "origins": [
+              {
+                "device_id": "886f9303473b40738943231bb1b8cd46",
+                "device_name": "synthetic-device"
+              }
+            ],
+            "archive_scope": "hub"
+          }
+        ],
+        "candidate_failures": [],
+        "hub_id": "4827fa9d154a42c6a887b3c783c70fa6",
+        "returned_count": 2
+      }
+    ]
+  }
+}

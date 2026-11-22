@@ -1,0 +1,168 @@
+{
+  "success": {
+    "query": "uniquelyabsentquery",
+    "scope": "project",
+    "requested_scope": "project",
+    "archive_scope": "combined",
+    "hub_id": "926b57b93da443ab9bf261dfcd06e7b5",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "9dfe60b1d9904cafab494e3170a93147",
+        "source_key": "6428d6c17f9ab4cb3f1e6b1a2d9ed21a",
+        "device_name": "synthetic-device"
+      }
+    ],
+    "local_effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 0,
+      "hub_count": 0,
+      "hub_returned_count": 0,
+      "method": "BM25"
+    },
+    "results": []
+  },
+  "failed": {
+    "query": "uniquelyabsentquery",
+    "scope": "project",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "results": [],
+    "candidate_failures": [],
+    "archive_scope": "local",
+    "requested_scope": "project",
+    "fallback_reason": "synthetic Hub unavailable for empty search",
+    "coverage": {
+      "local": "complete",
+      "hub": "unavailable"
+    }
+  },
+  "explicit_local": {
+    "query": "uniquelyabsentquery",
+    "scope": "project",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "results": [],
+    "candidate_failures": [],
+    "archive_scope": "local",
+    "requested_scope": "project",
+    "fallback_reason": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "not_requested"
+    }
+  },
+  "positive": {
+    "query": "presentpositive",
+    "scope": "project",
+    "requested_scope": "project",
+    "archive_scope": "combined",
+    "hub_id": "926b57b93da443ab9bf261dfcd06e7b5",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "9dfe60b1d9904cafab494e3170a93147",
+        "source_key": "6428d6c17f9ab4cb3f1e6b1a2d9ed21a",
+        "device_name": "synthetic-device"
+      }
+    ],
+    "local_effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 1,
+      "hub_count": 0,
+      "hub_returned_count": 0,
+      "method": "BM25"
+    },
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "empty-a",
+        "title": "presentpositive local",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 0.2876820724517809,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "presentpositive local",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "synthetic-device",
+                "device_id": "9dfe60b1d9904cafab494e3170a93147",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "05e1d043852f716efb303d701f87f1b64dc1f2df6441bcf5efd19afdda50464d",
+            "content_version": "36a451b1c8721f54ae64b6b07f1800c64a8924abc99ded42677d1850b25a08af",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2Y2ODk2YTAwZDY1NGIyYjgzMGY4ZDViODQ1ODY3MDUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoiZW1wdHktYS1tZXNzYWdlIiwidmVyc2lvbiI6IjM2YTQ1MWIxYzg3MjFmNTRhZTY0YjZiMDdmMTgwMGM2NGE4OTI0YWJjOTlkZWQ0MjY3N2QxODUwYjI1YTA4YWYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjFjYWVkMmY1MDU0YThhZTk4YTMyZDJhNTk4ZWE2OGE0MDgyNGFmYWE1OTU3YzM1NjgwMTY2OTYwNTg1YWUwOWEiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.9681b85df4284a11bfa24500bb6e38b9fc3616bc56b1acc9dddbab3b43825f08"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "synthetic-device",
+            "device_id": "9dfe60b1d9904cafab494e3170a93147"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "empty-a",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2Y2ODk2YTAwZDY1NGIyYjgzMGY4ZDViODQ1ODY3MDUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoiZW1wdHktYS1tZXNzYWdlIiwidmVyc2lvbiI6IjM2YTQ1MWIxYzg3MjFmNTRhZTY0YjZiMDdmMTgwMGM2NGE4OTI0YWJjOTlkZWQ0MjY3N2QxODUwYjI1YTA4YWYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjFjYWVkMmY1MDU0YThhZTk4YTMyZDJhNTk4ZWE2OGE0MDgyNGFmYWE1OTU3YzM1NjgwMTY2OTYwNTg1YWUwOWEiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.9681b85df4284a11bfa24500bb6e38b9fc3616bc56b1acc9dddbab3b43825f08",
+        "rerank_score": 0.2876820724517809,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2Y2ODk2YTAwZDY1NGIyYjgzMGY4ZDViODQ1ODY3MDUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoiZW1wdHktYS1tZXNzYWdlIiwidmVyc2lvbiI6IjM2YTQ1MWIxYzg3MjFmNTRhZTY0YjZiMDdmMTgwMGM2NGE4OTI0YWJjOTlkZWQ0MjY3N2QxODUwYjI1YTA4YWYifV0sIm9yaWdpbl9pZGVudGl0eSI6IjFjYWVkMmY1MDU0YThhZTk4YTMyZDJhNTk4ZWE2OGE0MDgyNGFmYWE1OTU3YzM1NjgwMTY2OTYwNTg1YWUwOWEiLCJwcm9qZWN0X2lkcyI6WzFdLCJzb3VyY2UiOiJjb2RleCJ9.9681b85df4284a11bfa24500bb6e38b9fc3616bc56b1acc9dddbab3b43825f08"
+          }
+        ]
+      }
+    ]
+  }
+}

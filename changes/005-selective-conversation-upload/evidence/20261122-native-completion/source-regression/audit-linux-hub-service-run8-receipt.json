@@ -1,0 +1,21 @@
+{
+  "name": "audit-linux-hub-service-run8",
+  "command": [
+    ".venv/bin/python",
+    "scripts/acceptance/selective_upload_audit.py",
+    "--evidence-dir",
+    "<task-path>",
+    "--local-wheel",
+    "<task-path>",
+    "--hub-wheel",
+    "<task-path>",
+    "--output",
+    "<task-path>"
+  ],
+  "started_at": "2026-11-22T10:25:09.019793+00:00",
+  "finished_at": "2026-11-22T10:25:09.058325+00:00",
+  "exit_code": 0,
+  "stdout_sha256": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "input_manifest_sha256": "ef4b3b069e8301cadaf6eaacf2a18a320bd37fc7a1308c92f00f61e0b3b62c5c"
+}

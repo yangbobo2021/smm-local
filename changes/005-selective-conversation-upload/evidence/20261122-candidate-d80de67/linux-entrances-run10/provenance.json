@@ -1,0 +1,67 @@
+{
+  "source": "AT-SMM-005 private original linux-entrances-run10",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "controllers": {
+    "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_platform.py": "e45453433bc61eba96a0807ae298a33098b1aa60224b4adee28b6754a83c1102",
+    "selective_upload_windows_limited.py": "f47e079e706060713b03c473475a6e0a49139fb03427fd1536f6fe30e511a43d"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "combined-all.json",
+      "original_sha256": "28506900b59cfa6b87f7db53fa76cfb3353f5e359acfbb6e5bc2cb56eb1bf5db",
+      "export_sha256": "28506900b59cfa6b87f7db53fa76cfb3353f5e359acfbb6e5bc2cb56eb1bf5db"
+    },
+    {
+      "file": "isolation-result.json",
+      "original_sha256": "5797ff6b05ca03707ac576ce72df693fd5b6e716a5b0b49b0fabf86dc61558f7",
+      "export_sha256": "5797ff6b05ca03707ac576ce72df693fd5b6e716a5b0b49b0fabf86dc61558f7"
+    },
+    {
+      "file": "local-all.json",
+      "original_sha256": "9c0db94bb3eb3d9613fcc2f1071aada57eea8eea8bbfd44f32a0e056ae22fddd",
+      "export_sha256": "9c0db94bb3eb3d9613fcc2f1071aada57eea8eea8bbfd44f32a0e056ae22fddd"
+    },
+    {
+      "file": "local-project.json",
+      "original_sha256": "35fd3d7d501653a8e62aa025b97920ac12094289c2a5499ab803fb922ff1b904",
+      "export_sha256": "35fd3d7d501653a8e62aa025b97920ac12094289c2a5499ab803fb922ff1b904"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "6af69291abf50be52eaf5ea301b63a26b84ea6a02f4c780847f5ec422bc85e57",
+      "export_sha256": "8c296144a801815229563a7c6e219d49ecc111d5867adfaf50b184daab7920db"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "5de7c8c5b9374bd8fcba210071dfa5207409c64633dad54eb39edce03c5520ad",
+      "export_sha256": "5de7c8c5b9374bd8fcba210071dfa5207409c64633dad54eb39edce03c5520ad"
+    },
+    {
+      "file": "payloads.json",
+      "original_sha256": "5e67c86b9514838687156e5e382acb5049882ef6b5c0a7ff8638b3831cb4242b",
+      "export_sha256": "5e67c86b9514838687156e5e382acb5049882ef6b5c0a7ff8638b3831cb4242b"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "2bc66f96747d79a64ffefaf37cac83cb57d288b309695c24dcd4bca236cbd5f6",
+      "export_sha256": "2bc66f96747d79a64ffefaf37cac83cb57d288b309695c24dcd4bca236cbd5f6"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "4b284643735cc6cbe17279bd0137a3e2fea0d88bb8aa23a3aa4399de355ff4ef",
+      "export_sha256": "4b284643735cc6cbe17279bd0137a3e2fea0d88bb8aa23a3aa4399de355ff4ef"
+    },
+    {
+      "file": "sync-observations.json",
+      "original_sha256": "9923eb29e7e0d90ab5db97040415c4cadcf83ba8fad3cca177fb8b0d68edf244",
+      "export_sha256": "9923eb29e7e0d90ab5db97040415c4cadcf83ba8fad3cca177fb8b0d68edf244"
+    }
+  ]
+}

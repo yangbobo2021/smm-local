@@ -140,3 +140,68 @@ python scripts/acceptance/vibeinsight_contracts.py references --evidence-dir <H�
 ```
 
 C 准备阶段记录旧进程实际加载的 core/federation SHA，并从 Hub 完整读回本设备的三段会话；补传后再次完整读回，逐条比较消息 ID、位置、角色、正文、时间和总数。项目元数据允许从空变为有效归属，消息不允许增加或重写。
+
+## 005 上传规则与联合检索（可选）
+
+`selective_upload_fixture.py` 仅生成任务目录内的合成 Agent/插件历史及本机 Hub 的 VibeInsight 归档，不连接 PostgreSQL 或实际来源服务器。
+`selective_upload_prepare.py` 要求候选提交干净，记录两个实际 wheel 的摘要及全部安装模块预期，生成任务 HTTPS 证书及私有目标配置。
+`selective_upload_platform.py` 在两个独立 wheel 环境上核验实际模块，再通过 CLI、独立 stdio MCP、真实浏览器按钮完成范围/原文、断线恢复、停止保留及补传；保存请求审计、截图、trace 和清理退出结果。输出目录必须全新。
+
+```text
+uv sync --extra test --extra acceptance
+uv run python scripts/build_packages.py
+uv venv <local环境>
+uv venv <hub环境>
+uv pip install --python <LocalPython> <本次LocalWheel>
+uv pip install --python <HubPython> <本次HubWheel>
+uv run python -m playwright install chromium
+uv run python scripts/acceptance/selective_upload_prepare.py --work <新任务目录> --local-python <LocalPython> --hub-python <HubPython> --local-wheel <本次LocalWheel> --hub-wheel <本次HubWheel>
+uv run python scripts/acceptance/selective_upload_platform.py self-managed --target-config <任务目录>/target.json --output <新证据目录>
+```
+
+浏览器可用 `prepare --browser <实际Chrome或Edge路径>`；否则使用本环境 Playwright Chromium。Linux 缺少系统依赖时先由有权限的环境准备，不能跳过浏览器后称通过。
+`hub-service` 模式通过实际 Hub setup/enable/disable 执行 E3，需各平台相应服务管理权限；`login-service` 仅 macOS，使用内部 label/logs 参数注册任务专用 LaunchAgent，保留日常 `ai.smm.local`。`client` 在本系统普通用户运行，Windows 不能以管理员进程冒充普通交互用户。
+目标配置中的解释器、TLS 文件与目录必须能被实际 Hub 服务账户访问；Windows LocalService 的叶子文件 ACL 也需核对。配置与 Token 保持私有，脚本只导出脱敏的合成资料。
+
+这些探针只证明实际执行的检查，完整矩阵仍对照[005 PLAN](../../changes/005-selective-conversation-upload/plan.md)填写；R1–R6、新旧真实版本组合和剩余边界不能仅以某次核心流程通过替代。
+
+`selective_upload_recovery.py` 在独立档案上执行 R1/R2/R3 的实际 `prepare-restore`→停服务→恢复清单→重启→查看差异→明确采用 Hub→允许补传。R3 要求 `hub-service`，同时恢复旧 `hub.json`，保留排除的保护文件。R4 在真实 Linux systemd 用户服务中调用已安装候选的 `Hub.upgrade`，以离线安装成功桩避免访问发布仓库，在真实服务启动后确认一条新停止规则，再注入健康失败；验证实际恢复路径保留该限制。它不模拟已发布新包安装成功，包字节始终是本次候选，证据明确记录这一边界。R4 的 Hub 环境放在任务自己的 `tools/smm-hub` 下，使实际升级入口的环境检查仍正常执行。
+
+```text
+<控制端Python> scripts/acceptance/selective_upload_recovery.py self-managed --case R1 --target-config <新配置> --output <新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py self-managed --case R2 --target-config <另一新配置> --output <另一新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py hub-service --case R3 --target-config <另一新配置> --output <另一新证据目录>
+<控制端Python> scripts/acceptance/selective_upload_recovery.py hub-service --case R4 --target-config <另一新配置> --output <另一新证据目录>
+```
+
+Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` 在当前已登录用户的 Limited 交互任务中运行，配置增加 `controller_python`；对应 Hub 服务探针用 `--mode hub-service` 的 Highest 交互任务，仍核对服务实际为 LocalService。包装器保存实际 token 判定和退出码，结束后移除本任务。不能把管理员控制端当成本机普通用户的证明。
+
+005 Windows 旧版本组合同样必须以普通交互身份运行，包装器支持 `--probe compatibility --mode client`，调用实际四环境控制器。Windows VM 启动 Python/浏览器较慢，任务允许最多 30 分钟，调度器硬上限 32 分钟；必须保留过程收据，超时不能算完成，并核对任务服务/后台是否已清理。
+
+`selective_upload_recorded.py` 将每次原生验收调试/正式执行绑定到新的实际业务运行，自动创建新任务状态，把原始安装摘要、命令、接口结果、截图与清理结果收进 `ACCEPTANCE_EVIDENCE_DIR`。私有目标可用 execution 指定 SSH 测试机/控制解释器/脚本目录；SSH 保持严格主机校验，Windows 仍经交互任务核对实际身份。它不会把先前通过的 JSON 重新包装成新执行。
+
+记录收回后可用 `selective_upload_audit.py --evidence-dir <原始运行目录> --local-wheel <该轮LocalWheel> --hub-wheel <该轮HubWheel> --output <新审计文件>` 独立核对包摘要、完整合成原文、范围、排序公式、补齐进度和请求形状。此工具只读原始文件，不重新运行产品；不能替代截图审阅或 A1–A12/E1–E5 的完整验收。其自检用例包含正文缺失、错误排序、排序候选外发、假补齐和错误原文等负例。
+
+A5 可运行 `selective_upload_isolation.py --target-config <独立新配置> --output <新目录>`，只验证真实 HTTPS Hub 下同设备关联项目、其他设备与合成 VibeInsight 继续推进，禁止 A 不外发且旧副本保留；它不覆盖三入口或整个验收矩阵。
+
+在上述隔离配置增加 `extra_entrances: true`，还会通过 CLI、真实 stdio MCP 和浏览器实际选择“仅本机按项目/全部项目、联合全部项目”，逐条读取并与合成夹具完整正文比较。Windows 包装器支持 `--probe isolation --mode client`，仍必须使用普通交互身份。
+
+`selective_upload_scope.py <client|self-managed|hub-service> --target-config <新配置> --output <新目录>` 单独补离线全项目三入口及共享会话分项目原文读取。夹具通过真实上传协议在任务Hub写入同会话X/Y两条消息，只关联X，验证允许标题、完整消息、旧无范围读取与重启引用；`protocol_only` 的实际服务任务只执行范围原文部分。Windows包装器选择`--probe scope`并保留对应mode，服务仍需实际LocalService身份。
+
+`selective_upload_global_cli.py --target-config <已结束的任务配置> --output <新目录>` 仅在该任务自己的合成档案/来源上验证CLI唯一全局项目、明确归属与强制源重放。须在对应主流程结束后运行，不用于日常档案；Windows包装器支持`--probe global_cli --mode client`。
+
+`selective_upload_reconcile.py --target-config <新配置> --output <新目录>` 使用真实新包CLI/Web验证旧本机代次、旧Hub版本、缺版本拒绝和新鲜双版本成功。所有状态和断线仅在独立测试Hub/任务转发中构造，保存两端头、请求、界面与trace。Windows包装器选择`--probe reconcile --mode client`；仍需普通交互身份。
+
+### 原生十二场景补齐的包专项
+
+`selective_upload_completion.py` 的三个独立探针补充旧非空档案关联/游标升级、旧参数的真实 stdio MCP 读取，以及 Hub 备份后已确认消息丢失的恢复。使用上面的新包独立 Local/Hub 环境、loopback HTTPS 证书和模块清单；另从正式 `v0.4.0` 源码构建并在两个独立环境安装旧 Local/Hub 包。在私有目标配置增加 `old_local_python`、`old_hub_python`，以及 `old_candidate.installed_local` / `old_candidate.installed_hub`（按旧 wheel 全部模块生成，与新包清单相同的键与 SHA 格式）。不能仅填写相同的版本字符串代替真实旧包。每次执行新建合成档案及 loopback Hub；不注册系统服务、不访问日常档案。
+
+```text
+ACCEPTANCE_EVIDENCE_DIR=<全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe legacy-links
+ACCEPTANCE_EVIDENCE_DIR=<另一全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe legacy-mcp
+ACCEPTANCE_EVIDENCE_DIR=<另一全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe confirmed-loss
+```
+
+`selective_upload_empty_recorded.py --target-config <私有配置> --output <全新目录> --mode client` 专门执行成功零命中：目标配置增加 `expected_platform`（`darwin` / `linux` / `win32`），先保存非空正控，再核对 project/all 在 CLI、真实 stdio MCP、浏览器上的六个空响应及两张画面。控制解释器需要验收依赖与浏览器；包解释器仍为已安装的独立环境。Windows 配置另含 `controller_python`，包装器调用 `selective_upload_empty_windows.py`，要求已登录用户的 Limited 交互任务并核对实际非管理员身份；控制终端不作为普通用户证据。子进程读取的唯一配置位于任务根目录既有 ACL 下，只含路径/模块摘要和运行参数，退出删除，不放用户凭据。
+
+空查询包装可沿用 `selective_upload_recorded.py` 的私有 `execution` SSH 目标字段，由控制端回收原始响应/画面/worker 与清理收据。Windows 长轮可能超过原生单条自动命令 300 秒上限，应按独立确认的人工外部执行步骤保存新命令的实际起止与退出，再登记复审；超时的自动收据仍为超时，不能靠回收旧结果改判成功。以上都是可选实际包验证，默认 CI 仍运行不依赖服务/浏览器/远程机器的共用 `pytest`；完整平台与原生记录范围见[本轮证据入口](../../changes/005-selective-conversation-upload/evidence/20261122-native-completion/README.md)。

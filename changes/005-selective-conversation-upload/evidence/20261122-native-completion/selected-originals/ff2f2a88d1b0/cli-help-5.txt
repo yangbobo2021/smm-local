@@ -1,0 +1,10 @@
+usage: smm project [-h] {ensure-global,assign-conversation} ...
+
+positional arguments:
+  {ensure-global,assign-conversation}
+    ensure-global       创建或取得唯一全局项目；全局不是所有项目检索
+    assign-conversation
+                        用本机搜索的会话 ID 预览归属变更，核对后 --confirm 提交
+
+options:
+  -h, --help            show this help message and exit

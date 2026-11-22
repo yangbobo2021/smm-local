@@ -1,0 +1,133 @@
+{
+  "cases": {
+    "TC-005-empty-coverage": {
+      "checks": [
+        {
+          "action": "有本机/Hub正控，按项目/全部查询不存在词，再真实令Hub请求失败，并显式仅本机。",
+          "expected": "同为[]时coverage分别complete/unavailable/not_requested，成功无失败原因，未执行有具体原因，且成功确实调用Hub搜索。",
+          "id": "additional-empty-coverage"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "成功零命中与未执行区分"
+    },
+    "TC-005-empty-linux": {
+      "checks": [
+        {
+          "action": "在linux实际最终独立安装包与普通客户端身份上，准备有本机/其他设备/合成V正命中，分别通过CLI、真实stdio MCP及浏览器按all/project提交确定不存在词。",
+          "expected": "六个实际响应均results=[]、本机/Hub complete，无失败原因；页面实际显示无匹配与双方已检索；留真实包/账户/原始请求与响应、两范围关键画面/轨迹、清理/退出码。",
+          "id": "empty-e1-linux"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "A9每个E1实际平台；最终安装包全模块验证，全新合成档案/loopback HTTPS；Windows VM76和Limited交互Token；不重做其他平台业务，不触达真实来源。",
+      "title": "linux三入口成功空查询"
+    },
+    "TC-005-empty-mac": {
+      "checks": [
+        {
+          "action": "在mac实际最终独立安装包与普通客户端身份上，准备有本机/其他设备/合成V正命中，分别通过CLI、真实stdio MCP及浏览器按all/project提交确定不存在词。",
+          "expected": "六个实际响应均results=[]、本机/Hub complete，无失败原因；页面实际显示无匹配与双方已检索；留真实包/账户/原始请求与响应、两范围关键画面/轨迹、清理/退出码。",
+          "id": "empty-e1-mac"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "A9每个E1实际平台；最终安装包全模块验证，全新合成档案/loopback HTTPS；Windows VM76和Limited交互Token；不重做其他平台业务，不触达真实来源。",
+      "title": "mac三入口成功空查询"
+    },
+    "TC-005-empty-windows": {
+      "checks": [
+        {
+          "action": "在已确认VM76和Limited普通交互Token中，直接运行外部空查询包装，等真实结束并回收完整原件；逐all/project的CLI、实际stdio MCP和Web核验六空响应、正控、两个空画面及清理。原生自动300秒timeout历史保留，不改判通过。",
+          "expected": "六个实际响应均results=[]、本机/Hub complete，无失败原因；页面实际显示无匹配与双方已检索；留真实包/账户/原始请求与响应、两范围关键画面/轨迹、清理/退出码。",
+          "id": "empty-e1-windows"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "A9每个E1实际平台；最终安装包全模块验证，全新合成档案/loopback HTTPS；Windows VM76和Limited交互Token；不重做其他平台业务，不触达真实来源。",
+      "title": "windows三入口成功空查询"
+    },
+    "TC-005-fallback": {
+      "checks": [
+        {
+          "action": "默认按 A 查询并对照显式本机查询。",
+          "expected": "回退只返回 A 且说明未覆盖；显式本机仍含 A/D。",
+          "id": "tdd-core"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "本机 A 与直接关联 D 有不同独有命中，Hub 请求失败。",
+      "title": "范围解析失败只查本机 A"
+    },
+    "TC-005-sc9-evidence": {
+      "checks": [
+        {
+          "action": "核对实际断线三入口A仅返回A，排除D/全局并显示Hub未覆盖，不能把零命中当未执行。",
+          "expected": "Hub/项目范围解析失败时按 A 仅返回本机 A，不扩本机关联、不退全部，并说明未覆盖。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full1"
+        },
+        {
+          "action": "核对三入口offline-all及重连恢复，显式本机范围独立不变。",
+          "expected": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full2"
+        },
+        {
+          "action": "结合当前单端候选/全文失败、缺全文排除、双端失败的实际自动结果核对覆盖字段。",
+          "expected": "有效快照后单端失败如实部分覆盖，全文缺失排除不完整候选；双端失败报错。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full3"
+        },
+        {
+          "action": "核对当前无效参数报错断言及逐E1三入口真实断线/重连查询和原文；查看断线覆盖画面。",
+          "expected": "无效参数直接报参数错误，不能冒充 Hub 失败扩大范围；各 E1 三入口实际断线恢复可复核。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full4"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC9实际原件与当前适用性核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "obligations": [
+    {
+      "id": "full1",
+      "quote": "Hub/项目范围解析失败时按 A 仅返回本机 A，不扩本机关联、不退全部，并说明未覆盖。"
+    },
+    {
+      "id": "full2",
+      "quote": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。"
+    },
+    {
+      "id": "full3",
+      "quote": "有效快照后单端失败如实部分覆盖，全文缺失排除不完整候选；双端失败报错。"
+    },
+    {
+      "id": "full4",
+      "quote": "无效参数直接报参数错误，不能冒充 Hub 失败扩大范围；各 E1 三入口实际断线恢复可复核。"
+    },
+    {
+      "id": "tdd-core",
+      "quote": "Hub/项目范围解析失败时按 A 仅返回本机 A，不扩本机关联、不退全部，并说明未覆盖。"
+    },
+    {
+      "id": "additional-empty-coverage",
+      "quote": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。"
+    },
+    {
+      "id": "empty-e1-mac",
+      "quote": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。"
+    },
+    {
+      "id": "empty-e1-linux",
+      "quote": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。"
+    },
+    {
+      "id": "empty-e1-windows",
+      "quote": "全部查询退本机全部；恢复后再次联合，显式本机不变，成功零命中与未执行区分。"
+    }
+  ],
+  "request_id": "design-complete31-sc9",
+  "scene": "SC9"
+}

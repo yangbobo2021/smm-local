@@ -1,0 +1,120 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-default": {
+      "checks": [
+        {
+          "action": "配置后运行待传处理，核对全部 Hub 消息和最小项目登记，再查已存在远端内容。",
+          "expected": "无本机标题/正文/摘要/会话列表被发送，最小项目已登记且远端查询成功。",
+          "id": "tdd-core"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "本机独有消息和 Hub 另一设备历史；尚未选择规则。",
+      "title": "新连接可查 Hub 但不上传内容"
+    },
+    "TC-005-pause-source": {
+      "checks": [
+        {
+          "action": "预先禁用Codex/Claude并暂停；分别四模式保存，立即核对状态及正常push路径。",
+          "expected": "每次保持全部原设置/停用，正常push不发正文、不启动导入，持久消息不变。",
+          "id": "additional-pause-source"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "逐次保存保持暂停和来源停用"
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "checks": [
+        {
+          "action": "实际CLI入口分别缺本机代次/缺Hub版本/缺两者及无效代次，比较错误和两端状态；再用新鲜双版本明确提交。",
+          "expected": "缺失和无效均非零退出、不改变规则/版本；正确双版本成功、规则确认，帮助解释取值来源。",
+          "id": "cli-versions"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "独立Local/Hub已确认none，从reconcile得到真实版本与代次。",
+      "title": "CLI双版本必填可取得并能新鲜提交"
+    },
+    "TC-005-reconcile-web-inputs": {
+      "checks": [
+        {
+          "action": "分别遗漏Web local/hub采用动作的任一版本，再提交负数、布尔、不可解析的本机代次或Hub版本，比较错误、两端完整规则与出站策略。",
+          "expected": "每次明确拒绝且两端规则/版本不变，无策略写入；正常双版本的四模式正控由同批fresh用例验证。",
+          "id": "web-versions"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "两端已确认none并有真实差异版本。",
+      "title": "Web采用动作缺失或无效版本不改规则"
+    },
+    "TC-005-sc1-evidence": {
+      "checks": [
+        {
+          "action": "核对待选择时真实请求中无标题/正文/摘要/会话列表，Hub最小项目已登记且远端可查询。",
+          "expected": "首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full1"
+        },
+        {
+          "action": "核对四模式、空名单、非法输入前后规则；配置截图应显示所选模式与项目；比对当前自动输入断言。",
+          "expected": "四模式、空名单和非法输入符合约定，错误输入不替换有效状态。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full2"
+        },
+        {
+          "action": "核对真实旧包迁移、真实Hub切换以及暂停/来源开关的回归断言；比较旧包与最终产品改动。",
+          "expected": "同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full3"
+        },
+        {
+          "action": "逐平台查看真实配置操作截图、CLI JSON和浏览器轨迹，验证共享状态和项目输入。",
+          "expected": "CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full4"
+        },
+        {
+          "action": "逐平台核对对账CLI缺参/陈旧负例与新鲜正例，实际查看三张差异处理画面及POST。",
+          "expected": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-5"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC1实际原件与当前适用性核验"
+    },
+    "TC-005-transfer-status": {
+      "checks": [
+        {
+          "action": "使正文核对请求失败后独立读取status，再恢复传输。",
+          "expected": "规则确认和传输失败分别显示；恢复完成清除过时失败。",
+          "id": "review-transfer-status"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "独立合成档案和TestClient Hub；不接触用户服务。",
+      "title": "规则已确认时仍展示正文补传失败"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "additional-pause-source": "同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。",
+    "cli-versions": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。",
+    "complete-5": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。",
+    "full1": "首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。",
+    "full2": "四模式、空名单和非法输入符合约定，错误输入不替换有效状态。",
+    "full3": "同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。",
+    "full4": "CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。",
+    "review-transfer-status": "CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。",
+    "tdd-core": "首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。",
+    "web-versions": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc1/result.json",
+  "recorded_at": "2026-11-22T10:05:10.632000+00:00",
+  "request_id": "design-complete27-sc1",
+  "request_sha256": "a42f1186535e123794a3fca1b3488252174d17bdd385ec8a08e8dcce447425f5",
+  "scene": "SC1",
+  "status": "designed"
+}

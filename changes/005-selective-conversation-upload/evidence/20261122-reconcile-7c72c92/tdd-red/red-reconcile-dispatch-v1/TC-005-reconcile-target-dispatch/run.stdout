@@ -1,0 +1,55 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target _____
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1056c3500>, remote=<smm_local.core.Archive object at 0x1056c3f50>,...874d3ca1bea76dda2b5916', 'device_id': '8c9275ebf35c4365a5279e4d3224ece8'})], hub_id='70e3bca666874d3ca1bea76dda2b5916')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x105d4ce30>
+
+    def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, monkeypatch):
+        """TC-005-reconcile-target-dispatch: inject after the local conditional save."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        shown = control.reconcile(request); old_head = head(pair, config)
+        other = Archive(pair.local.db_path.parent / 'other-after-save.sqlite3')
+        token = pair.token_file.read_text(); address = 'http://localhost:18772'
+        with TestClient(create_hub(other, token), headers={'Authorization': 'Bearer ' + token}) as server:
+            other_id = server.get('/v1/info').json()['hub_id']; assert other_id != pair.hub_id
+            def routed(cfg, route, payload=None):
+                if cfg['address'] != address: return request(cfg, route, payload)
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                reply = server.get('/v1' + route) if payload is None else server.post('/v1' + route, json=payload)
+                assert reply.status_code < 400, reply.text
+                return reply.json()
+            observed = {'status_reads': 0}
+            def concurrent(cfg, route, payload=None):
+                reply = routed(cfg, route, payload)
+                if route == '/upload-policy/status':
+                    observed['status_reads'] += 1
+                    if observed['status_reads'] == 2:
+                        observed['saved'] = control.row()
+                        assert observed['saved']['generation'] > shown['local']['generation']
+                        assert observed['saved']['state'] == 'pending'
+                        switched = federation.configure_hub(pair.local, address, 'after-save-target', str(pair.token_file))
+                        assert switched['connected']
+                        observed['switched'] = federation.hub_config(pair.local)['bound_hub_id']
+                return reply
+            monkeypatch.setattr(federation, '_request', routed); monkeypatch.setattr(api, '_request', concurrent)
+            marker = len(pair.calls)
+            with web(pair) as browser:
+                result = browser.post('/api/upload/reconcile', json={'use': 'local',
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert observed['switched'] == other_id
+>           assert result.status_code == 400, 'the second status RPC must not permit a new dispatch to the old target'
+E           AssertionError: the second status RPC must not permit a new dispatch to the old target
+E           assert 200 == 400
+E            +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_reconcile_dispatch.py:46: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_reconcile_dispatch.py::test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target
+1 failed, 1 warning in 0.57s

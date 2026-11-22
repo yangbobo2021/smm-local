@@ -1,0 +1,387 @@
+{
+  "local": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "confirmed": 0,
+        "kind": "ordinary",
+        "conversations": 1,
+        "stable_key": "9acacf912840be10356414d50c8b5747",
+        "paths": [
+          "<task>/old-device/work/A"
+        ],
+        "linked_ids": [
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "confirmed": 0,
+        "kind": "ordinary",
+        "conversations": 1,
+        "stable_key": "feddcd0c4f379e2c33a1f36c814693e3",
+        "paths": [
+          "<task>/old-device/work/D"
+        ],
+        "linked_ids": [
+          1
+        ]
+      }
+    ],
+    "cursor": {
+      "hub_cursor:26ad8dde8f1e4377b62b632866b9a04e:8a8cf0e45cf544e5b80b8e95612fc0f1": "2"
+    }
+  },
+  "hub": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "9acacf912840be10356414d50c8b5747",
+        "device_name": "legacy-links"
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+        "device_name": "legacy-links"
+      }
+    ],
+    "links": [
+      {
+        "a": 1,
+        "b": 2
+      }
+    ]
+  },
+  "originals": [
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "old-related",
+      "source_path": "",
+      "cwd": null,
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective compatibility related original",
+      "project_id": 2,
+      "project_name": "D",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility related original",
+          "timestamp": null,
+          "canonical_id": "4d51c56f372460bb941df03b031671384280f06e63404631c74b76d397eed62f",
+          "content_version": "81452b276b9ea9a3bb2342e2f20f9da816a2d7f15ed2708f7f7e78ac77147325",
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 2,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "D",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origin_session_key": "old-related",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "old-device",
+      "source_path": "",
+      "cwd": null,
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective compatibility old-device original",
+      "project_id": 1,
+      "project_name": "A",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility old-device original",
+          "timestamp": null,
+          "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+          "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 1,
+              "project_name": "A"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "9acacf912840be10356414d50c8b5747",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origin_session_key": "old-device",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    }
+  ],
+  "query": {
+    "query": "selective",
+    "scope": "project",
+    "requested_scope": "project",
+    "archive_scope": "combined",
+    "hub_id": "26ad8dde8f1e4377b62b632866b9a04e",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "9acacf912840be10356414d50c8b5747",
+        "device_name": "legacy-links"
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+        "device_name": "legacy-links"
+      }
+    ],
+    "local_effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      },
+      {
+        "id": 2,
+        "name": "D"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 2,
+      "hub_count": 2,
+      "hub_returned_count": 2,
+      "method": "BM25"
+    },
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "title": "selective compatibility old-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 0.18232155679395465,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "legacy-links",
+                "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+                "source_position": 1
+              },
+              {
+                "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+                "device_name": "legacy-links",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLWRldmljZS1tMSIsInZlcnNpb24iOiIxNTRhYmRmZWMyODU1ZGFiYTliOWM2MzAzY2U5YmNiZDRiNWQyMzVjNWY4OGJlYmYwNmExNTNlZDM0NWU4ZGFiIn1dLCJvcmlnaW5faWRlbnRpdHkiOiIzYTRjNzU1NDY3YjliZTI3MmJjODY4ZmIxNzI0ZGJkOTBkMzUxODcwYTcwNWZlYTMzMmExMjBhMDQ4ZTFmNmVlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.d477318f710d5c90e6339871a9d15ac53608282a2ffb3cd3003ffeaa94061662"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "legacy-links",
+            "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "old-device",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLWRldmljZS1tMSIsInZlcnNpb24iOiIxNTRhYmRmZWMyODU1ZGFiYTliOWM2MzAzY2U5YmNiZDRiNWQyMzVjNWY4OGJlYmYwNmExNTNlZDM0NWU4ZGFiIn1dLCJvcmlnaW5faWRlbnRpdHkiOiIzYTRjNzU1NDY3YjliZTI3MmJjODY4ZmIxNzI0ZGJkOTBkMzUxODcwYTcwNWZlYTMzMmExMjBhMDQ4ZTFmNmVlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.d477318f710d5c90e6339871a9d15ac53608282a2ffb3cd3003ffeaa94061662",
+        "rerank_score": 0.18232155679395465,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLWRldmljZS1tMSIsInZlcnNpb24iOiIxNTRhYmRmZWMyODU1ZGFiYTliOWM2MzAzY2U5YmNiZDRiNWQyMzVjNWY4OGJlYmYwNmExNTNlZDM0NWU4ZGFiIn1dLCJvcmlnaW5faWRlbnRpdHkiOiIzYTRjNzU1NDY3YjliZTI3MmJjODY4ZmIxNzI0ZGJkOTBkMzUxODcwYTcwNWZlYTMzMmExMjBhMDQ4ZTFmNmVlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.d477318f710d5c90e6339871a9d15ac53608282a2ffb3cd3003ffeaa94061662"
+          },
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTEzMTI2NGI3Mzg0NDJhZGFiZjhmMzkxOTA4MzNhY2UiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjI2YWQ4ZGRlOGYxZTQzNzdiNjJiNjMyODY2YjlhMDRlIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjMwMjhkNWI5NTllNTM3ZjJjMDQ0ZjNiNGYzNzJlZDY4NGNiNGE2OWJkZDc5Y2Y3ZGVmNzUwYmJhZTY1MTJjM2QiLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSIsInByb2plY3RfaWRzIjpbMSwyXSwic291cmNlIjoiY29kZXgifQ.3003f8449c4ffca1907afd11302e1c1e0d2365c4c075bb14f3f4fcc6dccc4723"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "old-related",
+        "title": "selective compatibility related original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "D",
+        "rank": 2,
+        "bm25_score": 0.18232155679395465,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility related original",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "legacy-links",
+                "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+                "source_position": 1
+              },
+              {
+                "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+                "device_name": "legacy-links",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 2,
+                "project_name": "D"
+              }
+            ],
+            "canonical_id": "4d51c56f372460bb941df03b031671384280f06e63404631c74b76d397eed62f",
+            "content_version": "81452b276b9ea9a3bb2342e2f20f9da816a2d7f15ed2708f7f7e78ac77147325",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLXJlbGF0ZWQtbTEiLCJ2ZXJzaW9uIjoiODE0NTJiMjc2YjllYTlhM2JiMjM0MmUyZjIwZjlkYTgxNmEyZDdmMTVlZDI3MDhmN2Y3ZTc4YWM3NzE0NzMyNSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMTRlZDc5ZmRmY2Y4ZGY0ZDRjZTE2YTMxNDIyNWFkNzBlYjU2ZDc0YmM1YmMzNTFhY2MzY2VjZDRmNDk3Y2YyYiIsInByb2plY3RfaWRzIjpbMl0sInNvdXJjZSI6ImNvZGV4In0.0a6ad7ce162b9d15af8f33150029f4873297529240a21c589f20ef606d99610c"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "legacy-links",
+            "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "old-related",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLXJlbGF0ZWQtbTEiLCJ2ZXJzaW9uIjoiODE0NTJiMjc2YjllYTlhM2JiMjM0MmUyZjIwZjlkYTgxNmEyZDdmMTVlZDI3MDhmN2Y3ZTc4YWM3NzE0NzMyNSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMTRlZDc5ZmRmY2Y4ZGY0ZDRjZTE2YTMxNDIyNWFkNzBlYjU2ZDc0YmM1YmMzNTFhY2MzY2VjZDRmNDk3Y2YyYiIsInByb2plY3RfaWRzIjpbMl0sInNvdXJjZSI6ImNvZGV4In0.0a6ad7ce162b9d15af8f33150029f4873297529240a21c589f20ef606d99610c",
+        "rerank_score": 0.18232155679395465,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNmQ2ZDI3YzIyMTA4NDJmODhiZTM3MjRmZDg5NjQ3MjkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjIsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjIsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5Ijoib2xkLXJlbGF0ZWQtbTEiLCJ2ZXJzaW9uIjoiODE0NTJiMjc2YjllYTlhM2JiMjM0MmUyZjIwZjlkYTgxNmEyZDdmMTVlZDI3MDhmN2Y3ZTc4YWM3NzE0NzMyNSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMTRlZDc5ZmRmY2Y4ZGY0ZDRjZTE2YTMxNDIyNWFkNzBlYjU2ZDc0YmM1YmMzNTFhY2MzY2VjZDRmNDk3Y2YyYiIsInByb2plY3RfaWRzIjpbMl0sInNvdXJjZSI6ImNvZGV4In0.0a6ad7ce162b9d15af8f33150029f4873297529240a21c589f20ef606d99610c"
+          },
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTEzMTI2NGI3Mzg0NDJhZGFiZjhmMzkxOTA4MzNhY2UiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjI2YWQ4ZGRlOGYxZTQzNzdiNjJiNjMyODY2YjlhMDRlIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImQzYjNhNmE1ZTNkY2M1NTVjNWNiMDEwMWE5NWZkNmZjMTE3MTU5YWRjYmUwMzk0ZjRkYTAwNzZkMTJiZTJlN2YiLCJ2ZXJzaW9uIjoiODE0NTJiMjc2YjllYTlhM2JiMjM0MmUyZjIwZjlkYTgxNmEyZDdmMTVlZDI3MDhmN2Y3ZTc4YWM3NzE0NzMyNSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMTRlZDc5ZmRmY2Y4ZGY0ZDRjZTE2YTMxNDIyNWFkNzBlYjU2ZDc0YmM1YmMzNTFhY2MzY2VjZDRmNDk3Y2YyYiIsInByb2plY3RfaWRzIjpbMSwyXSwic291cmNlIjoiY29kZXgifQ.4bd0fcd201738d8369a52ca8429a1a4c712cfc63c4dac17be7e2c76df1b6fafe"
+          }
+        ]
+      }
+    ]
+  },
+  "status": {
+    "configured": true,
+    "hub_id": "26ad8dde8f1e4377b62b632866b9a04e",
+    "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+    "hub_address": "https://localhost:58830",
+    "device_name": "legacy-links",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "671329233aa34d619d93e7e7dba1dd8f",
+    "confirmed_messages": 2,
+    "not_confirmed_messages": 0,
+    "inflight_messages": 0,
+    "unsent_messages": 0,
+    "problem": null,
+    "remote": {
+      "hub_id": "26ad8dde8f1e4377b62b632866b9a04e",
+      "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+      "revision": 1,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "189f06b729d94b9f9a48994e345c4b25",
+      "control_epoch": "671329233aa34d619d93e7e7dba1dd8f",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T11:03:45.924741+00:00",
+    "last_transfer_success": "2026-11-22T11:03:45.924741+00:00"
+  },
+  "upgraded": {
+    "exit_code": 0,
+    "stdout": "{\"uploaded\": 0, \"pending\": false, \"errors\": [], \"upload\": {\"configured\": true, \"hub_id\": \"26ad8dde8f1e4377b62b632866b9a04e\", \"device_id\": \"8a8cf0e45cf544e5b80b8e95612fc0f1\", \"hub_address\": \"https://localhost:58830\", \"device_name\": \"legacy-links\", \"policy\": {\"mode\": \"all\", \"projects\": []}, \"generation\": 1, \"state\": \"confirmed\", \"hub_revision\": 1, \"control_epoch\": \"671329233aa34d619d93e7e7dba1dd8f\", \"confirmed_messages\": 2, \"not_confirmed_messages\": 0, \"inflight_messages\": 0, \"unsent_messages\": 0, \"problem\": null, \"remote\": {\"hub_id\": \"26ad8dde8f1e4377b62b632866b9a04e\", \"device_id\": \"8a8cf0e45cf544e5b80b8e95612fc0f1\", \"revision\": 1, \"policy\": {\"mode\": \"all\", \"projects\": []}, \"submission_id\": \"189f06b729d94b9f9a48994e345c4b25\", \"control_epoch\": \"671329233aa34d619d93e7e7dba1dd8f\", \"restore_pending\": false, \"conflict\": false}, \"transfer_state\": \"complete\", \"transfer_problem\": null, \"allowed_pending_messages\": 0, \"last_transfer_attempt\": \"2026-11-22T11:03:45.924741+00:00\", \"last_transfer_success\": \"2026-11-22T11:03:45.924741+00:00\"}}\n",
+    "stderr": ""
+  }
+}

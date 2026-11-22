@@ -1,0 +1,109 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "bindings": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC11.md": "1350d64f51ae77ccbf10b57ffb850ac3c339f7dfa52b55f23e5007a64e2dd6f8",
+    "scripts/acceptance/selective_upload_completion.py": "fb49292b814c7b7f1f10ed89145ab69158d25251f687018413c6417263b57ef5",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+    "tests/test_upload_policy.py": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309"
+  },
+  "case_design": {
+    "id": "design-complete27-sc11",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc11/result.json",
+    "sha256": "3f185b756e130ee996f15d71ece096cf38a383202f1c279204c44548afc1e690"
+  },
+  "cases": {
+    "TC-005-confirmed-loss": {
+      "covers": {
+        "additional-confirmed-loss": "    def confirmed_loss(self):\n        self.initial()\n        history(self.root/'local','confirmed-recent','A',['selective confirmed after backup'])\n        self.cli(self.db,'maintenance','sync')\n        recent=next(h for h in self.hub_hits() if h['source_session_id']=='confirmed-recent')\n        original=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':recent['reference']})\n        assert [m['text'] for m in original['messages']]==['selective confirmed after backup']\n        before=self.cli(self.db,'upload','status');assert before['allowed_pending_messages']==0 and before['inflight_messages']==0\n        self.stop_and_append()\n        self.save('confirmed-after-backup',{'original':original,'confirmed_state':before,'stopped_state':self.cli(self.db,'upload','status')})\n        prepared=self.admin('prepare-restore');assert prepared['body_stopped']\n        guard=Path(str(self.state/'smm-hub.sqlite3')+'.upload-guard.json');guard_bytes=guard.read_bytes()\n        self.stop_hub();self.sql_restore(self.hub_backup,self.state/'smm-hub.sqlite3');assert guard.read_bytes()==guard_bytes\n        self.start_hub();self.cli(self.db,'maintenance','sync')\n        conflict=self.cli(self.db,'upload','status');assert conflict['state']=='conflict'\n        assert 'confirmed-recent' not in {h['source_session_id'] for h in self.hub_hits()}\n        difference=self.cli(self.db,'upload','reconcile');assert difference['hub']['policy']['mode']=='none'\n        adopted=self.cli(self.db,'upload','reconcile','--use','hub');assert adopted['policy']['mode']=='none'\n        self.cli(self.db,'maintenance','sync');assert 'confirmed-recent' not in {h['source_session_id'] for h in self.hub_hits()}\n        self.cli(self.db,'upload','set','--mode','only','--project-id',str(self.projects['A']));self.cli(self.db,'maintenance','sync')\n        expected={'local-A':['selective common local-A original','selective common local-A appended while stopped'],\n                  'local-A-new':['selective common local-A new while stopped'],'confirmed-recent':['selective confirmed after backup']}\n        hits={h['source_session_id']:h for h in self.hub_hits()};reads={}\n        for session,texts in expected.items():\n            read=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':hits[session]['reference']})\n            assert [m['text'] for m in read['messages']]==texts;reads[session]=read\n        old=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':self.reference});assert [m['text'] for m in old['messages']]==['selective common local-A original']\n        before_repeat=self.hub_hits();self.cli(self.db,'maintenance','sync');assert self.hub_hits()==before_repeat\n        done=self.cli(self.db,'upload','status');assert done['allowed_pending_messages']==done['inflight_messages']==0\n        self.save('confirmed-loss-recovery',{'prepare':prepared,'conflict':conflict,'difference':difference,'adopted':adopted,'reads':reads,'old_reference':old,'done':done,'expected':expected})\n"
+      },
+      "selector": "scripts/acceptance/selective_upload_completion.py::confirmed_loss",
+      "source": {
+        "first": 99,
+        "kind": "file",
+        "last": 128,
+        "path": "scripts/acceptance/selective_upload_completion.py",
+        "sha256": "fb49292b814c7b7f1f10ed89145ab69158d25251f687018413c6417263b57ef5",
+        "text": "    def confirmed_loss(self):\n        self.initial()\n        history(self.root/'local','confirmed-recent','A',['selective confirmed after backup'])\n        self.cli(self.db,'maintenance','sync')\n        recent=next(h for h in self.hub_hits() if h['source_session_id']=='confirmed-recent')\n        original=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':recent['reference']})\n        assert [m['text'] for m in original['messages']]==['selective confirmed after backup']\n        before=self.cli(self.db,'upload','status');assert before['allowed_pending_messages']==0 and before['inflight_messages']==0\n        self.stop_and_append()\n        self.save('confirmed-after-backup',{'original':original,'confirmed_state':before,'stopped_state':self.cli(self.db,'upload','status')})\n        prepared=self.admin('prepare-restore');assert prepared['body_stopped']\n        guard=Path(str(self.state/'smm-hub.sqlite3')+'.upload-guard.json');guard_bytes=guard.read_bytes()\n        self.stop_hub();self.sql_restore(self.hub_backup,self.state/'smm-hub.sqlite3');assert guard.read_bytes()==guard_bytes\n        self.start_hub();self.cli(self.db,'maintenance','sync')\n        conflict=self.cli(self.db,'upload','status');assert conflict['state']=='conflict'\n        assert 'confirmed-recent' not in {h['source_session_id'] for h in self.hub_hits()}\n        difference=self.cli(self.db,'upload','reconcile');assert difference['hub']['policy']['mode']=='none'\n        adopted=self.cli(self.db,'upload','reconcile','--use','hub');assert adopted['policy']['mode']=='none'\n        self.cli(self.db,'maintenance','sync');assert 'confirmed-recent' not in {h['source_session_id'] for h in self.hub_hits()}\n        self.cli(self.db,'upload','set','--mode','only','--project-id',str(self.projects['A']));self.cli(self.db,'maintenance','sync')\n        expected={'local-A':['selective common local-A original','selective common local-A appended while stopped'],\n                  'local-A-new':['selective common local-A new while stopped'],'confirmed-recent':['selective confirmed after backup']}\n        hits={h['source_session_id']:h for h in self.hub_hits()};reads={}\n        for session,texts in expected.items():\n            read=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':hits[session]['reference']})\n            assert [m['text'] for m in read['messages']]==texts;reads[session]=read\n        old=self.api(self.t['address'],'/v1/read',{'hub_id':self.hub_id,'reference':self.reference});assert [m['text'] for m in old['messages']]==['selective common local-A original']\n        before_repeat=self.hub_hits();self.cli(self.db,'maintenance','sync');assert self.hub_hits()==before_repeat\n        done=self.cli(self.db,'upload','status');assert done['allowed_pending_messages']==done['inflight_messages']==0\n        self.save('confirmed-loss-recovery',{'prepare':prepared,'conflict':conflict,'difference':difference,'adopted':adopted,'reads':reads,'old_reference':old,'done':done,'expected':expected})\n"
+      },
+      "status": "active"
+    },
+    "TC-005-local-restore": {
+      "covers": {
+        "tdd-core": "def test_old_allow_backup_blocks_until_explicit_hub_reconciliation(pair, tmp_path):\n    \"\"\"TC-005-local-restore: stale local allow cannot silently replace Hub none.\"\"\"\n    add_local(pair, \"a\", \"A\", \"old history\")\n    config = connect(pair)\n    federation.choose_upload(pair.local, \"all\", [])\n    backup = tmp_path / \"backup.sqlite3\"\n    with pair.local.connect() as source, sqlite3.connect(backup) as target:\n        source.backup(target)\n    federation.choose_upload(pair.local, \"none\", [])\n    controller = LocalUpload(pair.local, config, config[\"bound_hub_id\"])\n    prepared = controller.prepare_restore()\n    assert prepared[\"body_stopped\"] is True\n    assert str(controller.guard.path) in prepared[\"do_not_restore\"]\n    with sqlite3.connect(backup) as source, pair.local.connect() as target:\n        source.backup(target)\n    restored = Archive(pair.local.db_path)\n    controller = LocalUpload(restored, config, config[\"bound_hub_id\"])\n    assert controller.status()[\"state\"] == \"conflict\"\n    before = controller.row()[\"desired\"]\n    difference = controller.reconcile(federation._request)\n    assert difference[\"hub\"][\"policy\"][\"mode\"] == \"none\"\n    assert controller.row()[\"desired\"] == before\n    result = controller.reconcile(federation._request, use=\"hub\")\n    assert result[\"state\"] == \"confirmed\"\n    assert result[\"policy\"][\"mode\"] == \"none\"\n    federation.push_pending(restored)\n    assert bodies(pair.remote) == []\n"
+      },
+      "selector": "tests/test_upload_policy.py::test_old_allow_backup_blocks_until_explicit_hub_reconciliation",
+      "source": {
+        "first": 117,
+        "kind": "file",
+        "last": 143,
+        "path": "tests/test_upload_policy.py",
+        "sha256": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309",
+        "text": "def test_old_allow_backup_blocks_until_explicit_hub_reconciliation(pair, tmp_path):\n    \"\"\"TC-005-local-restore: stale local allow cannot silently replace Hub none.\"\"\"\n    add_local(pair, \"a\", \"A\", \"old history\")\n    config = connect(pair)\n    federation.choose_upload(pair.local, \"all\", [])\n    backup = tmp_path / \"backup.sqlite3\"\n    with pair.local.connect() as source, sqlite3.connect(backup) as target:\n        source.backup(target)\n    federation.choose_upload(pair.local, \"none\", [])\n    controller = LocalUpload(pair.local, config, config[\"bound_hub_id\"])\n    prepared = controller.prepare_restore()\n    assert prepared[\"body_stopped\"] is True\n    assert str(controller.guard.path) in prepared[\"do_not_restore\"]\n    with sqlite3.connect(backup) as source, pair.local.connect() as target:\n        source.backup(target)\n    restored = Archive(pair.local.db_path)\n    controller = LocalUpload(restored, config, config[\"bound_hub_id\"])\n    assert controller.status()[\"state\"] == \"conflict\"\n    before = controller.row()[\"desired\"]\n    difference = controller.reconcile(federation._request)\n    assert difference[\"hub\"][\"policy\"][\"mode\"] == \"none\"\n    assert controller.row()[\"desired\"] == before\n    result = controller.reconcile(federation._request, use=\"hub\")\n    assert result[\"state\"] == \"confirmed\"\n    assert result[\"policy\"][\"mode\"] == \"none\"\n    federation.push_pending(restored)\n    assert bodies(pair.remote) == []\n"
+      },
+      "status": "active"
+    },
+    "TC-005-sc11-evidence": {
+      "covers": {
+        "complete-5": "逐平台最终对账实际原件及当前竞态自动证据，两个版本任一过期均不改当前规则。",
+        "full1": "逐E1-E4核对实际服务启动身份/PID变化、none重启不重配、允许后精确补齐无重复及原文。",
+        "full2": "核对R1/R2从prepare-restore开始的备份身份/前后规则，旧允许不能覆盖新限制、未知先阻断。",
+        "full3": "核对R3/R4实际Hub恢复与epoch失效/对账/仅允许内容补齐；结合自动升级失败恢复回归。",
+        "full4": "核对当前差异只读、过期拒绝及README链接恢复清单和不支持边界。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC11.md#TC-005-sc11-evidence",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 63,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC11.md",
+        "sha256": "1350d64f51ae77ccbf10b57ffb850ac3c339f7dfa52b55f23e5007a64e2dd6f8",
+        "text": "# SC11实际原件与当前适用性核验\n\n人工验证项：TC-005-sc11-evidence\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### full1\n\n逐E1-E4核对实际服务启动身份/PID变化、none重启不重配、允许后精确补齐无重复及原文。\n\n预期：E1-E4 实际服务从停止积压状态重启后仍禁止，不重配，允许后补齐且检索原文准确，无重复。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full2\n\n核对R1/R2从prepare-restore开始的备份身份/前后规则，旧允许不能覆盖新限制、未知先阻断。\n\n预期：受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full3\n\n核对R3/R4实际Hub恢复与epoch失效/对账/仅允许内容补齐；结合自动升级失败恢复回归。\n\n预期：Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full4\n\n核对当前差异只读、过期拒绝及README链接恢复清单和不支持边界。\n\n预期：过期对账版本拒绝，查看差异不改规则，恢复清单和不支持边界有明确说明。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-5\n\n逐平台最终对账实际原件及当前竞态自动证据，两个版本任一过期均不改当前规则。\n\n预期：恢复对账的重新提交同样绑定所显示两端版本；旧本机代次或旧Hub版本拒绝，查看差异和拒绝提交均不改变当前规则。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `mac-run8`\n- `linux-client-run8`\n- `windows-client-run8`\n- `linux-hub-service-run8`\n- `windows-hub-service-run8`\n- `mac-login-run11`\n- `mac-hub-main15`\n- `restore-r1-debug8`\n- `restore-r2-debug8`\n- `restore-r3-debug8`\n- `restore-r4-debug8`\n- `mac-reconcile21`\n- `linux-reconcile21`\n- `windows-reconcile21`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n\n## 独立准备复审后的补充实测\n\n- `TC-005-confirmed-loss`：最终安装包Hub备份后实际上传并确认近期消息，再确认none、积压，prepare-restore并恢复缺近期消息/限制的旧Hub数据库。 预期：重启自动阻断/差异none，采用none不补丢失正文，明确仅允许A后精确补齐A新旧及此前已确认近期消息，无重复、旧引用保留。；本轮真实debug及execute原件分别位于debug-complete30-sc11和execute-complete30-sc11，原有平台事件仍保留原时间/版本。\n"
+      },
+      "status": "active"
+    },
+    "TC-005-unreconciled-send": {
+      "covers": {
+        "tdd-unreconciled": "def test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision(pair, tmp_path):\n    \"\"\"TC-005-unreconciled-send: exercise actual send attempts, not just status.\"\"\"\n    add_local(pair, 'restore-a', 'A', 'restored private original')\n    config = connect(pair); federation.choose_upload(pair.local, 'all', [])\n    backup = tmp_path / 'old-allow.sqlite3'\n    with pair.local.connect() as source, sqlite3.connect(backup) as target: source.backup(target)\n    federation.choose_upload(pair.local, 'none', [])\n    controller = LocalUpload(pair.local, config, config['bound_hub_id']); controller.prepare_restore()\n    with sqlite3.connect(backup) as source, pair.local.connect() as target: source.backup(target)\n    pair.local = Archive(pair.local.db_path)\n    add_local(pair, 'restore-new', 'A', 'restored private new')\n    assert {h['source_session_id'] for h in pair.local.search('restored', limit=50)['results']} == {'restore-a', 'restore-new'}\n    controller = LocalUpload(pair.local, config, config['bound_hub_id'])\n    before = controller.row()['desired']; assert before['mode'] == 'all'\n    physical = message_rows(pair); assert physical == []\n    for view_first in [False, True]:\n        if view_first:\n            diff = controller.reconcile(federation._request)\n            assert diff['hub']['policy']['mode'] == 'none'\n            assert controller.row()['desired'] == before\n        marker = len(pair.calls)\n        try:\n            result = federation.push_pending(pair.local)\n        except ControlConflict:\n            pass\n        else:\n            assert result['uploaded'] == 0\n        assert not any(route == '/known-upload-messages' or (route == '/upload' and payload['records'])\n                       for route, payload in pair.calls[marker:])\n        assert message_rows(pair) == physical\n        assert controller.status()['state'] == 'conflict'\n        assert controller.row()['desired'] == before\n        remote = pair.client.post('/v1/upload-policy/status', json={'hub_id': pair.hub_id, 'device_id': config['device_id']})\n        assert remote.status_code == 200 and remote.json()['policy']['mode'] == 'none'\n"
+      },
+      "selector": "tests/test_upload_acceptance_boundaries.py::test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision",
+      "source": {
+        "first": 71,
+        "kind": "file",
+        "last": 104,
+        "path": "tests/test_upload_acceptance_boundaries.py",
+        "sha256": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+        "text": "def test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision(pair, tmp_path):\n    \"\"\"TC-005-unreconciled-send: exercise actual send attempts, not just status.\"\"\"\n    add_local(pair, 'restore-a', 'A', 'restored private original')\n    config = connect(pair); federation.choose_upload(pair.local, 'all', [])\n    backup = tmp_path / 'old-allow.sqlite3'\n    with pair.local.connect() as source, sqlite3.connect(backup) as target: source.backup(target)\n    federation.choose_upload(pair.local, 'none', [])\n    controller = LocalUpload(pair.local, config, config['bound_hub_id']); controller.prepare_restore()\n    with sqlite3.connect(backup) as source, pair.local.connect() as target: source.backup(target)\n    pair.local = Archive(pair.local.db_path)\n    add_local(pair, 'restore-new', 'A', 'restored private new')\n    assert {h['source_session_id'] for h in pair.local.search('restored', limit=50)['results']} == {'restore-a', 'restore-new'}\n    controller = LocalUpload(pair.local, config, config['bound_hub_id'])\n    before = controller.row()['desired']; assert before['mode'] == 'all'\n    physical = message_rows(pair); assert physical == []\n    for view_first in [False, True]:\n        if view_first:\n            diff = controller.reconcile(federation._request)\n            assert diff['hub']['policy']['mode'] == 'none'\n            assert controller.row()['desired'] == before\n        marker = len(pair.calls)\n        try:\n            result = federation.push_pending(pair.local)\n        except ControlConflict:\n            pass\n        else:\n            assert result['uploaded'] == 0\n        assert not any(route == '/known-upload-messages' or (route == '/upload' and payload['records'])\n                       for route, payload in pair.calls[marker:])\n        assert message_rows(pair) == physical\n        assert controller.status()['state'] == 'conflict'\n        assert controller.row()['desired'] == before\n        remote = pair.client.post('/v1/upload-policy/status', json={'hub_id': pair.hub_id, 'device_id': config['device_id']})\n        assert remote.status_code == 200 and remote.json()['policy']['mode'] == 'none'\n"
+      },
+      "status": "active"
+    }
+  },
+  "coverage": "full",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "execution_status": "not_executed",
+  "implementation_sha256": {
+    "TC-005-confirmed-loss": "04a18d957934c723c47fc64ef60c2ff966abcd7f62cdeb1d0d09049ef3217951",
+    "TC-005-local-restore": "e58cc57c11d430826c0554c8bda6a4a9ea7563792a4cceb9e756a3eb73a237b0",
+    "TC-005-sc11-evidence": "ca1500f87c05d908c38cff26cdd3d951809f41807142eccb2f659ecd5f202437",
+    "TC-005-unreconciled-send": "069d1871ae94a90de63ab40f7b25f2df682cca072ee20c3a3ac9358caa91eb85"
+  },
+  "missing": [],
+  "obligations": {
+    "additional-confirmed-loss": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。",
+    "complete-5": "恢复对账的重新提交同样绑定所显示两端版本；旧本机代次或旧Hub版本拒绝，查看差异和拒绝提交均不改变当前规则。",
+    "full1": "E1-E4 实际服务从停止积压状态重启后仍禁止，不重配，允许后补齐且检索原文准确，无重复。",
+    "full2": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "full3": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。",
+    "full4": "过期对账版本拒绝，查看差异不改规则，恢复清单和不支持边界有明确说明。",
+    "tdd-core": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "tdd-unreconciled": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。"
+  },
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-complete30-sc11/result.json",
+  "recorded_at": "2026-11-22T10:36:50.916000+00:00",
+  "request_id": "match-complete30-sc11",
+  "request_sha256": "012e2336d2d4f43ffefe4865db90c5e3b52ee7cda341963551f039c7643d89e7",
+  "scene": "SC11",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。",
+  "status": "matched"
+}

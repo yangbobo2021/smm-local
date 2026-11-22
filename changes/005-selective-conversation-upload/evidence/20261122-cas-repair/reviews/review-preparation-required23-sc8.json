@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-reference-boundaries": {
+      "status": "passed",
+      "reason": "SPEC B7/A8及PLAN 3.3/A8明确重复位置按消息身份读取、被选消息删除须失败、Hub真实切换不能读错档案；design-required23-sc8已明确本机/Hub首及非首删除，原检查去向完整，场景与设计有据。冻结test_required_snapshot_and_batch_boundaries.py:73-141共7参数：:96/99先独立确认两个真实不同正文且position都1；重复position两参数在:101-107逐条签发单消息引用，:104单条独立预期正文首先拦截只第一条正确或两引用都指首目标，:106-107再核签名stamp恰1条且绑定实际_message_id/version。已去除public read.source_key的无依据字段要求，不新增公开产品契约。删除四参数在:111-114分别删真实首/非首ID，:115-117旧完整引用必须错误且实际仅剩对侧正文；上轮“只检查第一stamp存在”的反例现在在deleted-last参数:115首次失败。本机/Hub两档案均执行，不以一端正确代另一端。真实换Hub参数:123/133-134确认另一个实际hub_id，:136-140要求旧引用异常、无新端/read且新Hub和本机错误正文哨兵不变，两个结果都误路由同一档案无法通过异常/无请求约束。正常双消息→单条精确引用、首/非首删除后、真实目标切换等动作前状态差异全部实测，更多同条件ID属可选。原始日志7 passed，7份附件的删除剩余正文、重复位置双原文、不同Hub身份与空read_calls分别一致；所有本轮冻结artifacts、当前bindings、设计摘要及runtime-required23核验一致。只认领citation-extra-boundaries全分配；旧TC及各平台/其他SC8gaps未扩大。",
+      "covers": [
+        "citation-extra-boundaries"
+      ]
+    }
+  }
+}

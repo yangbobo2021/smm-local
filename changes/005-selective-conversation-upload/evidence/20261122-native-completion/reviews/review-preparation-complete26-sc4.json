@@ -1,0 +1,59 @@
+{
+  "cases": {
+    "TC-005-backfill": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/D1/A4明确允许后补齐全部而非全局游标截断。test_upload_policy.py:66–87先仅B、Hub精确B一条，设旧cursor99999999，A停传期间旧会话追加assistant及新会话，经add_local实际sync全部；允许后Hub完整4正文集合及A两条有序原文独立预期，重复uploaded0且4条。仅首消息/首会话正确会在完整sorted集合及A有序两正文处首先拦截；B已推进前状态实际存在。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1/A4要求整批失败/部分无效回执不能确认未提交。test_required_snapshot_and_batch_boundaries.py实际两独立会话同A，before-commit/partial-receipt两参数，注入必须真实两records；分别Hub零/完整两条，Local confirmed0/pending2/inflight2，再恢复后精确两条、pending/inflight0、confirmed2，重复不增。只确认首条或只重传首条在计数与完整body集合拦截。两个附件真实读取，日志两参数均exit0。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "whole-batch-failure"
+      ]
+    },
+    "TC-005-bounded-upload": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/A4明确有界队列完成前可导入/检索且B推进。test_upload_recovery.py:323–362真实35条独立预期会话/position/role/body/time集合；BATCH_SIZE1保持同一25派发上限分支，首轮uploaded25且pending时B已在Hub，并实际新增A-later导入/本机检索成功，第二轮10，最终独立expected35、confirmed35/pending0/inflight0，第三轮0且全部物理row键不变。只首消息或遗漏后来目标由expected集合首先拦截，两端同错不会通过独立手写expected。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "case-6"
+      ]
+    },
+    "TC-005-fair-upload": {
+      "status": "needs_revision",
+      "reason": "场景与需求原文核对：场景判据和B4/A4有依据，但自然设计action明确“使A指纹请求失败而B正常，运行有界一轮”，源码test_upload_recovery.py:163–176确只一次push_pending，只有一次A失败和一条初始B成功。A4原文共用故障测试明确包含“单个项目反复失败”，且B4要求“下一轮继续”、失败不能永久堵其他允许项目。合理错误：首轮A失败后B成功，后续轮A仍失败时阻塞新B；现fair用例和无故障bounded、七平台无此故障的正常流程都能全过，无首个拦截断言。最早补design：保持A故障跨两轮以上，每轮明确发生A失败，在首轮后导入新的B记录，队列仍未清空时断言B新记录和独立内容可查读，A未被误确认；不是无依据增加等价项目数量。保留原TC可新增独立持续失败检查，不宣称产品缺陷。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [],
+      "revision_target": "design"
+    },
+    "TC-005-mixed-batch": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1明确混批不得部分接收。test_required_snapshot_and_batch_boundaries.py分别allowed-first/forbidden-first真实当前revision/epoch，Hub已登记两project，严格403/project_disabled、完整bodies仍[]、receipts[]，纯允许B正控200/accepted1且独立正文。只首目标正确或先提交允许前缀的错误在allowed-first完整bodies空首先失败，拒绝全部则正控200失败。真实两附件读到顺序、拒绝、receipt及正控。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "mixed-batch-atomic"
+      ]
+    },
+    "TC-005-offset-prefix": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1消息出现序号区分轮次支持此设计。test_upload_review_regressions.py:12–32先无ID第二轮、后同角色/正文/时间第一轮，两实体独立expected同文字两次，Hub origins位置/顺序精确[(1,1),(2,2)]，重复无pending且confirmed2。只处理当前首轮或把文本相等合并，bodies两项/完整origin对首先拦截。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-timestamp-version": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1内容版本包括来源时间，B7旧引用保留。test_upload_review_regressions.py:63–83先旧None时间版并取得实际Hub旧ref，再变来源时间；Hub times精确[None,new]，当前confirmed1，重复0，旧ref timestampNone，combined完整两消息及时间集合。若两版本同错为新值，times独立预期首拦截；旧ref被替换由None断言拦截。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-unknown-receipt": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/A4未知须核实且停止后不重新发送正文。test_upload_policy.py:90–114实际Hub提交成功后choose none再丢响应，先inflight1，重试无正文upload，最终policy none/inflight0/confirmed1及独立旧body一条。未知直接当成功先在inflight1失败，旧body删除/重复在完整bodies失败。多记录inflight由batch-failure两记录恢复共同验证；此单样例本身不声称完整故障全表。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete26-sc4.md。",
+      "covers": [
+        "case-4"
+      ]
+    }
+  }
+}

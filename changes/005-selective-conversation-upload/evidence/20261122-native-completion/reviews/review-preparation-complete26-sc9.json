@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "SC9 tdd-core源于SPEC A9/B6，设计只分配“范围解析失败A不扩本机关联、对照显式本机”。真实源码tests/test_005_contracts.py:195–210、pair/add_local夹具给A/D独立JSONL并建立关联；:205完整session集合={local-a}，:206–208核fallback/local/实际项目A，:210显式本机集合={local-a,local-d}。若只正确首目标而丢D，显式集合断言拦截；回退扩大D或两端误查同范围由两个独立期望拦截。替换相同条件下另一项目名仅等价可选。当前debug result 013adc68fc385d7d4a9a47c96146819414c48b0e309c6a3865c7362dfe3d2c3b，bindings/artifacts实算一致，PID32869、exit0、run.stdout 1passed且stderr空；全部分配检查执行到。完整criteria/人工项另审manual-preparation-complete26-sc9.md；该MD指出full2成功零命中准备缺口，不能将本auto通过扩大成SC9整体通过。",
+      "covers": [
+        "tdd-core"
+      ]
+    }
+  }
+}

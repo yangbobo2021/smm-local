@@ -1,0 +1,692 @@
+{
+  "versionprobe": {
+    "cli": {
+      "query": "versionprobe",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "62baff181c9d42bdb356689117f69f37",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "2539223447d3442680a50b699f82470a",
+          "source_key": "ace7220b44306a35d0ed56d28f682d2d",
+          "device_name": "005-local"
+        },
+        {
+          "id": 6,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "4e43b344ce0a4ff7a5fa532fdb946d87",
+          "source_key": "b1a7b007fad23e133b1edf098f0bad3a",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 1,
+        "hub_count": 1,
+        "hub_returned_count": 1,
+        "method": "BM25"
+      },
+      "results": [
+        {
+          "id": 7,
+          "source": "codex",
+          "source_session_id": "version-dialogue",
+          "title": "versionprobe changed local version",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": 1,
+          "project_name": "A",
+          "rank": 1,
+          "bm25_score": 0.3955628496211987,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "text": "versionprobe changed local version",
+              "timestamp": null,
+              "origins": [
+                {
+                  "device_name": "005-local",
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "source_position": 1
+                }
+              ],
+              "canonical_id": "91831d534731a4b02c7594705c5ba0472182f24f7e1b6ea94e66245415bf42c3",
+              "content_version": "5da4167b2db985bfada7f8016d670402bb3a760f59f9f078828b0310a095e2fd",
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f"
+            },
+            {
+              "position": 1,
+              "role": "user",
+              "text": "versionprobe original archived version",
+              "timestamp": null,
+              "canonical_id": "e1bf4d0d527f9dd769778bf0ba92189c5a4450cd0c65942ec8b3b466b0eb9b58",
+              "content_version": "3a21f29b541a8d88b4b6b0b94dc80abf55309bcf8138b5ca6dde144849b6f116",
+              "hub_message_id": 5,
+              "origins": [
+                {
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "device_name": "005-local",
+                  "source_position": 1,
+                  "source_order": 1,
+                  "project_id": 2,
+                  "project_name": "A"
+                }
+              ],
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+            }
+          ],
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "2539223447d3442680a50b699f82470a"
+            }
+          ],
+          "archive_scope": "combined",
+          "origin_session_key": "version-dialogue",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoiY29tYmluZWQiLCJmb3JtYXQiOjEsImtpbmQiOiJidW5kbGUiLCJwYXJ0cyI6WyJyMS5leUpoY21Ob2FYWmxYMmxrSWpvaVltRm1Zems1TnpBek5UTXdOR0kxTjJKbU5ETXhNalpqWTJWaE5Ea3daVFVpTENKaGNtTm9hWFpsWDNOamIzQmxJam9pYkc5allXd2lMQ0pqYjI1MlpYSnpZWFJwYjI1ZmFXUWlPamNzSW1admNtMWhkQ0k2TVN3aWFIVmlYMmxrSWpwdWRXeHNMQ0pyYVc1a0lqb2lZMmwwWVhScGIyNGlMQ0p0WlhOellXZGxjeUk2VzNzaWFXUWlPamdzSW5CdmMybDBhVzl1SWpveExDSnpiM1Z5WTJWZmEyVjVJam9pZG1WeWMybHZiaTFrYVdGc2IyZDFaUzF0TVNJc0luWmxjbk5wYjI0aU9pSTFaR0UwTVRZM1lqSmtZams0TldKbVlXUmhOMlk0TURFMlpEWTNNRFF3TW1KaU0yRTNOakJtTlRsbU9XWXdOemc0TWpoaU1ETXhNR0V3T1RWbE1tWmtJbjFkTENKdmNtbG5hVzVmYVdSbGJuUnBkSGtpT2lJNE9HVTNPRGt5TVdNMU9UaGhZVEZpTmpNNFltVTJOR0ZoTTJFME0yVTRPVFU1TXpjME1UUmtNREk1TUdNeU9XTmtNamN4WW1ReU1HRmxOMlpqTUdZMElpd2ljSEp2YW1WamRGOXBaSE1pT2xzeFhTd2ljMjkxY21ObElqb2lZMjlrWlhnaWZRLmZmOGY3ZjI4MDBjMDE1MWM2OTQ5OGEwZDdjOGUyMzIxMmNkZTZlNmJiNjk2NDQ4MDBjNzYyNDEzZjYwYTI0NmYiLCJyMS5leUpoY21Ob2FYWmxYMmxrSWpvaU5HSTNaVFppWXpVME1qRTROR1ZrTm1JMk5EaGlNekUxTWpCaE1UVmlPREVpTENKaGNtTm9hWFpsWDNOamIzQmxJam9pYUhWaUlpd2lZMjl1ZG1WeWMyRjBhVzl1WDJsa0lqbzFMQ0ptYjNKdFlYUWlPakVzSW1oMVlsOXBaQ0k2SWpZeVltRm1aakU0TVdNNVpEUXlZbVJpTXpVMk5qZzVNVEUzWmpZNVpqTTNJaXdpYTJsdVpDSTZJbU5wZEdGMGFXOXVJaXdpYldWemMyRm5aWE1pT2x0N0ltbGtJam8xTENKd2IzTnBkR2x2YmlJNk1Td2ljMjkxY21ObFgydGxlU0k2SW1GaU9UazNOV001Wm1JM05EZzFZemt4T0RKbFl6STVNRGRtWkdWak1tRmpaRGt5TUdJNE1XTTFOekExWldJelpqUTJabVJsT1RneFl6WmlOV0ppWlRJaUxDSjJaWEp6YVc5dUlqb2lNMkV5TVdZeU9XSTFOREZoT0dRNE9HSTBZalppTUdJNU5HUmpPREJoWW1ZMU5UTXdPV0pqWmpneE16aGlOV05oTm1Sa1pURTBORGcwT1dJMlpqRXhOaUo5WFN3aWIzSnBaMmx1WDJsa1pXNTBhWFI1SWpvaU9EaGxOemc1TWpGak5UazRZV0V4WWpZek9HSmxOalJoWVROaE5ETmxPRGsxT1RNM05ERTBaREF5T1RCak1qbGpaREkzTVdKa01qQmhaVGRtWXpCbU5DSXNJbkJ5YjJwbFkzUmZhV1J6SWpwYk1Td3lMRFpkTENKemIzVnlZMlVpT2lKamIyUmxlQ0o5LmRiZWQ0YmQ0Y2FiODkyMmYwOTgzYzdkN2NhYWQ2MWI1MmYyMjE2NzhlNGE4YjhjMzJjZjI2MGU3NjFjNDljMzUiXX0.e9c98cc7ab4bdca27f410c77dcdb89f7b7eaf5e2acc22dac3eb71dca9d69ea73",
+          "rerank_score": 0.3955628496211987,
+          "origin_references": [
+            {
+              "archive_scope": "local",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f"
+            },
+            {
+              "archive_scope": "hub",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+            }
+          ]
+        }
+      ]
+    },
+    "mcp": {
+      "query": "versionprobe",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "62baff181c9d42bdb356689117f69f37",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "2539223447d3442680a50b699f82470a",
+          "source_key": "ace7220b44306a35d0ed56d28f682d2d",
+          "device_name": "005-local"
+        },
+        {
+          "id": 6,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "4e43b344ce0a4ff7a5fa532fdb946d87",
+          "source_key": "b1a7b007fad23e133b1edf098f0bad3a",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 1,
+        "hub_count": 1,
+        "hub_returned_count": 1,
+        "method": "BM25"
+      },
+      "results": [
+        {
+          "id": 7,
+          "source": "codex",
+          "source_session_id": "version-dialogue",
+          "title": "versionprobe changed local version",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": 1,
+          "project_name": "A",
+          "rank": 1,
+          "bm25_score": 0.3955628496211987,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "timestamp": null,
+              "origins": [
+                {
+                  "device_name": "005-local",
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "source_position": 1
+                }
+              ],
+              "canonical_id": "91831d534731a4b02c7594705c5ba0472182f24f7e1b6ea94e66245415bf42c3",
+              "content_version": "5da4167b2db985bfada7f8016d670402bb3a760f59f9f078828b0310a095e2fd",
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f",
+              "preview_truncated": false,
+              "preview": "versionprobe changed local version"
+            },
+            {
+              "position": 1,
+              "role": "user",
+              "timestamp": null,
+              "canonical_id": "e1bf4d0d527f9dd769778bf0ba92189c5a4450cd0c65942ec8b3b466b0eb9b58",
+              "content_version": "3a21f29b541a8d88b4b6b0b94dc80abf55309bcf8138b5ca6dde144849b6f116",
+              "hub_message_id": 5,
+              "origins": [
+                {
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "device_name": "005-local",
+                  "source_position": 1,
+                  "source_order": 1,
+                  "project_id": 2,
+                  "project_name": "A"
+                }
+              ],
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35",
+              "preview_truncated": false,
+              "preview": "versionprobe original archived version"
+            }
+          ],
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "2539223447d3442680a50b699f82470a"
+            }
+          ],
+          "archive_scope": "combined",
+          "origin_session_key": "version-dialogue",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoiY29tYmluZWQiLCJmb3JtYXQiOjEsImtpbmQiOiJidW5kbGUiLCJwYXJ0cyI6WyJyMS5leUpoY21Ob2FYWmxYMmxrSWpvaVltRm1Zems1TnpBek5UTXdOR0kxTjJKbU5ETXhNalpqWTJWaE5Ea3daVFVpTENKaGNtTm9hWFpsWDNOamIzQmxJam9pYkc5allXd2lMQ0pqYjI1MlpYSnpZWFJwYjI1ZmFXUWlPamNzSW1admNtMWhkQ0k2TVN3aWFIVmlYMmxrSWpwdWRXeHNMQ0pyYVc1a0lqb2lZMmwwWVhScGIyNGlMQ0p0WlhOellXZGxjeUk2VzNzaWFXUWlPamdzSW5CdmMybDBhVzl1SWpveExDSnpiM1Z5WTJWZmEyVjVJam9pZG1WeWMybHZiaTFrYVdGc2IyZDFaUzF0TVNJc0luWmxjbk5wYjI0aU9pSTFaR0UwTVRZM1lqSmtZams0TldKbVlXUmhOMlk0TURFMlpEWTNNRFF3TW1KaU0yRTNOakJtTlRsbU9XWXdOemc0TWpoaU1ETXhNR0V3T1RWbE1tWmtJbjFkTENKdmNtbG5hVzVmYVdSbGJuUnBkSGtpT2lJNE9HVTNPRGt5TVdNMU9UaGhZVEZpTmpNNFltVTJOR0ZoTTJFME0yVTRPVFU1TXpjME1UUmtNREk1TUdNeU9XTmtNamN4WW1ReU1HRmxOMlpqTUdZMElpd2ljSEp2YW1WamRGOXBaSE1pT2xzeFhTd2ljMjkxY21ObElqb2lZMjlrWlhnaWZRLmZmOGY3ZjI4MDBjMDE1MWM2OTQ5OGEwZDdjOGUyMzIxMmNkZTZlNmJiNjk2NDQ4MDBjNzYyNDEzZjYwYTI0NmYiLCJyMS5leUpoY21Ob2FYWmxYMmxrSWpvaU5HSTNaVFppWXpVME1qRTROR1ZrTm1JMk5EaGlNekUxTWpCaE1UVmlPREVpTENKaGNtTm9hWFpsWDNOamIzQmxJam9pYUhWaUlpd2lZMjl1ZG1WeWMyRjBhVzl1WDJsa0lqbzFMQ0ptYjNKdFlYUWlPakVzSW1oMVlsOXBaQ0k2SWpZeVltRm1aakU0TVdNNVpEUXlZbVJpTXpVMk5qZzVNVEUzWmpZNVpqTTNJaXdpYTJsdVpDSTZJbU5wZEdGMGFXOXVJaXdpYldWemMyRm5aWE1pT2x0N0ltbGtJam8xTENKd2IzTnBkR2x2YmlJNk1Td2ljMjkxY21ObFgydGxlU0k2SW1GaU9UazNOV001Wm1JM05EZzFZemt4T0RKbFl6STVNRGRtWkdWak1tRmpaRGt5TUdJNE1XTTFOekExWldJelpqUTJabVJsT1RneFl6WmlOV0ppWlRJaUxDSjJaWEp6YVc5dUlqb2lNMkV5TVdZeU9XSTFOREZoT0dRNE9HSTBZalppTUdJNU5HUmpPREJoWW1ZMU5UTXdPV0pqWmpneE16aGlOV05oTm1Sa1pURTBORGcwT1dJMlpqRXhOaUo5WFN3aWIzSnBaMmx1WDJsa1pXNTBhWFI1SWpvaU9EaGxOemc1TWpGak5UazRZV0V4WWpZek9HSmxOalJoWVROaE5ETmxPRGsxT1RNM05ERTBaREF5T1RCak1qbGpaREkzTVdKa01qQmhaVGRtWXpCbU5DSXNJbkJ5YjJwbFkzUmZhV1J6SWpwYk1Td3lMRFpkTENKemIzVnlZMlVpT2lKamIyUmxlQ0o5LmRiZWQ0YmQ0Y2FiODkyMmYwOTgzYzdkN2NhYWQ2MWI1MmYyMjE2NzhlNGE4YjhjMzJjZjI2MGU3NjFjNDljMzUiXX0.e9c98cc7ab4bdca27f410c77dcdb89f7b7eaf5e2acc22dac3eb71dca9d69ea73",
+          "rerank_score": 0.3955628496211987,
+          "origin_references": [
+            {
+              "archive_scope": "local",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f"
+            },
+            {
+              "archive_scope": "hub",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+            }
+          ]
+        }
+      ]
+    },
+    "reads": [
+      {
+        "id": 7,
+        "source": "codex",
+        "source_session_id": "version-dialogue",
+        "source_path": "<task>/local/sessions/version-dialogue.jsonl",
+        "cwd": "<task>/local/work/A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "versionprobe changed local version",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "versionprobe changed local version",
+            "timestamp": null,
+            "canonical_id": "91831d534731a4b02c7594705c5ba0472182f24f7e1b6ea94e66245415bf42c3",
+            "content_version": "5da4167b2db985bfada7f8016d670402bb3a760f59f9f078828b0310a095e2fd",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "source_position": 1
+              }
+            ]
+          },
+          {
+            "position": 1,
+            "role": "user",
+            "text": "versionprobe original archived version",
+            "timestamp": null,
+            "canonical_id": "e1bf4d0d527f9dd769778bf0ba92189c5a4450cd0c65942ec8b3b466b0eb9b58",
+            "content_version": "3a21f29b541a8d88b4b6b0b94dc80abf55309bcf8138b5ca6dde144849b6f116",
+            "hub_message_id": 5,
+            "origins": [
+              {
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "device_name": "005-local",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 2,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "2539223447d3442680a50b699f82470a"
+          }
+        ],
+        "archive_scope": "combined",
+        "origin_references": [
+          "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f",
+          "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+        ]
+      },
+      {
+        "id": 7,
+        "source": "codex",
+        "source_session_id": "version-dialogue",
+        "source_path": "<task>/local/sessions/version-dialogue.jsonl",
+        "cwd": "<task>/local/work/A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "versionprobe changed local version",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "versionprobe changed local version",
+            "timestamp": null,
+            "canonical_id": "91831d534731a4b02c7594705c5ba0472182f24f7e1b6ea94e66245415bf42c3",
+            "content_version": "5da4167b2db985bfada7f8016d670402bb3a760f59f9f078828b0310a095e2fd",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "source_position": 1
+              }
+            ]
+          },
+          {
+            "position": 1,
+            "role": "user",
+            "text": "versionprobe original archived version",
+            "timestamp": null,
+            "canonical_id": "e1bf4d0d527f9dd769778bf0ba92189c5a4450cd0c65942ec8b3b466b0eb9b58",
+            "content_version": "3a21f29b541a8d88b4b6b0b94dc80abf55309bcf8138b5ca6dde144849b6f116",
+            "hub_message_id": 5,
+            "origins": [
+              {
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "device_name": "005-local",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 2,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "2539223447d3442680a50b699f82470a"
+          }
+        ],
+        "archive_scope": "combined",
+        "origin_references": [
+          "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjcsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjgsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoidmVyc2lvbi1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI1ZGE0MTY3YjJkYjk4NWJmYWRhN2Y4MDE2ZDY3MDQwMmJiM2E3NjBmNTlmOWYwNzg4MjhiMDMxMGEwOTVlMmZkIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4OGU3ODkyMWM1OThhYTFiNjM4YmU2NGFhM2E0M2U4OTU5Mzc0MTRkMDI5MGMyOWNkMjcxYmQyMGFlN2ZjMGY0IiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.ff8f7f2800c0151c69498a0d7c8e23212cde6e6bb69644800c762413f60a246f",
+          "r1.eyJhcmNoaXZlX2lkIjoiNGI3ZTZiYzU0MjE4NGVkNmI2NDhiMzE1MjBhMTViODEiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjYyYmFmZjE4MWM5ZDQyYmRiMzU2Njg5MTE3ZjY5ZjM3Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImFiOTk3NWM5ZmI3NDg1YzkxODJlYzI5MDdmZGVjMmFjZDkyMGI4MWM1NzA1ZWIzZjQ2ZmRlOTgxYzZiNWJiZTIiLCJ2ZXJzaW9uIjoiM2EyMWYyOWI1NDFhOGQ4OGI0YjZiMGI5NGRjODBhYmY1NTMwOWJjZjgxMzhiNWNhNmRkZTE0NDg0OWI2ZjExNiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODhlNzg5MjFjNTk4YWExYjYzOGJlNjRhYTNhNDNlODk1OTM3NDE0ZDAyOTBjMjljZDI3MWJkMjBhZTdmYzBmNCIsInByb2plY3RfaWRzIjpbMSwyLDZdLCJzb3VyY2UiOiJjb2RleCJ9.dbed4bd4cab8922f0983c7d7caad61b52f221678e4a8b8c32cf260e761c49c35"
+        ]
+      }
+    ]
+  },
+  "longneedle": {
+    "cli": {
+      "query": "longneedle",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "62baff181c9d42bdb356689117f69f37",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "2539223447d3442680a50b699f82470a",
+          "source_key": "ace7220b44306a35d0ed56d28f682d2d",
+          "device_name": "005-local"
+        },
+        {
+          "id": 6,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "4e43b344ce0a4ff7a5fa532fdb946d87",
+          "source_key": "b1a7b007fad23e133b1edf098f0bad3a",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 1,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": [
+        {
+          "id": 8,
+          "source": "codex",
+          "source_session_id": "long-dialogue",
+          "title": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword ",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": 1,
+          "project_name": "A",
+          "rank": 1,
+          "bm25_score": 0.2876820724517809,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "text": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword longneedle end original",
+              "timestamp": null,
+              "origins": [
+                {
+                  "device_name": "005-local",
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "source_position": 1
+                }
+              ],
+              "canonical_id": "bbda230d1636abc0cc7b107ffb7b7ce1e6ae2ccfc58416659c8d7c8f55c0a8bf",
+              "content_version": "956bf5d930aab0c61c255da19e3fb1a0d62cfca885248a01cefdda8886b0dfa1",
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896"
+            }
+          ],
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "2539223447d3442680a50b699f82470a"
+            }
+          ],
+          "archive_scope": "local",
+          "origin_session_key": "long-dialogue",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896",
+          "rerank_score": 0.2876820724517809,
+          "origin_references": [
+            {
+              "archive_scope": "local",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896"
+            }
+          ]
+        }
+      ]
+    },
+    "mcp": {
+      "query": "longneedle",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "62baff181c9d42bdb356689117f69f37",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "2539223447d3442680a50b699f82470a",
+          "source_key": "ace7220b44306a35d0ed56d28f682d2d",
+          "device_name": "005-local"
+        },
+        {
+          "id": 6,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "4e43b344ce0a4ff7a5fa532fdb946d87",
+          "source_key": "b1a7b007fad23e133b1edf098f0bad3a",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 1,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": [
+        {
+          "id": 8,
+          "source": "codex",
+          "source_session_id": "long-dialogue",
+          "title": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword ",
+          "started_at": null,
+          "updated_at": null,
+          "project_id": 1,
+          "project_name": "A",
+          "rank": 1,
+          "bm25_score": 0.2876820724517809,
+          "matched_messages": [
+            {
+              "position": 1,
+              "role": "user",
+              "timestamp": null,
+              "origins": [
+                {
+                  "device_name": "005-local",
+                  "device_id": "2539223447d3442680a50b699f82470a",
+                  "source_position": 1
+                }
+              ],
+              "canonical_id": "bbda230d1636abc0cc7b107ffb7b7ce1e6ae2ccfc58416659c8d7c8f55c0a8bf",
+              "content_version": "956bf5d930aab0c61c255da19e3fb1a0d62cfca885248a01cefdda8886b0dfa1",
+              "source_order": 1,
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896",
+              "preview_truncated": true,
+              "text_chars": 24023,
+              "preview_ranges": [
+                [
+                  23423,
+                  24023
+                ]
+              ],
+              "preview": " paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword longneedle end original"
+            }
+          ],
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "2539223447d3442680a50b699f82470a"
+            }
+          ],
+          "archive_scope": "local",
+          "origin_session_key": "long-dialogue",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896",
+          "rerank_score": 0.2876820724517809,
+          "origin_references": [
+            {
+              "archive_scope": "local",
+              "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896"
+            }
+          ]
+        }
+      ]
+    },
+    "reads": [
+      {
+        "id": 8,
+        "source": "codex",
+        "source_session_id": "long-dialogue",
+        "source_path": "<task>/local/sessions/long-dialogue.jsonl",
+        "cwd": "<task>/local/work/A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword ",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword longneedle end original",
+            "timestamp": null,
+            "canonical_id": "bbda230d1636abc0cc7b107ffb7b7ce1e6ae2ccfc58416659c8d7c8f55c0a8bf",
+            "content_version": "956bf5d930aab0c61c255da19e3fb1a0d62cfca885248a01cefdda8886b0dfa1",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "2539223447d3442680a50b699f82470a"
+          }
+        ],
+        "archive_scope": "local"
+      },
+      {
+        "id": 8,
+        "source": "codex",
+        "source_session_id": "long-dialogue",
+        "source_path": "<task>/local/sessions/long-dialogue.jsonl",
+        "cwd": "<task>/local/work/A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword ",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword paddingword longneedle end original",
+            "timestamp": null,
+            "canonical_id": "bbda230d1636abc0cc7b107ffb7b7ce1e6ae2ccfc58416659c8d7c8f55c0a8bf",
+            "content_version": "956bf5d930aab0c61c255da19e3fb1a0d62cfca885248a01cefdda8886b0dfa1",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmFmYzk5NzAzNTMwNGI1N2JmNDMxMjZjY2VhNDkwZTUiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9uZy1kaWFsb2d1ZS1tMSIsInZlcnNpb24iOiI5NTZiZjVkOTMwYWFiMGM2MWMyNTVkYTE5ZTNmYjFhMGQ2MmNmY2E4ODUyNDhhMDFjZWZkZGE4ODg2YjBkZmExIn1dLCJvcmlnaW5faWRlbnRpdHkiOiJhMDVkNDVjZDdkYmQ1OTliYWRmOTBkZWM4NGNlOTk3OGE5OTAyZTQ0ZDI1ZjA4NGFmNjZkMzYyMDkzZjU0NDMwIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.92b585bbaad4fe06e0969a72f40a7a2b81561417307de7b21e8989e2be341896",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "2539223447d3442680a50b699f82470a",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "2539223447d3442680a50b699f82470a"
+          }
+        ],
+        "archive_scope": "local"
+      }
+    ]
+  }
+}

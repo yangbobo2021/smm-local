@@ -1,0 +1,37 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "A9/B6 tdd-core原设计/源码未改；30当前真实exit0/1passed、完整A回退与显式A+D集合/实际项目及原因断言全达，首目标或两查询同错由固定完整集合拦截。bindings/artifacts SHA一致。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-empty-coverage": {
+      "status": "passed",
+      "reason": "A9/B6 additional-empty-coverage原有效设计/修订断言未改；30实际exit0/2passed，all/project两个JSON完整保存success空/双方complete/无原因/真实search、failed空/Hub unavailable与准确原因、explicit_local空/Hub not_requested，逐scope/状态固定字典而非两端相等。bindings/artifacts及两附件SHA一致，全分配检查到达，不冒充E1平台。",
+      "covers": [
+        "additional-empty-coverage"
+      ]
+    },
+    "TC-005-empty-mac": {
+      "status": "passed",
+      "reason": "A9/E1/D4真实三入口零命中自然设计准确，30修控制器先在sync Playwright外真跑CLI/stdio MCP，再浏览器实际提交，未删除业务断言。mac当前exit0，ba8 clean Local25/Hub24逐模块相等、普通UID501身份/独立任务HTTPS、正控local-A/remote-B/vibe-V；successful-empty-cli-mcp及successful-empty.json两个scope(all/project)各CLI/MCP/Web六实际响应均results=[]/coverage local=hub=complete/无失败原因。两张successful-empty-all/project.png实际逐张打开，画面均“没有匹配结果；请结合上面的实际覆盖范围判断”及本机已检索/Hub已检索；all显示所有项目，project显示synthetic V/A/B，符合空成功区别未查询。原trace、commands、实际browser157.0.8103.50、page_errors=[]和cleanup failures=[]齐全，35附件及全部bindings/artifacts SHA一致。只首入口/仅一种scope正确会被六独立响应与两幅UI断言拦截，不仅互等；原29循环错误未重现。全部empty-e1-mac到达，属于调试准备而非formal execute。",
+      "covers": [
+        "empty-e1-mac"
+      ]
+    },
+    "TC-005-empty-linux": {
+      "status": "passed",
+      "reason": "A9/E1/D4真实三入口零命中自然设计准确，30修控制器先在sync Playwright外真跑CLI/stdio MCP，再浏览器实际提交，未删除业务断言。linux当前exit0，ba8 clean Local25/Hub24逐模块相等、普通UID1000身份/独立任务HTTPS、正控local-A/remote-B/vibe-V；successful-empty-cli-mcp及successful-empty.json两个scope(all/project)各CLI/MCP/Web六实际响应均results=[]/coverage local=hub=complete/无失败原因。两张successful-empty-all/project.png实际逐张打开，画面均“没有匹配结果；请结合上面的实际覆盖范围判断”及本机已检索/Hub已检索；all显示所有项目，project显示synthetic V/A/B，符合空成功区别未查询。原trace、commands、实际browser159.0.8154.6、page_errors=[]和cleanup failures=[]齐全，34附件及全部bindings/artifacts SHA一致。只首入口/仅一种scope正确会被六独立响应与两幅UI断言拦截，不仅互等；原29循环错误未重现。全部empty-e1-linux到达，属于调试准备而非formal execute。",
+      "covers": [
+        "empty-e1-linux"
+      ]
+    },
+    "TC-005-empty-windows": {
+      "status": "insufficient_evidence",
+      "reason": "当前debug30 execution.error=timed out、exit_code=null，10:37:42.910→10:42:42.933UTC恰约300秒；无stdout/stderr和回收附件。自然设计A9/E1准确，代码已修Limited配置可读性与Playwright循环组织；不能据工具超时断产品失败或通过。只读work/empty30-windows-inspection.json SHA5dc54d6815476df91f568f43389c1f4e3a6142f552022c26f1d09d251e4375bc显示同attempt native-790d…worker12868 exit0、tasks=[]，远端业务result10:37:54.167326→10:43:14.599196约320.432秒、cleanup[]、六响应JSON均空/双方complete，这是业务在工具超时后结束的迹象，非当前原生debug成功。该inspection只有commands/六响应/result/cleanup片段，未回收完整manifest、实际身份/模块、两个空结果PNG及trace供独立图检，尚不能认领empty-e1-windows。需完整恢复并另作真实观察记录，或按新design/match把同TC改人工项外部真执行后manual记录原结束/worker/包/入口/截图/清理，再独立执行复审；保留当前timeout不改工具、不把外部片段贴成debug通过。当前target SHA d52894b89117d6f1a29744c417a5a8d90c0ffbd516769aacbff91eef11c80ec5，covers空。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "cases": {
+    "TC-005-bm25": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc7全部binding/artifact SHA已逐项实核，正式时间11:03:36.215–37.295Z，四个指定命令各exit0/1passed；设计引用27、match30分配与实际TC一致。对照SPEC A7/B6/D3，实核tests/test_upload_acceptance_boundaries.py:107–118实际调用test_combined_search.py独立数学断言：端点分数方向相反的3/5token文档逐目标按ln(1+.5/2.5)和k1=1.2/b=.75比较；加入同源同版本副本不改分数/消息数，其他会话及另一canonical轮次仍保留；v1/v2在同会话中完整canonical/version/text集合及len2独立断言。该TC为数学候选，不声称伪造ref是真实原文读取；实际版本引用由人工项承担。",
+      "covers": [
+        "case-1",
+        "identity-versions"
+      ]
+    },
+    "TC-005-long-message": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc7全部binding/artifact SHA已逐项实核，正式时间11:03:36.215–37.295Z，四个指定命令各exit0/1passed；设计引用27、match30分配与实际TC一致。对照SPEC A7/B6/D3，实核test_combined_search.py:57–78，查询词tailonly仅在长文第2001token且不在前100字，远端独立3token；full/preview100均明确命中long/remote，各分数逐项符合以2001/3完整长度和独立avg/idf计算的式子，短预览长度确减少，long reference完整读回原text。两端同截断评分会被独立长度数值断言拦截。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-rank-ties": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc7全部binding/artifact SHA已逐项实核，正式时间11:03:36.215–37.295Z，四个指定命令各exit0/1passed；设计引用27、match30分配与实际TC一致。对照SPEC A7/B6/D3，实核test_combined_search.py:48–54，五候选同正文同分数；两等绝对时间（不同时区）、更新一天、显式None与缺失timestamp在动作前构造，完整顺序[c,a,b,d,e]断言更新有效时间优先、等时稳定身份和缺失早于有效时间。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-multiterm-ranking": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc7全部binding/artifact SHA已逐项实核，正式时间11:03:36.215–37.295Z，四个指定命令各exit0/1passed；设计引用27、match30分配与实际TC一致。对照SPEC A7/B6/D3，实核test_complete_scene_boundaries.py:171–183与本次multiterm-ranking.json。按原独立三个文档3/4/2token，amber df1、blue df3和去重查询amber/blue另行计算得m1=1.4821716155156461、m2=.11750762550957991、m3=.15461529672313148，附件实际值逐项一致、顺序m1/m3/m2。每目标独立字面式及精确集合拦只首目标正确、重复query词增权或df均M等错误。",
+      "covers": [
+        "additional-multiterm-ranking"
+      ]
+    }
+  }
+}

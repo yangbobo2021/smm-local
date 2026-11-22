@@ -1,0 +1,37 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_web_reconcile_requires_valid_versions_without_mutating_either_rule ____
+
+pair = namespace(local=<smm_local.core.Archive object at 0x106445c40>, remote=<smm_local.core.Archive object at 0x1062fea20>,...c9417a8a6bce850b8065b8', 'device_id': '57152804bae64c9a8c5571ccac83609c'})], hub_id='9bc791dad0c9417a8a6bce850b8065b8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10632b500>
+
+    def test_web_reconcile_requires_valid_versions_without_mutating_either_rule(pair, monkeypatch):
+        """TC-005-reconcile-web-inputs: Web adoption always uses its displayed pair."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        shown = control.reconcile(request); revision = shown['hub']['revision']; generation = shown['local']['generation']
+        before = control.row(); remote_before = head(pair, config)
+        bad = [{'use': 'local', 'expected_hub_revision': revision},
+               {'use': 'hub', 'expected_hub_revision': revision},
+               {'use': 'hub', 'expected_local_generation': generation},
+               {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': -1},
+               {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': True},
+               {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': 'not-a-generation'},
+               {'use': 'local', 'expected_hub_revision': True, 'expected_local_generation': generation}]
+        with web(pair) as browser:
+            for payload in bad:
+                marker = len(pair.calls); result = browser.post('/api/upload/reconcile', json=payload)
+>               assert result.status_code in (400, 422), 'missing or invalid displayed versions must not save a rule'
+E               AssertionError: missing or invalid displayed versions must not save a rule
+E               assert 200 in (400, 422)
+E                +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_reconcile_snapshot.py:147: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_reconcile_snapshot.py::test_web_reconcile_requires_valid_versions_without_mutating_either_rule
+1 failed, 1 warning in 0.50s

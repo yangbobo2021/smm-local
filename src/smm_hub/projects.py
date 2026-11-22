@@ -12,7 +12,10 @@ class HubProjects:
     def __init__(self, db: Archive):
         self.db = db
         with db.connect() as con:
+            if con.execute("SELECT 1 FROM schema_migrations WHERE name='hub-message-projects-v1'").fetchone():
+                return
             con.executescript("""
+                BEGIN IMMEDIATE;
                 CREATE TABLE IF NOT EXISTS hub_devices (id TEXT PRIMARY KEY, name TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS hub_origins (
                     message_id INTEGER NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
@@ -50,14 +53,26 @@ class HubProjects:
                 );
                 CREATE INDEX IF NOT EXISTS hub_documents_by_project ON hub_project_documents(project_id,id);
                 CREATE VIRTUAL TABLE IF NOT EXISTS hub_project_fts USING fts5(terms, tokenize='unicode61');
-                CREATE VIEW IF NOT EXISTS hub_project_messages AS
-                    SELECT DISTINCT m.id AS message_id, m.conversation_id, pm.project_id
-                    FROM hub_project_memberships pm JOIN messages m ON m.conversation_id=pm.conversation_id
-                    JOIN hub_origins o ON o.message_id=m.id AND o.device_id=pm.owner
-                    WHERE pm.kind='device'
+                CREATE TABLE IF NOT EXISTS hub_message_projects (
+                    message_id INTEGER NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
+                    device_id TEXT NOT NULL,
+                    project_id INTEGER NOT NULL REFERENCES hub_projects(id),
+                    PRIMARY KEY(message_id,device_id,project_id)
+                );
+                DROP VIEW IF EXISTS hub_project_messages;
+                CREATE VIEW hub_project_messages AS
+                    SELECT DISTINCT m.id AS message_id, m.conversation_id,
+                           COALESCE(mp.project_id,pm.project_id) AS project_id
+                    FROM messages m JOIN hub_origins o ON o.message_id=m.id
+                    LEFT JOIN hub_message_projects mp ON mp.message_id=m.id AND mp.device_id=o.device_id
+                    LEFT JOIN hub_project_memberships pm ON pm.conversation_id=m.conversation_id
+                        AND pm.kind='device' AND pm.owner=o.device_id AND mp.project_id IS NULL
+                    WHERE COALESCE(mp.project_id,pm.project_id) IS NOT NULL
                     UNION ALL
                     SELECT m.id,m.conversation_id,v.project_id FROM hub_vibeinsight_messages v
                     JOIN messages m ON m.id=v.id;
+                INSERT OR IGNORE INTO schema_migrations VALUES('hub-message-projects-v1',datetime('now'));
+                COMMIT;
             """)
 
     @staticmethod
@@ -115,7 +130,7 @@ class HubProjects:
     @staticmethod
     def _list(con, ids: tuple[int, ...] | None = None) -> list[dict]:
         query = """
-            SELECT p.id,p.name,h.kind AS source,h.owner,h.source_key,d.name AS device_name
+            SELECT p.id,p.name,p.kind AS project_kind,h.kind AS source,h.owner,h.source_key,d.name AS device_name
             FROM hub_projects h JOIN projects p ON p.id=h.id
             LEFT JOIN hub_devices d ON h.kind='device' AND h.owner=d.id
         """

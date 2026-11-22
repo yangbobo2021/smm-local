@@ -10,19 +10,21 @@ from pathlib import Path
 LABEL = "ai.smm.local"
 
 
-def location() -> tuple[Path, str]:
-    return Path.home() / "Library/LaunchAgents" / f"{LABEL}.plist", f"gui/{os.getuid()}"
+def location(label: str = LABEL) -> tuple[Path, str]:
+    if not label or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-" for c in label):
+        raise ValueError("登录服务 label 无效")
+    return Path.home() / "Library/LaunchAgents" / f"{label}.plist", f"gui/{os.getuid()}"
 
 
-def install(cli: Path, db: Path) -> None:
-    plist, domain = location()
-    logs = Path.home() / ".local/share/smm-local/logs"
+def install(cli: Path, db: Path, *, label: str = LABEL, logs: Path | None = None) -> None:
+    plist, domain = location(label)
+    logs = logs or Path.home() / ".local/share/smm-local/logs"
     logs.mkdir(parents=True, exist_ok=True)
     plist.parent.mkdir(parents=True, exist_ok=True)
     previous = plist.read_bytes() if plist.exists() else None
     if previous is not None:
         subprocess.run(["launchctl", "bootout", domain, str(plist)], check=False, stdout=subprocess.DEVNULL)
-    data = {"Label": LABEL, "ProgramArguments": [str(cli), "--db", str(db), "serve"],
+    data = {"Label": label, "ProgramArguments": [str(cli), "--db", str(db), "serve"],
             "WorkingDirectory": str(cli.parent.parent), "RunAtLoad": True, "KeepAlive": True,
             "StandardOutPath": str(logs / "stdout.log"), "StandardErrorPath": str(logs / "stderr.log")}
     plist.write_bytes(plistlib.dumps(data))
@@ -37,8 +39,8 @@ def install(cli: Path, db: Path) -> None:
         raise
 
 
-def uninstall() -> None:
-    plist, domain = location()
+def uninstall(*, label: str = LABEL) -> None:
+    plist, domain = location(label)
     if plist.exists():
         subprocess.run(["launchctl", "bootout", domain, str(plist)], check=False)
         plist.unlink()

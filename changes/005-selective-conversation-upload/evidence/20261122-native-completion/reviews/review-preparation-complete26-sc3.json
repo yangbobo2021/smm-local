@@ -1,0 +1,50 @@
+{
+  "cases": {
+    "TC-005-global": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3明确唯一G、明确归属重导入保持及未知不得自动global/上传。test_project_preview_coverage.py:9实际调用原test_upload_policy::global_contract，保留缺cwd→None/无正文及已归属G重导入；再检查完整项目G集合和数据库join精确[(id,key)]。如果重复生成第二G，完整globals_now首先失败；缺cwd误归G或all上传由原contract对应数据库/完整bodies拦截。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-global-query": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3全局不自动参与A。test_project_identity_boundaries.py:40–72以A/G/unknown独有正文和显式预览确认准备，A结果精确{a}，全部精确{a,g,unknown}，Hub显式link后A精确{a,g}，explicit local仍{a}。只首对象正确而遗漏unknown/G，第二/第三结果集合直接拦截；两个端点同错不能通过独立session集合。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-project-identity": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3同名不同设备、rename保留身份/规则/关系。test_project_identity_boundaries.py:10–38真实另一owner相同key+name，要求两个Hub id，分别按owner定位；link后rename，独立old_policy/links/key比较，own指定id的name改且key不改，scope集合精确{own,remote}。误用两端同目标会违反two ids/owners或scope独立集合。更多等价同名项目可选。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-project-preview": {
+      "status": "needs_revision",
+      "reason": "场景定义与SPEC核对后：场景case-4与B3/A3本身有依据，但自然设计只承诺改变规则代次后旧预览拒绝（design request action），源码test_project_preview_coverage.py:41–46也仅choose相同onlyB推进generation。B3原文明确“标识绑定会话归属、目标及规则版本，任一变化后须重新预览”。合理错误：签名仅绑定generation，忽略data/affected/target；当前三参数所有断言仍过，因为唯一过期场景均改generation。平台Web/CLI也只有fresh确认，没有旧token换目标/归属变化的负例；JUnit全套无补拦截。最早需补设计：分别保持规则代次不变，改变受影响会话归属，以及将请求target替换另一有效目标，再重放旧标识，要求拒绝且完整状态不变；不要求删改现有TC身份、源码或断言，可另新增独立检查。对当前实现project_control.py:48–71的state指纹包含affected/target/data是源码支持推论，不能替代缺失边界用例。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [],
+      "revision_target": "design"
+    },
+    "TC-005-move-project": {
+      "status": "needs_revision",
+      "reason": "场景定义与SPEC核对后：B3/A3与场景move-project有明确依据，assign/map/merge三个动作均已真实debug通过；源码test_upload_project_moves.py:35–65禁止B阶段检查不出站与A/B检索，但旧A reference实际read只在choose onlyB之后的for reference循环。自然设计expected也将A引用放在“B允许后”阶段。B3/A3要求改入禁止B期间原A归属及旧引用仍可用；若禁止期间旧引用报错、允许后恢复，本TC、批量TC及平台affiliation原件可全过。第一可用拦截目前不存在，最早补design：在禁止B同步后且允许B前，使用改归属前的每条A引用读回独立原文。保留现行单消息基例，可另独立补该状态检查；这是测试设计缺口，未确认产品缺陷。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [],
+      "revision_target": "design"
+    },
+    "TC-005-move-batch": {
+      "status": "needs_revision",
+      "reason": "场景定义与SPEC核对后：完整多目标设计有效：test_upload_acceptance_boundaries.py:29–68对assign/map/merge、多会话各两条，独立expected逐session正文/角色、完整destination集合、全部old reference及物理row和无重传检查，能在destination集合或逐session read拦截只处理首消息/首会话。然而B禁止前状态的旧A引用读取遗漏同move-project：禁止时只有A命中集合，old[session]的read均在允许B之后；只在禁止期间旧reference坏、允许后恢复仍全部通过。B3/A3在此状态也承诺旧引用可用，因此需design补禁止期每个受影响/未受影响旧A reference的独立原文检查，不能用允许后的成功倒推禁止时可用。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [],
+      "revision_target": "design"
+    },
+    "TC-005-move-retry": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3单列归属确认失败不沿用旧A回执。test_upload_project_moves.py:69–98真实all已收A/B，在Hub known已新增B归属后丢响应，必须errors+pending，Hub按B存在而Local allowed_pending1/transfer_failed；恢复known后上传0、pending0、physical_rows独立before保持及old reference精确正文。未知按成功跳过会在pending1首次拦截，只保持body但错当确认不允许通过。该TC只认move-retry，不声称覆盖尚缺的禁止B期间旧引用状态。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete26-sc3.md。",
+      "covers": [
+        "move-retry"
+      ]
+    }
+  }
+}

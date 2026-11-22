@@ -1,0 +1,2002 @@
+{
+  "scope": "Current original-content/applicability observation. Historical business is NOT re-executed here. Fresh formal installed-package executions are separately identified.",
+  "started_at": "2026-11-22T12:02:33.955227+00:00",
+  "observer": "/root",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design": "design-complete26-sc12",
+  "match": "match-complete26-sc12",
+  "manual_case": "TC-005-guidance",
+  "preparation": ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete26-sc12.md",
+  "preparation_sha256": "2413d322b3c94b5cfc4b5436990da24d46a18aa004775573a3e09719dcaf8a42",
+  "original_business_events": [
+    {
+      "run": "mac-entrances-run10",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T06:06:11.766382+00:00",
+        "finished_at": "2026-11-22T06:06:43.789929+00:00",
+        "mode": "client",
+        "scope": "A5 actual HTTPS Hub isolation only; not E1 three-entrance or full A/E acceptance"
+      },
+      "original_revision": "7ab6d6c94cd228aab4f6169cb81dd995f1ed180f",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "a734ff66ebc0a0010d9b656ee087f6c09b6ff1f933a355a13f0bc5ad7c56b30e"
+    },
+    {
+      "run": "linux-entrances-run10",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T06:09:05.026125+00:00",
+        "finished_at": "2026-11-22T06:10:16.898172+00:00",
+        "mode": "client",
+        "scope": "A5 actual HTTPS Hub isolation only; not E1 three-entrance or full A/E acceptance"
+      },
+      "original_revision": "06dd2efd4e6b58165d6854cd5dc848c7c4d568b0",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "6af69291abf50be52eaf5ea301b63a26b84ea6a02f4c780847f5ec422bc85e57"
+    },
+    {
+      "run": "windows-entrances-run14",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T06:40:11.263937+00:00",
+        "finished_at": "2026-11-22T06:50:26.629800+00:00",
+        "mode": "client",
+        "scope": "A5 actual HTTPS Hub isolation only; not E1 three-entrance or full A/E acceptance"
+      },
+      "original_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+      "original_mode": "client",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "23261a91bb13f396c3f546a769603a97b3025d9d9ab5e081ab086cd3050b263a"
+    },
+    {
+      "run": "mac-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:28:06.809614+00:00",
+        "finished_at": "2026-11-22T08:28:13.185573+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "a777db9e3db46e514685c9740c89e213725c37983e0e8886af14a412356875e1"
+    },
+    {
+      "run": "linux-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:29:36.541502+00:00",
+        "finished_at": "2026-11-22T08:30:01.968174+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "2d6496014e02c5a4b6d651c0ec680900cdcdcfc68775ca40113c7e0d9ab9f7f5"
+    },
+    {
+      "run": "windows-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:29:39.007686+00:00",
+        "finished_at": "2026-11-22T08:35:59.812417+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "66d3fbc41fafd5a1b7b13e8c8a1ad709469a36d4a5995a4661025aa4c55e51ee"
+    },
+    {
+      "run": "mac-global-cli11",
+      "original_event": {
+        "status": "passed",
+        "scope": "E1 CLI unique global/explicit assignment/replay only",
+        "started_at": "2026-11-22T06:46:41.095643+00:00",
+        "finished_at": "2026-11-22T06:46:41.713160+00:00"
+      },
+      "original_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "723f7398483c040d0193909fc4b6ef9dc950e54d86dd3aa39bdf3cf23ed88325"
+    },
+    {
+      "run": "linux-global-cli11",
+      "original_event": {
+        "status": "passed",
+        "scope": "E1 CLI unique global/explicit assignment/replay only",
+        "started_at": "2026-11-22T06:47:27.696231+00:00",
+        "finished_at": "2026-11-22T06:47:32.149035+00:00"
+      },
+      "original_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "d5c0c8c028c3ff185a447bc3db5a00152718ae681ab7dee2e3043c29a23788c2"
+    },
+    {
+      "run": "windows-global-cli11",
+      "original_event": {
+        "status": "passed",
+        "scope": "E1 CLI unique global/explicit assignment/replay only",
+        "started_at": "2026-11-22T06:53:11.890550+00:00",
+        "finished_at": "2026-11-22T06:53:29.143840+00:00"
+      },
+      "original_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+      "original_mode": "client",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "e54b81f81ab001226a752d706775df198939424f751793a2b213331f3f184187"
+    }
+  ],
+  "fresh_formal_checks": [],
+  "regression_suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "252",
+    "time": "110.310",
+    "timestamp": "2026-11-22T18:25:09.307339+08:00",
+    "hostname": "<mac-test-host>"
+  },
+  "regression_cases": [
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_rebuilds_existing_citation_audit_without_changing_raw_records",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_refuses_to_overwrite_audited_scores",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[score_change]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[nonverbatim_replacement]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[altered_grades]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_new_connection_is_query_only_until_selected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_hub_rejects_stale_policy_and_legacy_body_after_restriction",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_query_combines_unuploaded_local_and_linked_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_references_read_the_right_archive_and_fail_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_fallback_does_not_expand_local_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_tampering_cross_archive_and_conflicting_parameters_are_rejected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_local_content_change_between_recall_and_signing_fails_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_shared_conversation_reference_cannot_expand_to_outside_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_old_read_parameters_still_work_without_new_reference",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_bm25_matches_independent_formula_and_ignores_archive_scores",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_ties_use_latest_timestamp_then_stable_identity",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_long_preview_does_not_change_rank_or_original",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_common_scope_is_one_hub_hop_without_local_reexpansion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_partial_hub_failure_preserves_valid_local_snapshot",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_local_error_still_returns_readable_hub_candidates",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_legacy_hub_global_search_is_readable_but_project_search_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_current_session_excludes_both_copies_only_in_the_same_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_each_endpoint_receives_only_normal_n_without_topup_and_invalid_n_never_calls_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_incomplete_hub_candidate_is_excluded_without_losing_valid_peers_or_topping_up",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[wrong_hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[missing_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_projects]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[unsigned_widening]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[project]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_multiword_bm25_uses_each_terms_document_frequency_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_repeated_project_failure_does_not_block_new_peer_work",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_federation_offline_recovery_dedup_and_provenance",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_links_filter_before_ranking_and_follow_only_one_hop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_request_reports_actual_scope_before_any_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_vibeinsight_configuration_has_managed_hub_entry_point",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation_tls",
+      "name": "test_detached_service_can_upload_through_callers_private_ca",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_runs_saved_source_lifecycle",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_rejects_conflicting_archive_before_writing",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[legacy]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[matching-explicit-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_public_prepare_restore_command_marks_the_actual_standalone_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_maintenance",
+      "name": "test_agent_maintenance_starts_reuses_and_preserves_pause",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_incremental_copy_survives_deletion_and_partial_line",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[True]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[False]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_partial_line_and_concatenated_frames_retry",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_corrupt_compressed_file_does_not_block_other_histories",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_plugin_and_skill_context_are_not_conversation_titles_or_evidence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_long_conversation_preview_keeps_later_decision_and_its_question",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compact_search_preserves_rank_and_can_read_complete_message",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_mcp_defaults_to_compact_and_allows_full_configuration",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_project_mapping_direct_links_and_current_exclusion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_parent_path_mapping_applies_to_existing_and_future_child_sessions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_api_uses_same_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_source_file_rewrite_does_not_duplicate",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_and_claude_share_durable_archive_without_tool_output",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_missing_claude_source_does_not_block_codex",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_sync_and_source_settings_share_one_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_injected_context_is_not_archived_and_old_copy_is_cleaned",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_same_names_and_even_same_device_local_keys_remain_distinct_after_rename",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_project_query_includes_global_only_after_explicit_hub_link",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_global_assignment_also_preserves_exactly_one_persistent_global",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_cli_hub_without_version_option_protects_changes_during_its_call",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_hub_switch_during_reconcile_keeps_new_target_query_only",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_dispatch",
+      "name": "test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_web_reconcile_requires_valid_versions_without_mutating_either_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[lost-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[new-local-choice]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[scope-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[hub-results-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-switched]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_allow_stop_allow_commits_and_delayed_requests_and_replies_keep_the_latest_head",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[before-commit]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[partial-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[allowed-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[forbidden-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[hub-api]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[federated]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_accepts_complete_synthetic_unit_fixture",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[missing_append-backfill A body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_score-score divergence]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[candidate_egress-ranking payload]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[false_complete-still pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_original-exact original body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_waits_for_job_and_allowed_backfill_not_just_confirmed_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_can_wait_for_control_only_without_requiring_body_permission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_starts_fresh_scan_after_joining_an_older_automatic_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_does_not_confirm_a_fresh_scan_when_start_reply_is_lost",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_promotes_repeated_lost_start_replies_to_complete",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_turns_pending_transfer_into_success_at_timeout",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[win32-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[linux--15]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[False-7]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_windows_waits_for_a_slow_background_service",
+      "skipped": true
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_service_start_cannot_use_an_unrelated_listener",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[before-\\u9996\\u6b21\\u8bfb\\u53d6-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[after-\\u8ffd\\u52a0\\u8bfb\\u53d6-\\u76ee\\u5f55]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[live-\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_registers_and_background_resumes_after_restart",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_scope_rejects_later_live_page_and_persistent_batch",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[defer_system-zcode-pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[skip_empty_reply-zcode-after]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[accept_later_prefix-zcode-before]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[ignore_scope_on_live-live\\uff08\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b\\uff09]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_faults_do_not_block_other_sources_or_advance_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_finds_and_purges_batch_older_than_latest_100",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_pages_keep_id_order_and_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[missing]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[non-integer]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[zero]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[negative]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[out-of-range]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_controls_compete_for_one_job_and_preserve_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_sqlite_and_json_sources_use_same_protocol",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_local_plugin_does_not_block_old_hub_upload",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_registered_during_full_sync_gets_its_own_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_disable_during_plugin_execution_prevents_batch_commit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_candidate_with_incorrect_live_origin_cannot_register",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_purged_conversation_id_is_reserved_for_the_original_source_session",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_bm25_formula_and_exact_retained_content_versions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[address]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[token]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[device_name]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET source_key='changed-key']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET position=9]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE conversations SET source_session_id='changed-session']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_web_controls_require_same_origin_or_service_token",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_cli_help_explains_values_and_first_use_keeps_old_install_explicit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_isolation",
+      "name": "test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_invalid_choices_do_not_change_active_policy",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_global_assignment_survives_reimport_and_unknown_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_resume_backfills_old_new_and_appended_despite_global_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_unknown_receipt_can_resolve_after_stop_without_sending_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_old_allow_backup_blocks_until_explicit_hub_reconciliation",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_lost_project_confirmation_retries_without_using_old_project_receipt",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_old_database_and_joint_restore_never_reopen_stopped_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_loss_of_receipts_rebuilds_from_exact_existing_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_database_without_managed_flag_still_rejects_old_client",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_missing_control_never_defaults_to_allow_and_can_be_explicitly_repaired",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_checkpoint_crash_recovers_only_committed_submission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_stale_diff_and_target_changes_require_explicit_new_choice",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_expanding_project_change_requires_bound_preview_and_preserves_assignment",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_failed_project_does_not_starve_another_allowed_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_existing_legacy_upload_migrates_on_background_restart_without_reconfigure",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_late_policy_reply_cannot_replace_a_newer_local_stop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_pause_does_not_block_control_or_resume_imports",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_cross_process_save_and_dispatch_share_one_durable_fence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_lost_policy_confirmation_is_pending_until_head_is_rechecked",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_invalid_batch_receipt_remains_unknown_then_resolves_exactly",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_bounded_backfill_keeps_search_and_other_project_available",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_registration",
+      "name": "test_query_only_registration_fences_same_device_legacy_writer",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_late_offset_prefix_preserves_two_identical_turns",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_target_switch_during_known_lookup_fences_old_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_timestamp_version_is_stored_before_exact_ack",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_body_failure_persists_in_upload_status_and_clears_after_recovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_project_lookback_includes_boundary_and_resumes_after_days",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[host-other-host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[port-5433]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[database-other-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_unmarked_destination_is_rejected_before_any_connection",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_instance_mismatch_cannot_reach_a_write",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_all_visible_projects_and_historical_discovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_resume_appends_to_same_conversation_in_source_order",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_failed_batch_retries_and_late_event_is_read_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_managed_hub_credential_restart_and_mixed_project_search",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_archive_and_cursor_rollback_together",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_delayed_reply_keeps_source_turns_grouped",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_scoped_shared_conversations_keep_only_matching_project_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_late_repository_attribution_moves_provenance_without_editing_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[port]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_stop_cancels_postgres_stream_while_stdout_is_blocked",
+      "skipped": false
+    }
+  ],
+  "evidence_inventory": {
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/local-all.json": "a33d328461a9078dce357d8122bb3c51d7ad1e9338b93baa5fbbfed1f0525d67",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/isolation-result.json": "c4165290306a4570c3a73faecf1ef44792cad43c421bb3054b2b2792eed58fb2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/new-connection-status.json": "6f104f93ca3e2a811afdf70b876217bf3b745959149562bd8e9cd7433b9c57aa",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/fixture-local.json": "cc7e4f1ebe4e0cc10778fe87ffae99bbd361b8d157dcd92fa0521c9ed019448e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/result.json": "9744bc0b17dfaa1259b7d7d2a6e4c7d1d32cf42f68bbfbe0fd471cfc4896b884",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/local-project.json": "05eac427f849fee65414c4a77a3b11924e8c6be383789c5d055436021129bd92",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/combined-all.png": "268d0f8bb93d716dc47d472436c91e4a75a8f21d08b0271a1b12f85a35dc5918",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/sync-observations.json": "b3f55f0137e5fa03af46c7e711dabc90c650e9ec1b2231b631db69097ecd676a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/fixture-remote.json": "e93f701e23e7e688455e5ee10bbfd4170c677ab80aaf319b0286f0b241b0a7eb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/local-all.png": "88c2727c7f64c6b70ab03ab0ac67b740597a04cfaaccf97bf8821f03f14064b3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/local-project.png": "4547819b647a9091b0d74913e88dc52a4008d7eb6ec8d8e19fe2dfac9f0a38af",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/local-service.json": "d4c94977c80bab06f82e314000d850c8fe464d9e33f212684ca71f2ebda928ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/hub-projects.json": "95e6b931ae0cc4ae18ae8ba5583b74bb899bdaf9fba5c379c13154fa2d61c7f8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/commands.jsonl": "b5eaf58d57dc064fc8dc9c19c4b1acee3343d150e99631b3f1151b511ffbd087",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/isolation-links.json": "754b4ddc386febacdec39da72fe97f7f6f2ce9cddf249c234bcfb16be133af17",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/combined-all.json": "565a4cac5257c84230a8c437020e993ba9344504fe911890296ee5a61bb45c3c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/manifest.json": "a734ff66ebc0a0010d9b656ee087f6c09b6ff1f933a355a13f0bc5ad7c56b30e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/payloads.json": "5cf92c36700473a51d3489f1950c3c33e4897dc0c6722a8ee58b5b231495f16b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-entrances-run10/service-events.json": "4375998fdfa17ad4aeec502a2b4a27a95cedea2fe1da541f81fac0e473ac4dd7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/local-all.json": "9c0db94bb3eb3d9613fcc2f1071aada57eea8eea8bbfd44f32a0e056ae22fddd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/isolation-result.json": "5797ff6b05ca03707ac576ce72df693fd5b6e716a5b0b49b0fabf86dc61558f7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/new-connection-status.json": "5de7c8c5b9374bd8fcba210071dfa5207409c64633dad54eb39edce03c5520ad",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/hub-links.json": "b219bcc0f662140131a241bd62514a73aebd788ac7e5053d7ba61a1342c8f789",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/fixture-local.json": "8a13fe74ef34a3714f4106553a155b011fd21975e2983592f2c3c44fe3823b85",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/result.json": "2bc66f96747d79a64ffefaf37cac83cb57d288b309695c24dcd4bca236cbd5f6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/local-project.json": "35fd3d7d501653a8e62aa025b97920ac12094289c2a5499ab803fb922ff1b904",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/combined-all.png": "27cdd3e81d43740fbcde6260af778c84f93a52ebbd76618a33293d1acf8bf9cc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/sync-observations.json": "9923eb29e7e0d90ab5db97040415c4cadcf83ba8fad3cca177fb8b0d68edf244",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/fixture-remote.json": "ee4a0cefe38b8d3d5062fcf491b891954ebade82502abb5eb4dafdcb50db9939",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/local-all.png": "54f52a436cfe721cea8cf4409d3ada9ffb2de66867103dbd2f15e0898964c5f0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/local-project.png": "16d73f1528c503ec799ba8477fdea28f2580d19a6fecd284728813c87741d27f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/local-service.json": "88f8a0d298a746eca68a08d67a129a84d8aec95b733d0debaeca23c20103d755",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/hub-projects.json": "1de53440e8f1d21872e1bba84d0670266143c98ba71bc24ff10254706c3013eb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/commands.jsonl": "3b4856b28e4f7d8dc1a23628f1632379f8ab4892ec9e9112ceaa0fdf1fcb31d5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/isolation-links.json": "3a68709eb102e4463d0358f0e9ebe07c445061ddcce94f99462bbe66226f0b5a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/combined-all.json": "28506900b59cfa6b87f7db53fa76cfb3353f5e359acfbb6e5bc2cb56eb1bf5db",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/manifest.json": "6af69291abf50be52eaf5ea301b63a26b84ea6a02f4c780847f5ec422bc85e57",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/payloads.json": "5e67c86b9514838687156e5e382acb5049882ef6b5c0a7ff8638b3831cb4242b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-entrances-run10/service-events.json": "4b284643735cc6cbe17279bd0137a3e2fea0d88bb8aa23a3aa4399de355ff4ef",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/local-all.json": "ac69f888176213a497d2b861a9ce5a427644bac1491e9dd7fef785121f6d2766",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/isolation-result.json": "8bc9c0b3536086a42011d693dbf2636703dfdbe4b4e54354a8090a3dd7aee188",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/new-connection-status.json": "18ae510ca5bc132de3ad37d9305e93934661c82442cad928f32880dda0a6c778",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/fixture-local.json": "09da114dbc918892c5afd8c21adbd05db9bb87c752c8b67534c01a6a4d4d347c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/result.json": "ac88af94c970d965fe04d3eedc4e5104172d7ba7c430554a698fa242f88de380",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/local-project.json": "cacd73323bd22ad57190ff88db4d830dddc0cc941aa4b38e6ae57f956c5af91a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/combined-all.png": "7c18139d5e5006525ac493b8d2dda0e768d6710cdb6c4fd085685e77b2b4a6d5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/sync-observations.json": "c4a0f7b34cca9dd12b9b1181da0b0161bc25a8d28a2da79718f89906054198bb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/fixture-remote.json": "fe433817aaaa2c3796986b074dba00d58e25db383173a58bdcdba8e75750e09c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/local-all.png": "b431afa035c6f1d685c5bd90b9f54b2a2e47448aaee2bc75e4e72596415b464d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/local-project.png": "5208bc607b027010b3327e362ca4dd4588af0a6772d4df1bc86eed6dc9023e00",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/local-service.json": "53c32432373c25a38b5ec4e5c372ed2e8b3869f5526953fdd276e9d1bb4687ff",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/hub-projects.json": "4843449059afe82c5afa9ef15da1d9e61b33afbe1d15e98ca53a82a1d19db0f3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/commands.jsonl": "0f6d17f0b6d9fe631b635d6d764fb7455d0c13a7f831e39e289c0fc703958e50",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/outer-process.json": "19fc490b40b25dc7da15c4adc01d8e419e90d437c18711808ec92562026c07d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/isolation-links.json": "83f71130d3f865c43ef75f76fe8e3f1c0f870191898771d0e170e5e82b0a3a5a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/combined-all.json": "d5e216d1f71444b42ebd8cc2fabd3a7d8dc38f8d237bc672733ea84b779dba87",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/manifest.json": "23261a91bb13f396c3f546a769603a97b3025d9d9ab5e081ab086cd3050b263a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/payloads.json": "f19ff0f63f4d9e08735e9d79e54ef66d4b215f0dfbb6b45467310b121a66fedc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-entrances-run14/service-events.json": "eb616fda552f926a41783d8430a8363e867298c64132ab664e7d8df92705dcea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/stale-local-rejected.png": "03b7872b313613435ae86da9278cf73670f4f7eae78534f6913464def5ee4ba7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/new-connection-status.json": "918b97dfa087ce07fbc9748c184b237a65b196f8741088efee2eccd784262648",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/fixture-local.json": "e4fd2bacc831a574405db8252d97ba4fc500965c61821e5f14cad4615633bed2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/result.json": "34385e5f6c03047eaa630cf72c720c8b78289e4cea3051d6ad8a417f59874092",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/reconcile-result.json": "1dcf83f3d28cd6f0db0848aac33e76cb38a843b5718df85520c44d6e58d407c9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/sync-observations.json": "cab7b3a24e8323c76bf3cf9c19e852201197b6720fb17b930add99ff91e0e621",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/fixture-remote.json": "6581591cc96fa4abb75f859d7dd5f2dbe9d0a1b66b2768c05cc25816423ee4d3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/local-service.json": "25206f7e386da25068d1cce5304aa89587b42637545f910526ae4e3b4758d684",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/hub-projects.json": "511b0e11470cece334620396f162b4638de48b16b9a7442991c67fb862dc9b3f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/commands.jsonl": "afa33aff30f36d665157abc0b065250dce5cf621ac089026e8eaca64e84d263f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/manifest.json": "a777db9e3db46e514685c9740c89e213725c37983e0e8886af14a412356875e1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/stale-hub-rejected.png": "ae28462f494630f9c5245df622169422ab93627d4851c783a6c4f523241b34bc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/payloads.json": "cf5d0f5bd8b0842ebe1b9bf077a76fd0955b467d167c6856c1aabdfaa06dbb19",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/adopted-hub-current.png": "bd3f0443006df25632ef7fdbb85323a4894048d75f132ca6264a6728d029fd4c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/service-events.json": "d43fe5bd2e429ab7d3889724037ee83b79fcbbc2c952cbab947d4a7fa48eb2a5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/stale-local-rejected.png": "ba6f5b5551328f8530b66096644a17dc0dd5d139bb0ecd81a8ae5b3d12dcf8c1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/new-connection-status.json": "24f5a032c059b1377f1580cc663f437942770de6b8ad2b14948a1a0a8bbd1da4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/hub-links.json": "b219bcc0f662140131a241bd62514a73aebd788ac7e5053d7ba61a1342c8f789",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/fixture-local.json": "65b024a3f0d3bab1686b46835a054c849df0209909f2a9c5823b1a7ef1f06a68",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/result.json": "9f1e0c12ad7a728fb8e4c1a93c017011ad1c597d001f9cff78378a41a168a012",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/reconcile-result.json": "452ffeaf7a2bf0a9fc13fabb41bfc00e63d0786dfb75be633cee7f8e039f9a8e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/sync-observations.json": "04466fbb4af0c63db14db08fdec885330b812683922a37914a71059f9da66ea8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/fixture-remote.json": "457572769a89d7258a29611071882339983ae43cd3cdbadc9cdc9594ff8a2259",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/local-service.json": "59324989cd81c38d4cbc39cf1204ac7381c9ac82c4528a7c486dd9c9031b92f9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/hub-projects.json": "b7e6207a56dca67a54a4fb16bf68aa800f82b80d1e60543ea2491fb68cef621f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/commands.jsonl": "3c932f19c5cc917ce770e396d219042263241c65cd17fb2b6d23505862df8ab4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/manifest.json": "2d6496014e02c5a4b6d651c0ec680900cdcdcfc68775ca40113c7e0d9ab9f7f5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/stale-hub-rejected.png": "3b1159b746be40614374f87ec05939a2f697ea43502ae981ed247b1409f13f88",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/payloads.json": "d41fb4ff1175d41cdb1fe30342d77a5a667152641dc31671dd7f91e2e37263fc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/adopted-hub-current.png": "ed7109c04275225b9718e475a008a8211b552691fead6b9861603d545f57e999",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/service-events.json": "dd9444aa11f1d190a87a1df4e9ab905b2aab54d673f8580732a3c04b8312a234",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/stale-local-rejected.png": "d46bb078884c6b7f7412682c045516d5dc1c869edcf23a6a7476f54b6fb6cfb7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/new-connection-status.json": "3086ebb3eae53c808f4908cfc0294b6f5ce86558d865f446c8a5dff188052c9c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/fixture-local.json": "c20a0fab5f5bd3e4b60bf1555da25cfa92f344c36688507250a3232bc1f7dc0d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/result.json": "9594d72aac830c3e1d3218ab9fcebeeb74dc2257dad4c19f2a2dde56cb73043e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/reconcile-result.json": "bc4ee857a053f5e534ac2db951e1f554e8028483e6490828db3c602b3c1f3886",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/sync-observations.json": "f6f66bcd07299d77112a3c0e5df985c4333078699a7badeb62d33cb656dd9bb3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/fixture-remote.json": "4aac973e6a24b8bce6d14ddf85a099b26d95c34f657215b7fead4cc0db1ab6ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/local-service.json": "8e4b3d0add4f39eca8fb777dfd78192020f3e8389fadb1c5574e24004040efef",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/hub-projects.json": "d576789b34e0147f53ebdf206e5efcefdb03c0a61e7264a644552e0cacc28d3c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/commands.jsonl": "82d929c97bd3362bf33c8e12c744ed60b3e240b71d0aac53074878cb00b7c4c0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/outer-process.json": "0868cfbc0f27128729ada44e4022f8341c58761b6f1d1e2fbe30ea0afd2f0650",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/manifest.json": "66d3fbc41fafd5a1b7b13e8c8a1ad709469a36d4a5995a4661025aa4c55e51ee",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/stale-hub-rejected.png": "3d43b5798e3783e20c07bf9fc49440b35756671995e14479289ea1af786e7a6e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/payloads.json": "81611e262acae4aac5ec2fb2f5b6a52daee21a220629c3a24b02825486c63a83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/adopted-hub-current.png": "e3db7d1c35b74e9cba149207959b2b838be82949c92a1d35a81f583f44993c3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/service-events.json": "c255aef26eb521f1402771f53defd12be4f715756f7ef9dc493c8421b38e4548",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-global-cli11/result.json": "567fafed28e7c756ee33c120851e8a7511901f6180cd1d9ea28e0d3e267509f9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-global-cli11/commands.jsonl": "05faccd30e2a8ab0e3fe236f14451d8013c3406e42b8039848ca2d11d8957a5a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-global-cli11/cleanup.json": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-global-cli11/global-cli.json": "e49859f3044ad5844de009abb8367786961a3607f920f055be70ddef7a1f39a9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-global-cli11/manifest.json": "723f7398483c040d0193909fc4b6ef9dc950e54d86dd3aa39bdf3cf23ed88325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-global-cli11/result.json": "a8c60e7ddf40d1807f47c579779380677f1bd5b59db9e94bc27dd4ccf2c5c4dd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-global-cli11/commands.jsonl": "1810a03e4fd465c5c716822d1679980672e3dec00a8ce10922a99505121b7908",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-global-cli11/cleanup.json": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-global-cli11/global-cli.json": "ccc4dea3b8544452eff8a33207733fdd525033c21326b427b008efe795c06e9d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-global-cli11/manifest.json": "d5c0c8c028c3ff185a447bc3db5a00152718ae681ab7dee2e3043c29a23788c2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/result.json": "52f4b8931520d1d4b70ed7263a337e62036c5f3cb2a7f51d36bad631521b6ca4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/commands.jsonl": "c612324cccae2cf70fb0bc9cd848844d296f4b2c9553bfb7c58643cad0e25157",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/cleanup.json": "4e1ad4cf2a4f37ed8cd904e7102bb4561446d1d92bbeefa548558b7256734162",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/global-cli.json": "5bdc5f2a470a7c260bdcbcd0122887a96d0ede2ba2d16ae984fbfdfb1e579020",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/outer-process.json": "0d4a0ce633ad751a8792bb00bec9a1ae0eac3027c1192b83d21d08455758aaaf",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-global-cli11/manifest.json": "e54b81f81ab001226a752d706775df198939424f751793a2b213331f3f184187",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8-receipt.json": "ff2d99591ec0e62de99b302299dd6ec1b58e99babafa5eb80989af5cd405b74f",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8-receipt.json": "e117dc28e6d3c71d3f3e51cda2cb614d8407a542ff67a74ffbb8e0296e6666e0",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15-receipt.json": "742a63243d1b43dbdc1ff15f6af0d4be98741342a61de6eb475b8cfdae56ed4e",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8-receipt.json": "5c78f41c173abc598bb1ee4cf82e3d4724d520011cb0a7b373ce73db4348ffb8",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8-receipt.json": "35b473cd83fd5b47a9284386c68322b73ba020f950241f90e1b36354af0b9329",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8-receipt.json": "eaafb6ba71ef787622fc2d7d617951d446cd99084759e04d4635632027b1e295",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11-receipt.json": "57ace5076474ae2dcf7b6b114eecccbdfc6013515a6aacd47696ee32024abbdd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.xml": "e9335a0c53e17d2dd60fe35ba5791dcf78beaa6757d8a4932b921ecac6e401c4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/inputs.json": "ef4b3b069e8301cadaf6eaacf2a18a320bd37fc7a1308c92f00f61e0b3b62c5c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest-receipt.json": "5f9c08a52f7ac5b2d9a816fca311243ddab32c2401ba6f3f7c37a55aa8aea44c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stdout": "3a9cd119df766b3f7c16f5ca49abde836d6f136876c81b5193bb665c9cb53776",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/receipt.json": "c8c90fe68e9a68b20e83203ff673f870ac24b3bdf75885c36d19f227a24d7e9b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/final-package-comparison21.json": "778bf07a36d1e7027dd445076c7315158da9edc391a2256452b398d76dc9e1aa",
+    ".acceptance-local/native-v1/AT-SMM-005/work/reconcile-package-comparison15.json": "c830d2041577e841fe13fe48860aa9344cda1c38553cc478c67906e3f3191fda",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/primary-content-facts.json": "11b4ef2652cda87f38e8a9f31830f4fd9071299c8740103372fc604969cf3cf1",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8-receipt.json": "3c2b7804f47826fc23ef7e4ebc675008c2ebcdbe5ae2313094e42cfd0d7ba9c7",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8-receipt.json": "b281ce34396527912519c776d6aa424e913b77fac6322ae6020b0beb7df75517",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15-receipt.json": "668b9906785efd7cf329c3180e6d4990f371a0f4b7233f24006e3e4d99c4b5f4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8-receipt.json": "f5ef14491da17accd836a57ffdaec4eb89f6f9963ab262057ef9cf1f7446b23c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8-receipt.json": "77b193a0a39cb61ed01c3fcf3a128a0448a627bf4a3f5e593b7dbeff0744dfdb",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8-receipt.json": "3e1a5fa5857e43d864919ed4e5a5a39fdaaaca7ae55eddbd649fd4359680efa5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11-receipt.json": "72a78354a34773f45015cd8f6c733318003fe80333b60b1aa9511ae531c33cb5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete26-sc12.md": "2413d322b3c94b5cfc4b5436990da24d46a18aa004775573a3e09719dcaf8a42",
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC12.md": "d2640a1b2ade804365759f9741cb6508123a2ee8426321bd9fac60f33356d071",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-mac-linux-v1.md": "f507d1f4345d70bec3e3418efa49dc75b3aecbee44e0abc0b07bf51f5d684983",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows.md": "e1beed8d0d6cf884ffc8ce7be6832ab59a3158f4fd3c9eed1c81bc9f516602f2",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-mac-linux.md": "7cdca576ae5e1ab74a4a1264aa233c1e6ba4b49b76b76d9e6e8533982528fbbf",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-entry-global-f45-v1.md": "3593d630cb1390b762cdc70aabb6aad377a2cf8a89cdd5fcf37cafb256da93f9",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows-cleanup.md": "7233caf8b8be016b21687d40ce1e3fc5219b8279a7c7fec377103adfd046ab7d",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform15-actual.md": "f6685fcaed62998776e2252a719a0f05669e8835801e8a298b8e8cadc6ef9066",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-windows-v1.md": "ecc31f34cc688b58afa39101e62811d1d2208160b5240eb0f7270c087022cf9a"
+  },
+  "other_11_scene_statuses": {
+    "SC1": "passed",
+    "SC10": "passed",
+    "SC11": "passed",
+    "SC2": "passed",
+    "SC3": "passed",
+    "SC4": "passed",
+    "SC5": "passed",
+    "SC6": "passed",
+    "SC7": "passed",
+    "SC8": "passed",
+    "SC9": "passed"
+  },
+  "actual_installed_cli_help": [
+    {
+      "arguments": [],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-0.txt"
+    },
+    {
+      "arguments": [
+        "upload"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-1.txt"
+    },
+    {
+      "arguments": [
+        "upload",
+        "set"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-2.txt"
+    },
+    {
+      "arguments": [
+        "upload",
+        "reconcile"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-3.txt"
+    },
+    {
+      "arguments": [
+        "upload",
+        "prepare-restore"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-4.txt"
+    },
+    {
+      "arguments": [
+        "project"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-5.txt"
+    },
+    {
+      "arguments": [
+        "project",
+        "assign-conversation"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-6.txt"
+    },
+    {
+      "arguments": [
+        "projects"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-7.txt"
+    },
+    {
+      "arguments": [
+        "search"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-8.txt"
+    },
+    {
+      "arguments": [
+        "read"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-9.txt"
+    },
+    {
+      "arguments": [
+        "source"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-10.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "list"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-11.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "validate"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-12.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "register"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-13.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "enable"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-14.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "disable"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-15.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "batches"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-16.txt"
+    },
+    {
+      "arguments": [
+        "source",
+        "purge-batch"
+      ],
+      "exit_code": 0,
+      "file": ".acceptance-local/native-v1/AT-SMM-005/work/manual-complete32-sc12/cli-help-17.txt"
+    }
+  ],
+  "content_facts": {
+    "mac-global-cli11": {
+      "global_id": 4,
+      "stable_key": "d8b6aed6b6feb92663aa54886dfc7035",
+      "actual_files_reprocessed": 1,
+      "unknown_project": null
+    },
+    "linux-global-cli11": {
+      "global_id": 4,
+      "stable_key": "16e1162e2c898409d1ebc563a6b6a107",
+      "actual_files_reprocessed": 1,
+      "unknown_project": null
+    },
+    "windows-global-cli11": {
+      "global_id": 4,
+      "stable_key": "d0490e89b19ccbecea40614f6368b6a7",
+      "actual_files_reprocessed": 1,
+      "unknown_project": null
+    },
+    "mac-reconcile21": {
+      "final_local": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "9700597d8e3543cc9a1b3bc56f476f19",
+        "control_epoch": "44ceaa4b1990499ba6a7f78d5b1061f8",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}\n           ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}\n           ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    },
+    "linux-reconcile21": {
+      "final_local": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "cc67360bc0044855b5db5364f11d1d53",
+        "control_epoch": "85d2e3f05a4847abbea75648d11a1de2",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    },
+    "windows-reconcile21": {
+      "final_local": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "359448370bdb4d96829fdd4124be8548",
+        "control_epoch": "666b2ada45a64d7e97c1cc8a176f96e0",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    }
+  },
+  "independent_original_checks": [
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ]
+  ],
+  "finished_at": "2026-11-22T12:02:36.727281+00:00"
+}

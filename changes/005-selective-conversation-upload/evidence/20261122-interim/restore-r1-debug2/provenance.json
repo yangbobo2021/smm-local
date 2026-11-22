@@ -1,0 +1,56 @@
+{
+  "source": "AT-SMM-005 private original restore-r1-debug2",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "files": [
+    {
+      "file": "adopted-stop.json",
+      "original_sha256": "1c8f1dc748aedab13e0127b82201e74ae098387bde105fc73131cc3eef604fd6",
+      "export_sha256": "1c8f1dc748aedab13e0127b82201e74ae098387bde105fc73131cc3eef604fd6"
+    },
+    {
+      "file": "allowed-backfill.json",
+      "original_sha256": "46c1052468eea03c5d4d73b036c2fc894872bc3c8ff299d526ef584ab40ac5d6",
+      "export_sha256": "46c1052468eea03c5d4d73b036c2fc894872bc3c8ff299d526ef584ab40ac5d6"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "confirmed-stop.json",
+      "original_sha256": "46462a282aac59dceb1b624fd4b01855bff0acb8f309377a337bfed294dc2784",
+      "export_sha256": "46462a282aac59dceb1b624fd4b01855bff0acb8f309377a337bfed294dc2784"
+    },
+    {
+      "file": "difference-before-decision.json",
+      "original_sha256": "13a44cca2160290edfabd101955ce370ac8156baf88f60e2bc84ac1ba438428a",
+      "export_sha256": "13a44cca2160290edfabd101955ce370ac8156baf88f60e2bc84ac1ba438428a"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "97e1509f9efa5701f59fc8f1f596673027cf97755e65ad23c2782a4348b262a7",
+      "export_sha256": "2ec2ea0161cfbdc94b518e79288133ed5b9256dead921ea36a04c4f7859bd5d3"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "dc9eb00beaf8be67907089f5d8f026e0a5ee039f33ed6f2cc3fcb8211041b852",
+      "export_sha256": "dc9eb00beaf8be67907089f5d8f026e0a5ee039f33ed6f2cc3fcb8211041b852"
+    },
+    {
+      "file": "restore-preparation.json",
+      "original_sha256": "78c5cc8a964f52e7d9beccef26a8b0af8a8c76412aa2d52929fcd77b40a6c6e6",
+      "export_sha256": "78c5cc8a964f52e7d9beccef26a8b0af8a8c76412aa2d52929fcd77b40a6c6e6"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "0a4ffb0fa301157b4a74faf6795ee65138d54ff9856a0ccf6f0463f2b82cf85c",
+      "export_sha256": "0a4ffb0fa301157b4a74faf6795ee65138d54ff9856a0ccf6f0463f2b82cf85c"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "6b2e56e50fc899c73682ae7fa501efb4cc78609c838010f54907bcfa67356b44",
+      "export_sha256": "6b2e56e50fc899c73682ae7fa501efb4cc78609c838010f54907bcfa67356b44"
+    }
+  ]
+}

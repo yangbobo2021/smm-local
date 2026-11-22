@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "SC11 tdd-core按SPEC B8/A11，设计/源码/夹具与26未改：all备份后Hub none，prepare停止并排除guard，SQLite恢复旧all/Archive重建conflict，差异只读、明确采用Hub后confirmed none、push Hub完整正文=[]；无法永远拒绝正控，未决定时真阻断由同场景unreconciled项负责。当前debug27 PID45853、exit0、1passed，bindings/artifacts全部SHA一致；全部分配检查到达，非复用旧stdout。人工全criteria另manual-preparation-complete27-sc11.md。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "SC11 tdd-unreconciled来自B8/A11；源码/夹具与26未改。restore-a/restore-new两个独立目标全部本机可查；view_first False/True各真push，拦截全部known-upload/有records upload、完整Hub物理集合不变、conflict/desired旧all/Hub none逐次保持，首/非首目标泄漏及仅一个前状态错误均被同一循环内独立断言拦截；与明确采用Hub成功正控配合，不靠两产品返回互等。当前debug27 PID45854、exit0、1passed、全部bindings/artifacts SHA一致，分配检查全到达。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    },
+    "TC-005-confirmed-loss": {
+      "status": "passed",
+      "reason": "新增自然设计准确覆盖SPEC A11 E5/B8所点名动作前状态，实际scripts/acceptance/selective_upload_completion.py:90–120：Recovery.initial一致性备份后，真实installed包写confirmed-recent并从Hub读回独立正文，confirmed-after-backup保存其四条确认/allowed_pending0及新none revision2；prepare停止/保留guard，真实serve-hub PID45865→45905同目录旧库恢复，epoch10d793…→102336…，conflict且recent实际不在Hub；采用Hub none后confirmed_messages归0、仍不补recent，再only A，逐session独立expected文本完整列表核local-A两消息/local-A-new/recent，旧原引用仅原消息，再同步Hub完整搜索对象不变、pending/inflight0。只首session正确会在for expected逐目标/完整正文列表断言拦截；错误复用旧确认会因recent KeyError/独立正文缺失失败；只在none恢复时错会在两次recent缺席及状态拦截，一律阻断会在allow A读回失败。正控原始expected全文在确认丢失前已真实read，直接JSON列表提取无复杂新探针，完整fixture/原文与结果相互绑定。manifest新Local25/Hub24模块均逐文件等ba8、dirty false、两独立包互不安装，Mac UID501自管HTTPS专用状态；31附件含backup/confirmed/restore/raw reads/commands/service/cleanup均SHA实算一致，原件真实时间10:06:11.755→10:06:16.897 UTC；PID45855/exit0、stdout/stderr空由result和原附件支撑，cleanup failures=[]。当前target SHA 3d444f55950735bde8ad5a6a67209f6268e03dfa9f6c9dea8225903ad0045de9。仅准备debug通过，正式必须新真实execute，不把旧恢复事件或本debug冒充正式执行。",
+      "covers": [
+        "additional-confirmed-loss"
+      ]
+    }
+  }
+}

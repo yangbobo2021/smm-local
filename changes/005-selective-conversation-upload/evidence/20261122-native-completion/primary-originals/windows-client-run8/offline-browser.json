@@ -1,0 +1,442 @@
+{
+  "version": "158.0.4370.33",
+  "search": {
+    "query": "selective",
+    "scope": "project",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "local-A",
+        "title": "selective common local-A original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 1.8745130542892663e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-A original",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+            "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+          },
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "selective common local-A appended while stopped",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 2
+              }
+            ],
+            "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+            "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+            "source_order": 2,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "39e18a69fe414c6085a90c748563cc43"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-A",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+      },
+      {
+        "id": 8,
+        "source": "codex",
+        "source_session_id": "local-A-new",
+        "title": "selective common local-A new while stopped",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 2,
+        "bm25_score": 1.6571533247847594e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-A new while stopped",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "9639442a9d67ed65aef2f13d56f4d5ea59fdf289f3c52eed6d64be1881bd81ca",
+            "content_version": "bdebe75efede75a3c9179f303cf18ecddb257dd580e3558363b5a85f8bc22ed3",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "39e18a69fe414c6085a90c748563cc43"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "local-A-new",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7"
+      }
+    ],
+    "candidate_failures": [],
+    "archive_scope": "local",
+    "requested_scope": "project",
+    "fallback_reason": "汇总服务返回 HTTP 503",
+    "coverage": {
+      "local": "complete",
+      "hub": "unavailable"
+    }
+  },
+  "reads": [
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "local-A",
+      "source_path": "<task>\\local\\sessions\\local-A.jsonl",
+      "cwd": "<task>\\local\\work\\A",
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective common local-A original",
+      "project_id": 1,
+      "project_name": "A",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A original",
+          "timestamp": null,
+          "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+          "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9",
+          "source_order": 1,
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "source_position": 1
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "selective common local-A appended while stopped",
+          "timestamp": null,
+          "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+          "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9",
+          "source_order": 2,
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "source_position": 2
+            }
+          ]
+        }
+      ],
+      "origins": [
+        {
+          "device_name": "005-local",
+          "device_id": "39e18a69fe414c6085a90c748563cc43"
+        }
+      ],
+      "archive_scope": "local"
+    },
+    {
+      "id": 8,
+      "source": "codex",
+      "source_session_id": "local-A-new",
+      "source_path": "<task>\\local\\sessions\\local-A-new.jsonl",
+      "cwd": "<task>\\local\\work\\A",
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective common local-A new while stopped",
+      "project_id": 1,
+      "project_name": "A",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A new while stopped",
+          "timestamp": null,
+          "canonical_id": "9639442a9d67ed65aef2f13d56f4d5ea59fdf289f3c52eed6d64be1881bd81ca",
+          "content_version": "bdebe75efede75a3c9179f303cf18ecddb257dd580e3558363b5a85f8bc22ed3",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7",
+          "source_order": 1,
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "source_position": 1
+            }
+          ]
+        }
+      ],
+      "origins": [
+        {
+          "device_name": "005-local",
+          "device_id": "39e18a69fe414c6085a90c748563cc43"
+        }
+      ],
+      "archive_scope": "local"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:49283/api/search",
+      "status": 200,
+      "json": {
+        "query": "selective",
+        "scope": "project",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "A"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "results": [
+          {
+            "id": 1,
+            "source": "codex",
+            "source_session_id": "local-A",
+            "title": "selective common local-A original",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 1,
+            "project_name": "A",
+            "rank": 1,
+            "bm25_score": 1.8745130542892663e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "selective common local-A original",
+                "timestamp": null,
+                "origins": [
+                  {
+                    "device_name": "005-local",
+                    "device_id": "39e18a69fe414c6085a90c748563cc43",
+                    "source_position": 1
+                  }
+                ],
+                "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+                "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+              },
+              {
+                "position": 2,
+                "role": "assistant",
+                "text": "selective common local-A appended while stopped",
+                "timestamp": null,
+                "origins": [
+                  {
+                    "device_name": "005-local",
+                    "device_id": "39e18a69fe414c6085a90c748563cc43",
+                    "source_position": 2
+                  }
+                ],
+                "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+                "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+                "source_order": 2,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+              }
+            ],
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43"
+              }
+            ],
+            "archive_scope": "local",
+            "origin_session_key": "local-A",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9"
+          },
+          {
+            "id": 8,
+            "source": "codex",
+            "source_session_id": "local-A-new",
+            "title": "selective common local-A new while stopped",
+            "started_at": null,
+            "updated_at": null,
+            "project_id": 1,
+            "project_name": "A",
+            "rank": 2,
+            "bm25_score": 1.6571533247847594e-06,
+            "matched_messages": [
+              {
+                "position": 1,
+                "role": "user",
+                "text": "selective common local-A new while stopped",
+                "timestamp": null,
+                "origins": [
+                  {
+                    "device_name": "005-local",
+                    "device_id": "39e18a69fe414c6085a90c748563cc43",
+                    "source_position": 1
+                  }
+                ],
+                "canonical_id": "9639442a9d67ed65aef2f13d56f4d5ea59fdf289f3c52eed6d64be1881bd81ca",
+                "content_version": "bdebe75efede75a3c9179f303cf18ecddb257dd580e3558363b5a85f8bc22ed3",
+                "source_order": 1,
+                "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7"
+              }
+            ],
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43"
+              }
+            ],
+            "archive_scope": "local",
+            "origin_session_key": "local-A-new",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7"
+          }
+        ],
+        "candidate_failures": [],
+        "archive_scope": "local",
+        "requested_scope": "project",
+        "fallback_reason": "汇总服务返回 HTTP 503",
+        "coverage": {
+          "local": "complete",
+          "hub": "unavailable"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:49283/api/read",
+      "status": 200,
+      "json": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "local-A",
+        "source_path": "<task>\\local\\sessions\\local-A.jsonl",
+        "cwd": "<task>\\local\\work\\A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "selective common local-A original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-A original",
+            "timestamp": null,
+            "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+            "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 1
+              }
+            ]
+          },
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "selective common local-A appended while stopped",
+            "timestamp": null,
+            "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+            "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn0seyJpZCI6MTAsInBvc2l0aW9uIjoyLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMiIsInZlcnNpb24iOiJhYmE1YzkxOGEwZWNlMjZiZDQ0MjM3M2I2ZDk5ZTA5NTJkZDFlYmM4ZDk4YTc2MmI5ZDg0MzQyNWEzMWI4YjY5In1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fe7a7cf6114744d10d3ee0d9bc1898dc7ad2f71a3dd2d5cec2f2e01f7ab460f9",
+            "source_order": 2,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 2
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "39e18a69fe414c6085a90c748563cc43"
+          }
+        ],
+        "archive_scope": "local"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:49283/api/read",
+      "status": 200,
+      "json": {
+        "id": 8,
+        "source": "codex",
+        "source_session_id": "local-A-new",
+        "source_path": "<task>\\local\\sessions\\local-A-new.jsonl",
+        "cwd": "<task>\\local\\work\\A",
+        "started_at": null,
+        "updated_at": null,
+        "title": "selective common local-A new while stopped",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-A new while stopped",
+            "timestamp": null,
+            "canonical_id": "9639442a9d67ed65aef2f13d56f4d5ea59fdf289f3c52eed6d64be1881bd81ca",
+            "content_version": "bdebe75efede75a3c9179f303cf18ecddb257dd580e3558363b5a85f8bc22ed3",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjgsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjksInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1uZXctbTEiLCJ2ZXJzaW9uIjoiYmRlYmU3NWVmZWRlNzVhM2M5MTc5ZjMwM2NmMThlY2RkYjI1N2RkNTgwZTM1NTgzNjNiNWE4NWY4YmMyMmVkMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYjkxZWY4ZmUzMWU5OTRhMWRjNWU2Y2Y2YmE4NjNjMDExNTY1YzdjODc2ZDIwOTU5MTg4MzIxMjk3OThmY2RhMiIsInByb2plY3RfaWRzIjpbMV0sInNvdXJjZSI6ImNvZGV4In0.8bbd4ef9e491c277ca9d823a8f160e2a2821c6b9a5a8e8964fa0c2f5c4fb61e7",
+            "source_order": 1,
+            "origins": [
+              {
+                "device_name": "005-local",
+                "device_id": "39e18a69fe414c6085a90c748563cc43",
+                "source_position": 1
+              }
+            ]
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "005-local",
+            "device_id": "39e18a69fe414c6085a90c748563cc43"
+          }
+        ],
+        "archive_scope": "local"
+      }
+    }
+  ],
+  "page_errors": []
+}

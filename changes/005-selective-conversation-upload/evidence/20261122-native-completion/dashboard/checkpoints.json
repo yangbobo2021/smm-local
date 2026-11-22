@@ -1,0 +1,368 @@
+[
+  {
+    "step": "final-requirement-readback",
+    "requirement_id": "R005",
+    "status": "passed",
+    "scenario_ids": [
+      "SC1",
+      "SC2",
+      "SC3",
+      "SC4",
+      "SC5",
+      "SC6",
+      "SC7",
+      "SC8",
+      "SC9",
+      "SC10",
+      "SC11",
+      "SC12"
+    ],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "actual_judgment": ".acceptance-local/native-v1/AT-SMM-005/delivery-judge/delivery-r005-complete32-v1/result.json",
+    "actual_judgment_sha256": "78c8b42cca9290e7b6a873a3db0fcc476b10e3a6ff41baf7c88a272470b0f718",
+    "source": "results.mts view after actual delivery-judge plus dashboard readback",
+    "screenshot": "002-R005-passed.png",
+    "screenshot_sha256": "3debd59465d0e0554348f2f8a1f24b579ce379b7c5da3f044d6ad9fd23b6f5cb"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC1",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-default",
+      "TC-005-pause-source",
+      "TC-005-reconcile-cli-inputs",
+      "TC-005-reconcile-web-inputs",
+      "TC-005-transfer-status",
+      "TC-005-sc1-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/manual-manual-complete32-sc1.json": "6a444784b0265f20d3cd1b096ccfa376c9a8129fa03d78347e2be5e4b92d8041",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-execute-complete30-sc1.json": "fd4a39959801db2c965ee0bf100435732a3ead855f1111f8491b37e80a21b208",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-preparation-complete29-sc1.json": "4092923ecb7ad23f119d9f40b3bf0c7f8af16ecef8332c4db90dfbdd97c3d55e",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-preparation-complete28-sc1.json": "9419b429d62d8c1a331eb9784791cf05ab8c3ed7a54f6c25451175cf6c199ce9",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/execute-execute-complete30-sc1.json": "24c54d188c762b8cb1976f958e1e281e44de31f2bf2ecaac79343cd2e60ab257",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-manual-complete30-sc1.json": "75575b7810d6a01da157b90376e98558e6b548cfda66b20e7e5e0bf6edce66b7",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/manual-manual-complete30-sc1.json": "ee5f5b1ccc8da5cc062675fcb1d9a5655f7113458444d53632047c3198766cb5",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-manual-complete32-sc1.json": "fa3fb717c5d48c6a46323d9ef84be770742c10646e23ab9f2d202cedc3847c49",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-preparation-complete30-sc1.json": "da29ce8b5e9ef256ac80ddcccc548bcb74adb1ac3523252edf461449a64700e1",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-preparation-complete27-sc1.json": "bc43f6381b3c6e2da683a8bb79767264c8350508db30823c7c4c68f4ddcf4175",
+      ".acceptance/native-v1/AT-SMM-005/records/SC1/review-review-preparation-complete26-sc1.json": "c20c5e8246c1c4e7503037c894928a6875fcebb95beb8eef3c511c5ce848b89d"
+    },
+    "screenshot": "003-SC1-passed.png",
+    "screenshot_sha256": "a65af9b88e2353a91ad374a979b0c2b27abea1692ab8a637d8973a2307e6d1d5",
+    "observed_at": "2026-11-22T12:25:09.803395+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC2",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-cas",
+      "TC-005-policy-triple-order",
+      "TC-005-reconcile-fresh",
+      "TC-005-reconcile-inflight",
+      "TC-005-reconcile-remote-race",
+      "TC-005-reconcile-stale-local",
+      "TC-005-reconcile-target-dispatch",
+      "TC-005-reconcile-write-window",
+      "TC-005-target-dispatch",
+      "TC-005-sc2-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/review-review-preparation-complete26-sc2.json": "a133a46504d491c12db752d76f098078aca510ea65802adca2adf129e3d971b6",
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/manual-manual-complete30-sc2.json": "1b6a767283112d9ebdd46f6d01db99156e566c6c93edbff9e31bfc37fd467ae9",
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/review-review-manual-complete30-sc2.json": "98ff07d8ff0f7a5805bf0833bac4f7e8c34bae740f202281a01dae33fef1165a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/execute-execute-complete26-sc2.json": "af692c2c766ebf7d79dc3f3eeba89423d44baadd120d228efc2519e3f3e03e42",
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/review-review-preparation-reconcile-complete19.json": "aad142d9a0d60aae22f6ec54353951f04a9a638dc8c4bcd77d47bcbb83ceada4",
+      ".acceptance/native-v1/AT-SMM-005/records/SC2/review-review-execute-complete26-sc2.json": "8f0cc95006b7300230760e3dcca61381cbdbad6bd31282e0d5ff0b912aea8f99"
+    },
+    "screenshot": "004-SC2-passed.png",
+    "screenshot_sha256": "5b6eb1bdc2535c3e2bcb070faf2f3c871bf579f8d8802a9d523ee1512e27d33a",
+    "observed_at": "2026-11-22T12:25:10.044062+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC3",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-confirmation-bindings",
+      "TC-005-forbidden-move-read",
+      "TC-005-global",
+      "TC-005-global-query",
+      "TC-005-move-batch",
+      "TC-005-move-project",
+      "TC-005-move-retry",
+      "TC-005-project-identity",
+      "TC-005-project-preview",
+      "TC-005-sc3-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-preparation-complete30-sc3.json": "8a0fc7dbfee6f9477c0e7dd7b7bb5cabcec2ce8cf4f4ef64158e62ea417c8517",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-preparation-complete26-sc3.json": "abb1651a8edb8bea490762a60cf2f27cf6f803a857de83e00a52113b6c8f3322",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-preparation-complete27-sc3.json": "b4ed966e690edf298993da1f27735ebf002f704d4a442d194feed477d3506a67",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/manual-manual-complete30-sc3.json": "2bc6fbe7aec7829612f4e7935e625e8a6d7e493f84f43e1a4d3d914fd43af18c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/execute-execute-complete30-sc3.json": "8a1c3f324e89800db0bdce822bc7f9f972394a1e7d58436532ac613b0252f73d",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-manual-complete30-sc3.json": "056f8fcc36cc22b9b2c3069ba4e2d5ef9bdf0d514ac34721c77353be90a5e908",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-execute-complete30-sc3.json": "f9ac19c4f1a0777350499388f7ecf2fbd515a9d185eb30976742f91e31d53e89",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-preparation-complete28-sc3.json": "423da9a3ea296ffec1eeaabeca9b27c1c08e6d73ba1919fdbef86815aad590dc",
+      ".acceptance/native-v1/AT-SMM-005/records/SC3/review-review-preparation-complete29-sc3.json": "7dfb373337614364135deec482963ce3042f06d945e4042640696558983be8b4"
+    },
+    "screenshot": "005-SC3-passed.png",
+    "screenshot_sha256": "5a2e830f9ea39e8e0aa1d129aada1d280e0b368dcbded0f256130751fe874577",
+    "observed_at": "2026-11-22T12:25:10.305165+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC4",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-backfill",
+      "TC-005-batch-failure",
+      "TC-005-bounded-upload",
+      "TC-005-fair-upload",
+      "TC-005-mixed-batch",
+      "TC-005-offset-prefix",
+      "TC-005-repeated-fairness",
+      "TC-005-timestamp-version",
+      "TC-005-unknown-receipt",
+      "TC-005-sc4-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/manual-manual-complete30-sc4.json": "cb09e5ab163d60c3b224d90f237311b513c4052404b82399d4413bf25893408d",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-preparation-complete27-sc4.json": "291fbddeae607841b34a6be67cfae8a6fcecd7828501a92c2c55cca872119f19",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-preparation-complete26-sc4.json": "cc3f5d666897cdfc0538ab84e760f2b52759910429bc595357f28a8ffc61ea29",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-preparation-complete30-sc4.json": "4681685119f659e7288159a5d267c87e03aa5799355e1b54c00b19bfbba19950",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-preparation-complete29-sc4.json": "830b1deb8af4f8e0dfa8c87389b1a848259ab131f709f40a772acafb8fe5bfc5",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-preparation-complete28-sc4.json": "4270f121701a59f6d92009ee3b2c3e88f831961167a607459adb5db4f88e3ff6",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-execute-complete30-sc4.json": "543ba143b7c1ac4705bc01aa1dcc7048fc51a7e395782a3ac1ca86a58296ff3f",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/review-review-manual-complete30-sc4.json": "2502f1bba2a91f314e330576636589618b5b201bb05610fa227f09b5b4f1c636",
+      ".acceptance/native-v1/AT-SMM-005/records/SC4/execute-execute-complete30-sc4.json": "0be9cf1aff1cc7730805e285f5de4d1de4c8b3600a1b93b0f69d2a278c406220"
+    },
+    "screenshot": "006-SC4-passed.png",
+    "screenshot_sha256": "3c596e441f654f7d5e58a54133b651f4cbbfd3a2410a1ee30b844d092ca92ce8",
+    "observed_at": "2026-11-22T12:25:10.529973+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC5",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-isolation",
+      "TC-005-sc5-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC5/manual-manual-complete30c-sc5.json": "460e3092c83ab6720203634cdbec3a97163bfaf1e54cd5283ea0bbb12dee0f1b",
+      ".acceptance/native-v1/AT-SMM-005/records/SC5/review-review-preparation-complete26-sc5.json": "52fc0350d3a866e3dd0dbca3bfcae09b61594bc0eeda45f1e8c52f16cd6b643c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC5/review-review-execute-complete26-sc5.json": "ae3c122665be014c0795f9308a943f533b31348894c1bb05ec6ae0fbd5e7d9af",
+      ".acceptance/native-v1/AT-SMM-005/records/SC5/execute-execute-complete26-sc5.json": "df3b48bc7942955ac250f6189544216523c0f44179214888c7d813f4b003257c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC5/review-review-manual-complete30-sc5.json": "e33f985b2af1f29b861b41ad780fc7c66a1544f076ea04fcb9462cbe088f5081"
+    },
+    "screenshot": "007-SC5-passed.png",
+    "screenshot_sha256": "fb5711bccb4d537c65047b06647b1cec7c77b331815a3df390738077730078b0",
+    "observed_at": "2026-11-22T12:25:10.761684+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC6",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-combined",
+      "TC-005-scope-race",
+      "TC-005-sc6-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC6/execute-execute-complete26-sc6.json": "4c468bd09bd9d2da4e4f7d039f338116c4022c6248bd3f79676f7365bd9ca8b1",
+      ".acceptance/native-v1/AT-SMM-005/records/SC6/review-review-manual-complete30-sc6.json": "b7ef5211762adf9348d838b28c9bba505932a86b262e36fc0bbaceab4f8bb979",
+      ".acceptance/native-v1/AT-SMM-005/records/SC6/review-review-execute-complete26-sc6.json": "4f1fed7b1bee7e8a5fedf28c21d8f7fc10be7c3fc7e9d6080513306bce3e9bab",
+      ".acceptance/native-v1/AT-SMM-005/records/SC6/review-review-preparation-complete26-sc6.json": "87504e63d17e2d3beeba5ce43920fb1cb41fad2fa85519d60c9eb418b298f978",
+      ".acceptance/native-v1/AT-SMM-005/records/SC6/manual-manual-complete30-sc6.json": "b8b7a1e8dd82cf525ee6faa8afae0e3d2c940f8b3e2051fc56f2c23ab1fdd810"
+    },
+    "screenshot": "008-SC6-passed.png",
+    "screenshot_sha256": "47197382ddc32f0e91a3dbc2c669ea199feb5b5f5655e7032a7495321f40151c",
+    "observed_at": "2026-11-22T12:25:10.992048+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC7",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-bm25",
+      "TC-005-long-message",
+      "TC-005-multiterm-ranking",
+      "TC-005-rank-ties",
+      "TC-005-sc7-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/execute-execute-complete30-sc7.json": "cb5bbae33427fa61bbe25a41ecaad7c4dd0412f6108961731f083a8df7f531d0",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-manual-complete30-sc7.json": "fc074464a522139e73514a3a7b1d7736fe34234d8b0818051e5296ae61ec0a08",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-execute-complete30-sc7.json": "7d23cd3bff683b619037671711f7590660de16db16d2414be347803cf957863a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-preparation-complete28-sc7.json": "ef0fe16715475b3fa64201f0039f51c8e7c4cfedfec5874adc1d8caf05b57dea",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-preparation-complete29-sc7.json": "6a52e8c204b5ffbb0a248eed26edf423e738016fb537c93dda5c2e1c5b6b50bd",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-preparation-complete30-sc7.json": "eee2be5f747e5427027e8d3d4d3d836cfd4a91ce70a13606f233e902407f5705",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-preparation-complete26-sc7.json": "84a7503641c1f4a47838abf435e571d504b5d6bb79de870c5e14fc7754c0bc2c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/review-review-preparation-complete27-sc7.json": "1adf8dd16a65775426827b7949b06f9cca2ea088e1d59f0679179971c33ef5a8",
+      ".acceptance/native-v1/AT-SMM-005/records/SC7/manual-manual-complete30-sc7.json": "1c91de730b5afa5b184a6ebe28a8611cc1ebf94f24686baeb1e429325c744b4e"
+    },
+    "screenshot": "009-SC7-passed.png",
+    "screenshot_sha256": "84c0a908eb3de2d7eae4d1bd95ec709a2b7b9e739e88445ba49579beab31bb64",
+    "observed_at": "2026-11-22T12:25:11.251141+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC8",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-legacy-mcp",
+      "TC-005-reference",
+      "TC-005-reference-boundaries",
+      "TC-005-scoped-title",
+      "TC-005-sc8-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/manual-manual-complete30-sc8.json": "3205df5e737ea138e651e47cf02b4a8b7e4e5bc78ad39e0ead04a4d70f68ccba",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-preparation-complete26-sc8.json": "fbc22bc69dffb33eadbb9e5fe09d14695e5ee11bffa0038dfe9c5ad8ceb4128c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-preparation-complete27-sc8.json": "3d8ad14d60613b36859db0a7a180eca2b388145cc232341f5c70af0abf646f37",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-preparation-complete30-sc8.json": "44ef3ec33fee46a17af7717ab96eb613f81fa78be7f6a371e3043badd36f7f1f",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-preparation-complete28-sc8.json": "f41090b32e27cf6506d146a256f7bda12ff74d43c629cbb77b0ea0f14286fe83",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-preparation-complete29-sc8.json": "2d30f3483414025a8791af979a6d1208bfb6fbaf388cececceb1421320fe47d9",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-execute-complete30-sc8.json": "e606e076646a690e7a65aaef3cb36a2c7449562c277dfeb8e261b6e3024c6ca6",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/review-review-manual-complete30-sc8.json": "2babbad0964550c2b95299fcd3d15de2abd25d638a21e2634ba9465ece340da9",
+      ".acceptance/native-v1/AT-SMM-005/records/SC8/execute-execute-complete30-sc8.json": "6fa7b7ec072fa2c61ffd2e68d305d5b7eb1108fd7d561cd04e1b2b728224e689"
+    },
+    "screenshot": "010-SC8-passed.png",
+    "screenshot_sha256": "2d483f2ca0e42947489047f6e56fb4abac32ac856e8a0bfa1e9ca987d979b4b2",
+    "observed_at": "2026-11-22T12:25:11.503406+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC9",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-empty-coverage",
+      "TC-005-empty-linux",
+      "TC-005-empty-mac",
+      "TC-005-fallback",
+      "TC-005-empty-windows",
+      "TC-005-sc9-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/manual-manual-complete31-windows-empty.json": "08b819a1d38d952e90c13810275c31f1d68237e455da590618737fe8a350166b",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/manual-manual-complete31-sc9.json": "f61559af0894095b4d682755fdbbb5dd28b59b29ae66d8fc0faf31572fd0e4bb",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete31-sc9.json": "6b46613c49c93e52b0f292b0e67232b07f98cf85aad9037e995f493d1d72b142",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete30-sc9.json": "9fd6e569495302d828c150894857528be0870bf2c602cb080ef970555a9fb02a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete26-sc9.json": "739a0f25815c606360f81a599540ba91c7ac069ddc0d6a087fea73de1cecc50b",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete27-sc9.json": "7b94d30c85f22810d1f0a083f9a6833ec097523ea0b58a803f053b9d3afa615d",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-execute-complete31-sc9.json": "f012f005714d3fbe6b71b1294fb6157827308d8c17b07ad0a56262bc648f2c4a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-manual-complete31-windows-empty.json": "f4a1f05c01b4a05bae685297fed3a86e6effcbfda4c5822ee99aca1456d00bfc",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete28-sc9.json": "4930cd450227817492621b1c99d7f46b8cc97a266fa3ac2e1ef91b764016809b",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-preparation-complete29-sc9.json": "68111786c421647801f3bb2dc1923a105e496abf485eaf3d8d22d1fa5ae1b6bf",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/execute-execute-complete31-sc9.json": "1ad79bf25e2e4ff2fc61e79c86e8be89bd54991a5d91d5b8ca13d525048ea8f0",
+      ".acceptance/native-v1/AT-SMM-005/records/SC9/review-review-manual-complete31-sc9.json": "7af8447cd0aa746d9e42abe053bd862108accc1d78bc333c4c22ce6151cc876c"
+    },
+    "screenshot": "011-SC9-passed.png",
+    "screenshot_sha256": "e5ce61d0f361a7dc9729592fcef2ef7036f3679a92e9367868e92097dc8241c9",
+    "observed_at": "2026-11-22T12:25:11.733168+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC10",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-legacy-links",
+      "TC-005-register",
+      "TC-005-sc10-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-preparation-complete28-sc10.json": "72a70d42872b9bef555a8aa8cbf01521bcdf319c028a47f48ea717c2834abc3f",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-execute-complete30-sc10.json": "550104a3dfec3f34039042a60af9724b9e5098709ba23d4e18192cd7d6bee774",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/execute-execute-complete30-sc10.json": "174ae0cbc336132a11c3d26c537a235ee96aad8472f32fd81ddd62d06682ec3d",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/manual-manual-complete30-sc10.json": "f3f882ed8ca5899705c2683b8c9f8d03f2da99ac9daeb7604e1f031840a30206",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-preparation-complete30-sc10.json": "a8a5b98b7cd61592e7120a2f4ed3f7ecb9ae6890b1d1e6c79dbfcfb0fccf0bd8",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-preparation-complete29-sc10.json": "5843d338c657d1dea027508837c7aa93514aded113a4458e9d87e5dc5b2f490d",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-preparation-complete27-sc10.json": "45732a812d159a8a864829163cc762e85650cf06f9f305540d125ba08618ec72",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-manual-complete30-sc10.json": "a44ab50cd740b455d1810b5022eac3e796e785e2c3eced7fb8957d3bbb53d521",
+      ".acceptance/native-v1/AT-SMM-005/records/SC10/review-review-preparation-complete26-sc10.json": "8fc8f3b23a1c8d6b02008b5a0413663c2265824a8bbe222505a3388667f8adc5"
+    },
+    "screenshot": "012-SC10-passed.png",
+    "screenshot_sha256": "e5cc771a1deae38a370c3128de6c20ae64b715df2eb2a8463bc65e39dce0ac70",
+    "observed_at": "2026-11-22T12:25:11.959660+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC11",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-confirmed-loss",
+      "TC-005-local-restore",
+      "TC-005-unreconciled-send",
+      "TC-005-sc11-evidence"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/manual-manual-complete30-sc11.json": "a4294d4737f81fcec13637227ff6725bfa62cf20f64ecd868019dc29d50d04cc",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-execute-complete30-sc11.json": "39f789476cfcc6fb40d6bf081154f643b21f52308f3f84a5a906d69f27f18a9a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/execute-execute-complete30-sc11.json": "97f61fc0f49a5e3fe5b86f0757e7dddd59899c5203b4368a44d299e15a9dd526",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-preparation-complete28-sc11.json": "38cf801063f0e6e21dbfd69b69caab115d26afddfd22c04b4b8e1de8d9f4acab",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-preparation-complete29-sc11.json": "b0349b2e90ca53dc08bf81810e2c67fd912cd19a55ec5bd547dce30e7c44e097",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-preparation-complete30-sc11.json": "8ae8d5ba5a55677715d450ec8cdd4587cc257dfeb8de25b0ee8987c14ee58c5f",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-manual-complete30-sc11.json": "f824bcd88fa870b37f928760e80f8978f6208151d88edad988be2c7c4e99a4fe",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-preparation-complete27-sc11.json": "82872c821bcca836794b1c24d2a85f74b3bd4903d671ae6e74c94bad0020b73a",
+      ".acceptance/native-v1/AT-SMM-005/records/SC11/review-review-preparation-complete26-sc11.json": "1620edd30e08490249fd8b28c74924ec9b396f756665dbb379ce2ec08cac4ecd"
+    },
+    "screenshot": "013-SC11-passed.png",
+    "screenshot_sha256": "aa2c02944dd9d82ceeeeb4d1c8994d23e49828619b10c850de177bc62ef30f85",
+    "observed_at": "2026-11-22T12:25:12.196590+00:00"
+  },
+  {
+    "step": "final-scene-readback",
+    "scene_id": "SC12",
+    "status": "passed",
+    "case_ids": [
+      "TC-005-guidance"
+    ],
+    "missing_obligations": [],
+    "record_snapshot": ".acceptance-local/native-v1/AT-SMM-005/work/final-judged-view32.json",
+    "record_snapshot_sha256": "e3e5cf520bb49b6a7a3dbceb2385d4b544858183e88cc16e1538b372e2edbb50",
+    "current_record_index_sha256": {
+      ".acceptance/native-v1/AT-SMM-005/records/SC12/manual-manual-complete32-sc12.json": "097ae803fbf5280112dabf5064262e5447273e07baaf08a8204685379baccc1c",
+      ".acceptance/native-v1/AT-SMM-005/records/SC12/review-review-manual-complete32-sc12.json": "d64d3beb4df40c2d9333d188903e6b848248346236fe0ca3b0bb4b8a41aa5ce0"
+    },
+    "screenshot": "014-SC12-passed.png",
+    "screenshot_sha256": "d9a7ed37aa8fcda04a1263541031452648fed0f545d318be3f6dca7066534bae",
+    "observed_at": "2026-11-22T12:25:12.418499+00:00"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-web-inputs": {
+      "status": "passed",
+      "reason": "依据已确认 SPEC B1/A1/A11、PLAN12，Web两种采用动作必须带展示的两端版本。已独立读 AGENTS、design-reconcile-cli-v2、match-reconcile-sc1-v1、红灯和独立红灯意见，以及实际 fixture/断言。green-reconcile-web-inputs-v1/result.json SHA256 dea5cabcc95b38e36962a862eeb89ffc28f5ea91758b8e297ac1ed87e6e54cbb，定义493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e正确；全部bindings/artifacts字节摘要相符，runtime-reconcile-green-v1 ready。冻结snapshot测试SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5和contracts测试ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197及命令均与red相同。raw run.stdout 1 passed、exit_code=0、stderr空、process pid/group=24525；regression.stdout 55 passed且exit_code=0、stderr空。tests/test_reconcile_snapshot.py:132-149 实际经过本机API和SQLite Hub，7个缺失/非法payload逐一断言400/422、完整本机row和Hub head不变、没有出站upload-policy/set；本次已到达原红灯147行之后的副作用断言与剩余6种输入，非只验证第一个拒绝。api.py ReconcileRequest 对两个字段采用strict=True/ge=0，路由对所有use动作缺任一版本拒绝；共享reconcile再次按真正int/非负值防御。HTML将hub.revision和local.generation一并发送，两动作共用同函数；失败清除并隐藏旧diff且提示重新查看。该HTML为源码核查，当前TC为API执行证据，无实际浏览器按钮/截图主张。55项回归含四模式fresh精确policy/出站payload断言，排除拒绝全部或提交别的规则。只判此实际TC的TDD绿灯，不代表SC1全量、E1安装包/浏览器或Mac E3交付通过。"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+usage: smm read [-h] [--reference REFERENCE] [--start START] [--end END]
+                [--hub-id HUB_ID] [--hub-message-id HUB_MESSAGE_ID]
+                [conversation_id]
+
+positional arguments:
+  conversation_id
+
+options:
+  -h, --help            show this help message and exit
+  --reference REFERENCE
+                        直接使用本次搜索返回的 reference，不手工拼接档案 ID
+  --start START
+  --end END
+  --hub-id HUB_ID       汇总搜索返回的档案 ID
+  --hub-message-id HUB_MESSAGE_ID
+                        汇总搜索返回的精确消息 ID

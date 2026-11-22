@@ -1,0 +1,68 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-isolation": {
+      "checks": [
+        {
+          "action": "上传A/B并保存A引用，建立A-B关联后仅允许B；追加禁止A、允许B、其他设备和Vibe消息后同步。",
+          "expected": "A旧原文保留且新A原文/会话ID不外发；B、另一设备和Vibe均继续，允许范围无遗漏。",
+          "id": "case-1"
+        },
+        {
+          "action": "在A-B实际关联且限制仅B后，分别推进B、另一未迁移设备和原Vibe来源，比较完整正文集合。",
+          "expected": "B和另一设备的新会话、Vibe追加均实际进入Hub，A新禁止内容仍排除，旧A引用不变。",
+          "id": "other-sources"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "同设备A/B先建立本机和Hub双向直接关联，另有独立未迁移设备与合成VibeInsight来源；均为任务档案。",
+      "title": "限制A保留旧引用且其他来源继续"
+    },
+    "TC-005-sc5-evidence": {
+      "checks": [
+        {
+          "action": "核对真实停止前后差集和旧引用原文，禁止A新标记不在Hub正文。",
+          "expected": "停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "核对实际HTTPS隔离记录：A停止但B/其他设备/合成VibeInsight仍可查询且原状态不变。",
+          "expected": "其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "核对真实旧包未迁移/迁移同设备两种状态的接受/拒绝请求、旧读取及当前允许正控。",
+          "expected": "已迁移设备旧式正文请求拒绝，当前新规则仍可接收有效请求；未迁移设备继续兼容。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        },
+        {
+          "action": "结合本项逐条判据核对下列原始实际事件及当前自动回归；SC10 TC-005-register、实际旧包组合及SC2旧请求确认共用证据；此处不重复伪造相同身份。",
+          "expected": "已迁移设备旧式正文请求拒绝 原缺口只有获得对应原件及适用性依据才认领。",
+          "id": "legacy"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC5实际原件与当前适用性核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "case-1": "停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub",
+    "complete-1": "停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub。",
+    "complete-2": "其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭。",
+    "complete-3": "已迁移设备旧式正文请求拒绝，当前新规则仍可接收有效请求；未迁移设备继续兼容。",
+    "legacy": "已迁移设备旧式正文请求拒绝",
+    "other-sources": "其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete26-sc5/result.json",
+  "recorded_at": "2026-11-22T09:50:24.394000+00:00",
+  "request_id": "design-complete26-sc5",
+  "request_sha256": "b80749bca6157e7eb0f134051669ed677afcd21d79f9f68aef5511d61a68c340",
+  "scene": "SC5",
+  "status": "designed"
+}

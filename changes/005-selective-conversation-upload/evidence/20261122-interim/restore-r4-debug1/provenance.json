@@ -1,0 +1,46 @@
+{
+  "source": "AT-SMM-005 private original restore-r4-debug1",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "files": [
+    {
+      "file": "adopted-stop.json",
+      "original_sha256": "e28e0280133ad4d615b14d86196fef960410ead0c19a819e4b95fd92b00b695e",
+      "export_sha256": "e28e0280133ad4d615b14d86196fef960410ead0c19a819e4b95fd92b00b695e"
+    },
+    {
+      "file": "allowed-backfill.json",
+      "original_sha256": "b19ef3a3557eed2739c59700323838ac6bdda9b35ae63b05ec471fb4df0051d5",
+      "export_sha256": "b19ef3a3557eed2739c59700323838ac6bdda9b35ae63b05ec471fb4df0051d5"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "difference-before-decision.json",
+      "original_sha256": "68d81c98658c459006b7240c46129eefd3d5d57604e8ffaa0e304493491c6d35",
+      "export_sha256": "68d81c98658c459006b7240c46129eefd3d5d57604e8ffaa0e304493491c6d35"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "760dc056a8da007d44ce7a4d1747b2f26cc389c1aa36d148dc18645db777b1f6",
+      "export_sha256": "01266fde1fffc02b043537af0c3e31f2bd04e9db398c9fad297b058ae58a971f"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "4c65ac110735d1f4499393f3cb0157eee7296358a99d6218cf81cbe7f81e46dc",
+      "export_sha256": "4c65ac110735d1f4499393f3cb0157eee7296358a99d6218cf81cbe7f81e46dc"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "528cecae96e21ac5d2b2dcd95314674051415098a350d99fec53e50d217f38c0",
+      "export_sha256": "528cecae96e21ac5d2b2dcd95314674051415098a350d99fec53e50d217f38c0"
+    },
+    {
+      "file": "upgrade-failure-recovery.json",
+      "original_sha256": "cc76e24414b13eee2d3cd7033a43676dc15ec747839c9f09fd626c051675b4b9",
+      "export_sha256": "cc76e24414b13eee2d3cd7033a43676dc15ec747839c9f09fd626c051675b4b9"
+    }
+  ]
+}

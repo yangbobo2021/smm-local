@@ -1,0 +1,1857 @@
+{
+  "scope": "Current original-content/applicability observation. Historical business is NOT re-executed here. Fresh formal installed-package executions are separately identified.",
+  "started_at": "2026-11-22T11:43:12.843895+00:00",
+  "observer": "/root",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design": "design-complete27-sc10",
+  "match": "match-complete30-sc10",
+  "manual_case": "TC-005-sc10-evidence",
+  "preparation": ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete30-sc10.md",
+  "preparation_sha256": "c41cc0a5eb08b7dffe061d019dac950cddd23bf90db9ef2192039177b8e0b4a7",
+  "original_business_events": [
+    {
+      "run": "compat-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "scope": "actual 0.4.0/new Local and Hub combinations"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "self-managed",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "bd6b1ac3b50a7d447b7258a69e00d8e10cc06df2f4aa16dab595892cb37d15fb"
+    },
+    {
+      "run": "linux-compat-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "scope": "actual 0.4.0/new Local and Hub combinations"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "self-managed",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "f4fde3b1ff0a1df02cadc0d081c5fb112e42902b194ece03a0f166ddd49af734"
+    },
+    {
+      "run": "windows-compat-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "scope": "actual 0.4.0/new Local and Hub combinations"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "self-managed",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "db1daa45628e068061ef4693c774bfeeac02d3ef4ccf1697e5f05a88adea9428"
+    }
+  ],
+  "fresh_formal_checks": [
+    {
+      "scene": "SC10",
+      "target": "execute-complete30-sc10",
+      "case_ids": [
+        "TC-005-legacy-links",
+        "TC-005-register"
+      ],
+      "recorded_at": "2026-11-22T11:03:46.729000+00:00"
+    }
+  ],
+  "regression_suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "252",
+    "time": "110.310",
+    "timestamp": "2026-11-22T18:25:09.307339+08:00",
+    "hostname": "<mac-test-host>"
+  },
+  "regression_cases": [
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_rebuilds_existing_citation_audit_without_changing_raw_records",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_refuses_to_overwrite_audited_scores",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[score_change]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[nonverbatim_replacement]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[altered_grades]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_new_connection_is_query_only_until_selected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_hub_rejects_stale_policy_and_legacy_body_after_restriction",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_query_combines_unuploaded_local_and_linked_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_references_read_the_right_archive_and_fail_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_fallback_does_not_expand_local_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_tampering_cross_archive_and_conflicting_parameters_are_rejected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_local_content_change_between_recall_and_signing_fails_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_shared_conversation_reference_cannot_expand_to_outside_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_old_read_parameters_still_work_without_new_reference",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_bm25_matches_independent_formula_and_ignores_archive_scores",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_ties_use_latest_timestamp_then_stable_identity",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_long_preview_does_not_change_rank_or_original",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_common_scope_is_one_hub_hop_without_local_reexpansion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_partial_hub_failure_preserves_valid_local_snapshot",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_local_error_still_returns_readable_hub_candidates",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_legacy_hub_global_search_is_readable_but_project_search_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_current_session_excludes_both_copies_only_in_the_same_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_each_endpoint_receives_only_normal_n_without_topup_and_invalid_n_never_calls_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_incomplete_hub_candidate_is_excluded_without_losing_valid_peers_or_topping_up",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[wrong_hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[missing_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_projects]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[unsigned_widening]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[project]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_multiword_bm25_uses_each_terms_document_frequency_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_repeated_project_failure_does_not_block_new_peer_work",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_federation_offline_recovery_dedup_and_provenance",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_links_filter_before_ranking_and_follow_only_one_hop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_request_reports_actual_scope_before_any_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_vibeinsight_configuration_has_managed_hub_entry_point",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation_tls",
+      "name": "test_detached_service_can_upload_through_callers_private_ca",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_runs_saved_source_lifecycle",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_rejects_conflicting_archive_before_writing",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[legacy]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[matching-explicit-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_public_prepare_restore_command_marks_the_actual_standalone_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_maintenance",
+      "name": "test_agent_maintenance_starts_reuses_and_preserves_pause",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_incremental_copy_survives_deletion_and_partial_line",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[True]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[False]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_partial_line_and_concatenated_frames_retry",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_corrupt_compressed_file_does_not_block_other_histories",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_plugin_and_skill_context_are_not_conversation_titles_or_evidence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_long_conversation_preview_keeps_later_decision_and_its_question",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compact_search_preserves_rank_and_can_read_complete_message",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_mcp_defaults_to_compact_and_allows_full_configuration",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_project_mapping_direct_links_and_current_exclusion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_parent_path_mapping_applies_to_existing_and_future_child_sessions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_api_uses_same_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_source_file_rewrite_does_not_duplicate",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_and_claude_share_durable_archive_without_tool_output",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_missing_claude_source_does_not_block_codex",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_sync_and_source_settings_share_one_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_injected_context_is_not_archived_and_old_copy_is_cleaned",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_same_names_and_even_same_device_local_keys_remain_distinct_after_rename",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_project_query_includes_global_only_after_explicit_hub_link",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_global_assignment_also_preserves_exactly_one_persistent_global",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_cli_hub_without_version_option_protects_changes_during_its_call",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_hub_switch_during_reconcile_keeps_new_target_query_only",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_dispatch",
+      "name": "test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_web_reconcile_requires_valid_versions_without_mutating_either_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[lost-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[new-local-choice]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[scope-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[hub-results-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-switched]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_allow_stop_allow_commits_and_delayed_requests_and_replies_keep_the_latest_head",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[before-commit]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[partial-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[allowed-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[forbidden-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[hub-api]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[federated]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_accepts_complete_synthetic_unit_fixture",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[missing_append-backfill A body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_score-score divergence]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[candidate_egress-ranking payload]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[false_complete-still pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_original-exact original body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_waits_for_job_and_allowed_backfill_not_just_confirmed_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_can_wait_for_control_only_without_requiring_body_permission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_starts_fresh_scan_after_joining_an_older_automatic_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_does_not_confirm_a_fresh_scan_when_start_reply_is_lost",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_promotes_repeated_lost_start_replies_to_complete",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_turns_pending_transfer_into_success_at_timeout",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[win32-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[linux--15]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[False-7]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_windows_waits_for_a_slow_background_service",
+      "skipped": true
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_service_start_cannot_use_an_unrelated_listener",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[before-\\u9996\\u6b21\\u8bfb\\u53d6-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[after-\\u8ffd\\u52a0\\u8bfb\\u53d6-\\u76ee\\u5f55]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[live-\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_registers_and_background_resumes_after_restart",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_scope_rejects_later_live_page_and_persistent_batch",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[defer_system-zcode-pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[skip_empty_reply-zcode-after]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[accept_later_prefix-zcode-before]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[ignore_scope_on_live-live\\uff08\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b\\uff09]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_faults_do_not_block_other_sources_or_advance_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_finds_and_purges_batch_older_than_latest_100",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_pages_keep_id_order_and_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[missing]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[non-integer]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[zero]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[negative]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[out-of-range]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_controls_compete_for_one_job_and_preserve_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_sqlite_and_json_sources_use_same_protocol",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_local_plugin_does_not_block_old_hub_upload",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_registered_during_full_sync_gets_its_own_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_disable_during_plugin_execution_prevents_batch_commit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_candidate_with_incorrect_live_origin_cannot_register",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_purged_conversation_id_is_reserved_for_the_original_source_session",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_bm25_formula_and_exact_retained_content_versions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[address]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[token]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[device_name]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET source_key='changed-key']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET position=9]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE conversations SET source_session_id='changed-session']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_web_controls_require_same_origin_or_service_token",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_cli_help_explains_values_and_first_use_keeps_old_install_explicit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_isolation",
+      "name": "test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_invalid_choices_do_not_change_active_policy",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_global_assignment_survives_reimport_and_unknown_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_resume_backfills_old_new_and_appended_despite_global_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_unknown_receipt_can_resolve_after_stop_without_sending_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_old_allow_backup_blocks_until_explicit_hub_reconciliation",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_lost_project_confirmation_retries_without_using_old_project_receipt",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_old_database_and_joint_restore_never_reopen_stopped_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_loss_of_receipts_rebuilds_from_exact_existing_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_database_without_managed_flag_still_rejects_old_client",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_missing_control_never_defaults_to_allow_and_can_be_explicitly_repaired",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_checkpoint_crash_recovers_only_committed_submission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_stale_diff_and_target_changes_require_explicit_new_choice",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_expanding_project_change_requires_bound_preview_and_preserves_assignment",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_failed_project_does_not_starve_another_allowed_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_existing_legacy_upload_migrates_on_background_restart_without_reconfigure",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_late_policy_reply_cannot_replace_a_newer_local_stop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_pause_does_not_block_control_or_resume_imports",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_cross_process_save_and_dispatch_share_one_durable_fence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_lost_policy_confirmation_is_pending_until_head_is_rechecked",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_invalid_batch_receipt_remains_unknown_then_resolves_exactly",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_bounded_backfill_keeps_search_and_other_project_available",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_registration",
+      "name": "test_query_only_registration_fences_same_device_legacy_writer",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_late_offset_prefix_preserves_two_identical_turns",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_target_switch_during_known_lookup_fences_old_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_timestamp_version_is_stored_before_exact_ack",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_body_failure_persists_in_upload_status_and_clears_after_recovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_project_lookback_includes_boundary_and_resumes_after_days",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[host-other-host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[port-5433]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[database-other-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_unmarked_destination_is_rejected_before_any_connection",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_instance_mismatch_cannot_reach_a_write",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_all_visible_projects_and_historical_discovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_resume_appends_to_same_conversation_in_source_order",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_failed_batch_retries_and_late_event_is_read_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_managed_hub_credential_restart_and_mixed_project_search",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_archive_and_cursor_rollback_together",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_delayed_reply_keeps_source_turns_grouped",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_scoped_shared_conversations_keep_only_matching_project_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_late_repository_attribution_moves_provenance_without_editing_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[port]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_stop_cancels_postgres_stream_while_stdout_is_blocked",
+      "skipped": false
+    }
+  ],
+  "evidence_inventory": {
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/old-hub-original.json": "f07b4c7f7910ebdb074ed882f72a521f6a6c84cc9322faf0241aab51cbee5455",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/new-local-old-hub.json": "d7c413b15d4c41e119c68ca933de4413bce730aee78f46c27f7f642d7e751e9e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/unmanaged-old-local.json": "e6047ed1860bfa5f97db0d9d890713c2acb6fa848078341cb2c30aa071e1e68a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/result.json": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/commands.jsonl": "d383079612afc153ed7c89aed6f1b9c69fb1645afd6945d57d8553ae1510fe76",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/old-smm-hub-identity.json": "2c5b6d0dfa60433972928ed846626729917258d4312613354f0808cfcc0496f9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/migrated-old-device.json": "6d01f020ac4593c085af4a02c0098d726bd8984e911c0dceb9cd0539cbcc14ad",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/manifest.json": "bd6b1ac3b50a7d447b7258a69e00d8e10cc06df2f4aa16dab595892cb37d15fb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/old-smm-local-identity.json": "b6e3f5e603744d123b346ac18fd7d4b6ab0115ae04c182e96440bead0929702b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/service-events.json": "dafbafbad7a05328e63d4a5ecfd443cfb23f0a267c6660566cbaa9e0fd615018",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/compat-run8/actual-hub-change.json": "eb187ce85e091330440f6d2c3362ca9c1e49fe49e3caf1e6c0b9b2a573416d6b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/old-hub-original.json": "44d17b3255c788a5221bd77354dfbeae6c66880adc3f5ed75d122e72d958ed01",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/new-local-old-hub.json": "70aa41e03eb70413461542845b37aceb81cc74e21ed46f02e5d8e521cbec044a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/unmanaged-old-local.json": "d34e09326564507bdb36b0f89b3279182a5f7742f29d90f58efecac79fbdc953",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/result.json": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/commands.jsonl": "d81fc875c9935fb2d26920693ae9c8e9c4af6dc1e4968a26b07e6474cb3caccb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/old-smm-hub-identity.json": "86994c1ec019b87d7cb2c82b2e9613fd55043817297c2817a7b094bb615f87cb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/migrated-old-device.json": "90a99dfb9459bbdb1d53fae560dbdef6a7ad23a2bc5ccd42969232da3ffb080c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/manifest.json": "f4fde3b1ff0a1df02cadc0d081c5fb112e42902b194ece03a0f166ddd49af734",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/old-smm-local-identity.json": "de618936c66944b84a7c896dce03c4097d6609f9d27f78ece976299988de751c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/service-events.json": "52949b9d5281c412786cadde15cce3af9f1ae665877129290206af5252c9234a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-compat-run8/actual-hub-change.json": "386e88be3bcdec18b9ef259332f6c4c4af1a5fb9186a820cb80f2738896c2838",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/old-hub-original.json": "93d8b7f05537bb0f851822559e31ff471e4d7d683b98a3198b1a94e203b61446",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/new-local-old-hub.json": "82f0144102135d5902cc7ff3e7293dae4e867daf2999a3f0295586e5a7dc4a10",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/unmanaged-old-local.json": "251cd4050d01adbf6ae00816ad58cccaeff93874f577453495db32b2e10a317d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/result.json": "15c205936fd13e382420d1f0f68e5970c7b029525cb57e901e2876d9b4ee8f2d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/commands.jsonl": "eafd84fdfa34c8dd467a5d65cce648d544a0f9c1985866102cbfd983c158799b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/old-smm-hub-identity.json": "b169716537763e5dcb4ff9b2b71aa1427d7711573db250d170f47bc68a7161b1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/migrated-old-device.json": "88a628edbf15f209db7b8342de805b317b26ca0925ed7b51f9e8dc6aa9972fb1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/manifest.json": "db1daa45628e068061ef4693c774bfeeac02d3ef4ccf1697e5f05a88adea9428",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/old-smm-local-identity.json": "35576de55053b2c2dcfaa48928297bdbf6a1716cb18a9c2a3dff441106e6bb2e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/service-events.json": "c06b121fe2e7515d8026eaf90d338b302358da58d22a899093acb12f4ab453bf",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-compat-run8/actual-hub-change.json": "f9dc326bbabd3f5feb5f897850cbca85f271621a7a77cee73570a570d4a90e76",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8-receipt.json": "ff2d99591ec0e62de99b302299dd6ec1b58e99babafa5eb80989af5cd405b74f",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8-receipt.json": "e117dc28e6d3c71d3f3e51cda2cb614d8407a542ff67a74ffbb8e0296e6666e0",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15-receipt.json": "742a63243d1b43dbdc1ff15f6af0d4be98741342a61de6eb475b8cfdae56ed4e",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8-receipt.json": "5c78f41c173abc598bb1ee4cf82e3d4724d520011cb0a7b373ce73db4348ffb8",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8-receipt.json": "35b473cd83fd5b47a9284386c68322b73ba020f950241f90e1b36354af0b9329",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8-receipt.json": "eaafb6ba71ef787622fc2d7d617951d446cd99084759e04d4635632027b1e295",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11-receipt.json": "57ace5076474ae2dcf7b6b114eecccbdfc6013515a6aacd47696ee32024abbdd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.xml": "e9335a0c53e17d2dd60fe35ba5791dcf78beaa6757d8a4932b921ecac6e401c4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/inputs.json": "ef4b3b069e8301cadaf6eaacf2a18a320bd37fc7a1308c92f00f61e0b3b62c5c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest-receipt.json": "5f9c08a52f7ac5b2d9a816fca311243ddab32c2401ba6f3f7c37a55aa8aea44c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stdout": "3a9cd119df766b3f7c16f5ca49abde836d6f136876c81b5193bb665c9cb53776",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/receipt.json": "c8c90fe68e9a68b20e83203ff673f870ac24b3bdf75885c36d19f227a24d7e9b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/final-package-comparison21.json": "778bf07a36d1e7027dd445076c7315158da9edc391a2256452b398d76dc9e1aa",
+    ".acceptance-local/native-v1/AT-SMM-005/work/reconcile-package-comparison15.json": "c830d2041577e841fe13fe48860aa9344cda1c38553cc478c67906e3f3191fda",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/primary-content-facts.json": "11b4ef2652cda87f38e8a9f31830f4fd9071299c8740103372fc604969cf3cf1",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8-receipt.json": "3c2b7804f47826fc23ef7e4ebc675008c2ebcdbe5ae2313094e42cfd0d7ba9c7",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8-receipt.json": "b281ce34396527912519c776d6aa424e913b77fac6322ae6020b0beb7df75517",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15-receipt.json": "668b9906785efd7cf329c3180e6d4990f371a0f4b7233f24006e3e4d99c4b5f4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8-receipt.json": "f5ef14491da17accd836a57ffdaec4eb89f6f9963ab262057ef9cf1f7446b23c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8-receipt.json": "77b193a0a39cb61ed01c3fcf3a128a0448a627bf4a3f5e593b7dbeff0744dfdb",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8-receipt.json": "3e1a5fa5857e43d864919ed4e5a5a39fdaaaca7ae55eddbd649fd4359680efa5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11-receipt.json": "72a78354a34773f45015cd8f6c733318003fe80333b60b1aa9511ae531c33cb5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete30-sc10.md": "c41cc0a5eb08b7dffe061d019dac950cddd23bf90db9ef2192039177b8e0b4a7",
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC10.md": "6b652867ec7787659c19df9b8189531ffd50dc4226ad96669a1ac6c9e1b661b2",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-mac-linux-v1.md": "f507d1f4345d70bec3e3418efa49dc75b3aecbee44e0abc0b07bf51f5d684983",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows.md": "e1beed8d0d6cf884ffc8ce7be6832ab59a3158f4fd3c9eed1c81bc9f516602f2",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-mac-linux.md": "7cdca576ae5e1ab74a4a1264aa233c1e6ba4b49b76b76d9e6e8533982528fbbf",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-entry-global-f45-v1.md": "3593d630cb1390b762cdc70aabb6aad377a2cf8a89cdd5fcf37cafb256da93f9",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows-cleanup.md": "7233caf8b8be016b21687d40ce1e3fc5219b8279a7c7fec377103adfd046ab7d",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform15-actual.md": "f6685fcaed62998776e2252a719a0f05669e8835801e8a298b8e8cadc6ef9066",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-windows-v1.md": "ecc31f34cc688b58afa39101e62811d1d2208160b5240eb0f7270c087022cf9a",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/result.json": "af2327a74137875f0117f71d8ab1322dd87a45d20728a91a263abbdf14e00405",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/run.process.json": "37b4230302d1a41935a9b23d70dcea9c823d2bf7b26de054540e981f4f12f03d",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/run.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-register/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-register/run.process.json": "0a77a521a15f6bcb957d749ae5d247ab68470875ee1b10b7ed76afcaf82a0426",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-register/run.stdout": "191f5ea0a7705891f0fcc3a594ac088eda2169d324046e72d777e3404310aed1",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/after-upgrade.json": "d26af0cace4047e409a912199cad2884b09472a73e748a11f255655bd0b4c220",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/before-upgrade.json": "8b258f7a62340017222f87b6e7d95557cfcda67eae3f5efeeae5fa9e2da5a985",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/actual-old-local.json": "b111ee0316c63c5c334e916587734e81b0d8e3d4271b0c19c8608ee4a34286bc",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_scope.py": "eb42b7af7b66f4ac7c6d7e26fa18d2c715fb22c0d44e8930c635ed184fc12636",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/actual-old-hub.json": "4a3e627c641e3c86451163dbf2935a180c88a575789b92d12d333a43d9ecf8a1",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/result.json": "17343fc21e896f3b7fe54598c2f821c08be4a514f3b72b58462bee791c535063",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_empty_windows.py": "eed0b6f6f91e812ffa3287b4e39acb1daf8ef0d6d2fa4aee0e287f395e67b960",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/commands.jsonl": "866f89363e587ef2ddb7821ba8886089df9feabfdd63a87043f01ff4e7e7ddef",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/upgrade-read-observation.json": "838461122ad9278f1c7f420a88ad4410d43e303399ab67ed2d3287b5f0706191",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_completion.py": "fb49292b814c7b7f1f10ed89145ab69158d25251f687018413c6417263b57ef5",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_empty.py": "a277e5bd53df16cee76e3fd49f671c90863585ff584921ea544e5ff545a1c8cf",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/manifest.json": "4c20ec8c3f0859e3e7ffad9b98d3997b77426c71fa467d11ef540865fab484a9",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_platform.py": "ec5329e6240493ad8142bb359478fe2cfd52612ca8eb9f6e0af2553a06f70a8f",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_global_cli.py": "94d6ed7f057e354c80f7127f281f29f17000dab991ff9b73e15f8551971958fc",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_empty_recorded.py": "04350a3b195613748e25e1deb4063028e8f447ae2bb969434753b3fbee32ad55",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/hub.log": "2616aefb80836376fc8d250289914d065f2099135a1af12037b6caac0e302c4e",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/service-events.json": "f181a9cb6755d02ac371820a21c48d0a4adc82350eb608ad6a7d146c2d3a2c58",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_windows_limited.py": "78ec82d54e49cb208b91ea5a92fd35592b908e3b0a95f7d0c49c692bebdee519",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc10/TC-005-legacy-links/attachments/probe/selective_upload_reconcile.py": "3bcfbcf7c404634cd2b1ca7bda9a896d1d7bc96dc184ecd05d9310f228aefdbc"
+  },
+  "content_facts": {
+    "compat-run8": {
+      "before_after_exact_results_equal": true,
+      "old_write_exit": 1,
+      "state": {
+        "configured": true,
+        "hub_id": "21a2bf29dbbb414a92ba32159c5af90c",
+        "device_id": "77d8e4df55534a9db3989fbe212798a9",
+        "hub_address": "https://localhost:60165",
+        "device_name": "legacy-device",
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "generation": 1,
+        "state": "confirmed",
+        "hub_revision": 1,
+        "control_epoch": "335d59036ad24b05b53245b5d5098c6b",
+        "confirmed_messages": 1,
+        "not_confirmed_messages": 0,
+        "inflight_messages": 0,
+        "unsent_messages": 0,
+        "problem": null,
+        "remote": {
+          "hub_id": "21a2bf29dbbb414a92ba32159c5af90c",
+          "device_id": "77d8e4df55534a9db3989fbe212798a9",
+          "revision": 1,
+          "policy": {
+            "mode": "all",
+            "projects": []
+          },
+          "submission_id": "97adcd6e41594b41a7f07990c67fc4d2",
+          "control_epoch": "335d59036ad24b05b53245b5d5098c6b",
+          "restore_pending": false,
+          "conflict": false
+        },
+        "transfer_state": "complete",
+        "transfer_problem": null,
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": "2026-11-22T05:54:45.341371+00:00",
+        "last_transfer_success": "2026-11-22T05:54:45.341371+00:00"
+      },
+      "old_read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "selective compatibility old-device original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "77d8e4df55534a9db3989fbe212798a9",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "77d8e4df55534a9db3989fbe212798a9",
+            "source_key": "f31e116392fddd995980c893db61f029",
+            "device_name": "legacy-device"
+          }
+        ],
+        "origin_session_key": "old-device",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "77d8e4df55534a9db3989fbe212798a9",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub"
+      }
+    },
+    "linux-compat-run8": {
+      "before_after_exact_results_equal": true,
+      "old_write_exit": 1,
+      "state": {
+        "configured": true,
+        "hub_id": "f5f00a6c55604893910af4ff552e09b3",
+        "device_id": "0553319b24344b00923a6f785e3083ac",
+        "hub_address": "https://localhost:18876",
+        "device_name": "legacy-device",
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "generation": 1,
+        "state": "confirmed",
+        "hub_revision": 1,
+        "control_epoch": "0d6e1fb4d6d54800b0c8cb9ec6338302",
+        "confirmed_messages": 1,
+        "not_confirmed_messages": 0,
+        "inflight_messages": 0,
+        "unsent_messages": 0,
+        "problem": null,
+        "remote": {
+          "hub_id": "f5f00a6c55604893910af4ff552e09b3",
+          "device_id": "0553319b24344b00923a6f785e3083ac",
+          "revision": 1,
+          "policy": {
+            "mode": "all",
+            "projects": []
+          },
+          "submission_id": "776359f8a55b439e8abc414cfa4540c3",
+          "control_epoch": "0d6e1fb4d6d54800b0c8cb9ec6338302",
+          "restore_pending": false,
+          "conflict": false
+        },
+        "transfer_state": "complete",
+        "transfer_problem": null,
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": "2026-11-22T05:54:53.751229+00:00",
+        "last_transfer_success": "2026-11-22T05:54:53.751229+00:00"
+      },
+      "old_read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "selective compatibility old-device original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "0553319b24344b00923a6f785e3083ac",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "0553319b24344b00923a6f785e3083ac",
+            "source_key": "6806c8893b1dd31a208b8e28be4fbed4",
+            "device_name": "legacy-device"
+          }
+        ],
+        "origin_session_key": "old-device",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "0553319b24344b00923a6f785e3083ac",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub"
+      }
+    },
+    "windows-compat-run8": {
+      "before_after_exact_results_equal": true,
+      "old_write_exit": 1,
+      "state": {
+        "configured": true,
+        "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0",
+        "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+        "hub_address": "https://localhost:18886",
+        "device_name": "legacy-device",
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "generation": 1,
+        "state": "confirmed",
+        "hub_revision": 1,
+        "control_epoch": "53e0a45de1fc4047ba17ba1efb7bce22",
+        "confirmed_messages": 1,
+        "not_confirmed_messages": 0,
+        "inflight_messages": 0,
+        "unsent_messages": 0,
+        "problem": null,
+        "remote": {
+          "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0",
+          "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+          "revision": 1,
+          "policy": {
+            "mode": "all",
+            "projects": []
+          },
+          "submission_id": "2d5ccccec23244baa1ab1eaa56e3e273",
+          "control_epoch": "53e0a45de1fc4047ba17ba1efb7bce22",
+          "restore_pending": false,
+          "conflict": false
+        },
+        "transfer_state": "complete",
+        "transfer_problem": null,
+        "allowed_pending_messages": 0,
+        "last_transfer_attempt": "2026-11-22T05:57:14.623694+00:00",
+        "last_transfer_success": "2026-11-22T05:57:14.623694+00:00"
+      },
+      "old_read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "selective compatibility old-device original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "source_key": "4549ca94b74f85bddc8667142df007e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "origin_session_key": "old-device",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub"
+      }
+    }
+  },
+  "independent_original_checks": [
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ]
+  ],
+  "finished_at": "2026-11-22T11:43:12.864683+00:00"
+}

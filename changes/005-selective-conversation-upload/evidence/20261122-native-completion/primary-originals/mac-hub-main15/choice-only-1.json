@@ -1,0 +1,42 @@
+{
+  "configured": true,
+  "hub_id": "62baff181c9d42bdb356689117f69f37",
+  "device_id": "2539223447d3442680a50b699f82470a",
+  "hub_address": "https://localhost:50694",
+  "device_name": "005-local",
+  "policy": {
+    "mode": "only",
+    "projects": [
+      "ace7220b44306a35d0ed56d28f682d2d"
+    ]
+  },
+  "generation": 3,
+  "state": "confirmed",
+  "hub_revision": 3,
+  "control_epoch": "42b05d6fac4e49a79c2a2e7678829eb6",
+  "confirmed_messages": 0,
+  "not_confirmed_messages": 5,
+  "inflight_messages": 0,
+  "unsent_messages": 5,
+  "problem": null,
+  "remote": {
+    "hub_id": "62baff181c9d42bdb356689117f69f37",
+    "device_id": "2539223447d3442680a50b699f82470a",
+    "revision": 3,
+    "policy": {
+      "mode": "only",
+      "projects": [
+        "ace7220b44306a35d0ed56d28f682d2d"
+      ]
+    },
+    "submission_id": "486318c798024531b5e335455dbf7378",
+    "control_epoch": "42b05d6fac4e49a79c2a2e7678829eb6",
+    "restore_pending": false,
+    "conflict": false
+  },
+  "transfer_state": "backfilling",
+  "transfer_problem": null,
+  "allowed_pending_messages": 1,
+  "last_transfer_attempt": null,
+  "last_transfer_success": null
+}

@@ -1,0 +1,70 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[allowed-first] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x110537ec0>, remote=<smm_local.core.Archive object at 0x110537fe0>,...524d95bfe722c74b93057b', 'device_id': 'bd8d4f302e9848df8d098014ad9c9620'})], hub_id='06f5601490524d95bfe722c74b93057b')
+order = 'allowed-first'
+
+    @pytest.mark.parametrize('order', ['allowed-first', 'forbidden-first'])
+    def test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole(pair, order):
+        """TC-005-mixed-batch: no permitted prefix may commit from an invalid batch."""
+        a = add_local(pair, 'forbidden-a', 'A', 'forbidden batch A'); b = add_local(pair, 'allowed-b', 'B', 'allowed batch B')
+        config = connect(pair); state = federation.choose_upload(pair.local, 'only', [b['project_id']])
+        projects = {p['id']: p['stable_key'] for p in pair.local.projects()}
+        def record(item, session, text):
+            return {'source': 'codex', 'source_session_id': session, 'started_at': None, 'source_key': session + '-message',
+                    'position': 1, 'source_order': 1, 'role': 'user', 'text': text, 'timestamp': None, 'project_id': projects[item['project_id']]}
+        allowed = record(b, 'allowed-b', 'allowed batch B'); forbidden = record(a, 'forbidden-a', 'forbidden batch A')
+        records = [allowed, forbidden] if order == 'allowed-first' else [forbidden, allowed]
+        status = pair.client.post('/v1/upload-policy/status', json={'hub_id': pair.hub_id, 'device_id': config['device_id']}).json()
+        batch = {'hub_id': pair.hub_id, 'device_id': config['device_id'], 'device_name': 'synthetic-device',
+            'policy_revision': status['revision'], 'control_epoch': status['control_epoch'], 'batch_id': 'mixed-' + order, 'records': records}
+        before = bodies(pair.remote); reply = pair.client.post('/v1/upload', json=batch)
+        assert reply.status_code >= 400 and bodies(pair.remote) == before == []
+        receipts = pair.client.post('/v1/upload-receipts', json={'hub_id': pair.hub_id, 'device_id': config['device_id'], 'batch_ids': [batch['batch_id']]}).json()
+        assert receipts['receipts'] == []
+        positive = pair.client.post('/v1/upload', json={**batch, 'batch_id': 'valid-' + order, 'records': [allowed]})
+>       assert positive.status_code == 200 and positive.json()['accepted'] == 1
+E       assert (409 == 200)
+E        +  where 409 = <Response [409 Conflict]>.status_code
+
+tests/test_required_snapshot_and_batch_boundaries.py:224: AssertionError
+_ test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[forbidden-first] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x11083d580>, remote=<smm_local.core.Archive object at 0x11083d6a0>,...584c7da7c71f6a7442245e', 'device_id': 'd62f19b059114ca8a3a6df2049bc35e8'})], hub_id='1f31627977584c7da7c71f6a7442245e')
+order = 'forbidden-first'
+
+    @pytest.mark.parametrize('order', ['allowed-first', 'forbidden-first'])
+    def test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole(pair, order):
+        """TC-005-mixed-batch: no permitted prefix may commit from an invalid batch."""
+        a = add_local(pair, 'forbidden-a', 'A', 'forbidden batch A'); b = add_local(pair, 'allowed-b', 'B', 'allowed batch B')
+        config = connect(pair); state = federation.choose_upload(pair.local, 'only', [b['project_id']])
+        projects = {p['id']: p['stable_key'] for p in pair.local.projects()}
+        def record(item, session, text):
+            return {'source': 'codex', 'source_session_id': session, 'started_at': None, 'source_key': session + '-message',
+                    'position': 1, 'source_order': 1, 'role': 'user', 'text': text, 'timestamp': None, 'project_id': projects[item['project_id']]}
+        allowed = record(b, 'allowed-b', 'allowed batch B'); forbidden = record(a, 'forbidden-a', 'forbidden batch A')
+        records = [allowed, forbidden] if order == 'allowed-first' else [forbidden, allowed]
+        status = pair.client.post('/v1/upload-policy/status', json={'hub_id': pair.hub_id, 'device_id': config['device_id']}).json()
+        batch = {'hub_id': pair.hub_id, 'device_id': config['device_id'], 'device_name': 'synthetic-device',
+            'policy_revision': status['revision'], 'control_epoch': status['control_epoch'], 'batch_id': 'mixed-' + order, 'records': records}
+        before = bodies(pair.remote); reply = pair.client.post('/v1/upload', json=batch)
+        assert reply.status_code >= 400 and bodies(pair.remote) == before == []
+        receipts = pair.client.post('/v1/upload-receipts', json={'hub_id': pair.hub_id, 'device_id': config['device_id'], 'batch_ids': [batch['batch_id']]}).json()
+        assert receipts['receipts'] == []
+        positive = pair.client.post('/v1/upload', json={**batch, 'batch_id': 'valid-' + order, 'records': [allowed]})
+>       assert positive.status_code == 200 and positive.json()['accepted'] == 1
+E       assert (409 == 200)
+E        +  where 409 = <Response [409 Conflict]>.status_code
+
+tests/test_required_snapshot_and_batch_boundaries.py:224: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_required_snapshot_and_batch_boundaries.py::test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[allowed-first]
+FAILED tests/test_required_snapshot_and_batch_boundaries.py::test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[forbidden-first]
+2 failed, 1 warning in 0.27s

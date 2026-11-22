@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "source": "codex",
+    "source_session_id": "old-device",
+    "title": "selective compatibility old-device original",
+    "started_at": null,
+    "updated_at": null,
+    "project_id": 1,
+    "project_name": "A",
+    "rank": 1,
+    "bm25_score": 1e-06,
+    "matched_messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective compatibility old-device original",
+        "timestamp": null,
+        "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+        "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+        "hub_message_id": 1,
+        "origins": [
+          {
+            "device_id": "0553319b24344b00923a6f785e3083ac",
+            "device_name": "legacy-device",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 1,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "0553319b24344b00923a6f785e3083ac",
+        "source_key": "6806c8893b1dd31a208b8e28be4fbed4",
+        "device_name": "legacy-device"
+      }
+    ],
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjhiZjZiZGU1YTZmNGYwOGEwNmE1OTNiNTY4MTc5NDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImY1ZjAwYTZjNTU2MDQ4OTM5MTBhZjRmZjU1MmUwOWIzIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjMwMjhkNWI5NTllNTM3ZjJjMDQ0ZjNiNGYzNzJlZDY4NGNiNGE2OWJkZDc5Y2Y3ZGVmNzUwYmJhZTY1MTJjM2QiLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.3efb523edadb8c84e48c838bd531d296056ee0a9f54c0b46a52168258356a015",
+    "origin_session_key": "old-device",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "0553319b24344b00923a6f785e3083ac",
+        "device_name": "legacy-device"
+      }
+    ],
+    "archive_scope": "hub"
+  },
+  {
+    "id": 2,
+    "source": "codex",
+    "source_session_id": "unmanaged-legacy",
+    "title": "selective compatibility unmanaged-legacy original",
+    "started_at": null,
+    "updated_at": null,
+    "project_id": 3,
+    "project_name": "A",
+    "rank": 2,
+    "bm25_score": 1e-06,
+    "matched_messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective compatibility unmanaged-legacy original",
+        "timestamp": null,
+        "canonical_id": "8fee986ae2a1f64b460afe06d0706a40e760942d299c3031d5b8d4aa9d191a6c",
+        "content_version": "6d645e2b4c4304fd8579490fd0e2e08b047968e53480d295cc00b646cbb9d20e",
+        "hub_message_id": 2,
+        "origins": [
+          {
+            "device_id": "b8ae78aa176549cc908919f5ae8eb143",
+            "device_name": "unmanaged-legacy",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 3,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 3,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "b8ae78aa176549cc908919f5ae8eb143",
+        "source_key": "ce8a005d931a153d639639b1c654111c",
+        "device_name": "unmanaged-legacy"
+      }
+    ],
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjhiZjZiZGU1YTZmNGYwOGEwNmE1OTNiNTY4MTc5NDUiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImY1ZjAwYTZjNTU2MDQ4OTM5MTBhZjRmZjU1MmUwOWIzIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImUyN2M5NDk2ZGFmZGQwM2M2ZTIxYjRmNDNjOTRmNTBiYjQ0NTc3NDc2MmZjNmU3ZGE3ZDMyMTg2YzczZWRmMGUiLCJ2ZXJzaW9uIjoiNmQ2NDVlMmI0YzQzMDRmZDg1Nzk0OTBmZDBlMmUwOGIwNDc5NjhlNTM0ODBkMjk1Y2MwMGI2NDZjYmI5ZDIwZSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMWJiYWQ4ZDBmYzkzZGUzMGYxYWYyZTg0YWRmMjdhMTM4MjNmZDdhZjA2OTM4NTcyNjMxYjM4MGQ2ODQ3MjZhMyIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.7bd98eb2278a48b5e572b30f41b74d10a2c9c1eb187bd6b591d2fac4e44245c6",
+    "origin_session_key": "unmanaged-legacy",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "b8ae78aa176549cc908919f5ae8eb143",
+        "device_name": "unmanaged-legacy"
+      }
+    ],
+    "archive_scope": "hub"
+  }
+]

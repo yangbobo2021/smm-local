@@ -1,0 +1,19 @@
+{
+  "label": "ai.smm.local.acceptance.001914f202c6",
+  "pid": 86352,
+  "definition": {
+    "KeepAlive": true,
+    "Label": "ai.smm.local.acceptance.001914f202c6",
+    "ProgramArguments": [
+      "<task>/login-candidate",
+      "--db",
+      "<task>/local/archive.sqlite3",
+      "serve"
+    ],
+    "RunAtLoad": true,
+    "StandardErrorPath": "<task>/login-logs/stderr.log",
+    "StandardOutPath": "<task>/login-logs/stdout.log",
+    "WorkingDirectory": "<temporary-root>"
+  },
+  "process": "  UID   PID  PPID COMMAND\n  501 86352     1 <task-path> -I -m smm_local.cli --db <task>/local/archive.sqlite3 serve --port 0\n"
+}

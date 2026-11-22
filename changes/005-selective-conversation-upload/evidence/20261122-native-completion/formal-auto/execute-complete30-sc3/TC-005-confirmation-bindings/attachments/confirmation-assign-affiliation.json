@@ -1,0 +1,257 @@
+{
+  "old_preview": {
+    "applied": false,
+    "requires_confirmation": true,
+    "affected_conversations": [
+      1
+    ],
+    "newly_allowed_conversations": [
+      1
+    ],
+    "newly_stopped_conversations": [],
+    "conversations": [
+      {
+        "id": 1,
+        "title": "private a1",
+        "source": "codex",
+        "source_session_id": "binding-a1",
+        "project_id": 1
+      }
+    ],
+    "target": {
+      "id": 2,
+      "name": "B",
+      "kind": "ordinary",
+      "remote_key": "18807ad5a8009c6bc915c875ab70461d"
+    },
+    "confirmation": "r1.eyJhcmNoaXZlX2lkIjoiYWNiMTI5ZTg5MzAwNGYxZmI5OWJjYzBlMmU3Y2M0NzMiLCJraW5kIjoicHJvamVjdF9jaGFuZ2UiLCJzbmFwc2hvdCI6Ijg3NGQ4Yjk5ZTA0YjVhYzc0ZTJhN2UxZDk0MjA0YzNhZjU5MjE0ODM1MjcxNDBmNDBhNzg2MmQ3Yjg5ZTFlZGMifQ.67dcbcbea281f6d96a5776d47088b0d0c0bb15af9d1ff43c77e10c27ff612320",
+    "message": "核对影响范围后提交该确认标识；Hub 旧副本不会自动撤回"
+  },
+  "submitted": {
+    "conversation_id": 1,
+    "target_id": 2
+  },
+  "before_rejected": {
+    "projects": [
+      [
+        1,
+        "A",
+        0,
+        "ordinary"
+      ],
+      [
+        2,
+        "B",
+        0,
+        "ordinary"
+      ],
+      [
+        3,
+        "C",
+        0,
+        "ordinary"
+      ]
+    ],
+    "project_paths": [
+      [
+        "<pytest-fixture>",
+        1
+      ],
+      [
+        "<pytest-fixture>",
+        2
+      ],
+      [
+        "<pytest-fixture>",
+        3
+      ]
+    ],
+    "project_links": [],
+    "conversations": [
+      [
+        1,
+        "codex",
+        "binding-a1",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        3,
+        null,
+        null,
+        "private a1",
+        "private a1"
+      ],
+      [
+        2,
+        "codex",
+        "binding-a2",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        1,
+        null,
+        null,
+        "private a2",
+        "private a2"
+      ],
+      [
+        3,
+        "codex",
+        "binding-b",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        2,
+        null,
+        null,
+        "allowed b",
+        "allowed b"
+      ],
+      [
+        4,
+        "codex",
+        "binding-c",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        3,
+        null,
+        null,
+        "allowed c",
+        "allowed c"
+      ]
+    ],
+    "conversation_assignments": [
+      [
+        1,
+        3,
+        1
+      ]
+    ]
+  },
+  "fresh_preview": {
+    "applied": false,
+    "requires_confirmation": true,
+    "affected_conversations": [
+      1
+    ],
+    "newly_allowed_conversations": [],
+    "newly_stopped_conversations": [],
+    "conversations": [
+      {
+        "id": 1,
+        "title": "private a1",
+        "source": "codex",
+        "source_session_id": "binding-a1",
+        "project_id": 3
+      }
+    ],
+    "target": {
+      "id": 2,
+      "name": "B",
+      "kind": "ordinary",
+      "remote_key": "18807ad5a8009c6bc915c875ab70461d"
+    },
+    "confirmation": "r1.eyJhcmNoaXZlX2lkIjoiYWNiMTI5ZTg5MzAwNGYxZmI5OWJjYzBlMmU3Y2M0NzMiLCJraW5kIjoicHJvamVjdF9jaGFuZ2UiLCJzbmFwc2hvdCI6ImUyMTFkYmQwY2Q1N2FlYmI3ODc4OGRhODM3NDg2ZDcwOGFkOTM5ZDdhOTE4YjU4Y2I4OWQ2MTkxNjVhMGQ1ZGYifQ.b63703d461ab675b34c46a96a2ff5094bf255d40f8560f06b9ab80fcfe8c5db2",
+    "message": "核对影响范围后提交该确认标识；Hub 旧副本不会自动撤回"
+  },
+  "after_fresh": {
+    "projects": [
+      [
+        1,
+        "A",
+        0,
+        "ordinary"
+      ],
+      [
+        2,
+        "B",
+        0,
+        "ordinary"
+      ],
+      [
+        3,
+        "C",
+        0,
+        "ordinary"
+      ]
+    ],
+    "project_paths": [
+      [
+        "<pytest-fixture>",
+        1
+      ],
+      [
+        "<pytest-fixture>",
+        2
+      ],
+      [
+        "<pytest-fixture>",
+        3
+      ]
+    ],
+    "project_links": [],
+    "conversations": [
+      [
+        1,
+        "codex",
+        "binding-a1",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        2,
+        null,
+        null,
+        "private a1",
+        "private a1"
+      ],
+      [
+        2,
+        "codex",
+        "binding-a2",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        1,
+        null,
+        null,
+        "private a2",
+        "private a2"
+      ],
+      [
+        3,
+        "codex",
+        "binding-b",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        2,
+        null,
+        null,
+        "allowed b",
+        "allowed b"
+      ],
+      [
+        4,
+        "codex",
+        "binding-c",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        "<pytest-fixture>",
+        3,
+        null,
+        null,
+        "allowed c",
+        "allowed c"
+      ]
+    ],
+    "conversation_assignments": [
+      [
+        1,
+        2,
+        2
+      ]
+    ]
+  },
+  "generation": 1
+}

@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-005-scope-race": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SPEC B5/A6及PLAN 3.3/表A6明确本机与Hub同一次使用共同快照，查询中改关联下一次才生效；新场景与自然设计对两端候选及读取的预期有据，无新增要求。冻结tests/test_required_snapshot_and_batch_boundaries.py:24-68在scope返回/Hub结果返回两窗口真实由A-D/B切到A-E/C，:52验证注入及每端只查一次，:53-55旧项目与Hub/最终独立会话集合，:60逐条独立正文，:64-67下一次新集合与旧引用仍可读；两端都改用新范围会首先失败:53/54/55，只有首结果或误用同一目标会失败:55及:60。原始run.stdout实际2 passed；两份scope-race-*.json附件也确实显示当前产品local_count=2且D/E有本机origin，已核artifacts及当前bindings摘要一致。但候选实现仍未有效验证自然设计的“本机候选”义务：:30-31先把本机D/E上传到Hub，:54明确旧Hub候选本来含local-d，:65新查询的local-e也有Hub副本。反例：本机候选映射只保留首项目A而错误丢掉D（下一次也丢E），Hub仍正确用旧D/B及新E/C；最终集合:55/:65、所有正文读取:60/:67、项目展示:53/:64及请求数量均仍可全过，附件里存在正确origin并未在候选断言中检查。该遗漏违反B5本机相应项目也参与、A6两端范围一致的有据承诺，不是再换一个等价ID。最早revision_target=implementation：可以仅control_only最小登记D/E，保持它们本机独有并从独立预期核对旧D/新E，或逐个独立断言这些命中的本机origin及候选身份；保留两窗口和旧引用全部检查。当前2 passed不等于设计已被完整实现；只审此新TC，其他旧cases/gaps/真实平台不在本次覆盖认领。",
+      "covers": []
+    }
+  }
+}

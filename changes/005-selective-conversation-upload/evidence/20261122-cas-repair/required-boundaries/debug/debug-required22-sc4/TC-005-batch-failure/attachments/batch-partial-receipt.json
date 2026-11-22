@@ -1,0 +1,120 @@
+{
+  "attempts": [
+    {
+      "hub_id": "5c3bc740e8294213a0104ad4aaaad528",
+      "device_id": "bd33b1a2c6fb474b9a6216a4cf0dffce",
+      "device_name": "synthetic-device",
+      "batch_id": "6691a3e5edc544649f3b7da1f9424e24",
+      "policy_revision": 1,
+      "control_epoch": "8cfd44047587480e88cab5d4c0572afc",
+      "records": [
+        {
+          "source": "codex",
+          "source_session_id": "batch-a1",
+          "started_at": null,
+          "source_key": "batch-a1-message",
+          "position": 1,
+          "role": "user",
+          "text": "batch first original",
+          "timestamp": null,
+          "occurrence": null,
+          "source_order": 1,
+          "project_id": "0e3cf42ef2e920c2b394688a7fd0e90f"
+        },
+        {
+          "source": "codex",
+          "source_session_id": "batch-a2",
+          "started_at": null,
+          "source_key": "batch-a2-message",
+          "position": 1,
+          "role": "user",
+          "text": "batch second original",
+          "timestamp": null,
+          "occurrence": null,
+          "source_order": 1,
+          "project_id": "0e3cf42ef2e920c2b394688a7fd0e90f"
+        }
+      ]
+    }
+  ],
+  "failed_state": {
+    "configured": true,
+    "hub_id": "5c3bc740e8294213a0104ad4aaaad528",
+    "device_id": "bd33b1a2c6fb474b9a6216a4cf0dffce",
+    "hub_address": "http://localhost:18770",
+    "device_name": "synthetic-device",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "8cfd44047587480e88cab5d4c0572afc",
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 2,
+    "inflight_messages": 2,
+    "unsent_messages": 0,
+    "problem": null,
+    "remote": {
+      "hub_id": "5c3bc740e8294213a0104ad4aaaad528",
+      "device_id": "bd33b1a2c6fb474b9a6216a4cf0dffce",
+      "revision": 1,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "23c877b4116f40278cf0862f191853de",
+      "control_epoch": "8cfd44047587480e88cab5d4c0572afc",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "failed",
+    "transfer_problem": "Hub 未确认本批次的准确身份及全部记录",
+    "allowed_pending_messages": 2,
+    "last_transfer_attempt": "2026-11-22T08:58:54.942093+00:00",
+    "last_transfer_success": null
+  },
+  "recovered_state": {
+    "configured": true,
+    "hub_id": "5c3bc740e8294213a0104ad4aaaad528",
+    "device_id": "bd33b1a2c6fb474b9a6216a4cf0dffce",
+    "hub_address": "http://localhost:18770",
+    "device_name": "synthetic-device",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "8cfd44047587480e88cab5d4c0572afc",
+    "confirmed_messages": 2,
+    "not_confirmed_messages": 0,
+    "inflight_messages": 0,
+    "unsent_messages": 0,
+    "problem": null,
+    "remote": {
+      "hub_id": "5c3bc740e8294213a0104ad4aaaad528",
+      "device_id": "bd33b1a2c6fb474b9a6216a4cf0dffce",
+      "revision": 1,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "23c877b4116f40278cf0862f191853de",
+      "control_epoch": "8cfd44047587480e88cab5d4c0572afc",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T08:58:54.962917+00:00",
+    "last_transfer_success": "2026-11-22T08:58:54.962917+00:00"
+  },
+  "hub_body": [
+    "batch first original",
+    "batch second original"
+  ]
+}

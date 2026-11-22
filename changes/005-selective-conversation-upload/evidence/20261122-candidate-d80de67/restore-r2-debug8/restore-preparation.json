@@ -1,0 +1,14 @@
+{
+  "body_stopped": true,
+  "hub_id": "330185632ec34a9e8397c7270e8ad649",
+  "control_epoch": "7c12702b10dd499fbb215d0466354f55",
+  "restore_files": [
+    "<task>/hub-state/smm-hub.sqlite3"
+  ],
+  "do_not_restore": [
+    "<task>/hub-state/smm-hub.sqlite3.upload-guard.json",
+    "<task>/hub-state/smm-hub.sqlite3.upload-guard.json.lock"
+  ],
+  "next": "停止 Hub 服务，按清单恢复一致性备份并重启；客户端查看 upload reconcile 后明确确认",
+  "preserve_files": []
+}

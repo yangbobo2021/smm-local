@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-target-dispatch": {
+      "status": "expected_failure",
+      "reason": "原始依据成立：已读AGENTS.md、SPEC B1/B2/B4与已确认PLAN第12节。B1要求规则绑定设备和稳定hub_id，Web失败不得展示保存成功；B2规定其他hub_id须重新选择且历史/进度按目标隔离；PLAN12.2明确“连接在操作中改变则拒绝向旧目标继续保存/提交”。这支持本例在已完成本机条件保存后、尚未派发策略时停止旧连接提交，不引入多用户权限要求，也不要求撤回已发请求。定义000003文件SHA256为493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e；冻结R005 SPEC来源与现文件均为879c904b7217dda4124079094d7f0fa7f96e4554436516385d3d262b0293882e。已核对design-reconcile-dispatch-v1、match-reconcile-dispatch-v1、runtime-reconcile-dispatch-red-v1以及RED收据；RED result.json SHA256为e9a6cf189f202fbc4d874d6acf589be377edf543a233fbbe70968b2275af892e，7个artifacts、39个bindings、3个test_bindings、4个product_bindings均与实际字节一致，运行就绪收据及smoke输出哈希一致。冻结test_reconcile_dispatch.py SHA256为8f769ca794c791a753927285ea78896b976cb105e3dfd5a631d897e9da42a04c；冻结helpers test_reconcile_snapshot.py为4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5、test_005_contracts.py为ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197。自然语言设计与实际测试一致：旧Hub和本机none已确认，使用新鲜双版本；第二次真实status响应返回后，断言本机generation已增加且state=pending，再通过真实configure_hub连接不同hub_id的第二个TestClient Hub，随后才交回旧对账流程。原始run.stdout（SHA256 9f30dc8a321cbd71284e31828947792bda44492b129ceac3abebdda333bc2d4a）显示该注入及other_id断言均已通过，首个业务失败在tests/test_reconcile_dispatch.py:46：expected HTTP400，actual HTTP200，原文“assert 200 == 400”，1 failed；run.stderr为空，process文件真实记录pid/group31674，执行exit_code=1。因此失败来自未拒绝已换目标的旧对账请求，而非环境/测试启动错误。400符合现有api.py:208-210对ValueError的接口错误约定。产品upload.py:171-219在第二次status之后按旧self.config继续策略提交、未检查当前连接，能解释缺失行为，但这属于源码推论；此次执行在HTTP断言停止，后续旧Hub头不变、无upload-policy/set、旧目标非confirmed、新目标needs_selection及零正文等断言均未到达，不把这些后续预期声明为已实测。该RED只证明这个保存后控制派发窗口的业务拒绝失败，不代表SC2/R005完整验收或所有副作用已经测得。"
+    }
+  }
+}

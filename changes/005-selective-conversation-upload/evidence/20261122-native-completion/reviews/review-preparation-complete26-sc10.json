@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-register": {
+      "status": "passed",
+      "reason": "SC10 adoption对应SPEC A10/D2及B2首次连接不传正文，确认PLAN登记即建立同设备旧写门禁。自然设计managed待选择与unmanaged两种动作前状态准确；tests/test_upload_registration.py:8–31通过真实TestClient Hub、独立other-device/body夹具，:21断言另一旧设备200，:23同设备409，:24整个Hub正文集合恰为other-device历史，:29–31旧整数+message读取200并逐正文独立期望。若两设备同错/误用同身份、只允许首设备或一律拒绝，200/409和完整正文断言会拦截；额外同状态标识样本仅可选。debug-complete26-sc10全部bindings/artifacts实算一致，实际run.stdout 1passed、stderr空、exit0，全部adoption执行到；没有附件，真实输出/进程文件已读。场景人工complete-3升级旧关系准备缺口另见manual-preparation-complete26-sc10.md，不计入此auto covers，也不授予SC10整体通过。",
+      "covers": [
+        "adoption"
+      ]
+    }
+  }
+}

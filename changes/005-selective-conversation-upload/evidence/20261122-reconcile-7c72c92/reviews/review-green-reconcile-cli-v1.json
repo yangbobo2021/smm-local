@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-cli-inputs": {
+      "status": "passed",
+      "reason": "独立读取 AGENTS、已确认 SPEC B1/A1/A2/A11、PLAN12、design-reconcile-cli-v2、match-reconcile-sc1-v1 和原始红灯及其独立意见。green-reconcile-cli-v1/result.json SHA256 c399e2e65b8d1c13475198be29d205987e76c8c283c6d32d22c78e091399cfc0，定义快照493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e一致；全部 bindings/artifacts 与当前文件逐字节吻合，runtime-reconcile-green-v1 ready。冻结 test_reconcile_snapshot.py SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5、test_005_contracts.py SHA256 ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197 及实际单项命令与 red 完全相同。该目标 raw run.stdout 为1 passed，exit_code=0，stderr空，run.process.json pid/group=24358；回归原始stdout 55 passed，exit_code=0，stderr空。tests/test_reconcile_snapshot.py:81-110 经真实 cli.main、实际本机SQLite/Hub路由检查5种缺失/无效参数：非零、错误非空、stdout空和两端完整row/head不变；本次已越过原红灯第100行，执行并通过状态不变、剩余参数、帮助取值来源及新鲜双版本成功提交none的后续断言，最终策略独立与实际Hub头和字面期望none核对。cli.py参数传递与 upload.py reconcile 的必填/非负整数校验位于请求和_save之前，错误路径不会条件保存；TRIAL_GUIDE及Skill示例同步双版本。关联回归含fresh四模式、写窗口、恢复/原文兼容及CLI hub无版本保护正反例；不是以一律拒绝冒充修复。本意见仅确认此实际TC的TDD绿灯，未证明安装包三平台实际入口、浏览器画面或整场景交付；Mac E3授权及安装包探针仍独立待完成。"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-reference": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "A8/B7支持当前scene/design。tests/test_005_contracts.py真实本机/Hub同整数ID且正文不同，read_local/read_remote各按独立完整正文断言；仅首档案正确或两端误用同号首先在另一档案独立正文失败。远端offline旧Hub ref必须抛HubUnavailable且本机ref仍准确，内容版本变化和冲突旧参数也分别拒绝。当前debug-complete29-sc8真实exit0/1 passed，源/夹具与28相同，全部bindings/artifacts SHA有效；不把人工未观察范围认领为自动覆盖。 已逐项核对本轮29新debug真实结果、stdout/exit、附件及当前所有bindings/artifacts摘要；当前完整回归251pass1skip仅支持其实际测试范围，人工完整范围另MD，不认领尚未正式execute。"
+    },
+    "TC-005-reference-boundaries": {
+      "status": "passed",
+      "covers": [
+        "citation-extra-boundaries"
+      ],
+      "reason": "A8/B7点名精确消息/重复位置/删除/切换Hub。test_required_snapshot_and_batch_boundaries七参数实际本机/Hub deleted-first/last各先取得两消息旧ref，再真实删首或非首，整个ref必须拒绝，剩余独立正文不变，拦只检查首stamp。重复position两端逐消息签发并按独立first/second正文及stamp ID/version断言，第二条错误不能通过。真实第二Hub及本机都有不同正文同号哨兵，切换后须抛错、新Hub不能收到/read且两哨兵不变，拦误路由。当前29真实exit0/7 passed及七附件，全部SHA有效；源/原断言未改，原件是当前新运行。 已逐项核对本轮29新debug真实结果、stdout/exit、附件及当前所有bindings/artifacts摘要；当前完整回归251pass1skip仅支持其实际测试范围，人工完整范围另MD，不认领尚未正式execute。"
+    },
+    "TC-005-scoped-title": {
+      "status": "passed",
+      "covers": [
+        "scope-title"
+      ],
+      "reason": "B7范围正文约束适用于由正文形成的title，没有额外产品要求。test_scoped_read_metadata两参数hub-api/federated分别对独立X消息/title断言并排Y秘密；旧无范围正控独立要求Y标题、Y+X正文，证明Y仍在。仅首入口正确由第二参数拦截，两端同错title由独立X预期拦截。当前29真实exit0/2 passed、所有bindings/artifacts有效。实际平台标题应用scope11/15原件，人工准备另manual-preparation-complete29-sc8.md。 已逐项核对本轮29新debug真实结果、stdout/exit、附件及当前所有bindings/artifacts摘要；当前完整回归251pass1skip仅支持其实际测试范围，人工完整范围另MD，不认领尚未正式execute。"
+    },
+    "TC-005-legacy-mcp": {
+      "status": "passed",
+      "covers": [
+        "additional-legacy-mcp"
+      ],
+      "reason": "SPEC B7/A8和PLAN8.1支持旧MCP参数。Completion.legacy_mcp当前:79-97函数AST与28冻结原件完全一致，文件其他legacy-links函数修订导致SHA变化，已重新match和真实28debug。Run.mcp实际stdio_client/ClientSession初始化call_tool，old0.4.0和new最终包解释器分别各读本机/Hub，均同整数ID1，旧参数仅conversation_id或再加hub_id/hub_message_id。每次独立完整正文数组和source_session_id(local-A/vibe-V)断言拦仅首解释器/首目标正确、两端误用同档案；不是old=new比较。实际四读准确，stderr四组CallToolRequest/ListToolsRequest。manifest clean ba8、独立安装全模块相等/other_package=false；实际old19/21模块与4d58202 canonical清单一致，版本0.4.0。当前原件时间10:25:07.500823–10:25:12.868975Z，debug PID60466 exit0；Hub PID60478实际启动、请求停止exit-15，cleanup无失败。所有bindings/artifacts/附件SHA有效；新鲜UUID任务loopback HTTPS，仅合成V来源，不触达日常档案。E5单支持平台补旧MCP，不冒充E1全矩阵重跑；正式execute仍待完成。 已逐项核对本轮29新debug真实结果、stdout/exit、附件及当前所有bindings/artifacts摘要；当前完整回归251pass1skip仅支持其实际测试范围，人工完整范围另MD，不认领尚未正式execute。"
+    }
+  }
+}

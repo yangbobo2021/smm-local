@@ -33,7 +33,7 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 ## 3. 实际提问
 
-在新的 Codex 或 Claude Code 会话中问一个**必须依靠旧对话**才能回答的问题，例如：“我以前对某项目的上线回滚提出过什么要求？请查原始对话并引用来源会话和消息位置。”Agent 应调用 `smm-local` 的检索及读取工具。本机档案的答案可在 Web「检索测试」中复核；汇总端结果由 Agent 保留搜索返回的汇总端和消息引用，通过同一读取工具打开原文。Web「检索测试」查询本机档案。首次尝试可明确说“请使用 SMM 搜索过去对话”，再试不点名工具的自然提问。
+在新的 Codex 或 Claude Code 会话中问一个**必须依靠旧对话**才能回答的问题，例如：“我以前对某项目的上线回滚提出过什么要求？请查原始对话并引用来源会话和消息位置。”Agent 应调用 `smm-local` 的检索及读取工具。本机档案的答案可在 Web「检索测试」中复核；汇总端结果由 Agent 保留搜索返回的汇总端和消息引用，通过同一读取工具打开原文。包含 005 的版本中，Web「检索测试」默认联合检索，可明确选择仅本机；0.4.0 的 Web 只查本机。首次尝试可明确说“请使用 SMM 搜索过去对话”，再试不点名工具的自然提问。
 
 项目检索默认只包含当前项目及直接关联项目。跨项目提问时，让 Agent 使用全局范围。本机项目关联可在 Web「项目」中配置；连接 Hub 后，CLI/MCP 的在线检索使用 Hub 保存的关联，由汇总端维护者统一配置。[管理汇总端的项目关联](#管理汇总端的项目关联)
 
@@ -61,7 +61,7 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 在每台电脑上安装新版 Skill。将管理员提供的凭证文件存到该账户的 `~/.local/share/smm-local/hub-token`，或在配置时告诉 Agent 文件路径。然后说「把这台电脑叫出差笔记本，汇总地址是 https://smm.example.net:8770」。汇总电脑若也要上传自己的本机对话，同样配置一次。
 
-连不上汇总电脑时，Skill 会说明当前只搜本机，范围包含本机已导入的所有 Agent。网络恢复后，后台会补传未确认的记录，搜索重新覆盖汇总档案。引用会注明来源电脑、Agent、原始会话 ID 和消息位置。
+包含 005 的版本连不上汇总电脑时，Skill 会说明实际覆盖范围：按 A 项目查询只查本机 A；全项目查询才查本机全部。网络恢复后，后台会补传未确认的记录，搜索重新覆盖汇总档案。引用会注明来源电脑、Agent、原始会话 ID 和消息位置。
 
 ### 通过包管理器部署汇总端
 
@@ -119,7 +119,7 @@ smm-hub serve-hub --state-dir /path/to/hub-state --host 0.0.0.0 --port 8770 --to
 
 ### 管理汇总端的项目关联
 
-本机客户端至少完成一次与汇总端的同步后，运行 `smm-hub hub project list` 查看项目 ID、来源和设备名称。用以下命令管理关系，示例中的 `1` 和 `2` 换成汇总端给出的项目 ID。
+本机客户端至少完成一次与汇总端的项目登记后（005 不要求上传正文），运行 `smm-hub hub project list` 查看项目 ID、来源和设备名称。用以下命令管理关系，示例中的 `1` 和 `2` 换成汇总端给出的项目 ID。
 
 ```sh
 smm-hub hub project links
@@ -127,10 +127,84 @@ smm-hub hub project link 1 2
 smm-hub hub project unlink 1 2
 ```
 
-在 Agent 中要求按当前项目搜索时，CLI 和 MCP 会查询汇总端保存的当前项目及直接关联项目。关系双向生效。命中 VibeInsight 对话时，可以用同一个读取入口取得原文和源事件位置。需扩大范围时，明确要求搜索所有项目。汇总端断开时，CLI 和 MCP 回退到本机所有项目，并返回回退原因。
+在 Agent 中要求按当前项目搜索时，CLI 和 MCP 会查询汇总端保存的当前项目及直接关联项目。关系双向生效。命中 VibeInsight 对话时，可以用同一个读取入口取得原文和源事件位置。需扩大范围时，明确要求搜索所有项目。包含 005 的版本在汇总端断开时，项目查询只回退到本机所请求项目，并返回原因；全项目查询回退到本机全部。
 
 ### 项目改名与仓库身份变化
 
 设备项目修改显示名后，Hub 沿用原项目身份及关联。VibeInsight 项目以仓库主机、端口和路径的组合标识身份，该标识变化时会发现一个新项目。旧项目的归档及关联继续保留，已同步的新项目对话可通过全局检索找到。
 
 仓库身份变化后，维护者用 `smm-hub hub project list` 找到新仓库项目和相关设备项目，再用 `smm-hub hub project link <设备项目ID> <新仓库项目ID>` 建立关系，并按当前项目检索确认新对话已纳入。需要移除旧项目的关联时，用 `project unlink` 解除该关系，旧对话仍可全局检索。
+
+
+## 项目上传与联合检索（005，尚未发布）
+
+本节需要同时使用包含 005 的 Local 和 Hub。0.4.0 正式包不支持上传规则和新引用，更新 Skill 不等于更新运行组件。预览可按 README 建立独立源码开发环境，再运行 `python3 scripts/build_packages.py` 构建两个 wheel。用 `uv venv <任务环境>` 建环境，`uv pip install --python <环境中的Python> <本次wheel实际路径>` 安装；分别为 Local、Hub 建环境，不覆盖日常安装。macOS/Linux 的 Python 位于 `bin/python`，Windows 位于 `Scripts/python.exe`；CLI 同目录为 `smm`/`smm.exe` 或 `smm-hub`/`smm-hub.exe`。下文 `smm`、`smm-hub` 均指这些实际入口，`--db <独立档案>` 加在子命令之前。正式发布后才可按该发布版本替换包管理器命令中的版本号。
+
+### 先取得项目，再选择上传范围
+
+`configure-hub <地址> <本机名称> --token-file <文件路径>` 保存目标。新目标先只查询，自动登记设备与项目名称/类型/稳定键，不上传未允许会话的 ID、标题、路径、摘要或正文。查看 Web：`smm maintenance open`，进入「配置」的上传范围；命令行可运行：
+
+```sh
+smm projects
+smm upload status
+smm upload set --mode all
+smm upload set --mode only --project-id 1 --project-id 2
+smm upload set --mode except --project-id 2
+smm upload set --mode none
+```
+
+这些是四个可替代的设置例子，请选择所需的一条。数字用 `smm projects` 返回的本机 ID 替换，可重复 `--project-id`；`only` 空名单不上传，`except` 空名单允许全部；`all/none` 不接受名单。每次保存完整替换规则。名称修改不改变稳定身份或名单。Hub 管理员运行 `smm-hub hub project list` 得到另一套 Hub ID，用于 Hub 关联命令。
+
+`upload status` 显示当前地址/Hub 身份、设备、规则、本机序号、Hub 确认版本、已确认/未确认及在途消息。`needs_selection` 表示尚未选择；`pending` 表示本机已保存、Hub 尚未确认；`confirmed` 表示双方已确认；`conflict` 表示恢复或规则有差异，正文停止，需对账。传输进度由 `transfer_state` 单独显示暂停、待规则/对账、失败、在途待核实、正在补齐或已补齐；`allowed_pending_messages` 只统计当前允许范围内待确认的正文、项目归属或来源顺序，`transfer_problem` 保留最近同步失败，健康同步后清除。`last_transfer_attempt/last_transfer_success` 是最近传输轮次时间，不等同于规则确认时间。停止在本机立即阻止新派发，已派发的在途请求需等 Hub 确认，不能当成已撤回。Hub 已确认限制后拒绝旧版本或无版本正文。
+
+停止不会删除 Hub 旧副本；其他电脑的副本与 VibeInsight 同步不受影响。重新允许后按消息身份和内容版本核对回执，补齐旧历史、停传新会话和追加轮次，重复同步不增加副本。全局暂停仍可保存/确认规则和最小项目资料，不会自动恢复正文导入或上传。来源插件仍只归档本机，上传规则当前覆盖 Codex/Claude Code。
+
+### 明确全局会话与归属
+
+缺失工作目录的会话保持待定，不能自动当成全局项目。Web「项目」可建立唯一全局项目、查看归属预览并确认；CLI：
+
+```sh
+smm project ensure-global
+smm search "该会话的关键词" --local
+smm project assign-conversation <本机会话ID> --project-id <目标本机项目ID>
+smm project assign-conversation <同一会话ID> --project-id <同一项目ID> --confirm <刚返回的confirmation>
+```
+
+会话 ID 来自仅本机搜索；目标 ID 来自 `projects` 或 `ensure-global`。先检查预览中实际会话和新增允许范围再提交；规则或归属变化后需重新预览。全局项目与普通项目不能合并，按 A 检索不会自动包含全局项目。人工归属在源文件重放后保留。Web 路径映射、项目合并若扩大上传范围，同样须确认绑定的预览；Hub 已有副本不会随本机改归属而撤回。已上传会话从 A 改归属到 B 后，只有 B 获准上传，后续同步才为 Hub 已保存的同版本消息增加 B 归属；A 归属和旧引用保留，正文不重复保存。B 禁止上传时不发送这段会话的新归属或指纹。归属确认丢失会保持待确认并重试。
+
+### 搜索与读取
+
+```sh
+smm search "关键词" --scope project --project-id <本机项目ID> --limit 5
+smm search "关键词" --local --scope project --project-id <本机项目ID>
+smm read --reference <某条结果的reference>
+```
+
+MCP 使用 `search_conversations`、`read_conversation(reference=...)`；Web 在「检索测试」选择默认联合或仅本机，沿具体结果的原文按钮读取。三者共用同一逻辑。配置 Hub 后，默认两端各按同一个 N 正常返回候选（1–50），在本机按完整命中消息重新计算 BM25，先归并可证明同源同版本的副本，再排序，最终最多 N 条。不同版本/轮次保留。不为排序发送本机候选正文；预览长度不影响得分或完整原文。
+
+在线按 A 项目查 Hub 的直接一层 A/B/V，同时查询本机属于该共同集合的内容，包括未上传内容；本机自己的 A/D 关联只在显式仅本机时使用。Hub 范围解析失败只查本机 A；已有合法快照后 Hub 查询失败可保留该快照内的本机结果，说明缺失端点。全项目失败回退本机全部；本机失败而 Hub 可用则返回 Hub 并说明本机缺失；双方都失败报错。零命中不表示连接失败。
+
+顶层 `archive_scope=combined` 不决定单条档案。每条引用绑定实际档案、消息及版本，只读检索时允许的消息集合；可用 `--start/--end` 进一步缩小，不能扩大到范围外内容。多来源组合引用可整体读取，指定区间时先选择其 `origin_references` 中一个来源。远端不可用不会读本机同号 ID。旧 `read ID`、`--hub-id`、`--hub-message-id` 继续可用；不要把联合结果的本机 ID 与顶层 Hub ID 拼接。原文改变或引用损坏时重新检索。
+
+### 升级兼容与恢复备份
+
+有可验证同 Hub 已上传状态的旧设备升级时保留全部允许；新接入或实际 Hub 身份变化需重新选择。只换地址/凭据且仍是同一个 Hub，不重置规则。新 Local 连接旧 Hub 可查询可核验的全项目候选，但不上传正文；按项目只回退本机所请求项目，明确提示能力不足。旧 Local 对尚未迁移设备仍可写；该设备一旦采用新策略，旧写被拒绝，旧读仍可用。
+
+恢复前先运行该 Hub 原服务配置下的 `smm-hub hub status`（自定义状态目录时沿用原 `--state-dir`），从输出 `database` 的父目录确认实际 Hub 状态目录，并核对与待恢复服务相同。再用实际档案/状态目录输出清单并写入恢复保护：
+
+```sh
+smm --db <本机档案> upload prepare-restore
+smm-hub hub --state-dir <实际Hub状态目录> prepare-restore
+```
+
+随后停止相应服务，恢复一致性备份集，保留输出 `do_not_restore` 中的保护与锁文件，不能用旧备份覆盖它们。数据库包括引用签名材料，配套 Hub 配置/凭据按输出的 `restore_files`/保留清单处理。自管 `serve-hub` 使用同一个实际状态目录。不能把运行中的 SQLite 主文件单独复制当成一致性备份；应停服务或使用 SQLite backup。
+
+重启后先查看差异，查看本身不改变规则：
+
+```sh
+smm upload reconcile
+smm upload reconcile --use hub
+smm upload reconcile --use local --expected-hub-revision <刚查看的hub.revision> --expected-local-generation <刚查看的local.generation>
+```
+
+`--use local` 明确重新提交刚显示的本机规则，必须同时带刚查看差异输出中的 `hub.revision` 与 `local.generation`；少一个、任一已过期或调用期间本机规则又有修改，都拒绝且不覆盖当前规则，需重新查看。不能自动改用另一入口后来保存的本机规则。`--use hub` 明确采用调用时 Hub 当前规则，仍保护调用期间的本机新保存；也可提供 `--expected-local-generation` 绑定刚查看的本机代次。Web 两种对账按钮均绑定页面所显示的两端版本，过期需重新查看。恢复期间正文关闭；Hub 回到旧库会更换控制代次，原回执失效，明确对账后只补当前允许的缺失消息。手工连保护标记一起回滚不属于受支持恢复方式。

@@ -1,0 +1,67 @@
+{
+  "cases": {
+    "TC-005-backfill": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。B已上传/旧全局cursor99999999之后A旧/新会话/assistant追加全部补齐；完整4条及A顺序准确，再同步0。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。整批提交前故障与真实收两条但accepted=1两参数；失败confirmed0/pending2/inflight2，恢复2/0/0和精确两正文、重复无增。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "whole-batch-failure"
+      ]
+    },
+    "TC-005-bounded-upload": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。35条独立session/position/role/text/time全集；首轮25且pending时B已推进并能新导入/查询，次轮10后pending/inflight0、confirmed35，第三轮0且全部物理行不变。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-6"
+      ]
+    },
+    "TC-005-fair-upload": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。A指纹失败实际保留error，B正文当轮提交，Hub完整集合仅B accepted。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-5"
+      ]
+    },
+    "TC-005-mixed-batch": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。当前revision/epoch下允许在前/禁止在前均403 project_disabled，正文空/无receipt；纯允许正控200 accepted1。两附件原请求/响应匹配。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "mixed-batch-atomic"
+      ]
+    },
+    "TC-005-offset-prefix": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。相同文本/角色/时间的晚到前缀仍两个实体，source_position/order为1/1和2/2，确认2且无待补。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-repeated-fairness": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。三轮A持续错误且每轮新B实际uploaded1，完整正文集合逐轮B0→B0/B1→B0/B1/B2，A仍排队。附件与断言一致。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "additional-repeated-fairness"
+      ]
+    },
+    "TC-005-timestamp-version": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。同正文不同time两个版本分别持久保存，当前精确确认、重试0；旧引用None与联合两个timestamp均正确。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-unknown-receipt": {
+      "status": "passed",
+      "reason": "已核design-complete27-sc4/match-complete30-sc4与实际选择器、夹具及全部绑定/输出/五附件SHA相符，各正式进程exit0共11参数pass。实际先提交后丢确认并停止：inflight1，后核实不发正文，confirmed1/inflight0且旧副本保留。 仅该TC已分配检查，未据此替代E1–E4实测。",
+      "covers": [
+        "case-4"
+      ]
+    }
+  }
+}

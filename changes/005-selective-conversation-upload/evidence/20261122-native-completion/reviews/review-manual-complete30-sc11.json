@@ -1,0 +1,15 @@
+{
+  "cases": {
+    "TC-005-sc11-evidence": {
+      "status": "passed",
+      "reason": "本次11:43:14 UTC为实际原件/适用性核验，不是旧平台业务重演。已读definitions003(SHA493e01)、SPEC B8/D1/D4/A11、design27/match30、SC11步骤及准备MD，逐5操作expected/observed/原件核。597 artifacts、74 bindings、原inventory595项全部独立SHA匹配；完整29回归输入73项当前字节不变、真实10:25:09–10:26:59 UTC exit0，并逐相关JUnit核验，未只凭251pass。full1：七主流程原事件d80/f45/7c时间保留；所有Local安装25模块独立匹配原git提交，Local/Hub实际安装摘要等各自candidate且环境独立。原none已确认积压→同目录重启后同generation/none、三入口精确A/A-new/B/V及固定正文/角色/位置/时间（V为2026-11-01、Agent null）、停传载荷无相关正文、明确允许后A旧追加/新会话完整补齐、allowed_pending/inflight0、旧引用只读旧消息与重复同步不增均有原响应及实际脚本断言。真实E2 launchd登录86352→86801 uid501、E3 Linux systemd-user147555→148725、Windows LocalService2504→11036且owner LOCAL SERVICE、Mac系统launchd57818→58048 PPID1/UserName <ordinary-user>、E4 serve-hub54870→55420，路径/命令/PID及清理相符，未拿维护者终端冒充服务。本人打开Mac/Linux/Windows E1及Mac登录的local-restarted-upload.png四原图，均见双方已确认全部不上传、未传与在途分开、原状态目录；restart浏览器trace完整，未重配规则。full2：R1本机库+hub配置旧all备份、R2Hub旧库均在prepare-restore清单/独立guard保护后停服还原，差异分别local all/Hub none或epoch不一致，conflict后明确采用none，旧引用准确再onlyA补齐两会话；原37/36条commands与备份身份/服务时序、完整原文/cleanup核实。本轮local-restore/unreconciled-send正式真实pytest已独立复核，补现版未对账两次同步实际不派发/不改规则。full3：R3实际恢复Hub数据库+hub.json且不回滚guard、epoch变化/none冲突；R4真实systemd重启后确认新none再注入health失败，实际Hub.upgrade恢复分支保留none、改epoch并conflict，离线安装成功桩仅代包获取，未声称真实发布安装失败；两项原allowed-backfill/old-original/commands/cleanup符合。旧R2未含已确认近期丢失的差异由本轮最终安装包confirmed-loss真实专项补足（recent先确认、恢复丢失、采用none不重补、onlyA后精确补齐，旧引用保留/重复不增）。full4/complete-5：已打开mac/linux/windows-reconcile21各stale-local-rejected、stale-hub-rejected、adopted-hub-current九原PNG，清楚提示本机或Hub规则已改变/重新查看，刷新采用后双方已确认none；Windows保留历史传输失败与规则成功分开，未掩盖。三原manifest均最终ba8普通身份、全Local25模块等当前src；原CLI exit2/缺本机代次拒绝、Web400请求分别(gen1,rev2)/(gen3,rev3)、 fresh use-hub(gen3,rev4)200及最终gen5/rev6/none核实。原trace三次逐网络内容一致：查看200→旧本机400→查看200→旧Hub400→查看200→采用200；拒绝区间无policy/set、两端规则/版本保持有实际原断言。29JUnit逐核snapshot10、remote-race12、uncertain2全部实际通过，已读源码确认完整row/Hubhead/正文不变及未知回执不授权派发，避免旧7c对账先改状态问题冒充新通过。TRIAL_GUIDE189–210与standalone prepare实测清单说明SQLite一致备份、停服务、guard/lock不回滚、身份/实际目录及任意克隆不支持。当前src与ba8完全同字节；d80后变化的范围标题由f45 scope补、对账api/cli/upload/static由ba8 reconcile21+CAS/当前正式恢复补，未从Hub不变推所有Local相同。全部分配检查有对应原始副作用/现版实测支持；仅判本TC五项，不提前判R005。",
+      "covers": [
+        "complete-5",
+        "full1",
+        "full2",
+        "full3",
+        "full4"
+      ]
+    }
+  }
+}

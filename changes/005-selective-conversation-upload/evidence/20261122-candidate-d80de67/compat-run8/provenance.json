@@ -1,0 +1,61 @@
+{
+  "source": "AT-SMM-005 private original compat-run8",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "controllers": {
+    "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+    "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+    "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+    "selective_upload_platform.py": "ada9212a2a5a7d9b8a3594181b3d0ce1fa11df96c51e70ec92f3cd0e636ed4a9",
+    "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+    "selective_upload_windows_limited.py": "ba55be5dfb7bf2e4c2d1a3211154693028bf44eb5237f47e84b69d40530bee89"
+  },
+  "files": [
+    {
+      "file": "actual-hub-change.json",
+      "original_sha256": "eb187ce85e091330440f6d2c3362ca9c1e49fe49e3caf1e6c0b9b2a573416d6b",
+      "export_sha256": "86f55b08401d3a324bb4d9daf4bb79e4e0b8f085fa5ca76db646b067efea5f2a"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "bd6b1ac3b50a7d447b7258a69e00d8e10cc06df2f4aa16dab595892cb37d15fb",
+      "export_sha256": "f70d5e26467fa4714cf424e7d17751dbe005f995293e1d0a61eaaa8c1464cff5"
+    },
+    {
+      "file": "migrated-old-device.json",
+      "original_sha256": "6d01f020ac4593c085af4a02c0098d726bd8984e911c0dceb9cd0539cbcc14ad",
+      "export_sha256": "f77b5c51d3078b7ec7a62fbd6dada32d6bb6cc1df1d79a9e9a5ccd71eb6ff3c4"
+    },
+    {
+      "file": "new-local-old-hub.json",
+      "original_sha256": "d7c413b15d4c41e119c68ca933de4413bce730aee78f46c27f7f642d7e751e9e",
+      "export_sha256": "d7c413b15d4c41e119c68ca933de4413bce730aee78f46c27f7f642d7e751e9e"
+    },
+    {
+      "file": "old-smm-hub-identity.json",
+      "original_sha256": "2c5b6d0dfa60433972928ed846626729917258d4312613354f0808cfcc0496f9",
+      "export_sha256": "2c5b6d0dfa60433972928ed846626729917258d4312613354f0808cfcc0496f9"
+    },
+    {
+      "file": "old-smm-local-identity.json",
+      "original_sha256": "b6e3f5e603744d123b346ac18fd7d4b6ab0115ae04c182e96440bead0929702b",
+      "export_sha256": "b6e3f5e603744d123b346ac18fd7d4b6ab0115ae04c182e96440bead0929702b"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1",
+      "export_sha256": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "dafbafbad7a05328e63d4a5ecfd443cfb23f0a267c6660566cbaa9e0fd615018",
+      "export_sha256": "dafbafbad7a05328e63d4a5ecfd443cfb23f0a267c6660566cbaa9e0fd615018"
+    }
+  ]
+}

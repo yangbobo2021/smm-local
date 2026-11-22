@@ -1,0 +1,33 @@
+{
+  "cases": {
+    "TC-005-bm25": {
+      "status": "passed",
+      "covers": [
+        "case-1",
+        "identity-versions"
+      ],
+      "reason": "A7/B6/D3支持当前完整scene及设计，原26的不同df缺口现由独立TC-005-multiterm-ranking承接。真实tests/test_upload_acceptance_boundaries.py:107-120调用test_combined_search.py:21-46，独立公式逐候选核分、同版本副本前后不增分/消息、不同会话/轮次集合、精确v1/v2(canonical_id,version,text)集合全部保留。只首候选/首版本正确先被完整目标集合与逐项分数/精确身份集合拦截，两个产品结果相等不能替代独立预期。当前debug-complete30-sc7真实exit0/1 passed，全部bindings/artifacts SHA有效；人工完整范围另manual-preparation-complete30-sc7.md。 当前30真实新运行已逐项核对，不以旧green替代；runtime30只删除本TC不执行的控制器全局绑定，完整src/tests及实际所需夹具仍绑定。原完整pytest29 251pass1skip时间与输入保留、全部绑定输入当前未改，仅按原范围复用。"
+    },
+    "TC-005-long-message": {
+      "status": "passed",
+      "covers": [
+        "case-3"
+      ],
+      "reason": "A7/D3要求预览不改变评分、尾词命中与完整读取。tests/test_combined_search.py:57-79先证tailonly不在100字预览，全文/短预览分别逐目标校验独立2001/3-token BM25分数和完整session集合，二者同时截断同错会在独立公式失败；只首目标正确由另一目标独立分数拦截。长消息按所取引用读回独立完整text。当前30真实exit0/1 passed，源码/夹具与原29一致、全SHA有效；不以比较全文=预览自证。 当前30真实新运行已逐项核对，不以旧green替代；runtime30只删除本TC不执行的控制器全局绑定，完整src/tests及实际所需夹具仍绑定。原完整pytest29 251pass1skip时间与输入保留、全部绑定输入当前未改，仅按原范围复用。"
+    },
+    "TC-005-rank-ties": {
+      "status": "passed",
+      "covers": [
+        "case-2"
+      ],
+      "reason": "D3支持平局时间和稳定身份规则。test_combined_search.py:47-54动作前五个独立候选涵盖同绝对时间不同区、次日、空timestamp、缺timestamp；完整独立顺序[c,a,b,d,e]拦截仅首目标正确或某一时间状态错误，不是两端结果互比。当前30真实exit0/1 passed、绑定和产物摘要有效，旧TC断言未改。 当前30真实新运行已逐项核对，不以旧green替代；runtime30只删除本TC不执行的控制器全局绑定，完整src/tests及实际所需夹具仍绑定。原完整pytest29 251pass1skip时间与输入保留、全部绑定输入当前未改，仅按原范围复用。"
+    },
+    "TC-005-multiterm-ranking": {
+      "status": "passed",
+      "covers": [
+        "additional-multiterm-ranking"
+      ],
+      "reason": "SPEC D3明确每词df、查询词去重与贡献求和，设计没有额外承诺。当前tests/test_complete_scene_boundaries.py:171-183的函数AST与29冻结原件相同（文件其他函数修改致整体SHA变化，已按30重新匹配/真实debug）。3个独立文本给N3/avg3、amber df1及blue df3，query amber blue amber；固定idf常量和每目标tf/长度独立算分。:180完整目标集合、:181逐session独立分数approx、:182独立期望排序，依次拦遗漏目标、只首目标正确、错误df=M或重复query贡献；两端误用同候选也无法通过不同独立分数。当前30实际附件分数m1=1.4821716155156461/m2=.11750762550957991/m3=.15461529672313148，顺序m1/m3/m2，与数学式吻合。debug exit0/1 passed，所有bindings/artifacts/附件摘要一致；直接独立常量和正常路径断言无额外抽取探针。 当前30真实新运行已逐项核对，不以旧green替代；runtime30只删除本TC不执行的控制器全局绑定，完整src/tests及实际所需夹具仍绑定。原完整pytest29 251pass1skip时间与输入保留、全部绑定输入当前未改，仅按原范围复用。"
+    }
+  }
+}

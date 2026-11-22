@@ -1,0 +1,160 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-complete26-sc2/request.json": "6c1ed7b2ec880939cc2f305060db7bdeab29cfe6cc25905a8892e760e5097ae1",
+    ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-complete26-sc2/reviewer.txt": "2842101ceba8153c800b5542e592211560ad128555e1edfa838919a4e51bb46e"
+  },
+  "bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_archive_references.py": "2bc5e24bd8b61cd155745309e4ad29c7dec596dc7766c1564c79208efa8b1482",
+    "tests/test_cli_help.py": "355468c0783ed01394d9f5a8a2bb9e3092e94c4899a654e8b745beef8e028bc1",
+    "tests/test_combined_search.py": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+    "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+    "tests/test_federation_tls.py": "fea404b497ac6f1c71bb4fb6529a8a819f7c5a5e2da6778f31fea2fe51f79516",
+    "tests/test_hub_standalone.py": "3c7741ae2d762a5aa7d7498a25201860741135ef7bb897951017e47259a377cb",
+    "tests/test_maintenance.py": "63171d761ca0a60acc35bafb16f1581491090418da7039a42389988294f069e4",
+    "tests/test_pipeline.py": "2564b4d1bfdb81b81c58ef790f070129adbe8fc1363564969ac320b43d49c332",
+    "tests/test_project_identity_boundaries.py": "16a6b46ed7a32470c316f5748e4849eee9784bc6db6b83d9f7b058252542dac2",
+    "tests/test_project_preview_coverage.py": "28ed99f2da37e5df2acb711f7f24a2d5156b73a9a7fbd2c77e9c312f85fa031a",
+    "tests/test_reconcile_boundaries.py": "1215497c31beebc1f81ab81de4cc35d022aa918c7176404576c91dad78b7bc84",
+    "tests/test_reconcile_dispatch.py": "9fc53738cf45201c3a7f93fe3345405e93f5d7ab746beee5b259301472beaab3",
+    "tests/test_reconcile_remote_race.py": "b1f8c2fd4cf4578d91bd67a2f17041f5d0485022a573e8f0ce0d092940a2fe38",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+    "tests/test_reconcile_uncertain.py": "6ad019a7a09254c0e2f6f090b7bb0667fc900a46f37b8eae8af2dfe13be04d6c",
+    "tests/test_required_snapshot_and_batch_boundaries.py": "8413d7ae8bc17d5f84361f850c64c2973125c389ab3999172970f996645e4c5d",
+    "tests/test_scoped_read_metadata.py": "504194f3f20a11390aa13df2b0918d301d9644d665649caeb6a95d9dda11b918",
+    "tests/test_selective_upload_audit.py": "5e49f5bbac6cddb391afae148ee18617704f045ece8fb5179c82d65a93c1dee4",
+    "tests/test_selective_upload_probe.py": "d7103d8595a37fd08d0af7b16263610bbf4dcdaa469f32e48438a38ced553898",
+    "tests/test_service_startup.py": "79df1235e260a6323af648062df9d4b9694f9352b3a39567b2d8787ff1bfa223",
+    "tests/test_source_plugins.py": "4d7f9f61a505811117c6f4d2d106ca6205fe6131bc25331809e23c3d8cab82d0",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+    "tests/test_upload_dispatch_fence.py": "c9bbcdf0fa832eb4bd0b6388e23078cd1f2a1b829a61d675880eb2d63b4fc4de",
+    "tests/test_upload_interfaces.py": "41acfd8f711c0b92b431e71d90e06f1fb41b341801104381ab2ad4b9fd0f41d2",
+    "tests/test_upload_isolation.py": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899",
+    "tests/test_upload_mode_matrix.py": "dee64fb7cdf7dc793c59245111ccd18b472b3e76c36c9a9465c393f3c8d760ef",
+    "tests/test_upload_policy.py": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309",
+    "tests/test_upload_project_moves.py": "9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56",
+    "tests/test_upload_recovery.py": "00cc38f24899e3d135b6af97737e3631e522babdf8397ebd8b9a99b0d1eba39d",
+    "tests/test_upload_registration.py": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39",
+    "tests/test_upload_review_regressions.py": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586",
+    "tests/test_vibeinsight_boundaries.py": "24f69ae463941de27b66df97a01dcf5fb297817c74721c3ef7f2ba6b9e4600de",
+    "tests/test_vibeinsight_fixture_guard.py": "ea90372e8ee793da977aa2f7cfcb763646dc0309c9e44858aecd57b143874267",
+    "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "judgments": {
+    "TC-005-cas": {
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "场景/设计均有所述原文依据。B4/D1/A2原文规定设备内限制确认与正文提交边界；test_005_contracts.py:99先提交有效同项目正文并精确断言两条历史，再确认none；旧策略及旧版/无版正文均逐请求拒绝且完整bodies不变，最后独立head保持none和新revision。拒绝所有正文的错误在初次valid.status_code==200即被拦截，确认前历史删除在完整bodies比较拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-policy-triple-order": {
+      "covers": [
+        "three-choice-order"
+      ],
+      "reason": "场景/设计均有所述原文依据。A2点名允许/停止/允许请求及响应乱序。test_required_snapshot_and_batch_boundaries.py实际三次Hub提交，分别独立断言all/none/all、revision1/2/3及返回3/2/1，再核对Local generation/ack_revision/epoch/submission与第三次Hub回执。若两端同时误用第二目标，第三次all/gen3和head3先拦截；逐一重放前两已提交请求不改变head，未提交旧版本409。附件policy-triple-order.json实际读出3/2/1、1/2/3和gen3，最后精确一条及重复不增。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-fresh": {
+      "covers": [
+        "fresh"
+      ],
+      "reason": "场景/设计均有所述原文依据。B1要求采用所显示本机完整规则。test_reconcile_snapshot.py:114以none/all/only/except参数，各次读取shown后严格核对响应、Local desired、Hub head及唯一set出站载荷等于shown完整policy；仅首mode成功其余拒绝时相应参数status200首先拦截。原文是显示值提交一致，故shown作为比较对象合法；setup_control的a stable key及mode另有独立输入检查，无正文请求。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-inflight": {
+      "covers": [
+        "inflight-result"
+      ],
+      "reason": "场景/设计均有所述原文依据。B4未知结果不能成功跳过、新意图不被旧响应覆盖。test_reconcile_uncertain.py两参数在真实CAS提交后分别丢回执/另存none，明确确认Hub实际曾all，并分别检查Local不confirmed或新generation/desired/submission完整保留；普通重试后Hub无正文、无upload出站，lost分支只有fresh明确hub采用才confirmed。两状态各可失败，不只读取相同端结果；新版none分支最终Hub/Local均要求独立none。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-remote-race": {
+      "covers": [
+        "remote-reject-no-save"
+      ],
+      "reason": "场景/设计均有所述原文依据。B1/A2拒绝不得改变任一端规则。test_reconcile_remote_race.py遍历CLI/Web×local/hub×first-status/second-status/cas共12参数；真实独立Hub外部advance改变revision并none，注入标志必须发生，CLI非零无成功JSON/Web明确错误，Local完整row独立before相等，Hub==injected真实新head且无新正文。两端同错无法通过两个独立前后对象；first窗口正确而cas错误由cas参数完整row断言拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-stale-local": {
+      "covers": [
+        "stale-local"
+      ],
+      "reason": "场景/设计均有所述原文依据。A2新增判据及B1要求Hub未变时旧Local视图也失效。test_reconcile_snapshot.py:35–56分别local/hub采用，Hub仍旧revision，本机因失败通道另存all/gen新；实际POST旧none双版本应400，独立Local row和Hub head均不变且无set。若两端同采用新all掩盖旧视图，status400及无set先拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "covers": [
+        "target-control-dispatch"
+      ],
+      "reason": "场景/设计均有所述原文依据。B2目标绑定、B4保存后新派发重判支持此设计；不把实现暂存顺序当必需产品行为。test_reconcile_dispatch.py实际第二次status返回时configure到独立other_id，必须观测切换，旧请求400、原head不变且无set，新目标确为other且needs_selection/policyNone，other.messages0。两端误用旧Hub由current.hub_id==other_id最先拦截，新Hub和旧Hub数据分别核查。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-reconcile-write-window": {
+      "covers": [
+        "write-window"
+      ],
+      "reason": "场景/设计均有所述原文依据。B1/A2要求核对后到条件保存前再次修改也不覆盖。test_reconcile_snapshot.py:60–79在status返回前control.choose(all)，local/hub两动作均实际POST旧双版本，独立changed row完整不变，Hub保持remote_before且无set。只在函数开头校验的错误会在结果400或current row比较拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    },
+    "TC-005-target-dispatch": {
+      "covers": [
+        "review-target-dispatch"
+      ],
+      "reason": "场景/设计均有所述原文依据。B2/B4本机切换Hub后未发请求须重判。test_upload_review_regressions.py:35–66使用独立第二档案，在旧known返回后切换；must switched、旧/新bodies都空且新state needs_selection。若两端错误比较同档案，实际second Archive独立构造和第二bodies断言不允许假满足。此TC不承担暂停/旧请求重启全场景范围。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "status": "passed"
+    }
+  },
+  "operation": "review",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-complete26-sc2/result.json",
+  "recorded_at": "2026-11-22T10:00:50.065000+00:00",
+  "request_id": "review-preparation-complete26-sc2",
+  "request_sha256": "6c1ed7b2ec880939cc2f305060db7bdeab29cfe6cc25905a8892e760e5097ae1",
+  "reviewer_response": ".acceptance-local/native-v1/AT-SMM-005/review/review-preparation-complete26-sc2/reviewer.txt",
+  "reviewer_session": "/root/review_complete26_prep_a",
+  "revision": null,
+  "scene": "SC2",
+  "status": "reviewed",
+  "target": "debug-complete26-sc2",
+  "target_operation": "debug",
+  "target_sha256": "0d23048a004de26060a2d581334fd099d08407f860def1130c37e98aa4120b57"
+}

@@ -1,0 +1,94 @@
+{
+  "query": "amber blue amber",
+  "expected": {
+    "m1": 1.4821716155156461,
+    "m2": 0.11750762550957991,
+    "m3": 0.15461529672313148
+  },
+  "actual": [
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "m1",
+      "archive_scope": "local",
+      "reference": "localm1",
+      "bm25_score": 1.4821716155156461,
+      "matched_messages": [
+        {
+          "text": "amber amber blue",
+          "position": 1,
+          "role": "user",
+          "canonical_id": "m1-m1",
+          "content_version": "v1",
+          "timestamp": null,
+          "reference": "localm1"
+        }
+      ],
+      "rerank_score": 1.4821716155156461,
+      "origin_references": [
+        {
+          "archive_scope": "local",
+          "reference": "localm1"
+        }
+      ],
+      "needs_bundle": false,
+      "rank": 1
+    },
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "m3",
+      "archive_scope": "local",
+      "reference": "localm3",
+      "bm25_score": 0.15461529672313148,
+      "matched_messages": [
+        {
+          "text": "blue green",
+          "position": 1,
+          "role": "user",
+          "canonical_id": "m3-m1",
+          "content_version": "v1",
+          "timestamp": null,
+          "reference": "localm3"
+        }
+      ],
+      "rerank_score": 0.15461529672313148,
+      "origin_references": [
+        {
+          "archive_scope": "local",
+          "reference": "localm3"
+        }
+      ],
+      "needs_bundle": false,
+      "rank": 2
+    },
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "m2",
+      "archive_scope": "hub",
+      "reference": "hubm2",
+      "bm25_score": 0.11750762550957991,
+      "matched_messages": [
+        {
+          "text": "blue other other other",
+          "position": 1,
+          "role": "user",
+          "canonical_id": "m2-m1",
+          "content_version": "v1",
+          "timestamp": null,
+          "reference": "hubm2"
+        }
+      ],
+      "rerank_score": 0.11750762550957991,
+      "origin_references": [
+        {
+          "archive_scope": "hub",
+          "reference": "hubm2"
+        }
+      ],
+      "needs_bundle": false,
+      "rank": 3
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cases": {
+    "TC-005-sc10-evidence": {
+      "status": "passed",
+      "reason": "本次manual是11:43:12 UTC的真实原件/适用性核验，不声称重演原平台；已读SPEC B8/D1-D2/A10、design27/match30/SC10步骤及准备MD，并逐操作expected/observed/evidence对照。146 artifacts、74 bindings及observation原inventory144项全部独立SHA一致。complete-1：实际打开compat-run8/linux-compat-run8/windows-compat-run8的完整原响应、命令及manifest；原事件始于05:54:42/05:54:44/05:55:07 UTC、候选d80、普通Mac501/Linux1000/Windows <ordinary-user>，旧独立0.4.0两包全部安装模块均等冻结旧candidate，新包完整模块等原candidate且环境独立。真实new-local-old-hub sync uploaded0，全部查询恰new-device/old-device并报告旧能力限制，项目查询仅本机new-device、有共同范围不足原因；原Hub升级前后仅old-device，未把禁止正文发旧Hub。complete-2：各原migrated-old-device before/after完整结果同一条不重复，迁移all confirmed1；同设备旧追加真实exit1/409，旧式read仍精确codex/old-device/user/原文，另一unmanaged旧设备真实加入并可查；actual-hub-change为新身份needs_selection/policy null，旧写仍409。当前register正式200/409/固定Hub正文和旧读另已独立复审。complete-3：本轮execute-complete30-sc10真实最终安装包legacy-links已独立核两会话字面量、位置/角色/时间、旧引用/非空cursor2、本机A-D关系及Hub稳定身份、升级uploaded0/重复同步不增；补原游标/空关系之外的明确非空关系，未只证明两边相等。TRIAL_GUIDE:189-210明确版本组合、保护/停服/一致备份及处理；旧程序对新策略状态的正文封锁由各平台真实旧写409证明。当前适用性独立检查git d80→ba8仅Local api/cli/upload/static及references标题改变；Hub全模块和federation、迁移/查询能力路由未变。upload变化是双版本对账CAS/目标派发保护，当前register/legacy-links及全套29中相应迁移回归核实际JUnit，旧对账不冒作新语义通过。新标题范围与CAS由scope/reconcile后续独立包原件及当前测试分担，不能只凭Hub不变替Local。三个分配检查有实际来源与副作用，其他等价平台/ID样本无新增依据，不作阻塞。",
+      "covers": [
+        "complete-1",
+        "complete-2",
+        "complete-3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+usage: smm project assign-conversation [-h] --project-id PROJECT_ID
+                                       [--confirm CONFIRM]
+                                       conversation_id
+
+positional arguments:
+  conversation_id
+
+options:
+  -h, --help            show this help message and exit
+  --project-id PROJECT_ID
+                        smm projects 返回的目标本机项目 ID
+  --confirm CONFIRM     上次预览返回的 confirmation，归属/范围/规则变化后须重取

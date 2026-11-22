@@ -40,18 +40,22 @@
   <section id="overview" class="active">
     <div class="card"><h2>对话导入</h2><div class="stats" id="stats"></div><p class="muted" id="last-sync"></p><div class="row"><button class="primary" id="sync-now">立即同步全部</button><button class="secondary" id="pause-sync">暂停自动同步</button></div><p id="sync-state"></p><div class="source-table"><table><thead><tr><th>来源</th><th>状态</th><th>已归档</th><th>最近一次</th><th>操作</th></tr></thead><tbody id="source-stats"></tbody></table></div><p class="muted">接入其他 Agent 时，在支持 Skill 的 Agent 中使用 <code>smm-source-adapter</code>。</p></div>
     <div class="card"><h2>导入问题</h2><div id="errors" class="muted">加载中…</div></div>
+    <div class="card"><h2>对话上传</h2><p id="upload-overview">加载中…</p><button class="secondary" id="open-upload">设置上传范围</button><p class="muted">停止后续上传会保留 Hub 已接收的副本；本机归档与检索继续可用。</p></div>
   </section>
   <section id="projects">
     <div class="card"><h2>项目归属</h2><p class="muted">同一项目的多个目录映射到同一个项目；不同但相关的项目建立直接关联。检索只展开一层关联。</p><div class="row"><input id="project-filter" type="search" placeholder="按项目名或路径筛选"><span id="project-count" class="muted"></span></div><div id="project-list"></div></div>
     <div class="card"><h2>路径映射</h2><div class="row"><input id="map-path" type="text" placeholder="已有来源工作目录的完整路径"><select id="map-project"></select><button id="map-save" class="primary">保存映射</button></div></div>
-    <div class="card"><h2>项目关联</h2><div class="row"><select id="link-a"></select><span>↔</span><select id="link-b"></select><button id="link-save" class="primary">建立关联</button><button id="unlink-save" class="secondary">取消关联</button></div></div>
+    <div class="card"><h2>本机项目关联</h2><p class="muted">本页关系用于仅本机查询。默认联合查询采用 Hub 的直接一层关联，由维护者通过 Hub CLI 管理。</p><div class="row"><select id="link-a"></select><span>↔</span><select id="link-b"></select><button id="link-save" class="primary">建立关联</button><button id="unlink-save" class="secondary">取消关联</button></div></div>
     <div class="card"><h2>合并同一项目</h2><p class="muted">来源项目的所有路径、对话和关联将转入目标项目。</p><div class="row"><label>来源</label><select id="merge-source"></select><label>目标</label><select id="merge-target"></select><button id="merge-save" class="primary">合并项目</button></div></div>
+    <div class="card"><h2>全局项目与明确归属</h2><p class="muted">全局项目与普通项目同级，不会自动加入 A 项目检索。会话 ID 请从“仅本机”搜索结果取得，核对预览中的标题和来源后再确认。</p><button class="secondary" id="ensure-global">创建或取得全局项目</button><div class="row"><label for="assign-conversation">本机会话 ID</label><input id="assign-conversation" type="number" min="1"><label for="assign-project">目标项目</label><select id="assign-project"></select><button class="primary" id="assign-save">预览归属变更</button></div></div>
+    <div class="card" id="project-change-preview" hidden><h2>确认项目范围变更</h2><p id="project-change-summary"></p><pre id="project-change-details"></pre><p class="muted">已经被 Hub 接收的副本继续保留。规则或范围改变后需要重新预览。</p><button class="primary" id="project-change-confirm">确认应用以上变更</button><button class="secondary" id="project-change-cancel">取消</button></div>
   </section>
   <section id="search">
-    <div class="card"><h2>检索本机对话</h2><form id="search-form"><div class="row"><input id="query" type="search" placeholder="例如：KeySync 同步 错误" required><button class="primary">搜索</button></div><div class="row"><label for="scope">检索范围</label><select id="scope"><option value="all">所有项目</option><option value="project">指定项目及关联项目</option></select><input id="search-project-filter" type="search" placeholder="按项目名或路径查找" aria-label="查找检索项目"><select id="search-project" aria-label="选择检索项目"></select><label for="limit">数量</label><select id="limit"><option>5</option><option>10</option><option>20</option></select></div></form><p id="effective" class="muted"></p><div id="results"></div></div>
+    <div class="card"><h2>检索对话</h2><form id="search-form"><div class="row"><input id="query" type="search" placeholder="例如：KeySync 同步 错误" required><button class="primary">搜索</button></div><div class="row"><label for="archive-mode">档案范围</label><select id="archive-mode"><option value="combined">本机与 Hub（已连接时）</option><option value="local">仅本机</option></select><label for="scope">项目范围</label><select id="scope"><option value="all">所有项目</option><option value="project">指定项目及关联项目</option></select><input id="search-project-filter" type="search" placeholder="按项目名或路径查找" aria-label="查找检索项目"><select id="search-project" aria-label="选择检索项目"></select><label for="limit">数量</label><select id="limit"><option>5</option><option>10</option><option>20</option></select></div></form><p id="effective" class="muted"></p><div id="results"></div></div>
     <div class="card" id="reader-card" hidden><h2>对话原文</h2><div id="reader"></div></div>
   </section>
   <section id="settings">
+    <div class="card"><h2>对话上传</h2><p id="upload-target" class="muted"></p><p id="upload-state" role="status"></p><div class="row"><label for="upload-mode">上传规则</label><select id="upload-mode"><option value="">待选择，不上传正文</option><option value="all">全部项目</option><option value="only">仅指定项目</option><option value="except">排除指定项目</option><option value="none">全部不上传</option></select></div><fieldset id="upload-projects"><legend>项目选择（仅指定 / 排除指定）</legend></fieldset><p class="muted">仅指定的空名单不上传；排除指定的空名单全部上传。新项目按所选规则处理。首版上传仅支持 Codex、Claude Code，其他已归档来源仍参与本机检索。</p><button class="primary" id="upload-save">保存上传规则</button><button class="secondary" id="upload-diff">查看与 Hub 的规则差异</button><div id="upload-difference" hidden><h3>规则差异</h3><p id="upload-difference-text"></p><button class="secondary" id="upload-use-hub">采用 Hub 当前规则</button><button class="secondary" id="upload-use-local">重新提交上面所示的本机规则</button></div><p class="muted">保存与 Hub 确认分别显示。停止仅影响后续上传，旧副本继续可检索和读原文；重新允许会补齐全部未确认历史。</p></div>
     <div class="card"><h2>同步配置</h2><div class="row"><label for="codex-root">Codex 会话目录</label><input type="text" id="codex-root"></div><div class="row"><label for="claude-root">Claude Code 会话目录</label><input type="text" id="claude-root"></div><div class="row"><label for="sync-interval">同步间隔（秒）</label><input type="number" id="sync-interval" min="10" max="3600"></div><button id="settings-save" class="primary">保存配置</button><p class="muted">服务仅监听本机地址；导入后的知识库数据不会因源对话删除而自动删除。</p></div>
   </section>
 </main>
@@ -62,11 +66,13 @@
   function notice(message,error=false) { $('notice').textContent=message; $('notice').className='notice'+(error?' error':'') }
   let projectData=[];
   let sourceNames={};
+  let uploadInfo=null, uploadDifference=null, pendingProjectChange=null, lastResults=[];
   const localTime = time => new Date(time).toLocaleString('zh-CN', {hour12:false});
   let syncPaused=false;
   let sourceMarkup;
   async function refreshStatus() {
     const s=await request('/api/status'); $('stats').innerHTML=[['对话',s.conversations],['消息',s.messages],['项目',s.projects],['来源',Object.keys(s.sync.sources || {}).length]].map(([a,b])=>`<div class="stat"><span>${a}</span><strong>${b}</strong></div>`).join('');
+    if(s.upload) $('upload-overview').textContent=uploadSummary(s.upload);
     const sources=Object.values(s.sync.sources || {});
     sourceNames=Object.fromEntries(sources.map(source=>[source.id,source.name]));
     syncPaused=s.sync.paused;
@@ -97,15 +103,15 @@
   async function refreshProjects() {
     projectData=await request('/api/projects');
     const options=projectData.map(p=>`<option value="${p.id}">${esc(p.name)} · #${p.id}</option>`).join('');
-    for(const id of ['map-project','link-a','link-b','merge-source','merge-target']) $(id).innerHTML=options;
+    for(const id of ['map-project','link-a','link-b','merge-source','merge-target','assign-project']) $(id).innerHTML=options;
     filterSearchProjects();
     renderProjects();
   }
-  function renderProjects(){const q=$('project-filter').value.trim().toLowerCase();const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q)));const shown=matched.slice(0,60);$('project-count').textContent=`显示 ${shown.length} / ${matched.length} 个匹配项目（共 ${projectData.length} 个）`;$('project-list').innerHTML=shown.length?shown.map(p=>`<div class="result"><div class="row"><strong>${esc(p.name)}</strong><span class="tag">#${p.id}</span><span class="tag">${p.conversations} 段对话</span>${p.confirmed?'':'<span class="tag">待确认</span>'}</div><div class="paths">${p.paths.map(esc).join('<br>') || '无路径'}</div><p class="muted">直接关联：${p.linked_ids.map(i=>esc(projectData.find(x=>x.id===i)?.name || i)).join('、') || '无'}</p><div class="row"><input type="text" id="name-${p.id}" value="${esc(p.name)}" aria-label="项目名称"><button class="secondary" onclick="renameProject(${p.id})">重命名</button></div></div>`).join(''):'没有匹配项目。';}
+  function renderProjects(){const q=$('project-filter').value.trim().toLowerCase();const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q)));const shown=matched.slice(0,60);$('project-count').textContent=`显示 ${shown.length} / ${matched.length} 个匹配项目（共 ${projectData.length} 个）`;$('project-list').innerHTML=shown.length?shown.map(p=>`<div class="result"><div class="row"><strong>${esc(p.name)}</strong><span class="tag">#${p.id}</span><span class="tag">${p.kind==='global'?'全局项目':'普通项目'}</span><span class="tag">${p.upload_allowed?'允许上传':p.upload_selected?'规则已选，待生效':'不上传正文'}</span><span class="tag">${p.conversations} 段对话</span>${p.confirmed?'':'<span class="tag">待确认</span>'}</div><div class="paths">${p.paths.map(esc).join('<br>') || '无路径'}</div><details><summary>稳定项目身份</summary><code>${esc(p.stable_key)}</code></details><p class="muted">直接关联：${p.linked_ids.map(i=>esc(projectData.find(x=>x.id===i)?.name || i)).join('、') || '无'}</p><div class="row"><input type="text" id="name-${p.id}" value="${esc(p.name)}" aria-label="项目名称"><button class="secondary" onclick="renameProject(${p.id})">重命名</button></div></div>`).join(''):'没有匹配项目。';}
   function filterSearchProjects(){const q=$('search-project-filter').value.trim().toLowerCase();const selected=$('search-project').value;const matched=projectData.filter(p=>!q || p.name.toLowerCase().includes(q) || p.paths.some(path=>path.toLowerCase().includes(q))).slice(0,60);$('search-project').innerHTML=matched.map(p=>`<option value="${p.id}">${esc(p.name)} · #${p.id}</option>`).join('');if(matched.some(p=>String(p.id)===selected))$('search-project').value=selected;}
   async function renameProject(id) { try { await request(`/api/projects/${id}/rename`,{method:'POST',body:JSON.stringify({name:$('name-'+id).value})}); await refreshProjects(); notice('项目已重命名') } catch(e){notice(e.message,true)} }
   async function showConversation(id) { try { const d=await request('/api/conversations/'+id); $('reader-card').hidden=false; $('reader').innerHTML=`<p><strong>${esc(d.title)}</strong> · ${esc(d.project_name || '未归属')} · ${esc(sourceNames[d.source] || d.source)}</p>`+d.messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)} · ${esc(m.timestamp || '')}</small><pre>${esc(m.text)}</pre></div>`).join(''); $('reader-card').scrollIntoView({behavior:'smooth'}) } catch(e){notice(e.message,true)} }
-  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('nav button,main section').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $(b.dataset.tab).classList.add('active'); if(b.dataset.tab==='projects') refreshProjects().catch(e=>notice(e.message,true)); if(b.dataset.tab==='overview') refreshStatus().catch(e=>notice(e.message,true)); });
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('nav button,main section').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $(b.dataset.tab).classList.add('active'); if(b.dataset.tab==='projects') refreshProjects().catch(e=>notice(e.message,true)); if(b.dataset.tab==='overview') refreshStatus().catch(e=>notice(e.message,true)); if(b.dataset.tab==='settings') Promise.all([refreshSettings(),refreshUpload()]).catch(e=>notice(e.message,true)); });
   async function synchronize(source) {
     try {
       const query=source?'?source='+encodeURIComponent(source):'';
@@ -131,17 +137,84 @@
       await refreshStatus();
     } catch(e){notice(e.message,true)}
   };
-  $('map-save').onclick=async()=>{ try { await request('/api/projects/map',{method:'POST',body:JSON.stringify({path:$('map-path').value,project_id:Number($('map-project').value)})}); await refreshProjects(); notice('路径映射已保存') } catch(e){notice(e.message,true)} };
+  $('map-save').onclick=()=>runProjectChange('/api/projects/map',{path:$('map-path').value,project_id:Number($('map-project').value)});
   async function setLink(linked) { try { await request('/api/projects/link',{method:'POST',body:JSON.stringify({one:Number($('link-a').value),other:Number($('link-b').value),linked})}); await refreshProjects(); notice(linked?'关联已建立':'关联已取消') } catch(e){notice(e.message,true)} }
   $('link-save').onclick=()=>setLink(true); $('unlink-save').onclick=()=>setLink(false);
   $('project-filter').oninput=renderProjects;
   $('search-project-filter').oninput=filterSearchProjects;
-  $('merge-save').onclick=async()=>{try{const source_id=Number($('merge-source').value),target_id=Number($('merge-target').value);if(source_id===target_id)throw Error('来源与目标必须不同');await request('/api/projects/merge',{method:'POST',body:JSON.stringify({source_id,target_id})});await refreshProjects();notice('项目已合并')}catch(e){notice(e.message,true)}};
+  $('merge-save').onclick=()=>runProjectChange('/api/projects/merge',{source_id:Number($('merge-source').value),target_id:Number($('merge-target').value)});
   $('scope').onchange=()=>{$('search-project').disabled=$('scope').value==='all';$('search-project-filter').disabled=$('scope').value==='all'};
-  $('search-form').onsubmit=async e=>{ e.preventDefault(); try { if($('scope').value==='project'&&!$('search-project').value)throw Error('请先选择检索项目'); const req={query:$('query').value,scope:$('scope').value,project_id:$('scope').value==='project'?Number($('search-project').value):null,limit:Number($('limit').value)}; const d=await request('/api/search',{method:'POST',body:JSON.stringify(req)}); $('effective').textContent=d.scope==='all'?'实际范围：本机所有项目':'实际范围：本机 · '+d.effective_projects.map(p=>p.name).join('、'); $('results').innerHTML=d.results.length?d.results.map(x=>`<div class="result"><h3>#${x.rank} ${esc(x.title)}</h3><p class="muted">${esc(x.project_name || '未归属')} · ${esc(sourceNames[x.source] || x.source)} · ${esc(x.updated_at || '')} · BM25 ${x.bm25_score.toPrecision(3)}</p>${x.matched_messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)}</small><pre>${esc(m.text)}</pre></div>`).join('')}<button class="secondary" onclick="showConversation(${x.id})">查看完整对话</button></div>`).join(''):'没有匹配结果。'; $('reader-card').hidden=true; } catch(e){notice(e.message,true)} };
+  function archiveLabel(scope){return {local:'本机',hub:'Hub',combined:'本机 + Hub'}[scope] || scope}
+  async function readResult(index,messageIndex=null){
+    try{
+      const hit=lastResults[index];const ref=messageIndex===null?hit.reference:hit.matched_messages[messageIndex].reference || hit.reference;
+      const d=await request('/api/read',{method:'POST',body:JSON.stringify({reference:ref})});
+      $('reader-card').hidden=false;
+      $('reader').innerHTML=`<p><strong>${esc(d.title)}</strong> · ${esc(archiveLabel(d.archive_scope))} · ${esc(d.project_name || '未归属')} · ${esc(sourceNames[d.source] || d.source)}</p>`+d.messages.map(m=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)} · ${esc(m.timestamp || '')}${m.origins?' · 来源位置 '+esc(m.origins.map(o=>o.source_position).join('、')):''}</small><pre>${esc(m.text)}</pre></div>`).join('');
+      $('reader-card').scrollIntoView({behavior:'smooth'});
+    }catch(e){notice(e.message,true)}
+  }
+  $('search-form').onsubmit=async e=>{
+    e.preventDefault();try{
+      if($('scope').value==='project'&&!$('search-project').value)throw Error('请先选择检索项目');
+      const req={query:$('query').value,scope:$('scope').value,project_id:$('scope').value==='project'?Number($('search-project').value):null,limit:Number($('limit').value),local:$('archive-mode').value==='local'};
+      const d=await request('/api/search',{method:'POST',body:JSON.stringify(req)});lastResults=d.results;
+      const coverage={complete:'已检索',partial:'部分覆盖',unavailable:'未查到该端',not_requested:'本次未请求'};
+      $('effective').textContent=`实际档案：${archiveLabel(d.archive_scope)}；项目：${d.scope==='all'?'所有项目':d.effective_projects.map(p=>p.name).join('、') || '所请求项目'}。`+(d.coverage?`本机${coverage[d.coverage.local] || d.coverage.local}；Hub${coverage[d.coverage.hub] || d.coverage.hub}。`:'')+(d.fallback_reason || '')+(d.capability_limitations || []).join('；')+(d.candidate_failures || []).join('；')+(d.rerank?'仅对两端正常返回的候选重新排序。':'');
+      $('results').innerHTML=d.results.length?d.results.map((x,i)=>`<div class="result"><h3>#${x.rank} ${esc(x.title)}</h3><p class="muted">${esc(archiveLabel(x.archive_scope))} · 会话 ID ${x.id} · ${esc(x.project_name || '未归属')} · ${esc(sourceNames[x.source] || x.source)} · BM25 ${Number(x.bm25_score).toPrecision(3)}</p>${x.matched_messages.map((m,j)=>`<div class="message"><small>位置 ${m.position} · ${esc(m.role)}</small><pre>${esc(m.text ?? m.preview ?? '')}</pre><button class="secondary" onclick="readResult(${i},${j})">读取该来源原文</button></div>`).join('')}<button class="secondary" onclick="readResult(${i})">读取命中及允许的上下文</button></div>`).join(''):'没有匹配结果；请结合上面的实际覆盖范围判断。';
+      $('reader-card').hidden=true;
+    }catch(e){notice(e.message,true)}
+  };
   async function refreshSettings(){const s=await request('/api/settings');$('codex-root').value=s.codex_root;$('claude-root').value=s.claude_root;$('sync-interval').value=s.sync_interval_seconds}
   $('settings-save').onclick=async()=>{try{await request('/api/settings',{method:'PUT',body:JSON.stringify({codex_root:$('codex-root').value,claude_root:$('claude-root').value,sync_interval_seconds:Number($('sync-interval').value)})});notice('配置已保存')}catch(e){notice(e.message,true)}};
-  Promise.all([refreshStatus(),refreshProjects(),refreshSettings()]).then(()=>$('scope').onchange()).catch(e=>notice(e.message,true));
+  const modeNames={all:'全部项目',only:'仅指定项目',except:'排除指定项目',none:'全部不上传'};
+  const stateNames={unconfigured:'尚未配置 Hub',unverified:'Hub 身份待确认，未发送正文',needs_selection:'待选择，不上传正文',pending:'本机已保存，Hub 待确认',confirmed:'本机与 Hub 已确认当前规则',conflict:'规则或恢复状态有差异，正文已停止'};
+  function uploadSummary(s){const transferNames={paused:'上传已暂停',blocked:'正文等待规则确认或对账',failed:'历史补传失败',unknown:'在途结果待核实',backfilling:'正在补齐历史',complete:'当前允许范围已补齐'};return (stateNames[s.state] || s.state)+(s.policy?' · '+modeNames[s.policy.mode]:'')+`；已确认 ${s.confirmed_messages || 0} 条，在途待确认 ${s.inflight_messages || 0} 条，尚未上传 ${s.unsent_messages || 0} 条。`+(s.transfer_state?` ${transferNames[s.transfer_state] || s.transfer_state}，允许范围待确认 ${s.allowed_pending_messages || 0} 条。`:'')+(s.problem?' '+s.problem:'')+(s.transfer_problem?' 最近同步失败：'+s.transfer_problem:'')}
+  function renderUploadProjects(){
+    const selected=new Set(uploadInfo?.policy?.projects || []);
+    $('upload-projects').innerHTML='<legend>项目选择（仅指定 / 排除指定）</legend>'+projectData.map(p=>`<label style="display:block;margin:8px 0"><input class="upload-project-check" type="checkbox" value="${p.id}" ${selected.has(p.stable_key)?'checked':''}> ${esc(p.name)} · #${p.id} · ${p.kind==='global'?'全局项目':'普通项目'}</label>`).join('');
+    updateUploadMode();
+  }
+  function updateUploadMode(){const select=['only','except'].includes($('upload-mode').value);document.querySelectorAll('.upload-project-check').forEach(c=>c.disabled=!select);$('upload-save').disabled=!uploadInfo?.configured || !$('upload-mode').value}
+  async function refreshUpload(){
+    uploadInfo=await request('/api/upload');
+    $('upload-target').textContent=uploadInfo.configured?'目标：'+(uploadInfo.hub_address || 'Hub 身份待确认'):'先通过 Agent 或 smm configure-hub 配置 Hub 连接。';
+    $('upload-state').textContent=uploadSummary(uploadInfo);
+    $('upload-mode').value=uploadInfo.policy?.mode || '';
+    renderUploadProjects();
+    $('upload-overview').textContent=uploadSummary(uploadInfo);
+    $('upload-diff').disabled=!uploadInfo.configured;
+  }
+  $('upload-mode').onchange=updateUploadMode;
+  $('open-upload').onclick=()=>document.querySelector('nav button[data-tab="settings"]').click();
+  $('upload-save').onclick=async()=>{try{
+    const selected=['only','except'].includes($('upload-mode').value)?[...document.querySelectorAll('.upload-project-check:checked')].map(c=>Number(c.value)):[];
+    const d=await request('/api/upload',{method:'PUT',body:JSON.stringify({mode:$('upload-mode').value,project_ids:selected,expected_generation:uploadInfo.generation})});
+    uploadDifference=null;$('upload-difference').hidden=true;
+    notice(uploadSummary(d));await Promise.all([refreshUpload(),refreshProjects()]);
+  }catch(e){notice(e.message,true)}};
+  function ruleSummary(rule){if(!rule)return '待选择，不上传正文';return modeNames[rule.mode]+(rule.projects.length?'：'+rule.projects.map(k=>projectData.find(p=>p.stable_key===k)?.name || '已移除的项目').join('、'):'（空名单）')}
+  $('upload-diff').onclick=async()=>{try{
+    uploadDifference=await request('/api/upload/reconcile',{method:'POST',body:JSON.stringify({})});
+    $('upload-difference').hidden=false;
+    $('upload-difference-text').textContent='本机：'+ruleSummary(uploadDifference.local.policy)+'；Hub：'+ruleSummary(uploadDifference.hub.policy)+'。请核对后选择处理方式；提交时会再次检查 Hub 版本和本机代次，任一改变都需重新查看。';
+  }catch(e){uploadDifference=null;notice(e.message,true)}};
+  async function reconcileUpload(use){try{
+    if(!uploadDifference)throw Error('请先查看与 Hub 的规则差异');
+    const d=await request('/api/upload/reconcile',{method:'POST',body:JSON.stringify({use,expected_hub_revision:uploadDifference.hub.revision,expected_local_generation:uploadDifference.local.generation})});
+    uploadDifference=null;$('upload-difference').hidden=true;notice(uploadSummary(d));await Promise.all([refreshUpload(),refreshProjects()]);
+  }catch(e){uploadDifference=null;$('upload-difference').hidden=true;notice(e.message,true)}}
+  $('upload-use-hub').onclick=()=>reconcileUpload('hub');$('upload-use-local').onclick=()=>reconcileUpload('local');
+  async function runProjectChange(path,body){try{
+    const d=await request(path,{method:'POST',body:JSON.stringify(body)});
+    if(d.requires_confirmation){pendingProjectChange={path,body:{...body,confirmation:d.confirmation}};$('project-change-preview').hidden=false;$('project-change-summary').textContent=`目标：${d.target.name}；影响 ${d.affected_conversations.length} 段本机会话，新增允许上传 ${d.newly_allowed_conversations.length} 段。`;$('project-change-details').textContent=d.conversations.map(c=>`本机 #${c.id} · ${c.source} · ${c.source_session_id}\n${c.title}`).join('\n\n');$('project-change-preview').scrollIntoView({behavior:'smooth'})}
+    else{pendingProjectChange=null;$('project-change-preview').hidden=true;notice(d.message || '已应用项目变更');await Promise.all([refreshProjects(),refreshUpload()])}
+  }catch(e){notice(e.message,true)}}
+  $('project-change-confirm').onclick=()=>{if(pendingProjectChange)runProjectChange(pendingProjectChange.path,pendingProjectChange.body)};
+  $('project-change-cancel').onclick=()=>{pendingProjectChange=null;$('project-change-preview').hidden=true};
+  $('ensure-global').onclick=async()=>{try{const d=await request('/api/projects/global',{method:'POST'});await refreshProjects();$('assign-project').value=String(d.id);notice(`全局项目已就绪：${d.name}（本机 #${d.id}）`)}catch(e){notice(e.message,true)}};
+  $('assign-save').onclick=()=>runProjectChange('/api/projects/assign',{conversation_id:Number($('assign-conversation').value),project_id:Number($('assign-project').value)});
+  Promise.all([refreshStatus(),refreshProjects(),refreshSettings(),refreshUpload()]).then(()=>{$('scope').onchange();renderUploadProjects()}).catch(e=>notice(e.message,true));
   setInterval(()=>{if($('overview').classList.contains('active'))refreshStatus().catch(()=>{})},3000);
 </script>
 </body>

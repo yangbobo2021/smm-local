@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-scope-race": {
+      "status": "passed",
+      "reason": "SPEC B5/A6及PLAN 3.3/A6明确两端在一次查询中使用同一共同快照、关联变化下一次才生效；design-required22-sc6的自然设计有效，match-required23-sc6实现现已完整落实。冻结test_required_snapshot_and_batch_boundaries.py:24-70分别scope返回/Hub候选返回窗口实际变更关联，:31-32只control_only登记并独立确认Hub无本机正文，A/D/E均本机独有，Hub只有另设备B/C。:53验证真实注入及一次请求，:54-57旧有效项目/Hub只B/最终A,D,B及逐条local,local,hub，:62逐条独立原文，:66-69新查询A,E,C、排除旧D/B及旧引用仍正确。上轮反例“本机只查询首A而漏D/E，由Hub副本补齐”现首先在:56失败，因为Hub已被独立约束只有B，下一轮漏E也会失败:67；两端共同误用新范围在:54-56失败，只首个结果正确或两引用同指目标在:56/:62失败。旧关联动作前状态、新关联状态与两个并发窗口均实际执行；已覆盖有依据的分支差异，额外等价项目ID可选。原始run.stdout为2 passed；两附件endpointsets为[B]/[C]、旧hits A(local),D(local),B(hub)、新A(local),E(local),C(hub)，不存在前轮副本掩盖。已核本轮定义003、设计摘要、runtime-required23、所有冻结artifacts和当前bindings一致；本TCquery-scope-race全分配有效。仅认领这一个新TC，旧cases/平台/full场景gaps不扩称通过。",
+      "covers": [
+        "query-scope-race"
+      ]
+    }
+  }
+}

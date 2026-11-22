@@ -1,0 +1,255 @@
+{
+  "by_scope": {
+    "all": {
+      "cli": {
+        "query": "uniquelyabsentquery",
+        "scope": "all",
+        "requested_scope": "all",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": "all",
+        "local_effective_projects": "all",
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "mcp": {
+        "query": "uniquelyabsentquery",
+        "scope": "all",
+        "requested_scope": "all",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": "all",
+        "local_effective_projects": "all",
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "web": {
+        "query": "uniquelyabsentquery",
+        "scope": "all",
+        "requested_scope": "all",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": "all",
+        "local_effective_projects": "all",
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "visible": "SMM · 本地对话索引\n\n保存本机 Agent 对话副本，在明确的项目范围内查找原始信息。\n\n导入进度\n项目\n检索测试\n配置\n检索对话\n搜索\n档案范围\n本机与 Hub（已连接时）\n仅本机\n项目范围\n所有项目\n指定项目及关联项目\nA · #1\nD · #2\n全局项目 · #4\nG · #3\n数量\n5\n10\n20\n\n实际档案：本机 + Hub；项目：所有项目。本机已检索；Hub已检索。仅对两端正常返回的候选重新排序。\n\n没有匹配结果；请结合上面的实际覆盖范围判断。"
+    },
+    "project": {
+      "cli": {
+        "query": "uniquelyabsentquery",
+        "scope": "project",
+        "requested_scope": "project",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "synthetic.example/005/V",
+            "project_kind": "ordinary",
+            "source": "vibeinsight",
+            "owner": "synthetic-005-source",
+            "source_key": "synthetic.example/005/V",
+            "device_name": null
+          },
+          {
+            "id": 2,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cf21ef87baef4636969a501d80cfd6c0",
+            "source_key": "7b539a8fe57afab39af8750a95e58085",
+            "device_name": "005-local"
+          },
+          {
+            "id": 6,
+            "name": "B",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "531600e216f8472380aa6bcd5d8cbbe7",
+            "source_key": "9b290c414b0ab0e89baf913731128778",
+            "device_name": "005-remote"
+          }
+        ],
+        "local_effective_projects": [
+          {
+            "id": 1,
+            "name": "A"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "mcp": {
+        "query": "uniquelyabsentquery",
+        "scope": "project",
+        "requested_scope": "project",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "synthetic.example/005/V",
+            "project_kind": "ordinary",
+            "source": "vibeinsight",
+            "owner": "synthetic-005-source",
+            "source_key": "synthetic.example/005/V",
+            "device_name": null
+          },
+          {
+            "id": 2,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cf21ef87baef4636969a501d80cfd6c0",
+            "source_key": "7b539a8fe57afab39af8750a95e58085",
+            "device_name": "005-local"
+          },
+          {
+            "id": 6,
+            "name": "B",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "531600e216f8472380aa6bcd5d8cbbe7",
+            "source_key": "9b290c414b0ab0e89baf913731128778",
+            "device_name": "005-remote"
+          }
+        ],
+        "local_effective_projects": [
+          {
+            "id": 1,
+            "name": "A"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "web": {
+        "query": "uniquelyabsentquery",
+        "scope": "project",
+        "requested_scope": "project",
+        "archive_scope": "combined",
+        "hub_id": "9d298519d60f4d4b870ace1841947b5c",
+        "effective_projects": [
+          {
+            "id": 1,
+            "name": "synthetic.example/005/V",
+            "project_kind": "ordinary",
+            "source": "vibeinsight",
+            "owner": "synthetic-005-source",
+            "source_key": "synthetic.example/005/V",
+            "device_name": null
+          },
+          {
+            "id": 2,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cf21ef87baef4636969a501d80cfd6c0",
+            "source_key": "7b539a8fe57afab39af8750a95e58085",
+            "device_name": "005-local"
+          },
+          {
+            "id": 6,
+            "name": "B",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "531600e216f8472380aa6bcd5d8cbbe7",
+            "source_key": "9b290c414b0ab0e89baf913731128778",
+            "device_name": "005-remote"
+          }
+        ],
+        "local_effective_projects": [
+          {
+            "id": 1,
+            "name": "A"
+          }
+        ],
+        "excluded_current_session_id": null,
+        "coverage": {
+          "local": "complete",
+          "hub": "complete"
+        },
+        "candidate_failures": [],
+        "capability_limitations": [],
+        "rerank": {
+          "scope": "returned_candidates",
+          "local_count": 0,
+          "hub_count": 0,
+          "hub_returned_count": 0,
+          "method": "BM25"
+        },
+        "results": []
+      },
+      "visible": "SMM · 本地对话索引\n\n保存本机 Agent 对话副本，在明确的项目范围内查找原始信息。\n\n导入进度\n项目\n检索测试\n配置\n检索对话\n搜索\n档案范围\n本机与 Hub（已连接时）\n仅本机\n项目范围\n所有项目\n指定项目及关联项目\nA · #1\nD · #2\n全局项目 · #4\nG · #3\n数量\n5\n10\n20\n\n实际档案：本机 + Hub；项目：synthetic.example/005/V、A、B。本机已检索；Hub已检索。仅对两端正常返回的候选重新排序。\n\n没有匹配结果；请结合上面的实际覆盖范围判断。"
+    }
+  },
+  "browser_version": "158.0.4370.33",
+  "page_errors": []
+}

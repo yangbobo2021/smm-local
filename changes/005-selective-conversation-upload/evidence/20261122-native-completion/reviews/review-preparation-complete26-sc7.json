@@ -1,0 +1,27 @@
+{
+  "cases": {
+    "TC-005-bm25": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "covers": [
+        "case-1",
+        "identity-versions"
+      ],
+      "reason": "A7/B6/D3支持scene与独立BM25设计，但必要数学判定条件遗漏。实际test_upload_acceptance_boundaries.py:107-120调用test_combined_search.py:21-46；独立分数只用单词amber且两文档都含它(df=M=2)，其余不同会话/轮次/版本只检身份与数量。long-message的tailonly与平台audit selective数学同样df=M。SPEC D3明确每词df、查询词去重和各词贡献求和；search_merge.py:58-69按term frequency分支。合理错误frequency[term]=len(documents)在当前所有独立数学断言均得到相同期望，所以没有第一个拦截断言；多词且df不同会改变所承诺分数，非等价标识换样。最早修订design，增加不同df多词（可同时含重复query词）并给各候选独立预期，再实现/匹配/调试。现有v1/v2精确集合、同副本前后分数、另一会话/轮次保留断言有效；真实debug exit0/1 passed、SHA有效不消除设计缺口。人工complete-1相同缺口见manual-preparation-complete26-sc7.md。"
+    },
+    "TC-005-long-message": {
+      "status": "passed",
+      "covers": [
+        "case-3"
+      ],
+      "reason": "A7/D3要求预览不改分数与长消息尾词命中，设计与真实tests/test_combined_search.py:57-79一致。text=paddingword*2000+tailonly并先断尾词不在短预览；两端独立2001/3-token公式:69-75逐候选分别校验，全文/短预览若同时错误截断评分首先在该公式失败；只首候选正确由:73完整session集合/逐项分数拦截。:78准确读回独立全文拦同号错误原文。当前debug exit0/1 passed，绑定与产物摘要有效。此项分配case-3有效；场景其他数学缺口不冒充已解决，人工设计另MD。"
+    },
+    "TC-005-rank-ties": {
+      "status": "passed",
+      "covers": [
+        "case-2"
+      ],
+      "reason": "D3明确分数平局按最新命中时间与稳定身份，缺失早于有效；设计没有新增行为。tests/test_combined_search.py:47-54动作前独立构造五候选：a/b同一绝对时间不同区、c新一天、d空时间、e缺字段。完整独立顺序[c,a,b,d,e]拦截只首目标正确、错误时区或空/缺失任一状态优先错误；不是比较两端同错。当前真实debug exit0/1 passed，绑定与产物摘要一致。case-2本项有效，其他数学/人工范围另MD。"
+    }
+  }
+}

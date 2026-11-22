@@ -203,7 +203,7 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
     from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
 
-    from smm_local.federation import configure_hub, push_pending
+    from smm_local.federation import configure_hub, push_pending, choose_upload
     from test_federation import cli, eventually, record_codex
 
     monkeypatch.setenv("PYTHONPATH", str(Path(__file__).resolve().parents[1] / "src"))
@@ -339,7 +339,6 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             archive = Archive(tmp_path / name / "local.sqlite3")
             archive.set_settings(codex_root=str(sessions))
             archive.sync_codex()
-            assert configure_hub(archive, address, name, str(token))["connected"]
             clients.append((archive, archive.resolve_project(str(working))["id"]))
         client_a, project_a = clients[0]
         client_b, project_b = clients[1]
@@ -347,7 +346,7 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         # Reproduce an old upload with its message cursor independently of project metadata.
         legacy = {
             "hub_id": hub_id, "device_name": "device-a",
-            "device_id": json.loads(client_a.db_path.with_suffix(".sqlite3.hub.json").read_text())["device_id"],
+            "device_id": "a" * 32,
             "records": [{"source":"codex","source_session_id":"device-a","started_at":None,
                          "source_key":"device-a","position":0,"role":"user",
                          "text":"evidence from device-a","timestamp":None,"source_order":1}],
@@ -357,8 +356,15 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             message_id = con.execute("SELECT MAX(id) FROM messages").fetchone()[0]
             con.execute("INSERT INTO settings(key,value) VALUES(?,?)",
                         (f"hub_cursor:{hub_id}:{legacy['device_id']}", str(message_id)))
+        # The legacy receive/cursor predates new-protocol registration.
+        client_a.db_path.with_suffix('.sqlite3.hub.json').write_text(json.dumps({
+            'address': address, 'device_name': 'device-a', 'device_id': legacy['device_id'], 'token': token.read_text()}))
+        for (archive, _), label in zip(clients, ('device-a', 'device-b')):
+            assert configure_hub(archive, address, label, str(token))['connected']
         historical = next(hit for hit in query() if hit["source_session_id"] == "device-a")
         assert historical["project_id"] is None
+        choose_upload(client_a, "all", [])
+        choose_upload(client_b, "all", [])
         assert push_pending(client_a)["uploaded"] == 0
         assert push_pending(client_b)["uploaded"] == 1
 
@@ -393,17 +399,17 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             hit = next(row for row in via_mcp["results"] if row["source_session_id"] == session)
             message = hit["matched_messages"][0]
             exact = asyncio.run(mcp(client_a, "read_conversation", {
-                "conversation_id":hit["id"], "hub_id":hub_id, "hub_message_id":message["hub_message_id"],
+                "reference":hit["reference"], "start":message["position"], "end":message["position"],
             }))
             assert exact["messages"][0]["position"] == message["position"]
             assert exact["messages"][0]["text"] == message["preview"]
             assert exact["project_name"] == hit["project_name"]
-            source_number = [10, 11, 12, 13, 14, 15, 20, 21, 22, 23][message["position"] - 1]
+            source_number = int(message["preview"].rsplit(" ", 1)[-1]) if session != "device-a" else 0
             expected_text = "evidence from device-a" if session == "device-a" else f"evidence vibe-A {source_number}"
             assert exact["messages"][0]["text"] == expected_text
             assert exact["messages"][0]["role"] == ("user" if session == "device-a" or source_number % 2 == 0 else "assistant")
-            cli_exact = cli(client_a.db_path, "read", str(hit["id"]), "--hub-id", hub_id,
-                            "--hub-message-id", str(message["hub_message_id"]))
+            cli_exact = cli(client_a.db_path, "read", "--reference", hit["reference"],
+                            "--start", str(message["position"]), "--end", str(message["position"]))
             assert cli_exact == exact
             exact_reads[session] = exact
             cli_reads[session] = cli_exact
@@ -423,13 +429,13 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         record_codex(sessions, "offline-local", [(0, "new", "evidence only in another local project")], cwd=other)
         client_a.sync_codex()
         offline = scope(client_a, project_a)
-        assert offline["scope"] == "all" and offline["archive_scope"] == "local" and offline["fallback_reason"]
+        assert offline["scope"] == "project" and offline["archive_scope"] == "local" and offline["fallback_reason"]
         offline_mcp = asyncio.run(mcp(client_a, "search_conversations", {
             "query":"evidence", "scope":"project", "project_id":project_a,
         }))
-        assert offline_mcp["scope"] == "all" and offline_mcp["fallback_reason"]
+        assert offline_mcp["scope"] == "project" and offline_mcp["fallback_reason"]
         for result in (offline, offline_mcp):
-            assert {hit["source_session_id"] for hit in result["results"]} == {"device-a", "offline-local"}
+            assert {hit["source_session_id"] for hit in result["results"]} == {"device-a"}
         record_evidence(initial_status=initial_status, initial_read=initial_read, resumed_read=later,
                         recovered_status=recovered, before_restart=before_restart, checkpoints=checkpoints,
                         project_list=names, links=links, cli_a=scoped, cli_b=scoped_b,

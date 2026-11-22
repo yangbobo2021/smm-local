@@ -1,0 +1,51 @@
+INFO:     Started server process [88795]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on https://127.0.0.1:58726 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58731 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58732 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58735 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58737 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58739 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58744 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58746 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58748 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58750 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58752 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58754 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58758 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58761 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58763 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58765 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58767 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58769 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58773 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58775 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "POST /v1/upload-policy/set HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58779 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58783 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58785 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58787 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58793 - "POST /v1/known-upload-messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58795 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58797 - "POST /v1/known-upload-messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58799 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58804 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58806 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58808 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58810 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58812 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58814 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58818 - "POST /v1/upload-policy/set HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58820 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58821 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58823 - "POST /v1/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58825 - "POST /v1/read HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [88795]

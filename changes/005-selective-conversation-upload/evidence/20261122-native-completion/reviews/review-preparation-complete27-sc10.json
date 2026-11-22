@@ -1,0 +1,17 @@
+{
+  "cases": {
+    "TC-005-register": {
+      "status": "passed",
+      "reason": "当前complete27源码/夹具与26一致，SC10 adoption原文A10/D2/B2有据。独立managed待选择与unmanaged另一设备200/409、完整Hub唯一合法正文集合及旧整数+message完整读取均真实到达；只首目标、两目标混用/一律拒绝由独立状态和完整期望拦截。debug27当前exit0/1passed、bindings/artifacts实算一致，非复制26结果；详细源码依据沿用26意见，人工另manual-preparation-complete27-sc10.md。",
+      "covers": [
+        "adoption"
+      ]
+    },
+    "TC-005-legacy-links": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "自然设计有效且补到26缺失前状态：真实v0.4.0 Local/Hub，A/D两项目双向本机关联与Hub非空links、已确认cursor2、两个旧整数精确引用，最终ba8同库升级。debug27实际exit1，stderr指scripts/acceptance/selective_upload_completion.py:63整messages对象相等断言。before-upgrade.json旧messages不含canonical_id/content_version/source_order、origin无source_order；最终src/smm_hub/hub.py:392–439的add_origins对read无条件增加这些来源/版本字段。A10要求旧关系/正文/引用保留，D2允许增量字段，设计也未要求新旧扩展对象完全同构，所以此断言必然因合法增量字段不等，即使业务保留正确；不是已证实产品缺陷。此前Local项目ID/name/paths/linked_ids、cursor、Hub项目owner/source_key/name与links逐集合断言均执行通过，commands.jsonl保存前后值；两次after HTTP原文响应未保存，因为after-upgrade保存排在失败点之后，不能独立核对实际业务投影或宣称不存在其他缺陷。最小修正先保存原始after及before响应，再独立比较会话/精确消息身份、完整行数/位置/role/text/time和必要origin业务字段，增量metadata另外核对；保留后续关联范围查询/策略all/重复同步断言。:64之后所有业务步骤未到达。22附件SHA及bindings/artifacts实算一致，cleanup无失败；target SHA dbbbc033aaecaa36c306cd3493130b1a64f0f7e115babdf371760686e8ae8af3。一个E5实际支持平台足够该共享迁移专项，不扩大三OS。",
+      "covers": []
+    }
+  }
+}

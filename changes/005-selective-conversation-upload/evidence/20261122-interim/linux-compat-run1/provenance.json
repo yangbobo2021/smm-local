@@ -1,0 +1,51 @@
+{
+  "source": "AT-SMM-005 private original linux-compat-run1",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "files": [
+    {
+      "file": "actual-hub-change.json",
+      "original_sha256": "01519094f11aecea105ca02b407b4bd5e765d19a02109de6740484c839faf4f4",
+      "export_sha256": "01519094f11aecea105ca02b407b4bd5e765d19a02109de6740484c839faf4f4"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "5c60f59be114e57acd50e06bf8a7e0c66718b1e8b7bf687ab049cbeb175c5792",
+      "export_sha256": "e6fbfcf4b22b132052d6c8d717726cc7e47cac037c8b82713f91dc48a89c5ed5"
+    },
+    {
+      "file": "migrated-old-device.json",
+      "original_sha256": "c7343cee8d0532b0df22fb7041875f45261da01ff5f5959825a111e90405e38f",
+      "export_sha256": "c7343cee8d0532b0df22fb7041875f45261da01ff5f5959825a111e90405e38f"
+    },
+    {
+      "file": "new-local-old-hub.json",
+      "original_sha256": "a0b0b4f3fb7e8fd3844e595c765430d6c5b0c0d83f6b84dd24880f62b1f585b4",
+      "export_sha256": "a0b0b4f3fb7e8fd3844e595c765430d6c5b0c0d83f6b84dd24880f62b1f585b4"
+    },
+    {
+      "file": "old-smm-hub-identity.json",
+      "original_sha256": "86994c1ec019b87d7cb2c82b2e9613fd55043817297c2817a7b094bb615f87cb",
+      "export_sha256": "86994c1ec019b87d7cb2c82b2e9613fd55043817297c2817a7b094bb615f87cb"
+    },
+    {
+      "file": "old-smm-local-identity.json",
+      "original_sha256": "de618936c66944b84a7c896dce03c4097d6609f9d27f78ece976299988de751c",
+      "export_sha256": "de618936c66944b84a7c896dce03c4097d6609f9d27f78ece976299988de751c"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1",
+      "export_sha256": "7d521caaa24b99d5a82de313aea5780f720df291df837e74cc4e990e5a947ef1"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "4a690f83c62cea1a0bd35ff5c9cfabe840af947a87d1606139932ea822f67c43",
+      "export_sha256": "4a690f83c62cea1a0bd35ff5c9cfabe840af947a87d1606139932ea822f67c43"
+    }
+  ]
+}

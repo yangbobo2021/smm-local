@@ -1,0 +1,52 @@
+{
+  "cases": {
+    "TC-005-global-query": {
+      "status": "passed",
+      "reason": "本轮独立复核design-project-coverage18/match-project-coverage18、冻结source及原始run.stdout：实现字节与上轮对应声明相同，本轮重新实际运行通过（1 passed）；并非重用旧执行结果。SPEC B3/A3明确普通A、G、待定及明确关联边界，场景和自然设计有效。冻结test_project_identity_boundaries.py:38起先以独立会话集合断言A仅a、全部恰为a/g/unknown，建立Hub A-G后再次精确为a/g，而显式本机仍a。只首目标正确但丢G/待定、或所有查询错误用同A目标，首先在全部集合或关联后的集合断言失败；关联前与关联后两状态均实际经历，不由同一响应互比替代预期。实际1 passed。minimal及E1/E3/E4限制按gaps保留。 本轮只认领当前分配项；minimal/真实E1/E3/E4仍按gaps另验。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-move-batch": {
+      "status": "passed",
+      "reason": "本轮独立复核design-project-coverage18/match-project-coverage18、冻结source及原始run.stdout：实现字节与上轮对应声明相同，本轮重新实际运行通过（3 passed）；并非重用旧执行结果。SPEC B3/A3对受影响会话全部消息承诺有据，设计实现有效。冻结test_upload_acceptance_boundaries.py:28-68对assign/map/merge分别运行，两个A会话各两消息已先接收，B自身尚未上传，独立expected文本/角色与moved集合由输入操作推导。仅首会话正确会首先失败:52目标集合；仅首消息正确失败:56两条完整正文；误将assign未选会话转B也失败:52。动作前旧A的所有引用在:58-62逐会话检查，故只保留首个旧归属不可过；新旧引用两边同错会失败独立expected。:63全物理行、:64-65全上传记录、:66-68待确认/幂等分别防重复实体和正文重传。实际3 passed，不证明map/merge预览无副作用（另在project-preview标缺口）。 本轮只认领当前分配项；minimal/真实E1/E3/E4仍按gaps另验。",
+      "covers": [
+        "move-batch"
+      ]
+    },
+    "TC-005-move-project": {
+      "status": "passed",
+      "reason": "本轮独立复核design-project-coverage18/match-project-coverage18、冻结source及原始run.stdout：实现字节与上轮对应声明相同，本轮重新实际运行通过（3 passed）；并非重用旧执行结果。归属传播直接源于确认SPEC B3/A3。设计与实现有效；冻结test_upload_project_moves.py:34-66参数化assign/map/merge，动作前先确认A正文及旧引用；B禁止时:46-50无fingerprint/body且B无/A仍有；允许后:55首先拦截漏B归属，:56-61对旧/新引用逐条核独立A正文及物理行完全不变，:62-66无重传/待确认0/重复幂等。两个引用若同错正文仍被独立字符串挡住；多会话多消息首项特判由同批move-batch完整集合与逐消息断言补充。实际3 passed，仅分配move-project，不扩称预览持久状态或平台。 本轮只认领当前分配项；minimal/真实E1/E3/E4仍按gaps另验。",
+      "covers": [
+        "move-project"
+      ]
+    },
+    "TC-005-move-retry": {
+      "status": "passed",
+      "reason": "本轮独立复核design-project-coverage18/match-project-coverage18、冻结source及原始run.stdout：实现字节与上轮对应声明相同，本轮重新实际运行通过（1 passed）；并非重用旧执行结果。B3/A3要求归属确认丢失可核对重试，旧A回执不能充B确认。设计实现有效；冻结test_upload_project_moves.py:69-96在A/B均已收且允许、移动后Hub实际提交B归属再丢响应，:87首先检查errors/pending，:88确认不是未提交假故障，:90-91独立待确认1/传输failed；恢复后:93-96零正文上传/待确认0/物理行不变及旧引用独立A文本。未知接收状态与普通成功由此和move-project分别覆盖；两端同错或直接复用A回执会先失败:87或:90。实际1 passed；等价消息增样可选，实服务故障另验。 本轮只认领当前分配项；minimal/真实E1/E3/E4仍按gaps另验。",
+      "covers": [
+        "move-retry"
+      ]
+    },
+    "TC-005-project-identity": {
+      "status": "passed",
+      "reason": "本轮独立复核design-project-coverage18/match-project-coverage18、冻结source及原始run.stdout：实现字节与上轮对应声明相同，本轮重新实际运行通过（1 passed）；并非重用旧执行结果。B3/A3规定设备+稳定键身份以及改名保留规则/关联，场景和设计有效。冻结test_project_identity_boundaries.py:9-35先登记另一设备同名同键，完整列表两ID及按owner各取目标拦截两设备误并；动作前已建立link和only规则，改名后完整links/规则与旧快照一致，且按原own ID核对新name/source_key，query-scope精确{own,remote}。只正确处理本机而远端被重命名/丢失会在最终双ID集合失败；两端同错不能骗过owner区分与独立own/remote集合。实际1 passed；更多等价显示名可选，真实平台另验。 本轮只认领当前分配项；minimal/真实E1/E3/E4仍按gaps另验。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-global": {
+      "status": "passed",
+      "covers": [
+        "case-1"
+      ],
+      "reason": "SPEC B3“每个本机档案有至多一个全局项目”及A3缺cwd/明确归属为原始依据，无新增产品要求。新自然设计有效；冻结tests/test_project_preview_coverage.py:9-18先:11完整调用原test_upload_policy.py:42-63，保留重放后归属、缺cwd待定及all下不上传检查；:12-14已有G时重复取得并核对ID/stable_key，:15-16完整项目列表只允许[expected]，:17-18底层实际global与稳定键集合也只允许[expected]。上轮反例“返回首个G但额外留下另一G”首先在:16失败，不能只凭返回ID一致通过；两观察面共同误返回首个、底层存在额外实体在:18失败。首次创建与已有G重复调用动作前状态均已实际经过，原归属及待定内容用独立正文/SQL检查而非两响应互比。原始debug-project-coverage18/TC-005-global/run.stdout为1 passed，退出0；已核所有冻结artifact摘要，本TC全部分配case-1有效，仅本机共用逻辑，不扩大minimal/平台或整SC3。"
+    },
+    "TC-005-project-preview": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "covers": [],
+      "reason": "SPEC B3/A3要求assign/map/merge扩大允许范围确认、过期不能应用；新设计与冻结tests/test_project_preview_coverage.py:21-55已补齐上轮所指边界，三参数各在B一直允许、A禁止的状态无confirmation首次预览，:38-40独立affected集合及5表完整快照首先拦截只assign无副作用而map/merge提前改DB；仅代次改变后:44-46过期必须异常且5表不变；新预览:48-49仍无副作用，fresh应用:51/54-55独立核对所选与未选全部3会话。两边都误用首目标会在:39或:54-55失败，预览返回applied=false但实际已改DB会在:40失败。原始本轮3 passed，以上修订本身有效。但按Reviewer“替换已有声明检查去向”规则，原design-current16-sc3的project-preview expected还明确“重放保留，全局/普通合并拒绝”，原冻结test_upload_recovery.py:156-157实际重导入检查普通A→B归属不被源cwd抹掉，:158-160实际普通→global merge应拒绝；新自然设计删除这两项，新selector也未执行它们，当前其他5TC未承接普通/全局混合合并拒绝。B3明文“全局与普通项目不能通过项目合并混成同一身份”，普通已确认归属的持久保留也为原声明已有必测承诺。反例：正确完成本轮预览/fresh应用，但下一次导入把普通会话恢复原A，或允许ordinary→global merge；因本轮:55后无重导入/类型混合操作，所有当前断言仍可通过，原global_contract只验global归属重放，不能替代ordinary动作前状态。最早需修订design，保留上述原检查及明确去向，再补真实执行断言；可在当前参数化声明fresh应用后补重导入逐会话核对和普通→global拒绝，无需另换等价样本。此结论不归为产品缺陷，也不改变其余6TC结论；minimal及真实平台范围仍另验。"
+    }
+  }
+}

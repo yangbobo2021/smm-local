@@ -1,0 +1,196 @@
+{
+  "saved": {
+    "configured": true,
+    "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+    "device_id": "17f826ce6f3f48848598c66813c764c9",
+    "hub_address": "http://localhost:18770",
+    "device_name": "synthetic-device",
+    "policy": {
+      "mode": "only",
+      "projects": [
+        "cf57b6ae5ee371d79f83c9c0a76da95a"
+      ]
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "807f9a374fdb477596eb6049904582b9",
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 1,
+    "inflight_messages": 0,
+    "unsent_messages": 1,
+    "problem": null,
+    "remote": {
+      "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+      "device_id": "17f826ce6f3f48848598c66813c764c9",
+      "revision": 1,
+      "policy": {
+        "mode": "only",
+        "projects": [
+          "cf57b6ae5ee371d79f83c9c0a76da95a"
+        ]
+      },
+      "submission_id": "f524091b4fa64bc38363ea65744e59b9",
+      "control_epoch": "807f9a374fdb477596eb6049904582b9",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "paused",
+    "transfer_problem": null,
+    "allowed_pending_messages": 1,
+    "last_transfer_attempt": null,
+    "last_transfer_success": null
+  },
+  "settings": {
+    "codex_root": "<pytest-fixture>",
+    "claude_root": "<pytest-fixture>",
+    "disabled_builtin_sources": [
+      "claude-code",
+      "codex"
+    ],
+    "sync_paused": true,
+    "sync_interval_seconds": 60
+  },
+  "sources": {
+    "codex": {
+      "id": "codex",
+      "name": "Codex",
+      "root": "<pytest-fixture>",
+      "enabled": false,
+      "plugin": false
+    },
+    "claude-code": {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "root": "<pytest-fixture>",
+      "enabled": false,
+      "plugin": false
+    }
+  },
+  "normal_dispatch": {
+    "uploaded": 0,
+    "pending": false,
+    "upload": {
+      "configured": true,
+      "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+      "device_id": "17f826ce6f3f48848598c66813c764c9",
+      "hub_address": "http://localhost:18770",
+      "device_name": "synthetic-device",
+      "policy": {
+        "mode": "only",
+        "projects": [
+          "cf57b6ae5ee371d79f83c9c0a76da95a"
+        ]
+      },
+      "generation": 1,
+      "state": "confirmed",
+      "hub_revision": 1,
+      "control_epoch": "807f9a374fdb477596eb6049904582b9",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 1,
+      "inflight_messages": 0,
+      "unsent_messages": 1,
+      "problem": null,
+      "remote": {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9",
+        "revision": 1,
+        "policy": {
+          "mode": "only",
+          "projects": [
+            "cf57b6ae5ee371d79f83c9c0a76da95a"
+          ]
+        },
+        "submission_id": "f524091b4fa64bc38363ea65744e59b9",
+        "control_epoch": "807f9a374fdb477596eb6049904582b9",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "paused",
+      "transfer_problem": null,
+      "allowed_pending_messages": 1,
+      "last_transfer_attempt": null,
+      "last_transfer_success": null
+    }
+  },
+  "requests": [
+    [
+      "/info",
+      null
+    ],
+    [
+      "/upload-policy/status",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9"
+      }
+    ],
+    [
+      "/upload-policy/set",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9",
+        "policy": {
+          "mode": "only",
+          "projects": [
+            "cf57b6ae5ee371d79f83c9c0a76da95a"
+          ]
+        },
+        "expected_revision": 0,
+        "submission_id": "f524091b4fa64bc38363ea65744e59b9",
+        "reconcile": false
+      }
+    ],
+    [
+      "/upload-policy/status",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9"
+      }
+    ],
+    [
+      "/info",
+      null
+    ],
+    [
+      "/upload",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9",
+        "device_name": "synthetic-device",
+        "records": []
+      }
+    ],
+    [
+      "/upload-policy/register",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9"
+      }
+    ],
+    [
+      "/upload-policy/status",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9"
+      }
+    ],
+    [
+      "/project-metadata",
+      {
+        "hub_id": "44b34276b8a743ea8e8c7c8583965150",
+        "device_id": "17f826ce6f3f48848598c66813c764c9",
+        "device_name": "synthetic-device",
+        "projects": [
+          {
+            "id": "cf57b6ae5ee371d79f83c9c0a76da95a",
+            "name": "A",
+            "kind": "ordinary"
+          }
+        ],
+        "memberships": []
+      }
+    ]
+  ],
+  "hub_bodies": []
+}

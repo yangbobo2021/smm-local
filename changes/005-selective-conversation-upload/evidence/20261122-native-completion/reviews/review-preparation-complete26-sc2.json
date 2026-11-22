@@ -1,0 +1,67 @@
+{
+  "cases": {
+    "TC-005-cas": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B4/D1/A2原文规定设备内限制确认与正文提交边界；test_005_contracts.py:99先提交有效同项目正文并精确断言两条历史，再确认none；旧策略及旧版/无版正文均逐请求拒绝且完整bodies不变，最后独立head保持none和新revision。拒绝所有正文的错误在初次valid.status_code==200即被拦截，确认前历史删除在完整bodies比较拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-policy-triple-order": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。A2点名允许/停止/允许请求及响应乱序。test_required_snapshot_and_batch_boundaries.py实际三次Hub提交，分别独立断言all/none/all、revision1/2/3及返回3/2/1，再核对Local generation/ack_revision/epoch/submission与第三次Hub回执。若两端同时误用第二目标，第三次all/gen3和head3先拦截；逐一重放前两已提交请求不改变head，未提交旧版本409。附件policy-triple-order.json实际读出3/2/1、1/2/3和gen3，最后精确一条及重复不增。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "three-choice-order"
+      ]
+    },
+    "TC-005-reconcile-fresh": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B1要求采用所显示本机完整规则。test_reconcile_snapshot.py:114以none/all/only/except参数，各次读取shown后严格核对响应、Local desired、Hub head及唯一set出站载荷等于shown完整policy；仅首mode成功其余拒绝时相应参数status200首先拦截。原文是显示值提交一致，故shown作为比较对象合法；setup_control的a stable key及mode另有独立输入检查，无正文请求。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "fresh"
+      ]
+    },
+    "TC-005-reconcile-inflight": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B4未知结果不能成功跳过、新意图不被旧响应覆盖。test_reconcile_uncertain.py两参数在真实CAS提交后分别丢回执/另存none，明确确认Hub实际曾all，并分别检查Local不confirmed或新generation/desired/submission完整保留；普通重试后Hub无正文、无upload出站，lost分支只有fresh明确hub采用才confirmed。两状态各可失败，不只读取相同端结果；新版none分支最终Hub/Local均要求独立none。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "inflight-result"
+      ]
+    },
+    "TC-005-reconcile-remote-race": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B1/A2拒绝不得改变任一端规则。test_reconcile_remote_race.py遍历CLI/Web×local/hub×first-status/second-status/cas共12参数；真实独立Hub外部advance改变revision并none，注入标志必须发生，CLI非零无成功JSON/Web明确错误，Local完整row独立before相等，Hub==injected真实新head且无新正文。两端同错无法通过两个独立前后对象；first窗口正确而cas错误由cas参数完整row断言拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "remote-reject-no-save"
+      ]
+    },
+    "TC-005-reconcile-stale-local": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。A2新增判据及B1要求Hub未变时旧Local视图也失效。test_reconcile_snapshot.py:35–56分别local/hub采用，Hub仍旧revision，本机因失败通道另存all/gen新；实际POST旧none双版本应400，独立Local row和Hub head均不变且无set。若两端同采用新all掩盖旧视图，status400及无set先拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "stale-local"
+      ]
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B2目标绑定、B4保存后新派发重判支持此设计；不把实现暂存顺序当必需产品行为。test_reconcile_dispatch.py实际第二次status返回时configure到独立other_id，必须观测切换，旧请求400、原head不变且无set，新目标确为other且needs_selection/policyNone，other.messages0。两端误用旧Hub由current.hub_id==other_id最先拦截，新Hub和旧Hub数据分别核查。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "target-control-dispatch"
+      ]
+    },
+    "TC-005-reconcile-write-window": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B1/A2要求核对后到条件保存前再次修改也不覆盖。test_reconcile_snapshot.py:60–79在status返回前control.choose(all)，local/hub两动作均实际POST旧双版本，独立changed row完整不变，Hub保持remote_before且无set。只在函数开头校验的错误会在结果400或current row比较拦截。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "write-window"
+      ]
+    },
+    "TC-005-target-dispatch": {
+      "status": "passed",
+      "reason": "场景/设计均有所述原文依据。B2/B4本机切换Hub后未发请求须重判。test_upload_review_regressions.py:35–66使用独立第二档案，在旧known返回后切换；must switched、旧/新bodies都空且新state needs_selection。若两端错误比较同档案，实际second Archive独立构造和第二bodies断言不允许假满足。此TC不承担暂停/旧请求重启全场景范围。 当前debug对应真实选择器exit0（各参数全部到达），全部bindings和日志SHA重算一致；附件如有已读取。只认本TC分配check；人工完整范围及暂停证据缺口见manual-preparation-complete26-sc2.md。",
+      "covers": [
+        "review-target-dispatch"
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<task-path>", line 144, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "<task-path>", line 141, in main
+    Completion(args).run_completion(a.probe)
+  File "<task-path>", line 124, in run_completion
+    try:getattr(self,probe.replace('-','_'))()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<task-path>", line 63, in legacy_links
+    assert [v['messages'] for v in after]==[v['messages'] for v in originals]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

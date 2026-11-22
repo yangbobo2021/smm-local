@@ -1,0 +1,14 @@
+{
+  "cases": {
+    "TC-005-sc1-evidence": {
+      "status": "insufficient_evidence",
+      "reason": "当前人工核验时间2026-11-22T11:14:34Z与原业务时间分层准确；74 bindings/513 artifacts及原始inventory SHA均重算一致。但full3证据不足：已审design/preparation明确要求各E1真实0.4.0 Local同Hub升级及真正Hub身份切换，当前observation.original_business_events仅七主流程和三reconcile21，evidence_inventory无compat-run8/linux-compat-run8/windows-compat-run8，artifacts无migrated-old-device或actual-hub-change原件，也未显式关联其他正式收据。当前29源码迁移/target单测不能替代A1各平台真实旧包升级，因此不认full3；不能据本包声称该检查通过，未发现已证产品缺陷。其余已实际覆盖：full1七主流程首次policy/set前请求均无非空upload、最小metadata白名单且memberships空、待选择policyNone和远端可查；full2三E1 browser六保存only空/onlyA/exceptA/all/none/only空，分别核CLI/Web规则与代次及独立输入，原29 mode_matrix/空名单/非法输入具体JUnit与源码断言通过；full4真实独立安装/CLI命令/浏览器操作共享状态，已打开三平台config-0-only/config-2-except/config-3-all/config-4-none原PNG，画面分别为空仅指定/A勾选排除/全部/全部不上传，项目普通/全局同级；原位trace核真实选择、勾选、save与响应。complete-5三ba8 reconcile21缺参/旧代次CLI exit2、Web旧local/Hub版本400且无policy/set、新鲜CLI all及刷新Web采用Hub none200；已打开三平台全部九张stale-local-rejected/stale-hub-rejected/adopted-hub-current原图，所见是重新查看诊断及confirmed none；trace有实际按钮/双版本POST、完整响应，final generation5/revision6。pause四模式/来源开关的当前正式证据充分，但无法填补full3真实升级/换目标的遗漏。历史d80/f45/7c与当前模块差异按实际git diff及安装清单核，变化的对账/CAS/标题以ba8对账/当前自动与scope原件分层，不把旧业务改写为本轮执行。原29全套为真实251pass1skip，未当30新回归。此意见只判当前manual目标。",
+      "covers": [
+        "complete-5",
+        "full1",
+        "full2",
+        "full4"
+      ]
+    }
+  }
+}

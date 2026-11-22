@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "definitions003及design-complete31-sc9实际分工一致；本次全部84 artifacts和104 bindings独立重算SHA匹配，最终src与ba8c6d5无差异。正式pytest 11:09:56.530–11:09:57.045 UTC exit0/1 passed；test_005_contracts.py:195-210真实构造A/D关联和独有正文，Hub范围失败时仅A、effective项目仅A、archive_scope local且有失败原因；显式local仍A/D。故可区分回退范围扩大与本机关联语义，认tdd-core。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-empty-coverage": {
+      "status": "passed",
+      "reason": "definitions003及design-complete31-sc9实际分工一致；本次全部84 artifacts和104 bindings独立重算SHA匹配，最终src与ba8c6d5无差异。正式pytest exit0/2 passed；test_complete_scene_boundaries.py:54-76在all/project正控后执行相同不存在词，实际success=[]且两端complete并调用/search；故障注入后同为空但hub unavailable及具体原因；显式local为not_requested。两个原始empty-coverage-*.json逐项核实，与B6/A9相符，只认共用覆盖区别。",
+      "covers": [
+        "additional-empty-coverage"
+      ]
+    },
+    "TC-005-empty-mac": {
+      "status": "passed",
+      "reason": "definitions003及design-complete31-sc9实际分工一致；本次全部84 artifacts和104 bindings独立重算SHA匹配，最终src与ba8c6d5无差异。本次真实macOS15.3.1/uid501 <ordinary-user>、最终独立安装Local/Hub全模块与candidate一致并核当前Local源码；11:09:57.508–11:10:03.752 UTC，native外进程exit0、cleanup.failures=[]。positive-control有local-A/remote-B/vibe-V三来源。独立核successful-empty.json和cli-mcp原响应：all/project各CLI、真实stdio MCP、Web六响应均空且双方complete、无fallback；actual scope分别all与V/A/B、local仅A。已实际打开本次TC附件probe/successful-empty-all.png与successful-empty-project.png，均可见uniquelyabsentquery、没有匹配结果、本机已检索/Hub已检索，分别所有项目与指定A关联V/A/B。核successful-empty-trace.zip实际先选all搜索收响应并截图，再选project/A搜索收响应并截图；page_errors=[]。脚本独立断言与原图同源SHA匹配，未把未执行Hub或空档案当成功空检索。只认empty-e1-mac。",
+      "covers": [
+        "empty-e1-mac"
+      ]
+    },
+    "TC-005-empty-linux": {
+      "status": "passed",
+      "reason": "definitions003及design-complete31-sc9实际分工一致；本次全部84 artifacts和104 bindings独立重算SHA匹配，最终src与ba8c6d5无差异。本次真实Linux6.8/uid1000 <ordinary-user>、最终独立安装Local/Hub全模块与candidate一致并核当前Local源码；11:10:05.707–11:10:26.735 UTC，native外进程exit0、cleanup.failures=[]。positive-control有local-A/remote-B/vibe-V三来源。独立核successful-empty.json和cli-mcp原响应：all/project各CLI、真实stdio MCP、Web六响应均空且双方complete、无fallback；actual scope分别all与V/A/B、local仅A。已实际打开本次TC附件probe/successful-empty-all.png与successful-empty-project.png，均可见uniquelyabsentquery、没有匹配结果、本机已检索/Hub已检索，分别所有项目与指定A关联V/A/B。核successful-empty-trace.zip实际先选all搜索收响应并截图，再选project/A搜索收响应并截图；page_errors=[]。脚本独立断言与原图同源SHA匹配，未把未执行Hub或空档案当成功空检索。只认empty-e1-linux。",
+      "covers": [
+        "empty-e1-linux"
+      ]
+    }
+  }
+}

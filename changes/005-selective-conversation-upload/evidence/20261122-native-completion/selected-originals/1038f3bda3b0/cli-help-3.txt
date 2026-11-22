@@ -1,0 +1,12 @@
+usage: smm upload reconcile [-h] [--use {hub,local}]
+                            [--expected-hub-revision EXPECTED_HUB_REVISION]
+                            [--expected-local-generation EXPECTED_LOCAL_GENERATION]
+
+options:
+  -h, --help            show this help message and exit
+  --use {hub,local}
+  --expected-hub-revision EXPECTED_HUB_REVISION
+                        刚查看差异中 hub.revision；--use local 必填，过期则重新查看
+  --expected-local-generation EXPECTED_LOCAL_GENERATION
+                        刚查看 upload reconcile 输出中 local.generation；--use local
+                        必填，过期则重新查看

@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "design31继续原A9/B6 tdd-core，A/D独立JSONL与关联，回退完整集合仅A/实际A项目/原因/local，显式本机完整A+D各有固定预期，拦截首目标丢失或两查询同错。当前debug31真实10:58:05.242→05.646 exit0/1passed、全部bindings/artifacts SHA一致，原断言未删，分配检查全到达。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-empty-coverage": {
+      "status": "passed",
+      "reason": "A9/B6 design31保留成功零命中共用检查；31真实exit0/2passed与all/project两JSON，success空/双complete/get无原因/真实search调用，failed空/Hub unavailable+具体原因，explicit_local空/Hub not_requested全部逐scope独立字典到达；正控与固定预期不靠两产品互等。全部bindings/artifacts与原附件SHA一致。这里只认additional-empty-coverage，不冒充E1入口。",
+      "covers": [
+        "additional-empty-coverage"
+      ]
+    },
+    "TC-005-empty-mac": {
+      "status": "passed",
+      "reason": "A9/E1/D4自然设计覆盖all/project×CLI/真实stdio/browser六响应，31真实exit0、35附件及全部bindings/artifacts SHA一致。实际原JSON六响应空/双方complete/无原因，独立正控三来源、ba8 clean Local25/Hub24模块/普通UID501、独立任务HTTPS与cleanup[]可核；当前31两张successful-empty-all/project.png均已实际打开，画面为没有匹配结果且本机/Hub已检索，all所有项目、project syntheticV/A/B，trace/commands/原响应/browser/page_errors齐。逐scope/入口固定契约与两画面拦截只首目标或单端错误，非仅互等；分配全部到达。",
+      "covers": [
+        "empty-e1-mac"
+      ]
+    },
+    "TC-005-empty-linux": {
+      "status": "passed",
+      "reason": "A9/E1/D4 design31相同完整六响应/画面判据，31真实exit0，34附件与全部bindings/artifacts SHA一致。实际JSON all/project三入口均空/complete两端/无故障；正控三来源、ba8 Local25/Hub24完整模块相等/UID1000独立任务身份、cleanup[]核实。当前31两原PNG逐张打开，均无匹配+两端已查，scope所有项目或syntheticV/A/B正确，trace/commands/真实stdio/browser原件齐。只首scope/入口正确由独立六响应/画面拦截，不靠两产品互等，全部empty-e1-linux到达。",
+      "covers": [
+        "empty-e1-linux"
+      ]
+    }
+  }
+}

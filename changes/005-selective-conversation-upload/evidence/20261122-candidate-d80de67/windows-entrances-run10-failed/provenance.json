@@ -1,0 +1,47 @@
+{
+  "source": "AT-SMM-005 private original windows-entrances-run10-failed",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "controllers": {
+    "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_platform.py": "e45453433bc61eba96a0807ae298a33098b1aa60224b4adee28b6754a83c1102",
+    "selective_upload_windows_limited.py": "f47e079e706060713b03c473475a6e0a49139fb03427fd1536f6fe30e511a43d"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "6850778b2927926728fab400d559e3c50feb6a6cc97bd3f1adcf48acc2583cde",
+      "export_sha256": "2657a9ab0934360de3399476ce6772e80bb96fb34fe310ab016a2cc897e6a0c4"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "ae6f890a05d9552d516680e6b41c3c568798ece55e8348e6386b86d705662a5d",
+      "export_sha256": "2ec7e3597c75d4213915fb29136a3641e29e2134f54f832d24677e466f6be1e6"
+    },
+    {
+      "file": "payloads.json",
+      "original_sha256": "b8a453fdb643ca0e14548010ad4c5c58507d5c61a51610afa4bd7f6bba9b5fd6",
+      "export_sha256": "a79369a1123a1bce1c37072d8092ce718dca81f66e36343c6b8fa3f38597cb45"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "98492a0f4d0eb47da153fe0466c296b2a40848733bdc1847d74e83c92b9b1bfe",
+      "export_sha256": "f37a8bdf055b87f4c85527d1fe328d7eb752307b855ec44ed732c47027aeb688"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "81a5637f58934cb5964147c6154d249bedeae62c295468ae77dd232e2ce3dd24",
+      "export_sha256": "31013d226bce887208d7e428546134bb1e673049e6bf5316a5e99db9b8c21079"
+    },
+    {
+      "file": "sync-observations.json",
+      "original_sha256": "1e4a0eefc96ab8a4203b09f48b5498e9e2c2e0688274c9fc50270190db1b230b",
+      "export_sha256": "eacabc11819ad30786f3295265ea22af9f19fd781173e529fd1823ece5e97653"
+    }
+  ]
+}

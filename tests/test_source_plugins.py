@@ -504,7 +504,7 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
     assert archive.sync_all()["messages_new"] == 3
     codex = Path(archive.get_settings()["codex_root"])
     rows = [
-        {"type": "session_meta", "payload": {"id": "builtin-local"}},
+        {"type": "session_meta", "payload": {"id": "builtin-local", "cwd": str(codex)}},
         {"type": "response_item", "ordinal": 1, "payload": {
             "type": "message", "id": "original-1", "role": "user",
             "content": [{"type": "input_text", "text": "旧汇总风车回归"}]}},
@@ -514,7 +514,7 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
     hub_archive = Archive(tmp_path / "hub.sqlite3")
     token = "local-test-token-" + "a" * 32
     config = {"device_id": "a" * 32, "device_name": "试用节点", "token": token,
-              "address": "http://127.0.0.1"}
+              "address": "http://127.0.0.1", "policy_protocol": 1}
     monkeypatch.setattr(federation, "hub_config", lambda db: config)
 
     with TestClient(create_hub(hub_archive, token)) as hub:
@@ -525,8 +525,12 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
             assert response.status_code == 200, response.text
             return response.json()
 
+        config["bound_hub_id"] = request(config, "/info")["hub_id"]
+        archive.db_path.with_suffix(archive.db_path.suffix + '.hub.json').write_text(json.dumps(config))
         monkeypatch.setattr(federation, "_request", request)
-        assert federation.push_pending(archive)["uploaded"] == 1
+        federation.choose_upload(archive, "all", [])
+        pushed = federation.push_pending(archive)
+        assert pushed["uploaded"] == 1, pushed
         assert federation.push_pending(archive)["uploaded"] == 0
         assert federation.search_archive(archive, "旧汇总风车回归")["results"][0]["source"] == "codex"
         assert not federation.search_archive(archive, "白鹭验收", current_source="custom-json",

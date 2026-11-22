@@ -1,0 +1,54 @@
+{
+  "query": "selective",
+  "scope": "all",
+  "effective_projects": "all",
+  "excluded_current_session_id": null,
+  "results": [
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "old-device",
+      "title": "selective compatibility old-device original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 1,
+      "project_name": "A",
+      "rank": 1,
+      "bm25_score": 1e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility old-device original",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "device_id": "0553319b24344b00923a6f785e3083ac",
+              "device_name": "legacy-device",
+              "source_position": 1,
+              "project_id": 1,
+              "project_name": "A"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "A",
+          "source": "device",
+          "owner": "0553319b24344b00923a6f785e3083ac",
+          "source_key": "6806c8893b1dd31a208b8e28be4fbed4",
+          "device_name": "legacy-device"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "0553319b24344b00923a6f785e3083ac",
+          "device_name": "legacy-device"
+        }
+      ]
+    }
+  ],
+  "hub_id": "f5f00a6c55604893910af4ff552e09b3"
+}

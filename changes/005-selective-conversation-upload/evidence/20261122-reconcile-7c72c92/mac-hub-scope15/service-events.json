@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "system-launchd",
+    "definition": {
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "Label": "ai.smm.hub.9d5b68956b8a",
+      "ProgramArguments": [
+        "<task-path>",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "--state-dir",
+        "<task>/hub-state",
+        "run"
+      ],
+      "RunAtLoad": true,
+      "StandardErrorPath": "<task>/hub-state/launchd-error.log",
+      "UserName": "<ordinary-user>"
+    },
+    "pid": 58224,
+    "at": "2026-11-22T08:09:17.965404+00:00",
+    "process": "  UID   PID  PPID COMMAND\n  501 58224     1 <task-path> -m smm_hub.cli hub --state-dir <task>/hub-state run\n"
+  },
+  {
+    "mode": "system-launchd",
+    "definition": {
+      "KeepAlive": {
+        "SuccessfulExit": false
+      },
+      "Label": "ai.smm.hub.9d5b68956b8a",
+      "ProgramArguments": [
+        "<task-path>",
+        "-m",
+        "smm_hub.cli",
+        "hub",
+        "--state-dir",
+        "<task>/hub-state",
+        "run"
+      ],
+      "RunAtLoad": true,
+      "StandardErrorPath": "<task>/hub-state/launchd-error.log",
+      "UserName": "<ordinary-user>"
+    },
+    "pid": 58288,
+    "at": "2026-11-22T08:09:21.817648+00:00",
+    "process": "  UID   PID  PPID COMMAND\n  501 58288     1 <task-path> -m smm_hub.cli hub --state-dir <task>/hub-state run\n"
+  }
+]

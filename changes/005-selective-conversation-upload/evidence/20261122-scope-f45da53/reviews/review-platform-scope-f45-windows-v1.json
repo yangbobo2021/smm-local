@@ -1,0 +1,210 @@
+{
+  "request_id": "review-platform-scope-f45-windows-v1",
+  "kind": "external_actual_acceptance_evidence_review",
+  "acceptance_id": "AT-SMM-005",
+  "requirement": "R005",
+  "candidate_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+  "overall_scoped_status": "passed",
+  "whole_delivery_status": "not_assessed",
+  "baseline_sha256": {
+    "intent.md": "3eb436c7fc89c2583898155864baeeac64b0341af3b3d4a21b7bd39554963a0a",
+    "spec.md": "f434cbeaea0a05a99380b5a26d2c11d96bb4e1b791902e9996f1e68dee98e024",
+    "plan.md": "6a65037247af4d5e3da858c679a0605c742845f23b1b4a9d6f75f99c38905ff5"
+  },
+  "wheel_sha256": {
+    "smm_hub-0.4.0-py3-none-any.whl": "5c333e635b0b5b1d004a8a7a76eae4358458a3bdb6644068d64edbe06e9f8fdc",
+    "smm_local-0.4.0-py3-none-any.whl": "46e8c2366fcad19654a7fcf48943434b6c09ac84df219dcdbcee58bbda3ace71"
+  },
+  "provenance": "Frozen f45 source clean; all 25 Local and 24 Hub wheel Python/HTML hashes equal both candidate/installed manifests. Source file bytes match all wheel entries; generated Hub archive __init__ matches build script shim replacement. Both installed environments other_package=false; isolated -I interpreters. Review uses run snapshot controllers, not later checkout controller versions.",
+  "runs": {
+    "windows-scope-run11": {
+      "status": "passed",
+      "scope": [
+        "B7/A8 shared-conversation X-only body/title/project reading via CLI, real stdio MCP and direct API; widened bounds; legacy unscoped both messages; old scoped reference after Hub restart",
+        "B5/A9 offline all-project CLI/MCP/Edge search and all own-reference reads; Edge scoped split read"
+      ],
+      "reason": "Independent input-derived expectations match original bodies, source/session identity, roles, positions, timestamps, reference payloads and project metadata. Result passed label was not used as the oracle. Browser trace resource requests/responses and original PNGs were inspected for ordinary-client run.",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "controller_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "actual_hub_mode": "serve-hub",
+      "hub_identity_events": [
+        {
+          "event": "start",
+          "mode": "serve-hub",
+          "pid": 15732,
+          "at": "2026-11-22T06:26:57.001518+00:00"
+        },
+        {
+          "event": "process-exit",
+          "pid": 15732,
+          "exit_code": 1,
+          "stop_requested": true,
+          "at": "2026-11-22T06:32:12.817990+00:00"
+        },
+        {
+          "event": "start",
+          "mode": "serve-hub",
+          "pid": 12772,
+          "at": "2026-11-22T06:32:16.031108+00:00"
+        },
+        {
+          "event": "process-exit",
+          "pid": 12772,
+          "exit_code": 1,
+          "stop_requested": true,
+          "at": "2026-11-22T06:32:21.774349+00:00"
+        }
+      ],
+      "browser_version": "158.0.4370.33",
+      "cleanup": "cleanup.failures=[]; two stop-on-demand commands returned ok; both serve-hub PIDs exited 1 after explicit TerminateProcess-compatible stop_requested=true. No early exit was accepted. No new liveness check was performed by reviewer.",
+      "evidence_sha256": {
+        "boundaryneedle-browser-trace.zip": "78af5baf96cd7c0bb64dfb56a01f7520811d7d23a694f5d5f384d35e00a3afe1",
+        "boundaryneedle-browser.png": "c2bedc66bbefa764fe790725062b78ffeaaa2195af7b0669136e194410153db6",
+        "cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+        "commands.jsonl": "6bdd1fa5210c249fdbce7cf2b89c27a3804debec724eb8a6b4d648693b6a8334",
+        "fixture-local.json": "0a064503c2c342f925b0c951be983149e3d45c91d7cdc22dd480d72a07671749",
+        "fixture-remote.json": "c2bc42e61b0c4573add8f102bf76fbda4e83075f8df64b326ee0fc350839df90",
+        "hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+        "hub-projects.json": "6c59f4d386c44c3007f0e3ef8712b83f6215bf4287abc9216679595fc3514fcd",
+        "hub.log": "891e9345df6cffb1190b6492215557b4b50ac0c033a8fca408db8acc7b2c50be",
+        "local-service.json": "c5d6212ca592c576df71a866aa9379c9709105b8d0836da63f001679f5128d73",
+        "manifest.json": "4b61a8b2d03c451500fb4787c66c57fc5bc377b7182671d80a8834b357c1c914",
+        "new-connection-status.json": "a059e0b6fb81f4531a7036140ac9a434c505fb273b4cde562aa7ca6b3bf71c52",
+        "offline-all.json": "4a244d3ce05c03fb8fe51bc55d714a9beb02781d025cd7e876454bfbb7a22453",
+        "payloads.json": "204c3a6acb80d8cf75413960122c5198868d75976228129f15a9662d4dcb0442",
+        "result.json": "9225c05554e1b504a4f1b7d8c1506886fa6ba9328f3b1d1989f4cc31cdf8d34b",
+        "selective-browser-trace.zip": "2789c8fec1aba681e09e8125e759f5a7718f12d19d44b2f2e3c26e87e274e392",
+        "selective-browser.png": "665da4e0e2ab156d26fcd1a25791db67ab175ef858abc922b4ed014b4b9e4b6a",
+        "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+        "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+        "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+        "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+        "selective_upload_platform.py": "6af304d95437b6d95286bebeddc9dce36f451b4195ff9870326f5f8fe5ceb430",
+        "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+        "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+        "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+        "selective_upload_scope.py": "eb42b7af7b66f4ac7c6d7e26fa18d2c715fb22c0d44e8930c635ed184fc12636",
+        "selective_upload_windows_limited.py": "20cab1e1c8a24e91b20866986d4e5882701ea13fe121c681ec015fe08fa53f59",
+        "service-events.json": "cd2c8a2e3b6ea5beb3b6ab321cd296e4cfbb13036197857e4b17d1182b99a2e5",
+        "split-scope.json": "62632ec501174b1a840fb10ac8e312630fa4d0ee8920fc91cdadde57bfc9a24e",
+        "sync-observations.json": "3572446122af0b090e7a8ff2fb83decbeb2792a3b38f4816535df262fd6207df"
+      },
+      "limits": [
+        "Supplemental scope only, not complete A8/A9/E1/E3 acceptance",
+        "No new execution by reviewer",
+        "Copied wrapper specifies Limited/Highest scheduled-task route; actual run token is directly evidenced by manifest/controller IsUserAnAdmin check. Independent scheduler registration/worker receipt is not included in these supplied directories."
+      ]
+    },
+    "windows-hub-scope-run11": {
+      "status": "passed",
+      "scope": [
+        "B7/A8 shared-conversation X-only body/title/project reading via CLI, real stdio MCP and direct API; widened bounds; legacy unscoped both messages; old scoped reference after Hub restart"
+      ],
+      "reason": "Independent input-derived expectations match original bodies, source/session identity, roles, positions, timestamps, reference payloads and project metadata. Result passed label was not used as the oracle. Browser trace resource requests/responses and original PNGs were inspected for ordinary-client run.",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "controller_identity": {
+        "elevated_admin": true,
+        "user": "<ordinary-user>"
+      },
+      "actual_hub_mode": "LocalService",
+      "hub_identity_events": [
+        {
+          "mode": "LocalService",
+          "owner": {
+            "Domain": "NT AUTHORITY",
+            "ReturnValue": 0,
+            "User": "LOCAL SERVICE",
+            "PSComputerName": null
+          },
+          "service": {
+            "Name": "smm-hub-9c0a34ca9f63",
+            "StartName": "NT AUTHORITY\\LocalService",
+            "State": "Running",
+            "ProcessId": 15612
+          },
+          "pid": 15612,
+          "at": "2026-11-22T06:26:59.902884+00:00"
+        },
+        {
+          "mode": "LocalService",
+          "owner": {
+            "Domain": "NT AUTHORITY",
+            "ReturnValue": 0,
+            "User": "LOCAL SERVICE",
+            "PSComputerName": null
+          },
+          "service": {
+            "Name": "smm-hub-9c0a34ca9f63",
+            "StartName": "NT AUTHORITY\\LocalService",
+            "State": "Running",
+            "ProcessId": 16276
+          },
+          "pid": 16276,
+          "at": "2026-11-22T06:30:54.912948+00:00"
+        }
+      ],
+      "browser_version": null,
+      "cleanup": "cleanup.failures=[]; two stop-on-demand commands returned ok; disable returned enabled=false/running=false then sc.exe delete returned exit 0. Disable included endpoint timeout diagnostic after stop. No new liveness or SCM check was performed by reviewer.",
+      "evidence_sha256": {
+        "cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+        "commands.jsonl": "607c936f1785eee5ef7e8ac8122901be530cbed0c7f8424e99712635b1ee0ce7",
+        "fixture-local.json": "bbca312a7ab1b74caf6f846edb2f13585eb4d775538c2b8d9a59179cdeafe8cb",
+        "fixture-remote.json": "e296b85e7468896d5777db25233bcd44a5c5d387c358ae873523dea1e9b463ef",
+        "hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+        "hub-projects.json": "9de2c0a253e5fcbdff8d6cd9043227e55598212a4348aa8554e19a45d4cd6fba",
+        "local-service.json": "d1b0664b64b4ec7a279e02582c16fa20758a1e7822f3e81a1c53752f82f190e9",
+        "manifest.json": "0f1bc788c7178dc389a95fce4549bf80db9885e080d2826d64dd50f71be69670",
+        "new-connection-status.json": "633ef58f22a7a15d0df5dc9da3c217f1fa41f686a765e933644e02e8005b0183",
+        "payloads.json": "8e9c9304d351b280344584564e4e253f72acb5766fad1ae86c174e5382b721fe",
+        "result.json": "076fd78ce488286d3b7a043d20391028a4a262f453996e813e2bcc33cdd322d8",
+        "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+        "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+        "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+        "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+        "selective_upload_platform.py": "6af304d95437b6d95286bebeddc9dce36f451b4195ff9870326f5f8fe5ceb430",
+        "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+        "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+        "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+        "selective_upload_scope.py": "eb42b7af7b66f4ac7c6d7e26fa18d2c715fb22c0d44e8930c635ed184fc12636",
+        "selective_upload_windows_limited.py": "20cab1e1c8a24e91b20866986d4e5882701ea13fe121c681ec015fe08fa53f59",
+        "service-events.json": "2347b710075f62ab652d6e4bb6e16866278cfa5a9ce3637f55c9753f56ec6522",
+        "setup.json": "eef693873805e36fb70b7dd451fc89df5e48931aca408da16df39ab1924fc04a",
+        "split-scope.json": "4f94028b1b1e03d7e46362d08a3f79ae8049a1a8fe6959b70325033b917c1a15",
+        "sync-observations.json": "c8f9de581ae9f16f7d3d2bb8426eb1aa53e894384f97f1d361957fecd7327e47"
+      },
+      "limits": [
+        "Supplemental scope only, not complete A8/A9/E1/E3 acceptance",
+        "No new execution by reviewer",
+        "Copied wrapper specifies Limited/Highest scheduled-task route; actual run token is directly evidenced by manifest/controller IsUserAnAdmin check. Independent scheduler registration/worker receipt is not included in these supplied directories.",
+        "protocol_only; browser=null; no offline-all or browser claim despite generic result.scope text"
+      ]
+    }
+  },
+  "grounding": [
+    "SPEC B5/A9: Hub unavailable all-project query returns all local sources and cause; E1 requires CLI/actual stdio MCP/browser.",
+    "SPEC B7/A8: new shared-conversation reference excludes outside-project content; legacy unscoped semantics retained. Secret-title exclusion follows this content boundary; exact fixture title is not an invented universal title-format rule.",
+    "SPEC D4/E1/E3: actual installed bytes, process identity, distinct Hub service account, restart and UI/serialization evidence."
+  ],
+  "counterexample_review": [
+    "First offline target correct, others omitted or misread: exact full set at ScopeProbe 55/29 and per-hit independent expected session/full-body check at 59-61/33-36 intercept it. Raw review additionally validates sources/roles/positions, including plugin second assistant message.",
+    "Both entrances return same wrong target: expected source/session/body derives from fixture construction, not cross-entrance equality. Actual Edge read request resource uses each search hit reference.",
+    "First Y title leaks despite filtered X body: fixture puts secret Y first and X second, only A-X link; title checks at 91/93/97/103 and reader secret exclusion at 37-39 intercept it. Actual Edge hit and reader show X title.",
+    "Expanded start/end exposes Y: CLI/MCP/API all request 0..999999 and exact one-X message comparisons reject it. Project metadata remains X only.",
+    "Y is destructively absent or both read implementations wrongly omit it: accepted=2 and old unscoped read exact Y+X/Y-title at 98-99 intercept that shared wrong outcome.",
+    "Only before-restart behavior works: actual Hub PID changes, then old scoped reference exact-X check at 101-103 intercepts persistence failure.",
+    "Only administrator session works: ordinary client manifest records IsUserAnAdmin=false. Only controller account works for service: actual CIM GetOwner reports LOCAL SERVICE both before and after restart, distinct from elevated <ordinary-user> controller.",
+    "Other equivalent identifiers alone are optional for this narrow supplement. Remaining complete A8/A9/A11 conditions are not inferred passed."
+  ],
+  "actionable_findings": [],
+  "limits": [
+    "P1 stale-local-reconcile remains pending outside this batch; no fix or acceptance claimed.",
+    "Mac E3 remains unrun; previous Mac/Linux review is not merged into this Windows-specific verdict.",
+    "Separate isolation extra14 run is outside this batch and is neither inspected nor credited.",
+    "No complete upload stop/reallow/backfill lifecycle or complete A11 recovery result is claimed by scoped-reference restart.",
+    "Cleanup evidence is historical controller/command records; no new remote liveness or task registration inspection.",
+    "No supplemental unit/native green result substitutes for actual Windows execution evidence."
+  ]
+}

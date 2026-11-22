@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-move-project": {
+      "status": "expected_failure",
+      "reason": "独立核对当前 definitions/000002.json 实际 SHA-256 为 bd4ec82fbc652c141afecdd0bf5aa5b732720897c3d37d9083932e3d47e38649；SC3 与 SPEC B3 第50行、A3 第204行及 PLAN §11 明确要求已收 A 转 B 后，B 获准时补齐消息归属，保留 A/旧引用且不重传正文。design-affiliation-v1 和 match-affiliation-v1 对 TC-005-move-project 的 assign/map/merge 声明及命令与红灯冻结测试一致。两份冻结测试字节与 test_bindings SHA 一致，所有目标 artifacts 和五份 product_bindings 摘要均核对通过；runtime-affiliation-red-v1 的 pytest smoke exit 0，项目 AGENTS.md 要求 pytest 且 pyproject.toml 提供 pytest/httpx 测试依赖。原始 tdd-red/red-affiliation-move-v1/TC-005-move-project/run.stdout 显示三个参数均真实执行到 tests/test_upload_project_moves.py:55，B 查询仅含 move-b，缺少 move-a；exit 1、stderr 空，只有非阻塞 Starlette 弃用警告，不是导入、环境或测试异常。此前初次 A 上传、真实 project_control 预览确认及本机 B 归属、B 禁止时无 known/upload 请求且 Hub B 不含 A、Hub A 仍含 A、允许 B 后 B 自身首次上传均已通过。该失败直接违背获准 B 应补归属的规定。源码佐证：src/smm_local/upload.py candidates() 第272-277行按目标/设备/消息版本/代次/来源位置与顺序关联旧 local_upload_origin_receipts，却不含项目键，_record_receipts() 第410-416行也未记录项目；故旧 A 回执使 move-a 不进入 federation.push_pending() 第249-259行的 known 核对。Hub hub.py 第267-284行已有允许项目校验及同版本消息追加归属能力，测试未以错误新行为为预期。判为可信 expected_failure。边界：第56-66行的 B/旧引用精确读回、允许后 A 保留、物理正文不变、不重传与重复同步尚未执行，不能据红灯宣称通过；本意见只确认该 TC 的实际缺失行为，非完整 SC3/E1/E3/E4 验收。"
+    }
+  }
+}

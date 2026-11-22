@@ -1,0 +1,172 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-cas": {
+      "checks": [
+        {
+          "action": "在当前版本下成功接收有效项目的正控消息，再确认 none；重放旧版本策略及同一有效项目的旧版本/无版本新消息，比较当前规则与全部正文。",
+          "expected": "所有过期写入拒绝，原历史完整保留，无新增正文，版本仍为 2。",
+          "id": "tdd-core"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "合成设备已有历史；初始 all 版本下登记有效项目，证明同项目的当前版本正文能成功接收；随后收紧为 none。",
+      "title": "Hub 确认后拒绝旧版本正文"
+    },
+    "TC-005-policy-triple-order": {
+      "checks": [
+        {
+          "action": "实际依次提交all/none/all，令响应按3/2/1返回，再重放前两次已提交请求及提交一个未提交的旧版本停止请求；同步正文两轮。",
+          "expected": "最后本机generation/规则/确认和Hubrevision仍为第三次all；旧请求/旧回执不覆盖，过期新请求拒绝；最终正文恰好一份且不重复。",
+          "id": "three-choice-order"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "同一设备初始待选择，档案有完整未传正文；控制请求可在真实Hub提交后延迟返回。",
+      "title": "允许停止允许与旧请求响应乱序"
+    },
+    "TC-005-reconcile-fresh": {
+      "checks": [
+        {
+          "action": "获取当前差异后以准确双版本重新提交本机规则并核对Hub头、确认代次和发送请求。",
+          "expected": "四模式按所显示完整规则提交成功并确认，无隐式正文上传；防止把所有对账请求都拒绝作为修复。",
+          "id": "fresh"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "Hub当前none，本机有另一条待确认规则；分别覆盖none/all/onlyA/exceptA。",
+      "title": "四种新鲜本机规则可明确对账"
+    },
+    "TC-005-reconcile-inflight": {
+      "checks": [
+        {
+          "action": "分别在真实CAS提交成功后丢失回执，或在回执返回前本机另存none；正常重试并比较新规则和所有正文请求。丢回执时再以fresh差异明确采用Hub。",
+          "expected": "未知结果不报已确认，普通重试不上传正文；本机新none的规则/代次/提交身份不被旧回执覆盖并可确认；只有明确fresh对账才采用未知的Hub all。",
+          "id": "inflight-result"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "本机已选择待确认all，Hub为none；有真实可提交CAS的合成Hub。",
+      "title": "在途对账不自动接受未知结果或覆盖新选择"
+    },
+    "TC-005-reconcile-remote-race": {
+      "checks": [
+        {
+          "action": "分别从实际CLI与Web采用local/hub，在首次status返回后、第二次status返回后、set CAS提交前让另入口真实确认Hub none。比较拒绝、完整本机row、新Hub头及正文。",
+          "expected": "注入确已发生；CLI非零且无成功JSON、Web明确失败；本机完整规则及代次不变，Hub保持新none和新revision，没有正文发送。已有fresh四模式与本机修改/目标切换检查继续回归，防止只拒绝所有请求。",
+          "id": "remote-reject-no-save"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "同一本机为none、Hub为另一入口提交的all，已有刚查看的两端版本；本机和Hub有独立完整消息基线。",
+      "title": "调用中Hub改变后拒绝不保存本机规则"
+    },
+    "TC-005-reconcile-stale-local": {
+      "checks": [
+        {
+          "action": "恢复通道后提交所展示的旧两端版本，分别选择local/hub；比较两端完整规则/版本及出站策略写入。",
+          "expected": "请求明确拒绝，不把新all冒充旧none，也不覆盖新all为旧采用值；两端规则及版本不变，无策略提交。",
+          "id": "stale-local"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "已显示本机none/gen1及Hub none/rev1，另一入口本机保存all/gen2但Hub确认暂失败。Web两种采用动作均保留旧显示值。",
+      "title": "Hub不变时拒绝旧本机对账视图"
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "checks": [
+        {
+          "action": "在第二次真实Hub状态响应后执行configure-hub到另一Hub，观察旧对账响应、旧Hub头、新Hub待选择及策略提交。",
+          "expected": "旧对账不能继续向旧连接派发策略或报告当前连接已确认；旧Hub不新增策略提交，新Hub仍待选择且无正文。已经完成的本机旧目标intent可以保留pending，不把它当作Hub已确认。",
+          "id": "target-control-dispatch"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "旧Hub与本机已确认none，用户按新鲜双版本对账；本机条件保存完成后、sync_policy再次读取Hub状态返回时切换到另一真实Hub。；第二次远端读取时不约定本机是否已有暂存，该中间顺序不属于SPEC；保留旧端不新派发和新目标待选择的结果检查。",
+      "title": "条件保存后派发策略前切换Hub仍停止旧端提交"
+    },
+    "TC-005-reconcile-write-window": {
+      "checks": [
+        {
+          "action": "在真实Hub状态响应之后、交回对账逻辑之前保存另一条本机规则，分别采用local/hub；检查条件保存及两端状态。",
+          "expected": "旧对账因本机代次变化拒绝，保留最新本机规则与代次、Hub不改；不能只在请求开头比较版本。",
+          "id": "write-window"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "两端均none且版本已展示；对账请求开始后、Hub状态读取返回前，本机另保存all新代次。",
+      "title": "远端核对期间本机再修改不能被覆盖"
+    },
+    "TC-005-sc2-evidence": {
+      "checks": [
+        {
+          "action": "核对停止请求、确认及后续真实传输日志，确认无新的冲突正文任务；结合当前派发竞态自动断言。",
+          "expected": "保存停止后不启动冲突的新上传，未发送任务、手动同步和失败重试遵守当前规则。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full1"
+        },
+        {
+          "action": "逐平台/服务核对有旧版本和无版本重放均403/409且消息前后完全相同，旧副本原文可读。",
+          "expected": "Hub 确认限制后，旧版本及无所需版本请求被拒绝且正文不增加；确认前已提交历史保留。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full2"
+        },
+        {
+          "action": "结合当前三次提交/反序回复、确认丢失、在途提交与重启断言核对最终本机/Hub状态。",
+          "expected": "确认丢失、重启、并发保存及允许停止允许乱序不把未知记成功、不用过期响应覆盖新规则。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full3"
+        },
+        {
+          "action": "核对暂停自动导入回归，以及E1/E3/E4真实服务PID重启、持久none及旧批次重放原件。",
+          "expected": "暂停期间修改策略不恢复自动导入或正文上传；E1/E3/E4 的实际重启与旧批次重放结果符合上述判据。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full4"
+        },
+        {
+          "action": "核对当前核对到写入/远端CAS前等竞态测试与三平台真实陈旧视图拒绝/新鲜提交记录。",
+          "expected": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-5"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC2实际原件与当前适用性核验"
+    },
+    "TC-005-target-dispatch": {
+      "checks": [
+        {
+          "action": "在旧Hub指纹核对返回后、正文派发前连接另一个Hub，检查两端和新规则。",
+          "expected": "旧端没有新正文，新端仍待选择。",
+          "id": "review-target-dispatch"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "独立合成档案和TestClient Hub；不接触用户服务。",
+      "title": "切换目标立即阻止旧端新派发"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "complete-5": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。",
+    "fresh": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。",
+    "full1": "保存停止后不启动冲突的新上传，未发送任务、手动同步和失败重试遵守当前规则。",
+    "full2": "Hub 确认限制后，旧版本及无所需版本请求被拒绝且正文不增加；确认前已提交历史保留。",
+    "full3": "确认丢失、重启、并发保存及允许停止允许乱序不把未知记成功、不用过期响应覆盖新规则。",
+    "full4": "暂停期间修改策略不恢复自动导入或正文上传；E1/E3/E4 的实际重启与旧批次重放结果符合上述判据。",
+    "inflight-result": "确认丢失、重启、并发保存及允许停止允许乱序不把未知记成功、不用过期响应覆盖新规则。",
+    "remote-reject-no-save": "确认丢失、重启、并发保存及允许停止允许乱序不把未知记成功、不用过期响应覆盖新规则。",
+    "review-target-dispatch": "保存停止后不启动冲突的新上传，未发送任务、手动同步和失败重试遵守当前规则。",
+    "stale-local": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。",
+    "target-control-dispatch": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。",
+    "tdd-core": "旧版本及无所需版本请求被拒绝且正文不增加",
+    "three-choice-order": "确认丢失、重启、并发保存及允许停止允许乱序不把未知记成功、不用过期响应覆盖新规则。",
+    "write-window": "Hub版本不变而本机规则改变时，旧对账视图不能提交另一条本机规则；核对后到条件保存前发生的新修改同样不能被覆盖。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete26-sc2/result.json",
+  "recorded_at": "2026-11-22T09:50:23.410000+00:00",
+  "request_id": "design-complete26-sc2",
+  "request_sha256": "32c9199d8f8d9addfd53a6e1e1fec0600d72c3acac2561828ff89bafca529494",
+  "scene": "SC2",
+  "status": "designed"
+}

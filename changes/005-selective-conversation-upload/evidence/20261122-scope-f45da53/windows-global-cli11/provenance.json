@@ -1,0 +1,36 @@
+{
+  "source": "AT-SMM-005 private actual windows-global-cli11",
+  "redactions": "account, network and absolute private paths; fixture bodies unchanged",
+  "controllers": {
+    "selective_upload_platform.py": "ec5329e6240493ad8142bb359478fe2cfd52612ca8eb9f6e0af2553a06f70a8f",
+    "selective_upload_global_cli.py": "94d6ed7f057e354c80f7127f281f29f17000dab991ff9b73e15f8551971958fc",
+    "selective_upload_windows_limited.py": "e3e79f6d9aade3c72a4d018fb5ff5f1da28fe8db1384b4994ed6650b4a494aba"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "4e1ad4cf2a4f37ed8cd904e7102bb4561446d1d92bbeefa548558b7256734162",
+      "export_sha256": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012"
+    },
+    {
+      "file": "global-cli.json",
+      "original_sha256": "5bdc5f2a470a7c260bdcbcd0122887a96d0ede2ba2d16ae984fbfdfb1e579020",
+      "export_sha256": "f1e55761816e3998a59b0484def19e2d91f867dfd64183443b46addb3448e4d6"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "e54b81f81ab001226a752d706775df198939424f751793a2b213331f3f184187",
+      "export_sha256": "9b3f49ceb07e23033ff5dfd0dda9d0ab706e59e715287d0c303525901215b121"
+    },
+    {
+      "file": "outer-process.json",
+      "original_sha256": "0d4a0ce633ad751a8792bb00bec9a1ae0eac3027c1192b83d21d08455758aaaf",
+      "export_sha256": "a4fb4313a171cee1eca385f8c3b2dba431cf4b28b4b9d10efb20a0956a3e7627"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "52f4b8931520d1d4b70ed7263a337e62036c5f3cb2a7f51d36bad631521b6ca4",
+      "export_sha256": "6b801ddfaf4365cd154ee0766d809010ae70bcdf0c29a92593ad0224cd743072"
+    }
+  ]
+}

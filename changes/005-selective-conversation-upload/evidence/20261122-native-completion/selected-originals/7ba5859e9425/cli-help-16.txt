@@ -1,0 +1,11 @@
+usage: smm source batches [-h] [--before 批次ID] source_id
+
+默认显示最近 100 批。按导入时间 (imported_at)、版本 (revision) 和消息数 (messages) 辨认批次，取记录的
+id。清理前的停用要求见 smm source purge-batch --help。
+
+positional arguments:
+  source_id      插件来源 ID。用 smm source list 查找对应来源。
+
+options:
+  -h, --help     show this help message and exit
+  --before 批次ID  填当前页最后一条记录的 id，查询更早的批次。返回 [] 表示已查到末尾。

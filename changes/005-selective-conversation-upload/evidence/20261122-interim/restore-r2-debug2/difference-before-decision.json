@@ -1,0 +1,53 @@
+{
+  "local": {
+    "configured": true,
+    "hub_id": "5895a5c9086442bd865fe5488fc8d9d8",
+    "device_id": "54a1059f50934fa188b49b4b48b26531",
+    "hub_address": "https://localhost:54442",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "generation": 2,
+    "state": "conflict",
+    "hub_revision": 2,
+    "control_epoch": "e3d8a0b59f3f44d79d396a7953682566",
+    "confirmed_messages": 3,
+    "not_confirmed_messages": 4,
+    "inflight_messages": 0,
+    "unsent_messages": 4,
+    "problem": "Hub 与本机规则不一致，请查看差异",
+    "remote": {
+      "hub_id": "5895a5c9086442bd865fe5488fc8d9d8",
+      "device_id": "54a1059f50934fa188b49b4b48b26531",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "76cde40d5b1d496997e2000016a9eb15",
+      "control_epoch": "bbf88bc062fe436e9fe8bb13ea83ecb6",
+      "restore_pending": true,
+      "conflict": true
+    },
+    "transfer_state": "blocked",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T04:19:43.051196+00:00",
+    "last_transfer_success": "2026-11-22T04:19:43.051196+00:00"
+  },
+  "hub": {
+    "hub_id": "5895a5c9086442bd865fe5488fc8d9d8",
+    "device_id": "54a1059f50934fa188b49b4b48b26531",
+    "revision": 2,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "76cde40d5b1d496997e2000016a9eb15",
+    "control_epoch": "bbf88bc062fe436e9fe8bb13ea83ecb6",
+    "restore_pending": true,
+    "conflict": true
+  }
+}

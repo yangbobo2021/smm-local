@@ -1,0 +1,121 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+____ test_old_reference_reads_while_destination_is_still_forbidden[assign] _____
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1075b0fe0>, remote=<smm_local.core.Archive object at 0x1075b1280>,...e, 'source_order': 2, 'project_id': 'ac02b3af84bd6697c8ea9c01f4580aaf'}]})], hub_id='445569b545b141af965993692db83151')
+operation = 'assign'
+
+    @pytest.mark.parametrize('operation', ['assign', 'map', 'merge'])
+    def test_old_reference_reads_while_destination_is_still_forbidden(pair, operation):
+        """TC-005-forbidden-move-read: every old session/message ref before B is allowed."""
+        a = add_local(pair, 'move-a', 'A', 'moving A first original')
+        a2 = add_local(pair, 'move-a2', 'A', 'moving A second original')
+        b = add_local(pair, 'move-b', 'B', 'moving B forbidden original')
+        expected = {'move-a': [(1, 'user', 'moving A first original', None),
+                                (2, 'assistant', 'moving A first appended', None)],
+                    'move-a2': [(1, 'user', 'moving A second original', None),
+                                 (2, 'assistant', 'moving A second appended', None)]}
+        for session, rows in expected.items():
+            event = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',
+                     'id': session+'-appended', 'role': 'assistant',
+                     'content': [{'type': 'output_text', 'text': rows[1][2]}]}}
+            with (pair.histories/(session+'.jsonl')).open('a') as stream:
+                stream.write(json.dumps(event)+'\n')
+        assert pair.local.sync_codex(pair.histories)['files_changed'] == 2
+        config=connect(pair); federation.choose_upload(pair.local,'only',[a['project_id']])
+        assert federation.push_pending(pair.local)['uploaded']==4
+        keys={p['name']:p['source_key'] for p in HubProjects(pair.remote).list()}
+        old_hits=project_hits(pair,config,keys['A']); assert set(old_hits)==set(expected)
+        checks=[]
+        for session, hit in old_hits.items():
+            assert len(hit['matched_messages'])==2
+            checks.append((session,hit['reference'],expected[session]))
+            for message in hit['matched_messages']:
+>               checks.append((session,message['reference'],[next(row for row in expected[session] if row[0]==message['position'])]))
+                                       ^^^^^^^^^^^^^^^^^^^^
+E               KeyError: 'reference'
+
+tests/test_complete_scene_boundaries.py:143: KeyError
+______ test_old_reference_reads_while_destination_is_still_forbidden[map] ______
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1076f7cb0>, remote=<smm_local.core.Archive object at 0x1076f7dd0>,...e, 'source_order': 2, 'project_id': '2802397b913e238fd0ca73b56055d27b'}]})], hub_id='904c9a6eb873415988801f38e49b8966')
+operation = 'map'
+
+    @pytest.mark.parametrize('operation', ['assign', 'map', 'merge'])
+    def test_old_reference_reads_while_destination_is_still_forbidden(pair, operation):
+        """TC-005-forbidden-move-read: every old session/message ref before B is allowed."""
+        a = add_local(pair, 'move-a', 'A', 'moving A first original')
+        a2 = add_local(pair, 'move-a2', 'A', 'moving A second original')
+        b = add_local(pair, 'move-b', 'B', 'moving B forbidden original')
+        expected = {'move-a': [(1, 'user', 'moving A first original', None),
+                                (2, 'assistant', 'moving A first appended', None)],
+                    'move-a2': [(1, 'user', 'moving A second original', None),
+                                 (2, 'assistant', 'moving A second appended', None)]}
+        for session, rows in expected.items():
+            event = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',
+                     'id': session+'-appended', 'role': 'assistant',
+                     'content': [{'type': 'output_text', 'text': rows[1][2]}]}}
+            with (pair.histories/(session+'.jsonl')).open('a') as stream:
+                stream.write(json.dumps(event)+'\n')
+        assert pair.local.sync_codex(pair.histories)['files_changed'] == 2
+        config=connect(pair); federation.choose_upload(pair.local,'only',[a['project_id']])
+        assert federation.push_pending(pair.local)['uploaded']==4
+        keys={p['name']:p['source_key'] for p in HubProjects(pair.remote).list()}
+        old_hits=project_hits(pair,config,keys['A']); assert set(old_hits)==set(expected)
+        checks=[]
+        for session, hit in old_hits.items():
+            assert len(hit['matched_messages'])==2
+            checks.append((session,hit['reference'],expected[session]))
+            for message in hit['matched_messages']:
+>               checks.append((session,message['reference'],[next(row for row in expected[session] if row[0]==message['position'])]))
+                                       ^^^^^^^^^^^^^^^^^^^^
+E               KeyError: 'reference'
+
+tests/test_complete_scene_boundaries.py:143: KeyError
+_____ test_old_reference_reads_while_destination_is_still_forbidden[merge] _____
+
+pair = namespace(local=<smm_local.core.Archive object at 0x10779e450>, remote=<smm_local.core.Archive object at 0x10779c290>,...e, 'source_order': 2, 'project_id': 'ad6601a37797d0657e7db98193281666'}]})], hub_id='66211f376ad641a99bc2be197c5cf02d')
+operation = 'merge'
+
+    @pytest.mark.parametrize('operation', ['assign', 'map', 'merge'])
+    def test_old_reference_reads_while_destination_is_still_forbidden(pair, operation):
+        """TC-005-forbidden-move-read: every old session/message ref before B is allowed."""
+        a = add_local(pair, 'move-a', 'A', 'moving A first original')
+        a2 = add_local(pair, 'move-a2', 'A', 'moving A second original')
+        b = add_local(pair, 'move-b', 'B', 'moving B forbidden original')
+        expected = {'move-a': [(1, 'user', 'moving A first original', None),
+                                (2, 'assistant', 'moving A first appended', None)],
+                    'move-a2': [(1, 'user', 'moving A second original', None),
+                                 (2, 'assistant', 'moving A second appended', None)]}
+        for session, rows in expected.items():
+            event = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',
+                     'id': session+'-appended', 'role': 'assistant',
+                     'content': [{'type': 'output_text', 'text': rows[1][2]}]}}
+            with (pair.histories/(session+'.jsonl')).open('a') as stream:
+                stream.write(json.dumps(event)+'\n')
+        assert pair.local.sync_codex(pair.histories)['files_changed'] == 2
+        config=connect(pair); federation.choose_upload(pair.local,'only',[a['project_id']])
+        assert federation.push_pending(pair.local)['uploaded']==4
+        keys={p['name']:p['source_key'] for p in HubProjects(pair.remote).list()}
+        old_hits=project_hits(pair,config,keys['A']); assert set(old_hits)==set(expected)
+        checks=[]
+        for session, hit in old_hits.items():
+            assert len(hit['matched_messages'])==2
+            checks.append((session,hit['reference'],expected[session]))
+            for message in hit['matched_messages']:
+>               checks.append((session,message['reference'],[next(row for row in expected[session] if row[0]==message['position'])]))
+                                       ^^^^^^^^^^^^^^^^^^^^
+E               KeyError: 'reference'
+
+tests/test_complete_scene_boundaries.py:143: KeyError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_complete_scene_boundaries.py::test_old_reference_reads_while_destination_is_still_forbidden[assign]
+FAILED tests/test_complete_scene_boundaries.py::test_old_reference_reads_while_destination_is_still_forbidden[map]
+FAILED tests/test_complete_scene_boundaries.py::test_old_reference_reads_while_destination_is_still_forbidden[merge]
+3 failed, 1 warning in 0.48s

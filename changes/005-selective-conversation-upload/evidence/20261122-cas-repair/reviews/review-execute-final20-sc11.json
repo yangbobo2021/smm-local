@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "SPEC B8/A11及已审tdd-core：冻结test_upload_policy.py:117-143以SQLite backup生成all一致性备份，随后实际Hub确认none；prepare_restore的body_stopped=True且guard列入do_not_restore均已断言，恢复旧库并重建Archive/LocalUpload后状态conflict。查看差异独立要求Hub none且本机desired保持旧值；明确CLI等价use=hub后本机confirmed/none，再实际push且Hub正文空。所有恢复、只查看和明确接受后的断言均已到达；当前upload.py:246-248无use先返回，:258-295远端CAS成功后才条件_save，证据对应最终产品。此TC只在未改变的同一配套Hub配置下恢复SQLite，不扩大为配套文件被改变、实际停启服务或Hub恢复矩阵。 本次正式execute-final20-sc11/TC-005-local-restore/run.stdout为1 passed，stderr为空，pid=72029，exit_code=0，实际时间2026-11-22T08:26:40.053000+00:00至2026-11-22T08:26:40.495000+00:00。已核request实际两TC、全部artifacts/当前bindings摘要、case-design摘要及match-current16-sc11冻结source一致，执行bindings与已登记独立review-preparation-final20-sc11相同。仅认领本次实际到达分配项，full1-4及真实E1-E5其余恢复义务保持gaps。"
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "covers": [
+        "tdd-unreconciled"
+      ],
+      "reason": "SPEC B8/A11及已审tdd-unreconciled：冻结test_upload_acceptance_boundaries.py:71-104同一Hub all旧备份/后来none，先prepare_restore再恢复旧库且保留guard，重建对象后新增来源。独立完整搜索集合恰为{restore-a,restore-new}证明本机导入查询可用，动作前本机desired字面all、Hub物理正文空。未看差异与只看差异两种状态分别实际push；每轮零上传或明确ControlConflict，整个出站区间无known指纹/正文，Hub完整物理行不增，状态conflict、本机all、远端none保持；只查看不改desired。两轮全部尾部断言到达，旧/新内容都受到阻断，不用仅status模拟同步。本项不替代真实进程重启、Hub数据库及升级失败恢复。 本次正式execute-final20-sc11/TC-005-unreconciled-send/run.stdout为1 passed，stderr为空，pid=72030，exit_code=0，实际时间2026-11-22T08:26:40.496000+00:00至2026-11-22T08:26:40.922000+00:00。已核request实际两TC、全部artifacts/当前bindings摘要、case-design摘要及match-current16-sc11冻结source一致，执行bindings与已登记独立review-preparation-final20-sc11相同。仅认领本次实际到达分配项，full1-4及真实E1-E5其余恢复义务保持gaps。"
+    }
+  }
+}

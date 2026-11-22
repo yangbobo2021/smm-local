@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-empty-windows": {
+      "status": "passed",
+      "reason": "按SPEC A9/E1及当前design/match-complete31-sc9核同一TC kind=manual，仅长运行记录方式变化；已读SC9-windows-empty步骤与准备MD，未使用windows-empty30-recovered作为本次业务。新正式work/windows-empty31-formal/process.json真实11:06:33.033–11:11:43.051 UTC exit0/error=null，原stdout为实际新业务完成；远端worker11220 exit0，实际业务11:06:44.072–11:11:36.528，Windows11普通<ordinary-user> elevated_admin=false，本机按需服务及Hub8656均任务隔离，停止请求后exit1符合Windows主动清理，cleanup=[]。独立核完整Local25/Hub24安装模块均等ba8 candidate、65项输入前后SHA一致，保留runner源码SHA f388bb6a…与准备时相同。全部28 artifacts与68 bindings重算匹配。正控实际含local-A/remote-B/vibe-V，all/project各CLI/实际stdio MCP/Web六原响应空、双方complete、无fallback、范围all或V/A/B而本机A。本人实际打开新正式probe/successful-empty-all.png、successful-empty-project.png：uniquelyabsentquery、无匹配结果、本机/Hub已检索及对应所有/指定项目范围清晰。新trace.zip完整无坏项，实际两POST /api/search 200，内嵌原请求分别all与project_id1、local=false，匹配点击顺序/响应/截图；page_errors=[]。旧debug30 timeout/null保持原失败边界，未升级；仅认本次empty-e1-windows。",
+      "covers": [
+        "empty-e1-windows"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-005-isolation": {
+      "status": "passed",
+      "reason": "对照SPEC A5/B2–B4及design/match-complete26-sc5，正式execute于2026-11-22T10:17:27.965–10:17:28.628Z退出0；run.stdout为该指定test 1 passed。已逐字核对tests/test_upload_isolation.py:11–51及test_005_contracts.py夹具：停止前取得A旧reference并建立本机/Hub A-B关联，停止后给A旧会话追加和新会话、B新消息、独立未迁移设备新消息与合成Vibe追加；Hub完整7条独立预期正文集合排除两种A新增并保留三来源旧/新；全部停止后请求排除禁止会话ID/消息ID/正文；旧A引用仍精确读原文，本机保留A追加，允许待传为0。全部bindings/artifacts SHA实核一致。仅认领当前临时档案真实TestClient共用断言，不把它扩大成实际平台服务或旧包兼容实测；那些由人工项承担。",
+      "covers": [
+        "case-1",
+        "other-sources"
+      ]
+    }
+  }
+}

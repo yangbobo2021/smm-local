@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-005-scope-race": {
+      "status": "passed",
+      "reason": "正式执行复审，依据SPEC B5/A6及已审design-required22-sc6的query-scope-race。独立打开冻结test_required_snapshot_and_batch_boundaries.py:24-70、当前federation.py:451-556及Hub hub.py:448-492；本机只由同一effective快照精确映射，Hub使用签名scope的项目集合而不重扩关联。实际本次两窗口scope-return/hub-results-return均已真实解除A-D/B并关联A-E/C；:31-32先确保Hub没有本机A/D/E正文，避免副本掩盖本机漏查。:53-57及:62独立检查请求次数、完整旧范围A/D/RemoteB、Hub仅remote-b、最终三会话及local/local/hub来源、逐条独立全文；:65-69核下一次完整新范围A/E/RemoteC和新结果，且旧引用仍精确可读。原始本次两附件scope-race-scope-return.json及scope-race-hub-results-return.json分别显示旧hits local-a/local-d/remote-b，新hits local-a/local-e/remote-c，端点序列[B]/[C]，旧三引用全文均与独立输入一致；两个分支全部到达最后附件写入，非仅首目标/旧截图。只有本机A正确、D/E漏失会在当前完整集合断言失败，两端误用新范围也不能通过旧集合。run.stdout为2 passed，stderr空、pid=7788，exit_code=0，实际时段2026-11-22T09:14:38.641000+00:00至2026-11-22T09:14:39.342000+00:00。已核本执行request所选唯一TC、所有artifacts/bindings/附件摘要、设计摘要、match-required23-sc6冻结source与当前代码一致，且与已登记独立review-preparation-required23-sc6同bindings；产品仍ba8c6d5。本次只认领实际选中TC的query-scope-race，不认领收据中未选旧TC或full1-4/真实CLI/MCP/Web平台gaps；required22缺口原件保留，不改判成产品失败。",
+      "covers": [
+        "query-scope-race"
+      ]
+    }
+  }
+}

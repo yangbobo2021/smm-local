@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-register": {
+      "status": "passed",
+      "reason": "核对definitions003、SPEC D2/A10及design-complete27-sc10的adoption分工。本次execute-complete30-sc10于11:03:44 UTC真实pytest exit0，run.stdout为1 passed；test_upload_registration.py:6-26实际以未选择新设备拒绝同设备旧正文409、另一未迁移设备接受200，断言Hub仅有另一设备正文并用旧整数/消息参数完整读回，故未以状态字段代替副作用。源/test/所有34 artifacts与101 bindings逐字节SHA匹配；src与ba8c6d5无差异。仅认本TC的adoption，不预授整场景。",
+      "covers": [
+        "adoption"
+      ]
+    },
+    "TC-005-legacy-links": {
+      "status": "passed",
+      "reason": "SPEC A10/D1与设计additional-legacy-links对应。本次真实最终安装包/0.4.0包专项11:03:44.498–11:03:46.702 UTC，正式进程exit0，cleanup.failures=[]；manifest实际普通uid501、独立local/hub解释器及全模块摘要与candidate一致，当前Local全源码字节核对一致，actual-old-local/hub版本0.4.0。独立比较before/after-upgrade：A/D本机ID/名称/路径/双向关系、非空旧cursor=2及Hub owner/source_key和A-D关系均保留；两条旧引用的source/session/position/user/正文/时间逐一匹配独立预期，旧conversation ID保留；新联合项目查询仍得两会话，all已确认2条且pending0、升级uploaded0与重复同步集合不增加。selective_upload_completion.py:38-77有相应真实调用和断言，17条commands及服务PID88960→88968/请求停止-15与时序吻合，全部artifact/binding SHA重算匹配。该新增专项只承接已分配迁移关系义务，降级边界与其他组合由人工项负责。",
+      "covers": [
+        "additional-legacy-links"
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "local-A": {
+    "id": 6,
+    "source": "codex",
+    "source_session_id": "local-A",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective common local-A original",
+    "project_id": 2,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective common local-A original",
+        "timestamp": null,
+        "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+        "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+        "hub_message_id": 6,
+        "origins": [
+          {
+            "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 2,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      },
+      {
+        "position": 2,
+        "role": "assistant",
+        "text": "selective common local-A appended while stopped",
+        "timestamp": null,
+        "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+        "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+        "hub_message_id": 8,
+        "origins": [
+          {
+            "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+            "device_name": "005-local",
+            "source_position": 2,
+            "source_order": 2,
+            "project_id": 2,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 2
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "802ff591ac3e4b1f8c79c118fd79dcac",
+        "source_key": "bc65300485fd21eee96587a019bd7eab",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "local-A",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+        "device_name": "005-local"
+      }
+    ]
+  },
+  "local-A-new": {
+    "id": 7,
+    "source": "codex",
+    "source_session_id": "local-A-new",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective common local-A new while stopped",
+    "project_id": 2,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective common local-A new while stopped",
+        "timestamp": null,
+        "canonical_id": "9639442a9d67ed65aef2f13d56f4d5ea59fdf289f3c52eed6d64be1881bd81ca",
+        "content_version": "bdebe75efede75a3c9179f303cf18ecddb257dd580e3558363b5a85f8bc22ed3",
+        "hub_message_id": 7,
+        "origins": [
+          {
+            "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 2,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "802ff591ac3e4b1f8c79c118fd79dcac",
+        "source_key": "bc65300485fd21eee96587a019bd7eab",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "local-A-new",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+        "device_name": "005-local"
+      }
+    ]
+  }
+}

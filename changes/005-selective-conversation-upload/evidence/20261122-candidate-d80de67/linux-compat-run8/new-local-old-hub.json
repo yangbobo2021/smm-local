@@ -1,0 +1,200 @@
+{
+  "sync": {
+    "exit_code": 0,
+    "stdout": "{\"uploaded\": 0, \"pending\": true, \"reason\": \"\\u65e7 Hub \\u4e0d\\u652f\\u6301\\u4e0a\\u4f20\\u89c4\\u5219\\uff0c\\u6b63\\u6587\\u672a\\u53d1\\u9001\"}\n",
+    "stderr": ""
+  },
+  "combined": {
+    "query": "selective",
+    "scope": "all",
+    "requested_scope": "all",
+    "archive_scope": "combined",
+    "hub_id": "f5f00a6c55604893910af4ff552e09b3",
+    "effective_projects": "all",
+    "local_effective_projects": "all",
+    "excluded_current_session_id": null,
+    "coverage": {
+      "local": "complete",
+      "hub": "complete"
+    },
+    "candidate_failures": [],
+    "capability_limitations": [
+      "旧 Hub 使用兼容候选核验；未证实跨档案同源的副本不会合并"
+    ],
+    "rerank": {
+      "scope": "returned_candidates",
+      "local_count": 1,
+      "hub_count": 1,
+      "hub_returned_count": 1,
+      "method": "BM25"
+    },
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "new-device",
+        "title": "selective compatibility new-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 0.18232155679395462,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility new-device original",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "new-device",
+                "device_id": "79c545cba14547cd974e3af831f2c8d6",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "b61745a7bc38d614023834b9acf97eaffa6e9651d062a5211d9ff293f038c3ca",
+            "content_version": "2412f540851203d1a120faaa2a988f009a6e5f26d7e4e1e378dc8871a642cbec",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibmV3LWRldmljZS1tMSIsInZlcnNpb24iOiIyNDEyZjU0MDg1MTIwM2QxYTEyMGZhYWEyYTk4OGYwMDlhNmU1ZjI2ZDdlNGUxZTM3OGRjODg3MWE2NDJjYmVjIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI5ODA0OWVlNWQ1NWNmMTEwYjg1NmQ5NzFiZTlmNTdjNThiODE0MTAyM2VkNGE5MmY5OTc4NjZiOGIzMzcwNDUyIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fed041a2f2c60d9b5b9b07db706d27ba54da542150ce7bf1b207702fd5732c8e"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "new-device",
+            "device_id": "79c545cba14547cd974e3af831f2c8d6"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "new-device",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibmV3LWRldmljZS1tMSIsInZlcnNpb24iOiIyNDEyZjU0MDg1MTIwM2QxYTEyMGZhYWEyYTk4OGYwMDlhNmU1ZjI2ZDdlNGUxZTM3OGRjODg3MWE2NDJjYmVjIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI5ODA0OWVlNWQ1NWNmMTEwYjg1NmQ5NzFiZTlmNTdjNThiODE0MTAyM2VkNGE5MmY5OTc4NjZiOGIzMzcwNDUyIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fed041a2f2c60d9b5b9b07db706d27ba54da542150ce7bf1b207702fd5732c8e",
+        "rerank_score": 0.18232155679395462,
+        "origin_references": [
+          {
+            "archive_scope": "local",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibmV3LWRldmljZS1tMSIsInZlcnNpb24iOiIyNDEyZjU0MDg1MTIwM2QxYTEyMGZhYWEyYTk4OGYwMDlhNmU1ZjI2ZDdlNGUxZTM3OGRjODg3MWE2NDJjYmVjIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI5ODA0OWVlNWQ1NWNmMTEwYjg1NmQ5NzFiZTlmNTdjNThiODE0MTAyM2VkNGE5MmY5OTc4NjZiOGIzMzcwNDUyIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fed041a2f2c60d9b5b9b07db706d27ba54da542150ce7bf1b207702fd5732c8e"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "title": "selective compatibility old-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 2,
+        "bm25_score": 0.18232155679395462,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "0553319b24344b00923a6f785e3083ac",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImY1ZjAwYTZjNTU2MDQ4OTM5MTBhZjRmZjU1MmUwOWIzIiwia2luZCI6ImxlZ2FjeV9odWIiLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSJ9.225a32da2aa00b81c1bf6d148caa565a2d5e57525caf76ebe69a88a4d9e1b8d5"
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "source": "device",
+            "owner": "0553319b24344b00923a6f785e3083ac",
+            "source_key": "6806c8893b1dd31a208b8e28be4fbed4",
+            "device_name": "legacy-device"
+          }
+        ],
+        "origins": [
+          {
+            "device_id": "0553319b24344b00923a6f785e3083ac",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImY1ZjAwYTZjNTU2MDQ4OTM5MTBhZjRmZjU1MmUwOWIzIiwia2luZCI6ImxlZ2FjeV9odWIiLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSJ9.225a32da2aa00b81c1bf6d148caa565a2d5e57525caf76ebe69a88a4d9e1b8d5",
+        "identity_verification": "legacy_message_version_only",
+        "rerank_score": 0.18232155679395462,
+        "origin_references": [
+          {
+            "archive_scope": "hub",
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImY1ZjAwYTZjNTU2MDQ4OTM5MTBhZjRmZjU1MmUwOWIzIiwia2luZCI6ImxlZ2FjeV9odWIiLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSJ9.225a32da2aa00b81c1bf6d148caa565a2d5e57525caf76ebe69a88a4d9e1b8d5"
+          }
+        ]
+      }
+    ]
+  },
+  "scoped": {
+    "query": "selective",
+    "scope": "project",
+    "effective_projects": [
+      {
+        "id": 1,
+        "name": "A"
+      }
+    ],
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "new-device",
+        "title": "selective compatibility new-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility new-device original",
+            "timestamp": null,
+            "origins": [
+              {
+                "device_name": "new-device",
+                "device_id": "79c545cba14547cd974e3af831f2c8d6",
+                "source_position": 1
+              }
+            ],
+            "canonical_id": "b61745a7bc38d614023834b9acf97eaffa6e9651d062a5211d9ff293f038c3ca",
+            "content_version": "2412f540851203d1a120faaa2a988f009a6e5f26d7e4e1e378dc8871a642cbec",
+            "source_order": 1,
+            "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibmV3LWRldmljZS1tMSIsInZlcnNpb24iOiIyNDEyZjU0MDg1MTIwM2QxYTEyMGZhYWEyYTk4OGYwMDlhNmU1ZjI2ZDdlNGUxZTM3OGRjODg3MWE2NDJjYmVjIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI5ODA0OWVlNWQ1NWNmMTEwYjg1NmQ5NzFiZTlmNTdjNThiODE0MTAyM2VkNGE5MmY5OTc4NjZiOGIzMzcwNDUyIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fed041a2f2c60d9b5b9b07db706d27ba54da542150ce7bf1b207702fd5732c8e"
+          }
+        ],
+        "origins": [
+          {
+            "device_name": "new-device",
+            "device_id": "79c545cba14547cd974e3af831f2c8d6"
+          }
+        ],
+        "archive_scope": "local",
+        "origin_session_key": "new-device",
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2ViZDQxMjgwNTkxNGYzM2I5ZDFkNjQyZTliMzQ2ZTkiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibmV3LWRldmljZS1tMSIsInZlcnNpb24iOiIyNDEyZjU0MDg1MTIwM2QxYTEyMGZhYWEyYTk4OGYwMDlhNmU1ZjI2ZDdlNGUxZTM3OGRjODg3MWE2NDJjYmVjIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI5ODA0OWVlNWQ1NWNmMTEwYjg1NmQ5NzFiZTlmNTdjNThiODE0MTAyM2VkNGE5MmY5OTc4NjZiOGIzMzcwNDUyIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.fed041a2f2c60d9b5b9b07db706d27ba54da542150ce7bf1b207702fd5732c8e"
+      }
+    ],
+    "candidate_failures": [],
+    "archive_scope": "local",
+    "requested_scope": "project",
+    "fallback_reason": "Hub 不支持共同项目范围，本次只查本机所请求项目",
+    "coverage": {
+      "local": "complete",
+      "hub": "unavailable"
+    }
+  }
+}

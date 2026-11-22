@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-stale-local": {
+      "status": "expected_failure",
+      "reason": "依已确认 SPEC B1/A1/A2/A11 与 PLAN12，本机规则已从展示none/gen1变成all/gen2而Hub版本未变时，Web local及hub两个采用动作必须拒绝旧展示版本、保留两端完整状态且不得发策略提交。已独立阅读 design-reconcile-v1、match-reconcile-sc2-v1、tests/test_reconcile_snapshot.py:35-56 及真实 Local/SQLite Hub TestClient 的夹具。第40-49行实际先读双方none，临时仅令策略set通道不可用，通过 federation.choose_upload 另存all，确认 state=pending、本机代次已变化及Hub revision不变，再恢复通道；不是模拟业务输出。red-reconcile-stale-v1/result.json SHA256 e7038625217aa7d153db98fc387c9ce38e9c7acab37cd2ae3f326f3144a66bef；所有绑定及原始证据摘要核验一致，测试SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5。原始run.stdout显示两个独立参数local/hub都在第53行因实际200!=预期400失败，前述夹具业务条件均已到达；receipt exit_code=1，stderr空，process pid/group=17319。api.py:58-60/294忽略新本机代次字段，upload.py:213-229重读当前desired并无expected_generation约束，符合缺失的业务防护，而非环境、缺接口或测试协议错误。第54-56行诊断、两端完整状态及无出站set断言均在失败后未执行；因此实测仅证明两种过期本机视图被错误成功接受，不声称后续副作用断言已通过。没有借此覆盖整个SC2、恢复流程或平台矩阵。"
+    }
+  }
+}

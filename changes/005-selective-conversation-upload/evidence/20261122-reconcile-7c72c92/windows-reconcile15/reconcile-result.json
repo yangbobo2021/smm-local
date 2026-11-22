@@ -1,0 +1,549 @@
+{
+  "initial_cli_view": {
+    "local": {
+      "configured": true,
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "hub_address": "https://localhost:62412",
+      "device_name": "005-local",
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "generation": 1,
+      "state": "confirmed",
+      "hub_revision": 1,
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 5,
+      "inflight_messages": 0,
+      "unsent_messages": 5,
+      "problem": null,
+      "remote": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "revision": 1,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "ab31ddcfd3de4ab9af03d5b39de52276",
+        "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "complete",
+      "transfer_problem": null,
+      "allowed_pending_messages": 0,
+      "last_transfer_attempt": "2026-11-22T07:55:35.642764+00:00",
+      "last_transfer_success": "2026-11-22T07:55:35.642764+00:00"
+    },
+    "hub": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    }
+  },
+  "initial_web_view": {
+    "local": {
+      "configured": true,
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "hub_address": "https://localhost:62412",
+      "device_name": "005-local",
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "generation": 1,
+      "state": "conflict",
+      "hub_revision": 1,
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 5,
+      "inflight_messages": 0,
+      "unsent_messages": 5,
+      "problem": "Hub 与本机规则不一致，请查看差异",
+      "remote": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "revision": 2,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+        "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "blocked",
+      "transfer_problem": null,
+      "allowed_pending_messages": 0,
+      "last_transfer_attempt": "2026-11-22T07:56:03.965188+00:00",
+      "last_transfer_success": "2026-11-22T07:56:03.965188+00:00"
+    },
+    "hub": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    }
+  },
+  "external_head": {
+    "request": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "expected_revision": 1,
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "policy": {
+        "mode": "none",
+        "projects": []
+      }
+    },
+    "response": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35"
+    }
+  },
+  "pending_local": {
+    "configured": true,
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "hub_address": "https://localhost:62412",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 2,
+    "state": "pending",
+    "hub_revision": 1,
+    "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 5,
+    "inflight_messages": 0,
+    "unsent_messages": 5,
+    "problem": "汇总服务返回 HTTP 503",
+    "remote": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "blocked",
+    "transfer_problem": null,
+    "allowed_pending_messages": 3,
+    "last_transfer_attempt": "2026-11-22T07:56:03.965188+00:00",
+    "last_transfer_success": "2026-11-22T07:56:03.965188+00:00"
+  },
+  "before_stale_local": {
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "generation": 2,
+    "policy": {
+      "mode": "all",
+      "projects": []
+    }
+  },
+  "before_stale_hub": {
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "revision": 2,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+    "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+    "restore_pending": false,
+    "conflict": false
+  },
+  "stale_cli": {
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+  },
+  "stale_web": {
+    "status": 400,
+    "request": {
+      "use": "local",
+      "expected_hub_revision": 2,
+      "expected_local_generation": 1
+    },
+    "response": {
+      "detail": "本机规则已改变，请重新查看对账差异"
+    }
+  },
+  "missing_cli": {
+    "exit_code": 2,
+    "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+  },
+  "rejected_policy_calls": [
+    {
+      "at": "2026-11-22T07:56:12.601799+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "device_name": "005-local",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:13.850349+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "b3ad8c3a63ee494ba4352e8bba9d32f9",
+        "device_name": "005-remote",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:14.992278+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:16.773765+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:18.020794+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "b3ad8c3a63ee494ba4352e8bba9d32f9"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:19.503225+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:20.983758+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:22.505379+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "b3ad8c3a63ee494ba4352e8bba9d32f9"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:25.561466+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:28.589153+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T07:56:29.469718+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    }
+  ],
+  "fresh_cli_view": {
+    "local": {
+      "configured": true,
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "hub_address": "https://localhost:62412",
+      "device_name": "005-local",
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "generation": 2,
+      "state": "conflict",
+      "hub_revision": 1,
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "confirmed_messages": 0,
+      "not_confirmed_messages": 5,
+      "inflight_messages": 0,
+      "unsent_messages": 5,
+      "problem": "Hub 与本机规则不一致，请查看差异",
+      "remote": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "revision": 2,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+        "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "blocked",
+      "transfer_problem": null,
+      "allowed_pending_messages": 3,
+      "last_transfer_attempt": "2026-11-22T07:56:23.092793+00:00",
+      "last_transfer_success": "2026-11-22T07:56:23.092793+00:00"
+    },
+    "hub": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-0e70931933cb4a8baf9fd121ad2d0304",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    }
+  },
+  "fresh_cli_accepted": {
+    "configured": true,
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "hub_address": "https://localhost:62412",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 3,
+    "state": "confirmed",
+    "hub_revision": 3,
+    "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 5,
+    "inflight_messages": 0,
+    "unsent_messages": 5,
+    "problem": null,
+    "remote": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 3,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "4547a6934743440da0ebbea62b5a1c99",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "backfilling",
+    "transfer_problem": null,
+    "allowed_pending_messages": 3,
+    "last_transfer_attempt": "2026-11-22T07:56:43.294043+00:00",
+    "last_transfer_success": "2026-11-22T07:56:43.294043+00:00"
+  },
+  "later_external_stop": {
+    "request": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "expected_revision": 3,
+      "submission_id": "external-stop-ced0c23fcc6c4e01841595ef0f563f5a",
+      "policy": {
+        "mode": "none",
+        "projects": []
+      }
+    },
+    "response": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 4,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-ced0c23fcc6c4e01841595ef0f563f5a",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35"
+    }
+  },
+  "stale_hub_web": {
+    "status": 400,
+    "request": {
+      "use": "local",
+      "expected_hub_revision": 3,
+      "expected_local_generation": 3
+    },
+    "response": {
+      "detail": "Hub 规则已改变，请重新查看差异"
+    }
+  },
+  "fresh_web_view": {
+    "local": {
+      "configured": true,
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "hub_address": "https://localhost:62412",
+      "device_name": "005-local",
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "generation": 3,
+      "state": "confirmed",
+      "hub_revision": 3,
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "confirmed_messages": 2,
+      "not_confirmed_messages": 3,
+      "inflight_messages": 0,
+      "unsent_messages": 3,
+      "problem": null,
+      "remote": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "revision": 3,
+        "policy": {
+          "mode": "all",
+          "projects": []
+        },
+        "submission_id": "4547a6934743440da0ebbea62b5a1c99",
+        "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "failed",
+      "transfer_problem": "Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异",
+      "allowed_pending_messages": 1,
+      "last_transfer_attempt": "2026-11-22T07:57:42.725546+00:00",
+      "last_transfer_success": "2026-11-22T07:56:43.294043+00:00"
+    },
+    "hub": {
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "revision": 4,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "external-stop-ced0c23fcc6c4e01841595ef0f563f5a",
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "restore_pending": false,
+      "conflict": false
+    }
+  },
+  "adopted_hub_web": {
+    "status": 200,
+    "request": {
+      "use": "hub",
+      "expected_hub_revision": 4,
+      "expected_local_generation": 3
+    },
+    "response": {
+      "configured": true,
+      "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+      "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+      "hub_address": "https://localhost:62412",
+      "device_name": "005-local",
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "generation": 4,
+      "state": "confirmed",
+      "hub_revision": 5,
+      "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+      "confirmed_messages": 2,
+      "not_confirmed_messages": 3,
+      "inflight_messages": 0,
+      "unsent_messages": 3,
+      "problem": null,
+      "remote": {
+        "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+        "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+        "revision": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "57921f82549c4776a9075091c9bf65dc",
+        "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "transfer_state": "failed",
+      "transfer_problem": "Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异",
+      "allowed_pending_messages": 0,
+      "last_transfer_attempt": "2026-11-22T07:57:55.596259+00:00",
+      "last_transfer_success": "2026-11-22T07:56:43.294043+00:00"
+    }
+  },
+  "final_local": {
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "generation": 4,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    }
+  },
+  "final_hub": {
+    "hub_id": "b9743fcbb36e4b3d8073a18d8024711a",
+    "device_id": "929dd7c42cea405da6683a50e7c0a4c9",
+    "revision": 5,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "57921f82549c4776a9075091c9bf65dc",
+    "control_epoch": "43515a0eb6ee4ff793ae5ebabcbfbf35",
+    "restore_pending": false,
+    "conflict": false
+  },
+  "browser_version": "158.0.4370.33",
+  "page_errors": []
+}

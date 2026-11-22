@@ -1,0 +1,54 @@
+{
+  "query": "selective",
+  "scope": "all",
+  "effective_projects": "all",
+  "excluded_current_session_id": null,
+  "results": [
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "old-device",
+      "title": "selective compatibility old-device original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 1,
+      "project_name": "A",
+      "rank": 1,
+      "bm25_score": 1e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility old-device original",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "device_id": "77d8e4df55534a9db3989fbe212798a9",
+              "device_name": "legacy-device",
+              "source_position": 1,
+              "project_id": 1,
+              "project_name": "A"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "A",
+          "source": "device",
+          "owner": "77d8e4df55534a9db3989fbe212798a9",
+          "source_key": "f31e116392fddd995980c893db61f029",
+          "device_name": "legacy-device"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "77d8e4df55534a9db3989fbe212798a9",
+          "device_name": "legacy-device"
+        }
+      ]
+    }
+  ],
+  "hub_id": "21a2bf29dbbb414a92ba32159c5af90c"
+}

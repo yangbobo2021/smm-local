@@ -1,0 +1,944 @@
+FFFFFFFFFFFF                                                             [100%]
+=================================== FAILURES ===================================
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108324860>, remote=<smm_local.core.Archive object at 0x108324c20>,...8d4122ae29e09191a0215c', 'device_id': '9405201f36fd4778b7a4266d855c71c8'})], hub_id='115e85b70e8d4122ae29e09191a0215c')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1083171a0>
+capsys = <_pytest.capture.CaptureFixture object at 0x10712b470>, use = 'local'
+window = 'first-status', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': '1...tion': 2, ...} == {'hub_id': '1...tion': 1, ...}
+E         
+E         Omitting 8 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'ack_revision': 2} != {'ack_revision': 1}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'submission_id': '0600618419954db0acdad5088c952d2a'} != {'submission_id': '37e1bfedc5e5489c93785ea137071dff'}
+E         Use -v to get more diff
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1085adee0>, remote=<smm_local.core.Archive object at 0x10891f7d0>,...66400abce996b3c993dfea', 'device_id': 'b344a5491bb34c5e9e4b2a469674e990'})], hub_id='b9b19e580966400abce996b3c993dfea')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1085b54f0>
+capsys = <_pytest.capture.CaptureFixture object at 0x108936990>, use = 'hub'
+window = 'first-status', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'b...tion': 2, ...} == {'hub_id': 'b...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '01dc1060c9f4414b984c516af262c735'} != {'submission_id': 'defb8a3230cd4d87be8354dc0d175dd5'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}
+E         {'desired': {'mode': 'all', 'projects': []}} != {'desired': {'mode': 'none', 'projects': []}}
+E         Use -v to get more diff
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108936ea0>, remote=<smm_local.core.Archive object at 0x108937980>,..., 'submission_id': '0d59580fcb8649ec8ffddbbf2f0bcbb3', 'reconcile': True})], hub_id='b3b84a7fa3bc4cec909eb46635b2e8d4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108937890>
+capsys = <_pytest.capture.CaptureFixture object at 0x108c813a0>, use = 'local'
+window = 'second-status', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'b...tion': 2, ...} == {'hub_id': 'b...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '0d59580fcb8649ec8ffddbbf2f0bcbb3'} != {'submission_id': 'c42f5b1a8054476a88a315c675e7cab5'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108928bc0>, remote=<smm_local.core.Archive object at 0x1085b54f0>,..., 'submission_id': '5e364ccffbc94d57bf055f53fb15da16', 'reconcile': True})], hub_id='15eab5f0f7e04a278f202b5bc9c5076d')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108928a10>
+capsys = <_pytest.capture.CaptureFixture object at 0x108cc0c80>, use = 'hub'
+window = 'second-status', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': '1...tion': 2, ...} == {'hub_id': '1...tion': 1, ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '5e364ccffbc94d57bf055f53fb15da16'} != {'submission_id': 'f14f0b4dc5d741cd80fa6e8814550015'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108cc2f60>, remote=<smm_local.core.Archive object at 0x108cc1280>,..., 'submission_id': '7aca27f2b9004f0a83e2bd27ce0f67e2', 'reconcile': True})], hub_id='c5fbc965b1bc41c0819845f278aaf71a')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108cc0890>
+capsys = <_pytest.capture.CaptureFixture object at 0x108e05e20>, use = 'local'
+window = 'cas', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'c...tion': 2, ...} == {'hub_id': 'c...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '7aca27f2b9004f0a83e2bd27ce0f67e2'} != {'submission_id': 'f25e56e3b5c946cf9f3bd1cd99404f91'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108e05880>, remote=<smm_local.core.Archive object at 0x108e04590>,..., 'submission_id': 'eef65ce646594b4ea94554a4e6e1b3b3', 'reconcile': True})], hub_id='ab54368e1616433fa23180547b98a8df')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108e04530>
+capsys = <_pytest.capture.CaptureFixture object at 0x108e5d340>, use = 'hub'
+window = 'cas', entrance = 'web'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'a...tion': 2, ...} == {'hub_id': 'a...tion': 1, ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': 'eef65ce646594b4ea94554a4e6e1b3b3'} != {'submission_id': '88deb3062ec04caea19e2eec1ea5419a'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108e5e510>, remote=<smm_local.core.Archive object at 0x108e5cbc0>,...b747cb809e2bcfab13d584', 'device_id': '99d7a0548dd74878a6884f36a0b431fc'})], hub_id='68a70031eab747cb809e2bcfab13d584')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108e5f440>
+capsys = <_pytest.capture.CaptureFixture object at 0x108c03da0>, use = 'local'
+window = 'first-status', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': '6...tion': 2, ...} == {'hub_id': '6...tion': 1, ...}
+E         
+E         Omitting 8 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'ack_revision': 2} != {'ack_revision': 1}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'submission_id': '592d222ea9014c43a9347741e5a0df80'} != {'submission_id': 'fccfc2df719543218b209f132668eccd'}
+E         Use -v to get more diff
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108caf890>, remote=<smm_local.core.Archive object at 0x108caf530>,...ce41a5ab4567286be7d5f8', 'device_id': '383c206dc60c4bc084aac3a81ff4b2e5'})], hub_id='ba294a5ab0ce41a5ab4567286be7d5f8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108cac260>
+capsys = <_pytest.capture.CaptureFixture object at 0x108afd820>, use = 'hub'
+window = 'first-status', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'b...tion': 2, ...} == {'hub_id': 'b...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': 'a84e47d8e5d74ebc88bae02355857e21'} != {'submission_id': 'dcd0c38244e34b1f918d30fee8a2ad18'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}
+E         {'desired': {'mode': 'all', 'projects': []}} != {'desired': {'mode': 'none', 'projects': []}}
+E         Use -v to get more diff
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108afda90>, remote=<smm_local.core.Archive object at 0x108affc20>,..., 'submission_id': 'c8bd0fbe5b1943ca888ac1593920f3f7', 'reconcile': True})], hub_id='1265ed02809347848a24d7014f29f4ea')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108afcc80>
+capsys = <_pytest.capture.CaptureFixture object at 0x108930e90>, use = 'local'
+window = 'second-status', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': '1...tion': 2, ...} == {'hub_id': '1...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': 'c8bd0fbe5b1943ca888ac1593920f3f7'} != {'submission_id': '1b86079fdbe247e28d380da71165805b'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1085bbfb0>, remote=<smm_local.core.Archive object at 0x1085bb230>,..., 'submission_id': '812f571166b4435f83b56eb2287583aa', 'reconcile': True})], hub_id='fab73f591f8a425185d77fe639d5c37a')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108e5ffb0>
+capsys = <_pytest.capture.CaptureFixture object at 0x1085a7710>, use = 'hub'
+window = 'second-status', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'f...tion': 2, ...} == {'hub_id': 'f...tion': 1, ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '812f571166b4435f83b56eb2287583aa'} != {'submission_id': 'b3cad1d69e6744de8bafe06a6a50547d'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-local] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1085a77a0>, remote=<smm_local.core.Archive object at 0x1085a6b10>,..., 'submission_id': '890608b8f089454eaa2eaff27e30024b', 'reconcile': True})], hub_id='003c2e62d61b47aca3d79501e185daec')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1085a7290>
+capsys = <_pytest.capture.CaptureFixture object at 0x10891e300>, use = 'local'
+window = 'cas', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': '0...tion': 2, ...} == {'hub_id': '0...tion': 1, ...}
+E         
+E         Omitting 7 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '890608b8f089454eaa2eaff27e30024b'} != {'submission_id': '6f50d664c18f4158832ac44b7d260038'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+_ test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-hub] _
+
+pair = namespace(local=<smm_local.core.Archive object at 0x108c82960>, remote=<smm_local.core.Archive object at 0x108cec3e0>,..., 'submission_id': '4a9e883db6554bd2bfcc5555d8276e89', 'reconcile': True})], hub_id='df230510656e4667855993285a55614d')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108c80140>
+capsys = <_pytest.capture.CaptureFixture object at 0x1089297c0>, use = 'hub'
+window = 'cas', entrance = 'cli'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    @pytest.mark.parametrize('window', ['first-status', 'second-status', 'cas'])
+    @pytest.mark.parametrize('entrance', ['web', 'cli'])
+    def test_remote_rejection_preserves_the_local_rule_and_newer_hub_head(pair, monkeypatch, capsys, use, window, entrance):
+        """TC-005-reconcile-remote-race: a rejection cannot save an unconfirmed rule."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        initial = head(pair, config)
+        external = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+            'device_id': config['device_id'], 'expected_revision': initial['revision'],
+            'submission_id': 'external-all', 'policy': {'mode': 'all', 'projects': []}})
+        assert external.status_code == 200
+        shown = control.reconcile(request); before = control.row(); body_before = bodies(pair.remote)
+        injected = {}; reads = 0
+        def advance():
+            current = head(pair, config)
+            reply = pair.client.post('/v1/upload-policy/set', json={'hub_id': pair.hub_id,
+                'device_id': config['device_id'], 'expected_revision': current['revision'],
+                'submission_id': 'newer-stop', 'policy': {'mode': 'none', 'projects': []}})
+            assert reply.status_code == 200
+            injected['head'] = head(pair, config)
+        def concurrent(cfg, route, payload=None):
+            nonlocal reads
+            if route == '/upload-policy/set' and window == 'cas' and not injected:
+                advance()
+            if route == '/upload-policy/status':
+                result = request(cfg, route, payload); reads += 1
+                if not injected and ((window == 'first-status' and reads == 1) or
+                                     (window == 'second-status' and reads == 2)):
+                    advance()
+                return result
+            if route == '/upload-policy/set':
+                # Preserve the real application's HTTP CAS rejection; the pair's
+                # generic request helper assumes successful responses only.
+                pair.calls.append((route, json.loads(json.dumps(payload))))
+                response = pair.client.post('/v1' + route, json=payload)
+                if response.status_code == 409:
+                    raise federation.HubUnavailable('Hub 状态、规则或项目登记已改变，请重新检索或查看上传差异', status=409)
+                assert response.status_code == 200, response.text
+                return response.json()
+            return request(cfg, route, payload)
+        monkeypatch.setattr(api, '_request', concurrent); monkeypatch.setattr(cli, '_request', concurrent)
+        marker = len(pair.calls)
+        if entrance == 'web':
+            with web(pair) as browser:
+                reply = browser.post('/api/upload/reconcile', json={'use': use,
+                    'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+            assert reply.status_code in (400, 409, 502, 503), reply.text
+            assert '改变' in reply.json()['detail'] or '重新' in reply.json()['detail']
+        else:
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), 'upload', 'reconcile', '--use', use,
+                '--expected-hub-revision', str(shown['hub']['revision']), '--expected-local-generation', str(shown['local']['generation'])])
+            with pytest.raises(SystemExit) as failure: cli.main()
+            output = capsys.readouterr(); assert failure.value.code != 0 and not output.out
+            assert '改变' in output.err or '重新' in output.err
+        assert injected, 'the intended remote race must actually occur'
+>       assert control.row() == before, 'a rejected reconciliation must leave the complete previous local rule unchanged'
+E       AssertionError: a rejected reconciliation must leave the complete previous local rule unchanged
+E       assert {'hub_id': 'd...tion': 2, ...} == {'hub_id': 'd...tion': 1, ...}
+E         
+E         Omitting 6 identical items, use -vv to show
+E         Differing items:
+E         {'generation': 2} != {'generation': 1}
+E         {'submission_id': '4a9e883db6554bd2bfcc5555d8276e89'} != {'submission_id': '0bc6e242049a40929fa195ad922ce511'}
+E         {'state': 'pending'} != {'state': 'confirmed'}
+E         {'ack_revision': 2} != {'ack_revision': 1}...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_reconcile_remote_race.py:68: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-hub]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-hub]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-hub]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-hub]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-hub]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-local]
+FAILED tests/test_reconcile_remote_race.py::test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-hub]
+12 failed, 1 warning in 1.46s

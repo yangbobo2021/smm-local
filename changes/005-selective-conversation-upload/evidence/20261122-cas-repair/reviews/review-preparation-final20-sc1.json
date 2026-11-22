@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-default": {
+      "status": "passed",
+      "reason": "SPEC B2/B3/A1直接支持场景与自然设计，未新增产品要求。已独立核本轮冻结test_005_contracts.py:78-96及debug-final20-sc1原始日志：尚未选择时实际push，:86完整Hub正文集合恰为既有远端正文首先拦截任何新增本机正文，:87-93整个出站集合/所有登记项目字段白名单拦截泄漏会话ID/私有文本/会话归属列表；:94-96要求本机最小项目已登记且另一设备真实远端命中。只有首个目标正确而其余目标泄漏会被完整出站或正文集合挡住；两个结果同错为空仍过不了独立远端字符串/身份预期。当前未选择整体门禁不因同条件ID改变分支，新增等价目标可选。实际1 passed，全部tdd-core分配有效，仅此共用合同，不认领full1-4或真实平台。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "status": "passed",
+      "reason": "SPEC B1双版本必填、非零错误与新鲜显式提交直接支持场景和自然设计。冻结test_reconcile_snapshot.py:81-110实际调用CLI入口，从差异取得真实两版本；:94-102逐次缺Hub/缺本机/均缺/负值/不可解析本机代次，:100首先拦截任一坏输入接受，:101-102错误输出和两端完整状态不变防静默保存；:104-105帮助说明取值来源。新鲜双版本:108-110独立none常量约束当前CLI结果及Hub，两个端点共同误改成all不能通过。最终CAS产品upload.py:240-242仍对两字段共用非负整数验证；更多等价非法整数组合为可选。已核新产品:258-295两次头读取/CAS成功后本机保存，本TC本轮新鲜none正控实际1 passed；不据此认领并发/未知响应窗口或其他模式完整矩阵。cli-versions全部分配按此检查范围有效，full1-4/真实平台保持gaps。",
+      "covers": [
+        "cli-versions"
+      ]
+    },
+    "TC-005-reconcile-web-inputs": {
+      "status": "passed",
+      "reason": "SPEC B1规定Web local/hub均绑定两版本，判据与设计有据。冻结test_reconcile_snapshot.py:132-149逐次真实Web API坏输入：:147错误状态首先拦截只有首输入拒绝而其余接受，:148完整两端状态相等及:149无任何set挡住响应与状态两边同错。两种use、缺本机/Hub及负数/布尔/不可解析已分辨；api.py:295-296对两use共享缺任一字段门禁，:60-61共享严格非负字段规则，补local仅给本机代次等交叉组合不进入新判定条件，列可选。最终CAS修复在通过输入验证后执行，当前坏输入仍不进入set；本轮原始1 passed，分配web-versions有效。四模式新鲜正控由设计另分fresh，不在本目标内冒认；真实Web按钮/画面和full1-4仍待独立证据。",
+      "covers": [
+        "web-versions"
+      ]
+    },
+    "TC-005-transfer-status": {
+      "status": "passed",
+      "reason": "SPEC B2/B4区分规则确认与数据传输状态为依据，设计和实现有效。冻结test_upload_review_regressions.py:86-107在规则confirmed、正文known请求实际失败及恢复后两个状态分别push/status；:98-101独立要求confirmed/failed/准确错误/待确认1，先拦截把规则确认等同正文完成；:105-107恢复后complete/清除失败/待确认0，拦截仅首状态正确。错误两边同为confirmed或同为failed不能同时满足独立期望。实际本轮1 passed，review-transfer-status仅认领此分离状态检查；真实CLI/Web展示/平台仍由full4缺口另验。",
+      "covers": [
+        "review-transfer-status"
+      ]
+    }
+  }
+}

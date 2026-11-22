@@ -1,0 +1,15 @@
+{
+  "cases": {
+    "TC-005-sc2-evidence": {
+      "status": "passed",
+      "reason": "逐项核对manual.operations的真实核验时间2026-11-22T11:16:42Z；不是重新执行原平台业务。全部74 bindings/526 artifacts及原位inventory SHA相符。full1：七主流程stopped-payloads逐请求无非空upload，停止状态/本机新增可查；full2：initial-stop-replay与E3/E4重启后replay分别两个409且before==after，确认前旧正文保留。Linux真实systemd-user PID147555→148725、Windows NT AUTHORITY LocalService PID2504→11036、Mac系统launchd UserName <ordinary-user> PID57818→58048，E4实际serve-hub PID54870→55420；原状态目录/命令/退出/cleanup均核。full3：execute-complete26-sc2九TC与29原JUnit的lost-policy/crash四窗口/checkpoint/late-policy/cross-process实际case均无失败，按源码断言核完整row/head/正文副作用；未当30新全套。full4：当前SC1四模式pause-source即时settings/sources/消息快照、normal push0及sync_all哨兵，实际重启限制由上述原件支持。complete-5：三ba8 reconcile21 CLI旧generation/缺参exit2、Web旧local/Hub版本400，无policy/set，fresh CLI all与刷新Web hub none200；已打开三平台stale-local-rejected/stale-hub-rejected/adopted-hub-current原PNG，所见分别红色重新查看提示和confirmed none；原位trace实际diff/use-local/use-hub点击及POST版本/400/200与完整响应一致。已打开三E1和登录的combined-stopped-upload.png，均为confirmed none/未传待处理。历史d80/f45/7c全模块与当前差异实际核为Local对账/标题等，Hub控制分支未变；当前ba8三对账实测及CAS/派发专门测试补变更，不只凭Hub相等推Local全等。只认本项五检查，不授R005或其余环境/scene通过。",
+      "covers": [
+        "complete-5",
+        "full1",
+        "full2",
+        "full3",
+        "full4"
+      ]
+    }
+  }
+}

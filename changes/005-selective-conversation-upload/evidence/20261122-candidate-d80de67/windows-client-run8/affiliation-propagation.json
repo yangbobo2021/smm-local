@@ -1,0 +1,664 @@
+{
+  "meaning": "fixture D exercises destination B in SPEC",
+  "preview": {
+    "applied": false,
+    "requires_confirmation": true,
+    "affected_conversations": [
+      1
+    ],
+    "newly_allowed_conversations": [],
+    "newly_stopped_conversations": [
+      1
+    ],
+    "conversations": [
+      {
+        "id": 1,
+        "title": "selective common local-A original",
+        "source": "codex",
+        "source_session_id": "local-A",
+        "project_id": 1
+      }
+    ],
+    "target": {
+      "id": 2,
+      "name": "D",
+      "kind": "ordinary",
+      "remote_key": "d552682e8df1b00b2968be98baa55e6d"
+    },
+    "confirmation": "r1.eyJhcmNoaXZlX2lkIjoiMDc4ODU5ZDE4ODA2NGE3YjlkNmY4OTI2YTcwMDU4ZDgiLCJraW5kIjoicHJvamVjdF9jaGFuZ2UiLCJzbmFwc2hvdCI6ImE1YzU2N2QxNWRlYjAyY2MyNmNkNzcwY2E0ZWRlMTY2MzRjNjg0ODJiYTcyYTM2NDI4NjUyOGE1MDk2NjM2NDYifQ.ae12c4901cdaf8040b04c372a8e70426e518accaae420c369ba174986d07d03d",
+    "message": "核对影响范围后提交该确认标识；Hub 旧副本不会自动撤回"
+  },
+  "applied": {
+    "applied": true,
+    "affected_conversations": [
+      1
+    ],
+    "newly_allowed_conversations": [],
+    "newly_stopped_conversations": [
+      1
+    ],
+    "conversations": [
+      {
+        "id": 1,
+        "title": "selective common local-A original",
+        "source": "codex",
+        "source_session_id": "local-A",
+        "project_id": 1
+      }
+    ],
+    "target": {
+      "id": 2,
+      "name": "D",
+      "kind": "ordinary",
+      "remote_key": "d552682e8df1b00b2968be98baa55e6d"
+    },
+    "message": "已更新 1 段本机会话；新增允许 0 段、停止允许 1 段。Hub 旧副本继续保留。"
+  },
+  "forbidden_requests": [
+    {
+      "at": "2026-11-22T06:14:05.588052+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:07.884112+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:09.739972+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d",
+        "device_name": "005-remote",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:12.015204+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "device_name": "005-local",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:13.877075+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:16.173453+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:18.076696+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:20.414297+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    }
+  ],
+  "allowed_requests": [
+    {
+      "at": "2026-11-22T06:14:33.802329+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:35.693397+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "device_name": "005-local",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:35.953933+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:38.011607+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:39.941116+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:40.156916+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:44.134583+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:44.326694+00:00",
+      "route": "/v1/upload-policy/set",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "policy": {
+          "mode": "only",
+          "projects": [
+            "d552682e8df1b00b2968be98baa55e6d"
+          ]
+        },
+        "expected_revision": 12,
+        "submission_id": "2af7fc0a4d9a4d3ba739b3f4a1d26cb1",
+        "reconcile": false
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:45.598442+00:00",
+      "route": "/v1/info",
+      "payload": null,
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:48.307231+00:00",
+      "route": "/v1/upload-policy/set",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "policy": {
+          "mode": "only",
+          "projects": [
+            "d552682e8df1b00b2968be98baa55e6d"
+          ]
+        },
+        "expected_revision": 12,
+        "submission_id": "2af7fc0a4d9a4d3ba739b3f4a1d26cb1",
+        "reconcile": false
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:48.564277+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:49.736625+00:00",
+      "route": "/v1/upload",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d",
+        "device_name": "005-remote",
+        "records": []
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:52.531412+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:54.213049+00:00",
+      "route": "/v1/upload-policy/register",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:56.903349+00:00",
+      "route": "/v1/known-upload-messages",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "policy_revision": 13,
+        "control_epoch": "89de7abfe42040e2b3aaa852bda60d79",
+        "records": [
+          {
+            "conversation_digest": "85efd14e5ad7646cd01afeb34b3de392561db73674d194a3f9412487f86663ae",
+            "source_key": "8296b1447969eca733f15609cbee5270fb6dbed1ac9d84f7b524e4bfbc607b46",
+            "version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+            "project_id": "d552682e8df1b00b2968be98baa55e6d",
+            "position": 1,
+            "source_order": 1
+          },
+          {
+            "conversation_digest": "85efd14e5ad7646cd01afeb34b3de392561db73674d194a3f9412487f86663ae",
+            "source_key": "791713e0c3742fe327e6555a1d5a71317f00f278a0885bcb4dd60c8fd49f8114",
+            "version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+            "project_id": "d552682e8df1b00b2968be98baa55e6d",
+            "position": 2,
+            "source_order": 2
+          }
+        ]
+      },
+      "offline": false
+    },
+    {
+      "at": "2026-11-22T06:14:58.440439+00:00",
+      "route": "/v1/upload-policy/status",
+      "payload": {
+        "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+        "device_id": "3cc5905c0c00405093ce51a3d95d886d"
+      },
+      "offline": false
+    }
+  ],
+  "destination_search": {
+    "local-A": {
+      "id": 5,
+      "source": "codex",
+      "source_session_id": "local-A",
+      "title": "selective common local-A original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 3,
+      "project_name": "D",
+      "rank": 1,
+      "bm25_score": 1.86649187849491e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A original",
+          "timestamp": null,
+          "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+          "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+          "hub_message_id": 5,
+          "origins": [
+            {
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 3,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 1
+        },
+        {
+          "position": 2,
+          "role": "assistant",
+          "text": "selective common local-A appended while stopped",
+          "timestamp": null,
+          "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+          "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+          "hub_message_id": 11,
+          "origins": [
+            {
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "device_name": "005-local",
+              "source_position": 2,
+              "source_order": 2,
+              "project_id": 3,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 2
+        }
+      ],
+      "projects": [
+        {
+          "id": 3,
+          "name": "D",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "39e18a69fe414c6085a90c748563cc43",
+          "source_key": "d552682e8df1b00b2968be98baa55e6d",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiN2UzMDhjYTdmODk2NGZlNmJiMmE4Yzk0OTNiNWJkMGMiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjM5MTYxZjFjOWQ4NzQ1YmFiMzExMWZjNzM2ZmUzNWM5Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjgyOTZiMTQ0Nzk2OWVjYTczM2YxNTYwOWNiZWU1MjcwZmI2ZGJlZDFhYzlkODRmN2I1MjRlNGJmYmM2MDdiNDYiLCJ2ZXJzaW9uIjoiOTE4YTY5MjA4ZjM5NmUyOTYwZDg3NTEwMjIyZWIyMzdiZTEyNmM0OTQ5YjEyMTYwOTA5YzhlMTc2MDkzMzIzZSJ9LHsiaWQiOjExLCJwb3NpdGlvbiI6Miwic291cmNlX2tleSI6Ijc5MTcxM2UwYzM3NDJmZTMyN2U2NTU1YTFkNWE3MTMxN2YwMGYyNzhhMDg4NWJjYjRkZDYwYzhmZDQ5ZjgxMTQiLCJ2ZXJzaW9uIjoiYWJhNWM5MThhMGVjZTI2YmQ0NDIzNzNiNmQ5OWUwOTUyZGQxZWJjOGQ5OGE3NjJiOWQ4NDM0MjVhMzFiOGI2OSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODVlZmQxNGU1YWQ3NjQ2Y2QwMWFmZWIzNGIzZGUzOTI1NjFkYjczNjc0ZDE5NGEzZjk0MTI0ODdmODY2NjNhZSIsInByb2plY3RfaWRzIjpbM10sInNvdXJjZSI6ImNvZGV4In0.da0ecc4498f7e4a86e1f4f93b5818a5a2e213011629d6467e5d56366dc4e86f3",
+      "origin_session_key": "local-A",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "39e18a69fe414c6085a90c748563cc43",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    "local-D": {
+      "id": 7,
+      "source": "codex",
+      "source_session_id": "local-D",
+      "title": "selective common local-D original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 3,
+      "project_name": "D",
+      "rank": 2,
+      "bm25_score": 1.6617550514260705e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-D original",
+          "timestamp": null,
+          "canonical_id": "f367168b08554eb0e2bce874bcb0efb9ebf6058c23ada437802be6c8c53516fb",
+          "content_version": "cb0191d7e81d1d6d1beea4af8b6e602e3b5e11f0cf5a2fd903a021e2548f2f5f",
+          "hub_message_id": 7,
+          "origins": [
+            {
+              "device_id": "39e18a69fe414c6085a90c748563cc43",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 3,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 3,
+          "name": "D",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "39e18a69fe414c6085a90c748563cc43",
+          "source_key": "d552682e8df1b00b2968be98baa55e6d",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiN2UzMDhjYTdmODk2NGZlNmJiMmE4Yzk0OTNiNWJkMGMiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo3LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjM5MTYxZjFjOWQ4NzQ1YmFiMzExMWZjNzM2ZmUzNWM5Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo3LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImRjNmU3NWZlOTM2OWUwYzNmYTY4MzIzZTljNTIxZDgzOTc3ODcxZjRmZWE4NGMzNDFiYmY4ODAyOWY5YTc0YjQiLCJ2ZXJzaW9uIjoiY2IwMTkxZDdlODFkMWQ2ZDFiZWVhNGFmOGI2ZTYwMmUzYjVlMTFmMGNmNWEyZmQ5MDNhMDIxZTI1NDhmMmY1ZiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYmM0ZGQ3NjNiOWFkYjA2NDEwYzA1NDUwYWYyNGMzM2IwZjczNzY5NDRmOGQxYTQwN2M4YTFjYzE0ZjE2YTZmYSIsInByb2plY3RfaWRzIjpbM10sInNvdXJjZSI6ImNvZGV4In0.10012d385e55aa0ed6725f06847d1d0d562bb885e7c742f08cc0fe280757d5d5",
+      "origin_session_key": "local-D",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "39e18a69fe414c6085a90c748563cc43",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    }
+  },
+  "destination_read": {
+    "id": 5,
+    "source": "codex",
+    "source_session_id": "local-A",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective common local-A original",
+    "project_id": 3,
+    "project_name": "D",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective common local-A original",
+        "timestamp": null,
+        "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+        "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+        "hub_message_id": 5,
+        "origins": [
+          {
+            "device_id": "39e18a69fe414c6085a90c748563cc43",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 3,
+            "project_name": "D"
+          }
+        ],
+        "source_order": 1
+      },
+      {
+        "position": 2,
+        "role": "assistant",
+        "text": "selective common local-A appended while stopped",
+        "timestamp": null,
+        "canonical_id": "0e0014c542c298facfab97f16fefa5d7883a189e817650896e7d8d8d613ad0cb",
+        "content_version": "aba5c918a0ece26bd442373b6d99e0952dd1ebc8d98a762b9d843425a31b8b69",
+        "hub_message_id": 11,
+        "origins": [
+          {
+            "device_id": "39e18a69fe414c6085a90c748563cc43",
+            "device_name": "005-local",
+            "source_position": 2,
+            "source_order": 2,
+            "project_id": 3,
+            "project_name": "D"
+          }
+        ],
+        "source_order": 2
+      }
+    ],
+    "projects": [
+      {
+        "id": 3,
+        "name": "D",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "39e18a69fe414c6085a90c748563cc43",
+        "source_key": "d552682e8df1b00b2968be98baa55e6d",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "local-A",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "device_name": "005-local"
+      }
+    ]
+  },
+  "old_reference_read": {
+    "id": 5,
+    "source": "codex",
+    "source_session_id": "local-A",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective common local-A original",
+    "project_id": 2,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective common local-A original",
+        "timestamp": null,
+        "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+        "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+        "hub_message_id": 5,
+        "origins": [
+          {
+            "device_id": "39e18a69fe414c6085a90c748563cc43",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 2,
+            "project_name": "A"
+          },
+          {
+            "device_id": "39e18a69fe414c6085a90c748563cc43",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 3,
+            "project_name": "D"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "39e18a69fe414c6085a90c748563cc43",
+        "source_key": "b04c378e7d1b76e9e2626fc5a863c3ac",
+        "device_name": "005-local"
+      },
+      {
+        "id": 3,
+        "name": "D",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "39e18a69fe414c6085a90c748563cc43",
+        "source_key": "d552682e8df1b00b2968be98baa55e6d",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "local-A",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "39e18a69fe414c6085a90c748563cc43",
+        "device_name": "005-local"
+      }
+    ]
+  },
+  "before_physical_rows": [
+    [
+      5,
+      "8296b1447969eca733f15609cbee5270fb6dbed1ac9d84f7b524e4bfbc607b46",
+      1,
+      "user",
+      "selective common local-A original",
+      null
+    ],
+    [
+      11,
+      "791713e0c3742fe327e6555a1d5a71317f00f278a0885bcb4dd60c8fd49f8114",
+      2,
+      "assistant",
+      "selective common local-A appended while stopped",
+      null
+    ]
+  ],
+  "after_physical_rows": [
+    [
+      5,
+      "8296b1447969eca733f15609cbee5270fb6dbed1ac9d84f7b524e4bfbc607b46",
+      1,
+      "user",
+      "selective common local-A original",
+      null
+    ],
+    [
+      11,
+      "791713e0c3742fe327e6555a1d5a71317f00f278a0885bcb4dd60c8fd49f8114",
+      2,
+      "assistant",
+      "selective common local-A appended while stopped",
+      null
+    ]
+  ],
+  "final_state": {
+    "configured": true,
+    "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+    "device_id": "39e18a69fe414c6085a90c748563cc43",
+    "hub_address": "https://localhost:59553",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "only",
+      "projects": [
+        "d552682e8df1b00b2968be98baa55e6d"
+      ]
+    },
+    "generation": 13,
+    "state": "confirmed",
+    "hub_revision": 13,
+    "control_epoch": "89de7abfe42040e2b3aaa852bda60d79",
+    "confirmed_messages": 8,
+    "not_confirmed_messages": 1,
+    "inflight_messages": 0,
+    "unsent_messages": 1,
+    "problem": null,
+    "remote": {
+      "hub_id": "39161f1c9d8745bab3111fc736fe35c9",
+      "device_id": "39e18a69fe414c6085a90c748563cc43",
+      "revision": 13,
+      "policy": {
+        "mode": "only",
+        "projects": [
+          "d552682e8df1b00b2968be98baa55e6d"
+        ]
+      },
+      "submission_id": "2af7fc0a4d9a4d3ba739b3f4a1d26cb1",
+      "control_epoch": "89de7abfe42040e2b3aaa852bda60d79",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T06:15:26.446342+00:00",
+    "last_transfer_success": "2026-11-22T06:15:26.446342+00:00"
+  }
+}

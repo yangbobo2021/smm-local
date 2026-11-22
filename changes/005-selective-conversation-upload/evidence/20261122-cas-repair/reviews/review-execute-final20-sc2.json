@@ -1,0 +1,60 @@
+{
+  "cases": {
+    "TC-005-cas": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "SPEC B4/D1/D2及已审tdd-core：冻结test_005_contracts.py:99-143先用当前版本实际接收同一有效项目正文，确认none后才重放旧策略、旧版本及无版本新正文。旧写均HTTP拒绝，完整Hub正文保持含旧历史的before集合，最终revision保持限制的current_revision且policy为字面none；正控及两种坏正文均到达，非仅用无效项目制造拒绝。 本次正式execute-final20-sc2/TC-005-cas/run.stdout为1 passed，stderr为空，pid=71763，exit_code=0，实际时间2026-11-22T08:26:29.638000+00:00至2026-11-22T08:26:30.019000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-fresh": {
+      "status": "passed",
+      "covers": [
+        "fresh"
+      ],
+      "reason": "SPEC B1/A2及已审fresh：冻结test_reconcile_snapshot.py:113-129分别none/all/only/except，先保存后冻结显示policy，用显示的两版本提交；响应confirmed、完整policy与动作前expected/本机desired/Hub policy逐一相等，实际set列表恰为[expected]且无正文发送。四组全部到达尾部断言，不用拒绝全部对账伪装修复；不扩大为未断言的ack内部字段或多项目名单矩阵。 本次正式execute-final20-sc2/TC-005-reconcile-fresh/run.stdout为4 passed，stderr为空，pid=71869，exit_code=0，实际时间2026-11-22T08:26:30.019000+00:00至2026-11-22T08:26:30.755000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-inflight": {
+      "status": "passed",
+      "covers": [
+        "inflight-result"
+      ],
+      "reason": "SPEC B4/A2及PLAN12.1、已审inflight-result：冻结test_reconcile_uncertain.py:9-48分别真实CAS接受all后丢回执，以及回执前另存none；真实receipt与独立Hub均all证明接受已发生。丢失分支不报成功或confirmed、保持原desired；新选择分支逐字段保留新的generation/desired/submission_id。两分支正常push后全Hub正文空且所有正文请求空；丢失仍conflict直至fresh显式采用Hub才confirmed/all，新选择最终Hub及本机均none。两条分支均执行到各自尾部；不扩大为未测重启或未断言的最终内部ack字段。 本次正式execute-final20-sc2/TC-005-reconcile-inflight/run.stdout为2 passed，stderr为空，pid=71894，exit_code=0，实际时间2026-11-22T08:26:34.164000+00:00至2026-11-22T08:26:34.732000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-remote-race": {
+      "status": "passed",
+      "covers": [
+        "remote-reject-no-save"
+      ],
+      "reason": "SPEC B1/A11拒绝不改两端规则、PLAN12.1及已审remote-reject-no-save：冻结test_reconcile_remote_race.py:12-71真实CLI/Web×local/hub×first-status/second-status/cas共12组。本机none、Hub外部all后真实外部newer-stop提交none；每组先验证注入发生，Web拒绝并有可识别原因或CLI非零且无成功stdout，随后均到达:68完整本机row不变、:69完整最终Hub head等于真实新限制快照、:70完整正文不变、:71无正文派发。故最后Hub/正文断言并未被前置失败截断。真实CAS 409保留其状态，不是凭空异常。源码upload.py:258-295先登记不授权的提交身份、远端CAS接受后才_save；_save:134-168在锁及BEGIN IMMEDIATE核代次/目标。已登记red20/green20为独立链，本意见只认领这次正式12组。 本次正式execute-final20-sc2/TC-005-reconcile-remote-race/run.stdout为12 passed，stderr为空，pid=71886，exit_code=0，实际时间2026-11-22T08:26:32.702000+00:00至2026-11-22T08:26:34.163000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-stale-local": {
+      "status": "passed",
+      "covers": [
+        "stale-local"
+      ],
+      "reason": "SPEC B1/A2/A11及已审stale-local：冻结test_reconcile_snapshot.py:35-56保持Hub revision不变，实际另存本机all的新generation并验证pending；Web local/hub两种采用旧视图均400且提示本机已改变需重看。完整本机row与独立Hub head保持动作前快照、无set；两分支全部到达，不能以两端同错none通过保留已有all检查。 本次正式execute-final20-sc2/TC-005-reconcile-stale-local/run.stdout为2 passed，stderr为空，pid=71870，exit_code=0，实际时间2026-11-22T08:26:30.756000+00:00至2026-11-22T08:26:31.262000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "status": "passed",
+      "covers": [
+        "target-control-dispatch"
+      ],
+      "reason": "SPEC B1/B2/B4及PLAN12.1、已审target-control-dispatch：冻结test_reconcile_dispatch.py:13-54在第二次真实status后连接独立新Hub，要求身份确已切换；旧对账400，旧Hub完整head保持、出站无set，旧目标desired保持，新目标hub_id正确/needs_selection/policy=None且正文零。全部到达。本次不以第二次读取时已先保存为判据，该内部顺序在已审设计与PLAN12.1明确排除。 本次正式execute-final20-sc2/TC-005-reconcile-target-dispatch/run.stdout为1 passed，stderr为空，pid=71878，exit_code=0，实际时间2026-11-22T08:26:31.770000+00:00至2026-11-22T08:26:32.231000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-reconcile-write-window": {
+      "status": "passed",
+      "covers": [
+        "write-window"
+      ],
+      "reason": "SPEC B1同锁条件保存/A2及已审write-window：冻结test_reconcile_snapshot.py:59-78在真实status返回之前并发保存本机all、冻结完整新row，local/hub两种旧对账都明确拒绝且最终row等于新保存、Hub head不变、无set。注入all先于对账继续发生，全部断言到达；本次证明请求初检之后的新保存受到保护。 本次正式execute-final20-sc2/TC-005-reconcile-write-window/run.stdout为2 passed，stderr为空，pid=71872，exit_code=0，实际时间2026-11-22T08:26:31.262000+00:00至2026-11-22T08:26:31.770000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    },
+    "TC-005-target-dispatch": {
+      "status": "passed",
+      "covers": [
+        "review-target-dispatch"
+      ],
+      "reason": "SPEC B2/B4及已审review-target-dispatch：冻结test_upload_review_regressions.py:35-60已有旧Hub all并含待发正文，在known核对后真实切换新Hub；switched必须发生，两个独立Hub全部正文分别为空，当前状态needs_selection。实际副作用断言全到达。该声明未逐路由断言旧端无被拒绝的尝试，认领限制在已审设计的最终正文与待选择结果，不据此宣称网络字节召回或所有停止窗口。 本次正式execute-final20-sc2/TC-005-target-dispatch/run.stdout为1 passed，stderr为空，pid=71882，exit_code=0，实际时间2026-11-22T08:26:32.231000+00:00至2026-11-22T08:26:32.702000+00:00。已核request准确TC集、全部artifacts/当前bindings摘要、case-design摘要及match-reconcile-complete19冻结源段一致，执行bindings与已登记独立review-preparation-final20-sc2相同。只认领实际到达分配项；full1-4、完整暂停/崩溃/重启/乱序和真实E1/E3/E4保持gaps，不以TestClient替代。"
+    }
+  }
+}

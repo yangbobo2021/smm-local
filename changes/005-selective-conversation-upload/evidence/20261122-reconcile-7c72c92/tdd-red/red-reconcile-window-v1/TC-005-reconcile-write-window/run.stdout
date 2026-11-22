@@ -1,0 +1,70 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__ test_local_change_during_hub_read_is_rejected_at_the_write_boundary[local] __
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1036b9dc0>, remote=<smm_local.core.Archive object at 0x102fb9460>,...4f4978ad6a042600651078', 'device_id': '19f571af2796469996e448dacec33348'})], hub_id='e2f0411d154f4978ad6a042600651078')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x101539970>
+use = 'local'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    def test_local_change_during_hub_read_is_rejected_at_the_write_boundary(pair, monkeypatch, use):
+        """TC-005-reconcile-write-window: initial validation is not sufficient."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        shown = control.reconcile(request); changed = {}
+        def concurrent(config, route, payload=None):
+            result = request(config, route, payload)
+            if route == '/upload-policy/status' and not changed:
+                control.choose('all', [])
+                changed['row'] = control.row()
+            return result
+        monkeypatch.setattr(api, '_request', concurrent)
+        remote_before = head(pair, config); marker = len(pair.calls)
+        with web(pair) as browser:
+            result = browser.post('/api/upload/reconcile', json={'use': use,
+                'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+        assert changed['row']['desired']['mode'] == 'all'
+>       assert result.status_code == 400, 'a write after the initial snapshot must not be overwritten'
+E       AssertionError: a write after the initial snapshot must not be overwritten
+E       assert 200 == 400
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_reconcile_snapshot.py:76: AssertionError
+___ test_local_change_during_hub_read_is_rejected_at_the_write_boundary[hub] ___
+
+pair = namespace(local=<smm_local.core.Archive object at 0x103104050>, remote=<smm_local.core.Archive object at 0x103105b20>,...6a4480b9cfe791ad7bbc4d', 'device_id': '8a389877d28f44e48c9ff78093dbd3e8'})], hub_id='b005294b5d6a4480b9cfe791ad7bbc4d')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1031057f0>
+use = 'hub'
+
+    @pytest.mark.parametrize('use', ['local', 'hub'])
+    def test_local_change_during_hub_read_is_rejected_at_the_write_boundary(pair, monkeypatch, use):
+        """TC-005-reconcile-write-window: initial validation is not sufficient."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        shown = control.reconcile(request); changed = {}
+        def concurrent(config, route, payload=None):
+            result = request(config, route, payload)
+            if route == '/upload-policy/status' and not changed:
+                control.choose('all', [])
+                changed['row'] = control.row()
+            return result
+        monkeypatch.setattr(api, '_request', concurrent)
+        remote_before = head(pair, config); marker = len(pair.calls)
+        with web(pair) as browser:
+            result = browser.post('/api/upload/reconcile', json={'use': use,
+                'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})
+        assert changed['row']['desired']['mode'] == 'all'
+>       assert result.status_code == 400, 'a write after the initial snapshot must not be overwritten'
+E       AssertionError: a write after the initial snapshot must not be overwritten
+E       assert 200 == 400
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_reconcile_snapshot.py:76: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_reconcile_snapshot.py::test_local_change_during_hub_read_is_rejected_at_the_write_boundary[local]
+FAILED tests/test_reconcile_snapshot.py::test_local_change_during_hub_read_is_rejected_at_the_write_boundary[hub]
+2 failed, 1 warning in 0.58s

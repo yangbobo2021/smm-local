@@ -1,0 +1,26 @@
+usage: smm [-h] [--db DB]
+           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}
+           ...
+
+本机 Agent 对话知识库
+
+positional arguments:
+  {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}
+    sync                立即导入新增对话
+    status              查看导入状态
+    doctor              检查安装、来源和 Agent 接入
+    projects            列出项目及关联
+    resolve-project     按当前目录确定项目
+    search              BM25 检索
+    read                读取对话原文
+    serve               启动本地 Web UI
+    maintenance         管理本机同步与状态页
+    source              验收、注册或管理本机来源
+    stop-on-demand      停止按需启动的后台服务
+    configure-hub       配置汇总电脑和本机名称
+    upload              选择对话上传范围并查看 Hub 确认；停止不撤回旧副本
+    project             管理明确的全局项目和会话归属
+
+options:
+  -h, --help            show this help message and exit
+  --db DB               知识库 SQLite 路径

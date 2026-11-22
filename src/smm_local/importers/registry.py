@@ -203,7 +203,7 @@ def sync(archive, source: str) -> dict:
                     VALUES(?,?,?,?,?,?,?,?)
                     ON CONFLICT(source,source_session_id) DO UPDATE SET
                       source_path=excluded.source_path,cwd=excluded.cwd,project_path=excluded.project_path,
-                      project_id=excluded.project_id,started_at=excluded.started_at,updated_at=excluded.updated_at
+                      project_id=COALESCE((SELECT project_id FROM conversation_assignments WHERE conversation_id=conversations.id),excluded.project_id),started_at=excluded.started_at,updated_at=excluded.updated_at
                     RETURNING id
                 """, (source, session_id, origin, cwd, project_path, project_id, timestamp, timestamp)).fetchone()[0]
                 created += 1

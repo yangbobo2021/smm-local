@@ -1,0 +1,18 @@
+usage: smm search [-h] [--scope {all,project}] [--project-id PROJECT_ID]
+                  [--limit LIMIT] [--current-session-id CURRENT_SESSION_ID]
+                  [--current-source CURRENT_SOURCE] [--local]
+                  [--include-current]
+                  query
+
+positional arguments:
+  query
+
+options:
+  -h, --help            show this help message and exit
+  --scope {all,project}
+  --project-id PROJECT_ID
+  --limit LIMIT
+  --current-session-id CURRENT_SESSION_ID
+  --current-source CURRENT_SOURCE
+  --local               明确检索本机档案
+  --include-current

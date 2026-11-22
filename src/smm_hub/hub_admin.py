@@ -66,6 +66,7 @@ def add_arguments(commands) -> None:
     configure.add_argument("--password-file", type=Path, help="从凭据文件读取密码，否则交互输入")
     vibeinsight_actions.add_parser("status", help="查看同步状态")
     actions.add_parser("run", help=argparse.SUPPRESS)
+    actions.add_parser("prepare-restore", help="停止正文接收并输出一致性恢复清单；不要恢复保护文件，重启后须明确对账")
 
 
 def write_file(path: Path, content: bytes) -> None:
@@ -346,9 +347,25 @@ class Hub:
         return backup
 
     def restore(self, backup):
+        self.prepare_restore()
         with closing(sqlite3.connect(backup.as_uri() + "?mode=ro", uri=True)) as source:
             with closing(sqlite3.connect(self.database)) as target:
                 source.backup(target)
+
+    def prepare_restore(self):
+        from .upload import HubUpload
+        if not self.database.is_file():
+            raise ValueError("当前目录没有现有 Hub 数据库，请核对 hub status 的状态目录")
+        archive = Archive(self.database)
+        with archive.connect() as con:
+            row = con.execute("SELECT value FROM settings WHERE key='hub_identity'").fetchone()
+        if row is None:
+            raise ValueError("当前数据库没有 Hub 身份，请核对状态目录")
+        result = HubUpload(archive, json.loads(row[0])).prepare_restore()
+        if self.profile.is_file():
+            result["restore_files"].append(str(self.profile))
+        result["preserve_files"] = [str(p) for p in (self.token, self.certificate, self.key, self.ca) if p.is_file()]
+        return result
 
     def project(self, args):
         from .projects import HubProjects
@@ -405,7 +422,7 @@ class Hub:
 
 def dispatch(args: argparse.Namespace):
     hub = Hub(args.state_dir)
-    action = args.hub_action
+    action = args.hub_action.replace("-", "_")
     if action in ("status", "run"):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)

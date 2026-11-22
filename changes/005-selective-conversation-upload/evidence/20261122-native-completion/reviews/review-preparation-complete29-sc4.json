@@ -1,0 +1,67 @@
+{
+  "cases": {
+    "TC-005-backfill": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/D1/A4明确允许后补齐全部而非全局游标截断。test_upload_policy.py:66–87先仅B、Hub精确B一条，设旧cursor99999999，A停传期间旧会话追加assistant及新会话，经add_local实际sync全部；允许后Hub完整4正文集合及A两条有序原文独立预期，重复uploaded0且4条。仅首消息/首会话正确会在完整sorted集合及A有序两正文处首先拦截；B已推进前状态实际存在。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-batch-failure": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1/A4要求整批失败/部分无效回执不能确认未提交。test_required_snapshot_and_batch_boundaries.py实际两独立会话同A，before-commit/partial-receipt两参数，注入必须真实两records；分别Hub零/完整两条，Local confirmed0/pending2/inflight2，再恢复后精确两条、pending/inflight0、confirmed2，重复不增。只确认首条或只重传首条在计数与完整body集合拦截。两个附件真实读取，日志两参数均exit0。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "whole-batch-failure"
+      ]
+    },
+    "TC-005-bounded-upload": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/A4明确有界队列完成前可导入/检索且B推进。test_upload_recovery.py:323–362真实35条独立预期会话/position/role/body/time集合；BATCH_SIZE1保持同一25派发上限分支，首轮uploaded25且pending时B已在Hub，并实际新增A-later导入/本机检索成功，第二轮10，最终独立expected35、confirmed35/pending0/inflight0，第三轮0且全部物理row键不变。只首消息或遗漏后来目标由expected集合首先拦截，两端同错不会通过独立手写expected。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-6"
+      ]
+    },
+    "TC-005-fair-upload": {
+      "status": "passed",
+      "reason": "B4/A4失败项目不得阻塞其他项目。原test_upload_recovery::test_failed_project_does_not_starve_another_allowed_project保持不变，一轮A失败B完整正文成功。前轮跨轮缺口由本轮独立TC-005-repeated-fairness共同补足，不再把原单轮TC说成独立覆盖全部持续状态；新三轮每轮新增B、真实持续A失败，最终独立B全部正文与A未确认检查已覆盖原文next轮行为。原TC只认case-5，不把新增check冒归它。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-5"
+      ]
+    },
+    "TC-005-mixed-batch": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1明确混批不得部分接收。test_required_snapshot_and_batch_boundaries.py分别allowed-first/forbidden-first真实当前revision/epoch，Hub已登记两project，严格403/project_disabled、完整bodies仍[]、receipts[]，纯允许B正控200/accepted1且独立正文。只首目标正确或先提交允许前缀的错误在allowed-first完整bodies空首先失败，拒绝全部则正控200失败。真实两附件读到顺序、拒绝、receipt及正控。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "mixed-batch-atomic"
+      ]
+    },
+    "TC-005-offset-prefix": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1消息出现序号区分轮次支持此设计。test_upload_review_regressions.py:12–32先无ID第二轮、后同角色/正文/时间第一轮，两实体独立expected同文字两次，Hub origins位置/顺序精确[(1,1),(2,2)]，重复无pending且confirmed2。只处理当前首轮或把文本相等合并，bodies两项/完整origin对首先拦截。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-repeated-fairness": {
+      "status": "passed",
+      "reason": "B4下一轮继续和A4“单个项目反复失败”的明确原文支持新增design，未增加产品承诺。tests/test_complete_scene_boundaries.py::test_repeated_project_failure_does_not_block_new_peer_work实际固定A known请求持续失败，独立三轮，在轮1/2前实际导入不同B正文；每轮errors且uploaded恰1，Hub完整正文集合精确等于B round0..当前，无A正文，allowed_pending>=1；只有A未成功记录可为该待确认。首轮B成功后后续B饥饿在第二轮uploaded1或完整B集合首次拦截；两端同错不能绕过独立文字集合。真实附件三轮errors均指同A、pendingTrue，B精确1→2→3且allowed_pending1，不是只比较两个同错产品输出。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "additional-repeated-fairness"
+      ]
+    },
+    "TC-005-timestamp-version": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：D1内容版本包括来源时间，B7旧引用保留。test_upload_review_regressions.py:63–83先旧None时间版并取得实际Hub旧ref，再变来源时间；Hub times精确[None,new]，当前confirmed1，重复0，旧ref timestampNone，combined完整两消息及时间集合。若两版本同错为新值，times独立预期首拦截；旧ref被替换由None断言拦截。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-unknown-receipt": {
+      "status": "passed",
+      "reason": "场景与需求原文核对：B4/A4未知须核实且停止后不重新发送正文。test_upload_policy.py:90–114实际Hub提交成功后choose none再丢响应，先inflight1，重试无正文upload，最终policy none/inflight0/confirmed1及独立旧body一条。未知直接当成功先在inflight1失败，旧body删除/重复在完整bodies失败。多记录inflight由batch-failure两记录恢复共同验证；此单样例本身不声称完整故障全表。 当前debug选择器真实执行exit0，全部候选bindings及日志SHA重算一致；人工完整覆盖另manual-preparation-complete29-sc4.md。 当前真实debug-complete29-sc4绑定design-complete27-sc4/match-complete29-sc4，九TC11pytest参数全部exit0，10:24:59–10:25:04Z；全部bindings/输出/五附件SHA重算一致。持续失败当前三轮各24次A错误，独立B全集1→2→3、A待确认1；相关批次/混批当前附件与断言全部到达。29完整回归252=251pass+1Windows专属skip，逐相关case均pass；本TC只认分配checks，人工完整准备另MD。",
+      "covers": [
+        "case-4"
+      ]
+    }
+  }
+}

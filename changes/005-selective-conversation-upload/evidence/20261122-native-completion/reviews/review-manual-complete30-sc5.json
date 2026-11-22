@@ -1,0 +1,14 @@
+{
+  "cases": {
+    "TC-005-sc5-evidence": {
+      "status": "passed",
+      "reason": "逐操作核对manual-complete30c-sc5（不是已blocked的30b），actual case_obligations为complete-1/2/3/legacy，四项expected与当前design/match一致。本轮核验时间10:52:58.825–58.927Z，原业务isolation 05:59:45–50Z/7ab6d6c、三兼容d80、Mac系统Hub 08:09/7c各自保留；没有视为当前重跑。479附件及480 artifacts/74 bindings SHA均实核，observation inventory 478原件SHA与所附原字节逐项一致。complete-1/2：isolation-run9/isolation-result.json逐会话独立核完整预期：A旧user单条、D旧user+允许assistant append、设备乙remote-B旧user+assistant append、remote-C旧条、Vibe两条user；五会话reads身份/正文/顺序吻合，旧A reference仅原条，本机同时保留A-private及A旧会话禁止append。停止后的实际HTTPS请求只有允许D和乙B正文，没有禁止A会话ID/正文；final_state confirmed且allowed_pending=0，isolation-links建立同设备A-D关联，manifest+service-events为任务独立serve-hub且cleanup无失败。complete-3/legacy：compat/linux-compat/windows-compat-run8各真实旧包同设备迁移后writer exit1/HTTP409，before/after完整results不变，旧式read user old-device original；未迁移unmanaged-legacy实际正文仍出现。mac-run8、Linux systemd-user、Windows LocalService、mac-hub-main15 system-launchd的initial-stop-replay及after-hub-restart-replay均versioned stale_policy409/versionless policy_required409且before=after；之后backfill all/confirmed/allowed_pending0且A旧+停传追加、新A进入Hub、旧reference仍旧条，证明新规则正控。service-events核真实PID/账户/状态目录：Linux uid1000用户服务，Windows NT AUTHORITY LocalService，Mac系统域PPID1 uid501；清理均无失败。实际打开mac-run8/combined-stopped-upload.png，显示双方确认全部不上传、已确认1/在途0、明确停止保留旧副本文案；其原SHA在附件闭包内。原件安装files=candidate完整模块且独立包无交叉依赖；实际git diff 7ab→ba8及manifest对比显示Local api/cli/static限reconcile，references仅选中消息生成title，upload新增目标fence/双版本CAS；Hub主模块一致，不能据此称Local全等。旧A单条读取不受title差异；当前最终产品execute-complete26-sc5已独立实核完整隔离、请求和旧read，registration及CAS/目标竞态由complete29实际JUnit/绑定源码补控制变化。full-pytest-receipt输出/inputs SHA及全部输入实核一致，相关37条combined/Vibe/registration无failure/error/skip；Vibe历史、追加、混项目、失败重试、事务/游标回滚及取消断言回归支持原状态不关闭。结论仅是各分配检查的原件及当前适用性通过，不预授整需求或其他场景。",
+      "covers": [
+        "complete-1",
+        "complete-2",
+        "complete-3",
+        "legacy"
+      ]
+    }
+  }
+}
