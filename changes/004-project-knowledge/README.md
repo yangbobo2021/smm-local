@@ -2,7 +2,7 @@
 
 更新日期：2026-11-23。
 
-本目录记录[父意图](intent.md)及六项独立变更的关系。005已由[PR #30](https://github.com/yangbobo2021/smm-local/pull/30)实现、验收并合并。维护者于2026-11-22授权代理自主推进006的SPEC、PLAN、实现与验证，每阶段经PR合并后继续；006的规格与计划已分别由[PR #31](https://github.com/yangbobo2021/smm-local/pull/31)和[PR #32](https://github.com/yangbobo2021/smm-local/pull/32)依序合并；实施、验收及独立审查记录见[PR #33](https://github.com/yangbobo2021/smm-local/pull/33)和[当前证据](../006-local-document-search/evidence/README.md)。007–010仍为草稿，不将其余范围一并视为确认。
+本目录记录[父意图](intent.md)及六项独立变更的关系。005已由[PR #30](https://github.com/yangbobo2021/smm-local/pull/30)实现、验收并合并。维护者于2026-11-22授权代理自主推进006的SPEC、PLAN、实现与验证，每阶段经PR合并后继续；006的规格与计划已分别由[PR #31](https://github.com/yangbobo2021/smm-local/pull/31)和[PR #32](https://github.com/yangbobo2021/smm-local/pull/32)依序合并；实施、验收及独立审查记录见[PR #33](https://github.com/yangbobo2021/smm-local/pull/33)和[当前证据](../006-local-document-search/evidence/README.md)。006 实现 PR #33 已合并。007 首版边界于2026-11-23获维护者确认，开始按阶段PR推进；008–010仍为草稿，不将其余范围一并视为确认。
 
 ## 子意图
 
@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 005 | [对话上传控制与本机 / Hub 联合检索](../005-selective-conversation-upload/intent.md) | 首先形成对话联合检索语义；与 007 对齐上传边界 | 已实现并验收 | [PR #30](https://github.com/yangbobo2021/smm-local/pull/30)；[证据](../005-selective-conversation-upload/evidence/20261122-native-completion/README.md) |
 | 006 | [本机文档检索](../006-local-document-search/intent.md) | Markdown/UTF-8文本、本机明确纳入与刷新 | [SPEC](../006-local-document-search/spec.md) / [PLAN](../006-local-document-search/plan.md)已合并；[实施与验收记录](../006-local-document-search/evidence/README.md) | [PR #31](https://github.com/yangbobo2021/smm-local/pull/31) / [#32](https://github.com/yangbobo2021/smm-local/pull/32) / [#33](https://github.com/yangbobo2021/smm-local/pull/33) |
-| 007 | [Hub 文档检索与同步](../007-hub-document-search/intent.md) | 承接 006 的文档能力；与 005 协调上传选择 | 意图草稿 | 尚无 |
+| 007 | [Hub 文档检索与同步](../007-hub-document-search/intent.md) | 承接 006；明确来源上传、Hub 自有文件、暂停与撤回 | 意图首版边界已确认，按阶段 PR 推进 | 本轮意图 PR 待建立 |
 | 008 | [常用文档格式支持](../008-document-format-support/intent.md) | 扩展 006 / 007；覆盖 Word、Excel、PDF、图片 | 意图草稿 | 尚无 |
 | 009 | [本机飞书聊天历史检索](../009-feishu-history-search/intent.md) | 可独立调研和交付；与 006 协调新增内容的检索路径 | 意图草稿 | 尚无 |
 | 010 | [飞书长对话与关联内容理解](../010-feishu-context-understanding/intent.md) | 承接 009 的聊天记录及 008 的通用文件、图片处理能力 | 意图草稿 | 尚无 |
@@ -34,7 +34,7 @@
 | 各类新增入口、文档和飞书资料组织、图片与长对话处理位置 | [父意图的共同问题](intent.md#待确认问题) |
 | 005 的上传策略、停止恢复、历史补齐、默认选择、检索范围与入口、现有可汇总来源，均已确认 | [005 的已确认约束](../005-selective-conversation-upload/intent.md#范围与约束) |
 | 基础文档首批格式、纳入与更新方式、旧版本及源文件移除后的原文 | [006](../006-local-document-search/intent.md#待确认问题) |
-| Hub 自有文档、文档上传选择、重复来源与同步停止后的副本 | [007](../007-hub-document-search/intent.md#待确认问题) |
+| Hub 自有文档、文档上传选择、重复来源与同步停止后的副本，已确认 | [007](../007-hub-document-search/intent.md#已确认的首版边界) |
 | 文件扩展名、扫描件、图片理解层次、Excel 内容范围 | [008](../008-document-format-support/intent.md#待确认问题) |
 | 飞书读取方式及可读范围、持续更新、编辑撤回与权限变化 | [009](../009-feishu-history-search/intent.md#待确认问题) |
 | 长对话处理程度、关联材料读取范围、飞书云文档与图片的理解层次 | [010](../010-feishu-context-understanding/intent.md#待确认问题) |
