@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc11；全部44 artifacts、101 bindings独立SHA重算匹配，src与ba8c6d5完全同字节。SPEC B8/A11、设计tdd-core对应。正式pytest 11:03:46.966–11:03:47.394 UTC exit0/1 passed；test_upload_policy.py:117-143先all一致性备份、后none、prepare_restore持久保护清单，再恢复SQLite并重建Archive，实际state=conflict、差异Hub none且只读不改desired；明确use hub后confirmed/none，push_pending后Hub正文仍空。未对账同步另由独立TC承担，未将本TC扩大认领。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc11；全部44 artifacts、101 bindings独立SHA重算匹配，src与ba8c6d5完全同字节。SPEC B8/A11、设计tdd-unreconciled对应。正式pytest 11:03:47.394–11:03:47.803 UTC exit0/1 passed；test_upload_acceptance_boundaries.py:71-104在all备份/Hub none/prepare-restore/旧库恢复后新增本机消息，并在查看差异前后两次真实push_pending：本机两会话可查、无known-upload-messages或非空正文派发、Hub物理消息集合不增、双方规则与conflict保持。该断言能排除只显示阻断但仍发送的反例；未以设计expected替代运行。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    },
+    "TC-005-confirmed-loss": {
+      "status": "passed",
+      "reason": "本次execute-complete30-sc11；全部44 artifacts、101 bindings独立SHA重算匹配，src与ba8c6d5完全同字节。SPEC A11/B8、设计additional-confirmed-loss对应。正式真实安装包专项11:03:47.847–11:03:53.326 UTC、外进程exit0，普通uid501，完整Local/Hub安装模块等于最终candidate，cleanup.failures=[]。核原confirmed-after-backup与confirmed-loss-recovery：备份后confirmed-recent实际全文已读且allowed_pending/inflight0；再确认none积压，prepare-restore把epoch dbfcfb→15b493、清单保留guard；实际Hub PID88999停止后89144重启，恢复缺近期正文的旧SQLite后conflict/blocked且none仍保留。采用Hub none后确认账本归零仍不补近期正文；明确only A后local-A两轮、local-A-new、confirmed-recent逐项精确读回，旧A引用仍只读旧原文，最后allowed_pending/inflight0。selective_upload_completion.py:99-127及原commands实际执行顺序、重复同步Hub完整命中集合相等，反查了正文、角色、位置与时间，不凭result.status。只认本专项义务；其余平台和升级失败由人工项承接。",
+      "covers": [
+        "additional-confirmed-loss"
+      ]
+    }
+  }
+}

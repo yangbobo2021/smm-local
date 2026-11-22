@@ -1,0 +1,39 @@
+{
+  "state": {
+    "configured": true,
+    "hub_id": "654d00a25b1b421995a442fb5fd4b5e8",
+    "device_id": "0553319b24344b00923a6f785e3083ac",
+    "hub_address": "https://localhost:18876",
+    "device_name": "legacy-device",
+    "policy": null,
+    "generation": 0,
+    "state": "needs_selection",
+    "hub_revision": 0,
+    "control_epoch": null,
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 2,
+    "inflight_messages": 0,
+    "unsent_messages": 2,
+    "problem": null,
+    "remote": {
+      "hub_id": "654d00a25b1b421995a442fb5fd4b5e8",
+      "device_id": "0553319b24344b00923a6f785e3083ac",
+      "revision": 0,
+      "policy": null,
+      "submission_id": null,
+      "control_epoch": "2980a11d46cc4c0290ec094fd166e684",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "blocked",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": null,
+    "last_transfer_success": null
+  },
+  "old_write_rejected_after_registration": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<home>/smm-005-20261122/old-local-env/lib/python3.14/site-packages/smm_local/federation.py\", line 40, in _request\n    with LOCAL_HTTP.open(request, timeout=5) as response:\n         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/urllib/request.py\", line 493, in open\n    response = meth(req, response)\n  File \"<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/urllib/request.py\", line 602, in http_response\n    response = self.parent.error(\n        'http', request, response, code, msg, hdrs)\n  File \"<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/urllib/request.py\", line 531, in error\n    return self._call_chain(*args)\n           ~~~~~~~~~~~~~~~~^^^^^^^\n  File \"<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/urllib/request.py\", line 464, in _call_chain\n    result = func(*args)\n  File \"<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/urllib/request.py\", line 611, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 409: Conflict\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys,json; from smm_local.core import Archive; from smm_local.federation import push_pending; d=Archive(sys.argv[1]); d.sync_codex(); print(json.dumps(push_pending(d)))\n                                                                                                                                                                 ~~~~~~~~~~~~^^^\n  File \"<home>/smm-005-20261122/old-local-env/lib/python3.14/site-packages/smm_local/federation.py\", line 157, in push_pending\n    response = _request(config, \"/upload\", {\n        \"hub_id\": hub_id, \"device_id\": config[\"device_id\"],\n        \"device_name\": config[\"device_name\"], \"records\": rows,\n    })\n  File \"<home>/smm-005-20261122/old-local-env/lib/python3.14/site-packages/smm_local/federation.py\", line 48, in _request\n    raise HubUnavailable(f\"汇总服务返回 HTTP {exc.code}\") from exc\nsmm_local.federation.HubUnavailable: 汇总服务返回 HTTP 409\n"
+  }
+}

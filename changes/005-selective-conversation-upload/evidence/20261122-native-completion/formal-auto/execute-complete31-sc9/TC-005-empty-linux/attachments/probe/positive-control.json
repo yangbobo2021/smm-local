@@ -1,0 +1,232 @@
+{
+  "query": "selective",
+  "scope": "project",
+  "requested_scope": "project",
+  "archive_scope": "combined",
+  "hub_id": "69a5e692941645898ee26657c46d8615",
+  "effective_projects": [
+    {
+      "id": 1,
+      "name": "synthetic.example/005/V",
+      "project_kind": "ordinary",
+      "source": "vibeinsight",
+      "owner": "synthetic-005-source",
+      "source_key": "synthetic.example/005/V",
+      "device_name": null
+    },
+    {
+      "id": 2,
+      "name": "A",
+      "project_kind": "ordinary",
+      "source": "device",
+      "owner": "83c5c356171747018be079d35440f5a2",
+      "source_key": "a0a5fa8371ba186347ba679cf8df4dc6",
+      "device_name": "005-local"
+    },
+    {
+      "id": 7,
+      "name": "B",
+      "project_kind": "ordinary",
+      "source": "device",
+      "owner": "a075e63d79ba44e5b422f82c019cfcbd",
+      "source_key": "2eb2a568d175f8cd4bb286558ef799f2",
+      "device_name": "005-remote"
+    }
+  ],
+  "local_effective_projects": [
+    {
+      "id": 1,
+      "name": "A"
+    }
+  ],
+  "excluded_current_session_id": null,
+  "coverage": {
+    "local": "complete",
+    "hub": "complete"
+  },
+  "candidate_failures": [],
+  "capability_limitations": [],
+  "rerank": {
+    "scope": "returned_candidates",
+    "local_count": 1,
+    "hub_count": 2,
+    "hub_returned_count": 2,
+    "method": "BM25"
+  },
+  "results": [
+    {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "vibe-V",
+      "title": "selective common VibeInsight original",
+      "started_at": "2026-11-01T00:00:00",
+      "updated_at": "2026-11-01T00:00:00",
+      "project_id": 1,
+      "project_name": "synthetic.example/005/V",
+      "rank": 1,
+      "bm25_score": 0.13353139262452263,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common VibeInsight original",
+          "timestamp": "2026-11-01T00:00:00",
+          "canonical_id": "b7961f7783aa1f901e2b86ff245c0c9e3361f4a7a7717c122b6ed8879d645597",
+          "content_version": "d58276c03c3e411ce02f3d52a780d3ee5cf86200c12a94cff17da618d5414e23",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "synthetic-005-source",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "v-event-1",
+              "project_id": 1,
+              "project_name": "synthetic.example/005/V"
+            }
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IltcInYtdHJhY2UtMVwiLCBcInVzZXJcIl0iLCJ2ZXJzaW9uIjoiZDU4Mjc2YzAzYzNlNDExY2UwMmYzZDUyYTc4MGQzZWU1Y2Y4NjIwMGMxMmE5NGNmZjE3ZGE2MThkNTQxNGUyMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiOWE4MDQzMWIzY2NmY2ZkOGY0MmU4NWUwOGEyNjFhN2RlZDlhNGQ0Y2RlYjk4N2I1ODhjN2EwZjBjYzIzNTZlZiIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJ2aWJlaW5zaWdodCJ9.ac3372754a4282cc594e2bcc9e6dbc6957616e4512cd44f4ff6d0acf84609b89"
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IltcInYtdHJhY2UtMVwiLCBcInVzZXJcIl0iLCJ2ZXJzaW9uIjoiZDU4Mjc2YzAzYzNlNDExY2UwMmYzZDUyYTc4MGQzZWU1Y2Y4NjIwMGMxMmE5NGNmZjE3ZGE2MThkNTQxNGUyMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiOWE4MDQzMWIzY2NmY2ZkOGY0MmU4NWUwOGEyNjFhN2RlZDlhNGQ0Y2RlYjk4N2I1ODhjN2EwZjBjYzIzNTZlZiIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJ2aWJlaW5zaWdodCJ9.ac3372754a4282cc594e2bcc9e6dbc6957616e4512cd44f4ff6d0acf84609b89",
+      "origin_session_key": "9a80431b3ccfcfd8f42e85e08a261a7ded9a4d4cdeb987b588c7a0f0cc2356ef",
+      "identity_namespace": "vibeinsight",
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "synthetic-005-source",
+          "platform": "codex"
+        }
+      ],
+      "archive_scope": "hub",
+      "rerank_score": 0.13353139262452263,
+      "origin_references": [
+        {
+          "archive_scope": "hub",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IltcInYtdHJhY2UtMVwiLCBcInVzZXJcIl0iLCJ2ZXJzaW9uIjoiZDU4Mjc2YzAzYzNlNDExY2UwMmYzZDUyYTc4MGQzZWU1Y2Y4NjIwMGMxMmE5NGNmZjE3ZGE2MThkNTQxNGUyMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiOWE4MDQzMWIzY2NmY2ZkOGY0MmU4NWUwOGEyNjFhN2RlZDlhNGQ0Y2RlYjk4N2I1ODhjN2EwZjBjYzIzNTZlZiIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJ2aWJlaW5zaWdodCJ9.ac3372754a4282cc594e2bcc9e6dbc6957616e4512cd44f4ff6d0acf84609b89"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "local-A",
+      "title": "selective common local-A original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 1,
+      "project_name": "A",
+      "rank": 2,
+      "bm25_score": 0.13353139262452263,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A original",
+          "timestamp": null,
+          "origins": [
+            {
+              "device_name": "005-local",
+              "device_id": "83c5c356171747018be079d35440f5a2",
+              "source_position": 1
+            }
+          ],
+          "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+          "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+          "source_order": 1,
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiNjMwNDdmNzQ3MTAzNDBhMDhiNDM2MWM5MzgzMTc1YzIiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.f79bf44da844087972cd6e4ab791d9067755566a800fbafe6d06c5ce14ce610f"
+        }
+      ],
+      "origins": [
+        {
+          "device_name": "005-local",
+          "device_id": "83c5c356171747018be079d35440f5a2"
+        }
+      ],
+      "archive_scope": "local",
+      "origin_session_key": "local-A",
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiNjMwNDdmNzQ3MTAzNDBhMDhiNDM2MWM5MzgzMTc1YzIiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.f79bf44da844087972cd6e4ab791d9067755566a800fbafe6d06c5ce14ce610f",
+      "rerank_score": 0.13353139262452263,
+      "origin_references": [
+        {
+          "archive_scope": "local",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiNjMwNDdmNzQ3MTAzNDBhMDhiNDM2MWM5MzgzMTc1YzIiLCJhcmNoaXZlX3Njb3BlIjoibG9jYWwiLCJjb252ZXJzYXRpb25faWQiOjEsImZvcm1hdCI6MSwiaHViX2lkIjpudWxsLCJraW5kIjoiY2l0YXRpb24iLCJtZXNzYWdlcyI6W3siaWQiOjEsInBvc2l0aW9uIjoxLCJzb3VyY2Vfa2V5IjoibG9jYWwtQS1tMSIsInZlcnNpb24iOiI5MThhNjkyMDhmMzk2ZTI5NjBkODc1MTAyMjJlYjIzN2JlMTI2YzQ5NDliMTIxNjA5MDljOGUxNzYwOTMzMjNlIn1dLCJvcmlnaW5faWRlbnRpdHkiOiI4NWVmZDE0ZTVhZDc2NDZjZDAxYWZlYjM0YjNkZTM5MjU2MWRiNzM2NzRkMTk0YTNmOTQxMjQ4N2Y4NjY2M2FlIiwicHJvamVjdF9pZHMiOlsxXSwic291cmNlIjoiY29kZXgifQ.f79bf44da844087972cd6e4ab791d9067755566a800fbafe6d06c5ce14ce610f"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "remote-B",
+      "title": "selective common remote-B original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 7,
+      "project_name": "B",
+      "rank": 3,
+      "bm25_score": 0.13353139262452263,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common remote-B original",
+          "timestamp": null,
+          "canonical_id": "adde13f13a8043905b254536b8dfe096a72c5b94447c2fe0da633bec0607ebf4",
+          "content_version": "ddfce8f9ecb7ae87d78061435ff0758a5c91a6a211bad23dcfade66e96dc10fc",
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "a075e63d79ba44e5b422f82c019cfcbd",
+              "device_name": "005-remote",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 7,
+              "project_name": "B"
+            }
+          ],
+          "source_order": 1,
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6Ijk0Yjk4ZjJlZmUyZWRhOGUwYmE4OGMzODgwMDBiYmQ4ZDFhNjg4ZWY2OTI4YzMxOGUxYTI1NmU3ZDI3ZDc4NGMiLCJ2ZXJzaW9uIjoiZGRmY2U4ZjllY2I3YWU4N2Q3ODA2MTQzNWZmMDc1OGE1YzkxYTZhMjExYmFkMjNkY2ZhZGU2NmU5NmRjMTBmYyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNGNkYzhjMzY0Y2FmZTFjMDZmMTcwMDM2ODA5MThkN2Q0M2E3NTcyNzQ2N2RmNDUxOGFjMWEzMDZlYmJkNDE2NyIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJjb2RleCJ9.61fa721b090ab426440c48c0cd14235b93e0b53040b93e4ae765446b3095c970"
+        }
+      ],
+      "projects": [
+        {
+          "id": 7,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "a075e63d79ba44e5b422f82c019cfcbd",
+          "source_key": "2eb2a568d175f8cd4bb286558ef799f2",
+          "device_name": "005-remote"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6Ijk0Yjk4ZjJlZmUyZWRhOGUwYmE4OGMzODgwMDBiYmQ4ZDFhNjg4ZWY2OTI4YzMxOGUxYTI1NmU3ZDI3ZDc4NGMiLCJ2ZXJzaW9uIjoiZGRmY2U4ZjllY2I3YWU4N2Q3ODA2MTQzNWZmMDc1OGE1YzkxYTZhMjExYmFkMjNkY2ZhZGU2NmU5NmRjMTBmYyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNGNkYzhjMzY0Y2FmZTFjMDZmMTcwMDM2ODA5MThkN2Q0M2E3NTcyNzQ2N2RmNDUxOGFjMWEzMDZlYmJkNDE2NyIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJjb2RleCJ9.61fa721b090ab426440c48c0cd14235b93e0b53040b93e4ae765446b3095c970",
+      "origin_session_key": "remote-B",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "a075e63d79ba44e5b422f82c019cfcbd",
+          "device_name": "005-remote"
+        }
+      ],
+      "archive_scope": "hub",
+      "rerank_score": 0.13353139262452263,
+      "origin_references": [
+        {
+          "archive_scope": "hub",
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTczMGMwNTM2YjI0NGQ0MWI2YmEwNzA4ZjVlNzNmYWYiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjY5YTVlNjkyOTQxNjQ1ODk4ZWUyNjY1N2M0NmQ4NjE1Iiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6Ijk0Yjk4ZjJlZmUyZWRhOGUwYmE4OGMzODgwMDBiYmQ4ZDFhNjg4ZWY2OTI4YzMxOGUxYTI1NmU3ZDI3ZDc4NGMiLCJ2ZXJzaW9uIjoiZGRmY2U4ZjllY2I3YWU4N2Q3ODA2MTQzNWZmMDc1OGE1YzkxYTZhMjExYmFkMjNkY2ZhZGU2NmU5NmRjMTBmYyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNGNkYzhjMzY0Y2FmZTFjMDZmMTcwMDM2ODA5MThkN2Q0M2E3NTcyNzQ2N2RmNDUxOGFjMWEzMDZlYmJkNDE2NyIsInByb2plY3RfaWRzIjpbMSwyLDddLCJzb3VyY2UiOiJjb2RleCJ9.61fa721b090ab426440c48c0cd14235b93e0b53040b93e4ae765446b3095c970"
+        }
+      ]
+    }
+  ]
+}

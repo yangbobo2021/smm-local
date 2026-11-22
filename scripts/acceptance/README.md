@@ -191,3 +191,17 @@ A5 可运行 `selective_upload_isolation.py --target-config <独立新配置> --
 `selective_upload_global_cli.py --target-config <已结束的任务配置> --output <新目录>` 仅在该任务自己的合成档案/来源上验证CLI唯一全局项目、明确归属与强制源重放。须在对应主流程结束后运行，不用于日常档案；Windows包装器支持`--probe global_cli --mode client`。
 
 `selective_upload_reconcile.py --target-config <新配置> --output <新目录>` 使用真实新包CLI/Web验证旧本机代次、旧Hub版本、缺版本拒绝和新鲜双版本成功。所有状态和断线仅在独立测试Hub/任务转发中构造，保存两端头、请求、界面与trace。Windows包装器选择`--probe reconcile --mode client`；仍需普通交互身份。
+
+### 原生十二场景补齐的包专项
+
+`selective_upload_completion.py` 的三个独立探针补充旧非空档案关联/游标升级、旧参数的真实 stdio MCP 读取，以及 Hub 备份后已确认消息丢失的恢复。使用上面的新包独立 Local/Hub 环境、loopback HTTPS 证书和模块清单；另从正式 `v0.4.0` 源码构建并在两个独立环境安装旧 Local/Hub 包。在私有目标配置增加 `old_local_python`、`old_hub_python`，以及 `old_candidate.installed_local` / `old_candidate.installed_hub`（按旧 wheel 全部模块生成，与新包清单相同的键与 SHA 格式）。不能仅填写相同的版本字符串代替真实旧包。每次执行新建合成档案及 loopback Hub；不注册系统服务、不访问日常档案。
+
+```text
+ACCEPTANCE_EVIDENCE_DIR=<全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe legacy-links
+ACCEPTANCE_EVIDENCE_DIR=<另一全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe legacy-mcp
+ACCEPTANCE_EVIDENCE_DIR=<另一全新输出目录> <控制端Python> scripts/acceptance/selective_upload_completion.py --target-config <私有配置> --probe confirmed-loss
+```
+
+`selective_upload_empty_recorded.py --target-config <私有配置> --output <全新目录> --mode client` 专门执行成功零命中：目标配置增加 `expected_platform`（`darwin` / `linux` / `win32`），先保存非空正控，再核对 project/all 在 CLI、真实 stdio MCP、浏览器上的六个空响应及两张画面。控制解释器需要验收依赖与浏览器；包解释器仍为已安装的独立环境。Windows 配置另含 `controller_python`，包装器调用 `selective_upload_empty_windows.py`，要求已登录用户的 Limited 交互任务并核对实际非管理员身份；控制终端不作为普通用户证据。子进程读取的唯一配置位于任务根目录既有 ACL 下，只含路径/模块摘要和运行参数，退出删除，不放用户凭据。
+
+空查询包装可沿用 `selective_upload_recorded.py` 的私有 `execution` SSH 目标字段，由控制端回收原始响应/画面/worker 与清理收据。Windows 长轮可能超过原生单条自动命令 300 秒上限，应按独立确认的人工外部执行步骤保存新命令的实际起止与退出，再登记复审；超时的自动收据仍为超时，不能靠回收旧结果改判成功。以上都是可选实际包验证，默认 CI 仍运行不依赖服务/浏览器/远程机器的共用 `pytest`；完整平台与原生记录范围见[本轮证据入口](../../changes/005-selective-conversation-upload/evidence/20261122-native-completion/README.md)。

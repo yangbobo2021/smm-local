@@ -1,0 +1,53 @@
+{
+  "id": 6,
+  "source": "codex",
+  "source_session_id": "local-A",
+  "source_path": "",
+  "cwd": null,
+  "started_at": null,
+  "updated_at": null,
+  "title": "selective common local-A original",
+  "project_id": 2,
+  "project_name": "A",
+  "messages": [
+    {
+      "position": 1,
+      "role": "user",
+      "text": "selective common local-A original",
+      "timestamp": null,
+      "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+      "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+      "hub_message_id": 6,
+      "origins": [
+        {
+          "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+          "device_name": "005-local",
+          "source_position": 1,
+          "source_order": 1,
+          "project_id": 2,
+          "project_name": "A"
+        }
+      ],
+      "source_order": 1
+    }
+  ],
+  "projects": [
+    {
+      "id": 2,
+      "name": "A",
+      "project_kind": "ordinary",
+      "source": "device",
+      "owner": "802ff591ac3e4b1f8c79c118fd79dcac",
+      "source_key": "bc65300485fd21eee96587a019bd7eab",
+      "device_name": "005-local"
+    }
+  ],
+  "origin_session_key": "local-A",
+  "identity_namespace": "agent",
+  "origins": [
+    {
+      "device_id": "802ff591ac3e4b1f8c79c118fd79dcac",
+      "device_name": "005-local"
+    }
+  ]
+}

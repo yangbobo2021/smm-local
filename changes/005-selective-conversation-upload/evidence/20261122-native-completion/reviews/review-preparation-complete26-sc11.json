@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "SC11 tdd-core由SPEC B8/A11旧允许不能覆盖Hub新限制推出，设计与tests/test_upload_policy.py:118–148一致：all备份、none确认、prepare body_stopped/排除guard、SQLite恢复与Archive重建、conflict；差异Hub none且desired不变；显式use hub后confirmed/none，再push Hub正文完整=[]。只显示conflict而不阻断的反例由共同TC-unreconciled-send承担，设计已明确分工；永远拒绝的实现由采用Hub正控拦截。当前debug PID32906、exit0、1passed；全部bindings/artifacts核SHA一致，stderr空，分配tdd-core全执行。完整人工义务另见manual-preparation-complete26-sc11.md（full3实际已确认消息丢失恢复前状态需补设计），不能据本项将SC11整体判passed。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "SC11 tdd-unreconciled来自B8/A11，tests/test_upload_acceptance_boundaries.py:71–108以真实prepare及SQLite恢复旧all，在尚未决定前新增restore-new，与restore-a共同构成两个独立已归档目标；:84完整本机search集合，:88物理Hub=[]，:89–108分别在未查看差异/仅查看后真实push。任何首条或非首条的指纹/正文外发会被:101–103对所有出站known-upload/有records的upload拒绝与完整物理消息集合拦截；:104–108逐次conflict/desired旧all不变/远端none拦截只在一个前状态下错。与同场景明确采用Hub成功正控共同排除永久停传。probe输入来自独立JSONL/规范化普通消息行，无用产品输出反造预期。当前debug PID32907、exit0、1passed，全部bindings/artifacts实算一致、stderr空，全部分配检查到达。场景/人工准备边界在manual-preparation-complete26-sc11.md，当前auto不认领其full checks。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    }
+  }
+}

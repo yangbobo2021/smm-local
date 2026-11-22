@@ -1,0 +1,15 @@
+{
+  "cases": {
+    "TC-005-sc7-evidence": {
+      "status": "passed",
+      "reason": "逐个核对manual-complete30-sc7五operations及design27/match30分配complete-1/2/3/4/privacy，与SPEC A7/B6/D3一致。438附件/439artifacts及bindings SHA全部实核；observation inventory437原件与附件字节均匹配。当前人工核验11:41:01Z，原平台业务d80三E1/两Hub服务05:52–06:09Z、Mac登录f45 06:32Z和系统Hub7c 08:09Z分别保留manifest/安装全模块/账户/服务事件及cleanup，未当成本轮重执行。complete-1：独立用原七环境combined-stopped-cli-search完整4候选正文逐词重算df/avglen/k1=1.2/b=.75，全部实际rerank_score数值吻合；当前正式execute-complete30-sc7四TC已另行独立实核，三文档多词amber df1/blue df3及重复query的逐目标实际值m1=1.4821716155156461/m2=.11750762550957991/m3=.15461529672313148、m1/m3/m2顺序吻合独立数学。端点原分数相反不改变独立预期，五时间状态完整平局顺序断言均实际通过。complete-2：当前bm25保留同源同版本副本分数/消息不增加、不同会话和canonical轮次独立集合，以及v1/v2 canonical/version/text精确两消息断言；原七环境version-and-long-originals的versionprobe实为changed local与original archived两条user、position1但content_version不同，retained-version-original仍只旧原条，没有拿合成数学ref冒充真实读取。三E1和Mac登录的CLI/MCP/browser均完整两版本原文；已实际打开各edge-versionprobe.png四原图，画面有本机+Hub同会话两个位置1版本及原文两条。complete-3：当前long-message真实测试分别独立2001/3token长度公式核全文/preview100各目标得分并读完整long text，不以两端同错相等通过。七原件长文完整独立预期为paddingword重复2000次加longneedle end original、长度24023；CLI/MCP全部读回原字节，三E1及登录browser原响应也完整匹配。实际打开四edge-longneedle.png，见query longneedle、长文候选及本机原文区；容器截图只露其可视开头，完整尾关键词与24023长度依据附完整响应，未据截图猜尾部。四edges-browser-trace.zip原SHA与对应complete29 audit original_files一致，实际解析各trace为search200/read200再search200/read200，结合响应核两次操作。complete-4/privacy：逐三E1（另核登录）payloads/stopped-payloads/hub.log正常与失败记录检查。Mac228/97请求、Linux262/119、Windows578/303，offline分别3/5/11次且均info阶段；正常search仅query/current/source/include/limit/preview/device/project/scope_reference字段、query仅用户selective/versionprobe/longneedle，metadata只最小项目字段且无memberships；本设备停止区段无非空正文upload，禁止A停传追加/新会话全文、changed本机版本及paddingword长文标记均不在停止请求与Hub日志。逐21个Hub read请求解码ref证archive_scope=hub且无本机parts/正文/preview，只远端消息stamp；正常及失败不夹带本机候选评分输入。Windows设计残文“尚在重跑”是旧描述，不能取消本次实际原件；已按Windows同一标准实核。版本闭包：实际manifest installed=candidate且两独立包other_package=false；既核git7ab/d80→ba8差异仅Local reconcile输入/UI、upload控制fence/CAS及references选中title；federation/core/search_merge/MCP及Hub主模块不变。title变化由scope11/15实际包材料补，不以Hub等字节推Local全等。完整回归仍为complete29 10:25:09–10:26:59Z真实运行，inputs/output SHA核实不变；本轮fresh四auto与原审计分开，未用252总数自证。上述仅认本TC分配的原件和当前适用性，不预授其他场景或需求。",
+      "covers": [
+        "complete-1",
+        "complete-2",
+        "complete-3",
+        "complete-4",
+        "privacy"
+      ]
+    }
+  }
+}

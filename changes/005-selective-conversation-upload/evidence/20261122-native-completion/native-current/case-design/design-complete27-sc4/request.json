@@ -1,0 +1,206 @@
+{
+  "cases": {
+    "TC-005-backfill": {
+      "checks": [
+        {
+          "action": "先上传B并设置高旧游标，停止期追加A旧轮次及新会话，再允许并重复同步。",
+          "expected": "A新旧追加齐全且顺序正确，B保留，无重复。",
+          "id": "case-1"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "其他项目游标不截断停传历史"
+    },
+    "TC-005-batch-failure": {
+      "checks": [
+        {
+          "action": "分别在实际upload调用前让整批失败，或真实归档两条后将回执accepted改为1；检查无本机接收确认，再恢复网络/回执并同步两轮。",
+          "expected": "失败期间两条均未确认、保持待确认/在途；Hub为零或完整两条，恢复后两条精确全部到达，待确认归零且重复同步不增正文。",
+          "id": "whole-batch-failure"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "同一允许项目有两个不同会话的未确认消息，Hub初始无正文。",
+      "title": "整批未提交故障与部分无效回执"
+    },
+    "TC-005-bounded-upload": {
+      "checks": [
+        {
+          "action": "制造大于单轮上限的积压，减小批次并跨轮查询/续传。",
+          "expected": "轮次有界且中途查询可用/其他项目推进；最终独立会话/位置/角色/正文/时间集合35条精确齐全，允许待确认与在途归零，第三轮不发且全部物理行/键不变。",
+          "id": "case-6"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "有界补传中可搜索并推进其他项目"
+    },
+    "TC-005-fair-upload": {
+      "checks": [
+        {
+          "action": "使A指纹请求失败而B正常，运行有界一轮。",
+          "expected": "A错误被保留，B仍提交并可读。",
+          "id": "case-5"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "失败项目不饿死其他允许项目"
+    },
+    "TC-005-mixed-batch": {
+      "checks": [
+        {
+          "action": "分别让允许B在前/禁止A在前，以当前revision/epoch提交真实两记录批次，再查询正文与批次接收回执；另发纯允许B正控。",
+          "expected": "整个混批拒绝且无任意允许前缀正文或接收确认；允许B单独提交仍成功，不以拒绝全部请求掩盖错误。",
+          "id": "mixed-batch-atomic"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "当前策略仅允许B，A/B最小项目均已真实登记，Hub初始无正文。",
+      "title": "有效版本混合批次整体拒绝"
+    },
+    "TC-005-offset-prefix": {
+      "checks": [
+        {
+          "action": "先上传无ID第二轮，再追加相同正文/角色/时间的第一轮并重传。",
+          "expected": "Hub两实体、来源位置/顺序为1/1和2/2，确认2条，重复无待补。",
+          "id": "case-2"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "晚到前缀的相同两轮分别保存"
+    },
+    "TC-005-repeated-fairness": {
+      "checks": [
+        {
+          "action": "连续三轮使A指纹失败；首轮后每轮新增B独有消息。",
+          "expected": "每轮错误保留，B当轮精确推进1条，A未确认仍排队，不发生跨轮饥饿。",
+          "id": "additional-repeated-fairness"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "反复失败时跨轮推进其他项目"
+    },
+    "TC-005-sc4-evidence": {
+      "checks": [
+        {
+          "action": "逐真实服务比较A历史/停传期新增/旧会话追加完整预期集合、角色和顺序，B旧游标不得截断。",
+          "expected": "允许项目后补齐对当前 Hub 全部未确认历史、停传期新增与旧会话追加，不被其他项目游标截断。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "核对精确确认/物理消息集合、重复同步、丢确认恢复，以及整批未提交/部分无效回执当前断言。",
+          "expected": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "核对当前有界积压中本机查询、其他允许项目推进及失败项目不饿死的真实自动断言。",
+          "expected": "补传中本机归档检索可用，其他允许项目持续推进，失败项目不永久阻塞队列。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        },
+        {
+          "action": "对E1/E3/E4逐入口核对补齐后查询/引用取得/完整原文，身份和正文顺序匹配独立夹具。",
+          "expected": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-4"
+        },
+        {
+          "action": "结合本项逐条判据核对下列原始实际事件及当前自动回归；共享SC12/E3/E4已安装包的真实业务证据，Windows与macOS系统级E3仍待完成，不以核心回归替代。",
+          "expected": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容 原缺口只有获得对应原件及适用性依据才认领。",
+          "id": "platform"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC4实际原件与当前适用性核验"
+    },
+    "TC-005-timestamp-version": {
+      "checks": [
+        {
+          "action": "保存无时间版本后构造归档中的有时间版本，再上传、重试、读旧引用和联合命中。",
+          "expected": "两个版本均实体保存；当前版本准确确认，重试不增，旧引用与联合两版本保留。",
+          "id": "case-3"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "来源时间不同版本确认不吞消息"
+    },
+    "TC-005-unknown-receipt": {
+      "checks": [
+        {
+          "action": "Hub提交后丢失确认并停止本机上传，再核实回执。",
+          "expected": "先在途1、后确认1；核实时不再发正文，旧副本保留。",
+          "id": "case-4"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "停止后核实未知接收结果"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "obligations": [
+    {
+      "id": "case-1",
+      "quote": "允许项目后补齐对当前 Hub 全部未确认历史、停传期新增与旧会话追加，不被其他项目游标截断"
+    },
+    {
+      "id": "case-2",
+      "quote": "全部未确认历史"
+    },
+    {
+      "id": "case-3",
+      "quote": "相同消息版本重复同步或响应丢失重试不重复"
+    },
+    {
+      "id": "case-4",
+      "quote": "响应丢失重试不重复，未提交或未知记录不被跳过"
+    },
+    {
+      "id": "case-5",
+      "quote": "失败项目不永久阻塞队列"
+    },
+    {
+      "id": "case-6",
+      "quote": "补传中本机归档检索可用，其他允许项目持续推进"
+    },
+    {
+      "id": "platform",
+      "quote": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容"
+    },
+    {
+      "id": "whole-batch-failure",
+      "quote": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。"
+    },
+    {
+      "id": "mixed-batch-atomic",
+      "quote": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。"
+    },
+    {
+      "id": "complete-1",
+      "quote": "允许项目后补齐对当前 Hub 全部未确认历史、停传期新增与旧会话追加，不被其他项目游标截断。"
+    },
+    {
+      "id": "complete-2",
+      "quote": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。"
+    },
+    {
+      "id": "complete-3",
+      "quote": "补传中本机归档检索可用，其他允许项目持续推进，失败项目不永久阻塞队列。"
+    },
+    {
+      "id": "complete-4",
+      "quote": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容。"
+    },
+    {
+      "id": "additional-repeated-fairness",
+      "quote": "补传中本机归档检索可用，其他允许项目持续推进，失败项目不永久阻塞队列。"
+    }
+  ],
+  "request_id": "design-complete27-sc4",
+  "scene": "SC4"
+}

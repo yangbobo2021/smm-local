@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<home>/smm-005-20261122/controllers-ba8c6d5/selective_upload_empty.py", line 68, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "<home>/smm-005-20261122/controllers-ba8c6d5/selective_upload_empty.py", line 65, in main
+    target=Path(d)/'target.json';target.write_text(json.dumps(config));Empty(argparse.Namespace(target_config=target,output=output,mode='client')).run_empty()
+                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "<home>/smm-005-20261122/controllers-ba8c6d5/selective_upload_empty.py", line 48, in run_empty
+    try:self.execute_empty()
+        ~~~~~~~~~~~~~~~~~~^^
+  File "<home>/smm-005-20261122/controllers-ba8c6d5/selective_upload_empty.py", line 30, in execute_empty
+    mcp=asyncio.run(self.mcp('search_conversations',{'query':'uniquelyabsentquery','scope':scope,**({'project_id':self.projects['A']} if scope=='project' else {})}))
+  File "<home>/smm-zcode-trial-1114/python/cpython-3.14.10-linux-x86_64-gnu/lib/python3.14/asyncio/runners.py", line 201, in run
+    raise RuntimeError(
+        "asyncio.run() cannot be called from a running event loop")
+RuntimeError: asyncio.run() cannot be called from a running event loop
+<sys>:0: RuntimeWarning: coroutine 'Run.mcp' was never awaited

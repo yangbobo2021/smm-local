@@ -1,0 +1,33 @@
+{
+  "cases": {
+    "TC-005-bm25": {
+      "status": "passed",
+      "covers": [
+        "case-1",
+        "identity-versions"
+      ],
+      "reason": "当前SC7完整scene criteria仍由A7/B6/D3支持；原26设计缺少不同df多词的缺口现由同版设计新增TC-005-multiterm-ranking独立承接，原TC身份与断言未删。tests/test_upload_acceptance_boundaries.py:107-120及test_combined_search.py:21-46与26字节相同：独立公式逐候选、同版本副本不增分/消息、另一轮/会话保留，v1/v2精确(canonical_id,version,text)集合有效。只首候选/版本正确会被完整集合与逐项分数断言拦截；两端同错不能替代独立预期。当前debug-complete27-sc7真实exit0/1 passed、stderr空，bindings/artifacts全部摘要有效。补充数学TC已实际审查，未再用历史green放行；人工complete-1等范围另manual-preparation-complete27-sc7.md。"
+    },
+    "TC-005-long-message": {
+      "status": "passed",
+      "covers": [
+        "case-3"
+      ],
+      "reason": "A7/D3要求预览不改分数与长消息尾词命中，设计与真实tests/test_combined_search.py:57-79一致。text=paddingword*2000+tailonly并先断尾词不在短预览；两端独立2001/3-token公式:69-75逐候选分别校验，全文/短预览若同时错误截断评分首先在该公式失败；只首候选正确由:73完整session集合/逐项分数拦截。:78准确读回独立全文拦同号错误原文。当前debug-complete27-sc7 exit0/1 passed，绑定与产物摘要有效。此项分配case-3有效；场景其他数学缺口不冒充已解决，人工设计另MD。 本轮源码与26相同，现已核对27新运行stdout/exit与绑定；原26依据保留。"
+    },
+    "TC-005-rank-ties": {
+      "status": "passed",
+      "covers": [
+        "case-2"
+      ],
+      "reason": "D3明确分数平局按最新命中时间与稳定身份，缺失早于有效；设计没有新增行为。tests/test_combined_search.py:47-54动作前独立构造五候选：a/b同一绝对时间不同区、c新一天、d空时间、e缺字段。完整独立顺序[c,a,b,d,e]拦截只首目标正确、错误时区或空/缺失任一状态优先错误；不是比较两端同错。当前debug-complete27-sc7真实debug exit0/1 passed，绑定与产物摘要一致。case-2本项有效，其他数学/人工范围另MD。 本轮源码与26相同，现已核对27新运行stdout/exit与绑定；原26依据保留。"
+    },
+    "TC-005-multiterm-ranking": {
+      "status": "passed",
+      "covers": [
+        "additional-multiterm-ranking"
+      ],
+      "reason": "SPEC D3明确查询词去重、逐term文档频率和BM25贡献求和，设计为有依据缺口补测。tests/test_complete_scene_boundaries.py:134-148独立输入m1=amber amber blue、m2=blue other other other、m3=blue green给N3/avg3、amber df1/blue df3；idf常量math.log1p(2.5/1.5)及math.log1p(.5/3.5)和每文档tf/len分别独立计算，query=amber blue amber。完整目标集合随后每个hit按session独立expected分数approx(rel1e-12)，再按独立expected排序。错误所有df=M会首先在m1逐项分数断言失败；重复amber贡献两次亦同。只m1正确而m2/m3错误由同循环第二/第三目标独立期望拦截；误用同一候选/分数由集合及各自不同预期拦截。旧case仍覆盖副本/版本/平局/预览边界，无依据要求增加同条件随机标识。当前真实debug exit0/1 passed，multiterm-ranking附件实际expected=[m1 1.4821716155156461,m2 .11750762550957991,m3 .15461529672313148]、顺序m1/m3/m2，与独立式一致；全bindings/artifacts SHA有效。直接字典/标量断言无外部抽取探针，已有正常独立常量兼作oracle核对。"
+    }
+  }
+}

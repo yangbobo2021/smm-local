@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "原设计tdd-core及实现未改，B8/A11旧all恢复不能覆盖新none、prepare/guard排除/SQLite恢复/差异只读/采用Hub正控/Hub正文空均有完整断言，未决定真阻断由unreconciled-send分工。当前debug28 PID52151 exit0/1passed，bindings/artifacts实算一致，全部检查到达；不是沿用27执行。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "原有依据tdd-unreconciled与代码未改，两个独立本机目标在未查看和仅查看差异两个前状态各实际push，完整出站known-upload/正文upload禁止、物理Hub空集合、conflict/desired all/Hub none逐次核，首目标/前状态遗漏及两端同错由独立预期拦截。当前debug28 PID52152 exit0/1passed，全部bindings/artifacts SHA一致，全分配到达。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    },
+    "TC-005-confirmed-loss": {
+      "status": "passed",
+      "reason": "SPEC A11 E5/B8有据，完整设计及原27验证边界有效。独立AST提取27/28快照confirmed_loss函数字节SHA均4de2db2647f8b8a782caa19526dee7b5a009e6a29091de7f6edec3b941a1fb20，函数确未改；整文件因SC10修订而变，当前已重新真实执行。28附件实际confirmed-recent在备份后Hub完整读回、confirmed4/pending0，随后none新限制；prepare停止并排除guard，同目录serve-hub52268→52316旧库恢复后conflict/Hub none，采用none确认归0而recent不补；only A后三会话四条独立正文列表各准确、旧引用仅原消息、再同步全hits不变及pending/inflight0。只首会话正确或保旧receipt跳过recent由逐session独立全文拦截；只在none状态下错误或永久阻断由缺席/状态及允许后正控拦截，两端互等不能代替固定正文。Mac自管独立task HTTPS/UID501、ba8 clean Local25/Hub24全模块相等；31附件/全部bindings/artifacts SHA实算一致，PID52258 exit0，正常业务证据在raw附件/commands非空stdout，cleanup无失败。target SHA d712c01f3fa470478437c5c16d59608781e0802d001444a1ce7f4a0eec07e68f。完整人工范围另MD，正式仍须新execute，不能把本debug或旧恢复当formal。",
+      "covers": [
+        "additional-confirmed-loss"
+      ]
+    }
+  }
+}

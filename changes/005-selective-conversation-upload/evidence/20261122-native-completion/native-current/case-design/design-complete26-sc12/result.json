@@ -1,0 +1,43 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-guidance": {
+      "checks": [
+        {
+          "action": "从README链接实际打开使用指南与Skill，逐条寻找项目ID/模式/保留/联合读取/恢复说明。",
+          "expected": "从 README 主路径可找到模式、项目 ID、停止保留、联合检索读取及恢复说明。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "实际运行当前已安装包各层CLI帮助并与Web原始配置/项目/差异画面和Skill语义比较，旧来源帮助不丢；核对三平台实际入口。",
+          "expected": "CLI/Web/Skill 语义一致，已有来源帮助不退化；E1 各平台实际入口可操作。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "读取当前十二场景完整证据、真实版本差异、失败及未验证项；所有必要平台有适用原件才判交付。",
+          "expected": "必要平台和行为均有当前候选证据才判交付，未验证不冒充通过。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "用户入口与完整交付记录核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "complete-1": "从 README 主路径可找到模式、项目 ID、停止保留、联合检索读取及恢复说明。",
+    "complete-2": "CLI/Web/Skill 语义一致，已有来源帮助不退化；E1 各平台实际入口可操作。",
+    "complete-3": "必要平台和行为均有当前候选证据才判交付，未验证不冒充通过。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete26-sc12/result.json",
+  "recorded_at": "2026-11-22T09:50:26.680000+00:00",
+  "request_id": "design-complete26-sc12",
+  "request_sha256": "a069c58ab09718edb44d50411019f06273b0ec3c9eb876183c02f43d29fae953",
+  "scene": "SC12",
+  "status": "designed"
+}

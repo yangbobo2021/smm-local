@@ -1,0 +1,22 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_ids": [
+    "TC-005-backfill",
+    "TC-005-batch-failure",
+    "TC-005-bounded-upload",
+    "TC-005-fair-upload",
+    "TC-005-mixed-batch",
+    "TC-005-offset-prefix",
+    "TC-005-sc4-evidence",
+    "TC-005-timestamp-version",
+    "TC-005-unknown-receipt"
+  ],
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-complete26-sc4/result.json",
+  "request_id": "match-complete26-sc4",
+  "result_sha256": "ce32666b8ab227f7f552e9826ca0675e74c31b00491476271556e9d80235685d",
+  "scene": "SC4",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

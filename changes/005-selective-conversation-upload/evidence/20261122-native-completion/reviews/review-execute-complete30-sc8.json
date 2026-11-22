@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-reference": {
+      "status": "passed",
+      "reason": "独立对照SPEC B7/A8与design27/match30实际分配，execute-complete30-sc8全部bindings/artifacts SHA实核一致，正式11:03:37.509–37.830Z退出0、1passed；tests/test_005_contracts.py:167–192实际让Hub与Local整数ID相同但正文不同，分别按新reference精确读common exact local original/remote original；冲突conversation_id报错，Hub故障抛HubUnavailable且本机引用仍可用；本机正文改版本后旧引用拒绝。各分支真实断言，无同号档案替代。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-reference-boundaries": {
+      "status": "passed",
+      "reason": "独立对照SPEC B7/A8与design27/match30实际分配，execute-complete30-sc8全部bindings/artifacts SHA实核一致，正式11:03:37.830–38.487Z退出0、7passed；tests/test_required_snapshot_and_batch_boundaries.py:73–141及七本次附件显示本机/Hub首条和非首条删除前都精确两条，分别删真实id后旧引用明确失败且余正文独立断言不变；重复position1的两源消息分别issue reference后只读对应独立正文，并核stamp id/version；整段仍两条。真实第二Hub的错误正文和本机同号哨兵分别保留，绑定新Hub后旧引用拒绝且/read未发往新Hub，hub-switched附件两hub_id不同、read_calls=[]。此项未把剩余正文相等冒充错误读取成功。",
+      "covers": [
+        "citation-extra-boundaries"
+      ]
+    },
+    "TC-005-scoped-title": {
+      "status": "passed",
+      "reason": "独立对照SPEC B7/A8与design27/match30实际分配，execute-complete30-sc8全部bindings/artifacts SHA实核一致，正式11:03:38.488–38.921Z退出0、2passed；test_scoped_read_metadata.py:9–45独立构造共享会话首条范围外Y SECRET、第二条允许X，仅A-X关联。Hub-api/federated两入口均先取得X命中，read仅common allowed X且title明确等于X，不含Y；旧无reference整段读仍Y/X两条与Y原title。两参数均实际到达，不用源码推断范围。",
+      "covers": [
+        "scope-title"
+      ]
+    },
+    "TC-005-legacy-mcp": {
+      "status": "passed",
+      "reason": "独立对照SPEC B7/A8与design27/match30实际分配，execute-complete30-sc8全部bindings/artifacts SHA实核一致，正式11:03:38.921–43.923Z实际包命令退出0，probe/result记录业务38.964–43.858Z。已读Completion.legacy_mcp及Run.mcp真实stdio_client/ClientSession.initialize/call_tool调用链，非Python helper代读。当前probe/legacy-mcp-parameters.json本机旧参数conversation_id1、Hub旧三参数conversation_id1/hub_id/hub_message_id1；旧0.4.0解释器和最终包解释器各自两次真实stdio调用，四原文分别精确local-A/Codex user selective common local-A original与vibe-V/VibeInsight user selective common VibeInsight original，位置1。manifest clean ba8、macOS uid501，独立Local/Hub installed全模块=候选且other_package=false；actual-old-local19/old-hub21模块版本0.4.0与目标旧候选清单一致。service-events真实serve-hub PID88795启动后明确停止exit-15，cleanup.failures=[]；stderr四CallToolRequest/ListToolsRequest与业务读数一致，无以old=new相等替代独立预期。仅认E5一平台旧调用兼容专项，其他E1/E3/E4由人工项判。",
+      "covers": [
+        "additional-legacy-mcp"
+      ]
+    }
+  }
+}

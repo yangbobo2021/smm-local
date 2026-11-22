@@ -1,0 +1,508 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-backfill/run.process.json": "bf4ddba21fc00b77bd7b309c7378051f83b27c95f3b38c8e07ae95889fced1fb",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-backfill/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-backfill/run.stdout": "5fe556b85a60ef3bc95e33959ddc0bd8fe62128cfe8221f7a4378c0fc2cd7bd0",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/attachments/batch-before-commit.json": "0a68a2d13a36aced2f9e0c85625394a0b907eb357a231e43424eb0acd935cf33",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/attachments/batch-partial-receipt.json": "82fdf0a85a0522f29f148f6e9b2eefd144d3270e2eb697eb6d08482cdc4db342",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/run.process.json": "24ff4b4f09dec8e22a42d1ea957eea1d8e3088e76965a1adafc7200c8562b972",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/run.stdout": "2070c05c39ab2ca244db71f6137b48ee2d6e9b3eff4aa09111710844d3f8226a",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-bounded-upload/run.process.json": "a85deb50453261962793c3fc31e9986ce0d985aa52d52ff2aa09b698a0459780",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-bounded-upload/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-bounded-upload/run.stdout": "464a641265c332f9d7ff98fbe8927088c5101412dde342fdb23919129627b480",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-fair-upload/run.process.json": "44e444e0e2a8f5c8ddb70ce77f039c794e4c69032ceb2f10f61711b0ed3fd496",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-fair-upload/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-fair-upload/run.stdout": "b15ca0b7a879af5d2c6b91fc37ce2250250644cc3115c444676f1185d741789e",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/attachments/mixed-batch-allowed-first.json": "dd9da3beedc785d1b689e8cb98e9a63c6fe1fa5b967dee34781c545135b72d7b",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/attachments/mixed-batch-forbidden-first.json": "b47ec4ead9d833a3eabcb30a027172f62f6b6cb7d6d6845e4950a4a82daddda1",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/run.process.json": "aee8c989c0f5f3374fa9ebf3d9955d562093817ff2fcbcf97378cfd9d29d9740",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/run.stdout": "a4fd5844bf90b47c8ebaaffe8bb8b1644ba9b6f89df9007cee8877362ab4a14e",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-offset-prefix/run.process.json": "fdcb42a0e25589c3c21fff72b8069c4d5dade788b5799f3aa91b455d2a1f066f",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-offset-prefix/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-offset-prefix/run.stdout": "7541d46028382760d5d303c5bf1872cb0431aa7f73e07c8dab8b9ee4a3e7f45d",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/attachments/repeated-fairness.json": "280b9e366807494e4f3528a607513711c39d838d77595f84e638be8b0d4b68f8",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/run.process.json": "e6c0e6474465c43c8c164daa3187cbfbdb474a8ce1a6b77b120cf8ede6f2540f",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/run.stdout": "b133a35ed6c1fb04025f4f029f4b99f11297394c350b65ce647c4a82ab8889ff",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-timestamp-version/run.process.json": "fad34bb456db43624b95c5f35444b24b2f640169226abb82d6b6731fbec520ad",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-timestamp-version/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-timestamp-version/run.stdout": "5fe556b85a60ef3bc95e33959ddc0bd8fe62128cfe8221f7a4378c0fc2cd7bd0",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-unknown-receipt/run.process.json": "60a46bff12adb88189469e0771de164c7fe12a500fc0e8c59b0cd6c99b4a747c",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-unknown-receipt/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-unknown-receipt/run.stdout": "e5b47d501c19d391332d773f1bba893d8e51214925c10b13e6f2dae5969a40ff",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/request.json": "3da61c4b3c919ed13dc7ecbf88462d99cce036c2458300b8d37d80ded1d6770f"
+  },
+  "bindings": {
+    ".acceptance-local/native-v1/AT-SMM-005/native-targets/empty-linux29.json": "bc9272545f0f8d1f299d7d0099dc4a0bf377a1dcecabe26caf56e261c1394eca",
+    ".acceptance-local/native-v1/AT-SMM-005/native-targets/empty-mac29.json": "c175b86d3568a8521be98a08eeab14a999a6ec2398c55485f7e8e9c9bca0c92d",
+    ".acceptance-local/native-v1/AT-SMM-005/native-targets/empty-windows29.json": "a9fbf31421ef95cc3579a9ed8201bb3395f23beec4bad630f5c2402ef36f9d86",
+    ".acceptance-local/native-v1/AT-SMM-005/native-targets/mac-completion27.json": "1369df2aab61058209ffe545370d745e9fbcbbf9e8beb412665aa57b296ec88d",
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_archive_references.py": "2bc5e24bd8b61cd155745309e4ad29c7dec596dc7766c1564c79208efa8b1482",
+    "tests/test_cli_help.py": "355468c0783ed01394d9f5a8a2bb9e3092e94c4899a654e8b745beef8e028bc1",
+    "tests/test_combined_search.py": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+    "tests/test_complete_scene_boundaries.py": "253b2f7765a5d9b6ab7b5a07b9b4dfef86c228f4c9b5a2eeee8f8b7abed40801",
+    "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+    "tests/test_federation_tls.py": "fea404b497ac6f1c71bb4fb6529a8a819f7c5a5e2da6778f31fea2fe51f79516",
+    "tests/test_hub_standalone.py": "3c7741ae2d762a5aa7d7498a25201860741135ef7bb897951017e47259a377cb",
+    "tests/test_maintenance.py": "63171d761ca0a60acc35bafb16f1581491090418da7039a42389988294f069e4",
+    "tests/test_pipeline.py": "2564b4d1bfdb81b81c58ef790f070129adbe8fc1363564969ac320b43d49c332",
+    "tests/test_project_identity_boundaries.py": "16a6b46ed7a32470c316f5748e4849eee9784bc6db6b83d9f7b058252542dac2",
+    "tests/test_project_preview_coverage.py": "28ed99f2da37e5df2acb711f7f24a2d5156b73a9a7fbd2c77e9c312f85fa031a",
+    "tests/test_reconcile_boundaries.py": "1215497c31beebc1f81ab81de4cc35d022aa918c7176404576c91dad78b7bc84",
+    "tests/test_reconcile_dispatch.py": "9fc53738cf45201c3a7f93fe3345405e93f5d7ab746beee5b259301472beaab3",
+    "tests/test_reconcile_remote_race.py": "b1f8c2fd4cf4578d91bd67a2f17041f5d0485022a573e8f0ce0d092940a2fe38",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+    "tests/test_reconcile_uncertain.py": "6ad019a7a09254c0e2f6f090b7bb0667fc900a46f37b8eae8af2dfe13be04d6c",
+    "tests/test_required_snapshot_and_batch_boundaries.py": "8413d7ae8bc17d5f84361f850c64c2973125c389ab3999172970f996645e4c5d",
+    "tests/test_scoped_read_metadata.py": "504194f3f20a11390aa13df2b0918d301d9644d665649caeb6a95d9dda11b918",
+    "tests/test_selective_upload_audit.py": "5e49f5bbac6cddb391afae148ee18617704f045ece8fb5179c82d65a93c1dee4",
+    "tests/test_selective_upload_probe.py": "d7103d8595a37fd08d0af7b16263610bbf4dcdaa469f32e48438a38ced553898",
+    "tests/test_service_startup.py": "79df1235e260a6323af648062df9d4b9694f9352b3a39567b2d8787ff1bfa223",
+    "tests/test_source_plugins.py": "4d7f9f61a505811117c6f4d2d106ca6205fe6131bc25331809e23c3d8cab82d0",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+    "tests/test_upload_dispatch_fence.py": "c9bbcdf0fa832eb4bd0b6388e23078cd1f2a1b829a61d675880eb2d63b4fc4de",
+    "tests/test_upload_interfaces.py": "41acfd8f711c0b92b431e71d90e06f1fb41b341801104381ab2ad4b9fd0f41d2",
+    "tests/test_upload_isolation.py": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899",
+    "tests/test_upload_mode_matrix.py": "dee64fb7cdf7dc793c59245111ccd18b472b3e76c36c9a9465c393f3c8d760ef",
+    "tests/test_upload_policy.py": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309",
+    "tests/test_upload_project_moves.py": "9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56",
+    "tests/test_upload_recovery.py": "00cc38f24899e3d135b6af97737e3631e522babdf8397ebd8b9a99b0d1eba39d",
+    "tests/test_upload_registration.py": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39",
+    "tests/test_upload_review_regressions.py": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586",
+    "tests/test_vibeinsight_boundaries.py": "24f69ae463941de27b66df97a01dcf5fb297817c74721c3ef7f2ba6b9e4600de",
+    "tests/test_vibeinsight_fixture_guard.py": "ea90372e8ee793da977aa2f7cfcb763646dc0309c9e44858aecd57b143874267",
+    "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+  },
+  "case_design": {
+    "id": "design-complete27-sc4",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc4/result.json",
+    "sha256": "0b71d084aa1652b8dfc99987ae9fa32a4d999522cee8973146f8eabb06bbfa08"
+  },
+  "case_obligations": {
+    "TC-005-backfill": [
+      "case-1"
+    ],
+    "TC-005-batch-failure": [
+      "whole-batch-failure"
+    ],
+    "TC-005-bounded-upload": [
+      "case-6"
+    ],
+    "TC-005-fair-upload": [
+      "case-5"
+    ],
+    "TC-005-mixed-batch": [
+      "mixed-batch-atomic"
+    ],
+    "TC-005-offset-prefix": [
+      "case-2"
+    ],
+    "TC-005-repeated-fairness": [
+      "additional-repeated-fairness"
+    ],
+    "TC-005-timestamp-version": [
+      "case-3"
+    ],
+    "TC-005-unknown-receipt": [
+      "case-4"
+    ]
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design_review": "review-preparation-complete30-sc4",
+  "designed_case_ids": [
+    "TC-005-backfill",
+    "TC-005-batch-failure",
+    "TC-005-bounded-upload",
+    "TC-005-fair-upload",
+    "TC-005-mixed-batch",
+    "TC-005-offset-prefix",
+    "TC-005-repeated-fairness",
+    "TC-005-timestamp-version",
+    "TC-005-unknown-receipt"
+  ],
+  "implementation_sha256": {
+    "TC-005-backfill": "2d067d6d2efb9c2b46378222dc5773cc518a40f601fc69d14a70226d04a2cbdb",
+    "TC-005-batch-failure": "c5f4e7f6cb2801e3b9ca4ef4423a4f52aeb64cac5e189ea541b83119eaaa6dcb",
+    "TC-005-bounded-upload": "f28534373353e4fdcc9a5069d8e9e8bef472b056e02c151a0a610d61bf392557",
+    "TC-005-fair-upload": "85e2a1fa9aea86405c20ea7a8a179880eeae08297ef2ae810b2a2bb368118fe5",
+    "TC-005-mixed-batch": "a0c21851a96dc83add0879c46f2d89317257d017d248679bd8a9c3e371ac694d",
+    "TC-005-offset-prefix": "5b92b149a09a78d13f10ebb40546f22d7d0c31b0cd43ba26fb5ffdbb5bc4a2f2",
+    "TC-005-repeated-fairness": "d5f4faaca737be6bc1e8f53bd6b08d3fd1991544fefff3a06fd31b4466ed0ab9",
+    "TC-005-sc4-evidence": "ab05002b41131887c8826dc94bf052c942a5bc68b2d94b006374d2adb14dead6",
+    "TC-005-timestamp-version": "a84690b1498e179cd5f5b161bf15403923568abd35a61969d58fae188cef0770",
+    "TC-005-unknown-receipt": "892bd465ed806189e1c65a4d60fc7421aea32320c6a1af5c0ae70ae6b9a01e2a"
+  },
+  "obligations": {
+    "additional-repeated-fairness": "补传中本机归档检索可用，其他允许项目持续推进，失败项目不永久阻塞队列。",
+    "case-1": "允许项目后补齐对当前 Hub 全部未确认历史、停传期新增与旧会话追加，不被其他项目游标截断",
+    "case-2": "全部未确认历史",
+    "case-3": "相同消息版本重复同步或响应丢失重试不重复",
+    "case-4": "响应丢失重试不重复，未提交或未知记录不被跳过",
+    "case-5": "失败项目不永久阻塞队列",
+    "case-6": "补传中本机归档检索可用，其他允许项目持续推进",
+    "complete-1": "允许项目后补齐对当前 Hub 全部未确认历史、停传期新增与旧会话追加，不被其他项目游标截断。",
+    "complete-2": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。",
+    "complete-3": "补传中本机归档检索可用，其他允许项目持续推进，失败项目不永久阻塞队列。",
+    "complete-4": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容。",
+    "mixed-batch-atomic": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。",
+    "platform": "E1/E3/E4 实际服务可检索并按稳定身份和顺序完整读回补传内容",
+    "whole-batch-failure": "相同消息版本重复同步或响应丢失重试不重复，未提交或未知记录不被跳过。"
+  },
+  "operation": "execute",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/result.json",
+  "recorded_at": "2026-11-22T11:03:36.014000+00:00",
+  "request_id": "execute-complete30-sc4",
+  "request_sha256": "3da61c4b3c919ed13dc7ecbf88462d99cce036c2458300b8d37d80ded1d6770f",
+  "results": {
+    "TC-005-backfill": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_policy.py::test_resume_backfills_old_new_and_appended_despite_global_cursor"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_policy.py::test_resume_backfills_old_new_and_appended_despite_global_cursor"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:31.521000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-backfill/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-backfill/run.stdout": "5fe556b85a60ef3bc95e33959ddc0bd8fe62128cfe8221f7a4378c0fc2cd7bd0"
+        },
+        "started_at": "2026-11-22T11:03:31.089000+00:00"
+      }
+    },
+    "TC-005-batch-failure": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/attachments/batch-before-commit.json": "0a68a2d13a36aced2f9e0c85625394a0b907eb357a231e43424eb0acd935cf33",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/attachments/batch-partial-receipt.json": "82fdf0a85a0522f29f148f6e9b2eefd144d3270e2eb697eb6d08482cdc4db342"
+      },
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_required_snapshot_and_batch_boundaries.py::test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_required_snapshot_and_batch_boundaries.py::test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:32.280000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-batch-failure/run.stdout": "2070c05c39ab2ca244db71f6137b48ee2d6e9b3eff4aa09111710844d3f8226a"
+        },
+        "started_at": "2026-11-22T11:03:31.522000+00:00"
+      }
+    },
+    "TC-005-bounded-upload": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_recovery.py::test_bounded_backfill_keeps_search_and_other_project_available"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_recovery.py::test_bounded_backfill_keeps_search_and_other_project_available"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:33.074000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-bounded-upload/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-bounded-upload/run.stdout": "464a641265c332f9d7ff98fbe8927088c5101412dde342fdb23919129627b480"
+        },
+        "started_at": "2026-11-22T11:03:32.281000+00:00"
+      }
+    },
+    "TC-005-fair-upload": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_recovery.py::test_failed_project_does_not_starve_another_allowed_project"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_recovery.py::test_failed_project_does_not_starve_another_allowed_project"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:33.546000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-fair-upload/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-fair-upload/run.stdout": "b15ca0b7a879af5d2c6b91fc37ce2250250644cc3115c444676f1185d741789e"
+        },
+        "started_at": "2026-11-22T11:03:33.075000+00:00"
+      }
+    },
+    "TC-005-mixed-batch": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/attachments/mixed-batch-allowed-first.json": "dd9da3beedc785d1b689e8cb98e9a63c6fe1fa5b967dee34781c545135b72d7b",
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/attachments/mixed-batch-forbidden-first.json": "b47ec4ead9d833a3eabcb30a027172f62f6b6cb7d6d6845e4950a4a82daddda1"
+      },
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_required_snapshot_and_batch_boundaries.py::test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_required_snapshot_and_batch_boundaries.py::test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:33.976000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-mixed-batch/run.stdout": "a4fd5844bf90b47c8ebaaffe8bb8b1644ba9b6f89df9007cee8877362ab4a14e"
+        },
+        "started_at": "2026-11-22T11:03:33.546000+00:00"
+      }
+    },
+    "TC-005-offset-prefix": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_review_regressions.py::test_late_offset_prefix_preserves_two_identical_turns"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_review_regressions.py::test_late_offset_prefix_preserves_two_identical_turns"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:34.395000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-offset-prefix/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-offset-prefix/run.stdout": "7541d46028382760d5d303c5bf1872cb0431aa7f73e07c8dab8b9ee4a3e7f45d"
+        },
+        "started_at": "2026-11-22T11:03:33.977000+00:00"
+      }
+    },
+    "TC-005-repeated-fairness": {
+      "attachments": {
+        ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/attachments/repeated-fairness.json": "280b9e366807494e4f3528a607513711c39d838d77595f84e638be8b0d4b68f8"
+      },
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_complete_scene_boundaries.py::test_repeated_project_failure_does_not_block_new_peer_work"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_complete_scene_boundaries.py::test_repeated_project_failure_does_not_block_new_peer_work"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:36.009000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-repeated-fairness/run.stdout": "b133a35ed6c1fb04025f4f029f4b99f11297394c350b65ce647c4a82ab8889ff"
+        },
+        "started_at": "2026-11-22T11:03:35.218000+00:00"
+      }
+    },
+    "TC-005-timestamp-version": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_review_regressions.py::test_timestamp_version_is_stored_before_exact_ack"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_review_regressions.py::test_timestamp_version_is_stored_before_exact_ack"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:34.821000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-timestamp-version/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-timestamp-version/run.stdout": "5fe556b85a60ef3bc95e33959ddc0bd8fe62128cfe8221f7a4378c0fc2cd7bd0"
+        },
+        "started_at": "2026-11-22T11:03:34.395000+00:00"
+      }
+    },
+    "TC-005-unknown-receipt": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_policy.py::test_unknown_receipt_can_resolve_after_stop_without_sending_body"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_policy.py::test_unknown_receipt_can_resolve_after_stop_without_sending_body"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T11:03:35.217000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-unknown-receipt/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc4/TC-005-unknown-receipt/run.stdout": "e5b47d501c19d391332d773f1bba893d8e51214925c10b13e6f2dae5969a40ff"
+        },
+        "started_at": "2026-11-22T11:03:34.822000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC4",
+  "selection": "all_designed_cases",
+  "status": "executed"
+}

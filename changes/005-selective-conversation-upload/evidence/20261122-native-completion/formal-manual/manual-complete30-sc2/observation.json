@@ -1,0 +1,2205 @@
+{
+  "scope": "Current original-content/applicability observation. Historical business is NOT re-executed here. Fresh formal installed-package executions are separately identified.",
+  "started_at": "2026-11-22T11:16:42.590345+00:00",
+  "observer": "/root",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design": "design-complete26-sc2",
+  "match": "match-complete26-sc2",
+  "manual_case": "TC-005-sc2-evidence",
+  "preparation": ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete30-sc2.md",
+  "preparation_sha256": "18e252a05b9e578e160d07f94683e576b175fa6360353df8afc175119ebe214c",
+  "original_business_events": [
+    {
+      "run": "mac-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T05:52:58.362425+00:00",
+        "finished_at": "2026-11-22T05:53:31.248506+00:00",
+        "mode": "self-managed",
+        "scope": "E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "self-managed",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "4980b3ba63ff8385b4dbc441b7670e45ec7b8a47853dde95b5bb7c9e797fb79d"
+    },
+    {
+      "run": "linux-client-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T05:54:10.344553+00:00",
+        "finished_at": "2026-11-22T05:55:46.286624+00:00",
+        "mode": "client",
+        "scope": "E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "2ac93d39b97d2ec03ae4b756eb7ffd4e22c9cde40e54aee2106585ceb815d7a4"
+    },
+    {
+      "run": "windows-client-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T05:55:07.410227+00:00",
+        "finished_at": "2026-11-22T06:15:42.060752+00:00",
+        "mode": "client",
+        "scope": "E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "client",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "fd88b7bde46e75408c4a2c79f8c833280ef40f5348a2a98defb023edd44db962"
+    },
+    {
+      "run": "linux-hub-service-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T05:54:11.180239+00:00",
+        "finished_at": "2026-11-22T05:55:07.004359+00:00",
+        "mode": "hub-service",
+        "scope": "E3 API/CLI/MCP core; no E1 browser claim"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "hub-service",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "3c5bb5f7ad48bb13f653fea61aa846cf729c48717ce24fae627bb4b6ddf2a82f"
+    },
+    {
+      "run": "windows-hub-service-run8",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T05:55:07.309075+00:00",
+        "finished_at": "2026-11-22T06:09:25.360714+00:00",
+        "mode": "hub-service",
+        "scope": "E3 API/CLI/MCP core; no E1 browser claim"
+      },
+      "original_revision": "d80de6731d681ca06276dd6231a1eb77c0a7111c",
+      "original_mode": "hub-service",
+      "original_identity": {
+        "elevated_admin": true,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "752c1279d9b435d349ff66c628d8af82ea849de8a1d8bf4b3e58fe24e5b0ab63"
+    },
+    {
+      "run": "mac-login-run11",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T06:32:03.745428+00:00",
+        "finished_at": "2026-11-22T06:32:38.369137+00:00",
+        "mode": "login-service",
+        "scope": "E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof"
+      },
+      "original_revision": "f45da53b4aa6860f5a92d80869073756dbf319f8",
+      "original_mode": "login-service",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "f6391d3a0ca139791818c2700da26cf4e9501f030f583363298d55560fb2f121"
+    },
+    {
+      "run": "mac-hub-main15",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:09:00.983824+00:00",
+        "finished_at": "2026-11-22T08:09:17.325572+00:00",
+        "mode": "hub-service",
+        "scope": "E3 API/CLI/MCP core; no E1 browser claim"
+      },
+      "original_revision": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "original_mode": "hub-service",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "a1c6c752000c2a91d102bb254efbbb7c545b8d0f76840aae5fefb067f62aba37"
+    },
+    {
+      "run": "mac-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:28:06.809614+00:00",
+        "finished_at": "2026-11-22T08:28:13.185573+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "a777db9e3db46e514685c9740c89e213725c37983e0e8886af14a412356875e1"
+    },
+    {
+      "run": "linux-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:29:36.541502+00:00",
+        "finished_at": "2026-11-22T08:30:01.968174+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "2d6496014e02c5a4b6d651c0ec680900cdcdcfc68775ca40113c7e0d9ab9f7f5"
+    },
+    {
+      "run": "windows-reconcile21",
+      "original_event": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:29:39.007686+00:00",
+        "finished_at": "2026-11-22T08:35:59.812417+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "original_revision": "ba8c6d5e86dbe0ecbb58214db14a22d4a556b7a0",
+      "original_mode": "client",
+      "original_identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "manifest_sha256": "66d3fbc41fafd5a1b7b13e8c8a1ad709469a36d4a5995a4661025aa4c55e51ee"
+    }
+  ],
+  "fresh_formal_checks": [
+    {
+      "scene": "SC1",
+      "target": "execute-complete30-sc1",
+      "case_ids": [
+        "TC-005-default",
+        "TC-005-pause-source",
+        "TC-005-reconcile-cli-inputs",
+        "TC-005-reconcile-web-inputs",
+        "TC-005-transfer-status"
+      ],
+      "recorded_at": "2026-11-22T11:03:19.789000+00:00"
+    },
+    {
+      "scene": "SC2",
+      "target": "execute-complete26-sc2",
+      "case_ids": [
+        "TC-005-cas",
+        "TC-005-policy-triple-order",
+        "TC-005-reconcile-fresh",
+        "TC-005-reconcile-inflight",
+        "TC-005-reconcile-remote-race",
+        "TC-005-reconcile-stale-local",
+        "TC-005-reconcile-target-dispatch",
+        "TC-005-reconcile-write-window",
+        "TC-005-target-dispatch"
+      ],
+      "recorded_at": "2026-11-22T11:03:24.669000+00:00"
+    }
+  ],
+  "regression_suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "252",
+    "time": "110.310",
+    "timestamp": "2026-11-22T18:25:09.307339+08:00",
+    "hostname": "<mac-test-host>"
+  },
+  "regression_cases": [
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_rebuilds_existing_citation_audit_without_changing_raw_records",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_refuses_to_overwrite_audited_scores",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[score_change]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[nonverbatim_replacement]",
+      "skipped": false
+    },
+    {
+      "class": "evals.spec-generation.002-platform-acceptance.tests.test_audited_scores",
+      "name": "test_invalid_audit_creates_no_summary_and_keeps_input_bytes[altered_grades]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_new_connection_is_query_only_until_selected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_hub_rejects_stale_policy_and_legacy_body_after_restriction",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_query_combines_unuploaded_local_and_linked_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_references_read_the_right_archive_and_fail_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_005_contracts",
+      "name": "test_project_fallback_does_not_expand_local_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_tampering_cross_archive_and_conflicting_parameters_are_rejected",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_local_content_change_between_recall_and_signing_fails_closed",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_shared_conversation_reference_cannot_expand_to_outside_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_archive_references",
+      "name": "test_old_read_parameters_still_work_without_new_reference",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[source-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[batches-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-new-path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_cli_help",
+      "name": "test_source_help[purge-batch-existing-archive]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_bm25_matches_independent_formula_and_ignores_archive_scores",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_ties_use_latest_timestamp_then_stable_identity",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_long_preview_does_not_change_rank_or_original",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_common_scope_is_one_hub_hop_without_local_reexpansion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_partial_hub_failure_preserves_valid_local_snapshot",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_local_error_still_returns_readable_hub_candidates",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_legacy_hub_global_search_is_readable_but_project_search_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_current_session_excludes_both_copies_only_in_the_same_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_each_endpoint_receives_only_normal_n_without_topup_and_invalid_n_never_calls_hub",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_incomplete_hub_candidate_is_excluded_without_losing_valid_peers_or_topping_up",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[wrong_hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[missing_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_reference]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[bad_projects]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_combined_search",
+      "name": "test_invalid_scope_response_never_activates_local_links[unsigned_widening]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_every_policy_save_preserves_paused_and_disabled_sources[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_empty_success_is_distinct_from_unexecuted_hub[project]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[target-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_confirmation_rejects_changed_target_or_existing_affiliation[affiliation-merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_old_reference_reads_while_destination_is_still_forbidden[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_multiword_bm25_uses_each_terms_document_frequency_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_complete_scene_boundaries",
+      "name": "test_repeated_project_failure_does_not_block_new_peer_work",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_federation_offline_recovery_dedup_and_provenance",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_links_filter_before_ranking_and_follow_only_one_hop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_project_request_reports_actual_scope_before_any_links",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation",
+      "name": "test_vibeinsight_configuration_has_managed_hub_entry_point",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_federation_tls",
+      "name": "test_detached_service_can_upload_through_callers_private_ca",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_runs_saved_source_lifecycle",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_rejects_conflicting_archive_before_writing",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[legacy]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_standalone_explicit_archive_remains_supported[matching-explicit-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_hub_standalone",
+      "name": "test_public_prepare_restore_command_marks_the_actual_standalone_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_maintenance",
+      "name": "test_agent_maintenance_starts_reuses_and_preserves_pause",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_incremental_copy_survives_deletion_and_partial_line",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[True]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_history_migration_and_update_preserve_identity[False]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compressed_partial_line_and_concatenated_frames_retry",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_corrupt_compressed_file_does_not_block_other_histories",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_plugin_and_skill_context_are_not_conversation_titles_or_evidence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_long_conversation_preview_keeps_later_decision_and_its_question",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_compact_search_preserves_rank_and_can_read_complete_message",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_mcp_defaults_to_compact_and_allows_full_configuration",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_project_mapping_direct_links_and_current_exclusion",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_parent_path_mapping_applies_to_existing_and_future_child_sessions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_api_uses_same_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_source_file_rewrite_does_not_duplicate",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_and_claude_share_durable_archive_without_tool_output",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_missing_claude_source_does_not_block_codex",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_web_sync_and_source_settings_share_one_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_pipeline",
+      "name": "test_codex_injected_context_is_not_archived_and_old_copy_is_cleaned",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_same_names_and_even_same_device_local_keys_remain_distinct_after_rename",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_identity_boundaries",
+      "name": "test_project_query_includes_global_only_after_explicit_hub_link",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_global_assignment_also_preserves_exactly_one_persistent_global",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_project_preview_coverage",
+      "name": "test_all_expanding_operations_preview_and_reject_stale_without_persistent_changes[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_cli_hub_without_version_option_protects_changes_during_its_call",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_boundaries",
+      "name": "test_hub_switch_during_reconcile_keeps_new_target_query_only",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_dispatch",
+      "name": "test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[web-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-first-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-second-status-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_remote_race",
+      "name": "test_remote_rejection_preserves_the_local_rule_and_newer_hub_head[cli-cas-hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_stale_local_generation_is_rejected_while_hub_revision_stays_unchanged[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[local]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_local_change_during_hub_read_is_rejected_at_the_write_boundary[hub]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[none]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[all]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[only]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_fresh_displayed_rules_are_submitted_exactly_for_all_modes[except]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_snapshot",
+      "name": "test_web_reconcile_requires_valid_versions_without_mutating_either_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[lost-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_reconcile_uncertain",
+      "name": "test_remote_reconcile_acceptance_cannot_overwrite_a_new_choice_or_authorize_unknown_upload[new-local-choice]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[scope-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_project_link_changes_during_one_search_do_not_mix_snapshots[hub-results-return]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-deleted-last]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[local-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-repeated-position]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_citation_message_identity_survives_repeated_positions_and_rejects_removed_targets[hub-switched]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_allow_stop_allow_commits_and_delayed_requests_and_replies_keep_the_latest_head",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[before-commit]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_uncommitted_whole_batch_and_partially_invalid_receipt_never_acknowledge_rows[partial-receipt]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[allowed-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_required_snapshot_and_batch_boundaries",
+      "name": "test_current_revision_mixed_allowed_forbidden_batch_is_rejected_as_a_whole[forbidden-first]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[hub-api]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_scoped_read_metadata",
+      "name": "test_scoped_read_title_comes_only_from_permitted_messages[federated]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_accepts_complete_synthetic_unit_fixture",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[missing_append-backfill A body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_score-score divergence]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[candidate_egress-ranking payload]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[false_complete-still pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_audit",
+      "name": "test_auditor_rejects_false_pass_even_when_result_status_is_passed[wrong_original-exact original body]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_waits_for_job_and_allowed_backfill_not_just_confirmed_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_can_wait_for_control_only_without_requiring_body_permission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_starts_fresh_scan_after_joining_an_older_automatic_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_does_not_confirm_a_fresh_scan_when_start_reply_is_lost",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_promotes_repeated_lost_start_replies_to_complete",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_never_turns_pending_transfer_into_success_at_timeout",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[win32-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_accepts_platform_exit_only_after_requested_stop[linux--15]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[True-0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_selective_upload_probe",
+      "name": "test_probe_keeps_early_or_unexpected_hub_exit_as_failure[False-7]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_windows_waits_for_a_slow_background_service",
+      "skipped": true
+    },
+    {
+      "class": "tests.test_service_startup",
+      "name": "test_service_start_cannot_use_an_unrelated_listener",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[before-\\u9996\\u6b21\\u8bfb\\u53d6-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[after-\\u8ffd\\u52a0\\u8bfb\\u53d6-\\u76ee\\u5f55]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_reports_failed_stage_and_root_type[live-\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b-\\u6587\\u4ef6]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_registers_and_background_resumes_after_restart",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_scope_rejects_later_live_page_and_persistent_batch",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[defer_system-zcode-pending]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[skip_empty_reply-zcode-after]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[accept_later_prefix-zcode-before]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_skill_rejects_zcode_fixture_regressions[ignore_scope_on_live-live\\uff08\\u5b9e\\u9645\\u6765\\u6e90\\u63a2\\u6d4b\\uff09]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_faults_do_not_block_other_sources_or_advance_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_finds_and_purges_batch_older_than_latest_100",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_pages_keep_id_order_and_source",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[missing]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[non-integer]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[zero]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[negative]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_batches_rejects_invalid_cursor[out-of-range]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_controls_compete_for_one_job_and_preserve_archive",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_sqlite_and_json_sources_use_same_protocol",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_local_plugin_does_not_block_old_hub_upload",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_source_registered_during_full_sync_gets_its_own_job",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_disable_during_plugin_execution_prevents_batch_commit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_candidate_with_incorrect_live_origin_cannot_register",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_source_plugins",
+      "name": "test_purged_conversation_id_is_reserved_for_the_original_source_session",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_all_affected_messages_and_conversations_receive_the_allowed_project[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_acceptance_boundaries",
+      "name": "test_bm25_formula_and_exact_retained_content_versions",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[address]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[token]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_same_hub_configuration_change_discards_old_dispatch_snapshot[device_name]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET source_key='changed-key']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE messages SET position=9]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_dispatch_fence",
+      "name": "test_message_identity_change_during_lookup_rebuilds_before_dispatch[UPDATE conversations SET source_session_id='changed-session']",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_web_controls_require_same_origin_or_service_token",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_interfaces",
+      "name": "test_new_cli_help_explains_values_and_first_use_keeps_old_install_explicit",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_isolation",
+      "name": "test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[only-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_mode_matrix",
+      "name": "test_modes_treat_global_and_future_projects_as_regular_peer_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[all-selected0-expected0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[none-selected1-expected1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected2-expected2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected3-expected3]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[only-selected4-expected4]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_modes_upload_only_selected_projects[except-selected5-expected5]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_invalid_choices_do_not_change_active_policy",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_global_assignment_survives_reimport_and_unknown_stays_local",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_resume_backfills_old_new_and_appended_despite_global_cursor",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_unknown_receipt_can_resolve_after_stop_without_sending_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_policy",
+      "name": "test_old_allow_backup_blocks_until_explicit_hub_reconciliation",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[assign]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[map]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_received_message_gets_new_allowed_project_without_body_reupload[merge]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_project_moves",
+      "name": "test_lost_project_confirmation_retries_without_using_old_project_receipt",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_old_database_and_joint_restore_never_reopen_stopped_rule",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_loss_of_receipts_rebuilds_from_exact_existing_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_database_without_managed_flag_still_rejects_old_client",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_missing_control_never_defaults_to_allow_and_can_be_explicitly_repaired",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_hub_checkpoint_crash_recovers_only_committed_submission",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_stale_diff_and_target_changes_require_explicit_new_choice",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_expanding_project_change_requires_bound_preview_and_preserves_assignment",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_failed_project_does_not_starve_another_allowed_project",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_existing_legacy_upload_migrates_on_background_restart_without_reconfigure",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_late_policy_reply_cannot_replace_a_newer_local_stop",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_pause_does_not_block_control_or_resume_imports",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_cross_process_save_and_dispatch_share_one_durable_fence",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_lost_policy_confirmation_is_pending_until_head_is_rechecked",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[local-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_control_interruption_recovers_only_a_proven_complete_local_choice[hub-2]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_invalid_batch_receipt_remains_unknown_then_resolves_exactly",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_recovery",
+      "name": "test_bounded_backfill_keeps_search_and_other_project_available",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_registration",
+      "name": "test_query_only_registration_fences_same_device_legacy_writer",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_late_offset_prefix_preserves_two_identical_turns",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_target_switch_during_known_lookup_fences_old_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_timestamp_version_is_stored_before_exact_ack",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_upload_review_regressions",
+      "name": "test_body_failure_persists_in_upload_status_and_clears_after_recovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_project_lookback_includes_boundary_and_resumes_after_days",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[host-other-host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[port-5433]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_connection_target_changes_isolate_progress_and_preserve_archive[database-other-db]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[0]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_boundaries",
+      "name": "test_invalid_interval_does_not_replace_saved_configuration[-1]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_unmarked_destination_is_rejected_before_any_connection",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_fixture_guard",
+      "name": "test_instance_mismatch_cannot_reach_a_write",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_all_visible_projects_and_historical_discovery",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_resume_appends_to_same_conversation_in_source_order",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_failed_batch_retries_and_late_event_is_read_once",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_managed_hub_credential_restart_and_mixed_project_search",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_archive_and_cursor_rollback_together",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_delayed_reply_keeps_source_turns_grouped",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_scoped_shared_conversations_keep_only_matching_project_messages",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_late_repository_attribution_moves_provenance_without_editing_body",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_streamed_sync_checkpoints_partial_batch_and_discovers_older_projects",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[host]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[port]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_repository_identity_change_requires_new_link[path]",
+      "skipped": false
+    },
+    {
+      "class": "tests.test_vibeinsight_sync",
+      "name": "test_stop_cancels_postgres_stream_while_stdout_is_blocked",
+      "skipped": false
+    }
+  ],
+  "evidence_inventory": {
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restarted-mcp-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/initial-stop-replay.json": "7e39c6385098cd5bf9ef2d90b272dab920eab17ed2508ed1b50f873b05d00d75",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-mcp-search.json": "2093cb5173fe2a657fb31d4a433f1f9aecae7adb091f9f2e168e01dd7c183543",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/hub-restart-rule.json": "326ce781fc29c2f410e095b306b341843c30ad4a892d98fce54f52ab84d45855",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/offline-mcp-search.json": "031da3daac4a658349111d218127f1b9abae851aae8d258d9fc20499622340c2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/new-connection-status.json": "09c9b07a83368749b968f953177b3e20df7c5357771d0e36a850490742ef8676",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/version-and-long-originals.json": "3d0f2d06a7306c39bc9d55ada771e8604bd19f666a3de64ab253bf5b80ea0a41",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/choice-none-0.json": "59e18708acddeaa9ebf0394b6c23fdc8aa933521660903408ac1480061b2cf59",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-browser.json": "19fb350d73ec9dd391cf90ffcd3c280555b97172abccf37ca4f9964fef9f03ff",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/fixture-local.json": "21e4af178e06a689bf69a63169d773e88b5e97300a9b7320f5a267df057b18cb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/explicit-local.json": "e9d7e1a2c27a98df311fc6aa40f064929df3993378b4b611e84f3e916b0c726e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/result.json": "1a5b1ac736f11d7b2c88772f95f50c9191dee85c4f8791756cfc4073418f1c69",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-mcp-search.json": "2093cb5173fe2a657fb31d4a433f1f9aecae7adb091f9f2e168e01dd7c183543",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/sync-observations.json": "2cd3fdf7747409a490d413fbd80e64a37e670f7d4f1f7df64a8cc177d43b2e93",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/offline-mcp-reads.json": "d14d11ddba7e64c33ba22d107da51f12d5335c24067c5124e573e0a866d055b3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/fixture-remote.json": "0c36b7ae45b15e8cc1398630b5d8484b609197c722d7d97635e0ffa86bfbd01c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restarted-mcp-search.json": "2093cb5173fe2a657fb31d4a433f1f9aecae7adb091f9f2e168e01dd7c183543",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/browser-configuration.json": "e2b0ad4d44098247801bdf6cc9d1c5465e3a627c479d38accc3f6ed7a997c114",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/backfill.json": "bd3dc60447e9febd2a246913499a8c1af3045149c88a3bcb2476d22bf3e0ad39",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-service.json": "206d8b465f85d3cd995067740d2f133c1684ddb2dda597d08bb9c72e3906cda2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/hub-projects.json": "1865b6588a75d48c73f04232d307e78980b4d489c2e4158eb96f20ec22c022c8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/affiliation-propagation.json": "d1e66c3f4ee3d8c086ee8b347bf53eb2a059a1efdc351d9c134abb5dcdc10ef4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-cli-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/choice-only-0.json": "6137e15f648ebfc38c1efc1a83a32306a0472bf886d1bff90432ac0b7f3473ab",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/choice-only-1.json": "9540302eeed4b928a745e6612310e694428af8ff93e60ef77943d7c78d1d0491",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-cli-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/retained-version-original.json": "f1dff35a2bd7a9df7066a43a953086702d3701c4d4cb8f85f354d49837d529af",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/commands.jsonl": "09802c179e6a1e36a77d01e3ccc75789a17ef107a8915f4c8fa3f2810dd027fc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restarted-browser.json": "7a70ecc43e004c484efa55d60c32622f6cbe895ca98baf63076262497e9ee68e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/stopped-payloads.json": "acf989d53f2a7fa0bd5d14f486080280c874d03a4a590260757807a519478ebc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-cli-search.json": "d4e74efca2471dcca9a2e7b7692ac65653fb39b453ee59002356ca91f2543dad",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/after-hub-restart-replay.json": "7e39c6385098cd5bf9ef2d90b272dab920eab17ed2508ed1b50f873b05d00d75",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restarted-cli-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/old-original.json": "a44177b7b1496faa67e8efbc0a28d3e6f899108f8233cc530db36b8125ea4dd7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/offline-cli-reads.json": "d14d11ddba7e64c33ba22d107da51f12d5335c24067c5124e573e0a866d055b3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/initial-choice.json": "999a15c1bbed8e33e0aeadcc4918abdc8ad5b69bfefd7da4bf00283145f15639",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/offline-browser.json": "98e17be4319f8586df587c2a508c8a592bae67cde074234d8a0c30903dc87ee7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/manifest.json": "4980b3ba63ff8385b4dbc441b7670e45ec7b8a47853dde95b5bb7c9e797fb79d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restart.json": "907b0d8075aec66b761121f0526c1e6548fc8682ac8a8e913399783a6697f9f0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/all-local.json": "2b5d998977ae9f1b2479c6692a2ca7f9a70ae47e04ea2420876ad79769cf9ae3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/offline-cli-search.json": "64487edebc7393b6b3e564410f9d9f2f34ee707e72f66bad974f2bafb4f347a1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-cli-search.json": "d4e74efca2471dcca9a2e7b7692ac65653fb39b453ee59002356ca91f2543dad",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-mcp-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/payloads.json": "2449d610e4d6142fa150ec2f24b17db5ea1534b1ffbc40cce1de632c59a0d6b3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/stopped-state.json": "0e29a1a1f5d4bed4493564ff997431b430bef0ea9e97d1f814d92398428a4cd6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/service-events.json": "9e46104e88b3827478073176188b586f6039d6d555d2164fe8482ecbb9f423ab",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-search.png": "2187838d1affd53feb9456eb931b1beb28a371d9179d95724c1fbfe5b55d5273",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/combined-stopped-upload.png": "cb545e2e52fa53005df4a22fc5ead3183da33e289f85b6c37a9a5bb02dae7bfc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/local-restarted-cli-search.json": "d4e74efca2471dcca9a2e7b7692ac65653fb39b453ee59002356ca91f2543dad",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-browser.json": "19fb350d73ec9dd391cf90ffcd3c280555b97172abccf37ca4f9964fef9f03ff",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-run8/reconnected-mcp-reads.json": "8b27d7d75c05b15129030ae809b12f64135a4d2b781fb0e323072f7f510da70e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restarted-mcp-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/initial-stop-replay.json": "0b8a8c83bdaa142e8de49aba9020f7e9486582842b1fd596ffa9e78404c83126",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-mcp-search.json": "7edbfbb2b4216d381fd0a3b676a8b263e7f161f14d0f56c2fbc1aaf6349d7931",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/offline-mcp-search.json": "58e9aba362a10e94941e4f40c51e18e1a152443afec116cde89aabc539c69d2b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/new-connection-status.json": "a21da63843683e905cc42e9d74f26adbf618ac97709db40843664afbe9bbee7d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/hub-links.json": "b219bcc0f662140131a241bd62514a73aebd788ac7e5053d7ba61a1342c8f789",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/version-and-long-originals.json": "70cacbe3631afd1b6e63bee7a7d0192814be3819b7e08d10699181d510d20895",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/choice-none-0.json": "9964b9d4e4c26677bbe97d133480c43f53e670c8416de88af2d7875705e11672",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-browser.json": "14836e580a005cd4903124ae61efac1d841f6cf05150ea74dd1359b818868283",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/fixture-local.json": "1d9cd407daebf5c0c4acc32060975db8d15c821243a8fd98d479d84b80d1189d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/explicit-local.json": "f184a341c402db5a8e540f40bf100703c6e7c7fc414eff821a3eb4c0199b9bf6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/result.json": "06bf4ff5212e4e24a7dae5160452a6ce726180662b05ceba36b064c890dda301",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-mcp-search.json": "7edbfbb2b4216d381fd0a3b676a8b263e7f161f14d0f56c2fbc1aaf6349d7931",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/sync-observations.json": "a4c518c3145c7a5b6fccd23ad221e6616dad3cd1a90db058ee9f066e0396230e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/offline-mcp-reads.json": "0e8fb16b3007f3911c7fe93b8305bccc234c4ed9538548148950134bee634e92",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/fixture-remote.json": "34d33d2c824d62c8c134955f48065ef13ffbb888ec95989c1e00500c9882400e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restarted-mcp-search.json": "7edbfbb2b4216d381fd0a3b676a8b263e7f161f14d0f56c2fbc1aaf6349d7931",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/browser-configuration.json": "5e972c6ca103250affb547623da9dbf77a8022e7b515c19151943874ef435296",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/backfill.json": "f5cb8d52ef4e60fc5c5ab5e3846926d4dbb0a7817c8da3b1e87a6e2fd76eab1d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-service.json": "1c37982e1ccb22ca4e668b5b23be694a390362b5926b01c332ed42512473c460",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/hub-projects.json": "ba0d3ab9a128505b80e160673ba7fa757e4334e2cfca3a8b941ce6b61cd01f83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/affiliation-propagation.json": "da3653ad398a70cbca4ebf64dd9d31edca86d5b0667b62a74c2689762b1eb360",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-cli-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/choice-only-0.json": "ac935d874180c6f6781d5e9a20a6f3b11db985bd3f68f8f6f16e4c08aa139df0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/choice-only-1.json": "df364c3f5e61300c2d35935add45bb7d5c02943bc309b3d5db3da865ec8448ae",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-cli-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/retained-version-original.json": "5f7b08389d3aa65e8e84cfd7553cc429ef494931b8e201e480421f7863e0cf31",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/commands.jsonl": "6586e8d98301190254f89b536937b1eecbadfbfe16301fc10dcc22285ca48014",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restarted-browser.json": "3e13ed15dbe79ea9f5334d007d1dea555cd6609ea93e6ea9f1f589b446dd6871",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/stopped-payloads.json": "8b87b48625a95802e9037da74aafb9b627e1c16a1f836ef09ee5db57aa2a4de0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-cli-search.json": "f149af7bbfe913b091c0ec7a7817f1b9c576212fdb133253a2a827f00ec14287",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restarted-cli-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/old-original.json": "e8579e8b711526b302dc273edbcb241324d8f6dc820325f17f07b6183cc1e29e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/offline-cli-reads.json": "0e8fb16b3007f3911c7fe93b8305bccc234c4ed9538548148950134bee634e92",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/initial-choice.json": "ddea4e39dc08cf8860881919e74202352242c1cd013d9bd993c38851fae29924",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/offline-browser.json": "3f610647c3cb67b072eed7d1c76c8759771c7232da8300e8809535e882ef67b2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/manifest.json": "2ac93d39b97d2ec03ae4b756eb7ffd4e22c9cde40e54aee2106585ceb815d7a4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restart.json": "17c4f476eda80548e3cf8a5442be42c06847bd012d4b106db6ee08e5b39c7d9a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/all-local.json": "430949ffec1e588f7dfbf71c4ca595ebb368c7df451ce03bf3e54e5a73596dd5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/offline-cli-search.json": "99a625806a152c5d0ecb7cf167bd22975f252fa79973c11778154bb40bc4ca4e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-cli-search.json": "f149af7bbfe913b091c0ec7a7817f1b9c576212fdb133253a2a827f00ec14287",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-mcp-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/payloads.json": "506460a7f16b54e54a42eb0802ead9f3b96b278e933ba9913f2a2591043a2527",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/stopped-state.json": "768431260ab87eedc4eca31f8d3a8fc4b08ea20ab0726be512dd87660a8acc40",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/service-events.json": "a6e714a8fd87a33e540c05ff41cae21c452795d3d217b454dfaa31e0ff10953f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-search.png": "6bc6f6da119b9d28b57df1911a7244cf3c8dbe40aa507ea4334581b374ef8b99",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/combined-stopped-upload.png": "851aeb839725abf67abf20de996621a2f41c16f36070016af27b030fa3fb6317",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/local-restarted-cli-search.json": "f149af7bbfe913b091c0ec7a7817f1b9c576212fdb133253a2a827f00ec14287",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-browser.json": "14836e580a005cd4903124ae61efac1d841f6cf05150ea74dd1359b818868283",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-client-run8/reconnected-mcp-reads.json": "6bf103a9c2ce067c9a78f94afddc667731563c82b9a67feb69f29460dc579a3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restarted-mcp-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/initial-stop-replay.json": "e8cccb2eff7eba0119970b340564eb793b12349da2a0018ac21f1ce35a2a5dac",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-mcp-search.json": "4107a5253871f6f80b99c9cdfd572363037cc64bbc9b8d40ada2fdb5a905ec1a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/offline-mcp-search.json": "c5b0328fe6ad6a0cbf39d6537d2cb23838eddac4e5773f996d563824e6701ce6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/new-connection-status.json": "0217dea545e668a68ca6f005f01a94deab51d9033a8e39061c62e51f130e14c0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/version-and-long-originals.json": "73cd869537ad64c9022aa5daf8285ac932a30ba143cb5c84ef942707502063ee",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/choice-none-0.json": "6a47d644753095865b93e6ef2e56458b69588a7afd784e366a37aac2cd42375a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-browser.json": "f35bd9aacc25c219f516e7797d8064d2a5603d31d8b9a92181cc6713a3fd9a47",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/fixture-local.json": "2b02ba3fcd13edcf60ab93e9678df81afe9a52446fcb894cf1efb4d88a9a63cb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/explicit-local.json": "56891c88ba8f45db7b92f89227910ed4691e8eb58dcc4f38ff7d021f9cd1ac5f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/result.json": "37a7d2420c3e4cd36c6124d62cba41a9e005b4ce14109faa037e64e6db93fe1e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-mcp-search.json": "4107a5253871f6f80b99c9cdfd572363037cc64bbc9b8d40ada2fdb5a905ec1a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/sync-observations.json": "5daa40f841c2b934a2b2e34dcd44bef31c6eed8ebc1bc25820df4f087abc2d61",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/offline-mcp-reads.json": "7b668a62a614a2205caae8620d54d2584df542b6a8af6849d5f578dc2b9fe318",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/fixture-remote.json": "98d33000031fedc99c2075786b865ddf61276ab89c8995dbfdd8a26ef3daec36",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restarted-mcp-search.json": "4107a5253871f6f80b99c9cdfd572363037cc64bbc9b8d40ada2fdb5a905ec1a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/browser-configuration.json": "2d54aead727c6360f1a2a7baec5041dc9e7d190cfc158fc3ccbbd45cfcb523e2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/backfill.json": "020d577f7e43c3d1ba6823f97c106bed6915d405fe69783a3728c8f7cadd544f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-service.json": "7f61b33e46dbf261e8cca57778b9279737653e107abee9e9fbaa6786a374b1ed",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/hub-projects.json": "65a1d111cdea675c59f719e397e9e25bfed34b6d765d2a173558235156f33270",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/affiliation-propagation.json": "5b486c365ef76c0b94c7fc2c0f39f76e1671f6be8fa729e4ba0edcf5f757b5c1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-cli-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/choice-only-0.json": "db3ea53852230355c859679e875eb3b81dbaf857dec6e9758971e06f5c2fae8a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/choice-only-1.json": "2402f8c2697a2b5631e20c700971d856c628b560c232dfa858ccc4068519b260",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-cli-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/retained-version-original.json": "4743207f1c5a645d52793222d43ee8422c499596d6b78d2e0f796db874729a01",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/commands.jsonl": "8ea0252e1db371a6d23bfe11728e6e1ed3e6df8bdbb5570168201fae96dbd213",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restarted-browser.json": "4c25f4c454bcb3994d003fe5e0ee78f4ccdd323e1787146756a741aabb734df3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/stopped-payloads.json": "b60fe89f46e014c009717c09b8813b92c7e15268f00b0653058b32e44bb19c6a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-cli-search.json": "d65658c6ada011de722653a3ecfb296cf71b550ab9e817d7aa7a9a8eabdf4b9d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restarted-cli-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/old-original.json": "523c789b14cc7354fc7cfcd1b1455d94ecf426bf4d5eb2ba5771f85825905bb4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/offline-cli-reads.json": "7b668a62a614a2205caae8620d54d2584df542b6a8af6849d5f578dc2b9fe318",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/initial-choice.json": "7dbf5a0364e2bde25856ca0d01f1eac95dbe4f187e0871f10c33d1fb584c8dbf",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/offline-browser.json": "7ad9783c20786a5916818585548b8cf4615b9abc4b8b899677a6f792f2348abe",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/manifest.json": "fd88b7bde46e75408c4a2c79f8c833280ef40f5348a2a98defb023edd44db962",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restart.json": "8c3bac92080118ffef8972f711ca7bcd433f315dfe6a99d8f9233bd9fc57b9e3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/all-local.json": "c12197e3666dab3f936cd18facf87638c50b7392490b83fd6670ea9747ebc3cf",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/offline-cli-search.json": "c998832f8f7df1a1114e2a21ca655e1b6fd00e53e17321159a4b52182600cdbd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-cli-search.json": "d65658c6ada011de722653a3ecfb296cf71b550ab9e817d7aa7a9a8eabdf4b9d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-mcp-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/payloads.json": "7e1d9e51524d1d8ba0f4abc854f1e1027256e43ab600308ade5f907bf95be249",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/stopped-state.json": "9062846e30cc7a9067bddd00b181307c5b2b74372a2a1ae210315f3cab194964",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/service-events.json": "9e5ec7d37bcb256de3f729389989e14de1c70c48f625bb200165e5ee08e5b468",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-search.png": "5ffd126013f17a77ff442ae597ecf20fa19ab6fed6489bf373a5c45679a95a9c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/combined-stopped-upload.png": "d5af5a2a826bc0850f0c9691ac44470612196421df8d001b372dbf98d52b987c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/local-restarted-cli-search.json": "d65658c6ada011de722653a3ecfb296cf71b550ab9e817d7aa7a9a8eabdf4b9d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-browser.json": "f35bd9aacc25c219f516e7797d8064d2a5603d31d8b9a92181cc6713a3fd9a47",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-client-run8/reconnected-mcp-reads.json": "9a10833811605133fc9b5634669a641fdb70254da5ff2179b7a87d454b8244ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-restarted-mcp-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/initial-stop-replay.json": "1a4fe03cf741bbc4ac263bcaddb07c81d2f6be14ff8a381f52ce41265ada8930",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/combined-stopped-mcp-search.json": "cb422620f8aec51e341f882f941232f936f1ee6fb2e6597dd02eb41c41c0c4bb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/hub-restart-rule.json": "547a30ff52fb42e5111c4032beab3a951e5cf52b4ca36480b5b7718f0429a5c4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/offline-mcp-search.json": "c30fa73731153b47f860f08d060448cd16f4c11646b51719517b84fa73c92250",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/new-connection-status.json": "7b6a461188e0c7813d0a2f8261c5df41f8820b6ce2fc22027e092b495c200148",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/hub-links.json": "b219bcc0f662140131a241bd62514a73aebd788ac7e5053d7ba61a1342c8f789",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/version-and-long-originals.json": "a28844e55af268c56a6b15cb73355a2c12263fe7250a82f991b9c575f35d9d83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/choice-none-0.json": "6db15d41a37a3615ba36004ea50e340c80f725734c47c43a1c5b698ecf10a97f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/setup.json": "687bff87fc1b71bd922fb3890f33ca1b37f0f7164839d1a3ebfc7c6b1e727d30",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/fixture-local.json": "101879ff7079dc8fa7753cf4af56dcc043d1df4171f60cbe6a33e3cd033bc45d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/explicit-local.json": "21b4ffa8eff59def15ec37ec355aaa0c2146816c257dca6383439d17e1d4f8ee",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/result.json": "d9a1f25aa349baf8a13287f0115dadf68f113fe5af308d7507131882bca2435b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/reconnected-mcp-search.json": "cb422620f8aec51e341f882f941232f936f1ee6fb2e6597dd02eb41c41c0c4bb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/sync-observations.json": "302872f8fe913ac27338cae5e32feaac14a9a412d33cf9ccde5445edfe38541d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/offline-mcp-reads.json": "d0b4258e3a5a450c0b040b32dc8749d647f596ad13641aa541a3b6aaf299431b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/fixture-remote.json": "215796c84606aa00acef146c4e3149e6e57f869cec1ab53ae1cfd543ddc8ba36",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-restarted-mcp-search.json": "cb422620f8aec51e341f882f941232f936f1ee6fb2e6597dd02eb41c41c0c4bb",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/backfill.json": "7701c2966aeb6a927e4f88a4e4bc814e60165f104f1767a5f2746b454a6e3015",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-service.json": "37374474c12cecf0228d084025c9fc120d399aeef2a9a80c3e3fa445a2dac127",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/hub-projects.json": "a540928817d1bd3682a29d0f4cc69e159ea7cd67d9e6c6b209e339992c87ceee",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/affiliation-propagation.json": "51a1dfae1b225d060f354a942be98791ff3eea0b3f288cf27e31165f656ba04a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/combined-stopped-cli-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/choice-only-0.json": "dd8543e314fd5cd6988ade6098c4cb8a71ebe66713c436ba1f61544a0218d9ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/choice-only-1.json": "d339bd87a05142f99bc18873ff3c14b34c83b3e5f11053758923d5fd73d72b00",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/reconnected-cli-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/retained-version-original.json": "4ef793174b16c71ae23474fd8a495f4b762e0b5fc61c8d54bd6218669cb2f2d3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/commands.jsonl": "1193652250fbe53c89c4c607081d2eddf9e0ba7d4135364fc741f1d5be7f6a38",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/stopped-payloads.json": "fa82aeae4505e6e2744d80d952c6bb01ae28f2bc1cd35f8df5ff9b5fddc68f05",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/reconnected-cli-search.json": "d1ee06183454cf2a9db3c6cc7d42d3c6d678c6416fe7c2702599260d30b460b5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/after-hub-restart-replay.json": "1a4fe03cf741bbc4ac263bcaddb07c81d2f6be14ff8a381f52ce41265ada8930",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-restarted-cli-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/old-original.json": "b2e9675c8af50b1d759c002fa3356392a3825666b904ddfc7b7d5262e8568010",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/offline-cli-reads.json": "d0b4258e3a5a450c0b040b32dc8749d647f596ad13641aa541a3b6aaf299431b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/initial-choice.json": "7b6a461188e0c7813d0a2f8261c5df41f8820b6ce2fc22027e092b495c200148",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/manifest.json": "3c5bb5f7ad48bb13f653fea61aa846cf729c48717ce24fae627bb4b6ddf2a82f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-restart.json": "d610a5983c318e75c47b85dfd80c8242ec26b737920d43adb94f377741cb28f8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/all-local.json": "f179126948f0fb100683bcb2eaa649896de08b284c9f81c8561db8710eb62993",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/offline-cli-search.json": "65a047ccad178575088b2e0cc1690b11e2aa4829cae8e9cb281e7b3301aa7e51",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/combined-stopped-cli-search.json": "d1ee06183454cf2a9db3c6cc7d42d3c6d678c6416fe7c2702599260d30b460b5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/combined-stopped-mcp-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/payloads.json": "e04a10437cc9b727a771b945c43f3cef89bcbfa51e68a7c6ba773af47c341b28",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/stopped-state.json": "050a4de568973ced114438ed22ab03635e9fbe57e9750e1e3a8b09bfd836ed47",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/service-events.json": "d4fe38fbc0cec8422535319d4bd246f527b86daeee6d18f81d0acd1749a0beca",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/local-restarted-cli-search.json": "d1ee06183454cf2a9db3c6cc7d42d3c6d678c6416fe7c2702599260d30b460b5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-hub-service-run8/reconnected-mcp-reads.json": "b724294b7a776e9ac3e8e305d567830c8002e1ef40ea37564a56bfff330eef60",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-restarted-mcp-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/initial-stop-replay.json": "192a4f4c86723036e912b0a454ab59a46b85baeabf1cd62db9c3983d726e50f7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/combined-stopped-mcp-search.json": "dad3b34eaa8311bdaf1a7ec4afded7e9c61ccbf2565d6a0cda9026266b0bf5a8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/hub-restart-rule.json": "cd7d97c6bb5357905ba97be4633948408e046d07ff7e48e029e18b89afc44b71",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/offline-mcp-search.json": "3aaaf307fd329a0be7b5e33a77c0de5e4bcba85df96bb290bdf75151c0df8185",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/new-connection-status.json": "75fedfccfa0fe2a8966e52e9f899ce835a96946a3944928297a2db3fbc51cc55",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/version-and-long-originals.json": "597553146872b1617d1886d4a10f48bce06136024a5a5b89e1824ff84b39a06c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/choice-none-0.json": "a61ff0f6bbe271eda5a48541f7aa5e71ab6010d235b28c5be19dfd12a0c2bcca",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/setup.json": "770f5f6cd42ac850f5e0552635d10b8dd634004eb23643b6e135cc3459edaf9f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/fixture-local.json": "c7583ab9d953cf16ca35ec80b1969d00c92c0265b940e679572f9cc4f4709581",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/explicit-local.json": "707e3f0fd7a22508596a8981ba09c9b6be3c395d6359dcdb45b4d09a69f48e39",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/result.json": "5551e8751a30be481469fa0b8b235f30b8641a75f774d1c32138f56c06142fc5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/reconnected-mcp-search.json": "dad3b34eaa8311bdaf1a7ec4afded7e9c61ccbf2565d6a0cda9026266b0bf5a8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/sync-observations.json": "af27b75b03aa91e55b06d0a91b6878a5a23f3db76bd6fcfed1bc195785e135f5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/offline-mcp-reads.json": "9131ccc8e9439b9b42ebc9d41b66b9115230034cdeae8395d2ed52891ff2d676",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/fixture-remote.json": "b53fae93785693292f386fc5e158238d3d104f3e705f12c88ef80ecccb61f0e3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-restarted-mcp-search.json": "dad3b34eaa8311bdaf1a7ec4afded7e9c61ccbf2565d6a0cda9026266b0bf5a8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/backfill.json": "f2e9ce5df20e4f3b67169406e641a612be4b5817540e8a4a19392e754d165636",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-service.json": "2fff68e4bf821191c220444e6ed4c418aa8e08873baa0fce8747fba8cfe96197",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/hub-projects.json": "dc62af01400d65acc19e6c1243da1fa691cffd1fc86644fc982afce0ed424543",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/affiliation-propagation.json": "ef6bf650a365afcb5e60dbabc5ecb96e37fb444a457465cc80012d0e44095fd4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/combined-stopped-cli-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/choice-only-0.json": "988025dfee84af5a8daf3ab59eaf023a228eb2d44925bf1b31f08a84c5cfdc7e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/choice-only-1.json": "74898097058c1ccb6423345cf5e0da0315c109c1e73e7661940ba767bac52780",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/reconnected-cli-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/retained-version-original.json": "bc97f44c17ea146dfa5007f6b8ee7319b62ca9a2d70bcfdaaf0d6a4664806856",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/commands.jsonl": "16b544ccba78f40afb095edd178a987515502f3bb70ac1f938a7d9b919db5190",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/stopped-payloads.json": "d50d393b5a2504a9ce9279d2785c3e8d11b1ca3faa8edc9cc9b5f58479c94116",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/reconnected-cli-search.json": "c0202ef1a6656161a4b8f6631b195524949a80894a510be836a711c2bcdb7a13",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/after-hub-restart-replay.json": "192a4f4c86723036e912b0a454ab59a46b85baeabf1cd62db9c3983d726e50f7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-restarted-cli-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/old-original.json": "aae030dc2fddb93a7e4d31435e1fe85f1cc6a81617981ee8d915dd0bdb550c0d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/offline-cli-reads.json": "9131ccc8e9439b9b42ebc9d41b66b9115230034cdeae8395d2ed52891ff2d676",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/initial-choice.json": "75fedfccfa0fe2a8966e52e9f899ce835a96946a3944928297a2db3fbc51cc55",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/manifest.json": "752c1279d9b435d349ff66c628d8af82ea849de8a1d8bf4b3e58fe24e5b0ab63",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-restart.json": "93684fbfd06734cd832249545420116098a660308c054c397c1e017c99671de4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/all-local.json": "7b813e95ff6d3d47287af6985836d53b85bfb70cb0260f7051f1242c02b35ee1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/offline-cli-search.json": "123437c629c0e3da719445d65a0de04c4b1ddc8df918007d8706fe682b68f428",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/combined-stopped-cli-search.json": "c0202ef1a6656161a4b8f6631b195524949a80894a510be836a711c2bcdb7a13",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/combined-stopped-mcp-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/payloads.json": "ad07086877bef3dbb5c99f90f8300dc8cc8a08c2999054188173b183cdae055b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/stopped-state.json": "2dd7a8064a816288ff3ef8c328e0ac012cc8e5b54f2bf9ba1e3addcbe8dfa6b6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/service-events.json": "6369d217e28b3840f25b6fb82d118fee03059f2a713ddf20af4135d1419cd1ab",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/local-restarted-cli-search.json": "c0202ef1a6656161a4b8f6631b195524949a80894a510be836a711c2bcdb7a13",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-hub-service-run8/reconnected-mcp-reads.json": "f5415cb71b24a6401700036ae5dea0c02f16e648a0a51072e6785b52f8aa20d1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restarted-mcp-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/initial-stop-replay.json": "c81b503da7c540f4875a0eddcee01c95e21741338d6fc7d9162846bdd3b5af04",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-mcp-search.json": "61ede15511f1dd34de5d3a6423888535030f7547cd8b89dd94a4b9de8e10352d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/login-service-8.json": "cd62a83dab66c3e145e34b403cb5deac931b9d022e2df298578d34f27a26880b",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/offline-mcp-search.json": "0bee4629fe7f4067b15e507a98c151e1a205090e7d78ecf9b9a5a2cbdce61b15",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/new-connection-status.json": "6b953ea4812ff91c8d0ccc722b197343e1871db22b0afe1e3c69485038ba27ed",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/version-and-long-originals.json": "f76723499ec15d41ee0dc4cad46cea2e05d3d9401cbcef9de0e81c61c929298c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/choice-none-0.json": "dc0292f733d3d039f2da93532f2dbe8a8a251369cfbbf7115dd2d73c7eaae16f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-browser.json": "4a82b03dd5bf466557ae0fa79fc58fb56c8d994db78b8712bcfda37a34f26424",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/fixture-local.json": "c96c2acf426ff89f6072073499334a3a698040f5af8aee112d75ccdf32620eba",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/explicit-local.json": "aff5844e9da6a45cbbd450ed78aa09dfd78296f216a7c7676526792a1d1ffd68",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/result.json": "c87bd32464e09b295213441e53717cbaec4a29046c3255437ab653b71e6cf9bd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-mcp-search.json": "61ede15511f1dd34de5d3a6423888535030f7547cd8b89dd94a4b9de8e10352d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/sync-observations.json": "f211d94a3b818e16bde7e7764ecdd3a49c910c25b82dd442cd05057be24c1433",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/offline-mcp-reads.json": "f1828554adfbb5928d2795335a5b73c9e705caddcd01fe71c5a0fa05d20fbc83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/fixture-remote.json": "3f55126fbbfbb6332d3e02d047bb0ee8a641553e381ada7923bb73edf04da53f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restarted-mcp-search.json": "61ede15511f1dd34de5d3a6423888535030f7547cd8b89dd94a4b9de8e10352d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/browser-configuration.json": "385e89b08c4e3facce17fff12713d91924d0c1dbaf69494003f862ec582f4898",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/backfill.json": "553b9dbc858d6f9cf2be2ac36ffd321572c95e9d1e0f228cc06e258960fed6dd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-service.json": "16edb2f3e50e2fb04809c74d19ee7513cd4870f81bcad940c44be833e2b623d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/hub-projects.json": "83211fdf370a8a74e9c95ccad1f212a84132bba8332e3957c8d8b1eded28b301",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/affiliation-propagation.json": "1ad87b4a07bf3967e30516e73568f44bff81775618b4ddf2f61e20481c633ef9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-cli-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/choice-only-0.json": "9a74a788de385cc0c11c61ba0944d8a3c1fa70979d100485a361acaa0d2c3422",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/choice-only-1.json": "07e78060313c2ea96b61b46865291b08e35706ad297c42365e5068620eb0a5e6",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-cli-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/retained-version-original.json": "7a26103a5d53d6338f6ee325f3d69f1e718904d1e915b966aef7a5acfdf80e43",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/commands.jsonl": "2c49d15a6b6f1dc9d88b8f727f62ec55349f61e13ccfa3f5b411336d24e841e9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restarted-browser.json": "6784cf59a8d5e3c39b8021b656c92eaddbb947d93bb4dbcd0457aaee8ab939f4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/stopped-payloads.json": "8d53c7d38315f27537425c9085b9936eaae15dd4e472b141233f0db6bd973c8c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-cli-search.json": "39aa56f6e342409835c5f567e0598bfa833c58a025779554b827175e49c9f4dd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restarted-cli-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/old-original.json": "1e9af0d3acbabe7d36924c73d09bb8b74f579104de520135f9e83d5dec6a4d44",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/login-service-63.json": "8cc2b3fe632ea18266c9c215a3a60e060a2482133652a00e860c2e011cc6d68e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/offline-cli-reads.json": "f1828554adfbb5928d2795335a5b73c9e705caddcd01fe71c5a0fa05d20fbc83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/initial-choice.json": "5abfb7da1f8098f548f0cb3bf6c4bda50d53ad766738b4c9bc47aa4308a808a4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/offline-browser.json": "e32a470c4052863fdaf14bb80068c22539541e125a8e13d9cfa907c3509003d4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/manifest.json": "f6391d3a0ca139791818c2700da26cf4e9501f030f583363298d55560fb2f121",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restart.json": "4c5b02dbd11e0fec5000391caf0e01c132b635360ff845c3809f847a1353868c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/all-local.json": "d7fe86a6894b8c95148a95147ca71033ce34f252e9fb5ce817422dc5bb498767",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/offline-cli-search.json": "e41a8fe46b56840ab5ee90dbf8ddc60d1432e221b3e52de0a255537c1339d333",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-cli-search.json": "39aa56f6e342409835c5f567e0598bfa833c58a025779554b827175e49c9f4dd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-mcp-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/payloads.json": "1e82a0f604a4600288da7bf32222b4f0d6d529cdc44df8a7809f3daf205c0bc2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/stopped-state.json": "6c3bcbeb9429a0cc9992524305a8fb4dcd75159bba5b118be7a24a1ad1571d33",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/service-events.json": "317b94e4d3f809478edf6f1b8edf5d49b7a9bb4fb225d9b60bc9a25f30d4ac69",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-search.png": "2187838d1affd53feb9456eb931b1beb28a371d9179d95724c1fbfe5b55d5273",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/combined-stopped-upload.png": "60752ebed42ec36f9bd26be5dc3f2be08ea8e82a128b17f8070df17dbfd1ce96",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/local-restarted-cli-search.json": "39aa56f6e342409835c5f567e0598bfa833c58a025779554b827175e49c9f4dd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-browser.json": "4a82b03dd5bf466557ae0fa79fc58fb56c8d994db78b8712bcfda37a34f26424",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-login-run11/reconnected-mcp-reads.json": "0f88284123fefd17714a6c3a60f2a0af9ed3cbb7caea3476bc81196486642687",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-restarted-mcp-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/initial-stop-replay.json": "f005d5ed1faf47f6ef0241868977354e3b990837d104c6eaf41fcb0f0f88f609",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/combined-stopped-mcp-search.json": "541c9ac172396241e1f58563064e27b937e686bdcadad6ae32e05a2ae0a32e09",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/hub-restart-rule.json": "bf632c7accc633254aba85a4e282991489f1081cacd467c41cae3d1d8b63156c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/offline-mcp-search.json": "af5efcd10a908bd0250f3f60e76653f52fbe0b2855a030bc292bfa9b2d2d8f5a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/new-connection-status.json": "9fdd38b8c71da787b116472529ac25d0c3d4d8fca769a68467cff3b92c933646",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/version-and-long-originals.json": "1bc7e571278d74b9ee8ea16fa90efa2a049ae0dbe2409953b6a674a91e646289",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/choice-none-0.json": "982bd007e66648cd87b27a7c5cb0660273f0f83220522d4fb7dbe9452d7b8916",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/setup.json": "90df6a2d48c02ff22680e6aa738fcf7f5537715403cb3686b54e13981f405cb4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/fixture-local.json": "3f45c73898f842926689ce0b116aba94fcc5b16df622991ec5aa15b2a95a9ef5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/explicit-local.json": "279fc6446e20caa03be4728c8aa881c7ea1131501b0850fff00c202e2313e711",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/result.json": "f7f697a4951092fd9b0d1470ac92bab6fa5d244d6c6bb61608730a10533e473f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/reconnected-mcp-search.json": "541c9ac172396241e1f58563064e27b937e686bdcadad6ae32e05a2ae0a32e09",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/sync-observations.json": "0845433b4d46fc67acf5b7635ba687da5118575afb20288540bcfc2058fef0cf",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/offline-mcp-reads.json": "f64433ab65c0613e944ad5b37ea51577d384e77c32a140a1dd12d1c7e98e9dfd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/fixture-remote.json": "f72fbb2117272072e8dc14e64b05944bab6bc4275a552db562dada9e7b42498e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-restarted-mcp-search.json": "541c9ac172396241e1f58563064e27b937e686bdcadad6ae32e05a2ae0a32e09",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/backfill.json": "c8e8e64a2a549a5500a82f9df6115f7cfbbe34b111b4857ecce93047f0f37806",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-service.json": "1a77ebcb606d3dc7a849c0aca9429a4d64486d91afa1b75e4a995d546911b68a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/hub-projects.json": "a33371ed54d4339d8be1c736a809bb08000fa033e974d93623b87d1463622ee4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/affiliation-propagation.json": "60bba1d62fd1a7b7d44f185ec543029d168d9bc66844254bff0943e8f8468fd8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/combined-stopped-cli-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/choice-only-0.json": "a833fcca1ef1bcb2111e2a71f21a9f12f6bb8437639960de900018a690d1de51",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/choice-only-1.json": "fdc334e245d913773febead0161f80be34ec7545a0fa07a4e6e5a0d1b1fad5e2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/reconnected-cli-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/retained-version-original.json": "8f652e9adc8a1a0b642566a4038673a8c1ddaf99740d69063e3cb4e25d34c8d7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/commands.jsonl": "8f691978a249c154f7a5481a67c41bb93b31a5b4be10abb1b651e2d534a08525",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/stopped-payloads.json": "f41db457c21483902f487734263c4099174717c8a68d9892c58d1ff9d6712dd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/reconnected-cli-search.json": "c488c857986d486f933d7bfbd4cb379ba44144e92bdbbd2cf8d3ae9522d54338",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/after-hub-restart-replay.json": "f005d5ed1faf47f6ef0241868977354e3b990837d104c6eaf41fcb0f0f88f609",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-restarted-cli-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/old-original.json": "3ea1d4316f8b1a7c61e57905504d93ef4bd0ea1fe1330a92fa2f00e870586f52",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/offline-cli-reads.json": "f64433ab65c0613e944ad5b37ea51577d384e77c32a140a1dd12d1c7e98e9dfd",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/initial-choice.json": "9fdd38b8c71da787b116472529ac25d0c3d4d8fca769a68467cff3b92c933646",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/manifest.json": "a1c6c752000c2a91d102bb254efbbb7c545b8d0f76840aae5fefb067f62aba37",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-restart.json": "4f3e170333326d31a70beb00a4e860239b16534e9a3612bd79d86fbacb781e59",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/all-local.json": "d572d292149580d5150b17146923272a855f12f7ce4cde9076cc3476968bec66",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/offline-cli-search.json": "caacecedab0bdd25afac05d9a75542970708fd8403830de5f675c7da0812d96a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/combined-stopped-cli-search.json": "c488c857986d486f933d7bfbd4cb379ba44144e92bdbbd2cf8d3ae9522d54338",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/combined-stopped-mcp-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/payloads.json": "2fddc4a26a415a0289a7f456b7c20e0e34aed1d856dafaabccae88c58fb3d559",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/stopped-state.json": "c81d6ae18a1f0e4a07d1142f3fc649898fb6563380e3aa75b1534a09b4dba033",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/service-events.json": "000e88edf7cef28849fef5820893a0ef095c3d53679c98b1a036f212b59081b5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/local-restarted-cli-search.json": "c488c857986d486f933d7bfbd4cb379ba44144e92bdbbd2cf8d3ae9522d54338",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15/reconnected-mcp-reads.json": "e3fe055f48a939a57e77052375282226deb1c9c64c5c9f4c18a1058517b9ecea",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/stale-local-rejected.png": "03b7872b313613435ae86da9278cf73670f4f7eae78534f6913464def5ee4ba7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/new-connection-status.json": "918b97dfa087ce07fbc9748c184b237a65b196f8741088efee2eccd784262648",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/hub-links.json": "6b5dadd28e3ec542fe49a7ec10862bb9fffb83c2a4bab163c11cce46486856d9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/fixture-local.json": "e4fd2bacc831a574405db8252d97ba4fc500965c61821e5f14cad4615633bed2",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/result.json": "34385e5f6c03047eaa630cf72c720c8b78289e4cea3051d6ad8a417f59874092",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/reconcile-result.json": "1dcf83f3d28cd6f0db0848aac33e76cb38a843b5718df85520c44d6e58d407c9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/sync-observations.json": "cab7b3a24e8323c76bf3cf9c19e852201197b6720fb17b930add99ff91e0e621",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/fixture-remote.json": "6581591cc96fa4abb75f859d7dd5f2dbe9d0a1b66b2768c05cc25816423ee4d3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/local-service.json": "25206f7e386da25068d1cce5304aa89587b42637545f910526ae4e3b4758d684",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/hub-projects.json": "511b0e11470cece334620396f162b4638de48b16b9a7442991c67fb862dc9b3f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/commands.jsonl": "afa33aff30f36d665157abc0b065250dce5cf621ac089026e8eaca64e84d263f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/manifest.json": "a777db9e3db46e514685c9740c89e213725c37983e0e8886af14a412356875e1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/stale-hub-rejected.png": "ae28462f494630f9c5245df622169422ab93627d4851c783a6c4f523241b34bc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/payloads.json": "cf5d0f5bd8b0842ebe1b9bf077a76fd0955b467d167c6856c1aabdfaa06dbb19",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/adopted-hub-current.png": "bd3f0443006df25632ef7fdbb85323a4894048d75f132ca6264a6728d029fd4c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile21/service-events.json": "d43fe5bd2e429ab7d3889724037ee83b79fcbbc2c952cbab947d4a7fa48eb2a5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/stale-local-rejected.png": "ba6f5b5551328f8530b66096644a17dc0dd5d139bb0ecd81a8ae5b3d12dcf8c1",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/new-connection-status.json": "24f5a032c059b1377f1580cc663f437942770de6b8ad2b14948a1a0a8bbd1da4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/hub-links.json": "b219bcc0f662140131a241bd62514a73aebd788ac7e5053d7ba61a1342c8f789",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/fixture-local.json": "65b024a3f0d3bab1686b46835a054c849df0209909f2a9c5823b1a7ef1f06a68",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/result.json": "9f1e0c12ad7a728fb8e4c1a93c017011ad1c597d001f9cff78378a41a168a012",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/reconcile-result.json": "452ffeaf7a2bf0a9fc13fabb41bfc00e63d0786dfb75be633cee7f8e039f9a8e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/sync-observations.json": "04466fbb4af0c63db14db08fdec885330b812683922a37914a71059f9da66ea8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/fixture-remote.json": "457572769a89d7258a29611071882339983ae43cd3cdbadc9cdc9594ff8a2259",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/local-service.json": "59324989cd81c38d4cbc39cf1204ac7381c9ac82c4528a7c486dd9c9031b92f9",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/hub-projects.json": "b7e6207a56dca67a54a4fb16bf68aa800f82b80d1e60543ea2491fb68cef621f",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/commands.jsonl": "3c932f19c5cc917ce770e396d219042263241c65cd17fb2b6d23505862df8ab4",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/cleanup.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/manifest.json": "2d6496014e02c5a4b6d651c0ec680900cdcdcfc68775ca40113c7e0d9ab9f7f5",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/stale-hub-rejected.png": "3b1159b746be40614374f87ec05939a2f697ea43502ae981ed247b1409f13f88",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/payloads.json": "d41fb4ff1175d41cdb1fe30342d77a5a667152641dc31671dd7f91e2e37263fc",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/adopted-hub-current.png": "ed7109c04275225b9718e475a008a8211b552691fead6b9861603d545f57e999",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile21/service-events.json": "dd9444aa11f1d190a87a1df4e9ab905b2aab54d673f8580732a3c04b8312a234",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/stale-local-rejected.png": "d46bb078884c6b7f7412682c045516d5dc1c869edcf23a6a7476f54b6fb6cfb7",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/new-connection-status.json": "3086ebb3eae53c808f4908cfc0294b6f5ce86558d865f446c8a5dff188052c9c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/hub-links.json": "4393ac2fb400a757bbb3b4bc0232e3ad9786232184ffb43cfb13725d7e9ac325",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/fixture-local.json": "c20a0fab5f5bd3e4b60bf1555da25cfa92f344c36688507250a3232bc1f7dc0d",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/result.json": "9594d72aac830c3e1d3218ab9fcebeeb74dc2257dad4c19f2a2dde56cb73043e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/reconcile-result.json": "bc4ee857a053f5e534ac2db951e1f554e8028483e6490828db3c602b3c1f3886",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/sync-observations.json": "f6f66bcd07299d77112a3c0e5df985c4333078699a7badeb62d33cb656dd9bb3",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/fixture-remote.json": "4aac973e6a24b8bce6d14ddf85a099b26d95c34f657215b7fead4cc0db1ab6ce",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/local-service.json": "8e4b3d0add4f39eca8fb777dfd78192020f3e8389fadb1c5574e24004040efef",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/hub-projects.json": "d576789b34e0147f53ebdf206e5efcefdb03c0a61e7264a644552e0cacc28d3c",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/commands.jsonl": "82d929c97bd3362bf33c8e12c744ed60b3e240b71d0aac53074878cb00b7c4c0",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/cleanup.json": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/outer-process.json": "0868cfbc0f27128729ada44e4022f8341c58761b6f1d1e2fbe30ea0afd2f0650",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/manifest.json": "66d3fbc41fafd5a1b7b13e8c8a1ad709469a36d4a5995a4661025aa4c55e51ee",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/stale-hub-rejected.png": "3d43b5798e3783e20c07bf9fc49440b35756671995e14479289ea1af786e7a6e",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/payloads.json": "81611e262acae4aac5ec2fb2f5b6a52daee21a220629c3a24b02825486c63a83",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/adopted-hub-current.png": "e3db7d1c35b74e9cba149207959b2b838be82949c92a1d35a81f583f44993c3a",
+    ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile21/service-events.json": "c255aef26eb521f1402771f53defd12be4f715756f7ef9dc493c8421b38e4548",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8-receipt.json": "ff2d99591ec0e62de99b302299dd6ec1b58e99babafa5eb80989af5cd405b74f",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8-receipt.json": "e117dc28e6d3c71d3f3e51cda2cb614d8407a542ff67a74ffbb8e0296e6666e0",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15-receipt.json": "742a63243d1b43dbdc1ff15f6af0d4be98741342a61de6eb475b8cfdae56ed4e",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8-receipt.json": "5c78f41c173abc598bb1ee4cf82e3d4724d520011cb0a7b373ce73db4348ffb8",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8-receipt.json": "35b473cd83fd5b47a9284386c68322b73ba020f950241f90e1b36354af0b9329",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8-receipt.json": "eaafb6ba71ef787622fc2d7d617951d446cd99084759e04d4635632027b1e295",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11-receipt.json": "57ace5076474ae2dcf7b6b114eecccbdfc6013515a6aacd47696ee32024abbdd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.xml": "e9335a0c53e17d2dd60fe35ba5791dcf78beaa6757d8a4932b921ecac6e401c4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/inputs.json": "ef4b3b069e8301cadaf6eaacf2a18a320bd37fc7a1308c92f00f61e0b3b62c5c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest-receipt.json": "5f9c08a52f7ac5b2d9a816fca311243ddab32c2401ba6f3f7c37a55aa8aea44c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/full-pytest.stdout": "3a9cd119df766b3f7c16f5ca49abde836d6f136876c81b5193bb665c9cb53776",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete29-observations/receipt.json": "c8c90fe68e9a68b20e83203ff673f870ac24b3bdf75885c36d19f227a24d7e9b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/final-package-comparison21.json": "778bf07a36d1e7027dd445076c7315158da9edc391a2256452b398d76dc9e1aa",
+    ".acceptance-local/native-v1/AT-SMM-005/work/reconcile-package-comparison15.json": "c830d2041577e841fe13fe48860aa9344cda1c38553cc478c67906e3f3191fda",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/primary-content-facts.json": "11b4ef2652cda87f38e8a9f31830f4fd9071299c8740103372fc604969cf3cf1",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8-receipt.json": "3c2b7804f47826fc23ef7e4ebc675008c2ebcdbe5ae2313094e42cfd0d7ba9c7",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.json": "092e98de6fcba8cc3f2fce9e98a9bf77b30cdc36e6376d01ea0e96a28e8b5045",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.json": "9640a5688821f14664164b1c2a897405faa31d176f6f65241bcec63c9eb560ea",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8-receipt.json": "b281ce34396527912519c776d6aa424e913b77fac6322ae6020b0beb7df75517",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.json": "b791a1bbd1b76d329eb47b4053cfcf47641babd616218f960fda1940040ca0e6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15-receipt.json": "668b9906785efd7cf329c3180e6d4990f371a0f4b7233f24006e3e4d99c4b5f4",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.json": "a244bbe7d4adbc74c80fa428efcc911cf325bf8bb5c3823afcd3518a77bf9d14",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.json": "1d3c3662affc7d9c448784574639f4e9bef219004901e5bca97dd2e9f8a0bc12",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8-receipt.json": "f5ef14491da17accd836a57ffdaec4eb89f6f9963ab262057ef9cf1f7446b23c",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8-receipt.json": "77b193a0a39cb61ed01c3fcf3a128a0448a627bf4a3f5e593b7dbeff0744dfdb",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8-receipt.json": "3e1a5fa5857e43d864919ed4e5a5a39fdaaaca7ae55eddbd649fd4359680efa5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11-receipt.json": "72a78354a34773f45015cd8f6c733318003fe80333b60b1aa9511ae531c33cb5",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.json": "17400676462a446331afdbeb11aecd17f44c35786cf4c182f56fa384813e5bfd",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-linux-client-run8.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.json": "b8d4254be4d1fc7ea26b7cdc270d605011f76715c476a19a37956c92839a82a6",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-hub-service-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-login-run11.stdout": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-mac-hub-main15.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/work/complete26-observations/audit-windows-client-run8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/manual-preparation-complete30-sc2.md": "18e252a05b9e578e160d07f94683e576b175fa6360353df8afc175119ebe214c",
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC2.md": "ebb6da9c020c8e059dd3a648d2bf8e085f0e9e2833bbf9d8aece31661f5b0f47",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-mac-linux-v1.md": "f507d1f4345d70bec3e3418efa49dc75b3aecbee44e0abc0b07bf51f5d684983",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows.md": "e1beed8d0d6cf884ffc8ce7be6832ab59a3158f4fd3c9eed1c81bc9f516602f2",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-mac-linux.md": "7cdca576ae5e1ab74a4a1264aa233c1e6ba4b49b76b76d9e6e8533982528fbbf",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-entry-global-f45-v1.md": "3593d630cb1390b762cdc70aabb6aad377a2cf8a89cdd5fcf37cafb256da93f9",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform21-windows-cleanup.md": "7233caf8b8be016b21687d40ce1e3fc5219b8279a7c7fec377103adfd046ab7d",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform15-actual.md": "f6685fcaed62998776e2252a719a0f05669e8835801e8a298b8e8cadc6ef9066",
+    ".acceptance-local/native-v1/AT-SMM-005/review-inbox/review-platform-scope-f45-windows-v1.md": "ecc31f34cc688b58afa39101e62811d1d2208160b5240eb0f7270c087022cf9a",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/result.json": "bad84cc36e34ce588f82ddf584ab9ec94533cc837082cdc94d37e35ca0d60ca0",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-web-inputs/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-web-inputs/run.process.json": "bb184cc57164da7adc449709f4aa090b2532311b487da3b82d6ad0defb1225e0",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-web-inputs/run.stdout": "78fb140b0f4c1fa657a2a8c426bf26bc0d2a0b140ac177e8711df9374d9fa3a6",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/run.process.json": "b6120995e8a395554a920ed322b27d6074cc144a2d88f55c80e406bf6b24ad41",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/run.stdout": "2ed4071747848985bd7c6d0ae51535a006084cf93850f39c2b279ab40c3444a4",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-default/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-default/run.process.json": "f666fd792b3180715a25ca3baeb22c2fc0ba45e1902adce7e386dfd72b19a1ca",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-default/run.stdout": "d0feb0c5023f5e292e2bedeffd87b401f2f4641518ded575133cadcc91d15f02",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-cli-inputs/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-cli-inputs/run.process.json": "42ed240ac1cd445fce7e425beecd7bcc8065aefe3321e2422bc7ea7d8d000ee5",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-reconcile-cli-inputs/run.stdout": "2e42d329cae57df0122b0831dc56260f810d41beed1c268c9344ebe1b302693c",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-transfer-status/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-transfer-status/run.process.json": "0e3b42531a09f448282ab3e732c4c3f60093a114169211f6c5737bb909bb7216",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-transfer-status/run.stdout": "a4dd50148c1c10edaa5d28c28f0c768016718c94f1f69a79e863f378ba8681ef",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/attachments/pause-source-except.json": "102cd93e6c98295248ffab2c57f838a83265629f14667789ed8782c259db2ca8",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/attachments/pause-source-only.json": "bf0a71ad38f9700d44d3ef910456ded1297d2f8836604999cc0bccb396054fb9",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/attachments/pause-source-none.json": "7bd17fbc1baebd8a67ae2be7309cc63378ea86869d32d695dfe60d4ef9ae8ab3",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete30-sc1/TC-005-pause-source/attachments/pause-source-all.json": "4959ff217b64547e288aa45be05e9eabdf7c577d5e82ec7fc76f80b16ca96b12",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/result.json": "d52dab4f36bfc9c144b0ff0998bcdb5a9e4bbbcf3c4f7d173b0a4db785cca145",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-target-dispatch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-target-dispatch/run.process.json": "11cd7bde2d0571fc0809ceaf26967ace66a744cb0bad08d4efd6cc3a3688d36d",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-target-dispatch/run.stdout": "25219109f9e7a7fcf1fdf1f17d6f2bd29dca13d4e0d188f33d0c634f411897fb",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-cas/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-cas/run.process.json": "be3cb8777b8c096f08fbc991d1ade9bc8b99b752c9569ae21369d9e5504c56b6",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-cas/run.stdout": "8d2bd549ad802241fccf35ae149dd21d4176b80a3e5d7289bd9c1e113af043d4",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-policy-triple-order/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-policy-triple-order/run.process.json": "62621192603f8c488fd3b5d07f0be62b85430a13ab7fac0663d9be1c252a83ff",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-policy-triple-order/run.stdout": "d0feb0c5023f5e292e2bedeffd87b401f2f4641518ded575133cadcc91d15f02",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-stale-local/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-stale-local/run.process.json": "13dc8d4fc56f5a29b1c8d1c0b96a5c7c47ca68a729a40fdd52fac7cda41f41ce",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-stale-local/run.stdout": "a4fd5844bf90b47c8ebaaffe8bb8b1644ba9b6f89df9007cee8877362ab4a14e",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-remote-race/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-remote-race/run.process.json": "510f9ce1e421dc573d212f362a65cc493c66f0bf12ddbad7ce2df24b00935cb6",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-remote-race/run.stdout": "b58e81d928ce9958d274777ee02efe05ab155ab407f9d8b324f539fbe158ee2a",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-fresh/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-fresh/run.process.json": "af0974a39ae0a24640990b4da848b8403338879b59953b4e2c4218f6c69c9176",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-fresh/run.stdout": "6c2c30a8080cb05295abef95ea073c56b2667b02129a5efe42f23f245c34b186",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-inflight/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-inflight/run.process.json": "28ef35ea0bb08274cbb0f2bb873298767e9eb06dbbb9db150901e77bd69e7c1d",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-inflight/run.stdout": "dfd541de6dc90dca930d8141efb037752eaa6f0213b254da49218db60367e70b",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-write-window/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-write-window/run.process.json": "6503d8b90ab27b28b778b88e93e956dd695ed4683de03b8e819f6157f8b74b56",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-write-window/run.stdout": "d55e2497a0826efce85b44aae63f75f504a5a8c71f18e66c2dd563d2c46bb4cf",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-target-dispatch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-target-dispatch/run.process.json": "02e7a3e59138138f7b15c2f4933387e62dce2a262fe5f5a432c86964bcadab3c",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-reconcile-target-dispatch/run.stdout": "25219109f9e7a7fcf1fdf1f17d6f2bd29dca13d4e0d188f33d0c634f411897fb",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-complete26-sc2/TC-005-policy-triple-order/attachments/policy-triple-order.json": "2f93cacb54d67921127dc5c265ba8079d97b6ac6e4122ef4359bc6e3996ddba6"
+  },
+  "content_facts": {
+    "mac-reconcile21": {
+      "final_local": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "487006252e76409688f14c54931bab67",
+        "device_id": "d7689c8288e1477ca1d319bbee3ccd7f",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "9700597d8e3543cc9a1b3bc56f476f19",
+        "control_epoch": "44ceaa4b1990499ba6a7f78d5b1061f8",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}\n           ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project}\n           ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    },
+    "linux-reconcile21": {
+      "final_local": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "46e510c780dd43b686eaf0f764e12af1",
+        "device_id": "25ffac1828de4414b36cf4db32816d00",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "cc67360bc0044855b5db5364f11d1d53",
+        "control_epoch": "85d2e3f05a4847abbea75648d11a1de2",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    },
+    "windows-reconcile21": {
+      "final_local": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "generation": 5,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        }
+      },
+      "final_hub": {
+        "hub_id": "9db1dd7d46844df89ab09046dce4e541",
+        "device_id": "6bdc14829cb244078fdcec9502b7d0e6",
+        "revision": 6,
+        "policy": {
+          "mode": "none",
+          "projects": []
+        },
+        "submission_id": "359448370bdb4d96829fdd4124be8548",
+        "control_epoch": "666b2ada45a64d7e97c1cc8a176f96e0",
+        "restore_pending": false,
+        "conflict": false
+      },
+      "stale_cli": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 本机规则已改变，请重新查看对账差异\n"
+      },
+      "missing_cli": {
+        "exit_code": 2,
+        "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project} ...\nsmm: error: 重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation\n"
+      },
+      "page_errors": []
+    }
+  },
+  "independent_original_checks": [
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ],
+    [
+      "wheel and installed bytes",
+      "default and stop",
+      "three actual query scopes where required",
+      "same numeric ID references",
+      "independent full-body BM25",
+      "old requests",
+      "complete A append/new bodies",
+      "old/edge originals",
+      "outbound payload shape"
+    ]
+  ],
+  "finished_at": "2026-11-22T11:16:42.679201+00:00"
+}

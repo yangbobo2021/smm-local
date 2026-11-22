@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-reference": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "A8/B7支持scene，本项只承担tdd-core，其余引用边界/平台/旧调用另分配。tests/test_005_contracts.py:179-207与pair夹具真实本机/Hub同整数ID且独立不同正文；分别对两端准确正文断言，只有首个档案正确或两端误用同号会首先在read_remote独立预期失败；offline后远端引用必须抛HubUnavailable且本机引用仍可读，不能用两端一致自证。后续真实修改本机内容后旧ref拒绝；参数冲突显式抛ValueError。当前debug exit0/stdout1 passed，bindings/artifacts逐项SHA有效。人工全criteria/旧调用证据准备见manual-preparation-complete26-sc8.md，不认领未观察的平台。 complete27当前同名TC源码/全部原断言与26字节相同；本轮已核对新debug真实exit0及stdout（reference 1 passed、reference-boundaries 7 passed、scoped-title 2 passed），全bindings/artifacts摘要无误；旧manual缺旧MCP原件现由新增实际TC补，人工范围看manual-preparation-complete27-sc8.md。"
+    },
+    "TC-005-reference-boundaries": {
+      "status": "passed",
+      "covers": [
+        "citation-extra-boundaries"
+      ],
+      "reason": "A8/B7明确点名精确消息、重复位置、删除消息和Hub切换。tests/test_required_snapshot_and_batch_boundaries.py:73-141真实7参数覆盖本机/Hub首条与非首条删除、两端重复position、真实换Hub。:91-98先保证两消息同position并完整独立正文读回；:100-107逐个签发精确ref，用zip独立first/second正文与所选_message_id/version分别断言，首目标特判会在第二条失败；:111-117每个删除状态均实际删除所选首/非首消息，要求整个旧ref明确失败且剩余正文独立不变，遗漏非首stamp校验会在对应raises失败。真实第二Hub错误正文和本机错误同号哨兵都预先存在；:133-140切换后raises且新Hub不得收到/read、哨兵正文不变，拦错误路由/本机替代。当前debug exit0/7 passed，七附件及所有bindings/artifacts摘要一致，附件记录真实分支结果；无独立抽取探针替代断言。人工范围另MD。 complete27当前同名TC源码/全部原断言与26字节相同；本轮已核对新debug真实exit0及stdout（reference 1 passed、reference-boundaries 7 passed、scoped-title 2 passed），全bindings/artifacts摘要无误；旧manual缺旧MCP原件现由新增实际TC补，人工范围看manual-preparation-complete27-sc8.md。"
+    },
+    "TC-005-scoped-title": {
+      "status": "passed",
+      "covers": [
+        "scope-title"
+      ],
+      "reason": "B7规定新引用不带出范围外项目正文，范围外首条正文形成的title属于同一边界，没有新增产品承诺。tests/test_scoped_read_metadata.py:10-54给共享会话Y首条唯一秘密、X第二条允许正文，A仅关联X；hub-api/federated两参数分别执行，不把两端相等自证。搜索独立title=common allowed X，读取独立messages=[X]、title无Y且等X，首先拦只过滤正文不改title的合理错误；同次旧无范围读独立断言title=Y、messages=[Y,X]，证明Y并未从夹具消失，也保留动作前旧语义。当前debug exit0/2 passed，绑定与产物SHA均有效。实际服务/入口标题原件应用scope11/15而非d80，人工准备另MD。 complete27当前同名TC源码/全部原断言与26字节相同；本轮已核对新debug真实exit0及stdout（reference 1 passed、reference-boundaries 7 passed、scoped-title 2 passed），全bindings/artifacts摘要无误；旧manual缺旧MCP原件现由新增实际TC补，人工范围看manual-preparation-complete27-sc8.md。"
+    },
+    "TC-005-legacy-mcp": {
+      "status": "passed",
+      "covers": [
+        "additional-legacy-mcp"
+      ],
+      "reason": "B7/A8及PLAN8.1要求旧CLI/MCP/Web参数兼容，新增设计没有改变产品承诺。scripts/acceptance/selective_upload_completion.py:71-87调用真正Run.mcp；Run.mcp用指定独立安装解释器-I -m smm_local.mcp_server，经stdio_client/ClientSession初始化和call_tool，不是Python直接helper。对old/new两个解释器分别各开本机/Hub会话，旧参数分别conversation_id=1及conversation_id=1,hub_id,hub_message_id=1；先断同整数ID，每次分别对完整独立正文数组与source_session_id(local-A/vibe-V)断言，不仅比old=new。只首个目标或首个解释器正确会在后续迭代的独立完整正文失败；两端误用同档案也会在不同正文/来源断言失败。known本机/合成V fixture正控与直接字段提取无额外外部抽取探针。actual-old-local/hub version0.4.0且19/21模块SHA匹配已保留4d58202真实旧包清单；manifest candidate clean ba8，独立local/hub全模块与安装清单一致且other_package=false。原件legacy-mcp-parameters实际四读均正确，stderr四组CallToolRequest/ListToolsRequest与stdio调用数吻合；结果2026-11-22T10:06:00.360570至10:06:06.394009Z，debug进程45624 exit0，Hub PID45636实际serve-hub启动并请求停止exit-15，cleanup failures空。所有bindings/artifacts/附件SHA核对无误。该E5一个支持平台补旧MCP缺口，E1三平台新引用读取仍沿用原真实材料，不扩大为本轮重跑全矩阵；正式execute仍待完成。"
+    }
+  }
+}

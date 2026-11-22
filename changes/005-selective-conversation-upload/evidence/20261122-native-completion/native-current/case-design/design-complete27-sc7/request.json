@@ -1,0 +1,135 @@
+{
+  "cases": {
+    "TC-005-bm25": {
+      "checks": [
+        {
+          "action": "给出已知词频/文档长度并令端点分数方向相反，再加入相同与不同版本副本。",
+          "expected": "得分等于独立公式，同版本不增词频/名额，不同版本保留。",
+          "id": "case-1"
+        },
+        {
+          "action": "加入同源同版本副本、不同版本，再加入正文相同但不同原会话与不同canonical轮次的候选。",
+          "expected": "相同版本不增词频/得分/名额；不同版本、其他会话和另一轮各自保留完整身份/消息。",
+          "id": "identity-versions"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "独立BM25数学与去重版本边界"
+    },
+    "TC-005-long-message": {
+      "checks": [
+        {
+          "action": "查询词只在长消息第2001个token，短远端文档3个token也有该词；请求全文/短预览并比较独立完整长度公式，再准确读取。",
+          "expected": "两次都命中两端；各得分等于完整2001/3-token独立BM25预期，不能两次同用截断正文而同错；原文完整。",
+          "id": "case-3"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "长消息预览与全文评分一致"
+    },
+    "TC-005-multiterm-ranking": {
+      "checks": [
+        {
+          "action": "3个完整候选、amber df1/blue df3、长度3/4/2，查询amber blue amber，独立逐项计算。",
+          "expected": "逐候选分数等于独立常量数学式、重复查询词仅贡献一次，最终顺序按独立分数。",
+          "id": "additional-multiterm-ranking"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "不同文档频率的多词独立评分"
+    },
+    "TC-005-rank-ties": {
+      "checks": [
+        {
+          "action": "构造相同得分、同绝对时间不同时区、更新一天、显式空时间和缺失时间五份候选。",
+          "expected": "更新有效时间优先，等时间按稳定身份；空/缺失时间在所有有效时间之后且彼此稳定。",
+          "id": "case-2"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "平局按时间和稳定身份"
+    },
+    "TC-005-sc7-evidence": {
+      "checks": [
+        {
+          "action": "用离线独立数学审计重新计算原始完整候选BM25；结合平局/端点分数独立回归。",
+          "expected": "候选按独立 BM25 预期重排，平局稳定，端点分数不直接决定重排。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "核对同源同版本去重及不同位置/会话/版本保留断言和完整候选原件。",
+          "expected": "同源同版本副本不增加词频、得分或名额；不同轮次、会话和版本不误删。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "核对长消息预览外关键词查询、完整原文及评分输入，不能以预览充当全文。",
+          "expected": "预览截断不改变候选评分或原文，长消息预览外关键词仍可命中和完整读取。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        },
+        {
+          "action": "逐E1正常与失败阶段审计实际发往Hub载荷，搜索本机独有合成正文/预览/评分标记，不把禁传标记脱敏掉。",
+          "expected": "每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-4"
+        },
+        {
+          "action": "结合本项逐条判据核对下列原始实际事件及当前自动回归；需结合三平台实际payloads/停止区段与完整范围审计，Windows尚在重跑；数学回归不代替外发审计。",
+          "expected": "每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub 原缺口只有获得对应原件及适用性依据才认领。",
+          "id": "privacy"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC7实际原件与当前适用性核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "obligations": [
+    {
+      "id": "case-1",
+      "quote": "候选按独立 BM25 预期重排"
+    },
+    {
+      "id": "case-2",
+      "quote": "平局稳定"
+    },
+    {
+      "id": "case-3",
+      "quote": "预览截断不改变候选评分或原文"
+    },
+    {
+      "id": "privacy",
+      "quote": "每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub"
+    },
+    {
+      "id": "identity-versions",
+      "quote": "同源同版本副本不增加词频、得分或名额；不同轮次、会话和版本不误删"
+    },
+    {
+      "id": "complete-1",
+      "quote": "候选按独立 BM25 预期重排，平局稳定，端点分数不直接决定重排。"
+    },
+    {
+      "id": "complete-2",
+      "quote": "同源同版本副本不增加词频、得分或名额；不同轮次、会话和版本不误删。"
+    },
+    {
+      "id": "complete-3",
+      "quote": "预览截断不改变候选评分或原文，长消息预览外关键词仍可命中和完整读取。"
+    },
+    {
+      "id": "complete-4",
+      "quote": "每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub。"
+    },
+    {
+      "id": "additional-multiterm-ranking",
+      "quote": "候选按独立 BM25 预期重排，平局稳定，端点分数不直接决定重排。"
+    }
+  ],
+  "request_id": "design-complete27-sc7",
+  "scene": "SC7"
+}

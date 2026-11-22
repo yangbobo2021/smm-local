@@ -1,0 +1,9 @@
+tests (macos-15)	Run uv run python -m pytest -q --junitxml=test-results.xml	2026-11-22T11:15:28.9906970Z 251 passed, 1 skipped, 1 warning in 142.60s (0:02:22)
+tests (macos-15)	Run uv run python scripts/build_packages.py	2026-11-22T11:15:30.1597780Z Successfully built <ci-workspace>/dist/packages/smm_local-0.4.0-py3-none-any.whl
+tests (macos-15)	Run uv run python scripts/build_packages.py	2026-11-22T11:15:30.8402010Z Successfully built <ci-workspace>/dist/packages/smm_hub-0.4.0-py3-none-any.whl
+tests (windows-2022)	Run uv run python -m pytest -q --junitxml=test-results.xml	2026-11-22T11:21:13.3558334Z 252 passed, 1 warning in 479.67s (0:07:59)
+tests (windows-2022)	Run uv run python scripts/build_packages.py	2026-11-22T11:21:15.3623346Z Successfully built D:\a\smm-local\smm-local\dist\packages\smm_local-0.4.0-py3-none-any.whl
+tests (windows-2022)	Run uv run python scripts/build_packages.py	2026-11-22T11:21:16.5973782Z Successfully built D:\a\smm-local\smm-local\dist\packages\smm_hub-0.4.0-py3-none-any.whl
+tests (ubuntu-24.04)	Run uv run python -m pytest -q --junitxml=test-results.xml	2026-11-22T11:15:21.3143878Z 251 passed, 1 skipped, 1 warning in 135.60s (0:02:15)
+tests (ubuntu-24.04)	Run uv run python scripts/build_packages.py	2026-11-22T11:15:22.1205183Z Successfully built <ci-workspace>/dist/packages/smm_local-0.4.0-py3-none-any.whl
+tests (ubuntu-24.04)	Run uv run python scripts/build_packages.py	2026-11-22T11:15:22.6914655Z Successfully built <ci-workspace>/dist/packages/smm_hub-0.4.0-py3-none-any.whl

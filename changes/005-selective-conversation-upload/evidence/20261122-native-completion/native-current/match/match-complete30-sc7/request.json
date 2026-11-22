@@ -1,0 +1,101 @@
+{
+  "case_design": "design-complete27-sc7",
+  "cases": [
+    {
+      "case_id": "TC-005-bm25",
+      "covers": {
+        "case-1": "def test_bm25_formula_and_exact_retained_content_versions():\n    \"\"\"TC-005-bm25: retain prior formula/turn checks and assert version identities.\"\"\"\n    from test_combined_search import candidate, test_bm25_matches_independent_formula_and_ignores_archive_scores\n    from smm_local.search_merge import merge_candidates\n    test_bm25_matches_independent_formula_and_ignores_archive_scores()\n    a = candidate('versioned-a', 'amber amber original', version='v1')\n    b = candidate('versioned-a', 'amber amber changed', scope='hub', version='v2')\n    versions = merge_candidates([a], [b], 'amber', 5)\n    assert len(versions) == 1\n    assert {(m['canonical_id'], m['content_version'], m['text']) for m in versions[0]['matched_messages']} == {\n        ('versioned-a-m1', 'v1', 'amber amber original'), ('versioned-a-m1', 'v2', 'amber amber changed')}\n    assert len(versions[0]['matched_messages']) == 2\n",
+        "identity-versions": "def test_bm25_formula_and_exact_retained_content_versions():\n    \"\"\"TC-005-bm25: retain prior formula/turn checks and assert version identities.\"\"\"\n    from test_combined_search import candidate, test_bm25_matches_independent_formula_and_ignores_archive_scores\n    from smm_local.search_merge import merge_candidates\n    test_bm25_matches_independent_formula_and_ignores_archive_scores()\n    a = candidate('versioned-a', 'amber amber original', version='v1')\n    b = candidate('versioned-a', 'amber amber changed', scope='hub', version='v2')\n    versions = merge_candidates([a], [b], 'amber', 5)\n    assert len(versions) == 1\n    assert {(m['canonical_id'], m['content_version'], m['text']) for m in versions[0]['matched_messages']} == {\n        ('versioned-a-m1', 'v1', 'amber amber original'), ('versioned-a-m1', 'v2', 'amber amber changed')}\n    assert len(versions[0]['matched_messages']) == 2\n"
+      },
+      "selector": "tests/test_upload_acceptance_boundaries.py::test_bm25_formula_and_exact_retained_content_versions",
+      "source": {
+        "first": 107,
+        "kind": "file",
+        "last": 118,
+        "path": "tests/test_upload_acceptance_boundaries.py",
+        "sha256": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+        "text": "def test_bm25_formula_and_exact_retained_content_versions():\n    \"\"\"TC-005-bm25: retain prior formula/turn checks and assert version identities.\"\"\"\n    from test_combined_search import candidate, test_bm25_matches_independent_formula_and_ignores_archive_scores\n    from smm_local.search_merge import merge_candidates\n    test_bm25_matches_independent_formula_and_ignores_archive_scores()\n    a = candidate('versioned-a', 'amber amber original', version='v1')\n    b = candidate('versioned-a', 'amber amber changed', scope='hub', version='v2')\n    versions = merge_candidates([a], [b], 'amber', 5)\n    assert len(versions) == 1\n    assert {(m['canonical_id'], m['content_version'], m['text']) for m in versions[0]['matched_messages']} == {\n        ('versioned-a-m1', 'v1', 'amber amber original'), ('versioned-a-m1', 'v2', 'amber amber changed')}\n    assert len(versions[0]['matched_messages']) == 2\n"
+      },
+      "status": "active"
+    },
+    {
+      "case_id": "TC-005-long-message",
+      "covers": {
+        "case-3": "def test_long_preview_does_not_change_rank_or_original(pair):\n    text = 'paddingword ' * 2000 + 'tailonly'\n    assert 'tailonly' not in text[:100]\n    add_local(pair, 'long', 'A', text)\n    seed_remote(pair, 'tailonly short original')\n    connect(pair)\n    full = federation.search_archive(pair.local, 'tailonly', preview_chars=0)\n    short = federation.search_archive(pair.local, 'tailonly', preview_chars=100)\n    assert [(h['source_session_id'], h['rerank_score']) for h in full['results']] == [(h['source_session_id'], h['rerank_score']) for h in short['results']]\n    # Both copies could accidentally score the same truncated bodies. Compare\n    # independently against the fixture's complete 2001/3-token documents.\n    average = (2001 + 3) / 2\n    idf = math.log(1 + .5 / 2.5)\n    expected = {'long': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 2001 / average)),\n                'remote': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 3 / average))}\n    for result in (full, short):\n        assert {h['source_session_id'] for h in result['results']} == set(expected)\n        for hit in result['results']:\n            assert hit['rerank_score'] == pytest.approx(expected[hit['source_session_id']])\n    long = next(h for h in short['results'] if h['source_session_id'] == 'long')\n    assert len(long['matched_messages'][0]['preview']) < len(text)\n    assert federation.read_archive(pair.local, reference=long['reference'])['messages'][0]['text'] == text\n"
+      },
+      "selector": "tests/test_combined_search.py::test_long_preview_does_not_change_rank_or_original",
+      "source": {
+        "first": 57,
+        "kind": "file",
+        "last": 78,
+        "path": "tests/test_combined_search.py",
+        "sha256": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+        "text": "def test_long_preview_does_not_change_rank_or_original(pair):\n    text = 'paddingword ' * 2000 + 'tailonly'\n    assert 'tailonly' not in text[:100]\n    add_local(pair, 'long', 'A', text)\n    seed_remote(pair, 'tailonly short original')\n    connect(pair)\n    full = federation.search_archive(pair.local, 'tailonly', preview_chars=0)\n    short = federation.search_archive(pair.local, 'tailonly', preview_chars=100)\n    assert [(h['source_session_id'], h['rerank_score']) for h in full['results']] == [(h['source_session_id'], h['rerank_score']) for h in short['results']]\n    # Both copies could accidentally score the same truncated bodies. Compare\n    # independently against the fixture's complete 2001/3-token documents.\n    average = (2001 + 3) / 2\n    idf = math.log(1 + .5 / 2.5)\n    expected = {'long': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 2001 / average)),\n                'remote': idf * 2.2 / (1 + 1.2 * (.25 + .75 * 3 / average))}\n    for result in (full, short):\n        assert {h['source_session_id'] for h in result['results']} == set(expected)\n        for hit in result['results']:\n            assert hit['rerank_score'] == pytest.approx(expected[hit['source_session_id']])\n    long = next(h for h in short['results'] if h['source_session_id'] == 'long')\n    assert len(long['matched_messages'][0]['preview']) < len(text)\n    assert federation.read_archive(pair.local, reference=long['reference'])['messages'][0]['text'] == text\n"
+      },
+      "status": "active"
+    },
+    {
+      "case_id": "TC-005-rank-ties",
+      "covers": {
+        "case-2": "def test_ties_use_latest_timestamp_then_stable_identity():\n    a = candidate('a', 'amber', stamp='2026-01-01T01:00:00+01:00')\n    b = candidate('b', 'amber', stamp='2026-01-01T00:00:00Z')\n    c = candidate('c', 'amber', stamp='2026-01-02T00:00:00Z')\n    d = candidate('d', 'amber', stamp=None)\n    e = candidate('e', 'amber'); e['matched_messages'][0].pop('timestamp')\n    assert [h['source_session_id'] for h in merge_candidates([b, d], [c, a, e], 'amber', 5)] == ['c', 'a', 'b', 'd', 'e']\n"
+      },
+      "selector": "tests/test_combined_search.py::test_ties_use_latest_timestamp_then_stable_identity",
+      "source": {
+        "first": 48,
+        "kind": "file",
+        "last": 54,
+        "path": "tests/test_combined_search.py",
+        "sha256": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+        "text": "def test_ties_use_latest_timestamp_then_stable_identity():\n    a = candidate('a', 'amber', stamp='2026-01-01T01:00:00+01:00')\n    b = candidate('b', 'amber', stamp='2026-01-01T00:00:00Z')\n    c = candidate('c', 'amber', stamp='2026-01-02T00:00:00Z')\n    d = candidate('d', 'amber', stamp=None)\n    e = candidate('e', 'amber'); e['matched_messages'][0].pop('timestamp')\n    assert [h['source_session_id'] for h in merge_candidates([b, d], [c, a, e], 'amber', 5)] == ['c', 'a', 'b', 'd', 'e']\n"
+      },
+      "status": "active"
+    },
+    {
+      "case_id": "TC-005-sc7-evidence",
+      "covers": {
+        "complete-1": "用离线独立数学审计重新计算原始完整候选BM25；结合平局/端点分数独立回归。",
+        "complete-2": "核对同源同版本去重及不同位置/会话/版本保留断言和完整候选原件。",
+        "complete-3": "核对长消息预览外关键词查询、完整原文及评分输入，不能以预览充当全文。",
+        "complete-4": "逐E1正常与失败阶段审计实际发往Hub载荷，搜索本机独有合成正文/预览/评分标记，不把禁传标记脱敏掉。",
+        "privacy": "结合本项逐条判据核对下列原始实际事件及当前自动回归；需结合三平台实际payloads/停止区段与完整范围审计，Windows尚在重跑；数学回归不代替外发审计。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC7.md#TC-005-sc7-evidence",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 56,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC7.md",
+        "sha256": "c9fa4976b4e65115fb7f98ae91699910500f5ec1cee8ea91c51106843d874a8a",
+        "text": "# SC7实际原件与当前适用性核验\n\n人工验证项：TC-005-sc7-evidence\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### complete-1\n\n用离线独立数学审计重新计算原始完整候选BM25；结合平局/端点分数独立回归。\n\n预期：候选按独立 BM25 预期重排，平局稳定，端点分数不直接决定重排。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-2\n\n核对同源同版本去重及不同位置/会话/版本保留断言和完整候选原件。\n\n预期：同源同版本副本不增加词频、得分或名额；不同轮次、会话和版本不误删。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-3\n\n核对长消息预览外关键词查询、完整原文及评分输入，不能以预览充当全文。\n\n预期：预览截断不改变候选评分或原文，长消息预览外关键词仍可命中和完整读取。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-4\n\n逐E1正常与失败阶段审计实际发往Hub载荷，搜索本机独有合成正文/预览/评分标记，不把禁传标记脱敏掉。\n\n预期：每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### privacy\n\n结合本项逐条判据核对下列原始实际事件及当前自动回归；需结合三平台实际payloads/停止区段与完整范围审计，Windows尚在重跑；数学回归不代替外发审计。\n\n预期：每个 E1 平台正常与失败路径无禁止本机正文、摘要、预览或评分输入发往 Hub 原缺口只有获得对应原件及适用性依据才认领。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `mac-run8`\n- `linux-client-run8`\n- `windows-client-run8`\n- `linux-hub-service-run8`\n- `windows-hub-service-run8`\n- `mac-login-run11`\n- `mac-hub-main15`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n\n## 独立准备复审后的补充实测\n\n- `TC-005-multiterm-ranking`：3个完整候选、amber df1/blue df3、长度3/4/2，查询amber blue amber，独立逐项计算。 预期：逐候选分数等于独立常量数学式、重复查询词仅贡献一次，最终顺序按独立分数。；本轮真实debug及execute原件分别位于debug-complete30-sc7和execute-complete30-sc7，原有平台事件仍保留原时间/版本。\n"
+      },
+      "status": "active"
+    },
+    {
+      "case_id": "TC-005-multiterm-ranking",
+      "covers": {
+        "additional-multiterm-ranking": "def test_multiword_bm25_uses_each_terms_document_frequency_once():\n    \"\"\"TC-005-multiterm-ranking: unequal df and repeated query term have independent expected scores.\"\"\"\n    documents=[candidate('m1','amber amber blue'),candidate('m2','blue other other other',scope='hub'),candidate('m3','blue green')]\n    # N=3, avglen=3, df(amber)=1, df(blue)=3; counts and lengths are independent literals.\n    idf_amber=math.log1p(2.5/1.5);idf_blue=math.log1p(.5/3.5)\n    expected={'m1': idf_amber*2*2.2/(2+1.2) + idf_blue*2.2/(1+1.2),\n              'm2': idf_blue*2.2/(1+1.2*(.25+.75*4/3)),\n              'm3': idf_blue*2.2/(1+1.2*(.25+.75*2/3))}\n    actual=merge_candidates(documents[:1],documents[1:],'amber blue amber',10)\n    assert {h['source_session_id'] for h in actual}==set(expected)\n    for hit in actual:assert hit['rerank_score']==pytest.approx(expected[hit['source_session_id']],rel=1e-12)\n    assert [h['source_session_id'] for h in actual]==[s for s in sorted(expected,key=lambda s:(-expected[s],s))]\n    evidence('multiterm-ranking',{'query':'amber blue amber','expected':expected,'actual':actual})\n"
+      },
+      "selector": "tests/test_complete_scene_boundaries.py::test_multiword_bm25_uses_each_terms_document_frequency_once",
+      "source": {
+        "first": 171,
+        "kind": "file",
+        "last": 183,
+        "path": "tests/test_complete_scene_boundaries.py",
+        "sha256": "253b2f7765a5d9b6ab7b5a07b9b4dfef86c228f4c9b5a2eeee8f8b7abed40801",
+        "text": "def test_multiword_bm25_uses_each_terms_document_frequency_once():\n    \"\"\"TC-005-multiterm-ranking: unequal df and repeated query term have independent expected scores.\"\"\"\n    documents=[candidate('m1','amber amber blue'),candidate('m2','blue other other other',scope='hub'),candidate('m3','blue green')]\n    # N=3, avglen=3, df(amber)=1, df(blue)=3; counts and lengths are independent literals.\n    idf_amber=math.log1p(2.5/1.5);idf_blue=math.log1p(.5/3.5)\n    expected={'m1': idf_amber*2*2.2/(2+1.2) + idf_blue*2.2/(1+1.2),\n              'm2': idf_blue*2.2/(1+1.2*(.25+.75*4/3)),\n              'm3': idf_blue*2.2/(1+1.2*(.25+.75*2/3))}\n    actual=merge_candidates(documents[:1],documents[1:],'amber blue amber',10)\n    assert {h['source_session_id'] for h in actual}==set(expected)\n    for hit in actual:assert hit['rerank_score']==pytest.approx(expected[hit['source_session_id']],rel=1e-12)\n    assert [h['source_session_id'] for h in actual]==[s for s in sorted(expected,key=lambda s:(-expected[s],s))]\n    evidence('multiterm-ranking',{'query':'amber blue amber','expected':expected,'actual':actual})\n"
+      },
+      "status": "active"
+    }
+  ],
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "inspected": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC7.md": "c9fa4976b4e65115fb7f98ae91699910500f5ec1cee8ea91c51106843d874a8a",
+    "tests/test_combined_search.py": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+    "tests/test_complete_scene_boundaries.py": "253b2f7765a5d9b6ab7b5a07b9b4dfef86c228f4c9b5a2eeee8f8b7abed40801",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12"
+  },
+  "request_id": "match-complete30-sc7",
+  "scene": "SC7",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。"
+}

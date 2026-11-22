@@ -1,0 +1,172 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "definitions": {
+    "version": 3,
+    "sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e"
+  },
+  "requirement_results": {
+    "R005": {
+      "status": "passed",
+      "scenes": {
+        "SC1": "passed",
+        "SC10": "passed",
+        "SC11": "passed",
+        "SC12": "passed",
+        "SC2": "passed",
+        "SC3": "passed",
+        "SC4": "passed",
+        "SC5": "passed",
+        "SC6": "passed",
+        "SC7": "passed",
+        "SC8": "passed",
+        "SC9": "passed"
+      },
+      "scope_reviewed": true,
+      "delivery_judgment": {
+        "status": "passed",
+        "record": ".acceptance-local/native-v1/AT-SMM-005/delivery-judge/delivery-r005-complete32-v1/result.json",
+        "sha256": "78c8b42cca9290e7b6a873a3db0fcc476b10e3a6ff41baf7c88a272470b0f718"
+      }
+    }
+  },
+  "scenes": {
+    "SC1": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-default": "passed",
+        "TC-005-pause-source": "passed",
+        "TC-005-reconcile-cli-inputs": "passed",
+        "TC-005-reconcile-web-inputs": "passed",
+        "TC-005-transfer-status": "passed",
+        "TC-005-sc1-evidence": "passed"
+      }
+    },
+    "SC10": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-legacy-links": "passed",
+        "TC-005-register": "passed",
+        "TC-005-sc10-evidence": "passed"
+      }
+    },
+    "SC11": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-confirmed-loss": "passed",
+        "TC-005-local-restore": "passed",
+        "TC-005-unreconciled-send": "passed",
+        "TC-005-sc11-evidence": "passed"
+      }
+    },
+    "SC12": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-guidance": "passed"
+      }
+    },
+    "SC2": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-cas": "passed",
+        "TC-005-policy-triple-order": "passed",
+        "TC-005-reconcile-fresh": "passed",
+        "TC-005-reconcile-inflight": "passed",
+        "TC-005-reconcile-remote-race": "passed",
+        "TC-005-reconcile-stale-local": "passed",
+        "TC-005-reconcile-target-dispatch": "passed",
+        "TC-005-reconcile-write-window": "passed",
+        "TC-005-target-dispatch": "passed",
+        "TC-005-sc2-evidence": "passed"
+      }
+    },
+    "SC3": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-confirmation-bindings": "passed",
+        "TC-005-forbidden-move-read": "passed",
+        "TC-005-global": "passed",
+        "TC-005-global-query": "passed",
+        "TC-005-move-batch": "passed",
+        "TC-005-move-project": "passed",
+        "TC-005-move-retry": "passed",
+        "TC-005-project-identity": "passed",
+        "TC-005-project-preview": "passed",
+        "TC-005-sc3-evidence": "passed"
+      }
+    },
+    "SC4": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-backfill": "passed",
+        "TC-005-batch-failure": "passed",
+        "TC-005-bounded-upload": "passed",
+        "TC-005-fair-upload": "passed",
+        "TC-005-mixed-batch": "passed",
+        "TC-005-offset-prefix": "passed",
+        "TC-005-repeated-fairness": "passed",
+        "TC-005-timestamp-version": "passed",
+        "TC-005-unknown-receipt": "passed",
+        "TC-005-sc4-evidence": "passed"
+      }
+    },
+    "SC5": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-isolation": "passed",
+        "TC-005-sc5-evidence": "passed"
+      }
+    },
+    "SC6": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-combined": "passed",
+        "TC-005-scope-race": "passed",
+        "TC-005-sc6-evidence": "passed"
+      }
+    },
+    "SC7": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-bm25": "passed",
+        "TC-005-long-message": "passed",
+        "TC-005-multiterm-ranking": "passed",
+        "TC-005-rank-ties": "passed",
+        "TC-005-sc7-evidence": "passed"
+      }
+    },
+    "SC8": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-legacy-mcp": "passed",
+        "TC-005-reference": "passed",
+        "TC-005-reference-boundaries": "passed",
+        "TC-005-scoped-title": "passed",
+        "TC-005-sc8-evidence": "passed"
+      }
+    },
+    "SC9": {
+      "status": "passed",
+      "missing_obligations": [],
+      "cases": {
+        "TC-005-empty-coverage": "passed",
+        "TC-005-empty-linux": "passed",
+        "TC-005-empty-mac": "passed",
+        "TC-005-fallback": "passed",
+        "TC-005-empty-windows": "passed",
+        "TC-005-sc9-evidence": "passed"
+      }
+    }
+  },
+  "note": "Derived index only. Native raw receipts, reviewer-owned opinions and primary business artifacts are the evidence."
+}

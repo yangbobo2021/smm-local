@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "SC9 tdd-core仍准确来自A9/B6。原A/D独立JSONL及本机关联、回退完整session集合只有A与实际项目/失败原因/local，显式本机完整集合A+D拦截首目标丢失或两查询误用同范围；原设计/实现未删改。当前debug28 PID52099 exit0/1passed，全部bindings/artifacts实算一致，全部分配到达，非沿用27日志。人工完整范围另MD。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-empty-coverage": {
+      "status": "passed",
+      "reason": "自然设计additional-empty-coverage有A9/B6成功空与不可用区别依据。最小实现修订只把成功原因强制索引改get允许合法省略，无覆盖契约放宽；tests/test_complete_scene_boundaries.py:53–77两个scope(all/project)均真实2passed。先有本机positive，再独立absent query实际results=[]且coverage两端complete、无失败原因、marker后确有/search；真实故障注入同为空但Hub unavailable及准确原因，显式local同为空但Hub not_requested。两个empty-coverage-{all,project}.json原始附件已打开，与完整断言对应，各前状态均到达；错误只在一种scope或一种执行状态混淆会被逐参数/逐状态独立coverage字典和空集合拦截，正控/实际调用防止永远空或伪装查询，两产品互等不能替代固定预期。当前PID52100 exit0、stderr空，两附件及全部bindings/artifacts SHA一致；target SHA0b3fc6e5cb30538f8cb44ebe42e03a67c69c29e5f753e19cd33b2916ae2c85dd。这里覆盖的是共用搜索检查，不能把源TestClient写成E1三OS三入口实测；人工full2该环境边界另manual-preparation-complete28-sc9.md如实说明。",
+      "covers": [
+        "additional-empty-coverage"
+      ]
+    }
+  }
+}

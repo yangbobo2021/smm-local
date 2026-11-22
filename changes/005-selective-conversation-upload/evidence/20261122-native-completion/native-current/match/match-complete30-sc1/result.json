@@ -1,0 +1,144 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "bindings": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC1.md": "c4ab1359c01be41c5a6fbe5f3c29a41decae8ae6fffd24837ae2a95016ac3ec8",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_complete_scene_boundaries.py": "253b2f7765a5d9b6ab7b5a07b9b4dfef86c228f4c9b5a2eeee8f8b7abed40801",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+    "tests/test_upload_review_regressions.py": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586"
+  },
+  "case_design": {
+    "id": "design-complete27-sc1",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc1/result.json",
+    "sha256": "42d5d30ee17b4fce2773c44d32d86ce9dbeef04c6c30a906fd53659d92b4ecc3"
+  },
+  "cases": {
+    "TC-005-default": {
+      "covers": {
+        "tdd-core": "def test_new_connection_is_query_only_until_selected(pair):\n    \"\"\"TC-005-default: unknown upload choice must not send body or session metadata.\"\"\"\n    private = \"private-local-dialogue\"\n    session = \"private-local-session\"\n    add_local(pair, session, \"A\", private)\n    seed_remote(pair, \"remote known evidence\")\n    connect(pair)\n    federation.push_pending(pair.local)\n    assert bodies(pair.remote) == [\"remote known evidence\"], \"new connection must not upload local dialogue\"\n    assert session not in json.dumps(pair.calls), \"minimal registration must not enumerate forbidden conversations\"\n    assert private not in json.dumps(pair.calls), \"minimal registration must not send forbidden body\"\n    for route, payload in pair.calls:\n        if route == \"/project-metadata\":\n            assert not payload.get(\"memberships\"), \"forbidden conversations must not be registered through memberships\"\n            for project in payload.get(\"projects\", []):\n                assert set(project) <= {\"id\", \"name\", \"kind\", \"project_kind\"}\n    assert any(p[\"name\"] == \"A\" for p in HubProjects(pair.remote).list())\n    result = federation.search_archive(pair.local, \"known evidence\", limit=5)\n    assert any(h[\"source_session_id\"] == \"remote\" for h in result[\"results\"])\n"
+      },
+      "selector": "tests/test_005_contracts.py::test_new_connection_is_query_only_until_selected",
+      "source": {
+        "first": 78,
+        "kind": "file",
+        "last": 96,
+        "path": "tests/test_005_contracts.py",
+        "sha256": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "text": "def test_new_connection_is_query_only_until_selected(pair):\n    \"\"\"TC-005-default: unknown upload choice must not send body or session metadata.\"\"\"\n    private = \"private-local-dialogue\"\n    session = \"private-local-session\"\n    add_local(pair, session, \"A\", private)\n    seed_remote(pair, \"remote known evidence\")\n    connect(pair)\n    federation.push_pending(pair.local)\n    assert bodies(pair.remote) == [\"remote known evidence\"], \"new connection must not upload local dialogue\"\n    assert session not in json.dumps(pair.calls), \"minimal registration must not enumerate forbidden conversations\"\n    assert private not in json.dumps(pair.calls), \"minimal registration must not send forbidden body\"\n    for route, payload in pair.calls:\n        if route == \"/project-metadata\":\n            assert not payload.get(\"memberships\"), \"forbidden conversations must not be registered through memberships\"\n            for project in payload.get(\"projects\", []):\n                assert set(project) <= {\"id\", \"name\", \"kind\", \"project_kind\"}\n    assert any(p[\"name\"] == \"A\" for p in HubProjects(pair.remote).list())\n    result = federation.search_archive(pair.local, \"known evidence\", limit=5)\n    assert any(h[\"source_session_id\"] == \"remote\" for h in result[\"results\"])\n"
+      },
+      "status": "active"
+    },
+    "TC-005-pause-source": {
+      "covers": {
+        "additional-pause-source": "@pytest.mark.parametrize('mode', ['all', 'only', 'except', 'none'])\ndef test_every_policy_save_preserves_paused_and_disabled_sources(pair, monkeypatch, mode):\n    \"\"\"TC-005-pause-source: inspect each save before any later rule can mask it.\"\"\"\n    a = add_local(pair, 'pause-a', 'A', 'paused private body')\n    connect(pair)\n    pair.local.set_source_enabled('codex', False)\n    pair.local.set_source_enabled('claude-code', False)\n    pair.local.set_settings(sync_paused=True)\n    settings = pair.local.get_settings(); sources = pair.local.configured_sources()\n    with pair.local.connect() as con:\n        before = [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')]\n    def forbidden_import(*args, **kwargs):\n        pytest.fail('saving an upload rule must not start import')\n    monkeypatch.setattr(pair.local, 'sync_all', forbidden_import)\n    start = len(pair.calls)\n    saved = federation.choose_upload(pair.local, mode, [a['project_id']] if mode in ('only', 'except') else [])\n    assert saved['state'] == 'confirmed'\n    assert pair.local.get_settings() == settings\n    assert pair.local.configured_sources() == sources\n    assert pair.local.get_settings()['sync_paused'] is True\n    assert all(pair.local.configured_sources()[s]['enabled'] is False for s in ('codex', 'claude-code'))\n    # Normal upload dispatch, not the control_only bypass used by the earlier test.\n    dispatched = federation.push_pending(pair.local)\n    assert dispatched['uploaded'] == 0 and bodies(pair.remote) == []\n    assert not any(route == '/upload' and payload.get('records') for route, payload in pair.calls[start:])\n    with pair.local.connect() as con:\n        assert [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')] == before\n    evidence('pause-source-' + mode, {'saved': saved, 'settings': settings, 'sources': sources,\n                                    'normal_dispatch': dispatched, 'requests': pair.calls[start:], 'hub_bodies': bodies(pair.remote)})\n"
+      },
+      "selector": "tests/test_complete_scene_boundaries.py::test_every_policy_save_preserves_paused_and_disabled_sources",
+      "source": {
+        "first": 22,
+        "kind": "file",
+        "last": 50,
+        "path": "tests/test_complete_scene_boundaries.py",
+        "sha256": "253b2f7765a5d9b6ab7b5a07b9b4dfef86c228f4c9b5a2eeee8f8b7abed40801",
+        "text": "@pytest.mark.parametrize('mode', ['all', 'only', 'except', 'none'])\ndef test_every_policy_save_preserves_paused_and_disabled_sources(pair, monkeypatch, mode):\n    \"\"\"TC-005-pause-source: inspect each save before any later rule can mask it.\"\"\"\n    a = add_local(pair, 'pause-a', 'A', 'paused private body')\n    connect(pair)\n    pair.local.set_source_enabled('codex', False)\n    pair.local.set_source_enabled('claude-code', False)\n    pair.local.set_settings(sync_paused=True)\n    settings = pair.local.get_settings(); sources = pair.local.configured_sources()\n    with pair.local.connect() as con:\n        before = [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')]\n    def forbidden_import(*args, **kwargs):\n        pytest.fail('saving an upload rule must not start import')\n    monkeypatch.setattr(pair.local, 'sync_all', forbidden_import)\n    start = len(pair.calls)\n    saved = federation.choose_upload(pair.local, mode, [a['project_id']] if mode in ('only', 'except') else [])\n    assert saved['state'] == 'confirmed'\n    assert pair.local.get_settings() == settings\n    assert pair.local.configured_sources() == sources\n    assert pair.local.get_settings()['sync_paused'] is True\n    assert all(pair.local.configured_sources()[s]['enabled'] is False for s in ('codex', 'claude-code'))\n    # Normal upload dispatch, not the control_only bypass used by the earlier test.\n    dispatched = federation.push_pending(pair.local)\n    assert dispatched['uploaded'] == 0 and bodies(pair.remote) == []\n    assert not any(route == '/upload' and payload.get('records') for route, payload in pair.calls[start:])\n    with pair.local.connect() as con:\n        assert [tuple(r) for r in con.execute('SELECT * FROM messages ORDER BY id')] == before\n    evidence('pause-source-' + mode, {'saved': saved, 'settings': settings, 'sources': sources,\n                                    'normal_dispatch': dispatched, 'requests': pair.calls[start:], 'hub_bodies': bodies(pair.remote)})\n"
+      },
+      "status": "active"
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "covers": {
+        "cli-versions": "def test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair(pair, monkeypatch, capsys):\n    \"\"\"TC-005-reconcile-cli-inputs: missing values cannot silently save another submission.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    def invoke(arguments):\n        capsys.readouterr()\n        monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), *arguments])\n        try: cli.main(); code = 0\n        except SystemExit as exc: code = exc.code\n        captured = capsys.readouterr()\n        return code, captured.out, captured.err\n    code, output, _ = invoke(['upload', 'reconcile']); assert code == 0\n    shown = json.loads(output); generation = shown['local']['generation']; revision = shown['hub']['revision']\n    before = control.row(); remote_before = head(pair, config)\n    bad_arguments = [ ['--expected-hub-revision', str(revision)],\n                      ['--expected-local-generation', str(generation)], [],\n                      ['--expected-hub-revision', str(revision), '--expected-local-generation', '-1'],\n                      ['--expected-hub-revision', str(revision), '--expected-local-generation', 'not-an-integer'] ]\n    for arguments in bad_arguments:\n        code, output, error = invoke(['upload', 'reconcile', '--use', 'local', *arguments])\n        assert code != 0, 'missing/invalid consent snapshot versions must fail before saving'\n        assert error and not output\n        assert control.row() == before and head(pair, config) == remote_before\n    code, help_text, _ = invoke(['upload', 'reconcile', '--help']); assert code == 0\n    assert '--expected-local-generation' in help_text and 'local.generation' in help_text\n    assert '--expected-hub-revision' in help_text and 'hub.revision' in help_text\n    code, output, _ = invoke(['upload', 'reconcile', '--use', 'local', '--expected-hub-revision', str(revision),\n        '--expected-local-generation', str(generation)])\n    assert code == 0\n    assert json.loads(output)['state'] == 'confirmed'\n    assert json.loads(output)['policy'] == head(pair, config)['policy'] == {'mode': 'none', 'projects': []}\n"
+      },
+      "selector": "tests/test_reconcile_snapshot.py::test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair",
+      "source": {
+        "first": 81,
+        "kind": "file",
+        "last": 110,
+        "path": "tests/test_reconcile_snapshot.py",
+        "sha256": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+        "text": "def test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair(pair, monkeypatch, capsys):\n    \"\"\"TC-005-reconcile-cli-inputs: missing values cannot silently save another submission.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    def invoke(arguments):\n        capsys.readouterr()\n        monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), *arguments])\n        try: cli.main(); code = 0\n        except SystemExit as exc: code = exc.code\n        captured = capsys.readouterr()\n        return code, captured.out, captured.err\n    code, output, _ = invoke(['upload', 'reconcile']); assert code == 0\n    shown = json.loads(output); generation = shown['local']['generation']; revision = shown['hub']['revision']\n    before = control.row(); remote_before = head(pair, config)\n    bad_arguments = [ ['--expected-hub-revision', str(revision)],\n                      ['--expected-local-generation', str(generation)], [],\n                      ['--expected-hub-revision', str(revision), '--expected-local-generation', '-1'],\n                      ['--expected-hub-revision', str(revision), '--expected-local-generation', 'not-an-integer'] ]\n    for arguments in bad_arguments:\n        code, output, error = invoke(['upload', 'reconcile', '--use', 'local', *arguments])\n        assert code != 0, 'missing/invalid consent snapshot versions must fail before saving'\n        assert error and not output\n        assert control.row() == before and head(pair, config) == remote_before\n    code, help_text, _ = invoke(['upload', 'reconcile', '--help']); assert code == 0\n    assert '--expected-local-generation' in help_text and 'local.generation' in help_text\n    assert '--expected-hub-revision' in help_text and 'hub.revision' in help_text\n    code, output, _ = invoke(['upload', 'reconcile', '--use', 'local', '--expected-hub-revision', str(revision),\n        '--expected-local-generation', str(generation)])\n    assert code == 0\n    assert json.loads(output)['state'] == 'confirmed'\n    assert json.loads(output)['policy'] == head(pair, config)['policy'] == {'mode': 'none', 'projects': []}\n"
+      },
+      "status": "active"
+    },
+    "TC-005-reconcile-web-inputs": {
+      "covers": {
+        "web-versions": "def test_web_reconcile_requires_valid_versions_without_mutating_either_rule(pair, monkeypatch):\n    \"\"\"TC-005-reconcile-web-inputs: Web adoption always uses its displayed pair.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    shown = control.reconcile(request); revision = shown['hub']['revision']; generation = shown['local']['generation']\n    before = control.row(); remote_before = head(pair, config)\n    bad = [{'use': 'local', 'expected_hub_revision': revision},\n           {'use': 'hub', 'expected_hub_revision': revision},\n           {'use': 'hub', 'expected_local_generation': generation},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': -1},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': True},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': 'not-a-generation'},\n           {'use': 'local', 'expected_hub_revision': True, 'expected_local_generation': generation}]\n    with web(pair) as browser:\n        for payload in bad:\n            marker = len(pair.calls); result = browser.post('/api/upload/reconcile', json=payload)\n            assert result.status_code in (400, 422), 'missing or invalid displayed versions must not save a rule'\n            assert control.row() == before and head(pair, config) == remote_before\n            assert not any(route == '/upload-policy/set' for route, _ in pair.calls[marker:])\n"
+      },
+      "selector": "tests/test_reconcile_snapshot.py::test_web_reconcile_requires_valid_versions_without_mutating_either_rule",
+      "source": {
+        "first": 132,
+        "kind": "file",
+        "last": 149,
+        "path": "tests/test_reconcile_snapshot.py",
+        "sha256": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+        "text": "def test_web_reconcile_requires_valid_versions_without_mutating_either_rule(pair, monkeypatch):\n    \"\"\"TC-005-reconcile-web-inputs: Web adoption always uses its displayed pair.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    shown = control.reconcile(request); revision = shown['hub']['revision']; generation = shown['local']['generation']\n    before = control.row(); remote_before = head(pair, config)\n    bad = [{'use': 'local', 'expected_hub_revision': revision},\n           {'use': 'hub', 'expected_hub_revision': revision},\n           {'use': 'hub', 'expected_local_generation': generation},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': -1},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': True},\n           {'use': 'local', 'expected_hub_revision': revision, 'expected_local_generation': 'not-a-generation'},\n           {'use': 'local', 'expected_hub_revision': True, 'expected_local_generation': generation}]\n    with web(pair) as browser:\n        for payload in bad:\n            marker = len(pair.calls); result = browser.post('/api/upload/reconcile', json=payload)\n            assert result.status_code in (400, 422), 'missing or invalid displayed versions must not save a rule'\n            assert control.row() == before and head(pair, config) == remote_before\n            assert not any(route == '/upload-policy/set' for route, _ in pair.calls[marker:])\n"
+      },
+      "status": "active"
+    },
+    "TC-005-sc1-evidence": {
+      "covers": {
+        "complete-5": "逐平台核对对账CLI缺参/陈旧负例与新鲜正例，实际查看三张差异处理画面及POST。",
+        "full1": "核对待选择时真实请求中无标题/正文/摘要/会话列表，Hub最小项目已登记且远端可查询。",
+        "full2": "核对四模式、空名单、非法输入前后规则；配置截图应显示所选模式与项目；比对当前自动输入断言。",
+        "full3": "核对真实旧包迁移、真实Hub切换以及暂停/来源开关的回归断言；比较旧包与最终产品改动。",
+        "full4": "逐平台查看真实配置操作截图、CLI JSON和浏览器轨迹，验证共享状态和项目输入。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC1.md#TC-005-sc1-evidence",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 59,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC1.md",
+        "sha256": "c4ab1359c01be41c5a6fbe5f3c29a41decae8ae6fffd24837ae2a95016ac3ec8",
+        "text": "# SC1实际原件与当前适用性核验\n\n人工验证项：TC-005-sc1-evidence\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### full1\n\n核对待选择时真实请求中无标题/正文/摘要/会话列表，Hub最小项目已登记且远端可查询。\n\n预期：首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full2\n\n核对四模式、空名单、非法输入前后规则；配置截图应显示所选模式与项目；比对当前自动输入断言。\n\n预期：四模式、空名单和非法输入符合约定，错误输入不替换有效状态。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full3\n\n核对真实旧包迁移、真实Hub切换以及暂停/来源开关的回归断言；比较旧包与最终产品改动。\n\n预期：同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### full4\n\n逐平台查看真实配置操作截图、CLI JSON和浏览器轨迹，验证共享状态和项目输入。\n\n预期：CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-5\n\n逐平台核对对账CLI缺参/陈旧负例与新鲜正例，实际查看三张差异处理画面及POST。\n\n预期：重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `mac-run8`\n- `linux-client-run8`\n- `windows-client-run8`\n- `linux-hub-service-run8`\n- `windows-hub-service-run8`\n- `mac-login-run11`\n- `mac-hub-main15`\n- `mac-reconcile21`\n- `linux-reconcile21`\n- `windows-reconcile21`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n\n## 独立准备复审后的补充实测\n\n- `TC-005-pause-source`：预先禁用Codex/Claude并暂停；分别四模式保存，立即核对状态及正常push路径。 预期：每次保持全部原设置/停用，正常push不发正文、不启动导入，持久消息不变。；本轮真实debug及execute原件分别位于debug-complete30-sc1和execute-complete30-sc1，原有平台事件仍保留原时间/版本。\n"
+      },
+      "status": "active"
+    },
+    "TC-005-transfer-status": {
+      "covers": {
+        "review-transfer-status": "def test_body_failure_persists_in_upload_status_and_clears_after_recovery(pair, monkeypatch):\n    \"\"\"TC-005-transfer-status: rule confirmation and failed backfill are separate states.\"\"\"\n    add_local(pair, 'a', 'A', 'waiting for body transfer')\n    connect(pair); federation.choose_upload(pair.local, 'all', [])\n    request = federation._request\n    def fail(config, route, payload=None):\n        if route == '/known-upload-messages':\n            raise federation.HubUnavailable('synthetic body lookup unavailable')\n        return request(config, route, payload)\n    monkeypatch.setattr(federation, '_request', fail)\n    assert federation.push_pending(pair.local)['pending']\n    state = federation.upload_status(pair.local)\n    assert state['state'] == 'confirmed'\n    assert state['transfer_state'] == 'failed'\n    assert state['transfer_problem'] == 'synthetic body lookup unavailable'\n    assert state['allowed_pending_messages'] == 1\n    monkeypatch.setattr(federation, '_request', request)\n    federation.push_pending(pair.local)\n    state = federation.upload_status(pair.local)\n    assert state['state'] == 'confirmed' and state['transfer_state'] == 'complete'\n    assert state['transfer_problem'] is None\n    assert state['allowed_pending_messages'] == 0\n"
+      },
+      "selector": "tests/test_upload_review_regressions.py::test_body_failure_persists_in_upload_status_and_clears_after_recovery",
+      "source": {
+        "first": 86,
+        "kind": "file",
+        "last": 107,
+        "path": "tests/test_upload_review_regressions.py",
+        "sha256": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586",
+        "text": "def test_body_failure_persists_in_upload_status_and_clears_after_recovery(pair, monkeypatch):\n    \"\"\"TC-005-transfer-status: rule confirmation and failed backfill are separate states.\"\"\"\n    add_local(pair, 'a', 'A', 'waiting for body transfer')\n    connect(pair); federation.choose_upload(pair.local, 'all', [])\n    request = federation._request\n    def fail(config, route, payload=None):\n        if route == '/known-upload-messages':\n            raise federation.HubUnavailable('synthetic body lookup unavailable')\n        return request(config, route, payload)\n    monkeypatch.setattr(federation, '_request', fail)\n    assert federation.push_pending(pair.local)['pending']\n    state = federation.upload_status(pair.local)\n    assert state['state'] == 'confirmed'\n    assert state['transfer_state'] == 'failed'\n    assert state['transfer_problem'] == 'synthetic body lookup unavailable'\n    assert state['allowed_pending_messages'] == 1\n    monkeypatch.setattr(federation, '_request', request)\n    federation.push_pending(pair.local)\n    state = federation.upload_status(pair.local)\n    assert state['state'] == 'confirmed' and state['transfer_state'] == 'complete'\n    assert state['transfer_problem'] is None\n    assert state['allowed_pending_messages'] == 0\n"
+      },
+      "status": "active"
+    }
+  },
+  "coverage": "full",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "execution_status": "not_executed",
+  "implementation_sha256": {
+    "TC-005-default": "830a7d7a74f88557ff7036899c4f2a7089cdf23b07dec88eb53380867ce51a7d",
+    "TC-005-pause-source": "cc4e55239c32702760313faab26c4a6e50a3691f9c0b21089024814b10af07af",
+    "TC-005-reconcile-cli-inputs": "728828290c893262a0c2dcc34ecc862d10c821266a599d5aaae27b72ae9f30e2",
+    "TC-005-reconcile-web-inputs": "128df78f7f144f6be2a83794e1dde6af9798c617cc0e92e3564ac689af53c82f",
+    "TC-005-sc1-evidence": "da6c5edf944b1c6de6568bbd617e789900f3c38714eec67131f984a0df5b8090",
+    "TC-005-transfer-status": "38a05c3f852d75d0fa87266d9eefbd049cf0802fc3771a7e139d97aa28bb9997"
+  },
+  "missing": [],
+  "obligations": {
+    "additional-pause-source": "同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。",
+    "cli-versions": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。",
+    "complete-5": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。",
+    "full1": "首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。",
+    "full2": "四模式、空名单和非法输入符合约定，错误输入不替换有效状态。",
+    "full3": "同 Hub 升级能验证原状态才保留上传；目标身份改变需重新选择，来源开关和全局暂停不被隐式改变。",
+    "full4": "CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。",
+    "review-transfer-status": "CLI 和 Web 共享状态；各 E1 平台真实入口可取得必要输入并操作。",
+    "tdd-core": "首次连接未选择规则时可检索和最小登记，但不发送对话标题、正文、摘要或消息列表。",
+    "web-versions": "重新提交所显示本机规则须同时输入刚查看的Hub版本和本机代次，缺失、无效或任一过期均不改两端规则；CLI帮助及Web指引可取得这两个值。"
+  },
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-complete30-sc1/result.json",
+  "recorded_at": "2026-11-22T10:36:49.618000+00:00",
+  "request_id": "match-complete30-sc1",
+  "request_sha256": "5cdf11fc8e357d671534f23269ccd23b757b8fda1cd7f786de20f862819606f2",
+  "scene": "SC1",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。",
+  "status": "matched"
+}

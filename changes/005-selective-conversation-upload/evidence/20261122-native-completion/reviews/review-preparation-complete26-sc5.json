@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-005-isolation": {
+      "status": "passed",
+      "reason": "场景A5/B2–B4/D2依据有效，设计覆盖停止前已有A/B、其他设备和合成Vibe状态；真实源码tests/test_upload_isolation.py:11-51与pair/add_local/seed_remote夹具已核对。仅首目标正确、其他来源关闭会在:37完整独立正文集合断言首次失败；旧A正确但A新会话/追加漏拦同样由集合及:42-44出站禁传标记拦截。旧引用停止前取得，:45-50分别核对远端旧一条与本机旧+新，不会把两端同错当一致。当前debug-complete26-sc5真实pytest exit0、stdout1 passed，绑定与产物SHA逐一核对一致，无缺失附件。完整pytest完成receipt/输入摘要有效，相关Vibe回归逐case通过。人工完整criteria与平台版本适用性另见manual-preparation-complete26-sc5.md，未冒充人工执行通过。",
+      "covers": [
+        "case-1",
+        "other-sources"
+      ]
+    }
+  }
+}

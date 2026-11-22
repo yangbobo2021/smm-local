@@ -1,0 +1,75 @@
+{
+  "database": "<task>/remote/archive.sqlite3",
+  "projects": [
+    {
+      "id": 1,
+      "name": "B",
+      "confirmed": 0,
+      "kind": "ordinary",
+      "conversations": 1,
+      "stable_key": "b1a7b007fad23e133b1edf098f0bad3a",
+      "paths": [
+        "<task>/remote/work/B"
+      ],
+      "linked_ids": []
+    },
+    {
+      "id": 2,
+      "name": "C",
+      "confirmed": 0,
+      "kind": "ordinary",
+      "conversations": 1,
+      "stable_key": "521aa2b4b2ddce00c5f65e63b0f5573c",
+      "paths": [
+        "<task>/remote/work/C"
+      ],
+      "linked_ids": []
+    }
+  ],
+  "search": {
+    "query": "selective",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "remote-B",
+        "title": "selective common remote-B original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "B",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common remote-B original"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "remote-C",
+        "title": "selective common remote-C original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "C",
+        "rank": 2,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common remote-C original"
+          }
+        ]
+      }
+    ]
+  }
+}

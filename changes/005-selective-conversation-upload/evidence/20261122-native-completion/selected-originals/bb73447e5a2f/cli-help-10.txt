@@ -1,0 +1,17 @@
+usage: smm source [-h]
+                  {list,validate,register,enable,disable,rollback,batches,purge-batch}
+                  ...
+
+positional arguments:
+  {list,validate,register,enable,disable,rollback,batches,purge-batch}
+    list                列出本机对话来源及其状态
+    validate            验收候选来源适配器
+    register            验收并注册来源适配器
+    enable              启用指定来源的导入
+    disable             停用指定来源的导入，保留已导入的记录
+    rollback            将指定插件来源的适配器切回上一版
+    batches             查看指定插件来源的导入批次
+    purge-batch         从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源
+
+options:
+  -h, --help            show this help message and exit

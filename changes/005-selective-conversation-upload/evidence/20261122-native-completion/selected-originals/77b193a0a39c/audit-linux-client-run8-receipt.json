@@ -1,0 +1,21 @@
+{
+  "name": "audit-linux-client-run8",
+  "command": [
+    ".venv/bin/python",
+    "scripts/acceptance/selective_upload_audit.py",
+    "--evidence-dir",
+    "<task-path>",
+    "--local-wheel",
+    "<task-path>",
+    "--hub-wheel",
+    "<task-path>",
+    "--output",
+    "<task-path>"
+  ],
+  "started_at": "2026-11-22T09:51:53.725193+00:00",
+  "finished_at": "2026-11-22T09:51:53.784333+00:00",
+  "exit_code": 0,
+  "stdout_sha256": "9eff3f82ae64cf82d01ecbaa89f16133c260e7eab904afa8deec038a4125868b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "input_manifest_sha256": "2f79acd1d49efec1b4043a1616ed4d21b76499f695e4e9d5e646b1b4e2eec4d1"
+}

@@ -1,0 +1,31 @@
+{
+  "case_design": "design-complete26-sc12",
+  "cases": [
+    {
+      "case_id": "TC-005-guidance",
+      "covers": {
+        "complete-1": "从README链接实际打开使用指南与Skill，逐条寻找项目ID/模式/保留/联合读取/恢复说明。",
+        "complete-2": "实际运行当前已安装包各层CLI帮助并与Web原始配置/项目/差异画面和Skill语义比较，旧来源帮助不丢；核对三平台实际入口。",
+        "complete-3": "读取当前十二场景完整证据、真实版本差异、失败及未验证项；所有必要平台有适用原件才判交付。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC12.md#TC-005-guidance",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 42,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC12.md",
+        "sha256": "d2640a1b2ade804365759f9741cb6508123a2ee8426321bd9fac60f33356d071",
+        "text": "# 用户入口与完整交付记录核验\n\n人工验证项：TC-005-guidance\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### complete-1\n\n从README链接实际打开使用指南与Skill，逐条寻找项目ID/模式/保留/联合读取/恢复说明。\n\n预期：从 README 主路径可找到模式、项目 ID、停止保留、联合检索读取及恢复说明。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-2\n\n实际运行当前已安装包各层CLI帮助并与Web原始配置/项目/差异画面和Skill语义比较，旧来源帮助不丢；核对三平台实际入口。\n\n预期：CLI/Web/Skill 语义一致，已有来源帮助不退化；E1 各平台实际入口可操作。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-3\n\n读取当前十二场景完整证据、真实版本差异、失败及未验证项；所有必要平台有适用原件才判交付。\n\n预期：必要平台和行为均有当前候选证据才判交付，未验证不冒充通过。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `mac-entrances-run10`\n- `linux-entrances-run10`\n- `windows-entrances-run14`\n- `mac-reconcile21`\n- `linux-reconcile21`\n- `windows-reconcile21`\n- `mac-global-cli11`\n- `linux-global-cli11`\n- `windows-global-cli11`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n"
+      },
+      "status": "active"
+    }
+  ],
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "inspected": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC12.md": "d2640a1b2ade804365759f9741cb6508123a2ee8426321bd9fac60f33356d071"
+  },
+  "request_id": "match-complete26-sc12",
+  "scene": "SC12",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。"
+}

@@ -1,0 +1,10 @@
+usage: smm upload set [-h] --mode {all,only,except,none}
+                      [--project-id PROJECT_ID]
+
+options:
+  -h, --help            show this help message and exit
+  --mode {all,only,except,none}
+                        all 全部；only 仅指定；except 排除指定；none 不上传；only
+                        空名单不上传，except 空名单全部
+  --project-id PROJECT_ID
+                        运行 smm projects 取得本机项目 ID，可重复；不是 Hub 项目 ID

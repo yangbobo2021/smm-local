@@ -1,0 +1,11 @@
+usage: smm upload [-h] {status,set,reconcile,prepare-restore} ...
+
+positional arguments:
+  {status,set,reconcile,prepare-restore}
+    status              查看当前 Hub、规则、本机/Hub 确认和历史进度
+    set                 保存完整规则；用 smm projects 取得本机项目 ID
+    reconcile           无参数只查看差异；选择 hub 采用当前 Hub 规则，或明确重提 local
+    prepare-restore     先停止正文并输出恢复/排除清单，再停服务恢复备份；不要覆盖保护文件
+
+options:
+  -h, --help            show this help message and exit

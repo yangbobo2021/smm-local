@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "B8/A11 tdd-core自然设计及源码断言未改；当前30真实exit0/1passed。prepare停止/guard排除、旧all恢复conflict、差异只读、明确采用Hub none正控/完整Hub正文空全到达，未决定真实阻断另由unreconciled分工；bindings/artifacts SHA一致，不沿用29执行。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "B8/A11 tdd-unreconciled未改，当前30真实exit0/1passed；两个本机目标、未查看/仅查看差异两前状态各真push，完整known-upload/正文upload禁止、物理Hub空/desired all/远端none逐次核。首目标/一个前状态遗漏或两端同错均被独立固定预期拦截；全部bindings/artifacts SHA一致，分配检查全到达。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    },
+    "TC-005-confirmed-loss": {
+      "status": "passed",
+      "reason": "A11/E5/B8有据，AST确认30 confirmed_loss与29函数字节同SHA4de2db2647f8b8a782caa19526dee7b5a009e6a29091de7f6edec3b941a1fb20；仍用30新业务执行。备份后recent实际完整Hub原文/confirmed4/pending0、新none，prepare保留guard、同目录Hub73810→73850，旧库恢复conflict/none且recent丢失，采用none确认归0仍不补，onlyA后三session四条独立固定正文及旧引用原消息、重复sync全hits不变和pending/inflight0。逐session全文与缺席/不同规则状态拦截只首会话正确/旧receipt跳过recent/none状态错误/永久阻断，不靠两端互等。Mac任务HTTPS/UID501、ba8 clean Local25/Hub24全模块等candidate；34附件与全部bindings/artifacts SHA一致、exit0、cleanup无失败，target SHA f8a5e4b86d6ba253e43771d856e4d73e8a3dc3ce5f339d7120a9dd35fc82f91b。实际原始时间10:42:47.887→10:42:53.356UTC；正式需新execute，人工完整义务另MD。",
+      "covers": [
+        "additional-confirmed-loss"
+      ]
+    }
+  }
+}

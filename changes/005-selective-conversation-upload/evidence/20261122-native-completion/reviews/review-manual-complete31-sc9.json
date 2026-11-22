@@ -1,0 +1,14 @@
+{
+  "cases": {
+    "TC-005-sc9-evidence": {
+      "status": "passed",
+      "reason": "本次11:43:02 UTC原件/适用性观察，对照已实际打开definitions/000003.json SHA493e01、SPEC B5-B6/A9、design/match31、SC9步骤及准备MD逐操作核验；旧平台业务时间/版本仍为原d80/f45/7c事件，未声称本轮重跑。620 artifacts、74 bindings及原inventory618项独立SHA一致，附件原字节/原件可对应。full1：mac-run8/linux-client-run8/windows-client-run8原CLI/真实stdio MCP/Web offline均精确{local-A,local-A-new}、local complete/hub unavailable、effective仅A、HTTP503原因，独立核原文顺序/角色；实际打开各offline-search.png，均见本机A两会话、Hub未查与503，无D/G。full2：实际打开三scope-run11/selective-browser.png，均为所有项目+Hub未查503，六本机会话含普通/G/待定/plugin，原offline-all.json逐三入口7正文与固定预期完全吻合；重连各CLI/MCP/Web均精确A/A-new/B/V与双方complete，同一快照V/A/B；本人打开三reconnected-search.png，画面相符。explicit-local仍A/A-new/D。核原offline/reconnected-browser-trace实际POST project/A、local=false与响应顺序；成功空由本轮4auto加Windows formal31另项真实六响应/两新图补齐，已逐份独立复核，无使用30timeout。full3：当前29真实JUnit逐定位test_partial_hub_failure、local_error(含双端失败raise)、incomplete_hub_candidate及5种invalid_scope均无failure/skip；已读test_combined_search.py:99-125/187-225，实际有效快照保留A/B、Hub失败coverage unavailable、本机失败Hub原文仍准确、双失败抛错、缺完整候选broken被排除而a/good保留及partial/candidate_failures、仅一次/search不扩召回。full4：test_each_endpoint…实测0/51 ValueError且Hub调用计数不变，test_web_api_uses_same_archive空query400的实际JUnit通过；原三入口断线后读原文及恢复响应/trace完整。当前src与ba8完全相同，d80后Local变动仅references范围标题及对账api/cli/upload/static；搜索/范围/回退/核心导入与Hub模块无变化，f45后的scope原件覆盖标题变化，reconcile21/CAS与当前回归补对账，不以Hub相等推定所有Local。判据分工及边界合理，所有四分配检查有原始执行或本轮真实核验来源；未新增无依据组合，也不预判R005。",
+      "covers": [
+        "full1",
+        "full2",
+        "full3",
+        "full4"
+      ]
+    }
+  }
+}

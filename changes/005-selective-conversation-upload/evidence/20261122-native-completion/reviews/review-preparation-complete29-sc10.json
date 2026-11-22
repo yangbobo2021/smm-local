@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-register": {
+      "status": "passed",
+      "reason": "A10/D2/B2的adoption设计、真实TestClient夹具和源码断言与已审28一致；当前29重新执行exit0/1passed，managed409/unmanaged200、完整Hub仅合法另一设备正文及旧精确读取逐字期望全部到达，首设备/同目标/一律拒绝反例被完整集合及状态拦截。全部bindings/artifacts SHA实算一致。",
+      "covers": [
+        "adoption"
+      ]
+    },
+    "TC-005-legacy-links": {
+      "status": "passed",
+      "reason": "A10/E5有据的真实0.4.0升级非空旧关系专项。实际AST比28/29 legacy_links函数完全一致，SHA bba5555861edfcec841b1483d98add07eadfb358b0ff5a10a14c89e42a051fea；当前仍真实新run，不借28结果。29原始before/after升级read已保存并打开：old-related conv/msg2、old-device conv/msg1均codex/position1/user/独立预期全文/null时间，固定literal expected分别断言两侧，允许新元数据增量；A/D双向Local linked_ids/ID/name/paths、Hub owner/source_key/name/links、cursor2前后完整集合一致，A查询两session、all/confirmed、再次同步完整hits不变均到达。只首项目/首原文正确或两端同错会被完整dict/links与逐目标独立正文/ID拦截。真实ba8 clean Local25/Hub24模块等candidate、真实旧包模块自检；Hub同目录PID61278→61291，27附件及全部bindings/artifacts SHA一致、cleanup无失败，当前debug exit0。target SHA14e731d7ac4bb8581e1db616a712eb8012e7862a30cf123440b9ce8d5fb1066d。一个E5实际平台足够共享迁移差异，原三OS组合另审人工义务；正式需新execute。",
+      "covers": [
+        "additional-legacy-links"
+      ]
+    }
+  }
+}

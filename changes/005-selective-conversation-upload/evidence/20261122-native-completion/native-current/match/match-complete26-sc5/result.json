@@ -1,0 +1,73 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "bindings": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC5.md": "8052e185007f1f14a068c16758496011383e311c7074e1bb1ec402475b94ad00",
+    "tests/test_upload_isolation.py": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899"
+  },
+  "case_design": {
+    "id": "design-complete26-sc5",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete26-sc5/result.json",
+    "sha256": "3201acbdcb7a662c290bd1d9f64625dc70e090ebc73e7e07ce2e9cce9caaf20f"
+  },
+  "cases": {
+    "TC-005-isolation": {
+      "covers": {
+        "case-1": "def test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress(pair):\n    a = add_local(pair, 'a', 'A', 'isolation original A')\n    b = add_local(pair, 'b', 'B', 'isolation original B')\n    seed_remote(pair, 'isolation other device old', 'other-old')\n    source = FixtureSource([event(1, 'vibe-isolation', 'user', text='isolation Vibe old')],\n                           ['git.example/team/alpha'])\n    sync = VibeInsightSync(pair.remote, 'isolated-test-source', batch_size=2)\n    sync.run(source)\n    connect(pair); federation.choose_upload(pair.local, 'all', [])\n    federation.push_pending(pair.local)\n    pair.local.link_projects(a['project_id'], b['project_id'])\n    projects = HubProjects(pair.remote)\n    ids = {p['name']: p['id'] for p in projects.list()}\n    projects.link(ids['A'], ids['B'])\n    assert projects.links()\n    old = next(h for h in pair.client.post('/v1/search', json={'query': 'isolation'}).json()['results']\n               if h['source_session_id'] == 'a')\n    federation.choose_upload(pair.local, 'only', [b['project_id']])\n    marker = len(pair.calls)\n    appended = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',\n        'id': 'private-a-append', 'role': 'assistant',\n        'content': [{'type': 'output_text', 'text': 'isolation forbidden A append'}]}}\n    with (pair.histories / 'a.jsonl').open('a') as f: f.write(json.dumps(appended) + '\\n')\n    add_local(pair, 'a-private-new', 'A', 'isolation forbidden A new session')\n    add_local(pair, 'b-new', 'B', 'isolation allowed B new')\n    seed_remote(pair, 'isolation other device new', 'other-new')\n    source.rows.append(event(2, 'vibe-isolation', 'assistant', text='isolation Vibe appended'))\n    sync.run(source)\n    federation.push_pending(pair.local)\n    assert set(bodies(pair.remote)) == {'isolation original A', 'isolation original B',\n        'isolation allowed B new', 'isolation other device old', 'isolation other device new',\n        'isolation Vibe old', 'isolation Vibe appended'}\n    transmitted = json.dumps(pair.calls[marker:])\n    for private in ['a-private-new', 'private-a-append', 'isolation forbidden A']:\n        assert private not in transmitted\n    read = pair.client.post('/v1/read', json={'hub_id': pair.hub_id, 'reference': old['reference']})\n    assert read.status_code == 200\n    assert [m['text'] for m in read.json()['messages']] == ['isolation original A']\n    assert [m['text'] for m in pair.local.read(a['id'])['messages']] == [\n        'isolation original A', 'isolation forbidden A append']\n    assert federation.upload_status(pair.local)['allowed_pending_messages'] == 0\n",
+        "other-sources": "def test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress(pair):\n    a = add_local(pair, 'a', 'A', 'isolation original A')\n    b = add_local(pair, 'b', 'B', 'isolation original B')\n    seed_remote(pair, 'isolation other device old', 'other-old')\n    source = FixtureSource([event(1, 'vibe-isolation', 'user', text='isolation Vibe old')],\n                           ['git.example/team/alpha'])\n    sync = VibeInsightSync(pair.remote, 'isolated-test-source', batch_size=2)\n    sync.run(source)\n    connect(pair); federation.choose_upload(pair.local, 'all', [])\n    federation.push_pending(pair.local)\n    pair.local.link_projects(a['project_id'], b['project_id'])\n    projects = HubProjects(pair.remote)\n    ids = {p['name']: p['id'] for p in projects.list()}\n    projects.link(ids['A'], ids['B'])\n    assert projects.links()\n    old = next(h for h in pair.client.post('/v1/search', json={'query': 'isolation'}).json()['results']\n               if h['source_session_id'] == 'a')\n    federation.choose_upload(pair.local, 'only', [b['project_id']])\n    marker = len(pair.calls)\n    appended = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',\n        'id': 'private-a-append', 'role': 'assistant',\n        'content': [{'type': 'output_text', 'text': 'isolation forbidden A append'}]}}\n    with (pair.histories / 'a.jsonl').open('a') as f: f.write(json.dumps(appended) + '\\n')\n    add_local(pair, 'a-private-new', 'A', 'isolation forbidden A new session')\n    add_local(pair, 'b-new', 'B', 'isolation allowed B new')\n    seed_remote(pair, 'isolation other device new', 'other-new')\n    source.rows.append(event(2, 'vibe-isolation', 'assistant', text='isolation Vibe appended'))\n    sync.run(source)\n    federation.push_pending(pair.local)\n    assert set(bodies(pair.remote)) == {'isolation original A', 'isolation original B',\n        'isolation allowed B new', 'isolation other device old', 'isolation other device new',\n        'isolation Vibe old', 'isolation Vibe appended'}\n    transmitted = json.dumps(pair.calls[marker:])\n    for private in ['a-private-new', 'private-a-append', 'isolation forbidden A']:\n        assert private not in transmitted\n    read = pair.client.post('/v1/read', json={'hub_id': pair.hub_id, 'reference': old['reference']})\n    assert read.status_code == 200\n    assert [m['text'] for m in read.json()['messages']] == ['isolation original A']\n    assert [m['text'] for m in pair.local.read(a['id'])['messages']] == [\n        'isolation original A', 'isolation forbidden A append']\n    assert federation.upload_status(pair.local)['allowed_pending_messages'] == 0\n"
+      },
+      "selector": "tests/test_upload_isolation.py::test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress",
+      "source": {
+        "first": 11,
+        "kind": "file",
+        "last": 51,
+        "path": "tests/test_upload_isolation.py",
+        "sha256": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899",
+        "text": "def test_restricting_a_keeps_old_reference_b_other_device_and_vibe_progress(pair):\n    a = add_local(pair, 'a', 'A', 'isolation original A')\n    b = add_local(pair, 'b', 'B', 'isolation original B')\n    seed_remote(pair, 'isolation other device old', 'other-old')\n    source = FixtureSource([event(1, 'vibe-isolation', 'user', text='isolation Vibe old')],\n                           ['git.example/team/alpha'])\n    sync = VibeInsightSync(pair.remote, 'isolated-test-source', batch_size=2)\n    sync.run(source)\n    connect(pair); federation.choose_upload(pair.local, 'all', [])\n    federation.push_pending(pair.local)\n    pair.local.link_projects(a['project_id'], b['project_id'])\n    projects = HubProjects(pair.remote)\n    ids = {p['name']: p['id'] for p in projects.list()}\n    projects.link(ids['A'], ids['B'])\n    assert projects.links()\n    old = next(h for h in pair.client.post('/v1/search', json={'query': 'isolation'}).json()['results']\n               if h['source_session_id'] == 'a')\n    federation.choose_upload(pair.local, 'only', [b['project_id']])\n    marker = len(pair.calls)\n    appended = {'type': 'response_item', 'ordinal': 2, 'payload': {'type': 'message',\n        'id': 'private-a-append', 'role': 'assistant',\n        'content': [{'type': 'output_text', 'text': 'isolation forbidden A append'}]}}\n    with (pair.histories / 'a.jsonl').open('a') as f: f.write(json.dumps(appended) + '\\n')\n    add_local(pair, 'a-private-new', 'A', 'isolation forbidden A new session')\n    add_local(pair, 'b-new', 'B', 'isolation allowed B new')\n    seed_remote(pair, 'isolation other device new', 'other-new')\n    source.rows.append(event(2, 'vibe-isolation', 'assistant', text='isolation Vibe appended'))\n    sync.run(source)\n    federation.push_pending(pair.local)\n    assert set(bodies(pair.remote)) == {'isolation original A', 'isolation original B',\n        'isolation allowed B new', 'isolation other device old', 'isolation other device new',\n        'isolation Vibe old', 'isolation Vibe appended'}\n    transmitted = json.dumps(pair.calls[marker:])\n    for private in ['a-private-new', 'private-a-append', 'isolation forbidden A']:\n        assert private not in transmitted\n    read = pair.client.post('/v1/read', json={'hub_id': pair.hub_id, 'reference': old['reference']})\n    assert read.status_code == 200\n    assert [m['text'] for m in read.json()['messages']] == ['isolation original A']\n    assert [m['text'] for m in pair.local.read(a['id'])['messages']] == [\n        'isolation original A', 'isolation forbidden A append']\n    assert federation.upload_status(pair.local)['allowed_pending_messages'] == 0\n"
+      },
+      "status": "active"
+    },
+    "TC-005-sc5-evidence": {
+      "covers": {
+        "complete-1": "核对真实停止前后差集和旧引用原文，禁止A新标记不在Hub正文。",
+        "complete-2": "核对实际HTTPS隔离记录：A停止但B/其他设备/合成VibeInsight仍可查询且原状态不变。",
+        "complete-3": "核对真实旧包未迁移/迁移同设备两种状态的接受/拒绝请求、旧读取及当前允许正控。",
+        "legacy": "结合本项逐条判据核对下列原始实际事件及当前自动回归；SC10 TC-005-register、实际旧包组合及SC2旧请求确认共用证据；此处不重复伪造相同身份。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC5.md#TC-005-sc5-evidence",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 50,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC5.md",
+        "sha256": "8052e185007f1f14a068c16758496011383e311c7074e1bb1ec402475b94ad00",
+        "text": "# SC5实际原件与当前适用性核验\n\n人工验证项：TC-005-sc5-evidence\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### complete-1\n\n核对真实停止前后差集和旧引用原文，禁止A新标记不在Hub正文。\n\n预期：停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-2\n\n核对实际HTTPS隔离记录：A停止但B/其他设备/合成VibeInsight仍可查询且原状态不变。\n\n预期：其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-3\n\n核对真实旧包未迁移/迁移同设备两种状态的接受/拒绝请求、旧读取及当前允许正控。\n\n预期：已迁移设备旧式正文请求拒绝，当前新规则仍可接收有效请求；未迁移设备继续兼容。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### legacy\n\n结合本项逐条判据核对下列原始实际事件及当前自动回归；SC10 TC-005-register、实际旧包组合及SC2旧请求确认共用证据；此处不重复伪造相同身份。\n\n预期：已迁移设备旧式正文请求拒绝 原缺口只有获得对应原件及适用性依据才认领。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `isolation-run9`\n- `compat-run8`\n- `linux-compat-run8`\n- `windows-compat-run8`\n- `mac-run8`\n- `linux-client-run8`\n- `windows-client-run8`\n- `linux-hub-service-run8`\n- `windows-hub-service-run8`\n- `mac-login-run11`\n- `mac-hub-main15`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n"
+      },
+      "status": "active"
+    }
+  },
+  "coverage": "full",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "execution_status": "not_executed",
+  "implementation_sha256": {
+    "TC-005-isolation": "3e115f7f36937397acbf5f89e11fb3e63757d4bccf0e177cfe9eb17daee85d70",
+    "TC-005-sc5-evidence": "668cf1f3b75cfbf0ddec22445c48052fec99cbe81dca3efa371fe18d4154b419"
+  },
+  "missing": [],
+  "obligations": {
+    "case-1": "停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub",
+    "complete-1": "停止 A 保留已接收副本和旧引用，A 新禁止内容不进入 Hub。",
+    "complete-2": "其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭。",
+    "complete-3": "已迁移设备旧式正文请求拒绝，当前新规则仍可接收有效请求；未迁移设备继续兼容。",
+    "legacy": "已迁移设备旧式正文请求拒绝",
+    "other-sources": "其他项目、其他设备和 VibeInsight 原有状态不被该设备规则关闭"
+  },
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-complete26-sc5/result.json",
+  "recorded_at": "2026-11-22T09:50:24.553000+00:00",
+  "request_id": "match-complete26-sc5",
+  "request_sha256": "99013f2bf0b6daf34881402b80c1c058b228dee23a0efe4f86c2b4cb54aafaf5",
+  "scene": "SC5",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。",
+  "status": "matched"
+}

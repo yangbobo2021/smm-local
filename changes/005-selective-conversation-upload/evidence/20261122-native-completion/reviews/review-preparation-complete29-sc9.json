@@ -1,0 +1,36 @@
+{
+  "cases": {
+    "TC-005-fallback": {
+      "status": "passed",
+      "reason": "A9/B6 tdd-core原自然设计/源码未改；29真实exit0/1passed，A/D独立JSONL关联、回退集合仅A与实际项目/原因/local，显式本机集合A+D全部断言到达，首目标丢失/两查询同错由固定完整集合拦截。全部bindings/artifacts SHA一致。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-empty-coverage": {
+      "status": "passed",
+      "reason": "A9/B6 additional-empty-coverage设计有效；29真实exit0/2passed及all/project两个原始JSON，success=[]/complete两端/get无原因且marker后实际/search，故障同为空但hub unavailable与具体原因，显式local hub not_requested，逐参数/前状态独立字典断言完整到达；正控与实际调用排除假空/未查，非产品互等。全部bindings/artifacts SHA一致。仅共用source TestClient覆盖，不冒充新增E1平台TC。",
+      "covers": [
+        "additional-empty-coverage"
+      ]
+    },
+    "TC-005-empty-mac": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "A9首段/E1/D4真实三入口空结果依据充分，新自然设计all/project×CLI/真实stdio/browser六响应及空画面/双方已查准确，无额外产品行为。当前mac实际exit1，原stderr及probe/result.json均RuntimeError asyncio.run() cannot be called from a running event loop。scripts/acceptance/selective_upload_empty.py:21已进入sync_playwright，其同步上下文持有事件循环，:30再asyncio.run(self.mcp(...))属控制器实现错误，未进入MCP产品业务，并有coroutine未await警告。已达installed模块/正常project正控三来源及all的CLI空查询，commands原响应为[]/两端complete；但all MCP/Web、所有project空查询/两张success-empty PNG/最终successful-empty.json及统一六响应断言均未到达。trace只有准备阶段，不能当空画面。最小修正将CLI/真实stdio调用置于sync_playwright上下文之外或统一可await控制流程，保留六响应与独立UI判据，再新真实debug。Mac31/Linux30附件、bindings/artifacts SHA一致且cleanup无失败，已达局部不等于完整empty-e1-mac，故covers空。非产品缺陷，不可用source全套251pass替代。",
+      "covers": []
+    },
+    "TC-005-empty-linux": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "A9首段/E1/D4真实三入口空结果依据充分，新自然设计all/project×CLI/真实stdio/browser六响应及空画面/双方已查准确，无额外产品行为。当前linux实际exit1，原stderr及probe/result.json均RuntimeError asyncio.run() cannot be called from a running event loop。scripts/acceptance/selective_upload_empty.py:21已进入sync_playwright，其同步上下文持有事件循环，:30再asyncio.run(self.mcp(...))属控制器实现错误，未进入MCP产品业务，并有coroutine未await警告。已达installed模块/正常project正控三来源及all的CLI空查询，commands原响应为[]/两端complete；但all MCP/Web、所有project空查询/两张success-empty PNG/最终successful-empty.json及统一六响应断言均未到达。trace只有准备阶段，不能当空画面。最小修正将CLI/真实stdio调用置于sync_playwright上下文之外或统一可await控制流程，保留六响应与独立UI判据，再新真实debug。Mac31/Linux30附件、bindings/artifacts SHA一致且cleanup无失败，已达局部不等于完整empty-e1-linux，故covers空。非产品缺陷，不可用source全套251pass替代。",
+      "covers": []
+    },
+    "TC-005-empty-windows": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "A9首段/E1/D4真实三入口空结果依据充分，新自然设计all/project×CLI/真实stdio/browser六响应及空画面/双方已查准确，无额外产品行为。当前native包装exit1、0附件：scp远端probe目录不存在，不能仅此归因产品。额外只读原件work/empty29-windows-inspection.json SHA7078cb860fe7e986d489cd3c336e265497ec69e841d18910fa85ab0bfa5f4757中实际worker.process PID9020/exit1、tasks=[]；worker.log value显示selective_upload_empty.py:59读取<home>\\AppData\\Local\\Temp\\smm-005-native-fiwgmacf\\target.json PermissionError13，发生于读取配置、平台断言、installed/setup之前，未达任何六入口业务/包验证/UI取证。Windows包装以Limited普通交互Token运行，但记录器TemporaryDirectory生成的配置对其不可读；属探针运行准备/包装实现问题，最早修复recorded/Windows临时配置交接的可读性而非产品，再保存原worker/log及新真实业务原件。inspection深序列化夹带非UTF8字节，按替换解码仅读取明确ASCII日志/receipt的content.value，原始字节SHA保留，不改文件。设计完整但没有可授覆盖的实际业务，covers空，不提前passed或product_defect。",
+      "covers": []
+    }
+  }
+}

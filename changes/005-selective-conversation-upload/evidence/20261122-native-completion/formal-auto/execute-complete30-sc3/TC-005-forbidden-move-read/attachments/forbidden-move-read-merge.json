@@ -1,0 +1,513 @@
+{
+  "reads": [
+    {
+      "session": "move-a",
+      "expected": [
+        [
+          1,
+          "user",
+          "moving A first original",
+          null
+        ],
+        [
+          2,
+          "assistant",
+          "moving A first appended",
+          null
+        ]
+      ],
+      "read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "move-a",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "moving A first original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "moving A first original",
+            "timestamp": null,
+            "canonical_id": "4b12ccdef91cdd0ee9011167e295c9cba27238a6c8591b3e0349c85026cfaa83",
+            "content_version": "65020120386c4913d67af298a88e7ac6c2474a193fd967f5be4ffd578503f533",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          },
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "moving A first appended",
+            "timestamp": null,
+            "canonical_id": "1c54b20a7a031a174a8dde0f0d6a236bc2b4fce30533656e09dfaf130baff544",
+            "content_version": "b40d895aafefed0c1ed43038257bf5abc58feffd19700c5e81977968849434ae",
+            "hub_message_id": 3,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 2,
+                "source_order": 2,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 2
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    },
+    {
+      "session": "move-a",
+      "expected": [
+        [
+          1,
+          "user",
+          "moving A first original",
+          null
+        ]
+      ],
+      "read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "move-a",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "moving A first original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "moving A first original",
+            "timestamp": null,
+            "canonical_id": "4b12ccdef91cdd0ee9011167e295c9cba27238a6c8591b3e0349c85026cfaa83",
+            "content_version": "65020120386c4913d67af298a88e7ac6c2474a193fd967f5be4ffd578503f533",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    },
+    {
+      "session": "move-a",
+      "expected": [
+        [
+          2,
+          "assistant",
+          "moving A first appended",
+          null
+        ]
+      ],
+      "read": {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "move-a",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "(无用户消息)",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "moving A first appended",
+            "timestamp": null,
+            "canonical_id": "1c54b20a7a031a174a8dde0f0d6a236bc2b4fce30533656e09dfaf130baff544",
+            "content_version": "b40d895aafefed0c1ed43038257bf5abc58feffd19700c5e81977968849434ae",
+            "hub_message_id": 3,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 2,
+                "source_order": 2,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 2
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    },
+    {
+      "session": "move-a2",
+      "expected": [
+        [
+          1,
+          "user",
+          "moving A second original",
+          null
+        ],
+        [
+          2,
+          "assistant",
+          "moving A second appended",
+          null
+        ]
+      ],
+      "read": {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "move-a2",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "moving A second original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "moving A second original",
+            "timestamp": null,
+            "canonical_id": "d31b0cb0ff0b6b5e3c42ad3ac6ee0396ae4a031a538a73a75d652fd6e0c0f1a0",
+            "content_version": "b8041100cbdde03a4f4df026fd002041987ba9c01ab2799744d7daf78c2302b4",
+            "hub_message_id": 2,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          },
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "moving A second appended",
+            "timestamp": null,
+            "canonical_id": "b7c30466a9d50fb359bd3ede08466dd0de72eb769ba4e37b825ae127e36ba7b1",
+            "content_version": "d62e2cc625b96d2fce830a9c15609e1a70d483997a2eff9c065e70327546bd5b",
+            "hub_message_id": 4,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 2,
+                "source_order": 2,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 2
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a2",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    },
+    {
+      "session": "move-a2",
+      "expected": [
+        [
+          1,
+          "user",
+          "moving A second original",
+          null
+        ]
+      ],
+      "read": {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "move-a2",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "moving A second original",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "moving A second original",
+            "timestamp": null,
+            "canonical_id": "d31b0cb0ff0b6b5e3c42ad3ac6ee0396ae4a031a538a73a75d652fd6e0c0f1a0",
+            "content_version": "b8041100cbdde03a4f4df026fd002041987ba9c01ab2799744d7daf78c2302b4",
+            "hub_message_id": 2,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a2",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    },
+    {
+      "session": "move-a2",
+      "expected": [
+        [
+          2,
+          "assistant",
+          "moving A second appended",
+          null
+        ]
+      ],
+      "read": {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "move-a2",
+        "source_path": "",
+        "cwd": null,
+        "started_at": null,
+        "updated_at": null,
+        "title": "(无用户消息)",
+        "project_id": 1,
+        "project_name": "A",
+        "messages": [
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "moving A second appended",
+            "timestamp": null,
+            "canonical_id": "b7c30466a9d50fb359bd3ede08466dd0de72eb769ba4e37b825ae127e36ba7b1",
+            "content_version": "d62e2cc625b96d2fce830a9c15609e1a70d483997a2eff9c065e70327546bd5b",
+            "hub_message_id": 4,
+            "origins": [
+              {
+                "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+                "device_name": "synthetic-device",
+                "source_position": 2,
+                "source_order": 2,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 2
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "cdb2c1bf1627493d947b2298717ed12f",
+            "source_key": "d92fdb72a77e86e1187db6bc6f1c03fc",
+            "device_name": "synthetic-device"
+          }
+        ],
+        "origin_session_key": "move-a2",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+            "device_name": "synthetic-device"
+          }
+        ]
+      }
+    }
+  ],
+  "policy": {
+    "mode": "only",
+    "projects": [
+      "d92fdb72a77e86e1187db6bc6f1c03fc"
+    ]
+  },
+  "physical_rows": [
+    [
+      "move-a",
+      1,
+      "391ab4ac735ef16d4df0188735f3864a7d68f05c69e60b94235d759d7bbbc98b",
+      1,
+      "user",
+      "moving A first original",
+      null
+    ],
+    [
+      "move-a2",
+      2,
+      "7e2aaeff4f13014f5244d8634c5974335f63b83c6812629470144ce4c5724809",
+      1,
+      "user",
+      "moving A second original",
+      null
+    ],
+    [
+      "move-a",
+      3,
+      "430895fc1c0c5956a4b6045765041daaeb38a2fb1932f827e17eb29cd8e5bfdb",
+      2,
+      "assistant",
+      "moving A first appended",
+      null
+    ],
+    [
+      "move-a2",
+      4,
+      "922549acaaf582c681745a508ada92439892147308b1d231b3a10c5254754028",
+      2,
+      "assistant",
+      "moving A second appended",
+      null
+    ]
+  ],
+  "requests_while_forbidden": [
+    [
+      "/info",
+      null
+    ],
+    [
+      "/upload",
+      {
+        "hub_id": "ef3aff9001b44f8a97d8ad1deff06d34",
+        "device_id": "cdb2c1bf1627493d947b2298717ed12f",
+        "device_name": "synthetic-device",
+        "records": []
+      }
+    ],
+    [
+      "/upload-policy/register",
+      {
+        "hub_id": "ef3aff9001b44f8a97d8ad1deff06d34",
+        "device_id": "cdb2c1bf1627493d947b2298717ed12f"
+      }
+    ],
+    [
+      "/upload-policy/status",
+      {
+        "hub_id": "ef3aff9001b44f8a97d8ad1deff06d34",
+        "device_id": "cdb2c1bf1627493d947b2298717ed12f"
+      }
+    ]
+  ]
+}

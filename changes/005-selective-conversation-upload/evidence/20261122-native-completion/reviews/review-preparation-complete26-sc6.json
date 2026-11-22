@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-combined": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "A6/B5-B6支持本项，完整其他criteria另由人工项承担。tests/test_005_contracts.py:143-176实际夹具给本机local-a独有未传正文、Hub remote独有正文和直接A-B关联；:169结果完整session集合拦截只返回首端，:172-176逐session分别断言local/hub档案与独立正文，拦截两端误用同一目标或一起返回错误文本。源码/夹具与当前debug绑定吻合；真实debug exit0、stdout1 passed，所有bindings/artifacts摘要有效。人工全范围准备见manual-preparation-complete26-sc6.md。"
+    },
+    "TC-005-scope-race": {
+      "status": "passed",
+      "covers": [
+        "query-scope-race"
+      ],
+      "reason": "A6要求查询中改变关联不混快照，设计两个真实变更窗口有效。tests/test_required_snapshot_and_batch_boundaries.py:24-68在scope-return与hub-results-return分别修改D/B到E/C，:48旧effective集合、:49独立HubB集合、:50-51本机A/D与HubB完整来源集合首先拦截仅首目标正确或两端同时误用新范围；:53-57每条read按独立expected文本核对，:59-65下一次新集合与再次旧引用断言拦截引用误路由。两种动作前状态都经过真实操作；不是两个产品结果互相比而同错。当前debug两参数pytest真实exit0/stdout2 passed，两个scope-race附件含frozen/reads/fresh/endpoint_responses，摘要逐一有效；附件是结果记录，判据来自源码独立常量。人工其余范围另MD，不冒充正式观察。"
+    }
+  }
+}

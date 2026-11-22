@@ -1,0 +1,178 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-confirmation-bindings": {
+      "checks": [
+        {
+          "action": "assign/map/merge各自预览后，独立改变目标或通过另一有效确认改变已有归属，上传代次不变，重放旧确认。",
+          "expected": "旧确认均拒绝且当前全部持久快照不变；新预览不变，新确认可实际应用。",
+          "id": "additional-confirmation-bindings"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "归属和目标变化使旧确认失效"
+    },
+    "TC-005-forbidden-move-read": {
+      "checks": [
+        {
+          "action": "两个已接收A会话各两条不同角色消息取得两个真实旧会话opaque引用；assign逐会话转移，map/merge共同转入禁止B。保持B禁止，每引用完整读两条，再用同引用start=end分别读位置1/2，共六次读取。",
+          "expected": "两个会话及四消息在禁止B期间按原引用准确读回；逐来源会话、位置/角色/全文/时间及全部4物理行核对，A仍有/B无归属，不发指纹或正文。无需Hub每message提供reference字段。",
+          "id": "additional-forbidden-move-read"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "禁止目标期间读取旧引用"
+    },
+    "TC-005-global": {
+      "checks": [
+        {
+          "action": "执行原缺cwd/归属/重放/上传合同，再重复取得G并从项目列表和底层完整集合核对G数量、ID与stable_key。",
+          "expected": "仅有同一个持久G；原归属与缺cwd不上传全部检查保留。",
+          "id": "case-1"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "明确全局且缺cwd保持待定"
+    },
+    "TC-005-global-query": {
+      "checks": [
+        {
+          "action": "通过预览确认归入全局，查询A/全部，再明确Hub关联A-G并比较显式本机。",
+          "expected": "初始A仅A；全部含A/G/待定；Hub关联后联合A含A/G，显式本机A仍不含G。",
+          "id": "case-2"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "全局项目仅按明确Hub关联参与A查询"
+    },
+    "TC-005-move-batch": {
+      "checks": [
+        {
+          "action": "逐操作预览/确认后先在B禁止状态同步并比较载荷/归属；允许B后检查全部受影响会话的B引用完整两条消息、A旧引用及完整物理消息集合；再次同步。",
+          "expected": "禁止时不发新会话归属/指纹，未选assign会话不进入B；允许后所有受影响消息均可按B查读，A归属/旧引用仍准确，已有正文实体和身份不变且没有A正文重传，最终待确认0且幂等。",
+          "id": "move-batch"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "A含两段会话且每段两条消息，B另有一条；Hub仅已收A，B禁止。assign只改变所选一段，map/merge改变A两段。",
+      "title": "全部受影响会话及消息均补项目归属"
+    },
+    "TC-005-move-project": {
+      "checks": [
+        {
+          "action": "分别用assign/map/merge的预览确认将已上传A会话转B。先保持B禁止并同步，再只允许B并重复同步，核对两项目检索/原文及物理正文和出站请求。",
+          "expected": "B禁止阶段不发该会话指纹/新归属/正文；B允许后可查同版本，A旧归属和引用仍可读；A物理正文不增不变，元数据核对不重传A正文。",
+          "id": "move-project"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "独立任务Local和TestClient Hub；A/B普通项目与唯一合成正文，初始已确认正文和A旧引用可核对。；此项保留单会话单消息基例，多消息及map/merge多会话由TC-005-move-batch共同验证。",
+      "title": "已收消息改项目后按允许状态补归属"
+    },
+    "TC-005-move-retry": {
+      "checks": [
+        {
+          "action": "A/B已接收且允许时把A会话转B，在Hub新增B归属后丢失known响应；随后恢复通道并重试。",
+          "expected": "本机仍有当前项目待确认且保留失败，不能沿用A回执；恢复后仅核对归属，正文/旧引用保留且幂等归零。",
+          "id": "move-retry"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "独立任务Local和TestClient Hub；A/B普通项目与唯一合成正文，初始已确认正文和A旧引用可核对。",
+      "title": "归属确认丢失后不借旧项目回执跳过"
+    },
+    "TC-005-project-identity": {
+      "checks": [
+        {
+          "action": "登记两设备同名且相同本地键，关联后只改本机显示名并同步。",
+          "expected": "Hub项目ID分离，改名保持原键/规则/关联，共同范围仍含原两项目。",
+          "id": "case-3"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "仅任务合成档案、隔离TestClient Hub或数学候选；不访问日常服务和真实VibeInsight。",
+      "title": "同名和改名保持设备项目身份"
+    },
+    "TC-005-project-preview": {
+      "checks": [
+        {
+          "action": "分别对assign/map/merge在扩大允许范围时不带确认先预览，检查完整归属/项目/路径/关系快照不变；另入口保存同一允许规则以推进代次后提交旧预览，拒绝且持久快照仍不变；重新预览再次无副作用，明确确认后检查全部应变/不应变会话。；确认后真实重导入全部来源，逐会话核对归属；尝试普通B合并进G。",
+          "expected": "三种操作均先要求确认，首次与新预览不改持久数据，旧确认不应用，fresh确认仅更新独立预期集合。重导入后所有应变与不应变会话归属保持，普通与global类型合并明确拒绝。",
+          "id": "case-4"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "A含两会话且禁止，B已允许；三种操作分别使用独立档案。assign影响一段，map/merge影响两段。",
+      "title": "扩大归属要求未过期确认"
+    },
+    "TC-005-sc3-evidence": {
+      "checks": [
+        {
+          "action": "核对全局CLI完整G集合/重导入实际结果及当前全局唯一、未知归属不上传断言。",
+          "expected": "全局项目唯一、与普通同级；缺 cwd 或归属不足不自动变成全局，也不发送正文。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "核对项目/全项目/明确关联查询中的G和待定独有正文，分别比较独立预期。",
+          "expected": "按 A 查询默认不包含 G，全部查询包含 G 和待定；明确关联后才纳入 G。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "核对设备同名项目不同键、改名保持ID/关系及三类归属操作的首次/过期确认前后完整快照。",
+          "expected": "同名设备项目分离，改名保留身份、规则与关联；扩大允许范围的归属变更需要有效确认。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        },
+        {
+          "action": "逐平台检查最小登记载荷键和合成唯一禁传标记，确认无会话/路径/内容旁路。",
+          "expected": "最小登记不泄露未许可会话身份、标题、路径或内容；E1/E3/E4 实际路径均成立。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-4"
+        },
+        {
+          "action": "核对真实归属传播原件和当前assign/map/merge/retry测试：禁止B无外发，允许B只补归属，A/旧引用保留且实体正文不增。",
+          "expected": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-5"
+        },
+        {
+          "action": "结合本项逐条判据核对下列原始实际事件及当前自动回归；共享SC1 TC-005-default及SC12实际载荷证据交叉核对，不重复伪造新用例；完整E1/E3/E4仍待矩阵审计。",
+          "expected": "最小登记不泄露未许可会话身份、标题、路径或内容 原缺口只有获得对应原件及适用性依据才认领。",
+          "id": "minimal"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC3实际原件与当前适用性核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "additional-confirmation-bindings": "同名设备项目分离，改名保留身份、规则与关联；扩大允许范围的归属变更需要有效确认。",
+    "additional-forbidden-move-read": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。",
+    "case-1": "缺 cwd 或归属不足不自动变成全局，也不发送正文",
+    "case-2": "按 A 查询默认不包含 G，全部查询包含 G 和待定；明确关联后才纳入 G",
+    "case-3": "同名设备项目分离，改名保留身份、规则与关联",
+    "case-4": "扩大允许范围的归属变更需要有效确认",
+    "complete-1": "全局项目唯一、与普通同级；缺 cwd 或归属不足不自动变成全局，也不发送正文。",
+    "complete-2": "按 A 查询默认不包含 G，全部查询包含 G 和待定；明确关联后才纳入 G。",
+    "complete-3": "同名设备项目分离，改名保留身份、规则与关联；扩大允许范围的归属变更需要有效确认。",
+    "complete-4": "最小登记不泄露未许可会话身份、标题、路径或内容；E1/E3/E4 实际路径均成立。",
+    "complete-5": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。",
+    "minimal": "最小登记不泄露未许可会话身份、标题、路径或内容",
+    "move-batch": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。",
+    "move-project": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。",
+    "move-retry": "已接收会话改归属到未允许项目时不外发该会话的新归属、指纹或正文；目标项目允许后补齐归属，保留旧归属和引用且不重复同版本正文；归属确认失败可核对重试，不以旧项目回执跳过。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete29-sc3/result.json",
+  "recorded_at": "2026-11-22T10:23:58.158000+00:00",
+  "request_id": "design-complete29-sc3",
+  "request_sha256": "f18e950490ce4013a331c5f0d7fc2d1e4c9daf1cf676073e39b73a7c36e852ae",
+  "scene": "SC3",
+  "status": "designed"
+}

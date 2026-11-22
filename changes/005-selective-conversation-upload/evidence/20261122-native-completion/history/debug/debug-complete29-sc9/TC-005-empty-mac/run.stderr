@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<task-path>", line 68, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "<task-path>", line 65, in main
+    target=Path(d)/'target.json';target.write_text(json.dumps(config));Empty(argparse.Namespace(target_config=target,output=output,mode='client')).run_empty()
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<task-path>", line 48, in run_empty
+    try:self.execute_empty()
+        ^^^^^^^^^^^^^^^^^^^^
+  File "<task-path>", line 30, in execute_empty
+    mcp=asyncio.run(self.mcp('search_conversations',{'query':'uniquelyabsentquery','scope':scope,**({'project_id':self.projects['A']} if scope=='project' else {})}))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>/.local/share/uv/python/cpython-3.12.10-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 191, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+sys:1: RuntimeWarning: coroutine 'Run.mcp' was never awaited

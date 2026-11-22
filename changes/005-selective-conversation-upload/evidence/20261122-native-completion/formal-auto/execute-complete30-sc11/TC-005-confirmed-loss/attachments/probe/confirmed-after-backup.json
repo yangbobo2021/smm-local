@@ -1,0 +1,131 @@
+{
+  "original": {
+    "id": 7,
+    "source": "codex",
+    "source_session_id": "confirmed-recent",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective confirmed after backup",
+    "project_id": 2,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective confirmed after backup",
+        "timestamp": null,
+        "canonical_id": "ba1b70b348fbed9f1e7c2b1f0c8e8d165467c95e3b36b2c481924cb9f7ccfbbe",
+        "content_version": "b58ecf7098f35aaff29b6c158cc70d5a45e0187302201d4f0361c2beda08469c",
+        "hub_message_id": 7,
+        "origins": [
+          {
+            "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 2,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "9c0e62fafddc4cb7b47df5053537b348",
+        "source_key": "a4ef4afd7bbf8ec99f185678e341f06e",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "confirmed-recent",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+        "device_name": "005-local"
+      }
+    ]
+  },
+  "confirmed_state": {
+    "configured": true,
+    "hub_id": "968f4520e9474995a6645ab7af5ce1bd",
+    "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+    "hub_address": "https://localhost:58883",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "dbfcfbef15ca477bbec8eb58fd070da5",
+    "confirmed_messages": 4,
+    "not_confirmed_messages": 2,
+    "inflight_messages": 0,
+    "unsent_messages": 2,
+    "problem": null,
+    "remote": {
+      "hub_id": "968f4520e9474995a6645ab7af5ce1bd",
+      "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+      "revision": 1,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "801387955fa24f2c83374569b7e79c9a",
+      "control_epoch": "dbfcfbef15ca477bbec8eb58fd070da5",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T11:03:50.370641+00:00",
+    "last_transfer_success": "2026-11-22T11:03:50.370641+00:00"
+  },
+  "stopped_state": {
+    "configured": true,
+    "hub_id": "968f4520e9474995a6645ab7af5ce1bd",
+    "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+    "hub_address": "https://localhost:58883",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "generation": 2,
+    "state": "confirmed",
+    "hub_revision": 2,
+    "control_epoch": "dbfcfbef15ca477bbec8eb58fd070da5",
+    "confirmed_messages": 4,
+    "not_confirmed_messages": 4,
+    "inflight_messages": 0,
+    "unsent_messages": 4,
+    "problem": null,
+    "remote": {
+      "hub_id": "968f4520e9474995a6645ab7af5ce1bd",
+      "device_id": "9c0e62fafddc4cb7b47df5053537b348",
+      "revision": 2,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "3cff4952efa244919fd274a3cff3eea7",
+      "control_epoch": "dbfcfbef15ca477bbec8eb58fd070da5",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T11:03:50.672346+00:00",
+    "last_transfer_success": "2026-11-22T11:03:50.672346+00:00"
+  }
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "at": "2026-11-22T11:08:18.495633+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "backfilling",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:08:19.161119+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "unknown",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 1,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:08:23.582309+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:08:23.645524+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "fresh_start_error": "ConnectionAbortedError(10053, '你的主机中的软件中止了一个已建立的连接。', None, 10053, None)",
+    "confirmed_new_scan": false
+  },
+  {
+    "at": "2026-11-22T11:08:24.313952+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:08:42.310026+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:08:42.701054+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:09:00.239512+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:09:11.557102+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "needs_selection",
+      "transfer_state": "blocked",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:09:11.943223+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "needs_selection",
+      "transfer_state": "blocked",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T11:09:30.200542+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "needs_selection",
+      "transfer_state": "blocked",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  }
+]

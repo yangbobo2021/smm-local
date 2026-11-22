@@ -1,0 +1,95 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-legacy-mcp": {
+      "checks": [
+        {
+          "action": "真实最终包Hub及本机含同整数ID的本机A/合成V；分别启动真实0.4.0和最终包stdio MCP，用旧本机ID和旧Hub三参数读取。",
+          "expected": "两个真实MCP进程均准确区分同号本机/Hub完整正文和来源；模块摘要匹配独立安装包。",
+          "id": "additional-legacy-mcp"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "真实新旧MCP进程兼容旧参数"
+    },
+    "TC-005-reference": {
+      "checks": [
+        {
+          "action": "分别取得本机/Hub 新引用并读回，令远端失败后再读 Hub 引用。",
+          "expected": "各自读回正确消息；远端失败不能读到本机同号。",
+          "id": "tdd-core"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "本机与 Hub 同整数会话 ID 但正文不同，消息包含完整原文。",
+      "title": "引用区分同号档案且拒绝版本与参数冲突"
+    },
+    "TC-005-reference-boundaries": {
+      "checks": [
+        {
+          "action": "分别对本机/Hub删除旧引用选中的首条和非首条；切换到另一个真实Hub；或对两个同position消息逐个签发精确引用并读取。",
+          "expected": "本机/Hub任一被选消息消失均明确拒绝整个旧引用；换Hub不路由旧引用、不回读本机同号；重复位置逐个只读独立预期正文及所选消息stamp，整段保留两条。",
+          "id": "citation-extra-boundaries"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "实际本机/Hub各有同会话两个不同源消息且position相同；另有本机/新Hub同号错误正文哨兵。；删除检查分别覆盖被选消息中的首条和非首条，不能只验证第一stamp。",
+      "title": "引用删除与真实换Hub及重复位置"
+    },
+    "TC-005-sc8-evidence": {
+      "checks": [
+        {
+          "action": "核对各入口实际引用和对应完整原文、同号碰撞；结合当前删除首/非首消息和Hub切换断言。",
+          "expected": "新引用精确区分实际档案、消息和内容版本；同整数 ID 不误读，远端失败不读本机同号。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full1"
+        },
+        {
+          "action": "核对split-scope完整标题/正文无越界，篡改/身份变化/参数冲突拒绝；实际查看范围画面。",
+          "expected": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full2"
+        },
+        {
+          "action": "核对真实旧包读取和旧CLI/MCP/Web调用形式，E1三入口与E3/E4实际作用域原件。",
+          "expected": "旧 CLI/MCP/Web 引用和调用形式继续可用；各 E1 三入口及 E3/E4 实际读取满足范围。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full3"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC8实际原件与当前适用性核验"
+    },
+    "TC-005-scoped-title": {
+      "checks": [
+        {
+          "action": "按A联合查询取得正确X命中，分别从Hub API及本机引用入口读回，再检查旧整段读取。",
+          "expected": "新范围引用的消息和标题只来自允许X，不能包含Y唯一正文标记；旧无范围整段读取保持原语义。",
+          "id": "scope-title"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "Hub共享会话首条Y正文生成整段标题，第二条为允许X消息；本机A仅关联X。",
+      "title": "范围引用标题不泄漏范围外首条正文"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "additional-legacy-mcp": "旧 CLI/MCP/Web 引用和调用形式继续可用；各 E1 三入口及 E3/E4 实际读取满足范围。",
+    "citation-extra-boundaries": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "full1": "新引用精确区分实际档案、消息和内容版本；同整数 ID 不误读，远端失败不读本机同号。",
+    "full2": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "full3": "旧 CLI/MCP/Web 引用和调用形式继续可用；各 E1 三入口及 E3/E4 实际读取满足范围。",
+    "scope-title": "共享会话引用不读范围外正文；篡改、身份切换、消失消息和参数冲突明确失败。",
+    "tdd-core": "新引用精确区分实际档案、消息和内容版本；同整数 ID 不误读，远端失败不读本机同号。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc8/result.json",
+  "recorded_at": "2026-11-22T10:05:11.953000+00:00",
+  "request_id": "design-complete27-sc8",
+  "request_sha256": "e62af0604cc40b90c458a47a22906fdc7653c2d3eb8303ff1b6880eccb88dc82",
+  "scene": "SC8",
+  "status": "designed"
+}

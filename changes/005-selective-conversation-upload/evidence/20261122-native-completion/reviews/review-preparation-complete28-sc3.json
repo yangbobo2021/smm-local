@@ -1,0 +1,66 @@
+{
+  "cases": {
+    "TC-005-confirmation-bindings": {
+      "status": "passed",
+      "reason": "B3确认标识绑定会话归属、目标和规则版本，任一变化失效；新增design与该原文一致。tests/test_complete_scene_boundaries.py::test_confirmation_rejects_changed_target_or_existing_affiliation实际assign/map/merge×target/affiliation六参数：target换另一合法C，affiliation用另一个真正fresh确认将a归C，明确upload generation不变，再重放旧token要求重新预览错误，完整projects/paths/links/conversations/assignments快照不变；fresh预览无副作用、fresh确认实际applied。若只generation签名而漏target/affected，六参数对应with raises首先失败；拒绝所有确认则fresh applied正控失败。六附件读到gen1不变、真实target2→3及merge-affiliation受影响集合从[1,2]到[2]。无新增无依据样本。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "additional-confirmation-bindings"
+      ]
+    },
+    "TC-005-forbidden-move-read": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "covers": [],
+      "reason": "场景B3/A3的旧引用保留及全部受影响会话/消息原文承诺有效；本次design28已扩大两个A会话各两消息并预期独立位置/角色/全文/时间及来源，解决前轮单目标范围，但action把方法限定为“取得六个会话/消息旧引用”。SPEC B7每条新命中有reference，不要求直接Hub search每matched_message自带reference，也不要求六个不同opaque引用。实际debug28三参数均exit1，tests/test_complete_scene_boundaries.py:143在构造checks读取message[reference]即KeyError；日志已到上传4条、old_hits会话集合两段，但move/禁止期无外发/6次读取/physical比较尚未到达，attachments为空。此为测试数据提取/不当方法假设，不是产品defect或expected_failure。最早澄清自然设计为“保留两个真实旧会话reference，各完整读取两条，并沿同一旧ref以start=end=1或2逐消息读取，总六次读取”；业务expected不变。实现随后停止索引不存在字段，按Hub Read受支持reference+start/end发请求。src/smm_hub/hub.py:495–518真实把start/end交reference_read，references.read按原引用消息身份/版本验证后仅选位置范围；因此两ref/六读足以覆盖两会话×四消息，不需伪造新引用/新增产品字段。需保留独立(session/source/position/role/text/time)预期、四物理行及禁止B/current policy/无fingerprint/body断言，真实debug成功后方可给covers。"
+    },
+    "TC-005-global": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3明确唯一G、明确归属重导入保持及未知不得自动global/上传。test_project_preview_coverage.py:9实际调用原test_upload_policy::global_contract，保留缺cwd→None/无正文及已归属G重导入；再检查完整项目G集合和数据库join精确[(id,key)]。如果重复生成第二G，完整globals_now首先失败；缺cwd误归G或all上传由原contract对应数据库/完整bodies拦截。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete28-sc3.md。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-global-query": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3全局不自动参与A。test_project_identity_boundaries.py:40–72以A/G/unknown独有正文和显式预览确认准备，A结果精确{a}，全部精确{a,g,unknown}，Hub显式link后A精确{a,g}，explicit local仍{a}。只首对象正确而遗漏unknown/G，第二/第三结果集合直接拦截；两个端点同错不能通过独立session集合。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete28-sc3.md。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-move-batch": {
+      "status": "passed",
+      "reason": "原test_upload_acceptance_boundaries.py的assign/map/merge两会话各两消息保留，按独立expected验证允许B后全部受影响目标、A原归属/逐旧ref/实体行与幂等，能在destination集合/逐session read拦截只处理首对象。当前设计另以additional-forbidden-move-read承接禁止B前状态读取；本TC自身action仍实际有效，但不把允许后多目标读回倒推为禁止期多目标可读，新增项尚需修订，scene未被授予通过。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "move-batch"
+      ]
+    },
+    "TC-005-move-project": {
+      "status": "passed",
+      "reason": "原test_upload_project_moves.py的assign/map/merge单会话基例保留：B禁止无known/body且A有B无，B允许后两项目原文/旧ref精确、物理正文不增/不重传。当前设计另以additional-forbidden-move-read承接禁止期读取，原TC的move-project只承担所列基例阶段；当前9TC聚合仍有该新增项的多目标缺口，详见其needs_revision，不用此passed表示完整scene已通过。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "move-project"
+      ]
+    },
+    "TC-005-move-retry": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3单列归属确认失败不沿用旧A回执。test_upload_project_moves.py:69–98真实all已收A/B，在Hub known已新增B归属后丢响应，必须errors+pending，Hub按B存在而Local allowed_pending1/transfer_failed；恢复known后上传0、pending0、physical_rows独立before保持及old reference精确正文。未知按成功跳过会在pending1首次拦截，只保持body但错当确认不允许通过。该TC只认move-retry，不声称覆盖尚缺的禁止B期间旧引用状态。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete28-sc3.md。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "move-retry"
+      ]
+    },
+    "TC-005-project-identity": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3同名不同设备、rename保留身份/规则/关系。test_project_identity_boundaries.py:10–38真实另一owner相同key+name，要求两个Hub id，分别按owner定位；link后rename，独立old_policy/links/key比较，own指定id的name改且key不改，scope集合精确{own,remote}。误用两端同目标会违反two ids/owners或scope独立集合。更多等价同名项目可选。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete28-sc3.md。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-project-preview": {
+      "status": "passed",
+      "reason": "原test_project_preview_coverage.py与原全部输入/断言保持不变，assign/map/merge三参数仍完整fresh/旧generation拒绝、实际reimport所有源与逐会话赋值、普通/global禁止merge。26指出的target/affiliation遗漏现由独立additional-confirmation-bindings六参数补；本TC只认case-4，不声称原代码自身新增了这些分支。场景判据仍有B3/A3依据，按完整设计中的新分工其自身准备有效。 本轮debug-complete28-sc3对应旧TC与confirmation均exit0，全部bindings/输出/6确认附件SHA重算一致，确认六参数仍真实generation1、target/affiliation变化；只认本TC分配check。新增forbidden读取当前是测试提取故障，整体SC3仍未通过，人工完整准备另manual-preparation-complete28-sc3.md。",
+      "covers": [
+        "case-4"
+      ]
+    }
+  }
+}

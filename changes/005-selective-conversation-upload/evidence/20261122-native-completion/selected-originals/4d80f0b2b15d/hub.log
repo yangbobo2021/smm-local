@@ -1,0 +1,70 @@
+INFO:     Started server process [156386]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on https://127.0.0.1:46443 (Press CTRL+C to quit)
+INFO:     127.0.0.1:47544 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47546 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33422 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33438 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33454 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33462 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33468 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33484 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33500 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33506 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33522 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33532 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33544 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33548 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33560 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33564 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33566 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33572 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33580 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33584 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33592 - "POST /v1/upload-policy/set HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33600 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33602 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33604 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33612 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33620 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33634 - "POST /v1/project-metadata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33648 - "POST /v1/known-upload-messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33654 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33670 - "POST /v1/known-upload-messages HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33678 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33682 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33684 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33700 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33702 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33710 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33712 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33722 - "POST /v1/query-scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33724 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33738 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33744 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33760 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33772 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58920 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58922 - "POST /v1/query-scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58936 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58952 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58958 - "POST /v1/query-scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58962 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58970 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58984 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58992 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59008 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59014 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59022 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59030 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59042 - "POST /v1/query-scope HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59044 - "POST /v1/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59050 - "GET /v1/info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59052 - "POST /v1/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59056 - "POST /v1/upload-policy/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59064 - "POST /v1/upload-policy/status HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [156386]

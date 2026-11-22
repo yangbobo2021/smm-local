@@ -1,0 +1,257 @@
+{
+  "local": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "confirmed": 0,
+        "conversations": 1,
+        "paths": [
+          "<task>/old-device/work/A"
+        ],
+        "linked_ids": [
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "confirmed": 0,
+        "conversations": 1,
+        "paths": [
+          "<task>/old-device/work/D"
+        ],
+        "linked_ids": [
+          1
+        ]
+      }
+    ],
+    "cursor": {
+      "hub_cursor:26ad8dde8f1e4377b62b632866b9a04e:8a8cf0e45cf544e5b80b8e95612fc0f1": "2"
+    }
+  },
+  "hub": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "9acacf912840be10356414d50c8b5747",
+        "device_name": "legacy-links"
+      },
+      {
+        "id": 2,
+        "name": "D",
+        "source": "device",
+        "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+        "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+        "device_name": "legacy-links"
+      }
+    ],
+    "links": [
+      {
+        "a": 1,
+        "b": 2
+      }
+    ]
+  },
+  "hits": [
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "old-related",
+      "title": "selective compatibility related original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 2,
+      "project_name": "D",
+      "rank": 1,
+      "bm25_score": 1.0476190476190476e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility related original",
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "project_id": 2,
+              "project_name": "D"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "D",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "old-device",
+      "title": "selective compatibility old-device original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 1,
+      "project_name": "A",
+      "rank": 2,
+      "bm25_score": 9.565217391304347e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility old-device original",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "project_id": 1,
+              "project_name": "A"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "A",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "9acacf912840be10356414d50c8b5747",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "hub_id": "26ad8dde8f1e4377b62b632866b9a04e",
+      "conversation_id": 2,
+      "message_id": 2
+    },
+    {
+      "hub_id": "26ad8dde8f1e4377b62b632866b9a04e",
+      "conversation_id": 1,
+      "message_id": 1
+    }
+  ],
+  "originals": [
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "old-related",
+      "source_path": "",
+      "cwd": null,
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective compatibility related original",
+      "project_id": 2,
+      "project_name": "D",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility related original",
+          "timestamp": null,
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "project_id": 2,
+              "project_name": "D"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "D",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "feddcd0c4f379e2c33a1f36c814693e3",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "source": "codex",
+      "source_session_id": "old-device",
+      "source_path": "",
+      "cwd": null,
+      "started_at": null,
+      "updated_at": null,
+      "title": "selective compatibility old-device original",
+      "project_id": 1,
+      "project_name": "A",
+      "messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective compatibility old-device original",
+          "timestamp": null,
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+              "device_name": "legacy-links",
+              "source_position": 1,
+              "project_id": 1,
+              "project_name": "A"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "A",
+          "source": "device",
+          "owner": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "source_key": "9acacf912840be10356414d50c8b5747",
+          "device_name": "legacy-links"
+        }
+      ],
+      "origins": [
+        {
+          "device_id": "8a8cf0e45cf544e5b80b8e95612fc0f1",
+          "device_name": "legacy-links"
+        }
+      ]
+    }
+  ]
+}

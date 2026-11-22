@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-combined": {
+      "status": "passed",
+      "reason": "核对SPEC A6/B5–B6与本TC仅分配tdd-core。2026-11-22T10:17:28.839–29.220Z正式指定pytest退出0、1 passed；tests/test_005_contracts.py:140–164实际未允许上传的local-a与独立设备remote经Hub A-B关联后共同返回；逐条独立断言两种正文、local/hub归属及combined顶层。已核全部执行bindings/artifacts SHA一致；不把该单项扩大到三平台入口或二层排除。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-scope-race": {
+      "status": "passed",
+      "reason": "核对SPEC A6及design/match的query-scope-race。2026-11-22T10:17:29.220–29.754Z真实执行两个参数窗口退出0、2 passed。tests/test_required_snapshot_and_batch_boundaries.py:24–70在/query-scope返回后、/search返回后各实际解除D/RemoteB并加入E/RemoteC；两个本次SHA核实附件scope-race-scope-return.json与scope-race-hub-results-return.json均显示当前effective A/D/RemoteB、Hub独有remote-b与未上传local-a/本机local-d；逐条原文user common RemoteB/common D/common private A。下一次才A/E/RemoteC及对应三候选，旧引用再读仍准确。断言独立集合排除两边同用新范围、只保留首目标、引用路由错误。全部绑定与附件SHA一致。只认该共用竞态项，不替代实际平台入口人工核验。",
+      "covers": [
+        "query-scope-race"
+      ]
+    }
+  }
+}

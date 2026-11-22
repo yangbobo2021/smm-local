@@ -1,0 +1,168 @@
+{
+  "all": {
+    "cli": {
+      "query": "uniquelyabsentquery",
+      "scope": "all",
+      "requested_scope": "all",
+      "archive_scope": "combined",
+      "hub_id": "69a5e692941645898ee26657c46d8615",
+      "effective_projects": "all",
+      "local_effective_projects": "all",
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 0,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": []
+    },
+    "mcp": {
+      "query": "uniquelyabsentquery",
+      "scope": "all",
+      "requested_scope": "all",
+      "archive_scope": "combined",
+      "hub_id": "69a5e692941645898ee26657c46d8615",
+      "effective_projects": "all",
+      "local_effective_projects": "all",
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 0,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": []
+    }
+  },
+  "project": {
+    "cli": {
+      "query": "uniquelyabsentquery",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "69a5e692941645898ee26657c46d8615",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "83c5c356171747018be079d35440f5a2",
+          "source_key": "a0a5fa8371ba186347ba679cf8df4dc6",
+          "device_name": "005-local"
+        },
+        {
+          "id": 7,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "a075e63d79ba44e5b422f82c019cfcbd",
+          "source_key": "2eb2a568d175f8cd4bb286558ef799f2",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 0,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": []
+    },
+    "mcp": {
+      "query": "uniquelyabsentquery",
+      "scope": "project",
+      "requested_scope": "project",
+      "archive_scope": "combined",
+      "hub_id": "69a5e692941645898ee26657c46d8615",
+      "effective_projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        },
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "83c5c356171747018be079d35440f5a2",
+          "source_key": "a0a5fa8371ba186347ba679cf8df4dc6",
+          "device_name": "005-local"
+        },
+        {
+          "id": 7,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "a075e63d79ba44e5b422f82c019cfcbd",
+          "source_key": "2eb2a568d175f8cd4bb286558ef799f2",
+          "device_name": "005-remote"
+        }
+      ],
+      "local_effective_projects": [
+        {
+          "id": 1,
+          "name": "A"
+        }
+      ],
+      "excluded_current_session_id": null,
+      "coverage": {
+        "local": "complete",
+        "hub": "complete"
+      },
+      "candidate_failures": [],
+      "capability_limitations": [],
+      "rerank": {
+        "scope": "returned_candidates",
+        "local_count": 0,
+        "hub_count": 0,
+        "hub_returned_count": 0,
+        "method": "BM25"
+      },
+      "results": []
+    }
+  }
+}

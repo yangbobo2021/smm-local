@@ -1,0 +1,12 @@
+usage: smm source purge-batch [-h] source_id batch
+
+从本机档案删除指定批次已导入的记录。清理批次前须先停用对应的插件来源。使用 smm source disable <来源ID> 停用该来源。
+
+positional arguments:
+  source_id   待清理批次所属的插件来源 ID。用 smm source list 查找对应来源。
+  batch       要删除的导入批次 ID。用 smm source batches <来源ID> 查询同一来源，取目标批次记录的
+              id。默认只显示最近 100 批。用 --before 查询更早的批次，详见 smm source batches
+              --help。
+
+options:
+  -h, --help  show this help message and exit

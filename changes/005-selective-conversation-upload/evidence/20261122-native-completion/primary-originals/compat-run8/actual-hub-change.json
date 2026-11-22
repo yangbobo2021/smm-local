@@ -1,0 +1,39 @@
+{
+  "state": {
+    "configured": true,
+    "hub_id": "ca8392a1f40b439cb79a29a74f727e25",
+    "device_id": "77d8e4df55534a9db3989fbe212798a9",
+    "hub_address": "https://localhost:60165",
+    "device_name": "legacy-device",
+    "policy": null,
+    "generation": 0,
+    "state": "needs_selection",
+    "hub_revision": 0,
+    "control_epoch": null,
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 2,
+    "inflight_messages": 0,
+    "unsent_messages": 2,
+    "problem": null,
+    "remote": {
+      "hub_id": "ca8392a1f40b439cb79a29a74f727e25",
+      "device_id": "77d8e4df55534a9db3989fbe212798a9",
+      "revision": 0,
+      "policy": null,
+      "submission_id": null,
+      "control_epoch": "3ad740c302fc4de0879faad84b113a42",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "blocked",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": null,
+    "last_transfer_success": null
+  },
+  "old_write_rejected_after_registration": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<task-path>\", line 40, in _request\n    with LOCAL_HTTP.open(request, timeout=5) as response:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/urllib/request.py\", line 521, in open\n    response = meth(req, response)\n               ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/urllib/request.py\", line 630, in http_response\n    response = self.parent.error(\n               ^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/urllib/request.py\", line 559, in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/urllib/request.py\", line 492, in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n  File \"/opt/miniconda3/lib/python3.12/urllib/request.py\", line 639, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 409: Conflict\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"<task-path>\", line 157, in push_pending\n    response = _request(config, \"/upload\", {\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<task-path>\", line 48, in _request\n    raise HubUnavailable(f\"汇总服务返回 HTTP {exc.code}\") from exc\nsmm_local.federation.HubUnavailable: 汇总服务返回 HTTP 409\n"
+  }
+}

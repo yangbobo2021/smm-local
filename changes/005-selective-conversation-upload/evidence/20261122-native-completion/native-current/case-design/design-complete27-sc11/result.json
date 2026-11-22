@@ -1,0 +1,94 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-confirmed-loss": {
+      "checks": [
+        {
+          "action": "最终安装包Hub备份后实际上传并确认近期消息，再确认none、积压，prepare-restore并恢复缺近期消息/限制的旧Hub数据库。",
+          "expected": "重启自动阻断/差异none，采用none不补丢失正文，明确仅允许A后精确补齐A新旧及此前已确认近期消息，无重复、旧引用保留。",
+          "id": "additional-confirmed-loss"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "真实已确认近期消息丢失后恢复"
+    },
+    "TC-005-local-restore": {
+      "checks": [
+        {
+          "action": "通过 prepare_restore 标记后恢复旧 SQLite 与配置状态，重建本机对象；查看差异并明确采用 Hub 当前规则。",
+          "expected": "恢复状态显示conflict；查看不修改；明确对账成功且仍为none，Hub无新增正文。实际未对账同步阻断由TC-005-unreconciled-send共同验证。",
+          "id": "tdd-core"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "旧备份规则为 all，Hub 后来已确认 none。",
+      "title": "旧允许备份先阻断并可明确采用 Hub 限制"
+    },
+    "TC-005-sc11-evidence": {
+      "checks": [
+        {
+          "action": "逐E1-E4核对实际服务启动身份/PID变化、none重启不重配、允许后精确补齐无重复及原文。",
+          "expected": "E1-E4 实际服务从停止积压状态重启后仍禁止，不重配，允许后补齐且检索原文准确，无重复。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full1"
+        },
+        {
+          "action": "核对R1/R2从prepare-restore开始的备份身份/前后规则，旧允许不能覆盖新限制、未知先阻断。",
+          "expected": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full2"
+        },
+        {
+          "action": "核对R3/R4实际Hub恢复与epoch失效/对账/仅允许内容补齐；结合自动升级失败恢复回归。",
+          "expected": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full3"
+        },
+        {
+          "action": "核对当前差异只读、过期拒绝及README链接恢复清单和不支持边界。",
+          "expected": "过期对账版本拒绝，查看差异不改规则，恢复清单和不支持边界有明确说明。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "full4"
+        },
+        {
+          "action": "逐平台最终对账实际原件及当前竞态自动证据，两个版本任一过期均不改当前规则。",
+          "expected": "恢复对账的重新提交同样绑定所显示两端版本；旧本机代次或旧Hub版本拒绝，查看差异和拒绝提交均不改变当前规则。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-5"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC11实际原件与当前适用性核验"
+    },
+    "TC-005-unreconciled-send": {
+      "checks": [
+        {
+          "action": "恢复后保留未作决定状态，新增本机历史并实际push_pending，比较发送载荷、Hub正文、两端规则；只查看差异后再次同步。",
+          "expected": "本机导入/查询可用，但两次均无会话指纹/正文外发，Hub正文不增加、none不被旧all覆盖、未确认冲突保持；查看本身不改变规则。",
+          "id": "tdd-unreconciled"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "同一Hub下先保存all备份，后来确认none，按prepare-restore恢复旧本机库，保留保护标记。",
+      "title": "旧允许恢复后未对账同步实际阻断"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "additional-confirmed-loss": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。",
+    "complete-5": "恢复对账的重新提交同样绑定所显示两端版本；旧本机代次或旧Hub版本拒绝，查看差异和拒绝提交均不改变当前规则。",
+    "full1": "E1-E4 实际服务从停止积压状态重启后仍禁止，不重配，允许后补齐且检索原文准确，无重复。",
+    "full2": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "full3": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。",
+    "full4": "过期对账版本拒绝，查看差异不改规则，恢复清单和不支持边界有明确说明。",
+    "tdd-core": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "tdd-unreconciled": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc11/result.json",
+  "recorded_at": "2026-11-22T10:05:12.940000+00:00",
+  "request_id": "design-complete27-sc11",
+  "request_sha256": "252a5f27e97c14ac51c81381110235ac36d710081e854dc3a5fa400df3f2c08d",
+  "scene": "SC11",
+  "status": "designed"
+}

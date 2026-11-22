@@ -1,0 +1,67 @@
+{
+  "cases": {
+    "TC-005-confirmation-bindings": {
+      "status": "passed",
+      "reason": "B3确认标识绑定会话归属、目标和规则版本，任一变化失效；新增design与该原文一致。tests/test_complete_scene_boundaries.py::test_confirmation_rejects_changed_target_or_existing_affiliation实际assign/map/merge×target/affiliation六参数：target换另一合法C，affiliation用另一个真正fresh确认将a归C，明确upload generation不变，再重放旧token要求重新预览错误，完整projects/paths/links/conversations/assignments快照不变；fresh预览无副作用、fresh确认实际applied。若只generation签名而漏target/affected，六参数对应with raises首先失败；拒绝所有确认则fresh applied正控失败。六附件读到gen1不变、真实target2→3及merge-affiliation受影响集合从[1,2]到[2]。无新增无依据样本。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "additional-confirmation-bindings"
+      ]
+    },
+    "TC-005-forbidden-move-read": {
+      "status": "passed",
+      "reason": "B3/A3原A归属/旧引用在B禁止期间仍可用；design29已准确改为2真实旧会话opaque ref/6次读取，无额外message.reference产品承诺。当前test_complete_scene_boundaries三操作先真实接收两会话各两消息4条，old_hits独立两session、unique ref2/checks6，assign逐段确认/map-merge共同转移。保持onlyA/B禁止，A仍两段/B无两段、无known指纹/body。每ref完整读2及start=end1/2各单读；每次独立session/source与position/role/全文/time tuple。三个真实附件均含6read与4物理行；两会话分别move-a/move-a2、四独立正文/两角色/位置1/2准确，四实体行/键前后不变，policy仍onlyA。仅首会话正确在第二会话读回失败，首消息正确在完整2条或position2单读失败，两次误用同目标在独立session断言失败。所有关键断言和附件已到达；28提取错误保留不复用。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "additional-forbidden-move-read"
+      ]
+    },
+    "TC-005-global": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3明确唯一G、明确归属重导入保持及未知不得自动global/上传。test_project_preview_coverage.py:9实际调用原test_upload_policy::global_contract，保留缺cwd→None/无正文及已归属G重导入；再检查完整项目G集合和数据库join精确[(id,key)]。如果重复生成第二G，完整globals_now首先失败；缺cwd误归G或all上传由原contract对应数据库/完整bodies拦截。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete29-sc3.md。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "case-1"
+      ]
+    },
+    "TC-005-global-query": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3全局不自动参与A。test_project_identity_boundaries.py:40–72以A/G/unknown独有正文和显式预览确认准备，A结果精确{a}，全部精确{a,g,unknown}，Hub显式link后A精确{a,g}，explicit local仍{a}。只首对象正确而遗漏unknown/G，第二/第三结果集合直接拦截；两个端点同错不能通过独立session集合。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete29-sc3.md。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "case-2"
+      ]
+    },
+    "TC-005-move-batch": {
+      "status": "passed",
+      "reason": "B3/A3适用于全部会话/消息。原两会话各两消息三操作的独立destination集合、逐全文/角色/全部A旧ref、实体行无增/无重传与幂等保持。首消息/首会话错误在独立集合或逐read拦截；本轮forbidden另补禁止期全目标读取，不从允许后成功倒推前状态。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "move-batch"
+      ]
+    },
+    "TC-005-move-project": {
+      "status": "passed",
+      "reason": "B3/A3三操作已收归属变化有依据。原单会话基例先B禁止无指纹/body、A有/B无，再允许B逐新旧ref完整原文、物理实体不变/无重传与幂等；禁止前状态读回现由独立forbidden全目标补齐，前后状态分工清楚。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "move-project"
+      ]
+    },
+    "TC-005-move-retry": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3单列归属确认失败不沿用旧A回执。test_upload_project_moves.py:69–98真实all已收A/B，在Hub known已新增B归属后丢响应，必须errors+pending，Hub按B存在而Local allowed_pending1/transfer_failed；恢复known后上传0、pending0、physical_rows独立before保持及old reference精确正文。未知按成功跳过会在pending1首次拦截，只保持body但错当确认不允许通过。该TC只认move-retry，不声称覆盖尚缺的禁止B期间旧引用状态。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete29-sc3.md。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "move-retry"
+      ]
+    },
+    "TC-005-project-identity": {
+      "status": "passed",
+      "reason": "场景定义与SPEC核对后：B3/A3同名不同设备、rename保留身份/规则/关系。test_project_identity_boundaries.py:10–38真实另一owner相同key+name，要求两个Hub id，分别按owner定位；link后rename，独立old_policy/links/key比较，own指定id的name改且key不改，scope集合精确{own,remote}。误用两端同目标会违反two ids/owners或scope独立集合。更多等价同名项目可选。 当前对应debug exit0，参数均真实执行（global/query/identity/retry各1，preview/move/batch各3），全部bindings/运行日志SHA一致；无附件不伪造。人工完整准备另见manual-preparation-complete29-sc3.md。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "case-3"
+      ]
+    },
+    "TC-005-project-preview": {
+      "status": "passed",
+      "reason": "B3/A3有效确认有明确依据。原test_project_preview_coverage SHA28ed99f2da37e5df2acb711f7f24a2d5156b73a9a7fbd2c77e9c312f85fa031a完全不变：三操作完整五表快照、generation过期拒绝、fresh独立会话集合、真实重导入和普通/global拒绝保持。target/affiliation变化由独立confirmation六参数补，不改旧TC身份或说原TC已单独覆盖全部状态。 当前debug-complete29-sc3绑定design-complete29-sc3/match-complete29a-sc3；九TC22pytest参数全部exit0，10:24:53–10:24:59Z，全部bindings/输出/9附件SHA重算一致。29完整回归252=251pass+1Windows专属skip、相关逐case均pass；只认本TC实际checks，人工全义务另MD。",
+      "covers": [
+        "case-4"
+      ]
+    }
+  }
+}

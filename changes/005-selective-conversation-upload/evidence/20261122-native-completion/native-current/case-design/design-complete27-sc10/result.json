@@ -1,0 +1,69 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_identity": "design",
+  "cases": {
+    "TC-005-legacy-links": {
+      "checks": [
+        {
+          "action": "真实0.4.0 Local/Hub创建非空A-D关系、已确认游标和两段正文/旧精确引用，再以最终包升级同库。",
+          "expected": "本机/Hub关系与项目ID显示名/路径/键不变，游标保留，旧引用消息逐集合准确、同Hub策略all，重复同步不增加。",
+          "id": "additional-legacy-links"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "任务隔离合成数据；对应SPEC已约定条件，旧用例保留。实际包专项使用mac-completion27私有目标、全模块SHA、唯一任务状态和loopback HTTPS；不触达真实来源。",
+      "title": "真实旧包关联升级保留"
+    },
+    "TC-005-register": {
+      "checks": [
+        {
+          "action": "新本机首次登记后仍未选择范围，分别重放同设备旧式正文、另一未迁移设备有效旧写及旧参数原文读取。",
+          "expected": "同设备旧写被拒且未许可正文未到达；另一未迁移设备旧写成功，旧整数/消息定位读回其完整原文。",
+          "id": "adoption"
+        }
+      ],
+      "kind": "automated",
+      "preconditions": "一个有未许可合成消息的本机连接独立新 Hub，另一未采用策略的设备可按旧协议写入。",
+      "title": "待选择的新设备登记阻断同设备旧式正文"
+    },
+    "TC-005-sc10-evidence": {
+      "checks": [
+        {
+          "action": "核对三个OS真实0.4.0旧包来源/安装模块、新本机旧Hub能力协商，不发送正文或将项目扩大到Hub全局。",
+          "expected": "真实新旧包组合符合能力协商，新本机遇旧 Hub 不发正文、不把项目请求发成 Hub 全局。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-1"
+        },
+        {
+          "action": "核对同设备迁移前后的旧式正文接受/拒绝，旧式原文读取仍完整。",
+          "expected": "旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-2"
+        },
+        {
+          "action": "核对真实旧游标升级前后消息集合、项目身份和旧引用；真实换Hub需重新选择，降级边界文档无静默恢复承诺。",
+          "expected": "真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。",
+          "id": "complete-3"
+        }
+      ],
+      "kind": "manual",
+      "preconditions": "只读取本次任务隔离实测原件和当前候选；不访问真实VibeInsight，不修改日常SMM。历史业务不冒充本轮重执行，原时间/版本按manifest/result保留；最终产品ba8，变动范围由后续实测和当前自动测试补足。",
+      "title": "SC10实际原件与当前适用性核验"
+    }
+  },
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "gaps": {},
+  "missing": [],
+  "obligations": {
+    "additional-legacy-links": "真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。",
+    "adoption": "旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。",
+    "complete-1": "真实新旧包组合符合能力协商，新本机遇旧 Hub 不发正文、不把项目请求发成 Hub 全局。",
+    "complete-2": "旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。",
+    "complete-3": "真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。"
+  },
+  "operation": "case-design",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc10/result.json",
+  "recorded_at": "2026-11-22T10:05:12.601000+00:00",
+  "request_id": "design-complete27-sc10",
+  "request_sha256": "63c1ccda53686b92262a21b19af10b2776355288182923712d0e3beec9f1f007",
+  "scene": "SC10",
+  "status": "designed"
+}

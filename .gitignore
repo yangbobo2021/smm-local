@@ -8,3 +8,6 @@ __pycache__/
 .DS_Store
 /.acceptance-local/
 dist/
+
+# Native finish snapshots embed local raw evidence; publish desensitized receipts.
+/.acceptance/native-v1/*/records/finish-*.json

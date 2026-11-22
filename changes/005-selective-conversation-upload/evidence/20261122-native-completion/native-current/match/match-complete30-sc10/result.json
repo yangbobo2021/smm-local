@@ -1,0 +1,87 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "bindings": {
+    "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC10.md": "6b652867ec7787659c19df9b8189531ffd50dc4226ad96669a1ac6c9e1b661b2",
+    "scripts/acceptance/selective_upload_completion.py": "fb49292b814c7b7f1f10ed89145ab69158d25251f687018413c6417263b57ef5",
+    "tests/test_upload_registration.py": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39"
+  },
+  "case_design": {
+    "id": "design-complete27-sc10",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-complete27-sc10/result.json",
+    "sha256": "1bd751f7d61a3ace96fe2ab437223c0933c9433018f3e8469ca6aff45ad7ba13"
+  },
+  "cases": {
+    "TC-005-legacy-links": {
+      "covers": {
+        "additional-legacy-links": "    def legacy_links(self):\n        self.installed(); self.old_identities()\n        (self.root/'input-token').write_text(self.token)\n        self.start_compat_hub(self.old_hub,self.root/'old-hub-state')\n        db=self.new_archive('old-device',self.old_local)\n        history(db.parent,'old-related','D',['selective compatibility related original'])\n        code=\"import sys;from smm_local.core import Archive;d=Archive(sys.argv[1]);d.sync_codex();p={x['name']:x['id'] for x in d.projects()};d.link_projects(p['A'],p['D'])\"\n        self.command([self.old_local,'-I','-c',code,db])\n        self.cli_at(self.old_local,db,'configure-hub',self.t['address'],'legacy-links','--token-file',self.root/'input-token')\n        self.sync_at(self.old_local,db)\n        local_before=self.local_links(self.old_local,db);remote_before=self.remote_links(self.old_hub,True)\n        assert local_before['cursor'] and remote_before['links']\n        hits=self.hub_hits();assert {h['source_session_id'] for h in hits}=={'old-device','old-related'}\n        references=[{'hub_id':self.hub_id,'conversation_id':h['id'],'message_id':h['matched_messages'][0]['hub_message_id']} for h in hits]\n        originals=[self.api(self.t['address'],'/v1/read',r) for r in references]\n        self.save('before-upgrade',{'local':local_before,'hub':remote_before,'hits':hits,'references':references,'originals':originals})\n        self.stop_hub();self.start_compat_hub(self.active_hub_python,self.root/'old-hub-state')\n        upgraded=self.sync_at(self.t['local_python'],db);assert json.loads(upgraded['stdout'])['uploaded']==0\n        local_after=self.local_links(self.t['local_python'],db);remote_after=self.remote_links(self.t['hub_python'])\n        def local_projection(v):return {p['id']:{k:p[k] for k in ('name','linked_ids','paths')} for p in v['projects']}\n        def hub_projection(v):return {p['id']:{k:p[k] for k in ('name','owner','source_key')} for p in v['projects']}\n        assert local_projection(local_after)==local_projection(local_before)\n        assert local_after['cursor']==local_before['cursor']\n        assert hub_projection(remote_after)==hub_projection(remote_before) and remote_after['links']==remote_before['links']\n        after=[self.api(self.t['address'],'/v1/read',r) for r in references]\n        self.save('upgrade-read-observation',{'before':originals,'after':after,'references':references})\n        expected={'old-device':[(1,'user','selective compatibility old-device original',None)],\n                  'old-related':[(1,'user','selective compatibility related original',None)]}\n        for reads in (originals,after):\n            assert {v['source_session_id'] for v in reads}==set(expected)\n            for value in reads:\n                assert value['source']=='codex'\n                assert [(m['position'],m['role'],m['text'],m['timestamp']) for m in value['messages']]==expected[value['source_session_id']]\n        assert [v['id'] for v in after]==[v['id'] for v in originals]\n        a=next(p['id'] for p in local_after['projects'] if p['name']=='A')\n        query=self.cli(db,'search','selective','--scope','project','--project-id',str(a))\n        assert {h['source_session_id'] for h in query['results']}=={'old-device','old-related'}\n        status=self.cli(db,'upload','status');assert status['policy']['mode']=='all' and status['state']=='confirmed'\n        before_repeat=self.hub_hits();self.sync_at(self.t['local_python'],db);assert self.hub_hits()==before_repeat\n        self.save('after-upgrade',{'local':local_after,'hub':remote_after,'originals':after,'query':query,'status':status,'upgraded':upgraded})\n"
+      },
+      "selector": "scripts/acceptance/selective_upload_completion.py::legacy_links",
+      "source": {
+        "first": 38,
+        "kind": "file",
+        "last": 77,
+        "path": "scripts/acceptance/selective_upload_completion.py",
+        "sha256": "fb49292b814c7b7f1f10ed89145ab69158d25251f687018413c6417263b57ef5",
+        "text": "    def legacy_links(self):\n        self.installed(); self.old_identities()\n        (self.root/'input-token').write_text(self.token)\n        self.start_compat_hub(self.old_hub,self.root/'old-hub-state')\n        db=self.new_archive('old-device',self.old_local)\n        history(db.parent,'old-related','D',['selective compatibility related original'])\n        code=\"import sys;from smm_local.core import Archive;d=Archive(sys.argv[1]);d.sync_codex();p={x['name']:x['id'] for x in d.projects()};d.link_projects(p['A'],p['D'])\"\n        self.command([self.old_local,'-I','-c',code,db])\n        self.cli_at(self.old_local,db,'configure-hub',self.t['address'],'legacy-links','--token-file',self.root/'input-token')\n        self.sync_at(self.old_local,db)\n        local_before=self.local_links(self.old_local,db);remote_before=self.remote_links(self.old_hub,True)\n        assert local_before['cursor'] and remote_before['links']\n        hits=self.hub_hits();assert {h['source_session_id'] for h in hits}=={'old-device','old-related'}\n        references=[{'hub_id':self.hub_id,'conversation_id':h['id'],'message_id':h['matched_messages'][0]['hub_message_id']} for h in hits]\n        originals=[self.api(self.t['address'],'/v1/read',r) for r in references]\n        self.save('before-upgrade',{'local':local_before,'hub':remote_before,'hits':hits,'references':references,'originals':originals})\n        self.stop_hub();self.start_compat_hub(self.active_hub_python,self.root/'old-hub-state')\n        upgraded=self.sync_at(self.t['local_python'],db);assert json.loads(upgraded['stdout'])['uploaded']==0\n        local_after=self.local_links(self.t['local_python'],db);remote_after=self.remote_links(self.t['hub_python'])\n        def local_projection(v):return {p['id']:{k:p[k] for k in ('name','linked_ids','paths')} for p in v['projects']}\n        def hub_projection(v):return {p['id']:{k:p[k] for k in ('name','owner','source_key')} for p in v['projects']}\n        assert local_projection(local_after)==local_projection(local_before)\n        assert local_after['cursor']==local_before['cursor']\n        assert hub_projection(remote_after)==hub_projection(remote_before) and remote_after['links']==remote_before['links']\n        after=[self.api(self.t['address'],'/v1/read',r) for r in references]\n        self.save('upgrade-read-observation',{'before':originals,'after':after,'references':references})\n        expected={'old-device':[(1,'user','selective compatibility old-device original',None)],\n                  'old-related':[(1,'user','selective compatibility related original',None)]}\n        for reads in (originals,after):\n            assert {v['source_session_id'] for v in reads}==set(expected)\n            for value in reads:\n                assert value['source']=='codex'\n                assert [(m['position'],m['role'],m['text'],m['timestamp']) for m in value['messages']]==expected[value['source_session_id']]\n        assert [v['id'] for v in after]==[v['id'] for v in originals]\n        a=next(p['id'] for p in local_after['projects'] if p['name']=='A')\n        query=self.cli(db,'search','selective','--scope','project','--project-id',str(a))\n        assert {h['source_session_id'] for h in query['results']}=={'old-device','old-related'}\n        status=self.cli(db,'upload','status');assert status['policy']['mode']=='all' and status['state']=='confirmed'\n        before_repeat=self.hub_hits();self.sync_at(self.t['local_python'],db);assert self.hub_hits()==before_repeat\n        self.save('after-upgrade',{'local':local_after,'hub':remote_after,'originals':after,'query':query,'status':status,'upgraded':upgraded})\n"
+      },
+      "status": "active"
+    },
+    "TC-005-register": {
+      "covers": {
+        "adoption": "def test_query_only_registration_fences_same_device_legacy_writer(pair):\n    \"\"\"TC-005-register: new connection adopts a fence before any upload choice.\"\"\"\n    add_local(pair, 'new-device', 'A', 'private before choice')\n    config = connect(pair)\n    assert federation.upload_status(pair.local)['state'] == 'needs_selection'\n    batch = {'hub_id': pair.hub_id, 'device_id': config['device_id'], 'device_name': 'legacy still running',\n             'records': [{'source': 'codex', 'source_session_id': 'new-device', 'started_at': None,\n                          'source_key': 'legacy-message', 'position': 1, 'source_order': 1,\n                          'role': 'user', 'text': 'private before choice', 'timestamp': None}]}\n    # A distinct device not adopting new controls remains a valid legacy writer.\n    other_record = {**batch['records'][0], 'source_session_id': 'other-device', 'text': 'other-device received history'}\n    other = pair.client.post('/v1/upload', json={**batch, 'device_id': 'e' * 32, 'records': [other_record]})\n    assert other.status_code == 200, other.text\n    response = pair.client.post('/v1/upload', json=batch)\n    assert response.status_code == 409, 'new client registration must fence the same device legacy writer before choice'\n    assert bodies(pair.remote) == ['other-device received history']\n    hit = pair.client.post('/v1/search', json={'query': 'received'}).json()['results'][0]\n    read = pair.client.post('/v1/read', json={'hub_id': pair.hub_id, 'conversation_id': hit['id'],\n                                          'message_id': hit['matched_messages'][0]['hub_message_id']})\n    assert read.status_code == 200\n    assert [m['text'] for m in read.json()['messages']] == ['other-device received history']\n"
+      },
+      "selector": "tests/test_upload_registration.py::test_query_only_registration_fences_same_device_legacy_writer",
+      "source": {
+        "first": 6,
+        "kind": "file",
+        "last": 26,
+        "path": "tests/test_upload_registration.py",
+        "sha256": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39",
+        "text": "def test_query_only_registration_fences_same_device_legacy_writer(pair):\n    \"\"\"TC-005-register: new connection adopts a fence before any upload choice.\"\"\"\n    add_local(pair, 'new-device', 'A', 'private before choice')\n    config = connect(pair)\n    assert federation.upload_status(pair.local)['state'] == 'needs_selection'\n    batch = {'hub_id': pair.hub_id, 'device_id': config['device_id'], 'device_name': 'legacy still running',\n             'records': [{'source': 'codex', 'source_session_id': 'new-device', 'started_at': None,\n                          'source_key': 'legacy-message', 'position': 1, 'source_order': 1,\n                          'role': 'user', 'text': 'private before choice', 'timestamp': None}]}\n    # A distinct device not adopting new controls remains a valid legacy writer.\n    other_record = {**batch['records'][0], 'source_session_id': 'other-device', 'text': 'other-device received history'}\n    other = pair.client.post('/v1/upload', json={**batch, 'device_id': 'e' * 32, 'records': [other_record]})\n    assert other.status_code == 200, other.text\n    response = pair.client.post('/v1/upload', json=batch)\n    assert response.status_code == 409, 'new client registration must fence the same device legacy writer before choice'\n    assert bodies(pair.remote) == ['other-device received history']\n    hit = pair.client.post('/v1/search', json={'query': 'received'}).json()['results'][0]\n    read = pair.client.post('/v1/read', json={'hub_id': pair.hub_id, 'conversation_id': hit['id'],\n                                          'message_id': hit['matched_messages'][0]['hub_message_id']})\n    assert read.status_code == 200\n    assert [m['text'] for m in read.json()['messages']] == ['other-device received history']\n"
+      },
+      "status": "active"
+    },
+    "TC-005-sc10-evidence": {
+      "covers": {
+        "complete-1": "核对三个OS真实0.4.0旧包来源/安装模块、新本机旧Hub能力协商，不发送正文或将项目扩大到Hub全局。",
+        "complete-2": "核对同设备迁移前后的旧式正文接受/拒绝，旧式原文读取仍完整。",
+        "complete-3": "核对真实旧游标升级前后消息集合、项目身份和旧引用；真实换Hub需重新选择，降级边界文档无静默恢复承诺。"
+      },
+      "kind": "manual",
+      "selector": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC10.md#TC-005-sc10-evidence",
+      "source": {
+        "first": 1,
+        "kind": "file",
+        "last": 40,
+        "path": "changes/005-selective-conversation-upload/evidence/20261122-native-completion/steps/SC10.md",
+        "sha256": "6b652867ec7787659c19df9b8189531ffd50dc4226ad96669a1ac6c9e1b661b2",
+        "text": "# SC10实际原件与当前适用性核验\n\n人工验证项：TC-005-sc10-evidence\n\n版本策略：历史业务事件保留原时间和包版本；本轮执行的是原件真实性、覆盖和当前适用性核验。不得用旧 passed 字段替代原始输入、响应、消息集合、服务身份或画面核对。\n\n## 操作与预期\n\n### complete-1\n\n核对三个OS真实0.4.0旧包来源/安装模块、新本机旧Hub能力协商，不发送正文或将项目扩大到Hub全局。\n\n预期：真实新旧包组合符合能力协商，新本机遇旧 Hub 不发正文、不把项目请求发成 Hub 全局。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-2\n\n核对同设备迁移前后的旧式正文接受/拒绝，旧式原文读取仍完整。\n\n预期：旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n### complete-3\n\n核对真实旧游标升级前后消息集合、项目身份和旧引用；真实换Hub需重新选择，降级边界文档无静默恢复承诺。\n\n预期：真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。 核验时保持真实业务原时间/版本；图像判断须查看原图，网络/先后顺序以轨迹或实际断言定位。\n\n## 原件与复核入口\n\n场景原始目录（.acceptance-local/native-v1/AT-SMM-005/platform-debug/）：\n- `compat-run8`\n- `linux-compat-run8`\n- `windows-compat-run8`\n\n各目录按 manifest/result 的实际业务时间和提交读取；忽略目录名暗示的版本。核对 commands/service-events、完整响应/消息、必要 PNG 和 trace，不仅读取 result.status。\n\n补充：当前场景全部自动用例debug/execute及独立意见、work/final-package-comparison21.json、已保留的早期模块比较、原始平台独立审查。涉及d80到最终产品的标题修复用scope11/15；对账修复用reconcile21和当前CAS自动断言补足。\n\n## 独立准备复审后的补充实测\n\n- `TC-005-legacy-links`：真实0.4.0 Local/Hub创建非空A-D关系、已确认游标和两段正文/旧精确引用，再以最终包升级同库。 预期：本机/Hub关系与项目ID显示名/路径/键不变，游标保留，旧引用消息逐集合准确、同Hub策略all，重复同步不增加。；本轮真实debug及execute原件分别位于debug-complete30-sc10和execute-complete30-sc10，原有平台事件仍保留原时间/版本。\n"
+      },
+      "status": "active"
+    }
+  },
+  "coverage": "full",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "execution_status": "not_executed",
+  "implementation_sha256": {
+    "TC-005-legacy-links": "8a06163170006a0149349b3ab5b298cd3d8ba03a7203291b2e879ce657826abc",
+    "TC-005-register": "8524316551d2c8000481649f6e204c69c5534fa49c444261b127deeb1bde75cd",
+    "TC-005-sc10-evidence": "d21a44438b4c73e1e5410807f233c3774c8dc9321408def066a069b4b76f72d8"
+  },
+  "missing": [],
+  "obligations": {
+    "additional-legacy-links": "真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。",
+    "adoption": "旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。",
+    "complete-1": "真实新旧包组合符合能力协商，新本机遇旧 Hub 不发正文、不把项目请求发成 Hub 全局。",
+    "complete-2": "旧设备未迁移时兼容；迁移同设备后旧式正文拒绝而旧式读取可用。",
+    "complete-3": "真实旧游标迁移后历史、项目身份关系和引用保留，不丢不重复；不支持降级不能静默恢复正文。"
+  },
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-complete30-sc10/result.json",
+  "recorded_at": "2026-11-22T10:36:50.741000+00:00",
+  "request_id": "match-complete30-sc10",
+  "request_sha256": "af378acac13ce39614ce727ebe6e8d680d3030fb296fefb02385203258933942",
+  "scene": "SC10",
+  "search_scope": "沿用当前已审全部TC、输入及断言，刷新真实选段，不删除旧检查。补完整场景判据及原件适用性人工项；原缺口不得只靠结果字段或本设计文字消除。",
+  "status": "matched"
+}

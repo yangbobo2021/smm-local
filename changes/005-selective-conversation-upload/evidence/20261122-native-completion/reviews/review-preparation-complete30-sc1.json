@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-005-default": {
+      "status": "passed",
+      "reason": "场景判据可由B2首次连接、B3最小登记和A1推出；设计的待选择分支有效。tests/test_005_contracts.py:78–96以独立本机正文/会话标记、Hub另一设备原文准备，先断言Hub完整正文集合只有remote，再逐请求检查session/private标记和项目字段白名单，最后独立查remote。首目标正确而另一项目泄漏的通用风险由人工full1的多项目原件逐请求检查承接，不把单A样例声称全场景；正常/失败状态差异不由本TC承担。当前debug真实1pass/exit0、日志SHA及所有bindings核对一致，无附件。完整人工范围见manual-preparation-complete30-sc1.md。 当前debug-complete30-sc1/design27/match30真实5TC8pytest参数exit0（10:36:51–10:36:54Z），bindings/输出/4附件SHA全重算一致。原src/tests字节与29无差异；runtime30移除未被这些选择器调用的包/空查询控制器，test_complete_scene_boundaries及其005/combined/project_moves导入依赖仍完整绑定，未省略实际依赖。29 full251pass1skip按未变src/tests/audit输入复用，不冒称30新回归，亦不代表Windows空查询通过。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-pause-source": {
+      "status": "passed",
+      "reason": "B2/A1明确保存规则不得改变来源启停与全局暂停；原criterion与新design additional-pause-source均有依据。tests/test_complete_scene_boundaries.py:25–53四模式分别在独立档案禁用Codex/Claude、sync_paused=True；choose后立即独立比较全部settings与configured_sources及每个enabledFalse（不是等后续none才观察），再走正常push_pending而无control_only，严格uploaded0、Hub完整正文[]、全部出站无body及持久messages完整快照不变；sync_all被失败探针包裹。若只all解除暂停/只Codex开启，当前参数立即settings/source断言首先拦截；即使后续保存重置也无法掩盖。四真实附件分别保存正常派发transfer_state paused及相应规则，all/only还确有allowed_pending1，零上传不是没有待上传数据。只认additional-pause-source，人工全义务另MD。 当前debug-complete30-sc1/design27/match30真实5TC8pytest参数exit0（10:36:51–10:36:54Z），bindings/输出/4附件SHA全重算一致。原src/tests字节与29无差异；runtime30移除未被这些选择器调用的包/空查询控制器，test_complete_scene_boundaries及其005/combined/project_moves导入依赖仍完整绑定，未省略实际依赖。29 full251pass1skip按未变src/tests/audit输入复用，不冒称30新回归，亦不代表Windows空查询通过。",
+      "covers": [
+        "additional-pause-source"
+      ]
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "status": "passed",
+      "reason": "B1/A1明确local采用需要显示的两个版本且错误不改两端。tests/test_reconcile_snapshot.py:83–111实际cli.main参数解析，逐个缺Hub/缺local/缺两者及负数/不可解析local，断言非零、stderr且无stdout，并分别比较完整Local row和独立Hub head，防止两端同错；新鲜none正控与帮助两个来源断言拦截拒绝全部/不可发现。其他mode fresh由SC2四参数用例承接，Hub参数域的新增等价CLI数字样本可选。当前debug1pass/exit0，绑定和stdout/stderr摘要一致；人工完整义务另MD。 当前debug-complete30-sc1/design27/match30真实5TC8pytest参数exit0（10:36:51–10:36:54Z），bindings/输出/4附件SHA全重算一致。原src/tests字节与29无差异；runtime30移除未被这些选择器调用的包/空查询控制器，test_complete_scene_boundaries及其005/combined/project_moves导入依赖仍完整绑定，未省略实际依赖。29 full251pass1skip按未变src/tests/audit输入复用，不冒称30新回归，亦不代表Windows空查询通过。",
+      "covers": [
+        "cli-versions"
+      ]
+    },
+    "TC-005-reconcile-web-inputs": {
+      "status": "passed",
+      "reason": "B1/Web两动作双版本要求及A1支持设计。tests/test_reconcile_snapshot.py:132–150逐payload实际POST，local/hub缺参和负数/布尔/不可解析参数拒绝，分别比较Local完整row、Hub独立head及无set出站，任一端保存错误被该循环首个row/head断言拦截；两端同变不可能只靠相等通过。新鲜四模式正控由SC2 fresh覆盖。当前debug1pass/exit0，绑定与日志摘要一致。此TC只认web-versions，不认人工平台完成。 当前debug-complete30-sc1/design27/match30真实5TC8pytest参数exit0（10:36:51–10:36:54Z），bindings/输出/4附件SHA全重算一致。原src/tests字节与29无差异；runtime30移除未被这些选择器调用的包/空查询控制器，test_complete_scene_boundaries及其005/combined/project_moves导入依赖仍完整绑定，未省略实际依赖。29 full251pass1skip按未变src/tests/audit输入复用，不冒称30新回归，亦不代表Windows空查询通过。",
+      "covers": [
+        "web-versions"
+      ]
+    },
+    "TC-005-transfer-status": {
+      "status": "passed",
+      "reason": "B2要求规则与传输进度分开报告，B1要求最近失败；虽所引SC1判据偏入口，原需求有明确依据，未新增行为。tests/test_upload_review_regressions.py:86–111注入known读取失败，直接断言confirmed规则、failed传输、精确原因和pending1，再恢复后独立要求complete/None/0；若失败状态全抹平或把规则也改pending，首阶段state/transfer_state即拦截。当前debug1pass/exit0、源码和日志绑定一致。人工SC1 full3由本轮新增pause-source及原迁移原件共同承担。 当前debug-complete30-sc1/design27/match30真实5TC8pytest参数exit0（10:36:51–10:36:54Z），bindings/输出/4附件SHA全重算一致。原src/tests字节与29无差异；runtime30移除未被这些选择器调用的包/空查询控制器，test_complete_scene_boundaries及其005/combined/project_moves导入依赖仍完整绑定，未省略实际依赖。29 full251pass1skip按未变src/tests/audit输入复用，不冒称30新回归，亦不代表Windows空查询通过。",
+      "covers": [
+        "review-transfer-status"
+      ]
+    }
+  }
+}

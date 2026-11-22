@@ -1,0 +1,67 @@
+{
+  "cases": {
+    "TC-005-cas": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。确认前2正文保留，none确认后旧revision及无版本正文均拒绝、持久正文集合/当前revision不变。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-policy-triple-order": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。实际all→none→all提交1/2/3、响应3/2/1；附件原请求/回执及最终ack generation/revision=3，旧已提交幂等重放与未提交晚到409均不改head，后续正文仅一次。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "three-choice-order"
+      ]
+    },
+    "TC-005-reconcile-fresh": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。四模式新鲜双版本分别执行；提交集合严格为展示规则，Local row/Hub policy及confirmed一致，未发正文。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "fresh"
+      ]
+    },
+    "TC-005-reconcile-inflight": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。丢回执及派发后新选择两个窗口实际执行；未知不confirmed/不发正文，新generation/desired/submission不被旧响应覆盖，明确重新采用后才确认。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "inflight-result"
+      ]
+    },
+    "TC-005-reconcile-remote-race": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。CLI/Web × local/hub × 两次读取/CAS前三窗口共12参数；真实Hub推进none，拒绝后完整Local row和新Hub head/正文不变，CLI非零、Web诊断可识别。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "remote-reject-no-save"
+      ]
+    },
+    "TC-005-reconcile-stale-local": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。两采用动作，Hub revision保持而Local none→all pending；旧generation均400、完整两端状态无变化且无policy/set。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "stale-local"
+      ]
+    },
+    "TC-005-reconcile-target-dispatch": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。第二次真实远端状态读取时切换到独立Hub，旧端无policy/set、head不变，新目标needs_selection且无正文。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "target-control-dispatch"
+      ]
+    },
+    "TC-005-reconcile-write-window": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。两采用动作在读取返回前另保存all；旧请求400，保留新完整Local row、远端未变、无控制派发。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "write-window"
+      ]
+    },
+    "TC-005-target-dispatch": {
+      "status": "passed",
+      "reason": "当前design-complete26-sc2/match-complete26-sc2分工与实际选择器一致，完整bindings/artifacts SHA已核无差，正式各进程exit0及对应参数pass。已知消息核对后切到独立Hub；屏障实际触发，旧新端均无正文、新目标待选择。 仅认该TC分配的检查，不将共用测试视为全部平台实测。",
+      "covers": [
+        "review-target-dispatch"
+      ]
+    }
+  }
+}

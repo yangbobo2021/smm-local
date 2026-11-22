@@ -1,0 +1,151 @@
+{
+  "definitions": {
+    "version": 3,
+    "sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e"
+  },
+  "scenes": {
+    "SC1": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-default",
+        "TC-005-pause-source",
+        "TC-005-reconcile-cli-inputs",
+        "TC-005-reconcile-web-inputs",
+        "TC-005-transfer-status",
+        "TC-005-sc1-evidence"
+      ]
+    },
+    "SC10": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-legacy-links",
+        "TC-005-register",
+        "TC-005-sc10-evidence"
+      ]
+    },
+    "SC11": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-confirmed-loss",
+        "TC-005-local-restore",
+        "TC-005-unreconciled-send",
+        "TC-005-sc11-evidence"
+      ]
+    },
+    "SC12": {
+      "status": "not_fully_validated",
+      "missing_obligations": [
+        "complete-1",
+        "complete-2",
+        "complete-3"
+      ],
+      "case_ids": [
+        "TC-005-guidance"
+      ]
+    },
+    "SC2": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-cas",
+        "TC-005-policy-triple-order",
+        "TC-005-reconcile-fresh",
+        "TC-005-reconcile-inflight",
+        "TC-005-reconcile-remote-race",
+        "TC-005-reconcile-stale-local",
+        "TC-005-reconcile-target-dispatch",
+        "TC-005-reconcile-write-window",
+        "TC-005-target-dispatch",
+        "TC-005-sc2-evidence"
+      ]
+    },
+    "SC3": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-confirmation-bindings",
+        "TC-005-forbidden-move-read",
+        "TC-005-global",
+        "TC-005-global-query",
+        "TC-005-move-batch",
+        "TC-005-move-project",
+        "TC-005-move-retry",
+        "TC-005-project-identity",
+        "TC-005-project-preview",
+        "TC-005-sc3-evidence"
+      ]
+    },
+    "SC4": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-backfill",
+        "TC-005-batch-failure",
+        "TC-005-bounded-upload",
+        "TC-005-fair-upload",
+        "TC-005-mixed-batch",
+        "TC-005-offset-prefix",
+        "TC-005-repeated-fairness",
+        "TC-005-timestamp-version",
+        "TC-005-unknown-receipt",
+        "TC-005-sc4-evidence"
+      ]
+    },
+    "SC5": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-isolation",
+        "TC-005-sc5-evidence"
+      ]
+    },
+    "SC6": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-combined",
+        "TC-005-scope-race",
+        "TC-005-sc6-evidence"
+      ]
+    },
+    "SC7": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-bm25",
+        "TC-005-long-message",
+        "TC-005-multiterm-ranking",
+        "TC-005-rank-ties",
+        "TC-005-sc7-evidence"
+      ]
+    },
+    "SC8": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-legacy-mcp",
+        "TC-005-reference",
+        "TC-005-reference-boundaries",
+        "TC-005-scoped-title",
+        "TC-005-sc8-evidence"
+      ]
+    },
+    "SC9": {
+      "status": "passed",
+      "missing_obligations": [],
+      "case_ids": [
+        "TC-005-empty-coverage",
+        "TC-005-empty-linux",
+        "TC-005-empty-mac",
+        "TC-005-fallback",
+        "TC-005-empty-windows",
+        "TC-005-sc9-evidence"
+      ]
+    }
+  },
+  "full_view_sha256": "aef9cc34fda3c5ab78a352980b94e82228ae30bc5fff46624cce720ab34c5705",
+  "scope": "current view subset, full original kept private"
+}

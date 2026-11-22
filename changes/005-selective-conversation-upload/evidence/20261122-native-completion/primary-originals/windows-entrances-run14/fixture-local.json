@@ -1,0 +1,182 @@
+{
+  "database": "<task>\\local\\archive.sqlite3",
+  "projects": [
+    {
+      "id": 1,
+      "name": "A",
+      "confirmed": 0,
+      "kind": "ordinary",
+      "conversations": 1,
+      "stable_key": "4950364d8ba76875c9ef78ca21b866ac",
+      "paths": [
+        "<task>\\local\\work\\A"
+      ],
+      "linked_ids": [
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "D",
+      "confirmed": 0,
+      "kind": "ordinary",
+      "conversations": 1,
+      "stable_key": "1bf806b4d6d5efb239c41f7ba6d5bc20",
+      "paths": [
+        "<task>\\local\\work\\D"
+      ],
+      "linked_ids": [
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "name": "全局项目",
+      "confirmed": 1,
+      "kind": "global",
+      "conversations": 1,
+      "stable_key": "edf6b573906a1ed4ac592f7d12ad927c",
+      "paths": [],
+      "linked_ids": []
+    },
+    {
+      "id": 3,
+      "name": "G",
+      "confirmed": 0,
+      "kind": "ordinary",
+      "conversations": 0,
+      "stable_key": "7b10c7bfd83b4682f4e50ad5b1ee0941",
+      "paths": [
+        "<task>\\local\\work\\G"
+      ],
+      "linked_ids": []
+    }
+  ],
+  "search": {
+    "query": "selective",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 6,
+        "source": "synthetic-005",
+        "source_session_id": "plugin-history",
+        "title": "selective common plugin-only original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": null,
+        "project_name": null,
+        "rank": 1,
+        "bm25_score": 1.1449814126394052e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common plugin-only original"
+          },
+          {
+            "position": 2,
+            "role": "assistant",
+            "text": "selective common plugin-only appended"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "local-A",
+        "title": "selective common local-A original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 2,
+        "bm25_score": 1.0620689655172414e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-A original"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "source": "codex",
+        "source_session_id": "local-D",
+        "title": "selective common local-D original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 2,
+        "project_name": "D",
+        "rank": 3,
+        "bm25_score": 1.0620689655172414e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-D original"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "source": "codex",
+        "source_session_id": "local-G",
+        "title": "selective common local-G original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 4,
+        "project_name": "全局项目",
+        "rank": 4,
+        "bm25_score": 1.0620689655172414e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-G original"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "source": "codex",
+        "source_session_id": "local-U",
+        "title": "selective common local-U original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": null,
+        "project_name": null,
+        "rank": 5,
+        "bm25_score": 1.0620689655172414e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-U original"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "source": "codex",
+        "source_session_id": "local-U2",
+        "title": "selective common local-U2 original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": null,
+        "project_name": null,
+        "rank": 6,
+        "bm25_score": 1.0620689655172414e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective common local-U2 original"
+          }
+        ]
+      }
+    ]
+  }
+}

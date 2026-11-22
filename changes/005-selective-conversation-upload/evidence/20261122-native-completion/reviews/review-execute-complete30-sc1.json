@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-005-default": {
+      "status": "passed",
+      "reason": "已核当前design及match分工、绑定源码/测试和全部artifact SHA均一致。test_005_contracts.py::test_new_connection_is_query_only_until_selected 的本机独有正文/会话负例、Hub完整正文集合、最小登记载荷及远端查询均实际到达；exit0/1 passed。 正式时间见execute-complete30-sc1，未据此判其他场景或R005。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-pause-source": {
+      "status": "passed",
+      "reason": "已核当前design及match分工、绑定源码/测试和全部artifact SHA均一致。test_complete_scene_boundaries.py四模式参数各执行通过；每次保存后完整settings/sources和持久messages不变，sync_all失败哨兵未触发，正常push无正文；四份pause-source附件与实际请求/Hub空集一致。 正式时间见execute-complete30-sc1，未据此判其他场景或R005。",
+      "covers": [
+        "additional-pause-source"
+      ]
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "status": "passed",
+      "reason": "已核当前design及match分工、绑定源码/测试和全部artifact SHA均一致。test_reconcile_snapshot.py实际调用cli.main，缺各版本/两者、负数和非整数均非零且两端row/head不变；help含两个取值来源，新鲜双版本确认none；exit0/1 passed。 正式时间见execute-complete30-sc1，未据此判其他场景或R005。",
+      "covers": [
+        "cli-versions"
+      ]
+    },
+    "TC-005-reconcile-web-inputs": {
+      "status": "passed",
+      "reason": "已核当前design及match分工、绑定源码/测试和全部artifact SHA均一致。TestClient真实API输入七种缺失/非法双版本，分别400/422、完整两端规则不变且无policy/set；exit0/1 passed。此项只认API契约，真实浏览器由人工项负责。 正式时间见execute-complete30-sc1，未据此判其他场景或R005。",
+      "covers": [
+        "web-versions"
+      ]
+    },
+    "TC-005-transfer-status": {
+      "status": "passed",
+      "reason": "已核当前design及match分工、绑定源码/测试和全部artifact SHA均一致。test_upload_review_regressions.py注入正文核对失败，实际独立status断言规则confirmed、transfer failed、原因和待传1；恢复后complete/原因清除/待传0；exit0/1 passed。 正式时间见execute-complete30-sc1，未据此判其他场景或R005。",
+      "covers": [
+        "review-transfer-status"
+      ]
+    }
+  }
+}

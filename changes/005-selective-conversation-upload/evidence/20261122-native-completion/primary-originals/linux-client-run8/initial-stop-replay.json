@@ -1,0 +1,680 @@
+{
+  "attempts": [
+    {
+      "versioned": true,
+      "status": 409,
+      "response": "{\"detail\":{\"code\":\"stale_policy\",\"message\":\"上传规则版本或恢复代次已改变，请先同步规则\"}}"
+    },
+    {
+      "versioned": false,
+      "status": 409,
+      "response": "{\"detail\":{\"code\":\"policy_required\",\"message\":\"此设备已采用上传规则，不能使用旧式正文请求\"}}"
+    }
+  ],
+  "before": [
+    {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "vibe-V",
+      "title": "selective common VibeInsight original",
+      "started_at": "2026-11-01T00:00:00",
+      "updated_at": "2026-11-01T00:00:00",
+      "project_id": 1,
+      "project_name": "synthetic.example/005/V",
+      "rank": 1,
+      "bm25_score": 1.066079295154185e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common VibeInsight original",
+          "timestamp": "2026-11-01T00:00:00",
+          "canonical_id": "b7961f7783aa1f901e2b86ff245c0c9e3361f4a7a7717c122b6ed8879d645597",
+          "content_version": "d58276c03c3e411ce02f3d52a780d3ee5cf86200c12a94cff17da618d5414e23",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "synthetic-005-source",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "v-event-1",
+              "project_id": 1,
+              "project_name": "synthetic.example/005/V"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IltcInYtdHJhY2UtMVwiLCBcInVzZXJcIl0iLCJ2ZXJzaW9uIjoiZDU4Mjc2YzAzYzNlNDExY2UwMmYzZDUyYTc4MGQzZWU1Y2Y4NjIwMGMxMmE5NGNmZjE3ZGE2MThkNTQxNGUyMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiOWE4MDQzMWIzY2NmY2ZkOGY0MmU4NWUwOGEyNjFhN2RlZDlhNGQ0Y2RlYjk4N2I1ODhjN2EwZjBjYzIzNTZlZiIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJ2aWJlaW5zaWdodCJ9.860e9cb00ffcf44b92bb65bde877a6e8a90390366e3cd400718b9153be9f7918",
+      "origin_session_key": "9a80431b3ccfcfd8f42e85e08a261a7ded9a4d4cdeb987b588c7a0f0cc2356ef",
+      "identity_namespace": "vibeinsight",
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "synthetic-005-source",
+          "platform": "codex"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "remote-C",
+      "title": "selective common remote-C original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 6,
+      "project_name": "C",
+      "rank": 2,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common remote-C original",
+          "timestamp": null,
+          "canonical_id": "069e03d0c75e6b89dfc1993057e82f70a78828b13d7a163d3fc8db14eb514cbd",
+          "content_version": "1276138b5394ff4e695bb37d5015c4ba9b132fd926b3ac5aad211b992e17d160",
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "477ad4c7fbe746ebae36934435f968f8",
+              "device_name": "005-remote",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 6,
+              "project_name": "C"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 6,
+          "name": "C",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "477ad4c7fbe746ebae36934435f968f8",
+          "source_key": "21d3978038320e9217fb3284b2c7c2aa",
+          "device_name": "005-remote"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImVkNjEzYzNiYzk2YTQ2OGU2YmEzY2ZjYWRmYzk2N2FhNTc2ZTVmMzI5MzhhYmQwNjg1NDcyMzA4OTAwYmFiMTAiLCJ2ZXJzaW9uIjoiMTI3NjEzOGI1Mzk0ZmY0ZTY5NWJiMzdkNTAxNWM0YmE5YjEzMmZkOTI2YjNhYzVhYWQyMTFiOTkyZTE3ZDE2MCJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMDU3NmIwNTE2NjY1YzJiNzkwNzA4MTNlMDk4N2VmMGRhODkyZjAzYzYwNTE0OTdjZTk4ODFhODQyYTY0ZTZhYyIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.0922c0c283de3631816f94c3f935f32cbef7f3ba748c8d1978e83a7ceb3962f3",
+      "origin_session_key": "remote-C",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "477ad4c7fbe746ebae36934435f968f8",
+          "device_name": "005-remote"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 3,
+      "source": "codex",
+      "source_session_id": "remote-B",
+      "title": "selective common remote-B original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 7,
+      "project_name": "B",
+      "rank": 3,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common remote-B original",
+          "timestamp": null,
+          "canonical_id": "adde13f13a8043905b254536b8dfe096a72c5b94447c2fe0da633bec0607ebf4",
+          "content_version": "ddfce8f9ecb7ae87d78061435ff0758a5c91a6a211bad23dcfade66e96dc10fc",
+          "hub_message_id": 3,
+          "origins": [
+            {
+              "device_id": "477ad4c7fbe746ebae36934435f968f8",
+              "device_name": "005-remote",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 7,
+              "project_name": "B"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 7,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "477ad4c7fbe746ebae36934435f968f8",
+          "source_key": "ea35aa9720452c20d0a85cc8ec4a335b",
+          "device_name": "005-remote"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6Ijk0Yjk4ZjJlZmUyZWRhOGUwYmE4OGMzODgwMDBiYmQ4ZDFhNjg4ZWY2OTI4YzMxOGUxYTI1NmU3ZDI3ZDc4NGMiLCJ2ZXJzaW9uIjoiZGRmY2U4ZjllY2I3YWU4N2Q3ODA2MTQzNWZmMDc1OGE1YzkxYTZhMjExYmFkMjNkY2ZhZGU2NmU5NmRjMTBmYyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNGNkYzhjMzY0Y2FmZTFjMDZmMTcwMDM2ODA5MThkN2Q0M2E3NTcyNzQ2N2RmNDUxOGFjMWEzMDZlYmJkNDE2NyIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.716e63845e5369a53ff6218a5c60b9c311f053d52bfa783b6e059051d7fc96da",
+      "origin_session_key": "remote-B",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "477ad4c7fbe746ebae36934435f968f8",
+          "device_name": "005-remote"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 4,
+      "source": "codex",
+      "source_session_id": "local-G",
+      "title": "selective common local-G original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 5,
+      "project_name": "全局项目",
+      "rank": 4,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-G original",
+          "timestamp": null,
+          "canonical_id": "736008ee56fb47aa90d1679318574fa447435b299c52d300a9605efbea18ab88",
+          "content_version": "6bf920c5c503711885ea321a0bab35f24796f17976d42ddadaf6a42e47d78c89",
+          "hub_message_id": 4,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 5,
+              "project_name": "全局项目"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 5,
+          "name": "全局项目",
+          "project_kind": "global",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "8c10ffe2fd82592d2ff36de11d22f9c9",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjlmMDJkMDRhOWM2ZjI5NGJkOWQ0MzQyOTIzZjE2YmRjNjRiNmZlYTg2YmJjODM0YWEwNjYzYjRlYzhlYzdmZjEiLCJ2ZXJzaW9uIjoiNmJmOTIwYzVjNTAzNzExODg1ZWEzMjFhMGJhYjM1ZjI0Nzk2ZjE3OTc2ZDQyZGRhZGFmNmE0MmU0N2Q3OGM4OSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiZjRjZWJhYjk3NTBjOWJiMTE5ZTRmNjMxZGM0ZWMwMjVmMjMxYTdiZDU5ZGI2MjRlODZhOTJmOTlhNTM5ZGY3OSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.3781f5b608a39129cdf8974f68d55eda1ff74ac133d13aa13352ad5bf5ad903a",
+      "origin_session_key": "local-G",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 5,
+      "source": "codex",
+      "source_session_id": "local-D",
+      "title": "selective common local-D original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 3,
+      "project_name": "D",
+      "rank": 5,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-D original",
+          "timestamp": null,
+          "canonical_id": "f367168b08554eb0e2bce874bcb0efb9ebf6058c23ada437802be6c8c53516fb",
+          "content_version": "cb0191d7e81d1d6d1beea4af8b6e602e3b5e11f0cf5a2fd903a021e2548f2f5f",
+          "hub_message_id": 5,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 3,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 3,
+          "name": "D",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "cfca2460ea1b68f841060de9f8a54df2",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImRjNmU3NWZlOTM2OWUwYzNmYTY4MzIzZTljNTIxZDgzOTc3ODcxZjRmZWE4NGMzNDFiYmY4ODAyOWY5YTc0YjQiLCJ2ZXJzaW9uIjoiY2IwMTkxZDdlODFkMWQ2ZDFiZWVhNGFmOGI2ZTYwMmUzYjVlMTFmMGNmNWEyZmQ5MDNhMDIxZTI1NDhmMmY1ZiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYmM0ZGQ3NjNiOWFkYjA2NDEwYzA1NDUwYWYyNGMzM2IwZjczNzY5NDRmOGQxYTQwN2M4YTFjYzE0ZjE2YTZmYSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.3fff48c2ebbb039c1021d885e49bc3d3c452e625650380b0e939ba5257da4340",
+      "origin_session_key": "local-D",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 6,
+      "source": "codex",
+      "source_session_id": "local-A",
+      "title": "selective common local-A original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 2,
+      "project_name": "A",
+      "rank": 6,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A original",
+          "timestamp": null,
+          "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+          "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+          "hub_message_id": 6,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 2,
+              "project_name": "A"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "3724725fe269533d800dd1508df12fc3",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo2LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo2LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjgyOTZiMTQ0Nzk2OWVjYTczM2YxNTYwOWNiZWU1MjcwZmI2ZGJlZDFhYzlkODRmN2I1MjRlNGJmYmM2MDdiNDYiLCJ2ZXJzaW9uIjoiOTE4YTY5MjA4ZjM5NmUyOTYwZDg3NTEwMjIyZWIyMzdiZTEyNmM0OTQ5YjEyMTYwOTA5YzhlMTc2MDkzMzIzZSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODVlZmQxNGU1YWQ3NjQ2Y2QwMWFmZWIzNGIzZGUzOTI1NjFkYjczNjc0ZDE5NGEzZjk0MTI0ODdmODY2NjNhZSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.348669f953065940aa19820e7b611442840717583285418369be5aff322fd4ea",
+      "origin_session_key": "local-A",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    }
+  ],
+  "after": [
+    {
+      "id": 1,
+      "source": "vibeinsight",
+      "source_session_id": "vibe-V",
+      "title": "selective common VibeInsight original",
+      "started_at": "2026-11-01T00:00:00",
+      "updated_at": "2026-11-01T00:00:00",
+      "project_id": 1,
+      "project_name": "synthetic.example/005/V",
+      "rank": 1,
+      "bm25_score": 1.066079295154185e-06,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common VibeInsight original",
+          "timestamp": "2026-11-01T00:00:00",
+          "canonical_id": "b7961f7783aa1f901e2b86ff245c0c9e3361f4a7a7717c122b6ed8879d645597",
+          "content_version": "d58276c03c3e411ce02f3d52a780d3ee5cf86200c12a94cff17da618d5414e23",
+          "hub_message_id": 1,
+          "origins": [
+            {
+              "source": "vibeinsight",
+              "source_id": "synthetic-005-source",
+              "platform": "codex",
+              "source_position": 1,
+              "source_event_id": "v-event-1",
+              "project_id": 1,
+              "project_name": "synthetic.example/005/V"
+            }
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": 1,
+          "name": "synthetic.example/005/V",
+          "project_kind": "ordinary",
+          "source": "vibeinsight",
+          "owner": "synthetic-005-source",
+          "source_key": "synthetic.example/005/V",
+          "device_name": null
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IltcInYtdHJhY2UtMVwiLCBcInVzZXJcIl0iLCJ2ZXJzaW9uIjoiZDU4Mjc2YzAzYzNlNDExY2UwMmYzZDUyYTc4MGQzZWU1Y2Y4NjIwMGMxMmE5NGNmZjE3ZGE2MThkNTQxNGUyMyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiOWE4MDQzMWIzY2NmY2ZkOGY0MmU4NWUwOGEyNjFhN2RlZDlhNGQ0Y2RlYjk4N2I1ODhjN2EwZjBjYzIzNTZlZiIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJ2aWJlaW5zaWdodCJ9.860e9cb00ffcf44b92bb65bde877a6e8a90390366e3cd400718b9153be9f7918",
+      "origin_session_key": "9a80431b3ccfcfd8f42e85e08a261a7ded9a4d4cdeb987b588c7a0f0cc2356ef",
+      "identity_namespace": "vibeinsight",
+      "origins": [
+        {
+          "source": "vibeinsight",
+          "source_id": "synthetic-005-source",
+          "platform": "codex"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 2,
+      "source": "codex",
+      "source_session_id": "remote-C",
+      "title": "selective common remote-C original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 6,
+      "project_name": "C",
+      "rank": 2,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common remote-C original",
+          "timestamp": null,
+          "canonical_id": "069e03d0c75e6b89dfc1993057e82f70a78828b13d7a163d3fc8db14eb514cbd",
+          "content_version": "1276138b5394ff4e695bb37d5015c4ba9b132fd926b3ac5aad211b992e17d160",
+          "hub_message_id": 2,
+          "origins": [
+            {
+              "device_id": "477ad4c7fbe746ebae36934435f968f8",
+              "device_name": "005-remote",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 6,
+              "project_name": "C"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 6,
+          "name": "C",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "477ad4c7fbe746ebae36934435f968f8",
+          "source_key": "21d3978038320e9217fb3284b2c7c2aa",
+          "device_name": "005-remote"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoyLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoyLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImVkNjEzYzNiYzk2YTQ2OGU2YmEzY2ZjYWRmYzk2N2FhNTc2ZTVmMzI5MzhhYmQwNjg1NDcyMzA4OTAwYmFiMTAiLCJ2ZXJzaW9uIjoiMTI3NjEzOGI1Mzk0ZmY0ZTY5NWJiMzdkNTAxNWM0YmE5YjEzMmZkOTI2YjNhYzVhYWQyMTFiOTkyZTE3ZDE2MCJ9XSwib3JpZ2luX2lkZW50aXR5IjoiMDU3NmIwNTE2NjY1YzJiNzkwNzA4MTNlMDk4N2VmMGRhODkyZjAzYzYwNTE0OTdjZTk4ODFhODQyYTY0ZTZhYyIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.0922c0c283de3631816f94c3f935f32cbef7f3ba748c8d1978e83a7ceb3962f3",
+      "origin_session_key": "remote-C",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "477ad4c7fbe746ebae36934435f968f8",
+          "device_name": "005-remote"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 3,
+      "source": "codex",
+      "source_session_id": "remote-B",
+      "title": "selective common remote-B original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 7,
+      "project_name": "B",
+      "rank": 3,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common remote-B original",
+          "timestamp": null,
+          "canonical_id": "adde13f13a8043905b254536b8dfe096a72c5b94447c2fe0da633bec0607ebf4",
+          "content_version": "ddfce8f9ecb7ae87d78061435ff0758a5c91a6a211bad23dcfade66e96dc10fc",
+          "hub_message_id": 3,
+          "origins": [
+            {
+              "device_id": "477ad4c7fbe746ebae36934435f968f8",
+              "device_name": "005-remote",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 7,
+              "project_name": "B"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 7,
+          "name": "B",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "477ad4c7fbe746ebae36934435f968f8",
+          "source_key": "ea35aa9720452c20d0a85cc8ec4a335b",
+          "device_name": "005-remote"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjozLCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjozLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6Ijk0Yjk4ZjJlZmUyZWRhOGUwYmE4OGMzODgwMDBiYmQ4ZDFhNjg4ZWY2OTI4YzMxOGUxYTI1NmU3ZDI3ZDc4NGMiLCJ2ZXJzaW9uIjoiZGRmY2U4ZjllY2I3YWU4N2Q3ODA2MTQzNWZmMDc1OGE1YzkxYTZhMjExYmFkMjNkY2ZhZGU2NmU5NmRjMTBmYyJ9XSwib3JpZ2luX2lkZW50aXR5IjoiNGNkYzhjMzY0Y2FmZTFjMDZmMTcwMDM2ODA5MThkN2Q0M2E3NTcyNzQ2N2RmNDUxOGFjMWEzMDZlYmJkNDE2NyIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.716e63845e5369a53ff6218a5c60b9c311f053d52bfa783b6e059051d7fc96da",
+      "origin_session_key": "remote-B",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "477ad4c7fbe746ebae36934435f968f8",
+          "device_name": "005-remote"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 4,
+      "source": "codex",
+      "source_session_id": "local-G",
+      "title": "selective common local-G original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 5,
+      "project_name": "全局项目",
+      "rank": 4,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-G original",
+          "timestamp": null,
+          "canonical_id": "736008ee56fb47aa90d1679318574fa447435b299c52d300a9605efbea18ab88",
+          "content_version": "6bf920c5c503711885ea321a0bab35f24796f17976d42ddadaf6a42e47d78c89",
+          "hub_message_id": 4,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 5,
+              "project_name": "全局项目"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 5,
+          "name": "全局项目",
+          "project_kind": "global",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "8c10ffe2fd82592d2ff36de11d22f9c9",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo0LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo0LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjlmMDJkMDRhOWM2ZjI5NGJkOWQ0MzQyOTIzZjE2YmRjNjRiNmZlYTg2YmJjODM0YWEwNjYzYjRlYzhlYzdmZjEiLCJ2ZXJzaW9uIjoiNmJmOTIwYzVjNTAzNzExODg1ZWEzMjFhMGJhYjM1ZjI0Nzk2ZjE3OTc2ZDQyZGRhZGFmNmE0MmU0N2Q3OGM4OSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiZjRjZWJhYjk3NTBjOWJiMTE5ZTRmNjMxZGM0ZWMwMjVmMjMxYTdiZDU5ZGI2MjRlODZhOTJmOTlhNTM5ZGY3OSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.3781f5b608a39129cdf8974f68d55eda1ff74ac133d13aa13352ad5bf5ad903a",
+      "origin_session_key": "local-G",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 5,
+      "source": "codex",
+      "source_session_id": "local-D",
+      "title": "selective common local-D original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 3,
+      "project_name": "D",
+      "rank": 5,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-D original",
+          "timestamp": null,
+          "canonical_id": "f367168b08554eb0e2bce874bcb0efb9ebf6058c23ada437802be6c8c53516fb",
+          "content_version": "cb0191d7e81d1d6d1beea4af8b6e602e3b5e11f0cf5a2fd903a021e2548f2f5f",
+          "hub_message_id": 5,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 3,
+              "project_name": "D"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 3,
+          "name": "D",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "cfca2460ea1b68f841060de9f8a54df2",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo1LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo1LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6ImRjNmU3NWZlOTM2OWUwYzNmYTY4MzIzZTljNTIxZDgzOTc3ODcxZjRmZWE4NGMzNDFiYmY4ODAyOWY5YTc0YjQiLCJ2ZXJzaW9uIjoiY2IwMTkxZDdlODFkMWQ2ZDFiZWVhNGFmOGI2ZTYwMmUzYjVlMTFmMGNmNWEyZmQ5MDNhMDIxZTI1NDhmMmY1ZiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiYmM0ZGQ3NjNiOWFkYjA2NDEwYzA1NDUwYWYyNGMzM2IwZjczNzY5NDRmOGQxYTQwN2M4YTFjYzE0ZjE2YTZmYSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.3fff48c2ebbb039c1021d885e49bc3d3c452e625650380b0e939ba5257da4340",
+      "origin_session_key": "local-D",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    },
+    {
+      "id": 6,
+      "source": "codex",
+      "source_session_id": "local-A",
+      "title": "selective common local-A original",
+      "started_at": null,
+      "updated_at": null,
+      "project_id": 2,
+      "project_name": "A",
+      "rank": 6,
+      "bm25_score": 9.758064516129033e-07,
+      "matched_messages": [
+        {
+          "position": 1,
+          "role": "user",
+          "text": "selective common local-A original",
+          "timestamp": null,
+          "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+          "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+          "hub_message_id": 6,
+          "origins": [
+            {
+              "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+              "device_name": "005-local",
+              "source_position": 1,
+              "source_order": 1,
+              "project_id": 2,
+              "project_name": "A"
+            }
+          ],
+          "source_order": 1
+        }
+      ],
+      "projects": [
+        {
+          "id": 2,
+          "name": "A",
+          "project_kind": "ordinary",
+          "source": "device",
+          "owner": "3f6fd2f07a264a3293645bee3b27def0",
+          "source_key": "3724725fe269533d800dd1508df12fc3",
+          "device_name": "005-local"
+        }
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiZjJlZGJhYjg2NGUwNDUwMzlhNWYwNjdmMjRhZTNjNDIiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjo2LCJmb3JtYXQiOjEsImh1Yl9pZCI6IjdlYWYwYjgwZmUxODRhYzFiYjJhZDM5MWQzZDAzMTEyIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjo2LCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjgyOTZiMTQ0Nzk2OWVjYTczM2YxNTYwOWNiZWU1MjcwZmI2ZGJlZDFhYzlkODRmN2I1MjRlNGJmYmM2MDdiNDYiLCJ2ZXJzaW9uIjoiOTE4YTY5MjA4ZjM5NmUyOTYwZDg3NTEwMjIyZWIyMzdiZTEyNmM0OTQ5YjEyMTYwOTA5YzhlMTc2MDkzMzIzZSJ9XSwib3JpZ2luX2lkZW50aXR5IjoiODVlZmQxNGU1YWQ3NjQ2Y2QwMWFmZWIzNGIzZGUzOTI1NjFkYjczNjc0ZDE5NGEzZjk0MTI0ODdmODY2NjNhZSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.348669f953065940aa19820e7b611442840717583285418369be5aff322fd4ea",
+      "origin_session_key": "local-A",
+      "identity_namespace": "agent",
+      "origins": [
+        {
+          "device_id": "3f6fd2f07a264a3293645bee3b27def0",
+          "device_name": "005-local"
+        }
+      ],
+      "archive_scope": "hub"
+    }
+  ]
+}
