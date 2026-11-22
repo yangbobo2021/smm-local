@@ -112,13 +112,13 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
         if items:self.mcp_sync([('read_document',{'reference':item['reference']},True) for item in items])
 
     def known_sources(self,ready):
-        def counts(files,links=0):
-            return {'ready':len(files),'failed':0,'candidates':len(files),'billed_bytes':sum(len(self.expected[p]) for p in files),'ignored_entries':links,'ignored_links':links,'ignored_excluded':0,'ignored_format':0}
-        doc_files=[p for p in self.expected if p.is_relative_to(self.docs)]
+        def counts(files,links=0,excluded=0):
+            return {'ready':len(files),'failed':0,'candidates':len(files),'billed_bytes':sum(len(self.expected[p]) for p in files),'ignored_entries':links+excluded,'ignored_links':links,'ignored_excluded':excluded,'ignored_format':0}
+        doc_files=[p for p in self.expected if p.is_relative_to(self.docs) and not p.is_relative_to(self.excluded)]
         assert len(doc_files)==ready
-        expected={self.source['id']:{'path':str(self.docs),'kind':'directory','project_ids':[self.p['id']],'recursive':True,'exclude':['excluded/'],'revision':1,'status':'ready','counts':{'ready':ready,'failed':0}},
+        expected={self.source['id']:{'path':str(self.docs),'kind':'directory','project_ids':[self.p['id']],'recursive':True,'exclude':['excluded/**/'],'revision':1,'status':'ready','counts':{'ready':ready,'failed':0}},
                   self.single['id']:{'path':str(self.other),'kind':'file','project_ids':[self.q['id']],'recursive':True,'exclude':[],'revision':1,'status':'ready','counts':{'ready':1,'failed':0}}}
-        expected[self.source['id']]['counts']=counts(doc_files,1);expected[self.single['id']]['counts']=counts([self.other])
+        expected[self.source['id']]['counts']=counts(doc_files,1,1);expected[self.single['id']]['counts']=counts([self.other])
         if getattr(self,'web_source',None) and not getattr(self,'web_removed',False):
             expected[self.web_source['id']]={'path':str(self.guide),'kind':'file','project_ids':[self.p['id']],'recursive':True,'exclude':[],'revision':1,'status':'ready','counts':{'ready':1,'failed':0}}
             expected[self.web_source['id']]['counts']=counts([self.guide])
@@ -173,12 +173,13 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
         self.guide=self.docs/'指南.md';self.note=self.docs/'nested'/'notes.txt';self.control=self.docs/'control.txt';self.other=self.out/'other.txt'
         self.raw='needle 中文😀 e\u0301\r\n第二行 <script>window.__docExecution=1</script>\r\nlast\n'.encode()
         self.put(self.guide,self.raw);self.put(self.note,b'needle nested original\n');self.put(self.control,('İ'*3000+' needle continuous control\n').encode());self.put(self.other,b'needle unrelated Q\n')
+        self.excluded=self.docs/'excluded';self.put(self.excluded/'direct.txt',b'needle globexcludeduniquemarker must not be indexed')
         outside=self.out/'outside';self.put(outside/'escape.txt',b'escapeuniquemarker must never be read')
         self.link=self.docs/'linked-directory'
         if sys.platform=='win32':self.run(['cmd','/c','mklink','/J',str(self.link),str(outside)])
         else:self.link.symlink_to(outside,target_is_directory=True)
         self.phase='configure';before=self.stamp('configured-before')
-        self.source=self.cli('documents','add',self.docs,'--project-id',self.p['id'],'--exclude','excluded/')
+        self.source=self.cli('documents','add',self.docs,'--project-id',self.p['id'],'--exclude','excluded/**/')
         self.single=self.cli('documents','add',self.other,'--project-id',self.q['id'])
         assert self.source['status']==self.single['status']=='pending'
         sources=self.cli('documents','sources');assert {s['id'] for s in sources}=={self.source['id'],self.single['id']}
@@ -191,6 +192,9 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
         self.phase='cli-search-read'
         result=self.cli('documents','search','needle','--scope','project','--project-id',self.p['id'],'--limit','50')
         paths(result,[self.guide,self.note,self.control]);assert self.cli('documents','search','escapeuniquemarker')['results']==[]
+        excluded_zero=self.cli('documents','search','globexcludeduniquemarker')
+        assert excluded_zero['results']==[] and excluded_zero['coverage']['indexed_files']==4
+        self.save('glob-exclusion',{'pattern':'excluded/**/','excluded_root':str(self.excluded),'zero_result':excluded_zero,'source_config':self.source})
         for item in result['results']:
             path=Path(item['path']);hit(item,self.expected[path],path)
             self.read_cli(item)
@@ -487,6 +491,8 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
             assert all(x['flags'] & getattr(os,'O_ACCMODE',os.O_WRONLY|os.O_RDWR) == os.O_RDONLY for x in opens),'source opened for writing'
             outside=os.path.normcase(str(self.out/'outside'))
             assert not any(x['path']==outside or x['path'].startswith(outside+os.sep) for x in opens),'link target was opened'
+            excluded=os.path.normcase(str(self.excluded))
+            assert not any(x['path']==excluded or x['path'].startswith(excluded+os.sep) for x in opens),'excluded directory was opened'
             evidence_available(self.out,['web-pending.png','web-original.png','web-zero.png','web-old-reference-rejected.png','web-updated.png','web-partial.png','web-restarted.png','web-trace.zip','web-partial-trace.zip','web-restarted-trace.zip'])
             self.save('body-read-audit',{'entries':opens,'only_explicit_refresh':True});outcome='passed'
         except BaseException:

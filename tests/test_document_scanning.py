@@ -36,6 +36,32 @@ def test_scan_scope(tmp_path):
     assert {str(x):fingerprint(x) for x in (tmp_path/'docs').rglob('*') if x.is_file() and not x.is_symlink()}==before
     observe('scan-expected',{'expected':expected,'before':before,'sources':f.sources()})
 
+    # Independent exact file sets for zero/many directory ** combinations.
+    g=Fixture(tmp_path/'glob-cases')
+    names=['visible.txt','cache/direct.txt','cache/sub/deep.txt','outer/cache/direct.txt',
+           'outer/deep/cache/deep.txt','cachex/keep.txt','outer/cachex/keep.txt']
+    for name in names:g.file(name,'globneedle '+name)
+    source=g.add(tmp_path/'glob-cases'/'docs')
+    controls={'visible.txt','cachex/keep.txt','outer/cachex/keep.txt'}
+    for pattern,wanted in [
+        ('cache/**/',controls|{'outer/cache/direct.txt','outer/deep/cache/deep.txt'}),
+        ('**/cache/**/',controls),
+        ('outer/**/cache/**/',controls|{'cache/direct.txt','cache/sub/deep.txt'}),
+        ('**/**/cache/**/**/',controls),
+        ('CACHE/**/',set(names))]:
+        g.set(source,exclude=[pattern]);g.refresh(source)
+        found=g.search('globneedle',limit=50)['results']
+        actual={Path(h['path']).relative_to(tmp_path/'glob-cases'/'docs').as_posix() for h in found}
+        assert actual==wanted,(pattern,actual,wanted)
+        for h in found:
+            name=Path(h['path']).relative_to(tmp_path/'glob-cases'/'docs').as_posix()
+            assert g.read(h)['text']=='globneedle '+name
+        observe('terminal-glob-independent-expected',{'pattern':pattern,'wanted':sorted(wanted),'actual':sorted(actual)})
+    from smm_local.documents import _glob
+    assert _glob('**').fullmatch('cache/a\nb.txt')
+    assert _glob('cache/**').fullmatch('cache/a\nb.txt')
+
+
 
 def test_decode_files(tmp_path, monkeypatch):
     f=Fixture(tmp_path)

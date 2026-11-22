@@ -79,11 +79,21 @@ def _patterns(patterns):
 
 def _glob(pattern):
     """Compile slash-delimited glob syntax, independently of host glob rules."""
-    pieces = pattern.rstrip('/').split('/')
+    pieces = []
+    for part in pattern.rstrip('/').split('/'):
+        if part == '**' and pieces and pieces[-1] == '**':
+            continue
+        pieces.append(part)
     out = ''
     for i, part in enumerate(pieces):
         if part == '**':
-            out += '(?:[^/]+/)*' if i < len(pieces)-1 else '.*'
+            if i < len(pieces)-1:
+                out += '(?:[^/]+/)*'
+            elif i == 0:
+                out += '(?:[^/]+/)*[^/]*'
+            else:
+                # The preceding separator belongs to the optional ** tail.
+                out = out[:-1] + '(?:/[^/]+)*'
         else:
             out += ''.join('[^/]*' if c == '*' else '[^/]' if c == '?' else re.escape(c) for c in part)
             if i < len(pieces)-1:
