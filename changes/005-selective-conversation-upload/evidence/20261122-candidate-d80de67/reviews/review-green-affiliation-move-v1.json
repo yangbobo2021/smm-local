@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-move-project": {
+      "status": "passed",
+      "reason": "独立核对 AGENTS.md、已确认 intent、SPEC B3 第50行/A3 第204行及 PLAN §11，当前定义 .acceptance/native-v1/AT-SMM-005/definitions/000002.json 实际 SHA-256 为 bd4ec82fbc652c141afecdd0bf5aa5b732720897c3d37d9083932e3d47e38649；新增归属行为有已确认依据。green-affiliation-move-v1 与 red-affiliation-move-v1 的 cases（含精确 pytest 命令/声明）及两项 test_bindings 完全相同，冻结 test_upload_project_moves.py SHA 9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56、test_005_contracts.py SHA ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197 均与当前字节一致；全部38项当前 bindings、9项绿灯 artifacts 及红灯6项 artifacts 摘要核对通过。已读独立红灯意见及原始输出：三个参数原先均在第55行缺少 move-a；本次 TC-005-move-project/run.stdout 明确 3 passed，执行 exit 0、stderr 空；regression.stdout 为所列7文件完整回归48 passed，exit 0、stderr 空，仅非阻塞 Starlette 弃用警告。冻结测试通过真实 project_control.change 的预览/确认分别执行 assign/map/merge 并断言本机 B；第45-49行证明 B 禁止时无 known 指纹或正文请求，Hub B 不含 A 而旧 A 仍可查；第51-66行实际到达并证明允许 B 后新增归属、旧 A/B 两份引用精确读回 moving A original、A 归属保留、move-a 全部物理正文行的 id/source_key/position/role/text/timestamp 与前值相等，捕获请求中无 A 正文重传，当前允许待确认归零且重复同步仍无新增正文。B 自己原先禁止的一条正文首次上传被明确区分。源码佐证：LocalUpload 的 local_upload_project_receipts 主键绑定 Hub/设备/逻辑消息/版本/代次/稳定项目键/位置与顺序，candidates 与 status 依当前项目回执判定，_record_receipts 为本轮项目独立记账；federation.push_pending 先 known 核对，已知版本从正文批次排除；Hub known-upload-messages 校验当前允许项目后以 INSERT OR IGNORE 追加消息/会话归属，不删 A、不重建正文。禁传阶段的新归属不经最小登记旁路发送也由 federation._push_projects 固定 memberships=[] 支持。此意见限合成 Codex 单消息、三种归属操作的本次 TDD 绿灯及约定回归；不代表完整 SC3 或 E1/E3/E4 平台验收。"
+    }
+  }
+}

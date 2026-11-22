@@ -1,0 +1,93 @@
+{
+  "state": {
+    "configured": true,
+    "hub_id": "a816522f29d74fcba7800d8dea7503b0",
+    "device_id": "c06e6ad6bbbf4435b4cff171d7bd2f90",
+    "hub_address": "https://localhost:36847",
+    "device_name": "005-local",
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "generation": 3,
+    "state": "confirmed",
+    "hub_revision": 3,
+    "control_epoch": "1b68ba91772d486a9e78decf45bbe475",
+    "confirmed_messages": 0,
+    "not_confirmed_messages": 7,
+    "inflight_messages": 0,
+    "unsent_messages": 7,
+    "problem": null,
+    "remote": {
+      "hub_id": "a816522f29d74fcba7800d8dea7503b0",
+      "device_id": "c06e6ad6bbbf4435b4cff171d7bd2f90",
+      "revision": 3,
+      "policy": {
+        "mode": "none",
+        "projects": []
+      },
+      "submission_id": "3e35a7c2066046419a91fb6ae9d4e6d8",
+      "control_epoch": "1b68ba91772d486a9e78decf45bbe475",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T06:00:25.804293+00:00",
+    "last_transfer_success": "2026-11-22T06:00:25.804293+00:00"
+  },
+  "old-original": {
+    "id": 6,
+    "source": "codex",
+    "source_session_id": "local-A",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective common local-A original",
+    "project_id": 2,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective common local-A original",
+        "timestamp": null,
+        "canonical_id": "0ce304c770fc02515f66d77f24f732421836b14d0d2f94a36f5f670d3efa5974",
+        "content_version": "918a69208f396e2960d87510222eb237be126c4949b12160909c8e176093323e",
+        "hub_message_id": 6,
+        "origins": [
+          {
+            "device_id": "c06e6ad6bbbf4435b4cff171d7bd2f90",
+            "device_name": "005-local",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 2,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 2,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "c06e6ad6bbbf4435b4cff171d7bd2f90",
+        "source_key": "412f2bed669857a0b4d93b6d74b7cdfa",
+        "device_name": "005-local"
+      }
+    ],
+    "origin_session_key": "local-A",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "c06e6ad6bbbf4435b4cff171d7bd2f90",
+        "device_name": "005-local"
+      }
+    ]
+  }
+}

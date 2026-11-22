@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-move-retry": {
+      "status": "passed",
+      "reason": "独立核对 AGENTS.md、已确认 intent、SPEC B3 第50行/A3 第204行、PLAN §11 及实际 SHA-256 bd4ec82fbc652c141afecdd0bf5aa5b732720897c3d37d9083932e3d47e38649 的 definitions/000002.json：当前稳定项目归属必须独立确认，丢失回执不能沿用 A 接收确认。green-affiliation-retry-v1 与 red-affiliation-retry-v1 的 cases/精确 pytest 命令/声明及 test_bindings 完全相同；冻结 test_upload_project_moves.py SHA 9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56、test_005_contracts.py SHA ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197 与当前字节一致。全部38项绿灯 bindings、9项 artifacts、红灯6项 artifacts、设计引用摘要与运行就绪附件摘要核对通过。已读独立红灯意见及原始输出：红灯止于第87行 errors=[]，尚未发生回执丢失；本次 TC-005-move-retry/run.stdout 明确 1 passed，exit 0、stderr 空，故第88-96行后续断言实际均到达。该故障注入第79-83行先调用真实 TestClient Hub /known-upload-messages 请求再抛 HubUnavailable；第88行通过 B 检索找到 move-a 证明 Hub 已持久追加 B 后响应才丢失，非请求未送达。第87、89-91行同时证明本机 errors/pending 保留、规则仍 confirmed、当前项目 allowed_pending_messages=1 且 transfer_state=failed，旧 A 回执没有冒充 B 确认。恢复真实通道后第93-96行证明重试 uploaded=0、待确认归零，move-a 全部物理正文行（含 id/source_key/position/role/text/timestamp）与改归属前完全相等、原 A 引用仍读回精确正文。源码支撑：LocalUpload.candidates/status 按 local_upload_project_receipts 的 Hub/设备/消息版本/代次/稳定项目键/位置顺序匹配；federation.push_pending 的 known 失败分支持久 transfer_result(problem)，不写归属回执；成功核对后 acknowledge_known 仅为实际 verified 本轮项目记账，并从正文待发集合排除该版本。Hub known 分支检查许可与版本后 INSERT OR IGNORE 追加归属，不删除原 A 或复制正文，因此重试为幂等元数据核对。regression.stdout 为实际所列7文件完整回归48 passed（6.43s），exit 0、stderr 空，仅非阻塞 Starlette 弃用警告。范围限合成 Codex 单消息、assign 后已持久化/响应丢失的故障路径及约定回归；此绿灯补足红灯未到达的故障后断言，不冒充其他崩溃窗口或完整 SC3/平台验收。"
+    }
+  }
+}

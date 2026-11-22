@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-move-retry": {
+      "status": "expected_failure",
+      "reason": "独立核对定义快照 SHA-256 bd4ec82fbc652c141afecdd0bf5aa5b732720897c3d37d9083932e3d47e38649 及 SC3、SPEC B3 第50行/A3 第204行、PLAN §11：正文接收回执不能代替当前稳定项目归属确认，归属确认丢失须保持未确认并能只核对重试。design-affiliation-v1 的 move-retry 设计与 match-affiliation-v1 的实际声明、tdd-red/red-affiliation-retry-v1 的唯一目标 TC-005-move-retry 一致；冻结 tests/test_upload_project_moves.py SHA 9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56 和 tests/test_005_contracts.py SHA ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197 均与运行绑定及当前文件一致，全部记录 artifacts 与五份 product_bindings 校验一致。项目约定使用 pytest；runtime 原始 smoke.stdout 为 pytest 9.2.0、exit 0。实际 run.stdout 表明初始两条 A/B 已接收、A 旧引用取得、真实预览确认 assign 到 B 均通过，然后第87行 result[errors] and result[pending] 因 errors=[] 失败，exit 1、stderr 空，仅有不阻塞的 Starlette 弃用警告。不是异常注入导致测试框架崩溃：lost 包装先调用真实 TestClient 请求，只有 known-upload-messages 返回后才抛 HubUnavailable；产品 push_pending 第269-274行本应捕获该错误并保留待确认。当前失败恰因旧 A 回执过滤掉已收消息：LocalUpload 表结构第44-48行、candidates 第272-277行、_record_receipts 第410-416行均没有稳定项目键，改归属后仍命中旧 origin receipt；status 第315-320行同样沿用无项目回执，所以未启动本次 B 核对，既无错误也无法保留 B 待确认。Hub hub.py 第267-284行已有校验获准项目、增加已存同版本消息归属的真实路径。该已观察业务缺失符合 expected_failure，原始失败足以证明不能沿用 A 回执的需求尚未实现。边界明确：本次尚未实际触发 synthetic confirmation lost，不能称作已完成 Hub 先持久化/响应丢失的故障路径；第88-96行关于 Hub B 已存、allowed_pending=1、失败状态、恢复重试、正文不变和旧引用仍可读尚未执行，须同版绿灯再证明。本红灯仅证明缺失的当前项目核对先决行为，不代表完整重试或 SC3 验收通过。"
+    }
+  }
+}

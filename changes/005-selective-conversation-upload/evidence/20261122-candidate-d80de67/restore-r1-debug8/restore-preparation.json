@@ -1,0 +1,15 @@
+{
+  "body_stopped": true,
+  "archive_id": "a1c67cbfe3654c9aa0bd5f1cc6a2f2d3",
+  "control_epoch": "89f3875c7c0b4d1d865b88b374644f2f",
+  "inflight_messages": 0,
+  "restore_files": [
+    "<task>/local/archive.sqlite3",
+    "<task>/local/archive.sqlite3.hub.json"
+  ],
+  "do_not_restore": [
+    "<task>/local/archive.sqlite3.upload-guard.json",
+    "<task>/local/archive.sqlite3.upload-guard.json.lock"
+  ],
+  "next": "已停止新正文发送；在途请求仍待确认。停止本机服务，按清单恢复一致性备份并重启，再查看 upload reconcile"
+}

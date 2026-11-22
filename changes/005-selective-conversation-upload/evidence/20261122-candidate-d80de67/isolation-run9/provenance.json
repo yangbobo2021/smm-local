@@ -1,0 +1,57 @@
+{
+  "source": "AT-SMM-005 private original isolation-run9",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "controllers": {
+    "selective_upload_isolation.py": "d5fce93afe86310c559959eadc2259c5021393595c60e9d8560006f2f1b948de",
+    "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+    "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+    "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+    "selective_upload_platform.py": "e45453433bc61eba96a0807ae298a33098b1aa60224b4adee28b6754a83c1102",
+    "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+    "selective_upload_windows_limited.py": "ba55be5dfb7bf2e4c2d1a3211154693028bf44eb5237f47e84b69d40530bee89"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "isolation-result.json",
+      "original_sha256": "a3c94b783a03d4b15cd90dec8a8a3805f186970d83ce1bc1e6a3ff61dbf26ae1",
+      "export_sha256": "a3c94b783a03d4b15cd90dec8a8a3805f186970d83ce1bc1e6a3ff61dbf26ae1"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "6fd45ec9c09148f7b31f85df85c4186a27d0bfeb98cc4f1ef2f9deec2d80ab2c",
+      "export_sha256": "9fc8db0b518778b49c3bcb70320dade70c5e590735bde88972d1ca0692b5a1a5"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "da5931c4dd21c38e7a89ad8bb0de3b0e5956f4adf3feacbe3a03988251f524d7",
+      "export_sha256": "da5931c4dd21c38e7a89ad8bb0de3b0e5956f4adf3feacbe3a03988251f524d7"
+    },
+    {
+      "file": "payloads.json",
+      "original_sha256": "bb610508c38b7544b8a8155a9596b8953f443db90bef2986db881ffefd1e021c",
+      "export_sha256": "bb610508c38b7544b8a8155a9596b8953f443db90bef2986db881ffefd1e021c"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "99cabd7fcebf11872c97ef6d59ef645ec3d81c35b98bcd9c7d5236b38a5df726",
+      "export_sha256": "99cabd7fcebf11872c97ef6d59ef645ec3d81c35b98bcd9c7d5236b38a5df726"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "353a221ddfd25baf6ba34ce6e4729e670d470ec598cd7208e01528e401aa63fa",
+      "export_sha256": "353a221ddfd25baf6ba34ce6e4729e670d470ec598cd7208e01528e401aa63fa"
+    },
+    {
+      "file": "sync-observations.json",
+      "original_sha256": "0f867f036d3e2ac2bb5aa9cce8e622da01dfa64272b107555269308821efb6e6",
+      "export_sha256": "0f867f036d3e2ac2bb5aa9cce8e622da01dfa64272b107555269308821efb6e6"
+    }
+  ]
+}

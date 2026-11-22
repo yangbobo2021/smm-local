@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "systemd-user",
+    "definition": "# <home>/.config/systemd/user/smm-hub-8eca2c8b30fe.service\n[Unit]\nDescription=SMM aggregation server\n[Service]\nExecStart=\"<home>/smm-005-20261122/hub-env/bin/python\" \"-m\" \"smm_hub.cli\" \"hub\" \"--state-dir\" \"<task>/hub-state\" \"run\"\nRestart=on-failure\nRestartSec=2s\nUMask=0077\n[Install]\nWantedBy=default.target\n",
+    "pid": 149981,
+    "state": "MainPID=149981\nExecStart={ path=<home>/smm-005-20261122/hub-env/bin/python ; argv[]=<home>/smm-005-20261122/hub-env/bin/python -m smm_hub.cli hub --state-dir <task>/hub-state run ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+    "at": "2026-11-22T06:00:08.850107+00:00"
+  },
+  {
+    "mode": "systemd-user",
+    "definition": "# <home>/.config/systemd/user/smm-hub-8eca2c8b30fe.service\n[Unit]\nDescription=SMM aggregation server\n[Service]\nExecStart=\"<home>/smm-005-20261122/hub-env/bin/python\" \"-m\" \"smm_hub.cli\" \"hub\" \"--state-dir\" \"<task>/hub-state\" \"run\"\nRestart=on-failure\nRestartSec=2s\nUMask=0077\n[Install]\nWantedBy=default.target\n",
+    "pid": 150298,
+    "state": "MainPID=150298\nExecStart={ path=<home>/smm-005-20261122/hub-env/bin/python ; argv[]=<home>/smm-005-20261122/hub-env/bin/python -m smm_hub.cli hub --state-dir <task>/hub-state run ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+    "at": "2026-11-22T06:00:25.541734+00:00"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "at": "2026-11-22T06:10:57.270588+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "unknown",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 1,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:11:01.631602+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:11:08.306289+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "needs_selection",
+      "transfer_state": "blocked",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:11:50.398278+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "unknown",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 1,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:11:50.976012+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:12:26.429790+00:00",
+    "archive": "<task>\\local\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:12:42.885071+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "backfilling",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:12:43.447736+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": true,
+      "state": "confirmed",
+      "transfer_state": "unknown",
+      "allowed_pending_messages": 1,
+      "inflight_messages": 1,
+      "transfer_problem": null
+    }
+  },
+  {
+    "at": "2026-11-22T06:12:48.311903+00:00",
+    "archive": "<task>\\remote\\archive.sqlite3",
+    "state": {
+      "running": false,
+      "state": "confirmed",
+      "transfer_state": "complete",
+      "allowed_pending_messages": 0,
+      "inflight_messages": 0,
+      "transfer_problem": null
+    }
+  }
+]

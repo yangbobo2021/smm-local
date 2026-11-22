@@ -1,0 +1,19 @@
+{
+  "label": "ai.smm.local.acceptance.9be126e8e530",
+  "pid": 56731,
+  "definition": {
+    "KeepAlive": true,
+    "Label": "ai.smm.local.acceptance.9be126e8e530",
+    "ProgramArguments": [
+      "<task>/login-candidate",
+      "--db",
+      "<task>/local/archive.sqlite3",
+      "serve"
+    ],
+    "RunAtLoad": true,
+    "StandardErrorPath": "<task>/login-logs/stderr.log",
+    "StandardOutPath": "<task>/login-logs/stdout.log",
+    "WorkingDirectory": "/private/tmp"
+  },
+  "process": "  UID   PID  PPID COMMAND\n  501 56731     1 <local-env>/bin/python <task>/login-candidate --db <task>/local/archive.sqlite3 serve\n"
+}

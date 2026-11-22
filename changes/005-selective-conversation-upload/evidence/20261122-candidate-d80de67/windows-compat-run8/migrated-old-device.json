@@ -1,0 +1,234 @@
+{
+  "before": {
+    "query": "selective",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "title": "selective compatibility old-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "source_key": "4549ca94b74f85bddc8667142df007e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzdlNTcwODlmYzZjNDM5YjliZTE1ODllZWE1YjQ5MzQiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImRkNWVmYWUzNTdiMjQzNGY4NTBmN2YzNGNmYzFiNmMwIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjMwMjhkNWI5NTllNTM3ZjJjMDQ0ZjNiNGYzNzJlZDY4NGNiNGE2OWJkZDc5Y2Y3ZGVmNzUwYmJhZTY1MTJjM2QiLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.1ee923d9be4765200a43c73df27d76d0ef7bfb76d0edcae79ec7b2b21cffccb4",
+        "origin_session_key": "old-device",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub"
+      }
+    ],
+    "candidate_failures": [],
+    "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0"
+  },
+  "after": {
+    "query": "selective",
+    "scope": "all",
+    "effective_projects": "all",
+    "excluded_current_session_id": null,
+    "results": [
+      {
+        "id": 1,
+        "source": "codex",
+        "source_session_id": "old-device",
+        "title": "selective compatibility old-device original",
+        "started_at": null,
+        "updated_at": null,
+        "project_id": 1,
+        "project_name": "A",
+        "rank": 1,
+        "bm25_score": 1e-06,
+        "matched_messages": [
+          {
+            "position": 1,
+            "role": "user",
+            "text": "selective compatibility old-device original",
+            "timestamp": null,
+            "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+            "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+            "hub_message_id": 1,
+            "origins": [
+              {
+                "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+                "device_name": "legacy-device",
+                "source_position": 1,
+                "source_order": 1,
+                "project_id": 1,
+                "project_name": "A"
+              }
+            ],
+            "source_order": 1
+          }
+        ],
+        "projects": [
+          {
+            "id": 1,
+            "name": "A",
+            "project_kind": "ordinary",
+            "source": "device",
+            "owner": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "source_key": "4549ca94b74f85bddc8667142df007e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNzdlNTcwODlmYzZjNDM5YjliZTE1ODllZWE1YjQ5MzQiLCJhcmNoaXZlX3Njb3BlIjoiaHViIiwiY29udmVyc2F0aW9uX2lkIjoxLCJmb3JtYXQiOjEsImh1Yl9pZCI6ImRkNWVmYWUzNTdiMjQzNGY4NTBmN2YzNGNmYzFiNmMwIiwia2luZCI6ImNpdGF0aW9uIiwibWVzc2FnZXMiOlt7ImlkIjoxLCJwb3NpdGlvbiI6MSwic291cmNlX2tleSI6IjMwMjhkNWI5NTllNTM3ZjJjMDQ0ZjNiNGYzNzJlZDY4NGNiNGE2OWJkZDc5Y2Y3ZGVmNzUwYmJhZTY1MTJjM2QiLCJ2ZXJzaW9uIjoiMTU0YWJkZmVjMjg1NWRhYmE5YjljNjMwM2NlOWJjYmQ0YjVkMjM1YzVmODhiZWJmMDZhMTUzZWQzNDVlOGRhYiJ9XSwib3JpZ2luX2lkZW50aXR5IjoiM2E0Yzc1NTQ2N2I5YmUyNzJiYzg2OGZiMTcyNGRiZDkwZDM1MTg3MGE3MDVmZWEzMzJhMTIwYTA0OGUxZjZlZSIsInByb2plY3RfaWRzIjpudWxsLCJzb3VyY2UiOiJjb2RleCJ9.1ee923d9be4765200a43c73df27d76d0ef7bfb76d0edcae79ec7b2b21cffccb4",
+        "origin_session_key": "old-device",
+        "identity_namespace": "agent",
+        "origins": [
+          {
+            "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "device_name": "legacy-device"
+          }
+        ],
+        "archive_scope": "hub"
+      }
+    ],
+    "candidate_failures": [],
+    "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0"
+  },
+  "upgraded": {
+    "exit_code": 0,
+    "stdout": "{\"uploaded\": 0, \"pending\": false, \"errors\": [], \"upload\": {\"configured\": true, \"hub_id\": \"dd5efae357b2434f850f7f34cfc1b6c0\", \"device_id\": \"e8ce70539bfb4ab99df2033e6554b7e6\", \"hub_address\": \"https://localhost:18886\", \"device_name\": \"legacy-device\", \"policy\": {\"mode\": \"all\", \"projects\": []}, \"generation\": 1, \"state\": \"confirmed\", \"hub_revision\": 1, \"control_epoch\": \"53e0a45de1fc4047ba17ba1efb7bce22\", \"confirmed_messages\": 1, \"not_confirmed_messages\": 0, \"inflight_messages\": 0, \"unsent_messages\": 0, \"problem\": null, \"remote\": {\"hub_id\": \"dd5efae357b2434f850f7f34cfc1b6c0\", \"device_id\": \"e8ce70539bfb4ab99df2033e6554b7e6\", \"revision\": 1, \"policy\": {\"mode\": \"all\", \"projects\": []}, \"submission_id\": \"2d5ccccec23244baa1ab1eaa56e3e273\", \"control_epoch\": \"53e0a45de1fc4047ba17ba1efb7bce22\", \"restore_pending\": false, \"conflict\": false}, \"transfer_state\": \"complete\", \"transfer_problem\": null, \"allowed_pending_messages\": 0, \"last_transfer_attempt\": \"2026-11-22T05:57:14.623694+00:00\", \"last_transfer_success\": \"2026-11-22T05:57:14.623694+00:00\"}}\n",
+    "stderr": ""
+  },
+  "state": {
+    "configured": true,
+    "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0",
+    "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+    "hub_address": "https://localhost:18886",
+    "device_name": "legacy-device",
+    "policy": {
+      "mode": "all",
+      "projects": []
+    },
+    "generation": 1,
+    "state": "confirmed",
+    "hub_revision": 1,
+    "control_epoch": "53e0a45de1fc4047ba17ba1efb7bce22",
+    "confirmed_messages": 1,
+    "not_confirmed_messages": 0,
+    "inflight_messages": 0,
+    "unsent_messages": 0,
+    "problem": null,
+    "remote": {
+      "hub_id": "dd5efae357b2434f850f7f34cfc1b6c0",
+      "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+      "revision": 1,
+      "policy": {
+        "mode": "all",
+        "projects": []
+      },
+      "submission_id": "2d5ccccec23244baa1ab1eaa56e3e273",
+      "control_epoch": "53e0a45de1fc4047ba17ba1efb7bce22",
+      "restore_pending": false,
+      "conflict": false
+    },
+    "transfer_state": "complete",
+    "transfer_problem": null,
+    "allowed_pending_messages": 0,
+    "last_transfer_attempt": "2026-11-22T05:57:14.623694+00:00",
+    "last_transfer_success": "2026-11-22T05:57:14.623694+00:00"
+  },
+  "old_write_rejected": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<task-root>\\old-local-env\\Lib\\site-packages\\smm_local\\federation.py\", line 40, in _request\n    with LOCAL_HTTP.open(request, timeout=5) as response:\n         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\ProgramData\\SmmVibeInsight003-20261117\\Python\\Lib\\urllib\\request.py\", line 493, in open\n    response = meth(req, response)\n  File \"C:\\ProgramData\\SmmVibeInsight003-20261117\\Python\\Lib\\urllib\\request.py\", line 602, in http_response\n    response = self.parent.error(\n        'http', request, response, code, msg, hdrs)\n  File \"C:\\ProgramData\\SmmVibeInsight003-20261117\\Python\\Lib\\urllib\\request.py\", line 531, in error\n    return self._call_chain(*args)\n           ~~~~~~~~~~~~~~~~^^^^^^^\n  File \"C:\\ProgramData\\SmmVibeInsight003-20261117\\Python\\Lib\\urllib\\request.py\", line 464, in _call_chain\n    result = func(*args)\n  File \"C:\\ProgramData\\SmmVibeInsight003-20261117\\Python\\Lib\\urllib\\request.py\", line 611, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 409: Conflict\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys,json; from smm_local.core import Archive; from smm_local.federation import push_pending; d=Archive(sys.argv[1]); d.sync_codex(); print(json.dumps(push_pending(d)))\n                                                                                                                                                                 ~~~~~~~~~~~~^^^\n  File \"<task-root>\\old-local-env\\Lib\\site-packages\\smm_local\\federation.py\", line 157, in push_pending\n    response = _request(config, \"/upload\", {\n        \"hub_id\": hub_id, \"device_id\": config[\"device_id\"],\n        \"device_name\": config[\"device_name\"], \"records\": rows,\n    })\n  File \"<task-root>\\old-local-env\\Lib\\site-packages\\smm_local\\federation.py\", line 48, in _request\n    raise HubUnavailable(f\"汇总服务返回 HTTP {exc.code}\") from exc\nsmm_local.federation.HubUnavailable: 汇总服务返回 HTTP 409\n"
+  },
+  "old_read": {
+    "id": 1,
+    "source": "codex",
+    "source_session_id": "old-device",
+    "source_path": "",
+    "cwd": null,
+    "started_at": null,
+    "updated_at": null,
+    "title": "selective compatibility old-device original",
+    "project_id": 1,
+    "project_name": "A",
+    "messages": [
+      {
+        "position": 1,
+        "role": "user",
+        "text": "selective compatibility old-device original",
+        "timestamp": null,
+        "canonical_id": "34b7c94a9996eec1b2bf9ee28f237770f0cdde8b5c3669cc31c05261198dd29d",
+        "content_version": "154abdfec2855daba9b9c6303ce9bcbd4b5d235c5f88bebf06a153ed345e8dab",
+        "hub_message_id": 1,
+        "origins": [
+          {
+            "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+            "device_name": "legacy-device",
+            "source_position": 1,
+            "source_order": 1,
+            "project_id": 1,
+            "project_name": "A"
+          }
+        ],
+        "source_order": 1
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "name": "A",
+        "project_kind": "ordinary",
+        "source": "device",
+        "owner": "e8ce70539bfb4ab99df2033e6554b7e6",
+        "source_key": "4549ca94b74f85bddc8667142df007e6",
+        "device_name": "legacy-device"
+      }
+    ],
+    "origin_session_key": "old-device",
+    "identity_namespace": "agent",
+    "origins": [
+      {
+        "device_id": "e8ce70539bfb4ab99df2033e6554b7e6",
+        "device_name": "legacy-device"
+      }
+    ],
+    "archive_scope": "hub"
+  }
+}
