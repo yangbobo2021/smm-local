@@ -90,9 +90,10 @@ class Run:
         observed = {}
         for package, interpreter in [('local', self.t['local_python']), ('hub', self.t['hub_python'])]:
             expected = candidate['installed_' + package]
-            code = "import importlib.util,pathlib,hashlib,json,sys,platform; r=pathlib.Path(importlib.util.find_spec('smm_' + sys.argv[1]).origin).parent.parent; print(json.dumps({'files':{n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])},'python':sys.version,'platform':platform.platform(),'executable':sys.executable}))"
+            code = "import importlib.util,pathlib,hashlib,json,sys,platform; r=pathlib.Path(importlib.util.find_spec('smm_' + sys.argv[1]).origin).parent.parent; print(json.dumps({'files':{n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])},'python':sys.version,'platform':platform.platform(),'executable':sys.executable,'other_package':importlib.util.find_spec('smm_hub' if sys.argv[1]=='local' else 'smm_local') is not None}))"
             value = json.loads(self.command([interpreter, '-I', '-c', code, package, json.dumps(list(expected))]).stdout)
             assert value['files'] == expected, 'installed module differs from wheel'
+            assert not value['other_package'], 'independent package environment contains the other SMM package'
             observed[package] = value
         self.save('manifest', {'candidate': candidate, 'installed': observed, 'started_at': self.started,
                                'platform': platform.platform(), 'identity': self.identity(), 'mode': self.args.mode})

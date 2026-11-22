@@ -22,6 +22,13 @@ def main():
         wheel = getattr(args, kind + '_wheel').resolve()
         with zipfile.ZipFile(wheel) as z:
             candidate['installed_' + kind] = {name: hashlib.sha256(z.read(name)).hexdigest() for name in z.namelist() if name.startswith('smm_' + kind + '/') and name.endswith('.py')}
+            for name in candidate['installed_' + kind]:
+                if name == 'smm_hub/_archive/__init__.py':
+                    expected = (ROOT / 'src/smm_hub/_archive.py').read_text(encoding='utf-8').replace('from smm_local.', 'from .').encode()
+                else:
+                    source = name.replace('smm_hub/_archive/', 'smm_local/')
+                    expected = (ROOT / 'src' / source).read_bytes()
+                assert z.read(name) == expected, 'wheel differs from candidate source: ' + name
         candidate[kind + '_wheel'] = {'name': wheel.name, 'sha256': hashlib.sha256(wheel.read_bytes()).hexdigest()}
     work = args.work.resolve(); work.mkdir(parents=True, exist_ok=False)
     cert, key = work / 'cert.pem', work / 'key.pem'
