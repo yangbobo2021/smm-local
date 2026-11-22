@@ -409,12 +409,12 @@ class Documents:
             row=con.execute('SELECT * FROM documents WHERE id=?',(payload.get('document_id'),)).fetchone()
             if row is None or row['text'] is None or row['version']!=payload.get('version'):
                 raise ValueError('采集版本已失效，请重新检索')
-            valid=False
+            valid=[]
             for stamp in payload.get('sources',[]):
                 member=con.execute('SELECT m.status,m.qualification,s.revision,s.status AS source_status FROM document_memberships m JOIN document_sources s ON s.id=m.source_id WHERE m.document_pk=? AND m.source_id=?',(row['pk'],stamp['id'])).fetchone()
                 if member and member['status']=='ready' and member['source_status'] in {'ready','partial'} and member['qualification']==stamp['qualification'] and member['revision']==stamp['revision']:
-                    valid=True
+                    valid.append(stamp['id'])
             if not valid:raise ValueError('当次来源资格已失效或正在刷新，请稍后重新检索')
             result={k:row[k] for k in ['id','path','version','sha256','text_length','captured_at','captured_by_source_id']}
             return {**result,**_range(row['text'],payload['start'] if start is None else start,payload['end'] if end is None else end),
-                    'source_ids':[s['id'] for s in payload['sources']],'snapshot_kind':'采集版本（仅本机）'}
+                    'source_ids':valid,'snapshot_kind':'采集版本（仅本机）'}

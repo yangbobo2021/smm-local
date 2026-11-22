@@ -69,7 +69,11 @@ def test_overlap_version(tmp_path,monkeypatch,withdraw):
     assert set(names(f,project=p))=={'shared.txt','control.txt'}
     assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
     unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'} if withdraw=='continuous' else set());unique(None,{'shared.txt','control.txt'})
-    assert f.read(current['p'])['text']==f.read(current['all'])['text']=='needle v2'
+    p_read=f.read(current['p']);all_read=f.read(current['all'])
+    assert p_read['text']==all_read['text']=='needle v2'
+    assert p_read['source_ids']==[s1['id']]
+    assert set(all_read['source_ids'])==({s1['id'],s2['id']} if withdraw=='continuous' else {s1['id']})
+    assert p_read['captured_by_source_id']==all_read['captured_by_source_id']==s2['id']
     if withdraw!='continuous':f.bad('POST','/api/documents/read',{'reference':current['q']['reference']})
     else:assert f.read(current['q'])['text']=='needle v2'
     assert f.read(names(f,project=p)['control.txt'])['text']=='needle control'

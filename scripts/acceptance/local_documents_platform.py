@@ -398,7 +398,17 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
                 page.once('dialog',lambda dialog:dialog.accept());page.locator(f'[data-doc-remove="{self.web_source["id"]}"]').click()
                 page.wait_for_function('(id)=>!document.querySelector(`[data-doc-remove="${id}"]`)',arg=self.web_source['id'])
                 self.web_removed=True
-                assert self.cli('documents','read','--reference',self.current['reference'])['text']==normalized(self.raw2)
+                self.phase='surviving-overlap-reference'
+                expected={**self.current,'source_ids':[self.source['id']],'captured_by_source_id':self.web_source['id']}
+                cli_read=self.cli('documents','read','--reference',self.current['reference'])
+                mcp_read=self.mcp_sync([('read_document',{'reference':self.current['reference']},False)])[0]
+                with page.expect_response(lambda r:r.url.endswith('/api/documents/read') and r.request.method=='POST') as survivor_response:
+                    page.locator(f'[data-doc-read="{result["results"].index(new)}"]').click()
+                assert survivor_response.value.status==200
+                web_read=survivor_response.value.json()
+                for value in [cli_read,mcp_read,web_read]:
+                    read_matches(value,expected,self.raw2,self.guide,collector=self.web_source['id'])
+                self.save('overlap-survivor',{'original_hit':self.current,'removed_source_id':self.web_source['id'],'current_qualification_source_ids':[self.source['id']],'historical_collector':self.web_source['id'],'cli_read':cli_read,'mcp_read':mcp_read,'web_read':web_read})
             finally:
                 context.tracing.stop(path=str(self.out/'web-trace.zip'));context.close();browser.close()
 
