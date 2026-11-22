@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-005-default": {
+      "status": "passed",
+      "covers": [
+        "tdd-core"
+      ],
+      "reason": "按已审design-current16-sc1的tdd-core核对SPEC B2/B3及冻结test_005_contracts.py:78-96。本次实际push后完整Hub正文恰为预置远端正文；所有出站请求均无私有session/body，全部最小登记项目字段白名单且memberships为空；随后实际查到remote会话。故默认禁止、最小登记和仍可查询三项均已到达，不以零正文 alone 代替查询正控。 正式证据execute-final20-sc1/TC-005-default/run.stdout为1 passed，run.stderr为空，独立进程pid=71737，收据exit_code=0，实际时间2026-11-22T08:26:27.669000+00:00至2026-11-22T08:26:28.072000+00:00。已逐文件核对本目标artifacts/bindings摘要、request所选TC、设计收据摘要、match-current16-sc1冻结源段与当前源一致，且执行bindings与独立preparation-final20相同。无附件不影响此断言型检查；只认领本次实际到达分配项，full1-4、真实E1平台及其余gaps保持未验证。"
+    },
+    "TC-005-reconcile-cli-inputs": {
+      "status": "passed",
+      "covers": [
+        "cli-versions"
+      ],
+      "reason": "按已审cli-versions核对SPEC B1及冻结test_reconcile_snapshot.py:81-110。实际cli.main从差异读两版本，五组缺失/无效参数均非零退出且有stderr无stdout，两端完整row/head未变；帮助包含两个参数及local.generation/hub.revision来源；新鲜双版本明确提交成功，独立none规则与confirmed状态均被断言。没有把缺参失败当作新鲜提交成功。 正式证据execute-final20-sc1/TC-005-reconcile-cli-inputs/run.stdout为1 passed，run.stderr为空，独立进程pid=71738，收据exit_code=0，实际时间2026-11-22T08:26:28.072000+00:00至2026-11-22T08:26:28.459000+00:00。已逐文件核对本目标artifacts/bindings摘要、request所选TC、设计收据摘要、match-current16-sc1冻结源段与当前源一致，且执行bindings与独立preparation-final20相同。无附件不影响此断言型检查；只认领本次实际到达分配项，full1-4、真实E1平台及其余gaps保持未验证。"
+    },
+    "TC-005-reconcile-web-inputs": {
+      "status": "passed",
+      "covers": [
+        "web-versions"
+      ],
+      "reason": "按已审web-versions核对SPEC B1及冻结test_reconcile_snapshot.py:132-149。实际API逐个执行七组缺字段/负数/布尔/不可解析输入，两端完整row/head不变且出站无upload-policy/set；每组HTTP状态为400或422，全部循环到达。这里只认领设计所列输入门禁；四模式新鲜正控由SC2 fresh另验，真实浏览器画面不在本TC。 正式证据execute-final20-sc1/TC-005-reconcile-web-inputs/run.stdout为1 passed，run.stderr为空，独立进程pid=71739，收据exit_code=0，实际时间2026-11-22T08:26:28.459000+00:00至2026-11-22T08:26:28.858000+00:00。已逐文件核对本目标artifacts/bindings摘要、request所选TC、设计收据摘要、match-current16-sc1冻结源段与当前源一致，且执行bindings与独立preparation-final20相同。无附件不影响此断言型检查；只认领本次实际到达分配项，full1-4、真实E1平台及其余gaps保持未验证。"
+    },
+    "TC-005-transfer-status": {
+      "status": "passed",
+      "covers": [
+        "review-transfer-status"
+      ],
+      "reason": "按已审review-transfer-status实际分配的状态分离检查核对SPEC B2/B4及冻结test_upload_review_regressions.py:86-107。正文known查询故障后实际status保持规则confirmed，同时transfer_state=failed、准确错误及pending=1；恢复并push后规则仍confirmed、传输complete、错误清除且pending=0。两种状态和恢复副作用均实际到达。本项不据同名广义义务宣称真实CLI/Web各平台入口已经覆盖。 正式证据execute-final20-sc1/TC-005-transfer-status/run.stdout为1 passed，run.stderr为空，独立进程pid=71751，收据exit_code=0，实际时间2026-11-22T08:26:28.859000+00:00至2026-11-22T08:26:29.422000+00:00。已逐文件核对本目标artifacts/bindings摘要、request所选TC、设计收据摘要、match-current16-sc1冻结源段与当前源一致，且执行bindings与独立preparation-final20相同。无附件不影响此断言型检查；只认领本次实际到达分配项，full1-4、真实E1平台及其余gaps保持未验证。"
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-local-restore/run.process.json": "53ca627f052e6cdf4d86f40a4e261405347d27042fef35679bb7831477006671",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-local-restore/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-local-restore/run.stdout": "d0feb0c5023f5e292e2bedeffd87b401f2f4641518ded575133cadcc91d15f02",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-unreconciled-send/run.process.json": "6740e1dd2d9c3aa407fb2942a7d257475201f7330658e3f5b9bc3941784635e6",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-unreconciled-send/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-unreconciled-send/run.stdout": "e5b47d501c19d391332d773f1bba893d8e51214925c10b13e6f2dae5969a40ff",
+    ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/request.json": "1876cdd959d2ca351fddbbb6ffd83aa0ce9e7230fad5f67132881e2259aef342"
+  },
+  "bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_archive_references.py": "2bc5e24bd8b61cd155745309e4ad29c7dec596dc7766c1564c79208efa8b1482",
+    "tests/test_cli_help.py": "355468c0783ed01394d9f5a8a2bb9e3092e94c4899a654e8b745beef8e028bc1",
+    "tests/test_combined_search.py": "fbb6c58438c2e0faec275f045b95f815cc163f9867ff63a3b853079600e92c01",
+    "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+    "tests/test_federation_tls.py": "fea404b497ac6f1c71bb4fb6529a8a819f7c5a5e2da6778f31fea2fe51f79516",
+    "tests/test_hub_standalone.py": "3c7741ae2d762a5aa7d7498a25201860741135ef7bb897951017e47259a377cb",
+    "tests/test_maintenance.py": "63171d761ca0a60acc35bafb16f1581491090418da7039a42389988294f069e4",
+    "tests/test_pipeline.py": "2564b4d1bfdb81b81c58ef790f070129adbe8fc1363564969ac320b43d49c332",
+    "tests/test_project_identity_boundaries.py": "16a6b46ed7a32470c316f5748e4849eee9784bc6db6b83d9f7b058252542dac2",
+    "tests/test_project_preview_coverage.py": "28ed99f2da37e5df2acb711f7f24a2d5156b73a9a7fbd2c77e9c312f85fa031a",
+    "tests/test_reconcile_boundaries.py": "1215497c31beebc1f81ab81de4cc35d022aa918c7176404576c91dad78b7bc84",
+    "tests/test_reconcile_dispatch.py": "9fc53738cf45201c3a7f93fe3345405e93f5d7ab746beee5b259301472beaab3",
+    "tests/test_reconcile_remote_race.py": "b1f8c2fd4cf4578d91bd67a2f17041f5d0485022a573e8f0ce0d092940a2fe38",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5",
+    "tests/test_reconcile_uncertain.py": "6ad019a7a09254c0e2f6f090b7bb0667fc900a46f37b8eae8af2dfe13be04d6c",
+    "tests/test_scoped_read_metadata.py": "504194f3f20a11390aa13df2b0918d301d9644d665649caeb6a95d9dda11b918",
+    "tests/test_selective_upload_audit.py": "5e49f5bbac6cddb391afae148ee18617704f045ece8fb5179c82d65a93c1dee4",
+    "tests/test_selective_upload_probe.py": "d7103d8595a37fd08d0af7b16263610bbf4dcdaa469f32e48438a38ced553898",
+    "tests/test_service_startup.py": "79df1235e260a6323af648062df9d4b9694f9352b3a39567b2d8787ff1bfa223",
+    "tests/test_source_plugins.py": "4d7f9f61a505811117c6f4d2d106ca6205fe6131bc25331809e23c3d8cab82d0",
+    "tests/test_upload_acceptance_boundaries.py": "aea1eb83fffc8f45b581ad95ece89361451b0029503d023553464a3024394e12",
+    "tests/test_upload_dispatch_fence.py": "c9bbcdf0fa832eb4bd0b6388e23078cd1f2a1b829a61d675880eb2d63b4fc4de",
+    "tests/test_upload_interfaces.py": "41acfd8f711c0b92b431e71d90e06f1fb41b341801104381ab2ad4b9fd0f41d2",
+    "tests/test_upload_isolation.py": "c22d0c8a58bfbabf3007f95fbb2ce46c8c58e85612d5df75654024b0fa3b1899",
+    "tests/test_upload_mode_matrix.py": "dee64fb7cdf7dc793c59245111ccd18b472b3e76c36c9a9465c393f3c8d760ef",
+    "tests/test_upload_policy.py": "a7d55eaaeb06d4ef33c62cdf8e1831c57365b62a39ae14ba5979115308bad309",
+    "tests/test_upload_project_moves.py": "9230fca3a712533b3f67c46dbcc5569f86727f429e40e4fe02a400a6d168ae56",
+    "tests/test_upload_recovery.py": "00cc38f24899e3d135b6af97737e3631e522babdf8397ebd8b9a99b0d1eba39d",
+    "tests/test_upload_registration.py": "933ff55f1b940a2c72fb9561460a3084c939ac8205dc5f161b70181ab52a0f39",
+    "tests/test_upload_review_regressions.py": "dfd57d89e2707509b40eda6d49e549a50ed9dc4d832b556df9c8211c03b2a586",
+    "tests/test_vibeinsight_boundaries.py": "24f69ae463941de27b66df97a01dcf5fb297817c74721c3ef7f2ba6b9e4600de",
+    "tests/test_vibeinsight_fixture_guard.py": "ea90372e8ee793da977aa2f7cfcb763646dc0309c9e44858aecd57b143874267",
+    "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+  },
+  "case_design": {
+    "id": "design-current16-sc11",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-current16-sc11/result.json",
+    "sha256": "1cac9724580cefb7e20efc40bca6e751e7389b8467288fe03692c86709e97a00"
+  },
+  "case_obligations": {
+    "TC-005-local-restore": [
+      "tdd-core"
+    ],
+    "TC-005-unreconciled-send": [
+      "tdd-unreconciled"
+    ]
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "design_review": "review-preparation-final20-sc11",
+  "designed_case_ids": [
+    "TC-005-local-restore",
+    "TC-005-unreconciled-send"
+  ],
+  "implementation_sha256": {
+    "TC-005-local-restore": "e58cc57c11d430826c0554c8bda6a4a9ea7563792a4cceb9e756a3eb73a237b0",
+    "TC-005-unreconciled-send": "069d1871ae94a90de63ab40f7b25f2df682cca072ee20c3a3ac9358caa91eb85"
+  },
+  "obligations": {
+    "full1": "E1-E4 实际服务从停止积压状态重启后仍禁止，不重配，允许后补齐且检索原文准确，无重复。",
+    "full2": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "full3": "Hub 丢失记录或配套状态恢复后旧确认失效，明确对账后仅补当前允许内容；自动升级失败恢复遵守相同保护。",
+    "full4": "过期对账版本拒绝，查看差异不改规则，恢复清单和不支持边界有明确说明。",
+    "tdd-core": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。",
+    "tdd-unreconciled": "受支持恢复从 prepare-restore 开始，旧允许备份不能自动覆盖新限制，未知一致性先阻断并显示差异。"
+  },
+  "operation": "execute",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/result.json",
+  "recorded_at": "2026-11-22T08:26:40.925000+00:00",
+  "request_id": "execute-final20-sc11",
+  "request_sha256": "1876cdd959d2ca351fddbbb6ffd83aa0ce9e7230fad5f67132881e2259aef342",
+  "results": {
+    "TC-005-local-restore": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_policy.py::test_old_allow_backup_blocks_until_explicit_hub_reconciliation"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_policy.py::test_old_allow_backup_blocks_until_explicit_hub_reconciliation"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T08:26:40.495000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-local-restore/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-local-restore/run.stdout": "d0feb0c5023f5e292e2bedeffd87b401f2f4641518ded575133cadcc91d15f02"
+        },
+        "started_at": "2026-11-22T08:26:40.053000+00:00"
+      }
+    },
+    "TC-005-unreconciled-send": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_upload_acceptance_boundaries.py::test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_upload_acceptance_boundaries.py::test_unreconciled_restored_allow_never_dispatches_before_an_explicit_decision"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 0,
+        "finished_at": "2026-11-22T08:26:40.922000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-unreconciled-send/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/execute/execute-final20-sc11/TC-005-unreconciled-send/run.stdout": "e5b47d501c19d391332d773f1bba893d8e51214925c10b13e6f2dae5969a40ff"
+        },
+        "started_at": "2026-11-22T08:26:40.496000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC11",
+  "selection": "all_designed_cases",
+  "status": "executed"
+}

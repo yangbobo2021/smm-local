@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-write-window": {
+      "status": "expected_failure",
+      "reason": "已确认 SPEC B1 的同锁数据库条件保存、A2核对后至保存前再次修改、PLAN12要求旧对账不得覆盖新保存。独立读取 design-reconcile-v1、match-reconcile-sc2-v1 与 tests/test_reconcile_snapshot.py:59-78；此候选在实际 Hub upload-policy/status 读取完成后、响应交回 Local reconcile 前，调用真实 control.choose(all)并记录完整新row，两种use均应拒绝，预期有原始依据。red-reconcile-window-v1/result.json SHA256 9a0c62ea6de051231e15e455d02c56fb9db9b61a3bb68488cf70839b2212a103；全部绑定/原始材料字节摘要已核验相符，测试SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5。run.stdout中local和hub均通过第75行已保存all的探针自检，再于第76行出现实际200!=400；receipt exit_code=1，stderr为空，process pid/group=17331。Hub请求由原request先真实执行，钩子只在同步返回边界安排真实本机保存，既非假Hub结果，也不是缺少接口/参数导致失败。该安排会进入已有upload.py:213-229的Hub读取到_save窗口；_save虽有expected_generation能力（127-135），reconcile没有绑定调用前本机快照或把generation传入（228），初始入口校验也不足以保护此测试窗口，故系可信的预期业务失败。第77-78行最新row保留、Hub不变、无策略提交检查未执行，不报告其结果。两个动作参数均已实际失败；未扩大为整场景或真实并发线程/平台验收结论。"
+    }
+  }
+}

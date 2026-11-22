@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-write-window": {
+      "status": "passed",
+      "reason": "独立读取 AGENTS、已确认 SPEC B1同锁条件保存/A2核对后再修改/A11、PLAN12、design-reconcile-v1、match-reconcile-sc2-v1、原始红灯及独立红灯意见，当前TC针对初次Hub读取到本机条件保存之间的真实修改。green-reconcile-window-v1/result.json SHA256 4773e1a8fe0ad5a764f5cf98da9c38503caf518750ed8e41d40e3bb2c17857e6；定义493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e正确，全部bindings/artifacts摘要吻合，runtime-reconcile-green-v1 ready。冻结snapshot测试SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5、contracts测试ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197及业务命令与red相同。raw run.stdout local/hub共2 passed，exit_code=0，stderr空，process pid/group=24792；regression.stdout 55 passed、exit_code=0、stderr空。tests/test_reconcile_snapshot.py:59-78钩子先真实调用Hub status，再真实choose(all)并记录新row；本次两个参数均到达原76行之后并通过最新完整row保留、Hub head不变及无策略set断言，排除只在入口校验或重新读取all后误提交。源码upload.py reconcile将Hub请求前捕获的generation传给_save；_save在control_lock内BEGIN IMMEDIATE，重新读row/verify guard后检查generation，再生成pending并保存SQLite/guard，代次检查与写入之间没有另一正常保存可插入的边界。连接配置相等检查也在该SQLite事务内，configure_hub/_bind_hub同样BEGIN IMMEDIATE，故本次保存前目标变更受保护。关联回归test_reconcile_boundaries.py还实际验证CLI --use hub不带版本的初次读取窗口与另Hub在初次RPC切换后新端needs_selection、旧row/旧Hub不变；fresh四模式精确policy正控及恢复/原文兼容通过。范围限制：这些证据只支持当前写窗口TC和所列补充，不证明所有RPC期间的目标切换；_save之后sync_policy会再读Hub状态，其status返回到set之间没有hub_config重核对，PLAN12全操作目标切换承诺仍需主流程单独跟进。未认领整SC2、真实并发进程/平台安装包/浏览器或Mac E3交付。"
+    }
+  }
+}

@@ -1,0 +1,480 @@
+{
+  "redactions": "test accounts, test IPs and absolute private paths in textual files; synthetic bodies unchanged. PNGs show synthetic task UI only. Config/token/private keys/DB/trace not exported.",
+  "files": [
+    {
+      "file": "mac-reconcile15/result.json",
+      "original_sha256": "3466e6356ff371431dac297a84bbe1184dcfae048d68e81476d6a86543f562d1",
+      "export_sha256": "3466e6356ff371431dac297a84bbe1184dcfae048d68e81476d6a86543f562d1"
+    },
+    {
+      "file": "mac-reconcile15/reconcile-result.json",
+      "original_sha256": "c9fa8fe87ef2ca31b274f760cd13263240dc80db37f8155dcb8fe067bbae428e",
+      "export_sha256": "c9fa8fe87ef2ca31b274f760cd13263240dc80db37f8155dcb8fe067bbae428e"
+    },
+    {
+      "file": "mac-reconcile15/cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "mac-reconcile15/manifest.json",
+      "original_sha256": "38fee2f866ba29c1cf1bc0cca51d88e5be41f19d32e2ee03bcb6346e4513bf20",
+      "export_sha256": "933b59a4b08157bea46b3618bf88ab8e34d0c076ca5eaff5ca5c8a90bef379cb"
+    },
+    {
+      "file": "mac-reconcile15/payloads.json",
+      "original_sha256": "f6f7541fb7048db886d705e63e50f23a7944758023dd3e7ea835806cdf01597b",
+      "export_sha256": "f6f7541fb7048db886d705e63e50f23a7944758023dd3e7ea835806cdf01597b"
+    },
+    {
+      "file": "mac-reconcile15/service-events.json",
+      "original_sha256": "c0a23328011e86b8dda1b09e09a803c37be01abc499d5611ca57eabb375474b5",
+      "export_sha256": "c0a23328011e86b8dda1b09e09a803c37be01abc499d5611ca57eabb375474b5"
+    },
+    {
+      "file": "mac-reconcile15/stale-local-rejected.png",
+      "original_sha256": "94a7617ddc739c45ce503386801bd83ffbdc54a8434147989244e422fb4f3b67",
+      "export_sha256": "94a7617ddc739c45ce503386801bd83ffbdc54a8434147989244e422fb4f3b67"
+    },
+    {
+      "file": "mac-reconcile15/stale-hub-rejected.png",
+      "original_sha256": "2e771acc539a59cc96938c6e07d9a2f94a2a895e242a4e31c4bdc63a8e650c15",
+      "export_sha256": "2e771acc539a59cc96938c6e07d9a2f94a2a895e242a4e31c4bdc63a8e650c15"
+    },
+    {
+      "file": "mac-reconcile15/adopted-hub-current.png",
+      "original_sha256": "513e4994a2c447ac75da0e1f4506b901cef710d0144e9f2531d9aa5c8de8e0e7",
+      "export_sha256": "513e4994a2c447ac75da0e1f4506b901cef710d0144e9f2531d9aa5c8de8e0e7"
+    },
+    {
+      "file": "linux-reconcile15/result.json",
+      "original_sha256": "f8668e04ec1c3c5a5bae28ae9a512fc89e014449394c4cc7ea42c9478620eb32",
+      "export_sha256": "f8668e04ec1c3c5a5bae28ae9a512fc89e014449394c4cc7ea42c9478620eb32"
+    },
+    {
+      "file": "linux-reconcile15/reconcile-result.json",
+      "original_sha256": "12fab2f54aeede0c55cca7fc11fcd83240af1506eaf9be2726f0cb12013dd6e3",
+      "export_sha256": "12fab2f54aeede0c55cca7fc11fcd83240af1506eaf9be2726f0cb12013dd6e3"
+    },
+    {
+      "file": "linux-reconcile15/cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "linux-reconcile15/manifest.json",
+      "original_sha256": "20f94038ab3176cdccbe76cd5a43ae536bb7f379de0d95fea75a87205871e150",
+      "export_sha256": "37bce69c1dd53cddc2d1884445a075fb2636e22d2d5faa4e7c8383077c8edbd3"
+    },
+    {
+      "file": "linux-reconcile15/payloads.json",
+      "original_sha256": "c986648e87b8d7575a2e9f6fd5b71c8cfe9797ebc1bbe2ea9e3f85c660646fac",
+      "export_sha256": "c986648e87b8d7575a2e9f6fd5b71c8cfe9797ebc1bbe2ea9e3f85c660646fac"
+    },
+    {
+      "file": "linux-reconcile15/service-events.json",
+      "original_sha256": "3476d7708b5158d9a89f2260e299125574a0d9ddf2a96f409907328c6255e449",
+      "export_sha256": "3476d7708b5158d9a89f2260e299125574a0d9ddf2a96f409907328c6255e449"
+    },
+    {
+      "file": "linux-reconcile15/stale-local-rejected.png",
+      "original_sha256": "374dd454753afeefab3108e269d70de812eb544adca8a82b30e84339ba175445",
+      "export_sha256": "374dd454753afeefab3108e269d70de812eb544adca8a82b30e84339ba175445"
+    },
+    {
+      "file": "linux-reconcile15/stale-hub-rejected.png",
+      "original_sha256": "72b84c7f48e63b84b86385ae3d6aa39121fd4c3def52d04a69bd9d1b87769978",
+      "export_sha256": "72b84c7f48e63b84b86385ae3d6aa39121fd4c3def52d04a69bd9d1b87769978"
+    },
+    {
+      "file": "linux-reconcile15/adopted-hub-current.png",
+      "original_sha256": "12cfe5e3f97d9d06d6bbe28025dfd3b025f00e7e9afcb9435a24cb04ee431bff",
+      "export_sha256": "12cfe5e3f97d9d06d6bbe28025dfd3b025f00e7e9afcb9435a24cb04ee431bff"
+    },
+    {
+      "file": "windows-reconcile15/result.json",
+      "original_sha256": "450448b0449cb96b4994dd5063d9456251e413ee8f5fe8ab9aecbb3d06005d3c",
+      "export_sha256": "6138a3f705498b314becbc51b41dfd1f08f8d41b500f2268962b56127a54914b"
+    },
+    {
+      "file": "windows-reconcile15/reconcile-result.json",
+      "original_sha256": "6f3760839efe51b6d4dd53b047c50c74a435ddf45ca249ced2ec359b7180062d",
+      "export_sha256": "b19278b2336bdb467f648497aae5517daa6add1a7784056f6b68c9cdbc2bdaca"
+    },
+    {
+      "file": "windows-reconcile15/cleanup.json",
+      "original_sha256": "80d0a416e0bcd0887ae19659632bb0b67d5d42357842fb9cc61cf862c61bbed8",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "windows-reconcile15/outer-process.json",
+      "original_sha256": "c44434e1683aedd44a2ae6398df2d4a0a7be21a680fc46c13adff987e6c44f60",
+      "export_sha256": "c4ce782846c4c43533e3560ed7552f524de8f9d5cdcc3ca6de59e007d05f2ca9"
+    },
+    {
+      "file": "windows-reconcile15/manifest.json",
+      "original_sha256": "57c005e50af84abd98cae2e346c9b60713a4fff00a1b40886880b21ac67e6016",
+      "export_sha256": "4aa796861cee1b9813ae689671628b2c156eeaf3e4117522693dad8f36d1d0d4"
+    },
+    {
+      "file": "windows-reconcile15/payloads.json",
+      "original_sha256": "ea7c76c64d07ac3db00fc2cc1dcf8d1b038386e05d65155d916fd1ff50767cdd",
+      "export_sha256": "a3e9f2cd532b16f2a811859655e5d562000957645ed1b35f3d7a583a47ae5862"
+    },
+    {
+      "file": "windows-reconcile15/service-events.json",
+      "original_sha256": "559e445f8652f02f0cf10db285623b0d60564cd5cdbdfc87ee392172922565ca",
+      "export_sha256": "7de7fe28a45890c9a88bf5c64dc0a0c7d8cbbcafa32ea4dfc1f97d0b77f572b6"
+    },
+    {
+      "file": "windows-reconcile15/stale-local-rejected.png",
+      "original_sha256": "88b8da87ff4da8bcc64e1dc2bf3cfd335f6490c503060e573fcb417173c8b37e",
+      "export_sha256": "88b8da87ff4da8bcc64e1dc2bf3cfd335f6490c503060e573fcb417173c8b37e"
+    },
+    {
+      "file": "windows-reconcile15/stale-hub-rejected.png",
+      "original_sha256": "bf922720a9418ad6d4a02636f9081ec41b02c45820744672ee75c0dc22f24570",
+      "export_sha256": "bf922720a9418ad6d4a02636f9081ec41b02c45820744672ee75c0dc22f24570"
+    },
+    {
+      "file": "windows-reconcile15/adopted-hub-current.png",
+      "original_sha256": "eacee3bf0c86e093bde7fb42a8101595726bcf4e50bd9e376aa11165a337774d",
+      "export_sha256": "eacee3bf0c86e093bde7fb42a8101595726bcf4e50bd9e376aa11165a337774d"
+    },
+    {
+      "file": "mac-hub-main15/hub-restart-rule.json",
+      "original_sha256": "bf632c7accc633254aba85a4e282991489f1081cacd467c41cae3d1d8b63156c",
+      "export_sha256": "bf632c7accc633254aba85a4e282991489f1081cacd467c41cae3d1d8b63156c"
+    },
+    {
+      "file": "mac-hub-main15/result.json",
+      "original_sha256": "f7f697a4951092fd9b0d1470ac92bab6fa5d244d6c6bb61608730a10533e473f",
+      "export_sha256": "f7f697a4951092fd9b0d1470ac92bab6fa5d244d6c6bb61608730a10533e473f"
+    },
+    {
+      "file": "mac-hub-main15/backfill.json",
+      "original_sha256": "c8e8e64a2a549a5500a82f9df6115f7cfbbe34b111b4857ecce93047f0f37806",
+      "export_sha256": "c8e8e64a2a549a5500a82f9df6115f7cfbbe34b111b4857ecce93047f0f37806"
+    },
+    {
+      "file": "mac-hub-main15/affiliation-propagation.json",
+      "original_sha256": "60bba1d62fd1a7b7d44f185ec543029d168d9bc66844254bff0943e8f8468fd8",
+      "export_sha256": "60bba1d62fd1a7b7d44f185ec543029d168d9bc66844254bff0943e8f8468fd8"
+    },
+    {
+      "file": "mac-hub-main15/cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "mac-hub-main15/manifest.json",
+      "original_sha256": "a1c6c752000c2a91d102bb254efbbb7c545b8d0f76840aae5fefb067f62aba37",
+      "export_sha256": "7db498d1938d1c8b5bc9beafbe761008270d274601aa7a53fdb72f9279681029"
+    },
+    {
+      "file": "mac-hub-main15/payloads.json",
+      "original_sha256": "2fddc4a26a415a0289a7f456b7c20e0e34aed1d856dafaabccae88c58fb3d559",
+      "export_sha256": "2fddc4a26a415a0289a7f456b7c20e0e34aed1d856dafaabccae88c58fb3d559"
+    },
+    {
+      "file": "mac-hub-main15/stopped-state.json",
+      "original_sha256": "c81d6ae18a1f0e4a07d1142f3fc649898fb6563380e3aa75b1534a09b4dba033",
+      "export_sha256": "c81d6ae18a1f0e4a07d1142f3fc649898fb6563380e3aa75b1534a09b4dba033"
+    },
+    {
+      "file": "mac-hub-main15/service-events.json",
+      "original_sha256": "000e88edf7cef28849fef5820893a0ef095c3d53679c98b1a036f212b59081b5",
+      "export_sha256": "2e60061fc57adf91d6e7c21cf11b712bf6f54ac5fc73d20f7f4a11bf265456f2"
+    },
+    {
+      "file": "mac-hub-scope15/result.json",
+      "original_sha256": "19d75179d4fd9a352ca2347df0766224e5b2116768245480835ef8328e843154",
+      "export_sha256": "19d75179d4fd9a352ca2347df0766224e5b2116768245480835ef8328e843154"
+    },
+    {
+      "file": "mac-hub-scope15/split-scope.json",
+      "original_sha256": "db5e08e63860de384b751683970cb585a062259f69504766de8ac897215d0822",
+      "export_sha256": "db5e08e63860de384b751683970cb585a062259f69504766de8ac897215d0822"
+    },
+    {
+      "file": "mac-hub-scope15/cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "mac-hub-scope15/manifest.json",
+      "original_sha256": "cf9c07913c539264bae609a6f140c02b2397c223a2dffc107ee49a13958fc1ec",
+      "export_sha256": "14eb5a1e6a7e9819147e3f2d60f1f6b6eceb21b9569d1f26a53f872ef0d56e3c"
+    },
+    {
+      "file": "mac-hub-scope15/payloads.json",
+      "original_sha256": "721715dd607a7734e79ce71b22a045c00658512b30125a6e6f1c8a39fc40f25a",
+      "export_sha256": "721715dd607a7734e79ce71b22a045c00658512b30125a6e6f1c8a39fc40f25a"
+    },
+    {
+      "file": "mac-hub-scope15/service-events.json",
+      "original_sha256": "1d65af48fe1e93d1554cdce86017f7e76f00f77818fa756c493d2f1fc0ec4ab9",
+      "export_sha256": "004fc309964be884bb4c3d8e0c7f64cc114ba340b9e7a7562d164d38d4bd413c"
+    },
+    {
+      "file": "reviews/review-red-reconcile-cli-v1.json",
+      "original_sha256": "26301cee71cf37d68d4aca5819a21054d39e114223b5ac054ccaedba928e4fb6",
+      "export_sha256": "26301cee71cf37d68d4aca5819a21054d39e114223b5ac054ccaedba928e4fb6"
+    },
+    {
+      "file": "reviews/review-red-reconcile-web-inputs-v1.json",
+      "original_sha256": "34f3a0b4be1b7e0073d1a318a75f73ec44dab5eeffffa2542019379a47eb52a7",
+      "export_sha256": "34f3a0b4be1b7e0073d1a318a75f73ec44dab5eeffffa2542019379a47eb52a7"
+    },
+    {
+      "file": "reviews/review-red-reconcile-stale-v1.json",
+      "original_sha256": "c10a33ef6178a58515403e144626b90b7c9527a2a7d74b00fdc20372765144f0",
+      "export_sha256": "c10a33ef6178a58515403e144626b90b7c9527a2a7d74b00fdc20372765144f0"
+    },
+    {
+      "file": "reviews/review-red-reconcile-window-v1.json",
+      "original_sha256": "dbbee72e8d21da070896cb0794db3eea06daa8b669cad8a6926653caed47c49d",
+      "export_sha256": "dbbee72e8d21da070896cb0794db3eea06daa8b669cad8a6926653caed47c49d"
+    },
+    {
+      "file": "reviews/review-green-reconcile-cli-v1.json",
+      "original_sha256": "306721f4cfeadae2c14967e76d4708e54f4aa5fb5328a3c64c1e686f1775c8d0",
+      "export_sha256": "306721f4cfeadae2c14967e76d4708e54f4aa5fb5328a3c64c1e686f1775c8d0"
+    },
+    {
+      "file": "reviews/review-green-reconcile-web-inputs-v1.json",
+      "original_sha256": "810873e081e34f4d5504a87b512305c42332e5acd3a36d25517acc25deada7bd",
+      "export_sha256": "810873e081e34f4d5504a87b512305c42332e5acd3a36d25517acc25deada7bd"
+    },
+    {
+      "file": "reviews/review-green-reconcile-stale-v1.json",
+      "original_sha256": "721affd601e4a1cc03a0e519048ba093a98f5e7d2e5059a3be53f0ae444a7ecc",
+      "export_sha256": "721affd601e4a1cc03a0e519048ba093a98f5e7d2e5059a3be53f0ae444a7ecc"
+    },
+    {
+      "file": "reviews/review-green-reconcile-window-v1.json",
+      "original_sha256": "4d4fa8222c3da546bdd720bdfd27aeb1f69d93cd74478b0fa770012b52aa9ba6",
+      "export_sha256": "4d4fa8222c3da546bdd720bdfd27aeb1f69d93cd74478b0fa770012b52aa9ba6"
+    },
+    {
+      "file": "reviews/review-red-reconcile-dispatch-v1.json",
+      "original_sha256": "3e3658ee29b6fcbe006e1b8b37fb22cecf72d8c54e061971cbd1fd2da34f667b",
+      "export_sha256": "3e3658ee29b6fcbe006e1b8b37fb22cecf72d8c54e061971cbd1fd2da34f667b"
+    },
+    {
+      "file": "reviews/review-green-reconcile-dispatch-v1.json",
+      "original_sha256": "dd81da0b5dc7562ed101deef59de63cb97572fdbbea3c5ff4e49b6a93a9439aa",
+      "export_sha256": "dd81da0b5dc7562ed101deef59de63cb97572fdbbea3c5ff4e49b6a93a9439aa"
+    },
+    {
+      "file": "tdd-red/red-reconcile-stale-v1/TC-005-reconcile-stale-local/run.stdout",
+      "original_sha256": "fea935e7ba951f290e697ff41ff378b9f6bb70397fc57f5e8b94df981f38df26",
+      "export_sha256": "18775960b9b781d2e64052a49b6e77d71ee2d3fd1af482c4fc41989c44863880"
+    },
+    {
+      "file": "tdd-red/red-reconcile-stale-v1/TC-005-reconcile-stale-local/run.process.json",
+      "original_sha256": "acd2936016999daa49ee4dd9d443a0b4201aca341f9c5156b9237d317ae8d012",
+      "export_sha256": "acd2936016999daa49ee4dd9d443a0b4201aca341f9c5156b9237d317ae8d012"
+    },
+    {
+      "file": "tdd-red/red-reconcile-stale-v1/result.json",
+      "original_sha256": "e7038625217aa7d153db98fc387c9ce38e9c7acab37cd2ae3f326f3144a66bef",
+      "export_sha256": "5728f9c7bc293370b1ab86d42cf10eacf041eaa1f91ef5091241ddeadb98e2ab"
+    },
+    {
+      "file": "tdd-red/red-reconcile-cli-v1/TC-005-reconcile-cli-inputs/run.stdout",
+      "original_sha256": "6f709802095bc692ab1134b30393d7d284a790ca2c2502ae9af97614655041bd",
+      "export_sha256": "f60f6bdb85764c249255d30e8462996dd808beae3e81334151663f95a254737d"
+    },
+    {
+      "file": "tdd-red/red-reconcile-cli-v1/TC-005-reconcile-cli-inputs/run.process.json",
+      "original_sha256": "06f86051972d1472a958f5052ed5bb9a7e97ac9bdd01f530bcc8b4de657856de",
+      "export_sha256": "06f86051972d1472a958f5052ed5bb9a7e97ac9bdd01f530bcc8b4de657856de"
+    },
+    {
+      "file": "tdd-red/red-reconcile-cli-v1/result.json",
+      "original_sha256": "1c3a1d9760a08a54917376383a3d75e4b178ad2b67e9ad66a2def409dc3020a9",
+      "export_sha256": "01dcb1f8a4ad8fb0e0221503f9d8330fbcadcb74f901650aa3e8e506161c8679"
+    },
+    {
+      "file": "tdd-red/red-reconcile-window-v1/TC-005-reconcile-write-window/run.stdout",
+      "original_sha256": "9f77d7b290dc600abb093ae1c90d92a9c8c3f0cd34ac341885f75a5ac78c1a23",
+      "export_sha256": "4931d62ede4801e8edbb6969ce5b0b5d0c3ff9e5462362949d6956f64dbdeb8d"
+    },
+    {
+      "file": "tdd-red/red-reconcile-window-v1/TC-005-reconcile-write-window/run.process.json",
+      "original_sha256": "5cf1fde06d93934fde3569120c0cb5a7e498d8ef6400afeb4b0235ac8a410939",
+      "export_sha256": "5cf1fde06d93934fde3569120c0cb5a7e498d8ef6400afeb4b0235ac8a410939"
+    },
+    {
+      "file": "tdd-red/red-reconcile-window-v1/result.json",
+      "original_sha256": "9a0c62ea6de051231e15e455d02c56fb9db9b61a3bb68488cf70839b2212a103",
+      "export_sha256": "13d5fdf2b086b922586ab700aac58672141259ef6c4d4886508d4c2b5a6b6aba"
+    },
+    {
+      "file": "tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stdout",
+      "original_sha256": "9f30dc8a321cbd71284e31828947792bda44492b129ceac3abebdda333bc2d4a",
+      "export_sha256": "ff6e36c843dda7a438bbb79873ab420279cb32276a3b1a33606f5a2196851ab0"
+    },
+    {
+      "file": "tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.process.json",
+      "original_sha256": "a31f2d2a6e1319788a093652d37ce17e76a5bb127f6236dfef00a2bbf7ff8c28",
+      "export_sha256": "a31f2d2a6e1319788a093652d37ce17e76a5bb127f6236dfef00a2bbf7ff8c28"
+    },
+    {
+      "file": "tdd-red/red-reconcile-dispatch-v1/result.json",
+      "original_sha256": "e9a6cf189f202fbc4d874d6acf589be377edf543a233fbbe70968b2275af892e",
+      "export_sha256": "d9a67d4691a4e4a045311aeb6fd92d438524f52da57594ab41e8c7a892a75ba3"
+    },
+    {
+      "file": "tdd-red/red-reconcile-web-inputs-v1/TC-005-reconcile-web-inputs/run.stdout",
+      "original_sha256": "3956dc0f15d13997299f255ea25198d41bcbe9075f8bcea9b11026754e317218",
+      "export_sha256": "de0a5c8ba85e8844a48ccd6764759f403d7c2c989c18985a67dabb1e22481fc0"
+    },
+    {
+      "file": "tdd-red/red-reconcile-web-inputs-v1/TC-005-reconcile-web-inputs/run.process.json",
+      "original_sha256": "37e6e5444e52bd9136f5d894fcab142a62363c8b4c20daf9768e1db5058cf7ff",
+      "export_sha256": "37e6e5444e52bd9136f5d894fcab142a62363c8b4c20daf9768e1db5058cf7ff"
+    },
+    {
+      "file": "tdd-red/red-reconcile-web-inputs-v1/result.json",
+      "original_sha256": "3fc707af9653ce715dbc1ccf8fc1a94c928dbe0c2b32d4e54ca21565e4b5cbfa",
+      "export_sha256": "705f4c14a69f27bba8f57286d21971b7d06a0edbdf874eb2db632c7e881733ee"
+    },
+    {
+      "file": "tdd-green/green-reconcile-cli-v1/TC-005-reconcile-cli-inputs/run.stdout",
+      "original_sha256": "8d46127cbe26e17340e09b13fe9272333909da20b781f8f508d80970fd8ed00c",
+      "export_sha256": "46c1653d9f724510d187a589389772087fbc7026a4251c17448259047bc54fcd"
+    },
+    {
+      "file": "tdd-green/green-reconcile-cli-v1/TC-005-reconcile-cli-inputs/run.process.json",
+      "original_sha256": "4291535d1f94f29e79da7726ebb2d7eaa64555c0bcc5b99b642bd5f1d2ef5c17",
+      "export_sha256": "4291535d1f94f29e79da7726ebb2d7eaa64555c0bcc5b99b642bd5f1d2ef5c17"
+    },
+    {
+      "file": "tdd-green/green-reconcile-cli-v1/regression.stdout",
+      "original_sha256": "d79669fab24c2330f1e7323237bd2ee9a82f9edc61c36679a66dd6964b3d5766",
+      "export_sha256": "455d5fca5c3de07b82ba3363dc7ed244c371285d8d60f2d292c5405c7dbf8209"
+    },
+    {
+      "file": "tdd-green/green-reconcile-cli-v1/regression.process.json",
+      "original_sha256": "8216356980208aaba83d707ee05b5271b7b47596a949ddd477aa2683f61bd840",
+      "export_sha256": "8216356980208aaba83d707ee05b5271b7b47596a949ddd477aa2683f61bd840"
+    },
+    {
+      "file": "tdd-green/green-reconcile-cli-v1/result.json",
+      "original_sha256": "c399e2e65b8d1c13475198be29d205987e76c8c283c6d32d22c78e091399cfc0",
+      "export_sha256": "4ef8821610a01861ac58458db84f29ef38b6c10321563e8edb3e276e83be957d"
+    },
+    {
+      "file": "tdd-green/green-reconcile-stale-v1/TC-005-reconcile-stale-local/run.stdout",
+      "original_sha256": "f8355d664b2c5515fea9adcc1ec919c6b9cdcf1084501146097ed521b174b1c5",
+      "export_sha256": "32e282c516ca2ed766d247fe326178ffe7be48a64bbd771ae55b63069bbd9da6"
+    },
+    {
+      "file": "tdd-green/green-reconcile-stale-v1/TC-005-reconcile-stale-local/run.process.json",
+      "original_sha256": "106503d4822743aea6d9442c6b21ed609707b59d1cceee77b79da64a6c401b3d",
+      "export_sha256": "106503d4822743aea6d9442c6b21ed609707b59d1cceee77b79da64a6c401b3d"
+    },
+    {
+      "file": "tdd-green/green-reconcile-stale-v1/regression.stdout",
+      "original_sha256": "692bea67b9e34a06a6573831a4ab8d9d8379788d285b6876210e36a494eb48b2",
+      "export_sha256": "a1d79fd8063a65e0c486bcfb893e9c675711008e5639226fff874227fbc09427"
+    },
+    {
+      "file": "tdd-green/green-reconcile-stale-v1/regression.process.json",
+      "original_sha256": "61d739523c80b90e2632c2f9337cdc91d37e38198ccf6601c3f12210f6df2fad",
+      "export_sha256": "61d739523c80b90e2632c2f9337cdc91d37e38198ccf6601c3f12210f6df2fad"
+    },
+    {
+      "file": "tdd-green/green-reconcile-stale-v1/result.json",
+      "original_sha256": "4a156148f9ac975cde9808e9f830ccf2a58a1e97c29c136931d95484f586fd59",
+      "export_sha256": "3c9d3b1024b4c48922f3f380925f1d1b7aab6692c77f6ee8e4e4503b6f3ddc67"
+    },
+    {
+      "file": "tdd-green/green-reconcile-window-v1/TC-005-reconcile-write-window/run.stdout",
+      "original_sha256": "29a4a553e43f87103522bb67c8c08e483fec7ae6cad28e100bb8e93caab62738",
+      "export_sha256": "16f0218abd2bb36bea664654cb1a55608984a1c1496b7a97339eed61d85c3463"
+    },
+    {
+      "file": "tdd-green/green-reconcile-window-v1/TC-005-reconcile-write-window/run.process.json",
+      "original_sha256": "83b4671243b938a9a6f5a35dca791bc8efbbf6b91732f81455bbb50179029f09",
+      "export_sha256": "83b4671243b938a9a6f5a35dca791bc8efbbf6b91732f81455bbb50179029f09"
+    },
+    {
+      "file": "tdd-green/green-reconcile-window-v1/regression.stdout",
+      "original_sha256": "38b149545cd4210c874aefa54ec28efc53fb640a941d4cfdaeb82c63cc35ed45",
+      "export_sha256": "01977f7559a4761f016c46b0e38b10cfebbd7a66c47bd8be57d115b48b6dd177"
+    },
+    {
+      "file": "tdd-green/green-reconcile-window-v1/regression.process.json",
+      "original_sha256": "a958cb4e9ca8333d4af7dbf8cd622614dffba9a1a16bdef74096f80aa494ee36",
+      "export_sha256": "a958cb4e9ca8333d4af7dbf8cd622614dffba9a1a16bdef74096f80aa494ee36"
+    },
+    {
+      "file": "tdd-green/green-reconcile-window-v1/result.json",
+      "original_sha256": "4773e1a8fe0ad5a764f5cf98da9c38503caf518750ed8e41d40e3bb2c17857e6",
+      "export_sha256": "5620fde8f56660042f80d3b98007f6c93bbf4c19e886ca8af4d0d51847af29d7"
+    },
+    {
+      "file": "tdd-green/green-reconcile-web-inputs-v1/TC-005-reconcile-web-inputs/run.stdout",
+      "original_sha256": "9ae48bd5fc973219c9ee543b59e34c2424fc0df03c9da6e5ae82367ba4f326c6",
+      "export_sha256": "9206385326ed6ef3988ba5f34c7bbcd7610cd617fa9595166f6be16ebb612030"
+    },
+    {
+      "file": "tdd-green/green-reconcile-web-inputs-v1/TC-005-reconcile-web-inputs/run.process.json",
+      "original_sha256": "66ae6f88999bd52e9b66333f809932a93738a9224f57e819e90beed5b99678df",
+      "export_sha256": "66ae6f88999bd52e9b66333f809932a93738a9224f57e819e90beed5b99678df"
+    },
+    {
+      "file": "tdd-green/green-reconcile-web-inputs-v1/regression.stdout",
+      "original_sha256": "04c805d7198494f50b4b9903585db545fdc79846dc3712e8a41d4af76cb79637",
+      "export_sha256": "cb78790e25417bbfe35b2a262f9b87b3694d993f1af834ee492adea0ed0de4a4"
+    },
+    {
+      "file": "tdd-green/green-reconcile-web-inputs-v1/regression.process.json",
+      "original_sha256": "f96c07f90a78db27347d3e4cf41b06f1a25b76600ed73f7e49ae6fca5b7c383f",
+      "export_sha256": "f96c07f90a78db27347d3e4cf41b06f1a25b76600ed73f7e49ae6fca5b7c383f"
+    },
+    {
+      "file": "tdd-green/green-reconcile-web-inputs-v1/result.json",
+      "original_sha256": "dea5cabcc95b38e36962a862eeb89ffc28f5ea91758b8e297ac1ed87e6e54cbb",
+      "export_sha256": "fa7ba89278c895be6ee8f3aa0dadece5296f725ad7530286215deb9539cfbc9f"
+    },
+    {
+      "file": "tdd-green/green-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stdout",
+      "original_sha256": "2df596a3602d3d30f6981dd106da64f5c184aa48b712d000f20e889df8a3f16e",
+      "export_sha256": "5987649636f32f757bc27314702850a99e9ecca7f762c741bd416cc47e2e415d"
+    },
+    {
+      "file": "tdd-green/green-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.process.json",
+      "original_sha256": "3ff2f9c6faa7aafc978768b055a9f396e5ca25890956c26304d705cfb1636524",
+      "export_sha256": "3ff2f9c6faa7aafc978768b055a9f396e5ca25890956c26304d705cfb1636524"
+    },
+    {
+      "file": "tdd-green/green-reconcile-dispatch-v1/regression.stdout",
+      "original_sha256": "ec9cb7abbf74f033d16718ac893eaac54964920148e468478d9cc56c3e62d67e",
+      "export_sha256": "9b8ba8672c7760f9ec830f0f94b63a737ca1de5e676ebeb927b45c6a469c26f9"
+    },
+    {
+      "file": "tdd-green/green-reconcile-dispatch-v1/regression.process.json",
+      "original_sha256": "781a0ce61217623f0ed430a614521228be476029fc6cff39633d04f099b1d33d",
+      "export_sha256": "781a0ce61217623f0ed430a614521228be476029fc6cff39633d04f099b1d33d"
+    },
+    {
+      "file": "tdd-green/green-reconcile-dispatch-v1/result.json",
+      "original_sha256": "c86ec970ad96c3a2310a6049473b6291de8d80833d3a71fae426e895308aa445",
+      "export_sha256": "7f335ee8bd414b239e1215aa6f0fc1cf5c93a222bddb3e459febe19e56bf2727"
+    },
+    {
+      "file": "package-comparison.json",
+      "original_sha256": "c830d2041577e841fe13fe48860aa9344cda1c38553cc478c67906e3f3191fda",
+      "export_sha256": "c830d2041577e841fe13fe48860aa9344cda1c38553cc478c67906e3f3191fda"
+    },
+    {
+      "file": "full-pytest.txt",
+      "original_sha256": "6cc0d9685e1dd8f59cf88b962c4bf6241719350b1bc6ed94b98bd62786d5a3fe",
+      "export_sha256": "6cc0d9685e1dd8f59cf88b962c4bf6241719350b1bc6ed94b98bd62786d5a3fe"
+    }
+  ]
+}

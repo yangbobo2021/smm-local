@@ -1,0 +1,151 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.process.json": "a31f2d2a6e1319788a093652d37ce17e76a5bb127f6236dfef00a2bbf7ff8c28",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stdout": "9f30dc8a321cbd71284e31828947792bda44492b129ceac3abebdda333bc2d4a",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/request.json": "21f03860e469dea2798da90cfbb31269538f617790652984bb9fc5cc01475303",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/source/tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/source/tests/test_reconcile_dispatch.py": "8f769ca794c791a753927285ea78896b976cb105e3dfd5a631d897e9da42a04c",
+    ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/source/tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5"
+  },
+  "bindings": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "865d5a42d82620d1bd53def4bf0721a62dffda9e15c30f877d0295b50f48b279",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/hub.py": "445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de",
+    "src/smm_hub/hub_admin.py": "fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/projects.py": "dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/core.py": "d8683ae9d0b0ebeccd1e6915b7424e2bf752842474b1e35254d53327965e6737",
+    "src/smm_local/federation.py": "fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/mcp_server.py": "b87c419a7aa9a441f5594425ccf813edc43719e126f3ebb411fc7de6acaf9280",
+    "src/smm_local/project_control.py": "2b74b0c6446f6ac5d1c57a285465fd6acf46e285801f00ff3a0800036bfbdfaa",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "cccfe6fdee37dbaa7789a316b03782bfb307cf8a59f7c32ab2f36909477c2fc0",
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_reconcile_dispatch.py": "8f769ca794c791a753927285ea78896b976cb105e3dfd5a631d897e9da42a04c",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5"
+  },
+  "case_design": {
+    "id": "design-reconcile-dispatch-v1",
+    "record": ".acceptance-local/native-v1/AT-SMM-005/case-design/design-reconcile-dispatch-v1/result.json",
+    "sha256": "aa4aa4d37a86265f59259bee444732a190b376c8154bd4994d0681b2fa900852"
+  },
+  "cases": {
+    "TC-005-reconcile-target-dispatch": {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_reconcile_dispatch.py::test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target"
+      ],
+      "covers": {
+        "target-control-dispatch": "def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, monkeypatch):\n    \"\"\"TC-005-reconcile-target-dispatch: inject after the local conditional save.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    shown = control.reconcile(request); old_head = head(pair, config)\n    other = Archive(pair.local.db_path.parent / 'other-after-save.sqlite3')\n    token = pair.token_file.read_text(); address = 'http://localhost:18772'\n    with TestClient(create_hub(other, token), headers={'Authorization': 'Bearer ' + token}) as server:\n        other_id = server.get('/v1/info').json()['hub_id']; assert other_id != pair.hub_id\n        def routed(cfg, route, payload=None):\n            if cfg['address'] != address: return request(cfg, route, payload)\n            pair.calls.append((route, json.loads(json.dumps(payload))))\n            reply = server.get('/v1' + route) if payload is None else server.post('/v1' + route, json=payload)\n            assert reply.status_code < 400, reply.text\n            return reply.json()\n        observed = {'status_reads': 0}\n        def concurrent(cfg, route, payload=None):\n            reply = routed(cfg, route, payload)\n            if route == '/upload-policy/status':\n                observed['status_reads'] += 1\n                if observed['status_reads'] == 2:\n                    observed['saved'] = control.row()\n                    assert observed['saved']['generation'] > shown['local']['generation']\n                    assert observed['saved']['state'] == 'pending'\n                    switched = federation.configure_hub(pair.local, address, 'after-save-target', str(pair.token_file))\n                    assert switched['connected']\n                    observed['switched'] = federation.hub_config(pair.local)['bound_hub_id']\n            return reply\n        monkeypatch.setattr(federation, '_request', routed); monkeypatch.setattr(api, '_request', concurrent)\n        marker = len(pair.calls)\n        with web(pair) as browser:\n            result = browser.post('/api/upload/reconcile', json={'use': 'local',\n                'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})\n        assert observed['switched'] == other_id\n        assert result.status_code == 400, 'the second status RPC must not permit a new dispatch to the old target'\n        assert head(pair, config) == old_head\n        assert not any(route == '/upload-policy/set' for route, _ in pair.calls[marker:])\n        assert control.row()['state'] != 'confirmed'\n        current = federation.upload_status(pair.local)\n        assert current['hub_id'] == other_id and current['state'] == 'needs_selection' and current['policy'] is None\n        assert other.status()['messages'] == 0\n"
+      },
+      "files": [
+        "tests/test_reconcile_dispatch.py",
+        "tests/test_reconcile_snapshot.py",
+        "tests/test_005_contracts.py"
+      ],
+      "source": {
+        "first": 13,
+        "kind": "file",
+        "last": 52,
+        "path": "tests/test_reconcile_dispatch.py",
+        "sha256": "8f769ca794c791a753927285ea78896b976cb105e3dfd5a631d897e9da42a04c",
+        "text": "def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, monkeypatch):\n    \"\"\"TC-005-reconcile-target-dispatch: inject after the local conditional save.\"\"\"\n    _, config, request, control = setup_control(pair, monkeypatch)\n    shown = control.reconcile(request); old_head = head(pair, config)\n    other = Archive(pair.local.db_path.parent / 'other-after-save.sqlite3')\n    token = pair.token_file.read_text(); address = 'http://localhost:18772'\n    with TestClient(create_hub(other, token), headers={'Authorization': 'Bearer ' + token}) as server:\n        other_id = server.get('/v1/info').json()['hub_id']; assert other_id != pair.hub_id\n        def routed(cfg, route, payload=None):\n            if cfg['address'] != address: return request(cfg, route, payload)\n            pair.calls.append((route, json.loads(json.dumps(payload))))\n            reply = server.get('/v1' + route) if payload is None else server.post('/v1' + route, json=payload)\n            assert reply.status_code < 400, reply.text\n            return reply.json()\n        observed = {'status_reads': 0}\n        def concurrent(cfg, route, payload=None):\n            reply = routed(cfg, route, payload)\n            if route == '/upload-policy/status':\n                observed['status_reads'] += 1\n                if observed['status_reads'] == 2:\n                    observed['saved'] = control.row()\n                    assert observed['saved']['generation'] > shown['local']['generation']\n                    assert observed['saved']['state'] == 'pending'\n                    switched = federation.configure_hub(pair.local, address, 'after-save-target', str(pair.token_file))\n                    assert switched['connected']\n                    observed['switched'] = federation.hub_config(pair.local)['bound_hub_id']\n            return reply\n        monkeypatch.setattr(federation, '_request', routed); monkeypatch.setattr(api, '_request', concurrent)\n        marker = len(pair.calls)\n        with web(pair) as browser:\n            result = browser.post('/api/upload/reconcile', json={'use': 'local',\n                'expected_hub_revision': shown['hub']['revision'], 'expected_local_generation': shown['local']['generation']})\n        assert observed['switched'] == other_id\n        assert result.status_code == 400, 'the second status RPC must not permit a new dispatch to the old target'\n        assert head(pair, config) == old_head\n        assert not any(route == '/upload-policy/set' for route, _ in pair.calls[marker:])\n        assert control.row()['state'] != 'confirmed'\n        current = federation.upload_status(pair.local)\n        assert current['hub_id'] == other_id and current['state'] == 'needs_selection' and current['policy'] is None\n        assert other.status()['messages'] == 0\n"
+      }
+    }
+  },
+  "cwd": ".",
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "implementation_sha256": {
+    "TC-005-cas": "dfd44399a23d588f28064e8fd0d20de5b273ae9b3550cf27ce1683b33b779ec5",
+    "TC-005-reconcile-fresh": "03bc318e61c3c2f10dc58501a6dfe031956d84a0e88d3f33cdeefd26305d3464",
+    "TC-005-reconcile-stale-local": "ca20920c12353af9e800d6e197baf517b188211f5fe853f4ae63c97e0b8a3dbf",
+    "TC-005-reconcile-target-dispatch": "5bfff3fb324ebb588d031b99cf1910d3e321a20df4d14b98c9c2427a31d088a0",
+    "TC-005-reconcile-write-window": "4f1e95aac4144f322c1e32e2868ba1411eab21840f54e693059c6266a5b94df5",
+    "TC-005-target-dispatch": "eac187a5be18b0e5f81ad8e58457385b411fa78956a85991f8b44c16452a9b15"
+  },
+  "obligations": {},
+  "operation": "tdd-red",
+  "product_bindings": {
+    "src/smm_local/api.py": "d38815baac05bdd44ad51ff3605e620ae1fa5d27283d44537332867ebbf9b2f9",
+    "src/smm_local/cli.py": "f1133ae0cec7bfaccae9b93663c88870a589d88504a74cefa8769214a8aa86bd",
+    "src/smm_local/static/index.html": "1afcb4a170768ba79fe43647febe010c5aa2ea7030cd79dce05310db87f25599",
+    "src/smm_local/upload.py": "cccfe6fdee37dbaa7789a316b03782bfb307cf8a59f7c32ab2f36909477c2fc0"
+  },
+  "reason": null,
+  "record": ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/result.json",
+  "recorded_at": "2026-11-22T07:37:04.366000+00:00",
+  "request_id": "red-reconcile-dispatch-v1",
+  "request_sha256": "21f03860e469dea2798da90cfbb31269538f617790652984bb9fc5cc01475303",
+  "results": {
+    "TC-005-reconcile-target-dispatch": {
+      "attachments": {},
+      "business_command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_reconcile_dispatch.py::test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target"
+      ],
+      "coverage": {
+        "status": "off"
+      },
+      "execution": {
+        "argv": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_reconcile_dispatch.py::test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target"
+        ],
+        "cwd": "<task-path>",
+        "environment": {
+          "ACCEPTANCE_EVIDENCE_DIR": "<task-path>"
+        },
+        "exit_code": 1,
+        "finished_at": "2026-11-22T07:37:04.363000+00:00",
+        "output": {
+          ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".acceptance-local/native-v1/AT-SMM-005/tdd-red/red-reconcile-dispatch-v1/TC-005-reconcile-target-dispatch/run.stdout": "9f30dc8a321cbd71284e31828947792bda44492b129ceac3abebdda333bc2d4a"
+        },
+        "started_at": "2026-11-22T07:37:03.215000+00:00"
+      }
+    }
+  },
+  "revision": null,
+  "scene": "SC2",
+  "status": "red_observed",
+  "test_bindings": {
+    "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+    "tests/test_reconcile_dispatch.py": "8f769ca794c791a753927285ea78896b976cb105e3dfd5a631d897e9da42a04c",
+    "tests/test_reconcile_snapshot.py": "4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5"
+  }
+}

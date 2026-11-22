@@ -1,0 +1,53 @@
+{
+  "cases": {
+    "TC-005-global": {
+      "status": "passed",
+      "covers": [
+        "case-1"
+      ],
+      "reason": "SPEC B3至多一个持久全局项目/A3及已审case-1：冻结test_project_preview_coverage.py:9-18先完整调用test_upload_policy.py:42-63，真实源追加session元数据后重导入仍保留人工G归属，缺cwd记录保持SQL project_id=None且all下仅独立G正文到Hub。随后反复ensure核对ID/stable_key，完整projects的global集合恰为[expected]，底层projects JOIN hub_local_project_keys实际持久集合也恰为[expected]，不只核返回首G。全部检查实际到达，唯一性与原缺cwd/上传职责保留。 本次正式execute-final20-sc3/TC-005-global/run.stdout为1 passed，stderr为空，pid=71911，exit_code=0，实际时间2026-11-22T08:26:38.806000+00:00至2026-11-22T08:26:39.222000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-global-query": {
+      "status": "passed",
+      "covers": [
+        "case-2"
+      ],
+      "reason": "SPEC B3/A3及已审case-2：冻结test_project_identity_boundaries.py:38-63先明确预览/确认G归属；关联前A查询独立集合恰为{a}、全部恰为{a,g,unknown}，真实Hub建立A-G后联合A恰为{a,g}，显式本机A仍{a}。前后状态及待定内容都被实际集合断言覆盖，不以两个同错响应相等替代独立预期。 本次正式execute-final20-sc3/TC-005-global-query/run.stdout为1 passed，stderr为空，pid=71906，exit_code=0，实际时间2026-11-22T08:26:34.956000+00:00至2026-11-22T08:26:35.357000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-move-batch": {
+      "status": "passed",
+      "covers": [
+        "move-batch"
+      ],
+      "reason": "SPEC B3/A3及已审move-batch：冻结test_upload_acceptance_boundaries.py:28-68对assign/map/merge各运行，A两会话各两条消息已接收、B禁止；B禁止阶段无known/正文派发且B零命中。允许B后完整目的集合恰为独立moved集合加B，逐受影响会话读取两条独立正文及user/assistant角色，所有A旧归属及旧引用保留；完整物理A消息行集合/身份不变、所有上传记录无A重传、待确认0，重复同步全物理集合不变。全部会话/消息尾部断言均到达，不仅首项。 本次正式execute-final20-sc3/TC-005-move-batch/run.stdout为3 passed，stderr为空，pid=71907，exit_code=0，实际时间2026-11-22T08:26:35.357000+00:00至2026-11-22T08:26:36.540000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-move-project": {
+      "status": "passed",
+      "covers": [
+        "move-project"
+      ],
+      "reason": "SPEC B3/A3及已审move-project：冻结test_upload_project_moves.py:34-66分别assign/map/merge，先取得已接收A旧引用与物理行；转入禁止B后无known/正文发送，B找不到A、A仍找到；允许B后B可找到A，新旧引用各读独立A正文，A归属保留且完整物理行不变，出站无A正文、待确认0、再同步零上传。三操作均完成所有断言；多消息多会话职责由本目标move-batch另证。 本次正式execute-final20-sc3/TC-005-move-project/run.stdout为3 passed，stderr为空，pid=71908，exit_code=0，实际时间2026-11-22T08:26:36.540000+00:00至2026-11-22T08:26:37.649000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-move-retry": {
+      "status": "passed",
+      "covers": [
+        "move-retry"
+      ],
+      "reason": "SPEC B3/A3及已审move-retry：冻结test_upload_project_moves.py:69-96真实Hub保存B归属后才丢known响应，errors/pending以及独立B命中证明是真实丢回执；本机规则confirmed但当前项目pending=1/传输failed。恢复后只核对、零正文上传、pending=0，完整物理行保持且旧引用读独立A正文。全部后续断言到达，没有把旧A回执冒作B确认。 本次正式execute-final20-sc3/TC-005-move-retry/run.stdout为1 passed，stderr为空，pid=71909，exit_code=0，实际时间2026-11-22T08:26:37.649000+00:00至2026-11-22T08:26:38.360000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-project-identity": {
+      "status": "passed",
+      "covers": [
+        "case-3"
+      ],
+      "reason": "SPEC B3/A3及已审case-3：冻结test_project_identity_boundaries.py:9-35真实两设备使用同名同键，完整列表有两个不同Hub ID并按owner各取身份；建立link及only规则后改本机名，零正文上传，完整links与policy保持；own ID的名称更新而source_key保持，最终scope完整集合仍为独立{own,remote}。全部断言已到达，身份不凭名称互比。 本次正式execute-final20-sc3/TC-005-project-identity/run.stdout为1 passed，stderr为空，pid=71910，exit_code=0，实际时间2026-11-22T08:26:38.360000+00:00至2026-11-22T08:26:38.806000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    },
+    "TC-005-project-preview": {
+      "status": "passed",
+      "covers": [
+        "case-4"
+      ],
+      "reason": "SPEC B3/A3及已审case-4：冻结test_project_preview_coverage.py:21-71在A禁止/B允许状态对assign/map/merge分别运行；首次预览与fresh预览均要求确认、独立affected集合正确，projects/project_paths/project_links/conversations/conversation_assignments五表完整快照不变；仅推进规则generation后旧token拒绝且快照仍不变；fresh应用逐会话断言独立应变/不应变集合。此次不是未变化文件的伪重放：:57-63改全部三份源首行acceptance_replay字节而保留session/cwd/消息输入，core.py:488-495检测head_hash改变令offset=0，:520-530确实重新进入原会话归属更新路径；CodexAdapter仅取payload且忽略额外header字段。:65明确files_changed==len(source_files)==3，:67-68完整三会话id→project_id集合等于已经独立核对的应用后assigned，三操作各全部到达。最后普通B合并G实际抛不能合并ValueError，保留原混合类型拒绝检查；该检查未另采拒绝后五表快照，不扩大宣称其额外观察。 本次正式execute-final20-sc3/TC-005-project-preview/run.stdout为3 passed，stderr为空，pid=71912，exit_code=0，实际时间2026-11-22T08:26:39.222000+00:00至2026-11-22T08:26:39.848000+00:00。已核request实际TC集、全部artifacts与当前bindings摘要、case-design摘要、match-project-coverage20冻结源段及调用辅助源一致，执行bindings与已登记独立review-preparation-final20-sc3相同。仅认领本次已到达分配项，不将minimal、真实E1/E3/E4或整SC3其余范围记为通过。"
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "review_kind": "independent_readonly_actual_platform_evidence",
+  "task": "AT-SMM-005",
+  "revision_label": "R005",
+  "reviewed_at": "2026-11-22T08:16:55.784525+00:00",
+  "status": "scoped_evidence_supported_not_overall_acceptance",
+  "overall_acceptance_claim": false,
+  "findings_in_scope": [],
+  "unresolved_outside_scope": [
+    "pr30-current16-review.md F1/P2; these five runs do not inject the later Hub concurrency window"
+  ],
+  "new_product_runs_performed_by_reviewer": 0,
+  "readonly_evidence_review": true,
+  "candidate_revision": "7c72c92e902cae9b05b80ce829b516113292b17d",
+  "instruction_sources": [
+    "AGENTS.md",
+    "changes/005-selective-conversation-upload/intent.md",
+    "changes/005-selective-conversation-upload/spec.md",
+    "changes/005-selective-conversation-upload/plan.md"
+  ],
+  "runs": [
+    {
+      "run": "mac-reconcile15",
+      "status": "supported_with_limits",
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T07:51:11.705219+00:00",
+        "finished_at": "2026-11-22T07:51:18.033000+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "candidate": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "module_verification": {
+        "local_files": 25,
+        "hub_files": 24,
+        "candidate_manifest_command_wheel_source_sha_match": true
+      },
+      "cleanup_recorded_failures": [],
+      "evidence_prefix": ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-reconcile15",
+      "limits": [
+        "E1 reconciliation supplement only; no full E1 acceptance",
+        "No Hub mutation injected after first status read; F1 remains out of scope",
+        "Does not validate subsequent uncommitted fixes"
+      ],
+      "reason": "Actual installed CLI/Web stale local and Hub versions rejected; fresh CLI local submission and refreshed Web Hub adoption succeeded; 3 PNGs viewed and trace request/response bodies matched.",
+      "browser_pngs_viewed": [
+        "stale-local-rejected.png",
+        "stale-hub-rejected.png",
+        "adopted-hub-current.png"
+      ],
+      "trace_verified": true
+    },
+    {
+      "run": "linux-reconcile15",
+      "status": "supported_with_limits",
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T07:51:29.590002+00:00",
+        "finished_at": "2026-11-22T07:51:56.473663+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "candidate": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "identity": {
+        "uid": 1000,
+        "user": "<ordinary-user>"
+      },
+      "module_verification": {
+        "local_files": 25,
+        "hub_files": 24,
+        "candidate_manifest_command_wheel_source_sha_match": true
+      },
+      "cleanup_recorded_failures": [],
+      "evidence_prefix": ".acceptance-local/native-v1/AT-SMM-005/platform-debug/linux-reconcile15",
+      "limits": [
+        "E1 reconciliation supplement only; no full E1 acceptance",
+        "No Hub mutation injected after first status read; F1 remains out of scope",
+        "Does not validate subsequent uncommitted fixes"
+      ],
+      "reason": "Actual installed CLI/Web stale local and Hub versions rejected; fresh CLI local submission and refreshed Web Hub adoption succeeded; 3 PNGs viewed and trace request/response bodies matched.",
+      "browser_pngs_viewed": [
+        "stale-local-rejected.png",
+        "stale-hub-rejected.png",
+        "adopted-hub-current.png"
+      ],
+      "trace_verified": true
+    },
+    {
+      "run": "windows-reconcile15",
+      "status": "supported_with_limits",
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T07:52:03.037967+00:00",
+        "finished_at": "2026-11-22T07:58:26.260425+00:00",
+        "mode": "client",
+        "scope": "E1 actual dual-version CLI/Web reconciliation only; not full A/E acceptance"
+      },
+      "candidate": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "identity": {
+        "elevated_admin": false,
+        "user": "<ordinary-user>"
+      },
+      "module_verification": {
+        "local_files": 25,
+        "hub_files": 24,
+        "candidate_manifest_command_wheel_source_sha_match": true
+      },
+      "cleanup_recorded_failures": [],
+      "evidence_prefix": ".acceptance-local/native-v1/AT-SMM-005/platform-debug/windows-reconcile15",
+      "limits": [
+        "E1 reconciliation supplement only; no full E1 acceptance",
+        "No Hub mutation injected after first status read; F1 remains out of scope",
+        "Does not validate subsequent uncommitted fixes",
+        "Final policy confirmed/none but transfer_state failed; no backfill success claim"
+      ],
+      "reason": "Actual installed CLI/Web stale local and Hub versions rejected; fresh CLI local submission and refreshed Web Hub adoption succeeded; 3 PNGs viewed and trace request/response bodies matched.",
+      "browser_pngs_viewed": [
+        "stale-local-rejected.png",
+        "stale-hub-rejected.png",
+        "adopted-hub-current.png"
+      ],
+      "trace_verified": true,
+      "outer_process": {
+        "pid": 11440,
+        "exit_code": 0,
+        "session": "current interactive user; controlled task token"
+      }
+    },
+    {
+      "run": "mac-hub-main15",
+      "status": "supported_with_limits",
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:09:00.983824+00:00",
+        "finished_at": "2026-11-22T08:09:17.325572+00:00",
+        "mode": "hub-service",
+        "scope": "E3 API/CLI/MCP core; no E1 browser claim"
+      },
+      "candidate": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "module_verification": {
+        "local_files": 25,
+        "hub_files": 24,
+        "candidate_manifest_command_wheel_source_sha_match": true
+      },
+      "cleanup_recorded_failures": [],
+      "evidence_prefix": ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-main15",
+      "limits": [
+        "protocol_only:true; no browser claim",
+        "Does not validate subsequent uncommitted fixes",
+        "Not full E3 or R005 acceptance"
+      ],
+      "actual_service": {
+        "mode": "system-launchd",
+        "uid": 501,
+        "ppid": 1,
+        "pids": [
+          57818,
+          58048
+        ],
+        "state_dir": "<task>/hub-state"
+      },
+      "reason": "Real system LaunchDaemon identity and restart verified; business payload/read/restart evidence supports E3 core.",
+      "cleanup_independent_readonly_check": {
+        "plist_absent": true,
+        "hub_port_refused": true,
+        "local_and_remote_service_json_absent": true
+      }
+    },
+    {
+      "run": "mac-hub-scope15",
+      "status": "supported_with_limits",
+      "recorded_result": {
+        "status": "passed",
+        "failure": null,
+        "started_at": "2026-11-22T08:09:17.453529+00:00",
+        "finished_at": "2026-11-22T08:09:22.810849+00:00",
+        "mode": "hub-service",
+        "scope": "actual offline-all E1 supplement and split-message scoped read; not full A/E acceptance"
+      },
+      "candidate": "7c72c92e902cae9b05b80ce829b516113292b17d",
+      "identity": {
+        "uid": 501,
+        "user": "<ordinary-user>"
+      },
+      "module_verification": {
+        "local_files": 25,
+        "hub_files": 24,
+        "candidate_manifest_command_wheel_source_sha_match": true
+      },
+      "cleanup_recorded_failures": [],
+      "evidence_prefix": ".acceptance-local/native-v1/AT-SMM-005/platform-debug/mac-hub-scope15",
+      "limits": [
+        "protocol_only:true; no browser claim",
+        "Does not validate subsequent uncommitted fixes",
+        "Not full E3 or R005 acceptance",
+        "offline-all skipped despite generic result.scope text; browser:null"
+      ],
+      "actual_service": {
+        "mode": "system-launchd",
+        "uid": 501,
+        "ppid": 1,
+        "pids": [
+          58224,
+          58288
+        ],
+        "state_dir": "<task>/hub-state"
+      },
+      "reason": "Real system LaunchDaemon split-session X-only scoped title/body/project, legacy unscoped semantics and persisted reference after restart verified.",
+      "cleanup_independent_readonly_check": {
+        "plist_absent": true,
+        "hub_port_refused": true,
+        "local_and_remote_service_json_absent": true
+      }
+    }
+  ],
+  "nativecases_registration_input": false
+}

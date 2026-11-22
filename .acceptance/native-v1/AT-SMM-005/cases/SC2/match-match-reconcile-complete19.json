@@ -1,0 +1,21 @@
+{
+  "acceptance_id": "AT-SMM-005",
+  "case_ids": [
+    "TC-005-cas",
+    "TC-005-reconcile-fresh",
+    "TC-005-reconcile-inflight",
+    "TC-005-reconcile-remote-race",
+    "TC-005-reconcile-stale-local",
+    "TC-005-reconcile-target-dispatch",
+    "TC-005-reconcile-write-window",
+    "TC-005-target-dispatch"
+  ],
+  "definitions_sha256": "493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-005/match/match-reconcile-complete19/result.json",
+  "request_id": "match-reconcile-complete19",
+  "result_sha256": "b31d9124f3ec40a4a2d5b0ed5316dd31bfdebe59a3bacb47efed4bca525af65f",
+  "scene": "SC2",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

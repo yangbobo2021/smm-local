@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-web-inputs": {
+      "status": "expected_failure",
+      "reason": "已读取项目 AGENTS、SPEC B1/A1/A11 与 PLAN12、design-reconcile-cli-v2、match-reconcile-sc1-v1，以及 tests/test_reconcile_snapshot.py:132-149 与 test_005_contracts.py 的独立档案/真实 Hub TestClient 路由夹具。Web 两种采用须绑定展示的两端版本，缺失/无效值必须拒绝且不改变状态，预期有已确认需求依据。red-reconcile-web-inputs-v1/result.json SHA256 3fc707af9653ce715dbc1ccf8fc1a94c928dbe0c2b32d4e54ca21565e4b5cbfa；全部 artifacts/bindings 已逐字节核验，test_reconcile_snapshot.py SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5。run.stdout 在第147行记录首个 use=local、仅有 expected_hub_revision、缺 expected_local_generation 的真实 POST 返回200（预期400或422），pytest exit_code=1，stderr 为空，process.json 记录 pid/group=17307。API 的 ReconcileRequest(api.py:58-60)尚无本机代次，路由:294只传Hub版本；upload.py:213-229未对缺失代次拒绝，因此这是业务层接受未绑定视图的缺失行为，不是未知协议/输入触发的服务或测试故障。首个响应后的两端完整状态与无出站 set 断言（148-149）及其余六个无效/缺失输入未执行，不据此宣称其结果；正控另由 fresh 收据独立复审。此为局部预期失败，未认领整场景/平台或浏览器按钮画面。"
+    }
+  }
+}

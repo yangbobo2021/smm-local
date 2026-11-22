@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-stale-local": {
+      "status": "passed",
+      "reason": "已独立读 AGENTS、已确认 SPEC B1/A1/A2/A11、PLAN12、design-reconcile-v1、match-reconcile-sc2-v1、对应红灯及独立意见，候选输入与预期有需求依据。green-reconcile-stale-v1/result.json SHA256 4a156148f9ac975cde9808e9f830ccf2a58a1e97c29c136931d95484f586fd59，定义493e01b72eee696fccea84c88d0a2e44997cc08a0acc2244ee752755dbf5c98e相符；全部bindings/artifacts摘要逐字节吻合，runtime-reconcile-green-v1为ready。冻结snapshot测试SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5、contracts测试ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197和业务命令与red完全一致。raw run.stdout两个参数local/hub均通过（2 passed），exit_code=0，stderr空，process pid/group=24659；regression.stdout 55 passed、exit_code=0、stderr空。tests/test_reconcile_snapshot.py:35-56实际先显示双方none，再仅故障注入Hub set通道，真实保存本机all并证实pending、新generation及Hub revision不变，恢复通道后提交旧值。两个参数本次均越过原53行失败处，完成并通过400、要求重新查看的本机诊断、完整本机row/Hub head不变及无出站策略set断言，排除旧请求确认all或覆盖all为旧none两类错误。upload.py:reconcile在Hub读取前捕获本机row并校验提供generation；_save以同一快照generation再比较，采用local时使用快照desired，未重新读另一条desired冒充旧显示。回归的fresh四模式将响应、实际本机desired、Hub头、出站policy和独立显示policy等值核对，并确认不触发正文，故不是拒绝全部或错提交的修复。仅判该实际TC的TDD绿灯；未声称整SC2、真实并发线程、多平台安装包/浏览器或Mac E3已通过。"
+    }
+  }
+}

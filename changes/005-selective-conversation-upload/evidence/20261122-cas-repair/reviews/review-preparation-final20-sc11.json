@@ -1,0 +1,18 @@
+{
+  "cases": {
+    "TC-005-local-restore": {
+      "status": "passed",
+      "reason": "SPEC B8/A11的受支持prepare-restore、旧允许不能覆盖新限制及明确采用Hub为依据，场景与自然设计有效。冻结test_upload_policy.py:117-143在all一致性备份之后Hub实际确认none；:128-129阻断/保护标记不可回滚，恢复SQLite并重建Archive后:134首先要求conflict，:137-138查看时Hub none且本机desired保持旧值，:140-141明确采用后confirmed/none，:142-143实际push无Hub正文。若恢复自动旧all覆盖或查看即采用，分别在none/本机旧desired断言失败；两个结果都误用旧all或都未确认不能通过独立none/confirmed条件。当前产品upload.py:246-248的use=None在保存前返回；显式use=hub现走:258-295当前头/CAS收到有效回执后再条件保存，本轮正控实际通过，而非沿用旧顺序产品。原始debug-final20-sc11对应日志1 passed。未对账实际发送由同目标unreconciled-send承担；本TC全部tdd-core有效，full1-4平台/Hub恢复/升级恢复等gaps仍未据此完成。",
+      "covers": [
+        "tdd-core"
+      ]
+    },
+    "TC-005-unreconciled-send": {
+      "status": "passed",
+      "reason": "SPEC B8/A11要求未知一致性阻断并保留本机导入查询，设计与实现有效。冻结test_upload_acceptance_boundaries.py:71-104真实从all旧备份恢复到Hub none并保留guard；:82独立旧/新两会话集合证明恢复期间本机仍可导入查询，:84-85前置为旧desired all/物理Hub空。分别在未看差异与只看差异后实际push，:97零上传与:98-99整个出站区段无fingerprint/body首先拦截仅旧消息阻断而新消息漏发，:100全物理行不增加，:101-104冲突/本机旧desired/Hub none保持。两个状态误用同一规则或查看自动确认分别被本机all、Hub none及conflict独立检查挡住。新产品reconcile读差异仍在upload.py:247-248直接返回，不走新的CAS或_save，本轮两状态实际运行到所有断言，原始日志1 passed。只认领tdd-unreconciled，不扩大为实际服务重启/Hub数据库恢复/所有恢复窗口的full1-4。",
+      "covers": [
+        "tdd-unreconciled"
+      ]
+    }
+  }
+}

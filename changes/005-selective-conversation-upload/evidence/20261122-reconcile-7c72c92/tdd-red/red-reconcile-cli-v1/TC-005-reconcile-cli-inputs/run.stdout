@@ -1,0 +1,41 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair ______
+
+pair = namespace(local=<smm_local.core.Archive object at 0x102e83860>, remote=<smm_local.core.Archive object at 0x1034a9f70>,...a9499d9dfd4fe626b39365', 'device_id': '00a94e4cc0174ebe9a5fc829e4764bce'})], hub_id='41abeb466aa9499d9dfd4fe626b39365')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1013297c0>
+capsys = <_pytest.capture.CaptureFixture object at 0x1034e99a0>
+
+    def test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair(pair, monkeypatch, capsys):
+        """TC-005-reconcile-cli-inputs: missing values cannot silently save another submission."""
+        _, config, request, control = setup_control(pair, monkeypatch)
+        def invoke(arguments):
+            capsys.readouterr()
+            monkeypatch.setattr(sys, 'argv', ['smm', '--db', str(pair.local.db_path), *arguments])
+            try: cli.main(); code = 0
+            except SystemExit as exc: code = exc.code
+            captured = capsys.readouterr()
+            return code, captured.out, captured.err
+        code, output, _ = invoke(['upload', 'reconcile']); assert code == 0
+        shown = json.loads(output); generation = shown['local']['generation']; revision = shown['hub']['revision']
+        before = control.row(); remote_before = head(pair, config)
+        bad_arguments = [ ['--expected-hub-revision', str(revision)],
+                          ['--expected-local-generation', str(generation)], [],
+                          ['--expected-hub-revision', str(revision), '--expected-local-generation', '-1'],
+                          ['--expected-hub-revision', str(revision), '--expected-local-generation', 'not-an-integer'] ]
+        for arguments in bad_arguments:
+            code, output, error = invoke(['upload', 'reconcile', '--use', 'local', *arguments])
+>           assert code != 0, 'missing/invalid consent snapshot versions must fail before saving'
+E           AssertionError: missing/invalid consent snapshot versions must fail before saving
+E           assert 0 != 0
+
+tests/test_reconcile_snapshot.py:100: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_reconcile_snapshot.py::test_cli_requires_both_displayed_versions_and_accepts_a_fresh_pair
+1 failed, 1 warning in 0.74s

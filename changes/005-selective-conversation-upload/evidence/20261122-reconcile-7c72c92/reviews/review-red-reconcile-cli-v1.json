@@ -1,0 +1,8 @@
+{
+  "cases": {
+    "TC-005-reconcile-cli-inputs": {
+      "status": "expected_failure",
+      "reason": "依据已确认 SPEC B1（表格及双版本段）/A1/A11 与 PLAN12，CLI --use local 缺刚展示的 local.generation 必须非零拒绝。独立读取 design-reconcile-cli-v2、match-reconcile-sc1-v1、源码 tests/test_reconcile_snapshot.py:81-110 及 test_005_contracts.py:17-65；其 fixture 使用实际 Archive、Local API/CLI 和独立 SQLite Hub TestClient，api/cli._request 转入实际 Hub 路由。red-reconcile-cli-v1/result.json SHA256 1c3a1d9760a08a54917376383a3d75e4b178ad2b67e9ad66a2def409dc3020a9；所有 artifacts/bindings 字节摘要均吻合，测试 SHA256 4ea3270271dc8b1d7f300ae1da196dae90845834cf71dc48b0d37564a52b7ec5。原始 run.stdout 明确运行该 CLI 测试，首个仅带 --expected-hub-revision 的调用在第100行失败：assert 0 != 0；运行 receipt exit_code=1，stderr 为空，process 具有真实 pid/group。这是 CLI 接受缺失代次并成功返回的业务失败，不是未知参数、导入/环境或 fixture 故障。src/smm_local/cli.py:218 仅传 Hub 版本，upload.py:213-229 只校验 Hub 并无本机代次条件，支持根因。第101-110行状态不变、其余缺失/非法输入、帮助与新鲜提交均未到达，故不声称这些已实测，也不认领整个 SC1/三平台；此红灯只证明首个缺失 local.generation 拒绝行为尚未实现。"
+    }
+  }
+}
