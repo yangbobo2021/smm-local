@@ -79,6 +79,33 @@ class Run:
     def admin(self, *args):
         return json.loads(self.command([self.t['hub_python'], '-I', '-X', 'utf8', '-m', 'smm_hub.cli', 'hub', '--state-dir', self.state, *args], timeout=90).stdout)
 
+    def sync_done(self, db, *, wait_for_upload=False, seconds=180):
+        """Wait for the actual job/data state, separately from rule confirmation."""
+        triggered = self.cli(db, 'maintenance', 'sync')
+        address = triggered['url']
+        until = time.monotonic() + seconds
+        if not hasattr(self, 'sync_observations'): self.sync_observations = []
+        previous = None
+        while time.monotonic() < until:
+            status = self.api(address, '/api/status', local=True)
+            upload = status['upload']
+            current = {'running': status['sync']['running'],
+                       **{key: upload.get(key) for key in ('state', 'transfer_state', 'allowed_pending_messages',
+                           'inflight_messages', 'transfer_problem')}}
+            if current != previous:
+                self.sync_observations.append({'at': now(), 'archive': str(db), 'state': current})
+                self.save('sync-observations', self.sync_observations); previous = current
+            if not current['running']:
+                if not wait_for_upload or (upload.get('state') == 'confirmed'
+                        and upload.get('transfer_state') == 'complete'
+                        and upload.get('allowed_pending_messages') == 0
+                        and upload.get('inflight_messages') == 0):
+                    return status
+                assert upload.get('state') not in ('conflict', 'needs_selection'), upload
+                self.api(address, '/api/sync', {}, local=True)
+            time.sleep(.5)
+        raise AssertionError('sync/backfill did not complete within the probe bound: ' + repr(previous))
+
     def api(self, address, route, payload=None, *, method=None, local=False):
         headers = {'Content-Type': 'application/json'}
         if local: headers.update(Origin=address, **{'X-SMM-UI': '1'})
@@ -192,10 +219,10 @@ class Run:
             if name == 'local' and self.args.mode == 'login-service': self.install_login(db)
         self.db, self.remote_db = self.clients
         self.projects = {p['name']: p['id'] for p in self.cli(self.db, 'projects')}
-        self.cli(self.remote_db, 'upload', 'set', '--mode', 'all'); self.cli(self.remote_db, 'maintenance', 'sync')
+        self.cli(self.remote_db, 'upload', 'set', '--mode', 'all'); self.sync_done(self.remote_db, wait_for_upload=True)
         endpoint = json.loads((Path(str(self.db) + '.service.json')).read_text()); self.web = endpoint['url']
         self.save('local-service', {'url': self.web, 'on_demand': endpoint['on_demand'], 'identity': self.identity()})
-        self.cli(self.db, 'maintenance', 'sync')
+        self.sync_done(self.db)
         assert not any(h['source_session_id'].startswith('local-') for h in self.hub_hits())
         initial = self.cli(self.db, 'upload', 'status'); assert initial['state'] == 'needs_selection'
         self.save('new-connection-status', initial)
@@ -238,7 +265,7 @@ class Run:
             args = ['upload', 'set', '--mode', mode]
             for project in selected: args += ['--project-id', str(project)]
             value = self.cli(self.db, *args); assert value['state'] == 'confirmed'; self.save('choice-' + mode + '-' + str(len(selected)), value)
-        self.cli(self.db, 'maintenance', 'sync')
+        self.sync_done(self.db, wait_for_upload=True)
         old = next(h for h in self.hub_hits() if h['source_session_id'] == 'local-A')
         self.old_reference = old['reference']; self.save('old-original', self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': self.old_reference}))
         self.old_batch = next(r['payload'] for r in self.requests if r['route'] == '/v1/upload' and r['payload'].get('records') and r['payload']['device_name'] == '005-local')
@@ -249,7 +276,7 @@ class Run:
         self.stop_index = len(self.requests)
         self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'edge-stopped', '--root', self.root / 'local'])
         self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'append', '--root', self.root / 'local'])
-        self.cli(self.db, 'maintenance', 'sync')
+        self.sync_done(self.db)
         assert not any('appended while stopped' in m['text'] or 'new while stopped' in m['text'] for h in self.hub_hits() for m in h['matched_messages'])
         self.reject_old_requests('initial-stop')
         self.save('stopped-state', stop)
@@ -432,7 +459,7 @@ class Run:
                 page.locator('#project-change-preview').wait_for(); page.screenshot(path=str(self.output / 'assignment-preview.png'), full_page=True)
                 with page.expect_response(lambda r: r.url.endswith('/api/projects/assign')) as response: page.locator('#project-change-confirm').click()
                 applied = response.value.json(); assert applied['applied']
-                self.cli(self.db, 'maintenance', 'sync')
+                self.sync_done(self.db)
                 assigned = self.cli(self.db, 'read', str(self.unassigned['id']))
                 assert assigned['project_id'] == global_project['id']
                 self.save('browser-configuration', {'changes': changes, 'global': global_project, 'preview': preview, 'applied': applied, 'read_after_reimport': assigned})
@@ -481,7 +508,7 @@ class Run:
         if self.args.mode in ('hub-service', 'self-managed'):
             before = self.identities[-1]['pid']; self.stop_hub(); self.start_hub()
             assert self.identities[-1]['pid'] != before
-            self.cli(self.db, 'maintenance', 'sync')
+            self.sync_done(self.db)
             assert self.cli(self.db, 'upload', 'status')['policy']['mode'] == 'none'
             self.save('hub-restart-rule', self.cli(self.db, 'upload', 'status'))
             self.reject_old_requests('after-hub-restart')
@@ -490,14 +517,14 @@ class Run:
         for secret in ('local-A-new', 'appended while stopped', 'new while stopped', 'plugin-only original', 'versionprobe changed local version', 'longneedle end original'):
             assert secret not in sent, 'forbidden local material sent to Hub'
         self.save('stopped-payloads', after_stop)
-        self.cli(self.db, 'upload', 'set', '--mode', 'all'); self.cli(self.db, 'maintenance', 'sync')
+        self.cli(self.db, 'upload', 'set', '--mode', 'all'); self.sync_done(self.db, wait_for_upload=True)
         allowed = self.cli(self.db, 'upload', 'status'); assert allowed['state'] == 'confirmed'
         new = next(h for h in self.hub_hits() if h['source_session_id'] == 'local-A-new')
         assert self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': new['reference']})['messages'][0]['text'] == 'selective common local-A new while stopped'
         old = self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': self.old_reference})
         assert [m['text'] for m in old['messages']] == ['selective common local-A original']
         before = [(h['source_session_id'], [m['canonical_id'] for m in h['matched_messages']]) for h in self.hub_hits()]
-        self.cli(self.db, 'maintenance', 'sync')
+        self.sync_done(self.db)
         assert before == [(h['source_session_id'], [m['canonical_id'] for m in h['matched_messages']]) for h in self.hub_hits()]
         assert 'local-U2' not in {h['source_session_id'] for h in self.hub_hits()}
         old_version = self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': self.version_reference})

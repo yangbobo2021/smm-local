@@ -41,7 +41,7 @@ class Compatibility(Run):
     def execute_combinations(self):
         self.installed()
         for interpreter, package in [(self.old_local, 'smm-local'), (self.old_hub, 'smm-hub')]:
-            code = "from importlib.metadata import version; import importlib.util,sys,json,pathlib,hashlib; r=pathlib.Path(importlib.util.find_spec(sys.argv[1].replace('-','_')).origin).parent; print(json.dumps({'version':version(sys.argv[1]),'modules':{str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in r.rglob('*.py')}}))"
+            code = "from importlib.metadata import version; import importlib.util,sys,json,pathlib,hashlib; r=pathlib.Path(importlib.util.find_spec(sys.argv[1].replace('-','_')).origin).parent; print(json.dumps({'version':version(sys.argv[1]),'modules':{p.relative_to(r).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in r.rglob('*.py')}}))"
             identity = json.loads(self.command([interpreter, '-I', '-X', 'utf8', '-c', code, package]).stdout)
             assert identity['version'] == '0.4.0'
             expected = self.t['old_candidate']['installed_' + package.split('-')[1]]
