@@ -51,6 +51,37 @@ def test_probe_starts_fresh_scan_after_joining_an_older_automatic_job(monkeypatc
     assert requests == ['/api/status', '/api/sync', '/api/status', '/api/status']
 
 
+def test_probe_does_not_confirm_a_fresh_scan_when_start_reply_is_lost(monkeypatch):
+    complete = state(False, 0, 'complete')
+    _, runner, requests = probe(monkeypatch, [complete, complete, state(True, 0, 'complete'), complete])
+    runner.cli = lambda *args: {'url': 'http://127.0.0.1:1', 'running': False, 'started': False}
+    original = runner.api; attempts = []
+    def flaky(address, route, payload=None, **kwargs):
+        if route == '/api/sync':
+            attempts.append(route)
+            if len(attempts) == 1: raise ConnectionAbortedError('synthetic lost sync-start response')
+        return original(address, route, payload, **kwargs)
+    runner.api = flaky
+    assert runner.sync_done('task-archive', wait_for_upload=True) is complete
+    assert len(attempts) == 2
+    assert any(r.get('confirmed_new_scan') is False and 'fresh_start_error' in r for r in runner.sync_observations)
+    assert requests == ['/api/status', '/api/status', '/api/sync', '/api/status', '/api/status']
+
+
+def test_probe_never_promotes_repeated_lost_start_replies_to_complete(monkeypatch):
+    complete = state(False, 0, 'complete')
+    module, runner, _ = probe(monkeypatch, [complete, complete])
+    runner.cli = lambda *args: {'url': 'http://127.0.0.1:1', 'running': False, 'started': False}
+    original = runner.api
+    def aborted(address, route, payload=None, **kwargs):
+        if route == '/api/sync': raise ConnectionAbortedError('synthetic repeated start abort')
+        return original(address, route, payload, **kwargs)
+    runner.api = aborted
+    ticks = iter([0, 1, 2, 4]); monkeypatch.setattr(module.time, 'monotonic', lambda: next(ticks))
+    with pytest.raises(AssertionError, match='did not complete'):
+        runner.sync_done('task-archive', wait_for_upload=True, seconds=3)
+
+
 def test_probe_never_turns_pending_transfer_into_success_at_timeout(monkeypatch):
     module, runner, _ = probe(monkeypatch, [state(False, 1)])
     ticks = iter([0, 1, 3]); monkeypatch.setattr(module.time, 'monotonic', lambda: next(ticks))

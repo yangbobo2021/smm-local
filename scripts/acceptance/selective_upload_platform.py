@@ -101,7 +101,13 @@ class Run:
                 if not fresh_started:
                     # An existing automatic job may have scanned a file before
                     # the fixture update. Require a job started by this request.
-                    fresh_started = self.api(address, '/api/sync', {}, local=True).get('started', False)
+                    try:
+                        fresh_started = self.api(address, '/api/sync', {}, local=True).get('started', False)
+                    except (ConnectionAbortedError, ConnectionResetError, TimeoutError) as exc:
+                        self.sync_observations.append({'at': now(), 'archive': str(db),
+                            'fresh_start_error': repr(exc), 'confirmed_new_scan': False})
+                        self.save('sync-observations', self.sync_observations)
+                        time.sleep(.5)
                     continue
                 if not wait_for_upload or (upload.get('state') == 'confirmed'
                         and upload.get('transfer_state') == 'complete'
