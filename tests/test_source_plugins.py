@@ -514,7 +514,7 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
     hub_archive = Archive(tmp_path / "hub.sqlite3")
     token = "local-test-token-" + "a" * 32
     config = {"device_id": "a" * 32, "device_name": "试用节点", "token": token,
-              "address": "http://127.0.0.1"}
+              "address": "http://127.0.0.1", "policy_protocol": 1}
     monkeypatch.setattr(federation, "hub_config", lambda db: config)
 
     with TestClient(create_hub(hub_archive, token)) as hub:
@@ -528,7 +528,8 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
         config["bound_hub_id"] = request(config, "/info")["hub_id"]
         monkeypatch.setattr(federation, "_request", request)
         federation.choose_upload(archive, "all", [])
-        assert federation.push_pending(archive)["uploaded"] == 1
+        pushed = federation.push_pending(archive)
+        assert pushed["uploaded"] == 1, pushed
         assert federation.push_pending(archive)["uploaded"] == 0
         assert federation.search_archive(archive, "旧汇总风车回归")["results"][0]["source"] == "codex"
         assert not federation.search_archive(archive, "白鹭验收", current_source="custom-json",

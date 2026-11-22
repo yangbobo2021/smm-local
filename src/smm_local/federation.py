@@ -106,7 +106,7 @@ def configure_hub(db: Archive, address: str, device_name: str, token_file: str |
     try:
         info = _hub_info(config)
         config = _bind_hub(db, config, info["hub_id"])
-        _register_device(config, info["hub_id"])
+        _register_device(config, info["hub_id"], managed="upload-policy-v1" in info.get("capabilities", []))
         _controller(db, config, info["hub_id"])
     except HubUnavailable as exc:
         return {"configured": True, "connected": False, "address": address,
@@ -114,9 +114,11 @@ def configure_hub(db: Archive, address: str, device_name: str, token_file: str |
     return {"configured": True, "connected": True, "address": address, "device_name": device_name}
 
 
-def _register_device(config: dict, hub_id: str) -> None:
+def _register_device(config: dict, hub_id: str, *, managed=False) -> None:
     _request(config, "/upload", {"hub_id": hub_id, "device_id": config["device_id"],
                                  "device_name": config["device_name"], "records": []})
+    if managed:
+        _request(config, "/upload-policy/register", {"hub_id": hub_id, "device_id": config["device_id"]})
 
 
 def configure_and_start(db: Archive, address: str, device_name: str, token_file: str | None = None) -> dict:
@@ -219,6 +221,7 @@ def push_pending(db: Archive, *, control_only=False) -> dict | None:
         if "projects" in info.get("capabilities", []):
             _push_projects(db, config, hub_id, 0)
         return {"uploaded": 0, "pending": True, "reason": "旧 Hub 不支持上传规则，正文未发送"}
+    _register_device(config, hub_id, managed=True)
     upload = _controller(db, config, hub_id)
     upload.sync_policy(_request)
     upload.resolve_unknown(_request)

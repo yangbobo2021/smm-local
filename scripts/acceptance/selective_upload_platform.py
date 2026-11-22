@@ -87,6 +87,19 @@ class Run:
 
     def installed(self):
         candidate = self.t['candidate']; assert candidate['dirty'] is False
+        tooling = self.t.get('browser_tooling')
+        tooling_identity = None
+        if tooling:
+            directory = Path(tooling['directory'])
+            manifest = json.loads(Path(tooling['manifest']).read_text())
+            actual = {name: hashlib.sha256((directory / name).read_bytes()).hexdigest() for name in manifest['files']}
+            assert actual == manifest['files'], 'portable browser tooling differs from its source manifest'
+            sys.path.insert(0, str(directory))
+            os.environ['PLAYWRIGHT_NODEJS_PATH'] = tooling['node']
+            self.env['PLAYWRIGHT_NODEJS_PATH'] = tooling['node']
+            tooling_identity = {'source': manifest['source'], 'files': actual,
+                                'node_sha256': hashlib.sha256(Path(tooling['node']).read_bytes()).hexdigest(),
+                                'node_version': self.command([tooling['node'], '--version']).stdout.strip()}
         observed = {}
         for package, interpreter in [('local', self.t['local_python']), ('hub', self.t['hub_python'])]:
             expected = candidate['installed_' + package]
@@ -96,7 +109,8 @@ class Run:
             assert not value['other_package'], 'independent package environment contains the other SMM package'
             observed[package] = value
         self.save('manifest', {'candidate': candidate, 'installed': observed, 'started_at': self.started,
-                               'platform': platform.platform(), 'identity': self.identity(), 'mode': self.args.mode})
+                               'platform': platform.platform(), 'identity': self.identity(), 'mode': self.args.mode,
+                               'browser_tooling': tooling_identity})
 
     def identity(self):
         if os.name == 'nt':
@@ -325,7 +339,7 @@ class Run:
         self.cli(db, 'stop-on-demand')
         self.login_label = 'ai.smm.local.acceptance.' + hashlib.sha256(str(self.root).encode()).hexdigest()[:12]
         wrapper = self.root / 'login-candidate'
-        wrapper.write_text('#!' + self.t['local_python'] + '\nimport os,sys\nos.environ["SSL_CERT_FILE"]=' + repr(self.t['cert']) + '\nos.execv(sys.executable,[sys.executable,"-I","-m","smm_local.cli",*sys.argv[1:],"--port","0"]])\n', encoding='utf-8')
+        wrapper.write_text('#!' + self.t['local_python'] + '\nimport os,sys\nos.environ["SSL_CERT_FILE"]=' + repr(self.t['cert']) + '\nos.execv(sys.executable,[sys.executable,"-I","-m","smm_local.cli",*sys.argv[1:],"--port","0"])\n', encoding='utf-8')
         wrapper.chmod(0o700)
         code = "from pathlib import Path; import sys; from smm_local.login_service import install; install(Path(sys.argv[1]),Path(sys.argv[2]),label=sys.argv[3],logs=Path(sys.argv[4]))"
         self.command([self.t['local_python'], '-I', '-c', code, wrapper, db, self.login_label, self.root / 'login-logs'])

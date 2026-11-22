@@ -33,11 +33,12 @@ class HubUpload:
                     accepted INTEGER NOT NULL, control_epoch TEXT NOT NULL,
                     PRIMARY KEY(device_id,batch_id)
                 );
+                CREATE TABLE IF NOT EXISTS hub_managed_devices (device_id TEXT PRIMARY KEY);
             """)
         with control_lock(self.guard.lock):
             if not self.guard.path.exists():
                 with self.db.connect() as con:
-                    adopted = con.execute("SELECT 1 FROM hub_upload_policies LIMIT 1").fetchone()
+                    adopted = con.execute("SELECT 1 FROM hub_upload_policies UNION ALL SELECT 1 FROM hub_managed_devices LIMIT 1").fetchone()
                 if not adopted:
                     self.guard.write({"format": 1, "archive_id": hub_id, "control_epoch": uuid4().hex,
                                       "restore_pending": False, "devices": {}})
@@ -75,6 +76,8 @@ class HubUpload:
         mismatch = bool(protected.get("pending") or (protected.get("revision", 0) != row["revision"])
                         or (row["revision"] and any(protected.get(k) != row[k]
                             for k in ("policy", "submission_id", "control_epoch"))))
+        if con.execute("SELECT 1 FROM hub_managed_devices WHERE device_id=?", (device,)).fetchone() and not protected.get("legacy_locked"):
+            mismatch = True
         needs_restore = guard.get("restore_pending", False) and protected.get("reconciled_epoch") != guard["control_epoch"]
         return {"hub_id": self.hub_id, "device_id": device, "revision": selected["revision"],
                 "policy": selected["policy"], "submission_id": selected.get("submission_id"),
@@ -85,6 +88,21 @@ class HubUpload:
         with control_lock(self.guard.lock):
             guard = self._guard()
             with self.db.connect() as con:
+                return self._status(con, guard, device)
+
+    def register(self, device):
+        """Adopt controls without choosing an upload rule or changing a prior rule."""
+        with control_lock(self.guard.lock):
+            guard = self._guard()
+            with self.db.connect() as con:
+                con.execute("BEGIN IMMEDIATE")
+                current = self._status(con, guard, device)
+                if device not in guard["devices"] and not current["conflict"]:
+                    guard["devices"][device] = {"revision": 0, "policy": None, "submission_id": None,
+                        "control_epoch": None, "legacy_locked": True, "reconciled_epoch": guard["control_epoch"]}
+                    # Persist the deny fence first; an interrupted DB marker cannot reopen it.
+                    self.guard.write(guard)
+                con.execute("INSERT OR IGNORE INTO hub_managed_devices VALUES(?)", (device,))
                 return self._status(con, guard, device)
 
     def set(self, device, policy, expected_revision, submission_id, *, reconcile=False):
@@ -116,6 +134,7 @@ class HubUpload:
                 self.guard.write(guard)
                 con.execute("INSERT INTO hub_upload_policies VALUES(?,?,?,?,?) ON CONFLICT(device_id) DO UPDATE SET revision=excluded.revision,policy=excluded.policy,submission_id=excluded.submission_id,control_epoch=excluded.control_epoch",
                             (device, receipt["revision"], json.dumps(policy), submission_id, guard["control_epoch"]))
+                con.execute("INSERT OR IGNORE INTO hub_managed_devices VALUES(?)", (device,))
                 con.execute("INSERT INTO hub_policy_submissions VALUES(?,?,?,?) ON CONFLICT(device_id,submission_id) DO UPDATE SET receipt=excluded.receipt",
                             (device, submission_id, digest(policy), json.dumps(receipt)))
             guard["devices"][device] = {**receipt, "legacy_locked": True,
@@ -126,7 +145,8 @@ class HubUpload:
     def _check(self, con, guard, device, revision, epoch):
         row = self._recover_committed(con, guard, device)
         protected = guard["devices"].get(device, {})
-        managed = bool(row["revision"] or protected.get("legacy_locked") or protected.get("pending"))
+        managed = bool(row["revision"] or protected.get("legacy_locked") or protected.get("pending")
+                       or con.execute("SELECT 1 FROM hub_managed_devices WHERE device_id=?", (device,)).fetchone())
         if guard.get("restore_pending") and protected.get("reconciled_epoch") != guard["control_epoch"]:
             conflict("restore_pending", "Hub 恢复后须先对账，正文接收已停止")
         if not managed:

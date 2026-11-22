@@ -339,7 +339,6 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             archive = Archive(tmp_path / name / "local.sqlite3")
             archive.set_settings(codex_root=str(sessions))
             archive.sync_codex()
-            assert configure_hub(archive, address, name, str(token))["connected"]
             clients.append((archive, archive.resolve_project(str(working))["id"]))
         client_a, project_a = clients[0]
         client_b, project_b = clients[1]
@@ -347,7 +346,7 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         # Reproduce an old upload with its message cursor independently of project metadata.
         legacy = {
             "hub_id": hub_id, "device_name": "device-a",
-            "device_id": json.loads(client_a.db_path.with_suffix(".sqlite3.hub.json").read_text())["device_id"],
+            "device_id": "a" * 32,
             "records": [{"source":"codex","source_session_id":"device-a","started_at":None,
                          "source_key":"device-a","position":0,"role":"user",
                          "text":"evidence from device-a","timestamp":None,"source_order":1}],
@@ -357,6 +356,11 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
             message_id = con.execute("SELECT MAX(id) FROM messages").fetchone()[0]
             con.execute("INSERT INTO settings(key,value) VALUES(?,?)",
                         (f"hub_cursor:{hub_id}:{legacy['device_id']}", str(message_id)))
+        # The legacy receive/cursor predates new-protocol registration.
+        client_a.db_path.with_suffix('.sqlite3.hub.json').write_text(json.dumps({
+            'address': address, 'device_name': 'device-a', 'device_id': legacy['device_id'], 'token': token.read_text()}))
+        for (archive, _), label in zip(clients, ('device-a', 'device-b')):
+            assert configure_hub(archive, address, label, str(token))['connected']
         historical = next(hit for hit in query() if hit["source_session_id"] == "device-a")
         assert historical["project_id"] is None
         choose_upload(client_a, "all", [])

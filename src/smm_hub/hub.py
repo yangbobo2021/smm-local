@@ -202,6 +202,11 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         require_hub(req.hub_id)
         return uploads.status(req.device_id)
 
+    @app.post("/v1/upload-policy/register")
+    def register_policy(req: PolicyQuery):
+        require_hub(req.hub_id)
+        return uploads.register(req.device_id)
+
     @app.post("/v1/upload-policy/set")
     def policy_set(req: PolicySet):
         require_hub(req.hub_id)
