@@ -187,3 +187,5 @@ A5 可运行 `selective_upload_isolation.py --target-config <独立新配置> --
 在上述隔离配置增加 `extra_entrances: true`，还会通过 CLI、真实 stdio MCP 和浏览器实际选择“仅本机按项目/全部项目、联合全部项目”，逐条读取并与合成夹具完整正文比较。Windows 包装器支持 `--probe isolation --mode client`，仍必须使用普通交互身份。
 
 `selective_upload_scope.py <client|self-managed|hub-service> --target-config <新配置> --output <新目录>` 单独补离线全项目三入口及共享会话分项目原文读取。夹具通过真实上传协议在任务Hub写入同会话X/Y两条消息，只关联X，验证允许标题、完整消息、旧无范围读取与重启引用；`protocol_only` 的实际服务任务只执行范围原文部分。Windows包装器选择`--probe scope`并保留对应mode，服务仍需实际LocalService身份。
+
+`selective_upload_global_cli.py --target-config <已结束的任务配置> --output <新目录>` 仅在该任务自己的合成档案/来源上验证CLI唯一全局项目、明确归属与强制源重放。须在对应主流程结束后运行，不用于日常档案；Windows包装器支持`--probe global_cli --mode client`。
