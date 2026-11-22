@@ -24,11 +24,13 @@ def prepare(root, device):
     database = root / 'archive.sqlite3'
     assert not database.exists(), 'task archive already exists'
     labels = ['A', 'D', 'G', 'U', 'U2'] if device == 'local' else ['B', 'C']
-    for name in labels:
-        history(root, device + '-' + name, name if not name.startswith('U') else None, ['selective common ' + device + '-' + name + ' original'])
     empty = root / 'empty'; empty.mkdir()
+    (root / 'sessions').mkdir()
     db = Archive(database)
     db.set_settings(codex_root=str(root / 'sessions'), claude_root=str(empty), sync_interval_seconds=10)
+    for name in labels:
+        history(root, device + '-' + name, name if not name.startswith('U') else None, ['selective common ' + device + '-' + name + ' original'])
+        if device == 'local' and name == 'A': db.sync_codex()  # Local A and Hub V deliberately share integer ID 1.
     db.sync_codex()
     if device == 'local':
         g = db.ensure_global_project()
@@ -72,10 +74,22 @@ def seed_vibe(root):
 
 
 def main():
-    p = argparse.ArgumentParser(); p.add_argument('action', choices=['prepare', 'append', 'seed-vibe']); p.add_argument('--root', type=Path, required=True); p.add_argument('--device', default='local')
+    p = argparse.ArgumentParser(); p.add_argument('action', choices=['prepare', 'append', 'seed-vibe', 'prepare-edge', 'edge-stopped']); p.add_argument('--root', type=Path, required=True); p.add_argument('--device', default='local')
     args = p.parse_args(); root = args.root.resolve()
     if args.action == 'prepare': result = prepare(root, args.device)
     elif args.action == 'seed-vibe': result = seed_vibe(root)
+    elif args.action == 'prepare-edge':
+        history(root, 'version-dialogue', 'A', ['versionprobe original archived version'])
+        result = {'fixture': 'one original version before stop'}
+    elif args.action == 'edge-stopped':
+        from smm_local.core import Archive
+        db = Archive(root / 'archive.sqlite3')
+        with db.connect() as con:
+            conversation = con.execute("SELECT id FROM conversations WHERE source_session_id='version-dialogue'").fetchone()[0]
+            con.execute("UPDATE messages SET text='versionprobe changed local version' WHERE conversation_id=?", (conversation,))
+            db._reindex(con, conversation)
+        history(root, 'long-dialogue', 'A', ['paddingword ' * 2000 + 'longneedle end original'])
+        result = {'fixture': 'task local archive version changed; source server untouched', 'long_characters': 24023}
     else:
         history(root, 'local-A', 'A', ['selective common local-A original', 'selective common local-A appended while stopped'])
         history(root, 'local-A-new', 'A', ['selective common local-A new while stopped'])

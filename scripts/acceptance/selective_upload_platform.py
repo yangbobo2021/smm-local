@@ -73,11 +73,11 @@ class Run:
         return p
 
     def cli(self, db, *args, expected=0):
-        p = self.command([self.t['local_python'], '-I', '-m', 'smm_local.cli', '--db', db, *args], expected=expected)
+        p = self.command([self.t['local_python'], '-I', '-X', 'utf8', '-m', 'smm_local.cli', '--db', db, *args], expected=expected)
         return json.loads(p.stdout) if p.returncode == 0 else p.stderr
 
     def admin(self, *args):
-        return json.loads(self.command([self.t['hub_python'], '-I', '-m', 'smm_hub.cli', 'hub', '--state-dir', self.state, *args], timeout=90).stdout)
+        return json.loads(self.command([self.t['hub_python'], '-I', '-X', 'utf8', '-m', 'smm_hub.cli', 'hub', '--state-dir', self.state, *args], timeout=90).stdout)
 
     def api(self, address, route, payload=None, *, method=None, local=False):
         headers = {'Content-Type': 'application/json'}
@@ -106,7 +106,7 @@ class Run:
         for package, interpreter in [('local', self.t['local_python']), ('hub', self.t['hub_python'])]:
             expected = candidate['installed_' + package]
             code = "import importlib.util,pathlib,hashlib,json,sys,platform; r=pathlib.Path(importlib.util.find_spec('smm_' + sys.argv[1]).origin).parent.parent; print(json.dumps({'files':{n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])},'python':sys.version,'platform':platform.platform(),'executable':sys.executable,'other_package':importlib.util.find_spec('smm_hub' if sys.argv[1]=='local' else 'smm_local') is not None}))"
-            value = json.loads(self.command([interpreter, '-I', '-c', code, package, json.dumps(list(expected))]).stdout)
+            value = json.loads(self.command([interpreter, '-I', '-X', 'utf8', '-c', code, package, json.dumps(list(expected))]).stdout)
             assert value['files'] == expected, 'installed module differs from wheel'
             assert not value['other_package'], 'independent package environment contains the other SMM package'
             observed[package] = value
@@ -128,7 +128,7 @@ class Run:
             self.admin('enable')
         else:
             log = (self.output / 'hub.log').open('a', encoding='utf-8')
-            self.process = subprocess.Popen([self.t['hub_python'], '-I', '-m', 'smm_hub.cli', 'serve-hub', '--state-dir', str(self.state),
+            self.process = subprocess.Popen([self.t['hub_python'], '-I', '-X', 'utf8', '-m', 'smm_hub.cli', 'serve-hub', '--state-dir', str(self.state),
                 '--host', '127.0.0.1', '--port', str(self.t['port']), '--token-file', str(self.root / 'input-token'),
                 '--tls-cert', self.t['cert'], '--tls-key', self.t['key']], env=self.env, stdout=log, stderr=log)
             log.close()
@@ -169,7 +169,7 @@ class Run:
     def setup(self):
         assert not self.state.exists(), 'new task state is required'
         if self.args.mode != 'hub-service':
-            self.command([self.t['hub_python'], '-I', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
+            self.command([self.t['hub_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
         (self.root / 'input-token').write_text(self.token, encoding='ascii')
         if self.args.mode == 'hub-service':
             # setup creates the service credential; read it privately after setup.
@@ -178,13 +178,13 @@ class Run:
             self.token = (self.state / 'hub-token').read_text().strip()
             (self.root / 'input-token').write_text(self.token, encoding='ascii')
             self.identities.append(self.hub_identity()); self.save('setup', result)
-            self.command([self.t['hub_python'], '-I', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
+            self.command([self.t['hub_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
         else: self.start_hub()
         self.hub_id = self.api(self.t['address'], '/v1/info')['hub_id']
         self.make_relay()
         for name in ('local', 'remote'):
             directory = self.root / name
-            result = json.loads(self.command([self.t['local_python'], '-I', HERE / 'selective_upload_fixture.py', 'prepare', '--root', directory, '--device', name]).stdout)
+            result = json.loads(self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'prepare', '--root', directory, '--device', name]).stdout)
             db = directory / 'archive.sqlite3'; self.clients.append(db)
             self.save('fixture-' + name, result)
             if name == 'local': self.unassigned = next(h for h in result['search']['results'] if h['source_session_id'] == 'local-U')
@@ -232,6 +232,7 @@ class Run:
     def hub_hits(self): return self.api(self.t['address'], '/v1/search', {'query': 'selective', 'limit': 50, 'preview_chars': 0})['results']
 
     def policy_and_stop(self):
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'prepare-edge', '--root', self.root / 'local'])
         before = self.cli(self.db, 'upload', 'status'); self.save('initial-choice', before)
         for mode, selected in [('only', []), ('none', []), ('only', [self.projects['A']])]:
             args = ['upload', 'set', '--mode', mode]
@@ -243,8 +244,11 @@ class Run:
         self.old_batch = next(r['payload'] for r in self.requests if r['route'] == '/v1/upload' and r['payload'].get('records') and r['payload']['device_name'] == '005-local')
         self.cli(self.db, 'upload', 'set', '--mode', 'none')
         stop = self.cli(self.db, 'upload', 'status'); assert stop['state'] == 'confirmed'
+        version = self.api(self.t['address'], '/v1/search', {'query': 'versionprobe', 'preview_chars': 0})['results'][0]
+        self.version_reference = version['reference']
         self.stop_index = len(self.requests)
-        self.command([self.t['local_python'], '-I', HERE / 'selective_upload_fixture.py', 'append', '--root', self.root / 'local'])
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'edge-stopped', '--root', self.root / 'local'])
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', HERE / 'selective_upload_fixture.py', 'append', '--root', self.root / 'local'])
         self.cli(self.db, 'maintenance', 'sync')
         assert not any('appended while stopped' in m['text'] or 'new while stopped' in m['text'] for h in self.hub_hits() for m in h['matched_messages'])
         self.reject_old_requests('initial-stop')
@@ -268,7 +272,7 @@ class Run:
     async def mcp(self, tool, arguments):
         from mcp import ClientSession, StdioServerParameters
         from mcp.client.stdio import stdio_client
-        params = StdioServerParameters(command=self.t['local_python'], args=['-I', '-m', 'smm_local.mcp_server', '--db', str(self.db)], env=self.env)
+        params = StdioServerParameters(command=self.t['local_python'], args=['-I', '-X', 'utf8', '-m', 'smm_local.mcp_server', '--db', str(self.db)], env=self.env)
         async with stdio_client(params) as (reader, writer):
             async with ClientSession(reader, writer) as session:
                 await session.initialize(); response = await session.call_tool(tool, arguments)
@@ -277,6 +281,9 @@ class Run:
 
     def assert_scope(self, result, expected):
         assert {h['source_session_id'] for h in result['results']} == set(expected), result
+        if 'vibe-V' in expected:
+            by_session = {h['source_session_id']: h for h in result['results']}
+            assert by_session['local-A']['id'] == by_session['vibe-V']['id'], 'fixture must exercise colliding local/Hub integer IDs'
 
     def interfaces(self, stage, expected):
         args = ['search', 'selective', '--scope', 'project', '--project-id', str(self.projects['A']), '--limit', '20']
@@ -349,6 +356,47 @@ class Run:
         state = self.cli(self.db, 'upload', 'status'); assert state['policy']['mode'] == 'none'
         self.save('local-restart', state)
 
+    def edge_interfaces(self):
+        cases = {'versionprobe': {'versionprobe original archived version', 'versionprobe changed local version'},
+                 'longneedle': {'paddingword ' * 2000 + 'longneedle end original'}}
+        observed = {}
+        for query, expected in cases.items():
+            cli = self.cli(self.db, 'search', query, '--scope', 'project', '--project-id', str(self.projects['A']), '--limit', '20')
+            mcp = asyncio.run(self.mcp('search_conversations', {'query': query, 'scope': 'project', 'project_id': self.projects['A'], 'limit': 20}))
+            reads = []
+            for label, result in [('cli', cli), ('mcp', mcp)]:
+                assert len(result['results']) == 1
+                hit = result['results'][0]
+                read = self.cli(self.db, 'read', '--reference', hit['reference']) if label == 'cli' else asyncio.run(self.mcp('read_conversation', {'reference': hit['reference']}))
+                assert {m['text'] for m in read['messages']} == expected
+                assert len(read['messages']) == len(expected)
+                reads.append(read)
+            assert cli['results'][0]['rerank_score'] == mcp['results'][0]['rerank_score']
+            observed[query] = {'cli': cli, 'mcp': mcp, 'reads': reads}
+        if not self.protocol_only:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                kwargs = {'headless': True}
+                if self.t.get('browser'): kwargs['executable_path'] = self.t['browser']
+                browser = p.chromium.launch(**kwargs); context = browser.new_context(viewport={'width': 1440, 'height': 1100})
+                context.tracing.start(screenshots=True, snapshots=True, sources=True); page = context.new_page()
+                try:
+                    page.goto(self.web); page.locator('nav button[data-tab=search]').click()
+                    page.locator('#scope').select_option('project'); page.locator('#search-project').select_option(str(self.projects['A'])); page.locator('#limit').select_option('20')
+                    for query, expected in cases.items():
+                        page.locator('#query').fill(query)
+                        with page.expect_response(lambda r: r.url.endswith('/api/search')) as response: page.locator('#search-form button').click()
+                        result = response.value.json(); assert len(result['results']) == 1
+                        with page.expect_response(lambda r: r.url.endswith('/api/read')) as response: page.get_by_role('button', name='读取命中及允许的上下文').click()
+                        read = response.value.json(); assert {m['text'] for m in read['messages']} == expected
+                        assert read['messages'] and len(read['messages']) == len(expected)
+                        assert result['results'][0]['rerank_score'] == observed[query]['cli']['results'][0]['rerank_score']
+                        observed[query]['browser'] = {'search': result, 'read': read}
+                        page.screenshot(path=str(self.output / ('edge-' + query + '.png')), full_page=True)
+                finally:
+                    context.tracing.stop(path=str(self.output / 'edges-browser-trace.zip')); browser.close()
+        self.save('version-and-long-originals', observed)
+
     def browser_configuration(self):
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
@@ -399,7 +447,7 @@ class Run:
         wrapper.write_text('#!' + self.t['local_python'] + '\nimport os,sys\nos.environ["SSL_CERT_FILE"]=' + repr(self.t['cert']) + '\nos.execv(sys.executable,[sys.executable,"-I","-m","smm_local.cli",*sys.argv[1:],"--port","0"])\n', encoding='utf-8')
         wrapper.chmod(0o700)
         code = "from pathlib import Path; import sys; from smm_local.login_service import install; install(Path(sys.argv[1]),Path(sys.argv[2]),label=sys.argv[3],logs=Path(sys.argv[4]))"
-        self.command([self.t['local_python'], '-I', '-c', code, wrapper, db, self.login_label, self.root / 'login-logs'])
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', '-c', code, wrapper, db, self.login_label, self.root / 'login-logs'])
         eventually(lambda: Path(str(db) + '.service.json').exists())
         self.login_action('inspect')
 
@@ -417,6 +465,7 @@ class Run:
     def lifecycle(self):
         if not self.protocol_only: self.browser_configuration()
         self.policy_and_stop()
+        self.edge_interfaces()
         expected = ['local-A', 'local-A-new', 'remote-B', 'vibe-V']
         self.interfaces('combined-stopped', expected)
         local = self.cli(self.db, 'search', 'selective', '--local', '--scope', 'project', '--project-id', str(self.projects['A']), '--limit', '20')
@@ -438,7 +487,7 @@ class Run:
             self.reject_old_requests('after-hub-restart')
         after_stop = self.requests[self.stop_index:]
         sent = json.dumps([r['payload'] for r in after_stop])
-        for secret in ('local-A-new', 'appended while stopped', 'new while stopped', 'plugin-only original'):
+        for secret in ('local-A-new', 'appended while stopped', 'new while stopped', 'plugin-only original', 'versionprobe changed local version', 'longneedle end original'):
             assert secret not in sent, 'forbidden local material sent to Hub'
         self.save('stopped-payloads', after_stop)
         self.cli(self.db, 'upload', 'set', '--mode', 'all'); self.cli(self.db, 'maintenance', 'sync')
@@ -451,6 +500,9 @@ class Run:
         self.cli(self.db, 'maintenance', 'sync')
         assert before == [(h['source_session_id'], [m['canonical_id'] for m in h['matched_messages']]) for h in self.hub_hits()]
         assert 'local-U2' not in {h['source_session_id'] for h in self.hub_hits()}
+        old_version = self.api(self.t['address'], '/v1/read', {'hub_id': self.hub_id, 'reference': self.version_reference})
+        assert [m['text'] for m in old_version['messages']] == ['versionprobe original archived version']
+        self.save('retained-version-original', old_version)
         self.save('backfill', {'state': allowed, 'hub': self.hub_hits(), 'old-reference-read': old})
 
     def cleanup(self):
@@ -458,7 +510,7 @@ class Run:
         if self.login_label:
             try:
                 code = 'import sys; from smm_local.login_service import uninstall; uninstall(label=sys.argv[1])'
-                self.command([self.t['local_python'], '-I', '-c', code, self.login_label])
+                self.command([self.t['local_python'], '-I', '-X', 'utf8', '-c', code, self.login_label])
                 assert not (Path.home() / 'Library/LaunchAgents' / (self.login_label + '.plist')).exists()
             except Exception as exc: failures.append(str(exc))
         for db in self.clients:

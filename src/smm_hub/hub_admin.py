@@ -422,7 +422,7 @@ class Hub:
 
 def dispatch(args: argparse.Namespace):
     hub = Hub(args.state_dir)
-    action = args.hub_action
+    action = args.hub_action.replace("-", "_")
     if action in ("status", "run"):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)

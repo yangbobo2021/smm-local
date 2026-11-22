@@ -16,7 +16,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 from ._archive import (Archive, digest, legacy_message_key, message_version, sign,
-                       reference_material, reference_decode, reference_issue, reference_read)
+                       reference_material, reference_decode, reference_issue, reference_read, tokens, compact_message)
 from .projects import HubProjects
 from .upload import HubUpload
 from .vibeinsight import SOURCE as VIBEINSIGHT
@@ -377,8 +377,7 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             for message in conversation[message_field]:
                 if "source_key" in message:
                     message["canonical_id"] = digest([conversation["source"], original_session, message.pop("source_key")])
-                    original = con.execute("SELECT role,text,timestamp FROM messages WHERE id=?", (message["_message_id"],)).fetchone()
-                    message["content_version"] = message_version(dict(original))
+                    message["content_version"] = message_version(message)
         if conversation["source"] == VIBEINSIGHT:
             source_id, _, platform, original_session = json.loads(conversation["source_session_id"])
             conversation["source_session_id"] = original_session
@@ -425,6 +424,8 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
     @app.post("/v1/search")
     def search(req: Search):
         try:
+            if req.preview_chars != 0 and not 100 <= req.preview_chars <= 2000:
+                raise ValueError("preview_chars 必须为 0 或 100 到 2000")
             effective = None
             ids = None
             if req.scope_reference is not None:
@@ -444,21 +445,28 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                     raise ValueError("项目检索需要设备标识")
                 effective = projects.effective(req.device_id, str(req.project_id))
                 ids = tuple(project["id"] for project in effective)
-            result = db.search(**req.model_dump(exclude={"project_id", "device_id", "scope_reference"}),
-                               include_message_ids=True, hub_project_ids=ids)
+            result = db.search(**req.model_dump(exclude={"project_id", "device_id", "scope_reference", "preview_chars"}),
+                               preview_chars=0, include_message_ids=True, hub_project_ids=ids)
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
         if effective is not None:
             result.update(scope="project", effective_projects=effective)
+        usable, failures = [], []
         for hit in result["results"]:
-            matched = hit["matched_messages"]
-            anchors = tuple(item["_message_id"] for item in matched if item.pop("_query_match", False))
-            add_projects(hit, ids, anchors or tuple(item["_message_id"] for item in matched))
-            add_origins(hit, "matched_messages", ids)
-            hit["reference"] = reference_issue(db, hit["id"], matched, scope="hub", hub_id=hub_id,
-                                                project_ids=list(ids) if ids is not None else None)
-            hit["archive_scope"] = "hub"
-        return {**result, "hub_id": hub_id}
+            try:
+                matched = hit["matched_messages"]
+                anchors = tuple(item["_message_id"] for item in matched if item.pop("_query_match", False))
+                add_projects(hit, ids, anchors or tuple(item["_message_id"] for item in matched))
+                hit["reference"] = reference_issue(db, hit["id"], matched, scope="hub", hub_id=hub_id,
+                                                    project_ids=list(ids) if ids is not None else None)
+                add_origins(hit, "matched_messages", ids)
+                hit["archive_scope"] = "hub"
+                if req.preview_chars:
+                    hit["matched_messages"] = [compact_message(m, list(dict.fromkeys(tokens(req.query))), req.preview_chars) for m in matched]
+                usable.append(hit)
+            except (ValueError, TypeError):
+                failures.append("Hub 候选在定位完整原文时改变，已排除且不扩大召回")
+        return {**result, "results": usable, "candidate_failures": failures, "hub_id": hub_id}
 
     @app.post("/v1/read")
     def read(req: Read):

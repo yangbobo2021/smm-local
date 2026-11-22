@@ -60,12 +60,14 @@ def issue(db, conversation_id, messages, *, scope="local", hub_id=None, project_
         if conversation is None:
             raise ValueError("对话不存在")
         ids = [m.get("_message_id", m.get("hub_message_id")) for m in messages]
-        expected = {m.get("_message_id", m.get("hub_message_id")): m.get("content_version") for m in messages}
+        expected = {m.get("_message_id", m.get("hub_message_id")): m.get("content_version") or message_version(m) for m in messages}
+        source_keys = {m.get("_message_id", m.get("hub_message_id")): m.get("source_key") for m in messages}
         stamps = []
         for message_id in dict.fromkeys(ids):
             row = con.execute("SELECT id,source_key,position,role,text,timestamp FROM messages WHERE id=? AND conversation_id=?",
                               (message_id, conversation_id)).fetchone()
-            if row is None or (expected[message_id] and expected[message_id] != message_version(dict(row))):
+            if (row is None or expected[message_id] != message_version(dict(row))
+                    or (source_keys[message_id] is not None and source_keys[message_id] != row["source_key"])):
                 raise ValueError("原消息已改变，请重新检索")
             stamps.append({"id": row["id"], "source_key": row["source_key"], "position": row["position"], "version": message_version(dict(row))})
     return sign({"format": 1, "kind": "citation", "archive_scope": scope, "archive_id": identity, "hub_id": hub_id,

@@ -204,6 +204,11 @@ def choose_upload(db, mode, project_ids, expected_generation=None):
         upload = _controller(db, config, config["bound_hub_id"])
     upload.choose(mode, project_ids, expected_generation=expected_generation)
     try:
+        info = _hub_info(upload.config)
+        if info["hub_id"] != upload.hub_id:
+            raise HubUnavailable("Hub 身份已改变，请重新连接并选择上传范围")
+        if "upload-policy-v1" not in info.get("capabilities", []):
+            raise HubUnavailable("旧 Hub 不支持上传规则，正文未发送；请先升级 Hub")
         upload.sync_policy(_request)
     except (HubUnavailable, ControlConflict) as exc:
         upload._mark("pending", str(exc))
@@ -461,12 +466,28 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         remote = _request(config, "/search", payload)
         if not isinstance(remote.get("results"), list) or remote.get("hub_id") != info["hub_id"]:
             raise HubUnavailable("汇总服务返回了无效搜索结果")
+        usable = []
+        failures = list(remote.get("candidate_failures", []))
+        remote["returned_count"] = len(remote["results"])
         for hit in remote["results"]:
-            hit["archive_scope"] = "hub"
-            if not hit.get("reference"):
-                _legacy_candidate(db, config, info["hub_id"], hit)
-            for message in hit["matched_messages"]:
-                message["reference"] = hit["reference"]
+            try:
+                if not isinstance(hit, dict) or not all(k in hit for k in ("id", "source", "source_session_id", "matched_messages")):
+                    raise ValueError()
+                hit["archive_scope"] = "hub"
+                if not hit.get("reference"):
+                    if "full-candidates-v1" in info.get("capabilities", []):
+                        raise ValueError()
+                    _legacy_candidate(db, config, info["hub_id"], hit)
+                if not hit["matched_messages"]:
+                    raise ValueError()
+                for message in hit["matched_messages"]:
+                    if (not isinstance(message.get("text"), str) or message.get("content_version") != message_version(message)):
+                        raise ValueError()
+                    message["reference"] = hit["reference"]
+                usable.append(hit)
+            except (HubUnavailable, ValueError, KeyError, TypeError, AttributeError):
+                failures.append("Hub 候选缺少可核验的完整消息或精确引用，已排除且不扩大召回")
+        remote.update(results=usable, candidate_failures=failures)
     except HubUnavailable as exc:
         hub_reason = str(exc)
         remote = None
@@ -494,10 +515,11 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         "archive_scope": "combined", "hub_id": remote["hub_id"], "effective_projects": effective,
         "local_effective_projects": local_result["effective_projects"],
         "excluded_current_session_id": local_result.get("excluded_current_session_id"),
-        "coverage": {"local": "partial" if local_result["candidate_failures"] else "complete", "hub": "complete"},
-        "candidate_failures": local_result["candidate_failures"],
+        "coverage": {"local": "partial" if local_result["candidate_failures"] else "complete", "hub": "partial" if remote["candidate_failures"] else "complete"},
+        "candidate_failures": local_result["candidate_failures"] + remote["candidate_failures"],
+        "capability_limitations": [] if "full-candidates-v1" in info.get("capabilities", []) else ["旧 Hub 使用兼容候选核验；未证实跨档案同源的副本不会合并"],
         "rerank": {"scope": "returned_candidates", "local_count": len(local_result["results"]),
-                   "hub_count": len(remote["results"]), "method": "BM25"}, "results": hits}, query, preview)
+                   "hub_count": len(remote["results"]), "hub_returned_count": remote["returned_count"], "method": "BM25"}, "results": hits}, query, preview)
 
 
 def read_archive(db: Archive, conversation_id: int | None = None, *, start: int | None = None,

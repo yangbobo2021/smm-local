@@ -43,7 +43,7 @@ class Recovery(Run):
 
     def stop_and_append(self):
         self.cli(self.db, 'upload', 'set', '--mode', 'none')
-        self.command([self.t['local_python'], '-I', Path(__file__).with_name('selective_upload_fixture.py'), 'append', '--root', self.root / 'local'])
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', Path(__file__).with_name('selective_upload_fixture.py'), 'append', '--root', self.root / 'local'])
         self.cli(self.db, 'maintenance', 'sync')
         assert not any(h['source_session_id'] == 'local-A-new' for h in self.hub_hits())
         self.save('confirmed-stop', self.cli(self.db, 'upload', 'status'))
@@ -149,9 +149,9 @@ observed['installer_kind']='offline success stub; actual package remains candida
 Path(report).write_text(json.dumps(observed,ensure_ascii=False,indent=2))
 ''', encoding='utf-8')
         report = self.root / 'upgrade-worker-result.json'
-        self.command([self.t['hub_python'], '-I', worker, self.state, fake, self.t['address'], self.t['cert'], local_config['device_id'], report], timeout=120)
+        self.command([self.t['hub_python'], '-I', '-X', 'utf8', worker, self.state, fake, self.t['address'], self.t['cert'], local_config['device_id'], report], timeout=120)
         self.save('upgrade-failure-recovery', json.loads(report.read_text()))
-        self.command([self.t['local_python'], '-I', Path(__file__).with_name('selective_upload_fixture.py'), 'append', '--root', self.root / 'local'])
+        self.command([self.t['local_python'], '-I', '-X', 'utf8', Path(__file__).with_name('selective_upload_fixture.py'), 'append', '--root', self.root / 'local'])
         self.cli(self.db, 'maintenance', 'sync')
         self.check_difference_and_finish()
 

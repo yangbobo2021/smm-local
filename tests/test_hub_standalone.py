@@ -85,3 +85,24 @@ def test_standalone_explicit_archive_remains_supported(tmp_path, monkeypatch, wi
     monkeypatch.setattr(sys, "argv", args)
     main()
     assert len(invocations) == 1 and database.is_file()
+
+
+def test_public_prepare_restore_command_marks_the_actual_standalone_archive(tmp_path):
+    import subprocess
+    import json
+    from smm_hub.hub import create_hub
+    from smm_hub.upload import HubUpload
+    root = tmp_path / 'standalone-state'
+    archive = Archive(root / 'smm-hub.sqlite3')
+    create_hub(archive, 'synthetic-restore-token-' + 'a' * 32)
+    with archive.connect() as con:
+        hub_id = json.loads(con.execute("SELECT value FROM settings WHERE key='hub_identity'").fetchone()[0])
+    before = HubUpload(archive, hub_id).guard.read()['control_epoch']
+    result = subprocess.run([sys.executable, '-m', 'smm_hub.cli', 'hub', '--state-dir', str(root), 'prepare-restore'],
+                            capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    prepared = json.loads(result.stdout)
+    assert prepared['body_stopped'] is True
+    assert prepared['control_epoch'] != before
+    assert str(archive.db_path.resolve()) in prepared['restore_files']
+    assert str(HubUpload(archive, hub_id).guard.path) in prepared['do_not_restore']

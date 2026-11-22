@@ -159,3 +159,22 @@ def test_each_endpoint_receives_only_normal_n_without_topup_and_invalid_n_never_
         with pytest.raises(ValueError): federation.search_archive(pair.local, 'common', limit=n)
     assert len(pair.calls) == before
     assert len(federation.search_archive(pair.local, 'common', limit=50)['results']) == 3
+
+
+def test_incomplete_hub_candidate_is_excluded_without_losing_valid_peers_or_topping_up(pair, monkeypatch):
+    add_local(pair, 'a', 'A', 'common local')
+    seed_remote(pair, 'common complete remote', session='good')
+    seed_remote(pair, 'common body that must remain full', session='broken')
+    connect(pair); original = federation._request
+    def request(config, route, payload=None):
+        result = original(config, route, payload)
+        if route == '/search':
+            next(h for h in result['results'] if h['source_session_id'] == 'broken')['matched_messages'][0]['text'] = 'truncated'
+        return result
+    monkeypatch.setattr(federation, '_request', request)
+    before = len(pair.calls)
+    result = federation.search_archive(pair.local, 'common')
+    assert {h['source_session_id'] for h in result['results']} == {'a', 'good'}
+    assert result['coverage'] == {'local': 'complete', 'hub': 'partial'}
+    assert result['candidate_failures']
+    assert len([route for route, _ in pair.calls[before:] if route == '/search']) == 1

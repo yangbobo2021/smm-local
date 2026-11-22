@@ -104,7 +104,8 @@ def running_service(db: Archive) -> dict | None:
 def _windows_start_service(command: list[str], log: Path) -> None:
     # A detached process can still belong to the Agent's Windows Job Object.
     # Ask Windows to start the service under the same user, outside that job.
-    overrides = {name: os.environ[name] for name in ("SMM_CODEX_ROOT", "SMM_CLAUDE_ROOT", "CLAUDE_CONFIG_DIR")
+    overrides = {name: os.environ[name] for name in ("SMM_CODEX_ROOT", "SMM_CLAUDE_ROOT", "CLAUDE_CONFIG_DIR",
+                                                   "SMM_SERVICE_PORT", "SSL_CERT_FILE", "SSL_CERT_DIR")
                  if name in os.environ}
     bootstrap = (
         "import os, runpy, sys\n"

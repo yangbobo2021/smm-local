@@ -16,12 +16,12 @@ class Compatibility(Run):
         self.active_hub_python = self.t['hub_python']
 
     def cli_at(self, interpreter, db, *args, expected=0):
-        p = self.command([interpreter, '-I', '-m', 'smm_local.cli', '--db', db, *args], expected=expected)
+        p = self.command([interpreter, '-I', '-X', 'utf8', '-m', 'smm_local.cli', '--db', db, *args], expected=expected)
         return json.loads(p.stdout) if p.returncode == 0 else p.stderr
 
     def sync_at(self, interpreter, db, *, expect_failure=False):
         code = "import sys,json; from smm_local.core import Archive; from smm_local.federation import push_pending; d=Archive(sys.argv[1]); d.sync_codex(); print(json.dumps(push_pending(d)))"
-        result = self.command([interpreter, '-I', '-c', code, db], expected=None)
+        result = self.command([interpreter, '-I', '-X', 'utf8', '-c', code, db], expected=None)
         if expect_failure: assert result.returncode != 0
         else: assert result.returncode == 0, result.stderr
         return {'exit_code': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}
@@ -31,7 +31,7 @@ class Compatibility(Run):
         history(root, name, 'A', ['selective compatibility ' + name + ' original'])
         empty = root / 'empty'; empty.mkdir(); db = root / 'archive.sqlite3'
         code = "import sys; from smm_local.core import Archive; d=Archive(sys.argv[1]); d.set_settings(codex_root=sys.argv[2],claude_root=sys.argv[3]); d.sync_codex()"
-        self.command([interpreter, '-I', '-c', code, db, root / 'sessions', empty])
+        self.command([interpreter, '-I', '-X', 'utf8', '-c', code, db, root / 'sessions', empty])
         self.clients.append(db); return db
 
     def start_compat_hub(self, interpreter, state):
@@ -42,7 +42,7 @@ class Compatibility(Run):
         self.installed()
         for interpreter, package in [(self.old_local, 'smm-local'), (self.old_hub, 'smm-hub')]:
             code = "from importlib.metadata import version; import importlib.util,sys,json,pathlib,hashlib; r=pathlib.Path(importlib.util.find_spec(sys.argv[1].replace('-','_')).origin).parent; print(json.dumps({'version':version(sys.argv[1]),'modules':{str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in r.rglob('*.py')}}))"
-            identity = json.loads(self.command([interpreter, '-I', '-c', code, package]).stdout)
+            identity = json.loads(self.command([interpreter, '-I', '-X', 'utf8', '-c', code, package]).stdout)
             assert identity['version'] == '0.4.0'
             expected = self.t['old_candidate']['installed_' + package.split('-')[1]]
             assert {package.replace('-', '_') + '/' + n: h for n, h in identity['modules'].items()} == expected
