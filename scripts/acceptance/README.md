@@ -175,3 +175,5 @@ uv run python scripts/acceptance/selective_upload_platform.py self-managed --tar
 ```
 
 Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` 在当前已登录用户的 Limited 交互任务中运行，配置增加 `controller_python`；对应 Hub 服务探针用 `--mode hub-service` 的 Highest 交互任务，仍核对服务实际为 LocalService。包装器保存实际 token 判定和退出码，结束后移除本任务。不能把管理员控制端当成本机普通用户的证明。
+
+005 Windows 旧版本组合同样必须以普通交互身份运行，包装器支持 `--probe compatibility --mode client`，调用实际四环境控制器。Windows VM 启动 Python/浏览器较慢，任务允许最多 20 分钟，调度器硬上限 22 分钟；必须保留过程收据，超时不能算完成，并核对任务服务/后台是否已清理。

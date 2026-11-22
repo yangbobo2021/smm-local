@@ -12,13 +12,15 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--target-config',type=Path,required=True)
     p.add_argument('--mode',choices=['client','hub-service'],default='client')
+    p.add_argument('--probe',choices=['platform','compatibility'],default='platform')
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
     assert sys.platform=='win32'
     if a.output.exists():raise ValueError('use a new output directory')
     config=json.loads(a.target_config.read_text(encoding='utf-8-sig'))
-    actor=Path(__file__).with_name('selective_upload_platform.py').resolve()
-    argv=[str(actor),a.mode,'--target-config',str(a.target_config.resolve()),'--output',str(a.output.resolve())]
+    actor=Path(__file__).with_name('selective_upload_' + a.probe + '.py').resolve()
+    if a.probe == 'compatibility' and a.mode != 'client': raise ValueError('compatibility runs as an ordinary client')
+    argv=[str(actor),*([a.mode] if a.probe == 'platform' else []),'--target-config',str(a.target_config.resolve()),'--output',str(a.output.resolve())]
     base=a.output.resolve();base.parent.mkdir(parents=True,exist_ok=True)
     bootstrap=Path(str(base)+'.worker.py');receipt=Path(str(base)+'.process.json')
     log=Path(str(base)+'.worker.log');driver=Path(str(base)+'.driver.ps1')
@@ -49,11 +51,11 @@ $name={quote(task)}
 $user=[Security.Principal.WindowsIdentity]::GetCurrent().Name
 $principal=New-ScheduledTaskPrincipal -UserId $user -LogonType Interactive -RunLevel {'Highest' if a.mode=='hub-service' else 'Limited'}
 $action=New-ScheduledTaskAction -Execute {quote(config['controller_python'])} -Argument {quote('"'+str(bootstrap)+'"')}
-$settings=New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
+$settings=New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 22)
 try {{
  Register-ScheduledTask -TaskName $name -Action $action -Principal $principal -Settings $settings | Out-Null
  Start-ScheduledTask -TaskName $name
- $deadline=(Get-Date).AddMinutes(8)
+ $deadline=(Get-Date).AddMinutes(20)
  while (!(Test-Path {quote(receipt)})) {{
   if ((Get-Date) -gt $deadline) {{throw 'ordinary client task timed out; check interactive logon'}}
   Start-Sleep -Milliseconds 500
@@ -66,7 +68,7 @@ try {{
 }}
 '''
     driver.write_text(script,encoding='utf-8-sig')
-    process=subprocess.run(['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(driver)],timeout=520)
+    process=subprocess.run(['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(driver)],timeout=1260)
     raise SystemExit(process.returncode)
 
 
