@@ -1,0 +1,32 @@
+{
+  "method": "POST",
+  "path": "/api/documents/sources",
+  "request": {
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1018/test_query_snapshot_links_0/docs/p.txt",
+    "project_ids": [
+      1
+    ]
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "e8cea38e6aea4c63b02416452bfad55d",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1018/test_query_snapshot_links_0/docs/p.txt",
+    "kind": "file",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [
+      1
+    ],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

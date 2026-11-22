@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-refresh-order",
+  "target_sha256": "740e1af0a1b4a20d5e76828d10bdb9f937d0e57775a21d5ce4b6500eb9fdda8e",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:10-57与document_state六类完整表/FTS快照。两真实参数new-refresh/set-config实际2 passed/exit0/stderr空。00004/5独立新正文newwinner可查可读，00006旧请求published:false，00007新词有且00008旧词零；set组00014为新配置pending零命中，00015旧请求拒绝发布，第56行最终Q绑定和pending正确。释放屏障/线程join后第52行完整持久状态与新意图快照逐表相等，防止只修首个可见字段而残留旧索引/成员。00009/18确为本轮两个winner快照，含FTS1/0。22 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    }
+  }
+}

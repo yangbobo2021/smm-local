@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "独立从定义000002 SC6反查SPEC B3/B4/A6、PLAN §3.2/§4和design-r006-v5-sc6/match-r006-v4-sc6，来源移除不复活、独占退出与共享保留有明确依据，自然设计正确。tests/test_document_concurrency.py:60–74同时准备独占/共享、P/Q两个来源，在发布屏障中移除后对所有来源/绑定/文档/成员/meta/FTS作70行全量比较；71核P空而Q仅共享，72按独立原串读取shared original，73逐P旧ref拒绝，74禁旧任务forbidden正文。只有首文件正确会在共享原串72拦；两快照同错正文仍由72独立预期拦，恢复任意来源/成员/索引在70拦；不是只验HTTP状态。产品documents.py:237–243事务删除/清理，325–329核当前来源存在和刷新身份，阻止晚任务。red-r006-v3-refresh-remove原日志及api-001为合法add404，独立review-r006-red-v3-refresh-remove一致；green-r006-v1-refresh-remove测试绑定/声明/命令与红灯完全相同，全部artifacts及当前bindings SHA已核无差异。绿灯run.stdout实际1 passed/exit0，late-refresh-response原始published:false，api-010准确shared original，两旧ref400且查询forbidden零结果；无隐藏环境/屏障异常。所附regression.stdout实际5 passed/exit0，为已读四项旧引用和两Agent旧数字ID/ref、九层旧来源CLI帮助的独立断言。无有据必测缺口；同版绿灯及附带回归passed，新增等价文件可选。本项未认领正式轮、真实平台、用户入口或R006整体结论。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC1判据由SPEC B1操作表/B7/A1支持，design-r006-v5-sc1要求CLI完整配置并与公开来源相符，没有新增产品契约。v1b要求的多项目/exclude/no-recursive及实际CLI set已在tests/test_document_sources.py:57-65补上：丢第二项目在60行失败，丢排除/递归在60-61行失败，set只改输出而未持久在63行失败；CLI正文不是两响应同错，70行独立字面文本可拦截。仍未实现v1b明确要求的CLI省略名单后默认清空语义：62行set仍显式给project-id及exclude，只省略no-recursive。若CLI在未给project-id/exclude时保留旧值（API本身正确），本TC所有现有断言可通过，违反B1表“未给名单即空名单”；API用例的默认清空不能验证CLI参数传递。最小修订：对已有非空项目/排除配置执行CLI documents set <id>不带选项，再由公开sources按独立[]、[]、True核对同source，pending与revision递增；保留现有非默认输入分支。设计已要求完整替换，最早需修订implementation。原始red-r006-v2-entrance-contract/TC-006-entrance-contract/run.stdout与attachments/00001-cli-000.json显示54行真实project create退出2，stderr为invalid choice create，Fixture.cli:110失败；是B1命令缺失，CLI文档配置/查询/MCP/help均未到达。artifacts SHA全部一致，当前测试与match-r006-v3-sc1一致，src未改；保留真实能力缺失，但候选缺口未闭合，不能整项授予expected_failure。",
+      "covers": []
+    }
+  }
+}

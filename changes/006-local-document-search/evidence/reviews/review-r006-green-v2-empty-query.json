@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B5/B7/A5，SC5与自然设计要求拒非法输入并区分合法零命中覆盖。tests/test_document_search.py:106–131逐无来源/pending/ready/partial/refreshing/failed状态，完整来源ID映射及独立0/1计数拦只首来源正确和两响应同错，持续pending第二来源作正控；115–118逐输入拒绝，合法查询防一概拒绝。新green-r006-v2-empty-query原stdout 1 passed；11项非法请求400/422且含义正确；zero-hit-states实际为pending0、ready1、partial0、refreshing0、failed0，另一来源持续pending，合法结果均200空。red-r006-v3-empty-query首合法search404及独立红灯仍吻合同测试。documents.py:360–390验证输入且同事务构造有效成员与覆盖。 本次绿灯与回归有效，无有据必测缺口，passed；更多同状态样本可选，人工平台/用户发现、最终CI与R006交付不在本意见。",
+      "covers": []
+    }
+  }
+}

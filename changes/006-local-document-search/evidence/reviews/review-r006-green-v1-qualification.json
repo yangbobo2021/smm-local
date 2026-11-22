@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "依据SPEC B6/A4、SC4，file/source/missing三个会中断资格的状态及持续资格多来源设计有效。tests/test_document_lifecycle.py:40–76初始同路径S1/P、S2/Q加独立control，取得P/Q/all ref，不变刷新逐ref仍可读且version相同；分别注入单文件拒读、S1扫描失败或物理缺失，P旧ref即拒绝、Q/all固定全文可读；同配置同字节恢复后version相同但P旧ref仍拒绝；移除全部原资格后新来源不能使任一旧ref复活，control逐字可读。反例：用另一未包含来源冒充P资格被oldp拒绝拦截；一律作废所有ref被Q/all固定全文拦截；同字节恢复沿旧资格被第二次oldp拒绝拦截。108份原始API附件与3参数日志显示恢复内容仍version1、旧资格400、连续资格原文needle qualification/control一致；documents.py:_publish资格代次和read来源/revision/qualification核验支持结论。等价更多标识样本为可选补测。 同版TDD：red-r006-v3-qualification原始日志在公开POST /api/documents/sources返回404的业务断言失败，file/source/missing三个参数均为该缺失行为，原红灯独立意见为expected_failure。green-r006-v1-qualification与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志3 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

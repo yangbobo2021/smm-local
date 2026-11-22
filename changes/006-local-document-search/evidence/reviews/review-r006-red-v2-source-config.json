@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "expected_failure",
+      "reason": "SC1判据与design-r006-v5-sc1来自SPEC B1/B7/A1，来源/项目/完整替换/未读正文预期有依据。与v1b意见相比，tests/test_document_sources.py:26-35已补省略字段set后project_ids=[]、exclude=[]、recursive=True及目录add/set，目录内唯一正文也受11行deny_source_reads保护；17-35核pending、规范路径和空files/search。只保存首项目或清空时沿用旧配置会在24或27行独立字段预期失败；目录add暗读唯一正文会被哨兵阻断；非法输入改配置在42/45行完整来源集合比较失败。项目同名身份合并会在16行失败。预期不是仅两产品响应相等：名称、身份差异、配置与零采集均有独立值。此次未再增加只换标识的等价目标。red-r006-v2-source-config/TC-006-source-config/run.stdout与attachments/00001-api-001.json证明13行POST /api/projects实际405 Method Not Allowed，Fixture.request:52业务状态断言失败，源自B1要求的新项目创建尚缺；后续add/set、目录、拒绝、持久及移除均未到达。全部所列artifacts SHA已核一致，当前绑定测试与match-r006-v3-sc1一致，src相对f797fe8无差异。本意见确认候选设计/断言可用及真实预期红灯，不声称后续行为已执行通过。",
+      "covers": []
+    }
+  }
+}

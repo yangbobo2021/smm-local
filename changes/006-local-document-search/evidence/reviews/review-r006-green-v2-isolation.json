@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B1/B4/B5/A7与SC7设计要求三Hub/暂停状态、两独立Agent启停、旧归档/上传及出站隔离。已读Windows原CI日志：三个isolation失败在Starlette新portal→asyncio _make_self_pipe→socketpair回环connect，非文档业务；修订tests/test_document_compatibility.py:44先进入持久TestClient，已实际核安装版starlette/testclient.py:486–491后续复用portal、557后先建portal，Fixture关闭auto_sync/sync_on_start而api.py:213–232不启动同步线程。46–68全部文档操作及最终核对仍在guard，51无条件拒AF_INET/AF_INET6，54–56实际回环和外网connect负例均执行；未对回环Hub放行。62完整归档/远端/上传表比较、63–67逐独立会话原串/source与开关/暂停，65拦误读首会话，另一mode参数拦只首状态正确。新red-r006-ci-v1-isolation三个参数合法add404，已读review-r006-ci-red-v1b-isolation；provenance的36个基线src摘要逐个核git f797一致，red不含documents模块。green-r006-v2-isolation复用修订后同版测试，原stdout 3 passed/exit0，三complete-state原件各本地/远端before==after、两独立正文保留、出站新增0且两网络负例通过。产品仍f896，不将测试前提修复冒称产品改变。 自然设计及修订实现与原文一致，无有据必测缺口，本版绿灯和四项回归passed；不预判最终Windows CI、人工平台/用户发现或R006交付。",
+      "covers": []
+    }
+  }
+}

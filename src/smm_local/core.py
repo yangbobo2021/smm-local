@@ -607,6 +607,14 @@ class Archive:
             project_id = row[0] if row else con.execute("INSERT INTO projects(name,kind,confirmed) VALUES('全局项目','global',1) RETURNING id").fetchone()[0]
         return next(project for project in self.projects() if project["id"] == project_id)
 
+    def create_project(self, name: str) -> dict[str, Any]:
+        """Create an explicit ordinary identity without inferring paths or links."""
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("项目名不能为空")
+        with self.connect() as con:
+            project_id = con.execute("INSERT INTO projects(name,kind,confirmed) VALUES(?,'ordinary',1) RETURNING id", (name.strip(),)).fetchone()[0]
+        return next(project for project in self.projects() if project["id"] == project_id)
+
     def assign_conversation(self, conversation_id: int, project_id: int, *, connection=None) -> None:
         with nullcontext(connection) if connection is not None else self.connect() as con:
             if not con.in_transaction:
@@ -656,6 +664,8 @@ class Archive:
         if source_id == target_id:
             raise ValueError("不能合并项目自身")
         with nullcontext(connection) if connection is not None else self.connect() as con:
+            if not con.in_transaction:
+                con.execute("BEGIN IMMEDIATE")
             if con.execute("SELECT COUNT(*) FROM projects WHERE id IN (?,?)", (source_id,target_id)).fetchone()[0] != 2:
                 raise ValueError("项目不存在")
             if con.execute("SELECT COUNT(DISTINCT kind) FROM projects WHERE id IN (?,?)", (source_id,target_id)).fetchone()[0] != 1:
@@ -669,6 +679,14 @@ class Archive:
                 if peer != target_id:
                     a,b = sorted((peer,target_id))
                     con.execute("INSERT OR IGNORE INTO project_links(a,b) VALUES(?,?)", (a,b))
+            # Optional Local tables: the independently packaged Hub vendors core
+            # without importing or installing the Local document subsystem.
+            if con.execute("SELECT 1 FROM sqlite_master WHERE name='document_source_projects'").fetchone():
+                sources = [r[0] for r in con.execute("SELECT source_id FROM document_source_projects WHERE project_id=?", (source_id,))]
+                for source in sources:
+                    con.execute("INSERT OR IGNORE INTO document_source_projects VALUES(?,?)", (source,target_id))
+                    con.execute("DELETE FROM document_source_projects WHERE source_id=? AND project_id=?", (source,source_id))
+                    con.execute("UPDATE document_sources SET revision=revision+1,refresh_id=NULL,status=CASE WHEN status='refreshing' THEN resume_status ELSE status END WHERE id=?", (source,))
             con.execute("DELETE FROM projects WHERE id=?", (source_id,))
 
     def effective_projects(self, project_id: int) -> list[int]:

@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本项为ordinary debug purpose=tdd-baseline开发前已有行为，不是tdd-red。SC7 compatibility-c2及v5设计来自SPEC B1/A7，未增行为。首轮只查首对话/缺身份断言的问题已修正：tests/test_document_compatibility.py:65–74建立Codex/Claude两个不同session/id/正文，独立expected映射后核search完整ID集合；75–82对每个实际命中分别按数字ID及ref读取，逐项核source/session/ID和独立正文，search还核旧DTO字段。只有首目标正确，或search、两种read共同误用首对话，74完整集合或78–80第二目标身份/正文拦截；两读同错正文也被80独立原串拦。85–93逐9层source旧帮助核exit0和stdout原样相同，冻结CLI源码摘要与metadata及git show f797fe8:src/smm_local/cli.py三者一致。已读baseline-r006-compatibility-v2完整run.stdout/stderr/进程、绑定源码、legacy-source-help原附件/设计匹配及所有artifact摘要，均一致；真实exit0、1 passed，九项帮助原件均old/new exit0/stdout相等，所有断言已执行而非add404提前终止。src与f797fe8无diff，符合开发前基线。帮助比较范围仅冻结旧CLI入口在当前解释器及当前依赖模块运行，未执行旧完整发行包，不据此授予旧包/新增文档/三平台/整条R006通过。本项分配仅compatibility-c2，当前证据及设计实现足够，passed。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

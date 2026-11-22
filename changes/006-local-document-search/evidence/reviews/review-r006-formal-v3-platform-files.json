@@ -1,0 +1,16 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-files-v3",
+  "target_sha256": "fae0ea69ed0192fc82ff519327741b5fda86b26ca3b93298d52aa414a5346e4d",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-platform-files": {
+      "status": "passed",
+      "reason": "独立复审manual-r006-cross-files-v3新原件，仅判TC-006-platform-files的c1/c2，不替E1用例或R006授通过，不沿用a66旧人工意见。SPEC B2/A2、PLAN E1.1/E1.6/E1.7、design-v5-sc2与platform-files.md逐项核对；47 artifacts、37 bindings、operations全部原evidence及designSHA重算一致。三平台installation各26个已装模块/HTML对当前src逐一重算相符，documents.py=43d3762cd9d413bc5954df362bf99132beed242bb30348cd6911de470e5930a0（4c706b3）。实际业务Mac18:37:09.982–18:37:34.361Z、Linux18:41:22.001–18:42:54.409Z、Windows18:42:14.908–18:46:34.007Z，与本次只读观察18:48:34.398Z分列，不重包装为新业务运行。\n已实际打开work/platform-mac-formal-v3及platform-linux-formal-v3/probe、platform-windows-formal-v3/probe各自web-original.png与web-partial.png六张新原图：路径/来源ID均属于formal-v3，三张original显示中文/emoji/组合字符、惰性script原文、采集版本及[0,64)；3000个İ控制文件片段保留末尾needle。Mac/Linux partial分别2成功2失败1忽略，bad严格UTF8与denied Permission denied红字可见；Windows为3成功1失败1忽略、denied ready，未冒称Windows ACL不可读。原native-file-errors与画面一致，Unix runner采用真实chmod0。独立按原夹具字面字符串解析新commands原stdout/base64，Mac/Linux各59、Windows61处SHA/规范化正文/码点切片/行号全部准确；根链接add各exit2，内层ignored_links各1，两次逃逸词均零命中，Windows实际junction探针；body-read-audit只在explicit-refresh打开源，未读链接/外部目标。\n产品身份原件逐进程核实：Mac104个UID501、Linux104个UID1000、Windows103个is_admin=false/session1，控制身份亦普通。source-before-edit/initial-read-after、errors-before/after、restart-before/after全量SHA/字节/mtime各对相同。失败修复后仍同ID/version/SHA，Unix bad+denied及Windows bad原ref在失败时和修复后都exit2；restart-checkpoint各入口ID/版本/SHA/采集时间/有效来源及配置集合一致。服务实际PID为Mac21250→21480、Linux162362→162763、Windows10048→6812（区别wrapper16712/17016），首次actual_alive=false/port_closed=true核验早于第二服务启动，末次真实退出核验早于业务结束。\n另独立从overlap-survivor.json回查原commands argv、实际stdio mcp-call records及web-responses请求（原Web request为JSON字符串，先解码再比较）：三入口均原样传移除前同一ref，响应与survivor保存项逐值相同，只返回原双stamp中持续S1，captured_by_source_id保留已移除S2，39码点独立edited正文准确；未借新来源资格。以上为本人工项实际证据，Windows完整E1交付另由其Reviewer判断。",
+      "covers": [
+        "platform-files-c1",
+        "platform-files-c2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-version-lifecycle",
+  "target_sha256": "f05adbcfd1d574264d7d976e1b2d50888d882287b3972766f34512618a435096",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B3/B4/A4、PLAN §4 A4、design-r006-v5-sc4与tests/test_document_lifecycle.py:7-37逐项对照。stdout 1 passed、stderr空、exit 0。00003/00005两独立one/two均同ID/version1，00006/00007原ref在无变化刷新后可读；夹具同时编辑后、尚未刷新00008–00010仍有captured_at并逐文返回original。00012–00016两目标保留各自ID换version2、逐字updated且旧v1各400；改回原字节00018–00024两目标version3、逐字original且各v1/v2均400。移动one到moved且删除two后00026仅moved、新ID，00027/00028原两v3引用均拒绝，00029精确读取original one正文。每目标逐项断言避免只验证首文件；逐search解码payload与返回文档/版本/来源一致。33份artifacts、47份bindings及设计SHA重算一致；正式仅该selector，无XML/附加旧引用回归，不沿用v1通过意见。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    }
+  }
+}

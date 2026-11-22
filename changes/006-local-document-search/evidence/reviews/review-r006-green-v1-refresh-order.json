@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "已读定义000002(sha6b524c88…)的SC6、SPEC B4/A6、PLAN §3.2/§4及design-r006-v5-sc6/match-r006-v4-sc6。场景只规定旧任务不能覆盖新意图，设计分别覆盖同源新刷新和改配置，均有原文依据。tests/test_document_concurrency.py:36–57两个参数，9–17明确_publish屏障，46独立newwinner全文或49独立pending/空结果，50/52比较全部来源、绑定、文档、成员、meta和FTS，54/56复核词和项目。只首状态正确在另一参数被49/52拦；两快照同错旧正文先被46拦；任一表的晚到副作用由52全量相等拦。正常初刷和获胜新刷新提供正控，更多等价来源为可选。产品documents.py:308–329在短事务分配序号/刷新身份，发布事务核配置revision及refresh_id。核red-r006-v3-refresh-order两参数合法add404原日志、原附件及review-r006-red-v3-refresh-order；green-r006-v1-refresh-order复用同测试绑定/声明/命令，所有artifacts/当前bindings SHA一致。绿灯原stdout实际2 passed/exit0；api-005读取newwinner；两个late-refresh-response均published:false且表明被新配置/刷新取代；两winner_snapshot完整六类集合和断言对应。regression原stdout实际5 passed/exit0，为已读四项旧引用契约及两Agent数字ID/ref、九层旧来源CLI帮助兼容断言。未见有据必测缺口，同版TDD绿灯与附带回归passed；不等同正式运行、人工平台或R006交付。",
+      "covers": []
+    }
+  }
+}

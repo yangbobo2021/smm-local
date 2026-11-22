@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-refresh-order",
+  "target_sha256": "0199e4f7cbe66b7a073d1aab0edd7dc7dc7158568de60309580ce156542fc158",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照tests/test_document_concurrency.py:10-57和document_state完整来源/项目/文件/成员/meta/FTS快照。new-refresh及set-config两个真实参数均执行，stdout2 passed/exit0/stderr空。00004/5新正文newwinner可查可读，00006旧刷新published:false，00007新词命中且00008旧词零命中；00014改配置后pending零命中，00015旧刷新同样拒绝发布，最终来源绑定Q、保持pending。释放屏障并join线程后逐表完整状态等于新意图快照（第52行），因此旧任务即便只改未显示的成员/索引也不能漏过；不是只看返回成功码。22 artifacts及47 bindings和match实现摘要重算一致。本正式轮无XML/附回归；对应green-v2的旧引用regression原stdout4 passed/摘要一致，full-regression-v3原XML四项通过（全集301 passed/1 skipped）。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    }
+  }
+}

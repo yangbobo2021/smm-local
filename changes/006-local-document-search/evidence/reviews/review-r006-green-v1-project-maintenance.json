@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "依据SPEC B3/A3与SC3，改名保持身份、合并迁移/去重、路径映射不推断与普通/全局混并拒绝的自然设计有效。tests/test_document_projects.py:test_project_maintenance先使one(P)、both(P/Q)均ready，改P名后P完整命中集合保留，one仍P；merge后两个来源分别检查project_ids==[Q]且Q完整集合正确，所有原P ref拒绝；map_path到G后整个sources前后相同且G无命中；非法混并抛ValueError后来源配置/ready均保留。反例：只迁移首来源被both.project_ids断言拦截，迁移增加重复Q被精确[Q]拦截；借路径映射改文档归属被sources全量比较和G空集合拦截。17份API原件显示改名前后材料、合并两来源Q名单及两旧ref400资格失效；core.py:merge_projects对每来源转移并去重、revision递增，未导入Local模块，map_path无文档推断，符合断言。本项不替代独立Hub发行包验证。 同版TDD：red-r006-v3-project-maintenance原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-project-maintenance与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

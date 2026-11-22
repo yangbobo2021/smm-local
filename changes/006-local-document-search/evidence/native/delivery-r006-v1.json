@@ -1,0 +1,41 @@
+{
+  "acceptance_id": "AT-SMM-006",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-006/delivery-judge/delivery-r006-v1/reviewer.json": "7d8c1f45cab842aed23a50a67aa67859591a435048334021ad39b49f4a702d6e"
+  },
+  "definitions_sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c",
+  "judgment": {
+    "reason": "R006 failed。已实际读取006 intent/spec/plan及Reviewer需求级规则，重新运行原生records show与results view；采用定义000002、SHA-256 6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c，当前spec字节SHA c4ec0ed5…与基线相同。原生8SC/29TC虽均passed且无missing_obligations，但需求级反查发现当前正式原件已证明B3来源元信息不符合，不能据场景汇总授R006 passed。\n\n必修失败（A3/B3，并影响重叠来源生命周期返回的来源说明）：spec.md:39规定“元信息分别显示正文最后采集时间/采集来源ID，与当前提供查询资格的来源/项目”，且明确历史采集来源ID只是出处，不被误当仍有效来源。当前a66deeb的execute/execute-r006-v3-overlap-version/TC-006-overlap-version/attachments/00019-api-019.json实际删除S2=5a67d04e3e3a4042a18bf1c136d0ba56；00024-api-024.json中all search的shared只有S1=af9fbe48c9d04f83bd1be3f585c713ec资格，coverage也已无S2。然而00026-api-026.json对删除前all ref的成功read，source_ids仍同时返回已删除S2和S1，未标明这是历史引用资格集合，亦未另列当前实际通过校验的S1。其captured_by_source_id保留S2作为历史采集出处是正确的；错误是又把S2混入未区分的来源资格元信息。failed分支同样可复核：00072-api-019.json将S2=e6d9b6f9c62b48b98817ea30e688ded1置failed，00080-api-027.json旧all read仍在source_ids中列S2。src/smm_local/documents.py:412-420确实只把满足现存/ready/配置版本/资格代次的任一stamp归结为valid布尔，最终却回payload全部source ID。因此这不是猜测、旧包结果或缺图，而是当前正式业务的可见响应。B3/B6明确允许旧all ref依靠连续S1继续读取，本意见不要求拒绝这个本应成功的读取；要求当前有效来源与历史采集/引用集合能准确区分。test_document_projects.py::test_overlap_version在退出后检查正文/版本/查询集合，却未校验这次read的有效来源元信息，所以现有passed断言放过此差异。应补这两个已存在动作前状态的返回元信息断言并修产品，再由同版正式证据和独立意见关闭；不需要新增规格行为。\n\n其余逐A/E核查依据与边界：\nA1：已实际读tests/test_document_sources.py、CLI/API/MCP相关源码及v3正式stdout/附件。source-config的正文I/O哨兵、两个同名普通项目、单文件/目录add/set pending、完整替换/省略复位、非法配置后完整集合不变及重开Archive均有当前exit0证据。entrance-contract的实际CLI search reference原样进入read，七层帮助、三个新工具readOnlyHint与旧工具存在；真正stdio和Web由E1另证。当前新增项目不建路径/对话/关联，core.create_project实现与该范围相符。\nA2：实际读扫描/预算/竞态全部测试与当前documents.py扫描/有界读取分支，核v3各原观察。原件单文件2097152/2097153字节、1000/1001候选、16777216/16777217计费字节均真实；正反枚举mixed均4候选13计费字节、1ready3failed，invalid-total正反均整源failed无发布。预算后单文件增长2097153及九个2097152被逐项拒绝且控制文件可用；次轮重新预检整源失败、修复后恢复且旧资格不复活。BOM/CRLF/CR/中英emoji/空文本与严格UTF8/NUL/拒读错误、递归/非递归/全部排除/显式隐藏例外和枚举失败已有独立预期与原响应。权限/确定竞态注入不冒称真实OS故障；实际Unix权限及Windows junction由cross-files-v2和三E1原件支持。\nA3其余：project-scope实际P/Q/R/G/未绑定、多绑、同名、双向直接一层/共享不建关联及重叠去重；project-maintenance改名、合并转移/去重、旧配置ref拒绝、路径映射不推断与普通/全局不混并均当前通过。overlap-version三状态remove/failed/continuous中v1→v2→v3、各P/Q/all查询集合、正文不回退、S1最终失败只剩control等实证有效；仅上述read来源元信息未达到B3，不否定已经证实的正文与授权结果。\nA4：version-lifecycle对两个目标逐一证ID保留/版本变化、无变化刷新连续有效、刷新前仍为采集快照、字节改回不复活、移动新身份/删除失效；qualification的file/source/missing及多来源连续资格、替代新来源不能救旧ref、source-lifecycle的完整配置/排除/递归/移除与最终正文FTS清理均有当前正式结果。上述来源元信息问题须同时作为重叠生命周期回归，其他授权语义已证明。\nA5：实际读search-rank/exact-read/invalid-read/empty-query测试与当前原件。51同分文件limit1/50完整稳定、重复去重、文件名反例、相关性、尾/边界/长行/中文，Unicode两个真实红灯后当前保留lower词法并映回原码点。当前İ前缀marker及长s不能抢位原串切片有独立断言；BOM/换行、非BMP/组合码点、LF归前行、2000窗口、16000扩读及16001拒绝均准确。跨档案/签名各字段/版本/配置/对话ref/非法范围不回退，pending/ready/partial/refreshing/failed合法零命中覆盖分开。read与search只查SQLite，无源打开的哨兵实际到达。\nA6：实际读并发测试全部屏障/完整持久状态断言及v3原观察。新刷新/配置/移除后旧发布不能覆盖；两前置状态与两个路径的重叠请求新版本先发布后不被旧请求回写；查询同一SQLite读事务冻结关联、来源版本和引用，下一查询才见更改；持久refreshing故障注入后显式重刷恢复。这里只认数据库持久状态注入，不冒称进程崩溃实测；平台另证正常进程重启。\nA7：isolation三模式none/hub/paused原before==after、remote前后相同、outbound_calls_after_marker=0；socket哨兵仍拒绝回环/外部IP，两个既有对话原文/来源/暂停规则保持。legacy source九层help与冻结旧入口逐字比对。packages-v3的15条实际构建/分别安装/业务命令exit0，Local26/Hub24模块与源/wheel/安装清单相同，Hub独立找不到smm_local并可合并项目/serve-hub。full-regression-v4原日志301 passed/1 skipped、process exit0；两ci-a66元数据headSha a66deeb15ad2480d1cb9b6a9555822d299daa996、各三系统pytest/双包构建/分别安装全部success，已读实际日志。新维护证据入口当前README→TRIAL_GUIDE→scripts/acceptance/README→evidence/README可达，Skill说明未发布/0.4.0不含、ID/路径、刷新/状态/引用/边界。cross-user-v3当前独立意见、实际安装帮助原件有效。\nA8/E1：已实际核manual-r006-formal-{mac,linux,windows}-v2及其独立正式复审，当前五份manual全部artifacts/bindings重新计算相符；三个平台安装26个py/HTML逐值与当前src相同，同轮wheel SHA 7ee93bfe55a6ceb9ad251144677c611b8099c5975b3c85c740318a04da631bd3。身份为mac UID501/Linux UID1000，Windows worker及102项产品进程均is_admin=false/session1；未用SSH管理身份替代。三个目录的84CLI及19份stdio原件实际读取，MCP进程exit0/alive=false；真实Web42响应包括保存pending、刷新、P范围三目标、全替换/移除、旧ref400，三份原trace各202/18/65帧、动作/网络均无工具错误，新端口逐五项read200。本人实际打开三平台web-original与web-partial六PNG，看到主导航/本机/项目/采集版本、指南script纯文本、Unicode文本及范围、Unix权限/UTF8红字，Windows仅UTF8失败而denied ready。其余七图/平台已由当前独立正式Reviewer逐图审阅，本人对旧ref等行为另核原响应和trace。按独立夹具字面SHA→规范文本重算三入口及trace资源中的全部正文记录，无文本/码点/行号/引用负载不符；İ×3000后的control窗口[2801,3027)含实际needle，指南[7,14)中文/emoji/组合/LF准确。首次服务实际PID mac88581/Linux160681/Windows12608消失且端口关闭的核验均严格早于第二服务88909/161076/9088启动；末次亦actual_alive=false/port_closed=true，Windows区分启动器12692/5992。重启同档案sources/files逐值相同，五目标id/version/SHA/采集时间/资格保持，新CLI/MCP/Web可读且无重配/刷新。源SHA/mtime各阶段对应相等，23个body open仅显式refresh/只读/无链接目标。Windows未测ACL权限拒读已明确，junction+坏编码满足适用E1差异。\n\n版本/限制：24自动v3及5人工当前收据的绑定/附件全部重算无误；不把trial/debug当formal，不把旧wheel的意见授予a66deeb。Windows初CI封装问题、Unicode展开与IGNORECASE两轮产品红灯、旧Windows首次stop缺证、user-discovery-v2缺链接的历史均保留；目前唯新增未关闭的是本意见来源元信息失败。公开verify.py --raw-root实际通过1793个公开文件及私有原SHA；索引校验只是证据可追溯性，不代替行为判断。本轮只判006已授权实现需求，PR最终合并/发行升级、007/008、真实用户文档或staging不在本意见范围。除指出的当前失败外，没有发现其他阻塞需求差异。",
+    "status": "failed"
+  },
+  "operation": "delivery-judge",
+  "record": ".acceptance-local/native-v1/AT-SMM-006/delivery-judge/delivery-r006-v1/result.json",
+  "recorded_at": "2026-11-22T18:24:56.582000+00:00",
+  "request_id": "delivery-r006-v1",
+  "request_sha256": "3a9186045762e00313988089dd220f7280f69f9c719a08dbebb1fddb1cf3d9fe",
+  "requirement_ids": [
+    "R006"
+  ],
+  "reviewer_session": "/root/review_006_delivery",
+  "scene_evidence": {
+    "SC1": "de63322e78c6d5a87f44dd39bf4dce01f897a8ce2a1782efde9a3e3f66a98a9a",
+    "SC2": "b0757f13aa34f846071161fca01cf2818fb7bd84545103c052706182d1d7eaad",
+    "SC3": "f7e7bc528ddfa8ee49d1bedcc769925c04a6b1ea5c6c273771e04e40d3a66acc",
+    "SC4": "7bdeaf3e89006cf57e9daa0e77170685902b76b6176365c5f4586b7f6cb4cb76",
+    "SC5": "a37c458999cd487518a0e105100da7d053b4580b931e3061bfeda4be01b0bcd4",
+    "SC6": "e35b7915e016241e259f5ffe1880a6e18dffe4ead5b450735c610ad6c747af5a",
+    "SC7": "d6602ab82d548beff23402d49250fc1b14349ea4b0fc794e6baf98c03ebcdbdf",
+    "SC8": "b13b2f965df96bbeb5e2aa8e1204ad7a01e72b02104f1063160d9e898b206eb5"
+  },
+  "scene_status": {
+    "SC1": "passed",
+    "SC2": "passed",
+    "SC3": "passed",
+    "SC4": "passed",
+    "SC5": "passed",
+    "SC6": "passed",
+    "SC7": "passed",
+    "SC8": "passed"
+  },
+  "status": "judged"
+}

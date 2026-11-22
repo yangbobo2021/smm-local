@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "expected_failure",
+      "reason": "SC3第二判据/design-r006-v5-sc3来自SPEC B3/A3，改名、合并转移去重、路径映射不推断和普通/全局约束有原文依据。v1b本项已认可，本轮tests/test_document_projects.py:25-39仍保留仅P与P/Q两种实际动作前绑定：改名丢任一文件资格会在29行完整集合失败；只合并首个来源会在32行both独立[q]失败；重复Q绑定亦失败；映射改来源在35行完整sources比较失败，G误得资料36行失败；非法混并的变更38行失败。旧ref错误沿合并后新配置继续可读会在34逐ref拒绝失败。独立[q]及明确两文件集合避免只靠两产品结果相等而同错，当前输入已覆盖会改变判定的单/双绑定状态。原始red-r006-v2-project-maintenance/TC-006-project-maintenance/run.stdout及00001-api-001.json显示27行首次POST来源实际404 Not Found，Fixture.request:52失败；是SPEC B1新入口缺失，后续改名/合并/旧ref/映射/拒绝均未执行。所列artifacts SHA一致，当前测试与match-r006-v3-sc3一致，src相对f797fe8未变。候选有效并保留可信expected_failure，不将后置断言当作通过证据。",
+      "covers": []
+    }
+  }
+}

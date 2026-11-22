@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "expected_failure",
+      "reason": "已独立对照SC5、SPEC B5/B6/A5、PLAN §4与design-r006-v5-sc5；最多2000默认窗口、Unicode码点/行号和16000扩读均为已定行为。tests/test_document_search.py:39–68以三种独立原字符串覆盖BOM、CRLF/CR/LF、非BMP emoji、组合码点及尾LF/无尾LF；45–49分别对search和默认read核独立body及坐标行号，50–54对每一扩读范围按body切片和LF端点公式核验。只第一字符串或首范围正确会被后续参数/循环断言拦截，两响应同错会被46的独立原串拦截。前轮长行窗口漏项已在56–64补齐：long含超过16000码点的非BMP/组合字符，分别检查hit和默认read为整数有效非空窗口、长度上限、独立long切片、命中needle及独立行号；两个观察面同错或仅长行按UTF16错位首先由61/62拦截，64另核默认窗口与引用窗口一致。65独立核恰好16000，66拒16001，67拒旧版本；更多等价Unicode样本可选，无有据必测缺口。已读match-r006-v4-sc5和red-r006-v3-exact-read原收据、绑定源、完整stdout/stderr与三份api-001并核全部SHA。三个参数真实均在41行合法add返回404 Not Found，document_helpers.py:52失败；之后refresh/search/read与所有坐标、长行及扩读断言均未到达。API基线缺少文档来源入口，非测试/环境故障；本结论只确认有效测试与可信入口缺失红灯，不表示字符业务或平台已通过。expected_failure，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC3三判据分别来自SPEC B3/B5/A3，属于业务条件与结果。design-r006-v5-sc3自然设计与match-r006-v4-sc3本项匹配有效。依据SPEC B3/B5/A3与SC3，自然设计覆盖P-Q-Q-R直接一层、普通/全局、同名不同ID、零/多绑定及共享不建关联。tests/test_document_projects.py:test_project_scope用六份独立文件固定expected字典遍历P/Q/R/G，每份命中read等于needle+文件名；all完整六集合；共享前后links完整相等；重复来源后原始results长度/路径/ID均为3。反例：递归扩展至R会被P完整集合拦截；同名混并、全局隐式纳入和未绑定错误均由各集合拦截；两份响应都错指首文件由逐命中独立全文拦截。原始00027-project-expected.json记录ID1/2同名、链1-2-3、G4及独立集合，API逐文件原文相符。documents.py:_query_scope只取直接links，search在同读事务过滤有效来源并按文件去重，当前行为与证据一致。 debug-r006-v1-sc3本TC原始run.stdout实际1 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    },
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC3三判据分别来自SPEC B3/B5/A3，属于业务条件与结果。design-r006-v5-sc3自然设计与match-r006-v4-sc3本项匹配有效。依据SPEC B3/A3与SC3，改名保持身份、合并迁移/去重、路径映射不推断与普通/全局混并拒绝的自然设计有效。tests/test_document_projects.py:test_project_maintenance先使one(P)、both(P/Q)均ready，改P名后P完整命中集合保留，one仍P；merge后两个来源分别检查project_ids==[Q]且Q完整集合正确，所有原P ref拒绝；map_path到G后整个sources前后相同且G无命中；非法混并抛ValueError后来源配置/ready均保留。反例：只迁移首来源被both.project_ids断言拦截，迁移增加重复Q被精确[Q]拦截；借路径映射改文档归属被sources全量比较和G空集合拦截。17份API原件显示改名前后材料、合并两来源Q名单及两旧ref400资格失效；core.py:merge_projects对每来源转移并去重、revision递增，未导入Local模块，map_path无文档推断，符合断言。本项不替代独立Hub发行包验证。 debug-r006-v1-sc3本TC原始run.stdout实际1 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    },
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC3三判据分别来自SPEC B3/B5/A3，属于业务条件与结果。design-r006-v5-sc3自然设计与match-r006-v4-sc3本项匹配有效。依据SPEC B3确定时间线、A3/A4与SC3，S1/P/v1→S2/Q/v2，S2移除/failed/持续有效三前置状态及S1后刷v3的设计有效。tests/test_document_projects.py:test_overlap_version的unique直接核raw results数量、ID/路径去重与完整集合，P/Q/all各独立读v2、版本改变、captured_by=S2及资格来源；S2退出不回退v1且Q旧ref拒绝、P/all继续v2；S1采v3后三范围逐结果核v3、全部旧v2 ref拒绝；退出分支再使最后S1失败，只留独立control。反例：只有P更新而Q/all停v1被current.values全文循环拦截；S2退出时借Q其他资格或回退v1被Q空与P/all固定v2拦截；两边同错由字面v1/v2/v3预期拦截。151份附件及三份overlap-time-line明确v1版1/v2版2，各P/Q/all相应source_ids，remove/failed最终仅control，continuous最终shared v3；documents.py:_publish文件级唯一快照与search/read资格分开，证据一致。 debug-r006-v1-sc3本TC原始run.stdout实际3 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

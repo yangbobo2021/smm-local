@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "对照SPEC B2/A2及PLAN A2共用映射，本次真实.venv/bin/python -m pytest -q tests/test_document_scanning.py::test_scan_scope于16:19:59.623至16:19:59.974Z退出0，stdout 1 passed、stderr空。已读tests/test_document_scanning.py:7-37独立expected五路径/各正文、完整集合断言、递归切换、显式build文件/隐藏文件/隐藏目录、链接及末尾全体源文件SHA/mtime不变断言。正式附件00002 ready=5/ignored_entries=18，00003的五命中文本及00004-00008读取逐一符合独立字面预期；00011/00012非递归仅root.MD；00013-00021显式纳入三个默认排除内目标；00023 ignored_links=2，00024独有escapeuniquemarker零命中，00025根链接400且明确拒绝。00027记录独立期望/指纹，测试末断言未改源。已重算31个artifacts和89个bindings及000002定义SHA均匹配，设计v5-sc2/测试同版。仅认领分配scan-scope-c1；本机符号链接证据不冒充Windows junction或SC2人工三平台项。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc6本TC；已核原stdout/process/stderr、全部API/独立预期附件和artifacts SHA，当前运行绑定与实际产品/本用例源码吻合，debug按本TC分别实际2/1/2/2/1参数exit0。SPEC B4/A6的同源新刷新及配置替换判据与SC6自然设计一致。tests/test_document_concurrency.py:36–57两个动作前分支，以_publish事件屏障控制旧任务；46独立newwinner或49独立pending/空结果先拦两快照同错，50/52全来源/绑定/文档/成员/meta/FTS比较拦任一晚写副作用，另一参数拦仅首状态正确。新green-r006-v2-refresh-order原stdout 2 passed，两个late-refresh-response均published:false；winner_snapshot分别ready/revision1、newwinner v2和pending/revision2、正文NULL。red-r006-v3-refresh-order两参数合法add404及独立红灯与同测试吻合。documents.py:308–329事务分配序号/刷新身份并核revision、refresh_id。 调试原附件亦独立读回同源/移除晚响应published:false、两个跨源版本及逐P/Q/all读取、links/source冻结/后续范围及旧ref分支、文件/目录恢复和control连续资格，均与SPEC/自然设计/断言吻合。未见有据必测缺口，认领全部本TC分配检查，准备passed，可全新正式执行；不代表人工平台、用户入口、最终CI或R006交付。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    },
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc6本TC；已核原stdout/process/stderr、全部API/独立预期附件和artifacts SHA，当前运行绑定与实际产品/本用例源码吻合，debug按本TC分别实际2/1/2/2/1参数exit0。SPEC B3/B4/A6的移除不复活、独占退出与共享保留均由SC6设计承接。tests/test_document_concurrency.py:60–74同时准备两文件/两来源，发布屏障中移除；70全持久表比较拦来源/成员/索引复活，71核P空/Q仅shared，72独立shared original原串拦两快照同错或只首文件正确，73逐P旧ref拒绝，74禁旧forbidden正文。新green-r006-v2-refresh-remove原stdout 1 passed；晚响应published:false，共享read为needle shared original，两个P旧ref均400。red-r006-v3-refresh-remove首合法add404及独立红灯仍对应同版测试。documents.py:237–243/325–329事务移除并拒旧来源发布。 调试原附件亦独立读回同源/移除晚响应published:false、两个跨源版本及逐P/Q/all读取、links/source冻结/后续范围及旧ref分支、文件/目录恢复和control连续资格，均与SPEC/自然设计/断言吻合。未见有据必测缺口，认领全部本TC分配检查，准备passed，可全新正式执行；不代表人工平台、用户入口、最终CI或R006交付。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    },
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc6本TC；已核原stdout/process/stderr、全部API/独立预期附件和artifacts SHA，当前运行绑定与实际产品/本用例源码吻合，debug按本TC分别实际2/1/2/2/1参数exit0。SPEC B3/B4/A6的跨源新请求优先判据与SC6设计一致。tests/test_document_concurrency.py:77–99分别覆盖pending/ready动作前状态，两文件S1旧请求屏障等待而S2先发新版；91全documents相等，92–97逐P/Q/all完整集合、ID/version/采集来源及独立newwinner+文件名原串，93/97拦仅首文件或首范围正确及两边同错。新green-r006-v2-overlap-order原stdout 2 passed；两overlap-newer-wins均为one/two newwinner，pending版本1、ready版本2，十二次原文读取逐文件原串准确，获胜采集来源S2；旧词零召回断言到达。red-r006-v3-overlap-order两参数首add404与独立红灯仍匹配。documents.py:339–352按publish_seq保留较新正文同时纳入旧源成员资格。 调试原附件亦独立读回同源/移除晚响应published:false、两个跨源版本及逐P/Q/all读取、links/source冻结/后续范围及旧ref分支、文件/目录恢复和control连续资格，均与SPEC/自然设计/断言吻合。未见有据必测缺口，认领全部本TC分配检查，准备passed，可全新正式执行；不代表人工平台、用户入口、最终CI或R006交付。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    },
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc6本TC；已核原stdout/process/stderr、全部API/独立预期附件和artifacts SHA，当前运行绑定与实际产品/本用例源码吻合，debug按本TC分别实际2/1/2/2/1参数exit0。SPEC B5/B6/A6与SC6设计要求同次范围/版本/资格固定，后续按旧签名资格读。tests/test_document_concurrency.py:102–148覆盖links与source两种改变结论的条件，在_query_scope后改关联或配置/正文；128完整P/Q集合，129–135逐原目标独立正文、ID/version/SHA及资格，136–147下一次范围/独立原文与旧ref正反控，130/134拦只冻关联未冻来源，145/147拦全拒旧ref。新green-r006-v2-query-snapshot原stdout 2 passed；原frozen-query-scope当次均P/Q original v1，next为P/R original v1或加Q changed v2；links旧Q读200原文，source旧Q400，P均保持可读。red-r006-v3-query-snapshot合法add404及独立意见仍对应同测试。documents.py:367–390同读事务构造结果，392后依原签名不重展关联。 调试原附件亦独立读回同源/移除晚响应published:false、两个跨源版本及逐P/Q/all读取、links/source冻结/后续范围及旧ref分支、文件/目录恢复和control连续资格，均与SPEC/自然设计/断言吻合。未见有据必测缺口，认领全部本TC分配检查，准备passed，可全新正式执行；不代表人工平台、用户入口、最终CI或R006交付。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    },
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本份目标为debug-r006-v2-sc6本TC；已核原stdout/process/stderr、全部API/独立预期附件和artifacts SHA，当前运行绑定与实际产品/本用例源码吻合，debug按本TC分别实际2/1/2/2/1参数exit0。SPEC B4/B6/A6、PLAN §3.2/§4与SC6设计允许数据库持久refreshing注入核共用恢复，真实进程重启另归E1。tests/test_document_concurrency.py:151–173单文件/目录均注入、改one增added，创建新Archive/Documents明确刷新；166/168全文件集合和两个来源ready拦仅首目标正确，169/170独立变化/新增正文拦只恢复status或两响应同错，171未变control旧ref正控、172变化one旧ref拒绝。新green-r006-v2-interrupted-refresh原stdout 1 passed；persistent-interruption原件明确状态注入，after为one recovered v2、added newly discovered v1、control continuous v1；三read准确，旧one400。red-r006-v3-interrupted-refresh合法add404及独立红灯与同测试一致。documents.py:308–321下一明确刷新重新分配身份，不依赖旧进程。 调试原附件亦独立读回同源/移除晚响应published:false、两个跨源版本及逐P/Q/all读取、links/source冻结/后续范围及旧ref分支、文件/目录恢复和control连续资格，均与SPEC/自然设计/断言吻合。未见有据必测缺口，认领全部本TC分配检查，准备passed，可全新正式执行；不代表人工平台、用户入口、最终CI或R006交付。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

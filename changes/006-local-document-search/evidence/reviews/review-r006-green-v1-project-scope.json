@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "依据SPEC B3/B5/A3与SC3，自然设计覆盖P-Q-Q-R直接一层、普通/全局、同名不同ID、零/多绑定及共享不建关联。tests/test_document_projects.py:test_project_scope用六份独立文件固定expected字典遍历P/Q/R/G，每份命中read等于needle+文件名；all完整六集合；共享前后links完整相等；重复来源后原始results长度/路径/ID均为3。反例：递归扩展至R会被P完整集合拦截；同名混并、全局隐式纳入和未绑定错误均由各集合拦截；两份响应都错指首文件由逐命中独立全文拦截。原始00027-project-expected.json记录ID1/2同名、链1-2-3、G4及独立集合，API逐文件原文相符。documents.py:_query_scope只取直接links，search在同读事务过滤有效来源并按文件去重，当前行为与证据一致。 同版TDD：red-r006-v3-project-scope原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-project-scope与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

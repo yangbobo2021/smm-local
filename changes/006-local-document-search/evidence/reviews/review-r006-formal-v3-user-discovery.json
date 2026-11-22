@@ -1,0 +1,15 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-user-v3",
+  "target_sha256": "3a825d0b36ad4d61396e35586b4b16ebf339ea213e305d267a3bb74ad942c45e",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-user-discovery": {
+      "status": "passed",
+      "reason": "正式人工manual-r006-cross-user-v3返修复审passed；依据SPEC B7/A8、PLAN §6.4/§6.6、design-r006-v5-sc7与user-discovery.md第1-6步，只认领user-discovery-c3。v2 needs_revision原件及公开副本均保留，未覆盖历史。上一轮唯一实施缺口已关闭：实际重新从README:33-48→TRIAL_GUIDE:82→scripts/acceptance/README的006段落首行→evidence/README.md逐跳读取，当前可直接进入回归、双包、两CI run、三平台E1及独立意见；README/指南/维护说明/证据页的全部本地Markdown目标均存在。新证据页逐A1-A8列当前formal-v3与manual-v2/v3目标，E1每平台有业务/CLI/Web响应/26模块安装/普通身份/服务退出/原文和错误PNG/独立正式意见，另有9trace原SHA、历史返修、公开校验和当前原生结果。coverage.json真实29项且不重复，28 passed、当前用户项pending，target为本次manual-v3；唯一尚不存在的review链接正是待本次意见生成，并明确不由索引预判通过，不构成循环验收。未提前写R006 passed。实际运行公开verify.py --raw-root当前工作树，1766个公开文件和全部私有来源SHA通过；审阅时证据README SHA171cc05e2906a03861e12d06f86fe9d025c92fd11082e98db193cfb718fb2170，coverage SHA606f5edd3f3df8a569b3f289bd5ab5a2748721d5a9b8ee383c1edb579308afbb。当前公开full-regression-v4 JUnit实际302项/0失败/1跳过，四旧引用通过；双包正式v3入口存在且本上下文已核15命令和26/24模块；两CI元数据headSha a66deeb、各三系统success，并重读链接后的公开元数据与原JUnit。六job的原日志在v2复审实际核为mac/Ubuntu301pass1skip、Windows302pass且全部双包构建和分别安装成功，原件摘要本轮完全未变。当前业务原件无变化：人工证据映射中除新用户观察副本外28份共同原件SHA逐项等于v2；因此本上下文已实际打开的8张三平台formal-v2 PNG、9份原trace、真实stdio、同候选2 wheel SHA7ee93bfe…及26模块/HTML等于a66deeb的核查继续适用，没有冒称重跑业务或只凭status。mac web-pending.png显示主导航、pending和路径/项目/排除/完整替换；三平台web-original.png显示项目范围、采集版本、来源/SHA/字符[0,64)/行1-3和纯文本原文；partial图有真实bad编码/missing及适用权限错误；mac旧ref图显示重新检索。主trace真实点击保存→刷新→查询→读取/扩读→旧ref400→配置→带影响说明的移除confirm/DELETE200。用户与Agent路径重新核：README及指南明确006未发布/0.4.0不含、独立源码/wheel环境、服务器本机绝对路径/项目ID来源、pending后刷新、全局/零多绑定/一层、排除与set全替换、码点范围、快照/旧ref/移除；README Agent入口可直接读Skill三个只读工具及原reference、禁止混用对话/默扫/上传边界。work/user-discovery-v3的11份实际安装CLI帮助为本轮18:13:49.223–50.149Z新执行，全部exit0/stderr空，逐stdout与此前已核准确帮助一致。维护前提/控制依赖/普通Token/全新目录/安装摘要/原件清理与复跑方法亦完整。35 artifacts与41 bindings本轮全部重算匹配，目标设计/定义/TC与match-v7一致。以上支持当前用户/Agent/维护者可发现并完成相应流程；平台完整结果及R006最终交付仍由对应独立阶段判定。",
+      "covers": [
+        "user-discovery-c3"
+      ]
+    }
+  }
+}

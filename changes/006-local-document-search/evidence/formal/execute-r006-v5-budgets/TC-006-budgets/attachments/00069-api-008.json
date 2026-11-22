@@ -1,0 +1,247 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "x needle",
+    "limit": 50
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "9ed89efb20fc46458233913fe4171cb4",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/baseline.txt",
+        "version": 1,
+        "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+        "text_length": 1,
+        "captured_at": "2026-11-22T19:18:49.983372+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "x",
+        "start": 0,
+        "end": 1,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6IjllZDg5ZWZiMjBmYzQ2NDU4MjMzOTEzZmU0MTcxY2I0IiwiZW5kIjoxLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.8af1b6d106db3fadc4799db8884fcef409c9bb5551cb869096ff6a3266f9d4da",
+        "bm25_score": 1.7346010553881064,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "d476a735940240ed972acaa572d53ef6",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-0.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.204140+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6ImQ0NzZhNzM1OTQwMjQwZWQ5NzJhY2FhNTcyZDUzZWY2IiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.327965b196a5cc63be2745e2fa98ecd6eae943f33f96c790b246b9a6027c1374",
+        "bm25_score": 1e-06,
+        "rank": 2,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "1eda8d2fde784b99bf3821ee47e892db",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-1.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.240688+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6IjFlZGE4ZDJmZGU3ODRiOTliZjM4MjFlZTQ3ZTg5MmRiIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.0686350da1217fae72961eeb8ee076e834b00e45c6b4589bf9788606c904e5ee",
+        "bm25_score": 1e-06,
+        "rank": 3,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "6da97babd57144ab99d856ff596ca2a0",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-2.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.161824+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6IjZkYTk3YmFiZDU3MTQ0YWI5OWQ4NTZmZjU5NmNhMmEwIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.22d5919b088e4181ce82221cdf510006a06cc134dd3bbad6e0a35a99a0277e6a",
+        "bm25_score": 1e-06,
+        "rank": 4,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "308deff8ec54454194fba01d1276c053",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-3.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.126980+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6IjMwOGRlZmY4ZWM1NDQ1NDE5NGZiYTAxZDEyNzZjMDUzIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.ea6ed89aef2c4f1dd436f7a80a70fb381aa0f8cd935f64e60d5a520a7a30901f",
+        "bm25_score": 1e-06,
+        "rank": 5,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "b14c1c093b61410eb776fc09e3a9b7e7",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-4.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.013853+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6ImIxNGMxYzA5M2I2MTQxMGViNzc2ZmMwOWUzYTliN2U3IiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.d985116e3ce6b0752f475e7126b079ff4abf8b178da3d67150107fb6ff8a020f",
+        "bm25_score": 1e-06,
+        "rank": 6,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "ef5e38be14bd4484a7c6b736029308bf",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-5.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:49.983514+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6ImVmNWUzOGJlMTRiZDQ0ODRhN2M2YjczNjAyOTMwOGJmIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.948df9c80599f5c700f02869be29d25c1bc75191423c9cb025d156a3e51cf63f",
+        "bm25_score": 1e-06,
+        "rank": 7,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "373d0d9a642d4b3bb9a9c5cf3d25de1d",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-6.txt",
+        "version": 1,
+        "sha256": "1f7ee5a5a22f60362881d9aacdc5b410d8f1f3af9607d698442b393a765bc6c3",
+        "text_length": 2097152,
+        "captured_at": "2026-11-22T19:18:50.046781+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6IjM3M2QwZDlhNjQyZDRiM2JiOWE5YzVjZjNkMjVkZTFkIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.2685dc37d84b847a4390770a63633cb1e53ff6614c9844c66ca3c660ba357699",
+        "bm25_score": 1e-06,
+        "rank": 8,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "cdea8f9b2a694985adf0560c48914e7c",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs/large-7.txt",
+        "version": 1,
+        "sha256": "c172e67a456204afe7b5cd9b1d179de00345467150f70610fc79c5f031eed4c9",
+        "text_length": 2097151,
+        "captured_at": "2026-11-22T19:18:50.079562+00:00",
+        "captured_by_source_id": "44bdcafdebfd41fdba6a0583f8c61873",
+        "text": "needle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "44bdcafdebfd41fdba6a0583f8c61873"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiZTQwYmEyNTg3M2RmNGUzODhhMGU3YWQyZWEwM2U3NzkiLCJkb2N1bWVudF9pZCI6ImNkZWE4ZjliMmE2OTQ5ODVhZGYwNTYwYzQ4OTE0ZTdjIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiNDRiZGNhZmRlYmZkNDFmZGJhNmEwNTgzZjhjNjE4NzMiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.fa300b85f06add6c75ccc703b3cdfc080266ce1145ad6645163e2dc87a792581",
+        "bm25_score": 1e-06,
+        "rank": 9,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 9,
+      "sources": [
+        {
+          "id": "44bdcafdebfd41fdba6a0583f8c61873",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_equal_0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "b2e6622917964e5aa9d17ac4fcd7130f",
+          "request_seq": 2,
+          "started_at": "2026-11-22T19:18:49.967300+00:00",
+          "finished_at": "2026-11-22T19:18:50.278312+00:00",
+          "error": null,
+          "counts": {
+            "ready": 9,
+            "failed": 0,
+            "candidates": 9,
+            "billed_bytes": 16777216,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

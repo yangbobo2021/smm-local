@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-invalid-read",
+  "target_sha256": "96287a4434c3e60b69764e145efe738edb6c2d0c8f7da2e1b20d749318583f8a",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B6/A5、PLAN §4、design-r006-v5-sc5，对照tests/test_document_search.py:71-103及Fixture.bad。00003/00004分别one的alpha和two的beta独立内容，00007确为另一档案foreign；00008跨档案、00009–00022篡改archive/document/version/kind/source id/revision/qualification均400损坏引用，00023–00026非法范围400，00027/28布尔或小数422。00029原ref仍准确返回one正文；00030真实同档案对话ref400明确不能混用；改配置/刷新后00033旧ref400原资格失效，00034/35新ref仍读正确alpha正文。拒绝均为错误结构未回退另一份正文，读取阶段无源I/O哨兵实际启用。stdout1 passed/exit0/stderr空，39 artifacts与47 bindings、match实现摘要全部重算一致。旧内容版本和资格中断另有生命周期分配，当前只认领invalid-read-c3。本正式轮无XML/附回归；对应green-v2原旧引用回归4 passed且摘要核实，full-regression-v3原XML四旧引用通过（301 passed/1 skipped）。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    }
+  }
+}

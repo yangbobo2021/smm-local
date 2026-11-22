@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "expected_failure",
+      "reason": "已核006 SPEC B1/B2/A2、PLAN、000002定义SC2、design-r006-v5-sc2与match-r006-v5-sc2；本轮修改仅将Windows保留设备样例名nul.txt逐处改为binary-nul.txt，Fixture.file仍以write_bytes写入b'needle\\x00body'真实NUL。坏UTF8、NUL、注入OS拒绝分别failed及错误分类、4 ready/3 failed的partial计数、正常文件完整集合/逐正文/原始SHA、修复后7 ready及逐路径内容/SHA断言均原样保留；没有改为允许NUL或删除错误样例。原Windows CI日志:364-392明确原测试到达partial但failed=2而预期3，与设备名无法作为普通磁盘文件的原因相符；改名不降低需求。当前match源选段和完整测试SHA均与冻结运行测试一致。red-r006-ci-v1-decode-files/TC-006-decode-files/run.stdout在test_document_scanning.py:45的add进入document_helpers.py:52，附件00001-api-001.json实际POST /api/documents/sources得到404 {detail: Not Found}，退出1；解码/partial断言尚未到达，不能据此宣称其通过。36个product_bindings已逐个核对git f797fe843430b48faf379cd76b4ae18fd52f5c64的src原字节SHA，全部一致，全部artifact摘要和测试绑定一致；work/ci-test-repair-baseline-provenance.json及当前/备份src也与f89623b逐字一致。此为旧产品缺少需求文档入口的可信预期失败，不是测试/环境错误；最终Windows CI仍需实际运行确认。",
+      "covers": []
+    }
+  }
+}

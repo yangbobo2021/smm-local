@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "从SPEC B5/B6/A5、PLAN §3.3/§4反查SC5、design-r006-v5-sc5及match-r006-v4-sc5，码点/换行端点、2000窗口、16000扩读均有依据。自然设计完整、实现tests/test_document_search.py:39–68以三独立原串覆盖BOM/CRLF/CR/LF、非BMP、组合字符、末尾LF和无末尾LF；45–54对每个参数和每个范围分别以独立body切片/LF计数断言，只有首目标正确会被后续参数/循环拦截；search/read同错正文会被46行独立body拦截。56–64对长行两个观察面分别核窗口、独立long切片、整数码点与行号，65独立16000切片、66拒16001、67拒旧版本。已核red-r006-v3-exact-read原日志三参数合法add均404、既有独立review-r006-red-v3-exact-read；green-r006-v1-exact-read复用完全相同test_bindings/声明/命令，全部绑定与artifacts SHA吻合当前文件。产品documents.py:145–149按Python码点切片和B6公式算行，392–411仅读快照。绿灯原run.stdout实际3 passed/exit0，附件api-004/020/036分别返回独立归一化正文，api-038/040的a\\n和b\\n均末行为实际所属行；长行各api-012返回[0,2000)，各api-013返回[0,16000)；三次16001与旧版本均400且含义符合原文。regression.stdout实际5 passed/exit0，对应四项旧引用契约与两Agent旧数字ID/ref及九层来源帮助兼容，断言已读，不以摘要状态代替。未见有据必测缺口；同版TDD绿灯及所附回归通过，等价Unicode样本可选。本意见不认领正式执行、真实平台或R006交付。",
+      "covers": []
+    }
+  }
+}

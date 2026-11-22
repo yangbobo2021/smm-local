@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "按SPEC B3/A3和PLAN P5核本次正式.venv/bin/python -m pytest -q tests/test_document_projects.py::test_project_maintenance，16:20:04.788至16:20:05.131Z退出0，stdout 1 passed、stderr空。已读test_document_projects.py:25-39的实际rename/merge/map_path/普通全局混并调用及逐来源/完整集合断言。正式附件00001-00006从P和P/Q两个来源到改名后同ID资料集合保持；00007-00009合并后两来源project_ids精确[2]、ready/revision2，Q见原两个文档且ID不变；00010/11两份旧ref明确400资格失效；00012-00017证明路径映射G及被pytest.raises(ValueError)拦截的非法普通全局合并前后完整配置不变、G零命中、两来源继续ready。21个artifacts和89个bindings重算相符，定义000002/设计v5-sc3/本次完整测试断言同版。project-maintenance-c2实际已证实，不额外推断未执行的平台行为。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,229 @@
+[
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "/private/tmp/smm-006-impl/scripts/build_packages.py",
+      "--uv",
+      "/Users/TESTER/.local/bin/uv",
+      "--out-dir",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Building wheel...\nrunning egg_info\ncreating src/smm_local.egg-info\nwriting src/smm_local.egg-info/PKG-INFO\nwriting dependency_links to src/smm_local.egg-info/dependency_links.txt\nwriting entry points to src/smm_local.egg-info/entry_points.txt\nwriting requirements to src/smm_local.egg-info/requires.txt\nwriting top-level names to src/smm_local.egg-info/top_level.txt\nwriting manifest file 'src/smm_local.egg-info/SOURCES.txt'\nreading manifest file 'src/smm_local.egg-info/SOURCES.txt'\nadding license file 'LICENSE'\nwriting manifest file 'src/smm_local.egg-info/SOURCES.txt'\nrunning bdist_wheel\nrunning build\nrunning build_py\ncreating build/lib/smm_local\ncopying src/smm_local/login_service.py -> build/lib/smm_local\ncopying src/smm_local/service.py -> build/lib/smm_local\ncopying src/smm_local/support.py -> build/lib/smm_local\ncopying src/smm_local/archive_protocol.py -> build/lib/smm_local\ncopying src/smm_local/upload.py -> build/lib/smm_local\ncopying src/smm_local/references.py -> build/lib/smm_local\ncopying src/smm_local/installation.py -> build/lib/smm_local\ncopying src/smm_local/documents.py -> build/lib/smm_local\ncopying src/smm_local/__init__.py -> build/lib/smm_local\ncopying src/smm_local/project_control.py -> build/lib/smm_local\ncopying src/smm_local/search_merge.py -> build/lib/smm_local\ncopying src/smm_local/core.py -> build/lib/smm_local\ncopying src/smm_local/api.py -> build/lib/smm_local\ncopying src/smm_local/cli.py -> build/lib/smm_local\ncopying src/smm_local/federation.py -> build/lib/smm_local\ncopying src/smm_local/mcp_server.py -> build/lib/smm_local\ncreating build/lib/smm_local/importers\ncopying src/smm_local/importers/plugin_scope.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/codex.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/registry.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/source_io.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/__init__.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/plugin.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/zcode_fixture.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/base.py -> build/lib/smm_local/importers\ncopying src/smm_local/importers/claude_code.py -> build/lib/smm_local/importers\nrunning egg_info\nwriting src/smm_local.egg-info/PKG-INFO\nwriting dependency_links to src/smm_local.egg-info/dependency_links.txt\nwriting entry points to src/smm_local.egg-info/entry_points.txt\nwriting requirements to src/smm_local.egg-info/requires.txt\nwriting top-level names to src/smm_local.egg-info/top_level.txt\nreading manifest file 'src/smm_local.egg-info/SOURCES.txt'\nadding license file 'LICENSE'\nwriting manifest file 'src/smm_local.egg-info/SOURCES.txt'\ncreating build/lib/smm_local/static\ncopying src/smm_local/static/index.html -> build/lib/smm_local/static\ninstalling to build/bdist.macosx-11.0-arm64/wheel\nrunning install\nrunning install_lib\ncreating build/bdist.macosx-11.0-arm64/wheel\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_local\ncopying build/lib/smm_local/login_service.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/service.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/support.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/archive_protocol.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/upload.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_local/importers\ncopying build/lib/smm_local/importers/plugin_scope.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/codex.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/registry.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/source_io.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/plugin.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/zcode_fixture.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/base.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/importers/claude_code.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/importers\ncopying build/lib/smm_local/references.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/installation.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/documents.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/project_control.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/search_merge.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/core.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/api.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/cli.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_local/static\ncopying build/lib/smm_local/static/index.html -> build/bdist.macosx-11.0-arm64/wheel/./smm_local/static\ncopying build/lib/smm_local/federation.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\ncopying build/lib/smm_local/mcp_server.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_local\nrunning install_egg_info\nCopying src/smm_local.egg-info to build/bdist.macosx-11.0-arm64/wheel/./smm_local-0.4.0-py3.12.egg-info\nrunning install_scripts\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_local-0.4.0.dist-info/WHEEL\ncreating '<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/.tmp-4lgx09kw/smm_local-0.4.0-py3-none-any.whl' and adding 'build/bdist.macosx-11.0-arm64/wheel' to it\nadding 'smm_local/__init__.py'\nadding 'smm_local/api.py'\nadding 'smm_local/archive_protocol.py'\nadding 'smm_local/cli.py'\nadding 'smm_local/core.py'\nadding 'smm_local/documents.py'\nadding 'smm_local/federation.py'\nadding 'smm_local/installation.py'\nadding 'smm_local/login_service.py'\nadding 'smm_local/mcp_server.py'\nadding 'smm_local/project_control.py'\nadding 'smm_local/references.py'\nadding 'smm_local/search_merge.py'\nadding 'smm_local/service.py'\nadding 'smm_local/support.py'\nadding 'smm_local/upload.py'\nadding 'smm_local/importers/__init__.py'\nadding 'smm_local/importers/base.py'\nadding 'smm_local/importers/claude_code.py'\nadding 'smm_local/importers/codex.py'\nadding 'smm_local/importers/plugin.py'\nadding 'smm_local/importers/plugin_scope.py'\nadding 'smm_local/importers/registry.py'\nadding 'smm_local/importers/source_io.py'\nadding 'smm_local/importers/zcode_fixture.py'\nadding 'smm_local/static/index.html'\nadding 'smm_local-0.4.0.dist-info/licenses/LICENSE'\nadding 'smm_local-0.4.0.dist-info/METADATA'\nadding 'smm_local-0.4.0.dist-info/WHEEL'\nadding 'smm_local-0.4.0.dist-info/entry_points.txt'\nadding 'smm_local-0.4.0.dist-info/top_level.txt'\nadding 'smm_local-0.4.0.dist-info/RECORD'\nremoving build/bdist.macosx-11.0-arm64/wheel\nSuccessfully built <REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_local-0.4.0-py3-none-any.whl\nBuilding wheel...\nrunning egg_info\ncreating src/smm_hub.egg-info\nwriting src/smm_hub.egg-info/PKG-INFO\nwriting dependency_links to src/smm_hub.egg-info/dependency_links.txt\nwriting entry points to src/smm_hub.egg-info/entry_points.txt\nwriting requirements to src/smm_hub.egg-info/requires.txt\nwriting top-level names to src/smm_hub.egg-info/top_level.txt\nwriting manifest file 'src/smm_hub.egg-info/SOURCES.txt'\nreading manifest file 'src/smm_hub.egg-info/SOURCES.txt'\nadding license file 'LICENSE'\nwriting manifest file 'src/smm_hub.egg-info/SOURCES.txt'\nrunning bdist_wheel\nrunning build\nrunning build_py\ncreating build/lib/smm_hub\ncopying src/smm_hub/windows_service.py -> build/lib/smm_hub\ncopying src/smm_hub/upload.py -> build/lib/smm_hub\ncopying src/smm_hub/__init__.py -> build/lib/smm_hub\ncopying src/smm_hub/hub.py -> build/lib/smm_hub\ncopying src/smm_hub/hub_admin.py -> build/lib/smm_hub\ncopying src/smm_hub/cli.py -> build/lib/smm_hub\ncopying src/smm_hub/vibeinsight_settings.py -> build/lib/smm_hub\ncopying src/smm_hub/hub_os.py -> build/lib/smm_hub\ncopying src/smm_hub/vibeinsight.py -> build/lib/smm_hub\ncopying src/smm_hub/projects.py -> build/lib/smm_hub\ncreating build/lib/smm_hub/_archive\ncopying src/smm_hub/_archive/support.py -> build/lib/smm_hub/_archive\ncopying src/smm_hub/_archive/archive_protocol.py -> build/lib/smm_hub/_archive\ncopying src/smm_hub/_archive/references.py -> build/lib/smm_hub/_archive\ncopying src/smm_hub/_archive/__init__.py -> build/lib/smm_hub/_archive\ncopying src/smm_hub/_archive/core.py -> build/lib/smm_hub/_archive\ncreating build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/plugin_scope.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/codex.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/registry.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/source_io.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/__init__.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/plugin.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/zcode_fixture.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/base.py -> build/lib/smm_hub/_archive/importers\ncopying src/smm_hub/_archive/importers/claude_code.py -> build/lib/smm_hub/_archive/importers\nrunning egg_info\nwriting src/smm_hub.egg-info/PKG-INFO\nwriting dependency_links to src/smm_hub.egg-info/dependency_links.txt\nwriting entry points to src/smm_hub.egg-info/entry_points.txt\nwriting requirements to src/smm_hub.egg-info/requires.txt\nwriting top-level names to src/smm_hub.egg-info/top_level.txt\nreading manifest file 'src/smm_hub.egg-info/SOURCES.txt'\nadding license file 'LICENSE'\nwriting manifest file 'src/smm_hub.egg-info/SOURCES.txt'\ninstalling to build/bdist.macosx-11.0-arm64/wheel\nrunning install\nrunning install_lib\ncreating build/bdist.macosx-11.0-arm64/wheel\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_hub\ncopying build/lib/smm_hub/windows_service.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/upload.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/hub.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/hub_admin.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/cli.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/vibeinsight_settings.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/hub_os.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/vibeinsight.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncopying build/lib/smm_hub/projects.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_hub/_archive\ncopying build/lib/smm_hub/_archive/support.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive\ncopying build/lib/smm_hub/_archive/archive_protocol.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/plugin_scope.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/codex.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/registry.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/source_io.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/plugin.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/zcode_fixture.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/base.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/importers/claude_code.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive/importers\ncopying build/lib/smm_hub/_archive/references.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive\ncopying build/lib/smm_hub/_archive/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive\ncopying build/lib/smm_hub/_archive/core.py -> build/bdist.macosx-11.0-arm64/wheel/./smm_hub/_archive\nrunning install_egg_info\nCopying src/smm_hub.egg-info to build/bdist.macosx-11.0-arm64/wheel/./smm_hub-0.4.0-py3.12.egg-info\nrunning install_scripts\ncreating build/bdist.macosx-11.0-arm64/wheel/smm_hub-0.4.0.dist-info/WHEEL\ncreating '<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/.tmp-fa2w8xjt/smm_hub-0.4.0-py3-none-any.whl' and adding 'build/bdist.macosx-11.0-arm64/wheel' to it\nadding 'smm_hub/__init__.py'\nadding 'smm_hub/cli.py'\nadding 'smm_hub/hub.py'\nadding 'smm_hub/hub_admin.py'\nadding 'smm_hub/hub_os.py'\nadding 'smm_hub/projects.py'\nadding 'smm_hub/upload.py'\nadding 'smm_hub/vibeinsight.py'\nadding 'smm_hub/vibeinsight_settings.py'\nadding 'smm_hub/windows_service.py'\nadding 'smm_hub/_archive/__init__.py'\nadding 'smm_hub/_archive/archive_protocol.py'\nadding 'smm_hub/_archive/core.py'\nadding 'smm_hub/_archive/references.py'\nadding 'smm_hub/_archive/support.py'\nadding 'smm_hub/_archive/importers/__init__.py'\nadding 'smm_hub/_archive/importers/base.py'\nadding 'smm_hub/_archive/importers/claude_code.py'\nadding 'smm_hub/_archive/importers/codex.py'\nadding 'smm_hub/_archive/importers/plugin.py'\nadding 'smm_hub/_archive/importers/plugin_scope.py'\nadding 'smm_hub/_archive/importers/registry.py'\nadding 'smm_hub/_archive/importers/source_io.py'\nadding 'smm_hub/_archive/importers/zcode_fixture.py'\nadding 'smm_hub-0.4.0.dist-info/licenses/LICENSE'\nadding 'smm_hub-0.4.0.dist-info/METADATA'\nadding 'smm_hub-0.4.0.dist-info/WHEEL'\nadding 'smm_hub-0.4.0.dist-info/entry_points.txt'\nadding 'smm_hub-0.4.0.dist-info/top_level.txt'\nadding 'smm_hub-0.4.0.dist-info/RECORD'\nremoving build/bdist.macosx-11.0-arm64/wheel\nSuccessfully built <REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_hub-0.4.0-py3-none-any.whl\n"
+  },
+  {
+    "argv": [
+      "/Users/TESTER/.local/bin/uv",
+      "venv",
+      "--python",
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Using CPython 3.12.10 interpreter at: .venv/bin/python\nCreating virtual environment at: <REVIEW_TEMP>/smm-006-packages-6szcudvw/local\nActivate with: source <REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/activate\n"
+  },
+  {
+    "argv": [
+      "/Users/TESTER/.local/bin/uv",
+      "pip",
+      "install",
+      "--offline",
+      "--link-mode",
+      "copy",
+      "--python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_local-0.4.0-py3-none-any.whl"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Using Python 3.12.10 environment at: <REVIEW_TEMP>/smm-006-packages-6szcudvw/local\nResolved 34 packages in 19ms\nPrepared 1 package in 5ms\nInstalled 34 packages in 377ms\n + annotated-doc==0.0.7\n + annotated-types==0.8.0\n + anyio==4.16.0\n + attrs==26.1.0\n + certifi==2026.11.20\n + cffi==2.1.1\n + click==8.5.1\n + cryptography==50.0.2\n + fastapi==0.162.0\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + httpx-sse==0.4.3\n + idna==3.20\n + jsonschema==4.26.0\n + jsonschema-specifications==2025.9.1\n + mcp==1.30.0\n + opentelemetry-api==1.45.2\n + pycparser==3.12\n + pydantic==2.14.4\n + pydantic-core==2.50.5\n + pydantic-settings==2.16.3\n + pyjwt==2.15.1\n + python-dotenv==1.2.4\n + python-multipart==0.0.34\n + referencing==0.37.0\n + rpds-py==2026.9.1\n + smm-local==0.4.0 (from file://<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_local-0.4.0-py3-none-any.whl)\n + sse-starlette==3.7.0\n + starlette==1.10.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.5\n + uvicorn==0.54.0\n + zstandard==0.25.0\n"
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,pathlib,hashlib,json,sys;r=pathlib.Path(importlib.util.find_spec('smm_'+sys.argv[1]).origin).parent.parent;print(json.dumps({n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])}))",
+      "local",
+      "[\"smm_local/__init__.py\", \"smm_local/api.py\", \"smm_local/archive_protocol.py\", \"smm_local/cli.py\", \"smm_local/core.py\", \"smm_local/documents.py\", \"smm_local/federation.py\", \"smm_local/installation.py\", \"smm_local/login_service.py\", \"smm_local/mcp_server.py\", \"smm_local/project_control.py\", \"smm_local/references.py\", \"smm_local/search_merge.py\", \"smm_local/service.py\", \"smm_local/support.py\", \"smm_local/upload.py\", \"smm_local/importers/__init__.py\", \"smm_local/importers/base.py\", \"smm_local/importers/claude_code.py\", \"smm_local/importers/codex.py\", \"smm_local/importers/plugin.py\", \"smm_local/importers/plugin_scope.py\", \"smm_local/importers/registry.py\", \"smm_local/importers/source_io.py\", \"smm_local/importers/zcode_fixture.py\", \"smm_local/static/index.html\"]"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"smm_local/__init__.py\": \"47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842\", \"smm_local/api.py\": \"5f6257e91084d259de6edcb315ddb1db7e8e8ada8d9f293719939381a1205749\", \"smm_local/archive_protocol.py\": \"1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927\", \"smm_local/cli.py\": \"62329fea59ee37567300ab188d30f03670cf8487b34e21a8faf9699ca03ca3fc\", \"smm_local/core.py\": \"a304d3c4c05e7158a9e5a5357177092c96ae683678132bc6379d362a293aa58c\", \"smm_local/documents.py\": \"390880bf58192317846ed1db29f271b9c5f6c7530b3811736634fa7aa4f74d66\", \"smm_local/federation.py\": \"fa7c5c75bf9aacf7f91b98742a7dcd80e6f5716f7954dd210b55a03a80d9a549\", \"smm_local/installation.py\": \"09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784\", \"smm_local/login_service.py\": \"4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0\", \"smm_local/mcp_server.py\": \"0f42aea37d0e5ee915f8e43d1366c5b33318307b1c24db76a20050ae9d0abcf2\", \"smm_local/project_control.py\": \"995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe\", \"smm_local/references.py\": \"362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980\", \"smm_local/search_merge.py\": \"27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b\", \"smm_local/service.py\": \"896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae\", \"smm_local/support.py\": \"90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960\", \"smm_local/upload.py\": \"b2d060a679bddbc97269ecccb1de4cfc9147794794bc6fff204d856b6a3eb006\", \"smm_local/importers/__init__.py\": \"4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91\", \"smm_local/importers/base.py\": \"74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c\", \"smm_local/importers/claude_code.py\": \"03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e\", \"smm_local/importers/codex.py\": \"4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc\", \"smm_local/importers/plugin.py\": \"78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee\", \"smm_local/importers/plugin_scope.py\": \"0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081\", \"smm_local/importers/registry.py\": \"0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0\", \"smm_local/importers/source_io.py\": \"a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577\", \"smm_local/importers/zcode_fixture.py\": \"d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965\", \"smm_local/static/index.html\": \"a3ae667c35923092e22a4ccd06bb31c13ad89f330784b14e942e843301e5a4ff\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/Users/TESTER/.local/bin/uv",
+      "venv",
+      "--python",
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Using CPython 3.12.10 interpreter at: .venv/bin/python\nCreating virtual environment at: <REVIEW_TEMP>/smm-006-packages-6szcudvw/hub\nActivate with: source <REVIEW_TEMP>/smm-006-packages-6szcudvw/hub/bin/activate\n"
+  },
+  {
+    "argv": [
+      "/Users/TESTER/.local/bin/uv",
+      "pip",
+      "install",
+      "--offline",
+      "--link-mode",
+      "copy",
+      "--python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub/bin/python",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_hub-0.4.0-py3-none-any.whl"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Using Python 3.12.10 environment at: <REVIEW_TEMP>/smm-006-packages-6szcudvw/hub\nResolved 16 packages in 5ms\nPrepared 1 package in 3ms\nInstalled 16 packages in 162ms\n + annotated-doc==0.0.7\n + annotated-types==0.8.0\n + anyio==4.16.0\n + click==8.5.1\n + fastapi==0.162.0\n + h11==0.16.0\n + idna==3.20\n + opentelemetry-api==1.45.2\n + pydantic==2.14.4\n + pydantic-core==2.50.5\n + smm-hub==0.4.0 (from file://<REVIEW_TEMP>/smm-006-packages-6szcudvw/wheels/smm_hub-0.4.0-py3-none-any.whl)\n + starlette==1.10.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.5\n + uvicorn==0.54.0\n + zstandard==0.25.0\n"
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub/bin/python",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,pathlib,hashlib,json,sys;r=pathlib.Path(importlib.util.find_spec('smm_'+sys.argv[1]).origin).parent.parent;print(json.dumps({n:hashlib.sha256((r/n).read_bytes()).hexdigest() for n in json.loads(sys.argv[2])}))",
+      "hub",
+      "[\"smm_hub/__init__.py\", \"smm_hub/cli.py\", \"smm_hub/hub.py\", \"smm_hub/hub_admin.py\", \"smm_hub/hub_os.py\", \"smm_hub/projects.py\", \"smm_hub/upload.py\", \"smm_hub/vibeinsight.py\", \"smm_hub/vibeinsight_settings.py\", \"smm_hub/windows_service.py\", \"smm_hub/_archive/__init__.py\", \"smm_hub/_archive/archive_protocol.py\", \"smm_hub/_archive/core.py\", \"smm_hub/_archive/references.py\", \"smm_hub/_archive/support.py\", \"smm_hub/_archive/importers/__init__.py\", \"smm_hub/_archive/importers/base.py\", \"smm_hub/_archive/importers/claude_code.py\", \"smm_hub/_archive/importers/codex.py\", \"smm_hub/_archive/importers/plugin.py\", \"smm_hub/_archive/importers/plugin_scope.py\", \"smm_hub/_archive/importers/registry.py\", \"smm_hub/_archive/importers/source_io.py\", \"smm_hub/_archive/importers/zcode_fixture.py\"]"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"smm_hub/__init__.py\": \"91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2\", \"smm_hub/cli.py\": \"afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8\", \"smm_hub/hub.py\": \"445c50f249476a0348c53a28c5a8686eb5a9905e0952194eed0df08226c983de\", \"smm_hub/hub_admin.py\": \"fa4873017bc81b70e51c80222fdf526c1291edf1687a9850ea58605a7e53e969\", \"smm_hub/hub_os.py\": \"ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43\", \"smm_hub/projects.py\": \"dcfe7d5d3977c572a1369c301e96afbff5dd1ad2e0176fb82ea3191e24bec17a\", \"smm_hub/upload.py\": \"c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7\", \"smm_hub/vibeinsight.py\": \"03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47\", \"smm_hub/vibeinsight_settings.py\": \"c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df\", \"smm_hub/windows_service.py\": \"2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a\", \"smm_hub/_archive/__init__.py\": \"e04298f62bf6978906eb90cf513c9486896b5245de034c58f8864202ef9d3b56\", \"smm_hub/_archive/archive_protocol.py\": \"1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927\", \"smm_hub/_archive/core.py\": \"a304d3c4c05e7158a9e5a5357177092c96ae683678132bc6379d362a293aa58c\", \"smm_hub/_archive/references.py\": \"362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980\", \"smm_hub/_archive/support.py\": \"90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960\", \"smm_hub/_archive/importers/__init__.py\": \"4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91\", \"smm_hub/_archive/importers/base.py\": \"74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c\", \"smm_hub/_archive/importers/claude_code.py\": \"03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e\", \"smm_hub/_archive/importers/codex.py\": \"4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc\", \"smm_hub/_archive/importers/plugin.py\": \"78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee\", \"smm_hub/_archive/importers/plugin_scope.py\": \"0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081\", \"smm_hub/_archive/importers/registry.py\": \"0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0\", \"smm_hub/_archive/importers/source_io.py\": \"a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577\", \"smm_hub/_archive/importers/zcode_fixture.py\": \"d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "documents",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smm documents [-h]\n                     {add,set,sources,files,refresh,remove,search,read} ...\n\n仅本机采集版本，不查询或上传Hub。仅 .md/.markdown/.txt；源正文不改写。保存后明确refresh；查询不会读当前文件。\n\npositional arguments:\n  {add,set,sources,files,refresh,remove,search,read}\n    add                 添加来源（pending）\n    set                 完整替换配置并使旧来源资格失效\n    sources             查看来源id/完整配置、pending/refreshing/ready/partial/failed、真实\n                        计数和错误\n    files               查看已发现文件元信息、ready/failed/missing及原因，不返回正文\n    refresh             明确读取并刷新采集快照；旧版本ref失效，失败后可重试\n    remove              取消来源；独占材料立即退出检索/读取，不删除原文件\n    search              按正文检索本机已采集文档，不扫描当前文件或发送Hub\n    read                按搜索返回的reference准确读取采集版本\n\noptions:\n  -h, --help            show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local.sqlite3",
+      "project",
+      "create",
+      "package project"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"id\": 1,\n  \"name\": \"package project\",\n  \"confirmed\": 1,\n  \"kind\": \"ordinary\",\n  \"conversations\": 0,\n  \"stable_key\": \"723e7dac5053b2d248c7acc4c7b248c7\",\n  \"paths\": [],\n  \"linked_ids\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local.sqlite3",
+      "documents",
+      "add",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt",
+      "--project-id",
+      "1"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"id\": \"53ea36206d704e7f8d125158280dc8ac\",\n  \"path\": \"<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt\",\n  \"kind\": \"file\",\n  \"recursive\": true,\n  \"exclude\": [],\n  \"revision\": 1,\n  \"status\": \"pending\",\n  \"resume_status\": \"pending\",\n  \"refresh_id\": null,\n  \"request_seq\": 0,\n  \"started_at\": null,\n  \"finished_at\": null,\n  \"error\": null,\n  \"counts\": {},\n  \"project_ids\": [\n    1\n  ],\n  \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local.sqlite3",
+      "documents",
+      "refresh",
+      "--source-id",
+      "53ea36206d704e7f8d125158280dc8ac"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"sources\": [\n    {\n      \"id\": \"53ea36206d704e7f8d125158280dc8ac\",\n      \"path\": \"<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt\",\n      \"kind\": \"file\",\n      \"recursive\": true,\n      \"exclude\": [],\n      \"revision\": 1,\n      \"status\": \"ready\",\n      \"resume_status\": \"ready\",\n      \"refresh_id\": \"0f46394435af47068145a10a36cbf8d5\",\n      \"request_seq\": 1,\n      \"started_at\": \"2026-11-22T19:19:09.837692+00:00\",\n      \"finished_at\": \"2026-11-22T19:19:09.839123+00:00\",\n      \"error\": null,\n      \"counts\": {\n        \"ready\": 1,\n        \"failed\": 0,\n        \"candidates\": 1,\n        \"billed_bytes\": 27,\n        \"ignored_entries\": 0,\n        \"ignored_format\": 0,\n        \"ignored_excluded\": 0,\n        \"ignored_links\": 0\n      },\n      \"project_ids\": [\n        1\n      ],\n      \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n    }\n  ],\n  \"message\": \"仅明确刷新读取文件；失败原因见来源和文件状态\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local.sqlite3",
+      "documents",
+      "search",
+      "needle"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"results\": [\n    {\n      \"id\": \"ed7c183787b84358941769ba97b2441c\",\n      \"path\": \"<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt\",\n      \"version\": 1,\n      \"sha256\": \"4b6449007f7b75dd2575ee941f63449e62ffe42fcd44d9850663097fab8d5e03\",\n      \"text_length\": 19,\n      \"captured_at\": \"2026-11-22T19:19:09.838973+00:00\",\n      \"captured_by_source_id\": \"53ea36206d704e7f8d125158280dc8ac\",\n      \"text\": \"needle package 中文😀\\n\",\n      \"start\": 0,\n      \"end\": 19,\n      \"start_line\": 1,\n      \"end_line\": 1,\n      \"source_ids\": [\n        \"53ea36206d704e7f8d125158280dc8ac\"\n      ],\n      \"project_ids\": [\n        1\n      ],\n      \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTNhMmI0MDEyMDBlNGQ0NjkxYTEyZWZkMDg2N2ExMmIiLCJkb2N1bWVudF9pZCI6ImVkN2MxODM3ODdiODQzNTg5NDE3NjliYTk3YjI0NDFjIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjUzZWEzNjIwNmQ3MDRlN2Y4ZDEyNTE1ODI4MGRjOGFjIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7bcafccf0e9600010e59da236c868f67809ef72089516642e70934b8eb7fe29d\",\n      \"bm25_score\": 1e-06,\n      \"rank\": 1,\n      \"snapshot_kind\": \"采集版本（仅本机）\"\n    }\n  ],\n  \"scope\": \"all\",\n  \"effective_project_ids\": null,\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 1,\n    \"sources\": [\n      {\n        \"id\": \"53ea36206d704e7f8d125158280dc8ac\",\n        \"path\": \"<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt\",\n        \"kind\": \"file\",\n        \"recursive\": true,\n        \"exclude\": [],\n        \"revision\": 1,\n        \"status\": \"ready\",\n        \"resume_status\": \"ready\",\n        \"refresh_id\": \"0f46394435af47068145a10a36cbf8d5\",\n        \"request_seq\": 1,\n        \"started_at\": \"2026-11-22T19:19:09.837692+00:00\",\n        \"finished_at\": \"2026-11-22T19:19:09.839123+00:00\",\n        \"error\": null,\n        \"counts\": {\n          \"ready\": 1,\n          \"failed\": 0,\n          \"candidates\": 1,\n          \"billed_bytes\": 27,\n          \"ignored_entries\": 0,\n          \"ignored_format\": 0,\n          \"ignored_excluded\": 0,\n          \"ignored_links\": 0\n        },\n        \"project_ids\": [\n          1\n        ],\n        \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n      }\n    ]\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/local.sqlite3",
+      "documents",
+      "read",
+      "--reference",
+      "r1.eyJhcmNoaXZlX2lkIjoiYTNhMmI0MDEyMDBlNGQ0NjkxYTEyZWZkMDg2N2ExMmIiLCJkb2N1bWVudF9pZCI6ImVkN2MxODM3ODdiODQzNTg5NDE3NjliYTk3YjI0NDFjIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjUzZWEzNjIwNmQ3MDRlN2Y4ZDEyNTE1ODI4MGRjOGFjIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7bcafccf0e9600010e59da236c868f67809ef72089516642e70934b8eb7fe29d"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"id\": \"ed7c183787b84358941769ba97b2441c\",\n  \"path\": \"<REVIEW_TEMP>/smm-006-packages-6szcudvw/输入 文档.txt\",\n  \"version\": 1,\n  \"sha256\": \"4b6449007f7b75dd2575ee941f63449e62ffe42fcd44d9850663097fab8d5e03\",\n  \"text_length\": 19,\n  \"captured_at\": \"2026-11-22T19:19:09.838973+00:00\",\n  \"captured_by_source_id\": \"53ea36206d704e7f8d125158280dc8ac\",\n  \"text\": \"needle package 中文😀\\n\",\n  \"start\": 0,\n  \"end\": 19,\n  \"start_line\": 1,\n  \"end_line\": 1,\n  \"source_ids\": [\n    \"53ea36206d704e7f8d125158280dc8ac\"\n  ],\n  \"snapshot_kind\": \"采集版本（仅本机）\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub/bin/python",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,json,sys;assert importlib.util.find_spec('smm_local') is None;from smm_hub._archive import Archive;d=Archive(sys.argv[1]);a=d.create_project('standalone-A');b=d.create_project('standalone-B');d.merge_projects(a['id'],b['id']);assert [p['name'] for p in d.projects()]==['standalone-B'];print(json.dumps({'independent':True,'projects':d.projects()}))",
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub.sqlite3"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"independent\": true, \"projects\": [{\"id\": 2, \"name\": \"standalone-B\", \"confirmed\": 1, \"kind\": \"ordinary\", \"conversations\": 0, \"stable_key\": \"13a58ec7eb4b16f00e9190ed7808c370\", \"paths\": [], \"linked_ids\": []}]}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "<REVIEW_TEMP>/smm-006-packages-6szcudvw/hub/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "smm_hub.cli",
+      "serve-hub",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: smm-hub serve-hub [-h] [--host HOST] [--port PORT] --token-file\n                         TOKEN_FILE [--tls-cert TLS_CERT] [--tls-key TLS_KEY]\n                         [--state-dir STATE_DIR]\n\noptions:\n  -h, --help            show this help message and exit\n  --host HOST\n  --port PORT\n  --token-file TOKEN_FILE\n  --tls-cert TLS_CERT\n  --tls-key TLS_KEY\n  --state-dir STATE_DIR\n                        读取此目录的 VibeInsight 配置和凭据，默认使用其中的 smm-hub.sqlite3\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "SC4配置/退出及连续资格判据来自SPEC B1/B4/B6/A4；来源set pending、独占材料退出、重叠保留与最后清理都有原文依据。自然设计只笼统写“旧资格立即失效”“一个来源退出不删除其他资格文件”，未为其已认领source-lifecycle-c3写清配置变更/移除时原P单来源、Q单来源与all多来源旧引用的不同预期。实际lifecycle.py:73仅保存P的old（只含a资格），77拒绝这些refs，76/78/79均重新查询取得新ref；从未保存含a+b资格的旧all或原b引用。反例：set a时错误地令所有shared旧引用永久失效，或b随后被移除后又错误借新配置a复活旧all，当前fresh search仍一直返回shared，所有现有断言可全过，却违反B6多来源引用仅沿当次从未失效资格、不借新资格恢复旧引用。与qualification用例的失败/缺失动作不同，这里是规格明确的配置版本变更与移除状态，不能被它替代。最小自然设计补：最初取得P/Q/all的shared旧ref；set a后及a新配置刷新后，原P拒绝而原Q/all沿连续b准确可读；remove b后原Q/all拒绝，当前a新ref仍可读；最后remove a全部退出。随后实现逐ref独立正文/拒绝，不以两份fresh结果相等代替。现有仅首个文件退出正确反例在75/78独立完整集合及77逐P ref会挡；忽略排除one或递归deep会在78集合挡；错误删除剩余a资格在79集合挡；可用正文/FTS未全清理在84-85直接SQL挡。这些有效断言不能覆盖旧all的资格历史。原件stdout/00001-api-001.json显示72行首次a add真实404，尚未到达set/移除/清理/源字节mtime断言；SHA一致、runtime正常。保留真实业务缺失红灯，但候选最早需修订设计；不认领尚缺区分性设计/实现的c3。",
+      "covers": [
+        "source-lifecycle-c2"
+      ]
+    }
+  }
+}

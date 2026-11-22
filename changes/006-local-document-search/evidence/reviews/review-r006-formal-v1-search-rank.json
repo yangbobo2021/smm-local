@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-search-rank 的独立复核通过。已对照 SPEC B5/B6、A5、PLAN §3.3/§4 及 design-r006-v5-sc5，读取 tests/test_document_search.py:9-36 和 document_helpers.py 的实际输入/断言。本次命令仅运行 test_search_rank，2026-11-22T16:20:08.883–09.228Z exit 0，原 stdout 为 1 passed。attachments/00005–00009 中 limit1 返回 file-000，limit50 为独立预期 file-000..049，50个ID去重，两次查询相同且分数有限；正文不含词的 filenameonly 反例为零命中，z-high 位于 a-low 前并有更高相关分。00010–00017 的尾部/边界/长行/中文四目标 search/read 均与 00018 独立夹具原字符串的码点切片相符，窗口不超过2000，未仅比较两个产品响应。已重新计算该正式 result 所列22个 artifacts、89个 bindings 及设计/定义 SHA，全部相符，确认同版目标与正式轮证据，未借用 debug/green 的结果。covers 仅认领本轮已实证分配项。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    }
+  }
+}

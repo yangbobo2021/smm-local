@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-isolation",
+  "target_sha256": "783237f1d4a118295f58729465e66a5ba5c53708023b2e592bcb0cc1d2f12b22",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B5/A7、PLAN §4及测试环境修订、design-r006-v5-sc7，对照重新打开的当前test_document_compatibility.py和pair/Fixture。none/hub/paused三组本轮均真实完成文档add/refresh/search/read/set/refresh/remove，00004/12/20分别200且正文准确docprivateneedle 本机文件 😀。00008/16/24完整本机settings/messages/conversations及所有local_upload/upload_message表逐字段前后相等、远端前后相等、marker后calls0；两独立消息原文为original/second independent，逐来源legacy读与configured_sources/paused断言全部到达。已核with f.client只在网络guard前建立portal，文档业务始终位于拒绝federation._request及全部AF_INET/6新connect的guard内，并真实执行127.0.0.1与203.0.113.1两个拒绝负例，不允许回环Hub连接。stdout3 passed/exit0/stderr空，28 artifacts/48 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "isolation-c1"
+      ]
+    }
+  }
+}

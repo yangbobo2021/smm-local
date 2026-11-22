@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-refresh-remove",
+  "target_sha256": "80599097129bb2deefde793223d1f97666f8ea26376600e80ae2fe93d724b754",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B3/B4/B6/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:60-74。S1/P的独占exclusive与shared、S2/Q的共享正控完整参与。原00006移除后旧请求published:false；第70行释放/join后的完整来源/关联/文件/成员/meta/FTS等于移除快照且仅S2，防止旧发布复活。P查询空、Q仅shared，00011准确needle shared original，source_ids经签名核仅Q/S2原持续资格；00012/13原P两旧ref分别版本/资格失效400，00014forbidden正文空。两适用目标与保留正控全到达，不只首文件。实际1passed/exit0/stderr空，18 artifacts/47 bindings。S2退出后旧all靠S1读的专项由SC3核，不冒称本项执行。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    }
+  }
+}

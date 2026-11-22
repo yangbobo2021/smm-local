@@ -1,0 +1,36 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "0a31158d2e204fcaa5c781dad14b4fa2",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_invalid_total_las0/docs",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "failed",
+      "resume_status": "failed",
+      "refresh_id": "c7a898a5c9574a288777c8bd8aaac2a9",
+      "request_seq": 2,
+      "started_at": "2026-11-22T19:18:50.883447+00:00",
+      "finished_at": "2026-11-22T19:18:50.884537+00:00",
+      "error": "来源超过1000候选或16MiB累计预算",
+      "counts": {
+        "ready": 0,
+        "failed": 0,
+        "candidates": 9,
+        "billed_bytes": 16777217,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

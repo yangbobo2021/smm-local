@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC2扫描判据“按B2生效”准确来自SPEC B2/A2；设计已明确星号/问号/双星零层和多层、显式单文件与根规则，没有场景加码。实际scanning.py:13-15只有**/private.txt、skip?.txt、branch/skip?.txt、cache/，没有任何单星*模式，也没有**匹配两层以上的文件；实现若把*错误地当跨段、把**仅实现零/一层，本用例仍会全过。B2明确定义*单段、**零或多目录段，不能以当前private.txt/sub/private.txt替代这两种会改变预期的边界。23-24只验证显式build/a.txt，未验证B2特许显式隐藏单文件；只对build例外放行、仍拒绝显式.secret.txt会漏过。最小补单星正/反跨段目标、**多层目标及显式隐藏文件正控，并以独立路径集合核对。现有仅首个正确的反例：只扫描root.MD漏掉现有三个合法子文件，在18行完整预期集合首先拦截；只解码首个正确则19行逐命中独立正文拦截；误跟随任一现有链接在30行独有词查询拦截；但上述未出现条件没有对应断言。SC2-platform-files负责真实三平台链接/junction/权限，不能替代这些通配条件，也尚无真实E1，未为其授予passed。原始run.stdout/00001-api-001.json显示15行首次来源POST实际404 Not Found，Fixture.request:52失败；扫描/排除/链接/源mtime断言未到达。SHA已核对，真实业务缺失保留，但候选实现需修订。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

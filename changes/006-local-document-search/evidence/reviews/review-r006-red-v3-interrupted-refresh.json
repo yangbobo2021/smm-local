@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "expected_failure",
+      "reason": "SC6持久中断判据、SPEC B4/B6/A6及PLAN §3.2/§4明确允许用持久refreshing故障注入核共用逻辑，实际平台进程重启另由E1证明。design-r006-v5-sc6要求真正重采改变/新增材料及未变连续资格正控，与原文一致。tests/test_document_concurrency.py:152–173在已成功文件/目录基础上另建独立control来源，157变one并新增added，158–159对文件和目录来源写持久refreshing，162新Archive/Documents实例读回该状态后分别明确refresh。166核完整文件集合，167核one保留ID换版，168逐来源ready，169/170独立核改变/新发现原文，171以独立原串核未变化control旧ref继续可读，172拒变化one旧ref。仅恢复status而不采变化会被169拦，不发现目录新文件被166拦；只第一来源或首文件正确亦不能通过166/168/170；全清旧资格会被171拦；响应两边同错仍有独立文本预期。等价来源样本可选，不把故障注入冒充OS崩溃。已读match-r006-v4-sc6和red-r006-v3-interrupted-refresh原收据/绑定/日志/api-001，全部SHA核一致。真实首失败在152行合法add返回404 Not Found、helper:52断言失败；尚未初刷或写refreshing，更未执行新实例/恢复/正文与引用检查。基线缺B1文档入口造成可信红灯，非导入或环境故障；设计与实现有效，expected_failure，TDD covers为空，平台未由本项预判。",
+      "covers": []
+    }
+  }
+}

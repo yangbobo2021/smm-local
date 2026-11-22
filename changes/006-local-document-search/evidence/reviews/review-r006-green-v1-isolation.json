@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "已从定义000002 SC7反查SPEC B1/B4/B5/A7、PLAN §4、design-r006-v5-sc7及match-r006-v4-sc7。无Hub/配Hub/对话暂停、两Agent启停状态和归档/上传隔离均有依据，自然设计与实现对应。tests/test_document_compatibility.py:30–60三参数分别准备codex/claude两个独立会话，其中一停用一启用；已实际读test_005_contracts.py的pair/add_local/connect，Hub夹具为隔离真实API进程内请求。41保留完整settings/messages/conversations及上传表与远端，43–48拦federation请求和IPv4/IPv6出站，50–53文档全周期并独立正文正控，54全量状态比较，55–59逐会话独立正文/source、来源开关与暂停断言。仅首Agent正确会由54/57/58拦；两会话同错首正文被57第二独立预期拦；三动作前模式分别执行，额外等价目标可选。产品api.py:318–348直接调用Documents，documents.py仅本机SQLite及明确刷新文件，不经federation。red-r006-v3-isolation三参数首合法add404及review-r006-red-v3-isolation已核；green-r006-v1-isolation复用完全相同test_bindings/声明/命令，全部artifacts和当前bindings SHA吻合。绿灯run.stdout真实3 passed/exit0；三isolation-complete-state原件逐模式before==after、remote_before==remote_after，出站新增0；两独立message正文都原样保留，codex停用及paused模式sync_paused=true未改变。所附回归原stdout 5 passed/exit0，四项旧引用契约和两Agent数字ID/ref、九层来源CLI帮助断言已读。无有据必测缺口；同版绿灯及附带回归passed，不预判真实网络平台、用户入口、正式执行或R006交付。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2与SC2，递归/非递归、默认/自定义排除、显式隐藏单文件/目录及链接拒绝的自然设计有效。tests/test_document_scanning.py:7起从独立五路径/全文字面值验证全部命中与逐文件read；包含所有默认目录、隐藏、未知格式、*不得跨段、?、**零/多层及尾斜杠；set非递归只剩root.MD，另加build文件/.secret/.hidden目录可见；链接目标有独有marker，检索必须为空，链接根add须4xx，所有原件SHA/mtime不变。反例：只索引首个正常文件被五项完整集合拦截；一律排隐藏使显式来源失效被对应搜索拦截；跟随目录/文件链接被escapeuniquemarker零命中拦截。原始00027-scan-expected.json与API逐文件正文、00025-rejected-024.json根链接400支撑，产品documents.py:_scan/_glob按相同业务边界实现。这里只是本机共享测试，不认领Windows junction或三平台原件项。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-scan-scope与新red-r006-ci-v1-scan-scope全部test_bindings及实际命令相同；实际重读红灯POST /api/documents/sources 404失败及review-r006-ci-red-v1b意见，逐一把36个product_bindings与git f797fe843430b48faf379cd76b4ae18fd52f5c64原字节核对无差异。provenance.json和当前git diff确认已恢复f896产品。test_scan_scope本体未改，文件摘要随NUL样例合法改名而更新。当前绿灯1 passed/exit0，27份新附件的五路径全文/根链接400与原件指纹断言成立。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

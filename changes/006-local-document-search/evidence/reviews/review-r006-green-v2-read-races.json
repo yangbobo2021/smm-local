@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "依据SPEC B2/B4/A2及PLAN3.2，预算后变化不得发布、枚举失败整源撤资格和下一轮恢复设计有效。tests/test_document_limits.py:test_read_races五参数先建racy与独立control快照，再于_read_file入口屏障把单个增2097153或9个各增2097152；fstat屏障分别改正文/替换路径；scandir实际抛枚举异常。每分支断言屏障发生、partial精确n失败/1ready且唯一正文controlneedle unchanged，旧racy引用逐一4xx；枚举failed时搜索空且不标missing。下一轮按新总量failed，然后恢复原字节仍不得复活已失效ref。反例：只拒首个变动文件由9失败计数、完整命中集合和逐ref拒绝拦截；把正控也撤销由独立控制全文拦截；新ref等于旧ref假成功由bad断言拦截。原始read-race-observation五份记录真实屏障事件/大小/状态，API原文/4xx相符。documents.py:_read_file比较预检/fd/路径身份大小mtime与有界读，_scan枚举错误不发布，支持共享逻辑结论，不冒称真实平台崩溃。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-read-races与red-r006-v3-read-races全部test_bindings及实际命令相同；旧红灯为来源API404，当前新绿灯5 passed/exit0。重读本轮98份原始附件，before-open-single/total实际事件after-budget-before-open分别partial失败1/9；during-read/path-replace实际fstat屏障各partial失败1；enumeration-error整源failed，control全文、逐旧ref4xx与恢复断言均相符。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

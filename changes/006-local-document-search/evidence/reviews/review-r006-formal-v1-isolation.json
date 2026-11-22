@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-isolation 独立复核通过。SPEC B1/B5/边界约束与A7、PLAN §4 A7、design-r006-v5-sc7 已对照 tests/test_document_compatibility.py:30-60、document_helpers 与 test_005_contracts.py:pair/add_local/connect 的真实合成归档/Hub夹具。本次 none/hub/paused 三参数在2026-11-22T16:20:15.247–15.874Z exit 0，stdout 3 passed。文档add→refresh→project-search→read→set→refresh→remove均在Hub请求拒绝哨兵及IPv4/IPv6 socket连接拒绝哨兵内执行，读取准确为 docprivateneedle 本机文件 😀；00008/00016/00024的本机settings/messages/conversations和适用上传全表、远端对话状态前后完全相等，出站计数全0。两个独立Agent来源一启用一停用，源码逐来源读取其各自独立正文并比较全部配置来源及暂停状态，非只验证首条。已独立重核三组完整状态相等和两条原文集合；28 artifacts、90 bindings、定义/设计SHA全部重新计算一致。结果是本批自动隔离范围的正式证据，不据此宣称真实平台/三系统CI已完成。",
+      "covers": [
+        "isolation-c1"
+      ]
+    }
+  }
+}

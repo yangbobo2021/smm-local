@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B1/B4/B6/A4、SC4，配置移出、重叠资格保留及最后来源清理的自然设计有效。tests/test_document_lifecycle.py:79–105先A目录P含one/deep/shared、B单文件Q取P/Q/all旧ref；A完整set改Q、排one且非递归后pending/P空，逐P旧ref拒绝，而旧Q/all借持续B仍读固定shared；刷新A后旧P仍拒绝；取新all再移B，旧Q/all拒绝但新all沿新A可读；最后移A sources/search皆空、最后ref拒绝，数据库可用正文与FTS均0，三源文件SHA/mtime逐一不变。反例：只使首P文件退出被old.values逐一4xx拦截；借新A复活旧all由移B后旧all4xx拦截；只改响应未清实际索引由SQL计数和search空拦截。34份API原件及00034-source-lifecycle.json保存旧/新ref与源指纹，400资格/版本拒绝及成功needle shared符合预期。documents.py:set/remove/_prune与read按引用原资格判定，支撑共享实现结论。 同版TDD：red-r006-v3-source-lifecycle原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-source-lifecycle与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

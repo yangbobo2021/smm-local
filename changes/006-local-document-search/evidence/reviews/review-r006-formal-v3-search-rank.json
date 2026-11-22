@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-search-rank",
+  "target_sha256": "79c3e0116ce9dd0179374087fe7f42e40008f939c1f6ebe4b24f2eb099ebd0f1",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本次仅正式execute-r006-v3-search-rank复审。重新核当前a66deeb的documents.py:381-395保留lower.find语义并将展开后偏移映回原码点，当前runtime-product-v3、match-v7和manifest-v6相符；未复用v2运行绑定。SPEC B5/B6/A5、PLAN §3.3/§4及末段Unicode修订、design-r006-v5-sc5有原文依据。实际tests/test_document_search.py:9-38的51文件完整路径/去重/相关性、六个独立special原串断言均到达，stdout1 passed/exit0/stderr空。当前正式00010/11：长s前缀中的ſ不等价抢位，ASCII stopuniquemarker原位置3400，窗口[3200,3421)精确原串切片且含查询；00012/13：3000个İ后的marker原位置3001，窗口[2801,3026)精确225码点，未用lower后的6001错切原文。另00005–00007完整000..049稳定、00008文件名反例零命中、00009高相关z-high先于a-low，00014–00021尾/边界/长行/中文及读取逐独立special切片核实。26 artifacts/47 bindings及本TC实现摘要全部重新计算一致。对应本轮green-v3-search-rank旧引用regression实际4 passed/exit0且原stdout摘要核实；full-regression-v4全部绑定吻合，原XML302项/0失败/1跳过，四旧引用均通过。正式本身没有XML/附回归，不将其余旧TDD冒称本轮23项绿灯；本意见不涵盖平台/CI或R006最终交付。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    }
+  }
+}

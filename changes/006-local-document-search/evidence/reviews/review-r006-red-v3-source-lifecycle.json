@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "expected_failure",
+      "reason": "SC4判据/design-r006-v5-sc4来自SPEC B1/B4/B6/A4及PLAN4，配置替换、来源移除和多来源连续资格自然设计准确，没有增加契约。match-r006-v4-sc4、manifest-v3、tests/test_document_lifecycle.py:79-105与红灯冻结source及运行绑定一致，原始artifacts SHA逐项一致。81-88行先建两独占目标及重叠shared，A配置变更pending后P/all旧P资格逐ref拒绝、Q仅shared；只撤首个独占文件会在87完整集合或88逐旧ref失败。84/89行旧Q/all在A pending后沿连续B可读；本轮90-92行A新配置刷新完成后再次读old_q及old_all精确needle shared，已拦截“刷新A误撤未中断B旧资格但fresh查询仍正确”的前轮反例。93取得新A+B引用，94-97移除B后旧Q/all拒绝而新引用沿A继续读，98-103最后来源移除后无来源/无查询且最终ref拒绝、正文/FTS清理。两个产品响应同错或误指独占文件会在89/91/97独立shared文本失败，104源指纹不变。已区分pending/新配置ready/移除B/最后移除A各会改变预期的动作前状态，同条件更多目标可选。原始tdd-red/red-r006-v3-source-lifecycle/TC-006-source-lifecycle/run.stdout及00001-api-001.json显示82行首次A add真实404 Not Found，Fixture.request:52首先失败，属于SPEC B1新增入口缺失，非环境/测试错误。B准备、刷新、set、引用连续/拒绝、移除和清理全部未执行。expected_failure确认候选有效及该可信红灯，不把后续或任何人工平台项当作通过。",
+      "covers": []
+    }
+  }
+}

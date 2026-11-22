@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-overlap-order",
+  "target_sha256": "89fb8fc0f32803748d33a4a1041b465e4f65aaf299e6fb591e0f1dc51afac7b0",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B3/B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:77-99。S1前置pending/ready两组、one/two两个路径均实际执行，S2新请求先发布，释放晚到S1后第91行全部documents仍等于新winner；第92-97行逐P/Q/all、逐两目标核独立newwinner正文/S2采集者，ready还核ID保留/版本更新。原00017/35 winner及final重新核完整两文件，00015/33旧词为空。12份read逐解码原引用核source_ids准确：P只S1、Q只S2、all两源，P读取的captured_by_source_id仍S2而不伪改为S1；两文件及两个状态都符合文件级新版本与资格来源分离。原00006–14为v1、00024–32为v2两个新正文。stdout2passed/exit0/stderr空，39 artifacts/47 bindings，无只检首文件或只比较两个同错响应。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    }
+  }
+}

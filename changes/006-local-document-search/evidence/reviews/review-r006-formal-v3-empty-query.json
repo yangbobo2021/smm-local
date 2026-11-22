@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-empty-query",
+  "target_sha256": "337f567db11760bd6f723d621a8f7271003aba3aa8b73404a3c05376f253fcbb",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B5/B7、A5、PLAN §4、design-r006-v5-sc5，对照当前tests/test_document_search.py:108-133。00001无来源合法非空不存在词200空集/索引0；00004两个pending真实列出。00005–15空白/无词、非法scope、缺失/不存在project、limit0/-1/51/小数/布尔分别明确400/422，诊断含义相符。合法查询00017 ready+pending对应1成功文件，00019 partial+pending、00020 refreshing+pending、00022 failed+pending均0且空集；failed保留文件不存在原因，另一个来源一直pending。覆盖完整ID→状态及独立计数断言实际到达，未把非法空查询或未处理当全部查询完成。stdout1 passed/exit0/stderr空，27 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

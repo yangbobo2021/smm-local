@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "expected_failure",
+      "reason": "SC6移除判据由SPEC B4/A6“移除来源…旧任务不能复活它”及B3仍有效来源保留共享文件推出；自然设计与实际exclusive/shared两种动作前资格差异相符。tests/test_document_concurrency.py:62-74同时建立独占和共享两文件，发布前阻塞one，68删除one后取得完整持久状态，70在释放后比较document_state全表并独立要求来源集合仅two；71逐P/Q集合、72独立shared原串、73对P旧引用逐一拒绝，74禁止晚到新词。推演只处理首exclusive正确而shared被晚到更新：70状态变化首先拦截，72原始shared全文亦拦截；若两快照同错把shared删掉，71独立Q集合拦截；若删源后又复活来源或FTS，70独立来源集合/完整表比较及74新词断言拦截。该分配项的保留/移除状态均有断言，增加同条件ID为可选。原始red收据、request、stdout/stderr、api-001及绑定文件已核SHA；63行合法目录add实际404 Not Found，helper:52断言失败；当前API无文档入口，故为真实能力缺失，不是测试屏障/线程/环境错误。刷新、删除及后续状态断言均未到达；covers仅认领已审设计实现有效范围，不声称执行通过。",
+      "covers": []
+    }
+  }
+}

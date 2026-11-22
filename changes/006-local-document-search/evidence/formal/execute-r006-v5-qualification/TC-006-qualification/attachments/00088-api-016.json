@@ -1,0 +1,40 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "c71cae1fa43d47e7b654c8801a340ae1"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "c71cae1fa43d47e7b654c8801a340ae1",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1009/test_qualification_missing_0/docs/shared.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "failed",
+        "resume_status": "failed",
+        "refresh_id": "535bc8722fbf49e0891c292f69ca0809",
+        "request_seq": 6,
+        "started_at": "2026-11-22T19:18:56.236619+00:00",
+        "finished_at": "2026-11-22T19:18:56.237499+00:00",
+        "error": "[Errno 2] No such file or directory: '<REVIEW_TEMP>/pytest-of-boboyang/pytest-1009/test_qualification_missing_0/docs/shared.txt'",
+        "counts": {
+          "ready": 0,
+          "failed": 0,
+          "candidates": 0,
+          "billed_bytes": 0,
+          "ignored_entries": 0
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

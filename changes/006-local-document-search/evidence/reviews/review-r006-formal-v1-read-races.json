@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "对照SPEC B2/B4/B6、A2及PLAN 3.2屏障方案，独立读本次真实命令.venv/bin/python -m pytest -q tests/test_document_limits.py::test_read_races；16:20:03.143至16:20:03.691Z退出0，stdout 5 passed、stderr空。test_document_limits.py:99-159在已成功快照后，_read_file前屏障真实把单文件变2097153字节或九文件各2097152字节；os.fstat屏障触发读中改写/路径替换，scandir触发枚举异常，events非空断言防止未触发通过。正式00010/00034/00060/00076/00092分别保存事件和真实大小/来源状态；对应00004/00020/00054/00070为partial，只有z-control原文可查且旧正控ref可读，全部受影响原ref逐一400；00035下一次总量18874391变整源failed且00037正控退出；00086枚举错误为整源failed，00088零命中、00089文件状态不误标missing、00090/91旧ref400。后续实际恢复均ready并保留失效旧资格拒绝；依据为完整代码断言与每分支后段响应，非仅status。全部102个artifacts/89个bindings SHA重算一致，定义000002/设计v5-sc2/本次测试产品文件同版。认领分配read-races-c2/c4；确定性OS故障/屏障与真实平台人工验证明确区分。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

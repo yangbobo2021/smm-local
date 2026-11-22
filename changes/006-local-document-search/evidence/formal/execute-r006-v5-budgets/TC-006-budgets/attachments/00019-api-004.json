@@ -1,0 +1,41 @@
+{
+  "method": "POST",
+  "path": "/api/documents/refresh",
+  "request": {
+    "source_id": "e5b68676efc14f30818102807806b2bd"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "sources": [
+      {
+        "id": "e5b68676efc14f30818102807806b2bd",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "partial",
+        "resume_status": "partial",
+        "refresh_id": "22c427ccf91d4c9789e6a6e98278f21b",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:18:49.274026+00:00",
+        "finished_at": "2026-11-22T19:18:49.275065+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 1,
+          "candidates": 2,
+          "billed_bytes": 1,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  }
+}

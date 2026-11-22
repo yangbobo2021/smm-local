@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "expected_failure",
+      "reason": "已实际读取AGENTS.md、006 SPEC B1/B2/A2、PLAN及000002定义SC2，并核对design-r006-v5-sc2和match-r006-v5-sc2。test_scan_scope本体与f89623b逐字相同，本轮仅同文件decode样例改名；递归/非递归、默认与自定义排除、显式单文件/隐藏目录、Mac链接负例、独立完整路径集合和源SHA/mtime断言均保留。red-r006-ci-v1-scan-scope/TC-006-scan-scope/run.stdout在test_document_scanning.py:15添加来源时进入document_helpers.py:52业务断言，响应404 {detail: Not Found}，附件00001-api-001.json对应POST /api/documents/sources，退出1；后续扫描断言未执行，不能当扫描已通过。独立将36个product_bindings逐个与git f797fe843430b48faf379cd76b4ae18fd52f5c64的src字节SHA比较，全部一致；全部artifact摘要及当前测试绑定一致；work/ci-test-repair-baseline-provenance.json与恢复备份/当前37个src文件均逐字匹配f89623b。失败因此来自旧产品缺少B1规定的文档入口，非导入/环境故障，认可预期红灯；此意见不预判最终Windows CI。",
+      "covers": []
+    }
+  }
+}

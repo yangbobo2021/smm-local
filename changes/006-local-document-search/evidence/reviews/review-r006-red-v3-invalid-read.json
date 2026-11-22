@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "expected_failure",
+      "reason": "SC5第三判据、SPEC B6/A5与design-r006-v5-sc5一致，签名/档案/版本/资格及非法范围拒绝均有依据；配置和连续资格生命周期另由SC4专项负责。tests/test_document_search.py:72–103准备两个独立正文及另一档案，75拒真实跨档案ref；78核原payload目标，80–92逐个只改档案/文件/版本/kind及来源id/revision/qualification，保留原签名，覆盖合法外观与无效值。若只检查首字段或错误目标，后续循环请求仍会揭露；93–94逐拒负数、反序、空区间、超长、bool/小数，95及103分别以独立alpha原串核原/新ref正控，避免所有读请求一概拒绝而全过；99拒同档案真实对话ref，102拒配置已变旧ref。两个响应同错正文首先被95独立原串断言拦截，已有目标和状态差异充分，额外等价目标可选。match-r006-v4-sc5及red-r006-v3-invalid-read的收据、当前与保存测试源、全部绑定及artifacts摘要已核一致。真实首失败在73行合法add，原00001-api-001.json显示POST /api/documents/sources返回404 Not Found，run.stdout定位helper:52；stderr为空。未执行refresh/search/任何篡改或范围拒绝及正控，不声称安全性已通过。当前API无文档入口，为B1新能力缺失，非测试/环境故障；有效候选给expected_failure，covers为空。",
+      "covers": []
+    }
+  }
+}

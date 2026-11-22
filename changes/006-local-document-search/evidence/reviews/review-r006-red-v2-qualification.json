@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "expected_failure",
+      "reason": "SC4/design-r006-v5-sc4来自SPEC B6/A4/A6，无变化连续资格与失败/缺失恢复的不同预期均有依据。v1b遗漏的正常无变化刷新已在tests/test_document_lifecycle.py:45-48补对one/two明确refresh后逐P/Q/all旧ref精确可读且版本不变；若每次成功刷新重置连续资格会在47行失败，已闭合c1。file/source/missing三种不同前置中断由54-63参数化分别触发，错误保留旧P资格64行拒绝会失败；误撤未失败Q/all65行独立needle qualification会失败；P恢复后借新资格复活旧ref68行失败；全部原资格消失后借replacement复活任何旧ref75行逐一失败。两响应同错正文仍被65/69的独立字面预期拦截，control独立文件76行保留正控，不只比较fresh结果一致。原始red-r006-v2-qualification/TC-006-qualification/run.stdout及3个api-001附件显示三个failure参数均在43行首次one add实际404，后续正常刷新、故障注入、恢复及资格断言全部未到达。所列artifacts SHA一致，当前绑定与match-r006-v3-sc4一致，src未改。自然设计和实现已落实首轮缺口；expected_failure仅是基础来源能力尚缺产生的真实红灯。",
+      "covers": []
+    }
+  }
+}

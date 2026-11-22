@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-project-maintenance",
+  "target_sha256": "73fed202718fb1cfa6a9b6d4fa1db469bd800f271ccf744987247606fbe27ef8",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B3/A3、PLAN §3.1/§4 A3、design-r006-v5-sc3与tests/test_document_projects.py:28-46逐项对照。stdout 1 passed、stderr空、exit 0。00001/00002来源分别[P]及[P,Q]；00004–00006实际rename后原P范围仍为one/both、绑定身份仍P。实际merge后00007/00008两来源均唯一[Q]、00009 Q两文件保留且版本不变；00010/00011原两文件引用均400资格失效。00012–00017配置集合在map_path到G前后、禁止普通/全局混并前后完全相同，G查询空且两来源ready；pytest实际执行ValueError断言，不能把未记录API请求误称为API合并调用。本次所有search原results路径/ID去重及payload文档/版本/来源对应已另核。21份artifacts、47份bindings及设计SHA重新计算一致。正式只目标selector，无XML/附加回归，不沿用v1意见。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    }
+  }
+}

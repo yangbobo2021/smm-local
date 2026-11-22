@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC4连续资格判据准确来自SPEC B6/A4/A6；设计明确正常无变化刷新不撤销连续资格、file/source/missing中断、单来源与all引用的区别，没有新增行为。实际lifecycle.py:34-66对三类中断、同字节恢复、原P与原Q/all、所有原资格消失后新来源等都有区分性检查：只处理P第一引用而错误拒绝Q或all，55行独立正文会挡；P恢复后复活旧ref在58行挡；两响应同错正文也会在55/59的独立needle qualification挡；新的来源误救旧all在65行逐ref拒绝挡。缺口是分配给本TC的qualification-c1及自然设计“正常无变化刷新”没有实际对应动作。37行只有首次refresh；56行是在one资格已失败后恢复，不是原资格从未中断的无变化刷新；three参数都不刷新从未失效的two后验证oldq。因此“每次正常成功refresh也换掉连续资格，但失败恢复能正确建新资格”的错误能通过本TC全部断言。TC-006-version-lifecycle另有场景级正例，但不能替代本TC已认领c1的实际实现。最小在失败前对one/two正常无变化refresh，独立核版本不变且原P/Q/all ref逐一精确可读；既有三个失败状态保留。无需增加只更换文件名的等价样本。原件3参数run.stdout与3个api-001附件全部在37行首次one add实际404；三类失败注入、恢复和连续资格检查尚未到达。原件SHA一致、runtime正常，业务缺失是真红灯但候选最早需补实现；covers仅认领已由设计及代码对应支撑的c3，不认领缺实际动作的c1。",
+      "covers": [
+        "qualification-c3"
+      ]
+    }
+  }
+}

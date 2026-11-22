@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-overlap-version",
+  "target_sha256": "26887cb2ecb003d720c127fff95e23144ed0b293ee1b494a63d10276810a3e81",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "当前v3正式执行独立重审：SPEC B3确定时间线/B4/A3、PLAN §4 A3和当前test_overlap_version三个分支全断言逐项核对。17:55:56.221–56.852Z exit0、stdout3 passed、stderr空，155 artifacts/47 bindings与设计摘要现字节一致，产品绑定documents87e25466…（a66deeb）。本轮67次search/34次read/18次reject全量解析，所有结果原路径/ID唯一，签名payload逐hit文档版本/source集合一致，正文SHA独立重算。00053/00107/00151分别remove/failed/continuous真实时间线：同文档v1→v2时P资格S1、Q资格S2、all两者且皆精确needle v2；S2退出/失败后旧P/all仍v2、Q空且旧Q拒绝；S1刷新v3后旧v2均失效，continuous的Q也精确v3。退出两分支最后S1失败仅control/v1保留，连续分支shared/v3及control保留，无旧文回退。失败为_scan注入，未当平台证据。正式仅该selector、无XML/额外回归，不沿用旧版passed或作R006总判定。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

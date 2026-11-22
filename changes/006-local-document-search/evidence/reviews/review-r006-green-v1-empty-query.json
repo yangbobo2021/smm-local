@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "已核SC5、SPEC B5/B7/A5、PLAN §4及design-r006-v5-sc5/match-r006-v4-sc5；非法输入明确拒绝、合法零命中同时呈现真实覆盖为原文要求，设计不增加行为。tests/test_document_search.py:106–131从无来源、两个pending、ready+pending、partial+pending、refreshing+pending、failed+pending逐动作前状态断言独立来源id→状态与文件数；持续pending第二来源使仅首来源正确在114/121/124/126/130完整映射处失败；109/114/120/123/127的独立0或1预期防两响应同错。115–118逐拒空/空白/无词法项、非法scope、项目缺失/不存在及limit0/-1/51/小数/bool，合法零命中正控防一概拒绝。红灯red-r006-v3-empty-query原日志首合法search404，独立review-r006-red-v3-empty-query一致；green-r006-v1-empty-query复用相同测试绑定/声明/命令，全部artifacts与当前绑定SHA已核。绿灯run.stdout实际1 passed/exit0，原附件api-001无来源覆盖空，zero-hit-states逐状态为文件数0/1/0/0/0并持续保留pending，非法输入400/422且错误含义明确；合法查询均200空结果。产品documents.py:360–390验证词法输入/limit并按同一事务构造有效成员和coverage。所附regression.stdout实际5 passed/exit0，对应四项旧引用及兼容用例的两Agent旧数字ID/ref与九层来源帮助断言；已核实际原日志及测试，不依status推定。没有有据必测缺口；同版绿灯及所附回归passed，等价状态样本可选。正式轮、人工平台/用户发现和R006交付不在本意见。",
+      "covers": []
+    }
+  }
+}

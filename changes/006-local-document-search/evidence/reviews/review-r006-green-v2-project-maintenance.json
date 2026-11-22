@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "passed",
+      "reason": "依据SPEC B3/A3与SC3，改名保持身份、合并迁移/去重、路径映射不推断与普通/全局混并拒绝的自然设计有效。tests/test_document_projects.py:test_project_maintenance先使one(P)、both(P/Q)均ready，改P名后P完整命中集合保留，one仍P；merge后两个来源分别检查project_ids==[Q]且Q完整集合正确，所有原P ref拒绝；map_path到G后整个sources前后相同且G无命中；非法混并抛ValueError后来源配置/ready均保留。反例：只迁移首来源被both.project_ids断言拦截，迁移增加重复Q被精确[Q]拦截；借路径映射改文档归属被sources全量比较和G空集合拦截。17份API原件显示改名前后材料、合并两来源Q名单及两旧ref400资格失效；core.py:merge_projects对每来源转移并去重、revision递增，未导入Local模块，map_path无文档推断，符合断言。本项不替代独立Hub发行包验证。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-project-maintenance与red-r006-v3-project-maintenance全部test_bindings及实际命令相同；旧红灯来源API404，当前新绿灯1 passed/exit0。当前17份API原件分别保留两来源绑定迁移后[Q]、P原引用400当次来源资格失效；自然设计和实际测试均对one及both精确检查迁移、去重与后续ready，路径映射/非法混并前后全量sources比较保留。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

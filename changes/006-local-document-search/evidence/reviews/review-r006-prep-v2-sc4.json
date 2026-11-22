@@ -1,0 +1,28 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B3/B4/A4、SC4，自然设计把两独立文件在无变化、编辑、回旧字节及移动/删除状态分别核对有效。tests/test_document_lifecycle.py:7–37先完整两文件集合，逐文件read独立原文；不变刷新ID/version相等且旧ref可读；物理改字节但未刷新仍读原快照并有captured_at；刷新后每文件同ID新version/新全文且旧ref4xx；回旧字节版号不属前两版且两代ref均拒绝；移动生成新ID、删另一文件后只留moved，全部旧ref拒绝，moved全文明确等于原one内容。反例：只更新首个文件被updated循环逐文件断言拦截；两次读取同错文件被文件名拼接独立正文拦截；sha决定旧版本复活被version不在旧集合及旧ref4xx拦截。29份API附件原文显示两文件版本1→2→3、moved新ID版1及旧ref400，与documents.py:_publish按文件递增版本、不猜移动身份和read版本核验一致。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc4本TC全新原始日志1 passed/exit0。本轮API原件重核两文件1→2→3及移动新身份、file/source/missing三资格状态的400和持续资格原文、配置移出/重叠保留/最后来源清理相符。自然设计v5仍由SPEC B3/B4/B6/A4推出，match-v5精确源码选段与当前测试一致；既有逐目标、同错与前态反例拦截点有效。全部本TC分配检查实际到达，完整认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    },
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "依据SPEC B6/A4、SC4，file/source/missing三个会中断资格的状态及持续资格多来源设计有效。tests/test_document_lifecycle.py:40–76初始同路径S1/P、S2/Q加独立control，取得P/Q/all ref，不变刷新逐ref仍可读且version相同；分别注入单文件拒读、S1扫描失败或物理缺失，P旧ref即拒绝、Q/all固定全文可读；同配置同字节恢复后version相同但P旧ref仍拒绝；移除全部原资格后新来源不能使任一旧ref复活，control逐字可读。反例：用另一未包含来源冒充P资格被oldp拒绝拦截；一律作废所有ref被Q/all固定全文拦截；同字节恢复沿旧资格被第二次oldp拒绝拦截。108份原始API附件与3参数日志显示恢复内容仍version1、旧资格400、连续资格原文needle qualification/control一致；documents.py:_publish资格代次和read来源/revision/qualification核验支持结论。等价更多标识样本为可选补测。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc4本TC全新原始日志3 passed/exit0。本轮API原件重核两文件1→2→3及移动新身份、file/source/missing三资格状态的400和持续资格原文、配置移出/重叠保留/最后来源清理相符。自然设计v5仍由SPEC B3/B4/B6/A4推出，match-v5精确源码选段与当前测试一致；既有逐目标、同错与前态反例拦截点有效。全部本TC分配检查实际到达，完整认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    },
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "依据SPEC B1/B4/B6/A4、SC4，配置移出、重叠资格保留及最后来源清理的自然设计有效。tests/test_document_lifecycle.py:79–105先A目录P含one/deep/shared、B单文件Q取P/Q/all旧ref；A完整set改Q、排one且非递归后pending/P空，逐P旧ref拒绝，而旧Q/all借持续B仍读固定shared；刷新A后旧P仍拒绝；取新all再移B，旧Q/all拒绝但新all沿新A可读；最后移A sources/search皆空、最后ref拒绝，数据库可用正文与FTS均0，三源文件SHA/mtime逐一不变。反例：只使首P文件退出被old.values逐一4xx拦截；借新A复活旧all由移B后旧all4xx拦截；只改响应未清实际索引由SQL计数和search空拦截。34份API原件及00034-source-lifecycle.json保存旧/新ref与源指纹，400资格/版本拒绝及成功needle shared符合预期。documents.py:set/remove/_prune与read按引用原资格判定，支撑共享实现结论。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前debug-r006-v2-sc4本TC全新原始日志1 passed/exit0。本轮API原件重核两文件1→2→3及移动新身份、file/source/missing三资格状态的400和持续资格原文、配置移出/重叠保留/最后来源清理相符。自然设计v5仍由SPEC B3/B4/B6/A4推出，match-v5精确源码选段与当前测试一致；既有逐目标、同错与前态反例拦截点有效。全部本TC分配检查实际到达，完整认领。只准许当前候选正式重执行，不预判平台/CI/交付。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

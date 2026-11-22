@@ -1,0 +1,97 @@
+{
+  "pattern": "excluded/**/",
+  "excluded_root": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/excluded",
+  "zero_result": {
+    "results": [],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 4,
+      "sources": [
+        {
+          "id": "cb93f7da39974e9b9f60edd92cef455f",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [
+            "excluded/**/"
+          ],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "081b067e6cbb475f9820c69ad013c90e",
+          "request_seq": 1,
+          "started_at": "2026-11-22T19:24:11.634599+00:00",
+          "finished_at": "2026-11-22T19:24:11.637288+00:00",
+          "error": null,
+          "counts": {
+            "ready": 3,
+            "failed": 0,
+            "candidates": 3,
+            "billed_bytes": 6130,
+            "ignored_entries": 2,
+            "ignored_format": 0,
+            "ignored_excluded": 1,
+            "ignored_links": 1
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "a6a760fcb345419fa0b404aa65285855",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+          "request_seq": 2,
+          "started_at": "2026-11-22T19:24:11.638343+00:00",
+          "finished_at": "2026-11-22T19:24:11.639295+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 19,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            2
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  },
+  "source_config": {
+    "id": "cb93f7da39974e9b9f60edd92cef455f",
+    "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [
+      "excluded/**/"
+    ],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [
+      1
+    ],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

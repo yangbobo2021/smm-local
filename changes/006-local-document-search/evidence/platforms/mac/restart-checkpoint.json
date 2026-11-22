@@ -1,0 +1,651 @@
+{
+  "sources_before": [
+    {
+      "id": "cb93f7da39974e9b9f60edd92cef455f",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [
+        "excluded/**/"
+      ],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "6d7813ba1373401298570a07a2ef39fc",
+      "request_seq": 9,
+      "started_at": "2026-11-22T19:24:25.283902+00:00",
+      "finished_at": "2026-11-22T19:24:25.286550+00:00",
+      "error": null,
+      "counts": {
+        "ready": 4,
+        "failed": 0,
+        "candidates": 4,
+        "billed_bytes": 6107,
+        "ignored_entries": 2,
+        "ignored_format": 0,
+        "ignored_excluded": 1,
+        "ignored_links": 1
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "a6a760fcb345419fa0b404aa65285855",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+      "request_seq": 2,
+      "started_at": "2026-11-22T19:24:11.638343+00:00",
+      "finished_at": "2026-11-22T19:24:11.639295+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 19,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        2
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ],
+  "files_before": [
+    {
+      "source_id": "a6a760fcb345419fa0b404aa65285855",
+      "relative_path": "other.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "acfc5ce4406743c197d14bb00242cabf",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:24:11.639198+00:00",
+      "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855"
+    },
+    {
+      "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "relative_path": "bad.txt",
+      "status": "ready",
+      "qualification": 2,
+      "error": null,
+      "id": "40bcb94498714873960b6e2ee475d8f8",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:24:25.286520+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+    },
+    {
+      "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "relative_path": "control.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:25.285836+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+    },
+    {
+      "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "relative_path": "denied.txt",
+      "status": "ready",
+      "qualification": 2,
+      "error": null,
+      "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:24:25.286497+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+    },
+    {
+      "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "relative_path": "nested/notes.txt",
+      "status": "missing",
+      "qualification": 1,
+      "error": "本轮未在来源范围发现",
+      "id": "fd0731949ba74e7abf6ac086b8baf143",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/nested/notes.txt",
+      "version": 1,
+      "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+      "text_length": 23,
+      "captured_at": "2026-11-22T19:24:16.670645+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+    },
+    {
+      "source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "relative_path": "指南.md",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:25.286457+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f"
+    }
+  ],
+  "hits_before": [
+    {
+      "id": "40bcb94498714873960b6e2ee475d8f8",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:24:25.286520+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle repaired",
+      "start": 0,
+      "end": 15,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 1,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:24:25.286497+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle unreadable",
+      "start": 0,
+      "end": 17,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 2,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "acfc5ce4406743c197d14bb00242cabf",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:24:11.639198+00:00",
+      "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855",
+      "text": "needle unrelated Q\n",
+      "start": 0,
+      "end": 19,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "a6a760fcb345419fa0b404aa65285855"
+      ],
+      "project_ids": [
+        2
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e",
+      "bm25_score": 1.6865065258239807e-06,
+      "rank": 3,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:25.286457+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3",
+      "bm25_score": 1.6750226974679712e-06,
+      "rank": 4,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:25.285836+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+      "bm25_score": 3.808764666077921e-07,
+      "rank": 5,
+      "snapshot_kind": "采集版本（仅本机）"
+    }
+  ],
+  "hits_after": [
+    {
+      "id": "40bcb94498714873960b6e2ee475d8f8",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:24:25.286520+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle repaired",
+      "start": 0,
+      "end": 15,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 1,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:24:25.286497+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle unreadable",
+      "start": 0,
+      "end": 17,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 2,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "acfc5ce4406743c197d14bb00242cabf",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:24:11.639198+00:00",
+      "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855",
+      "text": "needle unrelated Q\n",
+      "start": 0,
+      "end": 19,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "a6a760fcb345419fa0b404aa65285855"
+      ],
+      "project_ids": [
+        2
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e",
+      "bm25_score": 1.6865065258239807e-06,
+      "rank": 3,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "a05664b44ab8423b82d004d219de6bb5",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:24:25.286457+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3",
+      "bm25_score": 1.6750226974679712e-06,
+      "rank": 4,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+      "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:24:25.285836+00:00",
+      "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "cb93f7da39974e9b9f60edd92cef455f"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+      "bm25_score": 3.808764666077921e-07,
+      "rank": 5,
+      "snapshot_kind": "采集版本（仅本机）"
+    }
+  ],
+  "mcp_after": [
+    [
+      {
+        "id": "cb93f7da39974e9b9f60edd92cef455f",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "6d7813ba1373401298570a07a2ef39fc",
+        "request_seq": 9,
+        "started_at": "2026-11-22T19:24:25.283902+00:00",
+        "finished_at": "2026-11-22T19:24:25.286550+00:00",
+        "error": null,
+        "counts": {
+          "ready": 4,
+          "failed": 0,
+          "candidates": 4,
+          "billed_bytes": 6107,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "a6a760fcb345419fa0b404aa65285855",
+        "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:24:11.638343+00:00",
+        "finished_at": "2026-11-22T19:24:11.639295+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    {
+      "results": [
+        {
+          "id": "40bcb94498714873960b6e2ee475d8f8",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/bad.txt",
+          "version": 1,
+          "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+          "text_length": 15,
+          "captured_at": "2026-11-22T19:24:25.286520+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle repaired",
+          "start": 0,
+          "end": 15,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6IjQwYmNiOTQ0OTg3MTQ4NzM5NjBiNmUyZWU0NzVkOGY4IiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.f72728e90494e426623366e5026be6e0bfc1add35f4aa5e38a8300ddecce2651",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "fd92ff372cff4a0ca5bb7d97816abfdb",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/denied.txt",
+          "version": 1,
+          "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+          "text_length": 17,
+          "captured_at": "2026-11-22T19:24:25.286497+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle unreadable",
+          "start": 0,
+          "end": 17,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImZkOTJmZjM3MmNmZjRhMGNhNWJiN2Q5NzgxNmFiZmRiIiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b637c0edc9de671ae018aa792fca583a544468001e0ad0df8a245db891c58302",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "acfc5ce4406743c197d14bb00242cabf",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+          "version": 1,
+          "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+          "text_length": 19,
+          "captured_at": "2026-11-22T19:24:11.639198+00:00",
+          "captured_by_source_id": "a6a760fcb345419fa0b404aa65285855",
+          "text": "needle unrelated Q\n",
+          "start": 0,
+          "end": 19,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "a6a760fcb345419fa0b404aa65285855"
+          ],
+          "project_ids": [
+            2
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImFjZmM1Y2U0NDA2NzQzYzE5N2QxNGJiMDAyNDJjYWJmIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImE2YTc2MGZjYjM0NTQxOWZhMGI0MDRhYTY1Mjg1ODU1IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7622e31d775a9959cf5d409e8056c0e4cb2ab253442448b39fcc2bfd77209b9e",
+          "bm25_score": 1.6865065258239807e-06,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a05664b44ab8423b82d004d219de6bb5",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/指南.md",
+          "version": 2,
+          "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+          "text_length": 39,
+          "captured_at": "2026-11-22T19:24:25.286457+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "needle edited 中文😀 é\nnew captured text\n",
+          "start": 0,
+          "end": 39,
+          "start_line": 1,
+          "end_line": 2,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImNiOTNmN2RhMzk5NzRlOWI5ZjYwZWRkOTJjZWY0NTVmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.d81688e67e573f393a2ffddde4ec698667f1b219b83a24d08ed9c6ec95c4a2c3",
+          "bm25_score": 1.6750226974679712e-06,
+          "rank": 4,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "a2d7b67603b5436bb5f2ba3ce53ae549",
+          "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:24:25.285836+00:00",
+          "captured_by_source_id": "cb93f7da39974e9b9f60edd92cef455f",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "cb93f7da39974e9b9f60edd92cef455f"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEyZDdiNjc2MDNiNTQzNmJiNWYyYmEzY2U1M2FlNTQ5IiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiY2I5M2Y3ZGEzOTk3NGU5YjlmNjBlZGQ5MmNlZjQ1NWYiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.dd79e9117fe5acba99a1e5390ed43cadee0d7b1eb95652ec8913937a006f351c",
+          "bm25_score": 3.808764666077921e-07,
+          "rank": 5,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "all",
+      "effective_project_ids": null,
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 5,
+        "sources": [
+          {
+            "id": "cb93f7da39974e9b9f60edd92cef455f",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "6d7813ba1373401298570a07a2ef39fc",
+            "request_seq": 9,
+            "started_at": "2026-11-22T19:24:25.283902+00:00",
+            "finished_at": "2026-11-22T19:24:25.286550+00:00",
+            "error": null,
+            "counts": {
+              "ready": 4,
+              "failed": 0,
+              "candidates": 4,
+              "billed_bytes": 6107,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "a6a760fcb345419fa0b404aa65285855",
+            "path": "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/other.txt",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "7b0c5a761a65449081dd65fbdb5b119a",
+            "request_seq": 2,
+            "started_at": "2026-11-22T19:24:11.638343+00:00",
+            "finished_at": "2026-11-22T19:24:11.639295+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 19,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              2
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    }
+  ],
+  "same_configuration_versions_and_all_original_references": true
+}

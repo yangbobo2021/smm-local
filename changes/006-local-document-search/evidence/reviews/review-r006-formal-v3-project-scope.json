@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-project-scope",
+  "target_sha256": "e29fba03731b9eb87aac4581d6eeb26306a858b386fb1eba26e153aba16f8215",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-project-scope": {
+      "status": "passed",
+      "reason": "独立重审v3本次正式运行，SPEC B3/B5/A3、PLAN §4 A3、design-v5-sc3及test_project_scope已重新对照。17:55:54.824–55.190Z exit0、stdout1 passed、stderr空；31 artifacts/47 bindings和设计摘要一致，当前documents87e25466…并非旧源。重新解析本轮6次搜索及11次读取：P恰p/q/shared、Q恰p/q/r/shared、R恰q/r/shared、G仅global、all六路径包含free；同名P/Q以不同ID判定，P不穿透R且不隐含G，所有读取原SHA及独立needle+文件名准确。共享前后完整links断言未变；再纳入shared后00026原results路径/ID均恰3，逐个签名payload的document_id/version/source集合和结果对应且区间字符数相等，未被字典去重掩盖额外命中。没有XML/附加回归，不从v2passed推定；本次covers认领唯一分配项project-scope-c1。",
+      "covers": [
+        "project-scope-c1"
+      ]
+    }
+  }
+}

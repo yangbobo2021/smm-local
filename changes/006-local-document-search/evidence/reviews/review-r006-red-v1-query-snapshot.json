@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC6第三判据“同次项目范围、来源资格及文本版本一致”源于SPEC B5/B6/A6；design-r006-v3-sc6也明确所有结果来自同一旧范围/版本/资格，场景与设计正确。tests/test_document_concurrency.py:112只保存来源revision，123-127对旧结果独立核名字/文本并检查payload stamp的revision，但没有保存并逐文件核原document id/version/SHA或资格代次，也未断言每个结果的stamp来源ID就是该文件独立source。推演source分支q结果混合旧text与新version/SHA/qualification（stamp revision仍旧），p正确：123-127全部通过，131只要求q ref拒绝，正好仍通过；128-129下一查询只验文件名集合，也放过q依然旧正文。此反例违反已规定的同次版本/来源快照一致，不能靠两边都来自同产品或最后旧ref拒绝证明。应存独立动作前文件→身份/版本/资格/原字节摘要与预期来源，逐结果断言，并对source变化后的新q版本/正文作独立检查。多目标文本方面125按name原串可拦误用同一个p正文；links分支132独立q全文读可拦读时重展开关联。原red收据/命令、两份api-001及完整stdout/stderr已读并核SHA，两参数在108行首p文件合法add实际404 Not Found，helper:52报错；非环境故障，快照屏障/变化和后续断言未到达。",
+      "covers": []
+    }
+  }
+}

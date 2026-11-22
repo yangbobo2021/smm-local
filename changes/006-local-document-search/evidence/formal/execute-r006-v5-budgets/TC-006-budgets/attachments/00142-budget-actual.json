@@ -1,0 +1,95 @@
+{
+  "case": "invalid-total-last",
+  "source": {
+    "id": "0a31158d2e204fcaa5c781dad14b4fa2",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_invalid_total_las0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "failed",
+    "resume_status": "failed",
+    "refresh_id": "c7a898a5c9574a288777c8bd8aaac2a9",
+    "request_seq": 2,
+    "started_at": "2026-11-22T19:18:50.883447+00:00",
+    "finished_at": "2026-11-22T19:18:50.884537+00:00",
+    "error": "来源超过1000候选或16MiB累计预算",
+    "counts": {
+      "ready": 0,
+      "failed": 0,
+      "candidates": 9,
+      "billed_bytes": 16777217,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  },
+  "actual_candidates": 9,
+  "actual_billed_bytes": 16777217,
+  "source_bytes": {
+    "baseline.txt": {
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "bytes": 1,
+      "mtime_ns": 1795375130857240346
+    },
+    "item-6.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130872729231
+    },
+    "item-7.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130874267244
+    },
+    "item-5.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130871736681
+    },
+    "item-4.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130870052249
+    },
+    "item-0.txt": {
+      "sha256": "4bda3a28f4ffe603c0ec1258c0034d65a1a0d35ab7bd523a834608adabf03cc5",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130865651044
+    },
+    "item-1.txt": {
+      "sha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130866027339
+    },
+    "item-3.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130868873781
+    },
+    "item-2.txt": {
+      "sha256": "0af05227d50666d75b335ff8dc834bb71390a336aa7de36fcf4e0416c6d05984",
+      "bytes": 2097152,
+      "mtime_ns": 1795375130867346017
+    }
+  },
+  "files": [
+    {
+      "source_id": "0a31158d2e204fcaa5c781dad14b4fa2",
+      "relative_path": "baseline.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "来源超过1000候选或16MiB累计预算",
+      "id": "7d8c5e23fd1541d2bcfac5583c577266",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_invalid_total_las0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.862137+00:00",
+      "captured_by_source_id": "0a31158d2e204fcaa5c781dad14b4fa2"
+    }
+  ]
+}

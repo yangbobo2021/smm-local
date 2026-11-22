@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-empty-query",
+  "target_sha256": "dd302797f5a2796980f982855fe9d2b0471a8544a212b05dc0367e633b7ec85f",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B5/B7、A5、PLAN §4、design-r006-v5-sc5，对照tests/test_document_search.py:106-131。00001无源合法非空无匹配词返回200/空集/0索引；00004两个pending如实列出。00005–00015空/空白/无词、非法scope、缺或不存在project、limit0/-1/51/小数/布尔均明确400或422，错误含义与请求相符。00017 ready+pending为1成功文件；00019 partial+pending、00020 refreshing+pending、00022 failed+pending分别为0成功文件且合法空集，failed保留实际文件不存在原因；00023汇总与逐步原响应一致。不是以0命中冒称已处理，也未混用非法空串为合法零命中。stdout1 passed/exit0/stderr空；27 artifacts、47 bindings、match实现摘要均重算一致。本正式轮无XML/附回归；对应green-v2原stdout四项旧引用4 passed且摘要核实，full-regression-v3原XML四项通过，全集301 passed/1 skipped。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "method": "GET",
+  "path": "/api/documents/files?source_id=2fe6051cc40249099246d84d3cc9090f",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "source_id": "2fe6051cc40249099246d84d3cc9090f",
+      "relative_path": "baseline.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "来源超过1000候选或16MiB累计预算",
+      "id": "e5ec6d47fd7043118836e0a3ae16c963",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_invalid_total_fir0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.794421+00:00",
+      "captured_by_source_id": "2fe6051cc40249099246d84d3cc9090f"
+    }
+  ]
+}

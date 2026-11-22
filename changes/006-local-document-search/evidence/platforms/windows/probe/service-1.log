@@ -1,0 +1,48 @@
+INFO:     Started server process [1176]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65322 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59323 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59323 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59324 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59324 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59324 - "GET /api/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59324 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59324 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59323 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59327 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:52055 - "POST /api/documents/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "PUT /api/documents/sources/c6f9c47e01ba4df8ba0a1685703455c2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "DELETE /api/documents/sources/c6f9c47e01ba4df8ba0a1685703455c2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52055 - "POST /api/documents/read HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61645 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61645 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61647 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61648 - "GET /api/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49485 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61645 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49485 - "GET /api/documents/sources HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61645 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61645 - "GET /api/documents/files?source_id=e47b4928d13247709c76a3a71ef9e0d4 HTTP/1.1" 200 OK

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "依据SPEC B1/A1、SC1及design-r006-v5-sc1，明确添加、完整替换、非法输入不改配置和不暗读正文的设计有效。tests/test_document_sources.py:8–49分别验证两个同名不同身份项目、单文件/目录、指定配置与省略名单恢复默认；deny_source_reads覆盖builtins/io/os.open，files/search为空；所有非法add/set后比较完整sources，重新打开同档案一致，移除后源SHA/mtime不变。反例：只正确处理首个来源会被directory_reset及两次移除断言拦截；返回假pending但读正文会被哨兵拦截，配置两侧同错会被独立字段值断言拦截。src/smm_local/documents.py:add/set仅校验/存配置，api.py:318–348及Web表单调用同一后端。原始附件00039-source-config-expected.json显示P/不同stable_key、revision1→2、项目[1]→[2]及pending，39份API/拒绝附件与原始日志支持断言；本项不是浏览器画面验收。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-source-config与red-r006-v3-source-config全部test_bindings及command相同，红灯405缺少创建项目行为，绿灯新日志1 passed/exit0。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

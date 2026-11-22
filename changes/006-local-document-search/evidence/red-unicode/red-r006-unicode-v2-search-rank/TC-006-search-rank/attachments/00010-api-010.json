@@ -1,0 +1,97 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "stopuniquemarker"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "8bb62af0d19c4810ae1a1700bb4a34fe",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs/unicode-equivalence.txt",
+        "version": 1,
+        "sha256": "e22af40f81588d98ee4f7ebab3274772f61bcb93f80e960c89f63c91fef130c3",
+        "text_length": 3421,
+        "captured_at": "2026-11-22T17:48:06.056941+00:00",
+        "captured_by_source_id": "2d537460964d458ba614b480b86d04c9",
+        "text": "ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquemarker ſtopuniquem",
+        "start": 0,
+        "end": 2000,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "2d537460964d458ba614b480b86d04c9"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiNTQwMTdmMTlmYmNhNDMzYThhY2M5NjFjYmMwODM2YzciLCJkb2N1bWVudF9pZCI6IjhiYjYyYWYwZDE5YzQ4MTBhZTFhMTcwMGJiNGEzNGZlIiwiZW5kIjoyMDAwLCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiMmQ1Mzc0NjA5NjRkNDU4YmE2MTRiNDgwYjg2ZDA0YzkiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MCwidmVyc2lvbiI6MX0.be94732474ffdc85c2ded06e6749e9d353d6cd9f6a1a5f3f2fd6600b004a37db",
+        "bm25_score": 2.9682242750092485,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 60,
+      "sources": [
+        {
+          "id": "2d537460964d458ba614b480b86d04c9",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "546f025980d041f5b562d1ef3bc4ed1a",
+          "request_seq": 1,
+          "started_at": "2026-11-22T17:48:06.050889+00:00",
+          "finished_at": "2026-11-22T17:48:06.059538+00:00",
+          "error": null,
+          "counts": {
+            "ready": 60,
+            "failed": 0,
+            "candidates": 60,
+            "billed_bytes": 39400,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "322d58b723104ab1b9fa576122f0d6d8",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-868/test_search_rank0/docs/file-000.md",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "e6eeeee1502c400a91dbdf71767200d8",
+          "request_seq": 2,
+          "started_at": "2026-11-22T17:48:06.065614+00:00",
+          "finished_at": "2026-11-22T17:48:06.066624+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 13,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "lowerexpansionmarker"
+  },
+  "expected_status": 200,
+  "status": 400,
+  "response": {
+    "detail": "范围须为整个采集文本的Unicode码点 [start,end)，一次1至16000字符"
+  }
+}

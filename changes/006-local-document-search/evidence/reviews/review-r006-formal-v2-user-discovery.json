@@ -1,0 +1,16 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-user-v2",
+  "target_sha256": "43239ba189154e501b6c6aa5eb50c922425aa2faede2f79647e8d440f55be237",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-user-discovery": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "正式人工manual-r006-cross-user-v2独立复审为needs_revision，仅缺当前交付证据的可发现索引，不是文档产品业务失败。依据SPEC B7/A8、PLAN §6.4/§6.6、已审design-r006-v5-sc7及acceptance/user-discovery.md第5/6步：要求维护者可找到当前源码回归、双包、三系统CI、三个E1原件的逐项入口。实际沿README:33-48→TRIAL_GUIDE:58-82→scripts/acceptance/README:3-25回放；维护说明只链接PLAN，PLAN只写导出目录和计划，没有当前结果链接/逐A-E索引；当前evidence目录只有分类原件、provenance/SHA与verify.py，没有README或当前逐项索引。只有本次交接给出私有AT路径后才知道哪轮为当前，不能以原件存在或observation的“前提齐备”代替可发现入口。请在已有维护导航下直接链接当前交付索引，列当前版本、回归/双包/两CI run/各E1及真实结论和未完项；随后仅重作本人工项观察与复审即可，不要求重跑已有效的无关业务。其余实测与核查事实保留：README的006未发布/0.4.0不含边界、源码或独立wheel路径真实，指南明确服务器所在本机绝对路径和本机项目ID来源、pending→refresh、零/多/全局/直接一层、完整替换/排除、Unicode码点/旧引用/移除影响；README Agent入口实际链接Skill，Skill三个只读工具/reference原传/快照及不外发边界清楚。work/user-discovery-v2/commands.json本轮安装环境11份帮助全部exit0/stderr空（18:06:58.433–59.280Z），与正文和字段相符。实际打开8张新包正式原图：mac-formal-v2/web-pending.png可见主导航文档、pending尚未刷新和路径/项目/排除/完整替换提示；三平台web-original.png均可见项目检索、采集版本/来源/SHA/字符[0,64)/行1-3及纯文本脚本，web-partial.png均显示真实失败或missing及诊断；mac web-old-reference-rejected.png清楚显示“采集版本已失效，请重新检索”。实际以兼容Playwright1.65.1打开Mac主trace并查动作/请求；另直接解析三平台全部9份原trace：各主trace133动作/33请求，主导航点击→建项目→保存pending→刷新→项目检索→原文/扩读→旧ref400→改配置→移除confirm/DELETE200真实存在，confirm明确独占退出、重叠保留、不删源文件。此为回放当前正式原件，未宣称本次新增Web业务。三平台安装清单26模块全部重算等于当前a66deeb源码，均使用Local wheel SHA7ee93bfe55a6ceb9ad251144677c611b8099c5975b3c85c740318a04da631bd3，真实stdio原件也存在；平台完整判定归另一Reviewer。本会话此前独立核execute-v3-packages的15真实命令和26/24模块/双环境，结果通过。full-regression-v4绑定/原XML为301pass1skip，四旧引用通过。ci-a66两run45051663197/45051669927的headSha均a66deeb，六job全部success；实际读两份.log：各mac/Ubuntu301pass1skip、Windows302pass，均两个wheel构建与分别安装成功；PR run检出的是a66deeb的实际merge提交，未误称直接分支HEAD。原日志SHA分别8bd79ac2640f0dc3ee78009d413c12e60f9f13a76e5ddb3c828185768e6740b3、49962dba88e134cf9f70f5fdd90c6dd51d631a0aeb0ad1547330d264cab07c62。人工收据artifacts与bindings审阅起始逐项重算一致，实际case/covers与match-v7和设计一致。只认领user-discovery-c3的本次观察与上述导航缺口，不判E1或R006最终交付。",
+      "covers": [
+        "user-discovery-c3"
+      ]
+    }
+  }
+}

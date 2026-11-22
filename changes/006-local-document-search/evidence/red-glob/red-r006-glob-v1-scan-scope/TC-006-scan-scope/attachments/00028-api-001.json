@@ -1,0 +1,28 @@
+{
+  "method": "POST",
+  "path": "/api/documents/sources",
+  "request": {
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/glob-cases/docs",
+    "project_ids": []
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "2afdca80b69b4a58971bc569acd5df24",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/glob-cases/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

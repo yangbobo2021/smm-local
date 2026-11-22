@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "依据SPEC B2/A2、SC2与PLAN3.2/4，真实单文件2MiB/2MiB+1、1000/1001候选、16MiB/16MiB+1与计费优先级设计有效。tests/test_document_limits.py:test_budgets的11参数实际写对应字节/数量，不缩常量；先建baseline旧ref，再独立fingerprint求候选/可计费字节，完整1000ready路径集合与真实上下限逐项断言；正反scandir顺序的混合17MiB/坏编码/拒读应partial且只有baseline可查，编码/NUL/后续拒读参与16777217字节总预算而整源failed；stat失败计候选字节0。反例：以首文件代替完整1000集合被set(files ready)==set(originals)拦截；顺序提前发布好文件被整源搜索空/旧ref拒绝拦截；错误文件不计预算被billed_bytes独立总和及failed拦截。原始各budget-actual附件明确1000ready、1001failed、16777216ready、16777217failed、正反混合集合一致；超限后恢复并继续拒绝旧ref。产品documents.py:_scan先全量计数计费后读取/_publish整源失败撤资格，与证据一致。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-budgets与red-r006-v3-budgets全部test_bindings及实际命令相同；旧红灯仍为文档来源API404，当前新绿灯11 passed/exit0。重新逐份读取当前165份原始附件，1000/1001候选分别ready1000/failed0、16777216/16777217字节分别ready9/failed0；mixed-first/last各4候选13计费字节partial1ready，invalid-total两个顺序均整源失败，证明本轮实际执行各边界而非复用旧status。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

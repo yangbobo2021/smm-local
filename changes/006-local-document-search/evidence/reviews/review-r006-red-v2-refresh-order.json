@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "expected_failure",
+      "reason": "SC6并发发布判据与v5设计分别覆盖新刷新及新配置取代旧任务，来自SPEC B4/A6，无新增业务要求；首轮该项有效判断经本版重新核对。tests/test_document_concurrency.py:36–57参数化两种动作前变化；9–17在_publish前设置确定屏障而非依赖sleep。新刷新分支46独立断言newwinner全文，配置分支49独立pending/空结果；50记录document_state全部来源/绑定/文档/成员/meta/FTS，52在旧任务释放后逐表相等，54再核新词存在旧词缺失，56核新项目/pending。若前后快照都同错旧正文，46先拦截；若旧任务改任何持久来源/成员/正文/索引，52先拦截；若仅set-config分支复活材料，49/52/56拦截。两个会改变判定的业务状态均有覆盖，正常无竞争刷新也在准备/新任务中执行；额外同条件来源ID为可选。red-r006-v2-refresh-order匹配/设计/绑定原件、两api-001及完整stdout/stderr/进程已读并核SHA，两个参数均39行合法add返回404 Not Found（helper:52），当前API没有文档路由，属于B1新能力缺失。尚未运行refresh、屏障或发布断言，不把该入口红灯描述为并发已经通过，也没有观察到屏障/线程/环境错误。候选设计实现有效，给expected_failure；TDD covers为空。",
+      "covers": []
+    }
+  }
+}

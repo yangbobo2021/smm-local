@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "expected_failure",
+      "reason": "SC4与design-r006-v5-sc4的每文件版本、采集快照、移动/删除来自SPEC B3/B4/B6/A4及PLAN4，没有新增要求；场景与自然语言设计准确。match-r006-v4-sc4、manifest-v3、tests/test_document_lifecycle.py:7-37与红灯冻结选段/当前绑定一致，全部artifacts SHA一致。11/13/19/22/29行完整两文件集合，14逐文件不变ID/版本，15逐旧ref独立文本，20刷新前明确captured_at且仍为原正文；只处理首文件会在集合或后续第二目标正文断言失败。23-26编辑后逐文件ID保留/版本变换、独立updated文本及旧ref拒绝，30-33改回独立original字节、版本不复用且每个历史ref拒绝，拦截两个响应同错或只改版本标签未改正文。35行移动新身份和精确仅moved集合、36行移动/删除各旧ref拒绝，37行新身份仍对应原one文本。当前适用目标和动作前状态均有断言，不因等价新增样本阻塞。原始tdd-red/red-r006-v3-version-lifecycle/TC-006-version-lifecycle/run.stdout与00001-api-001.json显示9行首次来源add实际404 Not Found，Fixture.request:52首先失败，符合SPEC B1基础来源入口尚缺，非测试/环境故障。其后刷新、不变、编辑、改回、移动删除与原文/资格检查全部未执行。expected_failure确认候选设计/实现有效及真实预期红灯，不等于生命周期行为已通过；任何人工平台均未预判。",
+      "covers": []
+    }
+  }
+}

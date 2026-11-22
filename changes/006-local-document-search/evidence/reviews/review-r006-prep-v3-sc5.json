@@ -1,0 +1,32 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "本意见目标为debug-r006-v3-sc5。已核定义000002 sha6b524c88…、SPEC B5/B6/A5、PLAN及design-r006-v5-sc5、match-r006-v7-sc5的本TC分工。场景/自然设计有原文依据，具体样例在实际用例；当前37个src逐字等于a66deeb，runtime-r006-product-v3和本TC测试运行绑定均匹配，全部原artifacts SHA重算一致，原stdout/process/stderr无跳过或环境失败。本TC实际1 passed/exit0。tests/test_document_search.py的51文件及完整50路径/唯一ID断言拦仅首目标正确，高低相关和六special独立原串断言拦两观察面同错。此次新增Unicode在当前debug原件中真实成功：ASCII stop词原位置3400→窗口[3200,3421)，İ展开前缀后的marker原位置3001→[2801,3026)，search和read均精确原文且含真实词；不是IGNORECASE等价前缀抢位。其余排序000..049稳定、文件名词零命中、尾/边界/长行/中文均实际执行。documents.py使用lower.find并映回原码点，与core.tokens语义一致；已复现的两个必测缺陷由对应独立断言拦截并在本轮修复。 无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行，不代表人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "search-rank-c1"
+      ]
+    },
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "本意见目标为debug-r006-v3-sc5。已核定义000002 sha6b524c88…、SPEC B5/B6/A5、PLAN及design-r006-v5-sc5、match-r006-v7-sc5的本TC分工。场景/自然设计有原文依据，具体样例在实际用例；当前37个src逐字等于a66deeb，runtime-r006-product-v3和本TC测试运行绑定均匹配，全部原artifacts SHA重算一致，原stdout/process/stderr无跳过或环境失败。本TC实际3 passed/exit0。test_exact_read三独立body及每个扩读范围逐原串切片/LF端点公式，独立body拦search/read同错、参数循环拦只首目标正确；长行分别核两个观察面的整数码点窗口、正文和行号，16000正控/16001拒绝及旧版本拒绝均到达。当前debug附件30个命中/读取已逐条按独立三body或long重算文本/偏移/行号全部吻合，BOM/CRLF/CR/LF、非BMP/组合码点、有/无末尾LF均保留，长窗口2000、扩读16000、拒绝400。Unicode定位修复没有改变documents._range的B6码点语义。 无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行，不代表人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    },
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本意见目标为debug-r006-v3-sc5。已核定义000002 sha6b524c88…、SPEC B5/B6/A5、PLAN及design-r006-v5-sc5、match-r006-v7-sc5的本TC分工。场景/自然设计有原文依据，具体样例在实际用例；当前37个src逐字等于a66deeb，runtime-r006-product-v3和本TC测试运行绑定均匹配，全部原artifacts SHA重算一致，原stdout/process/stderr无跳过或环境失败。本TC实际1 passed/exit0。test_invalid_read逐字段保留原签名篡改档案/文档/版本/kind和来源id/revision/qualification，逐范围及真实对话ref/配置旧ref拒绝；两个文档与外档案身份不同，两个独立alpha正控使全拒或两响应同错首目标不能通过。当前debug23项原拒绝均为规定的400/422含义，正文正控两次准确needle alpha 😀 é加second行，未返回替代正文；test循环拦只首字段正确。references.decode及documents.read仍按当前档案/版本/原来源资格核对，连续资格专项归SC4。 无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行，不代表人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    },
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "本意见目标为debug-r006-v3-sc5。已核定义000002 sha6b524c88…、SPEC B5/B6/A5、PLAN及design-r006-v5-sc5、match-r006-v7-sc5的本TC分工。场景/自然设计有原文依据，具体样例在实际用例；当前37个src逐字等于a66deeb，runtime-r006-product-v3和本TC测试运行绑定均匹配，全部原artifacts SHA重算一致，原stdout/process/stderr无跳过或环境失败。本TC实际1 passed/exit0。test_empty_query在无来源及pending/ready/partial/refreshing/failed状态逐核完整ID→状态与独立文件数，持续pending第二来源拦只首目标正确；合法查询正控拦一概拒绝。当前debug11项非法输入400/422，合法零命中实际200空结果；独立coverage为pending0、ready1、partial0、refreshing0、failed0，另来源持续pending，不能用零命中掩盖状态。documents.search输入验证与同事务有效成员/覆盖计算未因定位返修改变。 无有据必测缺口，等价样本可选；认领本TC全部分配检查，准备passed，准许新的正式执行，不代表人工平台/用户发现、最终CI或R006交付。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

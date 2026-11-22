@@ -1,0 +1,634 @@
+{
+  "started_at": "2026-11-22T19:27:21.454978+00:00",
+  "finished_at": "2026-11-22T19:27:23.602626+00:00",
+  "transport": "actual stdio subprocess",
+  "argv": [
+    "/home/TESTER/smm-006-20261122/local-env/bin/python",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/home/TESTER/smm-006-20261122/probes-9c/local_documents_mcp_worker.py",
+    "/tmp/SmmDocuments006-20261122/formal-v4/mcp-process-13.json",
+    "[\"/home/TESTER/smm-006-20261122/local-env/bin/python\", \"-I\", \"-B\", \"-X\", \"utf8\", \"-c\", \"import sys,os,json,runpy,time\\nroots=json.loads(os.environ['SMM_DOC_PROBE_ROOTS']); logfile=os.environ['SMM_DOC_PROBE_AUDIT'];phasefile=os.environ['SMM_DOC_PROBE_PHASE_FILE']\\nidentity={'pid':os.getpid(),'platform':sys.platform,'python':sys.executable,'argv':sys.argv[1:],'time':time.time()}\\nif sys.platform=='win32':\\n import ctypes\\n sid=ctypes.c_ulong();assert ctypes.windll.kernel32.ProcessIdToSessionId(os.getpid(),ctypes.byref(sid))\\n identity.update(is_admin=bool(ctypes.windll.shell32.IsUserAnAdmin()),session_id=sid.value)\\nelse:identity['uid']=os.getuid()\\nwith open(os.environ['SMM_DOC_PROBE_IDENTITIES'],'a',encoding='utf-8') as f:f.write(json.dumps(identity)+'\\\\n')\\ndef audit(event,args):\\n if event=='open' and isinstance(args[0],(str,bytes)):\\n  p=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))\\n  if any(p==r or p.startswith(r+os.sep) for r in roots):\\n   with open(phasefile,encoding='utf-8') as f:phase=f.read()\\n   with open(logfile,'a',encoding='utf-8') as f:f.write(json.dumps({'time':time.time(),'pid':os.getpid(),'phase':phase,'path':p,'mode':args[1],'flags':args[2]})+'\\\\n')\\nsys.addaudithook(audit)\\nmodule=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__main__')\\n\", \"smm_local.mcp_server\", \"--db\", \"/tmp/SmmDocuments006-20261122/formal-v4/archive.sqlite3\"]"
+  ],
+  "records": [
+    {
+      "list_tools": {
+        "meta": null,
+        "nextCursor": null,
+        "tools": [
+          {
+            "name": "manage_sync",
+            "title": null,
+            "description": "Manage local SMM sync. status starts/reuses the service and returns its state; open opens its status page; sync runs one sync; pause persists a pause for automatic sync; resume reenables it. A manual sync leaves the pause setting unchanged.",
+            "inputSchema": {
+              "properties": {
+                "action": {
+                  "enum": [
+                    "status",
+                    "open",
+                    "sync",
+                    "pause",
+                    "resume"
+                  ],
+                  "title": "Action",
+                  "type": "string"
+                },
+                "source": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Source"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "title": "manage_syncArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "set_source_enabled",
+            "title": null,
+            "description": "Enable or disable a registered local conversation source by ID.",
+            "inputSchema": {
+              "properties": {
+                "source": {
+                  "title": "Source",
+                  "type": "string"
+                },
+                "enabled": {
+                  "title": "Enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "source",
+                "enabled"
+              ],
+              "title": "set_source_enabledArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "configure_hub",
+            "title": null,
+            "description": "Configure Hub lookup and this computer's name. New connections do not upload dialogue until a Web/CLI upload choice. Use a credential file, never its contents in chat.",
+            "inputSchema": {
+              "properties": {
+                "address": {
+                  "title": "Address",
+                  "type": "string"
+                },
+                "device_name": {
+                  "title": "Device Name",
+                  "type": "string"
+                },
+                "token_file": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Token File"
+                }
+              },
+              "required": [
+                "address",
+                "device_name"
+              ],
+              "title": "configure_hubArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": true
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "search_conversations",
+            "title": null,
+            "description": "Search local and configured Hub candidates together, reranked locally; unuploaded local conversations participate. Project scope uses Hub direct links online, only the requested local project on Hub failure; local=true uses local links. Pass the returned reference to read_conversation for exact evidence. Previews default to 600 characters.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "title": "Query",
+                  "type": "string"
+                },
+                "scope": {
+                  "default": "all",
+                  "title": "Scope",
+                  "type": "string"
+                },
+                "project_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Project Id"
+                },
+                "limit": {
+                  "default": 5,
+                  "title": "Limit",
+                  "type": "integer"
+                },
+                "current_session_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Current Session Id"
+                },
+                "current_source": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Current Source"
+                },
+                "include_current": {
+                  "default": false,
+                  "title": "Include Current",
+                  "type": "boolean"
+                },
+                "local": {
+                  "default": false,
+                  "title": "Local",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_conversationsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "search_conversationsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "read_conversation",
+            "title": null,
+            "description": "Read original messages using the exact search reference. Old integer/hub_id/message_id calls remain supported; never reuse another archive's numeric ID.",
+            "inputSchema": {
+              "properties": {
+                "conversation_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Conversation Id"
+                },
+                "start": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Start"
+                },
+                "end": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "End"
+                },
+                "hub_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Hub Id"
+                },
+                "hub_message_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Hub Message Id"
+                },
+                "reference": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Reference"
+                }
+              },
+              "title": "read_conversationArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "read_conversationOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "list_projects",
+            "title": null,
+            "description": "List project IDs, source paths, direct links, and conversation counts for choosing search scope.",
+            "inputSchema": {
+              "properties": {},
+              "title": "list_projectsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "list_projectsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "resolve_project",
+            "title": null,
+            "description": "Find the configured project for a working directory or its nearest parent.",
+            "inputSchema": {
+              "properties": {
+                "cwd": {
+                  "title": "Cwd",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cwd"
+              ],
+              "title": "resolve_projectArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "resolve_projectOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "list_document_sources",
+            "title": null,
+            "description": "List explicitly configured local document sources, projects and refresh/error coverage. No scan. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only.",
+            "inputSchema": {
+              "properties": {},
+              "title": "list_document_sourcesArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "list_document_sourcesOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "search_documents",
+            "title": null,
+            "description": "Search captured local text documents only, with local direct project links. Never searches Hub or scans files. Results include capture version, coverage and a signed reference; use read_document for evidence.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "title": "Query",
+                  "type": "string"
+                },
+                "scope": {
+                  "default": "all",
+                  "title": "Scope",
+                  "type": "string"
+                },
+                "project_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Project Id"
+                },
+                "limit": {
+                  "default": 5,
+                  "title": "Limit",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_documentsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "search_documentsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "read_document",
+            "title": null,
+            "description": "Read a captured document using its exact search reference. Default is the hit window; optional whole-file Unicode codepoint [start,end) range, max16000. Old versions/qualifications require a new search. No source-file read.",
+            "inputSchema": {
+              "properties": {
+                "reference": {
+                  "title": "Reference",
+                  "type": "string"
+                },
+                "start": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Start"
+                },
+                "end": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "End"
+                }
+              },
+              "required": [
+                "reference"
+              ],
+              "title": "read_documentArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "read_documentOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_document_sources",
+      "input": {},
+      "response": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "[{\"id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格\", \"kind\": \"directory\", \"recursive\": true, \"exclude\": [\"excluded/**/\"], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"df89edda582d411ca420b174c2eb7b9e\", \"request_seq\": 9, \"started_at\": \"2026-11-22T19:27:09.944680+00:00\", \"finished_at\": \"2026-11-22T19:27:09.966328+00:00\", \"error\": null, \"counts\": {\"ready\": 4, \"failed\": 0, \"candidates\": 4, \"billed_bytes\": 6107, \"ignored_entries\": 2, \"ignored_format\": 0, \"ignored_excluded\": 1, \"ignored_links\": 1}, \"project_ids\": [1], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}, {\"id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"kind\": \"file\", \"recursive\": true, \"exclude\": [], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"b1767e523adf4879a6f7c76bc189362f\", \"request_seq\": 2, \"started_at\": \"2026-11-22T19:26:17.478221+00:00\", \"finished_at\": \"2026-11-22T19:26:17.487219+00:00\", \"error\": null, \"counts\": {\"ready\": 1, \"failed\": 0, \"candidates\": 1, \"billed_bytes\": 19, \"ignored_entries\": 0, \"ignored_format\": 0, \"ignored_excluded\": 0, \"ignored_links\": 0}, \"project_ids\": [2], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}]",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": {
+          "result": "[{\"id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格\", \"kind\": \"directory\", \"recursive\": true, \"exclude\": [\"excluded/**/\"], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"df89edda582d411ca420b174c2eb7b9e\", \"request_seq\": 9, \"started_at\": \"2026-11-22T19:27:09.944680+00:00\", \"finished_at\": \"2026-11-22T19:27:09.966328+00:00\", \"error\": null, \"counts\": {\"ready\": 4, \"failed\": 0, \"candidates\": 4, \"billed_bytes\": 6107, \"ignored_entries\": 2, \"ignored_format\": 0, \"ignored_excluded\": 1, \"ignored_links\": 1}, \"project_ids\": [1], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}, {\"id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"kind\": \"file\", \"recursive\": true, \"exclude\": [], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"b1767e523adf4879a6f7c76bc189362f\", \"request_seq\": 2, \"started_at\": \"2026-11-22T19:26:17.478221+00:00\", \"finished_at\": \"2026-11-22T19:26:17.487219+00:00\", \"error\": null, \"counts\": {\"ready\": 1, \"failed\": 0, \"candidates\": 1, \"billed_bytes\": 19, \"ignored_entries\": 0, \"ignored_format\": 0, \"ignored_excluded\": 0, \"ignored_links\": 0}, \"project_ids\": [2], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}]"
+        },
+        "isError": false
+      },
+      "time": "2026-11-22T19:27:23.463944+00:00"
+    },
+    {
+      "name": "search_documents",
+      "input": {
+        "query": "needle",
+        "limit": 50
+      },
+      "response": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"results\": [{\"id\": \"5a3755f4a63a472d9c8ebac0ca6e1911\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt\", \"version\": 1, \"sha256\": \"66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7\", \"text_length\": 15, \"captured_at\": \"2026-11-22T19:27:09.961254+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle repaired\", \"start\": 0, \"end\": 15, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjVhMzc1NWY0YTYzYTQ3MmQ5YzhlYmFjMGNhNmUxOTExIiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.1ff5c1f256cea14fef457f5592118f1249e3f4fa85c4501277382ae50212d48f\", \"bm25_score\": 1.6884358237791393e-06, \"rank\": 1, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"ec114ef7eae74e59961110bdb48dc8a4\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt\", \"version\": 1, \"sha256\": \"48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1\", \"text_length\": 17, \"captured_at\": \"2026-11-22T19:27:09.966078+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle unreadable\", \"start\": 0, \"end\": 17, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImVjMTE0ZWY3ZWFlNzRlNTk5NjExMTBiZGI0OGRjOGE0IiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.4dca03936c6a5ec6b68ec470e5e508082fdb853f75882c2186ef1bcbe6b628f3\", \"bm25_score\": 1.6884358237791393e-06, \"rank\": 2, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"4573e90a72d44c63b9148ac537f82e60\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"version\": 1, \"sha256\": \"52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7\", \"text_length\": 19, \"captured_at\": \"2026-11-22T19:26:17.486615+00:00\", \"captured_by_source_id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"text\": \"needle unrelated Q\\n\", \"start\": 0, \"end\": 19, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"2bd168e4389249ed9ed774cba61d74f2\"], \"project_ids\": [2], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjQ1NzNlOTBhNzJkNDRjNjNiOTE0OGFjNTM3ZjgyZTYwIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJiZDE2OGU0Mzg5MjQ5ZWQ5ZWQ3NzRjYmE2MWQ3NGYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c876e2777163a04a6a1866bbb30e81804c3ad75ba55a7c65d7384d19ad0152cb\", \"bm25_score\": 1.6865065258239807e-06, \"rank\": 3, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"1b6b5b1b414344f2b029190aad98bcee\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md\", \"version\": 2, \"sha256\": \"97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f\", \"text_length\": 39, \"captured_at\": \"2026-11-22T19:27:09.960321+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle edited 中文😀 é\\nnew captured text\\n\", \"start\": 0, \"end\": 39, \"start_line\": 1, \"end_line\": 2, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjFiNmI1YjFiNDE0MzQ0ZjJiMDI5MTkwYWFkOThiY2VlIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bd6a225852bca95f18b03176166b35a07ae99d60ac7f2e6d89cc86e44d00edb7\", \"bm25_score\": 1.6750226974679712e-06, \"rank\": 4, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"cd817992879b4b0e8d08556411cd006f\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt\", \"version\": 1, \"sha256\": \"b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8\", \"text_length\": 3027, \"captured_at\": \"2026-11-22T19:27:09.961578+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\\n\", \"start\": 2801, \"end\": 3027, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImNkODE3OTkyODc5YjRiMGU4ZDA4NTU2NDExY2QwMDZmIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiOTFiMDMyZDRiNWQwNDZlMTkzY2RjZDQxNmM5Y2ZhZTEiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.02b6732dcb00ad4769f21659e9eb3f767b7533663895e18843b9074f0faa33d0\", \"bm25_score\": 3.808764666077921e-07, \"rank\": 5, \"snapshot_kind\": \"采集版本（仅本机）\"}], \"scope\": \"all\", \"effective_project_ids\": null, \"archive_scope\": \"local_documents\", \"coverage\": {\"indexed_files\": 5, \"sources\": [{\"id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格\", \"kind\": \"directory\", \"recursive\": true, \"exclude\": [\"excluded/**/\"], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"df89edda582d411ca420b174c2eb7b9e\", \"request_seq\": 9, \"started_at\": \"2026-11-22T19:27:09.944680+00:00\", \"finished_at\": \"2026-11-22T19:27:09.966328+00:00\", \"error\": null, \"counts\": {\"ready\": 4, \"failed\": 0, \"candidates\": 4, \"billed_bytes\": 6107, \"ignored_entries\": 2, \"ignored_format\": 0, \"ignored_excluded\": 1, \"ignored_links\": 1}, \"project_ids\": [1], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}, {\"id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"kind\": \"file\", \"recursive\": true, \"exclude\": [], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"b1767e523adf4879a6f7c76bc189362f\", \"request_seq\": 2, \"started_at\": \"2026-11-22T19:26:17.478221+00:00\", \"finished_at\": \"2026-11-22T19:26:17.487219+00:00\", \"error\": null, \"counts\": {\"ready\": 1, \"failed\": 0, \"candidates\": 1, \"billed_bytes\": 19, \"ignored_entries\": 0, \"ignored_format\": 0, \"ignored_excluded\": 0, \"ignored_links\": 0}, \"project_ids\": [2], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}]}}",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": {
+          "result": "{\"results\": [{\"id\": \"5a3755f4a63a472d9c8ebac0ca6e1911\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt\", \"version\": 1, \"sha256\": \"66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7\", \"text_length\": 15, \"captured_at\": \"2026-11-22T19:27:09.961254+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle repaired\", \"start\": 0, \"end\": 15, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjVhMzc1NWY0YTYzYTQ3MmQ5YzhlYmFjMGNhNmUxOTExIiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.1ff5c1f256cea14fef457f5592118f1249e3f4fa85c4501277382ae50212d48f\", \"bm25_score\": 1.6884358237791393e-06, \"rank\": 1, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"ec114ef7eae74e59961110bdb48dc8a4\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt\", \"version\": 1, \"sha256\": \"48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1\", \"text_length\": 17, \"captured_at\": \"2026-11-22T19:27:09.966078+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle unreadable\", \"start\": 0, \"end\": 17, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImVjMTE0ZWY3ZWFlNzRlNTk5NjExMTBiZGI0OGRjOGE0IiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.4dca03936c6a5ec6b68ec470e5e508082fdb853f75882c2186ef1bcbe6b628f3\", \"bm25_score\": 1.6884358237791393e-06, \"rank\": 2, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"4573e90a72d44c63b9148ac537f82e60\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"version\": 1, \"sha256\": \"52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7\", \"text_length\": 19, \"captured_at\": \"2026-11-22T19:26:17.486615+00:00\", \"captured_by_source_id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"text\": \"needle unrelated Q\\n\", \"start\": 0, \"end\": 19, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"2bd168e4389249ed9ed774cba61d74f2\"], \"project_ids\": [2], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjQ1NzNlOTBhNzJkNDRjNjNiOTE0OGFjNTM3ZjgyZTYwIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJiZDE2OGU0Mzg5MjQ5ZWQ5ZWQ3NzRjYmE2MWQ3NGYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c876e2777163a04a6a1866bbb30e81804c3ad75ba55a7c65d7384d19ad0152cb\", \"bm25_score\": 1.6865065258239807e-06, \"rank\": 3, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"1b6b5b1b414344f2b029190aad98bcee\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md\", \"version\": 2, \"sha256\": \"97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f\", \"text_length\": 39, \"captured_at\": \"2026-11-22T19:27:09.960321+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"needle edited 中文😀 é\\nnew captured text\\n\", \"start\": 0, \"end\": 39, \"start_line\": 1, \"end_line\": 2, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjFiNmI1YjFiNDE0MzQ0ZjJiMDI5MTkwYWFkOThiY2VlIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bd6a225852bca95f18b03176166b35a07ae99d60ac7f2e6d89cc86e44d00edb7\", \"bm25_score\": 1.6750226974679712e-06, \"rank\": 4, \"snapshot_kind\": \"采集版本（仅本机）\"}, {\"id\": \"cd817992879b4b0e8d08556411cd006f\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt\", \"version\": 1, \"sha256\": \"b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8\", \"text_length\": 3027, \"captured_at\": \"2026-11-22T19:27:09.961578+00:00\", \"captured_by_source_id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"text\": \"İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\\n\", \"start\": 2801, \"end\": 3027, \"start_line\": 1, \"end_line\": 1, \"source_ids\": [\"91b032d4b5d046e193cdcd416c9cfae1\"], \"project_ids\": [1], \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImNkODE3OTkyODc5YjRiMGU4ZDA4NTU2NDExY2QwMDZmIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiOTFiMDMyZDRiNWQwNDZlMTkzY2RjZDQxNmM5Y2ZhZTEiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.02b6732dcb00ad4769f21659e9eb3f767b7533663895e18843b9074f0faa33d0\", \"bm25_score\": 3.808764666077921e-07, \"rank\": 5, \"snapshot_kind\": \"采集版本（仅本机）\"}], \"scope\": \"all\", \"effective_project_ids\": null, \"archive_scope\": \"local_documents\", \"coverage\": {\"indexed_files\": 5, \"sources\": [{\"id\": \"91b032d4b5d046e193cdcd416c9cfae1\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/资料 空格\", \"kind\": \"directory\", \"recursive\": true, \"exclude\": [\"excluded/**/\"], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"df89edda582d411ca420b174c2eb7b9e\", \"request_seq\": 9, \"started_at\": \"2026-11-22T19:27:09.944680+00:00\", \"finished_at\": \"2026-11-22T19:27:09.966328+00:00\", \"error\": null, \"counts\": {\"ready\": 4, \"failed\": 0, \"candidates\": 4, \"billed_bytes\": 6107, \"ignored_entries\": 2, \"ignored_format\": 0, \"ignored_excluded\": 1, \"ignored_links\": 1}, \"project_ids\": [1], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}, {\"id\": \"2bd168e4389249ed9ed774cba61d74f2\", \"path\": \"/tmp/SmmDocuments006-20261122/formal-v4/other.txt\", \"kind\": \"file\", \"recursive\": true, \"exclude\": [], \"revision\": 1, \"status\": \"ready\", \"resume_status\": \"ready\", \"refresh_id\": \"b1767e523adf4879a6f7c76bc189362f\", \"request_seq\": 2, \"started_at\": \"2026-11-22T19:26:17.478221+00:00\", \"finished_at\": \"2026-11-22T19:26:17.487219+00:00\", \"error\": null, \"counts\": {\"ready\": 1, \"failed\": 0, \"candidates\": 1, \"billed_bytes\": 19, \"ignored_entries\": 0, \"ignored_format\": 0, \"ignored_excluded\": 0, \"ignored_links\": 0}, \"project_ids\": [2], \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"}]}}"
+        },
+        "isError": false
+      },
+      "time": "2026-11-22T19:27:23.472514+00:00"
+    }
+  ]
+}

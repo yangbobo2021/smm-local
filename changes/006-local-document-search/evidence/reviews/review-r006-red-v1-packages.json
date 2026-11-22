@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-packages": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "场景SC7第二判据来自SPEC A7及边界约束，未增加产品行为；design-r006-v3-sc7要求模块等于实际wheel/源码，与PLAN P9及第5节E1.1一致。实际scripts/acceptance/local_documents_packages.py:33-38只从wheel生成expected，再比较安装目录；没有由src/smm_local或src/smm_hub及vendored转换独立生成源码预期。推演两个wheel都来自旧源码而安装完整匹配旧wheel：37行actual==expected仍通过，Local新入口若已存在旧实现也可通过42-51行，故不能证明本候选源码交付。这里不是增加等价包样例，而是漏掉原约定的独立比较对象。原始commands.json的8次命令及run.stderr已读：构建、两个独立venv/安装及逐模块wheel比较均退出0；第8次已安装Local documents --help真实退出2，stderr为invalid choice documents，源码CLI亦无该命令，属于真实能力缺失而非环境故障；后续文档闭环/Hub归档合并未到达。但当前完整候选仍须补源码到wheel映射断言后复审，不把该部分红灯当全部packages设计有效。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-packages",
+  "target_sha256": "e87115bfb12aeb9499cff16618e8d380c94167a0627f5ed7ef632d453eda4d65",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC A7及Hub独立边界、PLAN P9/§4/§6、design-r006-v5-sc7，对照local_documents_packages.py:15-62及build_packages.py实际构建规则。当前commands原件15个构建/两个全新venv/各自离线安装/隔离解释器核验/业务命令全部exit0，构建stderr成功。重新从当前源码逐字计算Local26和Hub24全部模块/HTML（Hub实际vendor与shim替换），与本次source-wheel及installed清单完全相等；Local documents.py SHA43d3762cd9d413bc5954df362bf99132beed242bb30348cd6911de470e5930a0为4c706b3，Hub无documents且独立解释器找不到smm_local。package-result本轮Local wheel SHAeb681f31e419ac47a3adb6321a1b6f777853c80ef3c49506ee44b917b769a112、Hub SHAabbb72ff4a38846419136ceb15044ac319356560e29d576d97d02da1069a0cfe；临时wheel按探针退出清理，SHA是本次实际运行hashlib记录，不冒称现存wheel重算或与平台另一批包字节相同。Local安装解释器-I/-B实际project create、add pending、refresh、search、read，原search reference逐字传read，准确独立正文needle package 中文😀+LF与原签名有效来源相等；Hub项目合并只剩standalone-B且serve-hub帮助成功。探针wheel资料/密钥后缀和构建器敏感资料检查均实际到达。顶层stdout passed/26/24、exit0/stderr空，8 artifacts/48 bindings。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "packages-c2"
+      ]
+    }
+  }
+}

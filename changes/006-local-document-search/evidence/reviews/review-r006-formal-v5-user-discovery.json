@@ -1,0 +1,15 @@
+{
+  "target_operation": "manual",
+  "target": "manual-r006-cross-user-v5",
+  "target_sha256": "a2baa6b47830d006e49ddebbd2d854af8e910a0a0d1da54fcdfde2df01adc352",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-user-discovery": {
+      "status": "passed",
+      "reason": "正式人工manual-r006-cross-user-v5独立复审passed，仅认领user-discovery-c3；依据SPEC B7/A8、PLAN §6.4/§6.6、design-r006-v5-sc7与user-discovery第1-6步。35 artifacts/41 bindings全部对当前9c重新计算匹配，原定义/TC/match-v9一致，没有借4c/a66人工或CI。\n实际从README:33-48到TRIAL_GUIDE:58-82、README Agent接入→Skill、指南维护链接→scripts/acceptance/README→当前证据页逐跳读取：未发布/0.4.0安装器不含、源码/独立wheel环境、服务电脑绝对路径与项目ID、pending后明确刷新、零/多/全局/直接一层、完整替换/排除、原reference读取、采集版本/Unicode码点/失效/移除影响都能找到。Skill三只读工具及不混对话引用、不默扫、不查/上传Hub边界明确。最新安装环境11份帮助为19:38:24.604–25.435Z真实新执行，全部exit0/stderr空，实际stdout字段/限制/步骤与指南吻合。维护说明可到控制依赖/普通Token/全新目录/模块摘要/清理与复跑方法；证据页已明确9c/autoformal-v5/platform-v4/files-v4/user-v5，A1-A8/E1/29TC各有当前原件/意见/双包/回归/两CI入口。所有本地Markdown导航存在；29项不重复，审阅时27passed/2pending（platform-files与本user）如实标记，其待生成review链接不是已通过依据，本意见不代判另一待审项。索引SHA55645aea34fff4065066f38e55801d102f077cb59d5fb8b41698bb98dba5312a、coverage SHA fdb3fdc98fdf079a30a8e38b5eb6d25288f2e13829bf0b03211ac8cd06eb2f55。本人实际运行verify.py --raw-root通过2294个公开文件和全部私有原SHA；JUnit公开仅hostname TEST-HOST，原/导出双SHA保留。delivery-r006-v1/v2 judgment.status均failed且原文可达；metadata、Unicode与glob真实红灯均保留，当前red-glob原stdout确为cache/direct.txt漏排导致1failed，未抹失败或由索引预判R006。旧user-v4 a66标签笔误原件及更正说明仍保留，本轮step6已准确9c。\n本轮实际打开6张新formal-v4原PNG：Mac pending显示主导航文档、服务器路径/项目ID/排除/完整替换及尚未刷新；三平台original均有指定项目、采集版本/来源/SHA/字符[0,64)/行1-3/纯文本脚本与码点扩读字段；Mac partial显示坏UTF8/权限/missing诊断，旧ref图明确要求重新检索。用兼容Playwright1.65.1实际打开Mac主trace、查动作及失败请求；另外逐三平台9份rawtrace解析，主137动作/34请求/0工具错误，包含真实主导航→建项目→保存pending→刷新→项目检索→原文/扩读→旧ref400→改配置→移除confirm/DELETE→同旧ref按钮读回；partial13/restarted50动作可追溯。三平台当前26模块/HTML重新算均等于9c源码，documents.py SHA390880bf58192317846ed1db29f271b9c5f6c7530b3811736634fa7aa4f74d66，候选4平台wheel均412a68157d685f93bda6dbe8a4fbd77945dea53e7faa8578fdcc46235a2ba6fb。三份survivor的CLI/真实stdio MCP/Web各准确edited正文、source_ids仅连续S1、collector保留被移除S2。新glob-exclusion原件三平台均为excluded/**/，成功覆盖4文件下零标记命中、来源ready/candidates3/bytes6130/ignored_excluded1；excluded/direct.txt真实51字节、SHA dcdadb7e…，配置前后SHA/mtime逐值同，body-read-audit无excluded正文打开。此是原件核对而非本人工新执行业务，平台完整结论归其正式Reviewer。\nfull-regression-v6原stdout301pass1skip/exit0、JUnit302项0失败1跳过及四旧引用已实际核；本会话另独立核execute-v5-packages15命令、Local26/Hub24源码-wheel-install与独立新wheel原SHA。ci-9c runs45059349205/45059354697原元数据真实head9cfd6193262b692f779abe1b240cd82f67b1eb50、6job success；两份原.log各系统实读：mac/Ubuntu301pass1skip、Windows302pass，两个wheel构建与分别安装均成功，log SHA7d33cddeefc7165e56682765ebfea66a5a7dcfa9b7e783a5e8cc05a26d662613、b17e0b92936b0e3c473ed56c469de5a68e488adc877823e5d751d8bc9cbea0cd。以上支持当前用户/Agent/维护者可发现并完成所述流程，不以文档存在代替业务；不代判平台、其他待审项或R006最终交付。",
+      "covers": [
+        "user-discovery-c3"
+      ]
+    }
+  }
+}

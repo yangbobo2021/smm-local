@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-source-lifecycle",
+  "target_sha256": "221aebe9c36034b7b3c757219ff1bed7c66118cf3e1e2aac15173ce02cfebc1d",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B1 set/B3/B4/B6/A4、PLAN §3.2/§4 A4、design-r006-v5-sc4及tests/test_document_lifecycle.py的test_source_lifecycle逐项对照。stdout 1 passed、stderr空、exit 0。00004–00006 P三文件、Q仅shared、all三文件；00007完整set改A为Q/排除one/非递归后pending，00009 P空、00010 Q仅B的shared，00011–00013原P各ref400，而00014/00015原Q/all沿连续B可读。00016刷新仅shared，00018/00019旧Q/all仍可读，原P不复活。00023取得含新A的allref后移除B，00025 Q仍shared，原Q及旧all在00026/00027均400，新all在00028准确可读；最后移除A，00031空来源、00032零结果、00033 finalref400。同次实际SQL断言可用正文数及FTS均0，三原文件完整SHA/字节/mtime前后相等并存于00034。逐search引用payload与命中对应已另核。38份artifacts、47份bindings及设计SHA重算一致。正式仅目标selector，无XML/附加旧引用回归，不沿用v1结论。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

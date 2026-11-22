@@ -1,0 +1,218 @@
+[
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "project",
+      "create",
+      "审查资料"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"id\": 1,\n  \"name\": \"审查资料\",\n  \"confirmed\": 1,\n  \"kind\": \"ordinary\",\n  \"conversations\": 0,\n  \"stable_key\": \"3141a5d06f312eef98c335bdac21e470\",\n  \"paths\": [],\n  \"linked_ids\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "projects"
+    ],
+    "exit": 0,
+    "stdout": "[\n  {\n    \"id\": 1,\n    \"name\": \"审查资料\",\n    \"confirmed\": 1,\n    \"kind\": \"ordinary\",\n    \"conversations\": 0,\n    \"stable_key\": \"3141a5d06f312eef98c335bdac21e470\",\n    \"paths\": [],\n    \"linked_ids\": [],\n    \"upload_selected\": false,\n    \"upload_allowed\": false\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "add",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md",
+      "--project-id",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n  \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n  \"kind\": \"file\",\n  \"recursive\": true,\n  \"exclude\": [],\n  \"revision\": 1,\n  \"status\": \"pending\",\n  \"resume_status\": \"pending\",\n  \"refresh_id\": null,\n  \"request_seq\": 0,\n  \"started_at\": null,\n  \"finished_at\": null,\n  \"error\": null,\n  \"counts\": {},\n  \"project_ids\": [\n    1\n  ],\n  \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "search",
+      "needle"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"results\": [],\n  \"scope\": \"all\",\n  \"effective_project_ids\": null,\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 0,\n    \"sources\": [\n      {\n        \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n        \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n        \"kind\": \"file\",\n        \"recursive\": true,\n        \"exclude\": [],\n        \"revision\": 1,\n        \"status\": \"pending\",\n        \"resume_status\": \"pending\",\n        \"refresh_id\": null,\n        \"request_seq\": 0,\n        \"started_at\": null,\n        \"finished_at\": null,\n        \"error\": null,\n        \"counts\": {},\n        \"project_ids\": [\n          1\n        ],\n        \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n      }\n    ]\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "refresh"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"sources\": [\n    {\n      \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n      \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n      \"kind\": \"file\",\n      \"recursive\": true,\n      \"exclude\": [],\n      \"revision\": 1,\n      \"status\": \"ready\",\n      \"resume_status\": \"ready\",\n      \"refresh_id\": \"1994094f3b754b99a25e930ad7c35aeb\",\n      \"request_seq\": 1,\n      \"started_at\": \"2026-11-22T18:56:33.004660+00:00\",\n      \"finished_at\": \"2026-11-22T18:56:33.005839+00:00\",\n      \"error\": null,\n      \"counts\": {\n        \"ready\": 1,\n        \"failed\": 0,\n        \"candidates\": 1,\n        \"billed_bytes\": 37,\n        \"ignored_entries\": 0,\n        \"ignored_format\": 0,\n        \"ignored_excluded\": 0,\n        \"ignored_links\": 0\n      },\n      \"project_ids\": [\n        1\n      ],\n      \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n    }\n  ],\n  \"message\": \"仅明确刷新读取文件；失败原因见来源和文件状态\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "search",
+      "needle",
+      "--scope",
+      "project",
+      "--project-id",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"results\": [\n    {\n      \"id\": \"acc35905627b4c6db989310216e978bf\",\n      \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n      \"version\": 1,\n      \"sha256\": \"4503e6508594897d5baadcb1257710139e3bf39548fd49de23092a2d38325366\",\n      \"text_length\": 18,\n      \"captured_at\": \"2026-11-22T18:56:33.005701+00:00\",\n      \"captured_by_source_id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n      \"text\": \"needle 中文😀 é\\n第二行\\n\",\n      \"start\": 0,\n      \"end\": 18,\n      \"start_line\": 1,\n      \"end_line\": 2,\n      \"source_ids\": [\n        \"7e4e9133c3f24891b331ad92a4bf7546\"\n      ],\n      \"project_ids\": [\n        1\n      ],\n      \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxOCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.d08b3292a47a713653b498eac48db4622bbf6479d92fea78fed94abf8eb8f4d6\",\n      \"bm25_score\": 1e-06,\n      \"rank\": 1,\n      \"snapshot_kind\": \"采集版本（仅本机）\"\n    }\n  ],\n  \"scope\": \"project\",\n  \"effective_project_ids\": [\n    1\n  ],\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 1,\n    \"sources\": [\n      {\n        \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n        \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n        \"kind\": \"file\",\n        \"recursive\": true,\n        \"exclude\": [],\n        \"revision\": 1,\n        \"status\": \"ready\",\n        \"resume_status\": \"ready\",\n        \"refresh_id\": \"1994094f3b754b99a25e930ad7c35aeb\",\n        \"request_seq\": 1,\n        \"started_at\": \"2026-11-22T18:56:33.004660+00:00\",\n        \"finished_at\": \"2026-11-22T18:56:33.005839+00:00\",\n        \"error\": null,\n        \"counts\": {\n          \"ready\": 1,\n          \"failed\": 0,\n          \"candidates\": 1,\n          \"billed_bytes\": 37,\n          \"ignored_entries\": 0,\n          \"ignored_format\": 0,\n          \"ignored_excluded\": 0,\n          \"ignored_links\": 0\n        },\n        \"project_ids\": [\n          1\n        ],\n        \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n      }\n    ]\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "read",
+      "--reference",
+      "r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxOCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.d08b3292a47a713653b498eac48db4622bbf6479d92fea78fed94abf8eb8f4d6"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"id\": \"acc35905627b4c6db989310216e978bf\",\n  \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n  \"version\": 1,\n  \"sha256\": \"4503e6508594897d5baadcb1257710139e3bf39548fd49de23092a2d38325366\",\n  \"text_length\": 18,\n  \"captured_at\": \"2026-11-22T18:56:33.005701+00:00\",\n  \"captured_by_source_id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n  \"text\": \"needle 中文😀 é\\n第二行\\n\",\n  \"start\": 0,\n  \"end\": 18,\n  \"start_line\": 1,\n  \"end_line\": 2,\n  \"source_ids\": [\n    \"7e4e9133c3f24891b331ad92a4bf7546\"\n  ],\n  \"snapshot_kind\": \"采集版本（仅本机）\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "read",
+      "--reference",
+      "r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxOCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.d08b3292a47a713653b498eac48db4622bbf6479d92fea78fed94abf8eb8f4d6"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"id\": \"acc35905627b4c6db989310216e978bf\",\n  \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n  \"version\": 1,\n  \"sha256\": \"4503e6508594897d5baadcb1257710139e3bf39548fd49de23092a2d38325366\",\n  \"text_length\": 18,\n  \"captured_at\": \"2026-11-22T18:56:33.005701+00:00\",\n  \"captured_by_source_id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n  \"text\": \"needle 中文😀 é\\n第二行\\n\",\n  \"start\": 0,\n  \"end\": 18,\n  \"start_line\": 1,\n  \"end_line\": 2,\n  \"source_ids\": [\n    \"7e4e9133c3f24891b331ad92a4bf7546\"\n  ],\n  \"snapshot_kind\": \"采集版本（仅本机）\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "refresh"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"sources\": [\n    {\n      \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n      \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n      \"kind\": \"file\",\n      \"recursive\": true,\n      \"exclude\": [],\n      \"revision\": 1,\n      \"status\": \"ready\",\n      \"resume_status\": \"ready\",\n      \"refresh_id\": \"a079eb69d1ea4e5385e18d00df7b556d\",\n      \"request_seq\": 2,\n      \"started_at\": \"2026-11-22T18:56:33.211243+00:00\",\n      \"finished_at\": \"2026-11-22T18:56:33.212460+00:00\",\n      \"error\": null,\n      \"counts\": {\n        \"ready\": 1,\n        \"failed\": 0,\n        \"candidates\": 1,\n        \"billed_bytes\": 18,\n        \"ignored_entries\": 0,\n        \"ignored_format\": 0,\n        \"ignored_excluded\": 0,\n        \"ignored_links\": 0\n      },\n      \"project_ids\": [\n        1\n      ],\n      \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n    }\n  ],\n  \"message\": \"仅明确刷新读取文件；失败原因见来源和文件状态\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "read",
+      "--reference",
+      "r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxOCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.d08b3292a47a713653b498eac48db4622bbf6479d92fea78fed94abf8eb8f4d6"
+    ],
+    "exit": 2,
+    "stdout": "",
+    "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents}\n           ...\nsmm: error: 采集版本已失效，请重新检索\n"
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "search",
+      "needle"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"results\": [\n    {\n      \"id\": \"acc35905627b4c6db989310216e978bf\",\n      \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n      \"version\": 2,\n      \"sha256\": \"55e23ab42295baccba6ca422403f7651679b7472a005a8fa708515e91af56a9b\",\n      \"text_length\": 14,\n      \"captured_at\": \"2026-11-22T18:56:33.212316+00:00\",\n      \"captured_by_source_id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n      \"text\": \"needle new 原文\\n\",\n      \"start\": 0,\n      \"end\": 14,\n      \"start_line\": 1,\n      \"end_line\": 1,\n      \"source_ids\": [\n        \"7e4e9133c3f24891b331ad92a4bf7546\"\n      ],\n      \"project_ids\": [\n        1\n      ],\n      \"reference\": \"r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bccc33149d39bc9acae3a4a7a3263e26f72165fcb8908e3decf8e9c8727696e6\",\n      \"bm25_score\": 1e-06,\n      \"rank\": 1,\n      \"snapshot_kind\": \"采集版本（仅本机）\"\n    }\n  ],\n  \"scope\": \"all\",\n  \"effective_project_ids\": null,\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 1,\n    \"sources\": [\n      {\n        \"id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n        \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n        \"kind\": \"file\",\n        \"recursive\": true,\n        \"exclude\": [],\n        \"revision\": 1,\n        \"status\": \"ready\",\n        \"resume_status\": \"ready\",\n        \"refresh_id\": \"a079eb69d1ea4e5385e18d00df7b556d\",\n        \"request_seq\": 2,\n        \"started_at\": \"2026-11-22T18:56:33.211243+00:00\",\n        \"finished_at\": \"2026-11-22T18:56:33.212460+00:00\",\n        \"error\": null,\n        \"counts\": {\n          \"ready\": 1,\n          \"failed\": 0,\n          \"candidates\": 1,\n          \"billed_bytes\": 18,\n          \"ignored_entries\": 0,\n          \"ignored_format\": 0,\n          \"ignored_excluded\": 0,\n          \"ignored_links\": 0\n        },\n        \"project_ids\": [\n          1\n        ],\n        \"message\": \"仅本机；保存配置后请明确运行 documents refresh\"\n      }\n    ]\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "read",
+      "--reference",
+      "r1.eyJhcmNoaXZlX2lkIjoiMWRlYmJjMWM0YWVhNDEyZmEwZmU4NDA5ZTU4ZDdkNzAiLCJkb2N1bWVudF9pZCI6ImFjYzM1OTA1NjI3YjRjNmRiOTg5MzEwMjE2ZTk3OGJmIiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdlNGU5MTMzYzNmMjQ4OTFiMzMxYWQ5MmE0YmY3NTQ2IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bccc33149d39bc9acae3a4a7a3263e26f72165fcb8908e3decf8e9c8727696e6"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"id\": \"acc35905627b4c6db989310216e978bf\",\n  \"path\": \"<REVIEW_TEMP>/smm006-prreview-tog2acvu/资料 空格.md\",\n  \"version\": 2,\n  \"sha256\": \"55e23ab42295baccba6ca422403f7651679b7472a005a8fa708515e91af56a9b\",\n  \"text_length\": 14,\n  \"captured_at\": \"2026-11-22T18:56:33.212316+00:00\",\n  \"captured_by_source_id\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n  \"text\": \"needle new 原文\\n\",\n  \"start\": 0,\n  \"end\": 14,\n  \"start_line\": 1,\n  \"end_line\": 1,\n  \"source_ids\": [\n    \"7e4e9133c3f24891b331ad92a4bf7546\"\n  ],\n  \"snapshot_kind\": \"采集版本（仅本机）\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "remove",
+      "7e4e9133c3f24891b331ad92a4bf7546"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"removed\": \"7e4e9133c3f24891b331ad92a4bf7546\",\n  \"message\": \"已取消此来源；独占材料退出检索/读取，原文件未改变\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/smm-006-impl/.venv/bin/python",
+      "-m",
+      "smm_local.cli",
+      "--db",
+      "<REVIEW_TEMP>/smm006-prreview-tog2acvu/archive.sqlite3",
+      "documents",
+      "search",
+      "needle"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"results\": [],\n  \"scope\": \"all\",\n  \"effective_project_ids\": null,\n  \"archive_scope\": \"local_documents\",\n  \"coverage\": {\n    \"indexed_files\": 0,\n    \"sources\": []\n  }\n}\n",
+    "stderr": ""
+  }
+]

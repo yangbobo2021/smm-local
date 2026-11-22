@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "needs_revision",
+      "revision_target": "implementation",
+      "reason": "SC3判据与design-r006-v5-sc3来自SPEC B3确定时间线/A3/A4，无加码。v1b设计缺口已补continuous第三分支及79-84最后S1失败：持续有效S2但Q未获v3会在72及78行失败；最后S1失败仍可搜旧材料84行失败。v2的独立needle v2、captured_by_source_id和P/Q/all source_ids在51-54可拦两响应同错、误用同资格。仍有首轮实现缺口未完全闭合：v2的49行及退出后的63-64行均经names()字典吞重复，raw唯一性仅73-78在S1新采v3之后检查。若共享v2对每来源重复返回、而v3阶段正常去重，当前全部断言可通过，违反B3及本判据明确“P/Q/all各只返回当前v2”的承诺。最小在v2首次P/Q/all及退出后保留原始results，逐次核共享规范路径/id恰一份及预期完整集合，再读取同一命中；不是新增等价样例而是已声明v2动作前状态。另最后S1失败仅检查search，未保存v3 ref并逐一拒绝；存在search正确退出但read沿缓存资格继续成功的反例，需在79前保存P/all v3 ref，83后明确拒绝，正控仍可读。设计已表达原始results及最后资格消失退出，最早修订implementation。原始red-r006-v2-overlap-version/TC-006-overlap-version/run.stdout与3个api-001附件显示三个withdraw参数均在46行首次S1 add404，v1/v2/v3、资格和退出断言均未到达。artifacts SHA一致，测试与match-r006-v3-sc3一致，src未改；保留真实业务红灯，候选需修订。",
+      "covers": []
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "case": "stat-failure",
+  "source": {
+    "id": "0119b92945d2423bbf2e0e7de04f49f9",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_stat_failure_0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "partial",
+    "resume_status": "partial",
+    "refresh_id": "973d3ac3ce9f45a5a27fb14388a0b0c3",
+    "request_seq": 2,
+    "started_at": "2026-11-22T19:18:50.939572+00:00",
+    "finished_at": "2026-11-22T19:18:50.941323+00:00",
+    "error": null,
+    "counts": {
+      "ready": 1,
+      "failed": 1,
+      "candidates": 2,
+      "billed_bytes": 1,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  },
+  "actual_candidates": 2,
+  "actual_billed_bytes": 1,
+  "source_bytes": {
+    "baseline.txt": {
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "bytes": 1,
+      "mtime_ns": 1795375130928785384
+    },
+    "stat-failed.txt": {
+      "sha256": "ec0aba9801b6f0babacb965caf7d55ef767ca249cccdd93c71b5b7efeaa66dfd",
+      "bytes": 10,
+      "mtime_ns": 1795375130938455427
+    }
+  },
+  "files": [
+    {
+      "source_id": "0119b92945d2423bbf2e0e7de04f49f9",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "cd9df16f4e6f467fa12bf8bd968fb96a",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_stat_failure_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.941059+00:00",
+      "captured_by_source_id": "0119b92945d2423bbf2e0e7de04f49f9"
+    },
+    {
+      "source_id": "0119b92945d2423bbf2e0e7de04f49f9",
+      "relative_path": "stat-failed.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "stat失败: synthetic stat denied",
+      "id": "a2019b9be9c945598de95eee5672d6ad",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_stat_failure_0/docs/stat-failed.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    }
+  ]
+}

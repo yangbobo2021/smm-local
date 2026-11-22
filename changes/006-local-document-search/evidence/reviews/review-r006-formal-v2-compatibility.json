@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-compatibility",
+  "target_sha256": "8153cbf335da9c80989253d0cad7431e701cb32fc9cd72c5fe625188e6c362a3",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B1/A7、PLAN §4、design-r006-v5-sc7，对照tests/test_document_compatibility.py的test_compatibility、两个独立来源夹具及冻结legacy CLI。候选逐两个conversation ID验证Codex/documents-compat-session/original与Claude/second-session/second independent独立预期；各自数字ID旧参数及reference新参数都核source/session/id和完整消息正文，并核legacy DTO archive_scope/matched_messages且无文档content_kind。实际stdout1 passed、exit0、stderr空，说明上述所有断言实际到达；这些对话响应没有另存业务JSON，本结论依赖已绑定断言及真实成功运行，不虚构独立响应。唯一业务附件00001实际包含source/list/validate/register/enable/disable/rollback/batches/purge-batch共9层旧新帮助，逐层stdout字节文本相等且双exit0；独立以git show核冻结cli.py逐字等于f797fe843430b48faf379cd76b4ae18fd52f5c64原件，元数据SHA亦一致。5 artifacts、48 bindings与match摘要重算一致。此为兼容既有行为，不要求基线红灯。本正式轮无XML/附回归；full-regression-v3源码绑定一致，原XML四项旧对话引用通过（全集301 passed/1 skipped），未将完整回归冒充本selector内附带执行。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "method": "POST",
+  "path": "/api/documents/sources",
+  "request": {
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1012/test_exact_read_needle__U0001f0/docs/位置.md",
+    "project_ids": []
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "2444093a1cc347679656d02cb4808983",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1012/test_exact_read_needle__U0001f0/docs/位置.md",
+    "kind": "file",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "74191cca1b2e45dca779f75bf5e5ad57",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_failed_0/docs/shared.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "6f2c28ea1f2b488e8ce27a70df2b6934",
+      "request_seq": 1,
+      "started_at": "2026-11-22T17:55:56.596912+00:00",
+      "finished_at": "2026-11-22T17:55:56.598169+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 9,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "5a281e83e4b44407b5014e81450489cd",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_failed_0/docs/control.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "c011797e6ae3458cbb3253921faf910b",
+      "request_seq": 2,
+      "started_at": "2026-11-22T17:55:56.600394+00:00",
+      "finished_at": "2026-11-22T17:55:56.601393+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 14,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "e6d9b6f9c62b48b98817ea30e688ded1",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_failed_0/docs/shared.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "failed",
+      "resume_status": "failed",
+      "refresh_id": "50e4cb72fb4a4481853e5e13117c3606",
+      "request_seq": 4,
+      "started_at": "2026-11-22T17:55:56.632084+00:00",
+      "finished_at": "2026-11-22T17:55:56.632827+00:00",
+      "error": "synthetic S2 enumeration/read unavailable",
+      "counts": {
+        "ready": 0,
+        "failed": 0,
+        "candidates": 0,
+        "billed_bytes": 0,
+        "ignored_entries": 0
+      },
+      "project_ids": [
+        2
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

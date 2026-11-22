@@ -1,0 +1,25 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7及B3返修背景、PLAN§4/§6与最新说明、design-r006-v5-sc7及match-r006-v8-sc7自动项分工；场景/自然设计及断言有原文依据，人工user-discovery另项保留未判。当前37个src逐字等于4c706b3，runtime-product-v4/自身测试源码绑定与全部artifacts SHA重算一致；已实际读stdout/process/stderr和业务附件，不凭status，也不继承旧wheel通过。test_isolation实际三参数passed/exit0。none/hub/paused、Codex停用/Claude启用两独立会话，持久portal先建而文档全周期及最终核对均在guard；federation请求和全部新IP被拒、回环/外网两负例仍真实执行。全归档/远端/上传数据比较、逐第二Agent独立原串/source及开关/暂停断言拦只首目标正确或两响应同错，三参数拦只首环境状态正确。当前三complete-state原件逐模式本地/远端before==after、两独立原文保留、出站新增0及两负例通过，私有文档正文正控准确。read有效来源列表过滤本次未引入外发或对话改写。 本TC当前准备证据和设计/实现有效，无有据必测缺口，等价目标可选；认领全部分配检查，准备passed，可用全新正式执行验证。不判formal/新平台、用户发现、最终CI或R006；首次R006 failed及历史TDD保留，不被本意见覆盖。",
+      "covers": [
+        "isolation-c1"
+      ]
+    },
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7及B3返修背景、PLAN§4/§6与最新说明、design-r006-v5-sc7及match-r006-v8-sc7自动项分工；场景/自然设计及断言有原文依据，人工user-discovery另项保留未判。当前37个src逐字等于4c706b3，runtime-product-v4/自身测试源码绑定与全部artifacts SHA重算一致；已实际读stdout/process/stderr和业务附件，不凭status，也不继承旧wheel通过。test_compatibility实际1 passed/exit0。两个Codex/Claude独立id/session/source/正文，完整两ID集合、逐旧数字ID和reference两种读取的身份及独立原串断言，防只首目标正确或两读同错首会话；旧DTO字段保持。当前legacy-source-help九项source/list/validate/register/enable/disable/rollback/batches/purge-batch全old/new exit0、stdout逐字一致；实际冻结旧CLI仍由代码SHA验证且此前独立核git f797原件，不声称旧整包。当前业务测试声明与baseline-r006-compatibility-v3对应，历史基线只作追溯，最终4c产品兼容依据本次debug真实运行；未把它冒称本轮新TDDgreen。 本TC当前准备证据和设计/实现有效，无有据必测缺口，等价目标可选；认领全部分配检查，准备passed，可用全新正式执行验证。不判formal/新平台、用户发现、最终CI或R006；首次R006 failed及历史TDD保留，不被本意见覆盖。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    },
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "本份仅审debug-r006-v4-sc7准备结果。已读定义000002 sha6b524c88…、SPEC B1/B4/B5/A7及B3返修背景、PLAN§4/§6与最新说明、design-r006-v5-sc7及match-r006-v8-sc7自动项分工；场景/自然设计及断言有原文依据，人工user-discovery另项保留未判。当前37个src逐字等于4c706b3，runtime-product-v4/自身测试源码绑定与全部artifacts SHA重算一致；已实际读stdout/process/stderr和业务附件，不凭status，也不继承旧wheel通过。包探针当前exit0，commands.json十五条真实构建/两独立安装/模块核验及业务命令全exit0。26项Local/24项Hub独立源码字典=wheel=安装命令stdout=package-result全量SHA；新安装documents.py摘要43d3762cd9d413bc5954df362bf99132beed242bb30348cd6911de470e5930a0与当前4c源码逐字摘要相同。Local真实创建/add pending/refresh/search→原样ref read准确needle package 中文😀加LF；Hub实际find_spec(smm_local)为空、归档创建合并后仅standalone-B、serve-hub帮助通过。独立src全量字典拦wheel/安装同错旧源码，逐模块完整集合防只首项正确，构建扫描拒数据/私钥。当前包证据真实包含本次read修复，版本0.4.0字符串未被用来判同包；新平台闭环不由此推定。 本TC当前准备证据和设计/实现有效，无有据必测缺口，等价目标可选；认领全部分配检查，准备passed，可用全新正式执行验证。不判formal/新平台、用户发现、最终CI或R006；首次R006 failed及历史TDD保留，不被本意见覆盖。",
+      "covers": [
+        "packages-c2"
+      ]
+    }
+  }
+}

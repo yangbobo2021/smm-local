@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-overlap-order",
+  "target_sha256": "1ca5a71f96e11b9e20c4e6e5f10a5d8475ef6cce9dd8e7e4e33cbf4d7c0d9598",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B3/B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:77-99。两个实际前置状态S1 pending/ready、两个独立路径one/two均执行，S1旧请求在发布前等待，S2先成功发布新正文再释放S1。第91行所有documents行保持winner完整状态；第92-97行逐P/Q/all和逐one/two核newwinner独立原串、S2采集出处，ready组核ID保留且版本更新。当前00006–14/00024–32原读写分别是v1或v2两个新正文，00015/33旧词为空；00017/35的winner和final重新核两个文档、采集出处和独立正文均一致。旧请求补纳入成员资格可返回ready，但不能回写较旧文件内容，本轮未发生覆盖。stdout2 passed/exit0/stderr空，39 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "overlap-order-c1"
+      ]
+    }
+  }
+}

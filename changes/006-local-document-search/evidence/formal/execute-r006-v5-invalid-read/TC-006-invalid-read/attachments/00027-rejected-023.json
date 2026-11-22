@@ -1,0 +1,17 @@
+{
+  "path": "/api/documents/read",
+  "status": 422,
+  "response": {
+    "detail": [
+      {
+        "type": "int_type",
+        "loc": [
+          "body",
+          "start"
+        ],
+        "msg": "Input should be a valid integer",
+        "input": true
+      }
+    ]
+  }
+}

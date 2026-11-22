@@ -1,0 +1,17 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-entrance-contract",
+  "target_sha256": "397dca60939bc0a5e88fd2dc5281f20358db2782b706d864445cf014026227d5",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "独立重核v5本轮CLI原件及SPEC B1/B7/A1、PLAN §4、test_entrance_contract/设计分配。stdout1passed、stderr空、exit0；19 artifacts/47 bindings和设计摘要重算匹配9cfd619 documents390880bf…。真实CLI项目创建/多名单add/set及省略字段复位与同档案API相同，refresh后ready；唯一命中ref被原样传read，22码点独立正文、换行、原SHA及source_ids准确。非法相对路径exit2且stderr非空；七层真实帮助含输入ID、pending/refresh、Unicode和旧ref边界。同次工厂list_tools三个readonly及旧工具存在断言通过，不声称stdio平台调用。只当前正式selector、无XML/额外回归，不用旧通过或历史TDD代替本轮证据。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

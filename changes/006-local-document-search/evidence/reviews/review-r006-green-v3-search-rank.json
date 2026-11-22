@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "passed",
+      "reason": "已对照定义000002(sha6b524c88…)的SC5、SPEC B5/B6/A5、PLAN§3.3/§4及末段Unicode修订说明、design-r006-v5-sc5和match-r006-v7-sc5。新增两材料是合法UTF-8长文与原码点定位的有据边界，既有排序/去重/limit/文件名/尾部/长行/中文断言均保留。tests/test_document_search.py:9–38完整50路径/唯一ID拦仅首目标正确，逐special独立原串切片且要求实际查询词出现，不能search/read同错而全过；İ前缀分支会拦转换后偏移直接切原文，长s前缀会拦IGNORECASE错误等价字符抢位。实际读两轮原红灯及独立review-r006-red-unicode-v1/v2-search-rank：v1在lowerexpansionmarker合法查询返回400范围错误，v2虽200召回却read前2000全长s不含真实ASCII词，均为真实业务缺陷。green-r006-v3-search-rank与red-r006-unicode-v2-search-rank的test_bindings、声明和命令完全相同。当前37个src逐字等于git a66deeb；documents.py:380–394保留tokens的lower.find语义，按原字符lower长度把展开后offset映回原码点，再构造窗口，不引入regex等价匹配。绿灯原stdout 1 passed/exit0：api-010/011的stopuniquemarker原命中3400，窗口[3200,3421)长221且独立原串准确；api-012/013的lowerexpansionmarker原命中3001，窗口[2801,3026)长225且独立原串准确。其余50路径000..049/高低相关/文件名零命中与四种原特殊召回断言均真实执行。全部artifacts与当前bindings SHA已逐项重算；所附regression命令仅test_archive_references.py，原stdout 4 passed/exit0，其四项旧引用签名/范围/旧参数契约断言已核，不冒称包含旧帮助。设计、修订实现和本版绿灯/回归有效，无有据必测缺口，passed；其他旧TDDgreen只保留历史，不冒称23份新绿灯。正式运行、人工平台/用户发现、最终CI与R006交付不在本意见。",
+      "covers": []
+    }
+  }
+}

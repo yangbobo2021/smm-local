@@ -1,0 +1,176 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "needle"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [
+      {
+        "id": "922da9cdad6b463e9205a522659eba5e",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/branch/keep.txt",
+        "version": 1,
+        "sha256": "36873bd33644eae50c0706d44ea3de8e4c59c69d86bfde765cfbd6e7d2a4fc60",
+        "text_length": 12,
+        "captured_at": "2026-11-22T19:07:06.279395+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle keep\n",
+        "start": 0,
+        "end": 12,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6IjkyMmRhOWNkYWQ2YjQ2M2U5MjA1YTUyMjY1OWViYTVlIiwiZW5kIjoxMiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.72e0a9a0d6bab489fac49456f8baddb1c5340a2db90526f816cd583ef1e0c30f",
+        "bm25_score": 1.1578947368421053e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "f88dff62b2274842ace9d3b220ad9839",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/root.MD",
+        "version": 1,
+        "sha256": "5180ef9095f19b68c9c8c1c066a19dab0f60dbf080fbd27b6b65615d9a53a6f5",
+        "text_length": 10,
+        "captured_at": "2026-11-22T19:07:06.279553+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle 根😀\n",
+        "start": 0,
+        "end": 10,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6ImY4OGRmZjYyYjIyNzQ4NDJhY2U5ZDNiMjIwYWQ5ODM5IiwiZW5kIjoxMCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.0112135d925c8b79b4c3d1ed762a9e04e0a85d1f200ffac293e62e9d12f1d9b1",
+        "bm25_score": 1.1578947368421053e-06,
+        "rank": 2,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "020c27e9a04b4cafba38dfe8b6914bcd",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/sub/open.txt",
+        "version": 1,
+        "sha256": "757401ef91bc6a68a36b4804356b7693eb06e9aedbec0adf955857629e6f39b9",
+        "text_length": 12,
+        "captured_at": "2026-11-22T19:07:06.279811+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle open\n",
+        "start": 0,
+        "end": 12,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6IjAyMGMyN2U5YTA0YjRjYWZiYTM4ZGZlOGI2OTE0YmNkIiwiZW5kIjoxMiwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.61c7ce6735f0005a922995f21dd611d0c4a29b8c60fbb6dc1b36c170c7538e50",
+        "bm25_score": 1.1578947368421053e-06,
+        "rank": 3,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "df55864fb86f4e9784df9261aed85aba",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/sub/deep.markdown",
+        "version": 1,
+        "sha256": "066c8e4877c4fef8c117f394eabf89349950987e6e9bea4814c988b7204f7ac6",
+        "text_length": 10,
+        "captured_at": "2026-11-22T19:07:06.279785+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle 深层\n",
+        "start": 0,
+        "end": 10,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6ImRmNTU4NjRmYjg2ZjRlOTc4NGRmOTI2MWFlZDg1YWJhIiwiZW5kIjoxMCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.6bed91ab28a804c272250e5e09031536656d29e775008a94b27e703d7831d48d",
+        "bm25_score": 8.8e-07,
+        "rank": 4,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "66db7a4e62f541d3af657ed664223f8d",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/star-dir/keep.txt",
+        "version": 1,
+        "sha256": "fd07cea7911ea9e6cf0629b8448ca92996e4e86684a4a5268c67fec3336403ea",
+        "text_length": 35,
+        "captured_at": "2026-11-22T19:07:06.279831+00:00",
+        "captured_by_source_id": "e065cc6383c44d2fa03d73635e45ab17",
+        "text": "needle star cannot cross directory\n",
+        "start": 0,
+        "end": 35,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "e065cc6383c44d2fa03d73635e45ab17"
+        ],
+        "project_ids": [
+          1
+        ],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMTA1MGNjYTFhZDM2NGU2NDk4YjQxN2QzMjhmOThkODMiLCJkb2N1bWVudF9pZCI6IjY2ZGI3YTRlNjJmNTQxZDNhZjY1N2VkNjY0MjIzZjhkIiwiZW5kIjozNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImUwNjVjYzYzODNjNDRkMmZhMDNkNzM2MzVlNDVhYjE3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.3e355b039e83f868b3e49c9c1d4711b0482ff0ce482462da5dba28cd81d0fef4",
+        "bm25_score": 7.857142857142857e-07,
+        "rank": 5,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 5,
+      "sources": [
+        {
+          "id": "e065cc6383c44d2fa03d73635e45ab17",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [
+            "**/private.txt",
+            "skip?.txt",
+            "branch/skip?.txt",
+            "star-*.txt",
+            "cache/"
+          ],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "aca827f2d1d0493a8a8f02db64e60a1c",
+          "request_seq": 1,
+          "started_at": "2026-11-22T19:07:06.277833+00:00",
+          "finished_at": "2026-11-22T19:07:06.279852+00:00",
+          "error": null,
+          "counts": {
+            "ready": 5,
+            "failed": 0,
+            "candidates": 5,
+            "billed_bytes": 88,
+            "ignored_entries": 18,
+            "ignored_format": 1,
+            "ignored_excluded": 17,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

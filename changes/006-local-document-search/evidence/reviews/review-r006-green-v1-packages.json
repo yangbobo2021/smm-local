@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-packages": {
+      "status": "passed",
+      "reason": "已核定义000002 SC7、SPEC A7/边界、PLAN P9/§4/§6、design-r006-v5-sc7和match-r006-v4-sc7；Local/Hub独立构建安装、共享core不依赖Local documents有原文依据，设计未扩大到平台/CI，后者属其他实际验证项。scripts/acceptance/local_documents_packages.py:27–47真实构建、两个全新环境分别安装，34–43按src独立计算全部py/html集合/SHA，处理Hub shim和共享模块映射，45–46在已安装解释器逐模块核SHA；只首模块正确被43/46全量字典拦，wheel/安装两边同错旧源码被43独立src拦。51–60真实Local新CLI闭环和Hub无smm_local的Archive/创建合并及既有帮助；build_packages.py:27–52只拷对应源码、拒数据文件和私钥模式。red-r006-v3-packages原stderr及commands.json证实前7条构建/两环境/安装/模块核验成功，第8条已安装Local documents --help exit2 invalid choice documents；既有独立review-r006-red-v3-packages与原件一致。green-r006-v1-packages复用完全同测试绑定/声明/命令，全部artifacts和当前bindings SHA一致。绿灯真实15条命令全exit0：Local add返回pending，刷新/搜索/ref读取独立正文needle package 中文😀及LF，Hub独立断言find_spec(smm_local)为空、创建并合并后仅standalone-B、serve-hub --help成功；源码/wheel/安装26个Local和24个Hub模块完全相等，Local含documents而Hub不含，不依赖相同0.4.0字符串判断同包。run.stdout与package-result原件吻合；所附regression.stdout实际5 passed/exit0，为已读四项旧引用及两Agent数字ID/ref、九层旧来源帮助断言。无有据必测缺口；同版TDD绿灯与附带回归passed，额外同条件模块样本可选；本项不认领三系统CI、E1平台、正式交付或R006通过。",
+      "covers": []
+    }
+  }
+}

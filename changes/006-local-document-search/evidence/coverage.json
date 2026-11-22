@@ -1,0 +1,455 @@
+{
+  "acceptance_id": "AT-SMM-006",
+  "source": "9cfd619",
+  "definitions_sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c",
+  "current_automated_formal": "execute-r006-v5-*",
+  "current_platform_formal": "manual-r006-formal-*-v4",
+  "observed_at": "2026-11-22T19:42:55.305677+00:00",
+  "cases": [
+    {
+      "spec_acceptance": "A1",
+      "scene": "SC1",
+      "case": "TC-006-source-config",
+      "title": "明确来源和完整配置",
+      "kind": "automated",
+      "target": "execute-r006-v5-source-config",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-source-config/result.json",
+      "review": "reviews/review-r006-formal-v5-source-config.json",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ],
+      "basis": "tests/test_document_sources.py"
+    },
+    {
+      "spec_acceptance": "A1",
+      "scene": "SC1",
+      "case": "TC-006-entrance-contract",
+      "title": "CLI与只读MCP契约",
+      "kind": "automated",
+      "target": "execute-r006-v5-entrance-contract",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-entrance-contract/result.json",
+      "review": "reviews/review-r006-formal-v5-entrance-contract.json",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ],
+      "basis": "tests/test_document_sources.py"
+    },
+    {
+      "spec_acceptance": "A2",
+      "scene": "SC2",
+      "case": "TC-006-scan-scope",
+      "title": "目录范围与排除",
+      "kind": "automated",
+      "target": "execute-r006-v5-scan-scope",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-scan-scope/result.json",
+      "review": "reviews/review-r006-formal-v5-scan-scope.json",
+      "covers": [
+        "scan-scope-c1"
+      ],
+      "basis": "tests/test_document_scanning.py"
+    },
+    {
+      "spec_acceptance": "A2",
+      "scene": "SC2",
+      "case": "TC-006-decode-files",
+      "title": "文本解码与单文件失败",
+      "kind": "automated",
+      "target": "execute-r006-v5-decode-files",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-decode-files/result.json",
+      "review": "reviews/review-r006-formal-v5-decode-files.json",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ],
+      "basis": "tests/test_document_scanning.py"
+    },
+    {
+      "spec_acceptance": "A2",
+      "scene": "SC2",
+      "case": "TC-006-budgets",
+      "title": "实际字节与数量预算",
+      "kind": "automated",
+      "target": "execute-r006-v5-budgets",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-budgets/result.json",
+      "review": "reviews/review-r006-formal-v5-budgets.json",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ],
+      "basis": "tests/test_document_limits.py"
+    },
+    {
+      "spec_acceptance": "A2",
+      "scene": "SC2",
+      "case": "TC-006-read-races",
+      "title": "预算与实际读取一致",
+      "kind": "automated",
+      "target": "execute-r006-v5-read-races",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-read-races/result.json",
+      "review": "reviews/review-r006-formal-v5-read-races.json",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ],
+      "basis": "tests/test_document_limits.py"
+    },
+    {
+      "spec_acceptance": "A2",
+      "scene": "SC2",
+      "case": "TC-006-platform-files",
+      "title": "实际平台文件边界原件关联",
+      "kind": "manual",
+      "target": "manual-r006-cross-files-v4",
+      "status": "passed",
+      "formal_evidence": "native-manual/manual-r006-cross-files-v4/result.json",
+      "review": "reviews/review-r006-formal-v4-platform-files.json",
+      "covers": [
+        "platform-files-c1",
+        "platform-files-c2"
+      ],
+      "basis": "changes/006-local-document-search/acceptance/platform-files.md"
+    },
+    {
+      "spec_acceptance": "A3",
+      "scene": "SC3",
+      "case": "TC-006-project-scope",
+      "title": "本机项目范围与共享绑定",
+      "kind": "automated",
+      "target": "execute-r006-v5-project-scope",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-project-scope/result.json",
+      "review": "reviews/review-r006-formal-v5-project-scope.json",
+      "covers": [
+        "project-scope-c1"
+      ],
+      "basis": "tests/test_document_projects.py"
+    },
+    {
+      "spec_acceptance": "A3",
+      "scene": "SC3",
+      "case": "TC-006-project-maintenance",
+      "title": "项目维护保留文档绑定",
+      "kind": "automated",
+      "target": "execute-r006-v5-project-maintenance",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-project-maintenance/result.json",
+      "review": "reviews/review-r006-formal-v5-project-maintenance.json",
+      "covers": [
+        "project-maintenance-c2"
+      ],
+      "basis": "tests/test_document_projects.py"
+    },
+    {
+      "spec_acceptance": "A3",
+      "scene": "SC3",
+      "case": "TC-006-overlap-version",
+      "title": "重叠来源共享当前版本",
+      "kind": "automated",
+      "target": "execute-r006-v5-overlap-version",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-overlap-version/result.json",
+      "review": "reviews/review-r006-formal-v5-overlap-version.json",
+      "covers": [
+        "overlap-version-c3"
+      ],
+      "basis": "tests/test_document_projects.py"
+    },
+    {
+      "spec_acceptance": "A4",
+      "scene": "SC4",
+      "case": "TC-006-version-lifecycle",
+      "title": "编辑移动与版本失效",
+      "kind": "automated",
+      "target": "execute-r006-v5-version-lifecycle",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-version-lifecycle/result.json",
+      "review": "reviews/review-r006-formal-v5-version-lifecycle.json",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ],
+      "basis": "tests/test_document_lifecycle.py"
+    },
+    {
+      "spec_acceptance": "A4",
+      "scene": "SC4",
+      "case": "TC-006-qualification",
+      "title": "失败后的连续引用资格",
+      "kind": "automated",
+      "target": "execute-r006-v5-qualification",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-qualification/result.json",
+      "review": "reviews/review-r006-formal-v5-qualification.json",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ],
+      "basis": "tests/test_document_lifecycle.py"
+    },
+    {
+      "spec_acceptance": "A4",
+      "scene": "SC4",
+      "case": "TC-006-source-lifecycle",
+      "title": "配置移出和最后来源移除",
+      "kind": "automated",
+      "target": "execute-r006-v5-source-lifecycle",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-source-lifecycle/result.json",
+      "review": "reviews/review-r006-formal-v5-source-lifecycle.json",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ],
+      "basis": "tests/test_document_lifecycle.py"
+    },
+    {
+      "spec_acceptance": "A5",
+      "scene": "SC5",
+      "case": "TC-006-search-rank",
+      "title": "正文召回与稳定文件排序",
+      "kind": "automated",
+      "target": "execute-r006-v5-search-rank",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-search-rank/result.json",
+      "review": "reviews/review-r006-formal-v5-search-rank.json",
+      "covers": [
+        "search-rank-c1"
+      ],
+      "basis": "tests/test_document_search.py"
+    },
+    {
+      "spec_acceptance": "A5",
+      "scene": "SC5",
+      "case": "TC-006-exact-read",
+      "title": "码点原文与范围端点",
+      "kind": "automated",
+      "target": "execute-r006-v5-exact-read",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-exact-read/result.json",
+      "review": "reviews/review-r006-formal-v5-exact-read.json",
+      "covers": [
+        "exact-read-c2"
+      ],
+      "basis": "tests/test_document_search.py"
+    },
+    {
+      "spec_acceptance": "A5",
+      "scene": "SC5",
+      "case": "TC-006-invalid-read",
+      "title": "引用不串档或错资格",
+      "kind": "automated",
+      "target": "execute-r006-v5-invalid-read",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-invalid-read/result.json",
+      "review": "reviews/review-r006-formal-v5-invalid-read.json",
+      "covers": [
+        "invalid-read-c3"
+      ],
+      "basis": "tests/test_document_search.py"
+    },
+    {
+      "spec_acceptance": "A5",
+      "scene": "SC5",
+      "case": "TC-006-empty-query",
+      "title": "输入拒绝与零命中覆盖",
+      "kind": "automated",
+      "target": "execute-r006-v5-empty-query",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-empty-query/result.json",
+      "review": "reviews/review-r006-formal-v5-empty-query.json",
+      "covers": [
+        "empty-query-c1"
+      ],
+      "basis": "tests/test_document_search.py"
+    },
+    {
+      "spec_acceptance": "A6",
+      "scene": "SC6",
+      "case": "TC-006-refresh-order",
+      "title": "同源并发与配置竞态",
+      "kind": "automated",
+      "target": "execute-r006-v5-refresh-order",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-refresh-order/result.json",
+      "review": "reviews/review-r006-formal-v5-refresh-order.json",
+      "covers": [
+        "refresh-order-c1"
+      ],
+      "basis": "tests/test_document_concurrency.py"
+    },
+    {
+      "spec_acceptance": "A6",
+      "scene": "SC6",
+      "case": "TC-006-refresh-remove",
+      "title": "移除与晚到刷新",
+      "kind": "automated",
+      "target": "execute-r006-v5-refresh-remove",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-refresh-remove/result.json",
+      "review": "reviews/review-r006-formal-v5-refresh-remove.json",
+      "covers": [
+        "refresh-remove-c1"
+      ],
+      "basis": "tests/test_document_concurrency.py"
+    },
+    {
+      "spec_acceptance": "A6",
+      "scene": "SC6",
+      "case": "TC-006-overlap-order",
+      "title": "跨源旧刷新不覆盖新版本",
+      "kind": "automated",
+      "target": "execute-r006-v5-overlap-order",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-overlap-order/result.json",
+      "review": "reviews/review-r006-formal-v5-overlap-order.json",
+      "covers": [
+        "overlap-order-c1"
+      ],
+      "basis": "tests/test_document_concurrency.py"
+    },
+    {
+      "spec_acceptance": "A6",
+      "scene": "SC6",
+      "case": "TC-006-query-snapshot",
+      "title": "查询冻结范围和来源版本",
+      "kind": "automated",
+      "target": "execute-r006-v5-query-snapshot",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-query-snapshot/result.json",
+      "review": "reviews/review-r006-formal-v5-query-snapshot.json",
+      "covers": [
+        "query-snapshot-c3"
+      ],
+      "basis": "tests/test_document_concurrency.py"
+    },
+    {
+      "spec_acceptance": "A6",
+      "scene": "SC6",
+      "case": "TC-006-interrupted-refresh",
+      "title": "持久中断可恢复",
+      "kind": "automated",
+      "target": "execute-r006-v5-interrupted-refresh",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-interrupted-refresh/result.json",
+      "review": "reviews/review-r006-formal-v5-interrupted-refresh.json",
+      "covers": [
+        "interrupted-refresh-c2"
+      ],
+      "basis": "tests/test_document_concurrency.py"
+    },
+    {
+      "spec_acceptance": "A7",
+      "scene": "SC7",
+      "case": "TC-006-isolation",
+      "title": "对话与网络隔离",
+      "kind": "automated",
+      "target": "execute-r006-v5-isolation",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-isolation/result.json",
+      "review": "reviews/review-r006-formal-v5-isolation.json",
+      "covers": [
+        "isolation-c1"
+      ],
+      "basis": "tests/test_document_compatibility.py"
+    },
+    {
+      "spec_acceptance": "A7",
+      "scene": "SC7",
+      "case": "TC-006-compatibility",
+      "title": "旧入口与来源帮助兼容",
+      "kind": "automated",
+      "target": "execute-r006-v5-compatibility",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-compatibility/result.json",
+      "review": "reviews/review-r006-formal-v5-compatibility.json",
+      "covers": [
+        "compatibility-c2"
+      ],
+      "basis": "tests/test_document_compatibility.py"
+    },
+    {
+      "spec_acceptance": "A7",
+      "scene": "SC7",
+      "case": "TC-006-packages",
+      "title": "独立发行包完整性",
+      "kind": "automated",
+      "target": "execute-r006-v5-packages",
+      "status": "passed",
+      "formal_evidence": "formal/execute-r006-v5-packages/result.json",
+      "review": "reviews/review-r006-formal-v5-packages.json",
+      "covers": [
+        "packages-c2"
+      ],
+      "basis": "scripts/acceptance/local_documents_packages.py"
+    },
+    {
+      "spec_acceptance": "A7",
+      "scene": "SC7",
+      "case": "TC-006-user-discovery",
+      "title": "用户入口与交付证据",
+      "kind": "manual",
+      "target": "manual-r006-cross-user-v5",
+      "status": "passed",
+      "formal_evidence": "native-manual/manual-r006-cross-user-v5/result.json",
+      "review": "reviews/review-r006-formal-v5-user-discovery.json",
+      "covers": [
+        "user-discovery-c3"
+      ],
+      "basis": "changes/006-local-document-search/acceptance/user-discovery.md"
+    },
+    {
+      "spec_acceptance": "A8",
+      "scene": "SC8",
+      "case": "TC-006-e1-macos",
+      "title": "macOS普通用户完整文档入口",
+      "kind": "manual",
+      "target": "manual-r006-formal-mac-v4",
+      "status": "passed",
+      "formal_evidence": "native-manual/manual-r006-formal-mac-v4/result.json",
+      "review": "reviews/review-r006-platform-formal-v4-mac.json",
+      "covers": [
+        "e1-macos-c1"
+      ],
+      "basis": "changes/006-local-document-search/acceptance/e1-macos.md"
+    },
+    {
+      "spec_acceptance": "A8",
+      "scene": "SC8",
+      "case": "TC-006-e1-linux",
+      "title": "Ubuntu普通用户完整文档入口",
+      "kind": "manual",
+      "target": "manual-r006-formal-linux-v4",
+      "status": "passed",
+      "formal_evidence": "native-manual/manual-r006-formal-linux-v4/result.json",
+      "review": "reviews/review-r006-platform-formal-v4-linux.json",
+      "covers": [
+        "e1-linux-c2"
+      ],
+      "basis": "changes/006-local-document-search/acceptance/e1-linux.md"
+    },
+    {
+      "spec_acceptance": "A8",
+      "scene": "SC8",
+      "case": "TC-006-e1-windows",
+      "title": "Windows普通交互完整文档入口",
+      "kind": "manual",
+      "target": "manual-r006-formal-windows-v4",
+      "status": "passed",
+      "formal_evidence": "native-manual/manual-r006-formal-windows-v4/result.json",
+      "review": "reviews/review-r006-platform-formal-v4-windows.json",
+      "covers": [
+        "e1-windows-c3"
+      ],
+      "basis": "changes/006-local-document-search/acceptance/e1-windows.md"
+    }
+  ]
+}

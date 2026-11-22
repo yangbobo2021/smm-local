@@ -1,0 +1,13 @@
+{
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "按SPEC B1/B7、A1及PLAN P6/P8独立核对本次execute-r006-v1-entrance-contract。真实.venv/bin/python -m pytest -q tests/test_document_sources.py::test_entrance_contract于16:19:57.920至16:19:59.250Z退出0，原stdout 1 passed、stderr空。tests/test_document_sources.py:52-89实际断言CLI/API完整来源配置相同、多项目/排除/递归及空名单重置、pending、明确refresh后ready、精确路径单命中及独立字面正文needle CLI 中文😀\\nline 2\\n；附件00001-00013保存对应真实argv/stdout与API返回，search的reference原样用于read，relative.txt在00014实际exit2。00015-new-help逐层原stdout明确路径/项目ID取得、refresh、Unicode/reference规则。MCP工厂实际list_tools执行三个新工具readOnlyHint及四个既有工具存在的独立断言，并由该完整测试通过支持；此项为契约测试，不将其冒充真实stdio平台流程。已重算19个artifacts及89个bindings SHA全部匹配；同版definition 000002/design v5-sc1/源码测试绑定无漂移。本次三项分配均已执行得到支持，不预判其他人工入口。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-interrupted-refresh",
+  "target_sha256": "491a862e3b84d9fb61aefbdf5a80db5df43f86a0ee649f3b360696f9dcfb6e7d",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照tests/test_document_concurrency.py:151-173。实际为数据库refreshing持久状态注入，新Archive/Documents实例再次明确刷新文件和目录；不是进程崩溃实测。00009原响应完整集合control/added/one，one保留ID但版本由1到2，两个来源恢复ready；00012/13精确读新changed及新discovered正文，00014未改变control旧ref继续读continuous，00015变化前one旧ref400版本失效。第166-172行完整集合/身份版本/来源状态和独立正文断言均到达，证明实际重新采集而非只改status。00016明确标注故障注入范围，不将本项扩展为E1服务重启结论。stdout1 passed/exit0/stderr空，20 artifacts/47 bindings及match实现摘要重算一致。本正式轮无XML/附回归；对应green-v2旧引用regression原stdout4 passed且摘要一致，full-regression-v3 XML四项通过（301 passed/1 skipped）。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

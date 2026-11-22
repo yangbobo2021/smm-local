@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "expected_failure",
+      "reason": "已独立打开AGENTS、SPEC B1/B4/B7/A1、PLAN及SC1原始判据；场景只陈述有依据的来源/项目行为，design-r006-v5-sc1的自然语言设计准确。match-r006-v4-sc1和manifest-v3定位tests/test_document_sources.py:8-49，与red-r006-v3-source-config冻结选段及当前绑定SHA一致，原始artifacts逐项SHA核对一致。实现以14/16行独立名称、普通身份及同名不同稳定身份，18-32行规范根、pending、配置字段和空files/search，34-41行非法输入后完整来源集合不变，45行同档案重建Documents读回来判定。只保存首个项目、默认清空时保留旧值或只处理文件而漏目录分别会被23、26、30-32行拦截；产品两个响应同错仍不能满足这些独立字段及空集合预期。11-12行正文打开哨兵覆盖目录中唯一正文，保存暗读将直接失败；46-48行移除后来源为空且独立字节/mtime指纹不变。原始tdd-red/red-r006-v3-source-config/TC-006-source-config/run.stdout和attachments/00001-api-001.json证明13行POST /api/projects真实405 Method Not Allowed，Fixture.request:52首先失败；这是SPEC B1新增创建入口缺失，非环境/导入故障或错误预期。其后add/set、目录、非法输入、持久、移除全部未执行。本意见确认设计与断言有效及预期红灯，不把未到达行为判通过；人工Web和平台项不作预判。",
+      "covers": []
+    }
+  }
+}

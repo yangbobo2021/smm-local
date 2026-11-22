@@ -1,0 +1,130 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "escapeuniquemarker"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 15,
+      "sources": [
+        {
+          "id": "e065cc6383c44d2fa03d73635e45ab17",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 3,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "5c4ef910130742ecab63db0ec37d31eb",
+          "request_seq": 6,
+          "started_at": "2026-11-22T19:07:06.328035+00:00",
+          "finished_at": "2026-11-22T19:07:06.330225+00:00",
+          "error": null,
+          "counts": {
+            "ready": 12,
+            "failed": 0,
+            "candidates": 12,
+            "billed_bytes": 242,
+            "ignored_entries": 13,
+            "ignored_format": 1,
+            "ignored_excluded": 10,
+            "ignored_links": 2
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "9557fb79831c482790e966593234c1fb",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/build/a.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "d6a6929b6acd4dd7ab5ac9b87b2a7de7",
+          "request_seq": 3,
+          "started_at": "2026-11-22T19:07:06.305924+00:00",
+          "finished_at": "2026-11-22T19:07:06.306841+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 14,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "4cc9cd9da534482ca42e161f4c4c25c8",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/.secret.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "76e5433f07a04bb18b8feef4b8db4250",
+          "request_seq": 4,
+          "started_at": "2026-11-22T19:07:06.313224+00:00",
+          "finished_at": "2026-11-22T19:07:06.314222+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 14,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "17e5f4ba8f86429e8225a4ffc3d39a07",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-971/test_scan_scope0/docs/.hidden",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "724366f3cde64faba341b30c0cb03039",
+          "request_seq": 5,
+          "started_at": "2026-11-22T19:07:06.320636+00:00",
+          "finished_at": "2026-11-22T19:07:06.321531+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 14,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

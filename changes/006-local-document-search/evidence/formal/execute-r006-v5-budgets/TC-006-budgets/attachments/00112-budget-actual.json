@@ -1,0 +1,112 @@
+{
+  "case": "mixed-last",
+  "source": {
+    "id": "23fa2643f852414d90e4f92ebe219062",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "partial",
+    "resume_status": "partial",
+    "refresh_id": "5220fcaffaac4c848db706374e286190",
+    "request_seq": 2,
+    "started_at": "2026-11-22T19:18:50.734697+00:00",
+    "finished_at": "2026-11-22T19:18:50.736193+00:00",
+    "error": null,
+    "counts": {
+      "ready": 1,
+      "failed": 3,
+      "candidates": 4,
+      "billed_bytes": 13,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  },
+  "actual_candidates": 4,
+  "actual_billed_bytes": 13,
+  "source_bytes": {
+    "baseline.txt": {
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "bytes": 1,
+      "mtime_ns": 1795375130711549622
+    },
+    "zzz-denied.txt": {
+      "sha256": "da3c01050b1f352b33853bf17e408ba64e0b14423d4f7137a20906ed2e58e679",
+      "bytes": 10,
+      "mtime_ns": 1795375130724911280
+    },
+    "zzz-encoding.txt": {
+      "sha256": "b3d510ef04275ca8e698e5b3cbb0ece3949ef9252f0cdc839e9ee347409a2209",
+      "bytes": 2,
+      "mtime_ns": 1795375130724824321
+    },
+    "zzz-large.txt": {
+      "sha256": "397fa93fdb906d5a278075e087c5b1bef5c5f5fbfb3a080b438a3ba30f435db3",
+      "bytes": 17825792,
+      "mtime_ns": 1795375130724169024
+    }
+  },
+  "files": [
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "424234f29f8d4fc39aad9e8b6ab650c5",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:50.736086+00:00",
+      "captured_by_source_id": "23fa2643f852414d90e4f92ebe219062"
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-denied.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "synthetic access rejected",
+      "id": "2003ed17a5464fb9b77ccbe6ec8acc7a",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-denied.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-encoding.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件不是严格 UTF-8 文本",
+      "id": "7b781569b70a423b90e844c888e50f8c",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-encoding.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    },
+    {
+      "source_id": "23fa2643f852414d90e4f92ebe219062",
+      "relative_path": "zzz-large.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件超过2MiB",
+      "id": "369ce06e64ab4805ac3a350c2c23f3ee",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_mixed_last_0/docs/zzz-large.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-query-snapshot",
+  "target_sha256": "465ebda45baedd98b24592ebe4c0aa41ea39f1ff2a538a31a90c88ba8160032a",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B5/B6/A6、PLAN §3.3/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:102-148。links/source两真实参数均执行；查询确定范围后解除P-Q并连P-R，source组还改Q来源配置/文本并刷新。当前00007/22仍旧P/Q、原独立正文/版本，129-135行逐全部结果核ID/version/SHA、source_ids及签名旧revision/qualification；重新解码本轮冻结ref证实文档版本及原来源集合吻合。下次00008 P/R、00023 P/Q/R且q为新正文版本2；逐下一次独立expected正文SHA核对。links组00011/12旧P/Q仍准确读，source组00027旧P读、00028旧Q400过期。00013/29 frozen-query汇总与原响应一致，当前冻结/下次变更分明，未错档/错版或重展开旧引用。stdout2 passed/exit0/stderr空，33 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "query-snapshot-c3"
+      ]
+    }
+  }
+}

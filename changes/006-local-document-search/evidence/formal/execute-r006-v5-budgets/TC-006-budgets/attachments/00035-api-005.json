@@ -1,0 +1,36 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "0a9c1b68f5084b15968a1b44eeeb40cf",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_count_equal_0/docs",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "54b33ecbd88044e480dc62aa927eb394",
+      "request_seq": 2,
+      "started_at": "2026-11-22T19:18:49.408346+00:00",
+      "finished_at": "2026-11-22T19:18:49.505104+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1000,
+        "failed": 0,
+        "candidates": 1000,
+        "billed_bytes": 5995,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

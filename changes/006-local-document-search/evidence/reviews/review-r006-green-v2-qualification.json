@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "依据SPEC B6/A4、SC4，file/source/missing三个会中断资格的状态及持续资格多来源设计有效。tests/test_document_lifecycle.py:40–76初始同路径S1/P、S2/Q加独立control，取得P/Q/all ref，不变刷新逐ref仍可读且version相同；分别注入单文件拒读、S1扫描失败或物理缺失，P旧ref即拒绝、Q/all固定全文可读；同配置同字节恢复后version相同但P旧ref仍拒绝；移除全部原资格后新来源不能使任一旧ref复活，control逐字可读。反例：用另一未包含来源冒充P资格被oldp拒绝拦截；一律作废所有ref被Q/all固定全文拦截；同字节恢复沿旧资格被第二次oldp拒绝拦截。108份原始API附件与3参数日志显示恢复内容仍version1、旧资格400、连续资格原文needle qualification/control一致；documents.py:_publish资格代次和read来源/revision/qualification核验支持结论。等价更多标识样本为可选补测。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-qualification与red-r006-v3-qualification全部test_bindings及实际命令相同；旧红灯来源API404，当前新绿灯3 passed/exit0。重新核本轮108份API原件：file/source/missing各状态下旧P引用400，恢复相同字节仍version1但旧P引用继续拒绝，连续Q/all正文needle qualification可读，最终新来源不能复活原资格，独立control正文保留。各必测前态与逐引用断言未因其他夹具修订改变。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

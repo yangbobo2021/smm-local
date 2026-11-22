@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "依据SPEC B2/B6/A2与SC2，大小写扩展、BOM/CRLF/CR/LF/组合字符/emoji、错误编码/NUL/拒读及恢复的自然设计有效。tests/test_document_scanning.py:test_decode_files逐一校验三非空正常文件的独立规范化全文及原始字节SHA，空文件ready长度0；坏编码、NUL、os.open拒绝各failed且错误分类可见，partial精确4ready/3failed与完整命中集合；修复再刷7ready并逐文件核全文/SHA。反例：只解码首个正常文件会被完整名称集合与循环读取拦截；丢组合码点或尾LF会被normal(cases[name])独立值拦截；将三失败伪ready会被状态/计数/集合拦截。原始00020-decode-expected.json记录7候选、95字节、每文件错误，API read返回needle 中文😀\\n组合é\\n末行\\n及恢复全文，和实际断言相符。documents.py:_read_file严格utf-8-sig解码并仅规范换行，错误不发布半份正文。权限为确定性OS故障注入，真实普通账户权限归平台项。 本轮仅将夹具nul.txt改为binary-nul.txt，仍write_bytes(b'needle\\x00body')；当前v2绿灯及debug原件明确binary-nul.txt failed/文件含二进制NUL，7候选95字节、4ready/3failed及修复7ready断言完全保留。真实Windows旧日志的failed=2与设备名夹具问题相符，本项没有删除NUL边界。 本轮重新核对当前定义SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5及match-r006-v5同场景精确源选段。逐字git diff证实src仍为f89623b；runtime-r006-product-v2实际Python3.12.10/SQLite3.47.1导入当前documents成功，绑定全产品及共享夹具/实际旧引用回归文件，逐TC绑定本身测试，排除无关测试不会漏掉实际依赖。当前全部artifact SHA及运行绑定复算无差异。 当前green-r006-v2-decode-files与新red-r006-ci-v1-decode-files全部test_bindings及实际命令相同；红灯原日志POST /api/documents/sources 404且exit1，review-r006-ci-red-v1b意见expected_failure。独立逐一把36个product_bindings与git f797fe843430b48faf379cd76b4ae18fd52f5c64原字节核对无差异，provenance.json与当前src均恢复f896。当前绿灯新日志1 passed/exit0，20份附件00020-decode-expected及read原文准确，独立预期不因合法样例名改变而放宽。 该轮regression_command只运行tests/test_archive_references.py，原始regression.stdout为4 passed；实际四项断言覆盖篡改/跨档案/冲突参数、签发间内容变化拒绝、跨项目引用不扩展、旧读取参数。CLI兼容在独立TC/full-suite验证，本意见不把此4项回归算作CLI兼容或完整CI。本意见仅认定当前TC同版绿灯，不预判平台/交付。",
+      "covers": []
+    }
+  }
+}

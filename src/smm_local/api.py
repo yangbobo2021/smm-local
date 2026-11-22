@@ -10,7 +10,7 @@ from typing import Callable
 
 from fastapi import Body, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, StrictInt
 
 from .core import Archive, shared_db_path, utcnow
 from .federation import (HubUnavailable, push_pending, upload_status, choose_upload, upload_control,
@@ -18,6 +18,38 @@ from .federation import (HubUnavailable, push_pending, upload_status, choose_upl
 from .upload import LocalUpload
 from .project_control import change as change_project
 from . import references
+from .documents import Documents
+
+
+class DocumentConfig(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_ids: list[StrictInt] = Field(default_factory=list)
+    exclude: list[str] = Field(default_factory=list)
+    recursive: bool = True
+
+
+class DocumentAdd(DocumentConfig):
+    path: str
+
+
+class DocumentRefresh(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    source_id: str | None = None
+
+
+class DocumentQuery(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    query: str
+    scope: str = 'all'
+    project_id: StrictInt | None = None
+    limit: StrictInt = 5
+
+
+class DocumentRead(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    reference: str
+    start: StrictInt | None = None
+    end: StrictInt | None = None
 
 
 class SearchRequest(BaseModel):
@@ -104,6 +136,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                shutdown: Callable[[], None] | None = None) -> FastAPI:
     db = archive or Archive(shared_db_path())
     references.material(db)
+    documents = Documents(db)
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
@@ -275,6 +308,48 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                 raise HTTPException(404)
             shutdown()
             return {"stopping": True}
+
+    def document_call(function, *args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except (OSError, ValueError) as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get('/api/documents/sources')
+    def document_sources():
+        return documents.sources()
+
+    @app.post('/api/documents/sources')
+    def document_add(body: DocumentAdd):
+        return document_call(documents.add, **body.model_dump())
+
+    @app.put('/api/documents/sources/{source_id}')
+    def document_set(source_id: str, body: DocumentConfig):
+        return document_call(documents.set, source_id, **body.model_dump())
+
+    @app.delete('/api/documents/sources/{source_id}')
+    def document_remove(source_id: str):
+        return document_call(documents.remove, source_id)
+
+    @app.get('/api/documents/files')
+    def document_files(source_id: str | None = None):
+        return document_call(documents.files, source_id)
+
+    @app.post('/api/documents/refresh')
+    def document_refresh(body: DocumentRefresh):
+        return document_call(documents.refresh, body.source_id)
+
+    @app.post('/api/documents/search')
+    def document_search(body: DocumentQuery):
+        return document_call(documents.search, **body.model_dump())
+
+    @app.post('/api/documents/read')
+    def document_read(body: DocumentRead):
+        return document_call(documents.read, **body.model_dump())
+
+    @app.post('/api/projects')
+    def project_create(body: RenameRequest):
+        return document_call(db.create_project, body.name)
 
     @app.get("/api/projects")
     def projects():

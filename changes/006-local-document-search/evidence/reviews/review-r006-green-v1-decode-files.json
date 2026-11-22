@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "依据SPEC B2/B6/A2与SC2，大小写扩展、BOM/CRLF/CR/LF/组合字符/emoji、错误编码/NUL/拒读及恢复的自然设计有效。tests/test_document_scanning.py:test_decode_files逐一校验三非空正常文件的独立规范化全文及原始字节SHA，空文件ready长度0；坏编码、NUL、os.open拒绝各failed且错误分类可见，partial精确4ready/3failed与完整命中集合；修复再刷7ready并逐文件核全文/SHA。反例：只解码首个正常文件会被完整名称集合与循环读取拦截；丢组合码点或尾LF会被normal(cases[name])独立值拦截；将三失败伪ready会被状态/计数/集合拦截。原始00020-decode-expected.json记录7候选、95字节、每文件错误，API read返回needle 中文😀\\n组合é\\n末行\\n及恢复全文，和实际断言相符。documents.py:_read_file严格utf-8-sig解码并仅规范换行，错误不发布半份正文。权限为确定性OS故障注入，真实普通账户权限归平台项。 同版TDD：red-r006-v3-decode-files原始日志在公开POST /api/documents/sources返回404的业务断言失败，原红灯独立意见为expected_failure。green-r006-v1-decode-files与红灯全部test_bindings及实际命令完全相同，所有artifact SHA与当前产品/测试绑定复算无差异；绿灯原始日志1 passed、exit0。该轮regression.stdout实际5 passed，四项旧引用约束与兼容测试（两独立对话逐消息、旧参数、旧source帮助原stdout）通过。仅确认本TC绿灯与此回归，不扩张为平台或R006结论。",
+      "covers": []
+    }
+  }
+}

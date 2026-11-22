@@ -1,0 +1,651 @@
+{
+  "sources_before": [
+    {
+      "id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格",
+      "kind": "directory",
+      "recursive": true,
+      "exclude": [
+        "excluded/**/"
+      ],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "df89edda582d411ca420b174c2eb7b9e",
+      "request_seq": 9,
+      "started_at": "2026-11-22T19:27:09.944680+00:00",
+      "finished_at": "2026-11-22T19:27:09.966328+00:00",
+      "error": null,
+      "counts": {
+        "ready": 4,
+        "failed": 0,
+        "candidates": 4,
+        "billed_bytes": 6107,
+        "ignored_entries": 2,
+        "ignored_format": 0,
+        "ignored_excluded": 1,
+        "ignored_links": 1
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "2bd168e4389249ed9ed774cba61d74f2",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "b1767e523adf4879a6f7c76bc189362f",
+      "request_seq": 2,
+      "started_at": "2026-11-22T19:26:17.478221+00:00",
+      "finished_at": "2026-11-22T19:26:17.487219+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 19,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        2
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ],
+  "files_before": [
+    {
+      "source_id": "2bd168e4389249ed9ed774cba61d74f2",
+      "relative_path": "other.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "4573e90a72d44c63b9148ac537f82e60",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:26:17.486615+00:00",
+      "captured_by_source_id": "2bd168e4389249ed9ed774cba61d74f2"
+    },
+    {
+      "source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "relative_path": "bad.txt",
+      "status": "ready",
+      "qualification": 2,
+      "error": null,
+      "id": "5a3755f4a63a472d9c8ebac0ca6e1911",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:27:09.961254+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1"
+    },
+    {
+      "source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "relative_path": "control.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "cd817992879b4b0e8d08556411cd006f",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:27:09.961578+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1"
+    },
+    {
+      "source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "relative_path": "denied.txt",
+      "status": "ready",
+      "qualification": 2,
+      "error": null,
+      "id": "ec114ef7eae74e59961110bdb48dc8a4",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:27:09.966078+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1"
+    },
+    {
+      "source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "relative_path": "nested/notes.txt",
+      "status": "missing",
+      "qualification": 1,
+      "error": "本轮未在来源范围发现",
+      "id": "5716c060802145d2945a0ac89d33771e",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/nested/notes.txt",
+      "version": 1,
+      "sha256": "de4cf2f6bf350351d8037196a671ba17c965c7b6a725ff32d9a4b027e1169bde",
+      "text_length": 23,
+      "captured_at": "2026-11-22T19:26:36.359345+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1"
+    },
+    {
+      "source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "relative_path": "指南.md",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "1b6b5b1b414344f2b029190aad98bcee",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:27:09.960321+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1"
+    }
+  ],
+  "hits_before": [
+    {
+      "id": "5a3755f4a63a472d9c8ebac0ca6e1911",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:27:09.961254+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle repaired",
+      "start": 0,
+      "end": 15,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjVhMzc1NWY0YTYzYTQ3MmQ5YzhlYmFjMGNhNmUxOTExIiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.1ff5c1f256cea14fef457f5592118f1249e3f4fa85c4501277382ae50212d48f",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 1,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "ec114ef7eae74e59961110bdb48dc8a4",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:27:09.966078+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle unreadable",
+      "start": 0,
+      "end": 17,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImVjMTE0ZWY3ZWFlNzRlNTk5NjExMTBiZGI0OGRjOGE0IiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.4dca03936c6a5ec6b68ec470e5e508082fdb853f75882c2186ef1bcbe6b628f3",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 2,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "4573e90a72d44c63b9148ac537f82e60",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:26:17.486615+00:00",
+      "captured_by_source_id": "2bd168e4389249ed9ed774cba61d74f2",
+      "text": "needle unrelated Q\n",
+      "start": 0,
+      "end": 19,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "2bd168e4389249ed9ed774cba61d74f2"
+      ],
+      "project_ids": [
+        2
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjQ1NzNlOTBhNzJkNDRjNjNiOTE0OGFjNTM3ZjgyZTYwIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJiZDE2OGU0Mzg5MjQ5ZWQ5ZWQ3NzRjYmE2MWQ3NGYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c876e2777163a04a6a1866bbb30e81804c3ad75ba55a7c65d7384d19ad0152cb",
+      "bm25_score": 1.6865065258239807e-06,
+      "rank": 3,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "1b6b5b1b414344f2b029190aad98bcee",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:27:09.960321+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjFiNmI1YjFiNDE0MzQ0ZjJiMDI5MTkwYWFkOThiY2VlIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bd6a225852bca95f18b03176166b35a07ae99d60ac7f2e6d89cc86e44d00edb7",
+      "bm25_score": 1.6750226974679712e-06,
+      "rank": 4,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "cd817992879b4b0e8d08556411cd006f",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:27:09.961578+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImNkODE3OTkyODc5YjRiMGU4ZDA4NTU2NDExY2QwMDZmIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiOTFiMDMyZDRiNWQwNDZlMTkzY2RjZDQxNmM5Y2ZhZTEiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.02b6732dcb00ad4769f21659e9eb3f767b7533663895e18843b9074f0faa33d0",
+      "bm25_score": 3.808764666077921e-07,
+      "rank": 5,
+      "snapshot_kind": "采集版本（仅本机）"
+    }
+  ],
+  "hits_after": [
+    {
+      "id": "5a3755f4a63a472d9c8ebac0ca6e1911",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt",
+      "version": 1,
+      "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+      "text_length": 15,
+      "captured_at": "2026-11-22T19:27:09.961254+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle repaired",
+      "start": 0,
+      "end": 15,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjVhMzc1NWY0YTYzYTQ3MmQ5YzhlYmFjMGNhNmUxOTExIiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.1ff5c1f256cea14fef457f5592118f1249e3f4fa85c4501277382ae50212d48f",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 1,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "ec114ef7eae74e59961110bdb48dc8a4",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt",
+      "version": 1,
+      "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+      "text_length": 17,
+      "captured_at": "2026-11-22T19:27:09.966078+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle unreadable",
+      "start": 0,
+      "end": 17,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImVjMTE0ZWY3ZWFlNzRlNTk5NjExMTBiZGI0OGRjOGE0IiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.4dca03936c6a5ec6b68ec470e5e508082fdb853f75882c2186ef1bcbe6b628f3",
+      "bm25_score": 1.6884358237791393e-06,
+      "rank": 2,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "4573e90a72d44c63b9148ac537f82e60",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+      "version": 1,
+      "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+      "text_length": 19,
+      "captured_at": "2026-11-22T19:26:17.486615+00:00",
+      "captured_by_source_id": "2bd168e4389249ed9ed774cba61d74f2",
+      "text": "needle unrelated Q\n",
+      "start": 0,
+      "end": 19,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "2bd168e4389249ed9ed774cba61d74f2"
+      ],
+      "project_ids": [
+        2
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjQ1NzNlOTBhNzJkNDRjNjNiOTE0OGFjNTM3ZjgyZTYwIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJiZDE2OGU0Mzg5MjQ5ZWQ5ZWQ3NzRjYmE2MWQ3NGYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c876e2777163a04a6a1866bbb30e81804c3ad75ba55a7c65d7384d19ad0152cb",
+      "bm25_score": 1.6865065258239807e-06,
+      "rank": 3,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "1b6b5b1b414344f2b029190aad98bcee",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md",
+      "version": 2,
+      "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+      "text_length": 39,
+      "captured_at": "2026-11-22T19:27:09.960321+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "needle edited 中文😀 é\nnew captured text\n",
+      "start": 0,
+      "end": 39,
+      "start_line": 1,
+      "end_line": 2,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjFiNmI1YjFiNDE0MzQ0ZjJiMDI5MTkwYWFkOThiY2VlIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bd6a225852bca95f18b03176166b35a07ae99d60ac7f2e6d89cc86e44d00edb7",
+      "bm25_score": 1.6750226974679712e-06,
+      "rank": 4,
+      "snapshot_kind": "采集版本（仅本机）"
+    },
+    {
+      "id": "cd817992879b4b0e8d08556411cd006f",
+      "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt",
+      "version": 1,
+      "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+      "text_length": 3027,
+      "captured_at": "2026-11-22T19:27:09.961578+00:00",
+      "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+      "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+      "start": 2801,
+      "end": 3027,
+      "start_line": 1,
+      "end_line": 1,
+      "source_ids": [
+        "91b032d4b5d046e193cdcd416c9cfae1"
+      ],
+      "project_ids": [
+        1
+      ],
+      "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImNkODE3OTkyODc5YjRiMGU4ZDA4NTU2NDExY2QwMDZmIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiOTFiMDMyZDRiNWQwNDZlMTkzY2RjZDQxNmM5Y2ZhZTEiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.02b6732dcb00ad4769f21659e9eb3f767b7533663895e18843b9074f0faa33d0",
+      "bm25_score": 3.808764666077921e-07,
+      "rank": 5,
+      "snapshot_kind": "采集版本（仅本机）"
+    }
+  ],
+  "mcp_after": [
+    [
+      {
+        "id": "91b032d4b5d046e193cdcd416c9cfae1",
+        "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "excluded/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "df89edda582d411ca420b174c2eb7b9e",
+        "request_seq": 9,
+        "started_at": "2026-11-22T19:27:09.944680+00:00",
+        "finished_at": "2026-11-22T19:27:09.966328+00:00",
+        "error": null,
+        "counts": {
+          "ready": 4,
+          "failed": 0,
+          "candidates": 4,
+          "billed_bytes": 6107,
+          "ignored_entries": 2,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 1
+        },
+        "project_ids": [
+          1
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      },
+      {
+        "id": "2bd168e4389249ed9ed774cba61d74f2",
+        "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+        "kind": "file",
+        "recursive": true,
+        "exclude": [],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "b1767e523adf4879a6f7c76bc189362f",
+        "request_seq": 2,
+        "started_at": "2026-11-22T19:26:17.478221+00:00",
+        "finished_at": "2026-11-22T19:26:17.487219+00:00",
+        "error": null,
+        "counts": {
+          "ready": 1,
+          "failed": 0,
+          "candidates": 1,
+          "billed_bytes": 19,
+          "ignored_entries": 0,
+          "ignored_format": 0,
+          "ignored_excluded": 0,
+          "ignored_links": 0
+        },
+        "project_ids": [
+          2
+        ],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    {
+      "results": [
+        {
+          "id": "5a3755f4a63a472d9c8ebac0ca6e1911",
+          "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/bad.txt",
+          "version": 1,
+          "sha256": "66c89cefea602009712b57e7b0f161ef63fdf700cadca4fb3a31384ccf8529d7",
+          "text_length": 15,
+          "captured_at": "2026-11-22T19:27:09.961254+00:00",
+          "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+          "text": "needle repaired",
+          "start": 0,
+          "end": 15,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "91b032d4b5d046e193cdcd416c9cfae1"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjVhMzc1NWY0YTYzYTQ3MmQ5YzhlYmFjMGNhNmUxOTExIiwiZW5kIjoxNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.1ff5c1f256cea14fef457f5592118f1249e3f4fa85c4501277382ae50212d48f",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 1,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "ec114ef7eae74e59961110bdb48dc8a4",
+          "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/denied.txt",
+          "version": 1,
+          "sha256": "48c80c64e38f56152ee0a6b689c3657a0b25b85bc3bc537398f4b31893997db1",
+          "text_length": 17,
+          "captured_at": "2026-11-22T19:27:09.966078+00:00",
+          "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+          "text": "needle unreadable",
+          "start": 0,
+          "end": 17,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "91b032d4b5d046e193cdcd416c9cfae1"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImVjMTE0ZWY3ZWFlNzRlNTk5NjExMTBiZGI0OGRjOGE0IiwiZW5kIjoxNywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MiwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.4dca03936c6a5ec6b68ec470e5e508082fdb853f75882c2186ef1bcbe6b628f3",
+          "bm25_score": 1.6884358237791393e-06,
+          "rank": 2,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "4573e90a72d44c63b9148ac537f82e60",
+          "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+          "version": 1,
+          "sha256": "52bf45ab664c71651e4ef74dca3c11ebf8152e96c72da684d351f87ba4856ec7",
+          "text_length": 19,
+          "captured_at": "2026-11-22T19:26:17.486615+00:00",
+          "captured_by_source_id": "2bd168e4389249ed9ed774cba61d74f2",
+          "text": "needle unrelated Q\n",
+          "start": 0,
+          "end": 19,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "2bd168e4389249ed9ed774cba61d74f2"
+          ],
+          "project_ids": [
+            2
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjQ1NzNlOTBhNzJkNDRjNjNiOTE0OGFjNTM3ZjgyZTYwIiwiZW5kIjoxOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjJiZDE2OGU0Mzg5MjQ5ZWQ5ZWQ3NzRjYmE2MWQ3NGYyIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.c876e2777163a04a6a1866bbb30e81804c3ad75ba55a7c65d7384d19ad0152cb",
+          "bm25_score": 1.6865065258239807e-06,
+          "rank": 3,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "1b6b5b1b414344f2b029190aad98bcee",
+          "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/指南.md",
+          "version": 2,
+          "sha256": "97b453747d501eb215a1032ed77bf99d200680b0000610a39738d019f822d94f",
+          "text_length": 39,
+          "captured_at": "2026-11-22T19:27:09.960321+00:00",
+          "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+          "text": "needle edited 中文😀 é\nnew captured text\n",
+          "start": 0,
+          "end": 39,
+          "start_line": 1,
+          "end_line": 2,
+          "source_ids": [
+            "91b032d4b5d046e193cdcd416c9cfae1"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6IjFiNmI1YjFiNDE0MzQ0ZjJiMDI5MTkwYWFkOThiY2VlIiwiZW5kIjozOSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjkxYjAzMmQ0YjVkMDQ2ZTE5M2NkY2Q0MTZjOWNmYWUxIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjJ9.bd6a225852bca95f18b03176166b35a07ae99d60ac7f2e6d89cc86e44d00edb7",
+          "bm25_score": 1.6750226974679712e-06,
+          "rank": 4,
+          "snapshot_kind": "采集版本（仅本机）"
+        },
+        {
+          "id": "cd817992879b4b0e8d08556411cd006f",
+          "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格/control.txt",
+          "version": 1,
+          "sha256": "b3881bc548c97bd5a86625dddfb1d1d1c237dda3f65b37972366dc96a3b033c8",
+          "text_length": 3027,
+          "captured_at": "2026-11-22T19:27:09.961578+00:00",
+          "captured_by_source_id": "91b032d4b5d046e193cdcd416c9cfae1",
+          "text": "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ needle continuous control\n",
+          "start": 2801,
+          "end": 3027,
+          "start_line": 1,
+          "end_line": 1,
+          "source_ids": [
+            "91b032d4b5d046e193cdcd416c9cfae1"
+          ],
+          "project_ids": [
+            1
+          ],
+          "reference": "r1.eyJhcmNoaXZlX2lkIjoiYTYzYzNlY2NkNzU5NDBiNTllY2RiZTgzYTZkNGJjOWUiLCJkb2N1bWVudF9pZCI6ImNkODE3OTkyODc5YjRiMGU4ZDA4NTU2NDExY2QwMDZmIiwiZW5kIjozMDI3LCJmb3JtYXQiOjEsImtpbmQiOiJkb2N1bWVudCIsInNvdXJjZXMiOlt7ImlkIjoiOTFiMDMyZDRiNWQwNDZlMTkzY2RjZDQxNmM5Y2ZhZTEiLCJxdWFsaWZpY2F0aW9uIjoxLCJyZXZpc2lvbiI6MX1dLCJzdGFydCI6MjgwMSwidmVyc2lvbiI6MX0.02b6732dcb00ad4769f21659e9eb3f767b7533663895e18843b9074f0faa33d0",
+          "bm25_score": 3.808764666077921e-07,
+          "rank": 5,
+          "snapshot_kind": "采集版本（仅本机）"
+        }
+      ],
+      "scope": "all",
+      "effective_project_ids": null,
+      "archive_scope": "local_documents",
+      "coverage": {
+        "indexed_files": 5,
+        "sources": [
+          {
+            "id": "91b032d4b5d046e193cdcd416c9cfae1",
+            "path": "/tmp/SmmDocuments006-20261122/formal-v4/资料 空格",
+            "kind": "directory",
+            "recursive": true,
+            "exclude": [
+              "excluded/**/"
+            ],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "df89edda582d411ca420b174c2eb7b9e",
+            "request_seq": 9,
+            "started_at": "2026-11-22T19:27:09.944680+00:00",
+            "finished_at": "2026-11-22T19:27:09.966328+00:00",
+            "error": null,
+            "counts": {
+              "ready": 4,
+              "failed": 0,
+              "candidates": 4,
+              "billed_bytes": 6107,
+              "ignored_entries": 2,
+              "ignored_format": 0,
+              "ignored_excluded": 1,
+              "ignored_links": 1
+            },
+            "project_ids": [
+              1
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          },
+          {
+            "id": "2bd168e4389249ed9ed774cba61d74f2",
+            "path": "/tmp/SmmDocuments006-20261122/formal-v4/other.txt",
+            "kind": "file",
+            "recursive": true,
+            "exclude": [],
+            "revision": 1,
+            "status": "ready",
+            "resume_status": "ready",
+            "refresh_id": "b1767e523adf4879a6f7c76bc189362f",
+            "request_seq": 2,
+            "started_at": "2026-11-22T19:26:17.478221+00:00",
+            "finished_at": "2026-11-22T19:26:17.487219+00:00",
+            "error": null,
+            "counts": {
+              "ready": 1,
+              "failed": 0,
+              "candidates": 1,
+              "billed_bytes": 19,
+              "ignored_entries": 0,
+              "ignored_format": 0,
+              "ignored_excluded": 0,
+              "ignored_links": 0
+            },
+            "project_ids": [
+              2
+            ],
+            "message": "仅本机；保存配置后请明确运行 documents refresh"
+          }
+        ]
+      }
+    }
+  ],
+  "same_configuration_versions_and_all_original_references": true
+}

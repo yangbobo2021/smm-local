@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-empty-query",
+  "target_sha256": "5fbcaf7abe8b9a2095dcb09736376a05486494753ce4073b31ca2b7276e837f5",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B5/B7/A5、PLAN §4、design-r006-v5-sc5，对照当前test_document_search.py:108-133完整状态/数量断言。原00001无来源合法非空词200空集/索引0，00004两pending/0，00017 ready+pending/1，00019 partial+pending/0、00020 refreshing+pending/0、00022 failed+pending/0均实际重核且结果为空，失败原因与真实未处理覆盖分开；持续pending第二源没有被漏掉。11非法输入均明确拒绝（9个400/2个422），包括空白/无词/非法scope/缺或不存在项目及limit边界/类型。不是以空词失败冒充合法零命中，也不是0命中假称全部已查。实际1passed/exit0/stderr空，27 artifacts/47 bindings；本项不执行read，不认领有效来源输出专项。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

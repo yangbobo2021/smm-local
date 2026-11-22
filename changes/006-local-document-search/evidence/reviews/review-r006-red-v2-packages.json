@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-packages": {
+      "status": "expected_failure",
+      "reason": "SC7 packages场景/自然设计来自SPEC A7及PLAN P9/§4/§6，要求源码、wheel和独立安装一致，未新增行为。首轮缺失源码独立比较对象已补：scripts/acceptance/local_documents_packages.py:34–42从实际src生成所有.py/.html摘要，独立映射Hub _archive shim转换及共享core/support/archive_protocol/references/importers，42断言wheel完整集合等于源码；45–46在分别安装的两个隔离解释器中逐模块SHA等于wheel。旧源码wheel即使安装正确也会在42失败，漏第二模块亦由集合/逐摘要拦；两个包不只比较版本字符串。51–62设计Local真实文档闭环、Hub无smm_local可独立Archive/项目合并和既有入口，并检查documents模块只在Local；两包职责及全部适用模块有明确断言。已读red-r006-v2-packages收据/绑定源、完整stderr/stdout、commands.json、两份source-wheel原件，登记SHA一致；两个source-wheel的完整映射逐项相等，前7命令构建/两venv/两安装/两逐模块核对真实exit0。第8已安装Local执行documents --help真实exit2，原stderr为invalid choice documents，在51/run23断言失败，非构建、安装或环境故障；当前src CLI同样无该命令。后续Local文档闭环、Hub独立归档合并/帮助及最终模块职责断言尚未到达，不将已安装与未执行业务混称通过。候选设计实现有效、入口能力缺失为可信expected_failure，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

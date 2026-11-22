@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "依据SPEC B1/A1、SC1及design-r006-v5-sc1，明确添加、完整替换、非法输入不改配置和不暗读正文的设计有效。tests/test_document_sources.py:8–49分别验证两个同名不同身份项目、单文件/目录、指定配置与省略名单恢复默认；deny_source_reads覆盖builtins/io/os.open，files/search为空；所有非法add/set后比较完整sources，重新打开同档案一致，移除后源SHA/mtime不变。反例：只正确处理首个来源会被directory_reset及两次移除断言拦截；返回假pending但读正文会被哨兵拦截，配置两侧同错会被独立字段值断言拦截。src/smm_local/documents.py:add/set仅校验/存配置，api.py:318–348及Web表单调用同一后端。原始附件00039-source-config-expected.json显示P/不同stable_key、revision1→2、项目[1]→[2]及pending，39份API/拒绝附件与原始日志支持断言；本项不是浏览器画面验收。 同版TDD：red-r006-v3-source-config原始run.stdout因POST /api/projects返回405而失败，是新增行为缺失；review-r006-red-v3-source-config登记expected_failure。green-r006-v1-source-config与红灯全部test_bindings及命令完全一致，逐artifact重算SHA吻合，当前产品/测试运行绑定亦无差异；绿灯原始日志1 passed。该轮regression.stdout独立5 passed，对应test_archive_references.py四项签名/隔离/旧参数与test_document_compatibility.py两合成对话和旧source帮助比较。本意见只确认该TC同版绿灯及该回归，不判平台或R006交付。",
+      "covers": []
+    }
+  }
+}

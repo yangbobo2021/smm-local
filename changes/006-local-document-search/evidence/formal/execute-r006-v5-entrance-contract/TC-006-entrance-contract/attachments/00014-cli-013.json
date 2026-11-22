@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "documents",
+    "add",
+    "relative.txt"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents}\n           ...\nsmm: error: 文档来源必须是当前电脑上的绝对路径\n"
+}

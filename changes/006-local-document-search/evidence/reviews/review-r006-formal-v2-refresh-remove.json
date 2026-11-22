@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-refresh-remove",
+  "target_sha256": "f98fe3565d1b793adc842a9b2d7840223b439eb11d773eb4ca8e1ec05c4fe9b5",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-refresh-remove": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B3/B4/B6、A6、PLAN §3.2/§4、design-r006-v5-sc6，对照tests/test_document_concurrency.py:60-74及完整document_state。源S1/P含独占exclusive及共享shared，S2/Q仅shared；00006移除后旧任务晚到published:false。第70行在释放屏障/线程结束之后核所有来源、关联、文档、成员、meta、FTS等于移除快照且只剩S2。00008 P无内容，00009/10 Q只有shared，00011读回独立原文needle shared original；00012/13 P的两个旧ref均400（版本或资格失效），00014晚到forbidden正文零命中。共享正控与独占/共享拒绝均实际到达，无只检首个目标。stdout1 passed/exit0/stderr空；18 artifacts、47 bindings与match实现摘要重算一致。本正式轮无XML/附回归；对应green-v2的旧引用regression原stdout4 passed/摘要一致，full-regression-v3原XML四项通过（全集301 passed/1 skipped）。",
+      "covers": [
+        "refresh-remove-c1"
+      ]
+    }
+  }
+}

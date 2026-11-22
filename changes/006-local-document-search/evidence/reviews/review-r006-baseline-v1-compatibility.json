@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "这是开发前旧行为debug基线，绝非tdd-red。SC7 compatibility-c2来自SPEC B1/A7，场景没有新增行为；自然设计预期“独立期望对话正文/来源/ID正确”，但前置/动作没有选取多个已有对话分别核身份，实际tests/test_document_compatibility.py:50及document_helpers.py:132-141只导入一个固定session，再以产品search返回首hit作51行两种read的共同输入。52行独立conversationnonce字符串确实阻止两响应同错正文，但若search、整数read、ref read都无视所指定目标而总返回首对话，当前全部断言仍通过；53只验scope/字段存在，不核source_session_id/source/ID对应本次目标。SPEC现有对话检索/旧参数读取承诺适用于任意已有对话，缺少非首目标使该承诺漏检；应先在设计写两个不同身份和独立正文的对话，以本次实际目标分别搜索/旧参数读/ref读并逐项核身份正文。现有源码baseline无产品故障证据，不能把该设计缺口改称产品失败。运行原件及全部10项artifact SHA已核：run.stdout为1 passed、退出0、stderr空；九层source帮助old/new stdout逐项相等且退出0，冻结cli.py摘要与metadata的f797fe8基线一致。这一帮助基线仅是冻结旧CLI入口代码在当前解释器/当前依赖模块运行，与当前CLI对照，未运行完整旧发行包，不能作旧包兼容结论。covers按目标case_obligations仅compatibility-c2认领本次已执行的兼容检查，理由保留上述目标身份覆盖缺口；不据此判断user-discovery、三平台或R006通过。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

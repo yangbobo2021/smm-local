@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "TESTER@WINDOWS_HOST",
+    "powershell -NoProfile -EncodedCommand OMITTED_ENCODED_TRANSPORT"
+  ],
+  "started_at": "2026-11-22T19:28:22.891553+00:00",
+  "finished_at": "2026-11-22T19:33:19.728100+00:00",
+  "exit_code": 0,
+  "platform": "windows",
+  "phase": "formal",
+  "remote_business_output": "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4"
+}

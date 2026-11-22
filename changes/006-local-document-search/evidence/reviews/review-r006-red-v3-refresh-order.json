@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "expected_failure",
+      "reason": "SC6首判据与design-r006-v5-sc6源自SPEC B4/A6、PLAN §3.2/§4，分别要求同源新刷新和新配置取代晚到旧任务，无额外产品行为。tests/test_document_concurrency.py:36–57参数化这两种会改变结果的状态，9–17在_publish前设置明确事件屏障，finish释放并核线程结束/异常。新刷新分支46独立核newwinner全文，配置分支49独立核pending及无结果，50采集document_state的全部来源、项目绑定、文档、成员、meta及FTS，52在晚任务结束后逐表相等，54/56再核新旧词与项目/pending。如果两次快照都错误地保留旧正文，46先拦；仅配置分支复活材料由49/52拦；旧任务改变第二类表或任一成员由52完整比较拦截。新刷新准备与新任务本身提供无竞争正常刷新正控；增加等价来源名可选。已核match-r006-v4-sc6、red-r006-v3-refresh-order及全部绑定/artifacts SHA，原stdout/stderr、两份api-001一致。两个参数的真实首失败均在39行合法add返回404 Not Found，helper:52断言失败；尚未运行初次refresh、屏障、新刷新/配置或发布后断言，不能描述为并发通过。当前基线没有文档入口，失败来自B1新增能力缺失，未发生环境/线程/导入错误。候选设计实现有效，给expected_failure，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

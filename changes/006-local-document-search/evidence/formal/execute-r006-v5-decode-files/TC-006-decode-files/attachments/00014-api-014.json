@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiYmQ2ZTZmZGFkNzI3NGQzYWJjMzJhOGVmYjk5YzM2ZGEiLCJkb2N1bWVudF9pZCI6IjBkNjhhZTBlNWVlMjQyMWNiMjRkOWY4ZjQ3ZTlkMjhmIiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjdhZDRiMTVkYjdhNTQyZDhhMTM3ZDY3ODkyNmFiNWRiIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.77f6684626e9649dfd8ab3204cbc77304a114741ec3e5043be909425751b55a7"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "0d68ae0e5ee2421cb24d9f8f47e9d28f",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1002/test_decode_files0/docs/b.markdown",
+    "version": 1,
+    "sha256": "6d7a9b1518ae0247b72eb1a4052a8a2d7838535eb523d34f87807069fa454ffd",
+    "text_length": 14,
+    "captured_at": "2026-11-22T19:18:48.510578+00:00",
+    "captured_by_source_id": "7ad4b15db7a542d8a137d678926ab5db",
+    "text": "needle normal\n",
+    "start": 0,
+    "end": 14,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "7ad4b15db7a542d8a137d678926ab5db"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

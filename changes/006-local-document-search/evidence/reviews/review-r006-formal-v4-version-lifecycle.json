@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-version-lifecycle",
+  "target_sha256": "cfa1d74ec8e45b8fe87871189fcf284f8162398c5fdf8cb02fbf4ca5e9d65d59",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "当前v4按SPEC B3/B4/A4、PLAN §4及test_version_lifecycle全部独立文字断言重新审查。stdout1 passed、stderr空、exit0，33 artifacts/47 bindings及设计SHA重算匹配4c706b3 documents43d3762c…。6search/9read/8reject完整响应重新解析：one/two各自保留ID，00003/05/08/12/18版本链均1/1/1/2/3；无变化原ref可读、编辑未刷新仍captured_at与original，刷新逐文updated，改回原字节逐文original但v1/v2均400。移动/删除后仅moved新ID，旧两v3皆拒绝，moved独立正文为original one。每次正文与独立字面预期逐字及原SHA吻合，签名文档/版本和返回来源限原stamp，结果去重及区间字符数正确。仅本轮selector，无XML/附加回归，不沿用旧TDD或旧执行通过，不判平台/R006。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    }
+  }
+}

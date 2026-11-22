@@ -1,0 +1,46 @@
+{
+  "method": "PUT",
+  "path": "/api/documents/sources/4fce3782d4bb4c229f6a7a253d85332b",
+  "request": {
+    "project_ids": [
+      2
+    ],
+    "exclude": [
+      "one.txt"
+    ],
+    "recursive": false
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "4fce3782d4bb4c229f6a7a253d85332b",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1010/test_source_lifecycle0/docs",
+    "kind": "directory",
+    "recursive": false,
+    "exclude": [
+      "one.txt"
+    ],
+    "revision": 2,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 1,
+    "started_at": "2026-11-22T19:18:56.994449+00:00",
+    "finished_at": "2026-11-22T19:18:56.995990+00:00",
+    "error": null,
+    "counts": {
+      "ready": 3,
+      "failed": 0,
+      "candidates": 3,
+      "billed_bytes": 34,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [
+      2
+    ],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

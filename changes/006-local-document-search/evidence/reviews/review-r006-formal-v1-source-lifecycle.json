@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "对照SPEC B3/B4/B6/A4及PLAN配置/资格生命周期，独立核本次真实.venv/bin/python -m pytest -q tests/test_document_lifecycle.py::test_source_lifecycle，16:20:08.175至16:20:08.531Z退出0，stdout 1 passed、stderr空。test_document_lifecycle.py:79-105真实创建目录A/P与共享文件B/Q，保存三文件SHA/mtime；完整替换A为Q、exclude one、非递归后pending立即撤P全部资格；00007-00015对应原响应为P空/Q只shared、三旧P ref400且旧Q/all仍独立needle shared。00016-00022刷新新A后one/deep仍退出，旧P不复活，原Q/all沿B持续可读。00023的新all包含新A资格；00024移B后00025仍shared、00026/27原Q/all400，00028新all沿新A可读，证明不借未包含的新资格续旧引用。00030-00033最后移A后sources/results空、最后ref400；末段实际SQL断言documents非空正文数和document_fts均0，源指纹完整不变，并由本次完整测试通过和00034佐证。38个artifacts及89个bindings SHA逐一吻合，定义000002/设计v5-sc4/测试同版。source-lifecycle-c2/c3均据此执行证实；失败/缺失分支另有qualification正式TC，不据此冒称实测。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

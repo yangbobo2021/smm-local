@@ -7,15 +7,18 @@ import json
 import os
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
+from pydantic import StrictInt
 
 from .core import Archive, shared_db_path
 from .federation import configure_and_start, read_archive, search_archive
 from .service import Action, control_source, maintain
+from .documents import Documents
 
 
 def create_mcp(archive: Archive | None = None) -> FastMCP:
     db = archive or Archive(shared_db_path())
     server = FastMCP("smm-local")
+    documents = Documents(db)
     readonly = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
 
     @server.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
@@ -61,6 +64,21 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
     def resolve_project(cwd: str) -> str:
         """Find the configured project for a working directory or its nearest parent."""
         return json.dumps(db.resolve_project(cwd), ensure_ascii=False)
+
+    @server.tool(annotations=readonly)
+    def list_document_sources() -> str:
+        """List explicitly configured local document sources, projects and refresh/error coverage. No scan. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only."""
+        return json.dumps(documents.sources(), ensure_ascii=False)
+
+    @server.tool(annotations=readonly)
+    def search_documents(query: str, scope: str = 'all', project_id: StrictInt | None = None, limit: StrictInt = 5) -> str:
+        """Search captured local text documents only, with local direct project links. Never searches Hub or scans files. Results include capture version, coverage and a signed reference; use read_document for evidence."""
+        return json.dumps(documents.search(query, scope=scope, project_id=project_id, limit=limit), ensure_ascii=False)
+
+    @server.tool(annotations=readonly)
+    def read_document(reference: str, start: StrictInt | None = None, end: StrictInt | None = None) -> str:
+        """Read a captured document using its exact search reference. Default is the hit window; optional whole-file Unicode codepoint [start,end) range, max16000. Old versions/qualifications require a new search. No source-file read."""
+        return json.dumps(documents.read(reference, start=start, end=end), ensure_ascii=False)
 
     return server
 

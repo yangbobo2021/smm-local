@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-interrupted-refresh",
+  "target_sha256": "5dba3108f95505b053e10f71501026cddcdc1b103e58460fd6cc22fa0d0f281b",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B4/B6/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:151-173。实际为数据库持久refreshing状态注入，不假称进程崩溃；新Archive/Documents再次明确刷新文件/目录来源。00009完整集合one/added/control，one保留ID/版本变化、两来源ready；00012/13精确独立recovered change/newly discovered，00014旧control引用准确continuous，00015旧one ref400失效。3次read签名解码与source_ids完全相符：one两源、added目录源，control旧ref仅原独立连续源，即便后来目录也纳入仍不替换旧资格；collector历史可为后来目录，与当前资格分开。00016明确注入范围/完整after，166-172行独立集合/身份/版本/正文均到达，非仅status恢复。实际1passed/exit0/stderr空，20 artifacts/47 bindings。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

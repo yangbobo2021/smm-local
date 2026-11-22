@@ -1,0 +1,156 @@
+{
+  "reviewer": "/root/review_006_pr_final",
+  "source_commit": "4c706b304e904b126ea3103523069b265d101b31",
+  "started_at": "2026-11-22T19:00:50.596433+00:00",
+  "finished_at": "2026-11-22T19:00:50.613042+00:00",
+  "fixture_root": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu",
+  "pattern": "cache/**/",
+  "expected_exclusion_basis": "SPEC B2: ** matches zero or more directory segments; trailing slash excludes matching directory and descendants. cache/**/ includes cache directory at zero ** segments.",
+  "expected_paths": [
+    "visible.txt"
+  ],
+  "actual_paths": [
+    "cache/direct.txt",
+    "visible.txt"
+  ],
+  "pattern_matches_cache": false,
+  "source": {
+    "id": "fafa11b73273424f8eaccb38a24b5e7f",
+    "path": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [
+      "cache/**/"
+    ],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  },
+  "refresh": {
+    "sources": [
+      {
+        "id": "fafa11b73273424f8eaccb38a24b5e7f",
+        "path": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu/docs",
+        "kind": "directory",
+        "recursive": true,
+        "exclude": [
+          "cache/**/"
+        ],
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "62dfc8e298cc4770b3edafb7465d93f3",
+        "request_seq": 1,
+        "started_at": "2026-11-22T19:00:50.609176+00:00",
+        "finished_at": "2026-11-22T19:00:50.610523+00:00",
+        "error": null,
+        "counts": {
+          "ready": 2,
+          "failed": 0,
+          "candidates": 2,
+          "billed_bytes": 27,
+          "ignored_entries": 1,
+          "ignored_format": 0,
+          "ignored_excluded": 1,
+          "ignored_links": 0
+        },
+        "project_ids": [],
+        "message": "仅本机；保存配置后请明确运行 documents refresh"
+      }
+    ],
+    "message": "仅明确刷新读取文件；失败原因见来源和文件状态"
+  },
+  "search": {
+    "results": [
+      {
+        "id": "e72099e9aec24638ab01ca3bca52b7a3",
+        "path": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu/docs/cache/direct.txt",
+        "version": 1,
+        "sha256": "0af1214847d336cfd07c5c5fa4407ffb9486d0705ee00123857079b47cdfd93f",
+        "text_length": 13,
+        "captured_at": "2026-11-22T19:00:50.610493+00:00",
+        "captured_by_source_id": "fafa11b73273424f8eaccb38a24b5e7f",
+        "text": "needle direct",
+        "start": 0,
+        "end": 13,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "fafa11b73273424f8eaccb38a24b5e7f"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMjU1M2QwZmQyYTI4NDQ3YmE0N2FiN2FhNWY0MzdiZTYiLCJkb2N1bWVudF9pZCI6ImU3MjA5OWU5YWVjMjQ2MzhhYjAxY2EzYmNhNTJiN2EzIiwiZW5kIjoxMywiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImZhZmExMWI3MzI3MzQyNGY4ZWFjY2IzOGEyNGI1ZTdmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7ea9825dd96f27e402010c7fe47dc9ce49dc29e89bd713bfc17f284e6a313154",
+        "bm25_score": 1e-06,
+        "rank": 1,
+        "snapshot_kind": "采集版本（仅本机）"
+      },
+      {
+        "id": "fa9c189a3961410f9d164121bc4ce722",
+        "path": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu/docs/visible.txt",
+        "version": 1,
+        "sha256": "8fe8310d1a346ece97a0c776f1e8589a436b52094fcf18380f72f1626c4aab18",
+        "text_length": 14,
+        "captured_at": "2026-11-22T19:00:50.610358+00:00",
+        "captured_by_source_id": "fafa11b73273424f8eaccb38a24b5e7f",
+        "text": "needle control",
+        "start": 0,
+        "end": 14,
+        "start_line": 1,
+        "end_line": 1,
+        "source_ids": [
+          "fafa11b73273424f8eaccb38a24b5e7f"
+        ],
+        "project_ids": [],
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiMjU1M2QwZmQyYTI4NDQ3YmE0N2FiN2FhNWY0MzdiZTYiLCJkb2N1bWVudF9pZCI6ImZhOWMxODlhMzk2MTQxMGY5ZDE2NDEyMWJjNGNlNzIyIiwiZW5kIjoxNCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImZhZmExMWI3MzI3MzQyNGY4ZWFjY2IzOGEyNGI1ZTdmIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.7f3d291bef1a96f724472a4b9d8b19efbc7dac996834165a0826c2a52af6cd03",
+        "bm25_score": 1e-06,
+        "rank": 2,
+        "snapshot_kind": "采集版本（仅本机）"
+      }
+    ],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 2,
+      "sources": [
+        {
+          "id": "fafa11b73273424f8eaccb38a24b5e7f",
+          "path": "<REVIEW_TEMP>/smm006-glob-review-y7na81wu/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [
+            "cache/**/"
+          ],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "62dfc8e298cc4770b3edafb7465d93f3",
+          "request_seq": 1,
+          "started_at": "2026-11-22T19:00:50.609176+00:00",
+          "finished_at": "2026-11-22T19:00:50.610523+00:00",
+          "error": null,
+          "counts": {
+            "ready": 2,
+            "failed": 0,
+            "candidates": 2,
+            "billed_bytes": 27,
+            "ignored_entries": 1,
+            "ignored_format": 0,
+            "ignored_excluded": 1,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

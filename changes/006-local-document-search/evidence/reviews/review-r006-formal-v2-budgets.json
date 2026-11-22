@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-budgets",
+  "target_sha256": "660cdf832e5acb6028b5a1cd1f5bf06f2bde9992d82e1030610e5ab6a5e3d75c",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B2/A2、PLAN §3.2/§4 A2、design-r006-v5-sc2与tests/test_document_limits.py:7-96已对照。stdout实际11 passed、stderr空、exit 0，11参数全部完成。逐份budget-actual原source_bytes独立重算候选/计费与产品counts相等：2MiB/2MiB+1、1000/1001、16MiB/16MiB+1均真实边界；count-equal完整1000 ready路径集合等于实际原件名单。1001/累计超限及坏编码/NUL/后续不可读累计超限正反枚举均整源failed、零结果且旧ref400；混合17MiB/编码/不可读正反序均4候选13字节、partial只基线可读；stat失败计候选不计字节且显式stat错误。各轮清除新增夹具重刷恢复基线，曾整源失败的旧ref仍拒绝，未中断资格旧ref持续可读；源文件指纹断言不变。169份artifacts、48份bindings及设计SHA重算一致。仅本正式selector，无XML及附加回归，不沿用v1结论。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-invalid-read",
+  "target_sha256": "49a83fdd6341a6bf9da91c8a4406e2ca77828800f9538877ab441e5ed681c028",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照当前test_document_search.py:73-105及Fixture.bad。实际1passed/exit0/stderr空，39 artifacts/47 bindings。本轮原00008跨档案、00009–22各绑定字段保留原签名篡改均400损坏引用；00023–26范围400，00027/28布尔/浮点422；00030真实对话ref400不能混用，00033旧配置资格400。两次成功alpha正控独立核准确全文needle alpha 😀 é+second两行，源字段逐签名解码只有当次有效单源，未回退beta/foreign正文。真实alpha/beta/foreign独立输入、每字段循环和源I/O哨兵均实际到达。拒绝含义与设计一致，资格连续中断/重叠专项不在本项越界认领。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "invalid-read-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "case": "single-over",
+  "source": {
+    "id": "e5b68676efc14f30818102807806b2bd",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [],
+    "revision": 1,
+    "status": "partial",
+    "resume_status": "partial",
+    "refresh_id": "22c427ccf91d4c9789e6a6e98278f21b",
+    "request_seq": 2,
+    "started_at": "2026-11-22T19:18:49.274026+00:00",
+    "finished_at": "2026-11-22T19:18:49.275065+00:00",
+    "error": null,
+    "counts": {
+      "ready": 1,
+      "failed": 1,
+      "candidates": 2,
+      "billed_bytes": 1,
+      "ignored_entries": 0,
+      "ignored_format": 0,
+      "ignored_excluded": 0,
+      "ignored_links": 0
+    },
+    "project_ids": [],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  },
+  "actual_candidates": 2,
+  "actual_billed_bytes": 1,
+  "source_bytes": {
+    "baseline.txt": {
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "bytes": 1,
+      "mtime_ns": 1795375129262614955
+    },
+    "large.txt": {
+      "sha256": "c08987e11d71f436d361bd3b75aa2527f8e0bb3966556d4b361b76a02ab97a02",
+      "bytes": 2097153,
+      "mtime_ns": 1795375129271656326
+    }
+  },
+  "files": [
+    {
+      "source_id": "e5b68676efc14f30818102807806b2bd",
+      "relative_path": "baseline.txt",
+      "status": "ready",
+      "qualification": 1,
+      "error": null,
+      "id": "87a88696227b41b1b28eb290953ecfe8",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs/baseline.txt",
+      "version": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "text_length": 1,
+      "captured_at": "2026-11-22T19:18:49.274940+00:00",
+      "captured_by_source_id": "e5b68676efc14f30818102807806b2bd"
+    },
+    {
+      "source_id": "e5b68676efc14f30818102807806b2bd",
+      "relative_path": "large.txt",
+      "status": "failed",
+      "qualification": 1,
+      "error": "文件超过2MiB",
+      "id": "2b012db07fa247d5ae0b5dd3e3b772c6",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_single_over_0/docs/large.txt",
+      "version": 0,
+      "sha256": null,
+      "text_length": 0,
+      "captured_at": null,
+      "captured_by_source_id": null
+    }
+  ]
+}

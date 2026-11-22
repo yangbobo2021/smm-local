@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "expected_failure",
+      "reason": "SC6持久中断后可明确重刷的判据及v5设计来自SPEC B4/B6/A6，无新增产品要求。首轮只恢复status即可假过及强制refreshing必须4xx的问题已修正：tests/test_document_concurrency.py:152–159先有成功文件/目录及独立连续资格control，再修改原正文、增加文件并对文件和目录注入持久refreshing；162–170由新Archive/Documents实例明确重刷，核三个文件完整集合、原ID/换版、两来源ready以及两个独立新正文；171保留未变化control旧ref可读，172变更文件旧ref拒绝。只把status改ready而不扫描会被166缺added首先拦截，或169旧正文拦；仅恢复首文件而目录卡住由166/168/170拦；错误废除所有旧ref由171正控拦。实现未再强制暂态read拒绝，符合B6可提示或保留旧快照的边界。173明确这是数据库状态注入，未冒充进程崩溃/平台重启；实际重启另由E1负责。已读red-r006-v2-interrupted-refresh收据/设计/匹配、绑定源码和原stdout/stderr/进程/api-001并核SHA：152行第一次合法add真实404 Not Found（helper:52），源API缺文档入口，为B1能力缺失；未到达refreshing注入、恢复及读取断言，非测试导入或环境失败。设计/实现有效，可授expected_failure，TDD covers为空。",
+      "covers": []
+    }
+  }
+}

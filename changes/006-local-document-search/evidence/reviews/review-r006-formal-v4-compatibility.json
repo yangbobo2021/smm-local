@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-compatibility",
+  "target_sha256": "03b0ce499142662c16c7fd7661ea64deaf421c2d9bad0461c1c7f055bd2739cb",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "正式v4独立复审passed。SPEC B1/A7、PLAN §4、design-r006-v5-sc7，对照当前test_document_compatibility.py的双独立会话夹具/legacy方法。实际1passed/exit0/stderr空，5 artifacts/48 bindings。断言对Codex/documents-compat-session及Claude/second-session分别核独立ID/source/session与original/second independent完整消息，数字ID旧参数和reference新参数逐目标各核准确正文，旧DTO archive_scope/matched_messages及无文档content_kind保持。直接对话读未另存JSON，本意见依赖已绑定实际断言与真实成功运行，不虚构接口原响应。原00001九层source/list/validate/register/enable/disable/rollback/batches/purge-batch帮助本轮stdout逐字旧新相等且各exit0；重新用git show核冻结cli.py恰等元数据基线f797fe…与原SHA，不是旧完整发行包冒称。read.source_ids文档返修未变旧会话数据和入口。该既有兼容项无需假造预开发红灯。本轮目标只执行所列selector，无附带XML/旧引用回归；当前full-regression-v5全部输入绑定重算一致，原JUnit302项/0失败/1跳过，实际301passed/1skipped且四项test_archive_references均通过。当前src4c706b3、runtime-product-v4、match-v8/manifest-v7及本目标artifacts/bindings/实现摘要全部重新核实，未沿用v3或a66绑定。当前CI尚未用于授予本结论，不拿旧a66CI当新包CI；人工跨项/平台和R006最终判定不在本意见内。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

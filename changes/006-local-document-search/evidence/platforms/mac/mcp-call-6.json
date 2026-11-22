@@ -1,0 +1,611 @@
+{
+  "started_at": "2026-11-22T19:24:18.172208+00:00",
+  "finished_at": "2026-11-22T19:24:18.706743+00:00",
+  "transport": "actual stdio subprocess",
+  "argv": [
+    "/private/tmp/smm-006-mac-local/bin/python",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/private/tmp/smm-006-impl/scripts/acceptance/local_documents_mcp_worker.py",
+    "/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/mcp-process-6.json",
+    "[\"/private/tmp/smm-006-mac-local/bin/python\", \"-I\", \"-B\", \"-X\", \"utf8\", \"-c\", \"import sys,os,json,runpy,time\\nroots=json.loads(os.environ['SMM_DOC_PROBE_ROOTS']); logfile=os.environ['SMM_DOC_PROBE_AUDIT'];phasefile=os.environ['SMM_DOC_PROBE_PHASE_FILE']\\nidentity={'pid':os.getpid(),'platform':sys.platform,'python':sys.executable,'argv':sys.argv[1:],'time':time.time()}\\nif sys.platform=='win32':\\n import ctypes\\n sid=ctypes.c_ulong();assert ctypes.windll.kernel32.ProcessIdToSessionId(os.getpid(),ctypes.byref(sid))\\n identity.update(is_admin=bool(ctypes.windll.shell32.IsUserAnAdmin()),session_id=sid.value)\\nelse:identity['uid']=os.getuid()\\nwith open(os.environ['SMM_DOC_PROBE_IDENTITIES'],'a',encoding='utf-8') as f:f.write(json.dumps(identity)+'\\\\n')\\ndef audit(event,args):\\n if event=='open' and isinstance(args[0],(str,bytes)):\\n  p=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))\\n  if any(p==r or p.startswith(r+os.sep) for r in roots):\\n   with open(phasefile,encoding='utf-8') as f:phase=f.read()\\n   with open(logfile,'a',encoding='utf-8') as f:f.write(json.dumps({'time':time.time(),'pid':os.getpid(),'phase':phase,'path':p,'mode':args[1],'flags':args[2]})+'\\\\n')\\nsys.addaudithook(audit)\\nmodule=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__main__')\\n\", \"smm_local.mcp_server\", \"--db\", \"/private/tmp/smm-006-impl/.acceptance-local/native-v1/AT-SMM-006/work/platform-mac-formal-v4/archive.sqlite3\"]"
+  ],
+  "records": [
+    {
+      "list_tools": {
+        "meta": null,
+        "nextCursor": null,
+        "tools": [
+          {
+            "name": "manage_sync",
+            "title": null,
+            "description": "Manage local SMM sync. status starts/reuses the service and returns its state; open opens its status page; sync runs one sync; pause persists a pause for automatic sync; resume reenables it. A manual sync leaves the pause setting unchanged.",
+            "inputSchema": {
+              "properties": {
+                "action": {
+                  "enum": [
+                    "status",
+                    "open",
+                    "sync",
+                    "pause",
+                    "resume"
+                  ],
+                  "title": "Action",
+                  "type": "string"
+                },
+                "source": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Source"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "title": "manage_syncArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "set_source_enabled",
+            "title": null,
+            "description": "Enable or disable a registered local conversation source by ID.",
+            "inputSchema": {
+              "properties": {
+                "source": {
+                  "title": "Source",
+                  "type": "string"
+                },
+                "enabled": {
+                  "title": "Enabled",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "source",
+                "enabled"
+              ],
+              "title": "set_source_enabledArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "configure_hub",
+            "title": null,
+            "description": "Configure Hub lookup and this computer's name. New connections do not upload dialogue until a Web/CLI upload choice. Use a credential file, never its contents in chat.",
+            "inputSchema": {
+              "properties": {
+                "address": {
+                  "title": "Address",
+                  "type": "string"
+                },
+                "device_name": {
+                  "title": "Device Name",
+                  "type": "string"
+                },
+                "token_file": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Token File"
+                }
+              },
+              "required": [
+                "address",
+                "device_name"
+              ],
+              "title": "configure_hubArguments",
+              "type": "object"
+            },
+            "outputSchema": null,
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": null,
+              "openWorldHint": true
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "search_conversations",
+            "title": null,
+            "description": "Search local and configured Hub candidates together, reranked locally; unuploaded local conversations participate. Project scope uses Hub direct links online, only the requested local project on Hub failure; local=true uses local links. Pass the returned reference to read_conversation for exact evidence. Previews default to 600 characters.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "title": "Query",
+                  "type": "string"
+                },
+                "scope": {
+                  "default": "all",
+                  "title": "Scope",
+                  "type": "string"
+                },
+                "project_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Project Id"
+                },
+                "limit": {
+                  "default": 5,
+                  "title": "Limit",
+                  "type": "integer"
+                },
+                "current_session_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Current Session Id"
+                },
+                "current_source": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Current Source"
+                },
+                "include_current": {
+                  "default": false,
+                  "title": "Include Current",
+                  "type": "boolean"
+                },
+                "local": {
+                  "default": false,
+                  "title": "Local",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_conversationsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "search_conversationsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "read_conversation",
+            "title": null,
+            "description": "Read original messages using the exact search reference. Old integer/hub_id/message_id calls remain supported; never reuse another archive's numeric ID.",
+            "inputSchema": {
+              "properties": {
+                "conversation_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Conversation Id"
+                },
+                "start": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Start"
+                },
+                "end": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "End"
+                },
+                "hub_id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Hub Id"
+                },
+                "hub_message_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Hub Message Id"
+                },
+                "reference": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Reference"
+                }
+              },
+              "title": "read_conversationArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "read_conversationOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "list_projects",
+            "title": null,
+            "description": "List project IDs, source paths, direct links, and conversation counts for choosing search scope.",
+            "inputSchema": {
+              "properties": {},
+              "title": "list_projectsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "list_projectsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "resolve_project",
+            "title": null,
+            "description": "Find the configured project for a working directory or its nearest parent.",
+            "inputSchema": {
+              "properties": {
+                "cwd": {
+                  "title": "Cwd",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cwd"
+              ],
+              "title": "resolve_projectArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "resolve_projectOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "list_document_sources",
+            "title": null,
+            "description": "List explicitly configured local document sources, projects and refresh/error coverage. No scan. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only.",
+            "inputSchema": {
+              "properties": {},
+              "title": "list_document_sourcesArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "list_document_sourcesOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "search_documents",
+            "title": null,
+            "description": "Search captured local text documents only, with local direct project links. Never searches Hub or scans files. Results include capture version, coverage and a signed reference; use read_document for evidence.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "title": "Query",
+                  "type": "string"
+                },
+                "scope": {
+                  "default": "all",
+                  "title": "Scope",
+                  "type": "string"
+                },
+                "project_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Project Id"
+                },
+                "limit": {
+                  "default": 5,
+                  "title": "Limit",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_documentsArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "search_documentsOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          },
+          {
+            "name": "read_document",
+            "title": null,
+            "description": "Read a captured document using its exact search reference. Default is the hit window; optional whole-file Unicode codepoint [start,end) range, max16000. Old versions/qualifications require a new search. No source-file read.",
+            "inputSchema": {
+              "properties": {
+                "reference": {
+                  "title": "Reference",
+                  "type": "string"
+                },
+                "start": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Start"
+                },
+                "end": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "End"
+                }
+              },
+              "required": [
+                "reference"
+              ],
+              "title": "read_documentArguments",
+              "type": "object"
+            },
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "title": "read_documentOutput",
+              "type": "object"
+            },
+            "icons": null,
+            "annotations": {
+              "title": null,
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            },
+            "meta": null,
+            "execution": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "read_document",
+      "input": {
+        "reference": "r1.eyJhcmNoaXZlX2lkIjoiYzQxM2FjOGE3ZjdhNDZjY2IzOTI5NTAzZGEyZDE1MmYiLCJkb2N1bWVudF9pZCI6ImEwNTY2NGI0NGFiODQyM2I4MmQwMDRkMjE5ZGU2YmI1IiwiZW5kIjo2NCwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6IjBlOWRiZmRhNDUyZDRkYzliYThmNDkzOWQ0YzE1ZDU3IiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9LHsiaWQiOiJjYjkzZjdkYTM5OTc0ZTliOWY2MGVkZDkyY2VmNDU1ZiIsInF1YWxpZmljYXRpb24iOjEsInJldmlzaW9uIjoxfV0sInN0YXJ0IjowLCJ2ZXJzaW9uIjoxfQ.93338246bca9e4ffc5f0b43bd9c5cdc47037a4afc01a69c6beb943f40900df04"
+      },
+      "response": {
+        "meta": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool read_document: 采集版本已失效，请重新检索",
+            "annotations": null,
+            "meta": null
+          }
+        ],
+        "structuredContent": null,
+        "isError": true
+      },
+      "time": "2026-11-22T19:24:18.667489+00:00"
+    }
+  ]
+}

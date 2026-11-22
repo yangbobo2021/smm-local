@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B3/B4/A6的跨源新请求优先判据与SC6设计一致。tests/test_document_concurrency.py:77–99分别覆盖pending/ready动作前状态，两文件S1旧请求屏障等待而S2先发新版；91全documents相等，92–97逐P/Q/all完整集合、ID/version/采集来源及独立newwinner+文件名原串，93/97拦仅首文件或首范围正确及两边同错。新green-r006-v2-overlap-order原stdout 2 passed；两overlap-newer-wins均为one/two newwinner，pending版本1、ready版本2，十二次原文读取逐文件原串准确，获胜采集来源S2；旧词零召回断言到达。red-r006-v3-overlap-order两参数首add404与独立红灯仍匹配。documents.py:339–352按publish_seq保留较新正文同时纳入旧源成员资格。 业务和所附回归有效，无有据必测缺口，passed；额外同条件路径可选，人工平台/用户入口、最终CI和R006交付未由本项预判。",
+      "covers": []
+    }
+  }
+}

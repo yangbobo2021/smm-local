@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-query-snapshot": {
+      "status": "expected_failure",
+      "reason": "SC6冻结本次项目/来源/文本版本判据和v5设计来自SPEC B5/B6/A6，无新增行为。首轮身份/版本/来源资格及后续查询缺口已修正：tests/test_document_concurrency.py:110–117保存逐文件原身份/版本/SHA及完整签发sources stamp；128–135对本次所有p/q结果逐一核原正文、ID/version/SHA、独立预期来源ID、原版本和完整来源stamp（含qualification）及revision；136–144对后次完整文件集、逐文件独立期望正文及原串SHA、变更/不变版本关系断言。若q混旧text和新version/SHA/qualification，131或134拦；若误用p文档/来源，130/131/132拦；若两查询同错旧q正文，140独立changed q原串拦。145–147分别核未失效p、source变化q拒绝、仅links变化q仍可读，不能读取时重展开关联替换正文。两个会改变预期的变更状态均覆盖；同条件ID扩样为可选。已读red-r006-v2-query-snapshot收据、设计/匹配及绑定原件、两api-001、完整stdout/stderr/进程且SHA一致；两参数均108行首p文件合法add实际404 Not Found，helper:52失败，当前API缺文档路由，非环境/并发屏障问题。冻结范围钩子及上述版本/资格断言均未到达；可登记可信expected_failure，不能据此说查询完整性通过。TDD covers为空。",
+      "covers": []
+    }
+  }
+}

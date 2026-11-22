@@ -1,0 +1,48 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "x needle",
+    "limit": 50
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 0,
+      "sources": [
+        {
+          "id": "5a1b45c6f43c4a1a80d304f4b6e40a76",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1003/test_budgets_total_over_0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "failed",
+          "resume_status": "failed",
+          "refresh_id": "bccee110ee5647f5a5328d75c13883b1",
+          "request_seq": 2,
+          "started_at": "2026-11-22T19:18:50.589573+00:00",
+          "finished_at": "2026-11-22T19:18:50.596739+00:00",
+          "error": "来源超过1000候选或16MiB累计预算",
+          "counts": {
+            "ready": 0,
+            "failed": 0,
+            "candidates": 9,
+            "billed_bytes": 16777217,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

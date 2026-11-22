@@ -1,0 +1,27 @@
+{
+  "method": "POST",
+  "path": "/api/documents/read",
+  "request": {
+    "reference": "r1.eyJhcmNoaXZlX2lkIjoiY2YzMzJiNzM1OWZjNDJmZjk0NjkxMjQxY2I1ZjFjOTQiLCJkb2N1bWVudF9pZCI6IjE1YTY5NTU3NWMxZTQ4NDc5ZDZjZDkwZGZjOGJlYWQwIiwiZW5kIjozNSwiZm9ybWF0IjoxLCJraW5kIjoiZG9jdW1lbnQiLCJzb3VyY2VzIjpbeyJpZCI6ImJkOTZiNzc3MmY0MjQwYjA5YzA4OWI3NDczMjNhMzViIiwicXVhbGlmaWNhdGlvbiI6MSwicmV2aXNpb24iOjF9XSwic3RhcnQiOjAsInZlcnNpb24iOjF9.b225709d45888e2952864160e1cae880030e32d25198f0b412f873e2f13cefde"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": "15a695575c1e48479d6cd90dfc8bead0",
+    "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1001/test_scan_scope0/docs/star-dir/keep.txt",
+    "version": 1,
+    "sha256": "fd07cea7911ea9e6cf0629b8448ca92996e4e86684a4a5268c67fec3336403ea",
+    "text_length": 35,
+    "captured_at": "2026-11-22T19:18:47.379140+00:00",
+    "captured_by_source_id": "bd96b7772f4240b09c089b747323a35b",
+    "text": "needle star cannot cross directory\n",
+    "start": 0,
+    "end": 35,
+    "start_line": 1,
+    "end_line": 1,
+    "source_ids": [
+      "bd96b7772f4240b09c089b747323a35b"
+    ],
+    "snapshot_kind": "采集版本（仅本机）"
+  }
+}

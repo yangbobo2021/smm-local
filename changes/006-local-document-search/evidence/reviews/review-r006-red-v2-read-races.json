@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-read-races": {
+      "status": "expected_failure",
+      "reason": "SC2与design-r006-v5-sc2的预算后变化/读中变化/枚举失败来自SPEC B2/B4/B6及PLAN3.2，已有方案明确fd与路径身份，未新增契约。v1b缺口由tests/test_document_limits.py:117-128补path-replace：fstat取得旧fd状态后os.replace当前路径，若只核旧fd、不核路径身份，将不会得到143-147要求的单成员failed与旧ref拒绝。正常正控old ref现在在147行立即独立读controlneedle unchanged，误撤整个来源连续资格会被拦截；枚举失败141行另禁止未枚举成员假missing。只拒首个变化文件而遗漏其他8个的实现会在143行failed==n及145-146逐ref失败；改变内容误发布在144行独立仅正控集合失败；数据/预期两边同错不能绕过控制正文、实际n和旧ref拒绝。149-159恢复分支保留整来源总量失败与逐成员partial的不同旧ref预期。原始red-r006-v2-read-races/TC-006-read-races/run.stdout及5个api-001附件证明全部五参数均在103行首次add真实404，尚未到达Documents导入、屏障/文件变化、预算、枚举或恢复断言；不将本用例故障注入称为E1平台实测。全部artifacts SHA一致，当前绑定与match-r006-v3-sc2一致，src未改。设计与实际断言已闭合首轮缺口，此处expected_failure确认新能力缺失造成的红灯。",
+      "covers": []
+    }
+  }
+}

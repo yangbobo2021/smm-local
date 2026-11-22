@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B4/A6的同源新刷新及配置替换判据与SC6自然设计一致。tests/test_document_concurrency.py:36–57两个动作前分支，以_publish事件屏障控制旧任务；46独立newwinner或49独立pending/空结果先拦两快照同错，50/52全来源/绑定/文档/成员/meta/FTS比较拦任一晚写副作用，另一参数拦仅首状态正确。新green-r006-v2-refresh-order原stdout 2 passed，两个late-refresh-response均published:false；winner_snapshot分别ready/revision1、newwinner v2和pending/revision2、正文NULL。red-r006-v3-refresh-order两参数合法add404及独立红灯与同测试吻合。documents.py:308–329事务分配序号/刷新身份并核revision、refresh_id。 本版绿灯业务和回归均有效，无有据必测缺口，passed；等价目标可选，不预判人工平台/用户入口、最终CI或R006交付。",
+      "covers": []
+    }
+  }
+}

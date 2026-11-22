@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-isolation": {
+      "status": "expected_failure",
+      "reason": "SC7首判据、SPEC B1/B4/B5/A7、PLAN §4与design-r006-v5-sc7要求无Hub/配Hub/对话暂停均可手动文档工作，且不改旧归档/开关/上传、不外发；设计未扩大需求。tests/test_document_compatibility.py:30–60分别运行none/hub/paused，32–39先建两个不同Agent来源独立正文并设置一个停用一个启用；Hub分支实际配置/选择/推送后41保存完整本地及远端settings/messages/conversations和上传表，43–48同时拦federation请求和IPv4/IPv6出站连接。50–53执行文档增/刷/查/读/改配置/移除，52独立核文档原串；54比较完整旧状态、远端和请求数，55–57逐对话按各自ID及独立正文/source读取，58核完整来源开关集合，59核暂停值。仅第一Agent正确、第二停用/正文丢失分别被54/57/58拦；所有响应错读首会话会被第二项独立原串拦；网络请求即使不改远端仍被哨兵拦。三种会改变行为的环境状态和启停来源均已覆盖，更多同类标识属可选；真实网络平台行为另由E1/正式验收负责。已核match-r006-v4-sc7、red-r006-v3-isolation、共享005 pair夹具、全部绑定/artifacts SHA；原三个参数stdout、空stderr和三api-001证明旧对话/Hub准备已越过，首失败均为50行合法文档add返回404 Not Found、helper:52失败，非网络哨兵或旧功能故障。尚未文档refresh/search/read或末尾隔离断言，不声称隔离通过。B1新入口缺失为可信红灯，设计/测试有效，expected_failure，covers为空。",
+      "covers": []
+    }
+  }
+}

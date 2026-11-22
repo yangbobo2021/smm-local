@@ -1,0 +1,17 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-entrance-contract",
+  "target_sha256": "33bf146f7deccce2eaeeef071a5db264170d64b2256476ab48dd1fc0a3e4b6a1",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "本轮v4正式证据重新复核SPEC B1/B7/A1、PLAN §4及当前test_entrance_contract。实际stdout1 passed、stderr空、exit0，19 artifacts/47 bindings和设计SHA均重算一致，documents为4c706b3的43d3762c…。直接解析CLI原stdout：创建项目/多名单add/完整set及空配置复位均与同档案API相等，refresh后ready；00012唯一命中ref原样进入00013 argv，22码点独立正文needle CLI 中文😀及换行逐字准确，原SHA和返回source_ids对应来源一致。00014相对路径exit2且stderr非空，七层帮助原文含ID/pending/refresh及Unicode边界。同次工厂list_tools新三readonly和旧工具断言到达，不宣称stdio实测。仅当前selector，无XML/额外正式回归，历史绿灯及v3意见未当新证据。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

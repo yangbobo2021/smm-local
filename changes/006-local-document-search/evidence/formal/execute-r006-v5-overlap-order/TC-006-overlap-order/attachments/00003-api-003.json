@@ -1,0 +1,45 @@
+{
+  "method": "POST",
+  "path": "/api/documents/search",
+  "request": {
+    "query": "needle",
+    "limit": 50,
+    "scope": "project",
+    "project_id": 1
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "results": [],
+    "scope": "project",
+    "effective_project_ids": [
+      1
+    ],
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 0,
+      "sources": [
+        {
+          "id": "c5c1ded256f448799e77e14659e91521",
+          "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1017/test_overlap_order_pending_0/docs",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "pending",
+          "resume_status": "pending",
+          "refresh_id": null,
+          "request_seq": 0,
+          "started_at": null,
+          "finished_at": null,
+          "error": null,
+          "counts": {},
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  }
+}

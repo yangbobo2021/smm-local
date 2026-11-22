@@ -1,0 +1,28 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC4三判据来自SPEC B3/B4/B6/A4，无新增行为。design-r006-v5-sc4自然设计与match-r006-v4-sc4本项匹配有效。依据SPEC B3/B4/A4、SC4，自然设计把两独立文件在无变化、编辑、回旧字节及移动/删除状态分别核对有效。tests/test_document_lifecycle.py:7–37先完整两文件集合，逐文件read独立原文；不变刷新ID/version相等且旧ref可读；物理改字节但未刷新仍读原快照并有captured_at；刷新后每文件同ID新version/新全文且旧ref4xx；回旧字节版号不属前两版且两代ref均拒绝；移动生成新ID、删另一文件后只留moved，全部旧ref拒绝，moved全文明确等于原one内容。反例：只更新首个文件被updated循环逐文件断言拦截；两次读取同错文件被文件名拼接独立正文拦截；sha决定旧版本复活被version不在旧集合及旧ref4xx拦截。29份API附件原文显示两文件版本1→2→3、moved新ID版1及旧ref400，与documents.py:_publish按文件递增版本、不猜移动身份和read版本核验一致。 debug-r006-v1-sc4本TC原始run.stdout实际1 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "version-lifecycle-c1",
+        "version-lifecycle-c2"
+      ]
+    },
+    "TC-006-qualification": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC4三判据来自SPEC B3/B4/B6/A4，无新增行为。design-r006-v5-sc4自然设计与match-r006-v4-sc4本项匹配有效。依据SPEC B6/A4、SC4，file/source/missing三个会中断资格的状态及持续资格多来源设计有效。tests/test_document_lifecycle.py:40–76初始同路径S1/P、S2/Q加独立control，取得P/Q/all ref，不变刷新逐ref仍可读且version相同；分别注入单文件拒读、S1扫描失败或物理缺失，P旧ref即拒绝、Q/all固定全文可读；同配置同字节恢复后version相同但P旧ref仍拒绝；移除全部原资格后新来源不能使任一旧ref复活，control逐字可读。反例：用另一未包含来源冒充P资格被oldp拒绝拦截；一律作废所有ref被Q/all固定全文拦截；同字节恢复沿旧资格被第二次oldp拒绝拦截。108份原始API附件与3参数日志显示恢复内容仍version1、旧资格400、连续资格原文needle qualification/control一致；documents.py:_publish资格代次和read来源/revision/qualification核验支持结论。等价更多标识样本为可选补测。 debug-r006-v1-sc4本TC原始run.stdout实际3 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "qualification-c1",
+        "qualification-c3"
+      ]
+    },
+    "TC-006-source-lifecycle": {
+      "status": "passed",
+      "reason": "场景来源核对：当前定义000002.json SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c的SC4三判据来自SPEC B3/B4/B6/A4，无新增行为。design-r006-v5-sc4自然设计与match-r006-v4-sc4本项匹配有效。依据SPEC B1/B4/B6/A4、SC4，配置移出、重叠资格保留及最后来源清理的自然设计有效。tests/test_document_lifecycle.py:79–105先A目录P含one/deep/shared、B单文件Q取P/Q/all旧ref；A完整set改Q、排one且非递归后pending/P空，逐P旧ref拒绝，而旧Q/all借持续B仍读固定shared；刷新A后旧P仍拒绝；取新all再移B，旧Q/all拒绝但新all沿新A可读；最后移A sources/search皆空、最后ref拒绝，数据库可用正文与FTS均0，三源文件SHA/mtime逐一不变。反例：只使首P文件退出被old.values逐一4xx拦截；借新A复活旧all由移B后旧all4xx拦截；只改响应未清实际索引由SQL计数和search空拦截。34份API原件及00034-source-lifecycle.json保存旧/新ref与源指纹，400资格/版本拒绝及成功needle shared符合预期。documents.py:set/remove/_prune与read按引用原资格判定，支撑共享实现结论。 debug-r006-v1-sc4本TC原始run.stdout实际1 passed且exit0，全部附件SHA复算吻合；本TC分配项均实际执行到，覆盖完整。准许同候选正式执行，本意见不是正式交付或平台判定。",
+      "covers": [
+        "source-lifecycle-c2",
+        "source-lifecycle-c3"
+      ]
+    }
+  }
+}

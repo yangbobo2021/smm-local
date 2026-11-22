@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-empty-query": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-empty-query 独立复核通过。SPEC B5/B7、A5 与 PLAN §4 A5 对合法零命中和未采集/失败覆盖的区别，已与 design-r006-v5-sc5 及 tests/test_document_search.py:106-131 对照。2026-11-22T16:20:11.032–11.363Z 本次 selector 执行 exit 0，stdout 1 passed。00005–00015 的11次实际拒绝覆盖空/空白/无可检索词、非法scope、缺/不存在project、0/-1/51/非整数/bool limit，返回400或422及对应诊断。00001空档案为0文件无来源；00004、00017、00019、00020、00022及00023汇总的合法不存在词均成功零命中，来源分别pending/ready/partial/refreshing/failed且另一个未刷新来源一直pending，indexed_files依次0/1/0/0/0；原错误编码与删除的失败未伪装全部已查。已独立重算这些状态及11个拒绝数量，确认实际断言和证据。27 artifacts、89 bindings、定义/设计SHA逐一重算相符，证据明确属于本次正式执行。",
+      "covers": [
+        "empty-query-c1"
+      ]
+    }
+  }
+}

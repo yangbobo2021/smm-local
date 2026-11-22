@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-decode-files",
+  "target_sha256": "cb4c11f3c789cc1b26e11972854f953408537f96e300b0a621f08d3f3daffbbf",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-decode-files": {
+      "status": "passed",
+      "reason": "独立重新核v5原始stdout/响应/当前test_decode_files，SPEC B1/B2/B6/A2、PLAN §4及设计分配一致。stdout1passed、stderr空、exit0，24 artifacts/48 bindings和设计SHA现字节重算相同，产品为9cfd619 documents390880bf…。初次7候选4ready3failed，空文件ready零长度，bad/NUL/注入PermissionError各有错误且不入正常集合；每正常/恢复目标从独立cases原UTF8字节复算SHA、BOM去除及CRLF/CR转LF后逐字比原响应，中英emoji组合字符/尾换行准确。恢复7ready且limit50完整六非空路径，每目标read/SHA正确。权限注入不冒称平台实测，连续资格由其专责TC判。仅当前正式selector，无XML/附加回归，不拿旧产品通过或历史TDD代替本轮。",
+      "covers": [
+        "decode-files-c1",
+        "decode-files-c2"
+      ]
+    }
+  }
+}

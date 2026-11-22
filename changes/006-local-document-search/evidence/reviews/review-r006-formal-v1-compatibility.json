@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-compatibility 独立复核通过。对照 SPEC B1/B7/A7、PLAN §4 A7、design-r006-v5-sc7 与 tests/test_document_compatibility.py:63-93。2026-11-22T16:20:16.224–17.482Z 本次 selector exit 0，stdout 1 passed；源码先为Codex/Claude创建两个不同session/ID/独立正文，搜索结果完整等于两目标集合，再逐目标分别用数字ID及真实reference读取，source/session/ID和全文均对各自独立预期，旧DTO archive_scope/matched_messages保留且无document content_kind混入，已完成全部断言。00001-legacy-source-help.json中source根及list/validate/register/enable/disable/rollback/batches/purge-batch共9层原stdout逐字相等、前后exit均0。已另外从git f797fe843430b48faf379cd76b4ae18fd52f5c64取出原cli.py重算SHA=f1133ae0…，与冻结旧入口文件/元信息相符，比较不是两个当前入口。baseline-r006-compatibility-v2为同一测试摘要的独立开发前记录，仅作前置而未替代本次正式结果。5 artifacts、90 bindings、定义/设计SHA均重新计算一致。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

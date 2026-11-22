@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "expected_failure",
+      "reason": "实际读取006 SPEC B5/B6/A5、PLAN、原TC设计与match-r006-v6-sc5，确认新增unicode-lower.txt仅补合法UTF-8长文与Unicode坐标边界，没有降低原排序/去重/limit/末尾/长行/中文断言。该文件独立原字符串为İ重复3000次后接空格及lowerexpansionmarker tail，未触预算；预期必须返回唯一该文件且缺省片段含查询词，read原文等于原字符串对应码点切片。实际读取tdd-red/red-r006-unicode-v1-search-rank/result.json（SHA256 27109c53f19cf297ad6ea73f29eca8ae20039ee3f2dcc705f4acfe457b95e75f）、run.stdout/stderr及附件00010-api-010.json：此前项目/来源/刷新及排序正控已执行；tests/test_document_search.py:33查询lowerexpansionmarker时API返回400范围错误而期望200，实际pytest退出1，与独立PR最小复现同一产品缺陷，不是导入/环境失败。逐项重算19个artifact SHA全部匹配；37个product_bindings全部匹配git f89623b源字节，5个test_bindings匹配实际测试文件。认可本轮真实预期红灯；新增查询之后的读取断言尚未执行，不记为通过，covers为空，不预判修复及正式验收。",
+      "covers": []
+    }
+  }
+}

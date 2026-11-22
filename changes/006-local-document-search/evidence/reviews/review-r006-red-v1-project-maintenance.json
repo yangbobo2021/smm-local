@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-project-maintenance": {
+      "status": "expected_failure",
+      "reason": "场景SC3第二判据由SPEC B3/A3直接支持，没有新增行为；design-r006-v3-sc3明确分别验证仅P与P/Q两种动作前绑定、改名、合并、映射与普通/全局约束。实际tests/test_document_projects.py:24-38：只维护首个来源而遗漏第二个来源的反例，会在31行both.project_ids==[q]首先失败；改名丢失第二文件的P资格会在28行完整集合失败；合并后重复Q绑定同样在31行失败；路径映射改任一来源配置会在34行完整sources比较失败；非法混并修改来源会在37行失败。这里的集合比较验证绑定结果，31行另以独立[q]核验持久配置，不能两边同错。现有样本已覆盖会改变预期的单绑定/重叠绑定状态，增加等价来源可选。红灯原件red-r006-v1-project-maintenance/TC-006-project-maintenance/run.stdout及attachments/00001-api-001.json显示26行首次POST /api/documents/sources真实404 Not Found，Fixture.request:52拒绝；是SPEC B1要求的来源能力尚缺失，不是导入/环境错误。后续改名、合并、映射、拒绝及状态断言尚未到达，不称这些行为已实测。结果所列原件SHA全部一致，runtime-r006-tests-v2真实smoke exit=0。",
+      "covers": [
+        "project-maintenance-c2"
+      ]
+    }
+  }
+}

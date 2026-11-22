@@ -1,0 +1,19 @@
+{
+  "method": "POST",
+  "path": "/api/projects",
+  "request": {
+    "name": "P"
+  },
+  "expected_status": 200,
+  "status": 200,
+  "response": {
+    "id": 2,
+    "name": "P",
+    "confirmed": 1,
+    "kind": "ordinary",
+    "conversations": 0,
+    "stable_key": "c79113c03fd2b105925e93837eeeddbd",
+    "paths": [],
+    "linked_ids": []
+  }
+}

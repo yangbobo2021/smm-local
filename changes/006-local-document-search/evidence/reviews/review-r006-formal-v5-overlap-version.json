@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-overlap-version",
+  "target_sha256": "b552010613e77de0d82e1a86baad14cbc3393b9f09e2f02847090148e76684a2",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "当前v5独立重核SPEC B3确定时间线/B6/A3、PLAN §4及test_overlap_version所有正文/资格来源/历史collector断言。stdout3passed、stderr空、exit0，155 artifacts/47 bindings及设计SHA重算一致，产品9cfd619 documents390880bf…。67search/34read/18reject原响应全解析：同IDv1→v2、P/Q/all原集合去重、原v1ref拒绝，正文SHA另算。重点00025/26 remove旧P/all均仅S1=38157eed97864956b51e765086278145，collector仍退出S2=a5d25cbe00d543cf8d5eae566ba311bf；00079/80 failed均仅S1=ea8fa1c0e96a4ed8bc55be63fe0ed9f6、collector仍失败S2=12990a045e5942979b81021ef8efe5fb，二者正文始终needle v2。00131/132 continuous P仅S1=2ea7ef0ada7343718fb4187fa0f37368，all保留该S1与S2=cf9455d34efe4b2b9a1e4bdcb0eb6875、collector S2。返回来源只原签名仍有效stamp，无借新资格，旧Q在退出分支拒绝。S1采v3后旧v2全拒绝、continuous Q也v3；退出分支最后S1失败仅control，无回退v1或旧正文。仅本selector无XML/附加回归，未从旧源passed或历史TDD推本轮，不判平台/R006。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

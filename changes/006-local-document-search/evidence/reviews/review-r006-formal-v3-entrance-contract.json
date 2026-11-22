@@ -1,0 +1,17 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-entrance-contract",
+  "target_sha256": "47dbddba5a83ea15df62b2ba3bb214f63ef7d5be562d19483cb9933ce6d2d98b",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-entrance-contract": {
+      "status": "passed",
+      "reason": "重新审查本次v3的19份artifacts与47份bindings，全部重算匹配a66deeb产品（documents SHA87e25466…）及当前测试/设计；非复制v2授予新源。SPEC B1/B7/A1、PLAN §4 A1和test_entrance_contract逐项对照。17:55:47.692–49.154Z exit0、stdout1 passed、stderr空；独立解析00001–00013真实CLI stdout，创建项目、双项目配置、完整set与空名单复位均和同档案API来源一致，refresh后ready。00012唯一命中的reference原样进入00013 argv，返回规范路径及独立22码点正文、原SHA准确；00014非法路径exit2且stderr非空。00015七层帮助原文已看，含项目ID取得/pending后refresh及Unicode码点/旧引用边界。同次pytest到达MCP工厂list_tools新三工具readonly及旧四工具存在断言；没有宣称真实stdio调用。正式执行仅该selector，无XML或附加回归。",
+      "covers": [
+        "entrance-contract-c1",
+        "entrance-contract-c2",
+        "entrance-contract-c3"
+      ]
+    }
+  }
+}

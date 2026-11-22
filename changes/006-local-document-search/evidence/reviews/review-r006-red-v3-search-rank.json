@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "expected_failure",
+      "reason": "独立核对definitions/000002.json的SC5、SPEC B5/A5、PLAN §3.3/§4及design-r006-v5-sc5：场景与设计均有原文依据，不额外强制相关性分数符号。实际tests/test_document_search.py:11–35覆盖51个同分目标、重叠来源去重、limit1/50、重复稳定顺序和不等正文相关性；24行完整50路径序列与25行唯一ID会拦只处理首文件，30行独立要求高相关z-high先于低相关a-low，不能两响应同错。前轮文件名漏项现已补：12行仅文件名含filenameonlyuniquemarker，28行以该独有词单独要求零命中，误召回不能躲在limit截断之后。31–35逐个核尾部、窗口边界、长行和中文命中，按各自独立special原串切片且要求查询词出现；只让首个目标正确或两边返回同一错误文本分别被32/34拦截。更多同条件标识样本为可选。已核match-r006-v4-sc5、red-r006-v3-search-rank收据及全部绑定/原始artifacts SHA，当前2cc8cb0与所绑定测试一致。真实首失败为20行合法POST /api/documents/sources返回404、正文Not Found，document_helpers.py:52断言失败，原run.stdout、空stderr和00001-api-001.json一致；基线api/cli没有文档入口，属于B1能力尚缺，非环境或导入错误。refresh、search、排序/文件名与read断言均未执行，不能据此声称这些业务已通过。设计及测试实现有效，此入口缺失红灯可记expected_failure；TDD covers为空。",
+      "covers": []
+    }
+  }
+}

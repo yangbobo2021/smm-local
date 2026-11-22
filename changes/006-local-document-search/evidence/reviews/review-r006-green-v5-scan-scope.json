@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "独立核SPEC B2/A2、PLAN3.2/4、定义000002 SHA6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c、design-r006-v5-sc2及match-r006-v9-sc2实际test_scan_scope。新七路径/五模式属于B2既定**零/多目录段、尾斜杠及大小写敏感语义，不增加需求。red-r006-glob-v1-scan-scope在首模式cache/**/的独立完整集合断言多出cache/direct.txt，原始1 failed/exit1，与PRfinal独立expected_failure相符；后四模式红灯尚未到达，不算通过。当前green-r006-v5-scan-scope与红灯全部test_bindings和命令一致，src逐字9cfd619，实际diff使终端**前separator成为可选尾部、连续**合并、裸**用[^/]段表达式包含LF；旧metadata有效stamp/历史collector逻辑未改。当前71份原件中00037/cache/**/精确五路径，00044/**/cache/**/三控制路径，00053/outer/**/cache/**/五路径，00060/**/**/cache/**/**/三控制路径，00071/CACHE/**/全部七路径，均与源码独立wanted相等；每次实际read正文为globneedle+对应相对路径，防两个响应同错/误指首目标。cachex与外层正控拦过度排除，根/外层/深层cache拦只正确首目标；LF仅纯_glob匹配断言，不冒称真实Windows文件名。原有默认排除、递归、*?**文件模式、显式隐藏/排除中单文件、根/内层链接、原件SHA/mtime断言继续完整达到。当前run.stdout1 passed/exit0，全部artifact及运行绑定SHA复算一致，match-v9选段/implementation摘要与实际相符；runtime-product-v5当前环境导入成功。回归实际仅test_archive_references.py四项，regression.stdout4 passed/exit0，覆盖篡改/跨档案/冲突参数、签发间改变、冻结项目范围、旧读取参数。只认定本TC新同版绿灯与此4项回归；旧delivery-v2 failed保留，不冒称其余TC本轮新TDD或平台/CI/R006通过。",
+      "covers": []
+    }
+  }
+}

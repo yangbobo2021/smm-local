@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v4-read-races",
+  "target_sha256": "a654d3f2756d1ef741c64555e70ebba57f9f88ec5c051969f3bc439d65778a2c",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "本轮v4正式五参数按SPEC B2/B4/B6/A2、PLAN预算/打开屏障和当前test_read_races断言独立复核。stdout5 passed、stderr空、exit0；102 artifacts/48 bindings及设计SHA重算一致，指向4c706b3 documents43d3762c…。00010/34实际after-budget-before-open及单2097153/九个2097152字节，分别1/9failed而正控1ready；再次预算后累计超限整源failed。00060/76实际打开后改文/替换路径只留控制正文，00092枚举故障整源failed且不假missing；恢复2/10完整集合后原失败资格仍拒绝、未中断控制资格可读。16search/11read/29reject原响应全量解析，正文SHA、文档版本及返回来源非空且限原引用stamp核对一致。确定故障注入不冒称平台实测；仅当前selector，无XML/附加回归，未沿用旧版passed或声称本轮重做历史TDD。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-isolation",
+  "target_sha256": "7a6bede67a016b45109ece353c1d649f4c69d0ce779b677252ec5f2fe34befca",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B5/A7、PLAN §4及环境修订、design-r006-v5-sc7，对照当前test_document_compatibility.py:29-71及pair/Fixture。none/hub/paused实际三参数3passed/exit0/stderr空，28 artifacts/48 bindings。原00008/16/24本机settings/messages/conversations与所有上传表前后完整一致，远端一致、marker后calls0、两独立Codex/Claude正文各为original/second independent；开关及暂停逐原值保持。00004/12/20文档原文正控准确，read来源逐签名解码只原有效单源。文档add/refresh/search/read/set/refresh/remove及legacy读取全部在双guard内：拒绝federation._request和全部AF_INET/6新connect，回环127.0.0.1与外部203.0.113.1负例均到达。持久portal只在guard前建立，不放行Hub。_glob修复未引入网络/对话状态副作用。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "isolation-c1"
+      ]
+    }
+  }
+}

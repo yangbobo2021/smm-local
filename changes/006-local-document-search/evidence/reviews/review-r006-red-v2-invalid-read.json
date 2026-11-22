@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "expected_failure",
+      "reason": "SC5引用判据及v5自然设计均可从SPEC B6/A5推出，未新增约定。tests/test_document_search.py:65–68有两个正文独立的文档及另一档案；71核payload kind/文档ID/版本，77–85逐档案/文档/版本/kind及来源id/revision/qualification变更后拒绝，含另一真实文档ID及域外值；86–87逐坏范围，88独立alpha全文正控，91–92真实同档案对话ref拒绝，94–96配置失效拒绝及新ref独立原文正控。若只有首篡改被拒其余被放过，相应循环的bad断言拦截；若读/search都误用beta，88独立alpha原串拦截；若失效配置引用复活，95拦截。源正文I/O哨兵覆盖读取阶段。多源连续资格另由SC4/SC6分工，当前分配项无具体漏检；增加同条件ID为可选。已读red-r006-v2-invalid-read收据、绑定原件、stdout/stderr及api-001，全部摘要一致；66行合法目录add真实404 Not Found，在helper:52业务入口断言失败，当前src/smm_local/api.py无文档入口，为B1能力缺失，不是测试导入/环境错误。refresh及签名/范围/正控尚未到达。授予可信预期红灯，不声称后续行为通过；TDD covers为空。",
+      "covers": []
+    }
+  }
+}

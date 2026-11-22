@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-overlap-version",
+  "target_sha256": "6bda47b0c91a19e1cdaba8fb26b2b7f5be2efda4fc2e65111033382703265c20",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "passed",
+      "reason": "独立复审当前正式v2：SPEC B3确定时间线/B4/A3、PLAN §4 A3、design-r006-v5-sc3与tests/test_document_projects.py的test_overlap_version全部参数实际断言已对照。stdout 3 passed、stderr空、exit 0。00001–00053 remove、00054–00107 failed、00108–00151 continuous三独立档案均S1/P/v1→S2/Q/v2：P/Q/all原results路径/ID只一次、同ID新版本、各读取独立needle v2且采集来源S2，P资格S1、Q资格S2、all两者；v1均400。撤S2的两分支保留P/all v2、Q空且旧Q ref400，P/all原ref仍可读；S1采v3后旧v2各ref400，P/all精确v3，continuous时Q也精确v3。撤S2两分支最后S1失败后仅control可查/可读且final shared refs拒绝，未回退v1。逐命中签名payload与文档ID/版本/source_ids另核一致。155份artifacts、47份bindings及设计SHA重算一致。故障为合成_scan失败；仅正式目标selector，无XML/额外旧引用回归，不作平台或R006总判定。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

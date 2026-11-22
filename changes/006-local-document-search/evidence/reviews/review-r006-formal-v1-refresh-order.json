@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-refresh-order": {
+      "status": "passed",
+      "reason": "正式 execute-r006-v1-refresh-order 通过。已对照 SPEC B4/A6、PLAN §3.2/§4 A6、design-r006-v5-sc6 与 tests/test_document_concurrency.py:8-57 的屏障/线程及完整持久状态断言。本次 test_refresh_order 两参数在 2026-11-22T16:20:11.724–12.076Z exit 0，stdout 2 passed；屏障必须先到达，晚任务释放后须线程完成无异常，且完整 document_sources/source_projects/documents/memberships/meta/fts 与获胜快照逐值相等。00006、00015 原晚到响应均 published:false，明确被新意图取代；new-refresh 分支 00004–00009 返回 newwinner 版本2并且oldloser零命中；set-config 分支00014为空，00018状态pending/revision2、正文撤销且来源配置保留新Q/排除/递归意图。既有成功刷新为正控，两个可改变结果的前置分支均实际到达。22 artifacts、89 bindings 及当前定义/设计SHA全部重新计算相符，当前源码就是执行版；未以准备或绿灯状态代替本轮运行。",
+      "covers": [
+        "refresh-order-c1"
+      ]
+    }
+  }
+}

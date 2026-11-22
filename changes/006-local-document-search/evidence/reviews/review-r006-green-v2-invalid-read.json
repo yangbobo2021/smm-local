@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-invalid-read": {
+      "status": "passed",
+      "reason": "本轮重新核对定义000002的sha6b524c88…、006 SPEC/PLAN及design-r006-v5和match-r006-v5相应场景。runtime-r006-product-v2绑定全实际产品、共享夹具与四项旧引用回归，本TC另绑定自身测试；当前37个src已与git f89623b逐字比较一致。对应新绿灯全部artifacts及当前bindings SHA逐项匹配，红绿test_bindings、测试声明和命令一致。所附regression原stdout为4 passed/exit0，命令仅test_archive_references.py，实际断言核篡改/跨档案、签发期内容变化、冻结Hub项目范围和旧数字ID/Hub message旧参数；本回归不声称包含旧帮助，后者由当前TC-006-compatibility单独验证。SPEC B6/A5，SC5与自然设计的签名/档案/内容配置资格/范围拒绝有依据，连续资格生命周期另由SC4专项。tests/test_document_search.py:71–103准备两个不同正文与外档案，逐字段合法外观/非法值保留原签名篡改，逐范围拒绝，95/103独立alpha正控拦全拒或同错首目标，真实对话ref和改配置旧ref亦拒。新green-r006-v2-invalid-read原stdout 1 passed，原附件23个拒绝分别为损坏/跨档案、范围400/422、真实对话400与配置旧ref400，两次正控准确needle alpha 😀 é及second正文；无返回替代正文。red-r006-v3-invalid-read首合法add404及独立意见仍与同测试吻合。references.decode和documents.py:392–411按签名、档案、版本与原来源资格读取。 本次绿灯和所附回归有效，无有据必测缺口，passed；更多等价标识可选，不预判人工平台/用户入口、最终CI和R006交付。",
+      "covers": []
+    }
+  }
+}

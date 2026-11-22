@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-interrupted-refresh",
+  "target_sha256": "4dc58cc41855f71fa5e562cc229d0ac7260c1321a35485a2f5da2ab4f1980794",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "passed",
+      "reason": "本次正式v3独立复审通过。SPEC B4/A6、PLAN §3.2/§4、design-r006-v5-sc6，对照当前test_document_concurrency.py:151-173。实际是数据库持久refreshing状态注入，重新构造Archive/Documents后明确刷新文件和目录来源，不声称进程崩溃实测。00009全量仅one/added/control，one原ID保留而版本1→2，两个来源ready；00012读独立changed、00013读newly discovered、00014连续control旧ref仍为continuous，00015旧one ref400采集版本过期。第166-172行完整集合/身份版本/状态及独立正文全部断言到达，证明重新读取新增/变化文件而非仅改status。00016明确记录故障注入范围，已重新核其after集合和old身份/版本关系。stdout1 passed/exit0/stderr空，20 artifacts/47 bindings。重新核当前src=a66deeb、runtime-r006-product-v3、match-r006-v7与manifest-v6，目标artifacts/bindings和match实现摘要逐项重算一致，未沿用旧v2绑定。只认领本次实际分配项。本正式轮仅目标selector，无XML/附回归；full-regression-v4当前绑定全部吻合，原XML为301通过/1跳过，四项tests/test_archive_references均实过；不将历史旧TDD称为新23绿灯，不判平台/CI或R006最终交付。",
+      "covers": [
+        "interrupted-refresh-c2"
+      ]
+    }
+  }
+}

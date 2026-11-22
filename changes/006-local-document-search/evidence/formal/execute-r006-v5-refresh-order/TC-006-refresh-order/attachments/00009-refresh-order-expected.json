@@ -1,0 +1,66 @@
+{
+  "case": "new-refresh",
+  "winner_snapshot": {
+    "document_sources": [
+      {
+        "id": "424962ca58914809ab809034c6e38e93",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1015/test_refresh_order_new_refresh0/docs/one.txt",
+        "kind": "file",
+        "recursive": 1,
+        "exclude": "[]",
+        "revision": 1,
+        "status": "ready",
+        "resume_status": "ready",
+        "refresh_id": "6ea4bac479f4445f89e87582be3f6cd1",
+        "request_seq": 3,
+        "started_at": "2026-11-22T19:19:00.881900+00:00",
+        "finished_at": "2026-11-22T19:19:00.883046+00:00",
+        "error": null,
+        "counts": "{\"ready\": 1, \"failed\": 0, \"candidates\": 1, \"billed_bytes\": 26, \"ignored_entries\": 0, \"ignored_format\": 0, \"ignored_excluded\": 0, \"ignored_links\": 0}"
+      }
+    ],
+    "document_source_projects": [
+      {
+        "source_id": "424962ca58914809ab809034c6e38e93",
+        "project_id": 1
+      }
+    ],
+    "documents": [
+      {
+        "pk": 1,
+        "id": "2f07650d857e4e36b40486aaa74143fd",
+        "path_key": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1015/test_refresh_order_new_refresh0/docs/one.txt",
+        "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-1015/test_refresh_order_new_refresh0/docs/one.txt",
+        "version": 2,
+        "sha256": "b5c32f227ae4b93e96e87af504ee626a0d02fba40a02473a70beb2cdf21f1cd0",
+        "text": "needle newwinneruniqueterm",
+        "text_length": 26,
+        "captured_at": "2026-11-22T19:19:00.882916+00:00",
+        "captured_by_source_id": "424962ca58914809ab809034c6e38e93",
+        "publish_seq": 3
+      }
+    ],
+    "document_memberships": [
+      {
+        "source_id": "424962ca58914809ab809034c6e38e93",
+        "document_pk": 1,
+        "relative_path": "one.txt",
+        "status": "ready",
+        "qualification": 1,
+        "error": null
+      }
+    ],
+    "document_meta": [
+      {
+        "key": "request_seq",
+        "value": 3
+      }
+    ],
+    "fts": [
+      [
+        1,
+        "needle newwinneruniqueterm"
+      ]
+    ]
+  }
+}

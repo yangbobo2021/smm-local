@@ -55,6 +55,32 @@ Codex 默认读取 `~/.codex/sessions`，Claude Code 默认读取 `~/.claude/pro
 
 请在试用反馈中记录：安装是否独立完成、一次自己的历史问题是否找对原文、一次跨 Agent 搜索是否找对、哪一步费时或困惑。不要把私人对话原文发到公共 issue。
 
+## 本机文档检索（006，尚未发布）
+
+当前 README 快速安装的 0.4.0 和 Skill 首次安装器不含 006，重复安装同版本不会得到文档功能。预览可按 README 从源码安装，或在源码根目录运行 `python3 scripts/build_packages.py`，将 `dist/packages/smm_local-0.4.0-py3-none-any.whl` 安装到**独立新环境**。两个构建包仍使用未发布阶段版本字符串，以实际源码/wheel字节区分；不要覆盖日常安装。需要 Python 3.11+ 和 uv。
+
+```text
+uv venv .document-preview
+uv pip install --python <新环境的Python> dist/packages/smm_local-0.4.0-py3-none-any.whl
+<新环境的Python> -m smm_local.cli --db <独立档案的绝对路径> documents --help
+```
+
+macOS/Linux 的解释器是 `.document-preview/bin/python`，Windows 是 `.document-preview\Scripts\python.exe`。以下用 `smm` 表示该环境的入口；需要隔离时，**每条命令**均在子命令之前加 `--db <同一个独立档案>`，MCP 用同环境 `smm-mcp --db <同一档案>`。文档功能不需要 Hub，也不需要管理员权限。Web 沿用本机服务；新档案默认仍配置 Agent 对话来源，若只演示合成文档，可将 `SMM_CODEX_ROOT` 与 `SMM_CLAUDE_ROOT` 指向事先创建的空目录后再启动服务。
+
+1. 打开本机 Web 主导航“文档”。“创建普通本机项目”返回项目 #ID；已有项目也可在“项目”页或 `smm projects` 取得。全局项目通过“项目”页或 `smm project ensure-global` 创建，它与普通项目同级，不自动包含在 A 项目检索中。
+2. 添加 **SMM 服务所在电脑**上当前账户可读的绝对文件或目录路径，不能填写浏览器另一台电脑的路径。来源支持 `.md`、`.markdown`、`.txt`（扩展名不区分大小写），严格 UTF-8，允许 BOM；不支持 Word、Excel、PDF、图片。来源可绑定零个、一或多个现有本机项目；零绑定只参加“全部文档”，共享资料不创建项目关联。CLI 可用 `smm documents add <绝对路径> --project-id ID --project-id ID`。
+3. 保存后为 `pending`，尚未读取正文。点击该来源“刷新”或运行 `smm documents refresh --source-id <来源ID>`；省略 ID 逐来源刷新全部。来源 ID 从页面或 `smm documents sources` 取得。目录默认递归，`--no-recursive` 只看根直接文件。默认排除隐藏及 `.git/.hg/.svn/node_modules/.venv/venv/build/dist` 目录，不跟随链接/junction；可将实际文件或实际子目录另加为来源。
+4. 自定义 `--exclude` 可重复，使用相对根的 POSIX 路径，大小写敏感：`*` 单段、`?` 单字符、`**` 零或多层目录，末尾 `/` 排目录及后代；例如 `--exclude '**/private.txt' --exclude 'cache/'`。禁止绝对路径、`..`、反斜杠。Web“编辑配置”与 `smm documents set <来源ID>` 都是**完整替换**：未选项目/未给名单即清空，未给 `--no-recursive` 即递归；根路径不变，配置版本递增，旧来源资格立即退出，刷新后按新配置生效。
+5. 查看来源 `ready`、`partial`、`failed` 和“文件状态”，CLI 为 `smm documents files --source-id <ID>`。每文件原字节最多 2MiB，每来源最多 1000 个受支持候选及 16MiB 累计（过大文件不计累计，坏编码/NUL/后续不可读仍计）。逐文件错误只让该文件失败；来源枚举或总预算超限整轮失败且旧材料不可查。修正路径/权限/编码或缩小明确纳入范围，再刷新；不要将零命中当作全部已查。`refreshing` 在进程中断后也可通过下一次明确刷新恢复。
+6. 在“检索采集文档”选择全部或本机项目；CLI 为 `smm documents search "查询词" --scope project --project-id ID --limit 5`，数量 1–50。只按正文召回，项目范围只展开本机双向直接一层关联，连接 Hub 也不改变范围。有效零命中与未刷新/部分失败分开展示覆盖状态。
+7. 点“读取原文”，或原样将命中的 `reference` 传给 `smm documents read --reference <引用>`。默认读最多 2000 码点的命中窗口；`--start 0 --end 100` 按整个规范化文本的 Unicode 码点 `[0,100)` 扩读，一次最多 16000 字符，不是字节或 UTF-16。仅去 BOM 并将 CRLF/CR 转 LF，其他字符不改；原始字节 SHA-256、采集时间和版本均可核对。内容纯文本显示，不执行其中 Markdown/HTML/脚本。
+8. 修改/删除文件后，刷新前仍读取明确标记的上次快照；再次刷新才发现变化。内容新版本、失败/缺失、来源配置或资格变化后，失效引用明确拒绝；重新搜索取得新引用。即使改回旧字节或修复后同配置重新纳入，旧失效引用不会复活。首版不提供历史版本读取。无变化刷新、同档案服务/CLI/MCP重启保留版本和连续有效引用，不自动扫描文档。
+9. Web“移除来源”或 `smm documents remove <来源ID>` 不改原文件。独占材料立即退出检索/读取；其他有效重叠来源可保留唯一文件级当前快照及项目资格，移除最后采集来源也不回退旧正文。最后来源退出后清理可用正文/索引，不承诺物理介质安全擦除。
+
+Agent 使用三个只读 MCP 工具 `list_document_sources` → `search_documents` → `read_document(reference=...)`；来源管理通过 CLI/Web。先核覆盖，正文需读回再引用规范路径、采集版本/时间、字符/行号。对话仍用原对话工具，不能将两种引用混用。SMM 文档逻辑不调用 Hub 或外部模型；Agent 自己读取的片段会随该 Agent 的正常上下文流转。
+
+维护者的源码回归、双包独立安装与三系统真实入口复跑前提见[验收探针](scripts/acceptance/README.md#006-本机文档可选实际包验证)。
+
 ## 多台电脑共用汇总档案
 
 汇总端通过下面的包管理流程部署，也可在自行管理进程时运行 `smm-hub serve-hub`。汇总端使用独立数据库，远程连接使用 HTTPS。连接凭证允许上传和搜索汇总档案，应发给有权访问这些对话的使用者。

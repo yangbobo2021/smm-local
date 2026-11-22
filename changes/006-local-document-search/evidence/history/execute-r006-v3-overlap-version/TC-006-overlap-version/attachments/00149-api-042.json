@@ -1,0 +1,96 @@
+{
+  "method": "GET",
+  "path": "/api/documents/sources",
+  "request": null,
+  "expected_status": 200,
+  "status": 200,
+  "response": [
+    {
+      "id": "b2e350695e044e8b8ef182d0b27b178e",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_continuou0/docs/shared.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "65a87bca085f4cda91e5adb150b73fe6",
+      "request_seq": 4,
+      "started_at": "2026-11-22T17:55:56.773347+00:00",
+      "finished_at": "2026-11-22T17:55:56.774361+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 9,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "958647362ce2433cb23b68b43ec1022b",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_continuou0/docs/control.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "ad0c94291e74403392a1f72426767fa0",
+      "request_seq": 2,
+      "started_at": "2026-11-22T17:55:56.724082+00:00",
+      "finished_at": "2026-11-22T17:55:56.725109+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 14,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        1
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    },
+    {
+      "id": "064395b067fa4da0bc0630feb50c0cfc",
+      "path": "<REVIEW_TEMP>/pytest-of-boboyang/pytest-904/test_overlap_version_continuou0/docs/shared.txt",
+      "kind": "file",
+      "recursive": true,
+      "exclude": [],
+      "revision": 1,
+      "status": "ready",
+      "resume_status": "ready",
+      "refresh_id": "270ee4732ec6427bbc8dd6e6ebb4aba1",
+      "request_seq": 3,
+      "started_at": "2026-11-22T17:55:56.733723+00:00",
+      "finished_at": "2026-11-22T17:55:56.734678+00:00",
+      "error": null,
+      "counts": {
+        "ready": 1,
+        "failed": 0,
+        "candidates": 1,
+        "billed_bytes": 9,
+        "ignored_entries": 0,
+        "ignored_format": 0,
+        "ignored_excluded": 0,
+        "ignored_links": 0
+      },
+      "project_ids": [
+        2
+      ],
+      "message": "仅本机；保存配置后请明确运行 documents refresh"
+    }
+  ]
+}

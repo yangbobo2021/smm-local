@@ -1,0 +1,28 @@
+{
+  "step": "current-readback-SC6",
+  "scene_id": "SC6",
+  "observed_at": "2026-11-22T18:16:50.522099+00:00",
+  "note": "Current readback of existing matched/prepared/executed/reviewed records; not a past-time screenshot or a new business run",
+  "definitions": {
+    "version": 2,
+    "sha256": "6b524c88d83824c1d7c2666512bbc3a5d9c720df09f6a950f5da1a0106f7074c"
+  },
+  "status": "passed",
+  "stages": {
+    "match": {
+      "record": ".acceptance-local/native-v1/AT-SMM-006/match/match-r006-v7-sc6/result.json",
+      "sha256": "0a0e9ab1cc0d8fa6e32b251187e2a404641ac19f92bd4fe53c28ba585143f6f5"
+    },
+    "debug": {
+      "record": ".acceptance-local/native-v1/AT-SMM-006/debug/debug-r006-v3-sc6/result.json",
+      "sha256": "4b70bdeded68d2ccc53365646257c5ed39baa16c287d6de86df8e655f676ed44"
+    },
+    "review": {
+      "record": ".acceptance-local/native-v1/AT-SMM-006/review/review-r006-prep-v3-sc6/result.json",
+      "sha256": "f804ea98fdc1d9b29b60750a1a62eacf1a968d84d1e58be23600aba5e3402f17"
+    },
+    "current_cases": {}
+  },
+  "screenshot": "current-SC6-scope-match-prepare-execute-review.png",
+  "screenshot_sha256": "5c1d48deec4a65b6fc6ad5bbf6e67ff33efe7090ddaf3a7b82a1c197543dd622"
+}

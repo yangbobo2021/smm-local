@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-overlap-version": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "SC3第三判据为SPEC B3确定时间线和A3/A4的业务概括，P/Q/all当前v2及资格来源、退出不回退都有依据。自然设计覆盖S2 remove/failed、S1随后v3，但两案均先让S2失效，漏掉B3明确“S1随后成功采v3…Q仅在S2仍有效时参加”的S2持续有效动作前状态；也未设计S1最后也失败时无资格退出。实际projects.py:41参数只有remove/failed，66-69只核P新v3与Q空；实现仅在先撤S2时正确、S2持续有效时Q仍读旧v2，或最后S1失败仍保留历史S2正文，现有断言都可全过。这是原文明确状态差异，不是任意增加相同样例。最小增持续有效S2分支，S1采v3后分别P/Q/all精确v3及资格/采集来源，且旧v2 refs拒绝；在withdraw分支再令最后S1失败，P/Q/all空、v3 refs拒绝。实现另有独立缺口：48、62等全用names()，helper:128先按basename去重，49-53只对每个查询被字典留下的shared命中断言，产品每来源重复返回共享文件仍可通过；需对每次原始results断言一共享文件及正确完整路径/ID。现有P/Q/all两边同错正文会被51行独立needle v2拦截，误用同一资格会被52-53独立source IDs拦截；只对第一个P正确、Q错误v2则Q的51行拦截。这些有效断言不覆盖上述遗漏状态或raw重复。原件2参数stdout和2附件均在45行首次S1 add真实404；v1/v2/v3及撤源断言尚未到达，不能称时间线已实测。所有原件SHA一致、runtime正常，保留业务能力缺失，但候选最早需补自然设计。",
+      "covers": [
+        "overlap-version-c3"
+      ]
+    }
+  }
+}

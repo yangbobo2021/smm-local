@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-search-rank": {
+      "status": "expected_failure",
+      "reason": "实际对照SPEC B5/B6/A5与PLAN、当前match-r006-v7-sc5，新增unicode-equivalence.txt独立源为(ſtopuniquemarker 加空格)重复200次后接真正ASCII stopuniquemarker tail；现有core.tokens(text.lower())只在尾部产生完整ASCII查询词，故命中窗口应含尾部真实词。没有放宽排序/去重/原文断言。实际读取red-r006-unicode-v2-search-rank/result.json（SHA256 d010adcfe8ea94c03ed0c3e4ed9c41084769398f30e29b689520551acfbc0a0c）、实际stdout、API/read附件：请求成功召回该文档，但test_document_search.py:36独立断言query in read[text]失败，返回前2000码点全部长s前缀而没有真正ASCII词，真实pytest退出1。重算20 artifacts摘要全匹配，37个product_bindings全部匹配git580c449，5个test_bindings匹配实际测试。失败是regex IGNORECASE新增ſ与s等价抢占片段位置造成的明确业务缺陷，与独立PRdotless-i复现同类，非环境/导入故障。认可预期红灯，后续未执行用例不记passed，covers为空；此意见不预判下一修复及交付。",
+      "covers": []
+    }
+  }
+}

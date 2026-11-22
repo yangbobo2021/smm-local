@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v2-isolation",
+  "target_sha256": "fb8a145411576e0d3417980ccd505bf00805f6ba5986dec31ec96375b8812b0f",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-isolation": {
+      "status": "passed",
+      "reason": "正式v2独立复核通过；SPEC B5/A7、PLAN §4及末段Windows测试环境修订、design-r006-v5-sc7，对照当前tests/test_document_compatibility.py:29-71、test_005_contracts的pair/connect及Fixture关闭auto_sync/sync_on_start。已读新ci-red-v1b-isolation意见与当前源码，不沿用旧v1绑定。none/hub/paused三组均实际完成文档add/refresh/search/read/set/refresh/remove；00004/12/20均准确读独立docprivateneedle正文。00008/16/24原始完整状态中本机settings/messages/conversations及上传各表前后相等、远端前后相等、marker后calls=0；两个独立Codex/Claude正文/来源逐目标断言保持、codex停用/claude启用和暂停原值保持。持久TestClient portal仅在guard前建立；业务始终在拒绝federation._request与所有AF_INET/6新connect哨兵内，并真实执行127.0.0.1及203.0.113.1负例，因此没有放行回环Hub网络。stdout3 passed/exit0/stderr空；28 artifacts、48 bindings及match实现摘要全部重算一致。只认领本共用隔离用例，不代替平台E1或R006交付。本正式轮无XML/附回归；green-v2原旧引用回归4 passed且摘要一致，full-regression-v3全部绑定一致，原XML四项旧引用通过（301 passed/1 skipped）。",
+      "covers": [
+        "isolation-c1"
+      ]
+    }
+  }
+}

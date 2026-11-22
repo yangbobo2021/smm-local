@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v3-read-races",
+  "target_sha256": "c5f66ea5ee0f2ca4ec10689b5139c8df51b199c4172b1cc82a598bbc01328f56",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-read-races": {
+      "status": "passed",
+      "reason": "重新独立审查当前v3的五组竞态正式原始记录及test_read_races全断言；SPEC B2/B4/B6/A2、PLAN预算后打开前屏障及设计分配相符。17:55:53.903–54.464Z真实exit0、stdout5 passed、stderr空。00010/34证据记录after-budget-before-open及实际单2097153字节/九个2097152字节，变化文件分别1/9failed且控制文件1ready，原变化ref全部拒绝；九文件下一刷新按新大小整源failed、无正控结果。00060/76真实fstat触发改文/换路径后均只控制正文可查读；00092枚举故障整源failed且无假missing，恢复全部2或10文件，本轮29个400失效拒绝覆盖原资格不能复活，未中断控制ref仍可准确读。所有search原结果文档/路径去重、签名payload文档版本和码点区间合法性另核。102 artifacts/48 bindings及设计摘要重算一致，documents为a66deeb87e25466…。这些是确定注入而非平台故障实测；无XML/附加正式回归，不沿用旧通过。",
+      "covers": [
+        "read-races-c2",
+        "read-races-c4"
+      ]
+    }
+  }
+}

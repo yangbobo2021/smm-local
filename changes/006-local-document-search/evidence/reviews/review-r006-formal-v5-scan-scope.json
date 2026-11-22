@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-scan-scope",
+  "target_sha256": "c44f2a3d47d7e4a36f275e5f1a187077bd008bce2b1baa6a62048ea0d19947bc",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-scan-scope": {
+      "status": "passed",
+      "reason": "本轮v5正式独立复核SPEC B2/A2的POSIX * ? **/目录尾斜杠/大小写规则，PLAN §3.2/§4、当前test_scan_scope新增完整断言与设计分配。stdout1passed、stderr空、exit0；75 artifacts/48 bindings及设计SHA重算匹配9cfd619 documents390880bf…。原扫描五路径逐正文正确、非递归仅根，显式build文件/隐藏文件/隐藏目录纳入，内层link忽略2/逃逸词零命中/根链接400及源指纹不变仍通过。\n独立用七条字面路径重建五组预期（不取产品或emitted wanted作为预期）：controls={visible.txt,cachex/keep.txt,outer/cachex/keep.txt}；cache/**/应另保留outer/cache/direct及outer/deep/cache/deep，共5，直接cache/direct与cache/sub/deep均退出；**/cache/**/仅3 controls；outer/**/cache/**/应另保留cache/direct及cache/sub/deep，共5；**/**/cache/**/**/仍仅3 controls；CACHE/**/大小写不匹配，七个全保留。五次原results完整集合逐一相等，各23次read逐路径独立globneedle+相对路径正文及原SHA准确，无默认limit截断。当前通过selector末尾两条_glob(**)、_glob(cache/**)对cache/a\\nb.txt fullmatch断言真实到达，支持LF语义；这是编译器断言而非OS换行文件实测。源码terminal **使前分隔符归入可选尾部、合并连续**、裸**不以点号漏LF，与原要求相符。仅本轮selector，无XML/附加回归，不以旧源或历史TDD授新通过，不判平台/R006。",
+      "covers": [
+        "scan-scope-c1"
+      ]
+    }
+  }
+}

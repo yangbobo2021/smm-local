@@ -1,0 +1,16 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-source-config",
+  "target_sha256": "77262dc30861628131f602f2c05613b2bdb51faff25e3a69a7c9f9b04646749f",
+  "reviewer_session": "/root/review_006_formal2_a",
+  "cases": {
+    "TC-006-source-config": {
+      "status": "passed",
+      "reason": "重新审查v5原件，按SPEC B1/A1、PLAN §3.1/§4及当前test_source_config/设计分配。stdout1passed、stderr空、exit0；43 artifacts/47 bindings和设计SHA重算一致，documents390880bf…对应9cfd619。独立解析39附件：同名P不同ID/稳定键；单文件/目录完整替换及空名单/递归/排除复位均pending，未产生files/search；11坏输入400/422后各次完整来源集合仍baseline。正文打开哨兵、重开档案配置及移除后空集合/原件指纹不变断言到达，原29字节SHA另算一致。本轮只当前selector，无XML/额外回归；未沿用旧产品结论或将历史TDD当本轮绿灯。",
+      "covers": [
+        "source-config-c1",
+        "source-config-c2"
+      ]
+    }
+  }
+}

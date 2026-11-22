@@ -1,0 +1,15 @@
+{
+  "target_operation": "execute",
+  "target": "execute-r006-v5-exact-read",
+  "target_sha256": "14f4a52457f5b31f386d80d7557c6a6117efadc6ec835234b16a6d788700ea2a",
+  "reviewer_session": "/root/review_006_formal2_b",
+  "cases": {
+    "TC-006-exact-read": {
+      "status": "passed",
+      "reason": "正式v5独立复审passed；SPEC B6/A5、PLAN §3.3/§4、design-r006-v5-sc5，对照当前test_document_search.py:41-70与normal/deny_source_reads。实际3passed/exit0/stderr空，52 artifacts/47 bindings。本轮00016/32/48三个独立normalized正文和long重新计算所有范围/行号：BOM/CRLF/CR、非BMP emoji/组合码点、有无末尾LF均准确，a+LF[0,2)为第1行、b+LF[2,4)第2行、末LF不虚增末行。三组长默认窗口2000内/准确原串，16000扩读恰等long[:16000]，16001和原旧版本各400。24次成功read逐签名解码source_ids仅原当次有效单源，collector/正文/SHA不串错；读取阶段源I/O哨兵实际启用。既有位置语义在本轮9c新运行保持，未只比两个可能同错响应。当前src9cfd619、runtime-product-v5、match-v9/manifest-v8、目标artifacts/bindings和本TC实现摘要已全部重新计算匹配，未继承旧4c/a66运行绑定。本正式轮只有selector，无XML或附回归；full-regression-v6当前绑定全吻合，原stdout301passed/1skipped、JUnit302项/0失败/1跳过，四项旧对话引用均通过。新9cCI未用于本结论，不借旧4cCI；_glob新专项由SC2分工，本项不越界认领，不判人工/平台/R006。",
+      "covers": [
+        "exact-read-c2"
+      ]
+    }
+  }
+}

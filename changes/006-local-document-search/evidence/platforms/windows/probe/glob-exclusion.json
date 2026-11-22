@@ -1,0 +1,97 @@
+{
+  "pattern": "excluded/**/",
+  "excluded_root": "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\资料 空格\\excluded",
+  "zero_result": {
+    "results": [],
+    "scope": "all",
+    "effective_project_ids": null,
+    "archive_scope": "local_documents",
+    "coverage": {
+      "indexed_files": 4,
+      "sources": [
+        {
+          "id": "e47b4928d13247709c76a3a71ef9e0d4",
+          "path": "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\资料 空格",
+          "kind": "directory",
+          "recursive": true,
+          "exclude": [
+            "excluded/**/"
+          ],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "e45e2f527205497582325e59c5530c1f",
+          "request_seq": 1,
+          "started_at": "2026-11-22T19:28:43.879314+00:00",
+          "finished_at": "2026-11-22T19:28:43.920638+00:00",
+          "error": null,
+          "counts": {
+            "ready": 3,
+            "failed": 0,
+            "candidates": 3,
+            "billed_bytes": 6130,
+            "ignored_entries": 2,
+            "ignored_format": 0,
+            "ignored_excluded": 1,
+            "ignored_links": 1
+          },
+          "project_ids": [
+            1
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        },
+        {
+          "id": "188d489d5faf42058fe6d061e18adc3f",
+          "path": "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\other.txt",
+          "kind": "file",
+          "recursive": true,
+          "exclude": [],
+          "revision": 1,
+          "status": "ready",
+          "resume_status": "ready",
+          "refresh_id": "40bfb34fb00c443ea8519d11b1e1b773",
+          "request_seq": 2,
+          "started_at": "2026-11-22T19:28:43.940330+00:00",
+          "finished_at": "2026-11-22T19:28:43.958289+00:00",
+          "error": null,
+          "counts": {
+            "ready": 1,
+            "failed": 0,
+            "candidates": 1,
+            "billed_bytes": 19,
+            "ignored_entries": 0,
+            "ignored_format": 0,
+            "ignored_excluded": 0,
+            "ignored_links": 0
+          },
+          "project_ids": [
+            2
+          ],
+          "message": "仅本机；保存配置后请明确运行 documents refresh"
+        }
+      ]
+    }
+  },
+  "source_config": {
+    "id": "e47b4928d13247709c76a3a71ef9e0d4",
+    "path": "C:\\Users\\Public\\Documents\\SmmDocuments006-20261122\\formal-v4\\资料 空格",
+    "kind": "directory",
+    "recursive": true,
+    "exclude": [
+      "excluded/**/"
+    ],
+    "revision": 1,
+    "status": "pending",
+    "resume_status": "pending",
+    "refresh_id": null,
+    "request_seq": 0,
+    "started_at": null,
+    "finished_at": null,
+    "error": null,
+    "counts": {},
+    "project_ids": [
+      1
+    ],
+    "message": "仅本机；保存配置后请明确运行 documents refresh"
+  }
+}

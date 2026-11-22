@@ -1,0 +1,10 @@
+{
+  "cases": {
+    "TC-006-interrupted-refresh": {
+      "status": "needs_revision",
+      "revision_target": "design",
+      "reason": "SC6第二判据由SPEC B4/B6/A6推出，场景未增加行为；自然设计要求恢复按完整当前文件集建立资格、正常暂态不永久失效，但前置/动作未具体包含中断后源文件集合变化，也没有真实正常刷新暂态的操作。实际tests/test_document_concurrency.py:136-148仅一个已ready文件，注入status=refreshing后文件及配置完全不变，重刷只核原ID/version/ready/old正文。推演恢复只把status改ready、完全跳过扫描：147-148仍全部通过，不能证明B4“下一次明确刷新可重新开始”按当前文件执行；若只有首文件恢复其余文件永久卡住，单文件夹具也无法发现。应先在设计加入保留正控、修改/新增/缺失文件等改变恢复预期的最小集合，再逐目标断言内容/资格和旧ref，保持另一个无变化连续资格正控。另144强制刷新暂态read必须4xx；B6原文是“可临时提示…不把此暂态当作永久资格中断”，未强制所有refreshing读取拒绝，故实现应允许符合B6的旧快照读取或明确暂态错误，再核恢复后资格；该强制预期需修正，不能当产品红灯。原red命令、stdout/stderr、api-001及进程/收据已读且SHA一致，本次137行合法add已404 Not Found（helper:52），属新入口真实缺失但尚未注入/恢复/读取，并未实际触发上述错误预期。当前不能给完整expected_failure。",
+      "covers": []
+    }
+  }
+}

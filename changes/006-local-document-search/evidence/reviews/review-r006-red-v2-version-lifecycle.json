@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-version-lifecycle": {
+      "status": "expected_failure",
+      "reason": "SC4/design-r006-v5-sc4的每文件版本、快照、移动/删除来自SPEC B3/B4/B6/A4，没有新增行为。v1b遗漏第二目标和改回正文已由tests/test_document_lifecycle.py:11、13、19、22、29的独立起始两文件集合及各阶段相同完整集合修正，31行明确比较改回needle original+文件名。只采one遗漏two会首先在11行失败；只更新one而two未更新会在25行独立文本失败；返回两边同错的错误字节由15/20/25/31的字面预期失败。无变化乱换内容版本在14行失败，旧ref失效在15行旧initial读取失败；改回旧字节复活历史ref在32-33失败。移动猜同一身份35行新id不等式拦截，删除旧ref36行逐一拒绝。原始red-r006-v2-version-lifecycle/TC-006-version-lifecycle/run.stdout及00001-api-001.json证明9行首次目录add真实404，后续不变/编辑/改回/移动删除与旧ref均未到达。artifacts SHA全一致，当前测试与match-r006-v3-sc4一致，src未改。自然设计与实现已闭合首轮缺口；expected_failure仅确认B1基础能力缺失形成的可信业务红灯，不是各生命周期行为已执行通过。",
+      "covers": []
+    }
+  }
+}

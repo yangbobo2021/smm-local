@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "TC-006-compatibility": {
+      "status": "passed",
+      "reason": "已读006 SPEC B1/A7、PLAN A7、000002定义SC7、design-r006-v5-sc7和match-r006-v5-sc7的compatibility-c2分工。本轮test_compatibility函数业务内容未改，变化仅为同文件isolation封装导致整体绑定SHA改变；当前match源选段/文件SHA与baseline-r006-compatibility-v3运行冻结文件完全一致。测试以两个独立Codex/Claude session建立expected字典，逐搜索结果核对完整两ID集合、source/session与独立正文；分别用数字ID旧参数和reference读取，逐个核对source/session/id/messages及旧DTO。第二目标若误读第一目标会在test_document_compatibility.py:85-86的身份和字面正文断言失败，两个结果同错也不能绕过该独立预期。9层source帮助分别执行冻结旧CLI与当前CLI，逐层要求exit=0且stdout完全一致；已实际读取00001-legacy-source-help.json，source/list/validate/register/enable/disable/rollback/batches/purge-batch九项均一致且退出0。冻结document_legacy_cli.py字节已独立与git f797fe843430b48faf379cd76b4ae18fd52f5c64:src/smm_local/cli.py逐字比较相同，不把它宣称为旧完整安装包。run.stdout为1 passed，run.stderr空，run.process记录真实PID，result.execution退出0；purpose明确tdd-baseline，不冒称预期红灯。36个src绑定逐个等于上述f797 Git原件，全部artifacts和当前测试绑定摘要通过核对；当前及work/source-before-ci-test-repair备份的37个src逐字等于f89623b。依据本次实际基线证据及断言，compatibility-c2 passed；不覆盖其他SC7项，不推定最终产品/Windows CI或整体交付通过。",
+      "covers": [
+        "compatibility-c2"
+      ]
+    }
+  }
+}

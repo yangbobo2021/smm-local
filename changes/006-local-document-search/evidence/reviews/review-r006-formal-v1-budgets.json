@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "TC-006-budgets": {
+      "status": "passed",
+      "reason": "独立按SPEC B2/A2与PLAN实际数值边界核本次execute-r006-v1-budgets。真实.venv/bin/python -m pytest -q tests/test_document_limits.py::test_budgets于16:20:00.984至16:20:02.758Z退出0，stdout 11 passed、stderr空。已逐行读取test_document_limits.py:7-96：实际写入2MiB/2MiB+1、1000/1001候选、16MiB/16MiB+1，未缩产品常量；从原文件fingerprint独立计候选/字节并前后核源未改，scandir正反排序断言确实触发。逐读11份budget-actual与对应查询/旧ref/恢复原响应：00007等值2MiB可查；00022超单文件partial只保留baseline；00037完整1000 ready路径集合与原件一致；00052候选1001来源failed且零查/旧ref400；00067累计16777216 ready9；00082的16777217整源failed；00097/00112的17MiB+坏编码+不可读均partial候选4计费13，只baseline可读；00127/00142坏编码/NUL/后续不可读仍计累计16777217且先判来源failed；00157 stat失败候选计2、计费1、partial且显式错误。每分支清理夹具后真实refresh恢复baseline，整源失败后旧ref仍400。169个artifacts及89个bindings重算全部吻合，定义000002和设计v5-sc2一致。两项分配均有本次执行证据，未将OS注入错误冒充平台权限。",
+      "covers": [
+        "budgets-c2",
+        "budgets-c3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "cases": {
+    "TC-006-overlap-order": {
+      "status": "passed",
+      "reason": "已读定义000002的SC6、SPEC B3/B4/A6、PLAN §3.2/§4、design-r006-v5-sc6及match-r006-v4-sc6；跨源旧请求不得覆盖新版本有据，自然设计及实际pending/ready动作前状态适当。tests/test_document_concurrency.py:77–99每种状态均用one/two两个文件，S1在发布前等候、较新S2先发布后释放，91核完整documents不变，92–97逐P/Q/all完整两文件集合、各自ID/version与采集来源及独立newwinner+文件名原串，98旧词零命中。只第一文件正确由93/97拦；两范围同错旧正文由97独立文本拦；错误采集出处或元信息由91/96拦。更多同条件路径为可选。documents.py:339–352仅在文件publish_seq不晚于请求时更新正文，晚旧任务仍可建立自身成员资格但不覆较新采集。red-r006-v3-overlap-order原两参数合法add404及review-r006-red-v3-overlap-order已核；green-r006-v1-overlap-order完全复用test_bindings/声明/命令，全部artifacts和当前bindings SHA相符。原绿灯run.stdout 2 passed/exit0；overlap-newer-wins两份原记录分别为版本1/2的两个newwinner文件，六组P/Q/all读取均匹配one/two独立原串，获胜采集来源为S2。所附regression.stdout原5 passed/exit0，已核四项旧引用契约及两Agent旧数字ID/ref、九层来源帮助兼容断言。没有有据必测缺口；同版TDD绿灯及回归passed，不预判正式轮、平台或需求交付。",
+      "covers": []
+    }
+  }
+}
