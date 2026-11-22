@@ -415,6 +415,27 @@ def _legacy_candidate(db, config, hub_id, hit):
     return hit
 
 
+def _validated_scope(response, hub_id, device_id, project_key):
+    try:
+        projects = response["effective_projects"]
+        if response["hub_id"] != hub_id or not isinstance(projects, list) or not projects:
+            raise ValueError()
+        if any(not isinstance(p, dict) or type(p.get("id")) is not int or p["id"] < 1
+               or not all(isinstance(p.get(k), str) and p[k] for k in ("name", "source", "owner", "source_key")) for p in projects):
+            raise ValueError()
+        if len({p["id"] for p in projects}) != len(projects) or not any(
+                p["source"] == "device" and p["owner"] == device_id and p["source_key"] == project_key for p in projects):
+            raise ValueError()
+        payload = references.routing_metadata(response["scope_reference"])
+        if (payload.get("format") != 1 or payload.get("kind") != "query_scope" or payload.get("hub_id") != hub_id
+                or payload.get("device_id") != device_id or payload.get("project_key") != project_key
+                or payload.get("projects") != projects):
+            raise ValueError()
+        return response
+    except (ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise HubUnavailable("Hub 返回了无效的项目范围，本次只查本机所请求项目") from exc
+
+
 def search_archive(db: Archive, query: str, *, local: bool = False, **options) -> dict:
     scope = options.get("scope", "all")
     limit = options.get("limit", 5)
@@ -454,10 +475,9 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
             if "query-scope-v1" not in info.get("capabilities", []):
                 raise HubUnavailable("Hub 不支持共同项目范围，本次只查本机所请求项目")
             _push_projects(db, config, info["hub_id"], 0)
-            snapshot = _request(config, "/query-scope", {"hub_id": info["hub_id"], "device_id": config["device_id"],
-                                                       "project_id": _remote_project_key(db, options["project_id"])})
-            if snapshot.get("hub_id") != info["hub_id"] or not isinstance(snapshot.get("effective_projects"), list):
-                raise HubUnavailable("Hub 返回了无效的项目范围")
+            key = _remote_project_key(db, options["project_id"])
+            response = _request(config, "/query-scope", {"hub_id": info["hub_id"], "device_id": config["device_id"], "project_id": key})
+            snapshot = _validated_scope(response, info["hub_id"], config["device_id"], key)
             effective = snapshot["effective_projects"]
             local_keys = {p["stable_key"]: p["id"] for p in db.projects()}
             local_options["exact_project_ids"] = tuple(sorted({local_keys[p["source_key"]] for p in effective
@@ -491,6 +511,8 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
     except HubUnavailable as exc:
         hub_reason = str(exc)
         remote = None
+        if snapshot is not None and getattr(exc, "status", None) in {400, 409, 422}:
+            snapshot = None  # The Hub rejected this scope, rather than merely failing its search.
         if scope == "project" and snapshot is None:
             local_options["exact_project_ids"] = (options["project_id"],)
     try:

@@ -178,3 +178,25 @@ def test_incomplete_hub_candidate_is_excluded_without_losing_valid_peers_or_topp
     assert result['coverage'] == {'local': 'complete', 'hub': 'partial'}
     assert result['candidate_failures']
     assert len([route for route, _ in pair.calls[before:] if route == '/search']) == 1
+
+
+@pytest.mark.parametrize('fault', ['wrong_hub', 'missing_reference', 'bad_reference', 'bad_projects', 'unsigned_widening'])
+def test_invalid_scope_response_never_activates_local_links(pair, monkeypatch, fault):
+    a = add_local(pair, 'a', 'A', 'common A')
+    d = add_local(pair, 'd', 'D', 'common D')
+    pair.local.link_projects(a['project_id'], d['project_id']); connect(pair)
+    original = federation._request
+    def request(config, route, payload=None):
+        response = original(config, route, payload)
+        if route == '/query-scope':
+            if fault == 'wrong_hub': response['hub_id'] = 'different-hub'
+            elif fault == 'missing_reference': response.pop('scope_reference')
+            elif fault == 'bad_reference': response['scope_reference'] = 'invalid-reference'
+            elif fault == 'bad_projects': response['effective_projects'] = ['all']
+            else: response['effective_projects'].append({'id': 999, 'name': 'D', 'source': 'device', 'owner': config['device_id'], 'source_key': federation._remote_project_key(pair.local, d['project_id'])})
+        return response
+    monkeypatch.setattr(federation, '_request', request)
+    result = federation.search_archive(pair.local, 'common', scope='project', project_id=a['project_id'])
+    assert {h['source_session_id'] for h in result['results']} == {'a'}
+    assert result['coverage']['hub'] == 'unavailable' and result['fallback_reason']
+    assert [p['id'] for p in result['effective_projects']] == [a['project_id']]
