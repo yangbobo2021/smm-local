@@ -47,6 +47,8 @@ class Run:
         self.env.update(PYTHONUTF8='1', PYTHONIOENCODING='utf-8', SSL_CERT_FILE=self.t['cert'], SMM_SERVICE_PORT='0')
         self.token = 'synthetic-005-' + os.urandom(24).hex()
         self.commands = []; self.requests = []; self.process = None; self.browser = None
+        self.protocol_only = bool(self.t.get('protocol_only'))
+        if self.protocol_only and args.mode != 'hub-service': raise ValueError('protocol_only is restricted to E3 Hub service probes, not E1 client acceptance')
         self.clients = []; self.login_label = None; self.relay = None; self.offline = False; self.started = now(); self.identities = []
         self.opener = build_opener(ProxyHandler({}), HTTPSHandler(context=ssl.create_default_context(cafile=self.t['cert'])))
         for source in HERE.glob('selective_upload_*.py'):
@@ -294,7 +296,7 @@ class Run:
                 assert texts == expected_texts[hit['source_session_id']], texts
                 reads.append(read)
             self.save(stage + '-' + name + '-reads', reads)
-        self.browser_scope(stage, expected)
+        if not self.protocol_only: self.browser_scope(stage, expected)
         return cli
 
     def browser_scope(self, stage, expected):
@@ -412,7 +414,7 @@ class Run:
             'definition': plistlib.loads(plist.read_bytes()), 'process': self.command(['ps', '-o', 'uid,pid,ppid,command', '-p', str(pid)]).stdout})
 
     def lifecycle(self):
-        self.browser_configuration()
+        if not self.protocol_only: self.browser_configuration()
         self.policy_and_stop()
         expected = ['local-A', 'local-A-new', 'remote-B', 'vibe-V']
         self.interfaces('combined-stopped', expected)
@@ -489,7 +491,7 @@ class Run:
                 self.save('payloads', self.requests)
                 self.save('result', {'status': 'failed' if failure else 'passed', 'failure': failure,
                                     'started_at': self.started, 'finished_at': now(), 'mode': self.args.mode,
-                                    'scope': 'E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof'})
+                                    'scope': 'E3 API/CLI/MCP core; no E1 browser claim' if self.protocol_only else 'E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof'})
 
 
 def main():
