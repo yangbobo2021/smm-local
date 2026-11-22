@@ -12,7 +12,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--target-config',type=Path,required=True)
     p.add_argument('--mode',choices=['client','hub-service'],default='client')
-    p.add_argument('--probe',choices=['platform','compatibility','isolation','scope','global_cli'],default='platform')
+    p.add_argument('--probe',choices=['platform','compatibility','isolation','scope','global_cli','reconcile'],default='platform')
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
     assert sys.platform=='win32'

@@ -204,7 +204,7 @@ smm-hub hub --state-dir <实际Hub状态目录> prepare-restore
 ```sh
 smm upload reconcile
 smm upload reconcile --use hub
-smm upload reconcile --use local --expected-hub-revision <刚查看的hub.revision>
+smm upload reconcile --use local --expected-hub-revision <刚查看的hub.revision> --expected-local-generation <刚查看的local.generation>
 ```
 
-`--use hub` 明确采用当前 Hub 规则；`--use local` 明确重新提交本机规则，必须带刚查看的版本，过期则重新查看，不能覆盖另一入口的新修改。Web 配置页也可查看并选择对账。恢复期间正文关闭；Hub 回到旧库会更换控制代次，原回执失效，明确对账后只补当前允许的缺失消息。手工连保护标记一起回滚不属于受支持恢复方式。
+`--use local` 明确重新提交刚显示的本机规则，必须同时带刚查看差异输出中的 `hub.revision` 与 `local.generation`；少一个、任一已过期或调用期间本机规则又有修改，都拒绝且不覆盖当前规则，需重新查看。不能自动改用另一入口后来保存的本机规则。`--use hub` 明确采用调用时 Hub 当前规则，仍保护调用期间的本机新保存；也可提供 `--expected-local-generation` 绑定刚查看的本机代次。Web 两种对账按钮均绑定页面所显示的两端版本，过期需重新查看。恢复期间正文关闭；Hub 回到旧库会更换控制代次，原回执失效，明确对账后只补当前允许的缺失消息。手工连保护标记一起回滚不属于受支持恢复方式。

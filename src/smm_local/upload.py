@@ -124,6 +124,15 @@ class LocalUpload:
                 raise ControlConflict("本机恢复或规则状态不一致，正文已停止，请先查看上传差异")
         return guard
 
+    def _verify_target(self):
+        path = self.db.db_path.resolve().with_suffix(self.db.db_path.suffix + '.hub.json')
+        try:
+            same_target = json.loads(path.read_text(encoding='utf-8')) == self.config
+        except (OSError, ValueError):
+            same_target = False
+        if not same_target:
+            raise ValueError("Hub 连接已改变，请重新查看对账差异")
+
     def _save(self, policy, *, expected_generation=None, reconcile=False, expected_hub_revision=None):
         policy = normalize_policy(policy)
         with control_lock(self.guard.lock):
@@ -131,6 +140,8 @@ class LocalUpload:
                 con.execute("BEGIN IMMEDIATE")
                 row = self.row(con)
                 guard = self._verify(row, allow_reconcile=reconcile)
+                if reconcile:
+                    self._verify_target()
                 if expected_generation is not None and expected_generation != row["generation"]:
                     raise ValueError("本机规则已改变，请重新查看")
                 generation = max(row["generation"], guard["devices"].get(self.key, {}).get("generation", 0)) + 1
@@ -166,6 +177,7 @@ class LocalUpload:
             with control_lock(self.guard.lock):
                 row = self.row()
                 self._verify(row)
+                self._verify_target()
             remote = request(self.config, "/upload-policy/status", {"hub_id": self.hub_id, "device_id": self.device})
             if remote.get("hub_id") != self.hub_id or remote.get("device_id") != self.device:
                 raise ControlConflict("Hub 规则确认的目标身份不匹配")
@@ -173,6 +185,9 @@ class LocalUpload:
                 with self.db.connect() as con:
                     con.execute("BEGIN IMMEDIATE")
                     current = self.row(con)
+                    # Control dispatch fence: a later connection change is an
+                    # in-flight request, not permission for another new send.
+                    self._verify_target()
                     if current["generation"] != row["generation"]:
                         continue
                     self._verify(current)
@@ -210,22 +225,29 @@ class LocalUpload:
         self._mark("pending", "规则仍在协调，下一轮继续")
         return None
 
-    def reconcile(self, request, use=None, expected_hub_revision=None):
+    def reconcile(self, request, use=None, expected_hub_revision=None, expected_local_generation=None):
+        if use not in {None, "local", "hub"}:
+            raise ValueError("请选择 local 或 hub")
+        if use == "local" and (expected_hub_revision is None or expected_local_generation is None):
+            raise ValueError("重新提交本机规则必须提供刚查看的 hub.revision 和 local.generation")
+        for value, label in ((expected_hub_revision, "Hub 版本"), (expected_local_generation, "本机代次")):
+            if value is not None and (type(value) is not int or value < 0):
+                raise ValueError(label + "必须为非负整数，请重新查看差异")
+        local = self.row()
+        if expected_local_generation is not None and expected_local_generation != local["generation"]:
+            raise ValueError("本机规则已改变，请重新查看对账差异")
         remote = request(self.config, "/upload-policy/status", {"hub_id": self.hub_id, "device_id": self.device})
         if use is None:
             return {"local": self.status(), "hub": remote}
-        if use not in {"local", "hub"}:
-            raise ValueError("请选择 local 或 hub")
-        if use == "local" and expected_hub_revision is None:
-            raise ValueError("重新提交本机规则必须提供刚查看的 Hub 版本")
         if expected_hub_revision is not None and expected_hub_revision != remote["revision"]:
             raise ControlConflict("Hub 规则已改变，请重新查看差异")
-        policy = remote["policy"] if use == "hub" else self.row()["desired"]
+        policy = remote["policy"] if use == "hub" else local["desired"]
         if policy is None and use == "hub":
             policy = {"mode": "none", "projects": []}
         if policy is None:
             raise ValueError("尚无可采用的规则，请先明确选择上传范围")
-        self._save(policy, reconcile=True, expected_hub_revision=remote["revision"])
+        self._save(policy, expected_generation=local["generation"], reconcile=True,
+                   expected_hub_revision=remote["revision"])
         self.sync_policy(request, reconcile=True, expected_hub_revision=remote["revision"])
         return self.status()
 

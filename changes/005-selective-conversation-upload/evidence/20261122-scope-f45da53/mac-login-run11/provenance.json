@@ -1,0 +1,73 @@
+{
+  "source": "AT-SMM-005 private actual mac-login-run11",
+  "redactions": "account, network and absolute private paths; fixture bodies unchanged",
+  "controllers": {
+    "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+    "selective_upload_scope.py": "eb42b7af7b66f4ac7c6d7e26fa18d2c715fb22c0d44e8930c635ed184fc12636",
+    "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+    "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+    "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+    "selective_upload_platform.py": "6af304d95437b6d95286bebeddc9dce36f451b4195ff9870326f5f8fe5ceb430",
+    "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+    "selective_upload_windows_limited.py": "20cab1e1c8a24e91b20866986d4e5882701ea13fe121c681ec015fe08fa53f59"
+  },
+  "files": [
+    {
+      "file": "affiliation-propagation.json",
+      "original_sha256": "1ad87b4a07bf3967e30516e73568f44bff81775618b4ddf2f61e20481c633ef9",
+      "export_sha256": "1ad87b4a07bf3967e30516e73568f44bff81775618b4ddf2f61e20481c633ef9"
+    },
+    {
+      "file": "backfill.json",
+      "original_sha256": "553b9dbc858d6f9cf2be2ac36ffd321572c95e9d1e0f228cc06e258960fed6dd",
+      "export_sha256": "553b9dbc858d6f9cf2be2ac36ffd321572c95e9d1e0f228cc06e258960fed6dd"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "login-service-63.json",
+      "original_sha256": "8cc2b3fe632ea18266c9c215a3a60e060a2482133652a00e860c2e011cc6d68e",
+      "export_sha256": "c506b5388c2eabcb0a6295b0c062244f960bf66c0f578b72f02d88892a37b28a"
+    },
+    {
+      "file": "login-service-8.json",
+      "original_sha256": "cd62a83dab66c3e145e34b403cb5deac931b9d022e2df298578d34f27a26880b",
+      "export_sha256": "71696e154b2e7db45bfe3e9c8728359f48e2c665ecbdfeee796bca99cad4b18f"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "f6391d3a0ca139791818c2700da26cf4e9501f030f583363298d55560fb2f121",
+      "export_sha256": "6428e9943ba087a9d05bdd7b9bdf0680d2855f7a5409abf059ef63b848e8bb40"
+    },
+    {
+      "file": "payloads.json",
+      "original_sha256": "1e82a0f604a4600288da7bf32222b4f0d6d529cdc44df8a7809f3daf205c0bc2",
+      "export_sha256": "1e82a0f604a4600288da7bf32222b4f0d6d529cdc44df8a7809f3daf205c0bc2"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "c87bd32464e09b295213441e53717cbaec4a29046c3255437ab653b71e6cf9bd",
+      "export_sha256": "c87bd32464e09b295213441e53717cbaec4a29046c3255437ab653b71e6cf9bd"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "317b94e4d3f809478edf6f1b8edf5d49b7a9bb4fb225d9b60bc9a25f30d4ac69",
+      "export_sha256": "317b94e4d3f809478edf6f1b8edf5d49b7a9bb4fb225d9b60bc9a25f30d4ac69"
+    },
+    {
+      "file": "stopped-state.json",
+      "original_sha256": "6c3bcbeb9429a0cc9992524305a8fb4dcd75159bba5b118be7a24a1ad1571d33",
+      "export_sha256": "6c3bcbeb9429a0cc9992524305a8fb4dcd75159bba5b118be7a24a1ad1571d33"
+    },
+    {
+      "file": "sync-observations.json",
+      "original_sha256": "f211d94a3b818e16bde7e7764ecdd3a49c910c25b82dd442cd05057be24c1433",
+      "export_sha256": "f211d94a3b818e16bde7e7764ecdd3a49c910c25b82dd442cd05057be24c1433"
+    }
+  ]
+}

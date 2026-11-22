@@ -197,13 +197,13 @@
   $('upload-diff').onclick=async()=>{try{
     uploadDifference=await request('/api/upload/reconcile',{method:'POST',body:JSON.stringify({})});
     $('upload-difference').hidden=false;
-    $('upload-difference-text').textContent='本机：'+ruleSummary(uploadDifference.local.policy)+'；Hub：'+ruleSummary(uploadDifference.hub.policy)+'。请核对后选择处理方式；提交时会再次检查 Hub 版本。';
+    $('upload-difference-text').textContent='本机：'+ruleSummary(uploadDifference.local.policy)+'；Hub：'+ruleSummary(uploadDifference.hub.policy)+'。请核对后选择处理方式；提交时会再次检查 Hub 版本和本机代次，任一改变都需重新查看。';
   }catch(e){uploadDifference=null;notice(e.message,true)}};
   async function reconcileUpload(use){try{
     if(!uploadDifference)throw Error('请先查看与 Hub 的规则差异');
-    const d=await request('/api/upload/reconcile',{method:'POST',body:JSON.stringify({use,expected_hub_revision:uploadDifference.hub.revision})});
+    const d=await request('/api/upload/reconcile',{method:'POST',body:JSON.stringify({use,expected_hub_revision:uploadDifference.hub.revision,expected_local_generation:uploadDifference.local.generation})});
     uploadDifference=null;$('upload-difference').hidden=true;notice(uploadSummary(d));await Promise.all([refreshUpload(),refreshProjects()]);
-  }catch(e){uploadDifference=null;notice(e.message,true)}}
+  }catch(e){uploadDifference=null;$('upload-difference').hidden=true;notice(e.message,true)}}
   $('upload-use-hub').onclick=()=>reconcileUpload('hub');$('upload-use-local').onclick=()=>reconcileUpload('local');
   async function runProjectChange(path,body){try{
     const d=await request(path,{method:'POST',body:JSON.stringify(body)});

@@ -59,7 +59,8 @@ def test_hub_loss_of_receipts_rebuilds_from_exact_existing_messages(pair, tmp_pa
     local = LocalUpload(pair.local, config, pair.hub_id)
     assert local.sync_policy(federation._request)['conflict']
     assert local.status()['state'] == 'conflict'
-    local.reconcile(federation._request, use='local', expected_hub_revision=hub.status(config['device_id'])['revision'])
+    local.reconcile(federation._request, use='local', expected_hub_revision=hub.status(config['device_id'])['revision'],
+                    expected_local_generation=local.row()['generation'])
     assert local.status()['confirmed_messages'] == 0
     assert federation.push_pending(pair.local)['uploaded'] == 1
     assert bodies(pair.remote) == ['first exact']
@@ -125,7 +126,8 @@ def test_stale_diff_and_target_changes_require_explicit_new_choice(pair):
     revision = local.reconcile(federation._request)['hub']['revision']
     HubUpload(pair.remote, pair.hub_id).set(config['device_id'], {'mode': 'none', 'projects': []}, revision, 'other-controller')
     with pytest.raises(ControlConflict, match='已改变'):
-        local.reconcile(federation._request, use='local', expected_hub_revision=revision)
+        local.reconcile(federation._request, use='local', expected_hub_revision=revision,
+                        expected_local_generation=local.row()['generation'])
     assert local.row()['desired']['mode'] == 'none'
     assert federation.configure_hub(pair.local, config['address'], 'renamed device', str(pair.token_file))['connected']
     assert federation.upload_status(pair.local)['policy']['mode'] == 'none'

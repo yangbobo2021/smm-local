@@ -1,0 +1,39 @@
+{
+  "source": "AT-SMM-005 private actual mac-global-cli11",
+  "redactions": "account, network and absolute private paths; fixture bodies unchanged",
+  "controllers": {
+    "selective_upload_isolation.py": "b471107a748d172a1b95c089809d762a52db08851b323123fbb1d4c34bea3304",
+    "selective_upload_scope.py": "eb42b7af7b66f4ac7c6d7e26fa18d2c715fb22c0d44e8930c635ed184fc12636",
+    "selective_upload_recorded.py": "de69e25e89bc03d8bea4c464a040ab4deee4bbe17ffdff9c26d0026444166886",
+    "selective_upload_fixture.py": "f76cd8a7f12911b925c25670a6b52238a454aae1b7e92927eb1bc590b09055aa",
+    "selective_upload_recovery.py": "a6316f126d4ff9b0c9aef7209a13d93cdeb02d8ad072a8667210ed3e62660ee4",
+    "selective_upload_compatibility.py": "eccb971e514dce4922afebe1ca072835113e69eb46dbc84044f13629f6e0ed21",
+    "selective_upload_prepare.py": "8d9604e4eea346a8429216c6013b30ced81c5b0d0295b12da08ef2c12e010480",
+    "selective_upload_platform.py": "ec5329e6240493ad8142bb359478fe2cfd52612ca8eb9f6e0af2553a06f70a8f",
+    "selective_upload_global_cli.py": "94d6ed7f057e354c80f7127f281f29f17000dab991ff9b73e15f8551971958fc",
+    "selective_upload_audit.py": "b06bdf09d36c42e024019c5267d7d4dd3194300011902b32cda01b76caf72564",
+    "selective_upload_windows_limited.py": "20cab1e1c8a24e91b20866986d4e5882701ea13fe121c681ec015fe08fa53f59"
+  },
+  "files": [
+    {
+      "file": "cleanup.json",
+      "original_sha256": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012",
+      "export_sha256": "03ddb445a60a61d5c21fdc96d4d45900bbfe0f3ee32babd85aaa912687d2c012"
+    },
+    {
+      "file": "global-cli.json",
+      "original_sha256": "e49859f3044ad5844de009abb8367786961a3607f920f055be70ddef7a1f39a9",
+      "export_sha256": "e49859f3044ad5844de009abb8367786961a3607f920f055be70ddef7a1f39a9"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "723f7398483c040d0193909fc4b6ef9dc950e54d86dd3aa39bdf3cf23ed88325",
+      "export_sha256": "1b10608eb10e1dca1e9bac818da1fdef4c0f54500e1fa208fb4d15291d8c6f7c"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "567fafed28e7c756ee33c120851e8a7511901f6180cd1d9ea28e0d3e267509f9",
+      "export_sha256": "567fafed28e7c756ee33c120851e8a7511901f6180cd1d9ea28e0d3e267509f9"
+    }
+  ]
+}

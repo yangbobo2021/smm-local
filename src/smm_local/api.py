@@ -57,7 +57,8 @@ class UploadChoice(BaseModel):
 
 class ReconcileRequest(BaseModel):
     use: str | None = None
-    expected_hub_revision: int | None = None
+    expected_hub_revision: int | None = Field(default=None, ge=0, strict=True)
+    expected_local_generation: int | None = Field(default=None, ge=0, strict=True)
 
 
 class AssignRequest(BaseModel):
@@ -291,7 +292,10 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @app.post("/api/upload/reconcile")
     def reconcile_upload(req: ReconcileRequest, request: Request):
         require_local_control(request)
-        return upload_control(db).reconcile(_request, use=req.use, expected_hub_revision=req.expected_hub_revision)
+        if req.use is not None and (req.expected_hub_revision is None or req.expected_local_generation is None):
+            raise ValueError("请提供刚查看的 hub.revision 和 local.generation，再确认对账")
+        return upload_control(db).reconcile(_request, use=req.use, expected_hub_revision=req.expected_hub_revision,
+                                           expected_local_generation=req.expected_local_generation)
 
     @app.post("/api/upload/prepare-restore")
     def prepare_local_restore(request: Request):

@@ -121,6 +121,7 @@ def main() -> None:
     reconcile = upload_actions.add_parser("reconcile", help="无参数只查看差异；选择 hub 采用当前 Hub 规则，或明确重提 local")
     reconcile.add_argument("--use", choices=["hub", "local"])
     reconcile.add_argument("--expected-hub-revision", type=int, help="刚查看差异中 hub.revision；--use local 必填，过期则重新查看")
+    reconcile.add_argument("--expected-local-generation", type=int, help="刚查看 upload reconcile 输出中 local.generation；--use local 必填，过期则重新查看")
     upload_actions.add_parser("prepare-restore", help="先停止正文并输出恢复/排除清单，再停服务恢复备份；不要覆盖保护文件")
     project = sub.add_parser("project", help="管理明确的全局项目和会话归属")
     project_actions = project.add_subparsers(dest="project_action", required=True)
@@ -215,7 +216,8 @@ def main() -> None:
             elif args.upload_action == "set":
                 result = choose_upload(db, args.mode, args.project_id)
             elif args.upload_action == "reconcile":
-                result = upload_control(db).reconcile(_request, use=args.use, expected_hub_revision=args.expected_hub_revision)
+                result = upload_control(db).reconcile(_request, use=args.use, expected_hub_revision=args.expected_hub_revision,
+                                                      expected_local_generation=args.expected_local_generation)
             else:
                 config = hub_config(db)
                 controller = (LocalUpload(db, config, config["bound_hub_id"])
