@@ -166,7 +166,8 @@ class Run:
 
     def setup(self):
         assert not self.state.exists(), 'new task state is required'
-        self.command([self.t['hub_python'], '-I', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
+        if self.args.mode != 'hub-service':
+            self.command([self.t['hub_python'], '-I', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
         (self.root / 'input-token').write_text(self.token, encoding='ascii')
         if self.args.mode == 'hub-service':
             # setup creates the service credential; read it privately after setup.
@@ -175,6 +176,7 @@ class Run:
             self.token = (self.state / 'hub-token').read_text().strip()
             (self.root / 'input-token').write_text(self.token, encoding='ascii')
             self.identities.append(self.hub_identity()); self.save('setup', result)
+            self.command([self.t['hub_python'], '-I', HERE / 'selective_upload_fixture.py', 'seed-vibe', '--root', self.state])
         else: self.start_hub()
         self.hub_id = self.api(self.t['address'], '/v1/info')['hub_id']
         self.make_relay()
