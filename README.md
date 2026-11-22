@@ -30,6 +30,23 @@ npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-se
 
 日常可以直接对 Agent 说「查看 SMM 同步状态」「打开 SMM 状态页」「立即同步一次」「暂停自动同步」或「恢复自动同步」。暂停时仍可搜索已有记录，服务重启后也会记住暂停状态。
 
+## 本机文档检索（006，尚未发布）
+
+除对话外，可以明确纳入本机 Markdown 和 UTF-8 文本，在 Web 主导航“文档”页或 CLI 添加文件/目录、绑定本机项目，然后手动刷新。MCP 的 `list_document_sources`、`search_documents`、`read_document` 供 Agent 只读检索和读原文；文档查询始终只查本机，不上传或查询 Hub。
+
+这项能力需要包含 006 的源码或独立构建包，快速开始中的 **0.4.0 正式包及首次安装器尚不支持**。先按[源码开发](#从源码开发)准备环境，或按[文档使用指南](TRIAL_GUIDE.md#本机文档检索006尚未发布)安装本次构建 wheel。Windows 使用环境下的 `Scripts\smm.exe`，macOS/Linux 使用 `bin/smm`。
+
+```text
+smm project create "产品资料"
+smm projects
+smm documents add <本机文件或目录的绝对路径> --project-id <上一步的本机ID>
+smm documents refresh
+smm documents search "验收约定" --scope project --project-id <本机ID>
+smm documents read --reference <搜索结果的reference>
+```
+
+保存来源为 `pending`，只有明确刷新才读取文件；查询显示上次采集版本，修改后需再次刷新。内容变更或来源资格失效后旧引用会拒绝，需重新搜索；移除来源不会删除原文件，独占快照退出检索/读取。支持 `.md`、`.markdown`、`.txt`，暂不支持 Word、Excel、PDF、图片。项目关联、排除、状态、范围读取与恢复步骤见[完整指南](TRIAL_GUIDE.md#本机文档检索006尚未发布)。
+
 ## 多台电脑共用档案
 
 先在每台电脑按上面的步骤安装 Skill。再由管理员选择一台可通过 HTTPS 访问的电脑安装汇总端。准备好客户端可访问的 HTTPS 地址、证书和私钥，并先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)。

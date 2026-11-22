@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 
 from .core import Archive, shared_db_path
+from .documents import Documents
 from .federation import (configure_and_start, read_archive, search_archive, upload_status,
                          choose_upload, upload_control, hub_config, project_status, _request)
 from .upload import LocalUpload
@@ -125,7 +126,33 @@ def main() -> None:
     upload_actions.add_parser("prepare-restore", help="先停止正文并输出恢复/排除清单，再停服务恢复备份；不要覆盖保护文件")
     project = sub.add_parser("project", help="管理明确的全局项目和会话归属")
     project_actions = project.add_subparsers(dest="project_action", required=True)
+    project_create = project_actions.add_parser('create', help='创建普通本机项目；可同名，不推断目录/对话/关联')
+    project_create.add_argument('name', help='非空显示名称；返回本机ID和stable_key，用于documents --project-id')
     project_actions.add_parser("ensure-global", help="创建或取得唯一全局项目；全局不是所有项目检索")
+    documents = sub.add_parser('documents', help='仅本机Markdown/UTF-8文本采集与检索；添加后需明确refresh', description='仅本机采集版本，不查询或上传Hub。仅 .md/.markdown/.txt；源正文不改写。保存后明确refresh；查询不会读当前文件。')
+    document_actions = documents.add_subparsers(dest='document_action', required=True)
+    for action in ['add','set']:
+        doc = document_actions.add_parser(action, help='添加来源（pending）' if action=='add' else '完整替换配置并使旧来源资格失效', description='来源项目ID用 smm projects 取得，无项目时先 smm project create 名称。名单可重复，省略即空名单；省略--no-recursive即递归。保存只为pending，随后运行 smm documents refresh。')
+        doc.add_argument('path' if action=='add' else 'source_id',help='服务器所在本机的可读绝对文件/目录路径（非链接）' if action=='add' else 'smm documents sources 返回的来源id；不能改变根路径')
+        doc.add_argument('--project-id',type=int,action='append',default=[],help='现有本机项目ID（smm projects），可重复；省略只参加全部文档检索')
+        doc.add_argument('--exclude',action='append',default=[],help='相对POSIX路径，可重复；*单段、?单字符、**零/多目录，尾/排目录。禁止绝对路径、..和反斜杠')
+        doc.add_argument('--no-recursive',action='store_true',help='仅根直接文件；不跟随链接/junction，默认跳过隐藏与构建目录')
+    document_actions.add_parser('sources',help='查看来源id/完整配置、pending/refreshing/ready/partial/failed、真实计数和错误')
+    doc_files = document_actions.add_parser('files',help='查看已发现文件元信息、ready/failed/missing及原因，不返回正文')
+    doc_files.add_argument('--source-id',help='来源id取自documents sources，省略看全部')
+    doc_refresh = document_actions.add_parser('refresh',help='明确读取并刷新采集快照；旧版本ref失效，失败后可重试',description='仅此操作读取来源正文。每文件2MiB、每来源1000候选和16MiB；个别失败partial，枚举/来源预算失败failed。修复后再次明确刷新。')
+    doc_refresh.add_argument('--source-id',help='来源id取自documents sources，省略逐来源刷新全部')
+    doc_remove = document_actions.add_parser('remove',help='取消来源；独占材料立即退出检索/读取，不删除原文件')
+    doc_remove.add_argument('source_id',help='来源id取自documents sources；其他有效重叠来源继续保留当前版本')
+    doc_search = document_actions.add_parser('search',help='按正文检索本机已采集文档，不扫描当前文件或发送Hub')
+    doc_search.add_argument('query',help='非空中英文正文查询词')
+    doc_search.add_argument('--scope',choices=['all','project'],default='all')
+    doc_search.add_argument('--project-id',type=int,help='smm projects的本机ID，project必填；仅本机双向直接一层关联；全局不隐式加入')
+    doc_search.add_argument('--limit',type=int,default=5,help='1至50，默认5；按文件去重和词法相关性排序')
+    doc_read = document_actions.add_parser('read',help='按搜索返回的reference准确读取采集版本',description='缺省读命中片段。start/end是整个规范化采集文本的Unicode码点 [start,end)，非字节或UTF-16；最多16000字符。仅去BOM并CRLF/CR转LF，其他原样。旧版本/来源资格失效须重新检索，不读历史版本。')
+    doc_read.add_argument('--reference',required=True,help='原样复制documents search返回的reference，不能用对话ID')
+    doc_read.add_argument('--start',type=int,help='Unicode起始码点（含，0开始）')
+    doc_read.add_argument('--end',type=int,help='Unicode结束码点（不含）')
     assign = project_actions.add_parser("assign-conversation", help="用本机搜索的会话 ID 预览归属变更，核对后 --confirm 提交")
     assign.add_argument("conversation_id", type=int)
     assign.add_argument("--project-id", type=int, required=True, help="smm projects 返回的目标本机项目 ID")
@@ -224,11 +251,26 @@ def main() -> None:
                               if config.get("bound_hub_id") else upload_control(db))
                 result = controller.prepare_restore()
         elif args.command == "project":
-            if args.project_action == "ensure-global":
+            if args.project_action == 'create':
+                result = db.create_project(args.name)
+            elif args.project_action == "ensure-global":
                 result = db.ensure_global_project()
             else:
                 result = change_project(db, "assign", {"conversation_id": args.conversation_id,
                     "target_id": args.project_id}, args.confirm, always_preview=True)
+        elif args.command == 'documents':
+            documents = Documents(db)
+            action = args.document_action
+            if action == 'add':
+                result = documents.add(args.path, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)
+            elif action == 'set':
+                result = documents.set(args.source_id, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)
+            elif action == 'remove': result = documents.remove(args.source_id)
+            elif action == 'sources': result = documents.sources()
+            elif action == 'files': result = documents.files(args.source_id)
+            elif action == 'refresh': result = documents.refresh(args.source_id)
+            elif action == 'search': result = documents.search(args.query,scope=args.scope,project_id=args.project_id,limit=args.limit)
+            else: result = documents.read(args.reference,start=args.start,end=args.end)
         elif args.command == "resolve-project":
             result = db.resolve_project(args.cwd)
         elif args.command == "search":

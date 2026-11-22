@@ -1,6 +1,6 @@
 ---
 name: smm-search
-description: Search archived Agent conversations, manage SMM sync, or configure a multi-computer archive hub. Use for prior project decisions, fixes and preferences, or to check, sync, pause or resume the archive. Do not use for information only in the current chat.
+description: Search archived Agent conversations or explicitly captured local documents, manage SMM sync, or configure a multi-computer archive hub. Use for prior project decisions and evidence, configured document knowledge, or archive maintenance. Do not use for information only in the current chat.
 ---
 
 # SMM conversation archive
@@ -54,6 +54,18 @@ MCP tools: `list_projects`, `resolve_project`, `search_conversations`, `read_con
 Launcher arguments: `projects`, `resolve-project --cwd "$PWD"`, `search "terms" --scope project --project-id ID`, `read ID --start POSITION --end POSITION`.
 
 The MCP/CLI adapter excludes the current conversation by default when `CODEX_THREAD_ID`, `CODEX_SESSION_ID`, or `CLAUDE_SESSION_ID` is available. Set `include_current=true` only when earlier content from this same conversation is needed. If the Agent does not expose its session ID, pass `current_session_id` explicitly when known.
+
+## Search captured local documents (006)
+
+Use this path only when the installed component exposes `list_document_sources`, `search_documents`, and `read_document`, or `documents --help` succeeds in its actual CLI environment. The published 0.4.0 package and first-use launcher do not yet include 006; reinstalling 0.4.0 does not add it. An unpublished source/wheel preview is described in the repository's README and TRIAL_GUIDE. Report an unsupported installed version accurately; do not pretend a conversation search searched documents.
+
+1. Call `list_document_sources` to check explicit roots, bound local project IDs and pending/refreshing/partial/failed coverage. This does not scan or refresh. For a project use `list_projects`/`resolve_project` as appropriate, and pass a real local ID to `search_documents(scope="project",project_id=...)`; scope expands local direct one-hop links even with a Hub configured. Global projects are independent; unbound documents only join `scope="all"`.
+2. Search with distinctive content terms, then pass each hit's exact `reference` to `read_document`. Default windows are at most 2000 Unicode codepoints; optional `start`/`end` are whole normalized snapshot codepoint [start,end), max16000. Never use a conversation ID/reference here or guess byte/UTF-16 offsets. Cite canonical path, capture time/version, and line/character range. Read evidence before making a claim and distinguish source text from inference.
+3. These are captured UTF-8 Markdown/TXT files only, not live disk state, Word/Excel/PDF/images, or Hub documents. Only explicit Web/CLI `documents refresh` reads current files. Do not scan project roots/home or refresh just because a search missed. For authorized source management use Web “文档” or CLI `documents add <absolute-local-path> [--project-id ID ...]`, `sources`, `files`, `set`, `refresh`, `remove`. IDs come from `projects`/`documents sources`; create an ordinary identity with `project create <name>` or use `project ensure-global`.
+4. Explain full replacement: set omits project/exclude lists to clear them and defaults to recursive; add/set are pending, no body read. Exclusions are POSIX `* ? **` and directory trailing `/`; hidden/build directories are excluded by default and links/junctions are never followed. Explicitly chosen actual files/subdirectories may be separate sources. Per-file2MiB, per-source1000 candidates/16MiB; partial/failed are incomplete coverage. Do not call a zero-hit result proof of absence when sources are pending or failing.
+5. A refreshed content change or terminal qualification failure invalidates old refs, including later restoration of identical bytes; search again rather than substituting another source/version. Removing a source does not delete original files, but its exclusive snapshots leave search/read; other uninterrupted overlap qualifications retain the current version. No historical-version read. Unchanged refresh/restart preserves continuous valid references. Document operations do not change conversation pause/upload policies and do not send document bodies, summaries, or file lists to Hub/models. Content read into this Agent follows the Agent's normal context handling.
+
+Configuration via CLI/Web is separate from the three read-only MCP tools. Use dedicated conversation tools when both discussions and documents are needed. Do not imply 007 Hub sync or 008 format processing is already available.
 
 ## Configure the aggregation computer
 

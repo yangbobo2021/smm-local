@@ -47,6 +47,10 @@ def _snapshot(db, con, operation, data):
     state = {"operation": operation, "data": data, "target": dict(target), "affected": [dict(r) for r in rows],
              "target_hub": {k: config.get(k) for k in ("address", "bound_hub_id", "device_id")},
              "policy": rule, "generation": generation}
+    state['document_sources'] = []
+    if operation == 'merge' and con.execute("SELECT 1 FROM sqlite_master WHERE name='document_source_projects'").fetchone():
+        for row in con.execute('SELECT s.id,s.path,s.revision FROM document_sources s JOIN document_source_projects p ON p.source_id=s.id WHERE p.project_id=? ORDER BY s.id',(data['source_id'],)):
+            state['document_sources'].append({**dict(row),'project_ids':[r[0] for r in con.execute('SELECT project_id FROM document_source_projects WHERE source_id=? ORDER BY project_id',(row['id'],))]})
     return state, expanded
 
 
@@ -65,6 +69,7 @@ def change(db, operation, data, confirmation=None, *, always_preview=False):
                       "newly_allowed_conversations": expanded, "newly_stopped_conversations": stopped,
                       "conversations": [{k: r[k] for k in ("id", "title", "source", "source_session_id", "project_id")} for r in state["affected"]],
                       "target": state["target"]}
+            report['document_sources'] = state['document_sources']
             fingerprint = digest(state)
             if confirmation is not None:
                 payload = verify(confirmation, key)

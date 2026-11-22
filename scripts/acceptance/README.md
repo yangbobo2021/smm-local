@@ -1,4 +1,30 @@
-# VibeInsight 的可选验收探针
+# 可选实际安装包验收探针
+
+## 006 本机文档（可选实际包验证）
+
+日常 CI 运行 `pytest`，不依赖浏览器、远程机器或实际用户资料。完整 E1 另用下面探针，每次要求全新输出目录/档案，仅生成合成文档，不接 Hub。
+
+1. 从当前源码构建两个 wheel；`local_documents_packages.py --uv <uv路径> --output <新目录>` 会另行构建并分别安装 Local/Hub，逐模块核对源码→wheel→安装字节，验证 Local 新命令及 Hub 独立归档/项目方法。它不代替三系统 E1。
+2. 目标机准备独立 Local wheel 环境，以及另一个控制环境（`mcp`、`playwright`）。控制环境用 `python -m playwright install chromium` 准备浏览器，或配置本机 Chrome/Edge 可执行路径。Linux 需要实际可用的浏览器依赖，不能跳过浏览器后称通过。
+3. 私有目标 JSON 提供 `local_python`、`wheel`、`expected_platform`（`darwin`/`linux`/`win32`），可选 `browser`；Windows 另需 `controller_python`。路径均是目标机实际可读取的路径；Windows 新环境用复制安装依赖，确保普通交互账户可读，勿依赖管理员缓存的硬链接权限。配置不含用户凭据。
+
+```text
+<控制环境Python> scripts/acceptance/local_documents_platform.py --target-config <目标JSON> --output <全新业务输出>
+```
+
+Windows SSH 管理进程不作为普通用户证据，使用当前已登录用户的 Limited 交互任务：
+
+```text
+<控制环境Python> scripts/acceptance/local_documents_windows.py --target-config <目标JSON> --output <全新业务输出>
+```
+
+包装器核对实际非管理员 Token 和交互会话，保存 worker/控制进程退出并删除本任务。20分钟等待上限不改变原生自动执行300秒上限；较长平台轮按已确认人工外部步骤记录真实执行。macOS/Linux 直接用普通账户，不需要管理员认证或注册系统服务。
+
+探针记录实际安装/wheel全部模块摘要、命令起止/退出/响应、源字节与mtime时间线，真实Web按钮及PNG/trace，真实stdio MCP与子进程退出，链接/junction及适用权限错误、版本/旧ref、删除/移除和同档案重启。产品子进程的只读审计钩子只观察来源打开，不改变产品返回；仅明确刷新可打开正文。`local_documents_checks.py` 用独立原字符串/码点公式/完整集合判定，并用错误正文/坐标/身份/集合自检；不能只凭最终status字段验收。`local_documents_mcp_worker.py` 转发真实stdio并保存服务器退出。
+
+每轮调试后独立核查设计、断言和原始材料，正式轮必须换全新输出重新执行。源码变更按模块SHA判断适用性；完整矩阵、证据要求与未验证项对照[006 PLAN](../../changes/006-local-document-search/plan.md)。输出中有个人路径和账户信息，公开前保留原件SHA并对副本脱敏，不公开数据库、wheel、配置或原始trace。
+
+## VibeInsight 的可选验收探针
 
 日常回归运行 `pytest`，来源由合成事件夹具控制，无需 PostgreSQL 或 staging 凭据。
 设置 `ACCEPTANCE_EVIDENCE_DIR` 可导出选定场景的实际响应；不设置时不产生报告：
