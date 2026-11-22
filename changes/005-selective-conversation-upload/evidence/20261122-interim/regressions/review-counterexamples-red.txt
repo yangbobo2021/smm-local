@@ -1,0 +1,122 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+____________ test_late_offset_prefix_preserves_two_identical_turns _____________
+
+pair = namespace(local=<smm_local.core.Archive object at 0x110643f20>, remote=<smm_local.core.Archive object at 0x110643fe0>,...ca443f80fdf9bddb3542ae', 'device_id': 'bcdf5b74347d40e9bd707632c164f7ca'})], hub_id='2c1fe08f6bca443f80fdf9bddb3542ae')
+
+    def test_late_offset_prefix_preserves_two_identical_turns(pair):
+        """TC-005-offset-prefix: late prefix cannot consume an existing turn's receipt."""
+        path = pair.histories / 'offset-prefix.jsonl'
+        meta = {'type': 'session_meta', 'payload': {'id': 'offset-prefix', 'cwd': str(pair.histories.parent / 'A')}}
+        event = {'type': 'response_item', 'ordinal': 2, 'timestamp': '2026-11-20T10:00:00Z',
+                 'payload': {'type': 'message', 'role': 'user',
+                             'content': [{'type': 'input_text', 'text': 'identical repeated turn'}]}}
+        path.write_text(json.dumps(meta) + '\n' + json.dumps(event) + '\n')
+        assert pair.local.sync_codex(pair.histories)['messages_new'] == 1
+        connect(pair); federation.choose_upload(pair.local, 'all', [])
+        assert federation.push_pending(pair.local)['uploaded'] == 1
+        with path.open('a') as out:
+            out.write(json.dumps({**event, 'ordinal': 1}) + '\n')
+        assert pair.local.sync_codex(pair.histories)['messages_new'] == 1
+        federation.push_pending(pair.local)
+>       assert bodies(pair.remote) == ['identical repeated turn'] * 2
+E       AssertionError: assert ['identical repeated turn'] == ['identical r...epeated turn']
+E         
+E         Right contains one more item: 'identical repeated turn'
+E         Use -v to get more diff
+
+tests/test_upload_review_regressions.py:27: AssertionError
+____________ test_target_switch_during_known_lookup_fences_old_body ____________
+
+pair = namespace(local=<smm_local.core.Archive object at 0x1109165a0>, remote=<smm_local.core.Archive object at 0x110916f30>,...e, 'source_order': 1, 'project_id': 'fc8e11cee3088374464fe1eb830ab038'}]})], hub_id='1384aac7d39b43c2987f3e6a61e975fe')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x110916390>
+tmp_path = PosixPath('/private/var/folders/jh/mt3s144j7wg98ww3zyqc1np00000gn/T/pytest-of-<ordinary-user>/pytest-75/test_target_switch_during_know0')
+
+    def test_target_switch_during_known_lookup_fences_old_body(pair, monkeypatch, tmp_path):
+        """TC-005-target-dispatch: a newly chosen target fences not-yet-dispatched body."""
+        add_local(pair, 'a', 'A', 'must not start to old hub after switch')
+        connect(pair); federation.choose_upload(pair.local, 'all', [])
+        old_request = federation._request
+        second = Archive(tmp_path / 'second-hub.sqlite3')
+        with TestClient(create_hub(second, pair.token_file.read_text())) as client:
+            client.headers['Authorization'] = 'Bearer ' + pair.token_file.read_text()
+            switched = False
+            def request(config, route, payload=None):
+                nonlocal switched
+                if config['address'] == 'http://localhost:18771':
+                    response = client.get('/v1' + route) if payload is None else client.post('/v1' + route, json=payload)
+                    assert response.status_code == 200, response.text
+                    return response.json()
+                result = old_request(config, route, payload)
+                if route == '/known-upload-messages' and not switched:
+                    switched = True
+                    assert federation.configure_hub(pair.local, 'http://localhost:18771', 'new-target', str(pair.token_file))['connected']
+                return result
+            monkeypatch.setattr(federation, '_request', request)
+            federation.push_pending(pair.local)
+            assert switched
+>           assert bodies(pair.remote) == []
+E           AssertionError: assert ['must not st...after switch'] == []
+E             
+E             Left contains one more item: 'must not start to old hub after switch'
+E             Use -v to get more diff
+
+tests/test_upload_review_regressions.py:58: AssertionError
+______________ test_timestamp_version_is_stored_before_exact_ack _______________
+
+pair = namespace(local=<smm_local.core.Archive object at 0x110916bd0>, remote=<smm_local.core.Archive object at 0x110937770>,...e, 'source_order': 1, 'project_id': '44764e092756e89f5283eb62d46ff28c'}]})], hub_id='ac84b865d4cf4db188b7e54057cde4af')
+
+    def test_timestamp_version_is_stored_before_exact_ack(pair):
+        """TC-005-timestamp-version: same legacy fingerprint must not acknowledge another version."""
+        add_local(pair, 'a', 'A', 'same body different source time')
+        connect(pair); federation.choose_upload(pair.local, 'all', [])
+        federation.push_pending(pair.local)
+        old_hit = federation.search_archive(pair.local, 'different', local=False)['results'][0]
+        old_hub_reference = next(r['reference'] for r in old_hit['origin_references'] if r['archive_scope'] == 'hub')
+        with pair.local.connect() as con:
+            con.execute("UPDATE messages SET timestamp='2026-11-20T10:00:00Z'")
+        assert federation.push_pending(pair.local)['uploaded'] == 1
+        with pair.remote.connect() as con:
+            times = [r[0] for r in con.execute('SELECT timestamp FROM messages ORDER BY id')]
+>       assert times == [None, '2026-11-20T10:00:00Z']
+E       AssertionError: assert [None] == [None, '2026-11-20T10:00:00Z']
+E         
+E         Right contains one more item: '2026-11-20T10:00:00Z'
+E         Use -v to get more diff
+
+tests/test_upload_review_regressions.py:75: AssertionError
+____ test_body_failure_persists_in_upload_status_and_clears_after_recovery _____
+
+pair = namespace(local=<smm_local.core.Archive object at 0x110937590>, remote=<smm_local.core.Archive object at 0x11096d370>,...11288aafa6c6a477e', 'name': 'A', 'kind': 'ordinary'}], 'memberships': []})], hub_id='5662e43bff5e413285d5b35ac2e12f59')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x110937d10>
+
+    def test_body_failure_persists_in_upload_status_and_clears_after_recovery(pair, monkeypatch):
+        """TC-005-transfer-status: rule confirmation and failed backfill are separate states."""
+        add_local(pair, 'a', 'A', 'waiting for body transfer')
+        connect(pair); federation.choose_upload(pair.local, 'all', [])
+        request = federation._request
+        def fail(config, route, payload=None):
+            if route == '/known-upload-messages':
+                raise federation.HubUnavailable('synthetic body lookup unavailable')
+            return request(config, route, payload)
+        monkeypatch.setattr(federation, '_request', fail)
+        assert federation.push_pending(pair.local)['pending']
+        state = federation.upload_status(pair.local)
+        assert state['state'] == 'confirmed'
+>       assert state['transfer_state'] == 'failed'
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'transfer_state'
+
+tests/test_upload_review_regressions.py:99: KeyError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <task-path> StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_upload_review_regressions.py::test_late_offset_prefix_preserves_two_identical_turns
+FAILED tests/test_upload_review_regressions.py::test_target_switch_during_known_lookup_fences_old_body
+FAILED tests/test_upload_review_regressions.py::test_timestamp_version_is_stored_before_exact_ack
+FAILED tests/test_upload_review_regressions.py::test_body_failure_persists_in_upload_status_and_clears_after_recovery
+4 failed, 1 warning in 0.70s

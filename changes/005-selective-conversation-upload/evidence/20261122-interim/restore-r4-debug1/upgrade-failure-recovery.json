@@ -1,0 +1,40 @@
+{
+  "stop_before_failure": {
+    "hub_id": "a65fe3ffbdc34a2ab785899340fcac7b",
+    "device_id": "dd33bda91300485f8c092da4e0e042d7",
+    "revision": 2,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "controlled-health-stop",
+    "control_epoch": "9d01ea9b30734fb18467416c0cb62c7c"
+  },
+  "upgrade_exception": "升级失败，已恢复 0.4.0：synthetic upgrade health failure after confirmed stop",
+  "after_recovery": {
+    "enabled": true,
+    "address": "https://localhost:18875",
+    "running": true,
+    "credential_file": "<task>/hub-state/hub-token",
+    "database": "<task>/hub-state/smm-hub.sqlite3",
+    "version": "0.4.0",
+    "service": "smm-hub-bbdcbe3e5e82",
+    "log_file": "<task>/hub-state/hub.log",
+    "ca_file": "<task>/hub-state/ca.pem",
+    "hub_id": "a65fe3ffbdc34a2ab785899340fcac7b"
+  },
+  "control": {
+    "hub_id": "a65fe3ffbdc34a2ab785899340fcac7b",
+    "device_id": "dd33bda91300485f8c092da4e0e042d7",
+    "revision": 2,
+    "policy": {
+      "mode": "none",
+      "projects": []
+    },
+    "submission_id": "controlled-health-stop",
+    "control_epoch": "7a9bb473cf3e40499fd67115d905cfd5",
+    "restore_pending": true,
+    "conflict": true
+  },
+  "installer_kind": "offline success stub; actual package remains candidate bytes; real systemd start/health/restore"
+}

@@ -1,0 +1,91 @@
+{
+  "source": "AT-SMM-005 private original linux-client-run2",
+  "redactions": "test-machine addresses, account names and absolute task/environment paths; no bodies altered; no credential/key files exported",
+  "files": [
+    {
+      "file": "backfill.json",
+      "original_sha256": "efc4737a23e7e67bc1d7e9dedc3aaefdcfd63f11c541976b764938a1629a642e",
+      "export_sha256": "efc4737a23e7e67bc1d7e9dedc3aaefdcfd63f11c541976b764938a1629a642e"
+    },
+    {
+      "file": "browser-configuration.json",
+      "original_sha256": "5e4459a1d036e1a58eef91193aed7b85e2ef4735e52c5b739c534795f4c8da14",
+      "export_sha256": "5e4459a1d036e1a58eef91193aed7b85e2ef4735e52c5b739c534795f4c8da14"
+    },
+    {
+      "file": "cleanup.json",
+      "original_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+      "export_sha256": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0"
+    },
+    {
+      "file": "combined-stopped-cli-reads.json",
+      "original_sha256": "a607e2eb2190a6d8da91457c1915d2ca6b28d35210917d9af8aabc5719c05804",
+      "export_sha256": "a607e2eb2190a6d8da91457c1915d2ca6b28d35210917d9af8aabc5719c05804"
+    },
+    {
+      "file": "combined-stopped-cli-search.json",
+      "original_sha256": "92eb9724a06f351a62fdeb47639d4f0828a0b6b38e15c9331a2326f6b76fe084",
+      "export_sha256": "92eb9724a06f351a62fdeb47639d4f0828a0b6b38e15c9331a2326f6b76fe084"
+    },
+    {
+      "file": "combined-stopped-mcp-reads.json",
+      "original_sha256": "a607e2eb2190a6d8da91457c1915d2ca6b28d35210917d9af8aabc5719c05804",
+      "export_sha256": "a607e2eb2190a6d8da91457c1915d2ca6b28d35210917d9af8aabc5719c05804"
+    },
+    {
+      "file": "combined-stopped-mcp-search.json",
+      "original_sha256": "9c87ef2fbdbaa83ce1a96f4bd433f6ac4b4a038d17cf92bb5c4b7a16da00ab68",
+      "export_sha256": "9c87ef2fbdbaa83ce1a96f4bd433f6ac4b4a038d17cf92bb5c4b7a16da00ab68"
+    },
+    {
+      "file": "initial-choice.json",
+      "original_sha256": "8f2f2911a0ce80fe7667a55a73483c61400bbc3f40e0aa9696633a40c51a5022",
+      "export_sha256": "8f2f2911a0ce80fe7667a55a73483c61400bbc3f40e0aa9696633a40c51a5022"
+    },
+    {
+      "file": "initial-stop-replay.json",
+      "original_sha256": "081da6cbe2dd9bc18c8d14c37478c6ec5ed1ac11d7084cc822e85eabfcbe5e6f",
+      "export_sha256": "081da6cbe2dd9bc18c8d14c37478c6ec5ed1ac11d7084cc822e85eabfcbe5e6f"
+    },
+    {
+      "file": "local-restart.json",
+      "original_sha256": "feacbcca534726018bebc9d13895d07daf50c38a877d6371e30b3e3138a9feda",
+      "export_sha256": "feacbcca534726018bebc9d13895d07daf50c38a877d6371e30b3e3138a9feda"
+    },
+    {
+      "file": "manifest.json",
+      "original_sha256": "ead3f0adeaf1b404a4cb38b2a8680b9660ad4301a5325c79dff0f69a3ebee4d0",
+      "export_sha256": "e6f66a7fe50be508e256c4ef0039a2909d645dd9d64f5361467842220b7b334d"
+    },
+    {
+      "file": "new-connection-status.json",
+      "original_sha256": "7d41dbbd41b2b509a8e92ac43d30c4656314d348d9a0c7b9291744aef18093ac",
+      "export_sha256": "7d41dbbd41b2b509a8e92ac43d30c4656314d348d9a0c7b9291744aef18093ac"
+    },
+    {
+      "file": "offline-cli-search.json",
+      "original_sha256": "488ff500c59ec37375c99950739ca0fdcb992d4120b6f46b470ff3fc91463c94",
+      "export_sha256": "488ff500c59ec37375c99950739ca0fdcb992d4120b6f46b470ff3fc91463c94"
+    },
+    {
+      "file": "reconnected-cli-search.json",
+      "original_sha256": "92eb9724a06f351a62fdeb47639d4f0828a0b6b38e15c9331a2326f6b76fe084",
+      "export_sha256": "92eb9724a06f351a62fdeb47639d4f0828a0b6b38e15c9331a2326f6b76fe084"
+    },
+    {
+      "file": "result.json",
+      "original_sha256": "5c5e61fb0ed610bdd6b28df51858117f5a9c763230f06ebe786170080c425b8e",
+      "export_sha256": "5c5e61fb0ed610bdd6b28df51858117f5a9c763230f06ebe786170080c425b8e"
+    },
+    {
+      "file": "service-events.json",
+      "original_sha256": "fef8fb630d32b157a796c7457c063819e872464fd2211e30fcd7dbc053934c27",
+      "export_sha256": "fef8fb630d32b157a796c7457c063819e872464fd2211e30fcd7dbc053934c27"
+    },
+    {
+      "file": "stopped-state.json",
+      "original_sha256": "d063d77f48688678acef09122cc69c76ab162188c282810f73b931735d385892",
+      "export_sha256": "d063d77f48688678acef09122cc69c76ab162188c282810f73b931735d385892"
+    }
+  ]
+}
