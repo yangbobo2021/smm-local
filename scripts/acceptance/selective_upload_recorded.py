@@ -90,7 +90,7 @@ def main():
     observed = json.loads((output / 'result.json').read_text(encoding='utf-8'))
     assert observed['status'] == 'passed', observed
     cleanup = json.loads((output / 'cleanup.json').read_text(encoding='utf-8'))
-    assert not cleanup.get('errors'), cleanup
+    assert cleanup.get('failures') == [], cleanup
     print(json.dumps({'status': 'passed', 'probe': a.probe, 'mode': a.mode, 'case': a.case,
                       'basis': 'new business execution; installed-byte check and original evidence retained'}))
 
