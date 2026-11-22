@@ -6,7 +6,7 @@ from document_helpers import Fixture, normal, fingerprint, observe
 
 def test_scan_scope(tmp_path):
     f = Fixture(tmp_path); p = f.project()
-    expected = {'root.MD':'needle 根😀\n', 'sub/deep.markdown':'needle 深层\n', 'sub/open.txt':'needle open\n', 'branch/keep.txt':'needle keep\n'}
+    expected = {'root.MD':'needle 根😀\n', 'sub/deep.markdown':'needle 深层\n', 'sub/open.txt':'needle open\n', 'branch/keep.txt':'needle keep\n','star-dir/keep.txt':'needle star cannot cross directory\n'}
     for name,text in expected.items(): f.file(name,text)
     for name in ['.secret.txt','.hidden/a.txt','.git/a.md','.hg/a.txt','.svn/a.txt','node_modules/a.md','.venv/a.txt','venv/a.txt','build/a.txt','dist/a.txt','README.pdf']:
         f.file(name,'needle ignored')
@@ -54,6 +54,7 @@ def test_decode_files(tmp_path, monkeypatch):
     status=f.source(source);assert status['status']=='partial' and status['counts']['ready']==4 and status['counts']['failed']==3
     files={Path(x['path']).name:x for x in f.files(source)}
     assert all(files[n]['status']=='failed' and files[n]['error'] for n in ['bad.txt','nul.txt','denied.txt'])
+    assert files['empty.txt']['status']=='ready' and files['empty.txt']['text_length']==0
     assert 'utf' in files['bad.txt']['error'].lower() and 'nul' in files['nul.txt']['error'].lower()
     assert any(word in files['denied.txt']['error'].lower() for word in ['denied','permission'])
     assert {Path(h['path']).name for h in f.search()['results']} == set(cases)-{'empty.txt'}
@@ -63,9 +64,10 @@ def test_decode_files(tmp_path, monkeypatch):
         assert h['sha256']==fingerprint(paths[name])['sha256']
     f.file('bad.txt','needle recovered');f.file('nul.txt','needle repaired');f.refresh(source)
     assert f.source(source)['status']=='ready' and f.source(source)['counts']['ready']==7
-    assert {Path(h['path']).name for h in f.search(limit=50)['results']}==set(cases)-{'empty.txt'}|{'bad.txt','nul.txt','denied.txt'}
+    all_recovered=f.search(limit=50)['results']
+    assert {Path(h['path']).name for h in all_recovered}==set(cases)-{'empty.txt'}|{'bad.txt','nul.txt','denied.txt'}
     recovered={**cases,'bad.txt':'needle recovered','nul.txt':'needle repaired','denied.txt':'needle denied'}
-    for h in f.search()['results']:
+    for h in all_recovered:
         name=Path(h['path']).name
         assert f.read(h)['text']==normal(recovered[name])
         assert h['sha256']==fingerprint(tmp_path/'docs'/name)['sha256']

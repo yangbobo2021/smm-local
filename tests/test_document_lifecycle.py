@@ -88,6 +88,7 @@ def test_source_lifecycle(tmp_path):
     for h in old.values():f.bad('POST','/api/documents/read',{'reference':h['reference']})
     assert f.read(old_q)['text']==f.read(old_all)['text']=='needle shared'
     f.refresh(a);assert set(names(f,project=q))=={'shared.txt'}
+    assert f.read(old_q)['text']==f.read(old_all)['text']=='needle shared'
     for h in old.values():f.bad('POST','/api/documents/read',{'reference':h['reference']})
     before_remove=names(f)['shared.txt']
     f.remove(b);assert set(names(f,project=q))=={'shared.txt'}

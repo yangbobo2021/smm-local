@@ -9,7 +9,7 @@ from document_helpers import Fixture, normal, observe, deny_source_reads
 def test_search_rank(tmp_path):
     f=Fixture(tmp_path)
     for i in range(51):f.file(f'file-{i:03d}.md','needle common')
-    f.file('needle-only-filename.txt','unrelated document')
+    f.file('needle-filenameonlyuniquemarker.txt','unrelated document')
     special={'tail.txt':'padding '*1000+'tailuniquemarker',
              'boundary.txt':'x '*997+' crossboundaryword ending',
              'long.txt':'padding '*1800+'longuniquemarker suffix',
@@ -25,6 +25,7 @@ def test_search_rank(tmp_path):
     assert len({h['id'] for h in fifty})==50
     assert [(h['id'],h['bm25_score']) for h in fifty]==[(h['id'],h['bm25_score']) for h in f.search('needle',limit=50)['results']]
     assert all(math.isfinite(h['bm25_score']) for h in fifty)
+    assert f.search('filenameonlyuniquemarker')['results']==[]
     ranked=f.search('relevancemarker')['results']
     assert [Path(h['path']).name for h in ranked]==['z-high.txt','a-low.txt']
     for filename,query in [('tail.txt','tailuniquemarker'),('boundary.txt','crossboundaryword'),('long.txt','longuniquemarker'),('chinese.txt','中文检索')]:
@@ -54,7 +55,13 @@ def test_exact_read(tmp_path,monkeypatch,text):
     monkeypatch.undo()
     long='needle '+('😀e\u0301 x'*4000)
     path.write_text(long,encoding='utf-8');f.refresh(source);current=f.search()['results'][0]
-    assert len(f.read(current)['text'])<=2000
+    default=f.read(current)
+    for item in [current,default]:
+        assert type(item['start']) is int and type(item['end']) is int
+        assert 0<=item['start']<item['end']<=len(long) and item['end']-item['start']<=2000
+        assert item['text']==long[item['start']:item['end']] and 'needle' in item['text']
+        assert item['start_line']==1+long[:item['start']].count('\n') and item['end_line']==1+long[:item['end']-1].count('\n')
+    assert (current['start'],current['end'],current['text'])==(default['start'],default['end'],default['text'])
     r=f.read(current,start=0,end=16000);assert r['text']==long[:16000] and len(r['text'])==16000
     f.bad('POST','/api/documents/read',{'reference':current['reference'],'start':0,'end':16001})
     f.bad('POST','/api/documents/read',{'reference':h['reference']})

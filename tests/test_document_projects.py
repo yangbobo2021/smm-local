@@ -46,6 +46,12 @@ def test_overlap_version(tmp_path,monkeypatch,withdraw):
     s1=f.add(file,[p]);s3=f.add(other,[p]);f.refresh(s1);f.refresh(s3)
     v1=names(f,project=p)['shared.txt'];assert f.read(v1)['text']=='needle v1'
     file.write_text('needle v2',encoding='utf-8');s2=f.add(file,[q]);f.refresh(s2)
+    def unique(project,wanted):
+        result=f.search(scope='project',project_id=project,limit=50)['results'] if project else f.search(limit=50)['results']
+        assert {Path(h['path']).name for h in result}==wanted
+        assert len(result)==len(wanted)==len({h['id'] for h in result})==len({h['path'] for h in result})
+        return {Path(h['path']).name:h for h in result}
+    unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'});unique(None,{'shared.txt','control.txt'})
     current={key:names(f,project=project)['shared.txt'] for key,project in [('p',p),('q',q),('all',None)]}
     for h in current.values():
         assert h['id']==v1['id'] and h['version']!=v1['version']
@@ -62,6 +68,7 @@ def test_overlap_version(tmp_path,monkeypatch,withdraw):
         assert f.source(s2)['status']=='failed'
     assert set(names(f,project=p))=={'shared.txt','control.txt'}
     assert set(names(f,project=q))==({'shared.txt'} if withdraw=='continuous' else set())
+    unique(p,{'shared.txt','control.txt'});unique(q,{'shared.txt'} if withdraw=='continuous' else set());unique(None,{'shared.txt','control.txt'})
     assert f.read(current['p'])['text']==f.read(current['all'])['text']=='needle v2'
     if withdraw!='continuous':f.bad('POST','/api/documents/read',{'reference':current['q']['reference']})
     else:assert f.read(current['q'])['text']=='needle v2'
@@ -77,9 +84,12 @@ def test_overlap_version(tmp_path,monkeypatch,withdraw):
         assert len(shared)==(0 if project==q and withdraw!='continuous' else 1)
         for h in shared:assert f.read(h)['text']=='needle v3'
     if withdraw!='continuous':
+        final_refs=[unique(project,{'shared.txt','control.txt'})['shared.txt']['reference'] for project in [p,None]]
         from smm_local.documents import Documents
         def failure(*a,**kw):raise PermissionError('synthetic final S1 failure')
         with monkeypatch.context() as patch:
             patch.setattr(Documents,'_scan',failure);f.refresh(s1)
         assert set(names(f))=={'control.txt'} and names(f,project=q)=={}
+        for ref in final_refs:f.bad('POST','/api/documents/read',{'reference':ref})
+        assert f.read(names(f)['control.txt'])['text']=='needle control'
     observe('overlap-time-line',{'withdraw':withdraw,'v1':v1,'v2':current,'sources':f.sources(),'final':names(f)})

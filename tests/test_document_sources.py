@@ -62,6 +62,10 @@ def test_entrance_contract(tmp_path):
     changed = f.cli('documents', 'set', source['id'], '--project-id', project['id'], '--exclude', 'else/**')
     assert f.source(source) == changed and changed['project_ids'] == [project['id']]
     assert changed['recursive'] is True and changed['exclude'] == ['else/**'] and changed['status'] == 'pending'
+    cleared=f.cli('documents','set',source['id'])
+    assert f.source(source)==cleared and cleared['project_ids']==[] and cleared['exclude']==[] and cleared['recursive'] is True
+    assert cleared['status']=='pending' and cleared['revision']>changed['revision']
+    f.cli('documents','set',source['id'],'--project-id',project['id'])
     f.cli('documents', 'refresh', '--source-id', source['id'])
     assert f.source(source)['status'] == 'ready'
     result = f.cli('documents', 'search', 'needle', '--scope', 'project', '--project-id', project['id'])
