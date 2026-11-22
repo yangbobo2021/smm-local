@@ -627,7 +627,7 @@ class Run:
                 self.save('payloads', self.requests)
                 self.save('result', {'status': 'failed' if failure else 'passed', 'failure': failure,
                                     'started_at': self.started, 'finished_at': now(), 'mode': self.args.mode,
-                                    'scope': 'E3 API/CLI/MCP core; no E1 browser claim' if self.protocol_only else 'E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof'})
+                                    'scope': getattr(self, 'evidence_scope', 'E3 API/CLI/MCP core; no E1 browser claim' if self.protocol_only else 'E1 core entrances; E3 if hub-service; E4 if self-managed; not full A1-A12 proof')})
 
 
 def main():

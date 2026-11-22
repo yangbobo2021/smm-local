@@ -181,3 +181,5 @@ Windows 真实客户端用 `selective_upload_windows_limited.py --mode client` �
 `selective_upload_recorded.py` 将每次原生验收调试/正式执行绑定到新的实际业务运行，自动创建新任务状态，把原始安装摘要、命令、接口结果、截图与清理结果收进 `ACCEPTANCE_EVIDENCE_DIR`。私有目标可用 execution 指定 SSH 测试机/控制解释器/脚本目录；SSH 保持严格主机校验，Windows 仍经交互任务核对实际身份。它不会把先前通过的 JSON 重新包装成新执行。
 
 记录收回后可用 `selective_upload_audit.py --evidence-dir <原始运行目录> --local-wheel <该轮LocalWheel> --hub-wheel <该轮HubWheel> --output <新审计文件>` 独立核对包摘要、完整合成原文、范围、排序公式、补齐进度和请求形状。此工具只读原始文件，不重新运行产品；不能替代截图审阅或 A1–A12/E1–E5 的完整验收。其自检用例包含正文缺失、错误排序、排序候选外发、假补齐和错误原文等负例。
+
+A5 可运行 `selective_upload_isolation.py --target-config <独立新配置> --output <新目录>`，只验证真实 HTTPS Hub 下同设备关联项目、其他设备与合成 VibeInsight 继续推进，禁止 A 不外发且旧副本保留；它不覆盖三入口或整个验收矩阵。
