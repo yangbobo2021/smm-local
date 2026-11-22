@@ -190,7 +190,7 @@ MCP 使用 `search_conversations`、`read_conversation(reference=...)`；Web 在
 
 有可验证同 Hub 已上传状态的旧设备升级时保留全部允许；新接入或实际 Hub 身份变化需重新选择。只换地址/凭据且仍是同一个 Hub，不重置规则。新 Local 连接旧 Hub 可查询可核验的全项目候选，但不上传正文；按项目只回退本机所请求项目，明确提示能力不足。旧 Local 对尚未迁移设备仍可写；该设备一旦采用新策略，旧写被拒绝，旧读仍可用。
 
-恢复前先用实际档案/状态目录输出清单并写入恢复保护：
+恢复前先运行该 Hub 原服务配置下的 `smm-hub hub status`（自定义状态目录时沿用原 `--state-dir`），从输出 `database` 的父目录确认实际 Hub 状态目录，并核对与待恢复服务相同。再用实际档案/状态目录输出清单并写入恢复保护：
 
 ```sh
 smm --db <本机档案> upload prepare-restore

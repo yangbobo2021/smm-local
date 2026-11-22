@@ -116,29 +116,28 @@ S7 的说明与入口设计随前面阶段同步起草，不延迟到全部验�
 
 A1 要求的同目标升级在每个 E1 平台使用该平台独立的旧 Local 环境生成任务档案，再由新 Local 接管；设备身份按平台/run-id 隔离。完整三种新旧组合与恢复专项集中在 E5，不要求每个平台重复安装旧 Hub。
 
-### 5.2 拟新增可重跑入口
+### 5.2 可重跑入口与实施调整
 
-这些命令为 S8 以前要实现的验收工具，**当前不能当成已存在或已运行**：
-
-以下 `python` 表示验收控制环境的解释器；在 Windows 使用其 `Scripts/python.exe` 绝对路径，不依赖 `python3` 别名。SSH 只编排和收集证据，被测 CLI、MCP 与浏览器仍在目标系统执行。
+以下 `python` 表示验收控制环境的解释器；Windows 使用其 `Scripts/python.exe` 绝对路径。SSH 只编排和收集证据，被测 CLI、MCP 与浏览器仍在目标系统执行。独立包安装步骤见 5.1，以下入口已实现，但每次结果只代表其 manifest 绑定版本实际执行到的检查。
 
 ```text
-python scripts/acceptance/selective_upload_platform.py preflight --target-config <私有目标配置> --output <新目录>
-python scripts/acceptance/selective_upload_fixture.py create --root <新任务目录> --output <夹具清单>
-python scripts/acceptance/selective_upload_platform.py hub --target-config <平台配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_platform.py client --target-config <平台配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_platform.py login-service --target-config <macOS配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_platform.py self-managed --target-config <单平台配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_contracts.py compatibility --target-config <新旧环境配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_contracts.py recovery --target-config <单平台配置> --fixture-manifest <清单> --output <新目录>
-python scripts/acceptance/selective_upload_audit.py --evidence-root <run-id> --spec changes/005-selective-conversation-upload/spec.md
+python scripts/acceptance/selective_upload_prepare.py --work <新任务目录> --local-python <LocalPython> --hub-python <HubPython> --local-wheel <LocalWheel> --hub-wheel <HubWheel>
+python scripts/acceptance/selective_upload_platform.py client --target-config <私有目标配置> --output <新目录>
+python scripts/acceptance/selective_upload_platform.py hub-service --target-config <平台配置> --output <新目录>
+python scripts/acceptance/selective_upload_platform.py login-service --target-config <macOS配置> --output <新目录>
+python scripts/acceptance/selective_upload_platform.py self-managed --target-config <单平台配置> --output <新目录>
+python scripts/acceptance/selective_upload_compatibility.py --target-config <新旧环境配置> --output <新目录>
+python scripts/acceptance/selective_upload_recovery.py self-managed --case R1 --target-config <新配置> --output <新目录>
+python scripts/acceptance/selective_upload_recovery.py self-managed --case R2 --target-config <另一新配置> --output <另一新目录>
+python scripts/acceptance/selective_upload_recovery.py hub-service --case R3 --target-config <另一新配置> --output <另一新目录>
+python scripts/acceptance/selective_upload_recovery.py hub-service --case R4 --target-config <另一新配置> --output <另一新目录>
 ```
 
-夹具 `create` 同时生成一次性测试 CA/证书、Token 文件和私有目标配置模板，并打印其路径；公开夹具清单不含秘密。目标配置由执行者填入预检取得的任务目录、OS/运行方式、候选/旧包解释器、Hub 状态目录、HTTPS 地址、测试 CA/Token 文件路径、浏览器类型/可执行文件、任务独有服务名、源码/模块及 wheel 摘要。凭证原值不作为命令行参数或公开 JSON。配置必须核验任务标记，拒绝指向用户现有档案或服务。
+原计划的 contracts compatibility/recovery 拆成两个独立控制器，避免兼容状态与恢复故障注入共享流程。原 `hub` 模式改名 `hub-service`，明确真实服务；不再使用独立 preflight 子命令，预检在各入口执行并落盘。`prepare` 生成一次性 CA/证书、私有目标配置和候选源码/两个 wheel 全部文件摘要；fixture 由控制器在任务目录创建，不再传单独 fixture-manifest。不匹配候选字节则拒绝执行。详细参数及 Windows Limited 交互包装入口见 `scripts/acceptance/README.md`。
 
-`hub` 只用实际系统服务，`client` 同时执行已安装 CLI、真实 stdio MCP 和该系统真实浏览器；浏览器以 Playwright 驱动 Web DOM 和网络，保存结果/原文及状态页面截图。浏览器驱动放在验收专用环境，可增加独立 acceptance extra/锁定依赖；不污染生产包，也不要求日常 pytest 下载浏览器。Windows 客户端按需复用 Limited 交互任务启动器，记录非提升身份，不能由 SSH 服务身份代替用户浏览器。
+`hub-service` 只用实际系统服务；`client` 使用真实 CLI、独立 stdio MCP 和本系统浏览器，保存响应、原文和截图。E3 可显式 protocol_only，但此结果不算 E1 浏览器验收。浏览器驱动独立于生产包；没有浏览器时先修复准备条件。恢复使用产品 prepare-restore、实际服务启停及 reconcile。每项执行有超时与 finally 清理，只清理任务标记的资源，失败原始资料保留。
 
-`recovery` 使用产品 `prepare-restore`、服务启停及 `reconcile`，而非测试脚本直接修改规则后宣称恢复通过。清理仅接受该 run-id 标记的文件、进程和服务；每个子任务有超时、非零失败退出及 `finally` 清理，失败产物保留。审计入口不重新运行产品生成预期，只复核证据、身份、覆盖格子及摘要。
+原独立 audit 脚本尚未实现，不能按该旧命令宣称覆盖审计完成。最终须由独立 Reviewer 对照每次 manifest、真实命令/响应/截图、清理结果和 A1–A12/E1–E5 表逐格审计并记录缺口；如果增加机器审计入口，一并更新本节和证据索引，不能拿产品重新查询生成预期替代原始证据核对。
 
 ### 5.3 本地回归与 CI
 
