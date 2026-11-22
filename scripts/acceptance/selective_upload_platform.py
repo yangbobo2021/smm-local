@@ -183,6 +183,7 @@ class Run:
             result = json.loads(self.command([self.t['local_python'], '-I', HERE / 'selective_upload_fixture.py', 'prepare', '--root', directory, '--device', name]).stdout)
             db = directory / 'archive.sqlite3'; self.clients.append(db)
             self.save('fixture-' + name, result)
+            if name == 'local': self.unassigned = next(h for h in result['search']['results'] if h['source_session_id'] == 'local-U')
             self.cli(db, 'configure-hub', self.relay_address, '005-' + name, '--token-file', self.root / 'input-token')
             if name == 'local' and self.args.mode == 'login-service': self.install_login(db)
         self.db, self.remote_db = self.clients
@@ -192,7 +193,8 @@ class Run:
         self.save('local-service', {'url': self.web, 'on_demand': endpoint['on_demand'], 'identity': self.identity()})
         self.cli(self.db, 'maintenance', 'sync')
         assert not any(h['source_session_id'].startswith('local-') for h in self.hub_hits())
-        assert self.cli(self.db, 'upload', 'status')['state'] == 'needs_selection'
+        initial = self.cli(self.db, 'upload', 'status'); assert initial['state'] == 'needs_selection'
+        self.save('new-connection-status', initial)
         # Associate unuploaded A with B and V, B with C, and A with local-only D only locally.
         projects = self.admin('project', 'list'); ids = {p['name']: p['id'] for p in projects}
         for other in ('B', 'synthetic.example/005/V'): self.admin('project', 'link', str(ids['A']), str(ids[other]))
@@ -326,13 +328,63 @@ class Run:
 
     def restart_local(self):
         if self.login_label:
-            self.login_action('stop'); self.login_action('start')
+            self.login_action('stop')
+            eventually(lambda: not Path(str(self.db) + '.service.json').exists())
+            self.login_action('start')
+            def ready():
+                path = Path(str(self.db) + '.service.json')
+                if not path.exists(): return False
+                endpoint = json.loads(path.read_text())
+                return endpoint if self.api(endpoint['url'], '/api/status', local=True) else False
+            eventually(ready)
         else:
             self.cli(self.db, 'stop-on-demand')
             self.cli(self.db, 'maintenance', 'status')
         self.web = json.loads(Path(str(self.db) + '.service.json').read_text())['url']
         state = self.cli(self.db, 'upload', 'status'); assert state['policy']['mode'] == 'none'
         self.save('local-restart', state)
+
+    def browser_configuration(self):
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            kwargs = {'headless': True}
+            if self.t.get('browser'): kwargs['executable_path'] = self.t['browser']
+            browser = p.chromium.launch(**kwargs)
+            context = browser.new_context(viewport={'width': 1440, 'height': 1100})
+            context.tracing.start(screenshots=True, snapshots=True, sources=True)
+            page = context.new_page(); changes = []
+            try:
+                page.goto(self.web); page.locator('nav button[data-tab=settings]').click()
+                page.wait_for_function("document.querySelector('#upload-state').textContent.includes('待选择')")
+                for mode, selected in [('only', []), ('only', ['A']), ('except', ['A']), ('all', []), ('none', []), ('only', [])]:
+                    page.locator('#upload-mode').select_option(mode)
+                    if mode in ('only', 'except'):
+                        for checkbox in page.locator('.upload-project-check').all(): checkbox.uncheck()
+                        for name in selected: page.locator('.upload-project-check[value="' + str(self.projects[name]) + '"]').check()
+                    with page.expect_response(lambda r: r.url.endswith('/api/upload') and r.request.method == 'PUT') as response, page.expect_response(lambda r: r.url.endswith('/api/upload') and r.request.method == 'GET'):
+                        page.locator('#upload-save').click()
+                    saved = response.value.json(); observed = self.cli(self.db, 'upload', 'status')
+                    assert saved['state'] == observed['state'] == 'confirmed'
+                    assert saved['policy'] == observed['policy'] and saved['policy']['mode'] == mode
+                    page.screenshot(path=str(self.output / ('config-' + str(len(changes)) + '-' + mode + '.png')), full_page=True)
+                    changes.append({'web': saved, 'cli': observed})
+                page.locator('nav button[data-tab=projects]').click()
+                with page.expect_response(lambda r: r.url.endswith('/api/projects/global')) as response: page.locator('#ensure-global').click()
+                global_project = response.value.json()
+                page.locator('#assign-conversation').fill(str(self.unassigned['id']))
+                page.locator('#assign-project').select_option(str(global_project['id']))
+                with page.expect_response(lambda r: r.url.endswith('/api/projects/assign')) as response: page.locator('#assign-save').click()
+                preview = response.value.json(); assert not preview['applied']
+                assert preview['affected_conversations'] == [self.unassigned['id']]
+                page.locator('#project-change-preview').wait_for(); page.screenshot(path=str(self.output / 'assignment-preview.png'), full_page=True)
+                with page.expect_response(lambda r: r.url.endswith('/api/projects/assign')) as response: page.locator('#project-change-confirm').click()
+                applied = response.value.json(); assert applied['applied']
+                self.cli(self.db, 'maintenance', 'sync')
+                assigned = self.cli(self.db, 'read', str(self.unassigned['id']))
+                assert assigned['project_id'] == global_project['id']
+                self.save('browser-configuration', {'changes': changes, 'global': global_project, 'preview': preview, 'applied': applied, 'read_after_reimport': assigned})
+            finally:
+                context.tracing.stop(path=str(self.output / 'configuration-browser-trace.zip')); browser.close()
 
     def install_login(self, db):
         assert sys.platform == 'darwin'
@@ -358,6 +410,7 @@ class Run:
             'definition': plistlib.loads(plist.read_bytes()), 'process': self.command(['ps', '-o', 'uid,pid,ppid,command', '-p', str(pid)]).stdout})
 
     def lifecycle(self):
+        self.browser_configuration()
         self.policy_and_stop()
         expected = ['local-A', 'local-A-new', 'remote-B', 'vibe-V']
         self.interfaces('combined-stopped', expected)
@@ -392,6 +445,7 @@ class Run:
         before = [(h['source_session_id'], [m['canonical_id'] for m in h['matched_messages']]) for h in self.hub_hits()]
         self.cli(self.db, 'maintenance', 'sync')
         assert before == [(h['source_session_id'], [m['canonical_id'] for m in h['matched_messages']]) for h in self.hub_hits()]
+        assert 'local-U2' not in {h['source_session_id'] for h in self.hub_hits()}
         self.save('backfill', {'state': allowed, 'hub': self.hub_hits(), 'old-reference-read': old})
 
     def cleanup(self):

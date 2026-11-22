@@ -23,9 +23,9 @@ def prepare(root, device):
     root.mkdir(parents=True, exist_ok=True)
     database = root / 'archive.sqlite3'
     assert not database.exists(), 'task archive already exists'
-    labels = ['A', 'D', 'G', 'U'] if device == 'local' else ['B', 'C']
+    labels = ['A', 'D', 'G', 'U', 'U2'] if device == 'local' else ['B', 'C']
     for name in labels:
-        history(root, device + '-' + name, name if name != 'U' else None, ['selective common ' + device + '-' + name + ' original'])
+        history(root, device + '-' + name, name if not name.startswith('U') else None, ['selective common ' + device + '-' + name + ' original'])
     empty = root / 'empty'; empty.mkdir()
     db = Archive(database)
     db.set_settings(codex_root=str(root / 'sessions'), claude_root=str(empty), sync_interval_seconds=10)
