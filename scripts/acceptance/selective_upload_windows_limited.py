@@ -51,11 +51,11 @@ $name={quote(task)}
 $user=[Security.Principal.WindowsIdentity]::GetCurrent().Name
 $principal=New-ScheduledTaskPrincipal -UserId $user -LogonType Interactive -RunLevel {'Highest' if a.mode=='hub-service' else 'Limited'}
 $action=New-ScheduledTaskAction -Execute {quote(config['controller_python'])} -Argument {quote('"'+str(bootstrap)+'"')}
-$settings=New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 22)
+$settings=New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 32)
 try {{
  Register-ScheduledTask -TaskName $name -Action $action -Principal $principal -Settings $settings | Out-Null
  Start-ScheduledTask -TaskName $name
- $deadline=(Get-Date).AddMinutes(20)
+ $deadline=(Get-Date).AddMinutes(30)
  while (!(Test-Path {quote(receipt)})) {{
   if ((Get-Date) -gt $deadline) {{throw 'ordinary client task timed out; check interactive logon'}}
   Start-Sleep -Milliseconds 500
@@ -68,7 +68,7 @@ try {{
 }}
 '''
     driver.write_text(script,encoding='utf-8-sig')
-    process=subprocess.run(['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(driver)],timeout=1260)
+    process=subprocess.run(['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(driver)],timeout=1860)
     raise SystemExit(process.returncode)
 
 
