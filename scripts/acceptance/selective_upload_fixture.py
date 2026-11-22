@@ -40,11 +40,12 @@ def prepare(root, device):
         plugin = root / 'plugin'; plugin.mkdir()
         body = {'session_id': 'plugin-history', 'message_id': 'plugin-m1', 'position': 1,
                 'role': 'user', 'text': 'selective common plugin-only original', 'origin': 'records.json'}
+        extra = {**body, 'message_id': 'plugin-m2', 'position': 2, 'role': 'assistant', 'text': 'selective common plugin-only appended'}
         for name in ('before', 'after', 'live'):
-            (plugin / name).mkdir(); (plugin / name / 'records.json').write_text(json.dumps([body]), encoding='utf-8')
-        (plugin / 'adapter.py').write_text("import json,sys\nfrom pathlib import Path\nr=json.load(sys.stdin); rows=json.loads(Path(r['root']).read_text()); print(json.dumps({'messages':rows if not r['cursor'] else [],'cursor':'1','more':False}))\n", encoding='utf-8')
+            (plugin / name).mkdir(); (plugin / name / 'records.json').write_text(json.dumps([body] if name == 'before' else [body, extra]), encoding='utf-8')
+        (plugin / 'adapter.py').write_text("import json,sys\nfrom pathlib import Path\nr=json.load(sys.stdin); rows=json.loads(Path(r['root']).read_text()); start=int(r['cursor'] or 0); end=min(len(rows),start+r['limit']); print(json.dumps({'messages':rows[start:end],'cursor':str(end),'more':end<len(rows)}))\n", encoding='utf-8')
         manifest = {'id': 'synthetic-005', 'name': '005 fixture', 'version': 1, 'root': str(plugin / 'live' / 'records.json'), 'script': 'adapter.py'}
-        fixture = {'scope': {'kind': 'all'}, 'before': str(plugin / 'before' / 'records.json'), 'after': str(plugin / 'after' / 'records.json'), 'expected_before': [body], 'expected_added': []}
+        fixture = {'scope': {'kind': 'all'}, 'before': str(plugin / 'before' / 'records.json'), 'after': str(plugin / 'after' / 'records.json'), 'expected_before': [body], 'expected_added': [extra]}
         (plugin / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
         (plugin / 'fixture.json').write_text(json.dumps(fixture), encoding='utf-8')
         from smm_local.importers.registry import configure
@@ -67,7 +68,7 @@ def seed_vibe(root):
                    'event_type': 'trace.started', 'message': 'selective common VibeInsight original', 'project': project}
             return [row] if after is None or (row['created_at'], row['id']) > after else []
     db = Archive(root / 'smm-hub.sqlite3'); VibeInsightSync(db, 'synthetic-005-source').run(Source())
-    return {'fixture': 'synthetic-only', 'messages': db.stats()['messages']}
+    return {'fixture': 'synthetic-only', 'messages': db.status()['messages']}
 
 
 def main():
