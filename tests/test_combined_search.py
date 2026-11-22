@@ -127,3 +127,35 @@ def test_legacy_hub_global_search_is_readable_but_project_search_stays_local(pai
     scoped = federation.search_archive(pair.local, 'common', scope='project', project_id=a['project_id'])
     assert {h['source_session_id'] for h in scoped['results']} == {'a'}
     assert scoped['fallback_reason']
+
+
+def test_current_session_excludes_both_copies_only_in_the_same_source(pair):
+    add_local(pair, 'same-session', 'A', 'common current copy')
+    config = connect(pair); federation.choose_upload(pair.local, 'all', []); federation.push_pending(pair.local)
+    record = {'source': 'claude-code', 'source_session_id': 'same-session', 'started_at': None,
+              'source_key': 'different-agent-message', 'position': 1, 'source_order': 1,
+              'role': 'user', 'text': 'common other agent', 'timestamp': None}
+    response = pair.client.post('/v1/upload', json={'hub_id': pair.hub_id, 'device_id': 'f' * 32,
+        'device_name': 'other agent device', 'records': [record]})
+    assert response.status_code == 200
+    result = federation.search_archive(pair.local, 'common', current_source='codex', current_session_id='same-session')
+    assert [(h['source'], h['source_session_id']) for h in result['results']] == [('claude-code', 'same-session')]
+    included = federation.search_archive(pair.local, 'common', current_source='codex', current_session_id='same-session', include_current=True)
+    assert {(h['source'], h['source_session_id']) for h in included['results']} == {('codex', 'same-session'), ('claude-code', 'same-session')}
+
+
+def test_each_endpoint_receives_only_normal_n_without_topup_and_invalid_n_never_calls_hub(pair):
+    for session in ('a', 'b', 'c'):
+        add_local(pair, session, 'A', 'common identical words')
+    connect(pair); federation.choose_upload(pair.local, 'all', []); federation.push_pending(pair.local)
+    before = len(pair.calls)
+    result = federation.search_archive(pair.local, 'common', limit=2)
+    searches = [payload for route, payload in pair.calls[before:] if route == '/search']
+    assert len(searches) == 1 and searches[0]['limit'] == 2
+    assert result['rerank']['local_count'] == result['rerank']['hub_count'] == 2
+    assert len(result['results']) <= 2
+    before = len(pair.calls)
+    for n in (0, 51):
+        with pytest.raises(ValueError): federation.search_archive(pair.local, 'common', limit=n)
+    assert len(pair.calls) == before
+    assert len(federation.search_archive(pair.local, 'common', limit=50)['results']) == 3

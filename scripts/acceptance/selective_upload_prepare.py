@@ -21,7 +21,7 @@ def main():
     for kind in ('local', 'hub'):
         wheel = getattr(args, kind + '_wheel').resolve()
         with zipfile.ZipFile(wheel) as z:
-            candidate['installed_' + kind] = {name: hashlib.sha256(z.read(name)).hexdigest() for name in z.namelist() if name.startswith('smm_' + kind + '/') and name.endswith('.py')}
+            candidate['installed_' + kind] = {name: hashlib.sha256(z.read(name)).hexdigest() for name in z.namelist() if name.startswith('smm_' + kind + '/') and not name.endswith('/')}
             for name in candidate['installed_' + kind]:
                 if name == 'smm_hub/_archive/__init__.py':
                     expected = (ROOT / 'src/smm_hub/_archive.py').read_text(encoding='utf-8').replace('from smm_local.', 'from .').encode()
