@@ -332,12 +332,13 @@ class Run:
 
     def restart_local(self):
         if self.login_label:
+            descriptor = Path(str(self.db) + '.service.json')
+            previous_stamp = descriptor.stat().st_mtime_ns
             self.login_action('stop')
-            eventually(lambda: not Path(str(self.db) + '.service.json').exists())
             self.login_action('start')
             def ready():
                 path = Path(str(self.db) + '.service.json')
-                if not path.exists(): return False
+                if not path.exists() or path.stat().st_mtime_ns == previous_stamp: return False
                 endpoint = json.loads(path.read_text())
                 return endpoint if self.api(endpoint['url'], '/api/status', local=True) else False
             eventually(ready)

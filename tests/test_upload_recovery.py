@@ -237,3 +237,93 @@ def test_cross_process_save_and_dispatch_share_one_durable_fence(pair):
     local.sync_policy(federation._request)
     assert local.status()['state'] == 'confirmed'
     assert bodies(pair.remote) == []
+
+
+def test_lost_policy_confirmation_is_pending_until_head_is_rechecked(pair, monkeypatch):
+    add_local(pair, 'a', 'A', 'private')
+    config = connect(pair); original = federation._request; lost = False
+    def request(config, route, payload=None):
+        nonlocal lost
+        result = original(config, route, payload)
+        if route == '/upload-policy/set' and not lost:
+            lost = True; raise federation.HubUnavailable('synthetic policy reply lost')
+        return result
+    monkeypatch.setattr(federation, '_request', request)
+    status = federation.choose_upload(pair.local, 'none', [])
+    assert status['state'] == 'pending'
+    assert bodies(pair.remote) == []
+    federation.push_pending(pair.local)
+    assert federation.upload_status(pair.local)['state'] == 'confirmed'
+    assert federation.upload_status(pair.local)['policy']['mode'] == 'none'
+
+
+@pytest.mark.parametrize('side,write_number', [('local', 1), ('local', 2), ('hub', 1), ('hub', 2)])
+def test_control_interruption_recovers_only_a_proven_complete_local_choice(pair, monkeypatch, side, write_number):
+    from uuid import uuid4
+    add_local(pair, 'a', 'A', 'private')
+    config = connect(pair); federation.choose_upload(pair.local, 'none', [])
+    controller = LocalUpload(pair.local, config, pair.hub_id) if side == 'local' else HubUpload(pair.remote, pair.hub_id)
+    original = controller.guard.write; writes = 0
+    def interrupted(value):
+        nonlocal writes
+        writes += 1
+        original(value)
+        if writes == write_number: raise OSError('synthetic interruption after durable file write')
+    monkeypatch.setattr(controller.guard, 'write', interrupted)
+    with pytest.raises(OSError):
+        if side == 'local': controller.choose('all', [])
+        else: controller.set(config['device_id'], {'mode': 'all', 'projects': []}, controller.status(config['device_id'])['revision'], uuid4().hex)
+    monkeypatch.setattr(controller.guard, 'write', original)
+    local = LocalUpload(pair.local, config, pair.hub_id)
+    # Even if a committed Hub update can checkpoint, local's prior epoch/version
+    # or unfinished new allow is not silently promoted to a confirmed dispatch.
+    try: federation.push_pending(pair.local)
+    except (ControlConflict, federation.HubUnavailable): pass
+    if side == 'local' and write_number == 2:
+        # Both SQL and the final protected checkpoint are durable: recovering
+        # this explicit allow is permitted, despite losing the caller reply.
+        assert local.status()['state'] == 'confirmed'
+        assert local.row()['desired']['mode'] == 'all'
+        assert bodies(pair.remote) == ['private']
+    else:
+        assert bodies(pair.remote) == []
+        assert local.status()['state'] != 'confirmed' or local.row()['desired']['mode'] == 'none'
+
+
+def test_invalid_batch_receipt_remains_unknown_then_resolves_exactly(pair, monkeypatch):
+    add_local(pair, 'a', 'A', 'committed once')
+    connect(pair); federation.choose_upload(pair.local, 'all', [])
+    original = federation._request; corrupted = False
+    def request(config, route, payload=None):
+        nonlocal corrupted
+        result = original(config, route, payload)
+        if route == '/upload' and payload.get('records') and not corrupted:
+            corrupted = True; return {**result, 'accepted': 0}
+        return result
+    monkeypatch.setattr(federation, '_request', request)
+    with pytest.raises(ControlConflict): federation.push_pending(pair.local)
+    status = federation.upload_status(pair.local)
+    assert status['confirmed_messages'] == 0 and status['inflight_messages'] == 1
+    assert bodies(pair.remote) == ['committed once']
+    federation.push_pending(pair.local)
+    assert federation.upload_status(pair.local)['confirmed_messages'] == 1
+    assert bodies(pair.remote) == ['committed once']
+
+
+def test_bounded_backfill_keeps_search_and_other_project_available(pair, monkeypatch):
+    a = add_local(pair, 'a', 'A', 'common A initial')
+    b = add_local(pair, 'b', 'B', 'common B progress')
+    path = pair.histories / 'a.jsonl'
+    with path.open('a') as stream:
+        for n in range(2, 34):
+            stream.write(json.dumps({'type': 'response_item', 'ordinal': n, 'payload': {'type': 'message', 'id': f'a-m{n}', 'role': 'user', 'content': [{'type': 'input_text', 'text': f'common A backlog {n}'}]}}) + '\n')
+    pair.local.sync_codex(pair.histories)
+    connect(pair); federation.choose_upload(pair.local, 'all', [])
+    monkeypatch.setattr(federation, 'BATCH_SIZE', 1)  # Exercise the same bounded 25-dispatch branch with a small fixture.
+    first = federation.push_pending(pair.local)
+    assert first['uploaded'] == 25 and first['pending']
+    assert 'common B progress' in bodies(pair.remote)
+    add_local(pair, 'a-later', 'A', 'common A later import')
+    assert any(h['source_session_id'] == 'a-later' for h in federation.search_archive(pair.local, 'later', local=True)['results'])
+    assert federation.push_pending(pair.local)['uploaded'] == 10
+    assert len(bodies(pair.remote)) == 35
