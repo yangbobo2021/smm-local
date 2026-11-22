@@ -64,6 +64,7 @@ def main():
         if result.returncode:
             raise SystemExit(result.returncode)
     else:
+        assert sys.platform == config['expected_platform'], 'probe is running on the wrong operating system'
         if not a.child:
             config['work'] = str(Path(config['work']).parent / ('smm-005-native-' + identity))
         with socket.socket() as s:
