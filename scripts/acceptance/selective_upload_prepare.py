@@ -37,7 +37,7 @@ def main():
                     '-addext', 'subjectAltName=DNS:localhost,IP:127.0.0.1', '-addext', 'basicConstraints=critical,CA:TRUE'], check=True, capture_output=True)
     key.chmod(0o600)
     with socket.socket() as s: s.bind(('127.0.0.1', 0)); port = s.getsockname()[1]
-    config = {'work': str(work), 'local_python': str(Path(args.local_python).resolve()), 'hub_python': str(Path(args.hub_python).resolve()),
+    config = {'work': str(work), 'local_python': str(Path(args.local_python).expanduser().absolute()), 'hub_python': str(Path(args.hub_python).expanduser().absolute()),
               'cert': str(cert), 'key': str(key), 'port': port, 'address': f'https://localhost:{port}', 'candidate': candidate}
     if args.browser: config['browser'] = args.browser
     (work / 'target.json').write_text(json.dumps(config, indent=2) + '\n', encoding='utf-8')
