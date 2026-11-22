@@ -133,7 +133,8 @@ class LocalUpload:
         if not same_target:
             raise ValueError("Hub 连接已改变，请重新查看对账差异")
 
-    def _save(self, policy, *, expected_generation=None, reconcile=False, expected_hub_revision=None):
+    def _save(self, policy, *, expected_generation=None, reconcile=False, expected_hub_revision=None,
+              submission_id=None, confirmed=None):
         policy = normalize_policy(policy)
         with control_lock(self.guard.lock):
             with self.db.connect() as con:
@@ -145,7 +146,7 @@ class LocalUpload:
                 if expected_generation is not None and expected_generation != row["generation"]:
                     raise ValueError("本机规则已改变，请重新查看")
                 generation = max(row["generation"], guard["devices"].get(self.key, {}).get("generation", 0)) + 1
-                submission = uuid4().hex
+                submission = submission_id or uuid4().hex
                 pending = {"generation": generation, "desired": policy, "submission_id": submission,
                            "reconciled_epoch": guard["control_epoch"]}
                 guard["devices"].setdefault(self.key, {})["pending"] = pending
@@ -155,7 +156,13 @@ class LocalUpload:
                 if expected_hub_revision is not None:
                     con.execute("UPDATE local_upload_policies SET ack_revision=? WHERE hub_id=? AND device_id=?",
                                 (expected_hub_revision, self.hub_id, self.device))
-                con.execute("INSERT INTO local_upload_submissions VALUES(?,?,?,?)", (self.hub_id, self.device, submission, generation))
+                con.execute("INSERT INTO local_upload_submissions VALUES(?,?,?,?) ON CONFLICT(hub_id,device_id,submission_id) DO UPDATE SET generation=excluded.generation",
+                            (self.hub_id, self.device, submission, generation))
+                if confirmed is not None:
+                    if row['ack_epoch'] != confirmed['control_epoch'] and con.execute("SELECT 1 FROM sqlite_master WHERE name='hub_metadata_uploads'").fetchone():
+                        con.execute("DELETE FROM hub_metadata_uploads WHERE hub_id=? AND device_id=?", (self.hub_id, self.device))
+                    con.execute("UPDATE local_upload_policies SET remote=?,ack_revision=?,ack_epoch=?,ack_generation=?,state='confirmed',problem=NULL WHERE hub_id=? AND device_id=?",
+                                (json.dumps(confirmed), confirmed['revision'], confirmed['control_epoch'], generation, self.hub_id, self.device))
             guard["devices"][self.key] = pending
             self.guard.write(guard)
 
@@ -246,9 +253,46 @@ class LocalUpload:
             policy = {"mode": "none", "projects": []}
         if policy is None:
             raise ValueError("尚无可采用的规则，请先明确选择上传范围")
-        self._save(policy, expected_generation=local["generation"], reconcile=True,
-                   expected_hub_revision=remote["revision"])
-        self.sync_policy(request, reconcile=True, expected_hub_revision=remote["revision"])
+        # Recheck the remote head before reserving a submission. A reservation
+        # is not a policy save and cannot authorize any body upload.
+        latest = request(self.config, "/upload-policy/status", {"hub_id": self.hub_id, "device_id": self.device})
+        for value in (remote, latest):
+            if value.get("hub_id") != self.hub_id or value.get("device_id") != self.device:
+                raise ControlConflict("Hub 规则确认的目标身份不匹配")
+        if latest["revision"] != remote["revision"]:
+            raise ControlConflict("Hub 规则已改变，请重新查看差异")
+        submission = uuid4().hex
+        with control_lock(self.guard.lock):
+            with self.db.connect() as con:
+                con.execute("BEGIN IMMEDIATE")
+                current = self.row(con)
+                self._verify(current, allow_reconcile=True)
+                self._verify_target()
+                if current['generation'] != local['generation']:
+                    raise ValueError("本机规则已改变，请重新查看对账差异")
+                con.execute("INSERT INTO local_upload_submissions VALUES(?,?,?,?)",
+                            (self.hub_id, self.device, submission, local['generation']))
+        # Never hold the inter-process lock during I/O. The remote CAS is the
+        # acceptance point; only its successful receipt permits a local save.
+        try:
+            receipt = request(self.config, "/upload-policy/set", {"hub_id": self.hub_id,
+                "device_id": self.device, "policy": policy, "expected_revision": remote['revision'],
+                "submission_id": submission, "reconcile": True})
+            if (receipt.get('hub_id') != self.hub_id or receipt.get('device_id') != self.device
+                    or receipt.get('submission_id') != submission or receipt.get('policy') != policy
+                    or receipt.get('conflict') or receipt.get('revision') != remote['revision'] + 1
+                    or not receipt.get('control_epoch')):
+                raise ControlConflict("Hub 未确认当前规则，请重新查看差异")
+        except Exception as exc:
+            # A CAS rejection is a known non-commit. An unknown receipt must
+            # stop body traffic, without replacing any newer local choice.
+            if getattr(exc, 'status', None) != 409:
+                with self.db.connect() as con:
+                    con.execute("UPDATE local_upload_policies SET state='conflict',problem=? WHERE hub_id=? AND device_id=? AND generation=?",
+                                ("对账结果未确认，请重新查看差异", self.hub_id, self.device, local['generation']))
+            raise
+        self._save(policy, expected_generation=local['generation'], reconcile=True,
+                   submission_id=submission, confirmed=receipt)
         return self.status()
 
     def catalog(self, limit=25000):

@@ -11,7 +11,11 @@ from test_reconcile_snapshot import setup_control, head, web
 
 
 def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, monkeypatch):
-    """TC-005-reconcile-target-dispatch: inject after the local conditional save."""
+    """TC-005-reconcile-target-dispatch: switch during the second remote read.
+
+    Do not pin whether a provisional local save exists at this point: only
+    dispatch, Hub head and the newly selected target are public obligations.
+    """
     _, config, request, control = setup_control(pair, monkeypatch)
     shown = control.reconcile(request); old_head = head(pair, config)
     other = Archive(pair.local.db_path.parent / 'other-after-save.sqlite3')
@@ -31,8 +35,6 @@ def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, m
                 observed['status_reads'] += 1
                 if observed['status_reads'] == 2:
                     observed['saved'] = control.row()
-                    assert observed['saved']['generation'] > shown['local']['generation']
-                    assert observed['saved']['state'] == 'pending'
                     switched = federation.configure_hub(pair.local, address, 'after-save-target', str(pair.token_file))
                     assert switched['connected']
                     observed['switched'] = federation.hub_config(pair.local)['bound_hub_id']
@@ -46,7 +48,7 @@ def test_second_hub_read_switch_cannot_dispatch_policy_to_the_old_target(pair, m
         assert result.status_code == 400, 'the second status RPC must not permit a new dispatch to the old target'
         assert head(pair, config) == old_head
         assert not any(route == '/upload-policy/set' for route, _ in pair.calls[marker:])
-        assert control.row()['state'] != 'confirmed'
+        assert control.row()['desired'] == shown['local']['policy']
         current = federation.upload_status(pair.local)
         assert current['hub_id'] == other_id and current['state'] == 'needs_selection' and current['policy'] is None
         assert other.status()['messages'] == 0

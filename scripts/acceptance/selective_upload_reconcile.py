@@ -106,6 +106,9 @@ class ReconcileProbe(Run):
                 page.wait_for_function("document.querySelector('#upload-state').textContent.includes('本机与 Hub 已确认') && document.querySelector('#upload-state').textContent.includes('全部不上传')")
                 page.screenshot(path=str(self.output / 'adopted-hub-current.png'), full_page=True)
                 assert self.hub_rule()['policy']['mode'] == self.local_rule()['policy']['mode'] == 'none'
+                legacy_hub_adoption = self.cli(self.db, 'upload', 'reconcile', '--use', 'hub')
+                assert legacy_hub_adoption['state'] == 'confirmed' and legacy_hub_adoption['policy']['mode'] == 'none'
+                assert self.hub_rule()['policy'] == legacy_hub_adoption['policy']
                 assert not errors, errors
                 self.save('reconcile-result', {'initial_cli_view': shown, 'initial_web_view': old_web, 'external_head': external,
                     'pending_local': pending, 'before_stale_local': local_before, 'before_stale_hub': hub_before,
@@ -113,7 +116,7 @@ class ReconcileProbe(Run):
                     'stale_web': stale_web, 'missing_cli': {'exit_code': missing.returncode, 'stderr': missing.stderr},
                     'rejected_policy_calls': rejected_calls, 'fresh_cli_view': fresh, 'fresh_cli_accepted': accepted_state,
                     'later_external_stop': later_stop, 'stale_hub_web': stale_hub, 'fresh_web_view': refreshed,
-                    'adopted_hub_web': adopted, 'final_local': self.local_rule(), 'final_hub': self.hub_rule(),
+                    'adopted_hub_web': adopted, 'cli_use_hub_without_versions': legacy_hub_adoption, 'final_local': self.local_rule(), 'final_hub': self.hub_rule(),
                     'browser_version': browser.version, 'page_errors': errors})
             finally:
                 context.tracing.stop(path=str(self.output / 'reconcile-browser-trace.zip')); browser.close()
