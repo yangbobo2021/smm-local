@@ -41,7 +41,7 @@ def test_decode_files(tmp_path, monkeypatch):
     f=Fixture(tmp_path)
     cases={'a.MD':'\ufeffneedle 中文😀\r\n组合e\u0301\r末行\n','b.markdown':'needle normal\n','c.TXT':'needle no ending','empty.txt':''}
     paths={n:f.file(n,t) for n,t in cases.items()}
-    f.file('bad.txt',raw=b'\xff\xfe');f.file('nul.txt',raw=b'needle\x00body')
+    f.file('bad.txt',raw=b'\xff\xfe');f.file('binary-nul.txt',raw=b'needle\x00body')
     denied=f.file('denied.txt','needle denied');source=f.add(tmp_path/'docs')
     from document_helpers import deny_source_reads
     # A real OS read rejection is shared logic here; platform cases use ordinary filesystem behavior.
@@ -53,20 +53,20 @@ def test_decode_files(tmp_path, monkeypatch):
         patch.setattr(os,'open',fail);f.refresh(source)
     status=f.source(source);assert status['status']=='partial' and status['counts']['ready']==4 and status['counts']['failed']==3
     files={Path(x['path']).name:x for x in f.files(source)}
-    assert all(files[n]['status']=='failed' and files[n]['error'] for n in ['bad.txt','nul.txt','denied.txt'])
+    assert all(files[n]['status']=='failed' and files[n]['error'] for n in ['bad.txt','binary-nul.txt','denied.txt'])
     assert files['empty.txt']['status']=='ready' and files['empty.txt']['text_length']==0
-    assert 'utf' in files['bad.txt']['error'].lower() and 'nul' in files['nul.txt']['error'].lower()
+    assert 'utf' in files['bad.txt']['error'].lower() and 'nul' in files['binary-nul.txt']['error'].lower()
     assert any(word in files['denied.txt']['error'].lower() for word in ['denied','permission'])
     assert {Path(h['path']).name for h in f.search()['results']} == set(cases)-{'empty.txt'}
     for h in f.search()['results']:
         name=Path(h['path']).name
         assert name in cases and f.read(h)['text']==normal(cases[name])
         assert h['sha256']==fingerprint(paths[name])['sha256']
-    f.file('bad.txt','needle recovered');f.file('nul.txt','needle repaired');f.refresh(source)
+    f.file('bad.txt','needle recovered');f.file('binary-nul.txt','needle repaired');f.refresh(source)
     assert f.source(source)['status']=='ready' and f.source(source)['counts']['ready']==7
     all_recovered=f.search(limit=50)['results']
-    assert {Path(h['path']).name for h in all_recovered}==set(cases)-{'empty.txt'}|{'bad.txt','nul.txt','denied.txt'}
-    recovered={**cases,'bad.txt':'needle recovered','nul.txt':'needle repaired','denied.txt':'needle denied'}
+    assert {Path(h['path']).name for h in all_recovered}==set(cases)-{'empty.txt'}|{'bad.txt','binary-nul.txt','denied.txt'}
+    recovered={**cases,'bad.txt':'needle recovered','binary-nul.txt':'needle repaired','denied.txt':'needle denied'}
     for h in all_recovered:
         name=Path(h['path']).name
         assert f.read(h)['text']==normal(recovered[name])

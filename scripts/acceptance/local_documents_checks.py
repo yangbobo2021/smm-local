@@ -1,6 +1,9 @@
 """Independent expectations for the opt-in installed-document platform probe."""
 import hashlib
 import math
+from pathlib import Path
+import tempfile
+import zipfile
 
 
 def normalized(raw):
@@ -39,6 +42,37 @@ def identity(value, platform):
     else:assert value['uid']>0
 
 
+def read_matches(value,search_hit,raw,path,*,start=None,end=None,collector=None):
+    body=normalized(raw)
+    assert value['path']==str(path) and value['id']==search_hit['id'] and value['version']==search_hit['version']
+    assert value['sha256']==hashlib.sha256(raw).hexdigest() and value['text_length']==len(body)
+    assert value['captured_at'] and '采集' in value['snapshot_kind']
+    assert value['captured_by_source_id']==(search_hit['captured_by_source_id'] if collector is None else collector)
+    assert set(value['source_ids'])==set(search_hit['source_ids']) and value['source_ids']
+    text_range(value,body,start=search_hit['start'] if start is None else start,end=search_hit['end'] if end is None else end)
+
+
+def sources(value,expected):
+    assert len(value)==len(expected)==len({x['id'] for x in value})
+    actual={x['id']:x for x in value};assert set(actual)==set(expected)
+    for sid,fields in expected.items():
+        for key,wanted in fields.items():
+            if key=='counts':
+                for name,count in wanted.items():assert actual[sid]['counts'][name]==count
+            else:assert actual[sid][key]==wanted
+
+
+def rejection(actual,expected):
+    assert type(actual) is type(expected) and actual==expected
+
+
+def evidence_available(root,names):
+    for name in names:
+        path=Path(root)/name;assert path.is_file() and path.stat().st_size>0
+        if path.suffix=='.png':assert path.read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+        elif path.suffix=='.zip':assert zipfile.is_zipfile(path)
+
+
 def self_check():
     raw='needle 😀 e\u0301\r\n末行\n'.encode();body=normalized(raw)
     good={'start':0,'end':len(body),'text':body,'start_line':1,'end_line':2}
@@ -56,4 +90,24 @@ def self_check():
         try:paths({'results':bad},['one','two'])
         except AssertionError:pass
         else:raise AssertionError('set checker accepted incomplete or duplicate targets')
-    return {'status':'passed','rejected_wrong_text_coordinates_identity_and_sets':True}
+    meta={**good,'id':'doc-a','version':2,'path':'one','sha256':hashlib.sha256(raw).hexdigest(),'text_length':len(body),'captured_at':'2026-01-01T00:00:00Z','captured_by_source_id':'source-a','source_ids':['source-a'],'snapshot_kind':'采集版本'}
+    read_matches(meta,meta,raw,'one')
+    for change in [{'path':'two'},{'id':'other'},{'version':999},{'sha256':'wrong'},{'captured_at':''},{'source_ids':[]},{'source_ids':['other-source']},{'captured_by_source_id':'other-source'},{'snapshot_kind':'live'}]:
+        try:read_matches({**meta,**change},meta,raw,'one')
+        except AssertionError:pass
+        else:raise AssertionError('read checker accepted wrong identity/version/source metadata')
+    expected={'source-a':{'path':'one','project_ids':[1],'status':'ready','revision':1,'counts':{'ready':1,'failed':0}}}
+    source={'id':'source-a',**expected['source-a']};sources([source],expected)
+    for values in [[],[{**source,'status':'pending'}],[{**source,'project_ids':[2]}],[{**source,'counts':{'ready':0,'failed':0}}]]:
+        try:sources(values,expected)
+        except AssertionError:pass
+        else:raise AssertionError('source checker accepted false complete/pending/scope')
+    for actual,wanted in [(0,2),(False,True),(200,400)]:
+        try:rejection(actual,wanted)
+        except AssertionError:pass
+        else:raise AssertionError('rejection checker accepted a successful old-reference read')
+    with tempfile.TemporaryDirectory(prefix='smm-006-checker-') as tmp:
+        try:evidence_available(tmp,['missing.png'])
+        except AssertionError:pass
+        else:raise AssertionError('missing screenshot was accepted')
+    return {'status':'passed','rejected_wrong_text_coordinates_identity_sets_sources_coverage_old_ref_success_and_missing_picture':True}

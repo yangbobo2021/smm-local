@@ -38,26 +38,34 @@ def test_isolation(pair,tmp_path,monkeypatch,mode):
     f.db.set_source_enabled('codex',False)
     f.db.set_source_enabled('claude-code',True)
     sources_before=f.db.configured_sources()
-    before=retained_state(f.db);remote=retained_state(pair.remote);calls=len(pair.calls)
-    def reject(*args,**kwargs):raise AssertionError('document operation attempted a Hub/network call')
-    monkeypatch.setattr(federation,'_request',reject)
-    original_connect=socket.socket.connect
-    def no_network(self,address):
-        if self.family in [socket.AF_INET,socket.AF_INET6]:raise AssertionError('document operation opened an Internet socket')
-        return original_connect(self,address)
-    monkeypatch.setattr(socket.socket,'connect',no_network)
-    path=f.file('private-document.txt','docprivateneedle 本机文件 😀')
-    source=f.add(path,[original['project_id']]);f.refresh(source)
-    hit=f.search('docprivateneedle',scope='project',project_id=original['project_id'])['results'][0]
-    assert f.read(hit)['text']=='docprivateneedle 本机文件 😀'
-    f.set(source,project_ids=[]);f.refresh(source);f.remove(source)
-    assert retained_state(f.db)==before and retained_state(pair.remote)==remote and len(pair.calls)==calls
-    for item,expected,source_name in [(original,'conversationnonce original','codex'),(second,'conversationnonce second independent','claude-code')]:
-        legacy=federation.read_archive(f.db,item['id'])
-        assert [m['text'] for m in legacy['messages']]==[expected] and legacy['source']==source_name
-    assert f.db.configured_sources()==sources_before
-    assert f.db.get_settings()['sync_paused']==(mode=='paused')
-    observe('isolation-complete-state',{'mode':mode,'before':before,'after':retained_state(f.db),'remote_before':remote,'remote_after':retained_state(pair.remote),'outbound_calls_after_marker':len(pair.calls)-calls})
+    # Windows asyncio emulates socketpair using loopback TCP. Establish the
+    # TestClient's reusable portal before guarding product operations; keep
+    # blocking every new IP connection, including a loopback Hub connection.
+    with f.client:
+        before=retained_state(f.db);remote=retained_state(pair.remote);calls=len(pair.calls)
+        with monkeypatch.context() as guard:
+            def reject(*args,**kwargs):raise AssertionError('document operation attempted a Hub/network call')
+            guard.setattr(federation,'_request',reject)
+            original_connect=socket.socket.connect
+            def no_network(self,address):
+                if self.family in [socket.AF_INET,socket.AF_INET6]:raise AssertionError('document operation opened an Internet socket')
+                return original_connect(self,address)
+            guard.setattr(socket.socket,'connect',no_network)
+            for address in [('127.0.0.1',18770),('203.0.113.1',443)]:
+                with socket.socket() as sentinel:
+                    with pytest.raises(AssertionError,match='Internet socket'):sentinel.connect(address)
+            path=f.file('private-document.txt','docprivateneedle 本机文件 😀')
+            source=f.add(path,[original['project_id']]);f.refresh(source)
+            hit=f.search('docprivateneedle',scope='project',project_id=original['project_id'])['results'][0]
+            assert f.read(hit)['text']=='docprivateneedle 本机文件 😀'
+            f.set(source,project_ids=[]);f.refresh(source);f.remove(source)
+            assert retained_state(f.db)==before and retained_state(pair.remote)==remote and len(pair.calls)==calls
+            for item,expected,source_name in [(original,'conversationnonce original','codex'),(second,'conversationnonce second independent','claude-code')]:
+                legacy=federation.read_archive(f.db,item['id'])
+                assert [m['text'] for m in legacy['messages']]==[expected] and legacy['source']==source_name
+            assert f.db.configured_sources()==sources_before
+            assert f.db.get_settings()['sync_paused']==(mode=='paused')
+            observe('isolation-complete-state',{'mode':mode,'before':before,'after':retained_state(f.db),'remote_before':remote,'remote_after':retained_state(pair.remote),'outbound_calls_after_marker':len(pair.calls)-calls,'guard_blocks_loopback_and_external_ip':True})
 
 
 def test_compatibility(tmp_path):
