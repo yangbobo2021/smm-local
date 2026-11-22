@@ -41,6 +41,21 @@ class LocalUpload:
                     logical_id TEXT NOT NULL, version TEXT NOT NULL, control_epoch TEXT NOT NULL,
                     PRIMARY KEY(hub_id,device_id,logical_id,version,control_epoch)
                 );
+                CREATE TABLE IF NOT EXISTS local_upload_origin_receipts (
+                    hub_id TEXT NOT NULL, device_id TEXT NOT NULL,
+                    logical_id TEXT NOT NULL, version TEXT NOT NULL, control_epoch TEXT NOT NULL,
+                    source_position INTEGER NOT NULL, source_order INTEGER NOT NULL,
+                    PRIMARY KEY(hub_id,device_id,logical_id,version,control_epoch,source_position,source_order)
+                );
+                CREATE TABLE IF NOT EXISTS local_upload_transfer (
+                    hub_id TEXT NOT NULL, device_id TEXT NOT NULL,
+                    last_attempt TEXT, last_success TEXT, problem TEXT,
+                    PRIMARY KEY(hub_id,device_id)
+                );
+                CREATE TRIGGER IF NOT EXISTS invalidate_conversation_upload_identity
+                AFTER UPDATE OF source,source_session_id ON conversations
+                BEGIN DELETE FROM upload_message_catalog WHERE message_id IN
+                    (SELECT id FROM messages WHERE conversation_id=new.id); END;
                 CREATE TABLE IF NOT EXISTS local_upload_batches (
                     hub_id TEXT NOT NULL, device_id TEXT NOT NULL, batch_id TEXT NOT NULL,
                     generation INTEGER NOT NULL, control_epoch TEXT NOT NULL,
@@ -214,7 +229,6 @@ class LocalUpload:
             missing = con.execute("SELECT m.id,m.conversation_id FROM messages m JOIN conversations c ON c.id=m.conversation_id LEFT JOIN upload_message_catalog u ON u.message_id=m.id WHERE c.source IN ('codex','claude-code') AND u.message_id IS NULL ORDER BY m.id LIMIT ?", (limit,)).fetchall()
             if not missing:
                 return 0
-            wanted = {r[0] for r in missing}
             conversations = tuple(sorted({r[1] for r in missing}))
             for start in range(0, len(conversations), 400):
                 group = conversations[start:start + 400]
@@ -228,8 +242,6 @@ class LocalUpload:
                 WHERE c.id IN ({marks})
                 """, group).fetchall()
                 for r in rows:
-                    if r["id"] not in wanted:
-                        continue
                     record = dict(r)
                     occurrence = r["occurrence"] if r["source_key"].startswith("offset:") else None
                     record["occurrence"] = occurrence
@@ -257,8 +269,9 @@ class LocalUpload:
                            c.source,c.source_session_id,c.started_at,u.logical_id,u.version,u.source_order,u.occurrence
                     FROM upload_message_catalog u JOIN messages m ON m.id=u.message_id
                     JOIN conversations c ON c.id=m.conversation_id
-                    LEFT JOIN local_upload_receipts a ON a.hub_id=? AND a.device_id=?
+                    LEFT JOIN local_upload_origin_receipts a ON a.hub_id=? AND a.device_id=?
                         AND a.logical_id=u.logical_id AND a.version=u.version AND a.control_epoch=?
+                        AND a.source_position=m.position AND a.source_order=u.source_order
                     WHERE c.project_id=? AND c.source IN ('codex','claude-code') AND a.logical_id IS NULL
                     ORDER BY m.id LIMIT ?
                 """, (self.hub_id, self.device, epoch, project["id"], limit)).fetchall()
@@ -267,6 +280,15 @@ class LocalUpload:
                                 (project["stable_key"], self.hub_id, self.device))
                     return [{**dict(r), "project_id": project["stable_key"]} for r in rows]
         return []
+
+    def transfer_result(self, problem=None):
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc).isoformat()
+        with self.db.connect() as con:
+            con.execute("""INSERT INTO local_upload_transfer VALUES(?,?,?,?,?)
+                ON CONFLICT(hub_id,device_id) DO UPDATE SET last_attempt=excluded.last_attempt,
+                last_success=COALESCE(excluded.last_success,local_upload_transfer.last_success),problem=excluded.problem""",
+                (self.hub_id, self.device, now, None if problem else now, problem))
 
     def status(self):
         row = self.row()
@@ -285,13 +307,71 @@ class LocalUpload:
             for batch in con.execute("SELECT payload FROM local_upload_batches WHERE hub_id=? AND device_id=? AND state IN ('sending','unknown') AND payload IS NOT NULL", (self.hub_id, self.device)):
                 outstanding.update((r["logical_id"], r["version"]) for r in json.loads(batch[0]))
             inflight = len(outstanding - acknowledged)
+            pending = 0
+            for record in con.execute("""SELECT m.id,k.remote_key,a.logical_id FROM messages m
+                JOIN conversations c ON c.id=m.conversation_id
+                LEFT JOIN hub_local_project_keys k ON k.id=c.project_id
+                LEFT JOIN upload_message_catalog u ON u.message_id=m.id
+                LEFT JOIN local_upload_origin_receipts a ON a.hub_id=? AND a.device_id=?
+                    AND a.logical_id=u.logical_id AND a.version=u.version AND a.control_epoch=?
+                    AND a.source_position=m.position AND a.source_order=u.source_order
+                WHERE c.source IN ('codex','claude-code')""", (self.hub_id, self.device, row['ack_epoch'])):
+                if record['logical_id'] is None and permits(row['desired'], record['remote_key']):
+                    pending += 1
+            transfer = con.execute("SELECT * FROM local_upload_transfer WHERE hub_id=? AND device_id=?",
+                                   (self.hub_id, self.device)).fetchone()
+        transfer_problem = transfer['problem'] if transfer else None
+        transfer_state = ('paused' if self.db.get_settings()['sync_paused'] else
+                          'blocked' if state != 'confirmed' else
+                          'failed' if transfer_problem else 'unknown' if inflight else
+                          'backfilling' if pending else 'complete')
         return {"configured": True, "hub_id": self.hub_id, "device_id": self.device,
                 "hub_address": self.config["address"], "device_name": self.config["device_name"],
                 "policy": row["desired"], "generation": row["generation"], "state": state,
                 "hub_revision": row["ack_revision"], "control_epoch": row["ack_epoch"],
                 "confirmed_messages": confirmed, "not_confirmed_messages": total - confirmed,
                 "inflight_messages": inflight, "unsent_messages": max(0, total - confirmed - inflight),
-                "problem": problem, "remote": row["remote"]}
+                "problem": problem, "remote": row["remote"],
+                "transfer_state": transfer_state, "transfer_problem": transfer_problem,
+                "allowed_pending_messages": pending,
+                "last_transfer_attempt": transfer['last_attempt'] if transfer else None,
+                "last_transfer_success": transfer['last_success'] if transfer else None}
+
+    def _eligible(self, con, row, rows, expected_generation=None):
+        path = self.db.db_path.resolve().with_suffix(self.db.db_path.suffix + '.hub.json')
+        try:
+            current_config = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            return False
+        if (current_config != self.config or self.db.get_settings()['sync_paused']
+                or row['state'] != 'confirmed' or row['ack_generation'] != row['generation']
+                or (expected_generation is not None and row['generation'] != expected_generation)):
+            return False
+        for message in rows:
+            actual = con.execute("""SELECT m.*,c.source,c.source_session_id,k.remote_key,
+                u.logical_id,u.version,u.source_order,u.occurrence FROM messages m
+                JOIN conversations c ON c.id=m.conversation_id
+                LEFT JOIN hub_local_project_keys k ON k.id=c.project_id
+                LEFT JOIN upload_message_catalog u ON u.message_id=m.id WHERE m.id=?""", (message['seq'],)).fetchone()
+            if (actual is None or actual['remote_key'] != message['project_id']
+                    or not permits(row['desired'], actual['remote_key'])
+                    or any(actual[k] != message[k] for k in ('source', 'source_session_id', 'source_key',
+                           'position', 'logical_id', 'version', 'source_order', 'occurrence'))
+                    or message_version(dict(actual)) != message['version']):
+                return False
+            # A newly imported earlier turn can change existing offset occurrences.
+            if con.execute("""SELECT 1 FROM messages m LEFT JOIN upload_message_catalog u ON u.message_id=m.id
+                WHERE m.conversation_id=? AND u.message_id IS NULL LIMIT 1""", (actual['conversation_id'],)).fetchone():
+                return False
+        return True
+
+    def eligible(self, rows, generation):
+        with control_lock(self.guard.lock):
+            with self.db.connect() as con:
+                con.execute('BEGIN IMMEDIATE')
+                row = self.row(con)
+                self._verify(row)
+                return self._eligible(con, row, rows, generation)
 
     def dispatch(self, rows):
         with control_lock(self.guard.lock):
@@ -299,15 +379,8 @@ class LocalUpload:
                 con.execute("BEGIN IMMEDIATE")
                 row = self.row(con)
                 self._verify(row)
-                if (self.db.get_settings()["sync_paused"] or row["state"] != "confirmed"
-                        or row["ack_generation"] != row["generation"]):
+                if not self._eligible(con, row, rows):
                     return None
-                for message in rows:
-                    actual = con.execute("SELECT m.role,m.text,m.timestamp,k.remote_key FROM messages m JOIN conversations c ON c.id=m.conversation_id LEFT JOIN hub_local_project_keys k ON k.id=c.project_id WHERE m.id=?", (message["seq"],)).fetchone()
-                    if (actual is None or actual["remote_key"] != message["project_id"]
-                            or message_version(dict(actual)) != message["version"]
-                            or not permits(row["desired"], actual["remote_key"])):
-                        return None
                 batch = {"hub_id": self.hub_id, "device_id": self.device,
                          "device_name": self.config["device_name"], "batch_id": uuid4().hex,
                          "policy_revision": row["ack_revision"], "control_epoch": row["ack_epoch"],
@@ -330,10 +403,20 @@ class LocalUpload:
                     or receipt.get("control_epoch") != batch["control_epoch"]
                     or receipt.get("batch_digest") != batch["digest"]):
                 raise ControlConflict("Hub 未确认本批次的准确身份及全部记录")
-            con.executemany("INSERT OR IGNORE INTO local_upload_receipts VALUES(?,?,?,?,?)",
-                            [(self.hub_id, self.device, r["logical_id"], r["version"], batch["control_epoch"]) for r in rows])
+            self._record_receipts(con, rows, batch['control_epoch'])
             con.execute("UPDATE local_upload_batches SET state='confirmed',payload=NULL WHERE hub_id=? AND device_id=? AND batch_id=?",
                         (self.hub_id, self.device, batch_id))
+
+    def _record_receipts(self, con, rows, epoch):
+        con.executemany('INSERT OR IGNORE INTO local_upload_receipts VALUES(?,?,?,?,?)',
+                        [(self.hub_id, self.device, r['logical_id'], r['version'], epoch) for r in rows])
+        con.executemany('INSERT OR IGNORE INTO local_upload_origin_receipts VALUES(?,?,?,?,?,?,?)',
+                        [(self.hub_id, self.device, r['logical_id'], r['version'], epoch,
+                          r['position'], r['source_order']) for r in rows])
+
+    def acknowledge_known(self, rows, verified, epoch):
+        with self.db.connect() as con:
+            self._record_receipts(con, [r for r in rows if (r['logical_id'], r['version']) in verified], epoch)
 
     def resolve_unknown(self, request):
         with self.db.connect() as con:

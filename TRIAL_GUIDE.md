@@ -155,7 +155,7 @@ smm upload set --mode none
 
 这些是四个可替代的设置例子，请选择所需的一条。数字用 `smm projects` 返回的本机 ID 替换，可重复 `--project-id`；`only` 空名单不上传，`except` 空名单允许全部；`all/none` 不接受名单。每次保存完整替换规则。名称修改不改变稳定身份或名单。Hub 管理员运行 `smm-hub hub project list` 得到另一套 Hub ID，用于 Hub 关联命令。
 
-`upload status` 显示当前地址/Hub 身份、设备、规则、本机序号、Hub 确认版本、已确认/未确认及在途消息。`needs_selection` 表示尚未选择；`pending` 表示本机已保存、Hub 尚未确认；`confirmed` 表示双方已确认；`conflict` 表示恢复或规则有差异，正文停止，需对账。停止在本机立即阻止新派发，已派发的在途请求需等 Hub 确认，不能当成已撤回。Hub 已确认限制后拒绝旧版本或无版本正文。
+`upload status` 显示当前地址/Hub 身份、设备、规则、本机序号、Hub 确认版本、已确认/未确认及在途消息。`needs_selection` 表示尚未选择；`pending` 表示本机已保存、Hub 尚未确认；`confirmed` 表示双方已确认；`conflict` 表示恢复或规则有差异，正文停止，需对账。传输进度由 `transfer_state` 单独显示暂停、待规则/对账、失败、在途待核实、正在补齐或已补齐；`allowed_pending_messages` 只统计当前允许范围内待确认的正文/来源顺序，`transfer_problem` 保留最近正文失败，健康同步后清除。`last_transfer_attempt/last_transfer_success` 是最近传输轮次时间，不等同于规则确认时间。停止在本机立即阻止新派发，已派发的在途请求需等 Hub 确认，不能当成已撤回。Hub 已确认限制后拒绝旧版本或无版本正文。
 
 停止不会删除 Hub 旧副本；其他电脑的副本与 VibeInsight 同步不受影响。重新允许后按消息身份和内容版本核对回执，补齐旧历史、停传新会话和追加轮次，重复同步不增加副本。全局暂停仍可保存/确认规则和最小项目资料，不会自动恢复正文导入或上传。来源插件仍只归档本机，上传规则当前覆盖 Codex/Claude Code。
 

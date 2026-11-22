@@ -124,6 +124,16 @@ class Read(BaseModel):
     reference: str | None = None
 
 
+def record_origin(con, message_id, device_id, position, source_order):
+    # A later prefix can reveal the actual position of a previously partial copy.
+    removed = con.execute('DELETE FROM hub_origins WHERE message_id=? AND device_id=? AND source_order=? AND source_position<>?',
+                          (message_id, device_id, source_order, position)).rowcount
+    origin = con.execute('''INSERT INTO hub_origins VALUES(?,?,?,?)
+        ON CONFLICT(message_id,device_id,source_position) DO UPDATE SET source_order=excluded.source_order
+        WHERE hub_origins.source_order<>excluded.source_order''', (message_id, device_id, position, source_order))
+    return removed or origin.rowcount
+
+
 def order_messages(con, conversation_id: int) -> None:
     """Merge the ordering constraints visible in each device's original copy."""
     rows = con.execute("""
@@ -168,6 +178,10 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         con.execute("INSERT OR IGNORE INTO settings(key,value) VALUES('hub_identity',?)",
                     (json.dumps(uuid4().hex),))
         hub_id = json.loads(con.execute("SELECT value FROM settings WHERE key='hub_identity'").fetchone()[0])
+        con.execute("""CREATE TABLE IF NOT EXISTS hub_message_identities (
+            message_id INTEGER PRIMARY KEY REFERENCES messages(id) ON DELETE CASCADE,
+            canonical_key TEXT NOT NULL, content_version TEXT NOT NULL
+        )""")
     uploads = HubUpload(db, hub_id)
 
     def authorize(authorization: str = Header(default="")) -> None:
@@ -256,14 +270,15 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                     project = con.execute("SELECT id FROM hub_projects WHERE kind='device' AND owner=? AND source_key=?", (req.device_id, record.project_id)).fetchone()
                     if project is None:
                         raise HTTPException(409, "需先登记项目")
-                    row = con.execute("SELECT m.*,c.source,c.source_session_id FROM hub_conversation_fingerprints f JOIN conversations c ON c.id=f.conversation_id JOIN messages m ON m.conversation_id=c.id WHERE f.digest=? AND m.source_key=?", (record.conversation_digest, record.source_key)).fetchone()
+                    row = con.execute("SELECT m.*,c.source,c.source_session_id FROM hub_conversation_fingerprints f JOIN conversations c ON c.id=f.conversation_id JOIN messages m ON m.conversation_id=c.id WHERE f.digest=? AND m.source_key IN (?,?) AND (SELECT COUNT(*) FROM hub_message_identities i WHERE i.message_id=m.id AND i.canonical_key<>?)=0 ORDER BY m.id", (record.conversation_digest, record.source_key, 'v1:' + record.source_key + ':' + record.version, record.source_key)).fetchall()
+                    row = next((r for r in row if message_version(dict(r)) == record.version), None)
                     if row is None or message_version(dict(row)) != record.version:
                         continue
-                    con.execute("INSERT OR IGNORE INTO hub_origins VALUES(?,?,?,?)", (row["id"], req.device_id, record.position, record.source_order))
+                    record_origin(con, row['id'], req.device_id, record.position, record.source_order)
                     con.execute("INSERT OR IGNORE INTO hub_message_projects VALUES(?,?,?)", (row["id"], req.device_id, project[0]))
                     con.execute("INSERT OR IGNORE INTO hub_project_memberships VALUES(?,'device',?,?)", (row["conversation_id"], req.device_id, project[0]))
                     changed.add(row["conversation_id"])
-                    known.append({"logical_id": digest([row["source"], row["source_session_id"], row["source_key"]]), "version": record.version})
+                    known.append({"logical_id": digest([row["source"], row["source_session_id"], record.source_key]), "version": record.version})
                 for conversation in changed:
                     order_messages(con, conversation)
                     projects.reindex(con, conversation)
@@ -292,23 +307,27 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
                     (record.source, record.source_session_id),
                 ).fetchone()[0]
                 key = legacy_message_key(record.model_dump())
+                version = message_version(record.model_dump())
+                existing = con.execute("SELECT * FROM messages WHERE conversation_id=? AND source_key=?",
+                                       (conversation_id, key)).fetchone()
+                storage_key = key
+                if existing is not None and message_version(dict(existing)) != version:
+                    storage_key = 'v1:' + key + ':' + version
                 row = con.execute("""
                     INSERT INTO messages(conversation_id,source_key,position,role,text,timestamp)
                     VALUES(?,?,?,?,?,?) ON CONFLICT(conversation_id,source_key) DO NOTHING
                     RETURNING id
-                """, (conversation_id, key, record.source_order, record.role, record.text, record.timestamp)).fetchone()
+                """, (conversation_id, storage_key, record.source_order, record.role, record.text, record.timestamp)).fetchone()
                 if row is not None:
                     changed.add(conversation_id)
                 else:
                     row = con.execute("SELECT id FROM messages WHERE conversation_id=? AND source_key=?",
-                                      (conversation_id, key)).fetchone()
-                origin = con.execute("""
-                    INSERT INTO hub_origins(message_id,device_id,source_position,source_order)
-                    VALUES(?,?,?,?) ON CONFLICT(message_id,device_id,source_position)
-                    DO UPDATE SET source_order=excluded.source_order
-                    WHERE hub_origins.source_order<>excluded.source_order
-                """, (row[0], batch.device_id, record.position, record.source_order))
-                if origin.rowcount:
+                                      (conversation_id, storage_key)).fetchone()
+                stored = con.execute("SELECT role,text,timestamp FROM messages WHERE id=?", (row[0],)).fetchone()
+                if message_version(dict(stored)) != version:
+                    raise HTTPException(409, "消息版本冲突，未确认该批次")
+                con.execute("INSERT OR IGNORE INTO hub_message_identities VALUES(?,?,?)", (row[0], key, version))
+                if record_origin(con, row[0], batch.device_id, record.position, record.source_order):
                     changed.add(conversation_id)
                 if record.project_id is not None:
                     project = con.execute("SELECT id FROM hub_projects WHERE kind='device' AND owner=? AND source_key=?",
@@ -376,7 +395,11 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         with db.connect() as con:
             for message in conversation[message_field]:
                 if "source_key" in message:
-                    message["canonical_id"] = digest([conversation["source"], original_session, message.pop("source_key")])
+                    identity = con.execute("SELECT canonical_key FROM hub_message_identities WHERE message_id=?",
+                                           (message["_message_id"],)).fetchone()
+                    canonical_key = identity[0] if identity else message["source_key"]
+                    message.pop("source_key")
+                    message["canonical_id"] = digest([conversation["source"], original_session, canonical_key])
                     message["content_version"] = message_version(message)
         if conversation["source"] == VIBEINSIGHT:
             source_id, _, platform, original_session = json.loads(conversation["source_session_id"])

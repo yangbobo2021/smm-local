@@ -526,6 +526,7 @@ def test_local_plugin_does_not_block_old_hub_upload(archive, tmp_path, monkeypat
             return response.json()
 
         config["bound_hub_id"] = request(config, "/info")["hub_id"]
+        archive.db_path.with_suffix(archive.db_path.suffix + '.hub.json').write_text(json.dumps(config))
         monkeypatch.setattr(federation, "_request", request)
         federation.choose_upload(archive, "all", [])
         pushed = federation.push_pending(archive)

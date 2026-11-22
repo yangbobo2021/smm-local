@@ -229,7 +229,11 @@ def push_pending(db: Archive, *, control_only=False) -> dict | None:
     _register_device(config, hub_id, managed=True)
     upload = _controller(db, config, hub_id)
     upload.sync_policy(_request)
-    upload.resolve_unknown(_request)
+    try:
+        upload.resolve_unknown(_request)
+    except (HubUnavailable, ControlConflict) as exc:
+        upload.transfer_result(str(exc))
+        raise
     _push_projects(db, config, hub_id, 0)
     if control_only or db.get_settings()["sync_paused"] or upload.row()["desired"] is None:
         return {"uploaded": 0, "pending": False, "upload": upload.status()}
@@ -245,6 +249,8 @@ def push_pending(db: Archive, *, control_only=False) -> dict | None:
         rows = upload.candidates(row["ack_epoch"], BATCH_SIZE)
         if not rows:
             break
+        if not upload.eligible(rows, row['generation']):
+            break
         try:
             known = _request(config, "/known-upload-messages", {"hub_id": hub_id, "device_id": config["device_id"],
                 "policy_revision": row["ack_revision"], "control_epoch": row["ack_epoch"],
@@ -258,11 +264,12 @@ def push_pending(db: Archive, *, control_only=False) -> dict | None:
             verified = {(r["logical_id"], r["version"]) for r in known["known"]}
             if not verified <= wanted:
                 raise ControlConflict("Hub 返回了本轮未请求的接收确认")
-            with db.connect() as con:
-                con.executemany("INSERT OR IGNORE INTO local_upload_receipts VALUES(?,?,?,?,?)",
-                                [(hub_id, config["device_id"], logical, version, row["ack_epoch"]) for logical, version in verified])
+            upload.acknowledge_known(rows, verified, row['ack_epoch'])
             rows = [r for r in rows if (r["logical_id"], r["version"]) not in verified]
-        except HubUnavailable as exc:
+        except (HubUnavailable, ControlConflict) as exc:
+            upload.transfer_result(str(exc))
+            if isinstance(exc, ControlConflict):
+                raise
             errors.append({"project_id": rows[0]["project_id"], "reason": str(exc)})
             continue
         if not rows:
@@ -274,12 +281,17 @@ def push_pending(db: Archive, *, control_only=False) -> dict | None:
             receipt = _request(config, "/upload", batch)
             upload.acknowledge(batch["batch_id"], receipt)
             sent += len(rows)
-        except HubUnavailable as exc:
+        except (HubUnavailable, ControlConflict) as exc:
             rejected = getattr(exc, "status", None) in {400, 403, 409, 422}
             with db.connect() as con:
                 con.execute("UPDATE local_upload_batches SET state=? WHERE hub_id=? AND device_id=? AND batch_id=?",
                             ("rejected" if rejected else "unknown", hub_id, config["device_id"], batch["batch_id"]))
+            upload.transfer_result(str(exc))
+            if isinstance(exc, ControlConflict):
+                raise
             errors.append({"project_id": rows[0]["project_id"], "reason": str(exc)})
+    if not errors:
+        upload.transfer_result()
     status = upload.status()
     return {"uploaded": sent, "pending": bool(upload.candidates(upload.row()["ack_epoch"], 1)) or upload.catalog_pending(),
             "errors": errors, "upload": status}
