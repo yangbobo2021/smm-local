@@ -1,0 +1,24 @@
+{
+  "source": "/private/tmp/smm-007-ci-e1-ubuntu-v3/007-public-evidence",
+  "verified_manifest_files": 104,
+  "decrypted_trace_count": 2,
+  "private_key_uploaded": false,
+  "traces": [
+    {
+      "original_path": "platform/web-a-trace.zip",
+      "original_bytes": 5389517,
+      "original_sha256": "c6460ae4981945c9562dbd73d97af4f6230be6356af2a3651d47f73c15fa8b4e",
+      "ciphertext_sha256": "6745fb252b6aaef42dcff1b8fc0766b928c71e52c6e61aec679f7f3427159cfe",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    },
+    {
+      "original_path": "platform/web-hub-trace.zip",
+      "original_bytes": 2068459,
+      "original_sha256": "d91cf3addde8c47a7291f2b167494d400f7d9272045530bbe1214cc6080953a6",
+      "ciphertext_sha256": "8b23c2e0f89218ba5c34bc12a434b958c4a6b5b7af8dc1b426abf53a1caba69d",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    }
+  ]
+}

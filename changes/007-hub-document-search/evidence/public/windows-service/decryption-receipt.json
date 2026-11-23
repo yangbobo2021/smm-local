@@ -1,0 +1,24 @@
+{
+  "source": "/private/tmp/smm-007-ci-final-windows-v2/007-scm-public-evidence",
+  "verified_manifest_files": 109,
+  "decrypted_trace_count": 2,
+  "private_key_uploaded": false,
+  "traces": [
+    {
+      "original_path": "platform/ordinary-client/platform/web-a-trace.zip",
+      "original_bytes": 5588112,
+      "original_sha256": "2b96091de909561d24b7dc5c26ec44f33b6e2ecea4703a8eb1de5027192fdc90",
+      "ciphertext_sha256": "e4b7130e8e90bdb995ae9be839fc86d1feee40271959f1080b24321e592dc677",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    },
+    {
+      "original_path": "platform/ordinary-client/platform/web-hub-trace.zip",
+      "original_bytes": 2280387,
+      "original_sha256": "28d97c4b4953a5f4294f0499c594d486cea8f527fa8fb06e90975d00be4dd297",
+      "ciphertext_sha256": "514a0611e8890285c9dc7abe6fa74db19dd1f20e8580ae814df644952a457c64",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    }
+  ]
+}

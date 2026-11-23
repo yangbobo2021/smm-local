@@ -1,0 +1,49 @@
+{
+  "project_name": "Web Local <img src=\"/smm-document-executed\" onerror=\"window.__smm_document_executed=true\">",
+  "exact_upload": "webneedle dropped\n<script>window.__smm_document_executed=true</script>\n<img src=\"/smm-document-executed\" onerror=\"window.__smm_document_executed=true\">\n<script>window.SMM_007_EXECUTED=true</script>",
+  "stages": [
+    {
+      "stage": "new-project",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "query-snippets",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "original-chosen.txt",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "original-dropped.md",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    }
+  ],
+  "observed_targets": [
+    {
+      "name": "chosen.txt",
+      "id": "19ca663e27f64f84afb7756d66621fbe"
+    },
+    {
+      "name": "dropped.md",
+      "id": "9cc4d025673a4f4ead85fae649c0034d"
+    }
+  ],
+  "expected_targets": {
+    "chosen.txt": "19ca663e27f64f84afb7756d66621fbe",
+    "dropped.md": "9cc4d025673a4f4ead85fae649c0034d"
+  },
+  "two_target_negative_controls_rejected": true
+}

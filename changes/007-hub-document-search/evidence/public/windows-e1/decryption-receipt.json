@@ -1,0 +1,24 @@
+{
+  "source": "/private/tmp/smm-007-ci-e1-windows-v3/007-public-evidence",
+  "verified_manifest_files": 105,
+  "decrypted_trace_count": 2,
+  "private_key_uploaded": false,
+  "traces": [
+    {
+      "original_path": "platform/web-a-trace.zip",
+      "original_bytes": 6061403,
+      "original_sha256": "dd708016dc0f74bc033de2b8064793e1e99cc435b5779632cfffca2ad3f3d6ff",
+      "ciphertext_sha256": "57431600caf13738a4c65f93907a53e2d88992204a209812111f656e2d080966",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    },
+    {
+      "original_path": "platform/web-hub-trace.zip",
+      "original_bytes": 2035527,
+      "original_sha256": "f341295d8f1a43260c564697b88d80157efc1b2bf53d10bf815c9d7e75455b8e",
+      "ciphertext_sha256": "c059617ba1389593463cab9cad37a87306304d0bfbf0d25d689717279a45913a",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    }
+  ]
+}

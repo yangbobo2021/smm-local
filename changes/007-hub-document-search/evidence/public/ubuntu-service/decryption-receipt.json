@@ -1,0 +1,24 @@
+{
+  "source": "/private/tmp/smm-007-ci-final-ubuntu-v2/007-systemd-public-evidence",
+  "verified_manifest_files": 98,
+  "decrypted_trace_count": 2,
+  "private_key_uploaded": false,
+  "traces": [
+    {
+      "original_path": "platform/web-a-trace.zip",
+      "original_bytes": 4934195,
+      "original_sha256": "3872502bf8d12ce62ef0f2211f4d814948b761cd30372db2ea8d4419e0875a9f",
+      "ciphertext_sha256": "364c0284412f0005512bec781c4eaa9f1c6e6bd0dab6f2b273bc5125b88b6698",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    },
+    {
+      "original_path": "platform/web-hub-trace.zip",
+      "original_bytes": 1975337,
+      "original_sha256": "d425966db0beb9a490cbef8995e37cde43ecb1f6e1ddf60d5a3acffa5d5efed2",
+      "ciphertext_sha256": "5fcd0a57c4fe4c9abe20318729709e66ca808ea8b83c039ec338c13d3a1ac42c",
+      "decrypted_exact_original": true,
+      "zip_integrity": true
+    }
+  ]
+}
