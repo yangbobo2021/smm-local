@@ -5,7 +5,7 @@ on:
       mode:
         description: Acceptance or environment-only capability probe
         type: choice
-        options: [selective-upload, document-platform-preflight, document-installed]
+        options: [selective-upload, document-platform-preflight, document-installed, document-installed-e1]
         default: selective-upload
       evidence_certificate:
         description: Base64 public X509 certificate for encrypted original browser traces (private key stays with reviewer)
@@ -76,7 +76,8 @@ jobs:
           path: ${{ runner.temp }}/007-preflight
 
   document-installed:
-    if: inputs.mode == 'document-installed'
+    name: ${{ inputs.mode }} (${{ matrix.os }})
+    if: inputs.mode == 'document-installed' || inputs.mode == 'document-installed-e1'
     strategy:
       fail-fast: false
       matrix:
@@ -104,15 +105,15 @@ jobs:
       - name: Run installed document CLI, browser and stdio flows
         run: uv run python scripts/acceptance/hub_documents_ci.py --work "${{ runner.temp }}/007-business" --output "${{ runner.temp }}/007-public-evidence"
       - name: Run actual Ubuntu user-systemd Hub with document flows
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && inputs.mode == 'document-installed'
         run: uv run python scripts/acceptance/hub_documents_ci.py --hub-service --work "${{ runner.temp }}/007-systemd-business" --output "${{ runner.temp }}/007-systemd-public-evidence"
       - name: Run actual Windows SCM Hub with a separate standard Local
-        if: runner.os == 'Windows'
+        if: runner.os == 'Windows' && inputs.mode == 'document-installed'
         run: uv run python scripts/acceptance/hub_documents_ci.py --hub-service --work "${{ runner.temp }}/007-scm-business" --output "${{ runner.temp }}/007-scm-public-evidence"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: document-installed-${{ matrix.os }}
+          name: ${{ inputs.mode }}-${{ matrix.os }}
           path: |
             ${{ runner.temp }}/007-public-evidence
             ${{ runner.temp }}/007-systemd-public-evidence

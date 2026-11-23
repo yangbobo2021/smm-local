@@ -664,6 +664,218 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
             == []
         )
 
+    @staticmethod
+    def literal_display_check(value):
+        assert (
+            value["window_marker_unset"] is True
+            and value["legacy_marker_unset"] is True
+        )
+        assert value["embedded_nodes"] == 0
+        assert value["trigger_requests"] == []
+
+    @staticmethod
+    def read_target_check(rows, expected):
+        assert len(rows) == len(expected)
+        assert {row["name"] for row in rows} == set(expected)
+        assert len({row["name"] for row in rows}) == len(rows)
+        for row in rows:
+            assert row["id"] == expected[row["name"]]
+
+    @staticmethod
+    def ownership_equal(before, after):
+        assert before == after, "rejected write changed persistent/API state"
+
+    def ownership_state(self):
+        value = {}
+        for role, prefix in [("a", "/api"), ("hub", "/v1")]:
+            value[role] = {
+                resource: self.request(role, prefix + "/documents/" + resource)
+                for resource in ["sources", "files", "library"]
+            }
+        # E1 owns both foreground archives. SCM's ordinary actor must never
+        # gain direct state access; that E2 case has a separate identity gate.
+        if "external_hub" not in self.config:
+            code = r"""import hashlib,json,pathlib,sqlite3,sys
+result={}
+for db in sys.argv[1:]:
+ c=sqlite3.connect(pathlib.Path(db).as_uri()+'?mode=ro',uri=True)
+ tables=[r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name LIKE '%document%' ORDER BY name")]
+ rows={name:sorted([list(r) for r in c.execute('SELECT * FROM "'+name.replace('"','""')+'"')],key=repr) for name in tables}
+ raw=pathlib.Path(db).parent/'.documents'
+ disk={str(p.relative_to(raw)):{'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size,'mtime_ns':p.stat().st_mtime_ns} for p in sorted(raw.rglob('*')) if p.is_file()}
+ encoded=lambda value:json.dumps(value,sort_keys=True,default=lambda item:{'sqlite_blob_hex':item.hex()}).encode()
+ result[pathlib.Path(db).name]={'table_sha256':{name:hashlib.sha256(encoded(value)).hexdigest() for name,value in rows.items()},'managed_disk':disk};c.close()
+print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':value.hex()}))
+"""
+            for role, db in [("a", self.db["a"]), ("hub", self.hub_db)]:
+                value[role]["persistent"] = json.loads(
+                    self.run(
+                        "ownership-readonly-snapshot-" + role,
+                        [
+                            self.config[
+                                "local_python" if role == "a" else "hub_python"
+                            ],
+                            "-I",
+                            "-X",
+                            "utf8",
+                            "-c",
+                            code,
+                            db,
+                        ],
+                    )
+                )
+        return value
+
+    def forged_ownership(self, projected, replica_hit, native):
+        known = {
+            "api": {"files": ["one", "two"]},
+            "db": {"table_sha256": "known"},
+            "disk": {"file.txt": {"sha256": "original", "mtime_ns": 1}},
+        }
+        self.ownership_equal(known, known)
+        for wrong in [
+            {**known, "api": {"files": ["one"]}},
+            {**known, "db": {"table_sha256": "changed"}},
+            {**known, "disk": {"file.txt": {"sha256": "changed", "mtime_ns": 1}}},
+            {**known, "disk": {"forged.txt": {"sha256": "original", "mtime_ns": 1}}},
+        ]:
+            try:
+                self.ownership_equal(known, wrong)
+            except AssertionError:
+                pass
+            else:
+                raise AssertionError("ownership detector missed changed state")
+        before = self.ownership_state()
+        replica_source = next(
+            s for s in before["hub"]["sources"] if s["id"] in replica_hit["source_ids"]
+        )
+        remote = {
+            **self.hub_context,
+            "project_id": projected["id"],
+            "project_key": projected["source_key"],
+        }
+        replica = {
+            **remote,
+            "expected_version": replica_hit["version"],
+            "expected_revision": replica_source["revision"],
+        }
+        payload = base64.b64encode(b"forged independent forbidden bytes").decode()
+        assert len(native["project_ids"]) == 1
+        native_project = native["project_ids"][0]
+        assert native_project not in {p["id"] for p in self.cli("a", "projects")}
+        operations = [
+            (
+                "hub",
+                "POST",
+                "/v1/documents/library",
+                {
+                    **remote,
+                    "name": "forged.txt",
+                    "submission_id": os.urandom(16).hex(),
+                    "content_base64": payload,
+                },
+                400,
+            ),
+            (
+                "hub",
+                "PUT",
+                "/v1/documents/library/" + replica_hit["id"],
+                {
+                    **replica,
+                    "submission_id": os.urandom(16).hex(),
+                    "content_base64": payload,
+                },
+                400,
+            ),
+            (
+                "hub",
+                "DELETE",
+                "/v1/documents/library/" + replica_hit["id"],
+                replica,
+                400,
+            ),
+            (
+                "hub",
+                "PUT",
+                "/v1/documents/sources/" + replica_source["id"],
+                {
+                    **remote,
+                    "project_ids": [self.d["id"]],
+                    "exclude": [],
+                    "recursive": True,
+                },
+                400,
+            ),
+            (
+                "a",
+                "POST",
+                "/api/documents/library",
+                {
+                    "project_id": native_project,
+                    "name": "forged.txt",
+                    "submission_id": os.urandom(16).hex(),
+                    "content_base64": payload,
+                },
+                400,
+            ),
+            (
+                "a",
+                "PUT",
+                "/api/documents/library/" + native["id"],
+                {
+                    "project_id": self.a["id"],
+                    "expected_version": native["version"],
+                    "expected_revision": native["source_revision"],
+                    "submission_id": os.urandom(16).hex(),
+                    "content_base64": payload,
+                },
+                400,
+            ),
+            (
+                "a",
+                "DELETE",
+                "/api/documents/library/" + native["id"],
+                {
+                    "project_id": self.a["id"],
+                    "expected_version": native["version"],
+                    "expected_revision": native["source_revision"],
+                },
+                400,
+            ),
+            (
+                "a",
+                "PUT",
+                "/api/documents/sources/" + native["source_id"],
+                {"project_ids": [self.a["id"]], "exclude": [], "recursive": True},
+                400,
+            ),
+        ]
+        outcomes = []
+        for role, method, route, body, status in operations:
+            response = self.request(role, route, body, method=method, code=status)
+            after = self.ownership_state()
+            self.ownership_equal(before, after)
+            outcomes.append(
+                {
+                    "role": role,
+                    "method": method,
+                    "path": route,
+                    "expected_status": status,
+                    "response": response,
+                    "state_unchanged": True,
+                }
+            )
+        self.save(
+            "ownership-forged-management",
+            {
+                "before": before,
+                "after": after,
+                "operations": outcomes,
+                "persistent_snapshot_taken": "external_hub" not in self.config,
+                "known_valid_and_four_changed_states_checked": True,
+            },
+        )
+
     async def web(self, role):
         from playwright.async_api import async_playwright, expect
 
@@ -707,6 +919,48 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
             errors = []
             page.on("pageerror", lambda error: errors.append(str(error)))
             network = []
+            resource_requests = []
+            literal_states = []
+            page.on("request", lambda request: resource_requests.append(request.url))
+            known = {
+                "window_marker_unset": True,
+                "legacy_marker_unset": True,
+                "embedded_nodes": 0,
+                "trigger_requests": [],
+            }
+            self.literal_display_check(known)
+            for field, wrong in [
+                ("window_marker_unset", False),
+                ("legacy_marker_unset", False),
+                ("embedded_nodes", 1),
+                ("trigger_requests", ["/smm-document-executed"]),
+            ]:
+                try:
+                    self.literal_display_check({**known, field: wrong})
+                except AssertionError:
+                    pass
+                else:
+                    raise AssertionError("literal-display detector missed " + field)
+            self.save(
+                "literal-selfcheck-" + role,
+                {"known_valid": True, "four_invalid_states_rejected": True},
+            )
+            literal = '<script>window.__smm_document_executed=true</script>\n<img src="/smm-document-executed" onerror="window.__smm_document_executed=true">\n<script>window.SMM_007_EXECUTED=true</script>'
+            project_name = (
+                ("Web Hub" if role == "hub" else "Web Local")
+                + ' <img src="/smm-document-executed" onerror="window.__smm_document_executed=true">'
+            )
+
+            async def literal_state(stage):
+                await page.wait_for_load_state("networkidle")
+                value = await page.evaluate(
+                    "({window_marker_unset:window.__smm_document_executed===undefined,legacy_marker_unset:window.SMM_007_EXECUTED===undefined,embedded_nodes:document.querySelectorAll('main img, main script').length})"
+                )
+                value["trigger_requests"] = [
+                    url for url in resource_requests if "/smm-document-executed" in url
+                ]
+                self.literal_display_check(value)
+                literal_states.append({"stage": stage, **value})
 
             def response_seen(response):
                 if "/api/" in response.url or "/v1/" in response.url:
@@ -731,7 +985,7 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                         str(self.token_file)
                     )
                     await expect(page.locator("#workspace")).to_be_visible()
-                    await page.locator("#hub-project-name").fill("Web Hub")
+                    await page.locator("#hub-project-name").fill(project_name)
                     await page.locator("#hub-project-create").click()
                     await expect(page.locator("#notice")).to_contain_text(
                         "已创建Hub项目"
@@ -742,7 +996,7 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                     await expect(page.locator("#doc-hub-project")).to_contain_text(
                         "Hub D"
                     )
-                    await page.locator("#doc-project-name").fill("Web Local")
+                    await page.locator("#doc-project-name").fill(project_name)
                     await page.locator("#doc-project-create").click()
                     await expect(page.locator("#notice")).to_contain_text(
                         "已创建文档可用"
@@ -754,10 +1008,22 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                     await page.locator("#doc-library-project").select_option(
                         str(project_id)
                     )
+                project_option = page.locator(
+                    "#hub-project option"
+                    if role == "hub"
+                    else "#doc-library-project option"
+                ).filter(has_text=project_name)
+                await expect(project_option).to_have_count(1)
+                await expect(project_option).to_have_text(
+                    project_name
+                    + f" · #{project_id}"
+                    + (" · hub" if role == "hub" else "")
+                )
+                await literal_state("new-project")
                 await self.mixed_batch(page, role, project_id)
                 raws = {
                     "chosen.txt": "webneedle 选择😀 e\u0301\r\n独立甲".encode(),
-                    "dropped.md": b"webneedle dropped\n<script>window.SMM_007_EXECUTED=true</script>",
+                    "dropped.md": ("webneedle dropped\n" + literal).encode(),
                 }
                 inputs = self.fixtures / ("web-" + role)
                 inputs.mkdir()
@@ -818,6 +1084,37 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                     receipt2["id"],
                 }
                 oldrefs = {h["id"]: h["reference"] for h in result["results"]}
+                await expect(page.locator("#" + prefix + "-results")).to_contain_text(
+                    literal
+                )
+                await literal_state("query-snippets")
+                expected_targets = {
+                    "chosen.txt": receipt1["id"],
+                    "dropped.md": receipt2["id"],
+                }
+                observed_targets = []
+                self.read_target_check(
+                    [
+                        {"name": name, "id": identity}
+                        for name, identity in expected_targets.items()
+                    ],
+                    expected_targets,
+                )
+                for wrong in [
+                    [{"name": "chosen.txt", "id": receipt1["id"]}] * 2,
+                    [
+                        {"name": "chosen.txt", "id": receipt1["id"]},
+                        {"name": "dropped.md", "id": receipt1["id"]},
+                    ],
+                ]:
+                    try:
+                        self.read_target_check(wrong, expected_targets)
+                    except AssertionError:
+                        pass
+                    else:
+                        raise AssertionError(
+                            "duplicate/misdirected browser read accepted"
+                        )
                 for i in range(2):
                     row = page.locator("#" + prefix + "-results .result").nth(i)
                     name = await row.locator("h3").inner_text()
@@ -830,13 +1127,43 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                             "button", name="读取原文", exact=True
                         ).click()
                     actual = await (await response.value).json()
+                    assert actual["id"] == expected_targets[name]
+                    observed_targets.append({"name": name, "id": actual["id"]})
                     exact_read(actual, raws[name])
                     await expect(
                         page.locator(
                             "#hub-read-text" if role == "hub" else "#doc-reader-text"
                         )
                     ).to_have_text(normalized(raws[name]))
+                    await literal_state("original-" + name)
+                    if name == "dropped.md":
+                        await page.screenshot(
+                            path=str(
+                                self.out / ("web-" + role + "-literal-original.png")
+                            ),
+                            full_page=True,
+                        )
+                self.read_target_check(observed_targets, expected_targets)
+                assert {v["stage"] for v in literal_states} == {
+                    "new-project",
+                    "query-snippets",
+                    "original-chosen.txt",
+                    "original-dropped.md",
+                }
+                assert (self.out / ("web-" + role + "-literal-original.png")).is_file()
                 assert await page.evaluate("window.SMM_007_EXECUTED===undefined")
+                self.save(
+                    "literal-display-" + role,
+                    {
+                        "project_name": project_name,
+                        "observed_targets": observed_targets,
+                        "expected_targets": expected_targets,
+                        "two_target_negative_controls_rejected": True,
+                        "exact_upload": raws["dropped.md"].decode(),
+                        "stages": literal_states,
+                        "all_resource_requests": resource_requests,
+                    },
+                )
                 await page.screenshot(
                     path=str(self.out / ("web-" + role + "-search-read.png")),
                     full_page=True,
@@ -1004,6 +1331,15 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                             "conversation_root": local_root,
                         },
                     )
+                    hub_web = json.loads(
+                        (self.out / "web-hub.json").read_text(encoding="utf-8")
+                    )
+                    native = self.request(
+                        "hub",
+                        "/v1/documents/library?project_id="
+                        + str(hub_web["project_id"]),
+                    )[0]
+                    self.forged_ownership(projected, found["results"][0], native)
                     await page.goto(self.address["hub"])
                     await page.locator("#credential").set_input_files(
                         str(self.token_file)

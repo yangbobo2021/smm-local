@@ -69,6 +69,11 @@ def export(source, target):
                 "scm-client-boundary.json",
                 "program-access.json",
                 "administrator-source-open-audit.json",
+                "ownership-forged-management.json",
+                "literal-display-a.json",
+                "literal-display-hub.json",
+                "literal-selfcheck-a.json",
+                "literal-selfcheck-hub.json",
             }
             or p.name.startswith("mcp-")
             and p.suffix == ".json"

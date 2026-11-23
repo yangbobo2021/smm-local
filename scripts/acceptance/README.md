@@ -7,9 +7,11 @@
 - 回归入口：`python -m pytest -q`（包含主契约、列表/片段补充、PR扫描/网页回归；网页回归需acceptance依赖及Chrome，无该依赖时明确skip）。全部使用独立合成档案/只读源见证，不连接真实Hub、VibeInsight或用户资料。设置`ACCEPTANCE_EVIDENCE_DIR=<全新私有目录>`保存逐次实际请求/响应。
 - 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
 - 独立判定探针：`python scripts/acceptance/hub_documents_checks.py --selfcheck`。两个独立原件、文本/范围/版本/摘要/项目/来源/资格逐项负控，以及真实PID/端口存活负控均必须拒绝。自检仅表示工具可用于验收。
-- 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台探针与配置路径随后在此登记；没有业务记录时保持未验证。
+- 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台入口为 `python scripts/acceptance/hub_documents_platform.py --target-config <独立包配置> --output <全新目录>`；Windows须由实际标准账户运行。Hub凭据浏览器观察另用同参数的 `hub_documents_browser_privacy.py`；没有业务原件不能计通过。
 - 维护者已要求不再使用家庭ESXi Windows/Linux，且目前没有其他实机资源，先继续本机与CI。CI环境能力探测独立于产品验收；Ubuntu实际user-systemd能力不等于007服务业务已通过，Windows创建LocalService配置也不等于真实LocalService进程/普通Local已通过。
 - 原始输出含合成文档及本地路径。公开前保留原始/脱敏副本双SHA，不公开token、TLS私钥、签名材料、数据库、wheel或原始trace。保护冲突按用户指南明确恢复，不删除保护文件或自动重授权以“修复”测试。
+
+`Selective upload installed-package acceptance` 的 `document-installed-e1` 只复跑三系统E1，明确跳过服务，不代替E2；`document-installed` 继续同时执行适用的真实Ubuntu用户服务和Windows SCM。默认005模式不变。新增模式用于独立重取E1某项证据，不能以它的整体success声称服务或跨机器已验证。
 
 ## 006 本机文档（可选实际包验证）
 
