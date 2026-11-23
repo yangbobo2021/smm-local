@@ -165,3 +165,5 @@ PR39独立复审v1提出四项已有规格缺口，原报告及真实反例保�
 托管候选de41d7e的三系统CI：Mac/Ubuntu完整pytest及E1安装包业务通过；Windows两流程均止于包探针的中文stdout编码。原因是隔离`-I`忽略PYTHONUTF8，给同一私有探针的隔离解释器显式加`-X utf8`，仍逐字比较原始Unicode，不改产品编码规则或放松输入。旧失败保留，新候选须重跑三格。新增真实Ubuntu user-systemd与Windows SCM/LocalService探针：只管理任务状态目录派生的唯一服务，Windows另用独立标准账户执行全部Local业务，管理员仅任务Hub CLI/服务操作，Local不能直接读取Hub状态；程序目录只授读/执行，服务UID/SID和清理实际检查。物理跨OS机器HTTPS仍单独待验证，不能由这些同机档案或服务替代。
 
 CI首轮未回收完整浏览器trace，不能把原件缺失包装为正式充分证据。后续`document-installed`接收公开X509证书，完整trace以CMS加密原件连同原始/密文SHA回收，私钥只保存在本机任务目录，不进入仓库、workflow或artifact；本机用原件SHA验证解密逐字节一致后独立审查。其余明确允许的业务原输出、PNG、模块/源指纹及服务身份保留；token/CA私钥/数据库/wheel不公开。没有公开证书时明示trace未回收，不计完整正式证据。该封装已用独立二进制见证完成加密/解密及原SHA自检，托管实际回收仍须以运行结果判定。
+
+托管a44/f7bb候选的三系统常规测试/打包均通过；document-installed中Mac、Ubuntu前景和Ubuntu实际user-systemd通过，Windows普通业务止于构建wheel的只读校验：uv构建产物保留受保护ACL，任务标准账户虽可读安装模块但不能读取wheel。第二次准备修订仅重置本任务两份wheel的继承并给本任务账户显式R权限，保存前后ACL；不改Hub状态或其他文件权限，不绕过逐模块/包SHA校验。此前失败和SCM未到达记录保留，修订后按原流程复跑；不能由准备错误宣称Windows业务通过。

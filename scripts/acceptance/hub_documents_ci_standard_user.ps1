@@ -22,6 +22,19 @@ try {
     & icacls.exe $ReadPath /grant ($account+':(OI)(CI)RX') /T|Out-Null
     if ($LASTEXITCODE -ne 0) {throw 'Task program read/execute ACL grant failed'}
   }
+  # uv build can preserve a temporary wheel's protected ACL. Give this task's
+  # ordinary reviewer explicit file read access; do not weaken Hub-state ACLs.
+  $target=Get-Content $Config -Raw|ConvertFrom-Json
+  $wheelAcls=@()
+  foreach ($wheel in @($target.local_wheel,$target.hub_wheel)) {
+    $before=(Get-Acl -LiteralPath $wheel).AccessToString
+    & icacls.exe $wheel /reset|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel inheritance reset failed'}
+    & icacls.exe $wheel /grant:r ($account+':R')|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel explicit read grant failed'}
+    $wheelAcls+=@{path=$wheel;before=$before;after=(Get-Acl -LiteralPath $wheel).AccessToString}
+  }
+  $report.wheel_acls=$wheelAcls
   $credential=New-Object System.Management.Automation.PSCredential($account,$secure)
   $secondary=Get-Service seclogon
   $startedSecondary=$secondary.Status -ne 'Running'
