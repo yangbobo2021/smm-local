@@ -191,3 +191,9 @@ E2第二次准备修订前已回收873b500实际原件：icacls逐项处理3243�
 维护者明确批准E2 SCM在默认两轮之后额外修订/执行/独立复审一轮。前轮真实原件已证实程序读取/Hub setup成功、服务以LocalService S-1-5-19/session0实际启动、Std不能直读Hub DB且最终服务/端口清理成立；完整业务仍止于Std本机测试进程bootstrap追加共用process-identities.jsonl被拒，不能称Local产品崩溃或E2通过。采用已交维护者查看的观测流分离补丁：Admin身份/源打开回自己目录，Std只写自己的目录；Admin仍观测真实child fixture/phase，分别校验两种身份与显式采集记录，增加Admin审计回执白名单，不改ACL、IPC、产品或预期。便携隔离正控/四负控及export自检、新上下文scm-observer-preparation-review-v3认可此准备修订；新Windows整轮仍待实跑，若失败按本次批准停止返修。
 
 用户路径人工项补充独立hub_documents_browser_privacy.py：沿当前独立安装包实际Chrome和仅任务证书SPKI，逐阶段观察匿名空壳、选择凭据后URL/localStorage/sessionStorage/cookie、实际Authorization仅同源、刷新后不发API/凭据清除、重新选择后检索并读独立原件；保存原图、实际网络及私有trace，已知含token快照反例验证检测器，不把静态JS或单纯401当浏览器实测。当前Mac实际四阶段通过并清理任务服务。此脚本只补原TC-007-user-discovery既有检查，不新增产品范围或TC；使用说明更新后user_paths v4另实际重取两种旧页提交和发现链原件，原版本保留。
+
+额外SCM观测流轮run45194460889实际执行后仍失败：Std已越过bootstrap并调用固定Hub CLI，但UTF-8原子JSON响应在客户端Path.read_text默认cp1252下解码失败；原platform/ordinary stderr、failure、Std不能读取HubDB及服务清理原件保留。此是测试IPC编码故障，不能据此确认产品缺陷或E2通过。已用完本次明确批准的额外轮；在新的明确授权前不再修改或重跑该SCM场景。
+
+最终人工复审指出用户路径第6步原要求的img onerror、无嵌入DOM/触发请求尚缺实证，原两份insufficient_evidence意见保留。平台探针加入两创建端原始script/img文档、恶意样式项目名、查询片段及两份原文各阶段的真实DOM/window/全部请求检查与四负控，保存原图/JSON/trace。Mac v11仅因测试未计入项目选项既有ID/来源后缀失败，v12按完整既有标签后实跑通过；产品字节未改。新增document-installed-e1只选择三系统普通身份完整E1，便于独立补齐此既有检查，不执行已耗尽SCM轮、不豁免E2；默认005模式及全服务document-installed保持。CI白名单追加四份纯文本检查原件；证据导出完整性正反自检通过。新的平台/说明冻结后重新取用户路径与浏览器隐私原件，旧版本保留。
+
+维护者再次明确批准SCM IPC编码各修订/执行/独立复审一轮，采用已展示补丁，仅请求和响应的两个read_text显式utf-8，与既有atomic_json写出一致。实际原子写入含中文/空格/Unicode见证并逐值回读，旧cp1252负控明确解码失败；不改产品、ACL、状态访问、固定RPC允许列表或业务预期。通过独立准备审查后再提交同版实际Windows执行；若再次失败依本轮授权停止该项自动修订。

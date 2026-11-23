@@ -168,7 +168,7 @@ class OrdinaryScmClient(Probe):
         while not answer.exists():
             assert time.monotonic() < deadline, "task Hub administrator RPC timed out"
             time.sleep(0.1)
-        value = json.loads(answer.read_text())
+        value = json.loads(answer.read_text(encoding="utf-8"))
         assert value["ok"], value
         self.calls.append(
             {
@@ -358,7 +358,7 @@ def administrator(config, out):
                 try:
                     value = {
                         "ok": True,
-                        "result": manager.rpc(json.loads(request.read_text())),
+                        "result": manager.rpc(json.loads(request.read_text(encoding="utf-8"))),
                     }
                 except BaseException:
                     value = {"ok": False, "error": traceback.format_exc()}
