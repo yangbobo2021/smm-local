@@ -32,7 +32,8 @@ def verify(manifest_path, original_root=None):
             assert digest(original) == row["original_sha256"], relative
     index = json.loads((base / "acceptance-index.json").read_text(encoding="utf-8"))
     cases = index["cases"]
-    assert len(cases) == 35 and len({c["case_id"] for c in cases}) == 35
+    assert index["case_count"] == 36
+    assert len(cases) == 36 and len({c["case_id"] for c in cases}) == 36
     root = base.parents[2]
     for case in cases:
         if case["receipt"] is not None:

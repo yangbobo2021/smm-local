@@ -215,3 +215,9 @@ PR Review v3在head425f140独立确认F8：未配置Hub但显式传Hub项目根�
 F8首轮正式红灯六格业务失败真实，但独立复审指出正控只核normal正文/两边引用相等，可能漏explicit第二正文及两边第二ref共同误指首目标；needs_revision原件保留。第二版仅强化每个观察面完整ID/正文及逐ref读回独立正文/ID/范围，原两格/三入口/守卫保留，再取同一未修产品的红灯。先独立认可新版红灯，再修产品；修复后同测试绿灯、既有文档/范围回归及当前完整pytest/独立包/正式自动项重新取证。旧产品/旧门禁/平台原件留历史，不因小改动把旧源SHA称新版本通过。E1额外轮仍等维护者决定，E2明确保留不重跑，既定平台门禁不豁免。
 
 F8 v2红灯已独立expected_failure；仅修改standalone返回的hub_coverage/reason两个字段，同测试6格绿灯及14项文档范围回归、双包v5的18命令/源码安装摘要均独立passed。当前修复源与旧245c236相差该Local模块，故旧正式/平台/门禁原件不改写为新源通过；开始同定义/场景的28自动当前版本调试和正式重验。用户发现当前版本独立GUI/CAS补验的初次私有wrapper遗漏既有C-D-E准备关联而失败，原件保留；修订仅补先前Probe.execute既有合成关联准备，不运行E1生命周期或E2服务。
+
+F8当前源36项准备复审完成：28自动均真实debug exit0，但独立Reviewer只放行26项；library-update在两份同步资料的允许/暂停状态未核ID全集/唯一性，listing-coverage将未核默认列表用作后续预期，可能共同漏已有项目。两项现有修订记录达到技能上限，已备只加独立身份/全集断言的两文件补丁并请求额外一轮，未获答前不应用、不计正式通过。其余26项按逐项PLAN/新请求正式执行并独立passed，共30实际检查/33外层pytest参数，旧所有意见保留。当前用户发现另用v5包重取GUI/stdio/CAS及隐私完整原件，独立passed但不执行E1生命周期；当前完整pytest341=340pass1skip及b7ed三系统CI独立门禁passed。
+
+门禁manual-regression-ci-f8-v2的product_version尾句含旧product245c236文字，原收据保留；实际head/源绑定/执行均b7ed，索引和独立报告明确更正，不以该尾句判版本。CI实际PR合并树与b7ed源树一致，报告区分API head与实际checkout；源码摘要范围为.py/.html，不声称包括所有类型，legacy JSON以当前Git相同树和兼容原件另核。当前公开57选件每份分别标原/公开SHA与适用产品，旧245平台原件标历史；完整性校验36项和登记收据对应，不代业务通过。
+
+当前逐需求独立判定 `delivery-r007-v2` 已登记为 blocked（36项：28 passed、7 not_executed、1 insufficient_evidence）；不因服务补证暂停而豁免 SPEC。当前看板截图仅记录真实末版，不回填缺失的历史步骤画面。

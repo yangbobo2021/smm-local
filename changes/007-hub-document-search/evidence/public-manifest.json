@@ -1,8 +1,5 @@
 {
-  "product_content_commit": "245c236ddc41057cd78694902283574d1175e309",
-  "actual_mac_probe": "v16; runner SHA recorded",
-  "actual_service_run": "45201802511/head465d27e",
-  "policy": "Only synthetic task originals and explicitly labelled derived summaries; no token, key, database, full trace or protection material",
+  "policy": "Mixed-version evidence: each file states product_source_commit. Originals/derived are explicit; no token, key, database, full trace or guard material.",
   "files": [
     {
       "public_path": "public/macos/result.json",
@@ -11,7 +8,8 @@
       "original_sha256": "b187216b7e891d9d446f62a426eb1b3d98056fbbbeeb2fcb5160e35c4243c074",
       "public_sha256": "b187216b7e891d9d446f62a426eb1b3d98056fbbbeeb2fcb5160e35c4243c074",
       "bytes": 251,
-      "description": "Mac v16 actual original, no credentials"
+      "description": "Mac v16 actual original, no credentials",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/runner-bindings.json",
@@ -20,7 +18,8 @@
       "original_sha256": "b29fafb0800746130371b6bec305f690784bbb1688cef018279b9516663ac6a1",
       "public_sha256": "b29fafb0800746130371b6bec305f690784bbb1688cef018279b9516663ac6a1",
       "bytes": 302,
-      "description": "Mac v16 actual original, no credentials"
+      "description": "Mac v16 actual original, no credentials",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/literal-selfcheck-a.json",
@@ -29,7 +28,8 @@
       "original_sha256": "27a8df9e0fc5dacf8843c991bacd572f31d91d515409c1c364f0f56e80458005",
       "public_sha256": "27a8df9e0fc5dacf8843c991bacd572f31d91d515409c1c364f0f56e80458005",
       "bytes": 66,
-      "description": "Mac v16 actual original, no credentials"
+      "description": "Mac v16 actual original, no credentials",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/literal-selfcheck-hub.json",
@@ -38,7 +38,8 @@
       "original_sha256": "27a8df9e0fc5dacf8843c991bacd572f31d91d515409c1c364f0f56e80458005",
       "public_sha256": "27a8df9e0fc5dacf8843c991bacd572f31d91d515409c1c364f0f56e80458005",
       "bytes": 66,
-      "description": "Mac v16 actual original, no credentials"
+      "description": "Mac v16 actual original, no credentials",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/web-a-literal-original.png",
@@ -47,7 +48,8 @@
       "original_sha256": "2c82c245b6e45ff710dcf0e1531512e86d8e9a826b586df341c803e54002e409",
       "public_sha256": "2c82c245b6e45ff710dcf0e1531512e86d8e9a826b586df341c803e54002e409",
       "bytes": 980285,
-      "description": "Current Mac v16 ordinary-user task, synthetic data; image actually opened and checked, task-only path and IDs, no redaction needed"
+      "description": "Current Mac v16 ordinary-user task, synthetic data; image actually opened and checked, task-only path and IDs, no redaction needed",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/cleanup.json",
@@ -56,7 +58,8 @@
       "original_sha256": "084733487a6317159d995b71d31d7fc3a974bb2c27e45f9a886bf4908b678d6e",
       "public_sha256": "084733487a6317159d995b71d31d7fc3a974bb2c27e45f9a886bf4908b678d6e",
       "bytes": 1261,
-      "description": "Mac v16 actual original, no credentials"
+      "description": "Mac v16 actual original, no credentials",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/browser/privacy-reloaded.png",
@@ -65,7 +68,8 @@
       "original_sha256": "32f34d2005b2068cdc121653620a53742c75b382cf8eb4e7140913522af410b3",
       "public_sha256": "32f34d2005b2068cdc121653620a53742c75b382cf8eb4e7140913522af410b3",
       "bytes": 54960,
-      "description": "Actually opened; empty anonymous shell after reload, no data or credential visible"
+      "description": "Actually opened; empty anonymous shell after reload, no data or credential visible",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/literal-a-summary.json",
@@ -74,7 +78,8 @@
       "original_sha256": "018989234c6580a978bbe758468492fdf4309ef269b421da882f6fe6288727ff",
       "public_sha256": "c69d09829b0a31bbb022f4652dbe1a96623fd08db4962536d367a3b6be7f8abe",
       "bytes": 1447,
-      "description": "Real DOM/window/network checkpoints and independent target identities; URLs omitted, full trace private"
+      "description": "Real DOM/window/network checkpoints and independent target identities; URLs omitted, full trace private",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/literal-hub-summary.json",
@@ -83,7 +88,8 @@
       "original_sha256": "37b24ff058ba0f0fc925b214f567f669739da84cc075c952ad6c94e51511966d",
       "public_sha256": "cf883c5cf163542efd748758b4e99d37c77961bb6a0a1a04efdb53a749442a78",
       "bytes": 1445,
-      "description": "Real DOM/window/network checkpoints and independent target identities; URLs omitted, full trace private"
+      "description": "Real DOM/window/network checkpoints and independent target identities; URLs omitted, full trace private",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/macos/ownership-summary.json",
@@ -92,7 +98,8 @@
       "original_sha256": "9aed9d65177e9f2c1c6f94c1044275b34aa24efda2c4119d571d452e88346e07",
       "public_sha256": "2975095b2e2548e4850cf243f738689028387e3b4cc4411d4dec2f4101326743",
       "bytes": 2406,
-      "description": "Eight actual rejected cross-owner writes; complete table/raw-copy/API state is private, not published"
+      "description": "Eight actual rejected cross-owner writes; complete table/raw-copy/API state is private, not published",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/download-receipt.json",
@@ -101,7 +108,8 @@
       "original_sha256": "4dcfed00413ff6f15b8eca502ff2de02638cca2680dc887b5ae6b8bfed2ad9b0",
       "public_sha256": "4dcfed00413ff6f15b8eca502ff2de02638cca2680dc887b5ae6b8bfed2ad9b0",
       "bytes": 370,
-      "description": "GitHub artifact outer digest and ZIP CRC verification"
+      "description": "GitHub artifact outer digest and ZIP CRC verification",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/result.json",
@@ -110,7 +118,8 @@
       "original_sha256": "92f6e97d49bef70c208146edc1e31c047b8052d7250beba54ae291a1e9e031ee",
       "public_sha256": "92f6e97d49bef70c208146edc1e31c047b8052d7250beba54ae291a1e9e031ee",
       "bytes": 308,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/service-events.json",
@@ -119,7 +128,8 @@
       "original_sha256": "6590097ed6b1c82b108917fc28cde8c661c57be1d5a9a1705e9b15727d21809c",
       "public_sha256": "6590097ed6b1c82b108917fc28cde8c661c57be1d5a9a1705e9b15727d21809c",
       "bytes": 2474,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/service-cleanup.json",
@@ -128,7 +138,8 @@
       "original_sha256": "b571b08cf13fc1bb640bc0206bbaf6e05c1507d5963d47fac307d1b94aed1b66",
       "public_sha256": "b571b08cf13fc1bb640bc0206bbaf6e05c1507d5963d47fac307d1b94aed1b66",
       "bytes": 107,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/scm-client-boundary.json",
@@ -137,7 +148,8 @@
       "original_sha256": "abdfd1e464e55867ee95086477f0341fb55b246585500b44d9ead1780c6f1008",
       "public_sha256": "abdfd1e464e55867ee95086477f0341fb55b246585500b44d9ead1780c6f1008",
       "bytes": 257,
-      "description": "Actual standard Local denied direct Hub database read; not an administrator actor"
+      "description": "Actual standard Local denied direct Hub database read; not an administrator actor",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-service/decryption-receipt.json",
@@ -146,7 +158,8 @@
       "original_sha256": "74f5b7ba2db3b0dd1115c22594e602a57c893e25ccfa0d138696aee2bceef81d",
       "public_sha256": "74f5b7ba2db3b0dd1115c22594e602a57c893e25ccfa0d138696aee2bceef81d",
       "bytes": 955,
-      "description": "Both original trace SHA verified after private CMS decryption; private key and raw trace not published"
+      "description": "Both original trace SHA verified after private CMS decryption; private key and raw trace not published",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-service/download-receipt.json",
@@ -155,7 +168,8 @@
       "original_sha256": "525fb1e3802e4446a6c30ffb1990ac8cadaad55ad86ff1183833ff38e1f45498",
       "public_sha256": "525fb1e3802e4446a6c30ffb1990ac8cadaad55ad86ff1183833ff38e1f45498",
       "bytes": 370,
-      "description": "GitHub artifact outer digest and ZIP CRC verification"
+      "description": "GitHub artifact outer digest and ZIP CRC verification",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-service/result.json",
@@ -164,7 +178,8 @@
       "original_sha256": "8ed8d6adbcc124ba8ae95ab910143876071541755bfc757c4037a120929e8115",
       "public_sha256": "8ed8d6adbcc124ba8ae95ab910143876071541755bfc757c4037a120929e8115",
       "bytes": 289,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-service/service-events.json",
@@ -173,7 +188,8 @@
       "original_sha256": "af69e36863ca09a097c100ba53e5dfea10da511e9cbf9f640e0c48bc2398055a",
       "public_sha256": "af69e36863ca09a097c100ba53e5dfea10da511e9cbf9f640e0c48bc2398055a",
       "bytes": 2273,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-service/service-cleanup.json",
@@ -182,7 +198,8 @@
       "original_sha256": "2948ac02f32fbca36391ba30d767d6c395daa8df3955e38485474ad182d03ec5",
       "public_sha256": "2948ac02f32fbca36391ba30d767d6c395daa8df3955e38485474ad182d03ec5",
       "bytes": 158,
-      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained"
+      "description": "Actual original service evidence; partial proof only, independent review insufficient_evidence retained",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-service/decryption-receipt.json",
@@ -191,7 +208,8 @@
       "original_sha256": "bba9fd7d2366224e42c233e5070f317449f9301818c28e589736cb14a520a2d3",
       "public_sha256": "bba9fd7d2366224e42c233e5070f317449f9301818c28e589736cb14a520a2d3",
       "bytes": 907,
-      "description": "Both original trace SHA verified after private CMS decryption; private key and raw trace not published"
+      "description": "Both original trace SHA verified after private CMS decryption; private key and raw trace not published",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/result.json",
@@ -200,7 +218,8 @@
       "original_sha256": "c0c33a63489690ef56fc0a07f29dc81b768e814aae6fcd5b01c1a9922b6c809b",
       "public_sha256": "c0c33a63489690ef56fc0a07f29dc81b768e814aae6fcd5b01c1a9922b6c809b",
       "bytes": 760,
-      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked"
+      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/pytest.stdout",
@@ -209,7 +228,8 @@
       "original_sha256": "e19a69f5b28fcf0978018c5002888fcc6f3dd95725220d58bf2c3bc2f2a6a6da",
       "public_sha256": "e19a69f5b28fcf0978018c5002888fcc6f3dd95725220d58bf2c3bc2f2a6a6da",
       "bytes": 932,
-      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked"
+      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/pytest.stderr",
@@ -218,7 +238,8 @@
       "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
-      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked"
+      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/source-bindings.json",
@@ -227,7 +248,8 @@
       "original_sha256": "a267fda6eea306e2a31ddd5fd048ab6e17d204cc2c581358ef491275fbb2bb63",
       "public_sha256": "a267fda6eea306e2a31ddd5fd048ab6e17d204cc2c581358ef491275fbb2bb63",
       "bytes": 10365,
-      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked"
+      "description": "Actual independent process at head222e0e5; stdout/exit/JUnit/source hashes checked",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/ci-run.json",
@@ -236,7 +258,8 @@
       "original_sha256": "0ba6ba639379c862ec10b309d6c87eaa6b57eb76cdc6a0914f1ace0793427705",
       "public_sha256": "0ba6ba639379c862ec10b309d6c87eaa6b57eb76cdc6a0914f1ace0793427705",
       "bytes": 7119,
-      "description": "Actual three-OS job/step responses at head222e0e5; final later head must be checked separately"
+      "description": "Actual three-OS job/step responses at head222e0e5; final later head must be checked separately",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/local-junit.xml",
@@ -245,7 +268,8 @@
       "original_sha256": "33e25879b01274a2bdd6ee55f7f12107fb322377d6d9ce9595e333e43d60f93e",
       "public_sha256": "85b7813fa88311a6cfcfecc7e7c978b8477204bf5f416611aced6e0d2c79fe97",
       "bytes": 45738,
-      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied"
+      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/tests-ubuntu-24.04-junit.xml",
@@ -254,7 +278,8 @@
       "original_sha256": "4fc0c3efea3b544c41706060240eda87b9d49b3899c5ac0f2fdac5bcae3dbfea",
       "public_sha256": "1e58da0142ec97b715e5f520887c861e441daad9f4e4d1ada253c64e3694c15a",
       "bytes": 47134,
-      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied"
+      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/tests-windows-2022-junit.xml",
@@ -263,7 +288,8 @@
       "original_sha256": "86a8f8c9edef1717887d9c1ee5eb1dfecfe0aca2b109959bd84bb2df2fa47ebe",
       "public_sha256": "081049f389c6298163c218929b6ebfc47b85c56819996cc174c10e96a0658799",
       "bytes": 46878,
-      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied"
+      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/regression/tests-macos-15-junit.xml",
@@ -272,7 +298,8 @@
       "original_sha256": "052c52c3d41b5d312086923f8e3d9b23419296b9b95f29a1c61b3c451b01d521",
       "public_sha256": "6d9235508efedfd62131b124a8c089e9e6a3e2958f618d0a447ac98e20285a9c",
       "bytes": 47142,
-      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied"
+      "description": "Counts/testcases/skip reasons preserved; hostname redacted; original SHA supplied",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-e1/download-receipt.json",
@@ -281,7 +308,8 @@
       "original_sha256": "cd072b0adafb569f14a0772442f64790813e5d3960d529b3a399c9b28a21bc60",
       "public_sha256": "cd072b0adafb569f14a0772442f64790813e5d3960d529b3a399c9b28a21bc60",
       "bytes": 373,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-e1/decryption-receipt.json",
@@ -290,7 +318,8 @@
       "original_sha256": "048c930cee7f599a5305b72c673528f6f78f9b63ec5ee4f0181be20130cd3730",
       "public_sha256": "048c930cee7f599a5305b72c673528f6f78f9b63ec5ee4f0181be20130cd3730",
       "bytes": 898,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/windows-e1/result.json",
@@ -299,7 +328,8 @@
       "original_sha256": "5b714e7b9b1e947d1a9af7b2157c8dc0aab353578b8b7f92c0932e3ac66fe814",
       "public_sha256": "5b714e7b9b1e947d1a9af7b2157c8dc0aab353578b8b7f92c0932e3ac66fe814",
       "bytes": 258,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-e1/download-receipt.json",
@@ -308,7 +338,8 @@
       "original_sha256": "19e3b542ffec28a8a8cc9427180d824d1f113f5a623d6da5805a7812d6f0c0b6",
       "public_sha256": "19e3b542ffec28a8a8cc9427180d824d1f113f5a623d6da5805a7812d6f0c0b6",
       "bytes": 373,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-e1/decryption-receipt.json",
@@ -317,7 +348,8 @@
       "original_sha256": "8dc3efee424c0282a0c8f2ff4935e6c5d9450714250c2d57695f8315db804c6a",
       "public_sha256": "8dc3efee424c0282a0c8f2ff4935e6c5d9450714250c2d57695f8315db804c6a",
       "bytes": 897,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
     },
     {
       "public_path": "public/ubuntu-e1/result.json",
@@ -326,7 +358,224 @@
       "original_sha256": "4c56fd6900e5c0bfce17e89643b95523b50c32bc3a8237146d817e25bd52f1b7",
       "public_sha256": "4c56fd6900e5c0bfce17e89643b95523b50c32bc3a8237146d817e25bd52f1b7",
       "bytes": 250,
-      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review"
+      "description": "Actual E1 business original; incomplete protocol coverage disclosed by independent review",
+      "product_source_commit": "245c236ddc41057cd78694902283574d1175e309"
+    },
+    {
+      "public_path": "public/current/regression/result.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-complete-regression-v2/result.json",
+      "original_sha256": "3835656707dd2f35147c332e8471084dde1d5693264f9c69dbf0735f34f85ce2",
+      "public_sha256": "3835656707dd2f35147c332e8471084dde1d5693264f9c69dbf0735f34f85ce2",
+      "bytes": 760,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual full pytest process at b7ed5d7; source map contains .py/.html files, not every file type"
+    },
+    {
+      "public_path": "public/current/regression/pytest.stdout",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-complete-regression-v2/pytest.stdout",
+      "original_sha256": "34c417c9e4db54dac4a0fe4314380e167590ce74a0c1958a89152d482e123713",
+      "public_sha256": "34c417c9e4db54dac4a0fe4314380e167590ce74a0c1958a89152d482e123713",
+      "bytes": 932,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual full pytest process at b7ed5d7; source map contains .py/.html files, not every file type"
+    },
+    {
+      "public_path": "public/current/regression/pytest.stderr",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-complete-regression-v2/pytest.stderr",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual full pytest process at b7ed5d7; source map contains .py/.html files, not every file type"
+    },
+    {
+      "public_path": "public/current/regression/source-bindings.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-complete-regression-v2/source-bindings.json",
+      "original_sha256": "72d19234b8ebd284ebab879ef217b53164a3799f0665647a0335770e5896641d",
+      "public_sha256": "72d19234b8ebd284ebab879ef217b53164a3799f0665647a0335770e5896641d",
+      "bytes": 10479,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual full pytest process at b7ed5d7; source map contains .py/.html files, not every file type"
+    },
+    {
+      "public_path": "public/current/regression/ci-run.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-ci-unit-b7ed-v3/run.json",
+      "original_sha256": "2c5f3768cff31300bc53f908da5e76a79c1d912345b6716174a370985bcf916d",
+      "public_sha256": "2c5f3768cff31300bc53f908da5e76a79c1d912345b6716174a370985bcf916d",
+      "bytes": 7119,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual three-job/three-step success at API head b7ed; PR merge checkout has identical tree"
+    },
+    {
+      "public_path": "public/current/regression/local-junit.xml",
+      "kind": "derived, redactions or selected fields stated in description",
+      "original_locator": "/private/tmp/smm-007-complete-regression-v2/pytest.xml",
+      "original_sha256": "75c93f86f008c23a5920c230d865499f80f6a4047115dfccb3b062e958b540b5",
+      "public_sha256": "2991493523e7b97971bd7cb40d9a5317b3d8daf509b8748967ccc7b746234dcc",
+      "bytes": 46434,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Only hostname redacted; 341 cases and skip reasons preserved"
+    },
+    {
+      "public_path": "public/current/regression/tests-ubuntu-24.04-junit.xml",
+      "kind": "derived, redactions or selected fields stated in description",
+      "original_locator": "/private/tmp/smm-007-ci-unit-b7ed-v3/tests-ubuntu-24.04/test-results.xml",
+      "original_sha256": "9c701ca8f44307ce02cdebd835935c7598b98ea1d9d6b8c9b828dc034b3b2ca1",
+      "public_sha256": "851fc445740507c6084103a3973d65775e04603ed5a7d64bcff9c03110ffcc26",
+      "bytes": 47831,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Only hostname redacted; 341 cases and skip reasons preserved"
+    },
+    {
+      "public_path": "public/current/regression/tests-windows-2022-junit.xml",
+      "kind": "derived, redactions or selected fields stated in description",
+      "original_locator": "/private/tmp/smm-007-ci-unit-b7ed-v3/tests-windows-2022/test-results.xml",
+      "original_sha256": "70486573411cb9af6b0df530fc0482b4b633c924330a916ec200ff42bc43af0d",
+      "public_sha256": "2b4b68e502df1d3580fe9db9157297482b57eb6bbb30820217cacb700413e024",
+      "bytes": 47575,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Only hostname redacted; 341 cases and skip reasons preserved"
+    },
+    {
+      "public_path": "public/current/regression/tests-macos-15-junit.xml",
+      "kind": "derived, redactions or selected fields stated in description",
+      "original_locator": "/private/tmp/smm-007-ci-unit-b7ed-v3/tests-macos-15/test-results.xml",
+      "original_sha256": "2cda85935e90cf9239dea985ba29db7cd884bbfaf31234a848526fdc8ac93aca",
+      "public_sha256": "6cb25457302c9465ecd646bd8fb464be7a4f0d115be826db131cd64e6a7f6cb7",
+      "bytes": 47839,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Only hostname redacted; 341 cases and skip reasons preserved"
+    },
+    {
+      "public_path": "public/current/f8/red.stdout",
+      "kind": "derived, redactions or selected fields stated in description",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-red/red-unconfigured-hub-root-f8-v2/TC-007-unconfigured-hub-root/run.stdout",
+      "original_sha256": "db3234a11e132a1ed1d433281dcb4beda9110cbaf729cebe49e82a691d90d119",
+      "public_sha256": "469b8d7d0887ad448c5db0202cf2470da08ad31cacb8bc0cbd1c0d5c56acffb6",
+      "bytes": 31847,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Six CLI/API/MCP business parameter results; synthetic temp/user paths redacted where present"
+    },
+    {
+      "public_path": "public/current/f8/green.stdout",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/run.stdout",
+      "original_sha256": "60b09fc5f019ba7d403e65466b49289f3d792239c4edd99bce69a7910150fa22",
+      "public_sha256": "60b09fc5f019ba7d403e65466b49289f3d792239c4edd99bce69a7910150fa22",
+      "bytes": 587,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Six CLI/API/MCP business parameter results; synthetic temp/user paths redacted where present"
+    },
+    {
+      "public_path": "public/current/f8/related-regression.stdout",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/regression.stdout",
+      "original_sha256": "e820c51c4ddf6aaa4eb3dfc1810970e4ebbffbc3930a01c9fa1a29b4b67b5eaa",
+      "public_sha256": "e820c51c4ddf6aaa4eb3dfc1810970e4ebbffbc3930a01c9fa1a29b4b67b5eaa",
+      "bytes": 588,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual 14 related regression passes"
+    },
+    {
+      "public_path": "public/current/f8/cli-root-1.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00014-unconfigured-root.json",
+      "original_sha256": "d5613b118f20f783017652ee6ed94aa92ecd0df285b9ec2835466c4b92c16a10",
+      "public_sha256": "d5613b118f20f783017652ee6ed94aa92ecd0df285b9ec2835466c4b92c16a10",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/f8/api-root-1.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00028-unconfigured-root.json",
+      "original_sha256": "1ddd0a8b84157f67b0231ab93cf79658137f18d2f3e837ef64d7e74c89bb26a3",
+      "public_sha256": "1ddd0a8b84157f67b0231ab93cf79658137f18d2f3e837ef64d7e74c89bb26a3",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/f8/mcp-root-1.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00039-unconfigured-root.json",
+      "original_sha256": "83e3c4bf76ce5248b915854115a8db27da6f2bdbde686f5873a9d1337b5b04ed",
+      "public_sha256": "83e3c4bf76ce5248b915854115a8db27da6f2bdbde686f5873a9d1337b5b04ed",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/f8/cli-root-2.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00053-unconfigured-root.json",
+      "original_sha256": "b18e0dfce4a18a68a9f5599adb64c9383d79643426497705acc3cd29125498ad",
+      "public_sha256": "b18e0dfce4a18a68a9f5599adb64c9383d79643426497705acc3cd29125498ad",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/f8/api-root-2.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00067-unconfigured-root.json",
+      "original_sha256": "ce384e7546f0972258a12f5bde15308d34cc6dddfde4989c6633cb34666fa1b7",
+      "public_sha256": "ce384e7546f0972258a12f5bde15308d34cc6dddfde4989c6633cb34666fa1b7",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/f8/mcp-root-2.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/tdd-green/green-unconfigured-hub-root-f8-v1/TC-007-unconfigured-hub-root/attachments/00078-unconfigured-root.json",
+      "original_sha256": "d606205bb3fcaaac6858f77a966f3f6bf1b6ee4d8830e631b7867dd4d5afe428",
+      "public_sha256": "d606205bb3fcaaac6858f77a966f3f6bf1b6ee4d8830e631b7867dd4d5afe428",
+      "bytes": 471,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Actual empty explicit Hub scope with unavailable and reason; no document references or credentials"
+    },
+    {
+      "public_path": "public/current/user/result.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-user-discovery-current-v3/result.json",
+      "original_sha256": "516278579a1e1ab1097f977e577e959797a123260d5c73ab62ad7cab5303b184",
+      "public_sha256": "516278579a1e1ab1097f977e577e959797a123260d5c73ab62ad7cab5303b184",
+      "bytes": 156,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Current v5 user-discovery proof only; images actually opened by independent reviewer; no E1 lifecycle or service claim"
+    },
+    {
+      "public_path": "public/current/user/local-literal-original.png",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-user-discovery-current-v3/web-a-literal-original.png",
+      "original_sha256": "3c0b3af0bb57a24998b93cdcd865ffa41ebc59df70a74a60b30ca5868cdc6862",
+      "public_sha256": "3c0b3af0bb57a24998b93cdcd865ffa41ebc59df70a74a60b30ca5868cdc6862",
+      "bytes": 983787,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Current v5 user-discovery proof only; images actually opened by independent reviewer; no E1 lifecycle or service claim"
+    },
+    {
+      "public_path": "public/current/user/privacy-reloaded.png",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-browser-privacy-v3/privacy-reloaded.png",
+      "original_sha256": "503cd757bb136b2a5271f66e9266ed003341db7cbfd8cbf73f6a9cac98d402c9",
+      "public_sha256": "503cd757bb136b2a5271f66e9266ed003341db7cbfd8cbf73f6a9cac98d402c9",
+      "bytes": 54964,
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "description": "Current v5 user-discovery proof only; images actually opened by independent reviewer; no E1 lifecycle or service claim"
     }
-  ]
+  ],
+  "versions": {
+    "historical_product": "245c236ddc41057cd78694902283574d1175e309",
+    "current_product": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+  },
+  "historical_actual_mac_probe": "v16; runner SHA recorded",
+  "historical_actual_service_run": "45201802511/head465d27e"
 }

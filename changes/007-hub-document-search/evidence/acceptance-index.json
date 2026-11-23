@@ -1,9 +1,15 @@
 {
   "acceptance_id": "AT-SMM-007",
   "definitions_sha256": "d0f03b256990c6105b6a8bda288c66124a098a9779bf1b319cee65f1940f8bcd",
-  "product_content_commit": "245c236ddc41057cd78694902283574d1175e309",
-  "implementation_head": "222e0e55c788bd7693b9b25ce08964e967ef14c7",
-  "scope": "35 cases; current observations only; coverage off/unknown is not line coverage",
+  "case_count": 36,
+  "product_content_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+  "scope": "36TC/28auto8manual. Current formal native status is separate from preparation. Historical receipt current_bindings=false is not current product acceptance. Coverage off/unknown is not line coverage.",
+  "metadata_notes": [
+    {
+      "receipt": "manual-regression-ci-f8-v2",
+      "correction": "product_version尾句product245c236 bytes unchanged为过时说明；实际执行/源码绑定/CI head均b7ed5d7，文档搜索模块两字段与新增六格测试已改变。原收据不覆盖，独立门禁报告已更正版本解释。"
+    }
+  ],
   "cases": [
     {
       "scene": "SC1",
@@ -12,24 +18,104 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-policy-choice-final-v1",
+        "id": "execute-policy-choice-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "2923ddcdec146552ac61857e1b7c754ff97238cb27325223b6e02b25df7d4c1b",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC1/execute-execute-policy-choice-final-v1.json"
+        "receipt_sha256": "7ff0a63d024e0d696c5830bef38f17c3e7e6b8b342ec4a00dfd952cb0d2c1bb8",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC1/execute-execute-policy-choice-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-policy-choice-final-v1",
-        "receipt_sha256": "ff8b760f3ec401ca1e39dc141ff90d546ac798f73af0b1d668a99b8c50994cb7",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC1/review-review-execute-policy-choice-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-policy-choice-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "74e06c8c300f7820bd45d7dd596139877343b843176890b1f8e4ef898608e8e2",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC1/review-review-execute-policy-choice-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "policy-choice-1",
+          "policy-choice-2",
+          "policy-choice-3"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc1-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "60ddb62f5f008c1f8593868701cbfa3aa9f2edd077c790878ac34127d1ba4c3c",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC1/debug-debug-sc1-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc1-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "d0b53fe1c858837c945a15a3eefbd7063359b9bda5a4af30f49636fdc264285e",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC1/review-review-debug-sc1-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "policy-choice-1",
+          "policy-choice-2",
+          "policy-choice-3"
+        ]
+      },
       "covered_checks": [
         "policy-choice-1",
         "policy-choice-2",
         "policy-choice-3"
       ],
-      "evidence_files": 116
+      "evidence_files": 114
+    },
+    {
+      "scene": "SC2",
+      "case_id": "TC-007-sync-boundaries",
+      "status": "passed",
+      "exit_code": 0,
+      "coverage": "off",
+      "receipt": {
+        "id": "execute-sync-boundaries-f8-v2",
+        "operation": "execute",
+        "receipt_sha256": "a5cf1959fa14f1d4f3381f52db4eedc54e6853c2aa00dd0f4450eb7bafd54bbf",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-boundaries-f8-v2.json",
+        "current_bindings": true
+      },
+      "independent_review": {
+        "id": "review-execute-sync-boundaries-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "e31e59b9ada40ceb6d422f6d9b983e6c8895e960ffaee1dc8cc23a7d78a1e314",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-boundaries-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "sync-boundaries-3"
+        ]
+      },
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc2-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "4c419e8e40e7a858f9b12f16c960108c3c593383318925adfad67a6e4e2a0e15",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC2/debug-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc2-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "0b162e63e04ab1558009d036ba12591c53c8984913092ccd0843b9f55c207ab4",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "sync-boundaries-3"
+        ]
+      },
+      "covered_checks": [
+        "sync-boundaries-3"
+      ],
+      "evidence_files": 2746
     },
     {
       "scene": "SC2",
@@ -38,18 +124,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-sync-publication-final-v1",
+        "id": "execute-sync-publication-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "fecf66633fd2857eabdb82ff86177c1aaf9d0198ff0434d75c28632d77613873",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-publication-final-v1.json"
+        "receipt_sha256": "ba48e66e657cbb5dac806adc78d15cad8fcd4aef1a1cf3b9969fc49708cdd78d",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-publication-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-sync-publication-final-v1",
-        "receipt_sha256": "a861e78095cbba58a5af566e5a2f951fa4a3369e0e4edae5140444ac885386fe",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-publication-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-sync-publication-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "bc547ba8dceef74249446849860afd0c0265d1455adc8180decfb67c5358166f",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-publication-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "sync-publication-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc2-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "4c419e8e40e7a858f9b12f16c960108c3c593383318925adfad67a6e4e2a0e15",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC2/debug-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc2-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "0b162e63e04ab1558009d036ba12591c53c8984913092ccd0843b9f55c207ab4",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "sync-publication-1"
+        ]
+      },
       "covered_checks": [
         "sync-publication-1"
       ],
@@ -62,70 +174,48 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-sync-retry-final-v1",
+        "id": "execute-sync-retry-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "43bd58e65f13a6c90b793608f3d0df12f64d37f2885a668a50d0dfdebee75e6d",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-retry-final-v1.json"
+        "receipt_sha256": "7dfd9a033df503c84326cb7f7ef9290db6aaad47846373f8cfcf74a4df420d2f",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-retry-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-sync-retry-final-v1",
-        "receipt_sha256": "637e6cbd836dc4af04046c8836ce83593dae9831697c9637f5ddec9c534b6552",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-retry-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-sync-retry-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "d4598330ec3ffd55e20ba34b310e9895bc72ca348be0aaa31b80b38d91239bd2",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-retry-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "sync-retry-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc2-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "4c419e8e40e7a858f9b12f16c960108c3c593383318925adfad67a6e4e2a0e15",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC2/debug-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc2-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "0b162e63e04ab1558009d036ba12591c53c8984913092ccd0843b9f55c207ab4",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-debug-sc2-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "sync-retry-2"
+        ]
+      },
       "covered_checks": [
         "sync-retry-2"
       ],
       "evidence_files": 49
-    },
-    {
-      "scene": "SC2",
-      "case_id": "TC-007-sync-boundaries",
-      "status": "passed",
-      "exit_code": 0,
-      "coverage": "off",
-      "receipt": {
-        "id": "execute-sync-boundaries-final-v1",
-        "operation": "execute",
-        "receipt_sha256": "654d49f3336a58082af9d0eebcea17375357bb5c756ed5ef480109d271ce840d",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/execute-execute-sync-boundaries-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-execute-sync-boundaries-final-v1",
-        "receipt_sha256": "1a85e42b72d62f6aed7adb89c343c1f8458822c34e2b89dd40ec482cdaf407f1",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC2/review-review-execute-sync-boundaries-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
-      },
-      "independent_status": "passed",
-      "covered_checks": [
-        "sync-boundaries-3"
-      ],
-      "evidence_files": 2746
-    },
-    {
-      "scene": "SC3",
-      "case_id": "TC-007-paused-lifecycle",
-      "status": "passed",
-      "exit_code": 0,
-      "coverage": "off",
-      "receipt": {
-        "id": "execute-paused-lifecycle-final-v1",
-        "operation": "execute",
-        "receipt_sha256": "771c5f584abb213637abbebd1be0522ce590f3b5a6b2a48662b1b508d8fae4b5",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/execute-execute-paused-lifecycle-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-execute-paused-lifecycle-final-v1",
-        "receipt_sha256": "283bbfc8113efa683a7ac5da2c178c7a50dcecdb888b5233090395cde6188a7b",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-execute-paused-lifecycle-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
-      },
-      "independent_status": "passed",
-      "covered_checks": [
-        "paused-lifecycle-1"
-      ],
-      "evidence_files": 609
     },
     {
       "scene": "SC3",
@@ -134,46 +224,98 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-overlap-publication-final-v1",
+        "id": "execute-overlap-publication-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "e8c41f724e5882ef40fef3b981e3ace0d9cb179942344a28034cc1daf34f9012",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/execute-execute-overlap-publication-final-v1.json"
+        "receipt_sha256": "180905e6f0a1016d50afbf8341d6abd94a153b1d62f5ff53fb437e2e8f6f1e19",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/execute-execute-overlap-publication-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-overlap-publication-final-v1",
-        "receipt_sha256": "28b4c57ff6c32832ab1f54dade6d2d6b93c670b25cab25a519af891c3fc155fc",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-execute-overlap-publication-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-overlap-publication-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "0a46f97581c935de86facf9a484079350690ca6deb6321cd08f644e3d95ad9bc",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-execute-overlap-publication-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "overlap-publication-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc3-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "bc52c46c98264f8fb9608fe6a3a6d38fce9fe26605aa7a0fce82718519604a8d",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC3/debug-debug-sc3-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc3-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "7ecdacf7913ef86f55b1d695213a5c2f4267e7a86e1dce438a925b14c3df09c4",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-debug-sc3-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "overlap-publication-2"
+        ]
+      },
       "covered_checks": [
         "overlap-publication-2"
       ],
       "evidence_files": 82
     },
     {
-      "scene": "SC4",
-      "case_id": "TC-007-origin-identity",
+      "scene": "SC3",
+      "case_id": "TC-007-paused-lifecycle",
       "status": "passed",
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-origin-identity-final-v1",
+        "id": "execute-paused-lifecycle-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "ecf917d58b90b41963ffbebedeaaca2adfa7f3bbce9b1385ed6f6292506b2394",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-origin-identity-final-v1.json"
+        "receipt_sha256": "6a7fca9a6d8424a72ce43fa91cd17b997ca592dc1cc568e105c93f9ecbb52184",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/execute-execute-paused-lifecycle-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-origin-identity-final-v1",
-        "receipt_sha256": "dbe0860ecebc65c0b8bc91759049d082ca5d69f93b228e1c5b7fe21f0275fed6",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-origin-identity-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-paused-lifecycle-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "e5b10dd76a6edb239beea0619d6ad1eb3d0104b9fe614c3db7a2cf8aa7742832",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-execute-paused-lifecycle-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "paused-lifecycle-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc3-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "bc52c46c98264f8fb9608fe6a3a6d38fce9fe26605aa7a0fce82718519604a8d",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC3/debug-debug-sc3-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc3-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "7ecdacf7913ef86f55b1d695213a5c2f4267e7a86e1dce438a925b14c3df09c4",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC3/review-review-debug-sc3-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "paused-lifecycle-1"
+        ]
+      },
       "covered_checks": [
-        "origin-identity-1"
+        "paused-lifecycle-1"
       ],
-      "evidence_files": 47
+      "evidence_files": 609
     },
     {
       "scene": "SC4",
@@ -182,22 +324,98 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-ordering-concurrency-final-v1",
+        "id": "execute-ordering-concurrency-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "f995c69cb6a4f6a6f7be8289d4d6a44f001ed010501e213535a544ed74dfd8ff",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-ordering-concurrency-final-v1.json"
+        "receipt_sha256": "19de13e660d171d9e6b925ea0de5032ce756663e119af2484e315afb289555d2",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-ordering-concurrency-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-ordering-concurrency-final-v1",
-        "receipt_sha256": "ab73b55289155a541bd4cd3e6ce65fc26303b51af02c90549c9c49880730d089",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-ordering-concurrency-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-ordering-concurrency-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "4e03f6ff97d912c77283a215880c6630fe8d735c8853d25d1639f06ef0819463",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-ordering-concurrency-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "ordering-concurrency-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc4-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "d052f88ecdf493f75928dc86092999d41bcf7cd5a03d30ae460b0d3655a675f5",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC4/debug-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc4-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "9d8fdccf8bf9519362dcd27a860047d43c9895d75041f420e96b880f41d44776",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "ordering-concurrency-2"
+        ]
+      },
       "covered_checks": [
         "ordering-concurrency-2"
       ],
       "evidence_files": 51
+    },
+    {
+      "scene": "SC4",
+      "case_id": "TC-007-origin-identity",
+      "status": "passed",
+      "exit_code": 0,
+      "coverage": "off",
+      "receipt": {
+        "id": "execute-origin-identity-f8-v2",
+        "operation": "execute",
+        "receipt_sha256": "8d5efef2502ad323ae187cb9e4661c7762fd79506a00e2653bb7429657a39d19",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-origin-identity-f8-v2.json",
+        "current_bindings": true
+      },
+      "independent_review": {
+        "id": "review-execute-origin-identity-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "2596d331955f99647ad1858b0d43153e2338297efcc868b3b9c3fdbca90b1429",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-origin-identity-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "origin-identity-1"
+        ]
+      },
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc4-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "d052f88ecdf493f75928dc86092999d41bcf7cd5a03d30ae460b0d3655a675f5",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC4/debug-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc4-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "9d8fdccf8bf9519362dcd27a860047d43c9895d75041f420e96b880f41d44776",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "origin-identity-1"
+        ]
+      },
+      "covered_checks": [
+        "origin-identity-1"
+      ],
+      "evidence_files": 47
     },
     {
       "scene": "SC4",
@@ -206,18 +424,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-recovery-controls-final-v1",
+        "id": "execute-recovery-controls-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "0442e1b0f822f9534d1053064d56860a08f7e1a035c1655c71cb61fb8bc59c1a",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-recovery-controls-final-v1.json"
+        "receipt_sha256": "7635209112f814fbf9bf3d6d9dca6ceb0917bc5295bc789de2ff5be35813b2af",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/execute-execute-recovery-controls-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-recovery-controls-final-v1",
-        "receipt_sha256": "379f21f0d6a8f24ac7dece68372b0e1ee9cb4e3627e9af9fce32aa0fce7fe79f",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-recovery-controls-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-recovery-controls-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "51da8b8948b6ec0a3bf4f4e5b38144c3f999c04bdf6a10238352d7cfcb6c7755",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-execute-recovery-controls-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "recovery-controls-3"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc4-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "d052f88ecdf493f75928dc86092999d41bcf7cd5a03d30ae460b0d3655a675f5",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC4/debug-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc4-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "9d8fdccf8bf9519362dcd27a860047d43c9895d75041f420e96b880f41d44776",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC4/review-review-debug-sc4-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "recovery-controls-3"
+        ]
+      },
       "covered_checks": [
         "recovery-controls-3"
       ],
@@ -230,18 +474,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-hub-native-final-v1",
+        "id": "execute-hub-native-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "232229402257f22ae07095593651c8243ac84332feb39531fce20fb786ee2edb",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/execute-execute-hub-native-final-v1.json"
+        "receipt_sha256": "f20b304b603963bcdc3efb46ec62553e14c2581c938622a3ac4ab14f10d2df42",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/execute-execute-hub-native-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-hub-native-final-v1",
-        "receipt_sha256": "4bd73c3bb803dc8b6ddf1764ab42b88a5eb14a15ef8110b23ba89806deb38b4d",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-execute-hub-native-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-hub-native-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "0f151562d37c52ee1d0d0fdcf49a9464dbfe5dbe0f6a70aa97b001b1d6159f4e",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-execute-hub-native-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "hub-native-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc5-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "54a5391f159b61f6091296de070cf8f38db6d8c1afa13887557b43cf944a4887",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC5/debug-debug-sc5-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc5-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "e7ac32f4c10590d50c251f4058211d3bdb76398add886d3a5a1599d608404c00",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-debug-sc5-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "hub-native-1"
+        ]
+      },
       "covered_checks": [
         "hub-native-1"
       ],
@@ -254,18 +524,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-project-scope-final-v1",
+        "id": "execute-project-scope-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "a161711ccc4d7f5ef3aa4ae9d613b1764145b6b233fecd3037792463fa448714",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/execute-execute-project-scope-final-v1.json"
+        "receipt_sha256": "dfd4e6e5f3b13eefa5073d7004d5418ebbee71412853cc4d4944128f6a2ac047",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/execute-execute-project-scope-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-project-scope-final-v1",
-        "receipt_sha256": "52c2cd7801b943e47afb3c7b619813679f5869108bbfd69cdb2b3a004c669f17",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-execute-project-scope-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-project-scope-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "c9e1cfab30b28e45871273ac408bfb5fa336878e01a0efa136bf8a3382fd8703",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-execute-project-scope-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "project-scope-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc5-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "54a5391f159b61f6091296de070cf8f38db6d8c1afa13887557b43cf944a4887",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC5/debug-debug-sc5-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc5-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "e7ac32f4c10590d50c251f4058211d3bdb76398add886d3a5a1599d608404c00",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC5/review-review-debug-sc5-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "project-scope-2"
+        ]
+      },
       "covered_checks": [
         "project-scope-2"
       ],
@@ -278,18 +574,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-search-candidates-final-v1",
+        "id": "execute-search-candidates-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "ce4c5e102c47d3e3a2ef8a44a3b5623c03c1d95767ebc9388b74ecca4fb2f675",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/execute-execute-search-candidates-final-v1.json"
+        "receipt_sha256": "bb94bd59b5e0b252447610121ba934f0bd78bbc5271aa02b136dcf2a86f08b72",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/execute-execute-search-candidates-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-search-candidates-final-v1",
-        "receipt_sha256": "8730762e3f241d2f7c844fe2adb13272a9443182e85d29560429f3da6a1809fb",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-execute-search-candidates-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-search-candidates-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "ac1568195dadb6312f987aa1fea667a2b9d1e62ddf40ce9f00f761ee35111f59",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-execute-search-candidates-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "search-candidates-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc6-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "54a7d37040cb57f8c5c2ef3889fa6b5ed478e734e1ac3abb499baafef8ba76fb",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC6/debug-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc6-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "f5f823946f7d1b2c7020e01a1d4029a8f11eec2a0f332997914cffb843f32ad7",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "search-candidates-1"
+        ]
+      },
       "covered_checks": [
         "search-candidates-1"
       ],
@@ -302,22 +624,98 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-search-fallback-final-v1",
+        "id": "execute-search-fallback-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "442240ed26e8b6a17da132bd34841b95192738991b602d369fb7e011c5b062b3",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/execute-execute-search-fallback-final-v1.json"
+        "receipt_sha256": "e9ddf127630f83d62a9fd200978f96a7ff5c8d47d182a15f20f59d083c11b5fe",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/execute-execute-search-fallback-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-search-fallback-final-v1",
-        "receipt_sha256": "4293397a25671cef5a5a58a3c6eac2c68e1d00845bd5c9203c2f465a07489d4e",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-execute-search-fallback-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-search-fallback-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "ca937fbdee191978221906edd1d70a6395e2c7571e5d9997f1ce3de48ff3a1b2",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-execute-search-fallback-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "search-fallback-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc6-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "54a7d37040cb57f8c5c2ef3889fa6b5ed478e734e1ac3abb499baafef8ba76fb",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC6/debug-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc6-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "f5f823946f7d1b2c7020e01a1d4029a8f11eec2a0f332997914cffb843f32ad7",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "search-fallback-2"
+        ]
+      },
       "covered_checks": [
         "search-fallback-2"
       ],
       "evidence_files": 44
+    },
+    {
+      "scene": "SC6",
+      "case_id": "TC-007-unconfigured-hub-root",
+      "status": "passed",
+      "exit_code": 0,
+      "coverage": "off",
+      "receipt": {
+        "id": "execute-unconfigured-hub-root-f8-v2",
+        "operation": "execute",
+        "receipt_sha256": "37930e82440adf5d46209c1fac6baf376d78627b66a5ddd24e3eedcc8a03658c",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/execute-execute-unconfigured-hub-root-f8-v2.json",
+        "current_bindings": true
+      },
+      "independent_review": {
+        "id": "review-execute-unconfigured-hub-root-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "fb853b92e932661eb650a61b60a6c80f56a57e5c678659588bd0e35e7e55be20",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-execute-unconfigured-hub-root-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "unconfigured-hub-root-3"
+        ]
+      },
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc6-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "54a7d37040cb57f8c5c2ef3889fa6b5ed478e734e1ac3abb499baafef8ba76fb",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC6/debug-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc6-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "f5f823946f7d1b2c7020e01a1d4029a8f11eec2a0f332997914cffb843f32ad7",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC6/review-review-debug-sc6-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "unconfigured-hub-root-3"
+        ]
+      },
+      "covered_checks": [
+        "unconfigured-hub-root-3"
+      ],
+      "evidence_files": 81
     },
     {
       "scene": "SC7",
@@ -326,18 +724,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-read-exact-final-v1",
+        "id": "execute-read-exact-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "fff03876f680dcc0092b9a3e28393d90efb1fc3bf5ec63cdc570fc4266856986",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/execute-execute-read-exact-final-v1.json"
+        "receipt_sha256": "689be1c2c353377f0617e38ec4f1f3e5368bc0feaa636c896ceeee322b1faad6",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/execute-execute-read-exact-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-read-exact-final-v1",
-        "receipt_sha256": "bfdbdc63bfc3daaf8b751800895c6d0dfe19ee36e4a4c0a1e53a556183348276",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-execute-read-exact-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-read-exact-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "e9a584af41a84404beea7b9ba58d9ec4c7f5b9675c9f5720b822fb6b58b9c091",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-execute-read-exact-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "read-exact-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc7-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "93a1a938bf1f13e6925f5866df29c26525ec09e868c538a757b95c9a2ced72e9",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC7/debug-debug-sc7-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc7-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "7d6d7c8e532e0107560cca744ef75028e59628fdc60d1567d488beb195886a38",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-debug-sc7-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "read-exact-1"
+        ]
+      },
       "covered_checks": [
         "read-exact-1"
       ],
@@ -350,22 +774,79 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-read-rejection-final-v1",
+        "id": "execute-read-rejection-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "ab72430d17f757be67453a80de3cd12cc48d9a6172f79657920ee7ba3fd9d10b",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/execute-execute-read-rejection-final-v1.json"
+        "receipt_sha256": "f84fe1c04d1fc0394dfb0527afe96de600a4918c9839a0ce2d558e2a888cc37a",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/execute-execute-read-rejection-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-read-rejection-final-v1",
-        "receipt_sha256": "93e1b6539b06a70d54d7a045e37370263dcfc55f1ca150e28232cb883b5924e0",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-execute-read-rejection-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-read-rejection-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "fd70feb4826d52c6dfcef023ac79b0741b8c4090d9c1906572f539d20ac9117c",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-execute-read-rejection-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "read-rejection-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc7-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "93a1a938bf1f13e6925f5866df29c26525ec09e868c538a757b95c9a2ced72e9",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC7/debug-debug-sc7-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc7-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "7d6d7c8e532e0107560cca744ef75028e59628fdc60d1567d488beb195886a38",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC7/review-review-debug-sc7-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "read-rejection-2"
+        ]
+      },
       "covered_checks": [
         "read-rejection-2"
       ],
       "evidence_files": 128
+    },
+    {
+      "scene": "SC8",
+      "case_id": "TC-007-user-discovery",
+      "status": "passed",
+      "exit_code": null,
+      "coverage": "unknown",
+      "receipt": {
+        "id": "manual-user-discovery-f8-v4",
+        "operation": "manual",
+        "receipt_sha256": "66d838ba9b7dc5904359e64602d1360b8a17aaa824437e8f99ef8ee45c9e1b41",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/manual-manual-user-discovery-f8-v4.json",
+        "current_bindings": true
+      },
+      "independent_review": {
+        "id": "review-manual-user-discovery-f8-v4",
+        "operation": "review",
+        "receipt_sha256": "d25f682ddfd282dbc5cac6915b84d652121574d883a98d16823ad36ad878dde9",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-manual-user-discovery-f8-v4.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_discovery_v4",
+        "status": "passed",
+        "covers": [
+          "user-discovery-3"
+        ]
+      },
+      "current_preparation": null,
+      "covered_checks": [
+        "user-discovery-3"
+      ],
+      "evidence_files": 104
     },
     {
       "scene": "SC8",
@@ -374,18 +855,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-compatibility-final-v1",
+        "id": "execute-compatibility-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "5b5cb150e1fb71dd3434e901ead68115b30486f254b9264f9b73e84d174fd54f",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/execute-execute-compatibility-final-v1.json"
+        "receipt_sha256": "2fb89a74c3a252a3d62d8af9971d3a3d2c05a3502d77f97ec9c3e525e8312636",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/execute-execute-compatibility-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-compatibility-final-v1",
-        "receipt_sha256": "fe941b2433b4879f6237c2d4c621e3b987e3b737d542b2b2b5b9300a0de2c65a",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-execute-compatibility-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-compatibility-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "147bf99f3159c40dd01d168bd8b990ee8d7b8733fe42e2c85d2195eea3f2289c",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-execute-compatibility-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "compatibility-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc8-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "a5847395f7d6eed485232627a48d8e83cc1210a35a00b520393c08679cb39a84",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC8/debug-debug-sc8-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc8-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "5baa7f9467a05cc2dee300f291208d56631e736761b7bba5a0a5564a5bc9ef10",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-debug-sc8-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "compatibility-1"
+        ]
+      },
       "covered_checks": [
         "compatibility-1"
       ],
@@ -398,46 +905,48 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-packages-final-v1",
+        "id": "execute-packages-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "8e0d4f054ace7526df8e84f37d65b9f061bce7070f8f2caf516d2775bcdf914e",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/execute-execute-packages-final-v1.json"
+        "receipt_sha256": "c883059c17e6cde0c3653dc9d503fa86dcd5a9990ecafb62ada1d55326e352b1",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/execute-execute-packages-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-packages-final-v1",
-        "receipt_sha256": "ef867160ee02d0b06a8e07cada00fbd074abf8e235ab579ed792b00898d38c04",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-execute-packages-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-packages-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "bf6844ea9c3f96d439601f7c88e11d1bba5ebad4a13b24b5798684fbbdaf4a77",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-execute-packages-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "packages-2-build"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc8-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "a5847395f7d6eed485232627a48d8e83cc1210a35a00b520393c08679cb39a84",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC8/debug-debug-sc8-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc8-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "5baa7f9467a05cc2dee300f291208d56631e736761b7bba5a0a5564a5bc9ef10",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-debug-sc8-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "packages-2-build"
+        ]
+      },
       "covered_checks": [
         "packages-2-build"
       ],
       "evidence_files": 44
-    },
-    {
-      "scene": "SC8",
-      "case_id": "TC-007-user-discovery",
-      "status": "passed",
-      "exit_code": null,
-      "coverage": "unknown",
-      "receipt": {
-        "id": "manual-user-discovery-final-v3",
-        "operation": "manual",
-        "receipt_sha256": "f02e1356ba9ec0c17f8bf1a59838c77edf7f29c628916ad1d669d2dfe740cab6",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/manual-manual-user-discovery-final-v3.json"
-      },
-      "independent_review": {
-        "id": "review-manual-user-discovery-final-v3",
-        "receipt_sha256": "081dc30d551d4aa5325d65e9f0d4c496f81d769333e6bc5902cfa176b9577a6d",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-manual-user-discovery-final-v3.json",
-        "reviewer_session": "/root/review_007_manual_mac_v3"
-      },
-      "independent_status": "passed",
-      "covered_checks": [
-        "user-discovery-3"
-      ],
-      "evidence_files": 94
     },
     {
       "scene": "SC8",
@@ -446,44 +955,29 @@
       "exit_code": null,
       "coverage": "unknown",
       "receipt": {
-        "id": "manual-regression-ci-final-v1",
+        "id": "manual-regression-ci-f8-v2",
         "operation": "manual",
-        "receipt_sha256": "a2c21c197b9c44f5d9db121cf632ed3b772e215fde6c5dcc1b22f6131d71077f",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/manual-manual-regression-ci-final-v1.json"
+        "receipt_sha256": "49eeb84ce599f080258ca01de1c2185f87d989d978e982f9d6974edce487caf3",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/manual-manual-regression-ci-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-manual-regression-ci-final-v1",
-        "receipt_sha256": "bb2b8641ebda992bbfbe7f9242de963f5eb40d969272f59ab60a0105b2e46ccd",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-manual-regression-ci-final-v1.json",
-        "reviewer_session": "/root/review_007_regression_gate_v1"
+        "id": "review-manual-regression-ci-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "1adfa45f0582bb6a416c4b306ddf2bd3550c0ffbba7bbab1f8d38aa9b61ee74e",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC8/review-review-manual-regression-ci-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_gate_v2",
+        "status": "passed",
+        "covers": [
+          "packages-2-gate"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": null,
       "covered_checks": [
         "packages-2-gate"
       ],
       "evidence_files": 13
-    },
-    {
-      "scene": "SC9",
-      "case_id": "TC-007-e1-macos",
-      "status": "insufficient_evidence",
-      "exit_code": null,
-      "coverage": "unknown",
-      "receipt": {
-        "id": "manual-e1-macos-final-v3",
-        "operation": "manual",
-        "receipt_sha256": "c15df7d65ed335c35aacf7337de83ca3ab99f47fedb6795773c1b340fde85bd6",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-macos-final-v3.json"
-      },
-      "independent_review": {
-        "id": "review-manual-e1-macos-protocol-gap-v4",
-        "receipt_sha256": "5c0fa2b453bffa618b5e27fb66740fa02cd15077afd308e9a10f3add2b2e1d1f",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e1-macos-protocol-gap-v4.json",
-        "reviewer_session": "/root/review_007_macos_protocol_recheck_v4"
-      },
-      "independent_status": "insufficient_evidence",
-      "covered_checks": [],
-      "evidence_files": 66
     },
     {
       "scene": "SC9",
@@ -495,105 +989,157 @@
         "id": "manual-e2-cross-machine-resource-v1",
         "operation": "manual",
         "receipt_sha256": "38a4ad45333866d94301e4f60297478e9a4978919c7d83bdebef5fab402292f2",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-cross-machine-resource-v1.json"
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-cross-machine-resource-v1.json",
+        "current_bindings": true
       },
       "independent_review": {
         "id": "review-manual-e2-cross-machine-resource-v1",
+        "operation": "review",
         "receipt_sha256": "8d7d85fb4a7a3fc9e8229d9c86732deca99c1a6c045f2f274e5b4bee5541ed35",
         "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e2-cross-machine-resource-v1.json",
-        "reviewer_session": "/root/review_007_services_execution_v1"
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_services_execution_v1",
+        "status": "insufficient_evidence",
+        "covers": []
       },
-      "independent_status": "insufficient_evidence",
+      "current_preparation": null,
       "covered_checks": [],
       "evidence_files": 2
     },
     {
       "scene": "SC9",
-      "case_id": "TC-007-e2-windows-service",
-      "status": "insufficient_evidence",
-      "exit_code": null,
-      "coverage": "unknown",
-      "receipt": {
-        "id": "manual-e2-windows-service-final-v1",
-        "operation": "manual",
-        "receipt_sha256": "f971a66b14a56142258d299a4630f0ca3ec0d537851189de5904c50166824d34",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-windows-service-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-manual-e2-windows-service-final-v1",
-        "receipt_sha256": "c65efdd11d119b07b41d0d21596946a80f6d4d42f6c14413c6a3e048059b48c0",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e2-windows-service-final-v1.json",
-        "reviewer_session": "/root/review_007_services_execution_v1"
-      },
-      "independent_status": "insufficient_evidence",
-      "covered_checks": [],
-      "evidence_files": 120
-    },
-    {
-      "scene": "SC9",
-      "case_id": "TC-007-e2-linux-service",
-      "status": "insufficient_evidence",
-      "exit_code": null,
-      "coverage": "unknown",
-      "receipt": {
-        "id": "manual-e2-linux-service-final-v1",
-        "operation": "manual",
-        "receipt_sha256": "b9f10a545e13c7ad77e119b72aeaf223af8071abe9e5c3a4abc963f57c095a95",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-linux-service-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-manual-e2-linux-service-final-v1",
-        "receipt_sha256": "c8181ae14db8dfcd4099bbb036e9e201ec3734269b2bec56b971e76e1c8ab7da",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e2-linux-service-final-v1.json",
-        "reviewer_session": "/root/review_007_services_execution_v1"
-      },
-      "independent_status": "insufficient_evidence",
-      "covered_checks": [],
-      "evidence_files": 109
-    },
-    {
-      "scene": "SC9",
-      "case_id": "TC-007-e1-windows",
-      "status": "insufficient_evidence",
-      "exit_code": null,
-      "coverage": "unknown",
-      "receipt": {
-        "id": "manual-e1-windows-final-v1",
-        "operation": "manual",
-        "receipt_sha256": "f5cf45cbaf946c8776c3fd8300c533771cb579f01714eebf521a00e97ba4a3aa",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-windows-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-manual-e1-windows-final-v1",
-        "receipt_sha256": "a2ac7af4b0326f7317097111ea3b5c0ad51c658c97454e4c816e3075e4724bb3",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e1-windows-final-v1.json",
-        "reviewer_session": "/root/review_007_e1_ci_execution_v1"
-      },
-      "independent_status": "insufficient_evidence",
-      "covered_checks": [],
-      "evidence_files": 114
-    },
-    {
-      "scene": "SC9",
       "case_id": "TC-007-e1-linux",
-      "status": "insufficient_evidence",
+      "status": "not_executed",
       "exit_code": null,
-      "coverage": "unknown",
+      "coverage": "unavailable",
       "receipt": {
         "id": "manual-e1-linux-final-v1",
         "operation": "manual",
         "receipt_sha256": "f0ce08c86e840400d8d155d3cb017f3f90023012273221f90647974e6c85ef67",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-linux-final-v1.json"
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-linux-final-v1.json",
+        "current_bindings": false
       },
       "independent_review": {
         "id": "review-manual-e1-linux-final-v1",
+        "operation": "review",
         "receipt_sha256": "55145ef1ec1cdd2c0cbe29a117ffc9cd3f5302045c4dd8221a61bbdd306d4d90",
         "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e1-linux-final-v1.json",
-        "reviewer_session": "/root/review_007_e1_ci_execution_v1"
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_e1_ci_execution_v1",
+        "status": "insufficient_evidence",
+        "covers": []
       },
-      "independent_status": "insufficient_evidence",
+      "current_preparation": null,
       "covered_checks": [],
-      "evidence_files": 113
+      "evidence_files": 0
+    },
+    {
+      "scene": "SC9",
+      "case_id": "TC-007-e1-macos",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
+      "receipt": {
+        "id": "manual-e1-macos-final-v3",
+        "operation": "manual",
+        "receipt_sha256": "c15df7d65ed335c35aacf7337de83ca3ab99f47fedb6795773c1b340fde85bd6",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-macos-final-v3.json",
+        "current_bindings": false
+      },
+      "independent_review": {
+        "id": "review-manual-e1-macos-protocol-gap-v4",
+        "operation": "review",
+        "receipt_sha256": "5c0fa2b453bffa618b5e27fb66740fa02cd15077afd308e9a10f3add2b2e1d1f",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e1-macos-protocol-gap-v4.json",
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_macos_protocol_recheck_v4",
+        "status": "insufficient_evidence",
+        "covers": []
+      },
+      "current_preparation": null,
+      "covered_checks": [],
+      "evidence_files": 0
+    },
+    {
+      "scene": "SC9",
+      "case_id": "TC-007-e1-windows",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
+      "receipt": {
+        "id": "manual-e1-windows-final-v1",
+        "operation": "manual",
+        "receipt_sha256": "f5cf45cbaf946c8776c3fd8300c533771cb579f01714eebf521a00e97ba4a3aa",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e1-windows-final-v1.json",
+        "current_bindings": false
+      },
+      "independent_review": {
+        "id": "review-manual-e1-windows-final-v1",
+        "operation": "review",
+        "receipt_sha256": "a2ac7af4b0326f7317097111ea3b5c0ad51c658c97454e4c816e3075e4724bb3",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e1-windows-final-v1.json",
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_e1_ci_execution_v1",
+        "status": "insufficient_evidence",
+        "covers": []
+      },
+      "current_preparation": null,
+      "covered_checks": [],
+      "evidence_files": 0
+    },
+    {
+      "scene": "SC9",
+      "case_id": "TC-007-e2-linux-service",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
+      "receipt": {
+        "id": "manual-e2-linux-service-final-v1",
+        "operation": "manual",
+        "receipt_sha256": "b9f10a545e13c7ad77e119b72aeaf223af8071abe9e5c3a4abc963f57c095a95",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-linux-service-final-v1.json",
+        "current_bindings": false
+      },
+      "independent_review": {
+        "id": "review-manual-e2-linux-service-final-v1",
+        "operation": "review",
+        "receipt_sha256": "c8181ae14db8dfcd4099bbb036e9e201ec3734269b2bec56b971e76e1c8ab7da",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e2-linux-service-final-v1.json",
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_services_execution_v1",
+        "status": "insufficient_evidence",
+        "covers": []
+      },
+      "current_preparation": null,
+      "covered_checks": [],
+      "evidence_files": 0
+    },
+    {
+      "scene": "SC9",
+      "case_id": "TC-007-e2-windows-service",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
+      "receipt": {
+        "id": "manual-e2-windows-service-final-v1",
+        "operation": "manual",
+        "receipt_sha256": "f971a66b14a56142258d299a4630f0ca3ec0d537851189de5904c50166824d34",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/manual-manual-e2-windows-service-final-v1.json",
+        "current_bindings": false
+      },
+      "independent_review": {
+        "id": "review-manual-e2-windows-service-final-v1",
+        "operation": "review",
+        "receipt_sha256": "c65efdd11d119b07b41d0d21596946a80f6d4d42f6c14413c6a3e048059b48c0",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC9/review-review-manual-e2-windows-service-final-v1.json",
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_services_execution_v1",
+        "status": "insufficient_evidence",
+        "covers": []
+      },
+      "current_preparation": null,
+      "covered_checks": [],
+      "evidence_files": 0
     },
     {
       "scene": "SC10",
@@ -602,46 +1148,48 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-library-ingest-final-v1",
+        "id": "execute-library-ingest-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "e9f0e5bb69a0ce79a4952b3ad7b756ec2f29e420c0c20f42e2b6173572b15c7f",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-library-ingest-final-v1.json"
+        "receipt_sha256": "74d926c3a5ea00325162bcf78f62829834a88d3520c349bc5c62b059d721744c",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-library-ingest-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-library-ingest-final-v1",
-        "receipt_sha256": "b04aa83a28e07d2a088c2cdac65caf9bb3b2d09c2d10d8681781a3a41e154044",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-library-ingest-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-library-ingest-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "f3050c6f904dc543ca9e5ff8877e5aa51b02031c469bd01a082ea1ce8a0e7298",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-library-ingest-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "library-ingest-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc10-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "8875dd9e36ceb73a044358b26644af04a7c04d2a3c5a2eca81ac0e91173c7d78",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC10/debug-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc10-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "5db219d87d014b577a22a999a69585076c2e5e699582ca39544d46755fbeac87",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "library-ingest-1"
+        ]
+      },
       "covered_checks": [
         "library-ingest-1"
       ],
       "evidence_files": 498
-    },
-    {
-      "scene": "SC10",
-      "case_id": "TC-007-library-update",
-      "status": "passed",
-      "exit_code": 0,
-      "coverage": "off",
-      "receipt": {
-        "id": "execute-library-update-final-v1",
-        "operation": "execute",
-        "receipt_sha256": "1b7799ccb282f23657fabe9ef00f78c23e54dee5052c10dbcf609aee60835224",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-library-update-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-execute-library-update-final-v1",
-        "receipt_sha256": "265f9579299f0c7c7363354285c145aa511af44464f64b4f8eaf0639dd3d3028",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-library-update-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
-      },
-      "independent_status": "passed",
-      "covered_checks": [
-        "library-update-2"
-      ],
-      "evidence_files": 212
     },
     {
       "scene": "SC10",
@@ -650,46 +1198,140 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-project-ownership-final-v1",
+        "id": "execute-project-ownership-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "09c88bfb38a7c74d6982ab747a243c9d448788c75556ee51e56960585affc278",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-project-ownership-final-v1.json"
+        "receipt_sha256": "200805fc6a3e106b61ae1b8198898afef96defd7f6a7c2d6fd68c65a78be6bdd",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-project-ownership-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-project-ownership-final-v1",
-        "receipt_sha256": "99f501fa3077d1349c38bf1b7a7db08a902e2ad1d6b913b2363cb34518874e98",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-project-ownership-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-project-ownership-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "667deee52808ff130e3839e6d6266cf1660d8dc74942bb1d77c74f0ef560dcb9",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-project-ownership-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "project-ownership-3"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc10-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "8875dd9e36ceb73a044358b26644af04a7c04d2a3c5a2eca81ac0e91173c7d78",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC10/debug-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc10-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "5db219d87d014b577a22a999a69585076c2e5e699582ca39544d46755fbeac87",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "project-ownership-3"
+        ]
+      },
       "covered_checks": [
         "project-ownership-3"
       ],
       "evidence_files": 149
     },
     {
+      "scene": "SC10",
+      "case_id": "TC-007-library-update",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
+      "receipt": {
+        "id": "execute-library-update-final-v1",
+        "operation": "execute",
+        "receipt_sha256": "1b7799ccb282f23657fabe9ef00f78c23e54dee5052c10dbcf609aee60835224",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/execute-execute-library-update-final-v1.json",
+        "current_bindings": false
+      },
+      "independent_review": {
+        "id": "review-execute-library-update-final-v1",
+        "operation": "review",
+        "receipt_sha256": "265f9579299f0c7c7363354285c145aa511af44464f64b4f8eaf0639dd3d3028",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-execute-library-update-final-v1.json",
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_formal_execution_v1",
+        "status": "passed",
+        "covers": [
+          "library-update-2"
+        ]
+      },
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc10-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "8875dd9e36ceb73a044358b26644af04a7c04d2a3c5a2eca81ac0e91173c7d78",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC10/debug-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc10-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "5db219d87d014b577a22a999a69585076c2e5e699582ca39544d46755fbeac87",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC10/review-review-debug-sc10-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "needs_revision",
+        "covers": []
+      },
+      "covered_checks": [],
+      "evidence_files": 0
+    },
+    {
       "scene": "SC11",
       "case_id": "TC-007-listing-coverage",
-      "status": "passed",
-      "exit_code": 0,
-      "coverage": "off",
+      "status": "not_executed",
+      "exit_code": null,
+      "coverage": "unavailable",
       "receipt": {
         "id": "execute-listing-coverage-final-v1",
         "operation": "execute",
         "receipt_sha256": "abbf8f8f3bc2fac2b89101a6b5d7ff72cf2cd4a2914692894bb5904fa2f7339d",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC11/execute-execute-listing-coverage-final-v1.json"
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC11/execute-execute-listing-coverage-final-v1.json",
+        "current_bindings": false
       },
       "independent_review": {
         "id": "review-execute-listing-coverage-final-v1",
+        "operation": "review",
         "receipt_sha256": "3e0b290ef907ff490e780768975b15ae5c28f79f5d7567cf4d0c9df060194fa6",
         "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC11/review-review-execute-listing-coverage-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "current_bindings": false,
+        "reviewer_session": "/root/review_007_formal_execution_v1",
+        "status": "passed",
+        "covers": [
+          "listing-coverage-1"
+        ]
       },
-      "independent_status": "passed",
-      "covered_checks": [
-        "listing-coverage-1"
-      ],
-      "evidence_files": 24
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc11-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "88e8cce743491a7bcb1bb2ba4b6fda513acbd333cc0bb6998510c5935841efa2",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC11/debug-debug-sc11-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc11-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "2887e3f394742a755a8a833ceb3f87fbee922d75bed1fc5326fbf736248efe11",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC11/review-review-debug-sc11-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "needs_revision",
+        "covers": []
+      },
+      "covered_checks": [],
+      "evidence_files": 0
     },
     {
       "scene": "SC12",
@@ -698,18 +1340,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-snippet-conflict-final-v1",
+        "id": "execute-snippet-conflict-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "127610292df8a50da389a04eae45c52597326b7d54a0617c3aaefba5e8bb811e",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC12/execute-execute-snippet-conflict-final-v1.json"
+        "receipt_sha256": "5779247055fb8456ede32ffbfeb37dd95b8c764138a36593dd8b2a602d811013",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC12/execute-execute-snippet-conflict-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-snippet-conflict-final-v1",
-        "receipt_sha256": "3233254585e12dbd8d50076390cc10b7ca07c4c34eec1993e8054de839e7a6f1",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC12/review-review-execute-snippet-conflict-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-snippet-conflict-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "32a24a8e3854a8d72e333abf9d8a7733c5257bb96a43a787a7188c6e875bc48d",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC12/review-review-execute-snippet-conflict-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "snippet-conflict-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc12-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "e0765444d06448f3ab9369925aea9d30d8d7a8467600064bd0397d50cc466521",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC12/debug-debug-sc12-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc12-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "e666da90eb6993ea3878b6b532e6aa0ea686a417078dd6d59e6f6c1c2ffc9ec5",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC12/review-review-debug-sc12-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "snippet-conflict-1"
+        ]
+      },
       "covered_checks": [
         "snippet-conflict-1"
       ],
@@ -722,18 +1390,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-cli-scan-boundary-final-v1",
+        "id": "execute-cli-scan-boundary-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "39361c85f5d124eb0cd87b512836e7a18565d75c88625ac0c979a0b8051a7981",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC13/execute-execute-cli-scan-boundary-final-v1.json"
+        "receipt_sha256": "0c29fa386280f78078044e5a95133e592ef61fa28d7eca9de494bb2fc5ba8dc6",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC13/execute-execute-cli-scan-boundary-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-cli-scan-boundary-final-v1",
-        "receipt_sha256": "aee1e40489e470ece5a6965d2af713a8d9f9fcfd6b7e6fe6a09e34eb97fb5911",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC13/review-review-execute-cli-scan-boundary-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-cli-scan-boundary-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "b2891a3fd62c0d0d7efdeb5258339779b8209d177f1abd409ff003d8f204d568",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC13/review-review-execute-cli-scan-boundary-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "cli-scan-boundary-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc13-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "9be9d4059890f13e74ee25d8e93189dd507f3b5aeb704e2906a923799fd046fb",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC13/debug-debug-sc13-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc13-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "a961960f65ce199d18af6ca9eccfc57068436525eab17ee345a8bb4dd25582e8",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC13/review-review-debug-sc13-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "cli-scan-boundary-1"
+        ]
+      },
       "covered_checks": [
         "cli-scan-boundary-1"
       ],
@@ -746,18 +1440,48 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-web-review-feedback-final-v1",
+        "id": "execute-web-review-feedback-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "7802c7aae560676b318833b579ea5327c6e50ae2608b27f84a3130f347151584",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC14/execute-execute-web-review-feedback-final-v1.json"
+        "receipt_sha256": "63920a5b67ea84af59143f9c0fc288791483fa0bb643255f3027dd6f07da7326",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC14/execute-execute-web-review-feedback-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-web-review-feedback-final-v1",
-        "receipt_sha256": "5ba5d05edbe6d762c1b2c957e39c8f4fab995d3a7a328cac4bb6ffdfef568722",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC14/review-review-execute-web-review-feedback-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-web-review-feedback-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "8e52f4a8aed34ae09a8f10613e75ffb54f651b04a54cd6d802bd4015aa8eaef3",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC14/review-review-execute-web-review-feedback-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "web-review-feedback-1",
+          "web-review-feedback-2",
+          "web-review-feedback-3"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc14-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "ec071604337a43bb38d605604ec4dc2af1765abdf5a5bad32525795ce4da93f6",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC14/debug-debug-sc14-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc14-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "1930508ee8377e4c657c6bd13344005f6d3b6d81ff57f6c2e554e7e0c9ce6669",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC14/review-review-debug-sc14-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "web-review-feedback-1",
+          "web-review-feedback-2",
+          "web-review-feedback-3"
+        ]
+      },
       "covered_checks": [
         "web-review-feedback-1",
         "web-review-feedback-2",
@@ -767,51 +1491,103 @@
     },
     {
       "scene": "SC15",
-      "case_id": "TC-007-hub-status-provenance",
-      "status": "passed",
-      "exit_code": 0,
-      "coverage": "off",
-      "receipt": {
-        "id": "execute-hub-status-provenance-final-v1",
-        "operation": "execute",
-        "receipt_sha256": "dcf44960c92de1f3e87f27693ba8d46ea7d21cbb9832d049f0f30ac9134ff07a",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/execute-execute-hub-status-provenance-final-v1.json"
-      },
-      "independent_review": {
-        "id": "review-execute-hub-status-provenance-final-v1",
-        "receipt_sha256": "0c991f8cc38308881249ba6ef69cf9012e46d8964e2a6125f188dd9ba7ab2d35",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-execute-hub-status-provenance-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
-      },
-      "independent_status": "passed",
-      "covered_checks": [
-        "hub-status-provenance-1"
-      ],
-      "evidence_files": 66
-    },
-    {
-      "scene": "SC15",
       "case_id": "TC-007-hub-retained-state",
       "status": "passed",
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-hub-retained-state-final-v1",
+        "id": "execute-hub-retained-state-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "01bd5eaa4067cfd3306c1ea2daa2f70c277c7c748392f21782d0c079f9b68176",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/execute-execute-hub-retained-state-final-v1.json"
+        "receipt_sha256": "2c28e27d89db9df64264d92926f6eaa0d648f4f36f4fa0bcedc1e188ee0917c2",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/execute-execute-hub-retained-state-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-hub-retained-state-final-v1",
-        "receipt_sha256": "00a06877bfe32da913d7654dcc9c1fd5a5aea282d867dc2d4d22706e9443d2ca",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-execute-hub-retained-state-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-hub-retained-state-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "2627d4a372268b5c407c879d91192dd315e052d4f07e8a0a106c0f4abf0a489d",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-execute-hub-retained-state-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "hub-status-provenance-2"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc15-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "cf7fca6d14cdf4d8f0dd621935e3fbfc9e5b7ade09473739c7f7ce3a4bddb21d",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC15/debug-debug-sc15-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc15-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "a9184233ea914680d48062166e5ded38fe92913d115ec747e595c39e060f6f77",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-debug-sc15-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "hub-status-provenance-2"
+        ]
+      },
       "covered_checks": [
         "hub-status-provenance-2"
       ],
       "evidence_files": 91
+    },
+    {
+      "scene": "SC15",
+      "case_id": "TC-007-hub-status-provenance",
+      "status": "passed",
+      "exit_code": 0,
+      "coverage": "off",
+      "receipt": {
+        "id": "execute-hub-status-provenance-f8-v2",
+        "operation": "execute",
+        "receipt_sha256": "227450ba3535f87b9659fe1a2f49593cee903a5078c75c77072095ec4b1f41fb",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/execute-execute-hub-status-provenance-f8-v2.json",
+        "current_bindings": true
+      },
+      "independent_review": {
+        "id": "review-execute-hub-status-provenance-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "392c6250d4ed5efc73e913ccbd9b26a3a9a6d632cb4f2894b3bf794fea8c1f4e",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-execute-hub-status-provenance-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "hub-status-provenance-1"
+        ]
+      },
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc15-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "cf7fca6d14cdf4d8f0dd621935e3fbfc9e5b7ade09473739c7f7ce3a4bddb21d",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC15/debug-debug-sc15-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc15-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "a9184233ea914680d48062166e5ded38fe92913d115ec747e595c39e060f6f77",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC15/review-review-debug-sc15-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "hub-status-provenance-1"
+        ]
+      },
+      "covered_checks": [
+        "hub-status-provenance-1"
+      ],
+      "evidence_files": 66
     },
     {
       "scene": "SC16",
@@ -820,18 +1596,44 @@
       "exit_code": 0,
       "coverage": "off",
       "receipt": {
-        "id": "execute-folder-guidance-final-v1",
+        "id": "execute-folder-guidance-f8-v2",
         "operation": "execute",
-        "receipt_sha256": "93bf35ec40189c3347f1ef47fc56d589595dccd943214392849d1dad8e641d99",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC16/execute-execute-folder-guidance-final-v1.json"
+        "receipt_sha256": "9f876ddf883a9030cd668016feb4ceb5b23fafd5d0ae7bc427db2905071df675",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC16/execute-execute-folder-guidance-f8-v2.json",
+        "current_bindings": true
       },
       "independent_review": {
-        "id": "review-execute-folder-guidance-final-v1",
-        "receipt_sha256": "409555f8d5084ca17023419792f0bd11fd88cef406da095d84ec4f6aeca59ff0",
-        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC16/review-review-execute-folder-guidance-final-v1.json",
-        "reviewer_session": "/root/review_007_formal_execution_v1"
+        "id": "review-execute-folder-guidance-f8-v2",
+        "operation": "review",
+        "receipt_sha256": "5ef31df243a8c6c3bd06e4aee1af48ffc420a606011b468c11d8950ea544147a",
+        "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC16/review-review-execute-folder-guidance-f8-v2.json",
+        "current_bindings": true,
+        "reviewer_session": "/root/review_007_current_formal_v2",
+        "status": "passed",
+        "covers": [
+          "folder-guidance-1"
+        ]
       },
-      "independent_status": "passed",
+      "current_preparation": {
+        "receipt": {
+          "id": "debug-sc16-f8-current-v3",
+          "operation": "debug",
+          "receipt_sha256": "3716d047b804072f37163ebe9a7250fb6d0945f366931f43b36bd9a3ca1599d8",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/cases/SC16/debug-debug-sc16-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "review": {
+          "id": "review-debug-sc16-f8-current-v3",
+          "operation": "review",
+          "receipt_sha256": "47a4936895a7597fc32261d55d421b0599d59303ba3cafb5247bf04678e62a9d",
+          "public_record": ".acceptance/native-v1/AT-SMM-007/records/SC16/review-review-debug-sc16-f8-current-v3.json",
+          "current_bindings": true
+        },
+        "status": "passed",
+        "covers": [
+          "folder-guidance-1"
+        ]
+      },
       "covered_checks": [
         "folder-guidance-1"
       ],
