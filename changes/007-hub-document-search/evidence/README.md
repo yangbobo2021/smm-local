@@ -21,4 +21,4 @@
 
 在仓库根运行 `python3 scripts/acceptance/hub_documents_verify_evidence.py` 核公开长度/SHA、36项身份与登记收据关联；作者本机可加 `--original-root /private/tmp` 核原SHA。`integrity=passed`只证明字节/索引一致，不表示交付通过。
 
-[PR Review v3](../../../reviews/pr39-review-v3.md)对旧head425f140判需要修改，F1–F7关闭、F8及平台缺口分开；F8已按其意见修复，当前还需对最终资料与交付状态更新审查。[当前逐需求独立判定](../../../reviews/delivery-r007-v2.md)为 blocked：当前28项正式通过仅为部分范围，两个自动断言和六个平台项仍有缺口。必要验收未满足，维护者保留缺口不等于豁免SPEC，不合并、不发布或升级本机。未操作日常Hub/VibeInsight或被排除ESXi。
+[PR Review v3](../../../reviews/pr39-review-v3.md)对旧head425f140判需要修改，F1–F7关闭、F8及平台缺口分开；F8已按其意见修复；[当前 PR Review v4](../../../reviews/pr39-review-v4.md)已独立核完整diff、角色入口与逐条规格，结论仍不可合并，未确认新的产品失败。另有C1小缺口：README的“当前验证状态”所达验收工具007段仍写旧35项且未直链现有证据；可经指南→PLAN找到当前证据，正常使用不被阻断。该文档修订与其受影响的用户发现证据尚待一起更新，本轮不将其宣称已修复。[当前逐需求独立判定](../../../reviews/delivery-r007-v2.md)为 blocked：当前28项正式通过仅为部分范围，两个自动断言和六个平台项仍有缺口。必要验收未满足，维护者保留缺口不等于豁免SPEC，不合并、不发布或升级本机。未操作日常Hub/VibeInsight或被排除ESXi。

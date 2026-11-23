@@ -221,3 +221,5 @@ F8当前源36项准备复审完成：28自动均真实debug exit0，但独立Rev
 门禁manual-regression-ci-f8-v2的product_version尾句含旧product245c236文字，原收据保留；实际head/源绑定/执行均b7ed，索引和独立报告明确更正，不以该尾句判版本。CI实际PR合并树与b7ed源树一致，报告区分API head与实际checkout；源码摘要范围为.py/.html，不声称包括所有类型，legacy JSON以当前Git相同树和兼容原件另核。当前公开57选件每份分别标原/公开SHA与适用产品，旧245平台原件标历史；完整性校验36项和登记收据对应，不代业务通过。
 
 当前逐需求独立判定 `delivery-r007-v2` 已登记为 blocked（36项：28 passed、7 not_executed、1 insufficient_evidence）；不因服务补证暂停而豁免 SPEC。当前看板截图仅记录真实末版，不回填缺失的历史步骤画面。
+
+PR Review v4 对 base83b50fc 至 b2784d8 的完整差异按新Prompt重放角色入口，F1–F8关闭、无确认的新产品失败；两自动断言和六平台项仍缺证。新增C1低优先级导航/旧计数：验收工具007段未直链现有证据，已有指南→PLAN绕行。该项保留待修，变更所绑定的验收说明后须同步复核用户发现证据；不作为当前已修复或新增产品失败。
