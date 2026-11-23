@@ -1,10 +1,17 @@
 name: Selective upload installed-package acceptance
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Acceptance or environment-only capability probe
+        type: choice
+        options: [selective-upload, document-platform-preflight]
+        default: selective-upload
 permissions:
   contents: read
 jobs:
   installed-entrances:
+    if: inputs.mode != 'document-platform-preflight'
     strategy:
       fail-fast: false
       matrix:
@@ -40,3 +47,26 @@ jobs:
         with:
           name: selective-upload-${{ matrix.os }}
           path: ${{ runner.temp }}/005-evidence
+
+  document-platform-preflight:
+    if: inputs.mode == 'document-platform-preflight'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: python scripts/acceptance/hub_documents_ci_preflight.py --output "${{ runner.temp }}/007-preflight"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: document-platform-preflight-${{ matrix.os }}
+          path: ${{ runner.temp }}/007-preflight
