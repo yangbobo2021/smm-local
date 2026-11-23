@@ -27,12 +27,15 @@ try {
   $target=Get-Content $Config -Raw|ConvertFrom-Json
   $wheelAcls=@()
   foreach ($wheel in @($target.local_wheel,$target.hub_wheel)) {
-    $before=(Get-Acl -LiteralPath $wheel).AccessToString
+    $before=(& icacls.exe $wheel|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel original ACL receipt failed'}
     & icacls.exe $wheel /reset|Out-Null
     if ($LASTEXITCODE -ne 0) {throw 'Task wheel inheritance reset failed'}
     & icacls.exe $wheel /grant:r ($account+':R')|Out-Null
     if ($LASTEXITCODE -ne 0) {throw 'Task wheel explicit read grant failed'}
-    $wheelAcls+=@{path=$wheel;before=$before;after=(Get-Acl -LiteralPath $wheel).AccessToString}
+    $after=(& icacls.exe $wheel|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel final ACL receipt failed'}
+    $wheelAcls+=@{path=$wheel;before=$before;after=$after}
   }
   $report.wheel_acls=$wheelAcls
   $credential=New-Object System.Management.Automation.PSCredential($account,$secure)
