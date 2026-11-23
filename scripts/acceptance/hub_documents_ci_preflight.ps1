@@ -27,6 +27,34 @@ finally {
   Stop-ScheduledTask -TaskName $name -ErrorAction SilentlyContinue
   Unregister-ScheduledTask -TaskName $name -Confirm:$false -ErrorAction SilentlyContinue
 }
+# The built-in runneradmin account can retain an administrator token even at
+# RunLevel Limited. Probe a distinct standard account instead of mislabelling it.
+$userName='Smm007'+[guid]::NewGuid().ToString('N').Substring(0,10)
+$ordinaryTask=$name+'-Ordinary'
+$ordinaryReceipt=Join-Path $OutputDirectory 'ordinary-token.json'
+$ordinaryWorker=Join-Path $OutputDirectory 'ordinary-worker.ps1'
+$ordinaryScript=(Get-Content $worker -Raw).Replace($receipt.Replace("'","''"),$ordinaryReceipt.Replace("'","''"))
+$ordinaryScript|Set-Content -Encoding UTF8 $ordinaryWorker
+$password='Smm!'+[guid]::NewGuid().ToString('N')+'9aA'
+try {
+  New-LocalUser -Name $userName -Password (ConvertTo-SecureString $password -AsPlainText -Force) -AccountNeverExpires|Out-Null
+  $account=$env:COMPUTERNAME+'\'+$userName
+  & icacls.exe $OutputDirectory /grant ($account+':(OI)(CI)M')|Out-Null
+  if ($LASTEXITCODE -ne 0) {throw 'Task output ACL grant failed'}
+  $action=New-ScheduledTaskAction -Execute 'powershell.exe' -Argument ('-NoProfile -ExecutionPolicy Bypass -File "'+$ordinaryWorker+'"')
+  Register-ScheduledTask -TaskName $ordinaryTask -Action $action -User $account -Password $password -RunLevel Limited|Out-Null
+  Start-ScheduledTask -TaskName $ordinaryTask
+  $deadline=(Get-Date).AddSeconds(20)
+  while (!(Test-Path $ordinaryReceipt) -and (Get-Date) -lt $deadline) {Start-Sleep -Milliseconds 500}
+  if (Test-Path $ordinaryReceipt) {$r=Get-Content $ordinaryReceipt -Raw|ConvertFrom-Json;$report.ordinary_password_task=(!$r.is_admin);$report.ordinary_receipt=$r}
+  else {$report.ordinary_error='No ordinary account receipt within 20 seconds'}
+} catch {$report.ordinary_error=$_.Exception.Message}
+finally {
+  Stop-ScheduledTask -TaskName $ordinaryTask -ErrorAction SilentlyContinue
+  Unregister-ScheduledTask -TaskName $ordinaryTask -Confirm:$false -ErrorAction SilentlyContinue
+  Remove-LocalUser -Name $userName -ErrorAction SilentlyContinue
+  $password=$null
+}
 try {
   $bin='"'+$env:SystemRoot+'\System32\cmd.exe" /c exit 0'
   $out=& sc.exe create $name binPath= $bin obj= 'NT AUTHORITY\LocalService' start= demand 2>&1
