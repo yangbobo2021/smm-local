@@ -49,6 +49,7 @@ try {
   foreach ($character in $password.ToCharArray()) {$secure.AppendChar($character)}
   $secure.MakeReadOnly()
   New-LocalUser -Name $userName -Password $secure -AccountNeverExpires|Out-Null
+  Add-LocalGroupMember -SID 'S-1-5-32-545' -Member $userName
   $account=$env:COMPUTERNAME+'\'+$userName
   & icacls.exe $OutputDirectory /grant ($account+':(OI)(CI)M')|Out-Null
   if ($LASTEXITCODE -ne 0) {throw 'Task output ACL grant failed'}
@@ -58,7 +59,22 @@ try {
   $deadline=(Get-Date).AddSeconds(20)
   while (!(Test-Path $ordinaryReceipt) -and (Get-Date) -lt $deadline) {Start-Sleep -Milliseconds 500}
   if (Test-Path $ordinaryReceipt) {$r=Get-Content $ordinaryReceipt -Raw|ConvertFrom-Json;$report.ordinary_password_task=(!$r.is_admin);$report.ordinary_receipt=$r}
-  else {$report.ordinary_error='No ordinary account receipt within 20 seconds';$report.ordinary_task_info=(Get-ScheduledTaskInfo -TaskName $ordinaryTask|Format-List|Out-String)}
+  else {
+    $report.ordinary_error='No ordinary account receipt within 20 seconds'
+    $report.ordinary_task_info=(Get-ScheduledTaskInfo -TaskName $ordinaryTask|Format-List|Out-String)
+    $report.ordinary_task_principal=(Get-ScheduledTask -TaskName $ordinaryTask).Principal|Select-Object UserId,LogonType,RunLevel
+    Stop-ScheduledTask -TaskName $ordinaryTask -ErrorAction SilentlyContinue
+    $credential=New-Object System.Management.Automation.PSCredential($account,$secure)
+    $secondary=Get-Service seclogon
+    $startedSecondary=$secondary.Status -ne 'Running'
+    if ($startedSecondary) {Start-Service seclogon}
+    try {
+      $child=Start-Process -FilePath $python -ArgumentList ('"'+$ordinaryWorker+'"') -Credential $credential -LoadUserProfile -PassThru
+      if (!$child.WaitForExit(15000)) {Stop-Process -Id $child.Id -Force;throw 'Ordinary credential process timed out'}
+      $report.ordinary_process_exit=$child.ExitCode
+      if (Test-Path $ordinaryReceipt) {$r=Get-Content $ordinaryReceipt -Raw|ConvertFrom-Json;$report.ordinary_credential_process=(!$r.is_admin);$report.ordinary_receipt=$r}
+    } finally {if ($startedSecondary) {Stop-Service seclogon -ErrorAction SilentlyContinue}}
+  }
 } catch {$report.ordinary_error=$_.Exception.Message}
 finally {
   Stop-ScheduledTask -TaskName $ordinaryTask -ErrorAction SilentlyContinue
