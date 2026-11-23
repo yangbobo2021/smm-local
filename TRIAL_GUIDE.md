@@ -65,21 +65,90 @@ uv pip install --python <新环境的Python> dist/packages/smm_local-0.4.0-py3-n
 <新环境的Python> -m smm_local.cli --db <独立档案的绝对路径> documents --help
 ```
 
-macOS/Linux 的解释器是 `.document-preview/bin/python`，Windows 是 `.document-preview\Scripts\python.exe`。以下用 `smm` 表示该环境的入口；需要隔离时，**每条命令**均在子命令之前加 `--db <同一个独立档案>`，MCP 用同环境 `smm-mcp --db <同一档案>`。文档功能不需要 Hub，也不需要管理员权限。Web 沿用本机服务；新档案默认仍配置 Agent 对话来源，若只演示合成文档，可将 `SMM_CODEX_ROOT` 与 `SMM_CLAUDE_ROOT` 指向事先创建的空目录后再启动服务。
+macOS/Linux 的解释器是 `.document-preview/bin/python`，Windows 是 `.document-preview\Scripts\python.exe`。以下用 `smm` 表示该环境的入口；需要隔离时，**每条命令**均在子命令之前加 `--db <同一个独立档案>`，MCP 用同环境 `smm-mcp --db <同一档案>`。仅本机文档不需要 Hub，也不需要管理员权限；含007时默认联合查询，明确`--local`保留006范围。Web 沿用本机服务；新档案默认仍配置 Agent 对话来源，若只演示合成文档，可将 `SMM_CODEX_ROOT` 与 `SMM_CLAUDE_ROOT` 指向事先创建的空目录后再启动服务。
 
 1. 打开本机 Web 主导航“文档”。“创建普通本机项目”返回项目 #ID；已有项目也可在“项目”页或 `smm projects` 取得。全局项目通过“项目”页或 `smm project ensure-global` 创建，它与普通项目同级，不自动包含在 A 项目检索中。
 2. 添加 **SMM 服务所在电脑**上当前账户可读的绝对文件或目录路径，不能填写浏览器另一台电脑的路径。来源支持 `.md`、`.markdown`、`.txt`（扩展名不区分大小写），严格 UTF-8，允许 BOM；不支持 Word、Excel、PDF、图片。来源可绑定零个、一或多个现有本机项目；零绑定只参加“全部文档”，共享资料不创建项目关联。CLI 可用 `smm documents add <绝对路径> --project-id ID --project-id ID`。
 3. 保存后为 `pending`，尚未读取正文。点击该来源“刷新”或运行 `smm documents refresh --source-id <来源ID>`；省略 ID 逐来源刷新全部。来源 ID 从页面或 `smm documents sources` 取得。目录默认递归，`--no-recursive` 只看根直接文件。默认排除隐藏及 `.git/.hg/.svn/node_modules/.venv/venv/build/dist` 目录，不跟随链接/junction；可将实际文件或实际子目录另加为来源。
 4. 自定义 `--exclude` 可重复，使用相对根的 POSIX 路径，大小写敏感：`*` 单段、`?` 单字符、`**` 零或多层目录，末尾 `/` 排目录及后代；例如 `--exclude '**/private.txt' --exclude 'cache/'`。禁止绝对路径、`..`、反斜杠。Web“编辑配置”与 `smm documents set <来源ID>` 都是**完整替换**：未选项目/未给名单即清空，未给 `--no-recursive` 即递归；根路径不变，配置版本递增，旧来源资格立即退出，刷新后按新配置生效。
 5. 查看来源 `ready`、`partial`、`failed` 和“文件状态”，CLI 为 `smm documents files --source-id <ID>`。每文件原字节最多 2MiB，每来源最多 1000 个受支持候选及 16MiB 累计（过大文件不计累计，坏编码/NUL/后续不可读仍计）。逐文件错误只让该文件失败；来源枚举或总预算超限整轮失败且旧材料不可查。修正路径/权限/编码或缩小明确纳入范围，再刷新；不要将零命中当作全部已查。`refreshing` 在进程中断后也可通过下一次明确刷新恢复。
-6. 在“检索采集文档”选择全部或本机项目；CLI 为 `smm documents search "查询词" --scope project --project-id ID --limit 5`，数量 1–50。只按正文召回，项目范围只展开本机双向直接一层关联，连接 Hub 也不改变范围。有效零命中与未刷新/部分失败分开展示覆盖状态。
+6. 在“检索采集文档”选择全部或本机项目；CLI 为 `smm documents search "查询词" --scope project --project-id ID --limit 5`，数量 1–50。只按正文召回。006独立版本及显式`--local`展开本机双向直接一层；包含007并连接Hub时按下一节共同范围执行。有效零命中与未刷新/部分失败分开展示覆盖状态。
 7. 点“读取原文”，或原样将命中的 `reference` 传给 `smm documents read --reference <引用>`。默认读最多 2000 码点的命中窗口；`--start 0 --end 100` 按整个规范化文本的 Unicode 码点 `[0,100)` 扩读，一次最多 16000 字符，不是字节或 UTF-16。仅去 BOM 并将 CRLF/CR 转 LF，其他字符不改；原始字节 SHA-256、采集时间和版本均可核对。内容纯文本显示，不执行其中 Markdown/HTML/脚本。
 8. 修改/删除文件后，刷新前仍读取明确标记的上次快照；再次刷新才发现变化。内容新版本、失败/缺失、来源配置或资格变化后，失效引用明确拒绝；重新搜索取得新引用。即使改回旧字节或修复后同配置重新纳入，旧失效引用不会复活。首版不提供历史版本读取。无变化刷新、同档案服务/CLI/MCP重启保留版本和连续有效引用，不自动扫描文档。
 9. Web“移除来源”或 `smm documents remove <来源ID>` 不改原文件。独占材料立即退出检索/读取；其他有效重叠来源可保留唯一文件级当前快照及项目资格，移除最后采集来源也不回退旧正文。最后来源退出后清理可用正文/索引，不承诺物理介质安全擦除。
 
-Agent 使用三个只读 MCP 工具 `list_document_sources` → `search_documents` → `read_document(reference=...)`；来源管理通过 CLI/Web。先核覆盖，正文需读回再引用规范路径、采集版本/时间、字符/行号。对话仍用原对话工具，不能将两种引用混用。SMM 文档逻辑不调用 Hub 或外部模型；Agent 自己读取的片段会随该 Agent 的正常上下文流转。
+Agent 使用三个只读 MCP 工具 `list_document_sources` → `search_documents` → `read_document(reference=...)`；来源管理通过 CLI/Web。先核覆盖，正文需读回再引用规范路径、采集版本/时间、字符/行号。对话仍用原对话工具，不能将两种引用混用。仅本机文档不调用Hub；007联合查询与按项目明确允许的同步使用Hub，均不调用外部模型。Agent自己读取的片段会随其正常上下文流转。
 
 维护者的源码回归、双包独立安装与三系统真实入口复跑前提见[验收探针](scripts/acceptance/README.md#006-本机文档可选实际包验证)。
+
+## 项目文档库与 Hub 同步（007，尚未发布）
+
+本节需要同时含007的 Local 和 Hub；公开0.4.0包及首次安装器尚不包含。两个源码构建包仍用0.4.0阶段版本号，必须以当前提交/模块及wheel摘要区分，重复安装同名公开包不会获得新功能。不覆盖日常实例或拿真实资料验收。
+
+先在源码根构建，再分别安装到两个全新环境。以下解释器路径为macOS/Linux，Windows替换为对应环境下的`Scripts/python.exe`。uv不在PATH时传`--uv <实际uv绝对路径>`。
+
+```text
+python3 scripts/build_packages.py
+uv venv .preview-local
+uv venv .preview-hub
+uv pip install --python .preview-local/bin/python dist/packages/smm_local-0.4.0-py3-none-any.whl
+uv pip install --python .preview-hub/bin/python dist/packages/smm_hub-0.4.0-py3-none-any.whl
+```
+
+下文`smm`、`smm-hub`指各独立环境的真实入口，不是已安装的日常命令。每条Local命令都可在子命令前加`--db <同一个独立数据库绝对路径>`；Hub所有管理命令都使用同一个`hub --state-dir <绝对目录>`。本机Web沿该独立档案启动`serve`；只演示文档时先将`SMM_CODEX_ROOT`、`SMM_CLAUDE_ROOT`指向任务空目录，避免导入日常对话。
+
+**本机创建和管理。** 打开本机Web「文档」，先创建项目。文档项目与对话项目是同一种项目，允许同名、以ID及稳定键区分。选择“上传到本机项目文档库”中的项目，再选择或拖入`.md/.markdown/.txt`。保存即采集SMM专用副本，可立即按项目搜索并点击“读取原文”；外部原文件不会被改写。项目库各文档可选择新文件更新内容，保留ID/显示名/归属；移除退出搜索和读取，副本可以保留。目录/外部文件沿上一节`documents add/set/refresh`，只在明确refresh时读取。
+
+**Hub创建和管理。** 维护者先按[汇总安装](#通过包管理器部署汇总端)准备HTTPS/TLS和连接凭据。独立预览也可用`serve-hub --state-dir <目录> --token-file <现有凭据文件> --tls-cert <证书> --tls-key <私钥> --host <地址> --port <端口>`；非回环必须TLS。直接在浏览器打开该Hub HTTPS根地址，选择维护者交付的纯文本`hub-token`文件认证。凭据仅放内存和同源认证头，不放URL、浏览器存储或Cookie；页面刷新后须重新选择。新建Hub项目后选择/拖入文件，可搜索、按原文引用读取、更新和移除。远程浏览器上传的是文件字节，无需在Hub机器预先准备同名路径。设备/VibeInsight项目为只读投影，没有普通管理资格；本机网页也不代理管理Hub项目。
+
+Hub机器已有文件/目录则由维护者在Hub本机执行：
+
+```text
+smm-hub hub --state-dir <目录> project create "共享资料"
+smm-hub hub --state-dir <目录> project list
+smm-hub hub --state-dir <目录> documents add <Hub机器绝对路径> --project-id <Hub自有ID>
+smm-hub hub --state-dir <目录> documents refresh --source-id <add返回的id>
+smm-hub hub --state-dir <目录> documents sources
+smm-hub hub --state-dir <目录> documents search "独特正文词" --scope project --project-id <Hub项目ID>
+smm-hub hub --state-dir <目录> documents read --reference <本次reference>
+```
+
+`project ensure-global`创建/取得Hub自有全局项目。`documents set SOURCE --project-id ID [--exclude 模式] [--no-recursive]`完整替换为pending，随后明确refresh；省略列表清空，省略no-recursive恢复递归。`files [--source-id ID]`查看采集状态；`remove SOURCE`退出资格，不删除原文件。零绑定只参加all，多绑定不制造关联。设备来源拒绝Hub refresh/set/remove，不能尝试访问设备路径。网页库文件名只作显示，实际副本位于当前档案旁的隐藏`.documents/UUID/`目录，不允许客户端指定存储路径；相同名字/内容的不同上传是独立身份。
+
+**选择本机项目同步。** 先沿既有`configure-hub`连接验证Hub，新旧项目的文档均默认不上传，允许对话上传、项目关联或来源新增都不代表授权。Web「项目文档同步选择」逐项目操作，或从刚显示的状态逐字取得以下三个值：
+
+```text
+smm documents sync-status
+smm documents sync-policy <project_key> --enabled yes --expected-hub-id <hub_id> --expected-generation <generation>
+smm documents sync
+smm documents sources --hub
+```
+
+KEY是稳定本机项目键，HID是目标Hub身份，generation是本机保存代次，均不是项目数字ID；过期/错Hub/已删除KEY拒绝，重新查看后再决定。离线仍可保存已验证目标的选择，明确显示待确认；未知Hub不能授权正文。允许后同步该项目成功采集的当前及未来文档；新来源须明确采集。`sync --project-key KEY`只重试指定项目，手动不导入对话、不refresh、不修改全局暂停。正常重启沿用选择及任务。项目显示名修改保留选择；合并后目标保持自身选择，不继承原项目允许，新建/ID复用默认关闭。
+
+`--enabled no`是暂停：停止新正文/新名单，保留Hub已有连续资格；源移除/配置变化、refresh发现删除/不可读/失败仍安排撤回。离线撤回未确认时Hub可能仍返回旧快照，不称远端已删除。后台周期会重试档案任务；全局自动暂停只停止后台正文，仍重试已知控制/撤回；手动documents sync仍可执行。重新允许补当前有效全量，旧失效资格不复活。共享文件只给允许项目新资格；曾允许后暂停的项目，若其资格仍连续，可随另一个获准来源推进到同一文件级新版本，暂停不建立冻结分支。
+
+**按项目检索与原文。** 两端各正常返回limit（1–50）个、每份最多2000码点的片段，随后在本机对最多2limit片段做BM25，按稳定身份打破同分，最终返回limit。未上传本机结果参与排序，候选正文/摘要/文件名单不会为重排外发。相同设备/档案/文件/内容版本且双摘要一致才合并，保留两端精确引用；不同设备或版本分别保留。文档与对话共用Hub双向直接一层关联：A关联B、B关联C时从A只查A+B。
+
+```text
+smm projects --hub
+smm documents search "正文词" --scope project --project-id <本机根ID>
+smm documents search "正文词" --scope project --hub-project-id <Hub根ID>
+smm documents search "正文词" --scope project --project-id <本机根ID> --local
+smm documents read --reference <本次返回的reference> --start 0 --end 100
+smm search "对话词" --scope project --hub-project-id <Hub根ID>
+```
+
+`project-id`与`hub-project-id`互斥。Web可选档案范围、项目端及对应项目。MCP `list_projects(include_hub=true)`返回local/hub和逐端coverage/失败原因，默认仍是本机数组；`list_document_sources(include_hub=true)`返回两端来源及coverage，Hub不可用仍返回本机及原因，默认本机。`search_documents(...,local=true)`明确仅本机；`hub_project_id`选择Hub根，读取仍用`read_document(reference=...)`。三个文档工具仍只读，管理需Web/CLI。
+
+线上本机项目根只使用Hub的一层范围并映射自己稳定项目键；仅本机使用本机关联。范围无法确认时只查所请求本机根；Hub根不可得不猜同号/同名本机项目。已取得合法共同范围后仅查询断线，可保留该范围的本机结果；签名/身份被拒绝则不保留。覆盖区分已查完零条、部分、不可用与旧能力不支持。本机失败仍可返回可用Hub结果，并明确缺失端。引用绑定身份/内容版本/当次连续资格，不能把对话引用、另一端数字ID或新资格代替原引用；合并引用只可回退到当次同版本另一端。Unicode码点和LF行号规则沿006。
+
+**保护冲突与恢复。** 文档保护记录是数据库旁的`<数据库名>.documents-guard.json`及锁文件，不是005的upload guard。备份数据库及管理原始副本`.documents`为一致集，保留既有Hub连接/TLS/凭据；恢复时不能把旧保护文件覆盖当前保护边界。已有`upload prepare-restore`/`hub prepare-restore`输出包含适用文档保护排除项及副本目录，文档正文会停止；Hub还拒绝文档搜索/read。
+
+Hub维护者查看`hub documents recovery-status`的冲突、影响及不透明state，再执行`hub documents recover --expected-state <刚查看state>`。过期state拒绝；成功建立新document_epoch，使全部旧Hub文档引用/资格永久失效并丢弃暂存，自有来源保留pending。随后自有来源明确refresh，本机项目从sync-status取得KEY/HID/generation重新明确允许。Local保护失配也须对需要的项目重新显式选择，其余旧选择不会自动恢复；若本机版本回退仍冲突，应由维护者明确处理Hub恢复，不能猜版本或覆写新正文。此流程不改变005对话恢复约定或日常对话数据。
+
+维护者的[007复跑入口](scripts/acceptance/README.md#007-项目文档库与hub同步)和[已确认平台要求](changes/007-hub-document-search/plan.md)列明自动用例、实际Web/CLI/stdio、服务身份、证据及尚未覆盖项；普通单测通过不等于所有平台交付通过。
+
 
 ## 多台电脑共用汇总档案
 

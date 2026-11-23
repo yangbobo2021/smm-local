@@ -38,7 +38,7 @@ def hub_config(db: Archive) -> dict:
     return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
 
 
-def _request(config: dict, route: str, payload: dict | None = None) -> dict:
+def _request(config: dict, route: str, payload: dict | None = None) -> dict | list:
     request = Request(
         config["address"] + API + route,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8") if payload is not None else None,
@@ -47,7 +47,7 @@ def _request(config: dict, route: str, payload: dict | None = None) -> dict:
     try:
         with LOCAL_HTTP.open(request, timeout=5) as response:
             data = json.load(response)
-            if not isinstance(data, dict):
+            if not isinstance(data, dict) and not (route in {"/projects", "/documents/sources"} and isinstance(data,list)):
                 raise HubUnavailable("汇总服务返回了无效数据")
             return data
     except HTTPError as exc:
@@ -450,6 +450,7 @@ def _validated_scope(response, hub_id, device_id, project_key):
 
 def search_archive(db: Archive, query: str, *, local: bool = False, **options) -> dict:
     scope = options.get("scope", "all")
+    hub_project_id = options.pop("hub_project_id", None)
     limit = options.get("limit", 5)
     preview = options.pop("preview_chars", 0)
     if not tokens(query):
@@ -460,12 +461,18 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         raise ValueError("limit 必须在 1 到 50 之间")
     if preview != 0 and not 100 <= preview <= 2000:
         raise ValueError("preview_chars 必须为 0 或 100 到 2000")
+    if hub_project_id is not None:
+        if type(hub_project_id) is not int or hub_project_id<1 or options.get('project_id') is not None or scope!='project' or local:
+            raise ValueError('请选择一个本机或Hub项目根；Hub根不支持仅本机')
     if scope == "project":
         project_id = options.get("project_id")
-        if project_id is None:
-            raise ValueError("项目范围必须指定 project_id")
-        db.effective_projects(project_id)  # Validate caller input before any fallback.
+        if hub_project_id is None:
+            if project_id is None:raise ValueError("项目范围必须指定 project_id")
+            db.effective_projects(project_id)
+    elif options.get('project_id') is not None:raise ValueError('all不能指定项目根')
     config = hub_config(db)
+    if hub_project_id is not None and not config:
+        return {'results':[],'scope':scope,'archive_scope':'local','fallback_reason':'未连接Hub，无法确定Hub根范围','coverage':{'local':'complete','hub':'unavailable'},'candidate_failures':[],'effective_projects':[]}
     if local or not config:
         result = _local_search(db, query, config, options)
         return _display({**result, "archive_scope": "local", "requested_scope": scope,
@@ -486,10 +493,8 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         if scope == "project":
             if "query-scope-v1" not in info.get("capabilities", []):
                 raise HubUnavailable("Hub 不支持共同项目范围，本次只查本机所请求项目")
-            _push_projects(db, config, info["hub_id"], 0)
-            key = _remote_project_key(db, options["project_id"])
-            response = _request(config, "/query-scope", {"hub_id": info["hub_id"], "device_id": config["device_id"], "project_id": key})
-            snapshot = _validated_scope(response, info["hub_id"], config["device_id"], key)
+            from .document_search import _scope
+            snapshot = _scope(db,config,info,options.get('project_id'),hub_project_id)
             effective = snapshot["effective_projects"]
             local_keys = {p["stable_key"]: p["id"] for p in db.projects()}
             local_options["exact_project_ids"] = tuple(sorted({local_keys[p["source_key"]] for p in effective
@@ -526,7 +531,7 @@ def search_archive(db: Archive, query: str, *, local: bool = False, **options) -
         if snapshot is not None and getattr(exc, "status", None) in {400, 409, 422}:
             snapshot = None  # The Hub rejected this scope, rather than merely failing its search.
         if scope == "project" and snapshot is None:
-            local_options["exact_project_ids"] = (options["project_id"],)
+            local_options["exact_project_ids"] = (options["project_id"],) if hub_project_id is None else ()
     try:
         local_result = _local_search(db, query, config, local_options)
     except (OSError, ValueError, RuntimeError, sqlite3.Error) as exc:

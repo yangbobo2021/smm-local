@@ -138,6 +138,9 @@ class HubProjects:
             query += " WHERE h.id IN (" + ",".join("?" for _ in ids) + ")"
         return [dict(row) for row in con.execute(query + " ORDER BY p.id", ids or ())]
 
+    def _list_for_ids(self,ids):
+        with self.db.connect() as con:return self._list(con,ids)
+
     def memberships(self, conversation: int, within: tuple[int, ...] | None = None,
                     messages: tuple[int, ...] | None = None) -> list[dict]:
         with self.db.connect() as con:
@@ -175,6 +178,6 @@ class HubProjects:
             )]
         if len(kinds) != 2:
             raise ValueError("请选择两个不同的汇总项目")
-        if "device" not in kinds:
-            raise ValueError("关联至少需要一个设备项目")
+        if not {"device","hub"}.intersection(kinds):
+            raise ValueError("关联至少需要一个设备或Hub自有项目")
         self.db.link_projects(one, other, linked)

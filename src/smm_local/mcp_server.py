@@ -13,6 +13,8 @@ from .core import Archive, shared_db_path
 from .federation import configure_and_start, read_archive, search_archive
 from .service import Action, control_source, maintain
 from .documents import Documents
+from .document_search import search as document_search,read as document_read
+from .document_sync import hub_projects,hub_sources,combined_listing
 
 
 def create_mcp(archive: Archive | None = None) -> FastMCP:
@@ -40,12 +42,12 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
         return configure_and_start(db, address, device_name, token_file)
 
     @server.tool(annotations=readonly)
-    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, local: bool = False) -> str:
+    def search_conversations(query: str, scope: str = "all", project_id: int | None = None, limit: int = 5, current_session_id: str | None = None, current_source: str | None = None, include_current: bool = False, local: bool = False, hub_project_id: StrictInt | None = None) -> str:
         """Search local and configured Hub candidates together, reranked locally; unuploaded local conversations participate. Project scope uses Hub direct links online, only the requested local project on Hub failure; local=true uses local links. Pass the returned reference to read_conversation for exact evidence. Previews default to 600 characters."""
         current_id = current_session_id or os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") or os.environ.get("CLAUDE_SESSION_ID")
         source = current_source or ("codex" if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID") else "claude-code" if os.environ.get("CLAUDE_SESSION_ID") else None)
         size = int(os.environ.get("SMM_SEARCH_PREVIEW_CHARS", "600"))
-        return json.dumps(search_archive(db, query, local=local, scope=scope, project_id=project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current, preview_chars=size), ensure_ascii=False)
+        return json.dumps(search_archive(db, query, local=local, scope=scope, project_id=project_id, hub_project_id=hub_project_id, limit=limit, current_session_id=current_id, current_source=source, include_current=include_current, preview_chars=size), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def read_conversation(conversation_id: int | None = None, start: int | None = None, end: int | None = None,
@@ -56,9 +58,9 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
                                        hub_message_id=hub_message_id, reference=reference), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
-    def list_projects() -> str:
-        """List project IDs, source paths, direct links, and conversation counts for choosing search scope."""
-        return json.dumps(db.projects(), ensure_ascii=False)
+    def list_projects(include_hub: bool = False) -> str:
+        """List project IDs, source paths, direct links, and conversation counts. include_hub=true returns both lists with per-endpoint coverage and an unavailable reason; the default Local array is unchanged."""
+        return json.dumps(combined_listing(db) if include_hub else db.projects(), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def resolve_project(cwd: str) -> str:
@@ -66,19 +68,19 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
         return json.dumps(db.resolve_project(cwd), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
-    def list_document_sources() -> str:
-        """List explicitly configured local document sources, projects and refresh/error coverage. No scan. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only."""
-        return json.dumps(documents.sources(), ensure_ascii=False)
+    def list_document_sources(hub: bool = False, include_hub: bool = False) -> str:
+        """List explicitly configured Local sources by default. include_hub=true returns both endpoints with coverage and an unavailable reason while preserving Local results. hub=true requests only Hub. No scan or sync. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only."""
+        return json.dumps(combined_listing(db, sources=True) if include_hub else hub_sources(db) if hub else documents.sources(), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
-    def search_documents(query: str, scope: str = 'all', project_id: StrictInt | None = None, limit: StrictInt = 5) -> str:
-        """Search captured local text documents only, with local direct project links. Never searches Hub or scans files. Results include capture version, coverage and a signed reference; use read_document for evidence."""
-        return json.dumps(documents.search(query, scope=scope, project_id=project_id, limit=limit), ensure_ascii=False)
+    def search_documents(query: str, scope: str = 'all', project_id: StrictInt | None = None, limit: StrictInt = 5, local: bool = False, hub_project_id: StrictInt | None = None) -> str:
+        """Search captured local and Hub documents with a common direct project range and local reranking. local=true uses local links; hub_project_id selects an explicit remote root. Never scans files. Results include capture version, coverage and a signed reference; use read_document for evidence."""
+        return json.dumps(document_search(db,query, scope=scope, project_id=project_id, hub_project_id=hub_project_id,limit=limit,local=local), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
     def read_document(reference: str, start: StrictInt | None = None, end: StrictInt | None = None) -> str:
         """Read a captured document using its exact search reference. Default is the hit window; optional whole-file Unicode codepoint [start,end) range, max16000. Old versions/qualifications require a new search. No source-file read."""
-        return json.dumps(documents.read(reference, start=start, end=end), ensure_ascii=False)
+        return json.dumps(document_read(db,reference, start=start, end=end), ensure_ascii=False)
 
     return server
 

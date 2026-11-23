@@ -1,10 +1,17 @@
 name: Selective upload installed-package acceptance
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Acceptance or environment-only capability probe
+        type: choice
+        options: [selective-upload, document-platform-preflight, document-installed]
+        default: selective-upload
 permissions:
   contents: read
 jobs:
   installed-entrances:
+    if: inputs.mode == 'selective-upload'
     strategy:
       fail-fast: false
       matrix:
@@ -40,3 +47,59 @@ jobs:
         with:
           name: selective-upload-${{ matrix.os }}
           path: ${{ runner.temp }}/005-evidence
+
+  document-platform-preflight:
+    if: inputs.mode == 'document-platform-preflight'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: python scripts/acceptance/hub_documents_ci_preflight.py --output "${{ runner.temp }}/007-preflight"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: document-platform-preflight-${{ matrix.os }}
+          path: ${{ runner.temp }}/007-preflight
+
+  document-installed:
+    if: inputs.mode == 'document-installed'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+      UV_LINK_MODE: copy
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+      - run: uv sync --python python --extra test --extra acceptance
+      - name: Install browser runtime on Linux
+        if: runner.os == 'Linux'
+        run: uv run python -m playwright install --with-deps chromium
+      - name: Run installed document CLI, browser and stdio flows
+        run: uv run python scripts/acceptance/hub_documents_ci.py --work "${{ runner.temp }}/007-business" --output "${{ runner.temp }}/007-public-evidence"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: document-installed-${{ matrix.os }}
+          path: ${{ runner.temp }}/007-public-evidence

@@ -1,5 +1,16 @@
 # 可选实际安装包验收探针
 
+## 007 项目文档库与Hub同步
+
+[007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)定义20自动TC、7人工项和A1–A10/E1/E2。当前验证尚在进行；原始记录在任务`AT-SMM-007`私有目录，未执行或缺环境项不能计passed。最终公开索引会逐项关联原始材料及独立意见，不能用该说明或006历史结果代替007证据。
+
+- 回归入口：`python -m pytest -q tests/test_hub_documents_contracts.py`。全部使用独立合成档案/只读源见证，不连接真实Hub、VibeInsight或用户资料。设置`ACCEPTANCE_EVIDENCE_DIR=<全新私有目录>`保存逐次实际请求/响应。
+- 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
+- 独立判定探针：`python scripts/acceptance/hub_documents_checks.py --selfcheck`。两个独立原件、文本/范围/版本/摘要/项目/来源/资格逐项负控，以及真实PID/端口存活负控均必须拒绝。自检仅表示工具可用于验收。
+- 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台探针与配置路径随后在此登记；没有业务记录时保持未验证。
+- 维护者已要求不再使用家庭ESXi Windows/Linux，且目前没有其他实机资源，先继续本机与CI。CI环境能力探测独立于产品验收；Ubuntu实际user-systemd能力不等于007服务业务已通过，Windows创建LocalService配置也不等于真实LocalService进程/普通Local已通过。
+- 原始输出含合成文档及本地路径。公开前保留原始/脱敏副本双SHA，不公开token、TLS私钥、签名材料、数据库、wheel或原始trace。保护冲突按用户指南明确恢复，不删除保护文件或自动重授权以“修复”测试。
+
 ## 006 本机文档（可选实际包验证）
 
 本次候选的[实际验收证据](../../changes/006-local-document-search/evidence/README.md)提供 A1–A8/E1 与29项用例索引、三平台原文/画面/安装摘要、双包/回归/CI入口、独立意见及公开字节校验。复跑方法见下文；当前状态以索引关联的原生结果为准。
@@ -233,3 +244,11 @@ ACCEPTANCE_EVIDENCE_DIR=<另一全新输出目录> <控制端Python> scripts/acc
 `selective_upload_empty_recorded.py --target-config <私有配置> --output <全新目录> --mode client` 专门执行成功零命中：目标配置增加 `expected_platform`（`darwin` / `linux` / `win32`），先保存非空正控，再核对 project/all 在 CLI、真实 stdio MCP、浏览器上的六个空响应及两张画面。控制解释器需要验收依赖与浏览器；包解释器仍为已安装的独立环境。Windows 配置另含 `controller_python`，包装器调用 `selective_upload_empty_windows.py`，要求已登录用户的 Limited 交互任务并核对实际非管理员身份；控制终端不作为普通用户证据。子进程读取的唯一配置位于任务根目录既有 ACL 下，只含路径/模块摘要和运行参数，退出删除，不放用户凭据。
 
 空查询包装可沿用 `selective_upload_recorded.py` 的私有 `execution` SSH 目标字段，由控制端回收原始响应/画面/worker 与清理收据。Windows 长轮可能超过原生单条自动命令 300 秒上限，应按独立确认的人工外部执行步骤保存新命令的实际起止与退出，再登记复审；超时的自动收据仍为超时，不能靠回收旧结果改判成功。以上都是可选实际包验证，默认 CI 仍运行不依赖服务/浏览器/远程机器的共用 `pytest`；完整平台与原生记录范围见[本轮证据入口](../../changes/005-selective-conversation-upload/evidence/20261122-native-completion/README.md)。
+
+007 托管平台流程：手动运行 `Selective upload installed-package acceptance`，选择
+`document-installed`，依次保留 Linux/macOS/Windows 的独立包 CLI、真实浏览器和
+stdio 原件。默认 `selective-upload` 仍执行005流程。`document-platform-preflight`
+仅探测环境能力，不代表产品验收。Windows007业务使用新建标准账户，实际进程必须
+`is_admin=false`；仅创建SCM配置或普通前景进程不算E2实际服务通过。
+`hub_documents_ci.py`只导出允许的合成业务日志、截图和SHA，不上传任务凭据、私钥、
+数据库、wheel或完整浏览器trace；失败保留真实退出，输出failure及清理记录。
