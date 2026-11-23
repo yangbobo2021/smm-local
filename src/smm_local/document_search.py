@@ -233,9 +233,9 @@ def search(
             "coverage": {
                 **local_result.get("coverage", {}),
                 "local": local_coverage,
-                "hub": "not_requested",
+                "hub": hub_coverage,
             },
-            "fallback_reason": None,
+            "fallback_reason": reason,
             "candidate_failures": failures,
         }
     candidates = {}
