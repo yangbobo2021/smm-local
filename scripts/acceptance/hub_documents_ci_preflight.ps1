@@ -37,7 +37,10 @@ $ordinaryScript=(Get-Content $worker -Raw).Replace($receipt.Replace("'","''"),$o
 $ordinaryScript|Set-Content -Encoding UTF8 $ordinaryWorker
 $password='Smm!'+[guid]::NewGuid().ToString('N')+'9aA'
 try {
-  New-LocalUser -Name $userName -Password (ConvertTo-SecureString $password -AsPlainText -Force) -AccountNeverExpires|Out-Null
+  $secure=New-Object System.Security.SecureString
+  foreach ($character in $password.ToCharArray()) {$secure.AppendChar($character)}
+  $secure.MakeReadOnly()
+  New-LocalUser -Name $userName -Password $secure -AccountNeverExpires|Out-Null
   $account=$env:COMPUTERNAME+'\'+$userName
   & icacls.exe $OutputDirectory /grant ($account+':(OI)(CI)M')|Out-Null
   if ($LASTEXITCODE -ne 0) {throw 'Task output ACL grant failed'}
