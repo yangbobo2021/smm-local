@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def export(source, target):
     target.mkdir(parents=True, exist_ok=False)
     manifest = []
+    unavailable = []
     for p in sorted(source.rglob("*")):
         if not p.is_file() or p.is_symlink():
             continue
@@ -128,17 +129,44 @@ def export(source, target):
             continue
         destination = target / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(p, destination)
+        try:
+            shutil.copyfile(p, destination)
+        except OSError as error:
+            # Preserve later readable diagnostics as well as the original
+            # business failure; do not relax source ACLs to collect evidence.
+            destination.unlink(missing_ok=True)
+            unavailable.append(
+                {
+                    "path": relative.as_posix(),
+                    "error_type": type(error).__name__,
+                    "errno": error.errno,
+                }
+            )
+            continue
         manifest.append(
             {
                 "path": relative.as_posix(),
-                "bytes": p.stat().st_size,
-                "sha256": hashlib.sha256(p.read_bytes()).hexdigest(),
+                "bytes": destination.stat().st_size,
+                "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
+            }
+        )
+    if unavailable:
+        report = target / "evidence-unavailable.json"
+        report.write_text(
+            json.dumps({"files": unavailable}, indent=2), encoding="utf-8"
+        )
+        manifest.append(
+            {
+                "path": report.name,
+                "bytes": report.stat().st_size,
+                "sha256": hashlib.sha256(report.read_bytes()).hexdigest(),
             }
         )
     (target / "sha256.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
+    if unavailable:
+        raise RuntimeError("Evidence export incomplete; see evidence-unavailable.json")
 
 
 def main():
