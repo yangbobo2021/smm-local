@@ -59,6 +59,7 @@ class Probe:
         self.stops = []
         self.logs = []
         self.expected = {}
+        self.stable_mcp = []
         self.started = now()
         self.phase = "prepare"
         self.identities = out / "process-identities.jsonl"
@@ -1742,6 +1743,18 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
             + self.e_entries
         )
         document_set(all_documents[0]["results"], expected)
+        complete_reads = await self.mcp("a", [
+            ("read_document", {"reference": h["reference"]})
+            for h in all_documents[0]["results"]])
+        assert len(complete_reads) == len(expected)
+        stable = self.private_entries + self.global_entries + self.unbound_entries + self.d_entries + self.e_entries
+        for hit, actual in zip(all_documents[0]["results"], complete_reads):
+            entry = next(e for e in expected if e["origin"] == hit["origin"])
+            assert actual["id"] == hit["id"]
+            exact_read(actual, entry["raw"])
+            if any(e["origin"] == hit["origin"] for e in stable):
+                self.stable_mcp.append({"hit": hit, "raw": entry["raw"]})
+        assert len(self.stable_mcp) == len(stable)
         values = await self.mcp(
             "a",
             [
@@ -1770,7 +1783,70 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
             "e1chatneedle original discussion"
         ]
 
-    def lifecycle(self):
+    async def restart_protocol_checks(self):
+        from playwright.async_api import async_playwright, expect
+
+        expected = self.private_entries + self.global_entries + self.unbound_entries + self.d_entries + self.e_entries
+        values = await self.mcp("a", [
+            ("search_documents", {"query": "e1needle", "limit": 50}),
+            *[("read_document", {"reference": e["hit"]["reference"]}) for e in self.stable_mcp]])
+        document_set(values[0]["results"], expected)
+        assert len(values) == len(self.stable_mcp) + 1
+        for before, actual in zip(self.stable_mcp, values[1:]):
+            assert actual["id"] == before["hit"]["id"] and actual["version"] == before["hit"]["version"]
+            exact_read(actual, before["raw"])
+        self.save("restart-stdio", {"fresh_search": values[0], "old_reference_reads": values[1:],
+            "old_references": [e["hit"]["reference"] for e in self.stable_mcp], "all_stable_originals_exact": True})
+        pin = json.loads((self.out / "browser-tls.json").read_text(encoding="utf-8"))["spki_sha256_base64"]
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(headless=True,
+                args=["--ignore-certificate-errors-spki-list=" + pin],
+                **({"executable_path": self.config["browser"]} if self.config.get("browser") else {}))
+            context = await browser.new_context(viewport={"width":1280,"height":1000})
+            await context.tracing.start(screenshots=True,snapshots=True,sources=True)
+            network = []; errors = []; observations = []
+            try:
+                for role in ["a", "hub"]:
+                    page = await context.new_page()
+                    page.on("pageerror", lambda error: errors.append(str(error)))
+                    page.on("request", lambda request: network.append({"url":request.url,"method":request.method}))
+                    await page.goto(self.address[role])
+                    prefix = "doc" if role == "a" else "hub"
+                    entries = expected if role == "a" else self.d_entries + self.e_entries
+                    if role == "hub":
+                        await page.locator("#credential").set_input_files(str(self.token_file))
+                        await expect(page.locator("#workspace")).to_be_visible()
+                    else:
+                        await page.locator("button[data-tab=documents]").click()
+                        await page.locator("#doc-archive-mode").select_option("combined")
+                    await page.locator("#"+prefix+"-scope").select_option("all")
+                    await page.locator("#"+prefix+"-limit").select_option("50")
+                    await page.locator("#"+prefix+"-query").fill("e1needle")
+                    async with page.expect_response(lambda r:r.url.endswith("/documents/search") and r.request.method=="POST") as response:
+                        await page.locator("#"+prefix+"-search-form").evaluate("f=>f.requestSubmit()")
+                    result = await (await response.value).json()
+                    document_set(result["results"], entries)
+                    await expect(page.locator("#"+prefix+"-results .result")).to_have_count(len(entries))
+                    reads = []
+                    for i,hit in enumerate(result["results"]):
+                        entry = next(e for e in entries if e["origin"]==hit["origin"])
+                        async with page.expect_response(lambda r:r.url.endswith("/documents/read") and r.request.method=="POST") as response:
+                            await page.locator("#"+prefix+"-results .result").nth(i).get_by_role("button",name="读取原文",exact=True).click()
+                        actual = await (await response.value).json()
+                        assert actual["id"]==hit["id"] and actual["version"]==hit["version"]
+                        exact_read(actual, entry["raw"])
+                        await expect(page.locator("#doc-reader-text" if role=="a" else "#hub-read-text")).to_have_text(normalized(entry["raw"]))
+                        reads.append(actual)
+                    await page.screenshot(path=str(self.out/("restart-web-"+role+".png")),full_page=True)
+                    observations.append({"role":role,"search":result,"exact_reads":reads})
+                    await page.close()
+                assert not errors, errors
+                self.save("restart-web", {"observations":observations,"requests":network,"page_errors":errors})
+            finally:
+                await context.tracing.stop(path=str(self.out/"restart-web-trace.zip"))
+                await context.close(); await browser.close()
+
+    async def lifecycle(self):
         from copy import deepcopy
 
         baseline = self.verify(
@@ -2077,6 +2153,7 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
             ),
             self.d_entries,
         )
+        await self.restart_protocol_checks()
         self.cli("hub", "documents", "remove", self.sd["id"])
         for hit in native:
             if any(e["origin"] == hit["origin"] for e in self.d_entries):
@@ -2147,7 +2224,7 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
             "unchanged-source-fingerprints",
             {"before": original_sources, "after": after},
         )
-        self.lifecycle()
+        await self.lifecycle()
         entries = (
             [json.loads(line) for line in self.audit.read_text().splitlines()]
             if self.audit.exists()

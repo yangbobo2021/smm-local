@@ -223,3 +223,5 @@ F8当前源36项准备复审完成：28自动均真实debug exit0，但独立Rev
 当前逐需求独立判定 `delivery-r007-v2` 已登记为 blocked（36项：28 passed、7 not_executed、1 insufficient_evidence）；不因服务补证暂停而豁免 SPEC。当前看板截图仅记录真实末版，不回填缺失的历史步骤画面。
 
 PR Review v4 对 base83b50fc 至 b2784d8 的完整差异按新Prompt重放角色入口，F1–F8关闭、无确认的新产品失败；两自动断言和六平台项仍缺证。新增C1低优先级导航/旧计数：验收工具007段未直链现有证据，已有指南→PLAN绕行。该项保留待修，变更所绑定的验收说明后须同步复核用户发现证据；不作为当前已修复或新增产品失败。
+
+维护者2026-11-24允许E1三平台补证一轮、library-update/listing-coverage各一轮，原话与限定见 reviews/authorized-evidence-round-20261124.md。E1探针新增逐份stdio read与实际重启后的两端Web/stdio读取，原始请求/PNG/trace与原引用均保存；托管工作流仅用 document-installed-e1，不跑E2服务。两自动候选保留原TC/设计/检查，列表新增SQL在调试中提前报错，按测试故障交独立意见，不能归为产品失败或通过。

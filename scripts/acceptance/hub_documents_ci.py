@@ -69,6 +69,8 @@ def export(source, target):
                 "scm-client-boundary.json",
                 "program-access.json",
                 "administrator-source-open-audit.json",
+                "restart-stdio.json",
+                "restart-web.json",
                 "ownership-forged-management.json",
                 "literal-display-a.json",
                 "literal-display-hub.json",
