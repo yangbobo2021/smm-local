@@ -259,3 +259,20 @@ Windows标准Local与Hub管理员分开，状态/程序ACL、真实服务SID及�
 本机临时X509公钥证书的Base64填入workflow `evidence_certificate`；私钥只留本机，
 CI加密原始trace并保留原件/密文SHA，下载后本机解密校验再复审。未传公钥时
 artifact明确报告原trace未回收，该轮不能宣称完整正式证据。
+
+在本机仓库以外的私有任务目录准备回收证书（下列路径替换为你的实际私有目录）：
+
+```text
+openssl req -new -newkey rsa:3072 -nodes -x509 -keyout <私有目录>/reviewer-key.pem -out <私有目录>/reviewer-certificate.pem -days 30 -subj /CN=SMM007-evidence
+python -c "import base64,pathlib; print(base64.b64encode(pathlib.Path('<私有目录>/reviewer-certificate.pem').read_bytes()).decode())"
+```
+
+将第二条输出填入 `evidence_certificate`，选择 `document-installed` 运行。
+下载artifact后，对每个`private-traces/*.cms`解密；按artifact的`sha256.json`
+同时核密文SHA与`original_sha256`，二者一致才用于独立复审：
+
+```text
+openssl cms -decrypt -binary -inform DER -in <原件.zip.cms> -inkey <私有目录>/reviewer-key.pem -recip <私有目录>/reviewer-certificate.pem -out <私有目录>/原件.zip
+```
+
+`reviewer-key.pem`只留在该私有目录，不提交或传入workflow。公开证书不含私钥。
