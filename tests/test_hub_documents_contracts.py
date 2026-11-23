@@ -1278,11 +1278,15 @@ def test_library_update(w,monkeypatch):
         project=w.local.request('POST','/api/projects',{'name':'Sync lifecycle '+str(paused)})
         assets=[w.upload(project,'sync.txt',text='syncnonce original '+str(i),submission='state-'+str(paused)+'-'+str(i)) for i in [1,2]]
         w.policy(project['id']);w.sync();hp=w.hub_project_for(project['id'])
-        old={h['origin']['document_id']:h for h in w.search_hub(query='syncnonce',scope='project',project_id=hp['id'],limit=50)['results']}
+        initial=w.search_hub(query='syncnonce',scope='project',project_id=hp['id'],limit=50)['results']
+        expected_ids={asset['id'] for asset in assets}
+        assert len(initial)==len(assets)==len(expected_ids) and {h['origin']['document_id'] for h in initial}==expected_ids
+        old={h['origin']['document_id']:h for h in initial}
         if paused:w.policy(project['id'],False)
         for i,asset in enumerate(assets,1):
             raw=('syncnonce replacement '+str(i)).encode();request(False,'PUT','/documents/library/'+asset['id'],body(False,project,asset,content_base64=base64.b64encode(raw).decode()))
         w.sync();actual=w.search_hub(query='syncnonce',scope='project',project_id=hp['id'],limit=50)
+        assert len(actual['results'])==len(expected_ids) and {h['origin']['document_id'] for h in actual['results']}==expected_ids
         for h in actual['results']:
             i=next(i for i,a in enumerate(assets,1) if a['id']==h['origin']['document_id'])
             assert_text(w.read_hub(h),'syncnonce '+('original ' if paused else 'replacement ')+str(i))

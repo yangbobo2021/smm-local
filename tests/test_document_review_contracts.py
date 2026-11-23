@@ -26,11 +26,20 @@ def test_listing_coverage(w, monkeypatch):
         with w.pair.local.connect() as c:
             names=[r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name") if r[0]=='settings' or r[0].startswith(('local_upload','upload_message','local_document','document'))]
             return {name:[dict(r) for r in c.execute('SELECT * FROM "'+name+'" ORDER BY 1')] for name in names}
+    # Baselines come from the setup archives, not a queried list response.
+    with w.pair.local.connect() as c:
+        wanted_local={r['id']:dict(r) for r in c.execute('SELECT id,name,kind,stable_key FROM projects')}
+    with w.pair.remote.connect() as c:
+        wanted_hub={r['id']:dict(r) for r in c.execute('SELECT id,name,source,owner,source_key FROM hub_projects')}
+    def complete_projects(rows,wanted):
+        assert len(rows)==len(wanted) and {r['id'] for r in rows}==set(wanted)
+        for row in rows:
+            assert all(row[key]==value for key,value in wanted[row['id']].items())
     before_local=local_state();before_hub=w.snapshot();all_calls_start=len(w.calls)
     with monkeypatch.context() as scan_guard:
         attempts=deny_source_reads(scan_guard,path)
         assert {s['id'] for s in tool('list_document_sources',{})}=={source['id']}
-        assert isinstance(tool('list_projects',{}),list)
+        complete_projects(tool('list_projects',{}),wanted_local)
         for name in ['list_document_sources','list_projects']:
             result=tool(name,{'include_hub':True})
             assert result['coverage']=={'local':'complete','hub':'complete'}
@@ -40,13 +49,17 @@ def test_listing_coverage(w, monkeypatch):
                 assert native['source_id'] in {s['id'] for s in result['hub']}
                 assert {s['origin']['kind'] for s in result['hub']}=={'hub'}
             else:
-                assert p in {s['id'] for s in result['local']}
-                assert hp['id'] in {s['id'] for s in result['hub']}
+                complete_projects(result['local'],wanted_local)
+                complete_projects(result['hub'],wanted_hub)
         result=w.local.request('GET','/api/projects?include_hub=true')
         assert result['coverage']=={'local':'complete','hub':'complete'}
+        complete_projects(result['local'],wanted_local)
+        complete_projects(result['hub'],wanted_hub)
         expected_sources=tool('list_document_sources',{})
         expected_projects=tool('list_projects',{})
         expected_api_projects=w.local.request('GET','/api/projects')
+        complete_projects(expected_projects,wanted_local)
+        complete_projects(expected_api_projects,wanted_local)
         before=w.snapshot()
         marker=len(w.calls)
         original=federation._request
@@ -57,9 +70,11 @@ def test_listing_coverage(w, monkeypatch):
             assert result['coverage']=={'local':'complete','hub':'unavailable'}
             assert result['hub']==[] and 'listing offline witness' in result['fallback_reason']
             assert result['local']==(expected_sources if name=='list_document_sources' else expected_projects)
+            if name=='list_projects':complete_projects(result['local'],wanted_local)
         result=w.local.request('GET','/api/projects?include_hub=true')
         assert result['coverage']=={'local':'complete','hub':'unavailable'}
         assert result['local']==expected_api_projects and result['hub']==[] and result['fallback_reason']
+        complete_projects(result['local'],wanted_local)
         assert w.snapshot()==before
         assert not w.calls[marker:],'No request succeeds when offline'
         monkeypatch.setattr(federation,'_request',original)

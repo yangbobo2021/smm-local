@@ -570,11 +570,81 @@
       "bytes": 54964,
       "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
       "description": "Current v5 user-discovery proof only; images actually opened by independent reviewer; no E1 lifecycle or service claim"
+    },
+    {
+      "public_path": "public/approved-round-20261124/library-formal.stdout",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/execute/execute-library-update-approved-v1/TC-007-library-update/run.stdout",
+      "original_sha256": "2a0c760bcd9ffde5beff3de92d5a1097d1d4434e3c673b1fc7ba3176b20b0a8f",
+      "public_sha256": "2a0c760bcd9ffde5beff3de92d5a1097d1d4434e3c673b1fc7ba3176b20b0a8f",
+      "bytes": 587,
+      "description": "approved library-update formal exit0",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    },
+    {
+      "public_path": "public/approved-round-20261124/listing-debug.stdout",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007/.acceptance-local/native-v1/AT-SMM-007/debug/debug-listing-coverage-approved-v1/TC-007-listing-coverage/run.stdout",
+      "original_sha256": "fc0fa35cb6da8a60721957ae4ed877ef0918f9cdf67628a7a14c22f2153b4b4e",
+      "public_sha256": "fc0fa35cb6da8a60721957ae4ed877ef0918f9cdf67628a7a14c22f2153b4b4e",
+      "bytes": 2522,
+      "description": "listing setup SQL error, not product failure",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    },
+    {
+      "public_path": "public/approved-round-20261124/macos-e1-failure.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-ci-e1-approved-macos-v1/007-public-evidence/platform/failure.json",
+      "original_sha256": "dc95cca4f82454b5a042c9b77641e2f000ea95044a79d3ec0de2d0ea2fe7c9e8",
+      "public_sha256": "dc95cca4f82454b5a042c9b77641e2f000ea95044a79d3ec0de2d0ea2fe7c9e8",
+      "bytes": 1241,
+      "description": "CI45260738680 actual macos E1 stops at new ID assertion; later stages not reached",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    },
+    {
+      "public_path": "public/approved-round-20261124/ubuntu-e1-failure.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-ci-e1-approved-ubuntu-v1/007-public-evidence/platform/failure.json",
+      "original_sha256": "3d05c488cc483bbdf430cc2e302cadc67d0c23de811a9c4fd87bcaa1466b581c",
+      "public_sha256": "3d05c488cc483bbdf430cc2e302cadc67d0c23de811a9c4fd87bcaa1466b581c",
+      "bytes": 1205,
+      "description": "CI45260738680 actual ubuntu E1 stops at new ID assertion; later stages not reached",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    },
+    {
+      "public_path": "public/approved-round-20261124/windows-e1-failure.json",
+      "kind": "original synthetic task evidence, unchanged bytes",
+      "original_locator": "/private/tmp/smm-007-ci-e1-approved-windows-v1/007-public-evidence/platform/failure.json",
+      "original_sha256": "2116983c9f18d87490efd647d2ec35ac49f6e018427d80762c285213e476d4a5",
+      "public_sha256": "2116983c9f18d87490efd647d2ec35ac49f6e018427d80762c285213e476d4a5",
+      "bytes": 1198,
+      "description": "CI45260738680 actual windows E1 stops at new ID assertion; later stages not reached",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    },
+    {
+      "public_path": "public/approved-round-20261124/user-path-failure.json",
+      "kind": "derived username redaction; business assertions preserved",
+      "original_locator": "/private/tmp/smm-007-user-discovery-approved-v1/failure.json",
+      "original_sha256": "a3971ca1fefd060d4db60f798e92895e6af7c80a2c59ed548d2c5a3694dd8b55",
+      "public_sha256": "c2af2bd6ca32e9c7f5727482937c039afa6becc5165b797a8a5a73629545ad04",
+      "bytes": 1209,
+      "description": "same shared assertion stopped local user path, not passed",
+      "product_source_commit": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
     }
   ],
   "versions": {
     "historical_product": "245c236ddc41057cd78694902283574d1175e309",
-    "current_product": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da"
+    "current_product": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+    "approved_round_20261124": {
+      "product": "b7ed5d73cc6532dd451c1f6f52d6cd0e88a408da",
+      "E1_probe_commit": "3eb918c06b873773560361a882b60b6aa986d471",
+      "E1_run": 45260738680,
+      "E1_outcome": "three needs_revision; not product failure; corrections not applied",
+      "test_sha256": {
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_document_review_contracts.py": "334871eb07e5fcd8cde3434469aebad326a35e8914747dba7a4ba1967670644a"
+      }
+    }
   },
   "historical_actual_mac_probe": "v16; runner SHA recorded",
   "historical_actual_service_run": "45201802511/head465d27e"
