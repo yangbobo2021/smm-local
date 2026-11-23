@@ -32,9 +32,17 @@ finally {
 $userName='Smm007'+[guid]::NewGuid().ToString('N').Substring(0,10)
 $ordinaryTask=$name+'-Ordinary'
 $ordinaryReceipt=Join-Path $OutputDirectory 'ordinary-token.json'
-$ordinaryWorker=Join-Path $OutputDirectory 'ordinary-worker.ps1'
-$ordinaryScript=(Get-Content $worker -Raw).Replace($receipt.Replace("'","''"),$ordinaryReceipt.Replace("'","''"))
-$ordinaryScript|Set-Content -Encoding UTF8 $ordinaryWorker
+$ordinaryWorker=Join-Path $OutputDirectory 'ordinary-worker.py'
+$python=(Get-Command python).Source
+$pythonReceipt=$ordinaryReceipt.Replace('\','\\').Replace("'","\'")
+@"
+import ctypes,json,os,subprocess
+from pathlib import Path
+sid=ctypes.c_ulong()
+ctypes.windll.kernel32.ProcessIdToSessionId(os.getpid(),ctypes.byref(sid))
+value={'is_admin':bool(ctypes.windll.shell32.IsUserAnAdmin()),'pid':os.getpid(),'session_id':sid.value,'identity':subprocess.check_output(['whoami'],text=True).strip()}
+Path('$pythonReceipt').write_text(json.dumps(value),encoding='utf-8')
+"@|Set-Content -Encoding UTF8 $ordinaryWorker
 $password='Smm!'+[guid]::NewGuid().ToString('N')+'9aA'
 try {
   $secure=New-Object System.Security.SecureString
@@ -44,13 +52,13 @@ try {
   $account=$env:COMPUTERNAME+'\'+$userName
   & icacls.exe $OutputDirectory /grant ($account+':(OI)(CI)M')|Out-Null
   if ($LASTEXITCODE -ne 0) {throw 'Task output ACL grant failed'}
-  $action=New-ScheduledTaskAction -Execute 'powershell.exe' -Argument ('-NoProfile -ExecutionPolicy Bypass -File "'+$ordinaryWorker+'"')
+  $action=New-ScheduledTaskAction -Execute $python -Argument ('"'+$ordinaryWorker+'"')
   Register-ScheduledTask -TaskName $ordinaryTask -Action $action -User $account -Password $password -RunLevel Limited|Out-Null
   Start-ScheduledTask -TaskName $ordinaryTask
   $deadline=(Get-Date).AddSeconds(20)
   while (!(Test-Path $ordinaryReceipt) -and (Get-Date) -lt $deadline) {Start-Sleep -Milliseconds 500}
   if (Test-Path $ordinaryReceipt) {$r=Get-Content $ordinaryReceipt -Raw|ConvertFrom-Json;$report.ordinary_password_task=(!$r.is_admin);$report.ordinary_receipt=$r}
-  else {$report.ordinary_error='No ordinary account receipt within 20 seconds'}
+  else {$report.ordinary_error='No ordinary account receipt within 20 seconds';$report.ordinary_task_info=(Get-ScheduledTaskInfo -TaskName $ordinaryTask|Format-List|Out-String)}
 } catch {$report.ordinary_error=$_.Exception.Message}
 finally {
   Stop-ScheduledTask -TaskName $ordinaryTask -ErrorAction SilentlyContinue
