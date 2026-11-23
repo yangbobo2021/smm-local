@@ -300,6 +300,9 @@ def search(
             **local_result.get("coverage", {}),
             "local": local_coverage,
             "hub": hub_coverage,
+            "hub_sources": (
+                remote.get("coverage", {}).get("sources", []) if remote else []
+            ),
         },
         "fallback_reason": reason,
         "candidate_failures": failures,

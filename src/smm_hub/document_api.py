@@ -67,7 +67,7 @@ def install(app, documents, token):
 
     @app.get("/v1/documents/files")
     def document_files(source_id: str | None = None):
-        return invoke(documents.documents.files, source_id)
+        return invoke(documents.files, source_id)
 
     @app.get("/v1/documents/library")
     def library(project_id: int | None = None):

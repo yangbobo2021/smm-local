@@ -1,0 +1,83 @@
+{
+  "purpose": "Historical a44 candidate: exact original browser-trace recovery only; not final platform acceptance.",
+  "items": [
+    {
+      "scope": "macos-e1",
+      "run_id": 45167073148,
+      "product_commit": "a44a363bb8a708396c643daeec331f6a83bc9aac",
+      "verified_manifest_files": 97,
+      "decrypted_trace_count": 2,
+      "private_key_uploaded": false,
+      "traces": [
+        {
+          "original_path": "platform/web-a-trace.zip",
+          "original_bytes": 4568017,
+          "original_sha256": "814385e889ae2cc5e4011db45deb6c644df206a0292531bf02b92610ce7b4ca7",
+          "ciphertext_sha256": "8582d869894e780f5211d7bcd48199827f3eda8dd432d4a379df5956d065d2ad",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        },
+        {
+          "original_path": "platform/web-hub-trace.zip",
+          "original_bytes": 2304730,
+          "original_sha256": "cbbf7fa2eb55eaf67936ededfad0f06e6bb218bf48d3d4a430171d3d5bf62f62",
+          "ciphertext_sha256": "0fe86a38618993ea6af6257efdd53a1f3490b1309cf13da30a9ed53ffaf5f3b9",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        }
+      ]
+    },
+    {
+      "scope": "ubuntu-e1",
+      "run_id": 45167073148,
+      "product_commit": "a44a363bb8a708396c643daeec331f6a83bc9aac",
+      "verified_manifest_files": 97,
+      "decrypted_trace_count": 2,
+      "private_key_uploaded": false,
+      "traces": [
+        {
+          "original_path": "platform/web-a-trace.zip",
+          "original_bytes": 4662411,
+          "original_sha256": "27dcd876bdfb2199815a604c08b6733fae4f68f65b3c8e30440ab058a2b1e715",
+          "ciphertext_sha256": "17f670370cc477a43232da3803396a33e4d128327d2b0a078cb27ee3f6d81948",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        },
+        {
+          "original_path": "platform/web-hub-trace.zip",
+          "original_bytes": 1919514,
+          "original_sha256": "b7ec24ea4ed27da7c8830b9014714a17ddc7d8f5972bd636baf09e336e460ec5",
+          "ciphertext_sha256": "2b9ff31f3746b488de85acc5ac4194f886f13c744f983e7358011506cfdcf76d",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        }
+      ]
+    },
+    {
+      "scope": "ubuntu-user-systemd",
+      "run_id": 45167073148,
+      "product_commit": "a44a363bb8a708396c643daeec331f6a83bc9aac",
+      "verified_manifest_files": 98,
+      "decrypted_trace_count": 2,
+      "private_key_uploaded": false,
+      "traces": [
+        {
+          "original_path": "platform/web-a-trace.zip",
+          "original_bytes": 4851672,
+          "original_sha256": "a222d3d99c9fd17c80ba6f6dc0d138a42d2b7185ddecdb96e59f61d5afc691c8",
+          "ciphertext_sha256": "c6a00676a0b8c1e1e9dd42f7d958e411aba43e62d48a931f4d20150c87d86cc1",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        },
+        {
+          "original_path": "platform/web-hub-trace.zip",
+          "original_bytes": 1664123,
+          "original_sha256": "454176790b8ea4ac7897509a7f990dd56d1bc6dcbdd77874d3e0cbc80cad7653",
+          "ciphertext_sha256": "e378e7a11062250f9ec5b1f99cd9926fbff8b99b13fee57f370169adf5c5ec61",
+          "decrypted_exact_original": true,
+          "zip_integrity": true
+        }
+      ]
+    }
+  ]
+}

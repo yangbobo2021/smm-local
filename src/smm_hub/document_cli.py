@@ -46,7 +46,7 @@ def dispatch(state, args):
     if action == "sources":
         return documents.sources()
     if action == "files":
-        return documents.documents.files(args.source_id)
+        return documents.files(args.source_id)
     if action == "recovery-status":
         return documents.recovery_status()
     if action == "recover":

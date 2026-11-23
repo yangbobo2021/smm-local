@@ -160,12 +160,26 @@ class HubDocuments:
                 c.execute("UPDATE projects SET kind=? WHERE id=?", (kind, ident))
             return next(p for p in self.projects.list() if p["id"] == ident)
 
-    def sources(self):
+    def sources(self, *, locked=False):
+        if not locked:
+            with control_lock(self.guard.lock):
+                return self.sources(locked=True)
         with self.db.connect() as c:
             origins = {
                 r["source_id"]: dict(r)
                 for r in c.execute("SELECT * FROM hub_document_sources")
             }
+            times = {
+                r["source_id"]: dict(r)
+                for r in c.execute(
+                    "SELECT m.source_id,MAX(d.captured_at) AS captured_at,MAX(o.received_at) AS received_at,SUM(m.status='ready') AS ready FROM document_memberships m JOIN documents d ON d.pk=m.document_pk LEFT JOIN hub_document_origins o ON o.document_id=d.id GROUP BY m.source_id"
+                )
+            }
+            controls = {
+                (r["device_id"], r["archive_id"], r["project_key"]): dict(r)
+                for r in c.execute("SELECT * FROM hub_document_controls")
+            }
+        problem = self.guard.status(locked=True)
         result = []
         for source in self.documents.sources():
             origin = origins.get(source["id"])
@@ -188,8 +202,100 @@ class HubDocuments:
             source["message"] = (
                 "同步投影只读" if origin else "Hub自有来源；仅明确refresh读取文件"
             )
+            # These describe current stored member-file versions, not a source
+            # refresh or a fresh read of the external path.
+            source["latest_document_captured_at"] = times.get(source["id"], {}).get(
+                "captured_at"
+            )
+            source["latest_document_received_at"] = times.get(source["id"], {}).get(
+                "received_at"
+            )
+            control = (
+                controls.get(
+                    (origin["device_id"], origin["archive_id"], origin["project_key"])
+                )
+                if origin
+                else None
+            )
+            if problem or (
+                origin
+                and (
+                    not control
+                    or control["blocked_generation"] >= control["generation"]
+                )
+            ):
+                state, message = (
+                    "conflict",
+                    problem or "项目授权冲突；请在创建端重新明确选择",
+                )
+            elif not origin:
+                state, message = "native", "Hub自有；仅明确采集更新当前文件版本"
+            elif control["enabled"]:
+                state, message = "allowed", "允许同步；显示Hub已确认接收的采集版本"
+            else:
+                state, message = (
+                    "paused",
+                    "已暂停同步；保留仍有效的资格，共享文件可由其他允许来源更新",
+                )
+            source["sync_state"] = state
+            source["sync_message"] = message
+            source["retained_snapshot"] = bool(
+                state == "paused"
+                and source["status"] in {"ready", "partial", "refreshing"}
+                and times.get(source["id"], {}).get("ready", 0)
+            )
             result.append(source)
         return result
+
+    @staticmethod
+    def _snapshot_metadata(source_ids, sources):
+        states = [
+            {
+                "source_id": sources[ident]["origin"]["source_id"],
+                "origin": dict(sources[ident]["origin"]),
+                "project_key": sources[ident]["origin"].get("project_key"),
+                "project_ids": list(sources[ident]["project_ids"]),
+                "state": sources[ident]["sync_state"],
+                "retained_snapshot": sources[ident]["retained_snapshot"],
+            }
+            for ident in source_ids
+        ]
+        retained = any(state["retained_snapshot"] for state in states)
+        return {
+            "sync_states": states,
+            "retained_snapshot": retained,
+            "snapshot_kind": (
+                "暂停同步后保留的有效资格；共享文件可由其他允许来源更新"
+                if retained
+                else "Hub已采集/接收版本"
+            ),
+        }
+
+    def files(self, source_id=None):
+        with control_lock(self.guard.lock):
+            sources = {s["id"]: s for s in self.sources(locked=True)}
+            rows = self.documents.files(source_id)
+            with self.db.connect() as c:
+                metadata = {
+                    r["id"]: dict(r)
+                    for r in c.execute(
+                        "SELECT d.id,d.text_sha256,COALESCE(o.display_name,l.display_name) AS display_name FROM documents d LEFT JOIN hub_document_origins o ON o.document_id=d.id LEFT JOIN document_library l ON l.document_id=d.id"
+                    )
+                }
+            for row in rows:
+                source = sources[row["source_id"]]
+                origin, received = self._origin(row["id"])
+                row.update(
+                    origin=origin,
+                    **self._origin_display(origin, received),
+                    received_at=received,
+                    source_origin=dict(source["origin"]),
+                    project_ids=list(source["project_ids"]),
+                    archive_scope="hub",
+                    **self._snapshot_metadata([row["source_id"]], sources),
+                    **metadata[row["id"]],
+                )
+            return rows
 
     def native(self, action, body=None, source_id=None):
         body = dict(body or {})
@@ -217,7 +323,7 @@ class HubDocuments:
                 return {
                     "sources": [
                         self.documents.refresh(s["id"])
-                        for s in self.sources()
+                        for s in self.sources(locked=True)
                         if s["origin"]["kind"] == "hub"
                     ]
                 }
@@ -706,7 +812,7 @@ class HubDocuments:
                 options.pop("project_id", None)
                 options["scope"] = "all"
             result = self.documents.search(**options)
-            sources = {s["id"]: s for s in self.sources()}
+            sources = {s["id"]: s for s in self.sources(locked=True)}
             archive, key = reference_material(self.db)
             for hit in result["results"]:
                 with self.db.connect() as c:
@@ -721,7 +827,7 @@ class HubDocuments:
                 hit.update(self._origin_display(origin, received))
                 hit["received_at"] = received
                 hit["archive_scope"] = "hub"
-                hit["snapshot_kind"] = "Hub采集/接收版本"
+                hit.update(self._snapshot_metadata(hit["source_ids"], sources))
                 hit["provenance"] = [
                     {
                         "source_id": sources[s]["origin"]["source_id"],
@@ -745,6 +851,9 @@ class HubDocuments:
                     },
                     key,
                 )
+            result["coverage"]["sources"] = [
+                sources[item["id"]] for item in result["coverage"]["sources"]
+            ]
             return {**result, **self.context()}
 
     def read(self, body):
@@ -775,8 +884,17 @@ class HubDocuments:
                 for k in ("version", "sha256", "text_sha256", "text_length")
             ):
                 raise ValueError("引用身份或版本不匹配")
+            sources = {source["id"]: source for source in self.sources(locked=True)}
             return {
                 **value,
+                **self._snapshot_metadata(value["source_ids"], sources),
+                "project_ids": sorted(
+                    {
+                        project
+                        for ident in value["source_ids"]
+                        for project in sources[ident]["project_ids"]
+                    }
+                ),
                 "origin": origin,
                 **self._origin_display(origin, received),
                 "received_at": received,
