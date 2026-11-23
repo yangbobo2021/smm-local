@@ -24,3 +24,5 @@
 在仓库根运行 `python3 scripts/acceptance/hub_documents_verify_evidence.py` 核公开长度/SHA、36项与登记收据；作者可加`--original-root /private/tmp`核原SHA。覆盖率off/unknown不表示行覆盖率。保持Draft，不合并、不发布、不升级日常SMM，未访问日常Hub/VibeInsight或被排除ESXi。
 
 本轮完整R007的[独立交付判定](../../../reviews/delivery-r007-approved-v1.md)已登记blocked。历史passed不覆盖新测试/说明版本，测试断言故障不当作产品必测失败。两个修订问题仍等维护者答复，未应用待决草稿。
+
+[本轮完整PR Review v5](../../../reviews/pr39-approved-review-v5.md)已在新上下文核全PR、同字节产品与实际入口、新断言/平台原件及逐条规格：保持Draft，不合并；C1静态修正、测试实现故障、业务缺证分别认定，未确认新增产品违约。
