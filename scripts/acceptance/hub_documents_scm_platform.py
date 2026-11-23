@@ -49,10 +49,8 @@ class Administrator(Probe):
         child = getattr(self, "child_output", None)
         if role == "hub" and child and (child / "phase.txt").exists():
             value.update(
-                SMM_007_IDENTITIES=str(child / "process-identities.jsonl"),
                 SMM_007_FIXTURES=str(child / "资料 空格"),
                 SMM_007_PHASE=str(child / "phase.txt"),
-                SMM_007_AUDIT=str(child / "source-opens.jsonl"),
             )
         return value
 
@@ -376,6 +374,30 @@ def administrator(config, out):
         assert process.returncode == 0, process.returncode
         result = json.loads((manager.child_output / "result.json").read_text())
         assert result["status"] == "passed"
+        administrator_entries = (
+            [json.loads(line) for line in manager.audit.read_text().splitlines()]
+            if manager.audit.exists()
+            else []
+        )
+        assert all(
+            entry["phase"] in {"explicit-refresh", "conversation-import"}
+            for entry in administrator_entries
+        )
+        administrator_identities = [
+            json.loads(line) for line in manager.identities.read_text().splitlines()
+        ]
+        assert administrator_identities and all(
+            actor["is_admin"] is True and actor["argv"][0] == "smm_hub.cli"
+            for actor in administrator_identities
+        )
+        manager.save(
+            "administrator-source-open-audit",
+            {
+                "entries": administrator_entries,
+                "only_explicit_collection": True,
+                "separate_from_standard_user_stream": True,
+            },
+        )
         manager.save("result", result)
     finally:
         if process and process.poll() is None:
