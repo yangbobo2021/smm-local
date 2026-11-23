@@ -67,6 +67,7 @@ def export(source, target):
                 "service-events.json",
                 "service-cleanup.json",
                 "scm-client-boundary.json",
+                "program-access.json",
             }
             or p.name.startswith("mcp-")
             and p.suffix == ".json"

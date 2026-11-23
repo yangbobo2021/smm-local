@@ -262,9 +262,31 @@ def administrator(config, out):
             "*S-1-5-32-544:(OI)(CI)F",
             "*S-1-5-18:(OI)(CI)F",
             "*S-1-5-19:(OI)(CI)RX",
-            "/T",
         ],
     )
+    # Set inheritable rights on the task directory only; children must inherit
+    # it instead of having their inheritance removed file by file.
+    manager.run(
+        "inherit-task-programs", ["icacls.exe", str(packages / "*"), "/reset", "/T"]
+    )
+    manager.run("task-program-file-acl", ["icacls.exe", config["hub_python"]])
+    access = json.loads(
+        manager.run(
+            "task-program-access",
+            [
+                config["hub_python"],
+                "-I",
+                "-X",
+                "utf8",
+                "-c",
+                "import ctypes,hashlib,importlib.util,json,pathlib,sys; expected=json.loads(pathlib.Path(sys.argv[1]).read_text()); root=pathlib.Path(importlib.util.find_spec('smm_hub').origin).parent.parent; assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==digest for name,digest in expected.items()); print(json.dumps({'is_admin':bool(ctypes.windll.shell32.IsUserAnAdmin()),'python':sys.executable,'verified_modules':len(expected),'readable_expected_modules':True}))",
+                config["hub_expected"],
+            ],
+            role="hub",
+        )
+    )
+    assert access["is_admin"] is True and access["readable_expected_modules"] is True
+    manager.save("program-access", access)
     process = None
     installed = False
     failures = []

@@ -2,7 +2,7 @@
 
 ## 007 项目文档库与Hub同步
 
-[007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)当前含27自动TC、7人工项和A1–A10/E1/E2。当前验证尚在进行；原始记录在任务`AT-SMM-007`私有目录，未执行或缺环境项不能计passed。最终公开索引会逐项关联原始材料及独立意见，不能用该说明或006历史结果代替007证据。
+[007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)当前含27自动TC、8人工项和A1–A10/E1/E2。当前验证尚在进行；原始记录在任务`AT-SMM-007`私有目录，未执行或缺环境项不能计passed。最终公开索引会逐项关联原始材料及独立意见，不能用该说明或006历史结果代替007证据。
 
 - 回归入口：`python -m pytest -q`（包含主契约、列表/片段补充、PR扫描/网页回归；网页回归需acceptance依赖及Chrome，无该依赖时明确skip）。全部使用独立合成档案/只读源见证，不连接真实Hub、VibeInsight或用户资料。设置`ACCEPTANCE_EVIDENCE_DIR=<全新私有目录>`保存逐次实际请求/响应。
 - 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
