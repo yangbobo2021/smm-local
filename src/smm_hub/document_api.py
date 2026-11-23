@@ -57,10 +57,6 @@ def install(app, documents, token):
     def sources():
         return invoke(documents.sources)
 
-    @app.post("/v1/documents/sources")
-    def add_source(body: dict = Body(...)):
-        return invoke(documents.native, "add", body)
-
     @app.put("/v1/documents/sources/{source_id}")
     def set_source(source_id: str, body: dict = Body(...)):
         return invoke(documents.native, "set", body, source_id)
@@ -68,11 +64,6 @@ def install(app, documents, token):
     @app.delete("/v1/documents/sources/{source_id}")
     def remove_source(source_id: str, body: dict = Body(...)):
         return invoke(documents.native, "remove", body, source_id)
-
-    @app.post("/v1/documents/refresh")
-    def refresh(body: dict = Body(...)):
-        source = body.pop("source_id", None)
-        return invoke(documents.native, "refresh", body, source)
 
     @app.get("/v1/documents/files")
     def document_files(source_id: str | None = None):

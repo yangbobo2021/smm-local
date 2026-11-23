@@ -67,10 +67,10 @@ for name,expected in mapping.items():
 if role=='hub':assert importlib.util.find_spec('smm_local') is None,'Hub installation depends on Local'
 print(json.dumps({'role':role,'python':sys.executable,'site_root':str(root),'module_sha256':mapping,'hub_has_no_local':role=='hub'},ensure_ascii=False))
 """
-        run(role+'-installed-modules',[python,'-I','-c',code,manifest,role])
+        run(role+'-installed-modules',[python,'-I','-X','utf8','-c',code,manifest,role])
         state=output/(role+'-state');state.mkdir();source=state/'source 中文.txt';text='packageprobe '+role+'😀\nindependent '+role;source.write_text(text,encoding='utf-8')
-        if role=='local':base=[python,'-I','-m','smm_local.cli','--db',state/'local.sqlite3'];project_args=['project','create','Package P'];docbase=['documents']
-        else:base=[python,'-I','-m','smm_hub.cli'];project_args=['hub','--state-dir',state,'project','create','Package P'];docbase=['hub','--state-dir',state,'documents']
+        if role=='local':base=[python,'-I','-X','utf8','-m','smm_local.cli','--db',state/'local.sqlite3'];project_args=['project','create','Package P'];docbase=['documents']
+        else:base=[python,'-I','-X','utf8','-m','smm_hub.cli'];project_args=['hub','--state-dir',state,'project','create','Package P'];docbase=['hub','--state-dir',state,'documents']
         project=json.loads(run(role+'-project-create',base+project_args))
         added=json.loads(run(role+'-document-add',base+docbase+['add',source,'--project-id',str(project['id'])]));assert added['status']=='pending'
         run(role+'-document-refresh',base+docbase+['refresh','--source-id',added['id']])
@@ -87,7 +87,7 @@ assert set(n for n in names if 'document' in n)=={'list_document_sources','searc
 print(json.dumps(names))
 """
             # Give the isolated MCP its own empty state, never default user archive.
-            run('local-mcp-tools',[python,'-I','-c',code,state/'mcp.sqlite3'])
+            run('local-mcp-tools',[python,'-I','-X','utf8','-c',code,state/'mcp.sqlite3'])
     result={'status':'passed','wheels':{w.name:sha(w.read_bytes()) for w in whls},'source_wheel_install_sha256':expected,'commands':records}
     (output/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');return result
 

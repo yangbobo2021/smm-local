@@ -2,9 +2,9 @@
 
 ## 007 项目文档库与Hub同步
 
-[007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)定义20自动TC、7人工项和A1–A10/E1/E2。当前验证尚在进行；原始记录在任务`AT-SMM-007`私有目录，未执行或缺环境项不能计passed。最终公开索引会逐项关联原始材料及独立意见，不能用该说明或006历史结果代替007证据。
+[007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)当前含24自动TC、7人工项和A1–A10/E1/E2。当前验证尚在进行；原始记录在任务`AT-SMM-007`私有目录，未执行或缺环境项不能计passed。最终公开索引会逐项关联原始材料及独立意见，不能用该说明或006历史结果代替007证据。
 
-- 回归入口：`python -m pytest -q tests/test_hub_documents_contracts.py`。全部使用独立合成档案/只读源见证，不连接真实Hub、VibeInsight或用户资料。设置`ACCEPTANCE_EVIDENCE_DIR=<全新私有目录>`保存逐次实际请求/响应。
+- 回归入口：`python -m pytest -q`（包含主契约、列表/片段补充、PR扫描/网页回归；网页回归需acceptance依赖及Chrome，无该依赖时明确skip）。全部使用独立合成档案/只读源见证，不连接真实Hub、VibeInsight或用户资料。设置`ACCEPTANCE_EVIDENCE_DIR=<全新私有目录>`保存逐次实际请求/响应。
 - 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
 - 独立判定探针：`python scripts/acceptance/hub_documents_checks.py --selfcheck`。两个独立原件、文本/范围/版本/摘要/项目/来源/资格逐项负控，以及真实PID/端口存活负控均必须拒绝。自检仅表示工具可用于验收。
 - 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台探针与配置路径随后在此登记；没有业务记录时保持未验证。
@@ -252,3 +252,10 @@ stdio 原件。默认 `selective-upload` 仍执行005流程。`document-platform
 `is_admin=false`；仅创建SCM配置或普通前景进程不算E2实际服务通过。
 `hub_documents_ci.py`只导出允许的合成业务日志、截图和SHA，不上传任务凭据、私钥、
 数据库、wheel或完整浏览器trace；失败保留真实退出，输出failure及清理记录。
+
+007 的实际服务模式由同一CI分别运行Ubuntu user-systemd、Windows SCM/LocalService；
+Windows标准Local与Hub管理员分开，状态/程序ACL、真实服务SID及唯一实例清理均留证。
+这些模式是同机服务身份验收，不能替代E2物理跨OS机器。完整trace回收需将
+本机临时X509公钥证书的Base64填入workflow `evidence_certificate`；私钥只留本机，
+CI加密原始trace并保留原件/密文SHA，下载后本机解密校验再复审。未传公钥时
+artifact明确报告原trace未回收，该轮不能宣称完整正式证据。

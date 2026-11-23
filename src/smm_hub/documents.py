@@ -655,6 +655,23 @@ class HubDocuments:
             "document_id": ident,
         }, None
 
+    def _origin_display(self, origin, received):
+        kind = "device" if received is not None else "hub"
+        with self.db.connect() as c:
+            row = (
+                c.execute(
+                    "SELECT name FROM hub_devices WHERE id=?", (origin["device_id"],)
+                ).fetchone()
+                if kind == "device"
+                else None
+            )
+        return {
+            "origin_kind": kind,
+            "device_name": (
+                row[0] if row else ("Hub自有" if kind == "hub" else origin["device_id"])
+            ),
+        }
+
     def search(self, body):
         self._context(body)
         with self.guard.hold():
@@ -701,6 +718,7 @@ class HubDocuments:
                     hit["display_name"] = display[0]
                 origin, received = self._origin(hit["id"])
                 hit["origin"] = origin
+                hit.update(self._origin_display(origin, received))
                 hit["received_at"] = received
                 hit["archive_scope"] = "hub"
                 hit["snapshot_kind"] = "Hub采集/接收版本"
@@ -760,6 +778,7 @@ class HubDocuments:
             return {
                 **value,
                 "origin": origin,
+                **self._origin_display(origin, received),
                 "received_at": received,
                 "archive_scope": "hub",
                 **self.context(),

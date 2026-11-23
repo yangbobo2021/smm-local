@@ -152,6 +152,7 @@ class DocumentSync:
             )
         return {
             "configured": bool(config),
+            "hub_address": (config or {}).get("address"),
             "hub_id": hub_id,
             "projects": result,
             "pending": any(p["pending"] for p in result),

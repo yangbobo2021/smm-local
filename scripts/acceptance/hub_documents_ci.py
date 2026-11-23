@@ -6,6 +6,7 @@ administrator only provisions that account and its task-directory permissions.
 
 from __future__ import annotations
 import argparse
+import base64
 import hashlib
 import json
 import os
@@ -56,10 +57,73 @@ def export(source, target):
                 "standard-user-controller.json",
                 "local-expected.json",
                 "hub-expected.json",
+                "web-joint.json",
+                "web-hub-all.json",
+                "mixed-batch-a.json",
+                "mixed-batch-hub.json",
+                "unchanged-source-fingerprints.json",
+                "actual-invalid-utf8.json",
+                "service-events.json",
+                "service-cleanup.json",
+                "scm-client-boundary.json",
             }
             or p.name.startswith("mcp-")
             and p.suffix == ".json"
         )
+        if p.suffix == ".zip" and "trace" in p.name:
+            certificate = os.environ.get("SMM_007_EVIDENCE_CERTIFICATE")
+            if certificate:
+                certificate_path = source / "evidence-public-certificate.pem"
+                if not certificate_path.exists():
+                    certificate_path.write_bytes(
+                        base64.b64decode(certificate, validate=True)
+                    )
+                encrypted = (
+                    target
+                    / "private-traces"
+                    / relative.with_suffix(relative.suffix + ".cms")
+                )
+                encrypted.parent.mkdir(parents=True, exist_ok=True)
+                result = subprocess.run(
+                    [
+                        "openssl",
+                        "cms",
+                        "-encrypt",
+                        "-binary",
+                        "-aes256",
+                        "-in",
+                        str(p),
+                        "-out",
+                        str(encrypted),
+                        "-outform",
+                        "DER",
+                        str(certificate_path),
+                    ],
+                    capture_output=True,
+                    timeout=30,
+                )
+                assert result.returncode == 0, result.stderr.decode(errors="replace")
+                manifest.append(
+                    {
+                        "path": encrypted.relative_to(target).as_posix(),
+                        "bytes": encrypted.stat().st_size,
+                        "sha256": hashlib.sha256(encrypted.read_bytes()).hexdigest(),
+                        "format": "CMS encrypted original trace",
+                        "original_path": relative.as_posix(),
+                        "original_bytes": p.stat().st_size,
+                        "original_sha256": hashlib.sha256(p.read_bytes()).hexdigest(),
+                    }
+                )
+            else:
+                (target / "private-traces-unavailable.json").write_text(
+                    json.dumps(
+                        {
+                            "reason": "No evidence public certificate provided; original traces remain only on ephemeral runner. Not complete formal evidence."
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+            continue
         if not allowed:
             continue
         destination = target / relative
@@ -81,6 +145,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--hub-service",
+        action="store_true",
+        help="Ubuntu actual user-systemd Hub; same-host Local, not physical cross-OS",
+    )
     args = parser.parse_args()
     work = args.work.resolve()
     work.mkdir(parents=True, exist_ok=False)
@@ -147,8 +216,18 @@ def main():
             config["browser"] = str(browser)
         path = work / "target.json"
         path.write_text(json.dumps(config, indent=2), encoding="utf-8")
-        runner = ROOT / "scripts/acceptance/hub_documents_platform.py"
-        if os.name == "nt":
+        runner = ROOT / (
+            (
+                "scripts/acceptance/hub_documents_scm_platform.py"
+                if os.name == "nt"
+                else "scripts/acceptance/hub_documents_service_platform.py"
+            )
+            if args.hub_service
+            else "scripts/acceptance/hub_documents_platform.py"
+        )
+        if args.hub_service:
+            assert sys.platform in {"linux", "win32"}
+        if os.name == "nt" and not args.hub_service:
             run(
                 "standard-user",
                 [

@@ -31,6 +31,8 @@ def _local(db, config, options, query):
         hit.update(
             origin=_origin(db, config, hit),
             archive_scope="local",
+            origin_kind="local",
+            device_name=(config or {}).get("device_name", "本机"),
             origin_references=[
                 {"archive_scope": "local", "reference": hit["reference"]}
             ],
@@ -308,9 +310,14 @@ def read(db, reference, *, start=None, end=None):
     payload = references.decode(db, reference)
     kind = payload.get("kind")
     if kind == "document":
+        value = Documents(db).read(reference, start=start, end=end)
+        config = federation.hub_config(db)
         return {
-            **Documents(db).read(reference, start=start, end=end),
+            **value,
             "archive_scope": "local",
+            "origin": _origin(db, config, value),
+            "origin_kind": "local",
+            "device_name": (config or {}).get("device_name", "本机"),
         }
     if kind == "bundle":
         errors = []

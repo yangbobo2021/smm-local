@@ -555,6 +555,115 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
             time.sleep(0.2)
         raise AssertionError("local synchronization did not settle")
 
+    async def mixed_batch(self, page, role, project_id):
+        from playwright.async_api import expect
+
+        prefix = "hub" if role == "hub" else "doc"
+        endpoint = "/v1" if role == "hub" else "/api"
+        actor = "hub" if role == "hub" else "a"
+        originals = {
+            "batch-A.txt": b"mixedbatchnonce original A",
+            "batch-C.txt": "mixedbatchnonce 原件C😀\r\nsecond".encode(),
+        }
+        files = [
+            {
+                "name": "batch-A.txt",
+                "mimeType": "text/plain",
+                "buffer": originals["batch-A.txt"],
+            },
+            {"name": "batch-B.txt", "mimeType": "text/plain", "buffer": b"\xff"},
+            {
+                "name": "batch-C.txt",
+                "mimeType": "text/plain",
+                "buffer": originals["batch-C.txt"],
+            },
+        ]
+        await page.locator("#" + prefix + "-upload-files").set_input_files(files)
+        report = page.locator("#" + prefix + "-upload-results")
+        await expect(report.locator("li")).to_have_count(3)
+        for name, status in [
+            ("batch-A.txt", "成功"),
+            ("batch-B.txt", "失败"),
+            ("batch-C.txt", "成功"),
+        ]:
+            row = report.locator("li").filter(has_text=name + "：")
+            await expect(row).to_be_visible()
+            assert status in await row.inner_text()
+        library = self.request(
+            actor, endpoint + "/documents/library?project_id=" + str(project_id)
+        )
+        assert {d["display_name"] for d in library} == set(originals) and len(
+            library
+        ) == 2
+        result = self.request(
+            actor,
+            endpoint + "/documents/search",
+            {
+                **(self.hub_context if role == "hub" else {}),
+                "query": "mixedbatchnonce",
+                "limit": 50,
+            },
+        )
+        source_origin = self.hub_origin if role == "hub" else self.origins["a"]
+        expected = [
+            {
+                "origin": {**source_origin, "document_id": d["id"]},
+                "version": 1,
+                "raw": originals[d["display_name"]],
+            }
+            for d in library
+        ]
+        document_set(result["results"], expected)
+        reads = []
+        for hit in result["results"]:
+            value = self.request(
+                actor,
+                endpoint + "/documents/read",
+                {
+                    **(self.hub_context if role == "hub" else {}),
+                    "reference": hit["reference"],
+                },
+            )
+            exact_read(value, originals[hit["display_name"]])
+            reads.append(value)
+        await page.screenshot(
+            path=str(self.out / ("web-" + role + "-mixed-batch.png")), full_page=True
+        )
+        self.save(
+            "mixed-batch-" + role,
+            {
+                "project_id": project_id,
+                "report": await report.inner_text(),
+                "library": library,
+                "search": result,
+                "reads": reads,
+            },
+        )
+        for left in [1, 0]:
+            async with page.expect_response(
+                lambda r: "/documents/library/" in r.url
+                and r.request.method == "DELETE"
+            ) as response:
+                await page.locator("#" + prefix + "-library-list").get_by_role(
+                    "button", name="移除文档"
+                ).first.click()
+            assert (await response.value).status == 200
+            await expect(
+                page.locator("#" + prefix + "-library-list input[type=file]")
+            ).to_have_count(left)
+        assert (
+            self.request(
+                actor,
+                endpoint + "/documents/search",
+                {
+                    **(self.hub_context if role == "hub" else {}),
+                    "query": "mixedbatchnonce",
+                    "limit": 50,
+                },
+            )["results"]
+            == []
+        )
+
     async def web(self, role):
         from playwright.async_api import async_playwright, expect
 
@@ -645,6 +754,7 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
                     await page.locator("#doc-library-project").select_option(
                         str(project_id)
                     )
+                await self.mixed_batch(page, role, project_id)
                 raws = {
                     "chosen.txt": "webneedle 选择😀 e\u0301\r\n独立甲".encode(),
                     "dropped.md": b"webneedle dropped\n<script>window.SMM_007_EXECUTED=true</script>",
@@ -1715,10 +1825,7 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
         ]
         assert identities
         for actor in identities:
-            if os.name == "nt":
-                assert actor["is_admin"] is False
-            else:
-                assert actor["uid"] == os.getuid()
+            self.verify_actor(actor)
         self.save(
             "source-open-audit", {"entries": entries, "only_explicit_collection": True}
         )
@@ -1730,6 +1837,12 @@ x=Archive(sys.argv[1]);print(json.dumps({'archive_id':references.material(x)[0],
             "finished_at": now(),
             "all_source_open_audited": True,
         }
+
+    def verify_actor(self, actor):
+        if os.name == "nt":
+            assert actor["is_admin"] is False
+        else:
+            assert actor["uid"] == os.getuid()
 
     def cleanup(self):
         records = []

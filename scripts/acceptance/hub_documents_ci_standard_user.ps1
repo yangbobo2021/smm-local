@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Python,[Parameter(Mandatory=$true)][string]$Runner,[Parameter(Mandatory=$true)][string]$Config,[Parameter(Mandatory=$true)][string]$Work,[Parameter(Mandatory=$true)][string]$Workspace)
+param([Parameter(Mandatory=$true)][string]$Python,[Parameter(Mandatory=$true)][string]$Runner,[Parameter(Mandatory=$true)][string]$Config,[Parameter(Mandatory=$true)][string]$Work,[Parameter(Mandatory=$true)][string]$Workspace,[string]$ReadPath)
 $ErrorActionPreference='Stop'
 $name='Smm007'+[guid]::NewGuid().ToString('N').Substring(0,10)
 $password='Smm!'+[guid]::NewGuid().ToString('N')+'9aA'
@@ -18,6 +18,10 @@ try {
   if ($LASTEXITCODE -ne 0) {throw 'Task directory ACL grant failed'}
   & icacls.exe $Workspace /grant ($account+':(OI)(CI)RX')|Out-Null
   if ($LASTEXITCODE -ne 0) {throw 'Task source/controller read ACL grant failed'}
+  if ($ReadPath) {
+    & icacls.exe $ReadPath /grant ($account+':(OI)(CI)RX') /T|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task program read/execute ACL grant failed'}
+  }
   $credential=New-Object System.Management.Automation.PSCredential($account,$secure)
   $secondary=Get-Service seclogon
   $startedSecondary=$secondary.Status -ne 'Running'
