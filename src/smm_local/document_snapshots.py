@@ -1,0 +1,149 @@
+"""Immutable captured bytes/results and short transactional snapshot metadata.
+
+Only explicit creator actions call capture/process. Read/receive paths use the
+stdlib validation and immutable blobs; they never import a format processor.
+"""
+from __future__ import annotations
+import json
+import os
+from pathlib import Path
+import stat
+import tempfile
+from uuid import uuid4
+from .document_results import encode,sha,validate,RESULT_LIMIT
+from .core import utcnow
+
+RAW_LIMIT=20*1024*1024
+STAGING_LIMIT=256*1024*1024
+
+
+class Snapshots:
+    def __init__(self,db):
+        self.db=db;self.root=db.db_path.resolve().parent/'.document-snapshots'
+        with db.connect() as c:c.executescript('''
+        CREATE TABLE IF NOT EXISTS document_captures(id TEXT PRIMARY KEY,document_pk INTEGER NOT NULL,raw_sha256 TEXT NOT NULL,raw_bytes INTEGER NOT NULL,format TEXT NOT NULL,sequence INTEGER NOT NULL,created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS document_capture_authorizations(capture_id TEXT NOT NULL,source_id TEXT NOT NULL REFERENCES document_sources(id) ON DELETE CASCADE,revision INTEGER NOT NULL,active INTEGER NOT NULL DEFAULT 1,PRIMARY KEY(capture_id,source_id));
+        CREATE TABLE IF NOT EXISTS document_processing_attempts(id TEXT PRIMARY KEY,capture_id TEXT NOT NULL,config_revision INTEGER NOT NULL,state TEXT NOT NULL,error TEXT,result_sha256 TEXT,created_at TEXT NOT NULL,finished_at TEXT);
+        CREATE TABLE IF NOT EXISTS document_snapshot_state(document_pk INTEGER PRIMARY KEY,current_capture TEXT,latest_attempt TEXT,published_capture TEXT,result_sha256 TEXT,processing_version INTEGER NOT NULL DEFAULT 0,profile_sha256 TEXT,published_status TEXT);
+        CREATE TABLE IF NOT EXISTS document_processing_config(singleton INTEGER PRIMARY KEY CHECK(singleton=1),revision INTEGER NOT NULL,payload TEXT NOT NULL);
+        INSERT OR IGNORE INTO document_processing_config VALUES(1,0,'{}');
+        ''')
+    def _directory(self,name):
+        path=self.root/name
+        for part in [path,*path.parents]:
+            if part.exists() and (part.is_symlink() or bool(getattr(part.lstat(),'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400))):raise ValueError('快照存储路径不能经过链接或junction')
+        path.mkdir(parents=True,exist_ok=True,mode=0o700);return path
+    def blob(self,kind,digest):
+        if len(digest)!=64 or any(c not in '0123456789abcdef' for c in digest):raise ValueError('快照摘要无效')
+        return self.root/kind/digest
+    def put(self,kind,raw):
+        digest=sha(raw);directory=self._directory(kind);target=directory/digest
+        if target.exists():
+            if target.is_symlink() or sha(target.read_bytes())!=digest:raise ValueError('现有快照内容损坏')
+            return digest
+        fd,name=tempfile.mkstemp(prefix='.pending-',dir=directory)
+        try:
+            with os.fdopen(fd,'wb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+            # Equal digest means equal immutable content; concurrent creators use
+            # their own temp file and publish equivalent bytes only.
+            os.replace(name,target)
+        finally:
+            if os.path.exists(name):os.unlink(name)
+        return digest
+    def config(self,c=None):
+        if c is None:
+            with self.db.connect() as con:return self.config(con)
+        row=c.execute('SELECT revision,payload FROM document_processing_config WHERE singleton=1').fetchone()
+        return {'revision':row['revision'],**json.loads(row['payload'])}
+    def authorized(self,c,capture_id):
+        return bool(c.execute('SELECT 1 FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(capture_id,)).fetchone())
+    def capture(self,source,path,raw,format):
+        if len(raw)>RAW_LIMIT:raise ValueError('新格式原文件超过20MiB')
+        raw_sha=self.put('raw',raw);profile={'rendering':'smm-document-text-v1','format':format}
+        with self.db.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            current=c.execute('SELECT revision,refresh_id FROM document_sources WHERE id=?',(source['id'],)).fetchone()
+            if current is None or current['revision']!=source['revision'] or current['refresh_id']!=source['refresh_id']:raise ValueError('采集来源已变化')
+            key=os.path.normcase(str(path));c.execute('INSERT OR IGNORE INTO documents(id,path_key,path) VALUES(?,?,?)',(uuid4().hex,key,str(path)))
+            doc=c.execute('SELECT pk FROM documents WHERE path_key=?',(key,)).fetchone();pk=doc['pk']
+            state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+            config=self.config(c);profile['config_revision']=config['revision'];profile_sha=sha(encode(profile))
+            if state and state['current_capture']:
+                old=c.execute('SELECT * FROM document_captures WHERE id=?',(state['current_capture'],)).fetchone()
+                if old and old['raw_sha256']==raw_sha and self.authorized(c,old['id']) and state['published_capture']==old['id'] and state['profile_sha256']==profile_sha:
+                    c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1) ON CONFLICT(capture_id,source_id) DO UPDATE SET revision=excluded.revision,active=1',(old['id'],source['id'],source['revision']))
+                    return {'document_pk':pk,'capture_id':old['id'],'attempt_id':state['latest_attempt'],'raw_sha256':raw_sha,'result_sha256':state['result_sha256'],'profile_sha256':profile_sha,'reused':True,'config':config,'profile':profile}
+            cid=uuid4().hex;aid=uuid4().hex
+            pending=c.execute('SELECT COALESCE(SUM(raw_bytes),0) FROM document_captures x JOIN document_snapshot_state s ON s.current_capture=x.id WHERE s.current_capture IS NOT s.published_capture').fetchone()[0]
+            if pending+len(raw)>STAGING_LIMIT:raise ValueError('未发布暂存超过256MiB')
+            c.execute('INSERT INTO document_captures VALUES(?,?,?,?,?,?,?)',(cid,pk,raw_sha,len(raw),format,source['request_seq'],utcnow()))
+            c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1)',(cid,source['id'],source['revision']))
+            c.execute("INSERT INTO document_processing_attempts VALUES(?,?,?,'pending',NULL,NULL,?,NULL)",(aid,cid,config['revision'],utcnow()))
+            c.execute('INSERT INTO document_snapshot_state(document_pk,current_capture,latest_attempt) VALUES(?,?,?) ON CONFLICT(document_pk) DO UPDATE SET current_capture=excluded.current_capture,latest_attempt=excluded.latest_attempt',(pk,cid,aid))
+            return {'document_pk':pk,'capture_id':cid,'attempt_id':aid,'raw_sha256':raw_sha,'profile_sha256':profile_sha,'reused':False,'config':config,'profile':profile}
+    def process(self,token,format):
+        from .document_processing import process
+        return process(self,token)
+    def publish(self,c,pk,token,result):
+        state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+        if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')
+        changed=state['result_sha256']!=token['result_sha256'] or state['profile_sha256']!=token['profile_sha256']
+        processing_version=state['processing_version']+int(changed)
+        c.execute('UPDATE document_snapshot_state SET published_capture=?,result_sha256=?,processing_version=?,profile_sha256=?,published_status=? WHERE document_pk=?',(token['capture_id'],token['result_sha256'],processing_version,token['profile_sha256'],result['status'],pk))
+    def load_result(self,digest):
+        path=self.blob('results',digest)
+        if path.is_symlink():raise ValueError('结果快照不能经过链接')
+        raw=path.read_bytes()
+        if len(raw)>RESULT_LIMIT or sha(raw)!=digest:raise ValueError('结果快照损坏或超限')
+        return validate(json.loads(raw))
+    def detail(self,c,pk):
+        state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+        if state is None:return {}
+        doc=c.execute('SELECT version FROM documents WHERE pk=?',(pk,)).fetchone()
+        attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=?',(state['latest_attempt'],)).fetchone()
+        capture=c.execute('SELECT * FROM document_captures WHERE id=?',(state['current_capture'],)).fetchone()
+        published=None
+        if state['published_capture']:
+            saved=c.execute('SELECT * FROM document_captures WHERE id=?',(state['published_capture'],)).fetchone()
+            published={'capture_id':saved['id'],'sha256':saved['raw_sha256'],'raw_bytes':saved['raw_bytes'],'version':doc['version'],'processing_version':state['processing_version'],'result_sha256':state['result_sha256'],'status':state['published_status']}
+        latest=None if attempt is None else {'attempt_id':attempt['id'],'capture_id':attempt['capture_id'],'config_revision':attempt['config_revision'],'status':attempt['state'],'error':attempt['error'],'created_at':attempt['created_at'],'finished_at':attempt['finished_at']}
+        retry=None
+        if capture and attempt and attempt['state'] not in {'pending','processing'} and self.authorized(c,capture['id']):
+            retry={'capture_id':capture['id'],'sha256':capture['raw_sha256'],'expected_attempt_id':attempt['id'],'expected_version':doc['version'],'expected_processing_version':state['processing_version']}
+        return {'processing_version':state['processing_version'],'published_snapshot':published,'latest_attempt':latest,'retry_target':retry}
+    def retry(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
+        with self.db.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            doc=c.execute('SELECT * FROM documents WHERE id=?',(document_id,)).fetchone()
+            if doc is None:raise ValueError('文档不存在')
+            target=self.detail(c,doc['pk']).get('retry_target')
+            if not target or any(target[k]!=v for k,v in {'capture_id':capture_id,'expected_attempt_id':expected_attempt_id,'expected_version':expected_version,'expected_processing_version':expected_processing_version}.items()):raise ValueError('重处理目标已过期或采集授权已撤销，请重新查看当前状态')
+            capture=c.execute('SELECT * FROM document_captures WHERE id=? AND document_pk=?',(capture_id,doc['pk'])).fetchone()
+            if capture is None:raise ValueError('捕获不属于此文档')
+            config=self.config(c);profile={'rendering':'smm-document-text-v1','format':capture['format'],'config_revision':config['revision']};aid=uuid4().hex
+            c.execute('INSERT INTO document_processing_attempts(id,capture_id,config_revision,state,created_at) VALUES(?,?,?,?,?)',(aid,capture_id,config['revision'],'pending',utcnow()))
+            c.execute('UPDATE document_snapshot_state SET latest_attempt=? WHERE document_pk=?',(aid,doc['pk']))
+            return {'document_pk':doc['pk'],'capture_id':capture_id,'attempt_id':aid,'raw_sha256':capture['raw_sha256'],'profile_sha256':sha(encode(profile)),'reused':False,'config':config,'profile':profile}
+    def metadata(self,c,pk):
+        state,result=self.result(c,pk)
+        if state is None:return {},None
+        tables=[{k:v for k,v in table.items() if k!='cells'} for table in result['tables']]
+        return {'format':result['format'],'processing_version':state['processing_version'],'result_sha256':state['result_sha256'],'profile':result['profile'],'coverage':result['coverage'],'locations':result['locations'],'tables':tables,'original_available':True,'processing_status':state['published_status']},result
+    def load_result(self,digest):
+        path=self.blob('results',digest)
+        if path.is_symlink():raise ValueError('结果快照不能是链接')
+        with path.open('rb') as stream:raw=stream.read(RESULT_LIMIT+1)
+        if len(raw)>RESULT_LIMIT or sha(raw)!=digest:raise ValueError('处理结果快照摘要损坏')
+        value=json.loads(raw);validate(value);return value
+    def result(self,c,pk):
+        row=c.execute('SELECT s.*,x.raw_sha256,x.raw_bytes,x.format FROM document_snapshot_state s JOIN document_captures x ON x.id=s.published_capture WHERE s.document_pk=?',(pk,)).fetchone()
+        if row is None:return None,None
+        return dict(row),self.load_result(row['result_sha256'])
+    def original(self,c,pk):
+        state,result=self.result(c,pk)
+        if state is None:raise ValueError('legacy_original_not_captured: 未保存原字节，不能由文本伪造原件')
+        path=self.blob('raw',state['raw_sha256'])
+        if path.is_symlink():raise ValueError('原件快照不能是链接')
+        with path.open('rb') as stream:raw=stream.read(RAW_LIMIT+1)
+        if len(raw)!=state['raw_bytes'] or sha(raw)!=state['raw_sha256']:raise ValueError('原件快照摘要损坏')
+        return raw

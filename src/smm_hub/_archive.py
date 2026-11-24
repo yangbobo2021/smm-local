@@ -11,3 +11,5 @@ from smm_local.documents import Documents
 from smm_local.managed_documents import ManagedDocuments
 from smm_local.document_protocol import DocumentGuard, document as document_validate, identity as document_identity, integer as document_integer
 from smm_local.core import utcnow
+
+from smm_local.document_processing import Configuration as DocumentProcessingConfiguration, configuration_arguments as document_processing_arguments

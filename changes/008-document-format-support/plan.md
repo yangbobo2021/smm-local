@@ -48,6 +48,10 @@ PLAN经确认、PR合并并读回MERGED后，才创建/续接AT-SMM-008和R008�
 
 运行材料包含发行来源、实际架构、所有包/程序/DLL/dylib/so的版本/SHA、语言文件及许可。conda仅是本轮研究和验收材料准备工具，不进入SMM基础包依赖，也不由产品在处理时调用；普通用户仍可配置兼容本地OCR的绝对路径。若采用源码替代，另冻结编译器/CMake/vcpkg基线、triplet与源档。G0-P先完成离线安装小样，G0-I复用已验证材料，不在运行时访问包管理器。研究来源：[PDF库](https://github.com/jsvine/pdfplumber)、[PDFium接口](https://pypdfium2.readthedocs.io/en/stable/)、[公式缓存](https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/working-with-formulas)、[OCR构建](https://tesseract-ocr.github.io/tessdoc/Compiling.html)、[冻结OCR端口](https://github.com/microsoft/vcpkg/blob/2f8bf7a5bad48aaef99d80b221fca712f016ab8f/ports/tesseract/vcpkg.json)、[语言数据](https://github.com/tesseract-ocr/tessdata_fast/releases/tag/4.1.0)。上游资料不是本项目验收证据。
 
+### 实现阶段的方法调整记录
+
+2026-11-25：实际冻结的双份双页Noto中英扫描样本暴露两类本地OCR错误：直接使用整页PSM3将“关”误识别为“天”，单一块分割又遗漏另一份资料的中文段落。保留原样本与失败结果，采用统一180阈值二值化、完整网格一次PSM3、剩余正文区域PSM11；仍使用配置的语言顺序和同一Tesseract，不逐格启动、不接外部模型。每页全部布局/渲染/OCR仍共用30秒，强承诺质量/逐格真值和所有SPEC验收条件保持。实际组件/语言文件摘要、预处理和分割模式写入结果profile/coverage，以最终同版测试与平台验收确认；研究或开发调试通过不等于整体验收。
+
 ### 修改位置与数据流
 
 | 位置（新文件为拟名） | 修改职责及约束 |

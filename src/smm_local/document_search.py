@@ -309,11 +309,13 @@ def search(
     }
 
 
-def read(db, reference, *, start=None, end=None):
+def read(db, reference, *, start=None, end=None, view='text',table_id=None,row_start=None,row_end=None,column_start=None,column_end=None):
+    options={k:v for k,v in {'table_id':table_id,'row_start':row_start,'row_end':row_end,'column_start':column_start,'column_end':column_end}.items() if v is not None}
+    if view!='text':options['view']=view
     payload = references.decode(db, reference)
     kind = payload.get("kind")
     if kind == "document":
-        value = Documents(db).read(reference, start=start, end=end)
+        value = Documents(db).read(reference, start=start, end=end, **options)
         config = federation.hub_config(db)
         return {
             **value,
@@ -326,7 +328,7 @@ def read(db, reference, *, start=None, end=None):
         errors = []
         for part in payload.get("parts", []):
             try:
-                return read(db, part, start=start, end=end)
+                return read(db, part, start=start, end=end, **options)
             except (OSError, ValueError, federation.HubUnavailable) as exc:
                 errors.append(str(exc))
         raise ValueError("当次各端精确引用均已失效：" + "；".join(errors))
@@ -350,7 +352,20 @@ def read(db, reference, *, start=None, end=None):
                 "document_epoch": inner["document_epoch"],
                 "reference": payload["hub_reference"],
                 **{k: v for k, v in [("start", start), ("end", end)] if v is not None},
+                **options,
             },
         )
         return {**result, "archive_scope": "hub"}
     raise ValueError("须使用文档搜索返回的精确引用")
+
+
+def original(db,reference):
+    payload=references.decode(db,reference)
+    if payload.get('kind')=='document':return Documents(db).original(reference)
+    if payload.get('kind')=='bundle':
+        errors=[]
+        for part in payload.get('parts',[]):
+            try:return original(db,part)
+            except (OSError,ValueError,federation.HubUnavailable) as exc:errors.append(str(exc))
+        raise ValueError('当次各端原件资格均已失效：'+'；'.join(errors))
+    raise ValueError('远端原件接收能力尚不可用')

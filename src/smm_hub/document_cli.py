@@ -1,6 +1,6 @@
 """Hub document CLI uses the same checked context and storage as the Web API."""
 
-from ._archive import Archive
+from ._archive import Archive, DocumentProcessingConfiguration, document_processing_arguments
 from .documents import HubDocuments
 
 
@@ -12,6 +12,7 @@ def add_arguments(actions, project_actions):
         "documents", help="管理Hub自有文档、检索及恢复；设备投影只读"
     )
     sub = parser.add_subparsers(dest="document_action", required=True)
+    document_processing_arguments(sub)
     for action in ("add", "set"):
         p = sub.add_parser(action, help="保存配置为pending；需明确refresh")
         p.add_argument("path" if action == "add" else "source_id")
@@ -43,6 +44,10 @@ def add_arguments(actions, project_actions):
 def dispatch(state, args):
     documents = HubDocuments(Archive(state / "smm-hub.sqlite3"))
     action = args.document_action
+    if action == 'processing-status':
+        return DocumentProcessingConfiguration(documents.documents.snapshots).status(check=args.check)
+    if action == 'processing-configure':
+        return DocumentProcessingConfiguration(documents.documents.snapshots).configure(expected_revision=args.expected_revision,ocr_executable=args.ocr_executable,ocr_data_dir=args.ocr_data_dir,languages=args.languages)
     if action == "sources":
         return documents.sources()
     if action == "files":

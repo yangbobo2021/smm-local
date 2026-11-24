@@ -6,10 +6,10 @@ import threading
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from importlib.resources import files
-from typing import Callable
+from typing import Callable, Literal
 
 from fastapi import Body, FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field, ConfigDict, StrictInt
 
 from .core import Archive, shared_db_path, utcnow
@@ -21,7 +21,7 @@ from . import references
 from .documents import Documents
 from .managed_documents import ManagedDocuments
 from .document_sync import DocumentSync, schedule as schedule_documents, hub_projects, hub_sources, combined_listing
-from .document_search import search as search_documents,read as read_document
+from .document_search import search as search_documents,read as read_document,original as original_document
 
 
 class DocumentConfig(BaseModel):
@@ -96,6 +96,17 @@ class DocumentRead(BaseModel):
     reference: str
     start: StrictInt | None = None
     end: StrictInt | None = None
+    view: Literal['text','table','original-info'] = 'text'
+    table_id: str | None = None
+    row_start: StrictInt | None = None
+    row_end: StrictInt | None = None
+    column_start: StrictInt | None = None
+    column_end: StrictInt | None = None
+
+
+class DocumentOriginal(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    reference: str
 
 
 class SearchRequest(BaseModel):
@@ -420,6 +431,13 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @app.post('/api/documents/refresh')
     def document_refresh(body: DocumentRefresh):
         return document_mutation(documents.refresh, body.source_id)
+
+    @app.post('/api/documents/original')
+    def document_original(body: DocumentOriginal):
+        raw=document_call(original_document,db,body.reference)
+        def chunks():
+            for offset in range(0,len(raw),65536):yield raw[offset:offset+65536]
+        return StreamingResponse(chunks(),media_type='application/octet-stream',headers={'Content-Disposition':'attachment; filename="captured-original"','Content-Length':str(len(raw))})
 
     @app.post('/api/documents/search')
     def document_search(body: DocumentQuery):

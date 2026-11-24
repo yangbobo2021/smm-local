@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .core import Archive, shared_db_path
 from .documents import Documents
+from .document_processing import Configuration, configuration_arguments
 from .document_sync import DocumentSync,schedule as schedule_documents,hub_sources,hub_projects
 from .document_search import search as search_documents,read as read_document
 from .federation import (configure_and_start, read_archive, search_archive, upload_status,
@@ -133,8 +134,12 @@ def main() -> None:
     project_create = project_actions.add_parser('create', help='创建普通本机项目；可同名，不推断目录/对话/关联')
     project_create.add_argument('name', help='非空显示名称；返回本机ID和stable_key，用于documents --project-id')
     project_actions.add_parser("ensure-global", help="创建或取得唯一全局项目；全局不是所有项目检索")
-    documents = sub.add_parser('documents', help='项目文档采集、独立同步选择及联合检索；路径来源需明确refresh', description='本机明确采集 .md/.markdown/.txt；源正文不改写。项目文档同步默认关闭，以sync-policy独立允许；默认联合检索，--local仅本机。保存来源后明确refresh。')
+    documents = sub.add_parser('documents', help='项目文档采集、独立同步选择及联合检索；路径来源需明确refresh', description='本机明确采集 .md/.markdown/.txt/.docx/.xlsx/.pdf；创建端需安装[documents]依赖。PDF文字优先，OCR先用processing-configure及processing-status --check准备本地组件。源正文不改写。项目文档同步默认关闭，以sync-policy独立允许；默认联合检索，--local仅本机。保存来源后明确refresh。')
     document_actions = documents.add_subparsers(dest='document_action', required=True)
+    configuration_arguments(document_actions)
+    doc_retry=document_actions.add_parser('reprocess',help='只重处理files给出的合法保存原件，不重开源路径')
+    for flag in ('document-id','capture-id','expected-attempt-id'):doc_retry.add_argument('--'+flag,required=True)
+    for flag in ('expected-version','expected-processing-version'):doc_retry.add_argument('--'+flag,type=int,required=True)
     for action in ['add','set']:
         doc = document_actions.add_parser(action, help='添加来源（pending）' if action=='add' else '完整替换配置并使旧来源资格失效', description='来源项目ID用 smm projects 取得，无项目时先 smm project create 名称。名单可重复，省略即空名单；省略--no-recursive即递归。保存只为pending，随后运行 smm documents refresh。')
         doc.add_argument('path' if action=='add' else 'source_id',help='服务器所在本机的可读绝对文件/目录路径（非链接）' if action=='add' else 'smm documents sources 返回的来源id；不能改变根路径')
@@ -272,7 +277,10 @@ def main() -> None:
         elif args.command == 'documents':
             documents = Documents(db)
             action = args.document_action
-            if action == 'add':
+            if action == 'processing-status':result=Configuration(documents.snapshots).status(check=args.check)
+            elif action == 'processing-configure':result=Configuration(documents.snapshots).configure(expected_revision=args.expected_revision,ocr_executable=args.ocr_executable,ocr_data_dir=args.ocr_data_dir,languages=args.languages)
+            elif action == 'reprocess':result=documents.reprocess(args.document_id,args.capture_id,args.expected_attempt_id,args.expected_version,args.expected_processing_version)
+            elif action == 'add':
                 result = documents.add(args.path, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)
             elif action == 'set':
                 result = documents.set(args.source_id, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)

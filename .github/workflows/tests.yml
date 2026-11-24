@@ -22,7 +22,7 @@ jobs:
         with:
           version: "0.13.8"
           python-version: "3.14"
-      - run: uv sync --extra test
+      - run: uv sync --extra test --extra documents
       - run: uv run python -m pytest -q --junitxml=test-results.xml
         env:
           PYTHONPATH: src
