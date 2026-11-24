@@ -71,9 +71,18 @@ def prepare(work):
     engine=executable(offline,'tesseract');version=command([engine,'--version'],logs,'offline-ocr-version',30)
     langs=command([engine,'--tessdata-dir',data,'--list-langs'],logs,'offline-ocr-languages',30)
     if 'tesseract 5.5.4' not in version or not set(LANGUAGES).issubset(set(langs.splitlines())):raise ValueError('offline runtime contract mismatch')
-    components={p.relative_to(offline).as_posix():digest(p) for p in offline.rglob('*') if p.is_file() and not p.is_symlink() and p.suffix.lower() in {'.exe','.dll','.so','.dylib'}}
+    # Versioned .so.N files and extensionless programs are part of the actual
+    # installation too; freeze every regular file, plus each private symlink.
+    installed={p.relative_to(offline).as_posix():digest(p) for p in offline.rglob('*') if p.is_file() and not p.is_symlink()}
+    links={}
+    for path in offline.rglob('*'):
+        if not path.is_symlink():continue
+        target=path.resolve()
+        if not target.is_relative_to(offline):raise ValueError('runtime link escapes private prefix: '+str(path))
+        links[path.relative_to(offline).as_posix()]={'target':os.readlink(path),'resolved':target.relative_to(offline).as_posix(),'sha256':digest(target) if target.is_file() else None}
+    components={name:sha for name,sha in installed.items() if name.lower().endswith(('.exe','.dll','.dylib','.so')) or '.so.' in name.lower() or name.startswith('bin/')}
     if os.name!='nt':components['bin/tesseract']=digest(engine)
-    return {'phase':'G0-I materials only','platform':platform.platform(),'machine':platform.machine(),'python':sys.version,'installer':installer,'packages':packages,'offline_components':components,'ocr_executable':str(engine),'ocr_data_dir':str(data),'font':font,'font_license':license,'languages':language_files,'version':version,'list_languages':langs}
+    return {'phase':'G0-I materials only','platform':platform.platform(),'machine':platform.machine(),'python':sys.version,'installer':installer,'packages':packages,'offline_components':components,'installed_file_sha256':installed,'installed_links':links,'ocr_executable':str(engine),'ocr_data_dir':str(data),'font':font,'font_license':license,'languages':language_files,'version':version,'list_languages':langs}
 
 
 def probe():
