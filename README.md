@@ -32,7 +32,7 @@ npx skills add https://github.com/yangbobo2021/smm-local/tree/main/skills/smm-se
 
 ## 本机文档检索（006，尚未发布）
 
-除对话外，可以明确纳入本机 Markdown 和 UTF-8 文本，在 Web 主导航“文档”页或 CLI 添加文件/目录、绑定本机项目，然后手动刷新。MCP 的 `list_document_sources`、`search_documents`、`read_document` 供 Agent 只读检索和读原文；文档查询始终只查本机，不上传或查询 Hub。
+除对话外，可以明确纳入本机 Markdown 和 UTF-8 文本，在 Web 主导航“文档”页或 CLI 添加文件/目录、绑定本机项目，然后手动刷新。MCP 的 `list_document_sources`、`search_documents`、`read_document` 供 Agent 只读检索和读原文；包含 007 时，文档可按项目独立选择同步到 Hub；默认联合检索，`--local` 保留仅本机。两端网页都能新建项目并上传文档，文档始终在创建端管理。
 
 这项能力需要包含 006 的源码或独立构建包，快速开始中的 **0.4.0 正式包及首次安装器尚不支持**。先按[源码开发](#从源码开发)准备环境，或按[文档使用指南](TRIAL_GUIDE.md#本机文档检索006尚未发布)安装本次构建 wheel。Windows 使用环境下的 `Scripts\smm.exe`，macOS/Linux 使用 `bin/smm`。
 
@@ -46,6 +46,17 @@ smm documents read --reference <搜索结果的reference>
 ```
 
 保存来源为 `pending`，只有明确刷新才读取文件；查询显示上次采集版本，修改后需再次刷新。内容变更或来源资格失效后旧引用会拒绝，需重新搜索；移除来源不会删除原文件，独占快照退出检索/读取。支持 `.md`、`.markdown`、`.txt`，暂不支持 Word、Excel、PDF、图片。项目关联、排除、状态、范围读取与恢复步骤见[完整指南](TRIAL_GUIDE.md#本机文档检索006尚未发布)。
+
+### 项目文档库与 Hub 同步（007，尚未发布）
+
+需要同一次源码构建的 Local/Hub 独立包，**公开 0.4.0 和首次安装器不含本功能**。按[007 使用指南](TRIAL_GUIDE.md#项目文档库与-hub-同步007尚未发布)构建并安装到独立环境，不覆盖日常实例。
+
+- 本机 Web「文档」可选择文件或拖入文档，保存到本机项目文档库；也可继续明确纳入本机目录并刷新。
+- Hub 维护者提供 HTTPS 地址及 `hub-token` 文件。浏览器直接打开 Hub 地址，选择凭据文件后，可新建 Hub 项目并上传、更新、移除文档。凭据只在该页内存，刷新后重新选择。
+- 本机项目默认不传文档。在本机 Web 按项目允许，或用 `documents sync-status` 取得稳定 KEY、HID、generation 后执行 `documents sync-policy`。文档选择独立于对话上传；暂停保留旧快照，发现失效仍撤回。
+- 默认同时检索本机（含未上传资料）和 Hub，在本机重排两端片段；文档和对话共享项目关系。`projects --hub` 可发现 Hub 根，`--hub-project-id` 与本机 `--project-id` 互斥。
+
+本机创建项目的文档只在本机管理，Hub 副本只读；Hub 创建项目只在 Hub 管理，本机只能搜索/读取。关联不改变创建端权限。同步、搜索和读取不会打开外部源文件。具体操作、离线状态、保护恢复及原文引用见[完整指南](TRIAL_GUIDE.md#项目文档库与-hub-同步007尚未发布)，当前验证状态见[007 验收入口](scripts/acceptance/README.md#007-项目文档库与hub同步)。
 
 ## 多台电脑共用档案
 

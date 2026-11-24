@@ -1,0 +1,88 @@
+{
+  "operations": [
+    {
+      "role": "hub",
+      "method": "POST",
+      "path": "/v1/documents/library",
+      "expected_status": 400,
+      "response": {
+        "detail": "仅Hub创建的项目可在Hub管理文档"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "hub",
+      "method": "PUT",
+      "path": "/v1/documents/library/0ccf3eb4375838d1d57f6015d34a634e",
+      "expected_status": 400,
+      "response": {
+        "detail": "仅Hub创建的项目可在Hub管理文档"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "hub",
+      "method": "DELETE",
+      "path": "/v1/documents/library/0ccf3eb4375838d1d57f6015d34a634e",
+      "expected_status": 400,
+      "response": {
+        "detail": "仅Hub创建的项目可在Hub管理文档"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "hub",
+      "method": "PUT",
+      "path": "/v1/documents/sources/a33c7307971a37d01694d66dcabc3289",
+      "expected_status": 400,
+      "response": {
+        "detail": "设备同步投影只读，请在创建端管理"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "a",
+      "method": "POST",
+      "path": "/api/documents/library",
+      "expected_status": 400,
+      "response": {
+        "detail": "本机项目不存在，请用 smm projects 取得ID"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "a",
+      "method": "PUT",
+      "path": "/api/documents/library/9055eb0fde19425985b4a416f7d8d310",
+      "expected_status": 400,
+      "response": {
+        "detail": "管理文档不存在或已移除"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "a",
+      "method": "DELETE",
+      "path": "/api/documents/library/9055eb0fde19425985b4a416f7d8d310",
+      "expected_status": 400,
+      "response": {
+        "detail": "管理文档不存在或已移除"
+      },
+      "state_unchanged": true
+    },
+    {
+      "role": "a",
+      "method": "PUT",
+      "path": "/api/documents/sources/4c189002310944ba9e0c4fbd8567ff9f",
+      "expected_status": 400,
+      "response": {
+        "detail": "文档来源不存在"
+      },
+      "state_unchanged": true
+    }
+  ],
+  "persistent_snapshot_taken": true,
+  "known_valid_and_four_changed_states_checked": true,
+  "before_equals_after": true,
+  "complete_state_sha256": "c9f685f44dcdb95a445e392945567a8003f5bab4deb61346adc240985be8d78d"
+}

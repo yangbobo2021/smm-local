@@ -525,11 +525,20 @@ class LocalUpload:
                 raise ValueError("档案与保护文件身份不同，请核对恢复目录")
             value.update(control_epoch=uuid4().hex, restore_pending=True)
             self.guard.write(value)
-        return {"body_stopped": True, "archive_id": self.archive_id, "control_epoch": value["control_epoch"],
+        document_files=None
+        with self.db.connect() as con:has_documents=con.execute("SELECT 1 FROM sqlite_master WHERE name='local_document_sync'").fetchone()
+        if has_documents:
+            from .document_protocol import DocumentGuard
+            document_files=DocumentGuard(self.db,('local_document_sync',)).prepare_restore()
+        result = {"body_stopped": True, "archive_id": self.archive_id, "control_epoch": value["control_epoch"],
                 "inflight_messages": self.status()["inflight_messages"],
                 "restore_files": [str(self.db.db_path.resolve()), str(self.db.db_path.resolve()) + ".hub.json"],
                 "do_not_restore": [str(self.guard.path), str(self.guard.lock)],
                 "next": "已停止新正文发送；在途请求仍待确认。停止本机服务，按清单恢复一致性备份并重启，再查看 upload reconcile"}
+        if document_files:
+            for key in ('restore_files','do_not_restore'):result[key].extend(document_files[key])
+            result['documents_next']='文档正文已停止；恢复后查看 documents sync-status，对需要的项目明确重新选择，不复用旧保护文件'
+        return result
 
 
 def wire_record(record):

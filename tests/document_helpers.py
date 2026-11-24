@@ -112,15 +112,17 @@ class Fixture:
 
 
 def deny_source_reads(monkeypatch, *paths):
-    protected = {str(Path(p).resolve()) for p in paths}
+    protected = {os.path.normcase(str(Path(p).resolve())) for p in paths};attempts=[]
     def guard(original):
         def wrapped(file, *args, **kwargs):
-            if isinstance(file, (str, Path)) and str(Path(file).resolve()) in protected:
+            if isinstance(file, (str, Path)) and os.path.normcase(str(Path(file).resolve())) in protected:
+                attempts.append(str(file))
                 raise AssertionError('document source body unexpectedly opened outside explicit refresh')
             return original(file, *args, **kwargs)
         return wrapped
     for module, name in [(builtins, 'open'), (io, 'open'), (os, 'open')]:
         monkeypatch.setattr(module, name, guard(getattr(module, name)))
+    return attempts
 
 
 def names(f,query='needle',project=None):

@@ -54,6 +54,8 @@ def add_arguments(commands) -> None:
         relation = project_actions.add_parser(operation, help=help_text)
         relation.add_argument("one", type=int)
         relation.add_argument("other", type=int)
+    from .document_cli import add_arguments as add_document_arguments
+    add_document_arguments(actions,project_actions)
     vibeinsight = actions.add_parser("vibeinsight", help="配置 VibeInsight 只读同步")
     vibeinsight_actions = vibeinsight.add_subparsers(dest="vibeinsight_action", required=True)
     configure = vibeinsight_actions.add_parser("configure", help="验证并保存连接，启用同步")
@@ -362,6 +364,12 @@ class Hub:
         if row is None:
             raise ValueError("当前数据库没有 Hub 身份，请核对状态目录")
         result = HubUpload(archive, json.loads(row[0])).prepare_restore()
+        with archive.connect() as con:has_documents=con.execute("SELECT 1 FROM sqlite_master WHERE name='hub_document_meta'").fetchone()
+        if has_documents:
+            from .documents import HubDocuments
+            documents=HubDocuments(archive);document_files=documents.guard.prepare_restore()
+            for key in ('restore_files','do_not_restore'):result[key].extend(document_files[key])
+            result['documents_next']='文档接收、查询与原文已停止；恢复数据库及管理副本，保留保护文件，运行 documents recovery-status/recover 后明确 refresh/项目重新选择'
         if self.profile.is_file():
             result["restore_files"].append(str(self.profile))
         result["preserve_files"] = [str(p) for p in (self.token, self.certificate, self.key, self.ca) if p.is_file()]
@@ -371,6 +379,10 @@ class Hub:
         from .projects import HubProjects
 
         projects = HubProjects(Archive(self.database))
+        if args.project_action in ('create','ensure-global'):
+            from .documents import HubDocuments
+            documents=HubDocuments(projects.db)
+            return documents.project_create({**documents.context(),'name':args.name if args.project_action=='create' else '全局项目','kind':'ordinary' if args.project_action=='create' else 'global'})
         if args.project_action in ("list", "links"):
             return getattr(projects, args.project_action)()
         projects.link(args.one, args.other, linked=args.project_action == "link")
@@ -427,6 +439,9 @@ def dispatch(args: argparse.Namespace):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)
     with _service_lock(hub.root / "admin.lock"):
+        if action == 'documents':
+            from .document_cli import dispatch as dispatch_documents
+            return dispatch_documents(hub.root,args)
         if action in ("setup", "upgrade", "project", "vibeinsight"):
             return getattr(hub, action)(args)
         return getattr(hub, action)()

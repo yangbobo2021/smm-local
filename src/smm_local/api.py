@@ -19,6 +19,9 @@ from .upload import LocalUpload
 from .project_control import change as change_project
 from . import references
 from .documents import Documents
+from .managed_documents import ManagedDocuments
+from .document_sync import DocumentSync, schedule as schedule_documents, hub_projects, hub_sources, combined_listing
+from .document_search import search as search_documents,read as read_document
 
 
 class DocumentConfig(BaseModel):
@@ -43,6 +46,49 @@ class DocumentQuery(BaseModel):
     scope: str = 'all'
     project_id: StrictInt | None = None
     limit: StrictInt = 5
+    hub_project_id: StrictInt | None = None
+    local: bool = False
+
+
+class DocumentPolicy(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_key: str
+    enabled: bool
+    expected_hub_id: str
+    expected_generation: StrictInt
+
+
+class DocumentSyncRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_key: str | None = None
+
+
+class LibraryCreate(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_id: StrictInt
+    project_key: str | None = None
+    name: str
+    content_base64: str
+    submission_id: str
+
+
+class LibraryUpdate(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_id: StrictInt
+    project_key: str | None = None
+    expected_version: StrictInt
+    expected_revision: StrictInt
+    content_base64: str
+    submission_id: str
+
+
+class LibraryRemove(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    project_id: StrictInt
+    project_key: str | None = None
+    expected_version: StrictInt
+    expected_revision: StrictInt
+    submission_id: str | None = None
 
 
 class DocumentRead(BaseModel):
@@ -61,6 +107,7 @@ class SearchRequest(BaseModel):
     current_source: str | None = None
     include_current: bool = False
     local: bool = False
+    hub_project_id: StrictInt | None = None
 
 
 class MapRequest(BaseModel):
@@ -137,6 +184,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     db = archive or Archive(shared_db_path())
     references.material(db)
     documents = Documents(db)
+    library = ManagedDocuments(db)
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
@@ -155,6 +203,8 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                     result["hub"] = remote
             except (HubUnavailable, OSError, ValueError) as exc:
                 result["hub"] = {"pending": True, "reason": str(exc)}
+            try:result['documents']=DocumentSync(db).sync(control_only=job.automatic and db.get_settings()['sync_paused'])
+            except (OSError,ValueError,RuntimeError,HubUnavailable) as exc:result['documents']={'pending':True,'errors':[str(exc)]}
             db.record_sync_result(result)
         except Exception as exc:
             result["errors"].append({"error": f"无法保存同步结果：{exc}"})
@@ -203,6 +253,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
             if db.get_settings()["sync_paused"]:
                 try:
                     push_pending(db, control_only=True)
+                    DocumentSync(db).sync(control_only=True)
                 except (HubUnavailable, OSError, RuntimeError, ValueError):
                     pass
                 continue
@@ -315,21 +366,52 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
         except (OSError, ValueError) as exc:
             raise HTTPException(400, str(exc)) from exc
 
+    def document_mutation(function, *args, **kwargs):
+        result=document_call(function,*args,**kwargs)
+        try:schedule_documents(db)
+        except (OSError,ValueError,RuntimeError,HubUnavailable):pass
+        return result
+
+    @app.get('/api/documents/sync-status')
+    def document_sync_status():return document_call(DocumentSync(db).status)
+
+    @app.post('/api/documents/sync-policy')
+    def document_policy(body: DocumentPolicy):return document_call(DocumentSync(db).choose, **body.model_dump())
+
+    @app.post('/api/documents/sync')
+    def document_sync(body: DocumentSyncRequest):return document_call(DocumentSync(db).sync, **body.model_dump())
+
+    @app.get('/api/documents/library')
+    def library_list(project_id: int | None = None):
+        return document_call(library.list, project_id)
+
+    @app.post('/api/documents/library')
+    def library_create(body: LibraryCreate):
+        return document_mutation(library.create, **body.model_dump())
+
+    @app.put('/api/documents/library/{document_id}')
+    def library_update(document_id: str, body: LibraryUpdate):
+        return document_mutation(library.update, document_id, **body.model_dump())
+
+    @app.delete('/api/documents/library/{document_id}')
+    def library_remove(document_id: str, body: LibraryRemove):
+        return document_mutation(library.remove, document_id, **body.model_dump())
+
     @app.get('/api/documents/sources')
-    def document_sources():
-        return documents.sources()
+    def document_sources(hub: bool = False):
+        return document_call(hub_sources,db) if hub else documents.sources()
 
     @app.post('/api/documents/sources')
     def document_add(body: DocumentAdd):
-        return document_call(documents.add, **body.model_dump())
+        return document_mutation(documents.add, **body.model_dump())
 
     @app.put('/api/documents/sources/{source_id}')
     def document_set(source_id: str, body: DocumentConfig):
-        return document_call(documents.set, source_id, **body.model_dump())
+        return document_mutation(documents.set, source_id, **body.model_dump())
 
     @app.delete('/api/documents/sources/{source_id}')
     def document_remove(source_id: str):
-        return document_call(documents.remove, source_id)
+        return document_mutation(documents.remove, source_id)
 
     @app.get('/api/documents/files')
     def document_files(source_id: str | None = None):
@@ -337,23 +419,24 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     @app.post('/api/documents/refresh')
     def document_refresh(body: DocumentRefresh):
-        return document_call(documents.refresh, body.source_id)
+        return document_mutation(documents.refresh, body.source_id)
 
     @app.post('/api/documents/search')
     def document_search(body: DocumentQuery):
-        return document_call(documents.search, **body.model_dump())
+        return document_call(search_documents, db, **body.model_dump())
 
     @app.post('/api/documents/read')
     def document_read(body: DocumentRead):
-        return document_call(documents.read, **body.model_dump())
+        return document_call(read_document, db, **body.model_dump())
 
     @app.post('/api/projects')
     def project_create(body: RenameRequest):
         return document_call(db.create_project, body.name)
 
     @app.get("/api/projects")
-    def projects():
-        return project_status(db)
+    def projects(include_hub: bool = False):
+        local=project_status(db)
+        return document_call(combined_listing, db, local=local) if include_hub else local
 
     @app.get("/api/upload")
     def upload_info():

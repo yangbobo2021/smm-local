@@ -1,0 +1,251 @@
+{
+  "schema": "007-recovery-evidence-v1",
+  "files": [
+    {
+      "path": "ci-macos-15-junit.xml",
+      "bytes": 47809,
+      "sha256": "d5a75142e0d66f08201860e5475ad437da2781a39eef803dc1137ad419ee9b3e",
+      "original_sha256": "ff3bd7ea8fbfae3deb9a55868819e0268f94b77c4bb575464bb4d3251f7485fd",
+      "origin": "GitHub run45298310517 / tests-macos-15/test-results.xml",
+      "transformation": "removed testsuite hostname attribute; testcase data retained"
+    },
+    {
+      "path": "ci-windows-2022-junit.xml",
+      "bytes": 47545,
+      "sha256": "9e89efe02b686b4218255096e5a735dfd9d9cccc848cc776498919c2c3ae8812",
+      "original_sha256": "35bc8afcc6fe324f46256b848d13b564638672c25a18f2b00b49a9ac6bd92d76",
+      "origin": "GitHub run45298310517 / tests-windows-2022/test-results.xml",
+      "transformation": "removed testsuite hostname attribute; testcase data retained"
+    },
+    {
+      "path": "ci-ubuntu-24.04-junit.xml",
+      "bytes": 47801,
+      "sha256": "8a545ba9c06f780ce2dc8d16c1e892d8b9d96a3d75dcdee3f048b9ff13abe57c",
+      "original_sha256": "95a53e5fa38b2bdb027fe836df4ddc4858f3c76b8247866f5075f94391f1070a",
+      "origin": "GitHub run45298310517 / tests-ubuntu-24.04/test-results.xml",
+      "transformation": "removed testsuite hostname attribute; testcase data retained"
+    },
+    {
+      "path": "ci-508-summary.json",
+      "bytes": 4749,
+      "sha256": "eea62c87d1c650e6da7b0806ba9f60efb3407edbc93943524b6a2878597e5ca6",
+      "origin": "saved GitHub API run/jobs/commits plus actual job log and JUnit; raw source retained privately",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "e1-run-summary.json",
+      "bytes": 5916,
+      "sha256": "d0872e0dd4e938423fdbc399c3263022f39218e9371c217482215938bece491f",
+      "origin": "GitHub API run and jobs",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "local-junit.xml",
+      "bytes": 46402,
+      "sha256": "a05beed21d108002e6f8f443ae80e8f9969b24edb270ab8da8465f391c917740",
+      "original_sha256": "54747cb0caf072fe4fdd112d5773e81ae8c5d5ae34de0581815ddfcc4961f84a",
+      "origin": "current local regression test-results.xml",
+      "transformation": "removed testsuite hostname attribute"
+    },
+    {
+      "path": "local-regression.json",
+      "bytes": 503,
+      "sha256": "4a48627730b89f6da0a7bd982ce74a1ae26c4c742c22e025ec9a4909abe13b32",
+      "origin": "new actual local subprocess exit.json and JUnit",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "local-stdout.log",
+      "bytes": 548,
+      "sha256": "ba3caf444ce21fa8d4c8ab220781b83fa9d94d91d9dc7f2a85bdfd76a3b5fe96",
+      "original_sha256": "6979964c7de31ad94b1f903cd0fe2a868709cc8757e26aa4109d73bdd44c3e77",
+      "origin": "current local regression/stdout.log",
+      "transformation": "task worktree path replaced with <worktree>; all other bytes retained"
+    },
+    {
+      "path": "local-stderr.log",
+      "bytes": 630,
+      "sha256": "42e5a28792f889e4309a5d0bb741341549a67d0461c0a68062846fbd25b0ee4f",
+      "original_sha256": "42e5a28792f889e4309a5d0bb741341549a67d0461c0a68062846fbd25b0ee4f",
+      "origin": "current local regression/stderr.log",
+      "transformation": "task worktree path replaced with <worktree>; all other bytes retained"
+    },
+    {
+      "path": "source-test-sha256.json",
+      "bytes": 10896,
+      "sha256": "ccf24d56b01c40847a4746f0b241bb2927774cc225c7cbb424494f7bafafcbbc",
+      "original_sha256": "ccf24d56b01c40847a4746f0b241bb2927774cc225c7cbb424494f7bafafcbbc",
+      "origin": "hashes measured after current local regression; git diff src/tests empty",
+      "transformation": "original bytes"
+    },
+    {
+      "path": "e1-macos-15-result.json",
+      "bytes": 251,
+      "sha256": "fe2df6ff473553ac32cdc90146712be0e15a18055f6b9c2b6f1d430bb51e06fe",
+      "original_sha256": "fe2df6ff473553ac32cdc90146712be0e15a18055f6b9c2b6f1d430bb51e06fe",
+      "origin": "run45297175901 artifact platform/result.json (macos-15)",
+      "transformation": "original synthetic runner output; not independent formal judgment"
+    },
+    {
+      "path": "e1-macos-15-restart-summary.json",
+      "bytes": 10065,
+      "sha256": "4203009fdd1c3a3a5fda7f4dae89e959adf3e1ea04d5bbdc514f7ce35acef76b",
+      "origin": "actual restart stdio/Web JSON",
+      "transformation": "selected synthetic text/identity/version/ranges; reference and path fields omitted; exact text against fixed independent set"
+    },
+    {
+      "path": "e1-macos-15-integrity.json",
+      "bytes": 1282,
+      "sha256": "5ef74c8854712cc176f4b842390400008115e2ce4f4b333ec1d01195cd16e62c",
+      "origin": "actual downloaded ZIP, GitHub API artifact metadata and internal sha256.json",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "e1-macos-15-restart-web-a.png",
+      "bytes": 955584,
+      "sha256": "5f5fe0cff6db9e1b9b2e18a2c61030b2e16b4b39638cca44c7ccbe1b2eb016f2",
+      "original_sha256": "5f5fe0cff6db9e1b9b2e18a2c61030b2e16b4b39638cca44c7ccbe1b2eb016f2",
+      "origin": "run45297175901 macos-15 platform/restart-web-a.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "e1-macos-15-restart-web-hub.png",
+      "bytes": 640045,
+      "sha256": "836cdf550cc4203fa1c57fec16bf4879051b079755e09e783c6e0e2d1e58d06a",
+      "original_sha256": "836cdf550cc4203fa1c57fec16bf4879051b079755e09e783c6e0e2d1e58d06a",
+      "origin": "run45297175901 macos-15 platform/restart-web-hub.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "e1-ubuntu-24.04-result.json",
+      "bytes": 250,
+      "sha256": "7ec585930119e3fdd32d291548bda76ce58c282fd49c03069b7432f4b302853b",
+      "original_sha256": "7ec585930119e3fdd32d291548bda76ce58c282fd49c03069b7432f4b302853b",
+      "origin": "run45297175901 artifact platform/result.json (ubuntu-24.04)",
+      "transformation": "original synthetic runner output; not independent formal judgment"
+    },
+    {
+      "path": "e1-ubuntu-24.04-restart-summary.json",
+      "bytes": 10069,
+      "sha256": "013cba949ac2a554adfad8f742523ed2a5e243317b54d3a49466dfd8d3e22d9b",
+      "origin": "actual restart stdio/Web JSON",
+      "transformation": "selected synthetic text/identity/version/ranges; reference and path fields omitted; exact text against fixed independent set"
+    },
+    {
+      "path": "e1-ubuntu-24.04-integrity.json",
+      "bytes": 1286,
+      "sha256": "9f0f531872dd0ff2a79a002d476d2a1b7847530125d7a2e056d7382d7af60419",
+      "origin": "actual downloaded ZIP, GitHub API artifact metadata and internal sha256.json",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "e1-ubuntu-24.04-restart-web-a.png",
+      "bytes": 967001,
+      "sha256": "bb2b7d359758a6da1b2a58d28adb3e5be8faabc31eed0fbdd50fde485fe91358",
+      "original_sha256": "bb2b7d359758a6da1b2a58d28adb3e5be8faabc31eed0fbdd50fde485fe91358",
+      "origin": "run45297175901 ubuntu-24.04 platform/restart-web-a.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "e1-ubuntu-24.04-restart-web-hub.png",
+      "bytes": 630961,
+      "sha256": "a2d986c9f2b349ab9a4d8df639203281369f6478393ec08339f79ffdd3453f53",
+      "original_sha256": "a2d986c9f2b349ab9a4d8df639203281369f6478393ec08339f79ffdd3453f53",
+      "origin": "run45297175901 ubuntu-24.04 platform/restart-web-hub.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "e1-windows-2022-result.json",
+      "bytes": 258,
+      "sha256": "e9291ae38620671fb7545ff2bd796354a56aa190ac196e0ef5c79d8a8391b6e7",
+      "original_sha256": "e9291ae38620671fb7545ff2bd796354a56aa190ac196e0ef5c79d8a8391b6e7",
+      "origin": "run45297175901 artifact platform/result.json (windows-2022)",
+      "transformation": "original synthetic runner output; not independent formal judgment"
+    },
+    {
+      "path": "e1-windows-2022-restart-summary.json",
+      "bytes": 10069,
+      "sha256": "7d40e43ef3d27e4e5b8da806f96e163178724727a99415fc6cfc2e73a5c663d7",
+      "origin": "actual restart stdio/Web JSON",
+      "transformation": "selected synthetic text/identity/version/ranges; reference and path fields omitted; exact text against fixed independent set"
+    },
+    {
+      "path": "e1-windows-2022-integrity.json",
+      "bytes": 1286,
+      "sha256": "62abc6cefa1473be8d8387b932619d6da0e04bdd67c250f7563df7fe39aeac31",
+      "origin": "actual downloaded ZIP, GitHub API artifact metadata and internal sha256.json",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "e1-windows-2022-restart-web-a.png",
+      "bytes": 475386,
+      "sha256": "f00dc87d1d7f199ae3d2796ce555426b2c5491994bf920767b95df6a2f7ff589",
+      "original_sha256": "f00dc87d1d7f199ae3d2796ce555426b2c5491994bf920767b95df6a2f7ff589",
+      "origin": "run45297175901 windows-2022 platform/restart-web-a.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "e1-windows-2022-restart-web-hub.png",
+      "bytes": 323002,
+      "sha256": "608fa6ee3c765ff311f12860d130379db6985d19b52154f7abf157394cf8e380",
+      "original_sha256": "608fa6ee3c765ff311f12860d130379db6985d19b52154f7abf157394cf8e380",
+      "origin": "run45297175901 windows-2022 platform/restart-web-hub.png",
+      "transformation": "original PNG bytes; visually opened; synthetic task data only"
+    },
+    {
+      "path": "native-current-summary.json",
+      "bytes": 994,
+      "sha256": "e049fb6d924526eb9914c3c8f418cdb63b885467378c1bd09acece9498268fc0",
+      "origin": "actual native results view after independent delivery judgment registration",
+      "transformation": "derived summary; not a new formal acceptance receipt"
+    },
+    {
+      "path": "native-00-R007-current.png",
+      "bytes": 520655,
+      "sha256": "cfb98ecd2eac453daffffea04e2407809b60e92333f9b8f75a826556d03d72bc",
+      "original_sha256": "cfb98ecd2eac453daffffea04e2407809b60e92333f9b8f75a826556d03d72bc",
+      "origin": "current native dashboard, current-source blocked view",
+      "transformation": "original screenshot bytes; no historical image backfill"
+    },
+    {
+      "path": "native-16-SC9-current.png",
+      "bytes": 482943,
+      "sha256": "27ee9e32f4ba7f17c0facd207d3d2e2a8ac3750f3471754b3c79e40247ec0fd6",
+      "original_sha256": "27ee9e32f4ba7f17c0facd207d3d2e2a8ac3750f3471754b3c79e40247ec0fd6",
+      "origin": "current native dashboard, current-source blocked view",
+      "transformation": "original screenshot bytes; no historical image backfill"
+    },
+    {
+      "path": "native-checkpoints.json",
+      "bytes": 8070,
+      "sha256": "317b5d4060da584f5d76327a9c935a0a845f5c9ffae15141bb7288d1a275b791",
+      "origin": "actual 17 current dashboard screenshots/checkpoints; 2 selected public images",
+      "transformation": "private screenshot/data locators explicitly labeled, public image locations added"
+    },
+    {
+      "path": "delivery-r007-reviewer.json",
+      "bytes": 2093,
+      "sha256": "40a0a991676c1f81158fa6f854a8105ee816bad2cee78f09a56123599008d864",
+      "original_sha256": "40a0a991676c1f81158fa6f854a8105ee816bad2cee78f09a56123599008d864",
+      "origin": "actual independently written opinion / registered tool result / read-only native view",
+      "transformation": "original JSON bytes; no invented historical executions"
+    },
+    {
+      "path": "delivery-r007-registration.json",
+      "bytes": 4747,
+      "sha256": "a8cb2eeea959f603c8c55aa634a344ede38a8d30a159c051045ea9ee45122a0b",
+      "original_sha256": "a8cb2eeea959f603c8c55aa634a344ede38a8d30a159c051045ea9ee45122a0b",
+      "origin": "actual independently written opinion / registered tool result / read-only native view",
+      "transformation": "original JSON bytes; no invented historical executions"
+    },
+    {
+      "path": "native-before-judge.json",
+      "bytes": 431320,
+      "sha256": "87c2f788d56f9aa9efc913668a1f3ab5c74de10d57d1856c674e4bba73b0cf42",
+      "original_sha256": "87c2f788d56f9aa9efc913668a1f3ab5c74de10d57d1856c674e4bba73b0cf42",
+      "origin": "actual independently written opinion / registered tool result / read-only native view",
+      "transformation": "original JSON bytes; no invented historical executions"
+    }
+  ],
+  "not_formal_acceptance": true
+}

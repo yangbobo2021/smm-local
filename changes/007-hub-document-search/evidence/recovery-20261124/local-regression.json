@@ -1,0 +1,22 @@
+{
+  "start": "2026-11-24T08:14:52.906Z",
+  "done": true,
+  "code": 0,
+  "end": "2026-11-24T08:18:52.876Z",
+  "argv": [
+    "/usr/bin/env",
+    "PYTHONPATH=<worktree>/src",
+    "/opt/miniconda3/bin/python3",
+    "-m",
+    "pytest",
+    "-q",
+    "--junitxml=<worktree>/.acceptance-local/recovery-20261124/local-regression/test-results.xml"
+  ],
+  "cwd": "<worktree>",
+  "head": "5083227897ab9612390a4cbc4997df961dff96d7",
+  "tests": 341,
+  "passed": 340,
+  "skipped": 1,
+  "failures": 0,
+  "errors": 0
+}

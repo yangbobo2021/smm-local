@@ -718,7 +718,7 @@ class Archive:
             raise ValueError("preview_chars 必须为 0 或 100 到 2000")
         project_ids = None
         if scope == "project":
-            if project_id is None:
+            if project_id is None and exact_project_ids is None:
                 raise ValueError("项目范围必须指定 project_id")
             project_ids = list(exact_project_ids) if exact_project_ids is not None else self.effective_projects(project_id)
         match = " OR ".join('"'+term.replace('"','')+'"' for term in query_terms)

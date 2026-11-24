@@ -1,0 +1,49 @@
+{
+  "project_name": "Web Hub <img src=\"/smm-document-executed\" onerror=\"window.__smm_document_executed=true\">",
+  "exact_upload": "webneedle dropped\n<script>window.__smm_document_executed=true</script>\n<img src=\"/smm-document-executed\" onerror=\"window.__smm_document_executed=true\">\n<script>window.SMM_007_EXECUTED=true</script>",
+  "stages": [
+    {
+      "stage": "new-project",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "query-snippets",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "original-chosen.txt",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    },
+    {
+      "stage": "original-dropped.md",
+      "window_marker_unset": true,
+      "legacy_marker_unset": true,
+      "embedded_nodes": 0,
+      "trigger_requests": []
+    }
+  ],
+  "observed_targets": [
+    {
+      "name": "chosen.txt",
+      "id": "7a0203fd135742d7a026538297b8c09a"
+    },
+    {
+      "name": "dropped.md",
+      "id": "9055eb0fde19425985b4a416f7d8d310"
+    }
+  ],
+  "expected_targets": {
+    "chosen.txt": "7a0203fd135742d7a026538297b8c09a",
+    "dropped.md": "9055eb0fde19425985b4a416f7d8d310"
+  },
+  "two_target_negative_controls_rejected": true
+}

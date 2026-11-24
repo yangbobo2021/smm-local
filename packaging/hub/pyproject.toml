@@ -23,3 +23,6 @@ smm-hub = "smm_hub.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["smm_hub*"]
+
+[tool.setuptools.package-data]
+smm_hub = ["static/*.html"]

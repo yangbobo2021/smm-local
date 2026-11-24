@@ -1,0 +1,38 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________________ test_listing_coverage _____________________________
+
+w = <hub_document_helpers.World object at 0x103ef4500>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x103e8c9e0>
+
+    def test_listing_coverage(w, monkeypatch):
+        p=w.project('Listing Local')
+        path,source=w.source('listing.txt','listingnonce local original',[p])
+        hp=w.hub_project('Listing Hub')
+        native=w.upload(hp,'remote.txt','listingnonce remote original',hub=True)
+        server=create_mcp(w.pair.local)
+        async def call(name,body):
+            answer=await server.call_tool(name,body)
+            observe('listing-mcp',{'name':name,'request':body,'response':str(answer)})
+            return json.loads(answer[0][0].text)
+        def tool(name,body):return asyncio.run(call(name,body))
+        def local_state():
+            with w.pair.local.connect() as c:
+                names=[r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name") if r[0]=='settings' or r[0].startswith(('local_upload','upload_message','local_document','document'))]
+                return {name:[dict(r) for r in c.execute('SELECT * FROM "'+name+'" ORDER BY 1')] for name in names}
+        # Baselines come from the setup archives, not a queried list response.
+        with w.pair.local.connect() as c:
+>           wanted_local={r['id']:dict(r) for r in c.execute('SELECT id,name,kind,stable_key FROM projects')}
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           sqlite3.OperationalError: no such column: stable_key
+
+tests/test_document_review_contracts.py:31: OperationalError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /private/tmp/smm-007/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_document_review_contracts.py::test_listing_coverage - sqlit...
+1 failed, 1 warning in 0.46s

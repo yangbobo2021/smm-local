@@ -186,6 +186,10 @@ class Documents:
                 CREATE VIRTUAL TABLE IF NOT EXISTS document_fts USING fts5(text);
                 CREATE INDEX IF NOT EXISTS document_memberships_file ON document_memberships(document_pk);
             ''')
+            if 'text_sha256' not in {r['name'] for r in con.execute('PRAGMA table_info(documents)')}:
+                con.execute("ALTER TABLE documents ADD COLUMN text_sha256 TEXT")
+                for row in con.execute('SELECT pk,text FROM documents WHERE text IS NOT NULL').fetchall():
+                    con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(row['text'].encode('utf-8')).hexdigest(),row['pk']))
             if 'resume_status' not in {r['name'] for r in con.execute('PRAGMA table_info(document_sources)')}:
                 con.execute("ALTER TABLE document_sources ADD COLUMN resume_status TEXT NOT NULL DEFAULT 'pending'")
                 con.execute("UPDATE document_sources SET resume_status=status WHERE status!='refreshing'")
@@ -358,6 +362,7 @@ class Documents:
                         # capture metadata still records this successful collection.
                         captured=utcnow();collector=source['id']
                         con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
+                        con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
                         con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
                     con.execute('INSERT INTO document_memberships VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,document_pk) DO UPDATE SET relative_path=excluded.relative_path,status=excluded.status,qualification=excluded.qualification,error=excluded.error',(source['id'],pk,item['relative_path'],'failed' if error else 'ready',qualification,error))
                 for row in con.execute('SELECT document_pk FROM document_memberships WHERE source_id=?',(source['id'],)).fetchall():
@@ -367,14 +372,17 @@ class Documents:
             self._prune(con)
             return next(s for s in self._sources(con) if s['id']==source['id'])
 
-    def search(self, query, *, scope='all', project_id=None, limit=5):
+    def search(self, query, *, scope='all', project_id=None, limit=5, exact_project_ids=None):
         if not isinstance(query,str) or not (terms:=list(dict.fromkeys(tokens(query)))):
             raise ValueError('查询词不能为空，须有可检索的中英文内容')
         if type(limit) is not int or not 1<=limit<=50:
             raise ValueError('limit须为1至50整数')
         identity,key=references.material(self.db)
         with self.db.connect() as con:
-            con.execute('BEGIN');projects=_query_scope(con,scope,project_id)
+            con.execute('BEGIN')
+            if exact_project_ids is None:projects=_query_scope(con,scope,project_id)
+            else:
+                projects=self._projects(con,list(exact_project_ids))
             sources=[s for s in self._sources(con) if projects is None or set(s['project_ids']).intersection(projects)]
             available={s['id']:s for s in sources if s['status'] in {'ready','partial'}}
             qualified={}
@@ -401,7 +409,8 @@ class Documents:
                         offset+=width
                 start=max(0,point-200);end=min(len(text),start+2000)
                 payload={'format':1,'kind':'document','archive_id':identity,'document_id':row['id'],'version':row['version'],'sources':stamps,'start':start,'end':end}
-                result={k:row[k] for k in ['id','path','version','sha256','text_length','captured_at','captured_by_source_id']}
+                result={k:row[k] for k in ['id','path','version','sha256','text_sha256','text_length','captured_at','captured_by_source_id']}
+                result['display_name']=self._display_name(con,row['id'],row['path'])
                 results.append({**result,**_range(text,start,end),'source_ids':[s['id'] for s in stamps],
                                 'project_ids':sorted({p for stamp in stamps for p in available[stamp['id']]['project_ids']}),
                                 'reference':sign(payload,key),'bm25_score':-row['score'],'rank':len(results)+1,'snapshot_kind':'采集版本（仅本机）'})
@@ -410,14 +419,28 @@ class Documents:
             return {'results':results,'scope':scope,'effective_project_ids':projects,'archive_scope':'local_documents',
                     'coverage':{'indexed_files':sum(r[0] in qualified for r in indexed),'sources':sources}}
 
+    @staticmethod
+    def _display_name(con,ident,path):
+        if con.execute("SELECT 1 FROM sqlite_master WHERE name='document_library'").fetchone():
+            row=con.execute('SELECT display_name FROM document_library WHERE document_id=?',(ident,)).fetchone()
+            if row:return row[0]
+        return Path(path).name
+
     def read(self, reference, *, start=None, end=None):
         payload=references.decode(self.db,reference)
+        from .document_protocol import identity,integer
+        if type(payload.get('format')) is not int:raise ValueError('文档引用格式无效')
+        identity(payload.get('document_id'),'文档引用身份');integer(payload.get('version'),'文档引用版本')
+        if not isinstance(payload.get('sources'),list):raise ValueError('来源资格无效')
+        for stamp in payload['sources']:
+            if not isinstance(stamp,dict):raise ValueError('来源资格无效')
+            identity(stamp.get('id'),'来源身份');integer(stamp.get('revision'),'来源版本');integer(stamp.get('qualification'),'来源资格')
         if payload.get('kind')!='document':
             raise ValueError('须使用文档搜索返回的原文引用，不能混用对话引用')
         with self.db.connect() as con:
             con.execute('BEGIN')
             row=con.execute('SELECT * FROM documents WHERE id=?',(payload.get('document_id'),)).fetchone()
-            if row is None or row['text'] is None or row['version']!=payload.get('version'):
+            if row is None or row['text'] is None or row['version']!=payload.get('version') or hashlib.sha256(row['text'].encode('utf-8')).hexdigest()!=row['text_sha256'] or len(row['text'])!=row['text_length']:
                 raise ValueError('采集版本已失效，请重新检索')
             valid=[]
             for stamp in payload.get('sources',[]):
@@ -425,6 +448,7 @@ class Documents:
                 if member and member['status']=='ready' and member['source_status'] in {'ready','partial'} and member['qualification']==stamp['qualification'] and member['revision']==stamp['revision']:
                     valid.append(stamp['id'])
             if not valid:raise ValueError('当次来源资格已失效或正在刷新，请稍后重新检索')
-            result={k:row[k] for k in ['id','path','version','sha256','text_length','captured_at','captured_by_source_id']}
+            result={k:row[k] for k in ['id','path','version','sha256','text_sha256','text_length','captured_at','captured_by_source_id']}
+            result['display_name']=self._display_name(con,row['id'],row['path'])
             return {**result,**_range(row['text'],payload['start'] if start is None else start,payload['end'] if end is None else end),
                     'source_ids':valid,'snapshot_kind':'采集版本（仅本机）'}

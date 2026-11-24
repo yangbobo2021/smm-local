@@ -1,0 +1,36 @@
+{
+  "os": "ubuntu-24.04",
+  "artifact_id": 14876823203,
+  "bytes": 18387230,
+  "sha256": "a76516e9287647affb1a8c941b217c31c12f5db6d9c3efe897821cd740aa0828",
+  "github_digest_matches": true,
+  "zip_crc_passed": true,
+  "files": 115,
+  "inner_sha256_passed": true,
+  "cms": [
+    {
+      "path": "private-traces/platform/restart-web-trace.zip.cms",
+      "bytes": 1777357,
+      "sha256": "b74f7b0b54be73cefd563acc796aedbd7c84641e744b19a4a40bd9ce559bee66",
+      "original_sha256": "350f21b3ed62790a94b25aac62340411482b2bfa585d04d2c5260394a3b8fe86",
+      "original_bytes": 1776786,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-a-trace.zip.cms",
+      "bytes": 5355213,
+      "sha256": "18f7b97550695c82197862b9305fbf6a7f9ad684d7b435f0db4b178386e3ce0c",
+      "original_sha256": "e154b30b1f6319ef5013ef2b4393f5a998e2716e9530b3884974f7f9cd921013",
+      "original_bytes": 5354644,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-hub-trace.zip.cms",
+      "bytes": 2270717,
+      "sha256": "278d038b8bf57bad2984964e572eab100e801ef5e018061a5ecdb6949f94f000",
+      "original_sha256": "4c6977f4db5aa0a85427b20d38e9b28661efd283d0a96a03eb5b62f939851c21",
+      "original_bytes": 2270149,
+      "decrypted": false
+    }
+  ]
+}

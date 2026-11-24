@@ -1,0 +1,36 @@
+{
+  "os": "macos-15",
+  "artifact_id": 14875824635,
+  "bytes": 17390744,
+  "sha256": "cce371b6abd61ff31db701e8f52f64e6ec051123c1a934d9e56cc895eebd78e9",
+  "github_digest_matches": true,
+  "zip_crc_passed": true,
+  "files": 115,
+  "inner_sha256_passed": true,
+  "cms": [
+    {
+      "path": "private-traces/platform/restart-web-trace.zip.cms",
+      "bytes": 1784845,
+      "sha256": "36930d1950e8210f8274b600a5cc3cca6e1685113a4c39a3c31da1f9d8423955",
+      "original_sha256": "d34cb0c27973db6e1d9d2000d4ade5c79f21557d0a92f3acf121131c910c431e",
+      "original_bytes": 1784273,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-a-trace.zip.cms",
+      "bytes": 4798637,
+      "sha256": "2825e8914f4790c6c6581f8a7aba1fc2e4a127f3f217a844a956155e9dfa4c4d",
+      "original_sha256": "fb49c4956930ba6dedd96d521cad830bf9733eeb6791e52b5a0dda596e59b807",
+      "original_bytes": 4798071,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-hub-trace.zip.cms",
+      "bytes": 1963213,
+      "sha256": "9e214db39a7537fbe4a9bef6a1d35c7df829082b928d2725e3187cda0659f1e5",
+      "original_sha256": "e562408aef7453a7c694168e209471a6871bfe145a7fa2972212ffff57606358",
+      "original_bytes": 1962655,
+      "decrypted": false
+    }
+  ]
+}

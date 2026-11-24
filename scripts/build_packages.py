@@ -37,8 +37,8 @@ def main():
         shared = hub_code / "_archive"
         shared.mkdir()
         shim = (ROOT / "src/smm_hub/_archive.py").read_text(encoding="utf-8")
-        (shared / "__init__.py").write_text(shim.replace("from smm_local.", "from ."), encoding="utf-8")
-        for name in ("core.py", "support.py", "archive_protocol.py", "references.py"):
+        (shared / "__init__.py").write_text(shim.replace("from smm_local.", "from ."), encoding="utf-8", newline="\n")
+        for name in ("core.py", "support.py", "archive_protocol.py", "references.py", "documents.py", "managed_documents.py", "document_protocol.py"):
             shutil.copyfile(ARCHIVE / name, shared / name)
         shutil.copytree(ARCHIVE / "importers", shared / "importers", ignore=IGNORE_GENERATED)
         for project in (local, hub):

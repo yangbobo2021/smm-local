@@ -1,10 +1,21 @@
 name: Selective upload installed-package acceptance
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Acceptance or environment-only capability probe
+        type: choice
+        options: [selective-upload, document-platform-preflight, document-installed, document-installed-e1]
+        default: selective-upload
+      evidence_certificate:
+        description: Base64 public X509 certificate for encrypted original browser traces (private key stays with reviewer)
+        type: string
+        default: ""
 permissions:
   contents: read
 jobs:
   installed-entrances:
+    if: inputs.mode == 'selective-upload'
     strategy:
       fail-fast: false
       matrix:
@@ -40,3 +51,70 @@ jobs:
         with:
           name: selective-upload-${{ matrix.os }}
           path: ${{ runner.temp }}/005-evidence
+
+  document-platform-preflight:
+    if: inputs.mode == 'document-platform-preflight'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: python scripts/acceptance/hub_documents_ci_preflight.py --output "${{ runner.temp }}/007-preflight"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: document-platform-preflight-${{ matrix.os }}
+          path: ${{ runner.temp }}/007-preflight
+
+  document-installed:
+    name: ${{ inputs.mode }} (${{ matrix.os }})
+    if: inputs.mode == 'document-installed' || inputs.mode == 'document-installed-e1'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+      UV_LINK_MODE: copy
+      SMM_007_EVIDENCE_CERTIFICATE: ${{ inputs.evidence_certificate }}
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.8"
+      - run: uv sync --python python --extra test --extra acceptance
+      - name: Install browser runtime on Linux
+        if: runner.os == 'Linux'
+        run: uv run python -m playwright install --with-deps chromium
+      - name: Run installed document CLI, browser and stdio flows
+        run: uv run python scripts/acceptance/hub_documents_ci.py --work "${{ runner.temp }}/007-business" --output "${{ runner.temp }}/007-public-evidence"
+      - name: Run actual Ubuntu user-systemd Hub with document flows
+        if: runner.os == 'Linux' && inputs.mode == 'document-installed'
+        run: uv run python scripts/acceptance/hub_documents_ci.py --hub-service --work "${{ runner.temp }}/007-systemd-business" --output "${{ runner.temp }}/007-systemd-public-evidence"
+      - name: Run actual Windows SCM Hub with a separate standard Local
+        if: runner.os == 'Windows' && inputs.mode == 'document-installed'
+        run: uv run python scripts/acceptance/hub_documents_ci.py --hub-service --work "${{ runner.temp }}/007-scm-business" --output "${{ runner.temp }}/007-scm-public-evidence"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ inputs.mode }}-${{ matrix.os }}
+          path: |
+            ${{ runner.temp }}/007-public-evidence
+            ${{ runner.temp }}/007-systemd-public-evidence
+            ${{ runner.temp }}/007-scm-public-evidence

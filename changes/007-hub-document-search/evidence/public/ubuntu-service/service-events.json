@@ -1,0 +1,34 @@
+[
+  {
+    "action": "started",
+    "at": "2026-11-23T15:12:07.853777+00:00",
+    "unit": "smm-hub-73e65458f6c8.service",
+    "pid": 3778,
+    "actual_uid": 1001,
+    "systemctl_show": "MainPID=3778\nExecStart={ path=/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python ; argv[]=/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python -m smm_hub.cli hub --state-dir /home/runner/work/_temp/007-systemd-business/platform/hub run ; ignore_errors=no ; start_time=[Mon 2026-11-23 15:12:06 UTC] ; stop_time=[n/a] ; pid=3778 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+    "definition": "[Unit]\nDescription=SMM aggregation server\n[Service]\nExecStart=\"/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python\" \"-m\" \"smm_hub.cli\" \"hub\" \"--state-dir\" \"/home/runner/work/_temp/007-systemd-business/platform/hub\" \"run\"\nRestart=on-failure\nRestartSec=2s\nUMask=0077\n[Install]\nWantedBy=default.target\n"
+  },
+  {
+    "action": "stopped",
+    "unit": "smm-hub-73e65458f6c8.service",
+    "pid": 3778,
+    "alive": false,
+    "at": "2026-11-23T15:12:36.382984+00:00"
+  },
+  {
+    "action": "started",
+    "at": "2026-11-23T15:12:38.381351+00:00",
+    "unit": "smm-hub-73e65458f6c8.service",
+    "pid": 4324,
+    "actual_uid": 1001,
+    "systemctl_show": "MainPID=4324\nExecStart={ path=/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python ; argv[]=/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python -m smm_hub.cli hub --state-dir /home/runner/work/_temp/007-systemd-business/platform/hub run ; ignore_errors=no ; start_time=[Mon 2026-11-23 15:12:37 UTC] ; stop_time=[n/a] ; pid=4324 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+    "definition": "[Unit]\nDescription=SMM aggregation server\n[Service]\nExecStart=\"/home/runner/work/_temp/007-systemd-business/packages/hub-env/bin/python\" \"-m\" \"smm_hub.cli\" \"hub\" \"--state-dir\" \"/home/runner/work/_temp/007-systemd-business/platform/hub\" \"run\"\nRestart=on-failure\nRestartSec=2s\nUMask=0077\n[Install]\nWantedBy=default.target\n"
+  },
+  {
+    "action": "stopped",
+    "unit": "smm-hub-73e65458f6c8.service",
+    "pid": 4324,
+    "alive": false,
+    "at": "2026-11-23T15:12:40.935372+00:00"
+  }
+]

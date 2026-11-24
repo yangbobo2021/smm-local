@@ -56,7 +56,9 @@ def test_isolation(pair,tmp_path,monkeypatch,mode):
                     with pytest.raises(AssertionError,match='Internet socket'):sentinel.connect(address)
             path=f.file('private-document.txt','docprivateneedle 本机文件 😀')
             source=f.add(path,[original['project_id']]);f.refresh(source)
-            hit=f.search('docprivateneedle',scope='project',project_id=original['project_id'])['results'][0]
+            # 007 makes the default federated. This retained 006 obligation is
+            # the explicit Local path and must still perform zero network I/O.
+            hit=f.search('docprivateneedle',scope='project',project_id=original['project_id'],local=True)['results'][0]
             assert f.read(hit)['text']=='docprivateneedle 本机文件 😀'
             f.set(source,project_ids=[]);f.refresh(source);f.remove(source)
             assert retained_state(f.db)==before and retained_state(pair.remote)==remote and len(pair.calls)==calls

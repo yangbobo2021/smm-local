@@ -19,6 +19,8 @@ from ._archive import (Archive, digest, legacy_message_key, message_version, sig
                        reference_material, reference_decode, reference_issue, reference_read, tokens, compact_message)
 from .projects import HubProjects
 from .upload import HubUpload
+from .documents import HubDocuments
+from .document_api import install as install_documents
 from .vibeinsight import SOURCE as VIBEINSIGHT
 
 
@@ -77,8 +79,11 @@ class KnownMessages(PolicyQuery):
     records: list[KnownMessage] = Field(max_length=100)
 
 
-class QueryScope(PolicyQuery):
-    project_id: str = Field(min_length=1, max_length=1024)
+class QueryScope(BaseModel):
+    hub_id: str
+    device_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
+    project_id: str | None = Field(default=None, min_length=1, max_length=1024)
+    hub_project_id: int | None = Field(default=None, strict=True, ge=1)
 
 
 class Search(BaseModel):
@@ -183,13 +188,15 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
             canonical_key TEXT NOT NULL, content_version TEXT NOT NULL
         )""")
     uploads = HubUpload(db, hub_id)
+    documents = HubDocuments(db)
 
     def authorize(authorization: str = Header(default="")) -> None:
         if not hmac.compare_digest(authorization.encode("utf-8"), ("Bearer " + token).encode("ascii")):
             raise HTTPException(401, "需要有效的汇总服务凭证")
 
     app = FastAPI(title="SMM Hub", docs_url=None, redoc_url=None, openapi_url=None,
-                  dependencies=[Depends(authorize)], lifespan=lifespan)
+                  lifespan=lifespan)
+    install_documents(app,documents,token)
 
     def require_hub(expected: str) -> None:
         if expected != hub_id:
@@ -197,18 +204,24 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
 
     @app.get("/v1/info")
     def info():
-        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1"]}
+        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1", "documents-v1"], **documents.context()}
 
     @app.post("/v1/query-scope")
     def query_scope(req: QueryScope):
         require_hub(req.hub_id)
-        effective = projects.effective(req.device_id, req.project_id)
+        if req.hub_project_id is not None:
+            if req.project_id is not None:raise HTTPException(400,"项目根选择器互斥")
+            if not any(p['id']==req.hub_project_id for p in projects.list()):raise HTTPException(400,"Hub项目不存在")
+            effective = projects._list_for_ids(tuple(db.effective_projects(req.hub_project_id)))
+        else:
+            if req.device_id is None or req.project_id is None:raise HTTPException(400,"需要明确项目根")
+            effective = projects.effective(req.device_id, req.project_id)
         if not effective:
             raise HTTPException(409, "当前项目尚未登记，请重试最小项目登记")
         identity, key = reference_material(db)
         payload = {"format": 1, "kind": "query_scope", "archive_id": identity,
                    "hub_id": hub_id, "device_id": req.device_id, "project_key": req.project_id,
-                   "projects": effective}
+                   "projects": effective, "hub_project_id": req.hub_project_id}
         return {"hub_id": hub_id, "effective_projects": effective, "scope_reference": sign(payload, key)}
 
     @app.post("/v1/upload-policy/status")
