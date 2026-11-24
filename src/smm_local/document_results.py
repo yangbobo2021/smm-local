@@ -87,8 +87,9 @@ def table_view(result,table_id=None,*,row_start=None,row_end=None,column_start=N
     if anchor and anchor.get('table_id')==table['table_id'] and not explicit:
         r=max(1,min(anchor['row'],table['rows']-19));c=max(1,min(anchor['column'],table['columns']-9));origin='search_hit'
     else:r=c=1;origin='explicit' if explicit else 'table_start'
-    r=row_start if row_start is not None else r;c=column_start if column_start is not None else c
-    re=row_end if row_end is not None else min(table['rows']+1,r+20);ce=column_end if column_end is not None else min(table['columns']+1,c+10)
+    suggested=anchor.get('suggested_window') if anchor and anchor.get('table_id')==table['table_id'] and not explicit else None
+    r=row_start if row_start is not None else (suggested['row_start'] if suggested else r);c=column_start if column_start is not None else (suggested['column_start'] if suggested else c)
+    re=row_end if row_end is not None else (suggested['row_end'] if suggested else min(table['rows']+1,r+20));ce=column_end if column_end is not None else (suggested['column_end'] if suggested else min(table['columns']+1,c+10))
     if any(type(x) is not int for x in (r,re,c,ce)) or not 1<=r<re<=table['rows']+1 or not 1<=c<ce<=table['columns']+1:raise ValueError('表格窗口越界')
     selected=[x for x in table['cells'] if r<=x['row']<re and c<=x['column']<ce]
     header_rows=table.get('header_rows') or ([min(x['row'] for x in table['cells'] if x.get('text') not in ('',None))] if any(x.get('text') not in ('',None) for x in table['cells']) else [])
@@ -96,3 +97,53 @@ def table_view(result,table_id=None,*,row_start=None,row_end=None,column_start=N
     union={(x['row'],x['column']):x for x in selected+headers}
     if len(union)>1000 or sum(len(x.get('text') or '') for x in union.values())>16000:raise ValueError('表格窗口及必要表头超过1000格/16000字符，请缩小范围或核对原件')
     return {**{k:v for k,v in table.items() if k!='cells'},'cells':selected,'window':{'row_start':r,'row_end':re,'column_start':c,'column_end':ce},'window_origin':origin,'header_context':{'role':'explicit_header' if table.get('header_rows') else 'first_content_row','cells':headers}}
+
+
+def hit_context(result,point):
+    """Locate the actual normalized-text hit without parsing the source again.
+
+    Word cell locations address a structural container, while its paragraphs
+    carry normalized character spans. Choose the deepest matching container so
+    nested tables cannot borrow an outer cell's row/column.
+    """
+    locations=[loc for loc in result['locations'] if loc.get('start',-1)<=point<loc.get('end',-1)]
+    matches=[]
+    for table in result['tables']:
+        for cell in table['cells']:
+            loc=cell['location'];specificity=-1
+            if loc.get('start',-1)<=point<loc.get('end',-1):specificity=0
+            elif 'path' in loc:
+                prefix=loc['path']+'/'
+                if any(part.get('part')==loc.get('part') and part.get('path','').startswith(prefix) for part in locations):specificity=len(prefix)
+            if specificity>=0:matches.append((specificity,table,cell))
+    if not matches:return None,None,2000
+    _,table,cell=max(matches,key=lambda item:item[0])
+    anchor={'table_id':table['table_id'],'row':cell['row'],'column':cell['column']}
+    rows=min(20,table['rows']);columns=min(10,table['columns']);view=None
+    while True:
+        r=max(1,min(cell['row'],table['rows']-rows+1));c=max(1,min(cell['column'],table['columns']-columns+1))
+        window={'row_start':r,'row_end':r+rows,'column_start':c,'column_end':c+columns}
+        try:
+            view=table_view(result,table['table_id'],**window);break
+        except ValueError as exc:
+            if '1000' not in str(exc) or '16000' not in str(exc):raise
+            if rows>1:rows-=1
+            elif columns>1:columns-=1
+            else:break
+    if view is None:
+        # Searching still identifies this cell. Do not quietly redirect a read
+        # to the table's first row when even its required context cannot fit.
+        context={'table_id':table['table_id'],'matched_cells':[{k:cell[k] for k in ('row','column','row_span','column_span','location')}],
+                 'suggested_window':None,'needs_expansion':True,'reason':'命中单元格及必要上下文超过1000格/16000字符，请核对原件'}
+        return context,anchor,2000
+    anchor['suggested_window']=window
+    headers=view['header_context'];budget=1600;header_cells=[];truncated=False
+    for value in headers['cells']:
+        text=value.get('text');length=len(text or '');shown=min(length,budget);budget-=shown
+        clipped={**value,'text':text[:shown] if isinstance(text,str) else text}
+        if shown<length:clipped.update(text_truncated=True,text_length=length);truncated=True
+        header_cells.append(clipped)
+    used=sum(len(value.get('text') or '') for value in header_cells)
+    context={'table_id':table['table_id'],'matched_cells':[{k:cell[k] for k in ('row','column','row_span','column_span','location')}],
+             'suggested_window':window,'header_context':{'role':headers['role'],'cells':header_cells},'needs_expansion':truncated}
+    return context,anchor,2000-used

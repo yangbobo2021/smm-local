@@ -495,6 +495,12 @@ class Documents:
                 if processed is not None:
                     result.update(metadata)
                     payload.update(processing_version=metadata['processing_version'],result_sha256=metadata['result_sha256'],raw_sha256=row['sha256'])
+                    from .document_results import hit_context
+                    context,anchor,preview=hit_context(processed,point)
+                    if context is not None:
+                        result['table_context']=context
+                        start=max(0,point-min(200,preview//4));end=min(len(text),start+preview)
+                        payload.update(table_anchor=anchor,start=start,end=end)
                 results.append({**result,**_range(text,start,end),'source_ids':[s['id'] for s in stamps],
                                 'project_ids':sorted({p for stamp in stamps for p in available[stamp['id']]['project_ids']}),
                                 'reference':sign(payload,key),'bm25_score':-row['score'],'rank':len(results)+1,'snapshot_kind':'采集版本（仅本机）'})
