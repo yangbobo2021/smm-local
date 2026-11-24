@@ -14,8 +14,10 @@ from smm_local.mcp_server import create_mcp
 def test_listing_coverage(w, monkeypatch):
     p=w.project('Listing Local')
     path,source=w.source('listing.txt','listingnonce local original',[p])
+    path2,source2=w.source('listing-other.txt','listingnonce local other',[p])
     hp=w.hub_project('Listing Hub')
     native=w.upload(hp,'remote.txt','listingnonce remote original',hub=True)
+    native2=w.upload(hp,'remote-other.txt','listingnonce remote other',hub=True)
     server=create_mcp(w.pair.local)
     async def call(name,body):
         answer=await server.call_tool(name,body)
@@ -28,25 +30,29 @@ def test_listing_coverage(w, monkeypatch):
             return {name:[dict(r) for r in c.execute('SELECT * FROM "'+name+'" ORDER BY 1')] for name in names}
     # Baselines come from the setup archives, not a queried list response.
     with w.pair.local.connect() as c:
-        wanted_local={r['id']:dict(r) for r in c.execute('SELECT id,name,kind,stable_key FROM projects')}
+        wanted_local={r['id']:dict(r) for r in c.execute('SELECT id,name,kind FROM projects')}
     with w.pair.remote.connect() as c:
-        wanted_hub={r['id']:dict(r) for r in c.execute('SELECT id,name,source,owner,source_key FROM hub_projects')}
+        wanted_hub={r['id']:dict(r) for r in c.execute('SELECT p.id,p.name,h.kind AS source,h.owner,h.source_key FROM projects p JOIN hub_projects h ON h.id=p.id')}
     def complete_projects(rows,wanted):
         assert len(rows)==len(wanted) and {r['id'] for r in rows}==set(wanted)
         for row in rows:
             assert all(row[key]==value for key,value in wanted[row['id']].items())
+    wanted_local_sources={source['id'],source2['id']}
+    wanted_hub_sources={native['source_id'],native2['source_id']}
+    def complete_sources(rows,wanted):
+        assert len(rows)==len(wanted) and {row['id'] for row in rows}==wanted
     before_local=local_state();before_hub=w.snapshot();all_calls_start=len(w.calls)
     with monkeypatch.context() as scan_guard:
-        attempts=deny_source_reads(scan_guard,path)
-        assert {s['id'] for s in tool('list_document_sources',{})}=={source['id']}
+        attempts=deny_source_reads(scan_guard,path,path2)
+        complete_sources(tool('list_document_sources',{}),wanted_local_sources)
         complete_projects(tool('list_projects',{}),wanted_local)
         for name in ['list_document_sources','list_projects']:
             result=tool(name,{'include_hub':True})
             assert result['coverage']=={'local':'complete','hub':'complete'}
             assert not result.get('fallback_reason')
             if name=='list_document_sources':
-                assert {s['id'] for s in result['local']}=={source['id']}
-                assert native['source_id'] in {s['id'] for s in result['hub']}
+                complete_sources(result['local'],wanted_local_sources)
+                complete_sources(result['hub'],wanted_hub_sources)
                 assert {s['origin']['kind'] for s in result['hub']}=={'hub'}
             else:
                 complete_projects(result['local'],wanted_local)
@@ -56,6 +62,7 @@ def test_listing_coverage(w, monkeypatch):
         complete_projects(result['local'],wanted_local)
         complete_projects(result['hub'],wanted_hub)
         expected_sources=tool('list_document_sources',{})
+        complete_sources(expected_sources,wanted_local_sources)
         expected_projects=tool('list_projects',{})
         expected_api_projects=w.local.request('GET','/api/projects')
         complete_projects(expected_projects,wanted_local)
@@ -71,6 +78,7 @@ def test_listing_coverage(w, monkeypatch):
             assert result['hub']==[] and 'listing offline witness' in result['fallback_reason']
             assert result['local']==(expected_sources if name=='list_document_sources' else expected_projects)
             if name=='list_projects':complete_projects(result['local'],wanted_local)
+            else:complete_sources(result['local'],wanted_local_sources)
         result=w.local.request('GET','/api/projects?include_hub=true')
         assert result['coverage']=={'local':'complete','hub':'unavailable'}
         assert result['local']==expected_api_projects and result['hub']==[] and result['fallback_reason']
@@ -88,6 +96,7 @@ def test_listing_coverage(w, monkeypatch):
     assert {route for route,_ in w.calls[all_calls_start:]}<={'/info','/projects','/documents/sources'}
     observe('listing-side-effects',{'local_upload_document_settings_unchanged':True,'hub_document_projects_unchanged':True,'routes':[route for route,_ in w.calls[all_calls_start:]],'source_open_attempts':attempts})
     assert path.read_text()=='listingnonce local original'
+    assert path2.read_text()=='listingnonce local other'
 
 
 # @case-id: TC-007-snippet-conflict

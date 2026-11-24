@@ -1750,7 +1750,7 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
         stable = self.private_entries + self.global_entries + self.unbound_entries + self.d_entries + self.e_entries
         for hit, actual in zip(all_documents[0]["results"], complete_reads):
             entry = next(e for e in expected if e["origin"] == hit["origin"])
-            assert actual["id"] == hit["id"]
+            assert actual["origin"] == hit["origin"] and actual["version"] == hit["version"]
             exact_read(actual, entry["raw"])
             if any(e["origin"] == hit["origin"] for e in stable):
                 self.stable_mcp.append({"hit": hit, "raw": entry["raw"]})
@@ -1793,7 +1793,7 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
         document_set(values[0]["results"], expected)
         assert len(values) == len(self.stable_mcp) + 1
         for before, actual in zip(self.stable_mcp, values[1:]):
-            assert actual["id"] == before["hit"]["id"] and actual["version"] == before["hit"]["version"]
+            assert actual["origin"] == before["hit"]["origin"] and actual["version"] == before["hit"]["version"]
             exact_read(actual, before["raw"])
         self.save("restart-stdio", {"fresh_search": values[0], "old_reference_reads": values[1:],
             "old_references": [e["hit"]["reference"] for e in self.stable_mcp], "all_stable_originals_exact": True})
@@ -1833,7 +1833,7 @@ print(json.dumps(result,sort_keys=True,default=lambda value:{'sqlite_blob_hex':v
                         async with page.expect_response(lambda r:r.url.endswith("/documents/read") and r.request.method=="POST") as response:
                             await page.locator("#"+prefix+"-results .result").nth(i).get_by_role("button",name="读取原文",exact=True).click()
                         actual = await (await response.value).json()
-                        assert actual["id"]==hit["id"] and actual["version"]==hit["version"]
+                        assert actual["origin"]==hit["origin"] and actual["version"]==hit["version"]
                         exact_read(actual, entry["raw"])
                         await expect(page.locator("#doc-reader-text" if role=="a" else "#hub-read-text")).to_have_text(normalized(entry["raw"]))
                         reads.append(actual)
