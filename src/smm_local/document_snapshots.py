@@ -12,6 +12,7 @@ import tempfile
 from uuid import uuid4
 from .document_results import encode,sha,validate,RESULT_LIMIT
 from .core import utcnow
+from .archive_protocol import control_lock
 
 RAW_LIMIT=20*1024*1024
 STAGING_LIMIT=256*1024*1024
@@ -25,6 +26,7 @@ class Snapshots:
         CREATE TABLE IF NOT EXISTS document_capture_authorizations(capture_id TEXT NOT NULL,source_id TEXT NOT NULL REFERENCES document_sources(id) ON DELETE CASCADE,revision INTEGER NOT NULL,active INTEGER NOT NULL DEFAULT 1,PRIMARY KEY(capture_id,source_id));
         CREATE TABLE IF NOT EXISTS document_processing_attempts(id TEXT PRIMARY KEY,capture_id TEXT NOT NULL,config_revision INTEGER NOT NULL,state TEXT NOT NULL,error TEXT,result_sha256 TEXT,created_at TEXT NOT NULL,finished_at TEXT);
         CREATE TABLE IF NOT EXISTS document_snapshot_state(document_pk INTEGER PRIMARY KEY,current_capture TEXT,latest_attempt TEXT,published_capture TEXT,result_sha256 TEXT,processing_version INTEGER NOT NULL DEFAULT 0,profile_sha256 TEXT,published_status TEXT);
+        CREATE TABLE IF NOT EXISTS document_published_blobs(kind TEXT NOT NULL,sha256 TEXT NOT NULL,PRIMARY KEY(kind,sha256));
         CREATE TABLE IF NOT EXISTS document_processing_config(singleton INTEGER PRIMARY KEY CHECK(singleton=1),revision INTEGER NOT NULL,payload TEXT NOT NULL);
         INSERT OR IGNORE INTO document_processing_config VALUES(1,0,'{}');
         ''')
@@ -36,19 +38,47 @@ class Snapshots:
     def blob(self,kind,digest):
         if len(digest)!=64 or any(c not in '0123456789abcdef' for c in digest):raise ValueError('快照摘要无效')
         return self.root/kind/digest
+    def _published_blobs(self):
+        with self.db.connect() as c:
+            values={(row[0],row[1]) for row in c.execute('SELECT kind,sha256 FROM document_published_blobs')}
+            # Current snapshots also cover archives opened before the explicit
+            # publication ledger existed. No source reading or processing.
+            for row in c.execute('SELECT x.raw_sha256,s.result_sha256 FROM document_snapshot_state s JOIN document_captures x ON x.id=s.published_capture'):
+                values.add(('raw',row[0]));values.add(('results',row[1]))
+            return values
+    def _unpublished_bytes(self):
+        published=self._published_blobs();total=0
+        for kind in ('raw','results'):
+            directory=self.root/kind
+            if directory.exists():
+                directory_state=directory.lstat()
+                if not stat.S_ISDIR(directory_state.st_mode) or bool(getattr(directory_state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('暂存目录不能经过链接或junction')
+            for path in directory.iterdir() if directory.exists() else []:
+                state=path.lstat()
+                if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('暂存存储只能包含普通文件')
+                if (kind,path.name) not in published:total+=state.st_size
+        return total
     def put(self,kind,raw):
+        if kind not in {'raw','results'}:raise ValueError('未知的快照字节类型')
+        if len(raw)>(RAW_LIMIT if kind=='raw' else RESULT_LIMIT):raise ValueError('快照原件/结果超过单份上限')
         digest=sha(raw);directory=self._directory(kind);target=directory/digest
-        if target.exists():
-            if target.is_symlink() or sha(target.read_bytes())!=digest:raise ValueError('现有快照内容损坏')
-            return digest
-        fd,name=tempfile.mkstemp(prefix='.pending-',dir=directory)
-        try:
-            with os.fdopen(fd,'wb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
-            # Equal digest means equal immutable content; concurrent creators use
-            # their own temp file and publish equivalent bytes only.
-            os.replace(name,target)
-        finally:
-            if os.path.exists(name):os.unlink(name)
+        # A dedicated cross-process byte-admission lock reserves capacity before
+        # opening a body file. Database reads finish before body I/O; parsing,
+        # OCR, networking and query/read paths never acquire this lock.
+        with control_lock(self.root/'capacity.lock'):
+            if target.exists():
+                state=target.lstat()
+                if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('现有快照内容不是普通文件')
+                with target.open('rb') as stream:saved=stream.read(len(raw)+1)
+                if len(saved)!=len(raw) or sha(saved)!=digest:raise ValueError('现有快照内容损坏')
+                return digest
+            if self._unpublished_bytes()+len(raw)>STAGING_LIMIT:raise ValueError('未发布暂存超过256MiB')
+            fd,name=tempfile.mkstemp(prefix='.pending-',dir=directory)
+            try:
+                with os.fdopen(fd,'wb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+                os.replace(name,target)
+            finally:
+                if os.path.exists(name):os.unlink(name)
         return digest
     def config(self,c=None):
         if c is None:
@@ -74,8 +104,6 @@ class Snapshots:
                     c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1) ON CONFLICT(capture_id,source_id) DO UPDATE SET revision=excluded.revision,active=1',(old['id'],source['id'],source['revision']))
                     return {'document_pk':pk,'capture_id':old['id'],'attempt_id':state['latest_attempt'],'raw_sha256':raw_sha,'result_sha256':state['result_sha256'],'profile_sha256':profile_sha,'reused':True,'config':config,'profile':profile}
             cid=uuid4().hex;aid=uuid4().hex
-            pending=c.execute('SELECT COALESCE(SUM(raw_bytes),0) FROM document_captures x JOIN document_snapshot_state s ON s.current_capture=x.id WHERE s.current_capture IS NOT s.published_capture').fetchone()[0]
-            if pending+len(raw)>STAGING_LIMIT:raise ValueError('未发布暂存超过256MiB')
             c.execute('INSERT INTO document_captures VALUES(?,?,?,?,?,?,?)',(cid,pk,raw_sha,len(raw),format,source['request_seq'],utcnow()))
             c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1)',(cid,source['id'],source['revision']))
             c.execute("INSERT INTO document_processing_attempts VALUES(?,?,?,'pending',NULL,NULL,?,NULL)",(aid,cid,config['revision'],utcnow()))
@@ -89,6 +117,7 @@ class Snapshots:
         if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')
         changed=state['result_sha256']!=token['result_sha256'] or state['profile_sha256']!=token['profile_sha256']
         processing_version=state['processing_version']+int(changed)
+        c.executemany('INSERT OR IGNORE INTO document_published_blobs(kind,sha256) VALUES(?,?)',[('raw',token['raw_sha256']),('results',token['result_sha256'])])
         c.execute('UPDATE document_snapshot_state SET published_capture=?,result_sha256=?,processing_version=?,profile_sha256=?,published_status=? WHERE document_pk=?',(token['capture_id'],token['result_sha256'],processing_version,token['profile_sha256'],result['status'],pk))
     def load_result(self,digest):
         path=self.blob('results',digest)

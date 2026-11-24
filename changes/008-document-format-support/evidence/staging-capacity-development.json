@@ -1,0 +1,45 @@
+{
+  "scope": "development TDD: committed path-capture raw/result storage only; not complete SC10/R008/platform delivery",
+  "baseline": "e4f90c73c36136b593630baaf3a4b37a458a97f6",
+  "dedup": {
+    "case_id": "TC-008-staging-dedup",
+    "red": "red-staging-dedup-v3",
+    "red_review": "review-staging-dedup-red-v2",
+    "green": "green-staging-dedup-v1",
+    "green_review": "review-staging-dedup-green-v1",
+    "raw_bytes": 268435456,
+    "independent_raw_files": 13,
+    "candidate_identities": 14,
+    "main_passed": 1,
+    "regression_passed": 60
+  },
+  "plus_one": {
+    "case_id": "TC-008-staging-plus-one",
+    "red": "red-staging-plus-one-v1",
+    "red_review": "review-staging-plus-one-red-v1",
+    "green": "green-staging-plus-one-v1",
+    "green_review": "review-staging-plus-one-green-v1",
+    "before_bytes": 268427494,
+    "rejected_bytes": 7963,
+    "prospective_total_bytes": 268435457,
+    "body_write_and_worker_events": 0,
+    "main_passed": 1,
+    "focused_regression_passed": 23
+  },
+  "history": {
+    "first_test_failure": "raw_sha256 substring wrongly treated as capacity error; corrected with controls and independent candidate/retry-version assertions",
+    "runner_timeout": "red-staging-dedup-v2 blocked at outer60 seconds; settled/noactive processes; same-byte retry set outer180; product limits unchanged"
+  },
+  "not_claimed": [
+    "uncommitted transfer/reservation/TTL recovery",
+    "complete concurrency/queue/resource budgets",
+    "historical publication and protection migration matrix",
+    "E/H/X and current Windows/Linux final CI"
+  ],
+  "files": {
+    "src/smm_local/document_snapshots.py": "b2a063b112d712265b9ca57d4b1a13877c0d434217c20579a5453f1f4123f416",
+    "tests/test_document_formats_staging.py": "ff3beb2d670bc742ee49a51d79149416656b49386bd32249c6e710161eee3d6b",
+    "tests/document_formats_staging_fixture.py": "54089a15d34639052af093f6d186e1ad3db6ccc5d08410de4b31012bf15c58ff",
+    "tests/document_formats_staging_observer.py": "328b660c5903569486d26914bc5ef6932d4393a29d8038b8a7218611c6a9d7e3"
+  }
+}
