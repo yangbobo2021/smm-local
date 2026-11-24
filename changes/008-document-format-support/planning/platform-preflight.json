@@ -1,0 +1,39 @@
+{
+  "purpose": "PLAN environment capability only; not product/service acceptance",
+  "ci_run": "https://github.com/yangbobo2021/smm-local/actions/runs/45415550540",
+  "source_commit": "9d9faeed52d388f15a1d3fff92073d34c0156262",
+  "linux": {
+    "ordinary_uid": 1001,
+    "user_systemd": true
+  },
+  "windows": {
+    "limited_runneradmin_is_admin": true,
+    "ordinary_credential_process": true,
+    "ordinary_is_admin": false,
+    "ordinary_session_id": 2,
+    "ordinary_scheduled_task_succeeded": false,
+    "scm_service_start_and_localservice_ocr_verified": false,
+    "source_reported_scm_create_delete": true,
+    "scm_create_configuration_verified": true,
+    "scm_delete_attempted": true,
+    "scm_post_delete_query_verified": false
+  },
+  "mac": {
+    "sudo_noninteractive": false,
+    "system_domain_readable": true,
+    "uid": "501",
+    "service_registered": false,
+    "ocr_service_executed": false
+  },
+  "remaining": [
+    "macOS system launchd setup needs administrator authentication or separate CI probe",
+    "minimum-Python all-platform dependency/business smoke",
+    "OCR all-platform installed/runtime/service checks",
+    "native service product execution and final cleanup verification"
+  ],
+  "evidence_retrieval": {
+    "artifact_download_completed": false,
+    "observed_failure": "GitHub API network connection failed; no reconstructed raw evidence",
+    "formal_or_complete_preflight_pass": false
+  }
+}

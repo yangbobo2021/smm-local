@@ -1,0 +1,37 @@
+{
+  "purpose": "dependency feasibility only; not SMM acceptance",
+  "os": "Darwin",
+  "machine": "arm64",
+  "python": "3.11.11",
+  "packages": {
+    "pdfplumber": "0.11.11",
+    "pdfminer.six": "20260107",
+    "pypdfium2": "5.15.2",
+    "Pillow": "13.0.0",
+    "psutil": "7.2.2",
+    "defusedxml": "0.7.1",
+    "reportlab": "5.1.0"
+  },
+  "pdf_pages": 2,
+  "native_text_exact": true,
+  "native_grid_cells": [
+    [
+      "item",
+      "amount"
+    ],
+    [
+      "PLAN008NATIVE",
+      "731.25"
+    ]
+  ],
+  "render_size": [
+    595,
+    842
+  ],
+  "xml_entity_blocked": true,
+  "rss_observable": true,
+  "ocr_executed": false,
+  "smm_product_executed": false,
+  "sample_sha256": "8e0a66c25d31b2d703d685e5bf76b09091c553ae8de8f094881f5c7b6f55c30d",
+  "scope_note": "Planning dependency probe only. No OCR, SMM product or platform acceptance was executed. Runtime/service readiness remains a prerequisite."
+}
