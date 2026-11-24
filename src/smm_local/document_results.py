@@ -131,13 +131,16 @@ def hit_context(result,point):
             elif columns>1:columns-=1
             else:break
     if view is None:
-        # Searching still identifies this cell. Do not quietly redirect a read
-        # to the table's first row when even its required context cannot fit.
-        context={'table_id':table['table_id'],'matched_cells':[{k:cell[k] for k in ('row','column','row_span','column_span','location')}],
-                 'suggested_window':None,'needs_expansion':True,'reason':'命中单元格及必要上下文超过1000格/16000字符，请核对原件'}
-        return context,anchor,2000
-    anchor['suggested_window']=window
-    headers=view['header_context'];budget=1600;header_cells=[];truncated=False
+        # A table-read quota does not erase source context from search. Summarize
+        # the true headers for this cell's columns and retain the original hint.
+        c=cell['column'];ce=min(table['columns']+1,c+cell['column_span'])
+        header_rows=table.get('header_rows') or ([min(x['row'] for x in table['cells'] if x.get('text') not in ('',None))] if any(x.get('text') not in ('',None) for x in table['cells']) else [])
+        headers={'role':'explicit_header' if table.get('header_rows') else 'first_content_row',
+                 'cells':[x for x in table['cells'] if x['row'] in header_rows and c<=x['column']<ce]}
+        window=None
+    else:
+        anchor['suggested_window']=window;headers=view['header_context']
+    budget=1600;header_cells=[];truncated=False
     for value in headers['cells']:
         text=value.get('text');length=len(text or '');shown=min(length,budget);budget-=shown
         clipped={**value,'text':text[:shown] if isinstance(text,str) else text}
@@ -145,5 +148,6 @@ def hit_context(result,point):
         header_cells.append(clipped)
     used=sum(len(value.get('text') or '') for value in header_cells)
     context={'table_id':table['table_id'],'matched_cells':[{k:cell[k] for k in ('row','column','row_span','column_span','location')}],
-             'suggested_window':window,'header_context':{'role':headers['role'],'cells':header_cells},'needs_expansion':truncated}
+             'suggested_window':window,'header_context':{'role':headers['role'],'cells':header_cells},'needs_expansion':truncated or view is None}
+    if view is None:context['reason']='命中单元格及必要上下文超过1000格/16000字符，请核对原件'
     return context,anchor,2000-used
