@@ -102,10 +102,10 @@ def test_creator_results_sync_exactly_without_receiver_processing(w,monkeypatch)
             assert hit['sha256']==hashlib.sha256(item['raw']).hexdigest() and hit['result_sha256']==item['entry']['published_snapshot']['result_sha256']
             read=w.read_hub(hit,start=0,end=len(item['result']['text']))
             for field in ('text','locations','coverage','profile'):assert read[field]==item['result'][field],(name,field)
-            tables=item['result']['tables'];assert len(read['tables'])==len(tables) and {table['table_id'] for table in read['tables']}=={table['table_id'] for table in tables}
+            tables=item['result']['tables'];assert read['tables']==[{key:value for key,value in table.items() if key!='cells'} for table in tables]
             for table in tables:
                 view=w.read_hub(hit,view='table',table_id=table['table_id'],row_start=1,row_end=table['rows']+1,column_start=1,column_end=table['columns']+1)
-                assert view['cells']==table['cells'] and view['location']==table['location'] and view['header_rows']==table['header_rows']
+                assert all(view[key]==value for key,value in table.items()),(name,table['table_id'])
             response=w.hub.post('/v1/documents/original',json={**w.context(),'reference':hit['reference']})
             assert response.status_code==200 and response.content==item['raw'];keep('downloads/'+phase+'/'+name,response.content)
             observe('direct-index-'+phase+'-'+name,{'hit':hit,'read':read,'canonical_result_sha256':hit['result_sha256'],'original_sha256':hashlib.sha256(response.content).hexdigest()})

@@ -30,7 +30,10 @@ sys.addaudithook(audit)
     denied=subprocess.run([sys.executable,'-c','import subprocess;subprocess.run(["tesseract","--version"])'],capture_output=True,text=True,timeout=10)
     assert denied.returncode!=0 and 'native PDF must not launch' in denied.stderr
     rows=[json.loads(line) for line in log.read_text().splitlines()]
-    assert len(rows)==1 and rows[0]['executable']=='tesseract'
+    expected_executable='None' if os.name=='nt' else 'tesseract'
+    expected_argv=subprocess.list2cmdline(['tesseract','--version']) if os.name=='nt' else str(['tesseract','--version'])
+    assert len(rows)==1 and rows[0]['event']=='subprocess.Popen'
+    assert rows[0]['executable']==expected_executable and rows[0]['argv']==expected_argv
     log.unlink();return log
 
 
@@ -40,6 +43,28 @@ def assert_bbox(actual,expected):
     assert all(abs(a-b)<=0.002 for a,b in zip(actual,expected)),(actual,expected)
 
 
+
+
+def assert_native_location_metadata(value,truth):
+    import math
+    pages={page['page']:page for page in truth['pages']};length=len('\n'.join(truth['order']))
+    def locations(node):
+        if isinstance(node,dict):
+            for key,item in node.items():
+                if key=='location':yield item
+                elif key=='locations':yield from item
+                else:yield from locations(item)
+        elif isinstance(node,list):
+            for item in node:yield from locations(item)
+    for loc in locations(value):
+        assert type(loc['page']) is int and loc['page'] in pages;page=pages[loc['page']]
+        assert loc['method']=='native' and loc['page_width']==page['width'] and loc['page_height']==page['height']
+        box=loc['bbox'];assert len(box)==4 and all(type(x) in (int,float) and math.isfinite(x) and 0<=x<=1 for x in box)
+        assert box[0]<box[2] and box[1]<box[3]
+        if 'start' in loc or 'end' in loc:assert type(loc['start']) is type(loc['end']) is int and 0<=loc['start']<loc['end']<=length
+    for unit in value.get('coverage',{}).get('units',[]):
+        page=pages[unit['page']]
+        assert unit['method']=='native' and unit['page_width']==page['width'] and unit['page_height']==page['height']
 
 def assert_native_order(text,truth):
     assert all(text.count(word)==1 for word in truth['order'])
@@ -62,6 +87,8 @@ def test_native_pdf_all_pages_grids_without_ocr(tmp_path,monkeypatch):
         assert hit['format']=='pdf' and hit['original_available'] is True
         result=f.read(hit,start=0,end=hit['text_length'])
         assert_native_order(result['text'],truth)
+        assert result['text']=='\n'.join(truth['order'])
+        assert_native_location_metadata(result,truth);assert_native_location_metadata(hit,truth)
         assert len(result['tables'])==len({t['table_id'] for t in result['tables']})==sum(len(p['tables']) for p in truth['pages'])==3
         by_page={p:[t for t in result['tables'] if t['location']['page']==p] for p in (1,2)}
         assert {t['location']['page'] for t in result['tables']}=={1,2}
@@ -73,6 +100,7 @@ def test_native_pdf_all_pages_grids_without_ocr(tmp_path,monkeypatch):
                 anchor=paragraph['text'];assert result['text'].count(anchor)==1
                 found=f.search(anchor,scope='project',project_id=project,local=True,limit=50)['results']
                 selected=[h for h in found if h['id']==hit['id']];assert len(selected)==1
+                assert_native_location_metadata(selected[0],truth)
                 locs=[loc for loc in result['locations'] if result['text'][loc['start']:loc['end']]==anchor]
                 assert len(locs)==1 and locs[0]['page']==page['page'] and locs[0]['method']=='native'
                 assert locs[0]['page_width']==page['width'] and locs[0]['page_height']==page['height']
@@ -87,6 +115,8 @@ def test_native_pdf_all_pages_grids_without_ocr(tmp_path,monkeypatch):
                 assert len(candidates)==1;table=candidates[0]
                 assert_bbox(table['location']['bbox'],expected_table['bbox'])
                 view=f.read(hit,view='table',table_id=table['table_id']);views.append(view)
+                assert_native_location_metadata(view,truth)
+                assert view['location']['page']==page['page'];assert_bbox(view['location']['bbox'],expected_table['bbox'])
                 assert view['table_id']==table['table_id'] and view['rows']==expected_table['rows'] and view['columns']==expected_table['columns']
                 cells={(cell['row'],cell['column']):cell for cell in view['cells']}
                 assert len(cells)==len(view['cells'])==6 and set(cells)=={(r,c) for r in range(1,4) for c in range(1,3)}
@@ -96,8 +126,13 @@ def test_native_pdf_all_pages_grids_without_ocr(tmp_path,monkeypatch):
                     assert cell['location']['page']==page['page']
                     assert (cell['row_span'],cell['column_span'])==(1,1)
                     assert_bbox(cell['location']['bbox'],expected['bbox'])
+                    start=result['text'].index(expected['text']);end=start+len(expected['text'])
+                    assert (cell['location']['start'],cell['location']['end'])==(start,end)
+                    ordinary=[loc for loc in result['locations'] if loc['start']==start and loc['end']==end]
+                    assert len(ordinary)==1 and ordinary[0]['page']==page['page'];assert_bbox(ordinary[0]['bbox'],expected['bbox'])
                     matched=f.search(expected['text'],scope='project',project_id=project,local=True,limit=50)['results']
                     same=[value for value in matched if value['id']==hit['id']];assert len(same)==1
+                    assert_native_location_metadata(same[0],truth)
                     anchored=[loc for loc in same[0]['locations'] if loc['page']==page['page'] and result['text'][loc['start']:loc['end']]==expected['text']]
                     assert len(anchored)==1;assert_bbox(anchored[0]['bbox'],expected['bbox'])
                 assert view['header_context']['role']=='first_content_row'
@@ -153,3 +188,22 @@ def test_native_pdf_rotation_truth_rejects_raw_coordinates():
                 raw=[1-correct[2],1-correct[3],1-correct[0],1-correct[1]]
                 with pytest.raises(AssertionError):assert_bbox(raw,correct)
     assert angles=={0,90,180,270}
+
+
+def test_native_metadata_observer_rejects_wrong_methods_sizes_and_ranges():
+    import copy
+    truth={'pages':[{'page':1,'width':612,'height':792},{'page':2,'width':792,'height':612}],'order':['FIRST','SECOND']}
+    location={'page':2,'page_width':792,'page_height':612,'method':'native','bbox':[.1,.1,.5,.2],'start':6,'end':12}
+    good={'locations':[copy.deepcopy(location)],'tables':[{'location':copy.deepcopy(location)}],'location':copy.deepcopy(location),'cells':[{'location':copy.deepcopy(location)}],'header_context':{'cells':[{'location':copy.deepcopy(location)}]},'table_context':{'matched_cells':[{'location':copy.deepcopy(location)}]},'coverage':{'units':[{'page':2,'page_width':792,'page_height':612,'method':'native'}]}}
+    assert_native_location_metadata(good,truth)
+    paths=[('locations',0),('tables',0,'location'),('location',),('cells',0,'location'),('header_context','cells',0,'location'),('table_context','matched_cells',0,'location')]
+    for path in paths:
+        for field,bad in [('method','ocr'),('page_width',1),('page_height',1),('bbox',[.1,.1,.5,.2,9]),('start',-1),('end',13)]:
+            wrong=copy.deepcopy(good);node=wrong
+            for part in path:node=node[part]
+            node[field]=bad
+            with __import__('pytest').raises(AssertionError):assert_native_location_metadata(wrong,truth)
+
+    for field,bad in [('method','ocr'),('page_width',1),('page_height',1)]:
+        wrong=copy.deepcopy(good);wrong['coverage']['units'][0][field]=bad
+        with __import__('pytest').raises(AssertionError):assert_native_location_metadata(wrong,truth)

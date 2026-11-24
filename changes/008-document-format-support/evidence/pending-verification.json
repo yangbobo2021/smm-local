@@ -1,0 +1,21 @@
+{
+  "scope": "Incomplete 008 development verification; no whole-scene or delivery pass",
+  "native_pdf": {
+    "latest_debug": "debug-native-full-metadata-v1",
+    "observed_mac_tests": 6,
+    "review": "review-native-full-metadata-v1",
+    "status": "needs_revision",
+    "gap": "header_context source location correspondence assertion",
+    "actual_output": "correct in current samples; test can accept a valid but wrong source bbox",
+    "repair": "four-line draft prepared; awaiting another authorized round"
+  },
+  "hub_direct_index": {
+    "red": "red-direct-index-v4",
+    "review": "review-direct-index-red-v4",
+    "status": "expected_failure",
+    "first_failure": "missing processed_documents_v1 capability",
+    "gap": "first policy enable invokes synchronization before current observer installation; one-line sequencing repair drafted; awaiting authorization",
+    "implementation": "not applied"
+  },
+  "platform_status": "New ordinary CI will be development regression only; E/H/X and minimum-Python installed business remain incomplete"
+}
