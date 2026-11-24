@@ -282,14 +282,32 @@ class Documents:
         return {'removed':source_id,'message':'已取消此来源；独占材料退出检索/读取，原文件未改变'}
 
     def files(self, source_id=None):
+        archive_id,key=references.material(self.db)
         with self.db.connect() as con:
             con.execute('BEGIN')
             if source_id is not None and not con.execute('SELECT 1 FROM document_sources WHERE id=?',(source_id,)).fetchone():
                 raise ValueError('文档来源不存在')
+            available={source['id']:source for source in self._sources(con) if source['status'] in {'ready','partial'}}
+            qualified={}
+            for member in con.execute("SELECT document_pk,source_id,qualification FROM document_memberships WHERE status='ready'"):
+                source=available.get(member['source_id'])
+                if source is not None:
+                    qualified.setdefault(member['document_pk'],[]).append({'id':member['source_id'],'revision':source['revision'],'qualification':member['qualification']})
             rows=con.execute('SELECT d.pk,m.source_id,m.relative_path,m.status,m.qualification,m.error,d.id,d.path,d.version,d.sha256,d.text_length,d.captured_at,d.captured_by_source_id FROM document_memberships m JOIN documents d ON d.pk=m.document_pk'+(' WHERE m.source_id=?' if source_id else '')+' ORDER BY d.path,m.source_id', (source_id,) if source_id else ())
             result=[]
             for row in rows:
-                item=dict(row);pk=item.pop('pk');item.update(self.snapshots.detail(con,pk));result.append(item)
+                item=dict(row);pk=item.pop('pk');item.update(self.snapshots.detail(con,pk))
+                published=item.get('published_snapshot');stamps=sorted(qualified.get(pk,[]),key=lambda stamp:stamp['id'])
+                item.update(original_reference=None,original_available=False)
+                if published is not None and stamps and row['version']>0:
+                    # Empty text has a valid original-info/download reference;
+                    # publication and source qualifications, not FTS hits, are
+                    # the authority. Never open an external source here.
+                    payload={'format':1,'kind':'document','archive_id':archive_id,'document_id':row['id'],'version':row['version'],'sources':stamps,'start':0,'end':min(row['text_length'],2000),'processing_version':published['processing_version'],'result_sha256':published['result_sha256'],'raw_sha256':row['sha256']}
+                    item.update(original_reference=sign(payload,key),original_available=True)
+                elif stamps and row['version']>0:item['original_reason']='legacy_original_not_captured'
+                else:item['original_reason']='no_current_snapshot'
+                result.append(item)
             return result
 
     def reprocess(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
