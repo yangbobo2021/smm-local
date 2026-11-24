@@ -1,0 +1,57 @@
+{
+  "acceptance_id": "AT-SMM-007",
+  "artifacts": {
+    ".acceptance-local/native-v1/AT-SMM-007/delivery-judge/delivery-r007-recovery-v1/reviewer.json": "40a0a991676c1f81158fa6f854a8105ee816bad2cee78f09a56123599008d864"
+  },
+  "definitions_sha256": "d0f03b256990c6105b6a8bda288c66124a098a9779bf1b319cee65f1940f8bcd",
+  "judgment": {
+    "reason": "按完整SPEC B1–B8/A1–A10及定义v7独立复审，结论blocked。实核SPEC SHA590633b2257ca6c636058c34e5550e669d0d92dbd288076166fd9264fcb0b6e6、定义SHAd0f03b256990c6105b6a8bda288c66124a098a9779bf1b319cee65f1940f8bcd一致；src与b7ed同字节，当前101份src/tests摘要匹配。恢复后本机exit.json/stdout/JUnit证实340 passed/1 skipped/exit0；run45298310517实际三OS测试/双包构建/分安装步骤success，JUnit各341项、0失败，API head5083227与实际checkout4f43857树相同。这些是回归/构建实测，不是36TC正式逐项执行复审。run45297175901/head8210b25三OS E1 job及原platform/result均成功，三个ZIP实际长度/外SHA匹配GitHub且CRC通过，内层Mac115/Ubuntu115/Windows116件SHA/长度全匹配；三OS实际安装Local30/Hub31模块与当前源码匹配，新增restart-stdio各6份旧ref读回及restart-web各Local6/Hub3份exact_reads确有可读原件，支持E1局部进展。九份CMS轨迹仅密文可核、未解密，未冒称实际重读完整trace或获得完整E1新独立执行复审。当前native-results-view中16场景cases/history均空、R007 pending_delivery_review；521份已提交JSON实际为7定义、1manifest、513历史尝试索引，513所指私有result均缺失，不能从33通过摘要重造当前正式通过。A9/E2仍有独立必需缺口：真实不同OS机器HTTPS业务未有获准环境/当前执行证据；Ubuntu user-systemd及Windows SCM已保留的服务原件只支持身份、部分业务/native缓存停启等局部事实，不能证明网页管理资料停启后按新建项目查询并沿旧有效ref准确读取；Windows另缺删除服务/防火墙后的不存在查询。上述创建端、服务身份、实际停启和物理网络条件可能改变持久访问/TLS/清理结果，普通CI、同机逻辑设备、同UID前景进程及源码同字节均不能排除；维护者选择保留缺口并未修改SPEC。尚无当前有效正式证据确认必测产品行为失败，故不判failed；上述缺证仍独立阻止passed。",
+    "status": "blocked"
+  },
+  "operation": "delivery-judge",
+  "record": ".acceptance-local/native-v1/AT-SMM-007/delivery-judge/delivery-r007-recovery-v1/result.json",
+  "recorded_at": "2026-11-24T08:33:49.798000+00:00",
+  "request_id": "delivery-r007-recovery-v1",
+  "request_sha256": "d2881035080b99f25a4a5abd2f8507d5b749303af57fc40654593908b93f42d1",
+  "requirement_ids": [
+    "R007"
+  ],
+  "reviewer_session": "/root/delivery_007_recovery_v1",
+  "scene_evidence": {
+    "SC1": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC10": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC11": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC12": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC13": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC14": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC15": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC16": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC2": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC3": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC4": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC5": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC6": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC7": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC8": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada",
+    "SC9": "0af73572d46c821e09b39e83efb5ea08cc7b1e51dc1d75157a9c41abf8929ada"
+  },
+  "scene_status": {
+    "SC1": "not_fully_validated",
+    "SC10": "not_fully_validated",
+    "SC11": "not_fully_validated",
+    "SC12": "not_fully_validated",
+    "SC13": "not_fully_validated",
+    "SC14": "not_fully_validated",
+    "SC15": "not_fully_validated",
+    "SC16": "not_fully_validated",
+    "SC2": "not_fully_validated",
+    "SC3": "not_fully_validated",
+    "SC4": "not_fully_validated",
+    "SC5": "not_fully_validated",
+    "SC6": "not_fully_validated",
+    "SC7": "not_fully_validated",
+    "SC8": "not_fully_validated",
+    "SC9": "not_fully_validated"
+  },
+  "status": "judged"
+}

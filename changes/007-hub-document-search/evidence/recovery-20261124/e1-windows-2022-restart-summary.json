@@ -1,0 +1,281 @@
+{
+  "os": "windows-2022",
+  "run_id": 45297175901,
+  "head_sha": "8210b2570b19a4e58b2a1da118828634fb6487cc",
+  "source_sha256": {
+    "restart-stdio.json": "80aef835593dcea049ca90e523524149ad1f69b1c66e1c877991cacadf19ced1",
+    "restart-web.json": "5c8d58faaefd7cd3089826e71e2ce345867a490dd2bb635757215cb6e796d1ab"
+  },
+  "old_reference_reads": [
+    {
+      "origin": {
+        "device_id": "07fa72677db04dbabd0de47105aba7e8",
+        "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+        "document_id": "60e982eb9d93450b9194cd8d72322621"
+      },
+      "version": 1,
+      "text": "e1needle global independent",
+      "sha256": "fcfe4e6e63efb7298d53e745b50fcbd7e9a3f10af0dd572a652828e33b8bac71",
+      "text_sha256": "fcfe4e6e63efb7298d53e745b50fcbd7e9a3f10af0dd572a652828e33b8bac71",
+      "text_length": 27,
+      "start": 0,
+      "end": 27,
+      "start_line": 1,
+      "end_line": 1,
+      "archive_scope": "local"
+    },
+    {
+      "origin": {
+        "device_id": "07fa72677db04dbabd0de47105aba7e8",
+        "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+        "document_id": "9812448eb0da43d38112099f7a3b7c11"
+      },
+      "version": 1,
+      "text": "e1needle private never uploaded",
+      "sha256": "047a3333fdd52c9434d034af68c762d2c8a2c83a62de5b29b5eb2fce520fb5fd",
+      "text_sha256": "047a3333fdd52c9434d034af68c762d2c8a2c83a62de5b29b5eb2fce520fb5fd",
+      "text_length": 31,
+      "start": 0,
+      "end": 31,
+      "start_line": 1,
+      "end_line": 1,
+      "archive_scope": "local"
+    },
+    {
+      "origin": {
+        "device_id": "07fa72677db04dbabd0de47105aba7e8",
+        "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+        "document_id": "a2446ece7e8b488c8360a1eb426e183c"
+      },
+      "version": 1,
+      "text": "e1needle unbound local only",
+      "sha256": "6d4a51d622b262c68ba4653177b3f570b6b7d378bcfb44420bd109caff6f0151",
+      "text_sha256": "6d4a51d622b262c68ba4653177b3f570b6b7d378bcfb44420bd109caff6f0151",
+      "text_length": 27,
+      "start": 0,
+      "end": 27,
+      "start_line": 1,
+      "end_line": 1,
+      "archive_scope": "local"
+    },
+    {
+      "origin": {
+        "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+        "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+        "document_id": "79a41240d05a49348fcad3ebaad5a585"
+      },
+      "version": 1,
+      "text": "e1needle E second layer",
+      "sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+      "text_sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+      "text_length": 23,
+      "start": 0,
+      "end": 23,
+      "start_line": 1,
+      "end_line": 1,
+      "archive_scope": "hub"
+    },
+    {
+      "origin": {
+        "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+        "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+        "document_id": "f7341425ca1745f18d51f107ce6f4731"
+      },
+      "version": 1,
+      "text": "e1needle D native one",
+      "sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+      "text_sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+      "text_length": 21,
+      "start": 0,
+      "end": 21,
+      "start_line": 1,
+      "end_line": 1,
+      "archive_scope": "hub"
+    },
+    {
+      "origin": {
+        "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+        "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+        "document_id": "270dfc395a57400e85ba2140476c24f9"
+      },
+      "version": 1,
+      "text": "e1needle D native two😀\nend",
+      "sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+      "text_sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+      "text_length": 26,
+      "start": 0,
+      "end": 26,
+      "start_line": 1,
+      "end_line": 2,
+      "archive_scope": "hub"
+    }
+  ],
+  "web": [
+    {
+      "role": "a",
+      "exact_reads": [
+        {
+          "origin": {
+            "device_id": "07fa72677db04dbabd0de47105aba7e8",
+            "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+            "document_id": "60e982eb9d93450b9194cd8d72322621"
+          },
+          "version": 1,
+          "text": "e1needle global independent",
+          "sha256": "fcfe4e6e63efb7298d53e745b50fcbd7e9a3f10af0dd572a652828e33b8bac71",
+          "text_sha256": "fcfe4e6e63efb7298d53e745b50fcbd7e9a3f10af0dd572a652828e33b8bac71",
+          "text_length": 27,
+          "start": 0,
+          "end": 27,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "local"
+        },
+        {
+          "origin": {
+            "device_id": "07fa72677db04dbabd0de47105aba7e8",
+            "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+            "document_id": "9812448eb0da43d38112099f7a3b7c11"
+          },
+          "version": 1,
+          "text": "e1needle private never uploaded",
+          "sha256": "047a3333fdd52c9434d034af68c762d2c8a2c83a62de5b29b5eb2fce520fb5fd",
+          "text_sha256": "047a3333fdd52c9434d034af68c762d2c8a2c83a62de5b29b5eb2fce520fb5fd",
+          "text_length": 31,
+          "start": 0,
+          "end": 31,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "local"
+        },
+        {
+          "origin": {
+            "device_id": "07fa72677db04dbabd0de47105aba7e8",
+            "archive_id": "6c282fcacf7047e1a8a1246a2922459b",
+            "document_id": "a2446ece7e8b488c8360a1eb426e183c"
+          },
+          "version": 1,
+          "text": "e1needle unbound local only",
+          "sha256": "6d4a51d622b262c68ba4653177b3f570b6b7d378bcfb44420bd109caff6f0151",
+          "text_sha256": "6d4a51d622b262c68ba4653177b3f570b6b7d378bcfb44420bd109caff6f0151",
+          "text_length": 27,
+          "start": 0,
+          "end": 27,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "local"
+        },
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "79a41240d05a49348fcad3ebaad5a585"
+          },
+          "version": 1,
+          "text": "e1needle E second layer",
+          "sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+          "text_sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+          "text_length": 23,
+          "start": 0,
+          "end": 23,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "hub"
+        },
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "f7341425ca1745f18d51f107ce6f4731"
+          },
+          "version": 1,
+          "text": "e1needle D native one",
+          "sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+          "text_sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+          "text_length": 21,
+          "start": 0,
+          "end": 21,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "hub"
+        },
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "270dfc395a57400e85ba2140476c24f9"
+          },
+          "version": 1,
+          "text": "e1needle D native two😀\nend",
+          "sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+          "text_sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+          "text_length": 26,
+          "start": 0,
+          "end": 26,
+          "start_line": 1,
+          "end_line": 2,
+          "archive_scope": "hub"
+        }
+      ]
+    },
+    {
+      "role": "hub",
+      "exact_reads": [
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "f7341425ca1745f18d51f107ce6f4731"
+          },
+          "version": 1,
+          "text": "e1needle D native one",
+          "sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+          "text_sha256": "02c419d2b3480a872f6eec147d692711da811114cfbb047d137e69a2b9a2d772",
+          "text_length": 21,
+          "start": 0,
+          "end": 21,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "hub"
+        },
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "79a41240d05a49348fcad3ebaad5a585"
+          },
+          "version": 1,
+          "text": "e1needle E second layer",
+          "sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+          "text_sha256": "c3e84193e73cdd041080a24a5e400223ff23f0d04935a3b0c11d4fd762a782e8",
+          "text_length": 23,
+          "start": 0,
+          "end": 23,
+          "start_line": 1,
+          "end_line": 1,
+          "archive_scope": "hub"
+        },
+        {
+          "origin": {
+            "device_id": "75bbd6364f4e408c8f85ce489fb40adc",
+            "archive_id": "83ecc581a265459fae778cc5a2f7faf5",
+            "document_id": "270dfc395a57400e85ba2140476c24f9"
+          },
+          "version": 1,
+          "text": "e1needle D native two😀\nend",
+          "sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+          "text_sha256": "cc6de82c98f6ce6b7544aa2256d9325b4f8ba053b2afe25286e92a02abaa236c",
+          "text_length": 26,
+          "start": 0,
+          "end": 26,
+          "start_line": 1,
+          "end_line": 2,
+          "archive_scope": "hub"
+        }
+      ]
+    }
+  ],
+  "browser_request_count": 26,
+  "page_errors": [],
+  "limits": "derived from actual JSON; private references/URLs omitted; encrypted browser traces not decrypted; not a current formal E1 passed receipt"
+}

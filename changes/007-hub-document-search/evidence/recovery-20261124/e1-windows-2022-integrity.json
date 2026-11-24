@@ -1,0 +1,36 @@
+{
+  "os": "windows-2022",
+  "artifact_id": 14877107501,
+  "bytes": 13816219,
+  "sha256": "219d79e015b5dff0c6e1f71dcc91043a74395d5e94eaea9ccbd868484874e6b6",
+  "github_digest_matches": true,
+  "zip_crc_passed": true,
+  "files": 116,
+  "inner_sha256_passed": true,
+  "cms": [
+    {
+      "path": "private-traces/platform/restart-web-trace.zip.cms",
+      "bytes": 1752125,
+      "sha256": "1faee085624c6a38f1f28af2c367479d2113d2052b572a2c02955b8329983cdb",
+      "original_sha256": "a3f6a427f775f05e1b551689b38466e3c4c82c2538ea8e5ac9d0fa31b4e78968",
+      "original_bytes": 1751562,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-a-trace.zip.cms",
+      "bytes": 5400621,
+      "sha256": "4d337665431c77c4de84dfff0ad4d30f40fc036f8bca93231220dd10bc7c63c6",
+      "original_sha256": "b7145b10613915559554bf4cab7c7cdd5acc031a83408a57e08088bd758015ca",
+      "original_bytes": 5400062,
+      "decrypted": false
+    },
+    {
+      "path": "private-traces/platform/web-hub-trace.zip.cms",
+      "bytes": 2021709,
+      "sha256": "a224779a757aad1f130d5a03188d10a0b35cb35262782fd96b079e43006ede82",
+      "original_sha256": "39b4556bd814bd69294d7b9b5502f38cb924c3dfab6880ff031bd83fcafdaa09",
+      "original_bytes": 2021145,
+      "decrypted": false
+    }
+  ]
+}

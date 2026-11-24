@@ -1,0 +1,186 @@
+{
+  "run_id": 45298310517,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45298310517",
+  "head_sha": "5083227897ab9612390a4cbc4997df961dff96d7",
+  "conclusion": "success",
+  "actual_checkout_sha": "4f4385709ace965a3b1b1953d1d266ac8e51ee88",
+  "checkout_tree_equals_head_tree": true,
+  "tree_sha": "215677b6609468e465a5b15b5e3d48a8459096e5",
+  "jobs": [
+    {
+      "os": "macos-15",
+      "tests": 341,
+      "passed": 335,
+      "skipped": 6,
+      "failures": 0,
+      "errors": 0,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve repository source bytes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --extra test",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python scripts/build_packages.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install wheels separately",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "os": "windows-2022",
+      "tests": 341,
+      "passed": 336,
+      "skipped": 5,
+      "failures": 0,
+      "errors": 0,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve repository source bytes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --extra test",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python scripts/build_packages.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install wheels separately",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "os": "ubuntu-24.04",
+      "tests": 341,
+      "passed": 335,
+      "skipped": 6,
+      "failures": 0,
+      "errors": 0,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve repository source bytes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --extra test",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv run python scripts/build_packages.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install wheels separately",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "limits": "five Playwright cases skip in ordinary CI; not E1/E2 formal completion"
+}

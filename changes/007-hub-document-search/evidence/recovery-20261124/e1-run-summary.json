@@ -1,0 +1,217 @@
+{
+  "run_id": 45297175901,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45297175901",
+  "head_sha": "8210b2570b19a4e58b2a1da118828634fb6487cc",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "document-installed-e1 (ubuntu-24.04)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run git config --global core.autocrlf false",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --python python --extra test --extra acceptance",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser runtime on Linux",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run installed document CLI, browser and stdio flows",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actual Ubuntu user-systemd Hub with document flows",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actual Windows SCM Hub with a separate standard Local",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "document-installed-e1 (macos-15)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run git config --global core.autocrlf false",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --python python --extra test --extra acceptance",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser runtime on Linux",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run installed document CLI, browser and stdio flows",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actual Ubuntu user-systemd Hub with document flows",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actual Windows SCM Hub with a separate standard Local",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "document-installed-e1 (windows-2022)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run git config --global core.autocrlf false",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --python python --extra test --extra acceptance",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser runtime on Linux",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run installed document CLI, browser and stdio flows",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actual Ubuntu user-systemd Hub with document flows",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actual Windows SCM Hub with a separate standard Local",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "installed-entrances",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "document-platform-preflight",
+      "conclusion": "skipped",
+      "steps": []
+    }
+  ],
+  "limits": "job success is not a replacement for missing independent formal receipts; encrypted traces cannot currently be decrypted"
+}
