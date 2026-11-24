@@ -43,7 +43,7 @@ def test_listing_coverage(w, monkeypatch):
         assert len(rows)==len(wanted) and {row['id'] for row in rows}==wanted
     before_local=local_state();before_hub=w.snapshot();all_calls_start=len(w.calls)
     with monkeypatch.context() as scan_guard:
-        attempts=deny_source_reads(scan_guard,path,path2)
+        attempts=deny_source_reads(scan_guard,path,path2,native['path'],native2['path'])
         complete_sources(tool('list_document_sources',{}),wanted_local_sources)
         complete_projects(tool('list_projects',{}),wanted_local)
         for name in ['list_document_sources','list_projects']:
