@@ -94,12 +94,28 @@ def keep(name,raw):
         path=Path(output)/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
 
 
+
+def nonzero_reference_source(raw):
+    """Keep both existing documents; pad only alpha around its real query."""
+    from io import BytesIO
+    from zipfile import ZipFile
+    from document_formats_fixtures import package
+    with ZipFile(BytesIO(raw)) as archive:parts={name:archive.read(name) for name in archive.namelist()}
+    def paragraph(text):return ('<w:p><w:r><w:t xml:space="preserve">'+text+'</w:t></w:r></w:p>').encode()
+    prefix=b''.join(paragraph('paddingonly '*100) for _ in range(3))
+    suffix=b''.join(paragraph('tailpaddingonly '*100) for _ in range(3))
+    body=parts['word/document.xml'];assert body.count(b'<w:body>')==body.count(b'<w:sectPr>')==1
+    parts['word/document.xml']=body.replace(b'<w:body>',b'<w:body>'+prefix,1).replace(b'<w:sectPr>',suffix+b'<w:sectPr>',1)
+    return package(parts)
+
 def test_local_cli_views_and_exact_originals_for_each_document(tmp_path):
     # TC-008-reference-local-cli: format extraction semantics have independent
     # DOCX TDD; this slice tests the CLI's complete forwarding and output path.
     f=Fixture(tmp_path);project=f.project('CLI saved original views');expected={}
     for key in ('clialpha','clibeta'):
-        raw,truth=docx_fixture(key);path=f.file(key+'.docx',raw=raw)
+        raw,truth=docx_fixture(key)
+        if key=='clialpha':raw=nonzero_reference_source(raw)
+        path=f.file(key+'.docx',raw=raw)
         expected[path.name]={'raw':raw,'truth':truth,'path':path,'before':fingerprint(path)};keep('inputs/'+path.name,raw)
         keep('truth/'+key+'.json',json.dumps(truth,ensure_ascii=False,default=lambda value:sorted(value) if isinstance(value,set) else str(value)).encode('utf-8'))
     source=f.add(f.root/'docs',[project]);f.refresh(source)
@@ -121,9 +137,13 @@ def test_local_cli_views_and_exact_originals_for_each_document(tmp_path):
         assert hit['id']==saved['hit']['id'] and hit['version']==hit['processing_version']==1
         origin={'device_id':archive_id,'archive_id':archive_id,'document_id':hit['id']}
         assert hit['origin']==origin
+        if item['truth']['key']=='clialpha':
+            assert 0<hit['start']<hit['end']<hit['text_length'] and hit['end']-hit['start']<=2000
         default=actual_cli(f,env,'read','--reference',reference)
         assert_read_identity(default,saved['read'],origin,source['id'])
-        assert default['text']==saved['read']['text'][default['start']:default['end']]
+        assert default['start']==hit['start'] and default['end']==hit['end']
+        assert default['text']==saved['read']['text'][hit['start']:hit['end']]
+        assert default['start_line']==1+saved['read']['text'].count('\n',0,hit['start']) and default['end_line']==1+saved['read']['text'].count('\n',0,hit['end']-1)
         full=actual_cli(f,env,'read','--reference',reference,'--view','text','--start',0,'--end',hit['text_length'])
         assert full==saved['read'];assert_read_identity(full,saved['read'],origin,source['id'])
         start=full['text'].index('😀')-2;end=start+10

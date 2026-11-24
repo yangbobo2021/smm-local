@@ -11,7 +11,7 @@ from .core import Archive, shared_db_path
 from .documents import Documents
 from .document_processing import Configuration, configuration_arguments
 from .document_sync import DocumentSync,schedule as schedule_documents,hub_sources,hub_projects
-from .document_search import search as search_documents,read as read_document
+from .document_search import search as search_documents,read as read_document,original as original_document
 from .federation import (configure_and_start, read_archive, search_archive, upload_status,
                          choose_upload, upload_control, hub_config, project_status, _request)
 from .upload import LocalUpload
@@ -169,6 +169,11 @@ def main() -> None:
     doc_read.add_argument('--reference',required=True,help='原样复制documents search返回的reference，不能用对话ID')
     doc_read.add_argument('--start',type=int,help='Unicode起始码点（含，0开始）')
     doc_read.add_argument('--end',type=int,help='Unicode结束码点（不含）')
+    doc_read.add_argument('--view',choices=['text','table','original-info'],default='text',help='提取文本、表格窗口或已保存原件信息；默认text')
+    doc_read.add_argument('--table-id',help='取自本次命中/普通read的tables定位')
+    for flag in ('row-start','row-end','column-start','column-end'):
+        doc_read.add_argument('--'+flag,type=int,help='表格行列窗口，1起、终点不含；仅table视图')
+    doc_read.add_argument('--original-output',help='将准确采集原件保存到本机新文件；拒绝覆盖，与文本范围/表格参数互斥')
     assign = project_actions.add_parser("assign-conversation", help="用本机搜索的会话 ID 预览归属变更，核对后 --confirm 提交")
     assign.add_argument("conversation_id", type=int)
     assign.add_argument("--project-id", type=int, required=True, help="smm projects 返回的目标本机项目 ID")
@@ -292,7 +297,17 @@ def main() -> None:
             elif action == 'sync-policy':result=DocumentSync(db).choose(args.project_key,args.enabled=='yes',args.expected_hub_id,args.expected_generation)
             elif action == 'sync':result=DocumentSync(db).sync(project_key=args.project_key)
             elif action == 'search': result = search_documents(db,args.query,scope=args.scope,project_id=args.project_id,hub_project_id=args.hub_project_id,limit=args.limit,local=args.local)
-            else: result = read_document(db,args.reference,start=args.start,end=args.end)
+            else:
+                table_options={key:getattr(args,key) for key in ('table_id','row_start','row_end','column_start','column_end') if getattr(args,key) is not None}
+                if args.original_output is not None:
+                    if args.start is not None or args.end is not None or args.view=='table' or table_options:
+                        raise ValueError('原件输出与文本范围或表格读取参数互斥')
+                    from .document_protocol import write_original_output
+                    metadata=read_document(db,args.reference,view='original-info')
+                    raw=original_document(db,args.reference)
+                    output=write_original_output(args.original_output,raw,metadata)
+                    result={**metadata,'output_path':str(output)}
+                else:result=read_document(db,args.reference,start=args.start,end=args.end,view=args.view,**table_options)
             if action in {'add','set','remove','refresh'}:schedule_documents(db)
         elif args.command == "resolve-project":
             result = db.resolve_project(args.cwd)

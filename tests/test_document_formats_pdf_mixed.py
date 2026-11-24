@@ -27,6 +27,7 @@ def assert_dimensions(value,truth):
     if 'location' in value:locations.append(value['location'])
     assert locations
     for loc in locations:
+        valid_box(loc['bbox'])
         wanted=pages[loc['page']]
         assert loc['page_width']==wanted['width'] and loc['page_height']==wanted['height']
 
@@ -34,12 +35,67 @@ def assert_dimensions(value,truth):
 def test_dimensions_guard_rejects_later_page_and_consistent_wrong_views():
     import copy
     truth={'pages':[{'page':p,'width':240,'height':216} for p in (1,2,3)]}
-    good={'locations':[{'page':p,'page_width':240,'page_height':216} for p in (1,2,3)]}
+    good={'locations':[{'page':p,'page_width':240,'page_height':216,'bbox':[.1,.1,.5,.2]} for p in (1,2,3)]}
     assert_dimensions(good,truth)
     for field in ('page_width','page_height'):
         wrong=copy.deepcopy(good);wrong['locations'][1][field]=1
         for view in (wrong,copy.deepcopy(wrong)):
             with pytest.raises(AssertionError):assert_dimensions(view,truth)
+
+
+def valid_box(bbox):
+    import math
+    assert len(bbox)==4 and all(type(v) in (int,float) and math.isfinite(v) and 0<=v<=1 for v in bbox)
+    assert bbox[0]<bbox[2] and bbox[1]<bbox[3]
+
+
+def assert_coverage(value,truth):
+    units=value['coverage']['units'];assert units and {u['page'] for u in units}=={p['page'] for p in truth['pages']}
+    for page in truth['pages']:
+        own=[u for u in units if u['page']==page['page']]
+        assert own and all(u['status']=='ready' and u['method'] in ('native','ocr') for u in own)
+        if page['page']==3:assert all(u['method']=='native' for u in own)
+        else:
+            ocr=[u for u in own if u['method']=='ocr'];assert ocr
+            regions=[r for u in ocr for r in u['regions']];assert regions
+            for region in regions:valid_box(region)
+            # Each source table and independent title/body ink box is covered
+            # by the union of reported processed regions; splitting is legal.
+            for box in [*page['ink_boxes'],*[t['bbox'] for t in page['tables']]]:
+                xs=sorted({box[0],box[2],*[max(box[0],min(box[2],r[i])) for r in regions for i in (0,2)]})
+                ys=sorted({box[1],box[3],*[max(box[1],min(box[3],r[i])) for r in regions for i in (1,3)]})
+                for left,right in zip(xs,xs[1:]):
+                    for top,bottom in zip(ys,ys[1:]):
+                        x,y=(left+right)/2,(top+bottom)/2
+                        assert any(r[0]-.002<=x<=r[2]+.002 and r[1]-.002<=y<=r[3]+.002 for r in regions)
+
+
+def assert_table_summary(table,wanted,page):
+    assert table['rows']==wanted['rows'] and table['columns']==wanted['columns']
+    assert table['location']['page']==page['page'] and table['location']['method']=='ocr'
+    valid_box(table['location']['bbox']);assert_box(table['location']['bbox'],wanted['bbox'])
+
+
+def test_later_read_locations_and_coverage_guards():
+    import copy
+    locs=[{'start':0,'end':5,'page':1,'method':'ocr','bbox':[.1,.1,.4,.2]},{'start':6,'end':12,'page':2,'method':'ocr','bbox':[.2,.3,.5,.4]}]
+    read={'text':'FIRST\nSECOND','locations':locs}
+    assert_region(read,6,12,2,'ocr',[.2,.3,.5,.4])
+    for change in ({'page':1},{'method':'native'},{'bbox':[0,0,.01,.01]},{'start':0,'end':5}):
+        wrong=copy.deepcopy(read);wrong['locations'][1].update(change)
+        with pytest.raises(AssertionError):assert_region(wrong,6,12,2,'ocr',[.2,.3,.5,.4])
+    for bbox in ([.2,.3,.5,.4,9],[.2,.3,.1,.4],[-1,.3,.5,.4]):
+        with pytest.raises(AssertionError):valid_box(bbox)
+    wanted={'rows':2,'columns':2,'bbox':[.2,.3,.5,.4]};table={**wanted,'location':{'page':2,'method':'ocr','bbox':wanted['bbox']}}
+    assert_table_summary(table,wanted,{'page':2})
+    wrong=copy.deepcopy(table);wrong['location']['method']='native'
+    with pytest.raises(AssertionError):assert_table_summary(wrong,wanted,{'page':2})
+    truth={'pages':[{'page':p,'ink_boxes':[[.1,.1,.4,.2]],'tables':[]} for p in (1,2,3)]}
+    coverage={'coverage':{'units':[{'page':p,'method':'ocr' if p<3 else 'native','status':'ready','regions':[[0,0,1,1]]} for p in (1,2,3)]}}
+    assert_coverage(coverage,truth)
+    for change in ({'method':'native'},{'status':'failed'},{'regions':[[0,0,.05,.05]]}):
+        wrong=copy.deepcopy(coverage);wrong['coverage']['units'][1].update(change)
+        with pytest.raises(AssertionError):assert_coverage(wrong,truth)
 
 
 def assert_region(read,start,end,page,method,region):
@@ -72,7 +128,7 @@ def test_two_mixed_pdfs_preserve_native_and_ocr_regions(tmp_path,monkeypatch):
     for name,item in items.items():
         truth=item['truth'];hits=f.search(truth['pages'][0]['heading'],scope='project',project_id=project,local=True,limit=50)['results']
         own=[value for value in hits if Path(value['path']).name==name];assert len(own)==1;hit=own[0];observed_ids.add(hit['id'])
-        read=f.read(hit,start=0,end=hit['text_length']);assert_dimensions(read,truth);assert_dimensions(hit,truth);expected=normal(truth['text']);actual=normal(read['text'])
+        read=f.read(hit,start=0,end=hit['text_length']);assert_dimensions(read,truth);assert_coverage(read,truth);assert_dimensions(hit,truth);expected=normal(truth['text']);actual=normal(read['text'])
         cer=distance(expected,actual)/len(expected);assert cer<=.01,(name,cer,expected,actual)
         assert read['coverage']['errors']==[] and len(read['tables'])==len({t['table_id'] for t in read['tables']})==3
         for page in truth['pages']:
@@ -92,9 +148,14 @@ def test_two_mixed_pdfs_preserve_native_and_ocr_regions(tmp_path,monkeypatch):
                     assert_region(read,indices[offset],indices[offset+len(value)-1]+1,page['page'],'ocr',[.09,140/900,.95,310/900])
             rect=locs[0]['bbox'];bounds=page['heading_bbox'];assert bounds[0]<=rect[0]<rect[2]<=bounds[2] and bounds[1]<=rect[1]<rect[3]<=bounds[3]
             tables=[table for table in read['tables'] if table['location']['page']==page['page']];assert len(tables)==len(page['tables'])
+            indices=[i for i in range(end,read['text'].index(truth['pages'][page['page']]['heading']) if page['page']<3 else len(read['text'])) if not read['text'][i].isspace()]
+            section=''.join(read['text'][i] for i in indices);cursor=0
             for wanted in page['tables']:
+                for source_cell in wanted['cells']:
+                    word=normal(source_cell['text']);offset=section.index(word,cursor);cursor=offset+len(word)
+                    assert_region(read,indices[offset],indices[cursor-1]+1,page['page'],'ocr',source_cell['bbox'])
                 matching=[t for t in tables if all(abs(a-b)<.01 for a,b in zip(t['location']['bbox'],wanted['bbox']))];assert len(matching)==1
-                table=matching[0];assert table['rows']==wanted['rows'] and table['columns']==wanted['columns']
+                table=matching[0];assert_table_summary(table,wanted,page)
                 view=f.read(hit,view='table',table_id=table['table_id']);assert_dimensions(view,truth)
                 assert view['table_id']==table['table_id'] and view['location']['page']==page['page']
                 assert_box(view['location']['bbox'],wanted['bbox'])

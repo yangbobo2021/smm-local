@@ -189,3 +189,25 @@ class DocumentGuard:
             yield
             if self.status(locked=True):
                 self.checkpoint()
+
+
+
+def write_original_output(path,raw,metadata):
+    """Write only a verified saved snapshot, never overwrite an existing path."""
+    import os
+    if not isinstance(raw,bytes) or len(raw)!=metadata.get('bytes') or sha(raw)!=metadata.get('sha256'):
+        raise ValueError('原件长度或摘要与读取信息不一致')
+    path=Path(path).expanduser().absolute()
+    descriptor=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|getattr(os,'O_BINARY',0),0o600)
+    identity=os.fstat(descriptor)
+    try:
+        with os.fdopen(descriptor,'wb') as target:
+            target.write(raw);target.flush();os.fsync(target.fileno())
+    except BaseException:
+        # Remove our incomplete output only; a concurrently replaced path is
+        # owned by its new creator and must never be unlinked by this request.
+        try:
+            if os.path.samestat(identity,path.lstat()):path.unlink()
+        except FileNotFoundError:pass
+        raise
+    return path

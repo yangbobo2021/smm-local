@@ -36,17 +36,31 @@ def grids(image):
         group['ys'].append(y)
     tables=[]
     for group in groups:
-        ys=clusters(group['ys'])
-        if len(ys)<3:continue
-        left,right=group['left'],group['right'];top,bottom=ys[0],ys[-1]
-        if bottom-top<30:continue
-        xs=clusters([x for x in range(max(0,left-3),min(width,right+4)) if sum(data[y*width+x]<128 for y in range(top,bottom+1))>=(bottom-top+1)*.90])
-        if len(xs)<3 or abs(xs[0]-left)>4 or abs(xs[-1]-right)>4:continue
-        # Every admitted row/column boundary is a visible, uninterrupted grid.
-        if any(sum(data[y*width+x]<128 for x in range(xs[0],xs[-1]+1))<(xs[-1]-xs[0]+1)*.95 for y in ys):continue
-        rect=(xs[0],ys[0],xs[-1],ys[-1])
-        if any(abs(rect[0]-t['box'][0])<5 and abs(rect[1]-t['box'][1])<5 for t in tables):continue
-        tables.append({'xs':xs,'ys':ys,'box':rect})
+        ys=clusters(group['ys']);left,right=group['left'],group['right']
+        # Equal-width tables can occur above one another. A whitespace gap
+        # lacks continuous outer borders and must split the connected grids.
+        components=[];current=[]
+        def vertical(x,top,bottom):
+            return sum(data[y*width+x]<128 for y in range(top,bottom+1))>=(bottom-top+1)*.90
+        for y in ys:
+            if current:
+                top=current[-1]
+                connected=all(any(vertical(x,top,y) for x in range(max(0,border-3),min(width,border+4))) for border in (left,right))
+                if not connected:components.append(current);current=[]
+            current.append(y)
+        if current:components.append(current)
+        for rows in components:
+            if len(rows)<2:continue
+            top,bottom=rows[0],rows[-1]
+            if bottom-top<30:continue
+            xs=clusters([x for x in range(max(0,left-3),min(width,right+4)) if vertical(x,top,bottom)])
+            if len(xs)<3 or abs(xs[0]-left)>4 or abs(xs[-1]-right)>4:continue
+            # Every admitted boundary is uninterrupted across this component;
+            # partial/merged grids are not converted into guessed columns.
+            if any(sum(data[y*width+x]<128 for x in range(xs[0],xs[-1]+1))<(xs[-1]-xs[0]+1)*.95 for y in rows):continue
+            rect=(xs[0],rows[0],xs[-1],rows[-1])
+            if any(abs(rect[0]-t['box'][0])<5 and abs(rect[1]-t['box'][1])<5 for t in tables):continue
+            tables.append({'xs':xs,'ys':rows,'box':rect})
     return sorted(tables,key=lambda t:(t['box'][1],t['box'][0]))
 
 
@@ -78,7 +92,7 @@ def component_profile(config):
     try:languages={name:Configuration._file_hash(Path(config['ocr_data_dir'])/(name+'.traineddata')) for name in config['languages'].split('+')}
     except (OSError,ValueError) as exc:raise PageFailure('OCR语言不可读取: '+str(exc)) from exc
     if languages!=probe.get('language_data'):raise PageFailure('OCR语言数据自探测后变化，请重新配置/检查')
-    return {'executable':executable,'version':probe['component']['version'],'language_data':languages,'languages':config['languages'],'pipeline':'grid3-body11-binary180-v1'}
+    return {'executable':executable,'version':probe['component']['version'],'language_data':languages,'languages':config['languages'],'pipeline':'grid3-body11-binary180-connected-v2'}
 
 
 def page_events(document,number,page,config,*,native_boxes=(),regions=None):

@@ -1,0 +1,38 @@
+{
+  "scope": "macOS actual Local CLI transport and original output development TDD only",
+  "case_id": "TC-008-reference-local-cli",
+  "red": "red-local-cli-v5",
+  "red_review": "review-local-cli-red-v5",
+  "green": "green-local-cli-v1",
+  "green_review": "review-local-cli-green-v1",
+  "documents": 2,
+  "tables": 6,
+  "nonzero_hit": {
+    "start": 3403,
+    "end": 5403,
+    "text_length": 8666
+  },
+  "main_passed": 4,
+  "regression_passed": 68,
+  "checks": [
+    "default signed hit range and LF lines",
+    "explicit Unicode range and text view",
+    "all source tables and real headers",
+    "original information and byte-exact new-file output",
+    "existing output refused and preserved",
+    "source files removed before CLI access",
+    "empty processing/source/network audit and unchanged snapshot state"
+  ],
+  "not_claimed": [
+    "Hub CLI or MCP",
+    "full SC9/R008/E/H/X",
+    "other operating systems"
+  ],
+  "files": {
+    "src/smm_local/cli.py": "e14887a9e508d9fc5fad8b5a179a6ec3dd5278e696d33cf8617d81d62035abc2",
+    "src/smm_local/document_protocol.py": "1659b3c4bb12eec6d6efe925cc2e893d0fa6d6ad5ca12612b3541c0d709b6aef",
+    "tests/test_document_formats_cli.py": "70ac786c05cad0f1d965b1bfd94d752ddd55785a52dcb8a3fce895847ef4f242",
+    "tests/document_formats_cli_observer.py": "e697cbe83e131f0816079474b8c247ea2b20d94761c0365dcb2dac0f51fd77b3"
+  },
+  "baseline": "3453192ac73254890c11259c4220a5637e9b6e39"
+}

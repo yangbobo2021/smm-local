@@ -1,0 +1,36 @@
+{
+  "scope": "macOS Local API mixed PDF development TDD only",
+  "case_id": "TC-008-pdf-mixed",
+  "red": "red-pdf-mixed-v4",
+  "red_review": "review-pdf-mixed-red-v4",
+  "green": "green-pdf-mixed-v1",
+  "green_review": "review-pdf-mixed-green-v1",
+  "documents": 2,
+  "pages_per_document": 3,
+  "tables": 6,
+  "cells": 28,
+  "full_text_errors": [
+    {
+      "errors": 0,
+      "characters": 194
+    },
+    {
+      "errors": 0,
+      "characters": 189
+    }
+  ],
+  "main_passed": 4,
+  "regression_passed": 56,
+  "not_claimed": [
+    "full SC4/R008",
+    "Windows/Linux same-version business",
+    "complex-layout boundary",
+    "E/H/X"
+  ],
+  "files": {
+    "src/smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+    "tests/test_document_formats_pdf_mixed.py": "f9e3447826d987781e5695ecd666a872fcf424a9ead9c84e5aa76eb81b8781f9",
+    "tests/document_formats_mixed_fixture.py": "bcf7ab29fa3941022e4bdb1a8500ebeb19d2143681230e6799bc052bedab9236"
+  },
+  "baseline": "3453192ac73254890c11259c4220a5637e9b6e39"
+}
