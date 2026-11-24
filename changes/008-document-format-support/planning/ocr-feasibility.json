@@ -1,0 +1,407 @@
+{
+  "purpose": "PLAN component research only, not SMM acceptance",
+  "runtime": {
+    "version": "5.5.4",
+    "supplier": "conda-forge",
+    "package": "tesseract-5.5.4-hb597112_0.conda",
+    "sha256": "4d1a059fa1f1585066ff26d54240cd2ae828bcaba90c3613945e278bf7a10400"
+  },
+  "language_data": [
+    {
+      "language": "eng",
+      "bytes": 4113088,
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "git_blob_sha1": "bbef4675053b5b468cdb477053e28b1c698ba08e",
+      "upstream_sha1": "bbef4675053b5b468cdb477053e28b1c698ba08e",
+      "matches_frozen_upstream": true
+    },
+    {
+      "language": "chi_sim",
+      "bytes": 2469156,
+      "sha256": "a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730",
+      "git_blob_sha1": "388bac276d033d06e5ed5ba7a7ad14ae58f97dab",
+      "upstream_sha1": "388bac276d033d06e5ed5ba7a7ad14ae58f97dab",
+      "matches_frozen_upstream": true
+    }
+  ],
+  "selected_candidate": {
+    "languages": "chi_sim+eng",
+    "psm": 3,
+    "tsv_mode": "explicit tessedit_create_tsv=1",
+    "research_version": 4
+  },
+  "history": [
+    {
+      "version": 1,
+      "purpose": "OCR and grid component feasibility, not SMM acceptance",
+      "tesseract_version": "tesseract 5.5.4",
+      "languages": "eng+chi_sim",
+      "samples": [
+        {
+          "sample": 1,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "actual": [
+            [
+              "",
+              ""
+            ],
+            [
+              "",
+              ""
+            ],
+            [
+              "",
+              ""
+            ]
+          ],
+          "cer": 1,
+          "cells_exact": false,
+          "native_text_empty": true,
+          "pdf_sha256": "99b52dda153b2bd1f923e8cf149d427936850bc165e8c5e3e166f46aae7b10bf"
+        },
+        {
+          "sample": 2,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "actual": [
+            [
+              "",
+              ""
+            ],
+            [
+              "",
+              ""
+            ],
+            [
+              "",
+              ""
+            ]
+          ],
+          "cer": 1,
+          "cells_exact": false,
+          "native_text_empty": true,
+          "pdf_sha256": "5401f4342d65d8233a582d86f3f5a4b4cf885cd66700d63dc1dbc0d47facf815"
+        }
+      ],
+      "passed": false,
+      "font_sha256": "876af2cd4854644e7f3e7feb2f688997fdb3343c6df6693611209c9dfb47ccec"
+    },
+    {
+      "version": 2,
+      "purpose": "OCR and grid component feasibility, not SMM acceptance",
+      "tesseract_version": "tesseract 5.5.4",
+      "languages": "eng+chi_sim",
+      "samples": [
+        {
+          "sample": 1,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "actual": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "cer": 0,
+          "cells_exact": true,
+          "native_text_empty": true,
+          "pdf_sha256": "bf31eca176a0fd92af07938fe72bc3fe1d1f1e16d08a8aa04fc444d258992422"
+        },
+        {
+          "sample": 2,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "actual": [
+            [
+              "ii",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "cer": 0.08333333333333333,
+          "cells_exact": false,
+          "native_text_empty": true,
+          "pdf_sha256": "d17706186f27bb401f5ef3626961b4ab09c2e50ddd1c467b02af2b3036b489f6"
+        }
+      ],
+      "passed": false,
+      "font_sha256": "876af2cd4854644e7f3e7feb2f688997fdb3343c6df6693611209c9dfb47ccec"
+    },
+    {
+      "version": 3,
+      "purpose": "OCR and grid component feasibility, not SMM acceptance",
+      "tesseract_version": "tesseract 5.5.4",
+      "languages": "eng+chi_sim",
+      "samples": [
+        {
+          "sample": 1,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "actual": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "cer": 0,
+          "cells_exact": true,
+          "native_text_empty": true,
+          "pdf_sha256": "01cd6078ac9ec7e9fc2c96c02ae27f99a374a60e88ac26135d58f53dfd908d7e"
+        },
+        {
+          "sample": 2,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "actual": [
+            [
+              "ii",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "cer": 0.08333333333333333,
+          "cells_exact": false,
+          "native_text_empty": true,
+          "pdf_sha256": "f1239947e2ad482e5e19677b75aa6bc7926f2ea0d7f9f48cdcae8c40e77f7313"
+        }
+      ],
+      "passed": false,
+      "font_sha256": "876af2cd4854644e7f3e7feb2f688997fdb3343c6df6693611209c9dfb47ccec"
+    },
+    {
+      "version": 4,
+      "purpose": "OCR and grid component feasibility, not SMM acceptance",
+      "tesseract_version": "tesseract 5.5.4",
+      "languages": "chi_sim+eng",
+      "samples": [
+        {
+          "sample": 1,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "actual": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "文档检索",
+              "731.25"
+            ],
+            [
+              "本地解析",
+              "842.50"
+            ]
+          ],
+          "cer": 0,
+          "cells_exact": true,
+          "native_text_empty": true,
+          "pdf_sha256": "cb7ee2880e6bbb6c9428b68673a7cb2d24795e6115b8fb166e149f98e9586962"
+        },
+        {
+          "sample": 2,
+          "grid": [
+            3,
+            2
+          ],
+          "expected": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "actual": [
+            [
+              "项目",
+              "金额"
+            ],
+            [
+              "会话同步",
+              "912.75"
+            ],
+            [
+              "资料归档",
+              "624.30"
+            ]
+          ],
+          "cer": 0,
+          "cells_exact": true,
+          "native_text_empty": true,
+          "pdf_sha256": "a5f79d3e8a2b936b3ff1e2334583eb4b66b66c4dbae015b72d4b606d24293cb0"
+        }
+      ],
+      "passed": true,
+      "font_sha256": "876af2cd4854644e7f3e7feb2f688997fdb3343c6df6693611209c9dfb47ccec"
+    }
+  ],
+  "probe_sha256": {
+    "ocr_component_probe.py": "ae56e282764010df61d5fc10dc3bbb910eea81cf6f010c99a3d424d982a6e2a0",
+    "ocr_component_probe-v2.py": "350f43de0459d103a5aab12e73ed97f40777bfed74388eb0dd3b73e4cb1f0558",
+    "ocr_component_probe-v3.py": "c2ca7751c5b80b94d0b22797bf88b10b3a225d5b9154893f35f2dc9673faa2b0",
+    "ocr_component_probe-v4.py": "39307545b4b570e2df3f41702345afb964e6b98a64f3e7f42c17aabd414a76f9",
+    "bounded_flate_probe.py": "cdd67a0672e3ee061544fef0c53fb8431ee43da6a22958f9de2d0448cdc5aac9",
+    "bounded_flate_probe_v2.py": "52c0eb9edfb6983fc06b71810684c3ba2227f636a0f9974123744fd90b7cbcbb"
+  },
+  "comparison_inputs": [
+    {
+      "sample": 1,
+      "ocr_input_identical_across_four_profiles": true,
+      "sha256": "bc413692715419245aaffbd55c9d0307e96174d93f6d3c640ea9dc089ac158fe"
+    },
+    {
+      "sample": 2,
+      "ocr_input_identical_across_four_profiles": true,
+      "sha256": "b7dd7408f585db86ec3e4f647ab33492abcd6cd240a03ce3023c067cd5652fd7"
+    }
+  ]
+}

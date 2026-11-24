@@ -2,7 +2,7 @@
 
 更新日期：2026-11-24。
 
-本目录记录[父意图](intent.md)及六项独立变更的关系。005已由[PR #30](https://github.com/yangbobo2021/smm-local/pull/30)实现、验收并合并。维护者于2026-11-22授权代理自主推进006的SPEC、PLAN、实现与验证，每阶段经PR合并后继续；006的规格与计划已分别由[PR #31](https://github.com/yangbobo2021/smm-local/pull/31)和[PR #32](https://github.com/yangbobo2021/smm-local/pull/32)依序合并；实施、验收及独立审查记录见[PR #33](https://github.com/yangbobo2021/smm-local/pull/33)和[当前证据](../006-local-document-search/evidence/README.md)。006 实现 PR #33 已合并。007 的规格/计划和实现PR #39已按阶段合并，维护者接受剩余验收缺口，完整验收仍未通过；008已明确首版docx/xlsx/PDF文字表格、必要的本地PDF OCR及创建端处理/同步责任，暂不支持图片或外部模型，意图已由[PR #40](https://github.com/yangbobo2021/smm-local/pull/40)合并，SPEC已确认，PLAN尚未起草；009–010仍为草稿，不将其余范围一并视为确认。
+本目录记录[父意图](intent.md)及六项独立变更的关系。005已由[PR #30](https://github.com/yangbobo2021/smm-local/pull/30)实现、验收并合并。维护者于2026-11-22授权代理自主推进006的SPEC、PLAN、实现与验证，每阶段经PR合并后继续；006的规格与计划已分别由[PR #31](https://github.com/yangbobo2021/smm-local/pull/31)和[PR #32](https://github.com/yangbobo2021/smm-local/pull/32)依序合并；实施、验收及独立审查记录见[PR #33](https://github.com/yangbobo2021/smm-local/pull/33)和[当前证据](../006-local-document-search/evidence/README.md)。006 实现 PR #33 已合并。007 的规格/计划和实现PR #39已按阶段合并，维护者接受剩余验收缺口，完整验收仍未通过；008已明确首版docx/xlsx/PDF文字表格、必要的本地PDF OCR及创建端处理/同步责任，暂不支持图片或外部模型，意图已由[PR #40](https://github.com/yangbobo2021/smm-local/pull/40)合并，SPEC已由[PR #41](https://github.com/yangbobo2021/smm-local/pull/41)合并，PLAN已确认，合并后进入实现与验证；009–010仍为草稿，不将其余范围一并视为确认。
 
 ## 子意图
 
@@ -11,7 +11,7 @@
 | 005 | [对话上传控制与本机 / Hub 联合检索](../005-selective-conversation-upload/intent.md) | 首先形成对话联合检索语义；与 007 对齐上传边界 | 已实现并验收 | [PR #30](https://github.com/yangbobo2021/smm-local/pull/30)；[证据](../005-selective-conversation-upload/evidence/20261122-native-completion/README.md) |
 | 006 | [本机文档检索](../006-local-document-search/intent.md) | Markdown/UTF-8文本、本机明确纳入与刷新 | [SPEC](../006-local-document-search/spec.md) / [PLAN](../006-local-document-search/plan.md)已合并；[实施与验收记录](../006-local-document-search/evidence/README.md) | [PR #31](https://github.com/yangbobo2021/smm-local/pull/31) / [#32](https://github.com/yangbobo2021/smm-local/pull/32) / [#33](https://github.com/yangbobo2021/smm-local/pull/33) |
 | 007 | [Hub 文档检索与同步](../007-hub-document-search/intent.md) | 承接 006；按项目同步、两端网页资料库及创建端管理 | [SPEC](../007-hub-document-search/spec.md) / [PLAN](../007-hub-document-search/plan.md)及实现PR已合并；维护者接受验收缺口后合入，未标完整通过 | [#37](https://github.com/yangbobo2021/smm-local/pull/37) / [#38](https://github.com/yangbobo2021/smm-local/pull/38) / [#39](https://github.com/yangbobo2021/smm-local/pull/39)；[当前证据](../007-hub-document-search/evidence/README.md) |
-| 008 | [常用文档格式支持](../008-document-format-support/intent.md) | 扩展006/007；首版docx/xlsx/PDF文字表格，图片留后续 | 意图已合并；[SPEC](../008-document-format-support/spec.md)已确认，本阶段提交规格，尚未进入PLAN或实现 | [意图PR #40](https://github.com/yangbobo2021/smm-local/pull/40)；本阶段规格提交 |
+| 008 | [常用文档格式支持](../008-document-format-support/intent.md) | 扩展006/007；首版docx/xlsx/PDF文字表格，图片留后续 | 意图及[SPEC](../008-document-format-support/spec.md)已合并；[PLAN](../008-document-format-support/plan.md)已确认，合并后进入实现与验证 | [意图PR #40](https://github.com/yangbobo2021/smm-local/pull/40)；[SPEC PR #41](https://github.com/yangbobo2021/smm-local/pull/41)；本阶段PLAN提交 |
 | 009 | [本机飞书聊天历史检索](../009-feishu-history-search/intent.md) | 可独立调研和交付；与 006 协调新增内容的检索路径 | 意图草稿 | 尚无 |
 | 010 | [飞书长对话与关联内容理解](../010-feishu-context-understanding/intent.md) | 承接009聊天记录及008首版文件处理；图片理解需后续明确 | 意图草稿 | 尚无 |
 

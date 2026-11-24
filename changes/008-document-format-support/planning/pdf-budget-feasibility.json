@@ -1,0 +1,25 @@
+{
+  "multi_stream_page_plus_one_rejected": true,
+  "purpose": "bounded Flate adapter feasibility, not SMM acceptance",
+  "pdfminer_version": "20260107",
+  "page_boundary_cases": [
+    {
+      "decoded_bytes": 33554432,
+      "result": "allowed",
+      "peak_retained_bytes": 33554432,
+      "limit_bytes": 33554432
+    },
+    {
+      "decoded_bytes": 33554433,
+      "result": "rejected",
+      "peak_retained_bytes": 33554432,
+      "limit_bytes": 33554432
+    }
+  ],
+  "global_equal_bytes": 134217728,
+  "global_plus_one_rejected": true,
+  "non_flate_filters_verified": false,
+  "pdfium_safe_input_verified": false,
+  "prototype_scope": "Flate single/multiple streams and cumulative counters only; v1 lacked explicit multi-stream-page coverage, v2 adds it",
+  "probe_sha256": "52c0eb9edfb6983fc06b71810684c3ba2227f636a0f9974123744fd90b7cbcbb"
+}
