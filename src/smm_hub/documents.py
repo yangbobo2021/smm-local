@@ -277,28 +277,46 @@ class HubDocuments:
 
     def files(self, source_id=None):
         with control_lock(self.guard.lock):
-            sources = {s["id"]: s for s in self.sources(locked=True)}
-            rows = self.documents.files(source_id)
-            with self.db.connect() as c:
-                metadata = {
-                    r["id"]: dict(r)
-                    for r in c.execute(
-                        "SELECT d.id,d.text_sha256,COALESCE(o.display_name,l.display_name) AS display_name FROM documents d LEFT JOIN hub_document_origins o ON o.document_id=d.id LEFT JOIN document_library l ON l.document_id=d.id"
-                    )
-                }
-            for row in rows:
-                source = sources[row["source_id"]]
-                origin, received = self._origin(row["id"])
-                row.update(
-                    origin=origin,
-                    **self._origin_display(origin, received),
-                    received_at=received,
-                    source_origin=dict(source["origin"]),
-                    project_ids=list(source["project_ids"]),
-                    archive_scope="hub",
-                    **self._snapshot_metadata([row["source_id"]], sources),
-                    **metadata[row["id"]],
+            return self._files(source_id)
+
+    def _files(self, source_id=None):
+        sources = {s["id"]: s for s in self.sources(locked=True)}
+        rows = self.documents.files(source_id)
+        with self.db.connect() as c:
+            metadata = {
+                r["id"]: dict(r)
+                for r in c.execute(
+                    "SELECT d.id,d.text_sha256,COALESCE(o.display_name,l.display_name) AS display_name FROM documents d LEFT JOIN hub_document_origins o ON o.document_id=d.id LEFT JOIN document_library l ON l.document_id=d.id"
                 )
+            }
+        for row in rows:
+            source = sources[row["source_id"]]
+            origin, received = self._origin(row["id"])
+            row.update(
+                origin=origin,
+                **self._origin_display(origin, received),
+                received_at=received,
+                source_origin=dict(source["origin"]),
+                project_ids=list(source["project_ids"]),
+                archive_scope="hub",
+                **self._snapshot_metadata([row["source_id"]], sources),
+                **metadata[row["id"]],
+            )
+        for row in rows:
+            if row.get('original_reference'):
+                published=row.get('published_snapshot') or {}
+                metadata={**row,**{key:published[key] for key in ('processing_version','result_sha256') if key in published}}
+                row['original_reference']=self._wrap_reference(row['original_reference'],metadata,row['origin'])
+        return rows
+
+    def library_list(self, project_id=None):
+        with control_lock(self.guard.lock):
+            rows=self.library.list(project_id)
+            files={(row['id'],row['source_id']):row for row in self._files()}
+            for row in rows:
+                saved=files.get((row['id'],row['source_id']),{})
+                for key in ('original_reference','original_available','original_reason'):
+                    if key in saved:row[key]=saved[key]
             return rows
 
     def native(self, action, body=None, source_id=None):
@@ -795,6 +813,13 @@ class HubDocuments:
             ),
         }
 
+    def _wrap_reference(self, reference, metadata, origin):
+        archive,key=reference_material(self.db)
+        return sign({'format':1,'kind':'hub_document','archive_id':archive,**self.context(),
+            'origin':origin,'reference':reference,
+            **{name:metadata[name] for name in ('version','sha256','text_sha256','text_length')},
+            **{name:metadata[name] for name in ('processing_version','result_sha256') if name in metadata}},key)
+
     def search(self, body):
         self._context(body)
         with self.guard.hold():
@@ -830,7 +855,6 @@ class HubDocuments:
                 options["scope"] = "all"
             result = self.documents.search(**options)
             sources = {s["id"]: s for s in self.sources(locked=True)}
-            archive, key = reference_material(self.db)
             for hit in result["results"]:
                 with self.db.connect() as c:
                     display = c.execute(
@@ -853,22 +877,7 @@ class HubDocuments:
                     }
                     for s in hit["source_ids"]
                 ]
-                hit["reference"] = sign(
-                    {
-                        "format": 1,
-                        "kind": "hub_document",
-                        "archive_id": archive,
-                        **self.context(),
-                        "origin": origin,
-                        "reference": hit["reference"],
-                        "version": hit["version"],
-                        "sha256": hit["sha256"],
-                        "text_sha256": hit["text_sha256"],
-                        "text_length": hit["text_length"],
-                        **{k:hit[k] for k in ("processing_version","result_sha256") if k in hit},
-                    },
-                    key,
-                )
+                hit['reference']=self._wrap_reference(hit['reference'],hit,origin)
             result["coverage"]["sources"] = [
                 sources[item["id"]] for item in result["coverage"]["sources"]
             ]

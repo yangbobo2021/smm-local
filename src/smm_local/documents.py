@@ -281,6 +281,20 @@ class Documents:
             self._prune(con)
         return {'removed':source_id,'message':'已取消此来源；独占材料退出检索/读取，原文件未改变'}
 
+    def original_fields(self, con, document, archive_id, key, *, stamps=None):
+        """Bind list original refs to the same database snapshot as their row."""
+        details=self.snapshots.detail(con,document['pk'])
+        if stamps is None:
+            stamps=[dict(row) for row in con.execute("SELECT s.id,s.revision,m.qualification FROM document_memberships m JOIN document_sources s ON s.id=m.source_id WHERE m.document_pk=? AND m.status='ready' AND s.status IN ('ready','partial') ORDER BY s.id",(document['pk'],))]
+        published=details.get('published_snapshot')
+        details.update(original_reference=None,original_available=False)
+        if published is not None and stamps and document['version']>0:
+            payload={'format':1,'kind':'document','archive_id':archive_id,'document_id':document['id'],'version':document['version'],'sources':stamps,'start':0,'end':min(document['text_length'],2000),'processing_version':published['processing_version'],'result_sha256':published['result_sha256'],'raw_sha256':document['sha256']}
+            details.update(original_reference=sign(payload,key),original_available=True)
+        elif stamps and document['version']>0:details['original_reason']='legacy_original_not_captured'
+        else:details['original_reason']='no_current_snapshot'
+        return details
+
     def files(self, source_id=None):
         archive_id,key=references.material(self.db)
         with self.db.connect() as con:
@@ -296,17 +310,8 @@ class Documents:
             rows=con.execute('SELECT d.pk,m.source_id,m.relative_path,m.status,m.qualification,m.error,d.id,d.path,d.version,d.sha256,d.text_length,d.captured_at,d.captured_by_source_id FROM document_memberships m JOIN documents d ON d.pk=m.document_pk'+(' WHERE m.source_id=?' if source_id else '')+' ORDER BY d.path,m.source_id', (source_id,) if source_id else ())
             result=[]
             for row in rows:
-                item=dict(row);pk=item.pop('pk');item.update(self.snapshots.detail(con,pk))
-                published=item.get('published_snapshot');stamps=sorted(qualified.get(pk,[]),key=lambda stamp:stamp['id'])
-                item.update(original_reference=None,original_available=False)
-                if published is not None and stamps and row['version']>0:
-                    # Empty text has a valid original-info/download reference;
-                    # publication and source qualifications, not FTS hits, are
-                    # the authority. Never open an external source here.
-                    payload={'format':1,'kind':'document','archive_id':archive_id,'document_id':row['id'],'version':row['version'],'sources':stamps,'start':0,'end':min(row['text_length'],2000),'processing_version':published['processing_version'],'result_sha256':published['result_sha256'],'raw_sha256':row['sha256']}
-                    item.update(original_reference=sign(payload,key),original_available=True)
-                elif stamps and row['version']>0:item['original_reason']='legacy_original_not_captured'
-                else:item['original_reason']='no_current_snapshot'
+                item=dict(row);pk=item.pop('pk')
+                item.update(self.original_fields(con,row,archive_id,key,stamps=sorted(qualified.get(pk,[]),key=lambda stamp:stamp['id'])))
                 result.append(item)
             return result
 

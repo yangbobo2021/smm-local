@@ -85,7 +85,7 @@ def install(app, documents, token):
 
     @app.get("/v1/documents/library")
     def library(project_id: int | None = None):
-        return invoke(documents.library.list, project_id)
+        return invoke(documents.library_list, project_id)
 
     @app.post("/v1/documents/library")
     def library_add(body: dict = Body(...)):

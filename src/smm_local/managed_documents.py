@@ -13,6 +13,7 @@ import re
 import tempfile
 from uuid import uuid4
 from .core import tokens, utcnow
+from .references import material
 from .documents import Documents, _link
 from .document_protocol import normalize, sha, integer
 from .archive_protocol import digest, control_lock
@@ -120,6 +121,7 @@ class ManagedDocuments:
         return result
 
     def list(self, project_id=None):
+        archive,key=material(self.db)
         with self.db.connect() as c:
             c.execute("BEGIN")
             if project_id is not None:
@@ -131,6 +133,9 @@ class ManagedDocuments:
                 )
             ]
             rows = [self._receipt(c, ident) for ident in ids]
+            for row in rows:
+                document=c.execute('SELECT * FROM documents WHERE id=?',(row['id'],)).fetchone()
+                row.update(self.documents.original_fields(c,document,archive,key))
             return [
                 r for r in rows if project_id is None or project_id in r["project_ids"]
             ]
