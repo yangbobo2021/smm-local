@@ -1,29 +1,103 @@
 {
-  "scope": "Incomplete 008 development verification; no whole-scene or delivery pass",
-  "native_pdf": {
-    "latest_debug": "debug-native-header-source-v1",
-    "review": "review-native-header-source-v1",
-    "status": "passed",
-    "platform": "macOS ordinary process only; CI9835784 predates last four assertion lines"
+  "scope": "008 implementation draft; whole requirement R008 is NOT passed; no merge/release approval requested",
+  "snapshot": "4906918d8f1f854da48d4eee21109819781d287c",
+  "acceptance_id": "AT-SMM-008",
+  "baseline": "d8894d429ebe0915e377513a637b5dfc0fc7ea1a",
+  "scoped_passed": [
+    {
+      "area": "Conservative same-SHA transfer reservations",
+      "evidence": "reservation-lengths-development.json",
+      "main_passed": 2,
+      "regression_passed": 19
+    },
+    {
+      "area": "Empty originals through actual creator Web pages",
+      "evidence": "web-empty-original-development.json",
+      "main_passed": 2,
+      "regression_passed": 14
+    },
+    {
+      "area": "Installed macOS Python3.11 creator business",
+      "evidence": "minimum-installed-macos-development.json",
+      "main_passed": 2,
+      "limitation": "Exact earlier wheels only; final current-HEAD rebuild and recheck still required"
+    }
+  ],
+  "ci_checkpoint": {
+    "head": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+    "run": 45661390239,
+    "evidence": "ci-regression-5126cd1.json",
+    "macos": {
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0
+    },
+    "ubuntu": {
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0
+    },
+    "windows": {
+      "passed": 409,
+      "skipped": 27,
+      "failed": 24
+    },
+    "limitation": "Predates this Web/reservation/minimum-test commit; ordinary CI is not E/H/X acceptance"
   },
-  "hub_direct_index": {
-    "green": "green-direct-index-v3",
-    "review": "review-direct-index-green-v1",
-    "status": "passed",
-    "scope": "allocated selected-complete/zero-processing/offline-original; other SC6 items remain"
+  "retained_by_maintainer": [
+    {
+      "case": "TC-008-web-native-upload",
+      "evidence": "web-upload-retained-gaps.json",
+      "gaps": [
+        "Second-wave pending retained rows status/details",
+        "Visible document ID sets at project switch, pending and completion"
+      ],
+      "patch_applied": false
+    },
+    {
+      "area": "Windows stdlib socketpair observer repair",
+      "patch_applied": false,
+      "business_acceptance": "failed or unverified; not waived"
+    }
+  ],
+  "pending_test_repair_approvals": [
+    {
+      "case": "TC-008-reference-web",
+      "gap": "Playwright test uses status_code instead of status",
+      "patch_applied": false
+    },
+    {
+      "case": "TC-008-managed-upload-restart",
+      "gap": "C1 two applicable documents within each same project and evidence dedup",
+      "patch_applied": false
+    },
+    {
+      "case": "TC-008-web-ready-management",
+      "gap": "Raw main 2 passed, but 54,253,080-byte evidence exceeds native 25MiB limit; native regression did not start, no green review",
+      "separate_regression_passed": 24,
+      "patch_applied": false
+    },
+    {
+      "case": "TC-008-managed-update-paths",
+      "gap": "Windows dangling-link self-control namespace representation comparison",
+      "patch_applied": false
+    }
+  ],
+  "remaining_required": [
+    "Current-HEAD whole regression, clean build and installed minimum-Python recheck",
+    "Full C1 boundary, lifecycle, cancellation, TTL/shared/committed staging reclamation, malformed input and snapshot protection",
+    "Complete PDF resource/safety boundary matrix",
+    "E installed CLI/Web/MCP/HTTP paths, H actual operating-system service identity, X six cross-OS directions",
+    "Minimum Python3.11 installed business on Linux and Windows",
+    "Final encrypted CI original-evidence recovery and cleanup receipts",
+    "Fresh PR review and requirement-level independent acceptance"
+  ],
+  "environment_constraints": [
+    "Local and GitHub CI only; no ESXi",
+    "No production/daily SMM, Hub, VibeInsight or real user documents touched"
+  ],
+  "documentation": {
+    "readme_and_trial_guide": "Updated for development builds, format limits and creator-owned processing; discovery still requires PR review"
   },
-  "mcp": {
-    "green": "green-mcp-views-v1",
-    "review": "review-mcp-views-green-v1",
-    "status": "passed",
-    "scope": "Local Word real stdio views only; platform/other-format matrix incomplete"
-  },
-  "windows_ci": {
-    "run": 45508570876,
-    "failed": 12,
-    "diagnosis": "stdlib internal socketpair falsely blocked; shared probe candidate prepared and awaiting extra authorization",
-    "user_decision": "保留 Windows 缺口，继续其他工作",
-    "proposed_patch": "not applied; affected business remains failed/unverified"
-  },
-  "other": "Full C1 budgets/lifecycle/security; E/H/X; minimum-Python installed format business and README remain incomplete"
+  "redaction": "Synthetic documents only. Public summaries contain digests/status and no credentials or raw private evidence."
 }
