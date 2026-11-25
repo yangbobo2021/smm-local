@@ -16,6 +16,7 @@ from .document_results import sha
 from .document_snapshots import RAW_LIMIT
 from .document_transfers import BlobTransfers,BLOCK_LIMIT
 from .managed_documents import display_name
+from .documents import _link
 
 
 class ManagedDocumentUploads:
@@ -51,6 +52,15 @@ class ManagedDocumentUploads:
             if any(not v or binding.get(k)!=v for k,v in pair.items()):raise ValueError('捕获或最近处理尝试已改变，请重新查看')
         if not latest.get('capture_id') or not self.snapshots.authorized(c,latest['capture_id']):raise ValueError('当前原件采集授权已失效')
         if Path(binding['name']).suffix.lower()!=Path(row['display_name']).suffix.lower():raise ValueError('新格式更新必须保持同格式，跨格式请新纳入资料')
+        # Keep native writes inside ordinary managed entries, as for legacy
+        # text updates. A removed regular file may be recreated by an explicit
+        # upload, but present links (including broken ancestors) are rejected.
+        self.library._root()
+        path=Path(row['path'])
+        for component in (path,*path.parents):
+            try:linked=_link(component)
+            except FileNotFoundError:continue
+            if linked:raise ValueError('管理副本路径不能经过链接或 junction')
         return row
     def _prior(self,c,binding,fingerprint):
         prior=self.library._retry(c,binding['submission_id'],fingerprint)
@@ -62,6 +72,12 @@ class ManagedDocumentUploads:
         if binding['project_id'] not in current['project_ids'] or latest.get('capture_id')!=prior['capture_id'] or latest.get('attempt_id')!=prior['attempt_id'] or not self.snapshots.authorized(c,prior['capture_id']):
             raise ValueError('上传已被新项目、候选或处理尝试取代，请重新查看')
         return {**prior,'status':attempt['state'],'version':doc['version'],'processing_version':state['processing_version']}
+    def _check_current_upload(self,c,binding):
+        # A committed upload supersedes its own original CAS. Only its exact,
+        # still-current receipt may resume; later candidates/removal still fail.
+        if self._prior(c,binding,digest(['managed-original',binding])) is None:
+            self._target(c,binding)
+
     def _view(self,status):
         received=status['received']['raw'];state=self.transfers.binding(status['transfer_id'])
         length=state['bytes'];parts=(length+BLOCK_LIMIT-1)//BLOCK_LIMIT
@@ -87,14 +103,14 @@ class ManagedDocumentUploads:
         binding={**body,'purpose':'managed-original','device_id':'managed','archive_id':material(self.db)[0],'generation':0}
         with self._hold():
             self._check(binding)
-            with self.db.connect() as c:self._target(c,binding)
+            with self.db.connect() as c:self._check_current_upload(c,binding)
             return self._view(self.transfers.begin(binding,{'raw':{'bytes':body['bytes'],'sha256':body['sha256']}}))
     def part(self,upload_id,index,raw,expected_sha):
         integer(index,'分块序号',minimum=0)
         binding=self.transfers.binding(upload_id)
         with self._hold():
             self._check(binding)
-            with self.db.connect() as c:self._target(c,binding)
+            with self.db.connect() as c:self._check_current_upload(c,binding)
         # Body I/O is bounded and does not hold the Hub guard or a DB lock.
         return self._view(self.transfers.part(upload_id,'raw',index*BLOCK_LIMIT,raw,expected_sha))
     def commit(self,upload_id,body):

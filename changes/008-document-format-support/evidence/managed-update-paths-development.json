@@ -1,0 +1,61 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC10",
+  "case_id": "TC-008-managed-update-paths",
+  "status": "green_and_regression_independently_passed",
+  "run": "green-managed-update-paths-v1",
+  "result_sha256": "d0e317d9a0dba3a20e643556fc38083c5ca0c5d0c128cff4404254f21e480f27",
+  "main": {
+    "exit_code": 0,
+    "summary": "6 passed in 36.04s"
+  },
+  "regression": {
+    "exit_code": 0,
+    "summary": "39 passed in 98.03s"
+  },
+  "review": {
+    "request_id": "review-managed-update-paths-green-v1",
+    "status": "passed",
+    "result_sha256": "6f52cff817644756628db7eadbd8ad01c9483652c4ea7bc2ce6a4592fb8c0576",
+    "opinion_sha256": "a88195af3964932b66aa6dffb397baf3753e730894e484da82362ac3fd839046"
+  },
+  "evidence": {
+    "artifacts": 3102,
+    "stored_bytes": 6219643,
+    "all_sha256_verified": true,
+    "json_storage": "native lossless gzip, actual stored and decoded JSON hashes preserved",
+    "input_originals": 72,
+    "download_originals": 72,
+    "actual_original_downloads": 408,
+    "rejections_by_group": {
+      "local-file-prebegin": 4,
+      "local-file-precommit": 4,
+      "hub-file-prebegin": 4,
+      "hub-file-precommit": 4,
+      "local-parent-prebegin": 4,
+      "local-parent-precommit": 4,
+      "hub-parent-prebegin": 4,
+      "hub-parent-precommit": 4,
+      "local-root-prebegin": 4,
+      "local-root-precommit": 4,
+      "hub-root-prebegin": 4,
+      "hub-root-precommit": 4
+    },
+    "valid_restorations_by_group": {
+      "local-file-prebegin": 4,
+      "local-file-precommit": 4,
+      "hub-file-prebegin": 4,
+      "hub-file-precommit": 4,
+      "local-parent-prebegin": 4,
+      "local-parent-precommit": 4,
+      "hub-parent-prebegin": 4,
+      "hub-parent-precommit": 4,
+      "local-root-prebegin": 4,
+      "local-root-precommit": 4,
+      "hub-root-prebegin": 4,
+      "hub-root-precommit": 4
+    }
+  },
+  "scope": "C1 macOS HTTP TestClient native managed-update static file/parent/library-root symlinks, each ordinary/global project has two independent DOCX targets. Before-begin and before-commit; complete external tree/DB preservation and normal-path success, unrelated-project and stale-reference controls. Windows junction, request-internal filesystem races, other hostile inputs, SC1/SC9 and E/H/X remain separate gaps.",
+  "redaction": "Synthetic inputs only. Tokens, signed references and absolute runtime paths omitted; link target string replaced with SHA256. Relative external tree/stat/byte hashes preserved."
+}

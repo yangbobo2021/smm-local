@@ -1,0 +1,42 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC7",
+  "case_id": "TC-008-managed-update-replay",
+  "status": "scoped_tdd_passed_c1_dataset_gap_closed_by_later_formal_run",
+  "run": "green-managed-update-replay-v1",
+  "result_sha256": "f6c1bea4ea89ca9bb8e23cc6251c6870be1c5ef0dcc5ac8498905556432af572",
+  "main": {
+    "summary": "2 passed in 7.18s",
+    "exit_code": 0
+  },
+  "regression": {
+    "summary": "30 passed in 90.87s",
+    "exit_code": 0
+  },
+  "observed_current_replays": {
+    "local-pending": 2,
+    "local-ready": 2,
+    "hub-pending": 2,
+    "hub-ready": 2
+  },
+  "evidence": {
+    "artifacts": 333,
+    "bytes": 1204743,
+    "all_sha256_verified": true
+  },
+  "scope": "C1 real isolated creator HTTP processes, ordinary/global independent DOCX targets; own pending/ready begin/part/commit replay, changed payload, superseded V3 and removed rejection. Client discards recorded 200 receipt; not actual network fault injection or restart. SC1 Web-upload retained gaps and full SC7/E/H/X remain separate.",
+  "redaction": "Synthetic documents only. Auth headers, signed read references and absolute runtime paths omitted.",
+  "review": {
+    "request_id": "review-managed-update-replay-green-v1",
+    "status": "passed",
+    "result_sha256": "378b33a4550ed70169112e830ed9709364528a6918a78f5696b34b4a11d45731",
+    "opinion_sha256": "601d1c68506226f0b0ebdeea934d8cf38b271f15e83554de7af5a8880aa546ca"
+  },
+  "later_c1_audit": {
+    "source": "SPEC C1: same project must include at least two applicable targets plus unassociated/other-version controls",
+    "gap": "This recorded run used one DOCX in each of two projects. Same-project second-target coverage must be expanded before full C1 delivery.",
+    "historical_execution_and_review_preserved": true,
+    "resolved_by": "managed-update-replay-c1.json",
+    "open": false
+  }
+}
