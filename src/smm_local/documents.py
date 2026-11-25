@@ -395,6 +395,8 @@ class Documents:
                     if item['path'].suffix.lower() in NEW_SUFFIXES:
                         raw=_read_raw(item['path'],item['stat'])
                         token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:])
+                        # Parsing failure still has a legal saved-byte retry.
+                        item['captured_id']=token['capture_id']
                         result=self.snapshots.process(token,item['path'].suffix.lower()[1:])
                         item.update(snapshot_token=token,processed_result=result,sha256=token['raw_sha256'],text=result['text'])
                         from .document_results import encode
@@ -452,9 +454,19 @@ class Documents:
                         con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
                         con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
                         con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
+                    if error:
+                        # No completed capture means this source can no longer
+                        # authorize its previous bytes. Preserve only a newly
+                        # captured candidate whose parser failed, not stale copies.
+                        con.execute('UPDATE document_capture_authorizations SET active=0 WHERE source_id=? AND capture_id IN (SELECT id FROM document_captures WHERE document_pk=?) AND capture_id!=?',(source['id'],pk,item.get('captured_id','')))
                     con.execute('INSERT INTO document_memberships VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,document_pk) DO UPDATE SET relative_path=excluded.relative_path,status=excluded.status,qualification=excluded.qualification,error=excluded.error',(source['id'],pk,item['relative_path'],'failed' if error else 'ready',qualification,error))
                 for row in con.execute('SELECT document_pk FROM document_memberships WHERE source_id=?',(source['id'],)).fetchall():
-                    if row[0] not in seen:con.execute("UPDATE document_memberships SET status='missing',error='本轮未在来源范围发现' WHERE source_id=? AND document_pk=?",(source['id'],row[0]))
+                    if row[0] not in seen:
+                        # A successful enumeration is explicit evidence that this
+                        # source no longer authorizes its captured bytes. Other
+                        # continuously valid overlapping sources remain active.
+                        con.execute('UPDATE document_capture_authorizations SET active=0 WHERE source_id=? AND capture_id IN (SELECT id FROM document_captures WHERE document_pk=?)',(source['id'],row[0]))
+                        con.execute("UPDATE document_memberships SET status='missing',error='本轮未在来源范围发现' WHERE source_id=? AND document_pk=?",(source['id'],row[0]))
                 status='partial' if scan['counts']['failed'] else 'ready'
             con.execute('UPDATE document_sources SET status=?,resume_status=?,finished_at=?,error=?,counts=? WHERE id=?',(status,status,utcnow(),scan['error'],json.dumps(scan['counts']),source['id']))
             self._prune(con)

@@ -111,6 +111,13 @@
     "evidence": "pr43-review-v1.md",
     "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7171319505",
     "confirmed_findings": 7,
-    "source_missing_auth": "Now reproduced in both creators; red review pending; no product fix applied"
+    "source_missing_auth": "Two concrete missing/unreadable resurrection paths fixed and current unified formal reviews registered; in-flight cancellation and other seven-finding subdomains remain pending."
+  },
+  "source_authorization_fix": {
+    "status": "passed_scoped_current_source",
+    "evidence": "refresh-authorization-combined-development.json",
+    "product_sha256": "42f0ac5f55d295907bc0ce817a1263dc02b5d99b351ab17ec1c0f3e16ddebfb9",
+    "formal_reviews_registered": true,
+    "scope": "Explicit refresh missing-member and actual POSIX unreadable-member authorization resurrection; not in-flight cancellation/full SC8."
   }
 }

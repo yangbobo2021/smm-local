@@ -1,0 +1,129 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "requirement": "R008",
+  "scene": "SC8",
+  "status": "passed_scoped",
+  "product_base_commit": "341b38913789b6180f4b8ffcdb03ea8463558cf8",
+  "product_files": {
+    "src/smm_local/documents.py": "42f0ac5f55d295907bc0ce817a1263dc02b5d99b351ab17ec1c0f3e16ddebfb9"
+  },
+  "tests": {
+    "tests/test_document_formats_missing_auth.py": "612c16e89439c33c266e9ca6d978614b770881c65ec4a0eafd5c4022c701c477",
+    "tests/test_document_formats_unreadable_auth.py": "8749fb47daf2c2c87c1944a0ed3465c3c66af34b0234897943719436ec9038a6"
+  },
+  "design": {
+    "request_id": "design-sc8-refresh-authorization-combined-v1",
+    "cases": [
+      "TC-008-refresh-missing-auth",
+      "TC-008-refresh-unreadable-auth"
+    ],
+    "assigned_checks": 6,
+    "other_lifecycle_gaps": [
+      "remaining-first-capture",
+      "remaining-web-replace",
+      "remaining-new-file-processing",
+      "remaining-other-lifecycle",
+      "remaining-stale-and-budget"
+    ]
+  },
+  "candidate": {
+    "request_id": "debug-refresh-authorization-combined-v1",
+    "case_passes": {
+      "TC-008-refresh-missing-auth": {
+        "passed": 2,
+        "seconds": 18.98
+      },
+      "TC-008-refresh-unreadable-auth": {
+        "passed": 2,
+        "seconds": 18.82
+      }
+    },
+    "review": "review-refresh-authorization-combined-design-v1",
+    "review_status": "passed",
+    "review_opinion_sha256": "e0b1a29e0d376c42b99cd83769307ceb35dc5924e0833ae3a092dbef314a2b47"
+  },
+  "formal": {
+    "request_id": "execute-refresh-authorization-combined-v1",
+    "result_sha256": "3198d42b4de42e5c2926003604b3746bfe702102ce7396d14c4aeba3b05ede2b",
+    "case_passes": {
+      "TC-008-refresh-missing-auth": {
+        "passed": 2,
+        "seconds": 19.77,
+        "exit_code": 0
+      },
+      "TC-008-refresh-unreadable-auth": {
+        "passed": 2,
+        "seconds": 20.21,
+        "exit_code": 0
+      }
+    },
+    "artifacts": 1713,
+    "stored_bytes": 16111197,
+    "all_artifact_hashes_verified": true,
+    "review": "review-refresh-authorization-combined-execution-v1",
+    "review_status": "passed",
+    "review_registered": true,
+    "review_opinion_sha256": "f0945d2a88b698c0bf9cd95c41169984d24909f4638bc3e74bb4ef594ee6dd0f"
+  },
+  "tdd_history": {
+    "missing": {
+      "red": "red-refresh-missing-auth-v2",
+      "red_review": "review-refresh-missing-auth-red-v1",
+      "red_status": "expected_failure",
+      "green": "green-refresh-missing-auth-v1",
+      "main_passed": 2,
+      "regression_passed": 12,
+      "independent_green_opinion": "passed",
+      "green_native_registration": "blocked: use the current case design for this test scenario",
+      "reason": "Parent advanced scenario design before registering green opinion. Original blocked record and opinion retained; current unified formal execution is new evidence, not a rewrite.",
+      "test_repairs_used": 1
+    },
+    "unreadable": {
+      "red": "red-refresh-unreadable-auth-v1",
+      "red_review": "review-refresh-unreadable-auth-red-v1",
+      "red_status": "expected_failure",
+      "green": "green-refresh-unreadable-auth-v1",
+      "main_passed": 2,
+      "regression_passed": 15,
+      "regression_seconds": 94.02,
+      "green_review": "review-refresh-unreadable-auth-green-v1",
+      "green_review_registered": true,
+      "green_review_opinion_sha256": "f0e4ebfdffbce52935e267323a17338f081903c224fb56918d384758d45daad7",
+      "test_repairs_used": 0
+    }
+  },
+  "product_change": [
+    "After successful source enumeration, missing members revoke only that source capture authorizations for that document.",
+    "For per-member read/stat/size error, revoke previous captured-byte authorizations. If raw capture completed and subsequent parsing failed, preserve that specifically captured candidate for legitimate saved-byte retry.",
+    "Other continuously valid overlapping source grants remain intact; last lost grant prevents old retry/publish; explicit recapture creates fresh qualification."
+  ],
+  "actual_per_case": {
+    "creators": [
+      "Local",
+      "Hub"
+    ],
+    "source_states": [
+      "ready DOCX",
+      "partial PDF"
+    ],
+    "projects": "ordinary/global each2DOCX+2PDF per creator; two unrelated controls per creator",
+    "main_documents": 16,
+    "control_documents": 4,
+    "full_text_reads": 56,
+    "full_table_reads": 96,
+    "original_info_reads": 56,
+    "actual_original_downloads": 56,
+    "independent_original_bytes": 20,
+    "successful_saved_byte_reprocesses": 16,
+    "rejected_stale_reprocesses": 16,
+    "old_reference_rejections": 288,
+    "forbidden_source_opens_for_query_retry": 0
+  },
+  "evidence_note": "Both TC test bytes unchanged for unified candidate/formal. Dedicated basetemp retains exact synthetic sources for independent review. Missing TC has18 inputs slots because second owner overwrote2 control slots; all20 source originals were independently compared to persistent SHA-named downloads. Unreadable TC keeps20 input files. No evidence renamed or history rewritten.",
+  "remaining": [
+    "In-flight cancellation, configuration/removal stale task matrix and full C1 remain pending.",
+    "Hub refresh control-lock lifetime, snapshot restore set, GC, Web diagnostics, empty unsupported-object classification and CLI help findings remain separate.",
+    "Windows ACL/service paths, full E/H/X, current final clean package/minimum recheck and final PR review remain incomplete."
+  ],
+  "redaction": "Synthetic documents only. Public summary excludes credentials and raw private runtime paths."
+}
