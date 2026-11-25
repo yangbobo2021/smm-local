@@ -143,7 +143,7 @@ smm search "对话词" --scope project --hub-project-id <Hub根ID>
 
 线上本机项目根只使用Hub的一层范围并映射自己稳定项目键；仅本机使用本机关联。范围无法确认时只查所请求本机根；Hub根不可得不猜同号/同名本机项目。已取得合法共同范围后仅查询断线，可保留该范围的本机结果；签名/身份被拒绝则不保留。覆盖区分已查完零条、部分、不可用与旧能力不支持。本机失败仍可返回可用Hub结果，并明确缺失端。引用绑定身份/内容版本/当次连续资格，不能把对话引用、另一端数字ID或新资格代替原引用；合并引用只可回退到当次同版本另一端。Unicode码点和LF行号规则沿006。
 
-**保护冲突与恢复。** 文档保护记录是数据库旁的`<数据库名>.documents-guard.json`及锁文件，不是005的upload guard。备份数据库及管理原始副本`.documents`为一致集，保留既有Hub连接/TLS/凭据；恢复时不能把旧保护文件覆盖当前保护边界。已有`upload prepare-restore`/`hub prepare-restore`输出包含适用文档保护排除项及副本目录，文档正文会停止；Hub还拒绝文档搜索/read。
+**保护冲突与恢复。** 文档保护记录是数据库旁的`<数据库名>.documents-guard.json`及锁文件，不是005的upload guard。备份数据库、已有管理原始副本`.documents`及`.document-snapshots`内的持久原件、处理结果和传输状态为一致集；按输出的`do_not_restore`排除快照目录内的`tasks`、`capacity.lock`和`upload-queue.lock`等运行状态，保留既有Hub连接/TLS/凭据；恢复时不能把旧保护文件覆盖当前保护边界。已有`upload prepare-restore`/`hub prepare-restore`输出包含适用文档保护排除项及副本目录，文档正文会停止；Hub还拒绝文档搜索/read。
 
 Hub维护者查看`hub documents recovery-status`的冲突、影响及不透明state，再执行`hub documents recover --expected-state <刚查看state>`。过期state拒绝；成功建立新document_epoch，使全部旧Hub文档引用/资格永久失效并丢弃暂存，自有来源保留pending。随后自有来源明确refresh，本机项目从sync-status取得KEY/HID/generation重新明确允许。Local保护失配也须对需要的项目重新显式选择，其余旧选择不会自动恢复；若本机版本回退仍冲突，应由维护者明确处理Hub恢复，不能猜版本或覆写新正文。此流程不改变005对话恢复约定或日常对话数据。
 
@@ -368,7 +368,7 @@ smm --db <本机档案> upload prepare-restore
 smm-hub hub --state-dir <实际Hub状态目录> prepare-restore
 ```
 
-随后停止相应服务，恢复一致性备份集，保留输出 `do_not_restore` 中的保护与锁文件，不能用旧备份覆盖它们。数据库包括引用签名材料，配套 Hub 配置/凭据按输出的 `restore_files`/保留清单处理。自管 `serve-hub` 使用同一个实际状态目录。不能把运行中的 SQLite 主文件单独复制当成一致性备份；应停服务或使用 SQLite backup。
+随后停止相应服务及采集、上传、同步任务，恢复一致性备份集。`do_not_restore`列出的当前保护记录不得用旧备份覆盖；其中任务临时目录和运行锁也不从备份恢复。文档持久目录包括已有`.documents`和`.document-snapshots`，不能只恢复数据库或只复制管理原件。数据库包括引用签名材料，配套 Hub 配置/凭据按输出的 `restore_files`/保留清单处理。自管 `serve-hub` 使用同一个实际状态目录。不能把运行中的 SQLite 主文件单独复制当成一致性备份；应停服务或使用 SQLite backup。
 
 重启后先查看差异，查看本身不改变规则：
 

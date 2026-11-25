@@ -168,13 +168,15 @@ class DocumentGuard:
                     "restore_pending": True,
                 },
             )
+        parent=self.db.db_path.resolve().parent
+        snapshot=parent/'.document-snapshots'
+        excluded=[str(self.path),str(self.lock)]
+        if snapshot.exists():
+            # Runtime leases/locks describe stopped processes, not durable data.
+            excluded.extend(str(snapshot/name) for name in ('tasks','capacity.lock','upload-queue.lock'))
         return {
-            "do_not_restore": [str(self.path), str(self.lock)],
-            "restore_files": (
-                [str(self.db.db_path.resolve().parent / ".documents")]
-                if (self.db.db_path.resolve().parent / ".documents").exists()
-                else []
-            ),
+            'do_not_restore':excluded,
+            'restore_files':[str(parent/name) for name in ('.documents','.document-snapshots') if (parent/name).exists()],
         }
 
     def checkpoint(self):

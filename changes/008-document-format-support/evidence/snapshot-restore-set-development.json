@@ -1,0 +1,79 @@
+{
+  "scope": "Scoped development TDD: persistent raw/result restore manifest and consistent-copy/current-fence status; not full archive/service/platform recovery",
+  "base_commit": "c13de611316dcaabe6f75c39550604d95a1ac2ed",
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC11",
+  "case_id": "TC-008-snapshot-restore-set",
+  "test_sha256": "48babaeb208cf0bcc0c1635069eccf1b5b40df0451a9f89add9deb02a4803bc5",
+  "product_sha256": {
+    "src/smm_local/document_protocol.py": "5e65c5a14e3506f54294c9c60e0a3fdc369f260b6e86cd0c3ca1cf4e9ec37d9e",
+    "src/smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2"
+  },
+  "red": {
+    "request": "red-snapshot-restore-set-v3",
+    "result_sha256": "4684b92f3665290b5d0cb9de7af118020c5ad94a312db95fa21bcd75f4b29e86",
+    "failed": 3,
+    "passed": 2,
+    "seconds": 25.38,
+    "review": "review-snapshot-restore-set-red-v1",
+    "review_status": "expected_failure",
+    "review_registered": true
+  },
+  "green": {
+    "request": "green-snapshot-restore-set-v1",
+    "result_sha256": "6f5d5ce554c17cf7c1b2319b496a59a1bc2bd8f78a9f497d3a8fde45ba1fdc3c",
+    "passed": 5,
+    "seconds": 25.98,
+    "regression_passed": 67,
+    "regression_seconds": 156.58,
+    "artifacts_sha_verified": 141,
+    "artifact_bytes": 992070,
+    "review_status": "passed",
+    "review_registered": true,
+    "review": "review-snapshot-restore-set-green-v1",
+    "reviewer_sha256": "98de02deb805cf7f30076c27d6459af2192a00d732014b33dd0ae6eb67d33d6d"
+  },
+  "inputs": {
+    "creators": [
+      "Local imported before Hub configuration and never initialized document sync",
+      "Local initialized document sync",
+      "Hub-owned"
+    ],
+    "projects_per_creator": [
+      "ordinary",
+      "global"
+    ],
+    "per_project": [
+      "ready DOCX",
+      "ready XLSX",
+      "valid scanned PDF captured but failed without OCR configuration"
+    ],
+    "raw_originals": 18,
+    "processed_results": 12,
+    "public_cli_original_downloads": 12
+  },
+  "observed": [
+    "Public prepare-restore includes persistent snapshot directory as well as existing legacy management directory when present",
+    "Local private no-sync-table state is not omitted",
+    "Current guards plus tasks and runtime locks excluded from restore set",
+    "Actual consistent SQLite backup and include/exclude-based copy to private destination",
+    "All existing raw/result bytes match individually; restored SQLite integrity and captured metadata match",
+    "Current post-prepare guards preserved and restored status stays conflict",
+    "Two old-layout controls do not invent absent snapshot storage"
+  ],
+  "test_history": {
+    "automatic_test_repairs": 2,
+    "preparation_faults_preserved": [
+      "v1 omitted required --reference, before business assertion",
+      "v2 private branch initialized sync before test precondition; other two branches reached missing-directory assertion"
+    ],
+    "frozen_v3_green_same_test": true
+  },
+  "limitations": [
+    "No existing .documents managed payload fixture or real transfer-chunk/received-projection restore sample in this scoped run",
+    "No active-worker, crash, damaged protection, actual post-restore body-request rejection, full legacy migration or OS service restoration claim",
+    "Current guard conflict status does not mean successful reauthorization or continued old-reference eligibility",
+    "No E/H/X or complete A11 pass; final current-HEAD build and package checks still required"
+  ],
+  "redaction": "Synthetic inputs and isolated archives only. Private original evidence retained in task acceptance store; no credentials/raw user data published."
+}

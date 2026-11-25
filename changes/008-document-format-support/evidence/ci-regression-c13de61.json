@@ -1,0 +1,37 @@
+{
+  "scope": "Development ordinary CI checkpoint; not E/H/X or full installed-format acceptance",
+  "head": "c13de611316dcaabe6f75c39550604d95a1ac2ed",
+  "run": 45689519175,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45689519175",
+  "platforms": [
+    {
+      "platform": "macos-15",
+      "passed": 439,
+      "skipped": 56,
+      "failed": 0,
+      "zip_sha256": "2da9207787576a97032ca46f984dcaeeffbc2577bcb06ca6bbaf6703dc0e291a",
+      "xml_sha256": "f97fcc1bf95f6bd4cf7ed5fab2a1d365b12ea9b31f6a89d1b792c95751dfd715",
+      "official_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "passed": 439,
+      "skipped": 56,
+      "failed": 0,
+      "zip_sha256": "544c0888b94990e4bd17533ae4fc936930c83e376a8aba4468962393fd57bc16",
+      "xml_sha256": "f7aa6cc3c6513bab9d0b6ab8f33391f04780ff8c2dcdd924ccfa319b54ac51f4",
+      "official_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  ],
+  "windows": {
+    "status": "in_progress_at_capture",
+    "retained_observer_gap": true
+  },
+  "limitations": [
+    "Heavy local assets, real browser, minimum-installed and controlled content-worker tests are skipped without explicit fixture assets; ordinary CI passes do not fill those acceptance gaps.",
+    "Restore-manifest tests are local uncommitted work after this exact checkpoint."
+  ],
+  "redaction": "Synthetic inputs only. No tokens or private evidence published."
+}
