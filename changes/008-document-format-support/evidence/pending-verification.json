@@ -99,5 +99,18 @@
   "documentation": {
     "readme_and_trial_guide": "Updated for development builds, format limits and creator-owned processing; discovery still requires PR review"
   },
-  "redaction": "Synthetic documents only. Public summaries contain digests/status and no credentials or raw private evidence."
+  "redaction": "Synthetic documents only. Public summaries contain digests/status and no credentials or raw private evidence.",
+  "current_head_minimum_macos": {
+    "product_commit": "366931e78a72f55d5bbfeb28e3193997e5ab75f5",
+    "status": "passed_scoped",
+    "evidence": "minimum-installed-macos-clean-366931e.json",
+    "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
+  },
+  "pr_review": {
+    "status": "needs_revision",
+    "evidence": "pr43-review-v1.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7171319505",
+    "confirmed_findings": 7,
+    "source_missing_auth": "Now reproduced in both creators; red review pending; no product fix applied"
+  }
 }
