@@ -1,0 +1,26 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC9",
+  "case_id": "TC-008-reference-web",
+  "status": "main_failed_test_repair_awaiting_maintainer",
+  "run": "green-web-document-views-v1",
+  "result_sha256": "f097df2a538ebe13b47b1e14b6a8b9032419ac651711b7c903fc6af92483a4a4",
+  "main": {
+    "exit_code": 1,
+    "summary": "2 failed in 47.05s",
+    "local": "New nested section hidden by existing global tab CSS; product changed to div after this run.",
+    "hub": "Playwright Response.status_code attribute does not exist; expected 400 check needs Response.status. One-line test patch not applied."
+  },
+  "regression": {
+    "exit_code": 0,
+    "summary": "39 passed in 57.49s"
+  },
+  "pending_patch": {
+    "name": "web-read-response-status/fix.patch",
+    "sha256": "97c2ad05084847cda37fce6f541006a12517cd92ce74680e0db261c87b62f695",
+    "applied": false,
+    "note": "Git path headers normalized; same one-line test correction. Not applied."
+  },
+  "scope": "Actual browser text/table/original A case has no passing delivery conclusion. Separate blank-library TC independently passed at its frozen source. Full SC9 and SC1 retained gaps remain separate.",
+  "redaction": "Synthetic inputs only. Absolute runtime paths, authentication headers and signed references omitted."
+}

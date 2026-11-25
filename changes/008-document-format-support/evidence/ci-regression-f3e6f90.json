@@ -1,0 +1,267 @@
+{
+  "kind": "ordinary_ci_regression_not_platform_delivery",
+  "run_id": 45577974995,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45577974995",
+  "source": "f3e6f904881d24ee54990b1112730adb6eec5b41",
+  "conclusion": "failure",
+  "recovered_verified": true,
+  "platforms": [
+    {
+      "platform": "tests-macos-15",
+      "artifact_id": 15006336658,
+      "archive_sha256": "cde830c8adb36fd27c1d82a1434b9332f0fb63aaeac7c8778092f6541e39149b",
+      "bytes": 11013,
+      "tests": 443,
+      "passed": 415,
+      "skipped": 28,
+      "failed": 0,
+      "management_cases": [
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_management_frozen_oracle_detects_fts_only_change",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[local]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[hub]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[local]",
+          "status": "skipped"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[hub]",
+          "status": "skipped"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "platform": "tests-ubuntu-24.04",
+      "artifact_id": 15006210142,
+      "archive_sha256": "ed51828c7823ef851a2d14fa48db5abfa7c29c43caa20f8978947ef660b3db15",
+      "bytes": 10800,
+      "tests": 443,
+      "passed": 415,
+      "skipped": 28,
+      "failed": 0,
+      "management_cases": [
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_management_frozen_oracle_detects_fts_only_change",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[local]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[hub]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[local]",
+          "status": "skipped"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[hub]",
+          "status": "skipped"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "platform": "tests-windows-2022",
+      "artifact_id": 15006897523,
+      "archive_sha256": "779453d0297d3858eddac9cfb6103a33dac7737ec1330d11f115937b41522798",
+      "bytes": 21452,
+      "tests": 443,
+      "passed": 397,
+      "skipped": 27,
+      "failed": 19,
+      "management_cases": [
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_management_frozen_oracle_detects_fts_only_change",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[local]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_documents_reject_small_text_update_bypass[hub]",
+          "status": "passed"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[local]",
+          "status": "skipped"
+        },
+        {
+          "class": "tests.test_document_formats_management",
+          "name": "test_native_terminal_removal_compares_current_publication_and_candidate[hub]",
+          "status": "skipped"
+        }
+      ],
+      "failures": [
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_query_observer_controls",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_empty_source_files_have_exact_originals_without_text_hits",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "classification": "mcp_initialize_closed_cause_unconfirmed",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[docx]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[pdf]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_nested_table_hit_does_not_borrow_parent_coordinates",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_sync",
+          "name": "test_sync_observer_known_positive_and_negative_controls",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[docx-deep_word]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_combined_window_header_cell_and_unicode_quotas",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_table_preview",
+          "name": "test_search_table_header_summaries_have_exact_shared_budget",
+          "classification": "observer_socketpair_false_positive",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+          "classification": "test_path_case_comparison",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[local]",
+          "classification": "test_launcher_pid_identity_mismatch",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+          "classification": "test_launcher_pid_identity_mismatch",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "classification": "test_launcher_pid_identity_mismatch",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "classification": "test_launcher_pid_identity_mismatch",
+          "same_test_identity_as_cb008dd": true,
+          "current_stack_checked": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Ordinary CI only; no E/H/X platform delivery pass.",
+    "Two terminal native-removal cases skip on every OS because explicitly prepared font/OCR assets are absent.",
+    "Windows shared observer repair remains unapproved and unapplied; MCP inner-child cause remains unconfirmed.",
+    "Browser test added after this commit is not part of this CI run."
+  ],
+  "redactions": [
+    "No absolute paths, credentials or raw stack dumps published. Full ZIP and decoded XML observations retained privately."
+  ]
+}

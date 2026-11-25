@@ -1,0 +1,120 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_id": "TC-008-reservation-lengths",
+  "status": "passed_scoped",
+  "source_checkpoint": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+  "candidate_state": "Transfer module and Web assets remain WIP; exact test/module/wheel hashes identify this snapshot. No full final cleanHEAD/package install or whole008 claim.",
+  "scope": "Current macOS source Local/authenticated Hub metadata-only uncommitted raw-byte promises; full256MiB, sameSHA aliases and actual filesystem member enumeration order. No bytes transmitted/committed, no CID/AID/processing created; opaque big inputs are not format-acceptance evidence.",
+  "requirement": "SPEC B9: promised bytes counted before acceptance and same actual bytes not counted twice; an untrusted shorter declaration may not reduce a live larger promise.",
+  "test_sha256": "e6469c2455c8c0714754942ab7ed24d2c2785660aebea85fb05632a2239a7956",
+  "product_file": "src/smm_local/document_transfers.py",
+  "product_sha256": "741e5522a7982e613d8f024acdca750079e30fb979934b977bb0bdc84896cca0",
+  "design": "design-sc10-reservation-lengths-v2",
+  "match": "match-reservation-lengths-v2",
+  "runtime": "runtime-reservation-lengths-green-v1",
+  "red": {
+    "id": "red-reservation-lengths-v2",
+    "main": "2failed2.66s; full bookings followed by shorter sameSHA declaration allowed a distinct source-valid DOCX booking200",
+    "result_sha256": "6acf592f4d1196110422f1ad35f04aa4b4a75c5611cf990585bd5a5499e08f4a",
+    "review": "review-reservation-lengths-red-v1",
+    "status": "expected_failure_registered"
+  },
+  "green": {
+    "id": "green-reservation-lengths-v1",
+    "result_sha256": "b6abdc83e3667a39910d932bfd1465ef1bacd722eb420b236c6108027df77260",
+    "main_passed": 2,
+    "main_seconds": 3.71,
+    "main_exit": 0,
+    "regression_passed": 19,
+    "regression_seconds": 173.91,
+    "regression_exit": 0,
+    "artifact_count": 571,
+    "artifact_stored_bytes": 1415254,
+    "observations": {
+      "api-001": 1,
+      "api-002": 1,
+      "reservation-actual-directory-order": 136,
+      "reservation-http": 296,
+      "native-management-local": 2,
+      "reservation-rejected-unchanged": 28,
+      "reservation-all-complete": 2,
+      "hub-1": 1,
+      "hub-2": 1,
+      "hub-3": 1,
+      "hub-4": 1,
+      "hub-5": 1,
+      "native-management-hub": 2
+    },
+    "http_status_counts": {
+      "200": 260,
+      "400": 36
+    },
+    "review": "review-reservation-lengths-green-v1",
+    "status": "passed_registered"
+  },
+  "actual": {
+    "creators": 2,
+    "project_kinds": [
+      "ordinary",
+      "global"
+    ],
+    "live_unique_promises_per_creator": 14,
+    "booked_bytes_per_creator": 268435456,
+    "source_gzip_inputs": 26,
+    "source_valid_docx_inputs": 4,
+    "wrong_length_alias_targets": 8,
+    "actual_http_requests": 296,
+    "actual_member_order_observations": 136,
+    "rejected_probe_state_pairs": 28,
+    "bytes_received": 0,
+    "document_capture_attempt_job_rows": 0
+  },
+  "fix": "Group by(kind,SHA) using conservative largest promise and subtract realincoming bytes once; reject new knownSHA/length conflicts before creating state; clean this newly-created state on any post-create failure. Existing sameID and sameSHA/sameLength reuse retained.",
+  "packages": {
+    "build_exit": 0,
+    "inspection": [
+      {
+        "file": "smm_local-0.4.0-py3-none-any.whl",
+        "bytes": 192128,
+        "sha256": "6aa30c92c69317faaeeb82079065b1183e59fbfdd0f1c0ea6d7f7e486c70b789",
+        "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+        "static_sha256": "529fce2ff8f91fcf475f104cdeb543d7aa8228a6d22fad192d16cc0628f751c1",
+        "transfers_sha256": "741e5522a7982e613d8f024acdca750079e30fb979934b977bb0bdc84896cca0",
+        "zip_integrity": true,
+        "matches_source": true
+      },
+      {
+        "file": "smm_hub-0.4.0-py3-none-any.whl",
+        "bytes": 177159,
+        "sha256": "d5a46a4de64701082706bf05b667d06a787bb505398647e658fb6cef3ecdeed2",
+        "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+        "static_sha256": "f0d935106319f9b730da12d5b212c2f0695e357cbf57632264042113b2533f60",
+        "transfers_sha256": "741e5522a7982e613d8f024acdca750079e30fb979934b977bb0bdc84896cca0",
+        "zip_integrity": true,
+        "matches_source": true
+      }
+    ],
+    "installed_in_daily_smm": false
+  },
+  "regression_scope": [
+    "Actual stored capacity dedup and exact+1",
+    "Processed result sync with zero receiver processing",
+    "Native raw upload",
+    "Actual process restart/chunk recovery",
+    "Current native update replay"
+  ],
+  "prior_minimum_package_proof": {
+    "path": "minimum-installed-macos-development.json",
+    "applies_to_new_wheels": false,
+    "note": "Earlier exact wheels passed installed Python3.11; these newly built wheels must be verified again with final clean candidate."
+  },
+  "history": "v1 metadata1byte red retained without independent approval. Testrepair1 uses real valid smallDOCX positive and over-limit probe/plausible alias length. Frozen v2 red and green same test bytes; no further test repair.",
+  "remaining": [
+    "24h expiry and release",
+    "Received partial bytes/committed candidate/complete sharedGC",
+    "Concurrent reservation and full resource/safety matrix",
+    "Final threeOS CI and installed new-wheel minimum checks/E/H/X",
+    "RetainedSC1/Windows and pending test-repair decisions"
+  ],
+  "redaction": "Only synthetic inputs, repository-relative IDs, counters and hashes published; no credentials/private keys/user documents/bearer headers."
+}

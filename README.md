@@ -62,7 +62,7 @@ smm documents read --reference <搜索结果的reference>
 
 包含008的源码/构建包增加.docx、.xlsx和.pdf；公开0.4.0及首次安装器不含此功能。创建文档的那一端安装可选的[documents]依赖并负责解析，PDF优先直接读取文字/表格，需要时使用预先部署的本地Tesseract 5（简体中文/英文）。本机允许项目同步后，Hub直接使用同步的原件及处理结果建索引，不重新解析、OCR或调用模型；只接收结果的Hub无需处理依赖。
 
-按[008使用指南](TRIAL_GUIDE.md#wordexcelpdf008开发中尚未发布)在独立环境安装同一次构建的wheel，配置所在端OCR并检查真实执行身份。状态、表格窗口、准确原件下载，以及失败后从最新保存候选重试的命令都有完整示例。网页上传不是已可检索，需区分处理中、ready、partial、failed和空内容成功；引用绑定成套快照及资格，新版成功后重新检索取得新引用。
+按[008使用指南](TRIAL_GUIDE.md#wordexcelpdf008开发中尚未发布)在独立环境安装同一次构建的wheel，配置所在端OCR并检查真实执行身份。状态、表格窗口、准确原件下载，以及失败后从最新保存候选重试的命令都有完整示例。网页检索后可读取提取文本、按命中或指定行列查看表格，并核对/下载采集原件；合法空白文档从项目资料列表下载。网页上传不是已可检索，需区分处理中、ready、partial、failed和空内容成功；引用绑定成套快照及资格，新版成功后重新检索取得新引用。
 
 首版不支持图片、.doc/.xls、宏、公式重算或密码文件解密。Excel公式与文件中缓存值分别展示；PDF表格的强承诺范围为单页水平完整矩形网格、无跨行列合并。具体格式/覆盖边界及尚未完成的验收见[008规格](changes/008-document-format-support/spec.md)、[实施计划](changes/008-document-format-support/plan.md)和[脱敏证据目录](changes/008-document-format-support/evidence/)，不把普通CI成功当作完整平台交付结论。
 

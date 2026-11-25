@@ -1,0 +1,90 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_id": "TC-008-minimum-installed-mac",
+  "status": "passed_scoped",
+  "scope": "macOS normalUID501 Python3.11.11 two genuinely isolated installed Local/Hub[documents] wheels; installed CLI source capture/search/full source text/all tables/original bytes, same oldrefs after synthetic sources removed. Not a daemon/browser/service restart or otherOS/E/H/X.",
+  "source_checkpoint": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+  "candidate_state": "Wheels include uncommitted Web assets; this test and its matched source are WIP. Exact source/test/wheel digests identify the snapshot. Final cleanHEAD rebuild/recheck still required.",
+  "test_sha256": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+  "design": "design-sc11-minimum-installed-mac-v1",
+  "match": "match-minimum-installed-mac-v3",
+  "runtime": "runtime-minimum-installed-mac-v3",
+  "candidate_debug": "debug-minimum-installed-mac-v3",
+  "candidate_review": "review-minimum-installed-mac-design-v3",
+  "execute": {
+    "id": "execute-minimum-installed-mac-v1",
+    "result_sha256": "b55ce87afdcf5d3be751d06199fa3c533d49bd5dd5eaeb33857a85fde962b7c9",
+    "main_exit": 0,
+    "passed": 2,
+    "seconds": 17.24,
+    "artifacts": 352,
+    "artifact_stored_bytes": 2236903,
+    "observations": {
+      "minimum-installed-identity": 2,
+      "minimum-installed-probe-rejection-controls": 2,
+      "minimum-installed-cli": 246,
+      "minimum-installed-read-complete": 32,
+      "minimum-installed-complete": 2
+    }
+  },
+  "execution_review": {
+    "id": "review-minimum-installed-mac-execution-v1",
+    "status": "passed_registered",
+    "covers": [
+      "minimum-installed-mac"
+    ],
+    "opinion_sha256": "8931a712b9ea970754468121c2c071dc75e23051bfe8382653ab9a14360813ad"
+  },
+  "actual": {
+    "original_inputs": 16,
+    "original_downloads": 32,
+    "real_cli_calls": 246,
+    "full_text_reads": 32,
+    "table_reads": 64,
+    "source_cells_read": 304,
+    "original_info_reads": 32,
+    "projects_per_creator": [
+      "ordinary",
+      "global",
+      "unassociated negative"
+    ],
+    "source_files_available_after_capture": false,
+    "per_request_product_cli_new_process": true
+  },
+  "text_contract": "Native source units exact once and no added lexical content; explicit DOCX body/PDF source order checked. Legal separators/part placement/XLSX flat layout free; complete source tables retain structure. OCR only whitespace normalized. Does not add a new serialized-text contract.",
+  "packages": [
+    {
+      "file": "smm_local-0.4.0-py3-none-any.whl",
+      "bytes": 191834,
+      "sha256": "1edba0048f15fb0069a374a8f8e0428057bb3321024d7682c206c156b354110a",
+      "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+      "static_sha256": "529fce2ff8f91fcf475f104cdeb543d7aa8228a6d22fad192d16cc0628f751c1",
+      "zip_integrity": true,
+      "matches_source": true
+    },
+    {
+      "file": "smm_hub-0.4.0-py3-none-any.whl",
+      "bytes": 176860,
+      "sha256": "9e7e75b0e1a0bd9e335c67227425873a4e728fe9f78632a5f46a4dacdbd5bad4",
+      "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+      "static_sha256": "f0d935106319f9b730da12d5b212c2f0695e357cbf57632264042113b2533f60",
+      "zip_integrity": true,
+      "matches_source": true
+    }
+  ],
+  "independence": "Every own package asset and METADATA installed bytes match wheel; positive Python-I/site-packages/prefix/UID identity plus actual wrongSHA/source-import negative controls. Hub isolated environment cannot import smm_local. Source environment generates fixtures only.",
+  "installation_evidence_limit": "Original host command and fulfilled results plus unchanged install logs attribute both offline installs. Supplemental receipt explicitly lacks original per-process PID/start/finish; not fabricated or called a raw timing receipt.",
+  "history": [
+    "debug-v1:both config.revision fields misread as top-level;2failed2.02s before inputs",
+    "repair1:config/project kinds/independent full text and identity;debug-v2 actual2passed25.66s but original native LF/part-order expectation too strict",
+    "repair2:source semantics and legal-layout controls;debug-v3 actual2passed16.76s;fresh candidate+formal reviewers eachpassed"
+  ],
+  "remaining": [
+    "Linux/Windows Python3.11 minimum business",
+    "Final clean candidate source/wheel revalidation",
+    "BaseHub without processing dependencies receiver/E1/H/X",
+    "Legacy/restore guard, full discoverability and whole008 requirements",
+    "RetainedSC1/Windows and pending test repair approvals"
+  ],
+  "redaction": "Synthetic data only; no user documents/credentials/private keys/full bearer headers or host absolute paths published."
+}

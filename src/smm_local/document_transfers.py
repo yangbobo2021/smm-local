@@ -11,8 +11,8 @@ from .document_results import sha
 BLOCK_LIMIT = 1024 * 1024
 
 
-def reservations(snapshots):
-    """Count promised bytes once, including data not received yet."""
+def reservations(snapshots, expected_blobs=None):
+    """Count each promised blob conservatively, including unreceived bytes."""
     directory = snapshots.root / 'transfers'
     if not directory.exists():
         return 0
@@ -39,14 +39,23 @@ def reservations(snapshots):
             if kind not in {'raw', 'results'} or type(item['bytes']) is not int or item['bytes'] < 0:
                 raise ValueError('传输预约无效')
             target = snapshots.blob(kind, item['sha256'])
-            # The immutable target is already included in actual blob accounting.
+            requested = expected_blobs.get(kind) if expected_blobs is not None else None
+            if requested and requested['sha256'] == item['sha256'] and requested['bytes'] != item['bytes']:
+                raise ValueError('同一原件或结果SHA已有不同长度预约')
+            # A shorter untrusted declaration must not overwrite a larger live
+            # promise. Group before subtracting bytes already on disk, so both
+            # accounting and legacy conflicting entries are order-independent.
             if not target.exists():
-                incoming = snapshots.root / kind / ('.incoming-' + item['sha256'])
-                present = incoming.stat().st_size if incoming.exists() else 0
-                if present > item['bytes']:
-                    raise ValueError('传输暂存字节越界')
-                reserved[(kind, item['sha256'])] = item['bytes'] - present
-    return sum(reserved.values())
+                key = (kind, item['sha256'])
+                reserved[key] = max(reserved.get(key, 0), item['bytes'])
+    outstanding = 0
+    for (kind, digest), promised in reserved.items():
+        incoming = snapshots.root / kind / ('.incoming-' + digest)
+        present = incoming.stat().st_size if incoming.exists() else 0
+        if present > promised:
+            raise ValueError('传输暂存字节越界')
+        outstanding += promised - present
+    return outstanding
 
 
 class BlobTransfers:
@@ -119,6 +128,8 @@ class BlobTransfers:
                 if state['binding'] != binding or state['blobs'] != blobs:
                     raise ValueError('同一传输身份不能改变数据')
                 return self._status(transfer_id, saved_folder, state)
+            # Validate shared SHA/length contracts before creating a new state.
+            reservations(self.snapshots, blobs)
             required = 0
             for kind, item in blobs.items():
                 target = self.snapshots.blob(kind, item['sha256'])
@@ -128,12 +139,15 @@ class BlobTransfers:
                     required += item['bytes']
             folder.mkdir(mode=0o700)
             state = {'binding': binding, 'blobs': blobs, 'created_at': time.time(), 'committed': False}
-            atomic_json(folder / 'state.json', state)
-            if self.snapshots._unpublished_bytes() > STAGING_LIMIT:
-                (folder / 'state.json').unlink()
+            try:
+                atomic_json(folder / 'state.json', state)
+                if self.snapshots._unpublished_bytes() > STAGING_LIMIT:
+                    raise ValueError('未发布暂存超过256MiB，拒绝新传输')
+                return self._status(transfer_id, folder, state)
+            except BaseException:
+                (folder / 'state.json').unlink(missing_ok=True)
                 folder.rmdir()
-                raise ValueError('未发布暂存超过256MiB，拒绝新传输')
-            return self._status(transfer_id, folder, state)
+                raise
 
     def binding(self, transfer_id):
         return self._load(transfer_id)[1]['binding']
