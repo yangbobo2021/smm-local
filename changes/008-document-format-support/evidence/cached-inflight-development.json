@@ -1,0 +1,24 @@
+{
+  "acceptance": "AT-SMM-008",
+  "case": "TC-008-cached-inflight",
+  "scope": "macOS development: explicit cached CLI reprocess, ready and partial snapshots remain readable while in flight; no full SC8 or platform/service delivery claim",
+  "target": ".acceptance-local/native-v1/AT-SMM-008/debug/debug-cached-inflight-v3/result.json",
+  "target_sha256": "4ed8e8d40a4ea75f3e3860d8f0cfed608ad864a75332c89ed8e227287558df54",
+  "result": "3 passed",
+  "review": {
+    "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-cached-inflight-v2/result.json",
+    "reviewer": "/root/r008_cached_inflight_review_v2",
+    "status": "passed"
+  },
+  "checks": [
+    "Four real CLI reprocess jobs paused before supervised execution; two ready Word and two partial PDF targets plus unchanged control",
+    "External source files deleted after legal capture; independently checked saved raw bytes and per-document identity, versions, metadata, table structure and coverage",
+    "Read-only queries while processing preserve old complete snapshots and do not open sources, start processing or change document tables",
+    "Actual completed CLI and files each match own new task identity and terminal status; versioned previous references rejected after atomic publication"
+  ],
+  "limits": [
+    "No Web replace or changed-source refresh path",
+    "No failure/cancellation/restart or Hub proof",
+    "Windows observer gap retained by maintainer; not passed"
+  ]
+}
