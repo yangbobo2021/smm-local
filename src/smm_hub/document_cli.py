@@ -13,6 +13,11 @@ def add_arguments(actions, project_actions):
     )
     sub = parser.add_subparsers(dest="document_action", required=True)
     document_processing_arguments(sub)
+    retry=sub.add_parser('reprocess',help='只重处理Hub自有且仍获授权的保存原件；设备投影只读')
+    for flag in ('document-id','capture-id','expected-attempt-id'):
+        retry.add_argument('--'+flag,required=True)
+    for flag in ('expected-version','expected-processing-version'):
+        retry.add_argument('--'+flag,type=int,required=True)
     for action in ("add", "set"):
         p = sub.add_parser(action, help="保存配置为pending；需明确refresh")
         p.add_argument("path" if action == "add" else "source_id")
@@ -62,6 +67,8 @@ def dispatch(state, args):
     if action == "recover":
         return documents.recover(args.expected_state)
     context = documents.context()
+    if action == "reprocess":
+        return documents.reprocess({**context,**{key:getattr(args,key) for key in ("document_id","capture_id","expected_attempt_id","expected_version","expected_processing_version")}})
     if action in ("add", "set"):
         body = {
             **context,

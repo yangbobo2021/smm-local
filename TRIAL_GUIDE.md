@@ -68,7 +68,7 @@ uv pip install --python <新环境的Python> dist/packages/smm_local-0.4.0-py3-n
 macOS/Linux 的解释器是 `.document-preview/bin/python`，Windows 是 `.document-preview\Scripts\python.exe`。以下用 `smm` 表示该环境的入口；需要隔离时，**每条命令**均在子命令之前加 `--db <同一个独立档案>`，MCP 用同环境 `smm-mcp --db <同一档案>`。仅本机文档不需要 Hub，也不需要管理员权限；含007时默认联合查询，明确`--local`保留006范围。Web 沿用本机服务；新档案默认仍配置 Agent 对话来源，若只演示合成文档，可将 `SMM_CODEX_ROOT` 与 `SMM_CLAUDE_ROOT` 指向事先创建的空目录后再启动服务。
 
 1. 打开本机 Web 主导航“文档”。“创建普通本机项目”返回项目 #ID；已有项目也可在“项目”页或 `smm projects` 取得。全局项目通过“项目”页或 `smm project ensure-global` 创建，它与普通项目同级，不自动包含在 A 项目检索中。
-2. 添加 **SMM 服务所在电脑**上当前账户可读的绝对文件或目录路径，不能填写浏览器另一台电脑的路径。来源支持 `.md`、`.markdown`、`.txt`（扩展名不区分大小写），严格 UTF-8，允许 BOM；不支持 Word、Excel、PDF、图片。来源可绑定零个、一或多个现有本机项目；零绑定只参加“全部文档”，共享资料不创建项目关联。CLI 可用 `smm documents add <绝对路径> --project-id ID --project-id ID`。
+2. 添加 **SMM 服务所在电脑**上当前账户可读的绝对文件或目录路径，不能填写浏览器另一台电脑的路径。来源支持 `.md`、`.markdown`、`.txt`（扩展名不区分大小写），严格 UTF-8，允许 BOM；006/007不含 Word、Excel、PDF；包含008的构建见下方新格式章节，图片仍不支持。来源可绑定零个、一或多个现有本机项目；零绑定只参加“全部文档”，共享资料不创建项目关联。CLI 可用 `smm documents add <绝对路径> --project-id ID --project-id ID`。
 3. 保存后为 `pending`，尚未读取正文。点击该来源“刷新”或运行 `smm documents refresh --source-id <来源ID>`；省略 ID 逐来源刷新全部。来源 ID 从页面或 `smm documents sources` 取得。目录默认递归，`--no-recursive` 只看根直接文件。默认排除隐藏及 `.git/.hg/.svn/node_modules/.venv/venv/build/dist` 目录，不跟随链接/junction；可将实际文件或实际子目录另加为来源。
 4. 自定义 `--exclude` 可重复，使用相对根的 POSIX 路径，大小写敏感：`*` 单段、`?` 单字符、`**` 零或多层目录，末尾 `/` 排目录及后代；例如 `--exclude '**/private.txt' --exclude 'cache/'`。禁止绝对路径、`..`、反斜杠。Web“编辑配置”与 `smm documents set <来源ID>` 都是**完整替换**：未选项目/未给名单即清空，未给 `--no-recursive` 即递归；根路径不变，配置版本递增，旧来源资格立即退出，刷新后按新配置生效。
 5. 查看来源 `ready`、`partial`、`failed` 和“文件状态”，CLI 为 `smm documents files --source-id <ID>`。每文件原字节最多 2MiB，每来源最多 1000 个受支持候选及 16MiB 累计（过大文件不计累计，坏编码/NUL/后续不可读仍计）。逐文件错误只让该文件失败；来源枚举或总预算超限整轮失败且旧材料不可查。修正路径/权限/编码或缩小明确纳入范围，再刷新；不要将零命中当作全部已查。`refreshing` 在进程中断后也可通过下一次明确刷新恢复。
@@ -148,6 +148,76 @@ smm search "对话词" --scope project --hub-project-id <Hub根ID>
 Hub维护者查看`hub documents recovery-status`的冲突、影响及不透明state，再执行`hub documents recover --expected-state <刚查看state>`。过期state拒绝；成功建立新document_epoch，使全部旧Hub文档引用/资格永久失效并丢弃暂存，自有来源保留pending。随后自有来源明确refresh，本机项目从sync-status取得KEY/HID/generation重新明确允许。Local保护失配也须对需要的项目重新显式选择，其余旧选择不会自动恢复；若本机版本回退仍冲突，应由维护者明确处理Hub恢复，不能猜版本或覆写新正文。此流程不改变005对话恢复约定或日常对话数据。
 
 维护者的[007复跑入口](scripts/acceptance/README.md#007-项目文档库与hub同步)和[已确认平台要求](changes/007-hub-document-search/plan.md)列明自动用例、实际Web/CLI/stdio、服务身份、证据及尚未覆盖项；普通单测通过不等于所有平台交付通过。
+
+
+## Word、Excel、PDF（008，开发中，尚未发布）
+
+需要包含008的同一次源码构建，公开0.4.0及首次安装器不含本功能。两个预览wheel仍使用0.4.0版本字符串，按提交与wheel摘要区分。使用独立环境、独立档案及Hub状态目录，勿覆盖日常实例。文档解析依赖是可选项；只接收本机已处理结果的Hub不需要安装它们或OCR。
+
+### 安装创建端处理依赖
+
+在源码根目录运行python3 scripts/build_packages.py后，分别建立Local和Hub环境。用实际环境Python安装本轮wheel及documents依赖，例如：
+
+~~~text
+uv venv <Local环境>
+uv pip install --python <Local环境Python> "<绝对路径>/dist/packages/smm_local-0.4.0-py3-none-any.whl[documents]"
+uv venv <Hub环境>
+uv pip install --python <Hub环境Python> "<绝对路径>/dist/packages/smm_hub-0.4.0-py3-none-any.whl[documents]"
+~~~
+
+macOS/Linux环境Python在bin/python，Windows在Scripts/python.exe。下面smm/smm-hub均指对应独立环境的入口；Local所有命令在子命令前加--db <独立档案>。Hub沿用实际服务状态目录，不能配置一个与服务无关的新默认档案。仅接收结果的Hub安装本次基础wheel，不加[documents]。
+
+DOCX、XLSX与有完整文字层的PDF可直接解析，不要求OCR。扫描页或原生页眉加扫描正文的PDF需要在创建端预先部署本地Tesseract 5及eng、chi_sim语言数据。部署好完整可执行程序及其运行依赖后，用绝对路径配置；SMM不会在处理或启动时联网下载组件。
+
+~~~text
+smm --db <独立档案> documents processing-status
+smm --db <独立档案> documents processing-configure --expected-revision <刚看到的revision> --ocr-executable <Tesseract可执行文件绝对路径> --ocr-data-dir <语言数据目录绝对路径> --languages eng+chi_sim
+smm --db <独立档案> documents processing-status --check
+~~~
+
+Hub创建端把命令前缀换为smm-hub hub --state-dir <实际Hub状态目录> documents。配置持久保存，服务重启使用同一档案配置；状态中的最近探测身份应与实际运行任务的账户/服务身份分别核对。过期revision拒绝；配置变更不自动重做已有资料。OCR程序/数据路径只能在所在端CLI配置，网页/API不能指定处理命令。
+
+### 按项目纳入、检索并核对原件
+
+两端的文档与对话共用项目。外部路径沿用documents add/set后明确refresh；网页可在本端项目选择或拖入.docx/.xlsx/.pdf，也可保留旧文本格式。新建同名上传仍是独立资料；更新已有新格式资料须保持格式相同，跨格式改为新纳入。文件不会改写外部源；网页原件和处理结果保存到创建端。
+
+~~~text
+smm --db <独立档案> project create "产品资料"
+smm --db <独立档案> projects
+smm --db <独立档案> documents add <所在机器文件或目录绝对路径> --project-id <本机项目ID>
+smm --db <独立档案> documents refresh --source-id <add返回的来源ID>
+smm --db <独立档案> documents files --source-id <来源ID>
+smm --db <独立档案> documents search "文档中的独特词" --scope project --project-id <本机项目ID>
+smm --db <独立档案> documents read --reference <本次reference>
+smm --db <独立档案> documents read --reference <同一reference> --view original-info
+smm --db <独立档案> documents read --reference <同一reference> --original-output <尚不存在的输出文件绝对路径>
+~~~
+
+Hub使用自己的项目ID及上述Hub前缀；本机检索Hub自有资料仍只有查询/读取权限。查询不重新打开源文件、不解析、不OCR。默认read是提取文本的命中窗口，Unicode码点范围与LF行号沿用旧行为；这不是DOCX/XLSX/PDF原字节。original-info给原SHA、字节数、来源及可用性，original-output下载准确原字节且拒绝覆盖，与start/end或表格参数互斥。无正文命中的合法空白文档可从files/library的original_reference读回原件。
+
+表格命中包含table_context，全文读取列出tables。使用同一引用和返回的table_id：
+
+~~~text
+smm --db <独立档案> documents read --reference <reference> --view table --table-id <table_id> --row-start 1 --row-end 4 --column-start 1 --column-end 3
+~~~
+
+行列从1开始，终点不含；示例取前三行、前两列。返回表头上下文、单元格、合并跨度及原位置，不猜字段含义。正文/OCR/表格纯文本显示。Agent使用list_document_sources、search_documents、read_document，只能读取text/table/original-info；不通过MCP返回base64大原件，也不新增管理或OCR工具。原件交对应CLI或认证HTTP下载。
+
+### 处理状态、失败重试与同步责任
+
+已接收、正在处理、ready、partial、failed、空内容成功有不同含义。partial保留支持范围内已完成的内容，同时列明具体缺页/区域/表格；failed不能解释成已完整搜索且没有内容。OCR文字明确标识识别结果可能有误，首版质量范围为清晰水平简体中文/英文印刷字。PDF优先直接解析已有可用文字，不为完整原生页重复OCR；强承诺表格为单页、水平文字、完整矩形网格且无跨行列合并的原生或清晰扫描表格。
+
+files/library同时展示published_snapshot、latest_attempt、retry_target。首次失败时published为空，V/P均0；网页替换失败保留旧发布，同时显示新失败CID。恢复组件/配置后，从当前retry_target原样取得值，仅在创建端明确重处理：
+
+~~~text
+smm --db <独立档案> documents reprocess --document-id <ID> --capture-id <CID> --expected-attempt-id <AID> --expected-version <V> --expected-processing-version <P>
+~~~
+
+不从旧搜索结果猜CID或版本。新候选失败时只重试新CID；已失效CID/AID或采集授权拒绝。重试读取保存字节，不依赖重新打开源文件；来源被移除、后续刷新确认缺失等授权失效不能用旧缓存复活。成功才成套发布新原件、文本、表格、覆盖和定位；新版本发布后旧引用拒绝，重新检索取得新引用。不提供历史全文入口。
+
+本机项目文档同步仍默认关闭，沿用007按项目选择。允许后上传准确原件及本机已处理结果，Hub直接建索引，不重解析、不OCR。Hub自有项目的处理在Hub完成。项目创建端始终负责添加、删除、更新和重新处理，关联项目不授予另一端管理权。原件上限20MiB，新增格式通过分块上传；资源超限或缺组件要按错误处理，不能把半成品显示为成功。
+
+首版不支持图片文件、.doc/.xls/.docm/.xlsm、宏执行、公式重算或密码文件解密，不调用外部模型。Excel含隐藏/veryHidden区域；公式和文件缓存值分别展示，无缓存标missing，已有缓存新鲜度unknown。DOCX不保证稳定排版页码；图片、图表、SmartArt等不做语义理解。具体支持/限制见[008规格](changes/008-document-format-support/spec.md)，验收范围见[实施计划](changes/008-document-format-support/plan.md)与[脱敏证据](changes/008-document-format-support/evidence/)。普通CI通过不等于各OS/原生服务全部验收完成。
 
 
 ## 多台电脑共用汇总档案

@@ -319,6 +319,27 @@ class HubDocuments:
                     if key in saved:row[key]=saved[key]
             return rows
 
+    def reprocess(self,body):
+        fields=('document_id','capture_id','expected_attempt_id','expected_version','expected_processing_version')
+        if not isinstance(body,dict) or set(body)!={'hub_id','document_epoch',*fields}:raise ValueError('重处理需要当前Hub及资料的完整比较值')
+        for key in fields[:3]:document_identity(body[key],key)
+        for key in fields[3:]:document_integer(body[key],key,minimum=0)
+        with self.guard.hold():
+            self._context(body)
+            with self.db.connect() as c:
+                document=c.execute('SELECT pk FROM documents WHERE id=?',(body['document_id'],)).fetchone()
+                if document is None:raise ValueError('文档不存在')
+                sources=[r[0] for r in c.execute('SELECT source_id FROM document_capture_authorizations WHERE capture_id=? AND active=1',(body['capture_id'],))]
+            if not sources:raise ValueError('当前捕获没有有效采集来源')
+            for sid in sources:self._own_source(sid)
+            token=self.documents.snapshots.retry(*(body[key] for key in fields))
+        # No Hub protection/control lock spans a parser/OCR child process.
+        result=self.documents.snapshots.process(token,token['profile']['format'])
+        with self.guard.hold():
+            self._context(body)
+            for sid in sources:self._own_source(sid)
+            return self.documents._publish_reprocess(token,result)
+
     def native(self, action, body=None, source_id=None):
         body = dict(body or {})
         context = {k: body.pop(k, None) for k in ("hub_id", "document_epoch")}

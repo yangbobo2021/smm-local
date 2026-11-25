@@ -318,6 +318,9 @@ class Documents:
     def reprocess(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
         token=self.snapshots.retry(document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version)
         result=self.snapshots.process(token,token['profile']['format'])
+        return self._publish_reprocess(token,result)
+
+    def _publish_reprocess(self,token,result):
         with self.db.connect() as con:
             con.execute('BEGIN IMMEDIATE');pk=token['document_pk']
             self.snapshots.publish(con,pk,token,result)
@@ -326,14 +329,14 @@ class Documents:
             sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
             con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,text_sha256=?,captured_at=?,publish_seq=? WHERE pk=?',(version,token['raw_sha256'],result['text'],len(result['text']),hashlib.sha256(result['text'].encode('utf-8')).hexdigest(),utcnow(),sequence,pk))
             con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(result['text']))))
-            sources=[r[0] for r in con.execute('SELECT a.source_id FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(capture_id,))]
+            sources=[r[0] for r in con.execute('SELECT a.source_id FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(token['capture_id'],))]
             for sid in sources:
                 con.execute("UPDATE document_memberships SET qualification=qualification+(status!='ready'),status='ready',error=NULL WHERE document_pk=? AND source_id=?",(pk,sid))
                 failures=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status!='ready'",(sid,)).fetchone()[0]
                 status='partial' if failures else 'ready'
                 con.execute('UPDATE document_sources SET status=?,resume_status=? WHERE id=?',(status,status,sid))
             detail=self.snapshots.detail(con,pk)
-        return {'document_id':document_id,**detail}
+        return {'document_id':doc['id'],**detail}
 
     def _scan(self, source):
         root=Path(source['path']);counts={'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0,'ignored_format':0,'ignored_excluded':0,'ignored_links':0}
