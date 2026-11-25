@@ -3,7 +3,7 @@
 from importlib.resources import files
 import hmac, json
 from fastapi import Body, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from ._archive import DocumentGuard
 
 
@@ -128,3 +128,20 @@ def install(app, documents, token):
     @app.post("/v1/documents/read")
     def read(body: dict = Body(...)):
         return invoke(documents.read, body)
+
+    @app.post('/v1/documents/processed/begin')
+    def processed_begin(body: dict = Body(...)):
+        return invoke(documents.processed.begin, body)
+
+    @app.put('/v1/documents/processed/{transfer_id}/{kind}/{offset}')
+    async def processed_part(transfer_id: str, kind: str, offset: int, request: Request):
+        raw = await request.body()
+        return invoke(documents.processed.part, transfer_id, kind, offset, raw, request.headers.get('X-Content-SHA256'))
+
+    @app.post('/v1/documents/processed/commit')
+    def processed_commit(body: dict = Body(...)):
+        return invoke(documents.processed.commit, body)
+
+    @app.post('/v1/documents/original')
+    def original(body: dict = Body(...)):
+        return Response(invoke(documents.original, body), media_type='application/octet-stream', headers={'Cache-Control':'no-store'})

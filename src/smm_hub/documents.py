@@ -86,6 +86,8 @@ class HubDocuments:
             ),
         )
         self.guard.initialize(pristine)
+        from .processed_documents import ProcessedDocuments
+        self.processed = ProcessedDocuments(self)
 
     def context(self):
         with self.db.connect() as c:
@@ -573,7 +575,10 @@ class HubDocuments:
                 "qualification",
             }
             for item in p["files"]:
-                if not isinstance(item, dict) or set(item) != fields:
+                from .processed_documents import PROCESSED_FIELDS
+                processed_item = isinstance(item, dict) and item.get('schema') == 'processed_documents_v1'
+                required_fields = fields | PROCESSED_FIELDS if processed_item else fields
+                if not isinstance(item, dict) or set(item) != required_fields:
                     raise ValueError("清单字段无效")
                 ident = document_identity(item["document_id"])
                 document_integer(item["qualification"])
@@ -582,13 +587,16 @@ class HubDocuments:
                 if ident in seen:
                     raise ValueError("重复文件成员")
                 seen.add(ident)
-                staged = c.execute(
-                    "SELECT payload FROM hub_document_stages WHERE device_id=? AND archive_id=? AND document_id=? AND version=?",
-                    (p["device_id"], p["archive_id"], ident, item["version"]),
-                ).fetchone()
-                if not staged:
-                    raise ValueError("完整清单含未暂存的正文")
-                value = document_validate(json.loads(staged[0]))
+                if processed_item:
+                    value = self.processed.staged(c, p, item)
+                else:
+                    staged = c.execute(
+                        "SELECT payload FROM hub_document_stages WHERE device_id=? AND archive_id=? AND document_id=? AND version=?",
+                        (p["device_id"], p["archive_id"], ident, item["version"]),
+                    ).fetchone()
+                    if not staged:
+                        raise ValueError("完整清单含未暂存的正文")
+                    value = document_validate(json.loads(staged[0]))
                 if (
                     any(
                         value[k] != item[k]
@@ -613,13 +621,18 @@ class HubDocuments:
                 current = c.execute(
                     "SELECT * FROM documents WHERE id=?", (hub_ident,)
                 ).fetchone()
+                if processed_item and current:
+                    current_state = c.execute('SELECT processing_version,result_sha256 FROM document_snapshot_state WHERE document_pk=?', (current['pk'],)).fetchone()
+                    if current['version'] == item['version'] and current_state:
+                        if current_state['processing_version'] > item['processing_version'] or (current_state['processing_version'] == item['processing_version'] and current_state['result_sha256'] != item['result_sha256']):
+                            raise ValueError('旧处理版本或同V/P异结果不得覆盖当前快照')
                 if current and (
                     current["version"] > item["version"]
                     or (
                         current["version"] == item["version"]
                         and (
                             current["sha256"] != item["sha256"]
-                            or current["text_sha256"] != item["text_sha256"]
+                            or (not processed_item and current["text_sha256"] != item["text_sha256"])
                         )
                     )
                 ):
@@ -703,6 +716,8 @@ class HubDocuments:
                             value["display_name"],
                         ),
                     )
+                    if value.get('schema') == 'processed_documents_v1':
+                        self.processed.install(c, pk, value, p)
                     c.execute("DELETE FROM document_fts WHERE rowid=?", (pk,))
                     c.execute(
                         "INSERT INTO document_fts(rowid,text) VALUES(?,?)",
@@ -848,6 +863,7 @@ class HubDocuments:
                         "sha256": hit["sha256"],
                         "text_sha256": hit["text_sha256"],
                         "text_length": hit["text_length"],
+                        **{k:hit[k] for k in ("processing_version","result_sha256") if k in hit},
                     },
                     key,
                 )
@@ -869,7 +885,7 @@ class HubDocuments:
             document_integer(payload.get("text_length"), "引用长度", minimum=0)
             value = self.documents.read(
                 payload.get("reference"),
-                **{k: body[k] for k in ("start", "end") if k in body},
+                **{k: body[k] for k in ("start", "end", "view", "table_id", "row_start", "row_end", "column_start", "column_end") if k in body},
             )
             origin, received = self._origin(value["id"])
             with self.db.connect() as c:
@@ -901,6 +917,15 @@ class HubDocuments:
                 "archive_scope": "hub",
                 **self.context(),
             }
+
+
+    def original(self, body):
+        self.read({**body, 'view': 'original-info'})
+        with self.guard.hold():
+            self._context(body)
+            payload = reference_decode(self.db, body.get('reference'))
+            self._context(payload)
+            return self.documents.original(payload['reference'])
 
     def recovery_status(self):
         with control_lock(self.guard.lock):

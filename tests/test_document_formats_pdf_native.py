@@ -137,6 +137,10 @@ def test_native_pdf_all_pages_grids_without_ocr(tmp_path,monkeypatch):
                     assert len(anchored)==1;assert_bbox(anchored[0]['bbox'],expected['bbox'])
                 assert view['header_context']['role']=='first_content_row'
                 assert {(c['row'],c['column'],c['text']) for c in view['header_context']['cells']}=={(e['row'],e['column'],e['text']) for e in expected_table['cells'] if e['row']==1}
+                headers=view['header_context']['cells']
+                assert len(headers)==len({(c['row'],c['column']) for c in headers})==expected_table['columns']
+                for header in headers:
+                    assert header['location']==cells[(header['row'],header['column'])]['location']
         download=f.client.post('/api/documents/original',json={'reference':hit['reference']})
         assert download.status_code==200 and download.content==item['raw']
         assert hashlib.sha256(download.content).hexdigest()==hit['sha256']

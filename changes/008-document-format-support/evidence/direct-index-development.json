@@ -1,0 +1,54 @@
+{
+  "scope": "macOS creator-to-Hub direct indexing development TDD only",
+  "baseline": "983578435d4f84aac7569294fe6f34d71756b621",
+  "case_id": "TC-008-direct-index",
+  "red": "red-direct-index-first-guard-v1",
+  "red_review": "review-direct-index-first-guard-v1",
+  "green": "green-direct-index-v3",
+  "green_review": "review-direct-index-green-v1",
+  "main_passed": 1,
+  "regression_passed": 89,
+  "documents": {
+    "complete": 8,
+    "partial": 2,
+    "private_not_transferred": 1
+  },
+  "downloaded_originals": 20,
+  "full_table_views": 44,
+  "checks": [
+    "default-off does not disclose document list or bodies",
+    "observer and source deletion precede first policy-triggered sync",
+    "full normalized text, locations, coverage, profile and table structures preserved",
+    "raw and processed versions and SHA preserved",
+    "source-offline exact original download and repeat idempotency",
+    "no parser/OCR/source-read/subprocess/external-connection attempt",
+    "independent Local/Hub wheel member/hash inventory and basic Hub installation"
+  ],
+  "history": [
+    "green-v1: mismatched incoming write/read path; product fixed; regression outer timeout retained and settled",
+    "green-v2: main passed and 88 regression passed; package shared-module list incomplete",
+    "green-v3: package list updated without weakening exact member/hash checks; full relevant regression passed"
+  ],
+  "not_claimed": [
+    "all SC6/R008/E/H/X",
+    "Windows/Linux new-protocol execution",
+    "bad bundle/concurrency/recovery and processing-version matrices",
+    "rollback protection of new snapshot/transfer metadata",
+    "complete uncommitted TTL and budget matrix",
+    "minimum-Python installed format business"
+  ],
+  "files": {
+    "src/smm_local/document_transfers.py": "a2b191760769d3aece1050b7654e3e41cacb7d375d9db300abc1e1ea09dff269",
+    "src/smm_hub/processed_documents.py": "1697d2d132ba7227b20a1cde37e3f6bf897ce8df1d9ea319850ee313d0d248b4",
+    "src/smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+    "src/smm_hub/_archive.py": "15b1e42b02ed1132aee5fee209a3193961cb7945177c3f99d05f997d7678c7a0",
+    "src/smm_local/document_snapshots.py": "9428f4fe81d24b2d363b8ef6047347f7c50b05beeb7e40df0199c70b66aff385",
+    "scripts/build_packages.py": "cee579264b5f6bd4da79e020690aa5fafb0a59f066dbda1d6a9e378d9da80f0e",
+    "src/smm_hub/documents.py": "93fb387b85477ea8b365006901ec0fd57698004148a84fcdfe9d269336438c35",
+    "src/smm_hub/document_api.py": "fba48474a17f645b1a0d9323b80aa66cb02c06efeadeb693c4b1418c071de1f8",
+    "src/smm_hub/hub.py": "e241de939cc31e8486f17fb0f25f327e29e2e65b9f6f96702fbb8537c3170fcd",
+    "src/smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+    "scripts/acceptance/hub_documents_packages.py": "7200d915decf128e8e871f8a82efd273f9178e9f6b7e44d468c5a1b73d758ce2",
+    "tests/test_document_formats_sync.py": "9f41f8e34556151fff810d011c059dbb0fae658cdf07230b2836af39ca5907f4"
+  }
+}

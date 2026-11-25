@@ -378,9 +378,24 @@ class DocumentSync:
                         "relative_path": row["relative_path"],
                         "qualification": row["qualification"],
                     }
-                    path = directory / uuid4().hex
-                    path.write_text(row["text"], encoding="utf-8", newline="\n")
-                    spools[row["id"]] = path
+                    state, processed = self.documents.snapshots.result(c, row['pk'])
+                    if processed is not None:
+                        from .document_results import sha, encode
+                        raw = self.documents.snapshots.original(c, row['pk'])
+                        result_raw = self.documents.snapshots.blob('results', state['result_sha256']).read_bytes()
+                        item.update(schema=processed['schema'], format=processed['format'], raw_bytes=len(raw), result_bytes=len(result_raw),
+                                    processing_version=state['processing_version'], result_sha256=state['result_sha256'],
+                                    profile_sha256=sha(encode(processed['profile'])), capture_id=state['published_capture'])
+                        pair = {}
+                        for kind, data in (('raw', raw), ('results', result_raw)):
+                            path = directory / uuid4().hex
+                            path.write_bytes(data)
+                            pair[kind] = path
+                        spools[row['id']] = pair
+                    else:
+                        path = directory / uuid4().hex
+                        path.write_text(row['text'], encoding='utf-8', newline='\n')
+                        spools[row['id']] = path
                     files.append(item)
                 result.append((source, files, spools))
         return result
@@ -406,6 +421,44 @@ class DocumentSync:
             and row["sequence"] == control["sequence"]
             and row.get("dirty_generation", 0) == dirty_generation
         )
+
+
+    def _stage_processed(self, config, info, key, control, manifest, file, spool, dirty_generation):
+        from .document_results import sha
+        from .document_transfers import BLOCK_LIMIT
+        if 'processed_documents_v1' not in info.get('capabilities', []):
+            raise federation.HubUnavailable('Hub不支持processed_documents_v1；保留待办，不降级为文本或在Hub处理')
+        fields = ('document_id', 'version', 'sha256', 'text_sha256', 'path', 'display_name', 'captured_at', 'captured_by_source_id', 'capture_sequence', 'processing_version', 'result_sha256', 'result_bytes', 'raw_bytes', 'format', 'profile_sha256', 'capture_id', 'schema')
+        begin = {**{name: manifest[name] for name in ('hub_id', 'document_epoch', 'device_id', 'archive_id', 'project_key', 'generation')},
+                 'submission_id': digest([manifest['submission_id'], file['document_id'], file['version'], file['processing_version']])[:32],
+                 'document': {name: file[name] for name in fields}}
+        response = federation._request(config, '/documents/processed/begin', begin)
+        transfer_id = identity(response.get('transfer_id'), '传输ID')
+        if response.get('block_bytes') != BLOCK_LIMIT:
+            raise federation.HubUnavailable('Hub返回不兼容的分块大小')
+        for kind in ('raw', 'results'):
+            offset = response.get('received', {}).get(kind)
+            expected_size = file['raw_bytes'] if kind == 'raw' else file['result_bytes']
+            if type(offset) is not int or not 0 <= offset <= expected_size or (offset != expected_size and offset % BLOCK_LIMIT):
+                raise federation.HubUnavailable('Hub返回无效续传位置')
+            with spool[kind].open('rb') as source:
+                source.seek(offset)
+                while offset < expected_size:
+                    if not self._current(config, info, key, control, dirty_generation):
+                        return False
+                    raw = source.read(min(BLOCK_LIMIT, expected_size - offset))
+                    if not raw:
+                        raise ValueError('本轮冻结同步快照不完整')
+                    received = federation._request_binary(config, '/documents/processed/' + transfer_id + '/' + kind + '/' + str(offset), raw, headers={'X-Content-SHA256': sha(raw)})
+                    offset += len(raw)
+                    if received.get('transfer_id') != transfer_id or received.get('received', {}).get(kind) != offset:
+                        raise federation.HubUnavailable('Hub未确认当前传输块')
+        if not self._current(config, info, key, control, dirty_generation):
+            return False
+        response = federation._request(config, '/documents/processed/commit', {'transfer_id': transfer_id})
+        if response.get('staged') is not True or any(response.get(name) != file[name] for name in ('document_id', 'version', 'processing_version')):
+            raise federation.HubUnavailable('Hub未确认成套原件/处理结果')
+        return True
 
     def _publish(
         self, config, info, key, control, source, files, spools, dirty_generation
@@ -462,6 +515,10 @@ class DocumentSync:
             # guard faults, project deletion and source changes while in flight.
             if not self._current(config, info, key, control, dirty_generation):
                 return False
+            if file.get('schema') == 'processed_documents_v1':
+                if not self._stage_processed(config, info, key, control, manifest, file, spools[file['document_id']], dirty_generation):
+                    return False
+                continue
             body = {
                 k: file[k]
                 for k in (

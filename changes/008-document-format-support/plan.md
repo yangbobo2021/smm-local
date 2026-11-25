@@ -60,6 +60,10 @@ PLAN经确认、PR合并并读回MERGED后，才创建/续接AT-SMM-008和R008�
 
 2026-11-25：混合PDF的真实双网格红灯暴露同宽分离网格被合并的问题；按连续外侧竖边拆分连通网格组件，单行网格同样可识别，profile记录connected-v2。保留原生文字遮罩、同页OCR预算与全部逐格/覆盖/位置要求；两份混合资料的开发证据不替代复杂布局或平台矩阵。CLI读取独立验证真实非零命中范围，再接入text/table/original-info及原件新路径写出，未给start/end时保持引用范围；原件只从已验证快照写出，使用排他创建拒绝覆盖。
 
+2026-11-25：成套同步将纯字节分块/容量预约独立到document_transfers.py，将Hub的纯结果验证/快照安装独立到processed_documents.py；stage/publish仍承担设备来源投影完整发布，网页自有资料管理不借此授权。原件与结果分别冻结SHA/长度并按1MiB分块发送，首份同步前已删除源路径并安装零处理探针；已完成的十份资料、重复读回与独立包证据仅证明分配子路径，不替代坏包/并发/回滚保护/TTL及平台矩阵。Hub基础包增加该标准库共享模块，包验证器同步登记后仍检查完整文件集合与逐文件SHA。整批相关回归工具时限由180秒调至300秒，产品内容任务300秒限制不变；旧超时/失败保留。
+
+2026-11-25：MCP的text/table/original-info以真实stdio独立验证，保留三只读文档工具并转发完整行列参数。原件信息不提供写盘或大段base64。Windows普通CI的12项共享探针误拦已独立定位为标准库socketpair自管道；维护者明确决定保留该缺口、继续其他工作，故未应用候选探针补丁，也不把受影响业务或Windows整格标通过。SPEC平台要求不变，最终按实际失败/未验证状态交付。
+
 ### 修改位置与数据流
 
 | 位置（新文件为拟名） | 修改职责及约束 |
@@ -69,7 +73,7 @@ PLAN经确认、PR合并并读回MERGED后，才创建/续接AT-SMM-008和R008�
 | 新增document_processing.py、document_worker.py、document_formats/ | 配置CAS、单任务调度、所有格式读取/布局/OCR在worker内；标准库纯结果接收不导入这些可选处理库。DOCX部件/嵌套/修订、XLSX所有实际单元格/缓存/日期、PDF原生/混合/扫描分别实现 |
 | 新增document_supervisor.py及平台实现 | 每档案跨进程唯一处理槽位，任务树1GiB、临时256MiB、总300秒及PDF各子预算；独立监督、心跳/租约/终态恢复；Win Job Object纳入worker后才允许其加载解析器，POSIX独立进程组含OCR子进程，监督退出/父进程停止也回收任务树 |
 | src/smm_local/service.py、api.py及Hub lifespan | Web明确提交后后台执行，重启仅续办本端合法已捕获任务；CLI refresh/reprocess可同步等待并报告真实终态。Hub服务已运行时，CLI仍独自采集外部路径、将合法原件交同state服务worker处理并等待；无服务的明确CLI动作才使用前景调度。按需服务有活跃任务时保持生命周期；已运行创建端服务负责其队列，CLI可入队并同步等结果，独立CLI无服务时才启动自己的受监督执行器，跨进程槽位防重；MCP、纯查询及接收投影不得创建处理任务。处理不持DB/控制锁 |
-| document_protocol.py、document_sync.py、src/smm_hub/documents.py、document_api.py | processed_documents_v1能力与接收schema协商、成套原件/结果分块及原子来源发布、幂等/代次/回执；旧TXT协议独立兼容，禁止接收分支进入原件处理器 |
+| document_protocol.py、document_transfers.py、document_sync.py、src/smm_hub/processed_documents.py、documents.py、document_api.py | processed_documents_v1能力与接收schema协商、成套原件/结果分块及原子来源发布、幂等/代次/回执；旧TXT协议独立兼容，禁止接收分支进入原件处理器 |
 | document_search.py、references.py、Hub读逻辑 | 扩展processing_version与双摘要去重/精确路由；旧引用验证分支保留，新增文档定位/table_context/header_context、表格命中默认窗口、原件信息/附件流；所有读取核当次连续资格 |
 | Local cli.py/api.py/mcp_server.py、Hub document_cli.py/document_api.py | 完成SPEC全部新参数/输入取得、状态/配置/reprocess、分块上传和流式原件。MCP只text/table/original-info，无Hub独立MCP，无写盘/管理工具 |
 | 两端static/index.html | 新格式选择/拖入、阶段与失败候选详情、当前比较值、只在创建端管理；表格定位/上下文/窗口、原件下载、依赖配置指引；文本安全渲染，凭据仍仅内存同源头 |

@@ -62,6 +62,34 @@ def _request(config: dict, route: str, payload: dict | None = None) -> dict | li
         raise HubUnavailable("无法连接汇总服务") from exc
 
 
+
+def _request_binary(config, route, raw=None, *, method='PUT', payload=None, headers=None):
+    """Authenticated immutable-blob traffic over the configured Hub transport."""
+    if payload is not None:
+        data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
+        content_type = 'application/json'
+    else:
+        data = raw
+        content_type = 'application/octet-stream'
+    request = Request(config['address'] + API + route, data=data, method=method,
+                      headers={**(headers or {}), 'Authorization': 'Bearer ' + config['token'], 'Content-Type': content_type})
+    try:
+        with LOCAL_HTTP.open(request, timeout=5) as response:
+            body = response.read(20 * 1024 * 1024 + 1)
+            if len(body) > 20 * 1024 * 1024:
+                raise HubUnavailable('Hub二进制响应超过20MiB')
+            if 'json' in response.headers.get('Content-Type', ''):
+                value = json.loads(body)
+                if not isinstance(value, dict):
+                    raise HubUnavailable('Hub分块确认无效')
+                return value
+            return body
+    except HTTPError as exc:
+        raise HubUnavailable('Hub二进制传输返回HTTP ' + str(exc.code), status=exc.code) from exc
+    except (OSError, ValueError, http.client.HTTPException) as exc:
+        raise HubUnavailable('无法连接Hub原件传输') from exc
+
+
 def _hub_info(config: dict) -> dict:
     response = _request(config, "/info")
     if response.get("protocol") != 1 or not response.get("hub_id"):

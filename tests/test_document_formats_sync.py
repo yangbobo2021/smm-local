@@ -83,10 +83,10 @@ def test_creator_results_sync_exactly_without_receiver_processing(w,monkeypatch)
     assert all(not any(token in value for token in protected) for value in sent)
     assert all(item['request_bytes']==0 for item in wire[default_wire:])
     observe('default-off-complete',{'calls':w.calls[default_calls:],'wire':wire[default_wire:],'targets':len(items)+1,'hub_files':[]})
-    w.policy(project,True);w.policy(private_project,False)
     attempts=install_sync_observer(monkeypatch)
     source_reads=deny_source_reads(monkeypatch,private_path,*[item['path'] for item in items.values()])
     for item in items.values():item['path'].unlink()
+    w.policy(project,True);w.policy(private_project,False)
     synced=w.sync();assert not synced['pending'],synced
     def verify_hub(phase):
         project_record=w.hub_project_for(project);observed_ids=set();origin_ids=set();all_ids=set()

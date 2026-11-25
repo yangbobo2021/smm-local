@@ -1,0 +1,190 @@
+"""Bounded resumable immutable blob transfers; standard-library only."""
+from __future__ import annotations
+import json
+import os
+import stat
+import time
+from pathlib import Path
+from .archive_protocol import atomic_json, control_lock, digest
+from .document_results import sha
+
+BLOCK_LIMIT = 1024 * 1024
+
+
+def reservations(snapshots):
+    """Count promised bytes once, including data not received yet."""
+    directory = snapshots.root / 'transfers'
+    if not directory.exists():
+        return 0
+    if directory.is_symlink():
+        raise ValueError('传输暂存目录不能经过链接')
+    reserved = {}
+    for folder in directory.iterdir():
+        if folder.is_symlink() or not folder.is_dir():
+            raise ValueError('传输暂存成员无效')
+        path = folder / 'state.json'
+        if path.is_symlink():
+            raise ValueError('传输元信息不能经过链接')
+        if not path.exists():
+            # A newly created empty directory carries no body bytes.
+            if any(folder.iterdir()):
+                raise ValueError('传输暂存缺少元信息')
+            continue
+        with path.open('rb') as source:
+            raw = source.read(128 * 1024 + 1)
+        if len(raw) > 128 * 1024:
+            raise ValueError('传输元信息超限')
+        state = json.loads(raw)
+        for kind, item in state['blobs'].items():
+            if kind not in {'raw', 'results'} or type(item['bytes']) is not int or item['bytes'] < 0:
+                raise ValueError('传输预约无效')
+            target = snapshots.blob(kind, item['sha256'])
+            # The immutable target is already included in actual blob accounting.
+            if not target.exists():
+                incoming = snapshots.root / kind / ('.incoming-' + item['sha256'])
+                present = incoming.stat().st_size if incoming.exists() else 0
+                if present > item['bytes']:
+                    raise ValueError('传输暂存字节越界')
+                reserved[(kind, item['sha256'])] = item['bytes'] - present
+    return sum(reserved.values())
+
+
+class BlobTransfers:
+    def __init__(self, snapshots):
+        self.snapshots = snapshots
+
+    def _folder(self, transfer_id):
+        if not isinstance(transfer_id, str) or len(transfer_id) != 32 or any(c not in '0123456789abcdef' for c in transfer_id):
+            raise ValueError('传输身份无效')
+        return self.snapshots._directory('transfers') / transfer_id
+
+    def _load(self, transfer_id):
+        folder = self._folder(transfer_id)
+        if folder.is_symlink():
+            raise ValueError('传输目录不能经过链接')
+        path = folder / 'state.json'
+        if path.is_symlink():
+            raise ValueError('传输状态不能经过链接')
+        with path.open('rb') as source:
+            raw = source.read(128 * 1024 + 1)
+        if len(raw) > 128 * 1024:
+            raise ValueError('传输状态超限')
+        state = json.loads(raw)
+        if not state.get('committed') and time.time() - state['created_at'] >= 24 * 60 * 60:
+            raise ValueError('传输已过期，请用新的提交身份重新传输')
+        return folder, state
+
+    def _read_blob(self, folder, kind, item):
+        target = self.snapshots.blob(kind, item['sha256'])
+        path = target if target.exists() else self.snapshots._directory(kind) / ('.incoming-' + item['sha256'])
+        if path.is_symlink():
+            raise ValueError('传输内容不能经过链接')
+        with path.open('rb') as source:
+            raw = source.read(item['bytes'] + 1)
+        if len(raw) != item['bytes'] or sha(raw) != item['sha256']:
+            raise ValueError('传输内容不完整或摘要错误')
+        return raw
+
+    def _status(self, transfer_id, folder, state):
+        received = {}
+        for kind, item in state['blobs'].items():
+            target = self.snapshots.blob(kind, item['sha256'])
+            part = self.snapshots._directory(kind) / ('.incoming-' + item['sha256'])
+            count = item['bytes'] if target.exists() else (part.stat().st_size if part.exists() else 0)
+            if count > item['bytes']:
+                raise ValueError('传输已收数据越界')
+            received[kind] = count if count == item['bytes'] else count // BLOCK_LIMIT * BLOCK_LIMIT
+        return {'transfer_id': transfer_id, 'block_bytes': BLOCK_LIMIT, 'received': received, 'committed': bool(state.get('committed'))}
+
+    def begin(self, binding, blobs):
+        from .document_snapshots import RAW_LIMIT, STAGING_LIMIT
+        from .document_results import RESULT_LIMIT
+        if set(blobs) != {'raw', 'results'}:
+            raise ValueError('必须成套传输原件和结果')
+        for kind, item in blobs.items():
+            maximum = RAW_LIMIT if kind == 'raw' else RESULT_LIMIT
+            if set(item) != {'bytes', 'sha256'} or type(item['bytes']) is not int or not 0 < item['bytes'] <= maximum:
+                raise ValueError('传输原件/结果长度无效')
+            self.snapshots.blob(kind, item['sha256'])
+        if len(json.dumps(binding, ensure_ascii=False).encode('utf-8')) > 64 * 1024:
+            raise ValueError('传输绑定超限')
+        transfer_id = digest([binding.get(key) for key in ('hub_id', 'document_epoch', 'device_id', 'archive_id', 'project_key', 'generation', 'submission_id')])[:32]
+        folder = self._folder(transfer_id)
+        with control_lock(self.snapshots.root / 'capacity.lock'):
+            if folder.exists():
+                saved_folder, state = self._load(transfer_id)
+                if state['binding'] != binding or state['blobs'] != blobs:
+                    raise ValueError('同一传输身份不能改变数据')
+                return self._status(transfer_id, saved_folder, state)
+            required = 0
+            for kind, item in blobs.items():
+                target = self.snapshots.blob(kind, item['sha256'])
+                if target.exists():
+                    self._read_blob(folder, kind, item)
+                else:
+                    required += item['bytes']
+            folder.mkdir(mode=0o700)
+            state = {'binding': binding, 'blobs': blobs, 'created_at': time.time(), 'committed': False}
+            atomic_json(folder / 'state.json', state)
+            if self.snapshots._unpublished_bytes() > STAGING_LIMIT:
+                (folder / 'state.json').unlink()
+                folder.rmdir()
+                raise ValueError('未发布暂存超过256MiB，拒绝新传输')
+            return self._status(transfer_id, folder, state)
+
+    def binding(self, transfer_id):
+        return self._load(transfer_id)[1]['binding']
+
+    def part(self, transfer_id, kind, offset, raw, expected_sha):
+        if kind not in {'raw', 'results'} or type(offset) is not int or offset < 0 or offset % BLOCK_LIMIT:
+            raise ValueError('传输块类型/起点无效')
+        if not isinstance(raw, bytes) or not 0 < len(raw) <= BLOCK_LIMIT or sha(raw) != expected_sha:
+            raise ValueError('传输块大小或摘要无效')
+        with control_lock(self.snapshots.root / 'capacity.lock'):
+            folder, state = self._load(transfer_id)
+            item = state['blobs'][kind]
+            if offset >= item['bytes'] or len(raw) != min(BLOCK_LIMIT, item['bytes'] - offset):
+                raise ValueError('传输块超出声明范围')
+            target = self.snapshots.blob(kind, item['sha256'])
+            path = target if target.exists() else self.snapshots._directory(kind) / ('.incoming-' + item['sha256'])
+            if path.is_symlink():
+                raise ValueError('传输块不能经过链接')
+            size = path.stat().st_size if path.exists() else 0
+            if offset < size:
+                with path.open('rb') as source:
+                    source.seek(offset)
+                    existing = source.read(len(raw))
+                    if existing != raw[:len(existing)]:
+                        raise ValueError('重复块的数据不一致')
+                if len(existing) < len(raw):
+                    with path.open('ab') as output:
+                        output.write(raw[len(existing):])
+                        output.flush()
+                        os.fsync(output.fileno())
+            elif offset != size or state.get('committed'):
+                raise ValueError('请从当前已收位置继续传输')
+            else:
+                with path.open('ab') as output:
+                    output.write(raw)
+                    output.flush()
+                    os.fsync(output.fileno())
+            return self._status(transfer_id, folder, state)
+
+    def commit(self, transfer_id, validator):
+        with control_lock(self.snapshots.root / 'capacity.lock'):
+            folder, state = self._load(transfer_id)
+            raw = self._read_blob(folder, 'raw', state['blobs']['raw'])
+            result = self._read_blob(folder, 'results', state['blobs']['results'])
+            value = validator(state['binding'], raw, result)
+            for kind, item in state['blobs'].items():
+                target = self.snapshots._directory(kind) / item['sha256']
+                part = self.snapshots._directory(kind) / ('.incoming-' + item['sha256'])
+                if target.exists():
+                    self._read_blob(folder, kind, item)
+                    if part.exists():
+                        part.unlink()
+                else:
+                    os.replace(part, target)
+            state['committed'] = True
+            atomic_json(folder / 'state.json', state)
+            return state['binding'], value

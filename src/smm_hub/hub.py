@@ -204,7 +204,7 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
 
     @app.get("/v1/info")
     def info():
-        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1", "documents-v1"], **documents.context()}
+        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1", "documents-v1", "processed_documents_v1"], "processed_documents": {"schemas":["processed_documents_v1"], "formats":["docx","xlsx","pdf"]}, **documents.context()}
 
     @app.post("/v1/query-scope")
     def query_scope(req: QueryScope):

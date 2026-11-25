@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from typing import Literal
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 from pydantic import StrictInt
@@ -69,7 +70,7 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
 
     @server.tool(annotations=readonly)
     def list_document_sources(hub: bool = False, include_hub: bool = False) -> str:
-        """List explicitly configured Local sources by default. include_hub=true returns both endpoints with coverage and an unavailable reason while preserving Local results. hub=true requests only Hub. No scan or sync. Configure with Web or smm documents; supports UTF-8 Markdown/TXT only."""
+        """List explicitly configured Local sources by default. include_hub=true returns both endpoints with coverage and an unavailable reason while preserving Local results. hub=true requests only Hub. No scan or sync. Configure with Web or smm documents; supports captured Markdown/TXT, Word, Excel and PDF snapshots; optional processing is configured at the creating endpoint."""
         return json.dumps(combined_listing(db, sources=True) if include_hub else hub_sources(db) if hub else documents.sources(), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
@@ -78,9 +79,12 @@ def create_mcp(archive: Archive | None = None) -> FastMCP:
         return json.dumps(document_search(db,query, scope=scope, project_id=project_id, hub_project_id=hub_project_id,limit=limit,local=local), ensure_ascii=False)
 
     @server.tool(annotations=readonly)
-    def read_document(reference: str, start: StrictInt | None = None, end: StrictInt | None = None) -> str:
-        """Read a captured document using its exact search reference. Default is the hit window; optional whole-file Unicode codepoint [start,end) range, max16000. Old versions/qualifications require a new search. No source-file read."""
-        return json.dumps(document_read(db,reference, start=start, end=end), ensure_ascii=False)
+    def read_document(reference: str, start: StrictInt | None = None, end: StrictInt | None = None,
+                      view: Literal['text', 'table', 'original-info'] = 'text', table_id: str | None = None,
+                      row_start: StrictInt | None = None, row_end: StrictInt | None = None,
+                      column_start: StrictInt | None = None, column_end: StrictInt | None = None) -> str:
+        """Read the exact saved snapshot: text uses the signed hit window or Unicode [start,end), max16000; table uses its table_id and optional 1-based exclusive row/column windows with source headers. original-info returns saved original metadata, not bytes or a file-writing action. Old content/processing versions or invalid qualifications require a new search. Never reads the source or runs processing."""
+        return json.dumps(document_read(db,reference, start=start, end=end, view=view, table_id=table_id, row_start=row_start, row_end=row_end, column_start=column_start, column_end=column_end), ensure_ascii=False)
 
     return server
 

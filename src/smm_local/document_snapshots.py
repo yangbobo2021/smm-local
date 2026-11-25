@@ -57,7 +57,8 @@ class Snapshots:
                 state=path.lstat()
                 if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('暂存存储只能包含普通文件')
                 if (kind,path.name) not in published:total+=state.st_size
-        return total
+        from .document_transfers import reservations
+        return total + reservations(self)
     def put(self,kind,raw):
         if kind not in {'raw','results'}:raise ValueError('未知的快照字节类型')
         if len(raw)>(RAW_LIMIT if kind=='raw' else RESULT_LIMIT):raise ValueError('快照原件/结果超过单份上限')

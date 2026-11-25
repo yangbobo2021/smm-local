@@ -1,0 +1,53 @@
+{
+  "scope": "Ordinary source Python3.14 regression and package workflow; not E/H/X or installed Python3.11 business",
+  "run_id": 45508570876,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45508570876",
+  "commit": "983578435d4f84aac7569294fe6f34d71756b621",
+  "platforms": [
+    {
+      "platform": "macos-15",
+      "tests": 419,
+      "failed": 0,
+      "skipped": 23,
+      "passed": 396,
+      "native_pdf_six": true,
+      "cli_four": true
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "tests": 419,
+      "failed": 0,
+      "skipped": 23,
+      "passed": 396,
+      "native_pdf_six": true,
+      "cli_four": true
+    },
+    {
+      "platform": "windows-2022",
+      "tests": 419,
+      "failed": 12,
+      "skipped": 22,
+      "passed": 385,
+      "native_pdf_six": true,
+      "cli_four": true
+    }
+  ],
+  "artifact_ids": {
+    "windows-2022": 14976695149,
+    "macos-15": 14975297214,
+    "ubuntu-24.04": 14973269645
+  },
+  "artifact_sha256": {
+    "windows-2022": "4c26464bfbc1a8e74b59468e7c1786b567bfd31e8b6b0c4c766f75ec50f737fc",
+    "macos-15": "ecd48247e78df69e50b3b0002ce63c4e181e7bb2c892a2039df062f7545c918f",
+    "ubuntu-24.04": "979ad99c2f308dea13bf8abba40f771ce4d82b2638e62d3eda71cfe60b3ec54c"
+  },
+  "windows_failure": "12 first failures at the shared observer rejecting stdlib Windows Proactor socketpair self-pipe; raw ZIP/JUnit/logs independently reviewed, business assertions not passed",
+  "diagnosis_sha256": "1113432a713597ca598253d72003a6aefc5b685235a4c8b854ceee22341cc79f",
+  "not_claimed": [
+    "current uncommitted Hub protocol",
+    "new MCP views",
+    "strict source-header assertion added after this commit",
+    "all-platform delivery"
+  ]
+}
