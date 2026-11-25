@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from importlib.resources import files
 from typing import Callable, Literal
 
-from fastapi import Body, FastAPI, HTTPException, Request
+from fastapi import BackgroundTasks, Body, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field, ConfigDict, StrictInt
 
@@ -20,6 +20,7 @@ from .project_control import change as change_project
 from . import references
 from .documents import Documents
 from .managed_documents import ManagedDocuments
+from .managed_document_uploads import ManagedDocumentUploads
 from .document_sync import DocumentSync, schedule as schedule_documents, hub_projects, hub_sources, combined_listing
 from .document_search import search as search_documents,read as read_document,original as original_document
 
@@ -196,6 +197,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     references.material(db)
     documents = Documents(db)
     library = ManagedDocuments(db)
+    native_uploads = ManagedDocumentUploads(library)
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
@@ -391,6 +393,20 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
 
     @app.post('/api/documents/sync')
     def document_sync(body: DocumentSyncRequest):return document_call(DocumentSync(db).sync, **body.model_dump())
+
+    @app.post('/api/documents/uploads')
+    def document_upload_begin(body: dict = Body(...)):
+        return document_call(native_uploads.begin, body)
+
+    @app.put('/api/documents/uploads/{upload_id}/parts/{index}')
+    async def document_upload_part(upload_id: str, index: int, request: Request):
+        return document_call(native_uploads.part, upload_id, index, await request.body(), request.headers.get('X-Chunk-SHA256'))
+
+    @app.post('/api/documents/uploads/{upload_id}/commit')
+    def document_upload_commit(upload_id: str, background_tasks: BackgroundTasks, body: dict = Body(...)):
+        result = document_call(native_uploads.commit, upload_id, body)
+        background_tasks.add_task(native_uploads.run_pending)
+        return result
 
     @app.get('/api/documents/library')
     def library_list(project_id: int | None = None):

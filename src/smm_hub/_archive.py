@@ -17,3 +17,5 @@ from smm_local.document_processing import Configuration as DocumentProcessingCon
 from smm_local.document_snapshots import Snapshots as DocumentSnapshots
 from smm_local.document_transfers import BlobTransfers
 from smm_local.document_results import validate as processed_validate, encode as processed_encode, sha as processed_sha
+
+from smm_local.managed_document_uploads import ManagedDocumentUploads

@@ -90,26 +90,32 @@ class Snapshots:
         return bool(c.execute('SELECT 1 FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(capture_id,)).fetchone())
     def capture(self,source,path,raw,format):
         if len(raw)>RAW_LIMIT:raise ValueError('新格式原文件超过20MiB')
-        raw_sha=self.put('raw',raw);profile={'rendering':'smm-document-text-v1','format':format}
+        raw_sha=self.put('raw',raw)
         with self.db.connect() as c:
             c.execute('BEGIN IMMEDIATE')
-            current=c.execute('SELECT revision,refresh_id FROM document_sources WHERE id=?',(source['id'],)).fetchone()
-            if current is None or current['revision']!=source['revision'] or current['refresh_id']!=source['refresh_id']:raise ValueError('采集来源已变化')
-            key=os.path.normcase(str(path));c.execute('INSERT OR IGNORE INTO documents(id,path_key,path) VALUES(?,?,?)',(uuid4().hex,key,str(path)))
-            doc=c.execute('SELECT pk FROM documents WHERE path_key=?',(key,)).fetchone();pk=doc['pk']
-            state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
-            config=self.config(c);profile['config_revision']=config['revision'];profile_sha=sha(encode(profile))
-            if state and state['current_capture']:
-                old=c.execute('SELECT * FROM document_captures WHERE id=?',(state['current_capture'],)).fetchone()
-                if old and old['raw_sha256']==raw_sha and self.authorized(c,old['id']) and state['published_capture']==old['id'] and state['profile_sha256']==profile_sha:
-                    c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1) ON CONFLICT(capture_id,source_id) DO UPDATE SET revision=excluded.revision,active=1',(old['id'],source['id'],source['revision']))
-                    return {'document_pk':pk,'capture_id':old['id'],'attempt_id':state['latest_attempt'],'raw_sha256':raw_sha,'result_sha256':state['result_sha256'],'profile_sha256':profile_sha,'reused':True,'config':config,'profile':profile}
-            cid=uuid4().hex;aid=uuid4().hex
-            c.execute('INSERT INTO document_captures VALUES(?,?,?,?,?,?,?)',(cid,pk,raw_sha,len(raw),format,source['request_seq'],utcnow()))
-            c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1)',(cid,source['id'],source['revision']))
-            c.execute("INSERT INTO document_processing_attempts VALUES(?,?,?,'pending',NULL,NULL,?,NULL)",(aid,cid,config['revision'],utcnow()))
-            c.execute('INSERT INTO document_snapshot_state(document_pk,current_capture,latest_attempt) VALUES(?,?,?) ON CONFLICT(document_pk) DO UPDATE SET current_capture=excluded.current_capture,latest_attempt=excluded.latest_attempt',(pk,cid,aid))
-            return {'document_pk':pk,'capture_id':cid,'attempt_id':aid,'raw_sha256':raw_sha,'profile_sha256':profile_sha,'reused':False,'config':config,'profile':profile}
+            return self.capture_metadata(c,source,path,raw_sha,len(raw),format)
+    def capture_metadata(self,c,source,path,raw_sha,raw_bytes,format):
+        # The caller has already saved and verified the immutable raw blob.
+        # Creator upload registration can persist source, capture and job in
+        # one short transaction without holding a database lock over body I/O.
+        profile={'rendering':'smm-document-text-v1','format':format}
+        current=c.execute('SELECT revision,refresh_id FROM document_sources WHERE id=?',(source['id'],)).fetchone()
+        if current is None or current['revision']!=source['revision'] or current['refresh_id']!=source['refresh_id']:raise ValueError('采集来源已变化')
+        key=os.path.normcase(str(path));c.execute('INSERT OR IGNORE INTO documents(id,path_key,path) VALUES(?,?,?)',(uuid4().hex,key,str(path)))
+        doc=c.execute('SELECT pk FROM documents WHERE path_key=?',(key,)).fetchone();pk=doc['pk']
+        state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+        config=self.config(c);profile['config_revision']=config['revision'];profile_sha=sha(encode(profile))
+        if state and state['current_capture']:
+            old=c.execute('SELECT * FROM document_captures WHERE id=?',(state['current_capture'],)).fetchone()
+            if old and old['raw_sha256']==raw_sha and self.authorized(c,old['id']) and state['published_capture']==old['id'] and state['profile_sha256']==profile_sha:
+                c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1) ON CONFLICT(capture_id,source_id) DO UPDATE SET revision=excluded.revision,active=1',(old['id'],source['id'],source['revision']))
+                return {'document_pk':pk,'capture_id':old['id'],'attempt_id':state['latest_attempt'],'raw_sha256':raw_sha,'result_sha256':state['result_sha256'],'profile_sha256':profile_sha,'reused':True,'config':config,'profile':profile}
+        cid=uuid4().hex;aid=uuid4().hex
+        c.execute('INSERT INTO document_captures VALUES(?,?,?,?,?,?,?)',(cid,pk,raw_sha,raw_bytes,format,source['request_seq'],utcnow()))
+        c.execute('INSERT INTO document_capture_authorizations VALUES(?,?,?,1)',(cid,source['id'],source['revision']))
+        c.execute("INSERT INTO document_processing_attempts VALUES(?,?,?,'pending',NULL,NULL,?,NULL)",(aid,cid,config['revision'],utcnow()))
+        c.execute('INSERT INTO document_snapshot_state(document_pk,current_capture,latest_attempt) VALUES(?,?,?) ON CONFLICT(document_pk) DO UPDATE SET current_capture=excluded.current_capture,latest_attempt=excluded.latest_attempt',(pk,cid,aid))
+        return {'document_pk':pk,'capture_id':cid,'attempt_id':aid,'raw_sha256':raw_sha,'profile_sha256':profile_sha,'reused':False,'config':config,'profile':profile}
     def process(self,token,format):
         from .document_processing import process
         return process(self,token)

@@ -1,0 +1,39 @@
+{
+  "acceptance": "AT-SMM-008",
+  "case_id": "TC-008-managed-native-upload",
+  "scope": "macOS source-checkout HTTP development subpath: new native document uploads on Local and Hub",
+  "red": "red-managed-native-v3",
+  "red_review": "review-managed-native-red-v2",
+  "green": "green-managed-native-v2",
+  "green_sha256": "0c0bc9b5ccd57e1149c8bfb6eb6063bb659f4d311b85eb07066dc79f6be07d97",
+  "green_review": "review-managed-native-green-v1",
+  "reviewer": "/root/r008_managed_upload_green_review_v1",
+  "result": {
+    "main": "1 passed",
+    "regression": "100 passed in 222.35s",
+    "independent_review": "passed",
+    "originals": 12,
+    "actual_downloads": 24,
+    "source_defined_tables": 32
+  },
+  "coverage": [
+    "Ordinary/global projects and two independent DOCX/XLSX/native PDF originals per creator",
+    "Actual >1MiB Word chunks, incomplete commit rejected, precommit files/library/qualification unchanged",
+    "Each source-defined body and all table cells/spans, own versions/hash and exact original downloaded",
+    "After later same-name uploads, every previous original/result/reference remains correct",
+    "Local document sync remains disabled; Hub files contain only its six own documents",
+    "Independent Local/Hub package build/install regression retains full file/SHA checks including new shared module"
+  ],
+  "history": [
+    "First test startup used wrong existing Hub kind field; corrected before valid red",
+    "First independent red review required unique OR-search anchors, precommit qualification checks and later same-name preservation",
+    "green-managed-native-v1 main passed but regression timed out; retained and settled",
+    "Recovery control isolated diagnostic passed 7.84s; unchanged-source complete rerun passed with faulthandler/duration diagnostics, whose stack output is retained"
+  ],
+  "not_covered": [
+    "Browser selection/drag or upload status UI",
+    "Updates and stale CAS, source authorization revocation and all malformed packets",
+    "Restart/resume/TTL/complete staging and concurrency matrix",
+    "Installed Python 3.11 business, E/H/X or Windows retained observer gap"
+  ]
+}

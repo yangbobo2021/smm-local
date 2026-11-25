@@ -2,7 +2,7 @@
 
 from importlib.resources import files
 import hmac, json
-from fastapi import Body, HTTPException, Request
+from fastapi import BackgroundTasks, Body, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from ._archive import DocumentGuard
 
@@ -68,6 +68,20 @@ def install(app, documents, token):
     @app.get("/v1/documents/files")
     def document_files(source_id: str | None = None):
         return invoke(documents.files, source_id)
+
+    @app.post('/v1/documents/uploads')
+    def upload_begin(body: dict = Body(...)):
+        return invoke(documents.managed_uploads.begin, body)
+
+    @app.put('/v1/documents/uploads/{upload_id}/parts/{index}')
+    async def upload_part(upload_id: str, index: int, request: Request):
+        return invoke(documents.managed_uploads.part, upload_id, index, await request.body(), request.headers.get('X-Chunk-SHA256'))
+
+    @app.post('/v1/documents/uploads/{upload_id}/commit')
+    def upload_commit(upload_id: str, background_tasks: BackgroundTasks, body: dict = Body(...)):
+        result = invoke(documents.managed_uploads.commit, upload_id, body)
+        background_tasks.add_task(documents.managed_uploads.run_pending)
+        return result
 
     @app.get("/v1/documents/library")
     def library(project_id: int | None = None):

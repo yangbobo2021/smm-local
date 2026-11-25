@@ -18,7 +18,7 @@ from .document_protocol import normalize, sha, integer
 from .archive_protocol import digest, control_lock
 
 
-def display_name(name):
+def display_name(name, *, native=False):
     if (
         not isinstance(name, str)
         or not name
@@ -38,7 +38,7 @@ def display_name(name):
         *[f"LPT{i}" for i in range(1, 10)],
     }:
         raise ValueError("文件名不能是系统保留名")
-    if Path(name).suffix.lower() not in {".md", ".markdown", ".txt"}:
+    if Path(name).suffix.lower() not in ({".md", ".markdown", ".txt", ".docx", ".xlsx", ".pdf"} if native else {".md", ".markdown", ".txt"}):
         raise ValueError("首版只支持 .md/.markdown/.txt")
     return name
 
@@ -108,6 +108,8 @@ class ManagedDocuments:
             )
         }
         result["id"] = ident
+        pk = c.execute("SELECT pk FROM documents WHERE id=?", (ident,)).fetchone()[0]
+        result.update(self.documents.snapshots.detail(c, pk))
         result["project_ids"] = [
             r[0]
             for r in c.execute(

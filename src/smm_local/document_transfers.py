@@ -50,8 +50,9 @@ def reservations(snapshots):
 
 
 class BlobTransfers:
-    def __init__(self, snapshots):
+    def __init__(self, snapshots, *, raw_only=False):
         self.snapshots = snapshots
+        self.kinds = {'raw'} if raw_only else {'raw', 'results'}
 
     def _folder(self, transfer_id):
         if not isinstance(transfer_id, str) or len(transfer_id) != 32 or any(c not in '0123456789abcdef' for c in transfer_id):
@@ -70,6 +71,8 @@ class BlobTransfers:
         if len(raw) > 128 * 1024:
             raise ValueError('传输状态超限')
         state = json.loads(raw)
+        if set(state['blobs']) != self.kinds:
+            raise ValueError('传输不属于此原件或成套接收入口')
         if not state.get('committed') and time.time() - state['created_at'] >= 24 * 60 * 60:
             raise ValueError('传输已过期，请用新的提交身份重新传输')
         return folder, state
@@ -99,7 +102,7 @@ class BlobTransfers:
     def begin(self, binding, blobs):
         from .document_snapshots import RAW_LIMIT, STAGING_LIMIT
         from .document_results import RESULT_LIMIT
-        if set(blobs) != {'raw', 'results'}:
+        if set(blobs) != self.kinds:
             raise ValueError('必须成套传输原件和结果')
         for kind, item in blobs.items():
             maximum = RAW_LIMIT if kind == 'raw' else RESULT_LIMIT
@@ -174,7 +177,7 @@ class BlobTransfers:
         with control_lock(self.snapshots.root / 'capacity.lock'):
             folder, state = self._load(transfer_id)
             raw = self._read_blob(folder, 'raw', state['blobs']['raw'])
-            result = self._read_blob(folder, 'results', state['blobs']['results'])
+            result = self._read_blob(folder, 'results', state['blobs']['results']) if 'results' in self.kinds else None
             value = validator(state['binding'], raw, result)
             for kind, item in state['blobs'].items():
                 target = self.snapshots._directory(kind) / item['sha256']

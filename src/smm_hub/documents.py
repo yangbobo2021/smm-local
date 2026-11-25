@@ -88,6 +88,8 @@ class HubDocuments:
         self.guard.initialize(pristine)
         from .processed_documents import ProcessedDocuments
         self.processed = ProcessedDocuments(self)
+        from ._archive import ManagedDocumentUploads
+        self.managed_uploads = ManagedDocumentUploads(self.library, guard=self.guard, context_check=self._context, project_check=self._own_project)
 
     def context(self):
         with self.db.connect() as c:
