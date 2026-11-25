@@ -4,6 +4,7 @@ Nothing in this module watches files, calls federation, or sends model requests.
 Only refresh opens source bodies; search and read operate on one SQLite snapshot.
 """
 from __future__ import annotations
+from contextlib import nullcontext
 
 import hashlib
 import json
@@ -338,7 +339,7 @@ class Documents:
             detail=self.snapshots.detail(con,pk)
         return {'document_id':doc['id'],**detail}
 
-    def _scan(self, source):
+    def _scan(self, source, *, mutation_context=None):
         root=Path(source['path']);counts={'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0,'ignored_format':0,'ignored_excluded':0,'ignored_links':0}
         candidates=[];patterns=[(x.endswith('/'),_glob(x)) for x in source['exclude']]
         if _link(root):
@@ -394,7 +395,10 @@ class Documents:
                 try:
                     if item['path'].suffix.lower() in NEW_SUFFIXES:
                         raw=_read_raw(item['path'],item['stat'])
-                        token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:])
+                        if mutation_context is None:
+                            token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:])
+                        else:
+                            token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:],mutation_context=mutation_context)
                         # Parsing failure still has a legal saved-byte retry.
                         item['captured_id']=token['capture_id']
                         result=self.snapshots.process(token,item['path'].suffix.lower()[1:])
@@ -407,19 +411,22 @@ class Documents:
         if counts.get('processed_result_bytes',0)>128*MIB:return {'error':'来源完整处理结果超过128MiB','counts':counts,'files':[]}
         return {'error':None,'counts':counts,'files':candidates}
 
-    def refresh(self, source_id=None):
+    def refresh(self, source_id=None, *, mutation_context=None):
         ids=[s['id'] for s in self.sources()] if source_id is None else [source_id]
         results=[]
         for ident in ids:
-            with self.db.connect() as con:
-                con.execute('BEGIN IMMEDIATE');source=next((s for s in self._sources(con) if s['id']==ident),None)
-                if source is None:raise ValueError('文档来源不存在')
-                sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
-                source.update(refresh_id=uuid4().hex,request_seq=sequence)
-                con.execute("UPDATE document_sources SET resume_status=CASE WHEN status='refreshing' THEN resume_status ELSE status END,status='refreshing',refresh_id=?,request_seq=?,started_at=? WHERE id=?",(source['refresh_id'],sequence,utcnow(),ident))
-            try:scan=self._scan(source)
+            with (mutation_context() if mutation_context is not None else nullcontext()):
+                with self.db.connect() as con:
+                    con.execute('BEGIN IMMEDIATE');source=next((s for s in self._sources(con) if s['id']==ident),None)
+                    if source is None:raise ValueError('文档来源不存在')
+                    sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
+                    source.update(refresh_id=uuid4().hex,request_seq=sequence)
+                    con.execute("UPDATE document_sources SET resume_status=CASE WHEN status='refreshing' THEN resume_status ELSE status END,status='refreshing',refresh_id=?,request_seq=?,started_at=? WHERE id=?",(source['refresh_id'],sequence,utcnow(),ident))
+            try:
+                scan=self._scan(source) if mutation_context is None else self._scan(source,mutation_context=mutation_context)
             except (OSError,ValueError) as exc:scan={'error':str(exc),'files':[],'counts':{'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0}}
-            results.append(self._publish(source,scan))
+            with (mutation_context() if mutation_context is not None else nullcontext()):
+                results.append(self._publish(source,scan))
         return {'sources':results,'message':'仅明确刷新读取文件；失败原因见来源和文件状态'}
 
     def _publish(self, source, scan):

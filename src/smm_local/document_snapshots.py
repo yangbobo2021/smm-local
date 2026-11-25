@@ -4,6 +4,7 @@ Only explicit creator actions call capture/process. Read/receive paths use the
 stdlib validation and immutable blobs; they never import a format processor.
 """
 from __future__ import annotations
+from contextlib import nullcontext
 import json
 import os
 from pathlib import Path
@@ -88,12 +89,14 @@ class Snapshots:
         return {'revision':row['revision'],**json.loads(row['payload'])}
     def authorized(self,c,capture_id):
         return bool(c.execute('SELECT 1 FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(capture_id,)).fetchone())
-    def capture(self,source,path,raw,format):
+    def capture(self,source,path,raw,format,*,mutation_context=None):
         if len(raw)>RAW_LIMIT:raise ValueError('新格式原文件超过20MiB')
         raw_sha=self.put('raw',raw)
-        with self.db.connect() as c:
-            c.execute('BEGIN IMMEDIATE')
-            return self.capture_metadata(c,source,path,raw_sha,len(raw),format)
+        # Immutable body I/O completes before a creator control lock is held.
+        with (mutation_context() if mutation_context is not None else nullcontext()):
+            with self.db.connect() as c:
+                c.execute('BEGIN IMMEDIATE')
+                return self.capture_metadata(c,source,path,raw_sha,len(raw),format)
     def capture_metadata(self,c,source,path,raw_sha,raw_bytes,format):
         # The caller has already saved and verified the immutable raw blob.
         # Creator upload registration can persist source, capture and job in

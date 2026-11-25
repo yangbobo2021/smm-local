@@ -1,6 +1,7 @@
 """Hub-owned document management and device publication, separate from dialogues."""
 
 from __future__ import annotations
+from contextlib import contextmanager
 import json
 from pathlib import Path
 from uuid import uuid4
@@ -340,9 +341,30 @@ class HubDocuments:
             for sid in sources:self._own_source(sid)
             return self.documents._publish_reprocess(token,result)
 
+    def _refresh_native(self, context, body, source_id):
+        project_id=body.get('project_id');project_key=body.get('project_key')
+        # Freeze the requested source set, without spanning body I/O or workers.
+        with self.guard.hold():
+            self._context(context)
+            if source_id is not None:self._own_source(source_id)
+            if project_id is not None:self._own_project(project_id,project_key)
+            ids=[source_id] if source_id is not None else [s['id'] for s in self.sources(locked=True) if s['origin']['kind']=='hub']
+        def refresh_one(ident):
+            @contextmanager
+            def mutation():
+                with self.guard.hold():
+                    self._context(context);self._own_source(ident)
+                    if project_id is not None:self._own_project(project_id,project_key)
+                    yield
+            return self.documents.refresh(ident,mutation_context=mutation)
+        if source_id is not None:return refresh_one(source_id)
+        return {'sources':[refresh_one(ident) for ident in ids]}
+
     def native(self, action, body=None, source_id=None):
         body = dict(body or {})
         context = {k: body.pop(k, None) for k in ("hub_id", "document_epoch")}
+        if action == "refresh":
+            return self._refresh_native(context,body,source_id)
         with self.guard.hold():
             self._context(context)
             if source_id is not None:
@@ -360,16 +382,6 @@ class HubDocuments:
                 return getattr(self.documents, action)(
                     *([source_id] if action == "set" else []), **body
                 )
-            if action == "refresh":
-                if source_id is not None:
-                    return self.documents.refresh(source_id)
-                return {
-                    "sources": [
-                        self.documents.refresh(s["id"])
-                        for s in self.sources(locked=True)
-                        if s["origin"]["kind"] == "hub"
-                    ]
-                }
             if action == "remove":
                 return self.documents.remove(source_id)
             raise ValueError("未知来源操作")

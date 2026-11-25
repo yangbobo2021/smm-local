@@ -273,3 +273,6 @@ CI用上传/下载artifact传实际producer产物，再在目标OS本机HTTPS调
 
 
 2026-11-26：修复PR #43 F7已确认的Local CLI局部帮助冲突，只改refresh/read说明：旧文本2MiB/来源16MiB与新格式原件20MiB、原件/结果各来源128MiB分清，保持1000候选及现有命令/参数/实际限额不变；指出创建端依赖、OCR configure/check、提取文本与准确原字节导出。第一版实际输出会在命令名称中折行，补ASCII命令前后空格后4级真实help均exit0，未创建虚设DB；现有help及文档CLI回归10通过3.02秒，见evidence/cli-format-help-development.json含实际无敏感help原输出及摘要。低影响文案修订未新增镜像测试；未据此认领完整发现性、Hub帮助建议或平台安装门。
+
+
+2026-11-26：PR #43 F2先关闭已复现的Hub路径refresh跨内容worker持全局guard子域。新增可选内部mutation_context，由Hub冻结来源集合，并在刷新开始、capture_metadata事务、最终_publish各短持经HID/epoch/own-source复核的锁；原文件读取、raw/results不可变写盘及worker锁外，Local无上下文调用和Hub原返回结构保留。没有把全部refresh无保护移出锁。真实HTTP Hub与真实CLI共用专用档案，普通/全局各2ready DOCX+2partial PDF旧控制、各2DOCX/2XLSX/2nativePDF新目标；12实际worker raw-open屏障逐PID/PPID/模块/UID/AID/rawSHA核验，每屏障46条HTTP逐旧ref检索/全文/全表/信息/实际原件及状态在释放前正确返回。初始阻塞红灯1失败13.47秒、释放后同请求恢复，经独立expected_failure；冻结主项1通过18.65秒、48项相关Hub/Local来源/项目/生命周期/重试/在途/两类资格/HubCLI回归通过277.48秒，890原件6,655,575字节经新独立Reviewer passed并登记，见evidence/hub-refresh-availability-development.json。20源/原件逐字及mtime、15进程和端口清理已核，无测试修订。5秒仅屏障观测上限，不新增产品SLA。该子项不代表已实现活跃服务的CLI任务交接；该队列方案、写控制/取消/晚到、完整大批量发布锁时延和E/H/X仍未完成，不把本项称完整F2/SC7交付。

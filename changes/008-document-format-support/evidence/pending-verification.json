@@ -119,5 +119,15 @@
     "product_sha256": "42f0ac5f55d295907bc0ce817a1263dc02b5d99b351ab17ec1c0f3e16ddebfb9",
     "formal_reviews_registered": true,
     "scope": "Explicit refresh missing-member and actual POSIX unreadable-member authorization resurrection; not in-flight cancellation/full SC8."
+  },
+  "hub_refresh_read_fix": {
+    "status": "passed_scoped",
+    "evidence": "hub-refresh-availability-development.json",
+    "scope": "Content worker no longer holds Hub global read/control guard; service CLI handoff, write-control/late matrix and whole SC7 remain incomplete."
+  },
+  "cli_format_help": {
+    "status": "verified_development",
+    "evidence": "cli-format-help-development.json",
+    "scope": "Confirmed Local CLI help conflict only; whole discovery still incomplete."
   }
 }
