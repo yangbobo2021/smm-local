@@ -1,6 +1,6 @@
 """Hub document CLI uses the same checked context and storage as the Web API."""
 
-from ._archive import Archive, DocumentProcessingConfiguration, document_processing_arguments
+from ._archive import Archive, DocumentProcessingConfiguration, document_processing_arguments, write_original_output
 from .documents import HubDocuments
 
 
@@ -34,6 +34,11 @@ def add_arguments(actions, project_actions):
     p.add_argument("--reference", required=True)
     p.add_argument("--start", type=int)
     p.add_argument("--end", type=int)
+    p.add_argument("--view", choices=["text", "table", "original-info"], default="text", help="提取文本、结构表格或准确采集原件信息")
+    p.add_argument("--table-id", help="取search/read中同一快照的table_id")
+    for flag in ("row-start", "row-end", "column-start", "column-end"):
+        p.add_argument("--" + flag, type=int, help="表格窗口：起点1起、终点不含")
+    p.add_argument("--original-output", help="准确采集原件写入本机新文件；拒绝覆盖，与文本范围/表格参数互斥")
     sub.add_parser("recovery-status", help="查看文档保护冲突、影响及不透明state")
     p = sub.add_parser(
         "recover", help="重建文档epoch，使全部旧引用失效；需明确重新采集/选择"
@@ -82,15 +87,15 @@ def dispatch(state, args):
             }
         )
     if action == "read":
-        return documents.read(
-            {
-                **context,
-                "reference": args.reference,
-                **{
-                    k: getattr(args, k)
-                    for k in ("start", "end")
-                    if getattr(args, k) is not None
-                },
-            }
-        )
+        table_options={key:getattr(args,key) for key in ('table_id','row_start','row_end','column_start','column_end') if getattr(args,key) is not None}
+        body={**context,'reference':args.reference}
+        if args.original_output is not None:
+            if args.start is not None or args.end is not None or args.view=='table' or table_options:
+                raise ValueError('原件输出与文本范围或表格读取参数互斥')
+            metadata=documents.read({**body,'view':'original-info'})
+            raw=documents.original(body)
+            output=write_original_output(args.original_output,raw,metadata)
+            return {**metadata,'output_path':str(output)}
+        return documents.read({**body,'view':args.view,**table_options,
+            **{key:getattr(args,key) for key in ('start','end') if getattr(args,key) is not None}})
     raise ValueError("未知文档操作")
