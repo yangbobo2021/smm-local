@@ -136,26 +136,35 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "c13de611316dcaabe6f75c39550604d95a1ac2ed",
-    "evidence": "ci-regression-c13de61.json",
-    "run": 45689519175,
+    "head": "db798eadbf341f06489810d09473398de600c0ff",
+    "evidence": "ci-regression-db798ea.json",
+    "push_run": 45703105385,
+    "pr_run": 45703116764,
     "macos": {
-      "passed": 439,
-      "skipped": 56,
+      "passed": 447,
+      "skipped": 61,
       "failed": 0
     },
     "ubuntu": {
-      "passed": 439,
-      "skipped": 56,
-      "failed": 0
+      "push": {
+        "passed": 446,
+        "skipped": 61,
+        "failed": 1
+      },
+      "pull_request": {
+        "passed": 447,
+        "skipped": 61,
+        "failed": 0
+      },
+      "unresolved": "Hub restart push run observed V=0 instead of published V=1; cause unconfirmed"
     },
     "windows": {
-      "passed": 416,
-      "skipped": 55,
+      "passed": 424,
+      "skipped": 60,
       "failed": 24,
-      "same_failed_test_identity_set_as_5126cd1": true
+      "same_failed_identity_set_as_c13de61": true
     },
-    "limitation": "Before this restore-manifest commit; ordinary CI not E/H/X."
+    "limitation": "Ordinary CI only; separate failed/passed same-head runs preserved. Not E/H/X."
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",

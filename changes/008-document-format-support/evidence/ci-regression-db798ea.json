@@ -1,0 +1,552 @@
+{
+  "scope": "Ordinary CI checkpoint at db798ea; not full C1/E/H/X and not a passing delivery judgment",
+  "head": "db798eadbf341f06489810d09473398de600c0ff",
+  "runs": [
+    {
+      "id": 45703105385,
+      "event": "push",
+      "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45703105385",
+      "platforms": [
+        {
+          "platform": "macos-15",
+          "passed": 447,
+          "skipped": 61,
+          "failed": 0,
+          "zip_sha256": "b314c5c915babecc4e748647f630789e185cf8ebf0250ef22bedd444c2b8b162",
+          "xml_sha256": "ff4c0354aa1a10facdd33589ba3ffde572270017cf30befab64dcb4b8d9a7f9c",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        },
+        {
+          "platform": "windows-2022",
+          "passed": 424,
+          "skipped": 60,
+          "failed": 24,
+          "zip_sha256": "d0102fe40420515e064880d6082c3e779a680a3b8d9358a470688f9b97e48726",
+          "xml_sha256": "80e9270063983be734bbaa008bfbf00205a4491ed446804cfa95daa2a73749be",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [
+            "tests.test_document_formats_empty::test_query_observer_controls",
+            "tests.test_document_formats_empty::test_empty_source_files_have_exact_originals_without_text_hits",
+            "tests.test_document_formats_managed_empty::test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+            "tests.test_document_formats_mcp::test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[docx]",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[pdf]",
+            "tests.test_document_formats_multiple_hits::test_nested_table_hit_does_not_borrow_parent_coordinates",
+            "tests.test_document_formats_sync::test_sync_observer_known_positive_and_negative_controls",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[docx-deep_word]",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+            "tests.test_document_formats_table_context::test_combined_window_header_cell_and_unicode_quotas",
+            "tests.test_document_formats_table_preview::test_search_table_header_summaries_have_exact_shared_budget",
+            "tests.test_document_formats_update_paths::test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+            "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+            "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+            "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+            "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+            "tests.test_document_formats_upload_restart::test_restart_source_audit_has_actual_positive_and_negative_controls",
+            "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[local]",
+            "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[hub]",
+            "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+            "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+          ],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        },
+        {
+          "platform": "ubuntu-24.04",
+          "passed": 446,
+          "skipped": 61,
+          "failed": 1,
+          "zip_sha256": "8e48f72327910fd8d0c0a734df19742d336cdd5a52fb3dcaaabbf7525a924d80",
+          "xml_sha256": "2e4255d61a41ab4c57bf2d2e776dedeff3fcf44ced50ff23ccc9b75d8e84f891",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [
+            "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+          ],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 45703116764,
+      "event": "pull_request",
+      "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45703116764",
+      "platforms": [
+        {
+          "platform": "macos-15",
+          "passed": 447,
+          "skipped": 61,
+          "failed": 0,
+          "zip_sha256": "6be7e2acd06d51ae2b4550e9d9da6c86c630881eb22e3ec36dcc3a1967e2e153",
+          "xml_sha256": "b35b8f217b35b3aa113e0c379f245b1a84dc189e04405eb863acaf9cd6c2871c",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        },
+        {
+          "platform": "windows-2022",
+          "passed": 424,
+          "skipped": 60,
+          "failed": 24,
+          "zip_sha256": "155fb8a406355a85b9fbac1f425d29a04e2700bcf32f2b2c7d248ed84db0bab6",
+          "xml_sha256": "5def6de5a08160d52fc1e793f34aa02ad9cd53e6cdc4888b35fbd43f556e6744",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [
+            "tests.test_document_formats_empty::test_query_observer_controls",
+            "tests.test_document_formats_empty::test_empty_source_files_have_exact_originals_without_text_hits",
+            "tests.test_document_formats_managed_empty::test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+            "tests.test_document_formats_mcp::test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[docx]",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+            "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[pdf]",
+            "tests.test_document_formats_multiple_hits::test_nested_table_hit_does_not_borrow_parent_coordinates",
+            "tests.test_document_formats_sync::test_sync_observer_known_positive_and_negative_controls",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[docx-deep_word]",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+            "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+            "tests.test_document_formats_table_context::test_combined_window_header_cell_and_unicode_quotas",
+            "tests.test_document_formats_table_preview::test_search_table_header_summaries_have_exact_shared_budget",
+            "tests.test_document_formats_update_paths::test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+            "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+            "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+            "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+            "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+            "tests.test_document_formats_upload_restart::test_restart_source_audit_has_actual_positive_and_negative_controls",
+            "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[local]",
+            "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[hub]",
+            "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+            "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+          ],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        },
+        {
+          "platform": "ubuntu-24.04",
+          "passed": 447,
+          "skipped": 61,
+          "failed": 0,
+          "zip_sha256": "045bafc6401095137a005479f590f92468f12687e15f50893a96ab079bf0e457",
+          "xml_sha256": "2ea5840ec9af3ad86f16e72b24ebb3af977d248ea4eb65f77873488adbb8d886",
+          "official_digest_verified": true,
+          "zip_crc_verified": true,
+          "failures": [],
+          "scoped_cases": [
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_frozen_sdk_office_inputs_are_complete_and_independently_checked",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_real_creator_does_not_publish_object_only_files_as_empty_success[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[docx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_object_empty",
+              "name": "test_pure_result_validation_rejects_declared_unsupported_empty_content[xlsx]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-private]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[local-sync]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence[hub]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[local]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_restore_set",
+              "name": "test_legacy_restore_manifest_does_not_invent_snapshot_storage[hub]",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason",
+              "status": "passed"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[local]",
+              "status": "skipped"
+            },
+            {
+              "class": "tests.test_document_formats_web_failures",
+              "name": "test_real_web_details_show_each_saved_failure_reason[hub]",
+              "status": "skipped"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "observations": {
+    "windows": "Both runs retain the same 24 failed test identities as c13de61; none reclassified as passed. Existing observer/identity/MCP gaps remain.",
+    "ubuntu": "push run fails Hub upload-restart at expected ready V/P=1 but actual V=0; same-commit PR run passes. Original push failure retained. No inner worker diagnostic available in these JUnit artifacts; cause unconfirmed, no claim of mere flakiness or product correctness.",
+    "macos": "Both runs have 447 passed / 61 skipped / 0 failed.",
+    "new_object_cases": "Five frozen Office object classification cases passed on all three OS in both ordinary runs; this does not prove platform E/H/X."
+  },
+  "limitations": [
+    "Skipped tests are not acceptance evidence.",
+    "The in-progress raw-only expiry changes/test are not part of this committed checkpoint.",
+    "JUnit originals are private task-owned artifacts; no user source documents, credentials, databases, or real server accessed.",
+    "The ordinary workflow builds and installs wheels only after pytest success. Those subsequent steps were skipped in both Windows jobs and in the failed Ubuntu push job; their JUnit case results do not prove installed-package behavior."
+  ]
+}

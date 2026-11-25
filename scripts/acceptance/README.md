@@ -1,5 +1,36 @@
 # 可选实际安装包验收探针
 
+## 008 Word、Excel、PDF（实施中）
+
+依据 [008 SPEC](../../changes/008-document-format-support/spec.md) 和 [PLAN](../../changes/008-document-format-support/plan.md)；当前结果见 [待验与保留缺口](../../changes/008-document-format-support/evidence/pending-verification.json)。以下是已有工具的复跑入口，尚无一条命令完成全部 C1/E/H/X；006/007 探针或组件成功不能代替 008 交付。
+
+从本次提交的独立工作目录运行，使用任务自有档案、材料及全新证据目录。测试只生成合成文档；不要把日常 SMM/Hub 的数据库、项目目录、凭据或用户文件传入验收。维护者要求不使用家庭 ESXi，平台验证采用本机和 GitHub CI。
+
+普通组件回归和构建：
+
+```text
+uv sync --extra test --extra documents
+uv run python -m pytest -q --junitxml=<本轮证据目录>/test-results.xml
+uv run python scripts/build_packages.py
+```
+
+执行前将环境变量 PYTHONPATH 设为本仓库 src 的绝对路径，将 ACCEPTANCE_EVIDENCE_DIR 设为本轮全新私有目录；Windows 可用 PowerShell 的环境变量语法。每条命令分别核退出码，不能在 pytest 失败后把旧 dist 或 JUnit 当作本轮产物。常规 [Test packages](../../.github/workflows/tests.yml) 使用三 OS 的 Python 3.14；pytest 失败会跳过后续构建/独立安装步骤。跳过 OCR/浏览器用例不代表它们通过。
+
+需要真实 OCR 的用例先显式准备离线材料；只有此准备步骤允许下载锁定来源：
+
+```text
+uv run python scripts/acceptance/document_formats_prepare.py prepare --work <任务材料目录> --output <任务材料清单.json>
+uv run python scripts/acceptance/document_formats_component.py --materials <任务材料清单.json> --work <新组件输出目录> --output <新组件结果.json>
+```
+
+按材料清单将 SMM_008_OCR_EXECUTABLE、SMM_008_OCR_DATA、SMM_008_FONT 分别设为 ocr_executable、ocr_data_dir、font.path 的实际绝对路径，再执行所选 tests/test_document_formats_*.py。测试中仍由实际创建端配置并调用本地 OCR，不用伪引擎冒充成功；普通查询不准备或下载材料。需要网页用例时另装 acceptance 依赖和实际 Chromium，设置 PLAYWRIGHT_BROWSERS_PATH 指向本轮浏览器安装位置。用例自身还有入口/平台前置检查，须逐项核 skip 原因。
+
+[Document formats acceptance](../../.github/workflows/document-formats-acceptance.yml) 的 components 模式只测三 OS、Python 3.11/3.14 的依赖、实际渲染/OCR和离线组件安装。它从源码环境运行，不证明独立 wheel 安装后的完整文档业务、普通身份、系统服务或跨 OS 同步。Office 对象分类夹具固定在 [document-format-objects](../../tests/fixtures/document-format-objects/README.md)；CI 只读冻结原件，生成 SDK 不加入产品运行依赖。
+
+实际最低版本独立安装以 tests/test_document_formats_installed_minimum.py 对应轮次的私有配置、wheel 摘要和源码绑定为准；不能用源码 cwd 的成功代替。E/H/X 仍按 PLAN 逐格准备两端包、入口、真实身份、旧引用读取及清理证据。维护者保留的网页上传和 Windows 观察器缺口、未批准的测试修订继续按证据索引展示，不自动重跑或改判。
+
+CI 原件使用 document_formats_recover_evidence.py 下载并核官方 artifact 的 run/commit/name/ID/长度/SHA；加密业务原件再由 document_formats_evidence.py verify 解密、逐文件核对并实际打开，保留 recovered_verified 收据后才交 Reviewer。两脚本 --help 给出必填参数；普通 tests-<OS> 的 JUnit ZIP 不使用业务加密包的格式。私钥只保存在任务私有目录，不上传、提交或放进公开报告。所有失败、缺图/trace/清理及版本不适用项均保留，原始与脱敏副本分别记 SHA。
+
 ## 007 项目文档库与Hub同步
 
 [007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)当前含36项（28自动TC、8人工项）和A1–A10/E1/E2。[007当前验收证据](../../changes/007-hub-document-search/evidence/README.md)及其逐项索引关联原始材料与独立意见，并区分当前版本和历史记录。原始记录在任务`AT-SMM-007`私有目录；未执行或缺环境项不能计passed，不能用本说明或006历史结果代替007证据。
