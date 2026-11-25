@@ -276,6 +276,8 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         stop.clear()
+        processing_worker = threading.Thread(target=native_uploads.run_pending, name="smm-document-resume", daemon=True)
+        processing_worker.start()
         worker = None
         if auto_sync:
             if sync_on_start:
@@ -290,6 +292,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                 stop.set()
                 pending.clear()
                 job = active
+            processing_worker.join(timeout=2)
             if worker:
                 worker.join(timeout=2)
             if job:

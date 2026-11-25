@@ -77,7 +77,21 @@ class ManagedDocumentUploads:
             self._check(binding)
             with self.db.connect() as c:
                 prior=self.library._retry(c,binding['submission_id'],fingerprint)
-            if prior is not None:return prior
+            if prior is not None:
+                # Retrying a lost commit receipt does not enqueue another task.
+                # Report this submission's current attempt, not its saved
+                # initial pending status from before the original response.
+                with self.db.connect() as c:
+                    attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=? AND capture_id=?',(prior['attempt_id'],prior['capture_id'])).fetchone()
+                    doc=c.execute('SELECT * FROM documents WHERE id=?',(prior['document_id'],)).fetchone()
+                    if attempt is None or doc is None:raise ValueError('上传回执对应的资料或尝试已失效')
+                    state=self.snapshots.detail(c,doc['pk'])
+                    current=self.library._receipt(c,prior['document_id'])
+                    latest=state.get('latest_attempt') or {}
+                    if binding['project_id'] not in current['project_ids'] or latest.get('capture_id')!=prior['capture_id'] or latest.get('attempt_id')!=prior['attempt_id']:
+                        raise ValueError('上传已被新项目、候选或处理尝试取代，请重新查看')
+                return {**prior,'status':attempt['state'],'version':doc['version'],'processing_version':state['processing_version']}
+
             self.library._root()
             directory=self.library.root/uuid4().hex;directory.mkdir(mode=0o700)
             path=directory/('file'+Path(binding['name']).suffix.lower())

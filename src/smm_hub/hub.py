@@ -9,6 +9,8 @@ import heapq
 import hmac
 import json
 from collections import defaultdict
+from contextlib import asynccontextmanager
+import threading
 from typing import Literal
 from uuid import uuid4
 
@@ -194,8 +196,24 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         if not hmac.compare_digest(authorization.encode("utf-8"), ("Bearer " + token).encode("ascii")):
             raise HTTPException(401, "需要有效的汇总服务凭证")
 
+    @asynccontextmanager
+    async def document_lifespan(app):
+        # Existing legal captured jobs resume only on their creator service.
+        # Empty queues do not process or read any source on startup.
+        worker = threading.Thread(target=documents.managed_uploads.run_pending,
+                                  name="smm-hub-document-resume", daemon=True)
+        worker.start()
+        try:
+            if lifespan is None:
+                yield
+            else:
+                async with lifespan(app):
+                    yield
+        finally:
+            worker.join(timeout=2)
+
     app = FastAPI(title="SMM Hub", docs_url=None, redoc_url=None, openapi_url=None,
-                  lifespan=lifespan)
+                  lifespan=document_lifespan)
     install_documents(app,documents,token)
 
     def require_hub(expected: str) -> None:

@@ -1,0 +1,76 @@
+{
+  "source_commit": "0ab11b207855f67f466d9e1c85a7b70f0b7b00a4",
+  "run": {
+    "id": 45528161011,
+    "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45528161011"
+  },
+  "kind": "Ordinary package regression, not formal E/H/X delivery",
+  "platforms": {
+    "tests-ubuntu-24.04": {
+      "artifact_id": 14983423711,
+      "artifact_bytes": 10409,
+      "artifact_sha256": "sha256:27e18abb964984c924596e838a97c79ce072b3ad1af1fcaaaddd56cc47b1343d",
+      "tests": 426,
+      "passed": 402,
+      "skipped": 24,
+      "failed": 0,
+      "new_upload_and_mcp_cases": [
+        {
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "passed": true
+        },
+        {
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "passed": true
+        },
+        {
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "passed": true
+        },
+        {
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "passed": true
+        }
+      ],
+      "raw_zip_and_xml": "downloaded, SHA/length verified, XML opened"
+    },
+    "tests-macos-15": {
+      "artifact_id": 14984390329,
+      "artifact_bytes": 10538,
+      "artifact_sha256": "sha256:963d10bf5372a0c867293de59c7b908ac78a7aa92c93df8c42c0e1ed8a70f7c3",
+      "tests": 426,
+      "passed": 402,
+      "skipped": 24,
+      "failed": 0,
+      "new_upload_and_mcp_cases": [
+        {
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "passed": true
+        },
+        {
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "passed": true
+        },
+        {
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "passed": true
+        },
+        {
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "passed": true
+        }
+      ],
+      "raw_zip_and_xml": "downloaded, SHA/length verified, XML opened"
+    },
+    "tests-windows-2022": {
+      "status": "in_progress_at_recording",
+      "conclusion": "not_yet_available"
+    }
+  },
+  "limits": [
+    "Normal regression uploads JUnit only; does not supply formal original/trace recovery or service identity evidence",
+    "24 skipped cases per completed platform remain skipped; no pass inferred",
+    "This commit predates the subsequent creator startup queue resume changes",
+    "Prior Windows socketpair observer gap is retained by maintainer; its four-file candidate repair is not applied"
+  ]
+}
