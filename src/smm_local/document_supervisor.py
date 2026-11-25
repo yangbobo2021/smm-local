@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import stat
 import subprocess
 import sys
 import time
@@ -12,6 +13,21 @@ from .archive_protocol import atomic_json,control_lock
 RSS_LIMIT=1024*1024*1024
 TEMP_LIMIT=256*1024*1024
 TIME_LIMIT=300
+
+
+def temporary_bytes(root):
+    """Sample live regular files while workers may remove completed temporaries."""
+    root.stat()  # The task directory itself must remain observable.
+    def walk_error(exc):
+        if not isinstance(exc,FileNotFoundError):raise exc
+    used=0
+    for directory,_,files in os.walk(root,followlinks=False,onerror=walk_error):
+        for name in files:
+            try:info=(Path(directory)/name).stat()
+            except FileNotFoundError:continue
+            if stat.S_ISREG(info.st_mode):used+=info.st_size
+    root.stat()
+    return used
 
 
 def identity(process):return {'pid':process.pid,'created':process.create_time()}
@@ -115,7 +131,7 @@ def run(db,request,task_directory):
                         if rss>RSS_LIMIT:raise ValueError('任务进程树RSS超过1GiB')
                     except (psutil.NoSuchProcess,psutil.ZombieProcess):continue
                     except psutil.AccessDenied as exc:raise ValueError('无法建立完整任务树监督') from exc
-                    used=sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
+                    used=temporary_bytes(root)
                     if used>TEMP_LIMIT:raise ValueError('任务临时文件超过256MiB')
                     if time.monotonic()-started>TIME_LIMIT:raise ValueError('任务总处理超过300秒')
                     with db.connect() as c:

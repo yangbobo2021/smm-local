@@ -89,6 +89,9 @@ class LibraryRemove(BaseModel):
     project_key: str | None = None
     expected_version: StrictInt
     expected_revision: StrictInt
+    expected_processing_version: StrictInt | None = None
+    capture_id: str | None = None
+    expected_attempt_id: str | None = None
     submission_id: str | None = None
 
 

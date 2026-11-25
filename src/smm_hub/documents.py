@@ -27,7 +27,7 @@ class HubDocuments:
     def __init__(self, db):
         self.db = db
         self.documents = Documents(db)
-        self.library = ManagedDocuments(db)
+        self.library = ManagedDocuments(db, project_check=self._own_project)
         self.projects = HubProjects(db)
         with db.connect() as c:
             pristine = not c.execute(
@@ -393,7 +393,7 @@ class HubDocuments:
                     raise ValueError("项目不匹配")
             try:
                 return getattr(self.library, action)(
-                    *([ident] if ident is not None else []), **body
+                    *([ident] if ident is not None else []), project_key=key, **body
                 )
             except TypeError as exc:
                 raise ValueError("未知或缺失的文档管理字段") from exc

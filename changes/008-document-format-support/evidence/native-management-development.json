@@ -1,0 +1,194 @@
+{
+  "case_id": "TC-008-native-management-fence",
+  "scene": "SC1",
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "base_commit": "cb008dda5ea43d14a2f3fb89fb0e22fc8f40271a",
+  "status": "development_subcase_independently_passed",
+  "design": "design-sc1-native-management-fence-v4",
+  "red": "red-native-management-fence-v5",
+  "red_review": "review-native-management-fence-red-v3",
+  "green": "green-native-management-fence-v4",
+  "green_review": "review-native-management-fence-green-v2",
+  "test_bindings": {
+    "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+    "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+    "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+    "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+    "tests/document_formats_restart_server.py": "1c670a2d12d8714d6f7caec62889be6d5970f2e59761ce5ca68556e67915ce54",
+    "tests/document_formats_sync_observer.py": "d95fd9920fb4be4cf90533d86ddccb49552842906ca76e6a9251390daea06b5a",
+    "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+    "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+    "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+    "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+    "tests/test_document_formats_managed_empty.py": "4a729350e6b8af2a106ea10f312e3fbc77edf9bf882af401673a2ad2a39e4a15",
+    "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+    "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+    "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+    "tests/test_document_formats_upload_restart.py": "8020ef50728a9d4d7ce976743c21ad918c1a5f42373d21893fca94a5cf2c5cf3",
+    "tests/test_document_formats_uploads.py": "e2837770da0dc1991763e48c65a8aec4a969417382d6db32782c05132280043b",
+    "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545"
+  },
+  "product_bindings": {
+    "src/smm_hub/_archive.py": "b8b134e7148049b92ac8201c32b9da5662300cabdaa87cea8bd75a841ac87f01",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+    "src/smm_hub/document_cli.py": "02ec47302684b6ed4d6490b7eba4a3c5c0f09c61920ad4915f50822a3b449044",
+    "src/smm_hub/documents.py": "df41c82c785369de1930aa1e45b9931f7895ac9f4ecfe1f49162230957b083ec",
+    "src/smm_hub/hub.py": "fdf9c0d0c81b48bd08c2533665204b9b00ddac9c52c2715c3f27f657f4cb3b57",
+    "src/smm_hub/processed_documents.py": "1697d2d132ba7227b20a1cde37e3f6bf897ce8df1d9ea319850ee313d0d248b4",
+    "src/smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "e14887a9e508d9fc5fad8b5a179a6ec3dd5278e696d33cf8617d81d62035abc2",
+    "src/smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+    "src/smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+    "src/smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+    "src/smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+    "src/smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+    "src/smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+    "src/smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+    "src/smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+    "src/smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+    "src/smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+    "src/smm_local/document_processing.py": "c696f9c55605a76e7e9ffc9f88f02511736aae795dbfd9b2a634778b303729cc",
+    "src/smm_local/document_protocol.py": "1659b3c4bb12eec6d6efe925cc2e893d0fa6d6ad5ca12612b3541c0d709b6aef",
+    "src/smm_local/document_results.py": "44fce7371a73e4687fd8603b938a211e48d68bc4f7c577117bd9b944a40673fa",
+    "src/smm_local/document_search.py": "216bbc5c1b6a0f8b32096c72b009d4803d2462bb6a30011c62ed6ae95dd36fa9",
+    "src/smm_local/document_snapshots.py": "c678117aa61ed538bfffb1a07e8568df30877fc9864d4dc8c00a3b0ce3c50880",
+    "src/smm_local/document_supervisor.py": "d9255fb51e1efce7b070d8a493b961199db87c2c91a92a414edadd0c6481bbf7",
+    "src/smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+    "src/smm_local/document_transfers.py": "85db357245366a9ff58b03188b06e6c99a05597ac02e823f99f1228c6ae9d9b0",
+    "src/smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+    "src/smm_local/documents.py": "ee2381b4365cbeceea47c7ce9f97555d59a318d6a13b38183f5cc32ea7c40d5a",
+    "src/smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+    "src/smm_local/managed_document_uploads.py": "1c129657de16003173f9d198ac6939ddd6380250d9d15987128009860522bc1e",
+    "src/smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+    "src/smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960"
+  },
+  "observed": {
+    "main": {
+      "exit_code": 0,
+      "result": "5 passed in 139.83s"
+    },
+    "regression": {
+      "exit_code": 0,
+      "result": "71 passed in 217.31s"
+    },
+    "artifacts": {
+      "files": 6077,
+      "stored_bytes": 13191179,
+      "limit_bytes": 26214400
+    },
+    "http": {
+      "local": {
+        "requests": 2838,
+        "by_status": {
+          "200": 2568,
+          "400": 242,
+          "422": 28
+        },
+        "deletions": 14,
+        "denials": 270
+      },
+      "hub": {
+        "requests": 2861,
+        "by_status": {
+          "200": 2563,
+          "400": 298
+        },
+        "deletions": 14,
+        "denials": 298
+      }
+    },
+    "response_pool": {
+      "requests": 1650,
+      "distinct_full_responses": 170,
+      "decoded_sha_and_length_verified": true
+    }
+  },
+  "actual_observation_excerpts": {
+    "file": "native-management-observations.json",
+    "sha256": "76fce25bb8205c7b7b69daeae0b87f7d5a41d90bf91d59fc5df93fd7e1740fa7",
+    "states": 122,
+    "denials": 568,
+    "successful_deletions": 28
+  },
+  "history": [
+    {
+      "attempt": "green-native-management-fence-v1",
+      "status": "blocked",
+      "main": "1 failed, 4 passed",
+      "regression": "71 passed",
+      "reason": "Valid Hub native deletion rejected; product ownership callback/project-key forwarding repaired."
+    },
+    {
+      "attempt": "green-native-management-fence-v2",
+      "status": "blocked",
+      "main": "5 passed",
+      "reason": "Repeated full GET list evidence exceeded 25MiB; user explicitly authorized one additional evidence-only repair round."
+    },
+    {
+      "attempt": "red-native-management-fence-v5",
+      "status": "red_observed",
+      "main": "4 failed, 1 passed",
+      "reason": "Approved response-pool test bytes reproduced old small-text update bypass; independent expected_failure registered before restoring implementation."
+    },
+    {
+      "attempt": "green-native-management-fence-v3",
+      "status": "blocked",
+      "main": "1 failed, 4 passed",
+      "regression": "71 passed",
+      "reason": "PDF worker cleanup raced with supervisor temporary-file stat. Product-only fix tolerates disappearing files; same management test bytes retained."
+    }
+  ],
+  "temporary_sampling_diagnostic": {
+    "file": ".acceptance-local/008/diagnostics/temp-sampling-v1/probe.py",
+    "sha256": "f019e7d9b75f8125d33a914fa9b27f3edd11a0e2f4612363b534cc6202d0b962",
+    "observed": {
+      "stable_bytes": 10,
+      "concurrent_cleanup_bytes": 10,
+      "removed_before_stat_bytes": 7,
+      "permission_error": "propagated",
+      "missing_task_root": "rejected"
+    },
+    "scope": "Private product diagnostic; not complete resource limits/platform evidence."
+  },
+  "package_build": {
+    "exit_code": 0,
+    "wheels": [
+      {
+        "name": "smm_hub-0.4.0-py3-none-any.whl",
+        "sha256": "218b7b846adf49b6533eacbe854d938f920d3ceb1d6d0d085c402ccae7084945",
+        "bytes": 170595
+      },
+      {
+        "name": "smm_local-0.4.0-py3-none-any.whl",
+        "sha256": "3b9014c8c8754ab58cba309ace8d059ebeb9aaa8915966e1424bef7c0d2fc740",
+        "bytes": 185244
+      }
+    ],
+    "initial_failure": "Default uv executable not on noninteractive PATH; reran identical builder with supported explicit --uv argument.",
+    "scope": "Build only, not independent installation/minimum Python/platform acceptance"
+  },
+  "scope_limits": [
+    "C1 source HTTP terminal management subcase only; no actual browser interaction pass.",
+    "Native ready/partial/empty, first failure V/P0 and replacement failure covered as designed; active cancellation and broader lifecycle remain separate.",
+    "No E/H/X platform delivery pass, no Windows observer repair, no release or daily installation upgrade."
+  ],
+  "redactions": [
+    "Only isolated synthetic test IDs and SHA are published; source paths, opaque read refs, base64 request content, credentials and repeated raw list payloads omitted. Full originals remain in private native artifacts."
+  ],
+  "review_file_sha256": "39d316ed27d54aa9138e0f8f5cf95ed440c67eb5bc362764d6abf96fd9a53bbd",
+  "verified": {
+    "raw_text_reads": 470,
+    "complete_table_reads": 1126,
+    "table_cells": 5176,
+    "original_info_reads": 532,
+    "original_download_observations": 532,
+    "distinct_downloads_verified": 40,
+    "deletion_negative_controls": 308,
+    "old_page_replays_rejected": 28,
+    "first_failure_zero_version_deletions": 4
+  }
+}

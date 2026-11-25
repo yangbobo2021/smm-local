@@ -15,7 +15,7 @@ from uuid import uuid4
 from .core import tokens, utcnow
 from .references import material
 from .documents import Documents, _link
-from .document_protocol import normalize, sha, integer
+from .document_protocol import normalize, sha, integer, identity
 from .archive_protocol import digest, control_lock
 
 
@@ -55,8 +55,9 @@ def content(value):
 
 
 class ManagedDocuments:
-    def __init__(self, db):
+    def __init__(self, db, *, project_check=None):
         self.db = db
+        self.project_check = project_check
         self.documents = Documents(db)
         self.root = db.db_path.resolve().parent / ".documents"
         self.lock = self.root.with_name(".documents-library.lock")
@@ -225,8 +226,10 @@ class ManagedDocuments:
         finally:
             Path(tmp).unlink(missing_ok=True)
 
-    @staticmethod
-    def _project_key(c, project_id, project_key):
+    def _project_key(self, c, project_id, project_key):
+        if self.project_check is not None:
+            self.project_check(project_id, project_key)
+            return
         if project_key is None:
             return
         row = c.execute(
@@ -307,9 +310,11 @@ class ManagedDocuments:
             c.execute("BEGIN IMMEDIATE")
             self.documents._projects(c, [project_id])
             self._project_key(c, project_id, project_key)
+            current = self._receipt(c, ident)
+            if Path(current['display_name']).suffix.lower() in {'.docx','.xlsx','.pdf'}:
+                raise ValueError('新格式更新须通过原件分块入口成套处理，不能用旧小文本接口替换')
             if (retry := self._retry(c, submission, fingerprint)) is not None:
                 return retry
-            current = self._receipt(c, ident)
             self._check(current, project_id, expected_version, expected_revision)
             self._root()
             path = Path(current["path"])
@@ -347,6 +352,19 @@ class ManagedDocuments:
         ):
             raise ValueError("项目或版本已变化，请重新查看后提交")
 
+    @staticmethod
+    def _check_native(current,project_id,project_key,version,revision,processing_version,capture_id,attempt_id):
+        integer(project_id,'项目ID');integer(version,'文档版本',minimum=0)
+        integer(revision,'来源版本');integer(processing_version,'处理版本',minimum=0)
+        if not isinstance(project_key,str) or not project_key:raise ValueError('新格式管理需要刚查看的稳定项目身份')
+        if project_id not in current['project_ids'] or version!=current['version'] or revision!=current['source_revision'] or processing_version!=current['processing_version']:
+            raise ValueError('项目、内容、处理或来源版本已变化，请重新查看后提交')
+        latest=current.get('latest_attempt') or {};published=current.get('published_snapshot') or {}
+        unpublished=latest.get('capture_id')!=published.get('capture_id') or latest.get('status') in {'pending','processing'}
+        if unpublished or capture_id is not None or attempt_id is not None:
+            identity(capture_id,'捕获ID');identity(attempt_id,'处理尝试ID')
+            if capture_id!=latest.get('capture_id') or attempt_id!=latest.get('attempt_id'):raise ValueError('最新候选或尝试已变化，请重新查看后提交')
+
     def remove(
         self,
         ident,
@@ -356,12 +374,19 @@ class ManagedDocuments:
         expected_revision,
         submission_id=None,
         project_key=None,
+        expected_processing_version=None,
+        capture_id=None,
+        expected_attempt_id=None,
     ):
         with control_lock(self.lock), self.db.connect() as c:
             c.execute("BEGIN IMMEDIATE")
             self._project_key(c, project_id, project_key)
             current = self._receipt(c, ident)
-            self._check(current, project_id, expected_version, expected_revision)
+            if Path(current['display_name']).suffix.lower() in {'.docx','.xlsx','.pdf'}:
+                self._check_native(current,project_id,project_key,expected_version,expected_revision,expected_processing_version,capture_id,expected_attempt_id)
+            else:
+                if expected_processing_version is not None or capture_id is not None or expected_attempt_id is not None:raise ValueError('旧文本管理不接受新格式处理比较值')
+                self._check(current, project_id, expected_version, expected_revision)
             c.execute(
                 "DELETE FROM document_sources WHERE id=?", (current["source_id"],)
             )
