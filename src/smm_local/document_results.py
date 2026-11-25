@@ -49,6 +49,9 @@ def validate(value):
     if type(value['text_length']) is not int or value['text_length']!=len(text) or value['text_sha256']!=sha(text.encode('utf-8')):raise ValueError('处理文本摘要/长度不匹配')
     if not isinstance(value['raw_sha256'],str) or len(value['raw_sha256'])!=64 or any(c not in '0123456789abcdef' for c in value['raw_sha256']):raise ValueError('原件摘要无效')
     if not isinstance(value['locations'],list) or not isinstance(value['tables'],list) or not isinstance(value['coverage'],dict) or not isinstance(value['profile'],dict):raise ValueError('结果结构无效')
+    # Creation and receive-only validation share the same declared coverage.
+    if value['format'] in {'docx','xlsx'} and not text and value['coverage'].get('excluded'):
+        raise ValueError('Office无可用支持文字且存在未支持对象；不能标为空内容成功')
     def location(loc):
         if not isinstance(loc,dict):raise ValueError('定位须为对象')
         if 'start' in loc or 'end' in loc:

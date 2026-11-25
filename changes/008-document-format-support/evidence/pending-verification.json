@@ -161,5 +161,10 @@
     "status": "passed_scoped",
     "evidence": "web-failure-diagnostic-development.json",
     "scope": "First managed failure current retry target preserved; actual two-creator details expose corresponding saved error. No complete retry/visible comparison-value or retained initial-upload gap claim."
+  },
+  "unsupported_object_empty_fix": {
+    "status": "passed_scoped",
+    "evidence": "unsupported-object-empty-development.json",
+    "scope": "Strictly textless DOCX/XLSX with declared unsupported objects; true blank/support-text controls and pure result consistency. PDF unrecognized scan/all-object and lifecycle/OS matrices remain gaps."
   }
 }

@@ -1,0 +1,4 @@
+# Preserve the exact generator and Office fixture bytes across checkouts.
+scripts/acceptance/008_generate_object_fixtures.py text eol=lf
+tests/fixtures/document-format-objects/*.docx binary
+tests/fixtures/document-format-objects/*.xlsx binary
