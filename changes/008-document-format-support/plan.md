@@ -270,3 +270,6 @@ CI用上传/下载artifact传实际producer产物，再在目标OS本机HTTPS调
 
 
 2026-11-26：PR #43 F1的两个已复现路径分别补独立TC：正常目录枚举确认missing、目录可枚举但单文件真实非root POSIX PermissionError。每端普通/全局各2ready DOCX+2partial PDF，另2无关控制；只有该来源失效时撤对应捕获授权，保留连续重叠来源。新格式采集完成后在process前记录captured_id，单项错误只保留确实完成捕获的失败新候选，避免将正常OCR/解析失败误作无授权。主missing红灯2失败、同版绿灯2+12回归通过；第一轮身份预期错误保留。其绿灯独立passed但因先推进SC8设计导致原生登记blocked，未篡改记录或补假通过。不可读红灯2失败、绿灯2+15回归通过并独立登记。随后两冻结TC合并到同一设计、其它生命周期显式列5项缺口，最终共同产品普通debug各2通过并独立候选passed，再正式各2通过19.77/20.21秒、1713份原件16,111,197字节，经另一新Reviewer正式passed并成功登记，见evidence/refresh-authorization-combined-development.json。每TC56全文/96全表/56信息/56实际下载、16合法与16拒绝重试及288旧ref拒绝逐份核；相同字节重新明确refresh不复活旧ref。统一复验采用独立--basetemp保留合成源，避免pytest滚动清理；原测试内容未改，missing控制输入2槽覆盖和20份独立SHA下载的对应如实保留。只关闭上述授权复活子域，不据此关闭在途取消、完整SC8/C1、其它PR发现或E/H/X；新源码后需最终重建/安装复验。
+
+
+2026-11-26：修复PR #43 F7已确认的Local CLI局部帮助冲突，只改refresh/read说明：旧文本2MiB/来源16MiB与新格式原件20MiB、原件/结果各来源128MiB分清，保持1000候选及现有命令/参数/实际限额不变；指出创建端依赖、OCR configure/check、提取文本与准确原字节导出。第一版实际输出会在命令名称中折行，补ASCII命令前后空格后4级真实help均exit0，未创建虚设DB；现有help及文档CLI回归10通过3.02秒，见evidence/cli-format-help-development.json含实际无敏感help原输出及摘要。低影响文案修订未新增镜像测试；未据此认领完整发现性、Hub帮助建议或平台安装门。

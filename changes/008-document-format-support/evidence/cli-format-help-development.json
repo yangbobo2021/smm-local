@@ -1,0 +1,51 @@
+{
+  "scope": "PR43 F7 Local CLI help conflict only; wording change, no command/flag/limit behavior change",
+  "status": "verified_development",
+  "product_file": "src/smm_local/cli.py",
+  "product_sha256": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+  "actual_help": {
+    "root": {
+      "exit_code": 0,
+      "stdout_sha256": "f1496d4f8184edcab27fa95ab292f092bd48b29a7d41abe5b752963901e73180",
+      "stdout": "usage: smm [-h] [--db DB]\n           {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents} ...\n\n本机 Agent 对话知识库\n\npositional arguments:\n  {sync,status,doctor,projects,resolve-project,search,read,serve,maintenance,source,stop-on-demand,configure-hub,upload,project,documents}\n    sync                立即导入新增对话\n    status              查看导入状态\n    doctor              检查安装、来源和 Agent 接入\n    projects            列出项目及关联\n    resolve-project     按当前目录确定项目\n    search              BM25 检索\n    read                读取对话原文\n    serve               启动本地 Web UI\n    maintenance         管理本机同步与状态页\n    source              验收、注册或管理本机来源\n    stop-on-demand      停止按需启动的后台服务\n    configure-hub       配置汇总电脑和本机名称\n    upload              选择对话上传范围并查看 Hub 确认；停止不撤回旧副本\n    project             管理明确的全局项目和会话归属\n    documents           项目文档采集、独立同步选择及联合检索；路径来源需明确refresh\n\noptions:\n  -h, --help            show this help message and exit\n  --db DB               知识库 SQLite 路径\n"
+    },
+    "documents": {
+      "exit_code": 0,
+      "stdout_sha256": "de95698c9696abbeea1d6c8685275859d3dd8025f63f5bc7b114415e3b3be42c",
+      "stdout": "usage: smm documents [-h]\n                     {processing-status,processing-configure,reprocess,add,set,sources,sync-status,sync-policy,sync,files,refresh,remove,search,read} ...\n\n本机明确采集 .md/.markdown/.txt/.docx/.xlsx/.pdf；创建端需安装[documents]依赖。PDF文字优先，OCR先用pr\nocessing-configure及processing-status --check准备本地组件。源正文不改写。项目文档同步默认关闭，以sync-\npolicy独立允许；默认联合检索，--local仅本机。保存来源后明确refresh。\n\npositional arguments:\n  {processing-status,processing-configure,reprocess,add,set,sources,sync-status,sync-policy,sync,files,refresh,remove,search,read}\n    processing-status   查看创建端格式/接收能力、OCR配置revision与最近探测身份\n    processing-configure\n                        所在创建端持久配置本地OCR；不自动重处理已有资料\n    reprocess           只重处理files给出的合法保存原件，不重开源路径\n    add                 添加来源（pending）\n    set                 完整替换配置并使旧来源资格失效\n    sources             查看来源id/完整配置、pending/refreshing/ready/partial/failed、真实\n                        计数和错误\n    sync-status         查看稳定KEY/HID/generation及本机选择/Hub确认\n    sync-policy         保存项目文档选择后尝试同步；暂停保留旧资格，失效仍撤回\n    sync                重试采集档案和撤回，不扫描源文件；手动不改变全局暂停\n    files               查看已发现文件元信息、ready/failed/missing及原因，不返回正文\n    refresh             明确读取并刷新采集快照；旧版本ref失效，失败后可重试\n    remove              取消来源；独占材料立即退出检索/读取，不删除原文件\n    search              检索本机/Hub采集正文并本机重排；--local仅本机，不扫描源文件\n    read                按搜索返回的reference准确读取采集版本\n\noptions:\n  -h, --help            show this help message and exit\n"
+    },
+    "refresh": {
+      "exit_code": 0,
+      "stdout_sha256": "0ea9de00fa76b37c3e081f7de717f0fc03abeafeed5bc432802badbcaddfe8cb",
+      "stdout": "usage: smm documents refresh [-h] [--source-id SOURCE_ID]\n\n仅明确刷新读取来源正文。旧 TXT/Markdown 单文件2MiB、每来源累计16MiB；DOCX/XLSX/PDF\n原件单份20MiB、每来源原件及处理结果各累计128MiB；各格式共同计入每来源1000候选。创建端须安装 [documents]；PDF 本地OCR先用\nprocessing-configure 和 processing-status --check 准备。个别失败见\nfiles/sources，已保存合法原件按 retry_target 明确 reprocess。\n\noptions:\n  -h, --help            show this help message and exit\n  --source-id SOURCE_ID\n                        来源id取自documents sources，省略逐来源刷新全部\n"
+    },
+    "read": {
+      "exit_code": 0,
+      "stdout_sha256": "140f2cfe724a51654bef2b360f41e67557a17a0baa6da3b51803c8457fae9cee",
+      "stdout": "usage: smm documents read [-h] --reference REFERENCE [--start START]\n                          [--end END] [--view {text,table,original-info}]\n                          [--table-id TABLE_ID] [--row-start ROW_START]\n                          [--row-end ROW_END] [--column-start COLUMN_START]\n                          [--column-end COLUMN_END]\n                          [--original-output ORIGINAL_OUTPUT]\n\n缺省读命中片段。start/end是整个规范化采集文本的Unicode码点 [start,end)，非字节或UTF-16；最多16000字符。旧\nTXT/Markdown 只去BOM并将CRLF/CR转LF；DOCX/XLSX/PDF 返回创建端提取文本和覆盖信息，不等同原始文件。原字节用\n--view original-info 核对、--original-output 导出；表格用 --view table 和同次返回的\ntable_id。旧版本/来源资格失效须重新检索，不读历史版本。\n\noptions:\n  -h, --help            show this help message and exit\n  --reference REFERENCE\n                        原样复制documents search返回的reference，不能用对话ID\n  --start START         Unicode起始码点（含，0开始）\n  --end END             Unicode结束码点（不含）\n  --view {text,table,original-info}\n                        提取文本、表格窗口或已保存原件信息；默认text\n  --table-id TABLE_ID   取自本次命中/普通read的tables定位\n  --row-start ROW_START\n                        表格行列窗口，1起、终点不含；仅table视图\n  --row-end ROW_END     表格行列窗口，1起、终点不含；仅table视图\n  --column-start COLUMN_START\n                        表格行列窗口，1起、终点不含；仅table视图\n  --column-end COLUMN_END\n                        表格行列窗口，1起、终点不含；仅table视图\n  --original-output ORIGINAL_OUTPUT\n                        将准确采集原件保存到本机新文件；拒绝覆盖，与文本范围/表格参数互斥\n"
+    }
+  },
+  "dummy_database_created": false,
+  "regression": {
+    "test_files": [
+      "tests/test_cli_help.py",
+      "tests/test_document_formats_cli.py"
+    ],
+    "passed": 10,
+    "seconds": 3.02,
+    "exit_code": 0,
+    "stdout_sha256": "3f5127fbea76ae1039774d6f20a25b61e4e38dca1b820f415129df73084eff90",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "changes": [
+    "Distinguish legacy text2MiB/16MiB from native raw20MiB and per-source raw/result128MiB.",
+    "Make optional creator dependencies and OCR configure/check discoverable in refresh help.",
+    "Describe native reads as extracted text/coverage; original-info and original-output are the saved original-byte path.",
+    "Space command names so argparse wrapping does not split processing-configure."
+  ],
+  "limitations": [
+    "Actual source-backed macOS help and existing relevant tests only. No whole discoverability/SC11 or installed-package/platform claim.",
+    "Hub CLI and OCR acquisition guidance are separate remaining discovery suggestions; this fixes confirmed Local help conflict."
+  ],
+  "redaction": "Public help output contains no task-specific runtime paths, credentials or user data. Full process receipts remain private."
+}
