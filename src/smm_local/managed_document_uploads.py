@@ -198,7 +198,7 @@ class ManagedDocumentUploads:
                         token['result_sha256']=attempt['result_sha256'];result=self.snapshots.load_result(token['result_sha256'])
                     else:result=self.snapshots.process(token,token['profile']['format'])
                 except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
-                item={'path':Path(value['path']),'relative_path':Path(value['path']).name,'error':error}
+                item={'path':Path(value['path']),'relative_path':Path(value['path']).name,'error':error,'captured_id':token['capture_id']}
                 if result is not None:item.update(snapshot_token=token,processed_result=result,sha256=token['raw_sha256'],text=result['text'])
                 try:
                     with self._hold():

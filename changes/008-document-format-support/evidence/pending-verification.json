@@ -149,7 +149,17 @@
       "skipped": 56,
       "failed": 0
     },
-    "windows": "in_progress_at_capture",
+    "windows": {
+      "passed": 416,
+      "skipped": 55,
+      "failed": 24,
+      "same_failed_test_identity_set_as_5126cd1": true
+    },
     "limitation": "Before this restore-manifest commit; ordinary CI not E/H/X."
+  },
+  "web_failure_diagnostic": {
+    "status": "passed_scoped",
+    "evidence": "web-failure-diagnostic-development.json",
+    "scope": "First managed failure current retry target preserved; actual two-creator details expose corresponding saved error. No complete retry/visible comparison-value or retained initial-upload gap claim."
   }
 }

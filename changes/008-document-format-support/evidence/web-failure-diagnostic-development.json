@@ -1,0 +1,95 @@
+{
+  "scope": "Scoped development TDD: first managed failure retains legal capture retry target and actual creator pages expose saved processing diagnostics; not full SC1 or retained upload/management gap completion",
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC1",
+  "case_id": "TC-008-web-failure-diagnostic",
+  "base_commit": "a337e64f99175495e5b3cc4675b72af738caed17",
+  "test_sha256": "07ef398e2d2cfbf244986aa4fb2e2bce3079673f77e3c92a660695412e43c1d5",
+  "product_sha256": {
+    "src/smm_local/managed_document_uploads.py": "25f1ff2b092fd74aaa870c6e287c15dec01c8a3a50ccde1f267a30a68741fc01",
+    "src/smm_local/static/index.html": "36f83293c2d76f1a904b0fd45d222d595712d7caa31ce13f70b3843d3845a741",
+    "src/smm_hub/static/index.html": "c2e4a473d3fec29ad7c4f86e7ec2a74fd535937ef89d8eae11f8ad725d0b369a"
+  },
+  "observed_regression": "Earlier source-authorization repair integration missed completed CID in ManagedDocumentUploads.run_pending failure item. First managed failure revoked current legitimate capture authorization and returned retry_target=null.",
+  "fix": [
+    "Carry the completed server-owned capture ID into common failed publication; keep existing stale/current/authorization checks; never set an already-revoked authorization active",
+    "Render persisted latest_attempt.error through existing plain text details in both creator pages"
+  ],
+  "red": {
+    "request": "red-web-failure-diagnostic-v3",
+    "result_sha256": "04cf68add57b70f51251a2e300bdbef922e291ee1ea5927e7f93e95f4226e984",
+    "failed": 2,
+    "oracle_passed": 1,
+    "seconds": 8.52,
+    "observed_boundary": "Backend legal first-failed-upload retry target missing; browser was not reached and no UI-red screenshot/trace exists",
+    "review": "review-web-failure-diagnostic-red-v1",
+    "review_status": "expected_failure",
+    "review_registered": true,
+    "reviewer_sha256": "d4bb6d3e032a0ffeae00d4a149e7acde6b60cb02a306f685135abcbe3c5ab2bf"
+  },
+  "green": {
+    "request": "green-web-failure-diagnostic-v2",
+    "result_sha256": "cfc5487b0cd203c204bc0801cb7decf6303a2b1faebc7d9cf8c1a1c0884b1a7b",
+    "passed": 3,
+    "seconds": 12.44,
+    "regression_passed": 21,
+    "regression_seconds": 260.95,
+    "artifacts": 209,
+    "artifact_bytes": 4897529,
+    "all_artifact_sha256_verified": true,
+    "review": "review-web-failure-diagnostic-green-v1",
+    "review_status": "passed",
+    "review_registered": true,
+    "reviewer_sha256": "9ee833fd48f991ca29168f1706cfc11c9774aae6f84e582f13c969ee39dbbb4e"
+  },
+  "actual_inputs": {
+    "creators": [
+      "Local",
+      "Hub"
+    ],
+    "projects": [
+      "ordinary",
+      "global"
+    ],
+    "per_project": [
+      "Valid scanned PDF fails for missing local OCR component probe",
+      "Valid encrypted PDF fails without password; independent known-password validation opens its expected original text"
+    ],
+    "captured_originals": 8,
+    "visible_details_screenshots": 8,
+    "real_browser_traces": 2
+  },
+  "actual_assertions": [
+    "Correct document/capture/attempt IDs and raw SHA/bytes from upload receipts, readonly archive capture rows and independent frozen source bytes",
+    "Current failed attempts retain legal retry_target.capture_id; published=null and V/P=0",
+    "Actual browser selects each project, finds unique document ID row and expands details",
+    "Visible latest_attempt CID/AID/status/config_revision/error fields match the corresponding persisted record; nonempty failure categories checked",
+    "Wrong/missing fields, wrong targets and empty error are rejected by actual oracle self-controls",
+    "Source fixture bytes and mtime unchanged; browser requests confined to independent task server; real process/port cleanup verified"
+  ],
+  "regression_scope": [
+    "Managed native update bypass and removal comparisons",
+    "Failed managed replacement and saved-byte retry",
+    "First path capture OCR retry",
+    "Missing and actual unreadable source authorization lifecycle",
+    "Managed empty originals",
+    "Actual creator Web blank original download and legacy original absence"
+  ],
+  "limitations": [
+    "UI diagnostic omission was previously a static independent PR finding; frozen red stopped at an earlier backend defect, so do not describe a separately observed UI-red transition",
+    "The automatic test compares retry_target.capture_id but does not independently compare every visible published/retry SHA/AID/V/P field",
+    "These eight first-managed-failure targets were not actually reprocessed successfully via CLI in this scoped main test",
+    "Encrypted-error final line exceeds the screenshot pre scroll viewport; complete DOM innerText and trace contain PDFPasswordIncorrect, not all diagnostic bytes fit one still image",
+    "Not full initial-upload/ready-management flow, first retry recovery matrix, E/H/X or all-platform delivery; maintainer-retained gaps and four pending test patches unchanged"
+  ],
+  "history": {
+    "automatic_test_repairs": 2,
+    "preserved_attempts": [
+      "red-v1 incorrectly read managed library after path capture; setup fault",
+      "red-v2 true managed capture but null-target access TypeError; explicit None guard in frozen v3",
+      "green-v1 orchestration rejected timeout600 before execution; green-v2 uses native maximum300"
+    ],
+    "same_frozen_red_green_test": true
+  },
+  "redaction": "Synthetic PDFs/task credentials and isolated loopback archives only. Original trace/HTTP/PNG/raw evidence stays in private acceptance store; no private credentials or real user documents published."
+}
