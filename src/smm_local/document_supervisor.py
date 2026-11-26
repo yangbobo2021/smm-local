@@ -57,7 +57,16 @@ def matching(stamp,token=None):
     try:
         process=psutil.Process(stamp['pid'])
         if process.create_time()!=stamp['created']:return None
-        if token is not None and token not in process.cmdline():return None
+        if token is not None:
+            try:command=process.cmdline()
+            except psutil.AccessDenied:
+                # A cmdline denial alone is not evidence of exit. Only an
+                # independent, conclusive observation can retire this identity.
+                try:
+                    if not process.is_running() or process.status()==psutil.STATUS_ZOMBIE:return None
+                except (psutil.NoSuchProcess,psutil.ZombieProcess):return None
+                raise
+            if token not in command:return None
         return process
     except (psutil.NoSuchProcess,psutil.ZombieProcess):return None
 

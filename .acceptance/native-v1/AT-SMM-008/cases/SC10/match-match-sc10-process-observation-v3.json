@@ -1,0 +1,22 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_ids": [
+    "TC-008-budgets",
+    "TC-008-canonical-candidate-capacity",
+    "TC-008-live-temporary-observation",
+    "TC-008-managed-update-paths",
+    "TC-008-process-identity-observation",
+    "TC-008-reservation-lengths",
+    "TC-008-staging-dedup",
+    "TC-008-staging-plus-one",
+    "TC-008-transfer-expiry-raw"
+  ],
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-008/match/match-sc10-process-observation-v3/result.json",
+  "request_id": "match-sc10-process-observation-v3",
+  "result_sha256": "fa7b1d3f90f1cb6faaba8ca3b467915b8990f6b6b8e40e3f94feea243f490b84",
+  "scene": "SC10",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

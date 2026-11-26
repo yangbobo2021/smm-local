@@ -1,0 +1,513 @@
+{
+  "complete": true,
+  "runs": [
+    {
+      "id": 45803273804,
+      "event": "pull_request",
+      "head_sha": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45803265223,
+      "event": "push",
+      "head_sha": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "status": "completed",
+      "conclusion": "failure"
+    }
+  ],
+  "artifacts": [
+    {
+      "run": "45803273804",
+      "artifact_id": 15112515288,
+      "name": "tests-windows-2022",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 16087,
+      "zip_sha256": "61ebb1491c90a50bfb9324bf72bd9051e4f2ca7d6948e2ae0405afd2a6b586c0",
+      "official_digest": "sha256:61ebb1491c90a50bfb9324bf72bd9051e4f2ca7d6948e2ae0405afd2a6b586c0",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 467,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 67,
+      "junit_sha256": "932f283374e0df6c9ac8ed8a9146581dc9b21b8a6635920dab8ff445765d5433",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "passed",
+          "seconds": "304.859"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "passed",
+          "seconds": "420.452"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "passed",
+          "seconds": "0.366"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "268.436"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "250.556"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "18.820"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.009"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.047"
+        }
+      ],
+      "failure_tests": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+        }
+      ]
+    },
+    {
+      "run": "45803273804",
+      "artifact_id": 15110470883,
+      "name": "tests-macos-15",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 15799,
+      "zip_sha256": "0f3430912434e31d2a336aed8843f2db9eaa6e548807b2448f5dd20792bedf0e",
+      "official_digest": "sha256:0f3430912434e31d2a336aed8843f2db9eaa6e548807b2448f5dd20792bedf0e",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 466,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 69,
+      "junit_sha256": "fbc4dcd397db2c2677d92e3c905b1cdcd200976af41523a6449ce6a9e97e665a",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "passed",
+          "seconds": "224.852"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "failed",
+          "seconds": "100.423"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "105.643"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "89.976"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "6.550"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.009"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.034"
+        }
+      ],
+      "failure_tests": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]"
+        }
+      ]
+    },
+    {
+      "run": "45803273804",
+      "artifact_id": 15108624863,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 13416,
+      "zip_sha256": "825001edbcdd441e93739a82d9f71b254fc8b378451c38e22e9fdf85bb4c6474",
+      "official_digest": "sha256:825001edbcdd441e93739a82d9f71b254fc8b378451c38e22e9fdf85bb4c6474",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 467,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "junit_sha256": "62c84b9cf81907f668637bbc788dc3d2e191aa3789147f2780ac7f4abb96b4b7",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "passed",
+          "seconds": "176.659"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "passed",
+          "seconds": "232.753"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "70.993"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "56.695"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "3.716"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.003"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.015"
+        }
+      ],
+      "failure_tests": []
+    },
+    {
+      "run": "45803265223",
+      "artifact_id": 15112945974,
+      "name": "tests-windows-2022",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 16079,
+      "zip_sha256": "b37d14733b0561fabd4e39ed215440cef0a47ac0ef7adde28bc956317623374c",
+      "official_digest": "sha256:b37d14733b0561fabd4e39ed215440cef0a47ac0ef7adde28bc956317623374c",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 467,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 67,
+      "junit_sha256": "473e8b8cbbb027e977c206af3906505602c4c05c250329d1ab31e635858ca23a",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "passed",
+          "seconds": "311.208"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "passed",
+          "seconds": "420.916"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "passed",
+          "seconds": "0.382"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "271.037"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "251.510"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "18.648"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.009"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.040"
+        }
+      ],
+      "failure_tests": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+        }
+      ]
+    },
+    {
+      "run": "45803265223",
+      "artifact_id": 15109246378,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 13340,
+      "zip_sha256": "ed6bc2fb6b01cc1c5a0fa23b2caf1a8d6e1d62b2c638473f3f4deb3994b5e0f8",
+      "official_digest": "sha256:ed6bc2fb6b01cc1c5a0fa23b2caf1a8d6e1d62b2c638473f3f4deb3994b5e0f8",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 467,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "junit_sha256": "5f8a8ac757eb7322bb187a0665046b4eadfc1894b95dd9f2cc243a82e8319f52",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "passed",
+          "seconds": "151.700"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "passed",
+          "seconds": "184.405"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "60.200"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "56.233"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "4.025"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.002"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.011"
+        }
+      ],
+      "failure_tests": []
+    },
+    {
+      "run": "45803265223",
+      "artifact_id": 15109004619,
+      "name": "tests-macos-15",
+      "source_head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "zip_bytes": 16032,
+      "zip_sha256": "2ea47282d6e17ac73b36f8172e216a485391ab2317c7f848aa76c5f70432291f",
+      "official_digest": "sha256:2ea47282d6e17ac73b36f8172e216a485391ab2317c7f848aa76c5f70432291f",
+      "zip_crc_valid": true,
+      "tests": 536,
+      "passed": 465,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 69,
+      "junit_sha256": "6d19ba5a954db7c519312c37fd74939c42965df20b561291ea85fd1e149c6d5c",
+      "selected": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]",
+          "status": "failed",
+          "seconds": "139.031"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]",
+          "status": "failed",
+          "seconds": "76.757"
+        },
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "146.901"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "137.215"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "8.810"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.016"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.002"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.045"
+        }
+      ],
+      "failure_tests": [
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[local]"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_gc",
+          "name": "test_replaced_and_removed_candidates_release_physical_capacity[hub]"
+        }
+      ]
+    }
+  ],
+  "acceptance_id": "AT-SMM-008",
+  "scope": "Ordinary CI of committed 3e29255; does not include uncommitted process identity test or matching fix. Official ZIP SHA/digest, length, CRC and complete JUnit verified; no rerun, skip or expectation change.",
+  "interpretation": {
+    "ubuntu": "Both runs passed with 69 recorded skips each, not full platform acceptance.",
+    "windows": "Both runs failed the two retained upload-restart audit-event count assertions at test_document_formats_upload_restart.py:224 (0 != 2). No retained test repair applied.",
+    "macos": "New candidate GC tests reached line106 error guard after OCR check. Actual error string is absent from short traceback; which of capacity/time/RSS/PermissionError caused it is not established.",
+    "overall": "Both workflows failed. No claim of complete SC10, R008 or cross-platform delivery."
+  },
+  "failed_job_logs": [
+    {
+      "run": "45803273804",
+      "bytes": 62106,
+      "sha256": "9302c09451777965686e67ba93e14de5c82492713ddf5317735e7ad5d977d384",
+      "scope": "gh --log-failed recovered as raw bytes; no full GC error value exposed, cause remains unestablished."
+    },
+    {
+      "run": "45803265223",
+      "bytes": 80451,
+      "sha256": "b0be05339114d2ef238022a708d8a52ae94397062b1ba941414cd3f85334ea23",
+      "scope": "gh --log-failed recovered as raw bytes; no full GC error value exposed, cause remains unestablished."
+    }
+  ]
+}

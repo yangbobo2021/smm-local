@@ -103,11 +103,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
     "status": "needs_revision",
-    "evidence": "pr43-review-e8bb1bd.md",
-    "scope": "Fresh independent incremental review: scoped sampling fix/evidence credible, no new material product defect; D1 historical index labels clarified afterwards. Not whole R008 delivery.",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7187043311"
+    "evidence": "pr43-review-3e29255.md",
+    "scope": "Fresh independent30file checkpoint: scoped GC TDD credible, no new confirmed deletion/lock defect; actual watchdogP1 and remaining product/evidence gaps stay open. Not full R008.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7189860167"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -132,13 +132,13 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
-    "evidence": "ci-regression-e8bb1bd.json",
-    "macos_ubuntu_each": "465passed69skipped0failed twice each",
-    "windows_each": "465passed67skipped2retained worker-audit failures twice",
-    "new_sampler_windows": "passed twice, skipped on non-Windows",
-    "six_staging_tests": "passed all6 artifacts,36case instances",
-    "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
+    "head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+    "evidence": "ci-3e29255.json",
+    "artifacts": "All six official ZIPs verified against official digest/length, CRC and parsed complete JUnit.",
+    "ubuntu_each": "467passed69skipped0failed twice",
+    "macos": "PR466passed69skipped1failed; push465passed69skipped2failed; new candidate GC error-guard failures, actual error string not present in short trace.",
+    "windows_each": "467passed67skipped2retained upload-restart audit-count failures twice",
+    "scope": "Ordinary source CI only; both workflows failed. Uncommitted helper patch/test excluded. Not E/H/X, service or installed minimum-Python acceptance."
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",
@@ -471,5 +471,30 @@
     "status": "pending_new_source_commit",
     "prior_ordinary_evidence": "ci-regression-e8bb1bd.json",
     "note": "Old source CI does not cover this GC candidate. No platform skip/failure is counted as passed."
+  },
+  "historical_pr_review_e8bb1bd": {
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "status": "needs_revision",
+    "evidence": "pr43-review-e8bb1bd.md",
+    "scope": "Fresh independent incremental review: scoped sampling fix/evidence credible, no new material product defect; D1 historical index labels clarified afterwards. Not whole R008 delivery.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7187043311"
+  },
+  "historical_ordinary_ci": [
+    {
+      "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "evidence": "ci-regression-e8bb1bd.json",
+      "macos_ubuntu_each": "465passed69skipped0failed twice each",
+      "windows_each": "465passed67skipped2retained worker-audit failures twice",
+      "new_sampler_windows": "passed twice, skipped on non-Windows",
+      "six_staging_tests": "passed all6 artifacts,36case instances",
+      "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
+    }
+  ],
+  "process_identity_helper": {
+    "evidence": "process-identity-development.json",
+    "status": "passed_scoped",
+    "macos": "Frozen primary+6staging actualpass; red+green independent registered.",
+    "windows": "Same-source live identity component actualpass; debug independent registered.",
+    "limitation": "Full watchdog health/root-cause/5secondcleanup remains open; not fullSC10/R008."
   }
 }
