@@ -1,0 +1,120 @@
+diff --git a/src/smm_local/document_snapshots.py b/src/smm_local/document_snapshots.py
+index dc873e3..dc59361 100644
+--- a/src/smm_local/document_snapshots.py
++++ b/src/smm_local/document_snapshots.py
+@@ -124,18 +124,21 @@ class Snapshots:
+     def process(self,token,format):
+         from .document_processing import process
+         return process(self,token)
+-    def fail_current(self,token,error):
++    def fail_current(self,token,error,*,connection=None):
+         """Finish a rejected publication without changing a newer attempt."""
+         if token.get('reused'):return False
+-        with self.db.connect() as c:
+-            c.execute('BEGIN IMMEDIATE')
++        def finish(c):
+             changed=c.execute("""UPDATE document_processing_attempts SET state='failed',error=?,finished_at=?
+                 WHERE id=? AND capture_id=? AND config_revision=? AND state!='failed'
+                 AND EXISTS (SELECT 1 FROM document_snapshot_state s WHERE s.document_pk=?
+                     AND s.current_capture=? AND s.latest_attempt=?)""",
+                 (str(error),utcnow(),token['attempt_id'],token['capture_id'],token['config']['revision'],
+                  token['document_pk'],token['capture_id'],token['attempt_id'])).rowcount
+-        return bool(changed)
++            return bool(changed)
++        if connection is not None:return finish(connection)
++        with self.db.connect() as c:
++            c.execute('BEGIN IMMEDIATE')
++            return finish(c)
+     def publish(self,c,pk,token,result):
+         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+         if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')
+diff --git a/src/smm_local/documents.py b/src/smm_local/documents.py
+index b9dc5af..685f9bb 100644
+--- a/src/smm_local/documents.py
++++ b/src/smm_local/documents.py
+@@ -339,7 +339,10 @@ class Documents:
+                 con.execute("UPDATE document_memberships SET qualification=qualification+(status!='ready'),status='ready',error=NULL WHERE document_pk=? AND source_id=?",(pk,sid))
+                 failures=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status!='ready'",(sid,)).fetchone()[0]
+                 status='partial' if failures else 'ready'
+-                con.execute('UPDATE document_sources SET status=?,resume_status=? WHERE id=?',(status,status,sid))
++                counts=json.loads(con.execute('SELECT counts FROM document_sources WHERE id=?',(sid,)).fetchone()[0])
++                counts['ready']=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status='ready'",(sid,)).fetchone()[0]
++                counts['failed']=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status='failed'",(sid,)).fetchone()[0]
++                con.execute('UPDATE document_sources SET status=?,resume_status=?,counts=? WHERE id=?',(status,status,json.dumps(counts),sid))
+             detail=self.snapshots.detail(con,pk)
+         return {'document_id':doc['id'],**detail}
+ 
+@@ -430,10 +433,10 @@ class Documents:
+                 scan=self._scan(source) if mutation_context is None else self._scan(source,mutation_context=mutation_context)
+             except (OSError,ValueError) as exc:scan={'error':str(exc),'files':[],'counts':{'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0}}
+             with (mutation_context() if mutation_context is not None else nullcontext()):
+-                results.append(self._publish(source,scan))
++                results.append(self._publish(source,scan,settle_rejections=True))
+         return {'sources':results,'message':'仅明确刷新读取文件；失败原因见来源和文件状态'}
+ 
+-    def _publish(self, source, scan):
++    def _publish(self, source, scan, *, settle_rejections=False):
+         with self.db.connect() as con:
+             con.execute('BEGIN IMMEDIATE')
+             current=con.execute('SELECT * FROM document_sources WHERE id=?',(source['id'],)).fetchone()
+@@ -444,6 +447,16 @@ class Documents:
+                 con.execute("UPDATE document_memberships SET status='failed',error=? WHERE source_id=?",(scan['error'],source['id']))
+                 status='failed'
+             else:
++                if settle_rejections:
++                    # An older refresh must not turn a newer attempt into a
++                    # failed membership. Validate every frozen target before
++                    # applying any part of this source's publication.
++                    for item in scan['files']:
++                        token=item.get('snapshot_token')
++                        if token is None:continue
++                        state=con.execute('SELECT current_capture,latest_attempt FROM document_snapshot_state WHERE document_pk=?',(token['document_pk'],)).fetchone()
++                        if state is None or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id']:
++                            return {'id':source['id'],'published':False,'message':'旧刷新已被新候选或处理尝试取代'}
+                 seen=set()
+                 for item in scan['files']:
+                     path=str(item['path']);key=os.path.normcase(path)
+@@ -456,16 +469,34 @@ class Documents:
+                         error='较新文件快照已退出；请重新刷新，不能发布旧内容'
+                         scan['counts']['ready']-=1;scan['counts']['failed']+=1
+                     if not error and document['publish_seq']<=source['request_seq']:
+-                        if 'snapshot_token' in item:self.snapshots.publish(con,pk,item['snapshot_token'],item['processed_result'])
+-                        changed=document['sha256']!=item['sha256']
+-                        version=document['version']+int(changed)
+-                        # Re-reading identical bytes preserves content version;
+-                        # capture metadata still records this successful collection.
+-                        captured=utcnow();collector=source['id']
+-                        con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
+-                        con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
+-                        con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
++                        token=item.get('snapshot_token')
++                        if token is not None:
++                            try:
++                                if settle_rejections and token.get('reused'):
++                                    # This is an already-approved snapshot, not
++                                    # a new result under the changed config.
++                                    state=con.execute('SELECT published_capture,result_sha256 FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
++                                    if state['published_capture']!=token['capture_id'] or state['result_sha256']!=token['result_sha256'] or not self.snapshots.authorized(con,token['capture_id']):
++                                        raise ValueError('原快照或连续采集授权已变化，不能复用')
++                                else:self.snapshots.publish(con,pk,token,item['processed_result'])
++                            except ValueError as exc:
++                                # Managed upload jobs retain their existing
++                                # exception contract and queue finalization.
++                                if not settle_rejections:raise
++                                error=str(exc)
++                                scan['counts']['ready']-=1;scan['counts']['failed']+=1
++                        if not error:
++                            changed=document['sha256']!=item['sha256']
++                            version=document['version']+int(changed)
++                            # Re-reading identical bytes preserves content version;
++                            # capture metadata still records this successful collection.
++                            captured=utcnow();collector=source['id']
++                            con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
++                            con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
++                            con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
+                     if error:
++                        if settle_rejections and 'snapshot_token' in item:
++                            self.snapshots.fail_current(item['snapshot_token'],error,connection=con)
+                         # No completed capture means this source can no longer
+                         # authorize its previous bytes. Preserve only a newly
+                         # captured candidate whose parser failed, not stale copies.

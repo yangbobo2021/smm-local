@@ -67,6 +67,13 @@
       "decision": "Retain gap; no additional cross-archive testcase/further proposed fix/dedicated rerun",
       "risk": "Current busy-coalescing patch can miss another database wakeup; statically supported, not reproduced",
       "not_spec_waiver": true
+    },
+    {
+      "case": "TC-008-path-refresh-config-finalization",
+      "evidence": "path-finalization-retained.json",
+      "decision": "Retain Hub search-envelope test gap; no additional repair/dedicated rerun, candidate product patch remains unapplied",
+      "product_defect": "Path refresh publication rejection terminal/failure handling still unresolved in PR",
+      "not_spec_waiver": true
     }
   ],
   "pending_test_repair_approvals": [],
@@ -95,11 +102,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "head": "12e5128952ae2929b6c920158022f7d973213f76",
+    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
     "status": "needs_revision",
-    "evidence": "pr43-review-12e5128.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7184206562",
-    "scope": "Predates queue patch; fresh review required for later diff. GC, path refresh failure/detail, service CLI handoff, full platform acceptance remain."
+    "evidence": "pr43-review-7c2348a.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7184761155",
+    "scope": "Single-archive queue evidence credible; multi-DB retained, GC/path refresh/detail/service CLI and full platform acceptance remain incomplete"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -124,11 +131,12 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
-    "evidence": "ci-regression-abf46ca.json",
-    "macos_ubuntu_each": "459 passed,68 skipped,0 failed, twice each",
-    "windows_each": "457 passed,67 skipped,3 failed, twice",
-    "limitation": "Pre-header source. Two retained audit failures plus new upload-queue disconnect. No skip counted as passed."
+    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+    "evidence": "ci-regression-7c2348a.json",
+    "macos_ubuntu_each": "465passed68skipped0failed twice each",
+    "windows_pr": "464passed67skipped2retained failures",
+    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
+    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",
@@ -184,12 +192,12 @@
     "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
   },
   "current_ci_checkpoint": {
-    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
-    "evidence": "ci-regression-abf46ca.json",
-    "scope": "Last recovered ordinary CI, not current queue/header source",
-    "macos_ubuntu_each": "459pass68skip0fail twice",
-    "windows_each": "457pass67skip3fail twice",
-    "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
+    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+    "evidence": "ci-regression-7c2348a.json",
+    "macos_ubuntu_each": "465passed68skipped0failed twice each",
+    "windows_pr": "464passed67skipped2retained failures",
+    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
+    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
   },
   "active_source_lifecycle_gap": {
     "maintainer_decision": "retain gap, 2026-11-26",
@@ -299,15 +307,18 @@
       34
     ],
     "both_tdd_reviews_registered": true,
-    "other_findings_unchanged": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair."
+    "historical_other_findings_at_abf46ca": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair.",
+    "current_other_findings": "Merged-header context fixed/scoped evidence in merged-column-header-development.json. Canonical obsolete-candidate GC, path-refresh terminal failure, external-path Web details, service CLI handoff and remaining acceptance still pending."
   },
   "merged_column_header_fix": {
     "evidence": "merged-column-header-development.json",
     "status": "Two scoped greens independently passed/registered; full SC9 remains incomplete"
   },
   "windows_upload_queue_defect": {
-    "evidence": "windows-upload-queue-diagnostic.json",
-    "status": "Real Windows reproduced; fix pending; not retained-gap scope"
+    "original_evidence": "windows-upload-queue-diagnostic.json",
+    "current_evidence": "upload-queue-development.json",
+    "status": "Single-archive Mac/Windows component tests passed on7c2348a; not whole-queue closure",
+    "remaining": "Same-parent distinct database wakeup static risk retained by maintainer; native green review remains needs_revision/design"
   },
   "historical_latest_ordinary_ci_before_header": {
     "head": "092ab9d8be112481618ffe158a407103147d2ed0",
@@ -388,5 +399,29 @@
     },
     "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
     "all6_official_digest_crc_xml_verified": true
+  },
+  "historical_current_ci_checkpoint_before_7c2348a": {
+    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+    "evidence": "ci-regression-abf46ca.json",
+    "scope": "Last recovered ordinary CI, not current queue/header source",
+    "macos_ubuntu_each": "459pass68skip0fail twice",
+    "windows_each": "457pass67skip3fail twice",
+    "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
+  },
+  "windows_pdf_temporary_directory_error": {
+    "status": "Unresolved; not retained",
+    "evidence": "ci-regression-7c2348a.json",
+    "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
+    "limitation": "One failed and one passed sibling run; no confirmed cause or product fix. No blind retry or assertion broadening.",
+    "investigation": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
+    "retained": false,
+    "investigation_evidence": "windows-temporary-observation-diagnostic.json",
+    "next": "Concrete one-complete-rescan clarification awaiting maintainer; product unchanged, no weakening of staging OCR assertions."
+  },
+  "path_finalization_retained": {
+    "evidence": "path-finalization-retained.json",
+    "status": "Retained by maintainer; path product defect NOT fixed in PR",
+    "candidate_product_applied": false,
+    "test_gap": "Hub search context envelope, no approved extra round"
   }
 }
