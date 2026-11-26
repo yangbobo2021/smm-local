@@ -6,6 +6,7 @@ import httpx,psutil,pytest
 from document_helpers import observe,ROOT
 from document_formats_upload_fixture import upload_input
 from test_document_formats_retry import keep
+from document_formats_platform import path_key,utf8_environment,process_identity,spawn_identity,same_existing_path,matching_process,process_tree,refresh_owned_records,verify_server,terminate_verified,diagnostics_on_failure,preserve_diagnostics
 
 
 def test_restart_source_audit_has_actual_positive_and_negative_controls(tmp_path):
@@ -13,49 +14,67 @@ def test_restart_source_audit_has_actual_positive_and_negative_controls(tmp_path
     allowed=tmp_path/'allowed';allowed.write_text('can read')
     hooks=tmp_path/'hooks';hooks.mkdir();(hooks/'sitecustomize.py').write_text('from document_formats_restart_server import install_audit\ninstall_audit()\n')
     log=tmp_path/'audit.jsonl'
-    env=dict(os.environ,PYTHONPATH=os.pathsep.join([str(hooks),str(ROOT/'tests'),str(ROOT/'src')]),SMM_008_RESTART_DENY=json.dumps([str(protected)]),SMM_008_RESTART_AUDIT=str(log))
+    env=utf8_environment(os.environ,PYTHONPATH=os.pathsep.join([str(hooks),str(ROOT/'tests'),str(ROOT/'src')]),SMM_008_RESTART_DENY=json.dumps([str(protected)]),SMM_008_RESTART_AUDIT=str(log))
     positive=subprocess.run([sys.executable,'-c','from pathlib import Path;import sys;assert Path(sys.argv[1]).read_text()=="can read"',str(allowed)],env=env,capture_output=True,text=True,encoding='utf-8',timeout=10)
     negative=subprocess.run([sys.executable,'-c','from pathlib import Path;import sys;Path(sys.argv[1]).read_text()',str(protected)],env=env,capture_output=True,text=True,encoding='utf-8',timeout=10)
     assert positive.returncode==0 and negative.returncode!=0 and 'restart source read denied' in negative.stderr
     events=[json.loads(line) for line in log.read_text().splitlines()]
-    assert len(events)==1 and events[0]['path']==str(protected) and events[0]['event']=='open'
+    assert len(events)==1 and events[0]['path']==path_key(protected) and events[0]['event']=='open'
     observe('restart-source-audit-control',{'positive':positive.returncode,'negative':negative.returncode,'events':events})
 
 
 class Server:
     def __init__(self,root,owner):
         self.root=root;root.mkdir();self.owner=owner;self.db=root/'archive.sqlite3';self.token='008-synthetic-'+uuid4().hex
-        self.hooks=root/'hooks';self.hooks.mkdir();(self.hooks/'sitecustomize.py').write_text('from document_formats_restart_server import install_audit\ninstall_audit()\n')
-        self.number=0;self.process=None;self.client=None;self.handles=[]
+        self.hooks=root/'hooks';self.hooks.mkdir();(self.hooks/'sitecustomize.py').write_text('from document_formats_restart_server import install_audit\ninstall_audit()\n',encoding='utf-8')
+        self.number=0;self.process=None;self.client=None;self.handles=[];self.serving_stamp=None;self.known_tree=[]
+    @diagnostics_on_failure
     def start(self,*,pause=False,deny=()):
-        self.number+=1;tag=str(self.number);self.log=self.root/('audit-'+tag+'.jsonl');self.pause=self.root/('pause-'+tag+'.jsonl')
+        self.start_failed=False
+        try:
+            assert self.process is None,'stop the previous task server first'
+            return self._start(pause=pause,deny=deny)
+        except BaseException:
+            self.start_failed=True
+            raise
+    def _start(self,*,pause=False,deny=()):
+        self.number+=1;tag=str(self.number);self.log=self.root/('audit-'+tag+'.jsonl');self.pause=self.root/('pause-'+tag+'.jsonl');self.nonce=uuid4().hex;self.serving_stamp=None;self.known_tree=[]
         with socket.socket() as port:port.bind(('127.0.0.1',0));self.port=port.getsockname()[1]
-        env=dict(os.environ,PYTHONPATH=os.pathsep.join([str(self.hooks),str(ROOT/'tests'),str(ROOT/'src')]),PYTHONUTF8='1',SMM_008_TEST_DB=str(self.db),SMM_008_TEST_OWNER=self.owner,SMM_008_TEST_TOKEN=self.token,SMM_008_RESTART_DENY=json.dumps(list(map(str,deny))),SMM_008_RESTART_AUDIT=str(self.log))
+        env=utf8_environment(os.environ,PYTHONPATH=os.pathsep.join([str(self.hooks),str(ROOT/'tests'),str(ROOT/'src')]),SMM_008_TEST_DB=str(self.db),SMM_008_TEST_OWNER=self.owner,SMM_008_TEST_TOKEN=self.token,SMM_008_TEST_NONCE=self.nonce,SMM_008_RESTART_DENY=json.dumps(list(map(str,deny))),SMM_008_RESTART_AUDIT=str(self.log))
         env.pop('SMM_008_RESTART_PAUSE',None)
         if pause:env['SMM_008_RESTART_PAUSE']=str(self.pause)
         self.stdout=self.root/('server-'+tag+'.stdout');self.stderr=self.root/('server-'+tag+'.stderr')
         outs=self.stdout.open('wb');errors=self.stderr.open('wb');self.handles=[outs,errors]
-        self.argv=[sys.executable,'-B','-m','uvicorn','document_formats_restart_server:make_app','--factory','--host','127.0.0.1','--port',str(self.port),'--timeout-graceful-shutdown','1']
+        self.argv=[sys.executable,'-B','-m','document_formats_restart_server','--port',str(self.port)]
         self.process=subprocess.Popen(self.argv,env=env,cwd=self.root,stdout=outs,stderr=errors,start_new_session=os.name!='nt')
-        live=psutil.Process(self.process.pid);self.created=live.create_time();self.actual_argv=live.cmdline();self.actual_exe=live.exe()
-        assert self.actual_argv[1:]==self.argv[1:]
-        self.allowed_executables={str(Path(sys.executable).resolve()),str(Path(psutil.Process().exe()).resolve())}
-        self.client=httpx.Client(base_url='http://127.0.0.1:'+str(self.port),headers={'Authorization':'Bearer '+self.token} if self.owner=='hub' else {},timeout=10)
+        self.bootstrap_stamp=spawn_identity(psutil.Process(self.process.pid));self.launcher_stamp=self.bootstrap_stamp;self.created=self.bootstrap_stamp['created']
+        self.allowed_executables={path_key(p) for p in (sys.executable,getattr(sys,'_base_executable',sys.executable),psutil.Process().exe())}
+        packet={'bootstrap':self.bootstrap_stamp,'requested_argv':self.argv,'http_identity':None,'expected_archive':str(self.db),'expected_cwd':str(self.root),'expected_owner':self.owner,'expected_nonce':self.nonce,'permitted_executables':sorted(self.allowed_executables)}
+        identity_path=self.root/('identity-'+tag+'.json')
+        identity_path.write_text(json.dumps(packet,ensure_ascii=False),encoding='utf-8')
+        observe('restart-server-spawn',packet)
+        self.client=httpx.Client(base_url='http://127.0.0.1:'+str(self.port),headers={'Authorization':'Bearer '+self.token} if self.owner=='hub' else {},timeout=10,trust_env=False)
         until=time.monotonic()+20
         while True:
-            assert self.process.poll() is None,self.stderr.read_text()
+            assert self.process.poll() is None,self.stderr.read_text(encoding='utf-8')
             try:
                 identity=self.client.get('/__test_identity')
                 if identity.status_code==200:break
             except httpx.TransportError:pass
             assert time.monotonic()<until,'isolated service did not start'
             time.sleep(.03)
-        assert identity.json()=={'pid':self.process.pid,'archive':str(self.db),'owner':self.owner}
-        stable=psutil.Process(self.process.pid);assert stable.create_time()==self.created and str(Path(stable.exe()).resolve()) in self.allowed_executables
-        self.actual_argv=stable.cmdline();self.actual_exe=stable.exe()
+        packet.update(http_status=identity.status_code,http_identity=identity.json())
+        try:packet['current_tree']=process_tree(self.bootstrap_stamp)
+        except Exception as error:packet['current_tree_error']=str(error)
+        identity_path.write_text(json.dumps(packet,ensure_ascii=False),encoding='utf-8')
+        observe('restart-server-before-enrollment',packet)
+        self.serving_stamp=verify_server(self.bootstrap_stamp,identity.json(),argv=self.argv,archive=self.db,owner=self.owner,nonce=self.nonce,cwd=self.root,executables=self.allowed_executables)
+        self.launcher_stamp=process_identity(psutil.Process(self.process.pid))
+        self.known_tree=packet.get('current_tree',[])
+        self.serving_pid=self.serving_stamp['pid'];self.actual_argv=self.serving_stamp['argv'];self.actual_exe=self.serving_stamp['exe']
         self.prefix='/api' if self.owner=='local' else '/v1'
         self.context={} if self.owner=='local' else {k:self.call('GET','/info').json()[k] for k in ('hub_id','document_epoch')}
-        observe('restart-server-start',{'argv':self.argv,'pid':self.process.pid,'created':self.created,'identity':identity.json(),'stage':self.number})
+        observe('restart-server-start',{'argv':self.argv,'launcher':self.launcher_stamp,'serving':self.serving_stamp,'identity':identity.json(),'stage':self.number})
     def call(self,method,path,body=None,*,raw=None,headers=None):
         args={'headers':headers or {}}
         if body is not None:args['json']=body
@@ -65,28 +84,59 @@ class Server:
         observe('restart-http',{'owner':self.owner,'stage':self.number,'method':method,'path':path,'body':body,'raw_sha256':hashlib.sha256(raw).hexdigest() if raw is not None else None,'status':response.status_code,'response':value})
         assert response.status_code==200,response.text
         return response
+    @diagnostics_on_failure
     def stop(self):
+        original=sys.exception()
+        try:return self._stop()
+        except BaseException as error:
+            # A failed cleanup cannot replace a startup or test-body exception.
+            value={'status':'incomplete','error':str(error),'original_error':str(original) if original is not None else None,'bootstrap':getattr(self,'bootstrap_stamp',None),'launcher':getattr(self,'launcher_stamp',None),'serving':self.serving_stamp}
+            try:
+                (self.root/'cleanup-incomplete.json').write_text(json.dumps(value,ensure_ascii=False),encoding='utf-8')
+                observe('restart-server-cleanup-incomplete',value)
+                preserve_diagnostics(self.root,'failed-cleanup-'+str(self.number))
+            except Exception as diagnostic_error:
+                value['diagnostic_error']=str(diagnostic_error)
+                try:sys.stderr.write('restart cleanup incomplete: '+json.dumps(value,ensure_ascii=False)+'\n')
+                except Exception:pass
+            if original is None and not getattr(self,'start_failed',False):raise
+            return value
+    def _stop(self):
         if self.process is None:return
         process=self.process;forced=False
-        if process.poll() is None:
-            live=psutil.Process(process.pid);assert live.create_time()==self.created and live.cmdline()[1:]==self.argv[1:] and str(Path(live.exe()).resolve()) in self.allowed_executables
-            if os.name=='nt':process.terminate()
-            else:os.killpg(process.pid,signal.SIGTERM)
-            try:process.wait(timeout=3)
-            except subprocess.TimeoutExpired:
-                forced=True
-                if os.name=='nt':process.kill()
-                else:os.killpg(process.pid,signal.SIGKILL)
-                process.wait(timeout=5)
+        known={(item['pid'],item['created']):item for item in self.known_tree+self._owned_tree()}
+        if self.serving_stamp is not None:known[(self.serving_stamp['pid'],self.serving_stamp['created'])]=self.serving_stamp
+        members=list(known.values())
+        if self.serving_stamp is not None and matching_process(self.serving_stamp) is not None:
+            response=self.client.post('/__test_shutdown',headers={'X-SMM-Test-Nonce':self.nonce})
+            assert response.status_code==200,response.text
+        try:process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            forced=True
+            known={(item['pid'],item['created']):item for item in members+self._owned_tree()}
+            members=refresh_owned_records(list(known.values()),self.allowed_executables)
+            terminate_verified(members,owner=process)
+        remaining=refresh_owned_records(members,self.allowed_executables)
+        if remaining:
+            forced=True;terminate_verified(remaining,owner=process)
+        assert not refresh_owned_records(members,self.allowed_executables)
         if self.client is not None:self.client.close()
         for handle in self.handles:handle.close()
-        evidence={'owner':self.owner,'stage':self.number,'pid':process.pid,'created':self.created,'exit':process.returncode,'forced':forced,'stdout':self.stdout.read_text(),'stderr':self.stderr.read_text(),'audit':self.events(),'pause_events':[json.loads(line) for line in self.pause.read_text().splitlines()] if self.pause.exists() else []}
+        evidence={'owner':self.owner,'stage':self.number,'pid':self.serving_stamp['pid'] if self.serving_stamp else None,'launcher':self.launcher_stamp,'serving':self.serving_stamp,'members':members,'exit':process.returncode,'forced':forced,'stdout':self.stdout.read_text(encoding='utf-8'),'stderr':self.stderr.read_text(encoding='utf-8'),'audit':self.events(),'pause_events':[json.loads(line) for line in self.pause.read_text(encoding='utf-8').splitlines()] if self.pause.exists() else []}
         observe('restart-server-stop',evidence)
-        with httpx.Client(timeout=.2) as check:
+        with httpx.Client(timeout=.2,trust_env=False) as check:
             with pytest.raises(httpx.TransportError):check.get('http://127.0.0.1:'+str(self.port)+'/__test_identity')
         self.process=None
         return evidence
-    def events(self):return [json.loads(line) for line in self.log.read_text().splitlines()] if self.log.exists() else []
+    def _owned_tree(self):
+        members=process_tree(self.bootstrap_stamp)
+        if members:
+            launcher=members[0]
+            assert launcher['argv'][1:]==self.argv[1:]
+            assert any(same_existing_path(launcher['exe'],p) for p in self.allowed_executables)
+            actual=matching_process(launcher);assert actual is not None and same_existing_path(actual.cwd(),self.root)
+        return members
+    def events(self):return [json.loads(line) for line in self.log.read_text(encoding='utf-8').splitlines()] if self.log.exists() else []
 
 
 @pytest.mark.parametrize('owner',['local','hub'])
@@ -141,7 +191,7 @@ def test_real_creator_restart_resumes_chunks_and_pending_captures(tmp_path,owner
         until=time.monotonic()+45
         while True:
             listed=server.call('GET','/documents/files').json()
-            if len(listed)==2 and all((row.get('latest_attempt') or {}).get('status') in {'ready','partial','failed'} for row in listed):break
+            if len(listed)==2 and all((row.get('latest_attempt') or {}).get('status')=='failed' or (row.get('published_snapshot') is not None and (row.get('latest_attempt') or {}).get('status') in {'ready','partial'} and row['published_snapshot']['capture_id']==row['latest_attempt']['capture_id']) for row in listed):break
             assert time.monotonic()<until,{'phase':'captured jobs did not resume after actual process restart','files':listed}
             time.sleep(.1)
         def verify_all(phase):

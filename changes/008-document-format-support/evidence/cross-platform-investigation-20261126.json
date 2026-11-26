@@ -1,0 +1,277 @@
+{
+  "date": "2026-11-26",
+  "scope": "Cross-platform investigation and scoped shared test-facility calibration; R008, C1, E/H/X remain incomplete. Helpers uncommitted at this checkpoint.",
+  "product_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+  "historical_same_source_diagnostic": {
+    "source": "0494cdeb7d3dc1e211905207bec5c9fa152a311a",
+    "python": "3.14.10",
+    "windows_failed": 5,
+    "ubuntu_passed": 5,
+    "evidence_root": ".acceptance-local/008/platform-audit-20261126/retrieved",
+    "mcp_real_vm_inner_cause": "Windows asyncio standard-library fallback socketpair rejected by child CLI audit; recovered actual child stderr. Historical CI disconnect without child stderr is not retroactively proven identical."
+  },
+  "root_causes": [
+    {
+      "kind": "test_observer",
+      "cause": "stdlib Windows loopback socketpair was treated as product network",
+      "shared_repair": "Permit only the real stdlib fallback frame with its own csock/listener/family/address; product connect/create_connection still rejected."
+    },
+    {
+      "kind": "process_identity",
+      "cause": "Popen launcher PID was assumed to be serving Python PID; early argv/exe may transition on Mac as well.",
+      "shared_repair": "Creation-time-fenced owned bootstrap, then authenticated HTTP nonce/archive/owner plus actual descendant identity and allowed physical Python images; recheck before cleanup."
+    },
+    {
+      "kind": "path_identity",
+      "cause": "Case/extended namespace and raw strings were compared inconsistently.",
+      "shared_repair": "Lexical native keys, physical existing-object identity where appropriate, bounded normalization for ordinary Windows dangling targets; preserve special extended semantics."
+    },
+    {
+      "kind": "text_boundary",
+      "cause": "Inherited encodings and LF-only test expectations differ from native Windows text output.",
+      "shared_repair": "Explicit UTF8 with native LF/CRLF expectation and raw stdout/stderr saved before assertions. Approved combined-v2 applied; Mac11controls passed; new remote execution pending."
+    },
+    {
+      "kind": "diagnostic_lifecycle",
+      "cause": "Failure before enrollment/after body failure could lose identity/logs or mask the primary failure with cleanup error.",
+      "shared_repair": "Persist pre-enrollment packets and original stdout/stderr, verified task-tree cleanup, preserve primary exception; real rejection and cleanup-failure controls."
+    },
+    {
+      "kind": "completion_boundary",
+      "cause": "A processing attempt can finish before the separate snapshot publication transaction; test/UI must not conflate attempt completion with successful publication.",
+      "status": "Actual Local and Hub browser red-v4 each reproduces success text at V/P0 before publication. Independent expected_failure registered for each owner. Product publication_pending fix awaits complete split green proof."
+    },
+    {
+      "kind": "evidence_budget",
+      "cause": "Repeated full-page screenshots scale with long reader content and both creator datasets.",
+      "status": "Resumed Web-read attempt retained 39,909,877 attachment bytes and was natively blocked; raw hash manifest is diagnostic, not accepted proof."
+    }
+  ],
+  "scoped_results": [
+    {
+      "platform": "macOS",
+      "identity": "ordinary current account",
+      "result": "10 passed; candidate independently passed and registered",
+      "proof": {
+        "operation": "debug",
+        "attempt": "debug-platform-runtime-controls-v4",
+        "sha256": "9360c406d7694cc36c38f3bc0020da05427e13342e4e1a56d256aefc7b765f8c",
+        "status": "debugged",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/debug/debug-platform-runtime-controls-v4/result.json"
+      },
+      "review": "review-platform-runtime-design-v3"
+    },
+    {
+      "platform": "Windows home VM",
+      "identity": "SSH administrator; not ordinary account evidence",
+      "result": "13 passed, 1 failed in new UTF8 newline control; independent needs_revision registered",
+      "proof": {
+        "operation": "debug",
+        "attempt": "debug-platform-remote-windows-v1",
+        "sha256": "4f99337b96daec7376ca2751229ae08e1799a56841604b56992295b887cc4868",
+        "status": "debugged",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/debug/debug-platform-remote-windows-v1/result.json"
+      },
+      "review": "review-platform-remote-windows-v1"
+    },
+    {
+      "platform": "Ubuntu 22.04.5 home VM",
+      "identity": "ordinary account",
+      "result": "14 passed; independent passed registered; supplementary, not SPEC Ubuntu24.04",
+      "proof": {
+        "operation": "debug",
+        "attempt": "debug-platform-remote-ubuntu-v1",
+        "sha256": "ccd764c15c3140d6f7058829238af9f073a195253f85edd66735d66552551522",
+        "status": "debugged",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/debug/debug-platform-remote-ubuntu-v1/result.json"
+      },
+      "review": "review-platform-remote-ubuntu-v1"
+    },
+    {
+      "platform": "macOS",
+      "identity": "ordinary current account",
+      "result": "11 passed, 5.96s; approved combined-v2 normal-exit control and native UTF8 bytes; independent passed registered",
+      "proof": {
+        "operation": "debug",
+        "attempt": "debug-platform-runtime-controls-v5",
+        "sha256": "daffc35a74fc412b724bc3447290c0a43528838c05e650bda95004371db614d5",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/debug/debug-platform-runtime-controls-v5/result.json"
+      },
+      "review": "review-platform-runtime-design-v4",
+      "limits": "Mac facility calibration only; C1 business was bound but not executed here."
+    },
+    {
+      "platform": "Windows home VM",
+      "attempt": "debug-platform-remote-windows-v2",
+      "sha256": "2cc0ca025829b25a366c5c6d6184f3083ab33d435948b701759609775d0a2c4c",
+      "passed": 15,
+      "seconds": 66.6,
+      "independent_review": "review-platform-remote-windows-v2",
+      "registered": true,
+      "limits": "Facilities only; no full24/C1/E/H/X; Windows administrator, Ubuntu22.04 supplement"
+    },
+    {
+      "platform": "Ubuntu22.04.5 home VM",
+      "attempt": "debug-platform-remote-ubuntu-v2",
+      "sha256": "6f21dbcb5327ec4263cf6a6a3b2250aad9affc347b3affe7e40805a796c6564e",
+      "passed": 15,
+      "seconds": 19.66,
+      "independent_review": "review-platform-remote-ubuntu-v2",
+      "registered": true,
+      "limits": "Facilities only; no full24/C1/E/H/X; Windows administrator, Ubuntu22.04 supplement"
+    }
+  ],
+  "current_ci": [
+    {
+      "run": "45731144093",
+      "artifact_id": 15078007397,
+      "name": "tests-windows-2022",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "3e7e4e616a9bfb04c4a70707db38e8e528b21693c8721746e844dae04760c6c2",
+      "official_digest": "sha256:3e7e4e616a9bfb04c4a70707db38e8e528b21693c8721746e844dae04760c6c2",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 426,
+      "failed": 24,
+      "errors": 0,
+      "skipped": 60
+    },
+    {
+      "run": "45731144093",
+      "artifact_id": 15077232126,
+      "name": "tests-macos-15",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "2a31539652f58fbd2b212a8e168ffe9cebda243b3a7e547fc5c348d3ccde7b46",
+      "official_digest": "sha256:2a31539652f58fbd2b212a8e168ffe9cebda243b3a7e547fc5c348d3ccde7b46",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 449,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 61
+    },
+    {
+      "run": "45731144093",
+      "artifact_id": 15076997579,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "d8440424dc60556e924ed3807c67cd167fa80d8bb74c01e78e5f517b08ffa3f9",
+      "official_digest": "sha256:d8440424dc60556e924ed3807c67cd167fa80d8bb74c01e78e5f517b08ffa3f9",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 449,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 61
+    },
+    {
+      "run": "45731137697",
+      "artifact_id": 15078286026,
+      "name": "tests-windows-2022",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "15bdc16502c1adad731590032b75640b954d79e20ee6efc6e60ab4680b622d01",
+      "official_digest": "sha256:15bdc16502c1adad731590032b75640b954d79e20ee6efc6e60ab4680b622d01",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 426,
+      "failed": 24,
+      "errors": 0,
+      "skipped": 60
+    },
+    {
+      "run": "45731137697",
+      "artifact_id": 15077114130,
+      "name": "tests-macos-15",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "ebf9fe97ec8a13ba21fba25b10ed08ce7cbfb2e40a759a9e4988aa84cb31f543",
+      "official_digest": "sha256:ebf9fe97ec8a13ba21fba25b10ed08ce7cbfb2e40a759a9e4988aa84cb31f543",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 449,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 61
+    },
+    {
+      "run": "45731137697",
+      "artifact_id": 15076509807,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+      "zip_sha256": "e20a5e4729354e3cddac8feede8b1b2d77c707eb421f7a7e79a0be3348af8193",
+      "official_digest": "sha256:e20a5e4729354e3cddac8feede8b1b2d77c707eb421f7a7e79a0be3348af8193",
+      "zip_crc_valid": true,
+      "tests": 510,
+      "passed": 449,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 61
+    }
+  ],
+  "limits": [
+    "Remote controls do not rerun all 24 historical failures or the complete suite.",
+    "Latest pushed Windows CI still has 24 failures; helper candidate has not been pushed.",
+    "Real OS-specific Job Object/SCM/ACL, POSIX supervision and service checks still require native execution. Passing one platform cannot prove them.",
+    "Ubuntu22.04 cannot replace the confirmed Ubuntu24.04 cell.",
+    "No global proxy/service changes, VM reboot/snapshot or daily SMM/Hub upgrade performed.",
+    "Windows OCR material-only preparation now recovered verified; no document OCR business/SCM identity acceptance."
+  ],
+  "supplemental_windows": {
+    "scope": "Frozen same-overlay supplemental existing historical-failure regressions; not native formal TC/E/H/X",
+    "network_path_mcp": {
+      "passed": 15,
+      "failed": 0,
+      "seconds": 96.58,
+      "recovered_files": 573
+    },
+    "process_restart": {
+      "passed": 7,
+      "failed": 2,
+      "seconds": 147.16,
+      "recovered_files": 1383,
+      "failures": [
+        "Local restart test uses attempt-ready as publication-complete; actual one document V/P0 with published=null while latest ready, other V/P1. Not evidence of data loss.",
+        "Hub cleanup identity observation raced normal process exit; psutil.NoSuchProcess reading cmdline."
+      ]
+    },
+    "independent_review": ".acceptance-local/008/platform-audit-20261126/supplemental-independent-review-v1.json",
+    "maintainer_approved_combined_extra_round": true,
+    "approved_patch_sha256": "228e49987b36d623154cdd8976828e5d5bf8baa908a19eb3f2fe221a3bb4393d",
+    "approved_patch_applied": true,
+    "process_restart_v2": {
+      "passed": 7,
+      "failed": 2,
+      "seconds": 161.06,
+      "recovered_files": 1435,
+      "zip_sha256": "c5e5e16f4344fb461694d023184404eed4c43dc4a2f5bf91b469986fd8dae82b",
+      "independent_report": ".acceptance-local/008/platform-audit-20261126/supplemental-independent-review-v2.json",
+      "observed": "Both creator restores/search/fulltext/tables/raw passed, then worker audit count0vs2 failed; fourth stable restart not reached",
+      "root_cause": "Actual Windows CPython3.14 audit executable=null/argv=str; current list-only hook misses actual worker events. Probe defect; not missing processing.",
+      "maintainer_decision": "retain shared argv repair gap; no more scoped execution authorised"
+    }
+  },
+  "candidate_overlay_v2": {
+    "sha256": "50991ad51a2ad53a89baebae33a0994e05408e9556c1bdf9eb96b47daaa5e3ee",
+    "files": 205,
+    "status": "verified tar copied and extracted to both task roots; no test result inferred",
+    "retained_case": "active-source cancellation draft excluded from this candidate and remains explicit gap"
+  },
+  "unified_strategy": [
+    "One shared test platform layer for path identity, explicit UTF8/native newlines, authentic stdlib socketpair recognition, authenticated serving-process identity and task-only cleanup. Reject genuine product network and foreign/reused PID identities.",
+    "Run positive and negative controls on every actual platform before business tests; retain raw diagnostics before assertions and verify every recovered file.",
+    "Common fixtures reduce observer errors; they cannot establish native Job/SCM/ACL or service behavior on another OS. Native execution and CI remain necessary."
+  ],
+  "windows_ocr_preparation": {
+    "status": "materials prepared, recovered verified; not document OCR business acceptance",
+    "packages": 31,
+    "installed_files": 1761,
+    "components": 261,
+    "engine": "Tesseract5.5.4 Leptonica1.87.0",
+    "languages": [
+      "chi_sim",
+      "eng"
+    ],
+    "originals": ".acceptance-local/008/platform-audit-20261126/windows-materials-v2-opened",
+    "verified_zip_sha256": "5797862b211616996c53fb93b87bd4369654c09183f9e03fea75cb21c4b026eb",
+    "scope": "task-local JustMe, no global PATH/RegisterPython/proxy changes; task-owned uninstall/conda side-effects tracked for later cleanup"
+  }
+}

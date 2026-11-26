@@ -122,8 +122,8 @@ def test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state(
                 events=[json.loads(l) for l in Path(str(gate)+'.events').read_text().splitlines()]
                 if sum(e['event']=='enter' for e in events)>sum(e['event']=='exit' for e in events):break
                 assert time.monotonic()<until,events;time.sleep(.02)
-            assert all(e['pid']==server.process.pid for e in events)
-            observe('update-replay-pending-gate',{'owner':owner,'id':item['id'],'events':events,'server_pid':server.process.pid})
+            assert all(e['pid']==server.serving_pid for e in events)
+            observe('update-replay-pending-gate',{'owner':owner,'id':item['id'],'events':events,'server_pid':server.serving_pid})
             replay(item,payload,started,receipt,'pending')
             for target in items:verify(target)
             gate.touch();settle(server,gate);item['version']=2

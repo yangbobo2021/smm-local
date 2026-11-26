@@ -5,6 +5,7 @@ from pathlib import Path
 from uuid import uuid4
 import hashlib,json,os,stat,subprocess,time
 import pytest
+from document_formats_platform import windows_target_key
 from document_helpers import observe
 from test_hub_documents_contracts import w
 from test_document_formats_update_replay import material,state
@@ -90,7 +91,9 @@ def test_external_tree_oracle_detects_nonfile_members(tmp_path,member):
             raise
     after=tree(outside);assert set(after)==set(before)|{member}
     assert after[member]['kind']==('directory' if member=='empty-directory' else 'link')
-    if member=='dangling-link':assert after[member]['target']==str(outside/'missing-target') and not extra.exists()
+    if member=='dangling-link':
+        actual=after[member]['target'];expected=str(outside/'missing-target')
+        assert (windows_target_key(actual)==windows_target_key(expected) if os.name=='nt' else actual==expected) and not extra.exists()
     assert before['original']==after['original'] and before!=after
     observe('managed-external-tree-known-control',{'member':member,'before':before,'after':after,'unexpected_member_detected':True})
     if member=='empty-directory':extra.rmdir()

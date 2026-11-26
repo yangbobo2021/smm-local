@@ -131,6 +131,14 @@ def test_sync_observer_known_positive_and_negative_controls(monkeypatch):
     from smm_local.document_snapshots import Snapshots
     attempts=install_sync_observer(monkeypatch)
     assert json.loads('{"ok":true}')=={'ok':True}
+    factories={socket.socketpair,getattr(socket,'_fallback_socketpair',socket.socketpair)}
+    for factory in factories:
+        left,right=factory()
+        try:
+            left.sendall(b'pair');assert right.recv(4)==b'pair'
+        finally:
+            left.close();right.close()
+    assert attempts==[]
     app=FastAPI()
     @app.get('/probe')
     def probe():return {'known':'allowed'}

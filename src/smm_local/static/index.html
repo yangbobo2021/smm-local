@@ -293,7 +293,7 @@
   const shaBuffer=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
   function nativeDetails(row,asset){
     if(!isNative(asset.display_name))return;
-    const label=document.createElement('p');label.textContent='格式 '+nativeFormat(asset.display_name).toUpperCase()+' · '+(asset.latest_attempt?.status||'pending')+' · 版本 '+asset.version+' · 处理版本 '+asset.processing_version;row.append(label);
+    const label=document.createElement('p');label.textContent='格式 '+nativeFormat(asset.display_name).toUpperCase()+' · '+(asset.latest_attempt?.status||'pending')+(asset.publication_pending?' · 等待发布':'')+' · 版本 '+asset.version+' · 处理版本 '+asset.processing_version;row.append(label);
     const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='查看处理详情与重试比较值';details.append(summary);
     const latest=asset.latest_attempt?Object.fromEntries(['capture_id','attempt_id','status','config_revision','error'].map(k=>[k,asset.latest_attempt[k]])):null;
     for(const [field,title,value] of [['published_snapshot','已发布快照',asset.published_snapshot],['latest_attempt','最新尝试',latest],['retry_target','重试目标（创建端 CLI 使用）',asset.retry_target]]){
@@ -321,8 +321,8 @@
       const rows=await send('/documents/library?project_id='+encodeURIComponent(binding.project_id));
       const row=rows.find(r=>r.id===asset.id),latest=row?.latest_attempt;
       if(!row||latest?.capture_id!==saved.capture_id||latest?.attempt_id!==saved.attempt_id)throw Error('更新已被移除或新尝试取代，请重新查看资料库');
-      const stage=latest.status;
-      outcome.status=({ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
+      const stage=row.publication_pending?'publishing':latest.status;
+      outcome.status=({publishing:'等待发布',ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
       outcome.detail='项目 #'+binding.project_id+' · 文档 '+asset.id+' · '+stage+' · 版本 '+row.version+' / 处理版本 '+row.processing_version;
       showUploadOutcomes(box,[outcome]);await refresh();
       if(['ready','partial','failed','empty-success'].includes(stage)){
@@ -345,8 +345,8 @@
     const pending=outcomes.filter(o=>o.documentId);if(!pending.length)return;
     while(true){
       const rows=await send('/documents/library?project_id='+encodeURIComponent(projectId));let waiting=false;
-      for(const o of pending){const row=rows.find(r=>r.id===o.documentId),stage=row?.latest_attempt?.status||'pending';
-        o.status=({ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
+      for(const o of pending){const row=rows.find(r=>r.id===o.documentId),stage=row?.publication_pending?'publishing':(row?.latest_attempt?.status||'pending');
+        o.status=({publishing:'等待发布',ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
         o.detail='项目 #'+projectId+' · 文档 '+o.documentId+' · '+stage+' · 版本 '+(row?.version??0)+' / 处理版本 '+(row?.processing_version??0);
         if(!['ready','partial','failed','empty-success'].includes(stage))waiting=true;
       }

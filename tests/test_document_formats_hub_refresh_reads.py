@@ -99,7 +99,7 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
         return True
     try:
         server.start(deny=[i['path'] for i in all_items]);server.client.timeout=httpx.Timeout(3)
-        probe=server.client.post('/__test_processing_probe');assert probe.status_code==200 and probe.json()=={'blocked':['processing','subprocess'],'pid':server.process.pid}
+        probe=server.client.post('/__test_processing_probe');assert probe.status_code==200 and probe.json()=={'blocked':['processing','subprocess'],'pid':server.serving_pid}
         baseline_readonly=readonly.read_text();assert len(baseline_readonly.splitlines())==2
         baseline_source=server.log.read_text() if server.log.exists() else ''
         cli('processing-configure','--expected-revision',0,'--ocr-executable',ENGINE,'--ocr-data-dir',DATA,'--languages','chi_sim+eng')

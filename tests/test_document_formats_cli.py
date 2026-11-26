@@ -199,7 +199,20 @@ def test_cli_observer_has_known_controls(tmp_path):
     env,log=install(tmp_path,[source])
     good=subprocess.run([sys.executable,'-c','print("guard-ready")'],env=env,capture_output=True,text=True,encoding='utf-8',timeout=10)
     assert good.returncode==0 and good.stdout.strip()=='guard-ready' and not log.exists()
-    controls=[('source-open','from pathlib import Path;Path('+repr(str(source))+').read_bytes()'),('content-import','import pdfplumber'),('spawn','import subprocess,sys;subprocess.run([sys.executable,"-c","pass"])'),('network','import socket;socket.create_connection(("127.0.0.1",9))')]
+    ipc_code='''import asyncio,socket
+for factory in {socket.socketpair,getattr(socket,'_fallback_socketpair',socket.socketpair)}:
+    left,right=factory()
+    try:
+        left.sendall(b'pair');assert right.recv(4)==b'pair'
+    finally:
+        left.close();right.close()
+asyncio.run(asyncio.sleep(0))
+print('ipc-ready')
+'''
+    ipc=subprocess.run([sys.executable,'-c',ipc_code],env=env,capture_output=True,text=True,encoding='utf-8',timeout=10)
+    assert ipc.returncode==0 and ipc.stdout.strip()=='ipc-ready' and not log.exists()
+    observe('cli-observer-ipc-positive',{'code':ipc.returncode,'stdout':ipc.stdout,'stderr':ipc.stderr})
+    controls=[('source-open','from pathlib import Path;Path('+repr(str(source))+').read_bytes()'),('content-import','import pdfplumber'),('spawn','import subprocess,sys;subprocess.run([sys.executable,"-c","pass"])'),('network','import socket;socket.create_connection(("127.0.0.1",9))'),('network','import socket;socket.socket().connect(("127.0.0.1",9))')]
     for kind,code in controls:
         result=subprocess.run([sys.executable,'-c',code],env=env,capture_output=True,text=True,encoding='utf-8',timeout=10)
         assert result.returncode!=0 and 'CLI read observer forbidden' in result.stderr

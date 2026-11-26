@@ -74,10 +74,10 @@ def prepare(server,monkeypatch,*,empty=False):
     stopped=server.stop();assert stopped['forced'] is False
     for path in paths:path.unlink()
     log=server.root/'readonly.jsonl';log.write_text('');monkeypatch.setenv('SMM_008_WEB_READ_ONLY',str(log));server.start(deny=paths)
-    control=server.client.post('/__test_processing_probe');assert control.status_code==200 and control.json()=={'blocked':['processing','subprocess'],'pid':server.process.pid}
-    events=[json.loads(l) for l in log.read_text().splitlines()];assert [e['event'] for e in events]==['processing','subprocess'] and all(e['pid']==server.process.pid for e in events)
+    control=server.client.post('/__test_processing_probe');assert control.status_code==200 and control.json()=={'blocked':['processing','subprocess'],'pid':server.serving_pid}
+    events=[json.loads(l) for l in log.read_text().splitlines()];assert [e['event'] for e in events]==['processing','subprocess'] and all(e['pid']==server.serving_pid for e in events)
     observe('web-readonly-known-control',{'owner':server.owner,'response':control.json(),'events':events});log.write_text('')
-    actor=psutil.Process(server.process.pid)
+    actor=psutil.Process(server.serving_pid)
     observe('web-read-runtime-identity',{'owner':server.owner,'os':platform.platform(),'python':sys.version,'server_pid':actor.pid,'created':actor.create_time(),'executable':actor.exe(),'argv':actor.cmdline(),'cwd':actor.cwd(),'username':actor.username(),'effective_uid':actor.uids().effective if hasattr(actor,'uids') else None,'controller_uid':os.getuid() if hasattr(os,'getuid') else None})
     return items,legacy,log
 
@@ -199,7 +199,7 @@ def test_web_reads_text_deep_tables_and_exact_originals(tmp_path,owner,monkeypat
                         browser.page.locator('#'+browser.prefix+'-table-select').select_option(ident)
                         for field,number in zip(('row-start','row-end','column-start','column-end'),bounds):browser.page.locator('#'+browser.prefix+'-table-'+field).fill(str(number))
                         with browser.page.expect_response(lambda r:r.url==browser.base+server.prefix+'/documents/read' and r.request.method=='POST') as failed:browser.page.locator('#'+browser.prefix+'-table-read-range').click()
-                        response=failed.value;assert response.status_code==400
+                        response=failed.value;assert response.status==400
                         expect(browser.page.locator('#notice.error')).to_be_visible()
                         message=browser.page.locator('#notice').inner_text();assert '1000' in message and '16000' in message and '原件' in message
                         assert browser.page.locator('#'+browser.prefix+'-table-cells').text_content()==stable
@@ -286,8 +286,8 @@ def test_web_readonly_probe_blocks_real_processing_and_subprocess(tmp_path,owner
     log=tmp_path/'readonly.jsonl';log.write_text('');monkeypatch.setenv('SMM_008_WEB_READ_ONLY',str(log));server=Server(tmp_path/owner,owner)
     try:
         server.start();r=server.client.post('/__test_processing_probe')
-        assert r.status_code==200 and r.json()=={'blocked':['processing','subprocess'],'pid':server.process.pid}
-        events=[json.loads(l) for l in log.read_text().splitlines()];assert [e['event'] for e in events]==['processing','subprocess'] and all(e['pid']==server.process.pid for e in events)
+        assert r.status_code==200 and r.json()=={'blocked':['processing','subprocess'],'pid':server.serving_pid}
+        events=[json.loads(l) for l in log.read_text().splitlines()];assert [e['event'] for e in events]==['processing','subprocess'] and all(e['pid']==server.serving_pid for e in events)
         observe('web-server-readonly-known-control',{'owner':owner,'response':r.json(),'events':events})
     finally:server.stop()
 

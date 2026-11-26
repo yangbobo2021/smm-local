@@ -68,5 +68,23 @@ def make_app():
             except AssertionError:blocked.append('subprocess')
             return {'blocked':blocked,'pid':os.getpid()}
     @app.get('/__test_identity')
-    def actual_identity():return {'pid':os.getpid(),'archive':str(db.db_path.resolve()),'owner':os.environ['SMM_008_TEST_OWNER']}
+    def actual_identity():return {'pid':os.getpid(),'archive':str(db.db_path.resolve()),'owner':os.environ['SMM_008_TEST_OWNER'],'nonce':os.environ['SMM_008_TEST_NONCE']}
     return app
+
+
+if __name__=='__main__':
+    import argparse
+    import uvicorn
+    from fastapi import Request,HTTPException
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--port',type=int,required=True)
+    args=parser.parse_args()
+    app=make_app()
+    server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,timeout_graceful_shutdown=1))
+    @app.post('/__test_shutdown')
+    async def shutdown(request:Request):
+        if request.headers.get('X-SMM-Test-Nonce')!=os.environ['SMM_008_TEST_NONCE']:
+            raise HTTPException(403,'wrong task identity')
+        server.should_exit=True
+        return {'stopping':True,'pid':os.getpid()}
+    server.run()

@@ -186,9 +186,12 @@ def test_stdio_mcp_document_views_preserve_snapshot_and_source_locations(tmp_pat
                         other = next(other for other_name, other in items.items() if other_name != name)
                         await call('read_document', {'reference': hit['reference'], 'view': 'table', 'table_id': other['read']['tables'][0]['table_id']}, rejected=True)
                     assert len(seen) == 2
-        keep('stdio/stderr.txt', stderr_path.read_bytes())
 
-    asyncio.run(scenario())
+    try:
+        asyncio.run(scenario())
+    finally:
+        stderr_path=tmp_path/'stdio.stderr'
+        if stderr_path.exists():keep('stdio/stderr.txt',stderr_path.read_bytes())
     after = saved_state(f)
     assert before == after
     assert all(not item['path'].exists() for item in items.values())

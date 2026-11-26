@@ -151,7 +151,12 @@ class Snapshots:
         retry=None
         if capture and attempt and attempt['state'] not in {'pending','processing'} and self.authorized(c,capture['id']):
             retry={'capture_id':capture['id'],'sha256':capture['raw_sha256'],'expected_attempt_id':attempt['id'],'expected_version':doc['version'],'expected_processing_version':state['processing_version']}
-        return {'processing_version':state['processing_version'],'published_snapshot':published,'latest_attempt':latest,'retry_target':retry}
+        # A successful extraction is not yet a successful publication. Compare
+        # the whole result, not just CID: reprocessing the same capture with a
+        # new profile can still be waiting for its new result to be published.
+        publication_pending=bool(attempt and attempt['state'] in {'ready','partial','empty-success'} and
+            (state['published_capture']!=attempt['capture_id'] or state['result_sha256']!=attempt['result_sha256']))
+        return {'processing_version':state['processing_version'],'published_snapshot':published,'latest_attempt':latest,'retry_target':retry,'publication_pending':publication_pending}
     def retry(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
         with self.db.connect() as c:
             c.execute('BEGIN IMMEDIATE')

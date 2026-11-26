@@ -195,5 +195,66 @@
       "controls": 4
     },
     "scope": "Raw-only normal TTL quota and shared/committed protection; full F3/SC10 and other paths still required."
+  },
+  "platform_investigation": {
+    "evidence": "cross-platform-investigation-20261126.json",
+    "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
+  },
+  "current_ci_checkpoint": {
+    "head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+    "runs": [
+      "45731144093",
+      "45731137697"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 449,
+        "skipped": 61,
+        "failed": 0
+      },
+      "ubuntu": {
+        "passed": 449,
+        "skipped": 61,
+        "failed": 0
+      },
+      "windows": {
+        "passed": 426,
+        "skipped": 60,
+        "failed": 24
+      }
+    },
+    "official_six_zip_digest_and_crc_verified": true,
+    "helpers_uncommitted": true
+  },
+  "active_source_lifecycle_gap": {
+    "maintainer_decision": "retain gap, 2026-11-26",
+    "case": "TC-008-active-source-removal",
+    "scope": "Candidate did not pass preparation: isolated archives lack OCR configuration required to produce specified pixel-boundary partial sample. Actual cancellation/5-second slot/tree/last authorization were NOT reached.",
+    "latest_debug": "debug-sc8-active-source-removal-v3",
+    "independent_review": "review-active-source-design-v3 registered needs_revision",
+    "prepared_extra_repair_applied": false,
+    "no_further_execution_authorized": true
+  },
+  "publication_state_in_progress": {
+    "status": "passed_scoped",
+    "evidence": "publication-state-development.json",
+    "scope": "Two actual creator browser postprocessing/pre-publication UI boundaries,48flows96statePNG,10relatedregressions; each greenreview registered plus joint report. No fullSC1/E/H/X claim."
+  },
+  "restart_and_audit_retained": {
+    "decision": "retain gaps",
+    "call_id": "call_c6cb87550504411c86bdd14c3db57872",
+    "proposal": ".acceptance-local/008/drafts/restart-and-audit-completion/proposal.md",
+    "sha256": "3a01af4368e00edc7058c6cb8fd651b1f7f3973ba8058d85255fcd5aca32118b",
+    "scope": "C1 restart five findings and shared Windows string-argv audit normalisation; no additional repair/execution round authorised. Do not apply draft patches or run these retained TCs as dedicated acceptance.",
+    "candidate_result": "debug-sc7-managed-restart-c1-mac-v3:1failed4passed; independentreview-managed-restart-c1-design-v1 needs_revision design+implementation",
+    "findings": [
+      "Missing partial/empty/oldpub+pending before restart coverage",
+      "Local files API has no project_ids; wrong test observation",
+      "Final files ID set lacks explicit uniqueness",
+      "Old ref text checks anchors without complete source/order and pre/post fulltext equality",
+      "Dynamic restart_server missing runtime/debug binding",
+      "Windows subprocess audit argv is str; list-only observer misses actual workers"
+    ],
+    "unready_candidate_committed_as_executable_test": false
   }
 }
