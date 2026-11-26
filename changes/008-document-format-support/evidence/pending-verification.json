@@ -102,11 +102,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "head": "a04ac4cd987a29de9970071060df94de0ad2d5d5",
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
     "status": "needs_revision",
-    "evidence": "pr43-review-a04ac4c.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7186437392",
-    "scope": "Evidence-only checkpoint; new160124e confirmed temporary-observation policy and subsequent implementation are outside this historical PR-review scope. Fresh implementation review pending."
+    "evidence": "pr43-review-e8bb1bd.md",
+    "scope": "Fresh independent incremental review: scoped sampling fix/evidence credible, no new material product defect; D1 historical index labels clarified afterwards. Not whole R008 delivery.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7187043311"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -131,12 +131,13 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
-    "evidence": "ci-regression-7c2348a.json",
-    "macos_ubuntu_each": "465passed68skipped0failed twice each",
-    "windows_pr": "464passed67skipped2retained failures",
-    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
-    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "evidence": "ci-regression-e8bb1bd.json",
+    "macos_ubuntu_each": "465passed69skipped0failed twice each",
+    "windows_each": "465passed67skipped2retained worker-audit failures twice",
+    "new_sampler_windows": "passed twice, skipped on non-Windows",
+    "six_staging_tests": "passed all6 artifacts,36case instances",
+    "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",
@@ -192,12 +193,13 @@
     "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
   },
   "current_ci_checkpoint": {
-    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
-    "evidence": "ci-regression-7c2348a.json",
-    "macos_ubuntu_each": "465passed68skipped0failed twice each",
-    "windows_pr": "464passed67skipped2retained failures",
-    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
-    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "evidence": "ci-regression-e8bb1bd.json",
+    "macos_ubuntu_each": "465passed69skipped0failed twice each",
+    "windows_each": "465passed67skipped2retained worker-audit failures twice",
+    "new_sampler_windows": "passed twice, skipped on non-Windows",
+    "six_staging_tests": "passed all6 artifacts,36case instances",
+    "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
   },
   "active_source_lifecycle_gap": {
     "maintainer_decision": "retain gap, 2026-11-26",
@@ -409,23 +411,33 @@
     "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
   },
   "windows_pdf_temporary_directory_error": {
-    "status": "Approved recovery implemented; scoped native sampler/Mac regression independently passed. Fresh source CI pending; original CI exact cause not conclusively established.",
+    "status": "Approved sampling fix scoped passed and new Windows unit/original6staging source CI passed twice; exact original one-off cause remains unproven.",
     "evidence": "ci-regression-7c2348a.json",
     "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
-    "limitation": "One failed and one passed sibling run; no confirmed cause or product fix. No blind retry or assertion broadening.",
-    "investigation": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
     "retained": false,
     "investigation_evidence": "windows-temporary-observation-diagnostic.json",
-    "next": "Run current implementation CI and preserve all Windows source-regression results separately. Extra home-VM staging regression timed out, not passed.",
+    "next": "Other required GC/lifecycle/platform work remains; extra home-VM capacity attempt stays incomplete, not retrospectively passed.",
     "clarification": "Maintainer approved once-immediate-complete-rescan policy on2026-11-26; SPEC/PLAN and native definition v3 saved before product changes.",
     "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
     "delivery_evidence": "temporary-observation-development.json",
-    "scope": "Real Windows1 sampler; Mac6 staging; extra Windows6 run incomplete. Not full SC10/E/H/X."
+    "scope": "Real Windows1 sampler; Mac6 staging; extra Windows6 run incomplete. Not full SC10/E/H/X.",
+    "historical_limitation_before_160124e": "One failed and one passed sibling run; no confirmed cause or product fix. No blind retry or assertion broadening.",
+    "historical_investigation_before_160124e": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
+    "current_investigation": "Approved once-full-rescan policy implemented and independently passed at e8bb1bd; exact original CI causal chain remains unproven. Historical v1 design-conflict opinions stay unchanged.",
+    "current_ci": "ci-regression-e8bb1bd.json"
   },
   "path_finalization_retained": {
     "evidence": "path-finalization-retained.json",
     "status": "Retained by maintainer; path product defect NOT fixed in PR",
     "candidate_product_applied": false,
     "test_gap": "Hub search context envelope, no approved extra round"
+  },
+  "historical_ordinary_ci_7c2348a": {
+    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+    "evidence": "ci-regression-7c2348a.json",
+    "macos_ubuntu_each": "465passed68skipped0failed twice each",
+    "windows_pr": "464passed67skipped2retained failures",
+    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
+    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
   }
 }
