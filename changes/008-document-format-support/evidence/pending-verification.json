@@ -102,11 +102,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+    "head": "a04ac4cd987a29de9970071060df94de0ad2d5d5",
     "status": "needs_revision",
-    "evidence": "pr43-review-7c2348a.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7184761155",
-    "scope": "Single-archive queue evidence credible; multi-DB retained, GC/path refresh/detail/service CLI and full platform acceptance remain incomplete"
+    "evidence": "pr43-review-a04ac4c.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7186437392",
+    "scope": "Evidence-only checkpoint; new160124e confirmed temporary-observation policy and subsequent implementation are outside this historical PR-review scope. Fresh implementation review pending."
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -409,16 +409,18 @@
     "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
   },
   "windows_pdf_temporary_directory_error": {
-    "status": "Unresolved; not retained",
+    "status": "Approved recovery implemented; scoped native sampler/Mac regression independently passed. Fresh source CI pending; original CI exact cause not conclusively established.",
     "evidence": "ci-regression-7c2348a.json",
     "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
     "limitation": "One failed and one passed sibling run; no confirmed cause or product fix. No blind retry or assertion broadening.",
     "investigation": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
     "retained": false,
     "investigation_evidence": "windows-temporary-observation-diagnostic.json",
-    "next": "Revise test design under approved policy, obtain fresh valid product red and independent review before implementing.",
+    "next": "Run current implementation CI and preserve all Windows source-regression results separately. Extra home-VM staging regression timed out, not passed.",
     "clarification": "Maintainer approved once-immediate-complete-rescan policy on2026-11-26; SPEC/PLAN and native definition v3 saved before product changes.",
-    "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633"
+    "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+    "delivery_evidence": "temporary-observation-development.json",
+    "scope": "Real Windows1 sampler; Mac6 staging; extra Windows6 run incomplete. Not full SC10/E/H/X."
   },
   "path_finalization_retained": {
     "evidence": "path-finalization-retained.json",

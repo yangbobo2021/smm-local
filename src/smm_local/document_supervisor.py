@@ -16,8 +16,28 @@ TIME_LIMIT=300
 
 
 def temporary_bytes(root):
-    """Sample live regular files while workers may remove completed temporaries."""
-    root.stat()  # The task directory itself must remain observable.
+    """Return a complete sample, retrying one transient child-path denial."""
+    task = Path(os.path.abspath(root))
+    for attempt in range(2):
+        root.stat()  # Missing/inaccessible task roots always fail closed.
+        try:
+            return _temporary_bytes_once(root)
+        except PermissionError as exc:
+            if attempt or exc.filename is None:
+                raise
+            failed = Path(os.path.abspath(exc.filename))
+            if failed == task:
+                raise
+            try:
+                failed.relative_to(task)
+            except ValueError:
+                raise exc
+            # A Windows delete-pending child can reject a cached traversal.
+            # Discard the partial count and start one immediate complete scan.
+            # Persistent denial still aborts; no sleep or whole-task retry.
+
+
+def _temporary_bytes_once(root):
     def walk_error(exc):
         if not isinstance(exc,FileNotFoundError):raise exc
     used=0
