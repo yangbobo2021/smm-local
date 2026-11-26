@@ -1,0 +1,348 @@
+{
+  "case": "TC-008-canonical-candidate-capacity",
+  "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "source_base": "f1334a275e89c5079313eb7bdfc8436b62c422b7",
+  "scope": "Mac source checkout ASGI creators and actual CLI replay; first exclusive-archive candidate capacity subcase only, not full GC/SC10/R008, installed service or cross-platform E/H/X.",
+  "source": {
+    "src/smm_hub/processed_documents.py": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+    "src/smm_local/document_processing.py": "50a1acbd9431a3e24759e62ba11e64be2c3adb459e79568b4add9b1da88d1a1b",
+    "src/smm_local/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+    "src/smm_local/document_snapshots.py": "5b87230f9367d1f892a6a9a9b12235cb05c41c766ffedba3549d69a3dcc3fbb9",
+    "src/smm_local/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+    "src/smm_local/managed_document_uploads.py": "8694ee21d4c7fea094f4fd829a32a54e90cfd0a7efa4659e06bda1c49cfc45b5"
+  },
+  "creators": {
+    "local": {
+      "red": {
+        "id": "red-sc10-canonical-capacity-local-v3",
+        "sha256": "6b243b214c068ef4d0c1f7a11cb03dc055dcc22a4ed3dc4f10323a31db16c784",
+        "review_sha256": "f16bd6da9f6de56350353c1df33b1420c0b7148110dbc4db600a45db9ec685bf"
+      },
+      "green": {
+        "id": "green-sc10-canonical-capacity-local-v3",
+        "sha256": "09393a7d0038519b77712d6ccffb938b5b6b45d2a88de045a961ba1be527ef67",
+        "review_sha256": "2f51c85170210a608c9b15b49ec3acf1251e0e2605d76af4f3b9469f920b24d7",
+        "reviewer_session": "/root/r008_gc_capacity_green_v3"
+      },
+      "main_stdout": ".                                                                        [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  {checkout}/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 1 warning in 130.23s (0:02:10)\n",
+      "regression_stdout": ".........                                                                [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  {checkout}/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n9 passed, 1 warning in 101.07s (0:01:41)\n",
+      "artifacts": {
+        "files": 3002,
+        "bytes": 5454832,
+        "manifest_sha256": "6f09a530db240d2551414d7d4aa28ea836e86e5b3dc8ed0a9ecebc8ff1779d25"
+      },
+      "additional_regression_originals": {
+        "files": 1149,
+        "bytes": 5264840,
+        "manifest_sha256": "75f7e02cba6bcf1a98c49b282b9721ff33ddeda0da3f182ec3cebcb749a489b9"
+      },
+      "same_test_and_command": true,
+      "actual_target_count": 12,
+      "physical_samples": 26,
+      "actual_sample_mib": [
+        236,
+        256
+      ],
+      "intermediate_254_mib": "Sum from the replacement step; not a separately saved physical sample.",
+      "full_admission_before_body_write_checks": 12,
+      "targets": [
+        {
+          "owner": "local",
+          "index": 0,
+          "document_id": "bb37422ced7b4f37b235f866584b55d1",
+          "before": "none",
+          "probe_removed": "02508e24b8554cc8b182f8ec09e7fb0c"
+        },
+        {
+          "owner": "local",
+          "index": 1,
+          "document_id": "8e4827b3e0484ce9800f5c63add1a7d4",
+          "before": "none",
+          "probe_removed": "b92bb7fdf7c3405c981aa2f549cf5af5"
+        },
+        {
+          "owner": "local",
+          "index": 2,
+          "document_id": "937e02c4cbfd441290da77950735be98",
+          "before": "ready",
+          "probe_removed": "8664cf3fd8d842c38a48a1f77c973857"
+        },
+        {
+          "owner": "local",
+          "index": 3,
+          "document_id": "6ab6c4edc0f24589934f8ff8e918f270",
+          "before": "ready",
+          "probe_removed": "44b4084cc10f448889271226fd393bac"
+        },
+        {
+          "owner": "local",
+          "index": 4,
+          "document_id": "27bc2a9204c24a5ba153aaf8bf3fc12b",
+          "before": "partial",
+          "probe_removed": "0ebed912095044feae514b96ef09a34c"
+        },
+        {
+          "owner": "local",
+          "index": 5,
+          "document_id": "4b1e4e6addae4e4fa5a53c5a5dae8c9e",
+          "before": "partial",
+          "probe_removed": "5f71234d315a434aaf48c87e758f950a"
+        },
+        {
+          "owner": "local",
+          "index": 6,
+          "document_id": "4db764e3f10a4b20ad4082324da1e634",
+          "before": "none",
+          "probe_removed": "01a40df30b76430dbeeb886ef07b20c1"
+        },
+        {
+          "owner": "local",
+          "index": 7,
+          "document_id": "49a619cc54794601bdef5b1492caf663",
+          "before": "none",
+          "probe_removed": "f32e6eec34f041cd91f5f0c0e9360ebd"
+        },
+        {
+          "owner": "local",
+          "index": 8,
+          "document_id": "cb091f169e3340e7af413daa5c13b1e7",
+          "before": "ready",
+          "probe_removed": "06dc6344d2b5455b8348bffddf856503"
+        },
+        {
+          "owner": "local",
+          "index": 9,
+          "document_id": "caa79b28cad84120bb6b8d6b21d27c85",
+          "before": "ready",
+          "probe_removed": "9ba09499957b44fab4204edf06154cf5"
+        },
+        {
+          "owner": "local",
+          "index": 10,
+          "document_id": "ba53f790a73146eea2a5d1060d904930",
+          "before": "partial",
+          "probe_removed": "cbfe3e9a304e4ba4b9b6ea1a41b675b1"
+        },
+        {
+          "owner": "local",
+          "index": 11,
+          "document_id": "6727bde0957f48abad6d52aa4f93422f",
+          "before": "partial",
+          "probe_removed": "1d2686c1fc704730bbc08a7f68e2b01f"
+        }
+      ]
+    },
+    "hub": {
+      "red": {
+        "id": "red-sc10-canonical-capacity-hub-v3",
+        "sha256": "eeb17a1efb6ee47ac5c12d5fd9ecb447b0a803444762c9ede0aad1b3c74f37ac",
+        "review_sha256": "7e01894f6ae89df1710944dd72401395b670ac87b20eed5a798f9da8e3af126b"
+      },
+      "green": {
+        "id": "green-sc10-canonical-capacity-hub-v3",
+        "sha256": "845f16d9b6b94c567de0ecd21a4c0777baf28e5652d3916869b8210b203b378a",
+        "review_sha256": "d5ec26c0d251b2368fbbabe1940ae0969432a61fba25f35441823eefcd1462f5",
+        "reviewer_session": "/root/r008_gc_capacity_green_v3"
+      },
+      "main_stdout": ".                                                                        [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  {checkout}/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 1 warning in 169.96s (0:02:49)\n",
+      "regression_stdout": "........                                                                 [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  {checkout}/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n8 passed, 1 warning in 36.97s\n",
+      "artifacts": {
+        "files": 3006,
+        "bytes": 6892950,
+        "manifest_sha256": "785c6f281959d83f9d45b2b33435b0d7092703bcb171e8d751c852c05c822dc7"
+      },
+      "additional_regression_originals": {
+        "files": 450,
+        "bytes": 4059666,
+        "manifest_sha256": "2946f38ae8f80f3024c6d95704e9f18e40362aee0000150d501291782fcd6e2c"
+      },
+      "same_test_and_command": true,
+      "actual_target_count": 12,
+      "physical_samples": 26,
+      "actual_sample_mib": [
+        236,
+        256
+      ],
+      "intermediate_254_mib": "Sum from the replacement step; not a separately saved physical sample.",
+      "full_admission_before_body_write_checks": 12,
+      "targets": [
+        {
+          "owner": "hub",
+          "index": 0,
+          "document_id": "5ec6115cdcbe47639f2bbca5c3e7c415",
+          "before": "none",
+          "probe_removed": "58a332d6c7814749b9b52ec83fdb9f26"
+        },
+        {
+          "owner": "hub",
+          "index": 1,
+          "document_id": "b11abc2f053f4f589e98221e2837fd62",
+          "before": "none",
+          "probe_removed": "b7507bfd38f44520a1175f98ec9c4c0d"
+        },
+        {
+          "owner": "hub",
+          "index": 2,
+          "document_id": "08b56c912c9f47e392b5a368ce85b755",
+          "before": "ready",
+          "probe_removed": "1b70d3c12a384b10b11b7aa0778ab3f3"
+        },
+        {
+          "owner": "hub",
+          "index": 3,
+          "document_id": "f262f26d9a194b42bfed9ff6e373b564",
+          "before": "ready",
+          "probe_removed": "c51f547d53dd48e1bb35c248dd189a67"
+        },
+        {
+          "owner": "hub",
+          "index": 4,
+          "document_id": "497e68f2b738491194ecf4ef3ea56fb8",
+          "before": "partial",
+          "probe_removed": "960c15a0e6dc4b849add2593bd9a949d"
+        },
+        {
+          "owner": "hub",
+          "index": 5,
+          "document_id": "2b72a3d36b824f56aa1bdc9115e4cc04",
+          "before": "partial",
+          "probe_removed": "2ce420de6a8e46478e091564197d9381"
+        },
+        {
+          "owner": "hub",
+          "index": 6,
+          "document_id": "ba4fd093078b4cd7906a17eb6a6dd137",
+          "before": "none",
+          "probe_removed": "6d1eebbb01b7409183fb433b24cdb66d"
+        },
+        {
+          "owner": "hub",
+          "index": 7,
+          "document_id": "db21bfaa85fb4fe19d90e09dc609d644",
+          "before": "none",
+          "probe_removed": "5d34ee57c7fd4eee862a4e93abbeed5b"
+        },
+        {
+          "owner": "hub",
+          "index": 8,
+          "document_id": "842cc4725a63420398fd762709ef25ca",
+          "before": "ready",
+          "probe_removed": "3aa22a4135d6487095ea5133aa502f30"
+        },
+        {
+          "owner": "hub",
+          "index": 9,
+          "document_id": "5eb2927f424c45a9953c52e82c5dbaf3",
+          "before": "ready",
+          "probe_removed": "34d011550a774fa69bd6f4523e3cd4b7"
+        },
+        {
+          "owner": "hub",
+          "index": 10,
+          "document_id": "747b2b4702aa4304b98d6976c2ed200a",
+          "before": "partial",
+          "probe_removed": "8ac5db233c3d421bac2cf67a6856e03a"
+        },
+        {
+          "owner": "hub",
+          "index": 11,
+          "document_id": "753ca6a097954a8f88c2c6d842737a36",
+          "before": "partial",
+          "probe_removed": "3cc70406bcc448008e543dd81e89a22b"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Shared SHA last owner release, overlapping continuous sources, obsolete results/stages, in-flight/crash/restore and unknown/legacy ownership still need their separate cases.",
+    "Cross-archive same submission and DB rename/path reuse safety corrections statically reviewed; dynamic tests still missing.",
+    "Actual prior Hub-v2 watchdog matching/cmdline AccessDenied remains unfixed; normal-exit race is only a hypothesis, not established root cause. v3 success does not erase v2 failure.",
+    "Existing maintainer-retained cancellation/C1/shared-Windows-argv/queue-isolation/path-finalization gaps remain, no dedicated rerun or draft repair.",
+    "Current GC source not yet covered by recovered e8 ordinary CI."
+  ],
+  "prior_attempts": [
+    {
+      "id": "green-sc10-canonical-capacity-local-v1",
+      "sha256": "c3170c5ae024879fe9f139981952b03f5d1abec783e7f3b2cacde6cb6d7f35d5",
+      "status": "blocked",
+      "main_exit": 0,
+      "regression_exit": 1,
+      "kept_unchanged": true
+    },
+    {
+      "id": "green-sc10-canonical-capacity-local-v2",
+      "sha256": "78371455f134f8520009dc0f62535f060a7d80aa4269926c86f7d0b1b2e3e1a1",
+      "status": "green_observed",
+      "main_exit": 0,
+      "regression_exit": 0,
+      "kept_unchanged": true
+    },
+    {
+      "id": "green-sc10-canonical-capacity-hub-v2",
+      "sha256": "dc74109cb07947d7ba753733c950d684f2ee4753afc5fc047ed1600da9b9cdd2",
+      "status": "blocked",
+      "main_exit": 1,
+      "regression_exit": 0,
+      "kept_unchanged": true
+    }
+  ],
+  "independent_safety_reports": {
+    "candidate-reclamation-safety-v1.md": {
+      "original_sha256": "2d64490e8e4f3629eb55bfbaa368f6ba5a2c47d0c651bb6478fe6a93809cf139",
+      "display_sha256": "f920687cf27f8dbc01c72f36bf1a9426166fa3cf797c7ada932d5740bb3c84c8",
+      "redaction": "Checkout path replaced only; original private report unchanged."
+    },
+    "candidate-reclamation-safety-v2.md": {
+      "original_sha256": "14aae1e875c921ba05c05667bb807042977f282126e7e1f92d2d13256043d808",
+      "display_sha256": "55f87f451b97f8897e2e2e49c7e9d9a8b9166d7600d7f60e37619aee6c03df6b",
+      "redaction": "Checkout path replaced only; original private report unchanged."
+    },
+    "candidate-reclamation-owner-identity-v2.md": {
+      "original_sha256": "063c8e217643952fd5997c9d73871867b3db7419170d75d47bfe0d8bece97c81",
+      "display_sha256": "fafe9d2fc645a7ed249766897f5c70d56acbfb6860c071056f651d26a2f37ab7",
+      "redaction": "Checkout path replaced only; original private report unchanged."
+    },
+    "candidate-reclamation-safety-v3.md": {
+      "original_sha256": "4bcedc2f741f5562b4fd3a48b1952904f64be8dd9c587f1c77886674a929b134",
+      "display_sha256": "9d1cb2673c9799678e15f35ad32a73af83e724c670378e806a0856d045588932",
+      "redaction": "Checkout path replaced only; original private report unchanged."
+    },
+    "candidate-reclamation-supervisor-failure-v2.md": {
+      "original_sha256": "766e359a87ee3c04e3a01d5c0b7d72348648298e22717dbf3f70962dd560cad6",
+      "display_sha256": "766e359a87ee3c04e3a01d5c0b7d72348648298e22717dbf3f70962dd560cad6",
+      "redaction": "Checkout path replaced only; original private report unchanged."
+    }
+  },
+  "build": {
+    "wheels": [
+      {
+        "wheel": "smm_hub-0.4.0-py3-none-any.whl",
+        "bytes": 182314,
+        "sha256": "e469e62d42f1ff978283ea4cbdcfc4f4bf0dc94ef1cef05afb34db1dab724554",
+        "crc_valid": true,
+        "exact_source_members": 47
+      },
+      {
+        "wheel": "smm_local-0.4.0-py3-none-any.whl",
+        "bytes": 198170,
+        "sha256": "d16c1180f4d1079ce5abce6858124ad1e3df3cf6b68f815e4bcddd061df86bf0",
+        "crc_valid": true,
+        "exact_source_members": 45
+      }
+    ],
+    "source_manifest_sha256": "b8a936c60ca7a1991a814d8620e35b16ac50cf827f9b17627fbea99eca013908",
+    "scope": "Two wheels CRC and exact Python source; supplementary isolated Mac Python3.11.11 base Hub import/status, not complete installed business.",
+    "base_hub_smoke": {
+      "status": "passed",
+      "scope": "Mac Python3.11.11 isolated base Hub wheel import/metadata/publicCLI status; no smm_local or document processing extras, not full E/H/X",
+      "preparation_errors": "Two unpromised launcher forms failed and originals retained. Actual documented smm-hub hub --state-dir DIR documents processing-status passed.",
+      "wheel_sha256": "e469e62d42f1ff978283ea4cbdcfc4f4bf0dc94ef1cef05afb34db1dab724554"
+    },
+    "base_hub_smoke_commands_sha256": "6a0b5a114ace24057ce78c0b458be803915d864c0f8921333caac69b21f08cef",
+    "non_python_resources": {
+      "count": 1,
+      "manifest_sha256": "f4948012cc67bf63eb4d279efbf39c851758718c1e25c9f2435afa9f5252df0a"
+    }
+  },
+  "display_redaction": "Checkout path normalized in displayed stdout/reports only; original native evidence and hashes unchanged."
+}

@@ -7,12 +7,17 @@ from .core import utcnow
 
 
 def process(snapshots,capture):
+    with snapshots.pin([('raw',capture['raw_sha256'])]):
+        return _process(snapshots,capture)
+
+
+def _process(snapshots,capture):
     if capture['reused']:return snapshots.load_result(capture['result_sha256'])
     cid=capture['capture_id'];aid=capture['attempt_id']
     with snapshots.db.connect() as c:
         c.execute('BEGIN IMMEDIATE')
         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(capture['document_pk'],)).fetchone()
-        if state is None or state['current_capture']!=cid or state['latest_attempt']!=aid or not snapshots.authorized(c,cid):raise ValueError('捕获或尝试已失效')
+        if state is None or state['current_capture']!=cid or state['latest_attempt']!=aid or not snapshots.authorized(c,cid) or snapshots.retired('attempts',aid):raise ValueError('捕获或尝试已失效')
         c.execute("UPDATE document_processing_attempts SET state='processing' WHERE id=?",(aid,))
     directory=snapshots._directory('tasks')/aid;directory.mkdir(mode=0o700,exist_ok=True)
     output=directory/'result.json'
@@ -25,9 +30,11 @@ def process(snapshots,capture):
         from .document_supervisor import run
         raw=run(snapshots.db,request,directory);result=json.loads(raw);validate(result)
         if result['raw_sha256']!=capture['raw_sha256']:raise ValueError('处理结果与原件不匹配')
-        result_sha=snapshots.put('results',raw);capture['result_sha256']=result_sha
-        with snapshots.db.connect() as c:
-            c.execute('UPDATE document_processing_attempts SET state=?,result_sha256=?,finished_at=? WHERE id=?',(result['status'],result_sha,utcnow(),aid))
+        from .document_results import sha
+        with snapshots.pin([('results',sha(raw))]):
+            result_sha=snapshots.put('results',raw);capture['result_sha256']=result_sha
+            with snapshots.db.connect() as c:
+                c.execute('UPDATE document_processing_attempts SET state=?,result_sha256=?,finished_at=? WHERE id=?',(result['status'],result_sha,utcnow(),aid))
         return result
     except Exception as exc:
         with snapshots.db.connect() as c:c.execute("UPDATE document_processing_attempts SET state='failed',error=?,finished_at=? WHERE id=?",(str(exc),utcnow(),aid))

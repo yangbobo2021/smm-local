@@ -74,6 +74,13 @@ class ProcessedDocuments:
     def commit(self, p):
         if set(p) != {'transfer_id'}:
             raise ValueError('处理传输提交字段无效')
+        value = self.transfers.binding(p['transfer_id'])['document']
+        with self.snapshots.pin([('raw', value['sha256']), ('results', value['result_sha256'])]):
+            return self._commit(p)
+
+    def _commit(self, p):
+        if set(p) != {'transfer_id'}:
+            raise ValueError('处理传输提交字段无效')
         transfer_id = p['transfer_id']
         binding = self.transfers.binding(transfer_id)
         self._allowed(binding)

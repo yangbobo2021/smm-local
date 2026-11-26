@@ -199,6 +199,7 @@ class BlobTransfers:
                 if state['binding'] != binding or state['blobs'] != blobs:
                     raise ValueError('同一传输身份不能改变数据')
                 return self._status(transfer_id, saved_folder, state)
+            self.snapshots.reclaim_candidates()
             # Validate shared SHA/length contracts before creating a new state.
             reservations(self.snapshots, blobs)
             required = 0
@@ -270,10 +271,12 @@ class BlobTransfers:
                 part = self.snapshots._directory(kind) / ('.incoming-' + item['sha256'])
                 if target.exists():
                     self._read_blob(folder, kind, item)
+                    self.snapshots._own_blob(kind,item['sha256'],created=False)
                     if part.exists():
                         part.unlink()
                 else:
                     os.replace(part, target)
+                    self.snapshots._own_blob(kind,item['sha256'],created=True)
             state['committed'] = True
             atomic_json(folder / 'state.json', state)
             return state['binding'], value

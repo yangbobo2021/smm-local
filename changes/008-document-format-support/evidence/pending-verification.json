@@ -78,6 +78,7 @@
   ],
   "pending_test_repair_approvals": [],
   "remaining_required": [
+    "Complete remaining canonical-GC purposes and actual watchdog process-observation/health failure; first exclusive capacity slice is not full GC",
     "Current-HEAD whole regression, clean build and installed minimum-Python recheck",
     "Full C1 boundary, lifecycle, cancellation, TTL/shared/committed staging reclamation, malformed input and snapshot protection",
     "Complete PDF resource/safety boundary matrix",
@@ -310,7 +311,7 @@
     ],
     "both_tdd_reviews_registered": true,
     "historical_other_findings_at_abf46ca": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair.",
-    "current_other_findings": "Merged-header context fixed/scoped evidence in merged-column-header-development.json. Canonical obsolete-candidate GC, path-refresh terminal failure, external-path Web details, service CLI handoff and remaining acceptance still pending."
+    "current_other_findings": "Exclusive-candidate capacity scoped fixed in candidate-reclamation-development.json. Other canonical GC paths, actual watchdog failure, retained path-refresh terminal handling, external-path Web details, service CLI handoff and full acceptance remain."
   },
   "merged_column_header_fix": {
     "evidence": "merged-column-header-development.json",
@@ -439,5 +440,36 @@
     "windows_pr": "464passed67skipped2retained failures",
     "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
     "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
+  },
+  "snapshot_is_historical": true,
+  "current_checkpoint": "candidate-reclamation-development.json",
+  "candidate_reclamation_fix": {
+    "status": "passed_scoped_first_exclusive_archive_capacity_case",
+    "evidence": "candidate-reclamation-development.json",
+    "main_targets_each_creator": 12,
+    "main_passed_each": 1,
+    "regression_passed_by_attempt": {
+      "local": 9,
+      "hub": 8
+    },
+    "overlap": "Recovery cases overlap between attempts; not17distinct cases",
+    "both_reviews_registered": true,
+    "remaining": "Shared/unknown/legacy ownership, in-flight windows, results/stages, crash/restore and Windows delete safety still need their separate dynamic cases; archive collision/path reuse corrections only statically reviewed."
+  },
+  "supervisor_watchdog_failure": {
+    "status": "actual_unhandled_failure_unresolved",
+    "evidence": "candidate-reclamation-supervisor-failure-v2.md",
+    "attempt": "green-sc10-canonical-capacity-hub-v2",
+    "result_sha256": "dc74109cb07947d7ba753733c950d684f2ee4753afc5fc047ed1600da9b9cdd2",
+    "actual": "watch→matching→cmdline AccessDenied and watchdog exit; diagnostic contaminated expected OCR failure, testcase correctly rejected",
+    "cause": "Normal-exit race is compatible but unproven; no instant status/recheck timeline",
+    "product_changed": false,
+    "not_waived": true,
+    "next": "Separate B9/A10 process-observation and watchdog-health natural cases; no relaxed GC assertion or retained-case repair"
+  },
+  "current_gc_ci": {
+    "status": "pending_new_source_commit",
+    "prior_ordinary_evidence": "ci-regression-e8bb1bd.json",
+    "note": "Old source CI does not cover this GC candidate. No platform skip/failure is counted as passed."
   }
 }

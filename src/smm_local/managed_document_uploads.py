@@ -67,7 +67,7 @@ class ManagedDocumentUploads:
         if prior is None:return None
         attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=? AND capture_id=?',(prior['attempt_id'],prior['capture_id'])).fetchone()
         doc=c.execute('SELECT * FROM documents WHERE id=?',(prior['document_id'],)).fetchone()
-        if attempt is None or doc is None:raise ValueError('上传回执对应的资料或尝试已失效')
+        if attempt is None or doc is None or self.snapshots.retired('attempts',prior['attempt_id']):raise ValueError('上传回执对应的资料或尝试已失效')
         state=self.snapshots.detail(c,doc['pk']);current=self.library._receipt(c,prior['document_id']);latest=state.get('latest_attempt') or {}
         if binding['project_id'] not in current['project_ids'] or latest.get('capture_id')!=prior['capture_id'] or latest.get('attempt_id')!=prior['attempt_id'] or not self.snapshots.authorized(c,prior['capture_id']):
             raise ValueError('上传已被新项目、候选或处理尝试取代，请重新查看')
@@ -114,6 +114,10 @@ class ManagedDocumentUploads:
         # Body I/O is bounded and does not hold the Hub guard or a DB lock.
         return self._view(self.transfers.part(upload_id,'raw',index*BLOCK_LIMIT,raw,expected_sha))
     def commit(self,upload_id,body):
+        binding=self.transfers.binding(upload_id)
+        with self.snapshots.pin([('raw',binding['sha256'])]):
+            return self._commit(upload_id,body)
+    def _commit(self,upload_id,body):
         binding=self.transfers.binding(upload_id)
         if not isinstance(body,dict):raise ValueError('提交上下文无效')
         if self.context_check:
