@@ -52,37 +52,17 @@
         "Second-wave pending retained rows status/details",
         "Visible document ID sets at project switch, pending and completion"
       ],
-      "patch_applied": false
+      "patch_applied": false,
+      "current_status": "previously retained; resumed by2026-11-26 instruction; original gap preserved until actual execution/review"
     },
     {
       "area": "Windows stdlib socketpair observer repair",
       "patch_applied": false,
-      "business_acceptance": "failed or unverified; not waived"
+      "business_acceptance": "failed or unverified; not waived",
+      "current_status": "previously retained; resumed by2026-11-26 instruction; original gap preserved until actual execution/review"
     }
   ],
-  "pending_test_repair_approvals": [
-    {
-      "case": "TC-008-reference-web",
-      "gap": "Playwright test uses status_code instead of status",
-      "patch_applied": false
-    },
-    {
-      "case": "TC-008-managed-upload-restart",
-      "gap": "C1 two applicable documents within each same project and evidence dedup",
-      "patch_applied": false
-    },
-    {
-      "case": "TC-008-web-ready-management",
-      "gap": "Raw main 2 passed, but 54,253,080-byte evidence exceeds native 25MiB limit; native regression did not start, no green review",
-      "separate_regression_passed": 24,
-      "patch_applied": false
-    },
-    {
-      "case": "TC-008-managed-update-paths",
-      "gap": "Windows dangling-link self-control namespace representation comparison",
-      "patch_applied": false
-    }
-  ],
+  "pending_test_repair_approvals": [],
   "remaining_required": [
     "Current-HEAD whole regression, clean build and installed minimum-Python recheck",
     "Full C1 boundary, lifecycle, cancellation, TTL/shared/committed staging reclamation, malformed input and snapshot protection",
@@ -93,11 +73,12 @@
     "Fresh PR review and requirement-level independent acceptance"
   ],
   "environment_constraints": [
-    "Local and GitHub CI only; no ESXi",
-    "No production/daily SMM, Hub, VibeInsight or real user documents touched"
+    "Local, GitHub CI and home ESXi Windows/Ubuntu authorized on2026-11-26; Ubuntu22.04 VM is supplementary and does not replace SPEC Ubuntu24.04.",
+    "No daily SMM/Hub/VibeInsight or real user documents; ESXi SSH Windows administrator is diagnostic identity, not ordinary-user acceptance."
   ],
   "documentation": {
-    "readme_and_trial_guide": "Updated for development builds, format limits and creator-owned processing; discovery still requires PR review"
+    "readme_and_trial_guide": "Updated for development builds, format limits and creator-owned processing; discovery still requires PR review",
+    "acceptance_replay": "008 replay README includes ordinary CI versus components/installed/service/cross-OS boundaries."
   },
   "redaction": "Synthetic documents only. Public summaries contain digests/status and no credentials or raw private evidence.",
   "current_head_minimum_macos": {
@@ -175,5 +156,44 @@
     "status": "passed_scoped",
     "evidence": "unsupported-object-empty-development.json",
     "scope": "Strictly textless DOCX/XLSX with declared unsupported objects; true blank/support-text controls and pure result consistency. PDF unrecognized scan/all-object and lifecycle/OS matrices remain gaps."
+  },
+  "resumed_test_repairs": [
+    {
+      "case": "TC-008-reference-web",
+      "gap": "Playwright test uses status_code instead of status",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-managed-upload-restart",
+      "gap": "C1 two applicable documents within each same project and evidence dedup",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-web-ready-management",
+      "gap": "Raw main 2 passed, but 54,253,080-byte evidence exceeds native 25MiB limit; native regression did not start, no green review",
+      "separate_regression_passed": 24,
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-managed-update-paths",
+      "gap": "Windows dangling-link self-control namespace representation comparison",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    }
+  ],
+  "transfer_expiry_fix": {
+    "status": "passed_scoped",
+    "evidence": "transfer-expiry-raw-development.json",
+    "main_passed": 2,
+    "regression_passed": 23,
+    "separate_regression": {
+      "passed": 6,
+      "business": 2,
+      "controls": 4
+    },
+    "scope": "Raw-only normal TTL quota and shared/committed protection; full F3/SC10 and other paths still required."
   }
 }

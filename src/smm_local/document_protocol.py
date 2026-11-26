@@ -172,8 +172,8 @@ class DocumentGuard:
         snapshot=parent/'.document-snapshots'
         excluded=[str(self.path),str(self.lock)]
         if snapshot.exists():
-            # Runtime leases/locks describe stopped processes, not durable data.
-            excluded.extend(str(snapshot/name) for name in ('tasks','capacity.lock','upload-queue.lock'))
+            # Keep current expiration fences; runtime leases/locks are not data.
+            excluded.extend(str(snapshot/name) for name in ('tasks','capacity.lock','upload-queue.lock','expired-transfers'))
         return {
             'do_not_restore':excluded,
             'restore_files':[str(parent/name) for name in ('.documents','.document-snapshots') if (parent/name).exists()],

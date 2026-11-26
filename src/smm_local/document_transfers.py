@@ -10,31 +10,93 @@ from .document_results import sha
 
 BLOCK_LIMIT = 1024 * 1024
 
+TRANSFER_TTL = 24 * 60 * 60
 
-def reservations(snapshots, expected_blobs=None):
-    """Count each promised blob conservatively, including unreceived bytes."""
+
+def _regular(path, directory=False):
+    value = path.lstat()
+    expected = stat.S_ISDIR if directory else stat.S_ISREG
+    if not expected(value.st_mode) or bool(getattr(value, 'st_file_attributes', 0) & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0x400)):
+        raise ValueError('传输存储不能经过链接、junction或特殊文件')
+
+
+def _expired_marker(snapshots, transfer_id):
+    path = snapshots._directory('expired-transfers') / transfer_id
+    if os.path.lexists(path):
+        _regular(path)
+    return path
+
+
+def _states(snapshots):
     directory = snapshots.root / 'transfers'
-    if not directory.exists():
-        return 0
-    if directory.is_symlink():
-        raise ValueError('传输暂存目录不能经过链接')
-    reserved = {}
+    if not os.path.lexists(directory):
+        return []
+    _regular(directory, directory=True)
+    values = []
     for folder in directory.iterdir():
-        if folder.is_symlink() or not folder.is_dir():
-            raise ValueError('传输暂存成员无效')
+        _regular(folder, directory=True)
+        if len(folder.name) != 32 or any(c not in '0123456789abcdef' for c in folder.name):
+            raise ValueError('传输暂存身份无效')
         path = folder / 'state.json'
-        if path.is_symlink():
-            raise ValueError('传输元信息不能经过链接')
-        if not path.exists():
-            # A newly created empty directory carries no body bytes.
+        if not os.path.lexists(path):
             if any(folder.iterdir()):
                 raise ValueError('传输暂存缺少元信息')
             continue
+        _regular(path)
         with path.open('rb') as source:
             raw = source.read(128 * 1024 + 1)
         if len(raw) > 128 * 1024:
             raise ValueError('传输元信息超限')
         state = json.loads(raw)
+        for kind, item in state['blobs'].items():
+            if kind not in {'raw', 'results'} or type(item['bytes']) is not int or item['bytes'] < 0:
+                raise ValueError('传输预约无效')
+            snapshots.blob(kind, item['sha256'])
+        values.append((folder, state))
+    return values
+
+
+def _expired(snapshots, folder, state, now):
+    return _expired_marker(snapshots, folder.name).exists() or (not state.get('committed') and now - state['created_at'] >= TRANSFER_TTL)
+
+
+def reclaim_expired(snapshots):
+    """Called under capacity.lock; retain identity and canonical committed blobs.
+
+    Keep state metadata for crash-idempotent cleanup: if interrupted after a
+    marker or an unlink, the next admission can finish the same retirement.
+    """
+    now = time.time()
+    states = _states(snapshots)
+    expired = [(folder, state) for folder, state in states if _expired(snapshots, folder, state, now)]
+    live = {(kind, item['sha256']) for folder, state in states if not _expired(snapshots, folder, state, now) for kind, item in state['blobs'].items()}
+    # Reject the identity durably BEFORE releasing any promise or body bytes.
+    for folder, state in expired:
+        marker = _expired_marker(snapshots, folder.name)
+        if not marker.exists():
+            atomic_json(marker, {'expired': True})
+    for folder, state in expired:
+        for kind, item in state['blobs'].items():
+            if (kind, item['sha256']) in live:
+                continue
+            directory = snapshots.root / kind
+            if not os.path.lexists(directory):
+                continue
+            _regular(directory, directory=True)
+            incoming = directory / ('.incoming-' + item['sha256'])
+            if os.path.lexists(incoming):
+                _regular(incoming)
+                incoming.unlink()
+
+
+
+def reservations(snapshots, expected_blobs=None):
+    """Count each promised blob conservatively, including unreceived bytes."""
+    reserved = {}
+    now = time.time()
+    for folder, state in _states(snapshots):
+        if _expired(snapshots, folder, state, now):
+            continue
         for kind, item in state['blobs'].items():
             if kind not in {'raw', 'results'} or type(item['bytes']) is not int or item['bytes'] < 0:
                 raise ValueError('传输预约无效')
@@ -70,11 +132,16 @@ class BlobTransfers:
 
     def _load(self, transfer_id):
         folder = self._folder(transfer_id)
+        marker = _expired_marker(self.snapshots, transfer_id)
+        if marker.exists():
+            raise ValueError('传输已过期，请用新的提交身份重新传输')
         if folder.is_symlink():
             raise ValueError('传输目录不能经过链接')
+        _regular(folder, directory=True)
         path = folder / 'state.json'
         if path.is_symlink():
             raise ValueError('传输状态不能经过链接')
+        _regular(path)
         with path.open('rb') as source:
             raw = source.read(128 * 1024 + 1)
         if len(raw) > 128 * 1024:
@@ -82,7 +149,8 @@ class BlobTransfers:
         state = json.loads(raw)
         if set(state['blobs']) != self.kinds:
             raise ValueError('传输不属于此原件或成套接收入口')
-        if not state.get('committed') and time.time() - state['created_at'] >= 24 * 60 * 60:
+        if not state.get('committed') and time.time() - state['created_at'] >= TRANSFER_TTL:
+            atomic_json(marker, {'expired': True})
             raise ValueError('传输已过期，请用新的提交身份重新传输')
         return folder, state
 
@@ -123,6 +191,9 @@ class BlobTransfers:
         transfer_id = digest([binding.get(key) for key in ('hub_id', 'document_epoch', 'device_id', 'archive_id', 'project_key', 'generation', 'submission_id')])[:32]
         folder = self._folder(transfer_id)
         with control_lock(self.snapshots.root / 'capacity.lock'):
+            reclaim_expired(self.snapshots)
+            if _expired_marker(self.snapshots, transfer_id).exists():
+                raise ValueError('传输已过期，请用新的提交身份重新传输')
             if folder.exists():
                 saved_folder, state = self._load(transfer_id)
                 if state['binding'] != binding or state['blobs'] != blobs:
@@ -150,7 +221,8 @@ class BlobTransfers:
                 raise
 
     def binding(self, transfer_id):
-        return self._load(transfer_id)[1]['binding']
+        with control_lock(self.snapshots.root / 'capacity.lock'):
+            return self._load(transfer_id)[1]['binding']
 
     def part(self, transfer_id, kind, offset, raw, expected_sha):
         if kind not in {'raw', 'results'} or type(offset) is not int or offset < 0 or offset % BLOCK_LIMIT:

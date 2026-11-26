@@ -68,6 +68,8 @@ class Snapshots:
         # opening a body file. Database reads finish before body I/O; parsing,
         # OCR, networking and query/read paths never acquire this lock.
         with control_lock(self.root/'capacity.lock'):
+            from .document_transfers import reclaim_expired
+            reclaim_expired(self)
             if target.exists():
                 state=target.lstat()
                 if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('现有快照内容不是普通文件')

@@ -143,7 +143,7 @@ smm search "对话词" --scope project --hub-project-id <Hub根ID>
 
 线上本机项目根只使用Hub的一层范围并映射自己稳定项目键；仅本机使用本机关联。范围无法确认时只查所请求本机根；Hub根不可得不猜同号/同名本机项目。已取得合法共同范围后仅查询断线，可保留该范围的本机结果；签名/身份被拒绝则不保留。覆盖区分已查完零条、部分、不可用与旧能力不支持。本机失败仍可返回可用Hub结果，并明确缺失端。引用绑定身份/内容版本/当次连续资格，不能把对话引用、另一端数字ID或新资格代替原引用；合并引用只可回退到当次同版本另一端。Unicode码点和LF行号规则沿006。
 
-**保护冲突与恢复。** 文档保护记录是数据库旁的`<数据库名>.documents-guard.json`及锁文件，不是005的upload guard。备份数据库、已有管理原始副本`.documents`及`.document-snapshots`内的持久原件、处理结果和传输状态为一致集；按输出的`do_not_restore`排除快照目录内的`tasks`、`capacity.lock`和`upload-queue.lock`等运行状态，保留既有Hub连接/TLS/凭据；恢复时不能把旧保护文件覆盖当前保护边界。已有`upload prepare-restore`/`hub prepare-restore`输出包含适用文档保护排除项及副本目录，文档正文会停止；Hub还拒绝文档搜索/read。
+**保护冲突与恢复。** 文档保护记录是数据库旁的`<数据库名>.documents-guard.json`及锁文件，不是005的upload guard。备份数据库、已有管理原始副本`.documents`及`.document-snapshots`内的持久原件、处理结果和传输状态为一致集；按输出的`do_not_restore`排除快照目录内的`tasks`、`capacity.lock`和`upload-queue.lock`等运行状态，并保留当前`expired-transfers`过期上传身份保护目录，保留既有Hub连接/TLS/凭据；恢复时不能把旧保护文件覆盖当前保护边界。已有`upload prepare-restore`/`hub prepare-restore`输出包含适用文档保护排除项及副本目录，文档正文会停止；Hub还拒绝文档搜索/read。
 
 Hub维护者查看`hub documents recovery-status`的冲突、影响及不透明state，再执行`hub documents recover --expected-state <刚查看state>`。过期state拒绝；成功建立新document_epoch，使全部旧Hub文档引用/资格永久失效并丢弃暂存，自有来源保留pending。随后自有来源明确refresh，本机项目从sync-status取得KEY/HID/generation重新明确允许。Local保护失配也须对需要的项目重新显式选择，其余旧选择不会自动恢复；若本机版本回退仍冲突，应由维护者明确处理Hub恢复，不能猜版本或覆写新正文。此流程不改变005对话恢复约定或日常对话数据。
 
@@ -222,6 +222,8 @@ smm --db <独立档案> documents reprocess --document-id <ID> --capture-id <CID
 不从旧搜索结果猜CID或版本。新候选失败时只重试新CID；已失效CID/AID或采集授权拒绝。重试读取保存字节，不依赖重新打开源文件；来源被移除、后续刷新确认缺失等授权失效不能用旧缓存复活。成功才成套发布新原件、文本、表格、覆盖和定位；新版本发布后旧引用拒绝，重新检索取得新引用。不提供历史全文入口。
 
 本机项目文档同步仍默认关闭，沿用007按项目选择。允许后上传准确原件及本机已处理结果，Hub直接建索引，不重解析、不OCR。Hub自有项目的处理在Hub完成。项目创建端始终负责添加、删除、更新和重新处理，关联项目不授予另一端管理权。原件上限20MiB，新增格式通过分块上传；资源超限或缺组件要按错误处理，不能把半成品显示为成功。
+
+同档案未发布暂存总量为256MiB。未提交的上传自创建满24小时后过期；再次接收新内容时释放其预约及没有活跃上传共用的分块。旧上传身份继续明确报过期，须用新的提交身份重新传输。已提交且仍有资格的失败候选、等待任务和已发布原件不按此期限删除，不能通过淘汰它们为新上传腾出容量。
 
 首版不支持图片文件、.doc/.xls/.docm/.xlsm、宏执行、公式重算或密码文件解密，不调用外部模型。Excel含隐藏/veryHidden区域；公式和文件缓存值分别展示，无缓存标missing，已有缓存新鲜度unknown。DOCX不保证稳定排版页码；图片、图表、SmartArt等不做语义理解。具体支持/限制见[008规格](changes/008-document-format-support/spec.md)，验收范围见[实施计划](changes/008-document-format-support/plan.md)与[脱敏证据](changes/008-document-format-support/evidence/)。普通CI通过不等于各OS/原生服务全部验收完成。
 
