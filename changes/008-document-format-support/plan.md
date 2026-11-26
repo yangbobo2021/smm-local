@@ -88,7 +88,7 @@ PLAN经确认、PR合并并读回MERGED后，才创建/续接AT-SMM-008和R008�
 
 扫描PDF先找网格/闭合单元格，再对适当页/区域OCR并用词框归属单元格，不逐格无界起进程。原生文字/表格区与扫描区建立覆盖掩码，原生页OCR零调用，混合页只补缺失区。规范文本按确定顺序生成一次，正文与表格结构共享定位映射，不重复拼接同一段；search附加表头上下文不能改变text的Unicode区间。检测不到可支持网格就明确不完整，不把TSV行名当表格结构。
 
-POSIX监督至少每100ms检查任务树/单调时间及任务目录实际字节，以进程组和已登记后代处理退出/重父化；任何持久PID记录都须同时核创建时间、任务身份及租约，不能只凭复用PID杀其他进程；执行终止前核PID、创建时间、任务token/租约及程序身份，不按过期PID记录误杀重用PID的其他进程；Windows Job Object禁止breakaway，配合RSS观察和整Job终止。访问拒绝/观察盲区时停止该尝试并报监督不可用，不继续无监督处理。完整OOM/预算实验在隔离档案串行运行，保存实际树与终止证据，不通过调低生产预算冒充1GiB实测。按SPEC实证5秒终态/槽位恢复及主服务查询存活；各OS不宣称同种内核硬限制。[Windows进程组约束](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects)。
+POSIX监督至少每100ms检查任务树/单调时间及任务目录实际字节，以进程组和已登记后代处理退出/重父化；任何持久PID记录都须同时核创建时间、任务身份及租约，不能只凭复用PID杀其他进程；执行终止前核PID、创建时间、任务token/租约及程序身份，不按过期PID记录误杀重用PID的其他进程；Windows Job Object禁止breakaway，配合RSS观察和整Job终止。临时空间采样的子路径首次PermissionError后，立即从任务根完整重扫一次，不等待、不复用前次部分计数；完整重扫成功且根仍可观察才继续，否则停止该尝试并报实际监督错误。任务根缺失/不可读直接失败，持续访问拒绝/观察盲区不继续处理；不改任务预算或重跑内容任务。完整OOM/预算实验在隔离档案串行运行，保存实际树与终止证据，不通过调低生产预算冒充1GiB实测。按SPEC实证5秒终态/槽位恢复及主服务查询存活；各OS不宣称同种内核硬限制。[Windows进程组约束](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects)。
 
 ### PDF有界解码的接入位置与确认门
 
@@ -316,3 +316,5 @@ CI用上传/下载artifact传实际producer产物，再在目标OS本机HTTPS调
 2026-11-26：7c2348a的push/PR两轮共六份官方CI ZIP按官方digest、CRC、JUnit实际回收。Mac/Ubuntu每轮465过68skip0失败；Windows PR464过67skip2失败、push463过67skip3失败，其中两份共享argv审计按维护者决定保留，另一新增staging-dedup的WinError5临时目录错误仍单独调查；同项PR轮passed不抹去push失败。新增4队列、1远端原件、2合并表头在六份产物均实际passed，共42实例。见evidence/ci-regression-7c2348a.json。7c独立PR检查点needs_revision原文保留，组件改善不关闭完整SC1/R008。
 
 2026-11-26：Windows临时目录错误另作原生环境调查。普通RemoveDirectory得到ENOENT，真实FileDispositionInfo删除待定且句柄未关闭时scandir/旧walk得到WinError5，最后句柄关闭后目录消失。新采样用例先核持续共享拒绝、根缺失、256MiB及+1精确计数，之后真实PermissionError失败；原始证据/清理有效，但独审needs_revision/design已登记：强制异常后成功与本PLAN权限异常即失败约定冲突，不能认作产品expected_failure。未修改监督器或放宽既有OCR断言。一次完整重采样的具体SPEC澄清及未应用产品补丁另待维护者确认；相同症状复现不等于此前CI根因已查明。见evidence/windows-temporary-observation-diagnostic.json。
+
+2026-11-26：维护者确认上述一次完整重采样澄清，SPEC B9/A10已同步，替代此前权限异常一律立即失败的采样细节；保留持续拒绝/根异常时的失败保护。实施只改共享document_supervisor临时空间采样，首次子路径PermissionError后废弃部分计数并立即完整重扫一次，第二次异常继续抛出，不添加sleep/任务重试/额度更改。TC-008-live-temporary-observation修订设计后先在原产品重取红灯并独立复审，再冻结同字节绿灯；真实Windows分别核恢复后的完整计数、持续拒绝、根异常、原256MiB/+1与清理，保持既有staging缺OCR断言不变并实际回归。Mac/Linux相关回归与三OS普通CI另行保留实际版本结果；不认领整个SC10、原CI根因或E/H/X。此条按本次明确确认的建议执行，不重新打开已保留取消/C1/共享argv/跨档案队列/路径刷新封套用例。

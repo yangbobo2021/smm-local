@@ -416,7 +416,9 @@
     "investigation": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
     "retained": false,
     "investigation_evidence": "windows-temporary-observation-diagnostic.json",
-    "next": "Concrete one-complete-rescan clarification awaiting maintainer; product unchanged, no weakening of staging OCR assertions."
+    "next": "Revise test design under approved policy, obtain fresh valid product red and independent review before implementing.",
+    "clarification": "Maintainer approved once-immediate-complete-rescan policy on2026-11-26; SPEC/PLAN and native definition v3 saved before product changes.",
+    "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633"
   },
   "path_finalization_retained": {
     "evidence": "path-finalization-retained.json",
