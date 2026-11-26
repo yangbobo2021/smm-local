@@ -124,6 +124,18 @@ class Snapshots:
     def process(self,token,format):
         from .document_processing import process
         return process(self,token)
+    def fail_current(self,token,error):
+        """Finish a rejected publication without changing a newer attempt."""
+        if token.get('reused'):return False
+        with self.db.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            changed=c.execute("""UPDATE document_processing_attempts SET state='failed',error=?,finished_at=?
+                WHERE id=? AND capture_id=? AND config_revision=? AND state!='failed'
+                AND EXISTS (SELECT 1 FROM document_snapshot_state s WHERE s.document_pk=?
+                    AND s.current_capture=? AND s.latest_attempt=?)""",
+                (str(error),utcnow(),token['attempt_id'],token['capture_id'],token['config']['revision'],
+                 token['document_pk'],token['capture_id'],token['attempt_id'])).rowcount
+        return bool(changed)
     def publish(self,c,pk,token,result):
         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
         if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')

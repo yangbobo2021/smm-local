@@ -211,5 +211,14 @@ class ManagedDocumentUploads:
                         if state is None or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id']:raise ValueError('上传任务已被新候选或尝试取代')
                         if not error or not state['published_capture']:self.documents._publish(source,{'error':None,'counts':{'ready':int(not error),'failed':int(bool(error)),'candidates':1,'billed_bytes':0,'new_raw_bytes':value['binding']['bytes'],'ignored_entries':0},'files':[item]})
                 except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
+                if error:
+                    try:
+                        with self._hold():
+                            self._check(value['binding'])
+                            self.snapshots.fail_current(token,error)
+                    except (OSError,ValueError,RuntimeError):
+                        # A changed Hub/project context must not write into the
+                        # new context just to finish an obsolete task's status.
+                        pass
                 with self.db.connect() as c:
                     c.execute('UPDATE document_upload_jobs SET state=?,error=? WHERE document_id=? AND payload=?',('failed' if error else 'done',error,job['document_id'],job['payload']))

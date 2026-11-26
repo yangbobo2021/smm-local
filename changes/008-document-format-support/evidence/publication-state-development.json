@@ -8,11 +8,6 @@
     "tests/test_document_formats_publication_state.py": "1ea66d85dd32a342b33b972be9e8834c02f7a406bfd9e613804a1105f532b05d",
     "tests/document_formats_publication_hook.py": "916b19b381ecda4b756f745834433db76722cde0ef8b864dec0f0d6c66baf54c"
   },
-  "product_sha256": {
-    "src/smm_local/document_snapshots.py": "d77498e7c7671e9287d3535951555cf4c3bd02526afbd357734ef9e5702a49b9",
-    "src/smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b",
-    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
-  },
   "behavior": "Extraction success remains the actual attempt status. Detail adds publication_pending by capture AND result SHA. Both creator pages show waiting and continue polling until coherent publication before success. No new DB schema.",
   "owners": {
     "local": {
@@ -138,7 +133,12 @@
       "result": "Local transient empty DOM during screenshot; Hub complete;87PNG exceeded64, regression not started. Original evidence retained; not counted passed."
     }
   ],
-  "package_build": {
+  "original_fix_product_sha256": {
+    "src/smm_local/document_snapshots.py": "d77498e7c7671e9287d3535951555cf4c3bd02526afbd357734ef9e5702a49b9",
+    "src/smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b",
+    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
+  },
+  "original_package_build": {
     "status": "built_and_contents_verified",
     "installed_business": "not verified by this build",
     "initial_attempt": "default uv missing from tool PATH; retried with absolute /Users/boboyang/.local/bin/uv",
@@ -156,5 +156,65 @@
         "new_detail_and_html_equal_source": true
       }
     }
+  },
+  "latest_after_finalization": {
+    "source_version": "6c65bc9 plus frozen5file config-finalization patch, see config-finalization-development.json",
+    "same_approved_test_bytes_no_new_test_repair": true,
+    "portions": {
+      "local": {
+        "green": {
+          "id": "green-sc1-publication-local-after-finalization-v1",
+          "sha256": "f4ac0392700fbc99d2f88209d9d2d60d89c5c8119837970c1047276e3cbfb905"
+        },
+        "review": {
+          "id": "review-publication-local-after-finalization-green-v1",
+          "sha256": "19d088a23648b8507278f09d8f6330810dd554fe87d63e9da9d3a591baf468bf",
+          "status": "passed registered"
+        },
+        "main_passed": 1,
+        "seconds": 53.5,
+        "flows": 24,
+        "state_png": 48,
+        "regression_passed": 2,
+        "regression_seconds": 10.04,
+        "artifacts": 825
+      },
+      "hub": {
+        "green": {
+          "id": "green-sc1-publication-hub-after-finalization-v1",
+          "sha256": "1de4071e617ee668f14e3499b6ca00c3e7cbed93bacc1772136a47a2b3eb1542"
+        },
+        "review": {
+          "id": "review-publication-hub-after-finalization-green-v1",
+          "sha256": "3f381a6cfe4dacfd6e2b53105bf76c05dad63a1f210cc92453956d3c8e3f8cc2",
+          "status": "passed registered"
+        },
+        "main_passed": 1,
+        "seconds": 58.82,
+        "flows": 24,
+        "state_png": 48,
+        "regression_passed": 3,
+        "regression_seconds": 6.07,
+        "artifacts": 823
+      }
+    },
+    "joint_review": {
+      "path": ".acceptance-local/008/publication-boundary-20261126/joint-after-finalization-review-v1.json",
+      "sha256": "65ac985edd27b09308be2567414d613b9bb5bd47b3ba645cb1f391b8f917b662",
+      "reviewer": "/root/r008_publication_green_review_v1"
+    },
+    "totals": {
+      "flows": 48,
+      "state_png": 96,
+      "artifacts": 1648,
+      "bytes": 24586096,
+      "related_regression_executions": 5,
+      "unique_regression_counting": "These2upload+3empty are also among config-finalization27; not32 unique cases."
+    }
+  },
+  "latest_verified_product_sha256": {
+    "src/smm_local/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+    "src/smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b",
+    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
   }
 }

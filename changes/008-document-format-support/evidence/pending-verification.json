@@ -89,10 +89,19 @@
   },
   "pr_review": {
     "status": "needs_revision",
-    "evidence": "pr43-review-v1.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7171319505",
-    "confirmed_findings": 7,
-    "source_missing_auth": "Two concrete missing/unreadable resurrection paths fixed and current unified formal reviews registered; in-flight cancellation and other seven-finding subdomains remain pending."
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "pr43-review-v2.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7181841042",
+    "findings": [
+      "P1 Local pureHub original download route absent",
+      "P1 postprocess publication-failure terminal inconsistency",
+      "P1 invalid committed canonical candidate GC",
+      "P2 merged header span outside left window",
+      "P2 path-files Web metadata omitted",
+      "P1 same origin/contentV but different processingP/resultSHA can merge into a mixed bundle"
+    ],
+    "prior_findings_status": "v1 concrete auth resurrection/restore/help/object-only/failure-details paths scoped fixed;Hub shortlock and rawTTL partial; fulloriginalscope/EHX incomplete.",
+    "version_isolation_supplement": "processing-version-isolation-review.md"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -117,35 +126,31 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "db798eadbf341f06489810d09473398de600c0ff",
-    "evidence": "ci-regression-db798ea.json",
-    "push_run": 45703105385,
-    "pr_run": 45703116764,
-    "macos": {
-      "passed": 447,
-      "skipped": 61,
-      "failed": 0
-    },
-    "ubuntu": {
-      "push": {
-        "passed": 446,
-        "skipped": 61,
-        "failed": 1
-      },
-      "pull_request": {
-        "passed": 447,
-        "skipped": 61,
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "ci-regression-6c65bc9.json",
+    "runs": [
+      "45748718050",
+      "45748711062"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 63,
         "failed": 0
       },
-      "unresolved": "Hub restart push run observed V=0 instead of published V=1; cause unconfirmed"
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 63,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 62,
+        "failed": 2
+      }
     },
-    "windows": {
-      "passed": 424,
-      "skipped": 60,
-      "failed": 24,
-      "same_failed_identity_set_as_c13de61": true
-    },
-    "limitation": "Ordinary CI only; separate failed/passed same-head runs preserved. Not E/H/X."
+    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "all6_official_digest_crc_xml_verified": true
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",
@@ -201,30 +206,31 @@
     "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
   },
   "current_ci_checkpoint": {
-    "head": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "ci-regression-6c65bc9.json",
     "runs": [
-      "45731144093",
-      "45731137697"
+      "45748718050",
+      "45748711062"
     ],
     "each_run": {
       "macos": {
-        "passed": 449,
-        "skipped": 61,
+        "passed": 458,
+        "skipped": 63,
         "failed": 0
       },
-      "ubuntu": {
-        "passed": 449,
-        "skipped": 61,
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 63,
         "failed": 0
       },
-      "windows": {
-        "passed": 426,
-        "skipped": 60,
-        "failed": 24
+      "windows2022": {
+        "passed": 457,
+        "skipped": 62,
+        "failed": 2
       }
     },
-    "official_six_zip_digest_and_crc_verified": true,
-    "helpers_uncommitted": true
+    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "all6_official_digest_crc_xml_verified": true
   },
   "active_source_lifecycle_gap": {
     "maintainer_decision": "retain gap, 2026-11-26",
@@ -238,7 +244,8 @@
   "publication_state_in_progress": {
     "status": "passed_scoped",
     "evidence": "publication-state-development.json",
-    "scope": "Two actual creator browser postprocessing/pre-publication UI boundaries,48flows96statePNG,10relatedregressions; each greenreview registered plus joint report. No fullSC1/E/H/X claim."
+    "scope": "Two actual creator browser postprocessing/pre-publication UI boundaries,48flows96statePNG,10relatedregressions; each greenreview registered plus joint report. No fullSC1/E/H/X claim.",
+    "latest_current_source_recheck": "After5file finalization fix, same frozen testcase:Local24flows48PNG+2reg,Hub24flows48PNG+3reg, two newreviews registered plusnewjoint.5reg are subsetof27 above."
   },
   "restart_and_audit_retained": {
     "decision": "retain gaps",
@@ -256,5 +263,44 @@
       "Windows subprocess audit argv is str; list-only observer misses actual workers"
     ],
     "unready_candidate_committed_as_executable_test": false
+  },
+  "historical_latest_ordinary_ci_db798ea": {
+    "head": "db798eadbf341f06489810d09473398de600c0ff",
+    "evidence": "ci-regression-db798ea.json",
+    "push_run": 45703105385,
+    "pr_run": 45703116764,
+    "macos": {
+      "passed": 447,
+      "skipped": 61,
+      "failed": 0
+    },
+    "ubuntu": {
+      "push": {
+        "passed": 446,
+        "skipped": 61,
+        "failed": 1
+      },
+      "pull_request": {
+        "passed": 447,
+        "skipped": 61,
+        "failed": 0
+      },
+      "unresolved": "Hub restart push run observed V=0 instead of published V=1; cause unconfirmed"
+    },
+    "windows": {
+      "passed": 424,
+      "skipped": 60,
+      "failed": 24,
+      "same_failed_identity_set_as_c13de61": true
+    },
+    "limitation": "Ordinary CI only; separate failed/passed same-head runs preserved. Not E/H/X."
+  },
+  "config_finalization_fix": {
+    "status": "passed_scoped",
+    "evidence": "config-finalization-development.json",
+    "main_targets": 48,
+    "related_regression_passed": 27,
+    "four_tdd_reviews_registered": true,
+    "scope": "Macforeground managedupload and synchronouscache reprocess:config invalidation after real result, failed terminal/error, old publication preserved and explicit saved-byte retry. HubCLI status/config no longer refused byOSadminlock while content jobruns. Not pathrefresh/latepayload/L3/GC/services/EHX."
   }
 }

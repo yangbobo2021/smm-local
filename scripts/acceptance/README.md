@@ -4,7 +4,7 @@
 
 依据 [008 SPEC](../../changes/008-document-format-support/spec.md) 和 [PLAN](../../changes/008-document-format-support/plan.md)；当前结果见 [待验与保留缺口](../../changes/008-document-format-support/evidence/pending-verification.json)。以下是已有工具的复跑入口，尚无一条命令完成全部 C1/E/H/X；006/007 探针或组件成功不能代替 008 交付。
 
-从本次提交的独立工作目录运行，使用任务自有档案、材料及全新证据目录。测试只生成合成文档；不要把日常 SMM/Hub 的数据库、项目目录、凭据或用户文件传入验收。维护者要求不使用家庭 ESXi，平台验证采用本机和 GitHub CI。
+从本次提交的独立工作目录运行，使用任务自有档案、材料及全新证据目录。测试只生成合成文档；不要把日常 SMM/Hub 的数据库、项目目录、凭据或用户文件传入验收。维护者于 2026-11-26 恢复家庭 ESXi Windows/Ubuntu 的测试授权。本机、GitHub CI 与这些测试机均可使用；家庭 Ubuntu 22.04 仅作补充，不替代 SPEC 的 Ubuntu 24.04，Windows SSH 管理员也不代替规定的普通客户端或 LocalService 身份。
 
 普通组件回归和构建：
 
@@ -39,7 +39,7 @@ CI 原件使用 document_formats_recover_evidence.py 下载并核官方 artifact
 - 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
 - 独立判定探针：`python scripts/acceptance/hub_documents_checks.py --selfcheck`。两个独立原件、文本/范围/版本/摘要/项目/来源/资格逐项负控，以及真实PID/端口存活负控均必须拒绝。自检仅表示工具可用于验收。
 - 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台入口为 `python scripts/acceptance/hub_documents_platform.py --target-config <独立包配置> --output <全新目录>`；Windows须由实际标准账户运行。Hub凭据浏览器观察另用同参数的 `hub_documents_browser_privacy.py`；没有业务原件不能计通过。
-- 维护者已要求不再使用家庭ESXi Windows/Linux，且目前没有其他实机资源，先继续本机与CI。CI环境能力探测独立于产品验收；Ubuntu实际user-systemd能力不等于007服务业务已通过，Windows创建LocalService配置也不等于真实LocalService进程/普通Local已通过。
+- 007 当时按维护者要求停用家庭 ESXi、先做本机与 CI；008 本轮的环境授权见前节 2026-11-26 更新，不据此改写 007 历史结果。CI 环境能力探测独立于产品验收；Ubuntu 实际 user-systemd 能力不等于服务业务通过，Windows 创建 LocalService 配置也不等于真实 LocalService 进程/普通 Local 已通过。
 - 原始输出含合成文档及本地路径。公开前保留原始/脱敏副本双SHA，不公开token、TLS私钥、签名材料、数据库、wheel或原始trace。保护冲突按用户指南明确恢复，不删除保护文件或自动重授权以“修复”测试。
 
 `Selective upload installed-package acceptance` 的 `document-installed-e1` 只复跑三系统E1，明确跳过服务，不代替E2；`document-installed` 继续同时执行适用的真实Ubuntu用户服务和Windows SCM。默认005模式不变。新增模式用于独立重取E1某项证据，不能以它的整体success声称服务或跨机器已验证。

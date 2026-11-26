@@ -169,6 +169,8 @@ macOS/Linux环境Python在bin/python，Windows在Scripts/python.exe。下面smm/
 
 DOCX、XLSX与有完整文字层的PDF可直接解析，不要求OCR。扫描页或原生页眉加扫描正文的PDF需要在创建端预先部署本地Tesseract 5及eng、chi_sim语言数据。部署好完整可执行程序及其运行依赖后，用绝对路径配置；SMM不会在处理或启动时联网下载组件。
 
+开发版维护者可从[008材料准备入口](scripts/acceptance/README.md)显式准备一套私有OCR及语言材料。该步骤需要联网，在指定的任务材料目录安装并校验锁定版本；不是SMM启动或查询时自动下载。准备成功后，从输出材料清单JSON取`ocr_executable`作为下方程序路径，取`ocr_data_dir`作为数据目录，不依赖终端PATH。自行部署时，程序须能运行`--version`；数据目录内须有`eng.traineddata`和`chi_sim.traineddata`，并能用该程序的`--tessdata-dir <该目录> --list-langs`列出两种语言。最后仍以所在档案、实际执行身份的`processing-status --check`确认就绪。
+
 ~~~text
 smm --db <独立档案> documents processing-status
 smm --db <独立档案> documents processing-configure --expected-revision <刚看到的revision> --ocr-executable <Tesseract可执行文件绝对路径> --ocr-data-dir <语言数据目录绝对路径> --languages eng+chi_sim

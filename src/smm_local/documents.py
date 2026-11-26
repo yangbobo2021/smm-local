@@ -318,8 +318,12 @@ class Documents:
 
     def reprocess(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
         token=self.snapshots.retry(document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version)
-        result=self.snapshots.process(token,token['profile']['format'])
-        return self._publish_reprocess(token,result)
+        try:
+            result=self.snapshots.process(token,token['profile']['format'])
+            return self._publish_reprocess(token,result)
+        except (OSError,ValueError,RuntimeError) as exc:
+            self.snapshots.fail_current(token,exc)
+            raise
 
     def _publish_reprocess(self,token,result):
         with self.db.connect() as con:

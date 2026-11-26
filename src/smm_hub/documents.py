@@ -335,11 +335,20 @@ class HubDocuments:
             for sid in sources:self._own_source(sid)
             token=self.documents.snapshots.retry(*(body[key] for key in fields))
         # No Hub protection/control lock spans a parser/OCR child process.
-        result=self.documents.snapshots.process(token,token['profile']['format'])
-        with self.guard.hold():
-            self._context(body)
-            for sid in sources:self._own_source(sid)
-            return self.documents._publish_reprocess(token,result)
+        try:
+            result=self.documents.snapshots.process(token,token['profile']['format'])
+            with self.guard.hold():
+                self._context(body)
+                for sid in sources:self._own_source(sid)
+                return self.documents._publish_reprocess(token,result)
+        except (OSError,ValueError,RuntimeError) as exc:
+            with self.guard.hold():
+                try:
+                    self._context(body)
+                    for sid in sources:self._own_source(sid)
+                except (OSError,ValueError,RuntimeError):pass
+                else:self.documents.snapshots.fail_current(token,exc)
+            raise
 
     def _refresh_native(self, context, body, source_id):
         project_id=body.get('project_id');project_key=body.get('project_key')

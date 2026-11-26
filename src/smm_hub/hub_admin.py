@@ -438,10 +438,12 @@ def dispatch(args: argparse.Namespace):
     if action in ("status", "run"):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    if action == 'documents':
+        # Document commands use their own short guards, SQLite CAS and content
+        # slot. An OS administration lock must not span a content worker.
+        from .document_cli import dispatch as dispatch_documents
+        return dispatch_documents(hub.root,args)
     with _service_lock(hub.root / "admin.lock"):
-        if action == 'documents':
-            from .document_cli import dispatch as dispatch_documents
-            return dispatch_documents(hub.root,args)
         if action in ("setup", "upgrade", "project", "vibeinsight"):
             return getattr(hub, action)(args)
         return getattr(hub, action)()
