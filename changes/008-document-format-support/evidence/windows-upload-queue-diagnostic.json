@@ -1,0 +1,11 @@
+{
+  "scope": "Supplemental exact abf Windows administrator component reproduction only; not E/H/X or native-case passed. Selects only NEW pure remote originals, not retained C1/cancellation/argv cases.",
+  "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+  "source_files_verified": 273,
+  "test_exit_code": 1,
+  "timed_out": false,
+  "cleanup_errors": [],
+  "evidence_zip_sha256": "524854d21575a668e7ccd309af3d5c5d522613edeb7ac535cfb69d3022dc35cf",
+  "diagnostic": "Actual Windows Hub background run_pending hit upload-queue.lock timeout (managed_document_uploads.py:186; archive_protocol.py:124), propagating RuntimeError after response and disconnecting subsequent upload request. Dedicated regression/fix still pending.",
+  "status": "failed; not formal acceptance"
+}

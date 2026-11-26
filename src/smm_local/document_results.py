@@ -78,6 +78,12 @@ def validate(value):
     return value
 
 
+def _covers_columns(cell, start, end):
+    # Merge continuations address one coordinate; only the real master spans.
+    span = 1 if cell.get('merged_into') else cell['column_span']
+    return cell['column'] < end and start < cell['column'] + span
+
+
 def table_view(result,table_id=None,*,row_start=None,row_end=None,column_start=None,column_end=None,anchor=None):
     tables=result['tables']
     if table_id is None:
@@ -96,7 +102,7 @@ def table_view(result,table_id=None,*,row_start=None,row_end=None,column_start=N
     if any(type(x) is not int for x in (r,re,c,ce)) or not 1<=r<re<=table['rows']+1 or not 1<=c<ce<=table['columns']+1:raise ValueError('表格窗口越界')
     selected=[x for x in table['cells'] if r<=x['row']<re and c<=x['column']<ce]
     header_rows=table.get('header_rows') or ([min(x['row'] for x in table['cells'] if x.get('text') not in ('',None))] if any(x.get('text') not in ('',None) for x in table['cells']) else [])
-    headers=[x for x in table['cells'] if x['row'] in header_rows and c<=x['column']<ce]
+    headers=[x for x in table['cells'] if x['row'] in header_rows and _covers_columns(x,c,ce)]
     union={(x['row'],x['column']):x for x in selected+headers}
     if len(union)>1000 or sum(len(x.get('text') or '') for x in union.values())>16000:raise ValueError('表格窗口及必要表头超过1000格/16000字符，请缩小范围或核对原件')
     return {**{k:v for k,v in table.items() if k!='cells'},'cells':selected,'window':{'row_start':r,'row_end':re,'column_start':c,'column_end':ce},'window_origin':origin,'header_context':{'role':'explicit_header' if table.get('header_rows') else 'first_content_row','cells':headers}}
@@ -139,7 +145,7 @@ def hit_context(result,point):
         c=cell['column'];ce=min(table['columns']+1,c+cell['column_span'])
         header_rows=table.get('header_rows') or ([min(x['row'] for x in table['cells'] if x.get('text') not in ('',None))] if any(x.get('text') not in ('',None) for x in table['cells']) else [])
         headers={'role':'explicit_header' if table.get('header_rows') else 'first_content_row',
-                 'cells':[x for x in table['cells'] if x['row'] in header_rows and c<=x['column']<ce]}
+                 'cells':[x for x in table['cells'] if x['row'] in header_rows and _covers_columns(x,c,ce)]}
         window=None
     else:
         anchor['suggested_window']=window;headers=view['header_context']

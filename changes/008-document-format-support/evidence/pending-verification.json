@@ -89,23 +89,10 @@
   },
   "pr_review": {
     "status": "needs_revision",
-    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
-    "evidence": "pr43-review-v2.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7181841042",
-    "findings": [
-      "P1 Local pureHub original download route absent",
-      "P1 postprocess publication-failure terminal inconsistency",
-      "P1 invalid committed canonical candidate GC",
-      "P2 merged header span outside left window",
-      "P2 path-files Web metadata omitted",
-      "P1 same origin/contentV but different processingP/resultSHA can merge into a mixed bundle"
-    ],
-    "prior_findings_status": "v1 concrete auth resurrection/restore/help/object-only/failure-details paths scoped fixed;Hub shortlock and rawTTL partial; fulloriginalscope/EHX incomplete.",
-    "version_isolation_supplement": "processing-version-isolation-review.md",
-    "findings_status_after_remote_fix": {
-      "pure_hub_original": "New real CLI/HTTP/stdio-reference TDD passed and independently registered; Web/other platform entry still unverified.",
-      "processing_version_isolation": "Same-V/different-P, result conflicts and mixed old refs scoped fixed and independently registered; fullSC9/platform matrix remains unverified."
-    }
+    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+    "evidence": "pr43-review-abf46ca.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7183502385",
+    "limitation": "Pre-header patch checkpoint review; later product diff requires fresh review"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -130,31 +117,11 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
-    "evidence": "ci-regression-092ab9d.json",
-    "runs": [
-      "45754517560",
-      "45754512178"
-    ],
-    "each_run": {
-      "macos": {
-        "passed": 458,
-        "skipped": 67,
-        "failed": 0
-      },
-      "ubuntu24.04": {
-        "passed": 458,
-        "skipped": 67,
-        "failed": 0
-      },
-      "windows2022": {
-        "passed": 457,
-        "skipped": 66,
-        "failed": 2
-      }
-    },
-    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
-    "all6_official_digest_crc_xml_verified": true
+    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+    "evidence": "ci-regression-abf46ca.json",
+    "macos_ubuntu_each": "459 passed,68 skipped,0 failed, twice each",
+    "windows_each": "457 passed,67 skipped,3 failed, twice",
+    "limitation": "Pre-header source. Two retained audit failures plus new upload-queue disconnect. No skip counted as passed."
   },
   "web_failure_diagnostic": {
     "status": "passed_scoped",
@@ -345,5 +312,60 @@
     ],
     "both_tdd_reviews_registered": true,
     "other_findings_unchanged": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair."
+  },
+  "merged_column_header_fix": {
+    "evidence": "merged-column-header-development.json",
+    "status": "Two scoped greens independently passed/registered; full SC9 remains incomplete"
+  },
+  "windows_upload_queue_defect": {
+    "evidence": "windows-upload-queue-diagnostic.json",
+    "status": "Real Windows reproduced; fix pending; not retained-gap scope"
+  },
+  "historical_latest_ordinary_ci_before_header": {
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
+    "runs": [
+      "45754517560",
+      "45754512178"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 66,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
+    "all6_official_digest_crc_xml_verified": true
+  },
+  "historical_pr_review_before_abf46ca": {
+    "status": "needs_revision",
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "pr43-review-v2.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7181841042",
+    "findings": [
+      "P1 Local pureHub original download route absent",
+      "P1 postprocess publication-failure terminal inconsistency",
+      "P1 invalid committed canonical candidate GC",
+      "P2 merged header span outside left window",
+      "P2 path-files Web metadata omitted",
+      "P1 same origin/contentV but different processingP/resultSHA can merge into a mixed bundle"
+    ],
+    "prior_findings_status": "v1 concrete auth resurrection/restore/help/object-only/failure-details paths scoped fixed;Hub shortlock and rawTTL partial; fulloriginalscope/EHX incomplete.",
+    "version_isolation_supplement": "processing-version-isolation-review.md",
+    "findings_status_after_remote_fix": {
+      "pure_hub_original": "New real CLI/HTTP/stdio-reference TDD passed and independently registered; Web/other platform entry still unverified.",
+      "processing_version_isolation": "Same-V/different-P, result conflicts and mixed old refs scoped fixed and independently registered; fullSC9/platform matrix remains unverified."
+    }
   }
 }
