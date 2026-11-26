@@ -181,44 +181,61 @@ class ManagedDocumentUploads:
                 elif backup is not None:self.library._replace(path,backup)
                 raise
     def run_pending(self):
-        # This is a queue coordinator lock, never acquired by query/read. The
-        # existing supervisor separately owns the archive-wide content slot.
-        with control_lock(self.snapshots.root/'upload-queue.lock'):
-            while True:
+        # Kicks coalesce while another coordinator owns this durable queue.
+        # Never wait for a whole content task in an HTTP background callback.
+        while True:
+            acquired = False
+            try:
+                with control_lock(self.snapshots.root/'upload-queue.lock', timeout=0):
+                    acquired = True
+                    self._drain_pending()
+            except RuntimeError:
+                if acquired:
+                    raise  # A real coordinator failure must remain visible.
+                return
+            # Check only AFTER releasing ownership. A producer may have added
+            # work after the drain saw empty but before its busy kick returned.
+            # If it commits later, its own kick can acquire the now-free lock.
+            with self.db.connect() as c:
+                if c.execute("SELECT 1 FROM document_upload_jobs WHERE state='pending' LIMIT 1").fetchone() is None:
+                    return
+
+    def _drain_pending(self):
+        while True:
+            with self.db.connect() as c:
+                job=c.execute("SELECT * FROM document_upload_jobs WHERE state='pending' ORDER BY rowid LIMIT 1").fetchone()
+                if job is None:return
+                value=json.loads(job['payload'])
+            token=value['token'];source=value['source'];error=None;result=None
+            try:
+                with self._hold():self._check(value['binding'])
                 with self.db.connect() as c:
-                    job=c.execute("SELECT * FROM document_upload_jobs WHERE state='pending' ORDER BY rowid LIMIT 1").fetchone()
-                    if job is None:return
-                    value=json.loads(job['payload'])
-                token=value['token'];source=value['source'];error=None;result=None
-                try:
-                    with self._hold():self._check(value['binding'])
+                    attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=?',(token['attempt_id'],)).fetchone()
+                if attempt and attempt['result_sha256'] and attempt['state'] in {'ready','partial'}:
+                    token['result_sha256']=attempt['result_sha256'];result=self.snapshots.load_result(token['result_sha256'])
+                else:result=self.snapshots.process(token,token['profile']['format'])
+            except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
+            item={'path':Path(value['path']),'relative_path':Path(value['path']).name,'error':error,'captured_id':token['capture_id']}
+            if result is not None:item.update(snapshot_token=token,processed_result=result,sha256=token['raw_sha256'],text=result['text'])
+            try:
+                with self._hold():
+                    self._check(value['binding'])
+                    # Failed managed replacement preserves its old complete
+                    # publication. Path refresh keeps its separate withdrawal
+                    # semantics in Documents._publish.
                     with self.db.connect() as c:
-                        attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=?',(token['attempt_id'],)).fetchone()
-                    if attempt and attempt['result_sha256'] and attempt['state'] in {'ready','partial'}:
-                        token['result_sha256']=attempt['result_sha256'];result=self.snapshots.load_result(token['result_sha256'])
-                    else:result=self.snapshots.process(token,token['profile']['format'])
-                except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
-                item={'path':Path(value['path']),'relative_path':Path(value['path']).name,'error':error,'captured_id':token['capture_id']}
-                if result is not None:item.update(snapshot_token=token,processed_result=result,sha256=token['raw_sha256'],text=result['text'])
+                        state=c.execute('SELECT current_capture,latest_attempt,published_capture FROM document_snapshot_state WHERE document_pk=?',(token['document_pk'],)).fetchone()
+                    if state is None or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id']:raise ValueError('上传任务已被新候选或尝试取代')
+                    if not error or not state['published_capture']:self.documents._publish(source,{'error':None,'counts':{'ready':int(not error),'failed':int(bool(error)),'candidates':1,'billed_bytes':0,'new_raw_bytes':value['binding']['bytes'],'ignored_entries':0},'files':[item]})
+            except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
+            if error:
                 try:
                     with self._hold():
                         self._check(value['binding'])
-                        # Failed managed replacement preserves its old complete
-                        # publication. Path refresh keeps its separate withdrawal
-                        # semantics in Documents._publish.
-                        with self.db.connect() as c:
-                            state=c.execute('SELECT current_capture,latest_attempt,published_capture FROM document_snapshot_state WHERE document_pk=?',(token['document_pk'],)).fetchone()
-                        if state is None or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id']:raise ValueError('上传任务已被新候选或尝试取代')
-                        if not error or not state['published_capture']:self.documents._publish(source,{'error':None,'counts':{'ready':int(not error),'failed':int(bool(error)),'candidates':1,'billed_bytes':0,'new_raw_bytes':value['binding']['bytes'],'ignored_entries':0},'files':[item]})
-                except (OSError,ValueError,RuntimeError) as exc:error=str(exc)
-                if error:
-                    try:
-                        with self._hold():
-                            self._check(value['binding'])
-                            self.snapshots.fail_current(token,error)
-                    except (OSError,ValueError,RuntimeError):
-                        # A changed Hub/project context must not write into the
-                        # new context just to finish an obsolete task's status.
-                        pass
-                with self.db.connect() as c:
-                    c.execute('UPDATE document_upload_jobs SET state=?,error=? WHERE document_id=? AND payload=?',('failed' if error else 'done',error,job['document_id'],job['payload']))
+                        self.snapshots.fail_current(token,error)
+                except (OSError,ValueError,RuntimeError):
+                    # A changed Hub/project context must not write into the
+                    # new context just to finish an obsolete task's status.
+                    pass
+            with self.db.connect() as c:
+                c.execute('UPDATE document_upload_jobs SET state=?,error=? WHERE document_id=? AND payload=?',('failed' if error else 'done',error,job['document_id'],job['payload']))

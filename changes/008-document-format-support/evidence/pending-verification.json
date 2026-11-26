@@ -60,6 +60,13 @@
       "patch_applied": false,
       "business_acceptance": "failed or unverified; not waived",
       "current_status": "previously retained; resumed by2026-11-26 instruction; original gap preserved until actual execution/review"
+    },
+    {
+      "area": "Same-parent distinct SQLite queue ownership",
+      "evidence": "upload-queue-development.json",
+      "decision": "Retain gap; no additional cross-archive testcase/further proposed fix/dedicated rerun",
+      "risk": "Current busy-coalescing patch can miss another database wakeup; statically supported, not reproduced",
+      "not_spec_waiver": true
     }
   ],
   "pending_test_repair_approvals": [],
@@ -88,11 +95,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
+    "head": "12e5128952ae2929b6c920158022f7d973213f76",
     "status": "needs_revision",
-    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
-    "evidence": "pr43-review-abf46ca.md",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7183502385",
-    "limitation": "Pre-header patch checkpoint review; later product diff requires fresh review"
+    "evidence": "pr43-review-12e5128.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7184206562",
+    "scope": "Predates queue patch; fresh review required for later diff. GC, path refresh failure/detail, service CLI handoff, full platform acceptance remain."
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -177,31 +184,12 @@
     "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
   },
   "current_ci_checkpoint": {
-    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
-    "evidence": "ci-regression-092ab9d.json",
-    "runs": [
-      "45754517560",
-      "45754512178"
-    ],
-    "each_run": {
-      "macos": {
-        "passed": 458,
-        "skipped": 67,
-        "failed": 0
-      },
-      "ubuntu24.04": {
-        "passed": 458,
-        "skipped": 67,
-        "failed": 0
-      },
-      "windows2022": {
-        "passed": 457,
-        "skipped": 66,
-        "failed": 2
-      }
-    },
-    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
-    "all6_official_digest_crc_xml_verified": true
+    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+    "evidence": "ci-regression-abf46ca.json",
+    "scope": "Last recovered ordinary CI, not current queue/header source",
+    "macos_ubuntu_each": "459pass68skip0fail twice",
+    "windows_each": "457pass67skip3fail twice",
+    "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
   },
   "active_source_lifecycle_gap": {
     "maintainer_decision": "retain gap, 2026-11-26",
@@ -367,5 +355,38 @@
       "pure_hub_original": "New real CLI/HTTP/stdio-reference TDD passed and independently registered; Web/other platform entry still unverified.",
       "processing_version_isolation": "Same-V/different-P, result conflicts and mixed old refs scoped fixed and independently registered; fullSC9/platform matrix remains unverified."
     }
+  },
+  "queue_fix_checkpoint": {
+    "evidence": "upload-queue-development.json",
+    "status": "native green observed, independent needs_revision/design; same-parent multi-DB risk retained by maintainer",
+    "actual_tests": "Mac4main+8reg passed; Windows5component passed and independently reviewed",
+    "not_complete": "No whole TC/SC1/R008 or E/H/X pass"
+  },
+  "historical_current_ci_checkpoint_before_queue": {
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
+    "runs": [
+      "45754517560",
+      "45754512178"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 66,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
+    "all6_official_digest_crc_xml_verified": true
   }
 }
