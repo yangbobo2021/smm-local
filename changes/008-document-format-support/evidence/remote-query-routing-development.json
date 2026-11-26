@@ -1,0 +1,387 @@
+{
+  "scope": "Mac foreground CLI/HTTP/stdio-reference download and precise processing-version routing TDD subdomains only; R008/SC9 are NOT complete",
+  "source_baseline": "092ab9d8be112481618ffe158a407103147d2ed0 plus document_search.py patch",
+  "product_sha256": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+  "cases": [
+    {
+      "case": "TC-008-remote-original-routing",
+      "red": {
+        "id": "red-sc9-remote-original-v2",
+        "result_sha256": "77b622207eea94e2d804398f64a096a6bbe01032260c4994b3e1fbaa7d9649c5",
+        "review_id": "review-remote-original-red-v2"
+      },
+      "green": {
+        "id": "green-sc9-remote-original-v1",
+        "result_sha256": "a28b987e9bda25971a78a9a845dbcbd85e7251688e4238481d591ba4a5abcbee",
+        "main_passed": 1,
+        "main_seconds": 99.18,
+        "regression_passed": 12,
+        "regression_seconds": 34.89,
+        "artifacts": 1261,
+        "artifact_bytes": 4479209,
+        "all_artifacts_and_current_bindings_verified": true
+      },
+      "independent_review": {
+        "id": "review-remote-original-green-v1",
+        "status": "passed",
+        "native_review_sha256": "f0ee359bce39b49237f3294abc244eb0b9c164efe538d50c44eff1941862d61c",
+        "opinion_sha256": "d38c6c05e7c93253d5b3b032c365898ab17fda44c9d7bfa32e48599bdc73f9f9"
+      },
+      "synthetic_input_manifest": [
+        {
+          "name": "remotedevice0docx1.docx",
+          "bytes": 2577,
+          "sha256": "09845d301671c8d9722769d2ed4823db4df3f1e0f064368d3055e835138dde12"
+        },
+        {
+          "name": "remotedevice0docx2.docx",
+          "bytes": 2576,
+          "sha256": "098f6fb465b06d23ebb40d457a4989cffde3455eb38e285e6b159bcc4371267d"
+        },
+        {
+          "name": "remotedevice0pdf1.pdf",
+          "bytes": 3370,
+          "sha256": "db7547d2c363ec098f3146950bf64188fedcc41c925cf4aefdfa22be048bb51b"
+        },
+        {
+          "name": "remotedevice0pdf2.pdf",
+          "bytes": 3371,
+          "sha256": "e399c96dae52d568090aaed290d75e8f2c25b625a0327691394d94b831b4fc76"
+        },
+        {
+          "name": "remotedevice0xlsx1.xlsx",
+          "bytes": 1805,
+          "sha256": "079a6e220a794df9ad10829cb99cff543a65e919a53e40c97fcda7b29cb8e949"
+        },
+        {
+          "name": "remotedevice0xlsx2.xlsx",
+          "bytes": 1805,
+          "sha256": "aff8d001591e7f15ba3d1f16074a51e4801c0c4662869da40b5e0ca80830fda8"
+        },
+        {
+          "name": "remotedevice1docx1.docx",
+          "bytes": 2579,
+          "sha256": "56f561e262a636458d0decd4400ae102d306f41ebcd0d16d721cfc2e2be4b1c7"
+        },
+        {
+          "name": "remotedevice1docx2.docx",
+          "bytes": 2579,
+          "sha256": "7337965da3253e62080c7b9814ac3df9effb3a632ccc1f12afefd19916872d26"
+        },
+        {
+          "name": "remotedevice1pdf1.pdf",
+          "bytes": 3366,
+          "sha256": "e5d3c8be19d7f3c972254e57a066835324fbd35c449ee6620f62f3dc1b5066f6"
+        },
+        {
+          "name": "remotedevice1pdf2.pdf",
+          "bytes": 3369,
+          "sha256": "2be1d048701737ba92faf292e3f2b2fdaa1bfc172dc3410701a20f7e9749ed27"
+        },
+        {
+          "name": "remotedevice1xlsx1.xlsx",
+          "bytes": 1805,
+          "sha256": "8308cf28bb15be0e255a9a1ca851c0eaac4664bf865682518e081d2636060888"
+        },
+        {
+          "name": "remotedevice1xlsx2.xlsx",
+          "bytes": 1805,
+          "sha256": "38d9d4407731408ca03444677b42eec29e575a9416504568ec8c7e71539deed2"
+        },
+        {
+          "name": "remotehub0docx1.docx",
+          "bytes": 2570,
+          "sha256": "fa6326513183e91e61decd51b4b2760948d830ced88fc9005e06f814b4316b8d"
+        },
+        {
+          "name": "remotehub0docx2.docx",
+          "bytes": 2568,
+          "sha256": "94481565bfac65e7b61b01cc4a27455a26f08de71553e98383d49625aea975ee"
+        },
+        {
+          "name": "remotehub0pdf1.pdf",
+          "bytes": 3360,
+          "sha256": "89a14e669e8a83bccd87a917bc3267c907083a6533ac3479a19df0a4b21a7a78"
+        },
+        {
+          "name": "remotehub0pdf2.pdf",
+          "bytes": 3361,
+          "sha256": "5e99e552f6422f5b767424c99412810fc76fad266114d0750d6402d1430df2cc"
+        },
+        {
+          "name": "remotehub0xlsx1.xlsx",
+          "bytes": 1800,
+          "sha256": "abfa9756a327522135f5cf3ca2c5609071b6d89f2fc1021b1c746ed3d440e713"
+        },
+        {
+          "name": "remotehub0xlsx2.xlsx",
+          "bytes": 1799,
+          "sha256": "378cc73d7f65353c7edffa96c07475958fdaae2d46d8258af71ab390a983d8f4"
+        },
+        {
+          "name": "remotehub1docx1.docx",
+          "bytes": 2570,
+          "sha256": "664f2ed8f471ba92cefe948fc3541b5f6058f31aa7128e0d1e9fb9b2a8640c0d"
+        },
+        {
+          "name": "remotehub1docx2.docx",
+          "bytes": 2571,
+          "sha256": "6c29056b25ca74dee6e9cc46824b845cd490917d25a8bf9a1f444b52f62ee491"
+        },
+        {
+          "name": "remotehub1pdf1.pdf",
+          "bytes": 3357,
+          "sha256": "79a1ffcf1130c7d678f063d2c6b5bb9747fb22c4049bb6aae4b1ce7a90bb502f"
+        },
+        {
+          "name": "remotehub1pdf2.pdf",
+          "bytes": 3359,
+          "sha256": "517b82a593225015926ff6308d4f0bc05560c21c120bd285cb2cfb3a0cba1cf6"
+        },
+        {
+          "name": "remotehub1xlsx1.xlsx",
+          "bytes": 1797,
+          "sha256": "9f529be33bda2bfa24adcf1331ecf7e4a190585f27803d99f3322becdac469d6"
+        },
+        {
+          "name": "remotehub1xlsx2.xlsx",
+          "bytes": 1797,
+          "sha256": "237f658f2d478bd22dd96895722d69d120c2f1bf4685c6dc0d0d8b8175033eb8"
+        }
+      ]
+    },
+    {
+      "case": "TC-008-processing-version-isolation",
+      "red": {
+        "id": "red-sc9-version-isolation-v4",
+        "result_sha256": "f6b2a68d04b37287cc00d11c399b5a9e28ca504e669bac426ee984240f409b57",
+        "review_id": "review-version-isolation-red-v4"
+      },
+      "green": {
+        "id": "green-sc9-version-isolation-v1",
+        "result_sha256": "2616195b6c6ee6b5d6a51f409f75e1806db60b2b9059f8621c8e15013b9985db",
+        "main_passed": 1,
+        "main_seconds": 72.9,
+        "regression_passed": 34,
+        "regression_seconds": 213.82,
+        "artifacts": 896,
+        "artifact_bytes": 4196212,
+        "all_artifacts_and_current_bindings_verified": true
+      },
+      "independent_review": {
+        "id": "review-version-isolation-green-v1",
+        "status": "passed",
+        "native_review_sha256": "9875eec10a16308b4fa2267dfaa8449a67b66d2b09c52dc847cd21d034dccad2",
+        "opinion_sha256": "914ba3c61eb0c3cefb5d737291a8ca5a3b1d10a60170e529aedbff669e0be638"
+      },
+      "synthetic_input_manifest": [
+        {
+          "name": "remotedevice0docx1.docx",
+          "bytes": 2577,
+          "sha256": "af07b791b6ba239174b5f47daeee9f1d119468fd643229936e5c2a3ca488c044"
+        },
+        {
+          "name": "remotedevice0docx2.docx",
+          "bytes": 2576,
+          "sha256": "17c8523aa45d2033d2e6f27a0967ca6e081ebbe25d377fb27f54f4f2873de6e2"
+        },
+        {
+          "name": "remotedevice1docx1.docx",
+          "bytes": 2579,
+          "sha256": "eaec56b3ac148c6eb5154fd49fe5950ca4866f7e7d348eb25ca234646e8a6caf"
+        },
+        {
+          "name": "remotedevice1docx2.docx",
+          "bytes": 2579,
+          "sha256": "a880ec76fd8eaaa2e0d4249577ec751cd907771ec96fdb47d3b06562df215f3a"
+        },
+        {
+          "name": "remotehub0docx1.docx",
+          "bytes": 2570,
+          "sha256": "e87321d4bbb04a3733af3185fd4e4ac7476fd6bea775206f46e67a3c6bb83072"
+        },
+        {
+          "name": "remotehub0docx2.docx",
+          "bytes": 2568,
+          "sha256": "09f9b4fde452cc9f8157cf113fd0389c5c42fd052193d42a6024c0b4590b3be4"
+        },
+        {
+          "name": "remotehub1docx1.docx",
+          "bytes": 2570,
+          "sha256": "91a3d751c6b27bc9511781c65e4d0fe45a15e47cb87cb4a555d4dcd5be8af9f0"
+        },
+        {
+          "name": "remotehub1docx2.docx",
+          "bytes": 2571,
+          "sha256": "14880b8658a2dba6199c7a2d1aa8232928ca18b40271634c1aed288dda6f5ad9"
+        }
+      ]
+    }
+  ],
+  "remote_original": {
+    "documents": 24,
+    "origin_kinds": [
+      "Hub-owned",
+      "other-device projection"
+    ],
+    "project_kinds": [
+      "ordinary",
+      "global"
+    ],
+    "formats": [
+      "docx",
+      "xlsx",
+      "native PDF"
+    ],
+    "documents_per_origin_project_format": 2,
+    "entry_document_download_flows": 72,
+    "cli_exports": 72,
+    "local_http_downloads": 72,
+    "direct_hub_original_controls": 24,
+    "stdio_metadata_references": 24,
+    "wrong_hub_cli_and_http_rejections_each": 24,
+    "source_paths_removed_and_sender_stopped": true,
+    "query_guards": "Actual CLI and services calibrated source/process/spawn/network controls; final logs equal baselines, only configured Hub network allowed"
+  },
+  "version_isolation": {
+    "documents_with_p2_local_and_p1_hub": 4,
+    "precise_snapshots": 8,
+    "same_content_and_text_sha_but_different_processing_and_result_sha": true,
+    "same_snapshot_mirror_dedup_control": 1,
+    "malformed_protocol_negative_cases": 12,
+    "mixed_reference_rejection": "All4targets, text/table/original-info/original through controller and HTTP; original valid endpoint references reread afterwards",
+    "canonical_text": "Source words/exclusions/body ordering calibrated before snapshot text/SHA/length; every query read exact snapshot and profile; each CLI/HTTP requested table independently matches ID/location/source cells and complete table set",
+    "legacy_text_bundle_compatibility": true,
+    "query_guards": "Service/CLI plus scoped controller direct-product source/process/spawn/network guards, real controls and unchanged final logs"
+  },
+  "history": [
+    "Initial route and version candidates independently needs_revision for incomplete guards/assertions; original failure evidence retained.",
+    "Version candidate second repair binds each CLI/HTTP table to requested table and independent source grid.",
+    "Version redv3 failed preparation with disk I/O error at low available disk and stays insufficient_evidence. After task-only space recovery and32MiB SQLite commit/quick_check, identical testcase bytes redv4 reached expected union1instead2. No third testcase repair."
+  ],
+  "build": {
+    "scope": "Built current source wheels and verified exact source bytes only; not installed-business acceptance",
+    "command": [
+      "python",
+      "scripts/build_packages.py",
+      "--uv",
+      "<prepared-uv>",
+      "--out-dir",
+      "<task-wheel-dir>"
+    ],
+    "exit_code": 0,
+    "wheels": {
+      "smm_local-0.4.0-py3-none-any.whl": {
+        "bytes": 195396,
+        "sha256": "d973d804f8df8101fca23fa7a59e41c44af00212054d13bcd25fabffcba23b39",
+        "zip_crc_valid": true,
+        "verified_source_members": {
+          "smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+          "smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+          "smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_local/cli.py": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+          "smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_local/document_processing.py": "c696f9c55605a76e7e9ffc9f88f02511736aae795dbfd9b2a634778b303729cc",
+          "smm_local/document_protocol.py": "00256b366633ca01c71f28c184c09a06e40d2fead319fc438e44a5d1647ae79e",
+          "smm_local/document_results.py": "d0b8386c27b991fc45c4386158e9c3d4bbdc0f188ada9fe42fcf6240f574d473",
+          "smm_local/document_search.py": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+          "smm_local/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+          "smm_local/document_supervisor.py": "d9255fb51e1efce7b070d8a493b961199db87c2c91a92a414edadd0c6481bbf7",
+          "smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+          "smm_local/document_transfers.py": "d98ef43d861259df8cc3f2202a1c8639ee6f8d71843cd365839e5181b8ab761c",
+          "smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_local/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+          "smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+          "smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+          "smm_local/managed_document_uploads.py": "54a138d3fbe160f0e7a092205592691dfc62a9dabeffcb1940cc4c89ce8d8433",
+          "smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+          "smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+          "smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+          "smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+          "smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2",
+          "smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+          "smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+          "smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+          "smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b"
+        }
+      },
+      "smm_hub-0.4.0-py3-none-any.whl": {
+        "bytes": 179493,
+        "sha256": "843b327ac70dda6bc72c7e41ae7e71f64c1b39a7b1d6e287a15c06c4fbe8860e",
+        "zip_crc_valid": true,
+        "verified_source_members": {
+          "smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+          "smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+          "smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+          "smm_hub/document_cli.py": "02ec47302684b6ed4d6490b7eba4a3c5c0f09c61920ad4915f50822a3b449044",
+          "smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+          "smm_hub/hub.py": "fdf9c0d0c81b48bd08c2533665204b9b00ddac9c52c2715c3f27f657f4cb3b57",
+          "smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3",
+          "smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+          "smm_hub/processed_documents.py": "1697d2d132ba7227b20a1cde37e3f6bf897ce8df1d9ea319850ee313d0d248b4",
+          "smm_hub/projects.py": "a57bfbf034808a24452b05580e3d197bb8df84168b7e004159525b88df9e0ba9",
+          "smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+          "smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+          "smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+          "smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+          "smm_hub/_archive/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_hub/_archive/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_hub/_archive/document_processing.py": "c696f9c55605a76e7e9ffc9f88f02511736aae795dbfd9b2a634778b303729cc",
+          "smm_hub/_archive/document_protocol.py": "00256b366633ca01c71f28c184c09a06e40d2fead319fc438e44a5d1647ae79e",
+          "smm_hub/_archive/document_results.py": "d0b8386c27b991fc45c4386158e9c3d4bbdc0f188ada9fe42fcf6240f574d473",
+          "smm_hub/_archive/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+          "smm_hub/_archive/document_supervisor.py": "d9255fb51e1efce7b070d8a493b961199db87c2c91a92a414edadd0c6481bbf7",
+          "smm_hub/_archive/document_transfers.py": "d98ef43d861259df8cc3f2202a1c8639ee6f8d71843cd365839e5181b8ab761c",
+          "smm_hub/_archive/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_hub/_archive/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_hub/_archive/managed_document_uploads.py": "54a138d3fbe160f0e7a092205592691dfc62a9dabeffcb1940cc4c89ce8d8433",
+          "smm_hub/_archive/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_hub/_archive/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_hub/_archive/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_hub/_archive/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_hub/_archive/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_hub/_archive/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_hub/_archive/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_hub/_archive/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_hub/_archive/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_hub/_archive/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_hub/_archive/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_hub/_archive/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_hub/_archive/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+          "smm_hub/_archive/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_hub/_archive/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_hub/_archive/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_hub/_archive/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_hub/_archive/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_hub/_archive/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
+        }
+      }
+    }
+  },
+  "limits": [
+    "No actual browser UI, installed package business, OS service, real HTTPS exchange or E/H/X claim.",
+    "Maintainer-retained source cancellation, C1 restart and shared Windows string-argv observer gaps untouched; existing ordinary CI failures not skipped/xfail.",
+    "Canonical obsolete-candidate GC, merged-header window context and path-files Web details still need repair; other full SPEC matrices and final review remain incomplete.",
+    "CI092ab9d predates this document_search.py patch; next current-head CI must be evaluated separately."
+  ]
+}

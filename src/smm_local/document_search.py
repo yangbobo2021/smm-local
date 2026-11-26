@@ -3,6 +3,7 @@
 from __future__ import annotations
 from collections import Counter
 import math
+import re
 import sqlite3
 from .core import tokens
 from .documents import Documents
@@ -21,7 +22,7 @@ def _origin(db, config, hit):
 def _identity(hit):
     origin = hit["origin"]
     return tuple(origin[k] for k in ("device_id", "archive_id", "document_id")) + (
-        hit["version"],
+        hit["version"], hit.get("processing_version") or 0,
     )
 
 
@@ -167,6 +168,10 @@ def search(
                     for key in ("device_id", "archive_id", "document_id"):
                         identity(origin[key])
                     integer(hit["version"])
+                    if hit.get("format") in {"docx", "xlsx", "pdf"}:
+                        integer(hit.get("processing_version"))
+                        if not isinstance(hit.get("result_sha256"), str) or not re.fullmatch("[0-9a-f]{64}", hit["result_sha256"]):
+                            raise ValueError()
                     integer(hit["text_length"], minimum=0)
                     if (
                         ref.get("kind") != "hub_document"
@@ -174,7 +179,7 @@ def search(
                         or ref.get("origin") != origin
                         or any(
                             ref.get(k) != hit.get(k)
-                            for k in ("version", "sha256", "text_sha256", "text_length")
+                            for k in ("version", "sha256", "text_sha256", "text_length", "processing_version", "result_sha256")
                         )
                     ):
                         raise ValueError()
@@ -245,7 +250,7 @@ def search(
             old = candidates[key]
             if any(
                 old.get(k) != hit.get(k)
-                for k in ("sha256", "text_sha256", "text_length")
+                for k in ("sha256", "text_sha256", "text_length", "result_sha256")
             ):
                 failures.append("同一身份和版本的文档摘要冲突，排除远端候选")
                 hub_coverage = "partial"
@@ -309,6 +314,47 @@ def search(
     }
 
 
+def _bundle_snapshots(db, payload, depth=0):
+    # This is only a rejection precheck. Remote signatures/qualification are
+    # still verified by the destination on the actual read, not trusted here.
+    if depth > 8:
+        raise ValueError('文档组合引用无效，请重新检索')
+    kind = payload.get('kind')
+    if kind == 'bundle':
+        parts = payload.get('parts')
+        if not isinstance(parts, list) or not parts:
+            raise ValueError('文档组合引用无效，请重新检索')
+        return [stamp for part in parts for stamp in _bundle_snapshots(db, references.decode(db, part), depth + 1)]
+    if kind == 'remote_reference':
+        inner = references.routing_metadata(payload.get('hub_reference'))
+        if inner.get('kind') != 'hub_document' or inner.get('hub_id') != payload.get('hub_id'):
+            raise ValueError('文档组合路由无效，请重新检索')
+        origin = inner.get('origin', {})
+        archive, document = origin.get('archive_id'), origin.get('document_id')
+        value = inner
+        raw = inner.get('sha256')
+    elif kind == 'document':
+        archive, document = payload.get('archive_id'), payload.get('document_id')
+        value = payload
+        raw = payload.get('raw_sha256')
+    else:
+        raise ValueError('文档组合材料类型无效，请重新检索')
+    if value.get('processing_version') is None and value.get('result_sha256') is None:
+        return [None]  # Preserve legacy text-only bundles.
+    identity(archive);identity(document)
+    integer(value.get('version'));integer(value.get('processing_version'))
+    for digest in (raw, value.get('result_sha256')):
+        if not isinstance(digest, str) or not re.fullmatch('[0-9a-f]{64}', digest):
+            raise ValueError('文档组合快照无效，请重新检索')
+    return [(archive, document, value['version'], value['processing_version'], value['result_sha256'], raw)]
+
+
+def _validate_bundle(db, payload):
+    stamps = _bundle_snapshots(db, payload)
+    if any(stamp is not None for stamp in stamps) and any(stamp != stamps[0] for stamp in stamps):
+        raise ValueError('组合引用混用了不同处理快照，请重新检索')
+
+
 def read(db, reference, *, start=None, end=None, view='text',table_id=None,row_start=None,row_end=None,column_start=None,column_end=None):
     options={k:v for k,v in {'table_id':table_id,'row_start':row_start,'row_end':row_end,'column_start':column_start,'column_end':column_end}.items() if v is not None}
     if view!='text':options['view']=view
@@ -325,6 +371,7 @@ def read(db, reference, *, start=None, end=None, view='text',table_id=None,row_s
             "device_name": (config or {}).get("device_name", "本机"),
         }
     if kind == "bundle":
+        _validate_bundle(db, payload)
         errors = []
         for part in payload.get("parts", []):
             try:
@@ -363,9 +410,33 @@ def original(db,reference):
     payload=references.decode(db,reference)
     if payload.get('kind')=='document':return Documents(db).original(reference)
     if payload.get('kind')=='bundle':
+        _validate_bundle(db, payload)
         errors=[]
         for part in payload.get('parts',[]):
             try:return original(db,part)
             except (OSError,ValueError,federation.HubUnavailable) as exc:errors.append(str(exc))
         raise ValueError('当次各端原件资格均已失效：'+'；'.join(errors))
-    raise ValueError('远端原件接收能力尚不可用')
+    if payload.get('kind') == 'remote_reference':
+        config = federation.hub_config(db)
+        if not config:
+            raise ValueError('未连接引用所属Hub')
+        info = federation._hub_info(config)
+        inner = references.routing_metadata(payload['hub_reference'])
+        if (info['hub_id'] != payload.get('hub_id')
+                or inner.get('kind') != 'hub_document'
+                or inner.get('hub_id') != info['hub_id']):
+            raise ValueError('引用属于其他Hub或材料类型')
+        metadata = read(db, reference, view='original-info')
+        if not metadata.get('available'):
+            raise ValueError('该采集版本没有可用原件')
+        raw = federation._request_binary(config, '/documents/original', method='POST', payload={
+            'hub_id': info['hub_id'], 'document_epoch': inner['document_epoch'],
+            'reference': payload['hub_reference'],
+        })
+        import hashlib
+        if (not isinstance(raw, bytes) or len(raw) != metadata.get('bytes')
+                or hashlib.sha256(raw).hexdigest() != metadata.get('sha256')
+                or metadata.get('sha256') != inner.get('sha256')):
+            raise ValueError('Hub原件长度或摘要不匹配，请重新检索')
+        return raw
+    raise ValueError('须使用文档搜索返回的精确引用')

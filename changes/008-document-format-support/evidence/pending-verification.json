@@ -101,7 +101,11 @@
       "P1 same origin/contentV but different processingP/resultSHA can merge into a mixed bundle"
     ],
     "prior_findings_status": "v1 concrete auth resurrection/restore/help/object-only/failure-details paths scoped fixed;Hub shortlock and rawTTL partial; fulloriginalscope/EHX incomplete.",
-    "version_isolation_supplement": "processing-version-isolation-review.md"
+    "version_isolation_supplement": "processing-version-isolation-review.md",
+    "findings_status_after_remote_fix": {
+      "pure_hub_original": "New real CLI/HTTP/stdio-reference TDD passed and independently registered; Web/other platform entry still unverified.",
+      "processing_version_isolation": "Same-V/different-P, result conflicts and mixed old refs scoped fixed and independently registered; fullSC9/platform matrix remains unverified."
+    }
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -126,30 +130,30 @@
     "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
   },
   "latest_ordinary_ci": {
-    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
-    "evidence": "ci-regression-6c65bc9.json",
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
     "runs": [
-      "45748718050",
-      "45748711062"
+      "45754517560",
+      "45754512178"
     ],
     "each_run": {
       "macos": {
         "passed": 458,
-        "skipped": 63,
+        "skipped": 67,
         "failed": 0
       },
       "ubuntu24.04": {
         "passed": 458,
-        "skipped": 63,
+        "skipped": 67,
         "failed": 0
       },
       "windows2022": {
         "passed": 457,
-        "skipped": 62,
+        "skipped": 66,
         "failed": 2
       }
     },
-    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
     "all6_official_digest_crc_xml_verified": true
   },
   "web_failure_diagnostic": {
@@ -206,30 +210,30 @@
     "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
   },
   "current_ci_checkpoint": {
-    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
-    "evidence": "ci-regression-6c65bc9.json",
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
     "runs": [
-      "45748718050",
-      "45748711062"
+      "45754517560",
+      "45754512178"
     ],
     "each_run": {
       "macos": {
         "passed": 458,
-        "skipped": 63,
+        "skipped": 67,
         "failed": 0
       },
       "ubuntu24.04": {
         "passed": 458,
-        "skipped": 63,
+        "skipped": 67,
         "failed": 0
       },
       "windows2022": {
         "passed": 457,
-        "skipped": 62,
+        "skipped": 66,
         "failed": 2
       }
     },
-    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
     "all6_official_digest_crc_xml_verified": true
   },
   "active_source_lifecycle_gap": {
@@ -302,5 +306,44 @@
     "related_regression_passed": 27,
     "four_tdd_reviews_registered": true,
     "scope": "Macforeground managedupload and synchronouscache reprocess:config invalidation after real result, failed terminal/error, old publication preserved and explicit saved-byte retry. HubCLI status/config no longer refused byOSadminlock while content jobruns. Not pathrefresh/latepayload/L3/GC/services/EHX."
+  },
+  "historical_ordinary_ci_6c65bc9": {
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "ci-regression-6c65bc9.json",
+    "runs": [
+      "45748718050",
+      "45748711062"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 63,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 63,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 62,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "all6_official_digest_crc_xml_verified": true
+  },
+  "remote_query_routing_fix": {
+    "status": "passed_scoped",
+    "evidence": "remote-query-routing-development.json",
+    "scope": "Mac foreground CLI/HTTP/stdio reference handoff:24remote originals,4different-P source documents, exact snapshots and old mixed-ref rejection; not Web UI/installed/OS service/HTTPS/EHX.",
+    "main_passed_each": 1,
+    "related_regression_passed": [
+      12,
+      34
+    ],
+    "both_tdd_reviews_registered": true,
+    "other_findings_unchanged": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair."
   }
 }
