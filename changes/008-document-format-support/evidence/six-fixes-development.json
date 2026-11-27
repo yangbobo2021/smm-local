@@ -1,0 +1,1538 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scope": "Six user-authorized fixes within draft PR43. Whole R008/SC1/SC10 is NOT passed; no merge/release/daily upgrade.",
+  "base_head": "25dec277a92850c3214ceb0a8d7ab34fec1ac9c0",
+  "source_binding_authority": "Actual final product SHA map; native revision is base+working changes, not a claim these fixes are present in base HEAD.",
+  "final_product_sha256": {
+    "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+    "src/smm_hub/_archive.py": "52470a6b68fbbb61aeb156c0d705a2199639298227d114cbe729a531f4ebbb1a",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+    "src/smm_hub/document_cli.py": "48b709a9759672496747f6e5d5aea94feb791c9f2d6cf342c072695d7eff3c64",
+    "src/smm_hub/document_execution.py": "25fd4e7e533725fc0833b130e307fffcc823d4e1ed7e33e138076d083f6ce551",
+    "src/smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+    "src/smm_hub/hub.py": "4389811a799c64934691c58f16b515956ba4aaf267e0402ad5715732666efda2",
+    "src/smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3",
+    "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+    "src/smm_hub/processed_documents.py": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+    "src/smm_hub/projects.py": "a57bfbf034808a24452b05580e3d197bb8df84168b7e004159525b88df9e0ba9",
+    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec",
+    "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+    "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+    "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+    "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+    "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+    "src/smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+    "src/smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+    "src/smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+    "src/smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+    "src/smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+    "src/smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+    "src/smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+    "src/smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+    "src/smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+    "src/smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+    "src/smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+    "src/smm_local/document_processing.py": "85b8f6b5365e9cd37918e98d497b0306b296bc552116a77b0efc8777e27d6967",
+    "src/smm_local/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+    "src/smm_local/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+    "src/smm_local/document_search.py": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+    "src/smm_local/document_snapshots.py": "5bbd01bcd87b861479e19a75cd805ffa414d145995a3d1c59f6f70c9237b99b1",
+    "src/smm_local/document_supervisor.py": "ebf0bd1cd3c4d49d6f7ff8e95497e018c3fd4f9bd774f43f31189c226df22d3a",
+    "src/smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+    "src/smm_local/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+    "src/smm_local/document_windows.py": "297b2904402a59d9d4589c8c3b2a1afcb228af0b26783cfa517b2934642b0873",
+    "src/smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+    "src/smm_local/documents.py": "eb4f922ed16e400f092da6a891cd35bd2248692f35df5e95c7632541df7a559e",
+    "src/smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+    "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+    "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+    "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+    "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+    "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+    "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+    "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+    "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+    "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+    "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+    "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+    "src/smm_local/managed_document_uploads.py": "99cd7e5766dc90240232afdb26b75d9e84aaee93b746bd1793d33a3dbc5cdb7a",
+    "src/smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+    "src/smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+    "src/smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+    "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+    "src/smm_local/static/index.html": "b13655ec9f4b62b8f2073e0480259a6434ce49c1d95b90926a69ee369ddd5c6c",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+    "src/smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2"
+  },
+  "native_scoped_green": [
+    {
+      "area": "F1 Local",
+      "green": "green-sixfix-health-local-final-preparation2",
+      "result_sha256": "1792ec46cfd11272903d025b55a822d06bd6a187f99fc39358bb65fcad825eac",
+      "red": "red-sixfix-health-local-batch6-preparation",
+      "red_review": "review-sixfix-health-local-preparation-red1",
+      "main": [
+        {
+          "case": "TC-008-watchdog-health",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 55.83s",
+          "stdout_sha256": "6157b1401584e0655d682b8f4ce293f94c24c29e8bad178b674e26f1b7b0d394",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 338,
+            "path": "tests/test_document_formats_watchdog_health.py",
+            "sha256": "7f0a4cc10d5bfdaba0a64e5159bed12e5f64bcc1baa663b0f2007e6c5c3fbc76"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "16 passed, 1 warning in 1.48s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_exit_observer.py": "9716a8c257af8244fd0f70ddbf62593117ec3993e35a59820fe7875a3491630c",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_health_fixture.py": "1b3a46973c79790fed4a6f27d366f5b7e54eb646a75d1a0019c8bc6966ece020",
+        "tests/document_formats_health_hook.py": "638f890c8358aed3eefce9d3416f9f6d9d6bad0532036aca61e85bd80b5682ff",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_document_formats_watchdog_health.py": "7f0a4cc10d5bfdaba0a64e5159bed12e5f64bcc1baa663b0f2007e6c5c3fbc76",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [],
+      "artifact_count": 6679,
+      "artifact_total_bytes": 14954499,
+      "review": "review-sixfix-health-local-final-green2",
+      "review_result_sha256": "daf5ee1ceec370d44b63d3e68aeeeba140bd403312b02834b9575f2a232a0457",
+      "reviewer_session": "/root/sixfix_final_health_green_v2",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F1 Hub",
+      "green": "green-sixfix-health-hub-final-preparation2",
+      "result_sha256": "bc22d67d82b87aa96ca1652f49e2b24f4ed8dd94f9cd5ca1eeae155a54284564",
+      "red": "red-sixfix-health-hub-batch6-preparation",
+      "red_review": "review-sixfix-health-hub-preparation-red1",
+      "main": [
+        {
+          "case": "TC-008-watchdog-health",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 260.57s (0:04:20)",
+          "stdout_sha256": "3c009ee1a6886dadddfa32efc5b2056ab78d49b07c3a872e81cd6137498e8959",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 338,
+            "path": "tests/test_document_formats_watchdog_health.py",
+            "sha256": "7f0a4cc10d5bfdaba0a64e5159bed12e5f64bcc1baa663b0f2007e6c5c3fbc76"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "15 passed, 1 warning in 1.36s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_exit_observer.py": "9716a8c257af8244fd0f70ddbf62593117ec3993e35a59820fe7875a3491630c",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_health_fixture.py": "1b3a46973c79790fed4a6f27d366f5b7e54eb646a75d1a0019c8bc6966ece020",
+        "tests/document_formats_health_hook.py": "638f890c8358aed3eefce9d3416f9f6d9d6bad0532036aca61e85bd80b5682ff",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_document_formats_watchdog_health.py": "7f0a4cc10d5bfdaba0a64e5159bed12e5f64bcc1baa663b0f2007e6c5c3fbc76",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [],
+      "artifact_count": 6067,
+      "artifact_total_bytes": 20656405,
+      "review": "review-sixfix-health-hub-final-green2",
+      "review_result_sha256": "2370ad0aac32682d3cf9308a284c227fac17ad704e034f9097273f9f8b8ba918",
+      "reviewer_session": "/root/sixfix_final_health_green_v2",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "GC",
+      "green": "green-sixfix-recovery-final-preparation2",
+      "result_sha256": "a6dd084f850dedba67af483c9434d60ca72a1ffd113299a42c75987b1a20ebcb",
+      "red": "red-sixfix-recovery-copy-batch11-preparation",
+      "red_review": "review-sixfix-recovery-preparation-red1",
+      "main": [
+        {
+          "case": "TC-008-candidate-last-use-recovery",
+          "exit_code": 0,
+          "summary": "14 passed, 1 skipped, 1 warning in 17.49s",
+          "stdout_sha256": "f4c71e5bc2ab36176079098242518cc330e7616523fea0a9a7786e1dbdc06df3",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 398,
+            "path": "tests/test_document_formats_candidate_recovery.py",
+            "sha256": "2e035d6de51c9512b1c3bd8125fb7c9f0bf2f5b9453122e0c550fcb9c10c1992"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "7 passed, 1 warning in 8.49s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_exit_observer.py": "9716a8c257af8244fd0f70ddbf62593117ec3993e35a59820fe7875a3491630c",
+        "tests/document_formats_fixture_io.py": "b425db06f0e20ab035d3189fc9adbced6aa9da4108098421908d6ff54f767741",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_health_hook.py": "638f890c8358aed3eefce9d3416f9f6d9d6bad0532036aca61e85bd80b5682ff",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_formats_windows_recovery.py": "2e2e84542e7f8b663cb5ef6b7f36a45e7b75ce60bd768cf46ab99a0e1f3c2dc4",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_candidate_recovery.py": "2e035d6de51c9512b1c3bd8125fb7c9f0bf2f5b9453122e0c550fcb9c10c1992",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [],
+      "artifact_count": 431,
+      "artifact_total_bytes": 1423640,
+      "review": "review-sixfix-recovery-final-green2",
+      "review_result_sha256": "4aa1a1d8c95222232bf7eb12ef27388733b151bcfde2d9cd98143f6c4d2dc709",
+      "reviewer_session": "/root/sixfix_final_gc_green_v2",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F2 Local",
+      "green": "green-sixfix-path-local-completion1",
+      "result_sha256": "31ae4a84e8b6f1a08f31b8061d168f1a0a9c615b772ca88e0230070cb269b7e1",
+      "red": "red-sixfix-path-local-batch2-completion1",
+      "red_review": "review-sixfix-path-local-completion1",
+      "main": [
+        {
+          "case": "TC-008-path-refresh-config-finalization",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 39.81s",
+          "stdout_sha256": "631b98a08d9789129c290b2a4fd3d1cb348a375e235802a7ae94ec988d17f17e",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 385,
+            "path": "tests/test_document_formats_path_finalization.py",
+            "sha256": "aea7628e078b61689a1825c838aea544d6377822feb6655afa17496844ab59b8"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "2 passed, 1 warning in 1.49s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_publication_hook.py": "916b19b381ecda4b756f745834433db76722cde0ef8b864dec0f0d6c66baf54c",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_path_finalization.py": "aea7628e078b61689a1825c838aea544d6377822feb6655afa17496844ab59b8",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "artifact_count": 3332,
+      "artifact_total_bytes": 7159124,
+      "review": "review-sixfix-path-local-completion-green1",
+      "review_result_sha256": "9b1b637b5d4347a8a7bddf223a5566c26974d97428d8c736774b03e71808b640",
+      "reviewer_session": "/root/sixfix_paths_completion_review",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F2 Hub",
+      "green": "green-sixfix-path-hub-completion1",
+      "result_sha256": "356761b8637ee07504258a4c9b8c776ae4f74699cfd5acbf97a6bc89bd486410",
+      "red": "red-sixfix-path-hub-batch2-completion1",
+      "red_review": "review-sixfix-path-hub-completion1",
+      "main": [
+        {
+          "case": "TC-008-path-refresh-config-finalization",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 87.23s (0:01:27)",
+          "stdout_sha256": "fcebdb715ff7d7e33bbb43ed435143c59699807c2484527f70596ba11aae84e9",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 385,
+            "path": "tests/test_document_formats_path_finalization.py",
+            "sha256": "aea7628e078b61689a1825c838aea544d6377822feb6655afa17496844ab59b8"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "2 passed, 1 warning in 1.54s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_publication_hook.py": "916b19b381ecda4b756f745834433db76722cde0ef8b864dec0f0d6c66baf54c",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_path_finalization.py": "aea7628e078b61689a1825c838aea544d6377822feb6655afa17496844ab59b8",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "artifact_count": 3418,
+      "artifact_total_bytes": 10330143,
+      "review": "review-sixfix-path-hub-completion-green1",
+      "review_result_sha256": "25f1fe622edd44ae8010f452378b60727e16bca5c06c5e4636a742fb5270c96b",
+      "reviewer_session": "/root/sixfix_paths_completion_review",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F3 Local Web",
+      "green": "green-sixfix-path-web-completion1",
+      "result_sha256": "d657a5d9d0397d74364738af73ded4276c80ce08b7645869ccd591fb7a998e24",
+      "red": "red-sixfix-path-web-batch2-completion1",
+      "red_review": "review-sixfix-path-web-completion1",
+      "main": [
+        {
+          "case": "TC-008-path-web-details",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 11.89s",
+          "stdout_sha256": "9727ad2099a5e779f5ae0a6d2fd2a00abe33b177063fbaf005b10baedb93135d",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 152,
+            "path": "tests/test_document_formats_path_web_details.py",
+            "sha256": "f9c05fdd0ec5ce6ad18f91473adfa3cf42699fb71c104e0dfc51935d9c6c0e2e"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "3 passed, 1 warning in 12.13s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_formats_web_helpers.py": "3011f4de8b85b3d7fc254334e6f1098c579212154789f64c452098b0f7b241f2",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_path_web_details.py": "f9c05fdd0ec5ce6ad18f91473adfa3cf42699fb71c104e0dfc51935d9c6c0e2e",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "artifact_count": 88,
+      "artifact_total_bytes": 6306644,
+      "review": "review-sixfix-path-web-completion-green1",
+      "review_result_sha256": "b45e77c6bfff0c6973e74f89c5f1a713f91a341b354400d0a65b70c3639fde69",
+      "reviewer_session": "/root/sixfix_paths_completion_review",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F4 historical TDD",
+      "green": "green-sixfix-handoff-final-v2",
+      "result_sha256": "55fa6bb28483a84bb9b5d28854117eac2371fe906d0d0b445894c7ba515d7c8a",
+      "red": "red-sixfix-handoff-batch7",
+      "red_review": "review-sixfix-handoff-batch7",
+      "main": [
+        {
+          "case": "TC-008-hub-cli-service-handoff",
+          "exit_code": 0,
+          "summary": "1 passed, 1 warning in 21.13s",
+          "stdout_sha256": "b0bfc2942a62d5103667878658cc11f8dbaa2532d9b127c4f42de857b9ea2661",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 184,
+            "path": "tests/test_document_formats_hub_cli_handoff.py",
+            "sha256": "350ddb670e9ea560fc7300c85c9631165ced17ab50f40bda6bea2d8545bf41c0"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "20 passed, 1 warning in 165.86s (0:02:45)",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_handoff_observer.py": "596b392a1d06358d7f8ff3d3f53a884d2206cc9e2f7c043ee4a7ebf9226340f9",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_hub_cli_handoff.py": "350ddb670e9ea560fc7300c85c9631165ced17ab50f40bda6bea2d8545bf41c0",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "artifact_count": 150,
+      "artifact_total_bytes": 1157405,
+      "review": "review-sixfix-handoff-final-v2",
+      "review_result_sha256": "60fb90af7943951f2836e46456096ed7e08a41a6b46f325dbe8e2fd29484a121",
+      "reviewer_session": "/root/sixfix_handoff_final_green_review",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    },
+    {
+      "area": "F5 historical TDD",
+      "green": "green-sixfix-queue-final-v1",
+      "result_sha256": "a77a57c2a44894bfcc1aa16be620315f2c25b74207fb4b42ccaffff485ba4632",
+      "red": "red-sixfix-queue-batch3",
+      "red_review": "review-sixfix-queue-batch3",
+      "main": [
+        {
+          "case": "TC-008-upload-queue-archive-isolation",
+          "exit_code": 0,
+          "summary": "4 passed, 1 warning in 7.60s",
+          "stdout_sha256": "174c4281aa09a66f2f22e339e736cc82acade7a0de88f2b1a31439ee0e960702",
+          "test_source": {
+            "first": 1,
+            "kind": "file",
+            "last": 147,
+            "path": "tests/test_document_formats_queue_archives.py",
+            "sha256": "23cfcf705fe3eec9297d407da8b80e2134dc86546ab8249573f6dbbad94d8803"
+          }
+        }
+      ],
+      "regression_exit_code": 0,
+      "regression_summary": "4 passed, 1 warning in 4.49s",
+      "test_bindings": {
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "tests/test_document_formats_queue_archives.py": "23cfcf705fe3eec9297d407da8b80e2134dc86546ab8249573f6dbbad94d8803",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64"
+      },
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "artifact_count": 295,
+      "artifact_total_bytes": 1265631,
+      "review": "review-sixfix-queue-final-v1",
+      "review_result_sha256": "2173b704cdd2ebd4c0be250320a17fa180c770c781376ee2ef5a7871b8ea22cb",
+      "reviewer_session": "/root/sixfix_queue_capacity_final_review",
+      "limitation": "Only this frozen scope; later source changes and all skipped/unreached branches remain explicit."
+    }
+  ],
+  "independent_reviews": "six-fixes-independent-reviews.json",
+  "platform_supplementals": [
+    {
+      "name": "windows-recovery-completion-v1",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 22,
+        "failed": 0,
+        "error": 0,
+        "skipped": 2
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-local]",
+          "status": "passed",
+          "seconds": "31.287"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-hub]",
+          "status": "passed",
+          "seconds": "23.333"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-two-archives]",
+          "status": "passed",
+          "seconds": "14.150"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-local]",
+          "status": "passed",
+          "seconds": "11.087"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-hub]",
+          "status": "passed",
+          "seconds": "15.839"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-two-archives]",
+          "status": "passed",
+          "seconds": "9.192"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_real_pin_owner_exit_releases_only_abandoned_pending_bytes[local.sqlite3]",
+          "status": "passed",
+          "seconds": "0.563"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_real_pin_owner_exit_releases_only_abandoned_pending_bytes[smm-hub.sqlite3]",
+          "status": "passed",
+          "seconds": "0.712"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_unregistered_bytes_and_legacy_pin_remain_protected",
+          "status": "passed",
+          "seconds": "0.193"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_reused_database_path_does_not_transfer_old_archive_ownership",
+          "status": "passed",
+          "seconds": "0.271"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_denied_physical_deletion_keeps_bytes_charged_until_it_succeeds",
+          "status": "passed",
+          "seconds": "0.205"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_processing_pin_waits_for_real_owned_task_tree_cleanup",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_windows_job_owner_crash_recovers_pin",
+          "status": "passed",
+          "seconds": "1.866"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_owned_live_exit_and_strict_enrollment_remain_distinct",
+          "status": "passed",
+          "seconds": "0.265"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_unreaped_real_zombie_still_checks_creation_first",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[create_time]",
+          "status": "passed",
+          "seconds": "0.284"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[is_running]",
+          "status": "passed",
+          "seconds": "0.259"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[status]",
+          "status": "passed",
+          "seconds": "0.274"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_exit_polling_never_rereads_argv_or_exe",
+          "status": "passed",
+          "seconds": "0.301"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[PermissionError]",
+          "status": "passed",
+          "seconds": "0.021"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[FileNotFoundError]",
+          "status": "passed",
+          "seconds": "0.013"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_persistent_metadata_denial_keeps_original_deadline_and_exception",
+          "status": "passed",
+          "seconds": "0.037"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_bad_json_is_not_a_readiness_retry",
+          "status": "passed",
+          "seconds": "0.004"
+        },
+        {
+          "class": "tests.test_document_formats_process_observation",
+          "name": "test_verified_exit_and_live_identity_denial_are_distinct",
+          "status": "passed",
+          "seconds": "0.412"
+        }
+      ],
+      "zip_sha256": "7bb763d1eddc9880682c29efd280556f42e9b0598467d3a08d597562dfdcf4f2",
+      "zip_bytes": 585607,
+      "source_manifest_sha256": "093fb752c5559e8a19469da1bf7c700f2a27db6cd10b5c14d4953b028d56d14b",
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "independent_review_sha256": "d002a381d1350bc157f3ac6d718c20e3950ee770f3175b414d0db618442fbdba",
+      "review_copy": "six-fixes-windows-recovery-completion-v1-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "windows-path-local-completion-v1",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_path_finalization",
+          "name": "test_path_refresh_configuration_rejection_finishes_and_retries_saved_capture[local]",
+          "status": "passed",
+          "seconds": "181.812"
+        }
+      ],
+      "zip_sha256": "ea47d317c9e1b0fc005f3b0163e3938730806334094dfcc1d13450008ce3f1c1",
+      "zip_bytes": 6382577,
+      "source_manifest_sha256": "093fb752c5559e8a19469da1bf7c700f2a27db6cd10b5c14d4953b028d56d14b",
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "independent_review_sha256": "f0f71f64b79cbdd1298601fa36f710906a36e0fc87f49a082304584231314a60",
+      "review_copy": "six-fixes-windows-path-local-completion-v1-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "windows-path-hub-completion-v1",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_path_finalization",
+          "name": "test_path_refresh_configuration_rejection_finishes_and_retries_saved_capture[hub]",
+          "status": "passed",
+          "seconds": "530.925"
+        }
+      ],
+      "zip_sha256": "9096c93bae2e4edfc29816915bfe4086107378ee9de7c9f82ea401ef89dbd712",
+      "zip_bytes": 9533222,
+      "source_manifest_sha256": "093fb752c5559e8a19469da1bf7c700f2a27db6cd10b5c14d4953b028d56d14b",
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "independent_review_sha256": "0db21246a0bdd27d03d9b9bce9966ecb176d2f3a1511ec72d22d88e44336a635",
+      "review_copy": "six-fixes-windows-path-hub-completion-v1-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "ubuntu-health-completion-v1",
+      "exit_code": 1,
+      "timed_out": false,
+      "counts": {
+        "passed": 13,
+        "failed": 1,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_watchdog_health",
+          "name": "test_live_content_task_fails_when_independent_watchdog_exits[local]",
+          "status": "passed",
+          "seconds": "251.117"
+        },
+        {
+          "class": "tests.test_document_formats_watchdog_health",
+          "name": "test_live_content_task_fails_when_independent_watchdog_exits[hub]",
+          "status": "failed",
+          "seconds": "439.324"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_processing_pin_waits_for_real_owned_task_tree_cleanup",
+          "status": "passed",
+          "seconds": "1.900"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_owned_live_exit_and_strict_enrollment_remain_distinct",
+          "status": "passed",
+          "seconds": "0.227"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_unreaped_real_zombie_still_checks_creation_first",
+          "status": "passed",
+          "seconds": "0.227"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[create_time]",
+          "status": "passed",
+          "seconds": "0.255"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[is_running]",
+          "status": "passed",
+          "seconds": "0.256"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[status]",
+          "status": "passed",
+          "seconds": "0.256"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_exit_polling_never_rereads_argv_or_exe",
+          "status": "passed",
+          "seconds": "0.236"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[PermissionError]",
+          "status": "passed",
+          "seconds": "0.010"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[FileNotFoundError]",
+          "status": "passed",
+          "seconds": "0.010"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_persistent_metadata_denial_keeps_original_deadline_and_exception",
+          "status": "passed",
+          "seconds": "0.035"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_bad_json_is_not_a_readiness_retry",
+          "status": "passed",
+          "seconds": "0.004"
+        },
+        {
+          "class": "tests.test_document_formats_process_observation",
+          "name": "test_verified_exit_and_live_identity_denial_are_distinct",
+          "status": "passed",
+          "seconds": "0.318"
+        }
+      ],
+      "zip_sha256": "f7cb730e66e286b2b6d78b7205a5419681699febe2a59f7d2de1b7d2bd32240c",
+      "zip_bytes": 26555947,
+      "source_manifest_sha256": "093fb752c5559e8a19469da1bf7c700f2a27db6cd10b5c14d4953b028d56d14b",
+      "product_differences_from_final": [
+        "src/smm_local/document_snapshots.py"
+      ],
+      "independent_review_sha256": "9a614ccba3665ce5ae1b12e846591a85a731342f4676aeeb11752eabb4f55f23",
+      "review_copy": "six-fixes-ubuntu-health-completion-v1-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "windows-recovery-final-v2",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 29,
+        "failed": 0,
+        "error": 0,
+        "skipped": 2
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-local]",
+          "status": "passed",
+          "seconds": "12.299"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-hub]",
+          "status": "passed",
+          "seconds": "13.769"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[0-two-archives]",
+          "status": "passed",
+          "seconds": "9.857"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-local]",
+          "status": "passed",
+          "seconds": "9.865"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-hub]",
+          "status": "passed",
+          "seconds": "16.326"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_shared_candidate_reclaims_only_after_the_last_authorized_use[1-two-archives]",
+          "status": "passed",
+          "seconds": "10.423"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_real_pin_owner_exit_releases_only_abandoned_pending_bytes[local.sqlite3]",
+          "status": "passed",
+          "seconds": "0.632"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_real_pin_owner_exit_releases_only_abandoned_pending_bytes[smm-hub.sqlite3]",
+          "status": "passed",
+          "seconds": "0.972"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_unregistered_bytes_and_legacy_pin_remain_protected",
+          "status": "passed",
+          "seconds": "0.418"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_reused_database_path_does_not_transfer_old_archive_ownership",
+          "status": "passed",
+          "seconds": "0.327"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_denied_physical_deletion_keeps_bytes_charged_until_it_succeeds",
+          "status": "passed",
+          "seconds": "0.212"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_processing_pin_waits_for_real_owned_task_tree_cleanup",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_windows_job_owner_crash_recovers_pin",
+          "status": "passed",
+          "seconds": "1.822"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_copied_archive_identity_never_retires_the_other_database_candidate[False]",
+          "status": "passed",
+          "seconds": "2.008"
+        },
+        {
+          "class": "tests.test_document_formats_candidate_recovery",
+          "name": "test_copied_archive_identity_never_retires_the_other_database_candidate[True]",
+          "status": "passed",
+          "seconds": "2.692"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_owned_live_exit_and_strict_enrollment_remain_distinct",
+          "status": "passed",
+          "seconds": "0.314"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_unreaped_real_zombie_still_checks_creation_first",
+          "status": "skipped",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[create_time]",
+          "status": "passed",
+          "seconds": "0.284"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[is_running]",
+          "status": "passed",
+          "seconds": "0.259"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_denied_observation_stays_pending_with_original_deadline[status]",
+          "status": "passed",
+          "seconds": "0.261"
+        },
+        {
+          "class": "tests.test_document_formats_exit_observer",
+          "name": "test_exit_polling_never_rereads_argv_or_exe",
+          "status": "passed",
+          "seconds": "0.246"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[PermissionError]",
+          "status": "passed",
+          "seconds": "0.021"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_temporary_metadata_denial_returns_only_complete_json[FileNotFoundError]",
+          "status": "passed",
+          "seconds": "0.012"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_persistent_metadata_denial_keeps_original_deadline_and_exception",
+          "status": "passed",
+          "seconds": "0.035"
+        },
+        {
+          "class": "tests.test_document_formats_fixture_io",
+          "name": "test_bad_json_is_not_a_readiness_retry",
+          "status": "passed",
+          "seconds": "0.004"
+        },
+        {
+          "class": "tests.test_document_formats_process_observation",
+          "name": "test_verified_exit_and_live_identity_denial_are_distinct",
+          "status": "passed",
+          "seconds": "0.413"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_renews_only_after_a_new_complete_check",
+          "status": "passed",
+          "seconds": "0.029"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change0]",
+          "status": "passed",
+          "seconds": "0.029"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change1]",
+          "status": "passed",
+          "seconds": "0.018"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change2]",
+          "status": "passed",
+          "seconds": "0.015"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change3]",
+          "status": "passed",
+          "seconds": "0.014"
+        }
+      ],
+      "zip_sha256": "16ffc38a6e352e56fc9259fecddc77f7689aa5fe1f9eb54b5caea7f41f372aea",
+      "zip_bytes": 592113,
+      "source_manifest_sha256": "2d131a878e487fd177a46a52c25be60f3e61c06b10aa8089a7f16b5eca138a64",
+      "product_differences_from_final": [],
+      "independent_review_sha256": "a5a15df229db06d27ca21e9a7a264721a6b2236071118a1e9b1bb4f04cee8751",
+      "review_copy": "six-fixes-windows-recovery-final-v2-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "ubuntu-health-hub-final-v2",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_watchdog_health",
+          "name": "test_live_content_task_fails_when_independent_watchdog_exits[hub]",
+          "status": "passed",
+          "seconds": "611.731"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_renews_only_after_a_new_complete_check",
+          "status": "passed",
+          "seconds": "0.004"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change0]",
+          "status": "passed",
+          "seconds": "0.003"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change1]",
+          "status": "passed",
+          "seconds": "0.003"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change2]",
+          "status": "passed",
+          "seconds": "0.003"
+        },
+        {
+          "class": "tests.test_document_formats_health_preparation",
+          "name": "test_preparation_progress_rejects_another_task_or_nonprogress[change3]",
+          "status": "passed",
+          "seconds": "0.003"
+        }
+      ],
+      "zip_sha256": "ec3c94ed05f19565d4588b2e5e7e159acc351e0e89eb10ff4179a2b0f56416b7",
+      "zip_bytes": 19580793,
+      "source_manifest_sha256": "2d131a878e487fd177a46a52c25be60f3e61c06b10aa8089a7f16b5eca138a64",
+      "product_differences_from_final": [],
+      "independent_review_sha256": "5c957a733c09bd5e066ffcf537a4c531d789f4fe4e38f0ec04947db90b57ad94",
+      "review_copy": "six-fixes-ubuntu-health-hub-final-v2-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "ubuntu-path-local-final-v2",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_path_finalization",
+          "name": "test_path_refresh_configuration_rejection_finishes_and_retries_saved_capture[local]",
+          "status": "passed",
+          "seconds": "105.192"
+        }
+      ],
+      "zip_sha256": "ac4e305bbfaeaec896d40c0c378c7f5f56702dea2e90ebbca0d478feb828a2f2",
+      "zip_bytes": 6293729,
+      "source_manifest_sha256": "2d131a878e487fd177a46a52c25be60f3e61c06b10aa8089a7f16b5eca138a64",
+      "product_differences_from_final": [],
+      "independent_review_sha256": "4101a011996c29f50ba5310d7151b5db6ed27395c084b78fbed4e58c4d1e51c7",
+      "review_copy": "six-fixes-ubuntu-path-local-final-v2-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    },
+    {
+      "name": "ubuntu-path-hub-final-v2",
+      "exit_code": 0,
+      "timed_out": false,
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "class": "tests.test_document_formats_path_finalization",
+          "name": "test_path_refresh_configuration_rejection_finishes_and_retries_saved_capture[hub]",
+          "status": "passed",
+          "seconds": "243.899"
+        }
+      ],
+      "zip_sha256": "ad356a210933764b3b34de7f17e005aa8018ad6a8bdac5e43e6ed9b841744e19",
+      "zip_bytes": 9456175,
+      "source_manifest_sha256": "2d131a878e487fd177a46a52c25be60f3e61c06b10aa8089a7f16b5eca138a64",
+      "product_differences_from_final": [],
+      "independent_review_sha256": "c0c6ce5e04b853b73c74b1ba3bbd246f0af6d3d2ca16347caf602baec5fb292d",
+      "review_copy": "six-fixes-ubuntu-path-hub-final-v2-review.json",
+      "scope": "Source foreground supplemental only; Windows administrator, Ubuntu22.04 uid1000; not SCM/systemd/standard user/minimum Python/EHX."
+    }
+  ],
+  "supplementals": [
+    {
+      "name": "integration-final-v2",
+      "result_sha256": "ab6878c0a84eb8caad2190a1ee07613315d0da5bedcccfde910065335f746d20",
+      "independent_review_sha256": "4aa671191089a53d018676695bc8c664572a46355098174330feac0c2eb400a0",
+      "review_copy": "six-fixes-integration-final-v2-review.json",
+      "exit_code": 0,
+      "bindings_unchanged": true,
+      "bindings": {
+        "src/smm_local/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+        "src/smm_local/document_processing.py": "85b8f6b5365e9cd37918e98d497b0306b296bc552116a77b0efc8777e27d6967",
+        "src/smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+        "src/smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+        "src/smm_local/managed_document_uploads.py": "99cd7e5766dc90240232afdb26b75d9e84aaee93b746bd1793d33a3dbc5cdb7a",
+        "src/smm_local/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+        "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+        "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+        "src/smm_local/document_snapshots.py": "5bbd01bcd87b861479e19a75cd805ffa414d145995a3d1c59f6f70c9237b99b1",
+        "src/smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2",
+        "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+        "src/smm_local/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+        "src/smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+        "src/smm_local/documents.py": "eb4f922ed16e400f092da6a891cd35bd2248692f35df5e95c7632541df7a559e",
+        "src/smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+        "src/smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+        "src/smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+        "src/smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+        "src/smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+        "src/smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+        "src/smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+        "src/smm_local/document_supervisor.py": "ebf0bd1cd3c4d49d6f7ff8e95497e018c3fd4f9bd774f43f31189c226df22d3a",
+        "src/smm_local/cli.py": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+        "src/smm_local/document_search.py": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+        "src/smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+        "src/smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+        "src/smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+        "src/smm_local/document_windows.py": "297b2904402a59d9d4589c8c3b2a1afcb228af0b26783cfa517b2934642b0873",
+        "src/smm_hub/document_execution.py": "25fd4e7e533725fc0833b130e307fffcc823d4e1ed7e33e138076d083f6ce551",
+        "src/smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+        "src/smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+        "src/smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+        "src/smm_hub/processed_documents.py": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+        "src/smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+        "src/smm_hub/hub.py": "4389811a799c64934691c58f16b515956ba4aaf267e0402ad5715732666efda2",
+        "src/smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3",
+        "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+        "src/smm_hub/_archive.py": "52470a6b68fbbb61aeb156c0d705a2199639298227d114cbe729a531f4ebbb1a",
+        "src/smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+        "src/smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+        "src/smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+        "src/smm_hub/projects.py": "a57bfbf034808a24452b05580e3d197bb8df84168b7e004159525b88df9e0ba9",
+        "src/smm_hub/document_cli.py": "48b709a9759672496747f6e5d5aea94feb791c9f2d6cf342c072695d7eff3c64",
+        "src/smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+        "src/smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+        "src/smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+        "src/smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+        "src/smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+        "src/smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+        "src/smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+        "src/smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+        "src/smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+        "src/smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+        "src/smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+        "src/smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+        "src/smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+        "src/smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+        "src/smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+        "src/smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+        "src/smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+        "src/smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+        "src/smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+        "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec",
+        "src/smm_local/static/index.html": "b13655ec9f4b62b8f2073e0480259a6434ce49c1d95b90926a69ee369ddd5c6c",
+        "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+        "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+        "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+        "tests/test_vibeinsight_sync.py": "6fe87ff5a8921140b55ff447f5da43a63a49a128a4ce05b39165fd935afd9a64",
+        "tests/document_formats_handoff_observer.py": "596b392a1d06358d7f8ff3d3f53a884d2206cc9e2f7c043ee4a7ebf9226340f9",
+        "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+        "tests/document_formats_sync_observer.py": "f93cf93dee734a4b3f2764b22be36d95793f96d9fd53347c0f5f5cc9ff12f7d6",
+        "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+        "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+        "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+        "tests/test_document_formats_queue_archives.py": "23cfcf705fe3eec9297d407da8b80e2134dc86546ab8249573f6dbbad94d8803",
+        "tests/test_document_formats_upload_queue.py": "10aba8d1e47fc316f6b41c3960ad504151078adc37e1ee1c213f455081184871",
+        "tests/test_document_formats_hub_cli_handoff.py": "350ddb670e9ea560fc7300c85c9631165ced17ab50f40bda6bea2d8545bf41c0",
+        "tests/test_document_formats_installed_minimum.py": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+        "tests/test_document_formats_upload_restart.py": "46a835eb68e79ed7a7ab27431c59129752984f4dcf075c86d09f5fde6252a99d",
+        "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b",
+        "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+        "tests/conftest.py": "5faba3a2a728790758b53d9ece1493de0870146482a9f38dc09698c3b6b5b277",
+        "tests/document_formats_restart_server.py": "4f27b6c65241c9ab1aeb8cc557731be2bf5aaa30a5a92eaf16495354bdf2cc2b",
+        "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+        "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+        "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545",
+        "tests/test_federation.py": "b623d206ed763eeb364faa9b7511e76e119d41a13a8ffa8f8afde682b22fa99b",
+        "tests/test_005_contracts.py": "ab86edcee1bfd3d0dcac2c4f198b7660dd11ca7080d30015e6469225a7d2b197",
+        "tests/test_document_formats_management.py": "c6f08ffd6d63de70545b00127b6f08f546d50382d33b4ff1edbc24afdaa47feb",
+        "scripts/build_packages.py": "867c337e7e09290ad8328253a22fefcbd2297b2d51e9073bd9cfe3e248b62464",
+        "scripts/acceptance/hub_documents_packages.py": "2c9204504da050a82f89a960368e77f1f4fca1cdf09b89bcbe74eb5022f76cc2"
+      },
+      "summary": "29 passed, 1 warning in 133.76s (0:02:13)",
+      "scope": "Final-source integration supplemental: five handoff/independent DB queue main instances and 24 related regressions. Earlier native TDD remains historical, current native replay blocked by unrelated global case-design transition; no native passed record fabricated."
+    },
+    {
+      "name": "packages-final-v2",
+      "result_sha256": "9fa26bc5e5450762277fc4ca87df8de7ffe6a597fb18450e65db50e01be85521",
+      "independent_review_sha256": "4fa57b3f2737bb277005bd18c7a0eb26d36784fcc5e63a49b50582b43cb72cc4",
+      "review_copy": "six-fixes-packages-final-v2-review.json",
+      "status": "passed",
+      "wheels": {
+        "smm_local-0.4.0-py3-none-any.whl": "13ac9776208a88991868b8b43336f5e430e9a04668db6e979e747c70faac3b84",
+        "smm_hub-0.4.0-py3-none-any.whl": "bbdee1e90e0f19db522df48f11702a5f4035fbf48183bbd762a38b29be210bb3"
+      },
+      "commands": [
+        {
+          "label": "build",
+          "exit_code": 0
+        },
+        {
+          "label": "local-venv",
+          "exit_code": 0
+        },
+        {
+          "label": "local-install",
+          "exit_code": 0
+        },
+        {
+          "label": "local-installed-modules",
+          "exit_code": 0
+        },
+        {
+          "label": "local-project-create",
+          "exit_code": 0
+        },
+        {
+          "label": "local-document-add",
+          "exit_code": 0
+        },
+        {
+          "label": "local-document-refresh",
+          "exit_code": 0
+        },
+        {
+          "label": "local-document-search",
+          "exit_code": 0
+        },
+        {
+          "label": "local-document-read",
+          "exit_code": 0
+        },
+        {
+          "label": "local-mcp-tools",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-venv",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-install",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-installed-modules",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-project-create",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-document-add",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-document-refresh",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-document-search",
+          "exit_code": 0
+        },
+        {
+          "label": "hub-document-read",
+          "exit_code": 0
+        }
+      ],
+      "source_wheel_install_sha256": {
+        "local": {
+          "smm_local/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+          "smm_local/document_processing.py": "85b8f6b5365e9cd37918e98d497b0306b296bc552116a77b0efc8777e27d6967",
+          "smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+          "smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+          "smm_local/managed_document_uploads.py": "99cd7e5766dc90240232afdb26b75d9e84aaee93b746bd1793d33a3dbc5cdb7a",
+          "smm_local/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+          "smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_local/document_snapshots.py": "5bbd01bcd87b861479e19a75cd805ffa414d145995a3d1c59f6f70c9237b99b1",
+          "smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2",
+          "smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_local/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+          "smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+          "smm_local/documents.py": "eb4f922ed16e400f092da6a891cd35bd2248692f35df5e95c7632541df7a559e",
+          "smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+          "smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+          "smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+          "smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+          "smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+          "smm_local/document_supervisor.py": "ebf0bd1cd3c4d49d6f7ff8e95497e018c3fd4f9bd774f43f31189c226df22d3a",
+          "smm_local/cli.py": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+          "smm_local/document_search.py": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+          "smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+          "smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+          "smm_local/document_windows.py": "297b2904402a59d9d4589c8c3b2a1afcb228af0b26783cfa517b2934642b0873",
+          "smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+          "smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+          "smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+          "smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_local/static/index.html": "b13655ec9f4b62b8f2073e0480259a6434ce49c1d95b90926a69ee369ddd5c6c"
+        },
+        "hub": {
+          "smm_hub/document_execution.py": "25fd4e7e533725fc0833b130e307fffcc823d4e1ed7e33e138076d083f6ce551",
+          "smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+          "smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+          "smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+          "smm_hub/processed_documents.py": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+          "smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+          "smm_hub/hub.py": "4389811a799c64934691c58f16b515956ba4aaf267e0402ad5715732666efda2",
+          "smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3",
+          "smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+          "smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+          "smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+          "smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+          "smm_hub/projects.py": "a57bfbf034808a24452b05580e3d197bb8df84168b7e004159525b88df9e0ba9",
+          "smm_hub/document_cli.py": "48b709a9759672496747f6e5d5aea94feb791c9f2d6cf342c072695d7eff3c64",
+          "smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+          "smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec",
+          "smm_hub/_archive/__init__.py": "7d0033fd1e6110fbb12cb4ba9d47300e80ab5588a54b5a9eb32aafa57c76984a",
+          "smm_hub/_archive/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_hub/_archive/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_hub/_archive/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_hub/_archive/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_hub/_archive/documents.py": "eb4f922ed16e400f092da6a891cd35bd2248692f35df5e95c7632541df7a559e",
+          "smm_hub/_archive/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+          "smm_hub/_archive/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_hub/_archive/managed_document_uploads.py": "99cd7e5766dc90240232afdb26b75d9e84aaee93b746bd1793d33a3dbc5cdb7a",
+          "smm_hub/_archive/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+          "smm_hub/_archive/document_snapshots.py": "5bbd01bcd87b861479e19a75cd805ffa414d145995a3d1c59f6f70c9237b99b1",
+          "smm_hub/_archive/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+          "smm_hub/_archive/document_processing.py": "85b8f6b5365e9cd37918e98d497b0306b296bc552116a77b0efc8777e27d6967",
+          "smm_hub/_archive/document_supervisor.py": "ebf0bd1cd3c4d49d6f7ff8e95497e018c3fd4f9bd774f43f31189c226df22d3a",
+          "smm_hub/_archive/document_windows.py": "297b2904402a59d9d4589c8c3b2a1afcb228af0b26783cfa517b2934642b0873",
+          "smm_hub/_archive/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_hub/_archive/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_hub/_archive/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_hub/_archive/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_hub/_archive/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+          "smm_hub/_archive/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_hub/_archive/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_hub/_archive/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_hub/_archive/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_hub/_archive/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_hub/_archive/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_hub/_archive/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_hub/_archive/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_hub/_archive/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_hub/_archive/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+          "smm_hub/_archive/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_hub/_archive/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_hub/_archive/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_hub/_archive/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e"
+        }
+      },
+      "scope": "Actual Python3.14 Mac basic packages and source-wheel-install equality; not three-OS3.11 or native OCR install."
+    },
+    {
+      "name": "capacity-final-v1",
+      "result_sha256": "5c481b3c25c12b5bb0f078f7a98cfa56224dbd10dd687c08e6ed0c59870854b7",
+      "independent_review_sha256": "8ede8742d46d232534bedb7cd2b7a8e29f9350f0e7ffff6b76ddd8b56c27b2cd",
+      "review_copy": "six-fixes-capacity-final-v1-review.json",
+      "scope": "Earlier exact frozen source only: full Local/Hub capacity supplemental passed. Not final-v2 entire256MiB acceptance; first native combined300s timeout remains blocked."
+    }
+  ],
+  "still_pending_supplementals": [
+    "ubuntu-recovery-final-v2",
+    "ubuntu-health-local-final-v2"
+  ],
+  "native_replay_metadata_block": {
+    "attempt": "green-sixfix-handoff-final-v3",
+    "status": "blocked before any business execution",
+    "reason": "SC1 overall case-design migration; final5main+24regression captured separately; no replacement native green fabricated"
+  },
+  "root_cause_research": {
+    "kind": "read-only-root-cause-research-not-acceptance",
+    "environment": {
+      "platform": "macOS-15.3.1-arm64-arm-64bit-Mach-O",
+      "python": "3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "psutil": "7.2.2",
+      "uid": 501,
+      "euid": 501
+    },
+    "trials": 200,
+    "exit_zero_trials": 100,
+    "exit_one_trials": 100,
+    "trials_with_matching_denial": 200,
+    "matching_denials": 686,
+    "no_injected_errors": true,
+    "all_live_controls_succeeded": true,
+    "all_children_reaped_expected_without_force": true,
+    "inexit_counts": {
+      "samples_with_inexit": 6,
+      "inexit_before_actual_cmdline_denial": 5
+    },
+    "confirmed_mechanism": "Same-user worker exit transition makes KERN_PROCARGS2 return EINVAL; psutil 7.2.2 can map this to PermissionError/AccessDenied before zombie classification catches up. Current production matching can still raise during that transition; watch does not catch it.",
+    "historic_limit": "Original worker PID 56064 stderr has the same real error path after OCR failure, but no simultaneous process-state trace. Exact kernel branch for that historical PID cannot be reconstructed.",
+    "measurement_limit": "Tight sampling intentionally targets exit; 200/200 is not an operational incident rate. Summary inexit_observed omits between; corrected counts inspect before/between/after. proc_pidinfo may return ESRCH for both exiting and zombie children, so ESRCH alone is not treated as proof of fully gone.",
+    "sources": [
+      {
+        "name": "psutil-release-7.2.2-proc_utils.c",
+        "url": "https://raw.githubusercontent.com/giampaolo/psutil/release-7.2.2/psutil/arch/osx/proc_utils.c",
+        "sha256": "a485bac86e035ca8351e130ccd24dd47c190a0b49e8cce22956e3bee1470fe52",
+        "bytes": 6822
+      },
+      {
+        "name": "xnu-11215.81.4-kern_sysctl.c",
+        "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/xnu-11215.81.4/bsd/kern/kern_sysctl.c",
+        "sha256": "2a686c881977af53c371f21ad3f25a6459b7796ce7c54548ab5dd35aa2e3d5c7",
+        "bytes": 209206
+      }
+    ]
+  },
+  "retained_outside_six_fixes": [
+    "Active source cancellation",
+    "C1 restart and old shared Windows string argv audit",
+    "Full PDF safety/resources/lifecycle/platform E/H/X and current minimum Python matrix",
+    "All historical real failures/timeouts remain separate; no skip/xfail reduction"
+  ],
+  "counting": "Regression controls repeat across batches; execution counts are not unique test counts. POSIX/Windows skips are never passed.",
+  "redaction": {
+    "public": "Only synthetic test outcomes/identities/hashes and independently reviewed summaries; home/worktree/VM addresses replaced. No actual user content, credentials, token values or signing keys copied.",
+    "private": "All original raw bytes, complete requests/responses/screenshots/traces/JUnit/wheels/reports retain original SHA under .acceptance-local/008 and native-v1. Public redacted opinion has a different SHA than original."
+  }
+}

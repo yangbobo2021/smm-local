@@ -339,3 +339,29 @@ CI用上传/下载artifact传实际producer产物，再在目标OS本机HTTPS调
 2026-11-26：上述身份helper最终v3红灯在原3e产品复现并注册expected_failure，冻结测试SHA2a5bb383c12f1c093d8dbc027bed10d88125a4ef2a934e413281079b5d569171；新matching后Mac主项1过0.61秒、原6staging回归6过140.43秒，独立passed登记。回归214份JSON中的27份保留错误经独立逐字核为缺OCR组件，无本轮watchdog堆栈混入；早一轮green-v2确有AccessDenied的事实保留，不因本轮通过关闭现场问题。家庭Windows同源源码组件1过2.26秒，两实际launcher→解释器、四历史成员退出/exit0/无强清理及存活拒绝正控均独审passed登记；POSIX zombie在该OS不适用，不冒充Windows Job/普通用户/安装或服务验收。两wheel构建成功，Local45py+1HTML、Hub47py+1HTML逐字/CRC核对，仅为构建证据。见evidence/process-identity-development.json。原3e的两轮三OS普通CI六官方原件也已追回并核digest/长度/CRC/JUnit：Ubuntu均467过69skip0失败，Windows均467过67skip2保留重启审计失败，Mac分别466过69skip1失败与465过69skip2失败，均为新GC错误守卫；短JUnit及完整失败job日志未给出实际error值，不能确定四候选原因中的哪一项，也不能从当前helper断言反推已修。该CI不包含本次未提交helper字节；见evidence/ci-3e29255.json。整体draft/needs_revision及其余SPEC缺口不变。
 
 2026-11-26：1abe6cd新上下文PR审查已按角色/主入口逐跳、PLAN差异、A1–A12及原件完成：matching增量未见新实质产品问题，限定红绿/Windows组件证据可信，F1监督健康、F2路径refresh终态、F3路径网页详情、F4服务CLI交接、F5保留跨DB队列及完整验收仍needs_revision；原报告原字节归档evidence/pr43-review-1abe6cd.md，已补PR。其后两轮三OS普通CI六官方ZIP/digest/长度/CRC/完整JUnit已全部回收：两Ubuntu均468过69skip；Mac PR468过69skip0失败、push466过69skip2GC守卫失败；两Windows均468过67skip2保留重启审计失败。新身份helper六份产物均实际passed，不能据一次Mac通过盖掉另一次GC失败，也不能反推未知error值或宣称watchdog已修。两workflow仍failure，见evidence/ci-1abe6cd.json。未提交的监督健康开发用例及其审批不属于该CI或本次交付代码；生产监督健康逻辑尚未修改。
+
+
+### 2026-11-27—28 六项问题修复的实施调整
+
+维护者要求修复监督健康、路径刷新终态、路径资料详情、Hub CLI服务交接、同目录多档案队列和失效候选回收六项问题，重新开放相应队列及路径用例；2026-11-28明确授权必要测试修订、执行及独立复审继续进行，不再逐轮询问。其余已保留的在途来源取消、C1重启、旧Windows共享argv审计等缺口不因此关闭。本轮已重新允许家庭ESXi，Windows仅VM76（MAC 00:0c:29:8f:cb:f6）、Ubuntu仅VM75，在独立任务目录执行；Ubuntu实机为22.04，不替代SPEC的24.04平台格，Windows管理员源码执行不替代标准账户/SCM验收。
+
+实现顺序及变更位置：
+
+1. `document_supervisor.py`为受核验的worker注册内核退出事件（macOS kqueue NOTE_EXIT、Linux pidfd），在退出竞态中只凭确证归类退出；存活进程的拒绝访问仍报错。控制端同时监测独立看守，意外退出包括exit0均终止自有任务树并以失败收尾；持久记录精确token/worker的清理证明，之后才释放槽位和负载。Windows新增`document_windows.py`，用CreateProcessW扩展属性JOB_LIST在创建时原子加入私有kill-on-close Job，不采用启动后再绑定的窗口；包含实际创建时间身份和控制端退出后的回收核验。两个独立wheel及Hub内置共享模块均须纳入该新文件。
+2. `documents.py`与`document_snapshots.py`将路径refresh的发布拒绝收尾限定为相同document/CID/latest AID/config的短事务CAS，保留原解析错误与已发布快照，不改新尝试。普通/全局、首次/旧ready/旧partial、重叠连续来源分别验证；恢复后旧text/table/original-info/download引用逐一拒绝，过期请求前后完整业务表（含Hub处理jobs与receiver表）保持不变。
+3. 本机`static/index.html`的路径资料行复用已有保存详情组件，展示published/latest/retry，partial覆盖读取保存结果。独立DB/保存原件与结果物理SHA构造期望，再核API和实际页面，禁止查询重新打开源文件或解析。
+4. Hub新增`document_execution.py`：同state活跃服务持内核lease、发布状态并消费持久处理jobs；CLI先保存原件，再提交精确上下文，让服务执行新DOCX/XLSX/PDF。无活跃同state服务时明确CLI前景处理；活跃服务故障不静默降级。多HTTP生命周期允许同state后继协调器接班；managed pending仅在服务启动续办一次，不周期性改变用户任务状态。`document_cli.py`、`hub.py`与`_archive.py`接入。专用handoff观察器与旧共享argv观察器隔离，实际自检及逐解释器身份/任务token证明服务与CLI各自执行位置。
+5. `managed_document_uploads.py`按规范化DB路径维护进程内启动协调器，保留父目录OS全局内容槽。不同DB各自等待并只消费本库持久队列；同库重复kick仍合并。验证同父目录两库、各两文档，仅一次kick也全部完成，且第二份不靠人工重启或重复触发。
+6. `document_snapshots.py`用明确注册的稳定档案身份与实际DB路径读取同目录其他库的只读用途快照，汇总最后合法用途/发布ledger/接收stage后才回收；未知/旧/重用路径归属不猜测。pin使用OS持有的租约；处理pin须有同token整树退出和负载清理证明，Windows以实际Job约束及原生退出核验恢复。先持久退休过期CID/AID/UID再删除字节；拒删仍计费，历史发布字节继续保留。`document_processing.py`将任务token写入pin关联。
+
+验证方法的调整：正式TDD保持同版红灯→独立复审→冻结测试绿灯及相关回归→新上下文复审。总容量回归从单次300秒原生批次拆为独立补充控制器，不增加产品每任务300秒/1GiB/256MiB预算，也不以超时批次追认通过。平台补充按业务分组落盘退出码、完整JUnit、原始附件、源码清单与传输ZIP摘要，全部校验后才供复审。单平台通过不能代替平台特有内核行为验证。
+
+测试基础设施修订与产品边界分开：新只读退出观察器仅在完整归属登记后按pid/创建时间等待真实退出，不在退出中重读易变argv/exe；身份无法确认仍等待原截止，不延长时限或发送信号。Windows仅测试自有JSON就绪文件在原deadline内重试短暂PermissionError/FileNotFoundError，坏JSON立即失败；原产品输入及预算扫描不使用该helper。文本握手按各OS真实换行核验，不改变正文/结果字节要求。此前真实失败、超时与工具环境错误全部保留，后续通过只适用于实际冻结版本。
+
+
+2026-11-28补充：独立定点诊断用公开采集与SQLite backup复现同父目录复制库保留相同archive_id时的跨库退休：副本移除来源后，原库SQL授权仍有效，但共享retired可使原CID/AID失效，后续准入删掉候选。回执重复身份保护不足以防止该路径。按既有未知/歧义归属保守规则，在产生任何canonical退休、pin清理或字节删除前，将持久registry与当前实际DB身份/路径共同检查；复制身份存在多个路径时整次跳过canonical GC，仍按物理残留计费，不自动决定权威副本，不修复历史retired或复活旧引用。验证覆盖已登记副本、尚未登记副本首次准入及第三个独立库触发，原库合法候选、原字节、重试及实际账目保持；不同身份的正常共享最后用途仍须真正回收。
+
+Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local12目标、Hub前8目标完整，Hub第9目标在所有protected资料核对期间先耗尽测试30秒准备门，watcher正常退出，之后故障命令无法握手；不据此认产品五秒恢复失败或Hub剩余4目标通过。修订仅增加测试准备进度握手：父端在完整保护检查之间写当前token/nonce与递增step，worker/helper据新进度续其30/60秒idle门；重复/错身份/倒退step不能续门，未使用进度的旧用例保留原门。产品总任务300秒及资源限额、故障观察8秒、五秒失败/整树/槽位/负载回收判据不改；所有protected检查保留，注入前再次核真实三成员活着且无gate超时。实际响应耗时在五秒断言处采样，避免后续旧资料读回把证据计时字段延后。新增5项进度控制与原11项身份/就绪控制组成16项独立证据，再重取受影响红灯、绿灯和平台执行；不能用测试修订反向改判原失败。
+
+
+本轮定点结果（2026-11-28，源码以evidence/six-fixes-development.json逐文件SHA为准）：F1最终Mac Local/Hub各12故障目标完整通过，原生主项各1过与16/15项相关回归、两新上下文passed已登记；GC最终Mac14过1Windows skip、7回归及独立passed已登记。F2两端各12路径目标、F3路径详情12画面已有独立passed，其原生执行源码早于新增复制身份保守分支，保留精确版本，不伪称全源码相同。最终代码的服务交接/跨库队列5实例与24相关回归另捕获29过；原生补跑在业务执行前因SC1整体设计版迁移blocked，未更改状态或伪造新native green，当前独立补充复审另列。Windows最终GC/Job与控制29过2POSIX skip、Ubuntu22.04最终Hub健康12目标及5进度控制共6过，原件已恢复核验并独立passed；Windows两端路径各12目标先前同源切片通过，保留其SHA/身份边界。最终两包构建/全成员/独立安装97映射、18命令及基础文本检索读取独立passed；不替代三OS最低Python/原生OCR安装。剩余Linux补充、普通CI、最终PR审查与完整R008义务继续待办，旧失败/超时不改判。来源与各意见见evidence/six-fixes-development.json。

@@ -66,26 +66,28 @@
       "evidence": "upload-queue-development.json",
       "decision": "Retain gap; no additional cross-archive testcase/further proposed fix/dedicated rerun",
       "risk": "Current busy-coalescing patch can miss another database wakeup; statically supported, not reproduced",
-      "not_spec_waiver": true
+      "not_spec_waiver": true,
+      "current_status": "Reopened by user six-fix instruction; implemented and scoped evidence recorded in six-fixes-development.json. Previous retain decision remains historical, not current stop authorization."
     },
     {
       "case": "TC-008-path-refresh-config-finalization",
       "evidence": "path-finalization-retained.json",
       "decision": "Retain Hub search-envelope test gap; no additional repair/dedicated rerun, candidate product patch remains unapplied",
       "product_defect": "Path refresh publication rejection terminal/failure handling still unresolved in PR",
-      "not_spec_waiver": true
+      "not_spec_waiver": true,
+      "current_status": "Reopened by user six-fix instruction; implemented and scoped evidence recorded in six-fixes-development.json. Previous retain decision remains historical, not current stop authorization."
     }
   ],
   "pending_test_repair_approvals": [],
   "remaining_required": [
-    "Complete remaining canonical-GC purposes and actual watchdog process-observation/health failure; first exclusive capacity slice is not full GC",
-    "Current-HEAD whole regression, clean build and installed minimum-Python recheck",
-    "Full C1 boundary, lifecycle, cancellation, TTL/shared/committed staging reclamation, malformed input and snapshot protection",
-    "Complete PDF resource/safety boundary matrix",
-    "E installed CLI/Web/MCP/HTTP paths, H actual operating-system service identity, X six cross-OS directions",
-    "Minimum Python3.11 installed business on Linux and Windows",
-    "Final encrypted CI original-evidence recovery and cleanup receipts",
-    "Fresh PR review and requirement-level independent acceptance"
+    "Full canonical GC purposes beyond the six-fix slice, including complete receiver/inflight/shared staging and restore/replay/numeric matrix; no entireSC10 pass",
+    "Final-source whole ordinary CI and official raw artifact recovery; no old failure reclassified by focused success",
+    "Current minimum-Python installed matrix; present final Mac3.14 independent package evidence is not all3.11 platforms",
+    "Full C1 boundary/lifecycle/cancellation/malformed input/snapshot protection and complete PDF safety/resources",
+    "E installed CLI/Web/MCP/HTTP paths, H actual OS service identity, X six cross-OS directions",
+    "Previously retained active-source cancellation, restart and old shared Windows argv observer branches",
+    "Complete encrypted CI original evidence recovery and cleanup receipts for full delivery",
+    "Fresh full PR review and requirement-level independent acceptance; R008 remains unpassed"
   ],
   "environment_constraints": [
     "Local, GitHub CI and home ESXi Windows/Ubuntu authorized on2026-11-26; Ubuntu22.04 VM is supplementary and does not replace SPEC Ubuntu24.04.",
@@ -103,11 +105,9 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "head": "1abe6cd4de5b40fca7bf0152fc17da6fbdda0fcc",
-    "status": "needs_revision",
-    "evidence": "pr43-review-1abe6cd.md",
-    "scope": "Fresh completePR/PLAN/Intent role entry paths/A1-A12 and currentincrement: scoped helper credible, no new substantive matching defect; five actual/static product gaps and fullacceptance remain. CI described as unrecovered at review time; subsequently recovered actualfailedCI is separately indexed.",
-    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7191515486"
+    "status": "pending fresh final-source PR review",
+    "scope": "Six product fixes now implemented; historical full-PR needs_revision remains until current review and all requirement gaps addressed.",
+    "evidence": "six-fixes-development.json"
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -375,7 +375,8 @@
     "evidence": "upload-queue-development.json",
     "status": "native green observed, independent needs_revision/design; same-parent multi-DB risk retained by maintainer",
     "actual_tests": "Mac4main+8reg passed; Windows5component passed and independently reviewed",
-    "not_complete": "No whole TC/SC1/R008 or E/H/X pass"
+    "not_complete": "No whole TC/SC1/R008 or E/H/X pass",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
   },
   "historical_current_ci_checkpoint_before_queue": {
     "head": "092ab9d8be112481618ffe158a407103147d2ed0",
@@ -432,7 +433,8 @@
     "evidence": "path-finalization-retained.json",
     "status": "Retained by maintainer; path product defect NOT fixed in PR",
     "candidate_product_applied": false,
-    "test_gap": "Hub search context envelope, no approved extra round"
+    "test_gap": "Hub search context envelope, no approved extra round",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
   },
   "historical_ordinary_ci_7c2348a": {
     "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
@@ -443,7 +445,7 @@
     "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
   },
   "snapshot_is_historical": true,
-  "current_checkpoint": "candidate-reclamation-development.json",
+  "current_checkpoint": "six-fixes-development.json",
   "candidate_reclamation_fix": {
     "status": "passed_scoped_first_exclusive_archive_capacity_case",
     "evidence": "candidate-reclamation-development.json",
@@ -466,7 +468,8 @@
     "cause": "Normal-exit race is compatible but unproven; no instant status/recheck timeline",
     "product_changed": false,
     "not_waived": true,
-    "next": "Separate B9/A10 process-observation and watchdog-health natural cases; no relaxed GC assertion or retained-case repair"
+    "next": "Separate B9/A10 process-observation and watchdog-health natural cases; no relaxed GC assertion or retained-case repair",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
   },
   "current_gc_ci": {
     "status": "pending_new_source_commit",
@@ -515,5 +518,26 @@
       "scope": "Fresh independent30file checkpoint: scoped GC TDD credible, no new confirmed deletion/lock defect; actual watchdogP1 and remaining product/evidence gaps stay open. Not full R008.",
       "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7189860167"
     }
-  ]
+  ],
+  "historical_pr_review_before_six_fixes": {
+    "head": "1abe6cd4de5b40fca7bf0152fc17da6fbdda0fcc",
+    "status": "needs_revision",
+    "evidence": "pr43-review-1abe6cd.md",
+    "scope": "Fresh completePR/PLAN/Intent role entry paths/A1-A12 and currentincrement: scoped helper credible, no new substantive matching defect; five actual/static product gaps and fullacceptance remain. CI described as unrecovered at review time; subsequently recovered actualfailedCI is separately indexed.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7191515486"
+  },
+  "six_fixes": {
+    "authorization": "User requested fixing six issues; on2026-11-28 permitted all necessary test repair/execution/review rounds without further questions.",
+    "source": "Final product hashes in six-fixes-development.json; base25dec27 plus changes, not the base source itself.",
+    "scope": "Watchdog health, path refresh CAS finalization, Local path details, same-state service CLI handoff, per-DB queue kick, last-use/pin reclamation including copied identity ambiguity.",
+    "native": "Scoped F1/GC final-v2 and F2/F3 frozen slice independently passed; final-source F4/F5 five main instances+24 related regressions independently passed as supplemental, not fabricated native green. All exact version differences and SC1 design metadata block remain explicit.",
+    "platform": "Windows final-v2 GC/Job + controls29pass2POSIXskip; Ubuntu22.04 final-v2 Hub full12health targets+5controls and both Local/Hub path12targets each independently passed. Remaining real Ubuntu recovery/Local health batches pending until recovered/reviewed.",
+    "ci": "New-source ordinary CI still pending; all older failed Windows shared argv and earlier Mac failures remain historical, not waived.",
+    "not_closed": [
+      "Whole R008",
+      "Entire SC1/SC10",
+      "E/H/X or minimum Python matrix"
+    ],
+    "evidence": "six-fixes-development.json"
+  }
 }

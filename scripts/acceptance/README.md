@@ -309,3 +309,14 @@ openssl cms -decrypt -binary -inform DER -in <原件.zip.cms> -inkey <私有目�
 ```
 
 `reviewer-key.pem`只留在该私有目录，不提交或传入workflow。公开证书不含私钥。
+
+
+### 六项修复的跨平台探针约定（2026-11-28）
+
+启动与退出观察分开：启动时用`tests/document_formats_platform.py`核PID、创建时间、完整argv、exe/cwd及实际父子关系，完成归属登记后才注入故障/发送信号；等待退出用`document_formats_exit_observer.py`只读核已登记PID/创建时间和真实退出。退出中的argv/exe可能消失或暂不可读，不用它们重新推断“还是不是自己”；未知身份仍在调用者原截止内等待，绝不据AccessDenied判已退出或向不明进程发信号。Windows原生Job采用原子加入及内核创建时间证明，不能以POSIX退出例代替。
+
+文本与文件就绪分开：协议文本按UTF-8保存原始字节；本机stdout握手按实际系统换行检查。Windows字符串argv用专用`document_formats_handoff_observer.py`调用CommandLineToArgvW，保留原始表示并做正负自检，不用空格split或将字符串当字符数组。`document_formats_fixture_io.py`只为任务自有就绪JSON在原deadline内重试FileNotFoundError/PermissionError；坏JSON立即失败，不用于产品输入、访问权限或空间预算采样。旧共享argv审计缺口未因新handoff观察器修复而关闭。
+
+准备时间与业务时间分开：完整资料保护核对之间可通过当前token/nonce/递增step报告准备进度，只续测试30/60秒idle门；重复、倒退或另一任务消息不能续门。注入前再次核实际worker/helper/watchdog仍活且无门超时。五秒终态/整树/槽位/payload回收计时从已确认的真实监督退出开始，并在该断言位置采样，不把之后旧资料读回时间混入。产品300秒、1GiB、256MiB预算保持；长批次按业务及平台拆分，外层控制器留足实际批次与清理时间，超时结果原样保留，不抬产品额度或删目标来通过。
+
+每个运行输出分别保存命令、源码/材料SHA、身份、退出码、完整JUnit、原stdout/stderr及附件。不同来源观察日志各自保存，不把旧worker审计和新handoff事件混计。远端包先核传输ZIP摘要/CRC，再逐成员核长度与SHA，打开关键原件后独立复审。统一探针和固定材料能减少测试本身的平台差异；平台特有内核/身份/文件系统行为仍需实测。一台机器通过、普通CI通过、管理员源码组件通过分别保留自己的范围，不能替代三OS的最低Python/标准用户/原生服务/E/H/X。

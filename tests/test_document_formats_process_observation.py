@@ -11,6 +11,7 @@ import psutil
 import pytest
 
 from document_helpers import observe
+from document_formats_fixture_io import read_fixture_json
 from document_formats_platform import (spawn_identity,process_tree,matching_process,
     same_existing_path,refresh_owned_records,terminate_verified)
 from smm_local.document_supervisor import matching
@@ -47,7 +48,7 @@ def start_owned(root, index, owned):
             assert child.poll() is None, 'owned preparation child exited before its handshake'
             assert time.monotonic() < deadline, 'owned preparation handshake timed out'
             time.sleep(.005)
-        actual = json.loads(ready.read_text(encoding='utf-8'))
+        actual = read_fixture_json(ready,deadline=deadline)
         value['reported'] = actual
         assert actual['token'] == token
         deadline = time.monotonic() + 5

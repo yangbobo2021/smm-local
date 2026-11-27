@@ -69,35 +69,161 @@ class Snapshots:
         owners=self._gc_read('owners.json',{})
         key=kind+'/'+digest
         if key not in owners and not created:return
-        values=set(owners.get(key,[]));owner=self._gc_owner()
+        values=set(owners.get(key,[]));owner=self._register_gc_owner()
         if owner is None:return
         if owner not in values:
             owners[key]=sorted(values|{owner})
             atomic_json(self._gc_path('owners.json'),owners)
     def retired(self,kind,ident):
         return ident in self._gc_read('retired.json',{}).get(kind,[])
+    def _register_gc_owner(self):
+        with self.db.connect() as c:
+            row=c.execute("SELECT value FROM settings WHERE key='archive:identity'").fetchone()
+            archive=json.loads(row[0]);owner=self._gc_owner(c)
+        archives=self._gc_read('archives.json',{})
+        value={'archive_id':archive,'database':str(self.db.db_path.resolve())}
+        if archives.get(owner)!=value:
+            archives[owner]=value;atomic_json(self._gc_path('archives.json'),archives)
+        return owner
+
+    def _foreign_gc_uses(self,owner,cids,aids):
+        # Only explicitly registered sibling DBs with unchanged archive identity
+        # can prove last use. Missing/replaced/copied/unknown owners stay billed.
+        import sqlite3
+        from contextlib import closing
+        known={owner};protected=set();receipts={}
+        for ident,entry in self._gc_read('archives.json',{}).items():
+            if ident==owner:continue
+            try:
+                path=Path(entry['database'])
+                if not path.is_absolute() or path.parent!=self.db.db_path.resolve().parent or path.is_symlink() or path.resolve()!=path:continue
+                with closing(sqlite3.connect(path.as_uri()+'?mode=ro',uri=True,timeout=.05)) as c:
+                    c.row_factory=sqlite3.Row;c.execute('BEGIN')
+                    archive=json.loads(c.execute("SELECT value FROM settings WHERE key='archive:identity'").fetchone()[0])
+                    if archive!=entry['archive_id'] or protocol_digest(['document-blob-owner-v2',archive,str(path)])!=ident:continue
+                    uses={(r[0],r[1]) for r in c.execute('SELECT kind,sha256 FROM document_published_blobs')}
+                    states={r['document_pk']:dict(r) for r in c.execute('SELECT * FROM document_snapshot_state')}
+                    valid=set();retired_captures=set();retired_attempts=set()
+                    for row in c.execute('SELECT * FROM document_captures'):
+                        state=states.get(row['document_pk'])
+                        if state and state['published_capture']==row['id']:
+                            uses.add(('raw',row['raw_sha256']))
+                            if state['result_sha256']:uses.add(('results',state['result_sha256']))
+                        if state and state['current_capture']==row['id'] and self.authorized(c,row['id']):
+                            valid.add(row['id']);uses.add(('raw',row['raw_sha256']))
+                        else:retired_captures.add(row['id'])
+                    for row in c.execute('SELECT a.*,x.document_pk FROM document_processing_attempts a JOIN document_captures x ON x.id=a.capture_id'):
+                        state=states.get(row['document_pk'])
+                        if row['capture_id'] in valid and state and state['latest_attempt']==row['id'] and not self.retired('attempts',row['id']):
+                            if row['result_sha256']:uses.add(('results',row['result_sha256']))
+                        else:retired_attempts.add(row['id'])
+                    tables={r[0] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+                    pending={r['submission_id']:json.loads(r['response']) for r in c.execute('SELECT * FROM document_library_submissions')} if 'document_library_submissions' in tables else {}
+                    if 'hub_processed_stages' in tables:
+                        for row in c.execute('SELECT payload FROM hub_processed_stages'):
+                            value=json.loads(row[0]);uses.update({('raw',value['sha256']),('results',value['result_sha256'])})
+                known.add(ident);protected.update(uses);cids.update(retired_captures);aids.update(retired_attempts)
+                if archive not in receipts:receipts[archive]=pending
+                else:receipts[archive]=None  # An ambiguous copied identity proves no retirement.
+            except (OSError,sqlite3.Error,ValueError,KeyError,TypeError):
+                continue
+        return known,protected,receipts
+
+    def _task_cleanup_confirmed(self,task_id):
+        if not isinstance(task_id,str) or len(task_id)!=32 or any(c not in '0123456789abcdef' for c in task_id):return False
+        directory=self._directory('tasks')/task_id
+        try:
+            for path in (directory,directory/'supervision.json'):
+                info=path.lstat()
+                if (not stat.S_ISDIR(info.st_mode) if path==directory else not stat.S_ISREG(info.st_mode)) or path.is_symlink() or bool(getattr(info,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):return False
+            state=json.loads((directory/'supervision.json').read_text(encoding='utf-8'))
+            if state.get('token')!=task_id:return False
+            if state.get('status')=='preparing' and state.get('gate_open') is False:
+                from .document_supervisor import matching,cleanup_task
+                try:controller=matching(state['controller'])
+                except Exception:return False
+                if controller is None:
+                    state={**state,'status':'failed','error':'控制进程在激活解析前退出'}
+                    atomic_json(directory/'supervision.json',state);cleanup_task(directory,state)
+            elif os.name=='nt' and not (directory/'cleanup.json').exists():
+                from .document_supervisor import recover_windows_task
+                recover_windows_task(directory,state)
+                state=json.loads((directory/'supervision.json').read_text(encoding='utf-8'))
+            path=directory/'cleanup.json';info=path.lstat()
+            if not stat.S_ISREG(info.st_mode) or bool(getattr(info,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):return False
+            proof=json.loads(path.read_text(encoding='utf-8'))
+            return (state.get('token')==task_id and state.get('status') in {'completed','failed'}
+                    and proof=={'token':task_id,'worker':state['worker'],'stopped':True})
+        except (OSError,ValueError,KeyError,TypeError,ImportError):return False
+
+    def _pin_uses(self):
+        protected=set()
+        for path in self._directory('reclamation').glob('pin-*.json'):
+            value=self._gc_read(path.name,{})
+            lease=value.get('lease')
+            keep=True
+            if lease==path.stem+'.lock':
+                lock=self._gc_path(lease)
+                try:
+                    info=lock.lstat()
+                    if not stat.S_ISREG(info.st_mode) or bool(getattr(info,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):raise ValueError('pin租约不是普通文件')
+                    with control_lock(lock,timeout=0):
+                        if value.get('task_id') is None or self._task_cleanup_confirmed(value['task_id']):
+                            path.unlink(missing_ok=True);keep=False
+                    if not keep:lock.unlink(missing_ok=True)
+                except (OSError,RuntimeError,ValueError):pass
+            if keep:protected.update(tuple(entry) for entry in value['blobs'])
+        return protected
+
     @contextmanager
-    def pin(self,blobs):
-        # A durable pin covers body->metadata windows without holding any lock
-        # over parsing, guard acquisition, or SQL writes. A crashed owner leaves
-        # a conservative pin; reclaiming those requires separate liveness proof.
+    def pin(self,blobs,*,task_id=None):
         entries=sorted(set(blobs))
         for kind,digest in entries:
             if kind not in {'raw','results'}:raise ValueError('未知快照pin类型')
             self.blob(kind,digest)
-        ident='pin-'+uuid4().hex+'.json'
-        with control_lock(self.root/'capacity.lock'):
-            atomic_json(self._gc_path(ident),{'blobs':entries})
-        try:yield
+        ident='pin-'+uuid4().hex
+        lease=self._gc_path(ident+'.lock');marker=self._gc_path(ident+'.json')
+        # A dedicated kernel lease, not a PID/age heuristic, proves whether the
+        # synchronous owner is alive. Content-task pins additionally require
+        # the registered task's completed tree/payload cleanup proof.
+        try:
+            with control_lock(lease,timeout=0):
+                with control_lock(self.root/'capacity.lock'):
+                    owner=self._register_gc_owner()
+                    atomic_json(marker,{'blobs':entries,'lease':lease.name,'task_id':task_id,'owner':owner})
+                try:yield
+                finally:
+                    with control_lock(self.root/'capacity.lock'):
+                        if task_id is None or self._task_cleanup_confirmed(task_id):marker.unlink(missing_ok=True)
         finally:
             with control_lock(self.root/'capacity.lock'):
-                self._gc_path(ident).unlink(missing_ok=True)
+                if not marker.exists():lease.unlink(missing_ok=True)
+    def _ambiguous_gc_identity(self):
+        # A backup can retain identity/CID/AID at another DB path. Its state
+        # cannot retire the original's candidate. Include the calling DB before
+        # it has ever registered a blob owner; unavailable old entries stay safe.
+        with self.db.connect() as c:
+            row=c.execute("SELECT value FROM settings WHERE key='archive:identity'").fetchone()
+            if row is None:return True
+            archive=json.loads(row[0])
+        entries=[*self._gc_read('archives.json',{}).values(),
+                 {'archive_id':archive,'database':str(self.db.db_path.resolve())}]
+        paths={}
+        for entry in entries:
+            if (not isinstance(entry,dict) or not isinstance(entry.get('archive_id'),str)
+                    or not isinstance(entry.get('database'),str)):return True
+            identity=entry['archive_id'];database=entry['database']
+            if identity in paths and paths[identity]!=database:return True
+            paths[identity]=database
+        return False
+
     def reclaim_candidates(self):
         """Conservative canonical GC, called only while capacity.lock is held.
 
         All publication history stays protected. Unknown/shared ownership and
         unfinished receiver uses remain charged instead of risking data loss.
         """
+        if self._ambiguous_gc_identity():return
         from .document_transfers import _states,_expired,_expired_marker
         import time
         protected=set()
@@ -128,6 +254,11 @@ class Snapshots:
             if 'hub_processed_stages' in tables:
                 for row in c.execute('SELECT payload FROM hub_processed_stages'):
                     value=json.loads(row[0]);protected.update({('raw',value['sha256']),('results',value['result_sha256'])})
+        known,foreign,foreign_receipts=self._foreign_gc_uses(owner,cids,aids)
+        protected.update(foreign)
+        all_receipts=foreign_receipts
+        if archive_id in all_receipts:all_receipts[archive_id]=None
+        else:all_receipts[archive_id]=receipts
         # Qualification fences precede every physical deletion, and are kept
         # outside SQLite so restoring an older DB cannot resurrect an identity.
         updated={'captures':sorted(cids),'attempts':sorted(aids)}
@@ -135,20 +266,19 @@ class Snapshots:
         for folder,state in _states(self):
             if _expired(self,folder,state,time.time()):continue
             binding=state['binding']
-            local_upload=(binding.get('purpose')=='managed-original' and binding.get('device_id')=='managed' and archive_id is not None and binding.get('archive_id')==archive_id)
-            receipt=receipts.get(binding.get('submission_id')) if local_upload else None
+            source_receipts=all_receipts.get(binding.get('archive_id'))
+            local_upload=(binding.get('purpose')=='managed-original' and binding.get('device_id')=='managed' and source_receipts is not None)
+            receipt=source_receipts.get(binding.get('submission_id')) if local_upload else None
             obsolete=bool(receipt and (receipt.get('capture_id') in cids or receipt.get('attempt_id') in aids))
             if obsolete:
                 marker=_expired_marker(self,folder.name)
                 if not marker.exists():atomic_json(marker,{'retired':True})
             else:protected.update((kind,item['sha256']) for kind,item in state['blobs'].items())
-        for path in self._directory('reclamation').glob('pin-*.json'):
-            value=self._gc_read(path.name,{})
-            protected.update(tuple(entry) for entry in value['blobs'])
+        protected.update(self._pin_uses())
         owners=self._gc_read('owners.json',{})
         for key,values in owners.items():
             kind,digest=key.split('/',1)
-            if owner is None or values!=[owner] or (kind,digest) in protected:continue
+            if owner is None or not values or not set(values).issubset(known) or (kind,digest) in protected:continue
             path=self.blob(kind,digest)
             if not os.path.lexists(path):continue
             state=path.lstat()
@@ -246,18 +376,21 @@ class Snapshots:
     def process(self,token,format):
         from .document_processing import process
         return process(self,token)
-    def fail_current(self,token,error):
+    def fail_current(self,token,error,*,connection=None):
         """Finish a rejected publication without changing a newer attempt."""
         if token.get('reused'):return False
-        with self.db.connect() as c:
-            c.execute('BEGIN IMMEDIATE')
+        def finish(c):
             changed=c.execute("""UPDATE document_processing_attempts SET state='failed',error=?,finished_at=?
                 WHERE id=? AND capture_id=? AND config_revision=? AND state!='failed'
                 AND EXISTS (SELECT 1 FROM document_snapshot_state s WHERE s.document_pk=?
                     AND s.current_capture=? AND s.latest_attempt=?)""",
                 (str(error),utcnow(),token['attempt_id'],token['capture_id'],token['config']['revision'],
                  token['document_pk'],token['capture_id'],token['attempt_id'])).rowcount
-        return bool(changed)
+            return bool(changed)
+        if connection is not None:return finish(connection)
+        with self.db.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            return finish(c)
     def publish(self,c,pk,token,result):
         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
         if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']) or self.retired('attempts',token['attempt_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')

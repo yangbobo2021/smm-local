@@ -54,6 +54,10 @@ def add_arguments(actions, project_actions):
 def dispatch(state, args):
     documents = HubDocuments(Archive(state / "smm-hub.sqlite3"))
     action = args.document_action
+    if action in {'refresh','reprocess'}:
+        from .document_execution import ProcessingService
+        processor=ProcessingService(documents)
+        documents.documents.snapshots.process=processor.process
     if action == 'processing-status':
         return DocumentProcessingConfiguration(documents.documents.snapshots).status(check=args.check)
     if action == 'processing-configure':

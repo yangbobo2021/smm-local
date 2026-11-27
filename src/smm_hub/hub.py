@@ -198,19 +198,15 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
 
     @asynccontextmanager
     async def document_lifespan(app):
-        # Existing legal captured jobs resume only on their creator service.
-        # Empty queues do not process or read any source on startup.
-        worker = threading.Thread(target=documents.managed_uploads.run_pending,
-                                  name="smm-hub-document-resume", daemon=True)
-        worker.start()
-        try:
+        from .document_execution import ProcessingService
+        # The processor consumes saved-byte jobs only. Startup never scans
+        # source paths, and a CLI on another archive cannot use this lease.
+        with ProcessingService(documents).serve():
             if lifespan is None:
                 yield
             else:
                 async with lifespan(app):
                     yield
-        finally:
-            worker.join(timeout=2)
 
     app = FastAPI(title="SMM Hub", docs_url=None, redoc_url=None, openapi_url=None,
                   lifespan=document_lifespan)

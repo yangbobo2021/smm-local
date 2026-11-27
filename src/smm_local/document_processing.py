@@ -7,7 +7,7 @@ from .core import utcnow
 
 
 def process(snapshots,capture):
-    with snapshots.pin([('raw',capture['raw_sha256'])]):
+    with snapshots.pin([('raw',capture['raw_sha256'])],task_id=None if capture.get('reused') else capture['attempt_id']):
         return _process(snapshots,capture)
 
 

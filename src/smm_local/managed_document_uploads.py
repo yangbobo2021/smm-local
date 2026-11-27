@@ -7,6 +7,7 @@ from __future__ import annotations
 from contextlib import nullcontext
 import json
 import os
+import threading
 from pathlib import Path
 from uuid import uuid4
 from .archive_protocol import control_lock,digest
@@ -17,6 +18,16 @@ from .document_snapshots import RAW_LIMIT
 from .document_transfers import BlobTransfers,BLOCK_LIMIT
 from .managed_documents import display_name
 from .documents import _link
+
+
+_coordinators={}
+_coordinators_guard=threading.Lock()
+
+
+def _coordinator(database):
+    key=os.path.normcase(str(database.resolve()))
+    with _coordinators_guard:
+        return _coordinators.setdefault(key,threading.Lock())
 
 
 class ManagedDocumentUploads:
@@ -185,18 +196,24 @@ class ManagedDocumentUploads:
                 elif backup is not None:self.library._replace(path,backup)
                 raise
     def run_pending(self):
-        # Kicks coalesce while another coordinator owns this durable queue.
-        # Never wait for a whole content task in an HTTP background callback.
+        # Only a coordinator of THIS database can consume its only kick.
+        # A sibling archive sharing the byte store/OS lock is not a consumer
+        # of this durable queue. Its busy lock must leave a waiting leader.
+        coordinator=_coordinator(self.db.db_path)
         while True:
-            acquired = False
+            if not coordinator.acquire(blocking=False):return
             try:
-                with control_lock(self.snapshots.root/'upload-queue.lock', timeout=0):
-                    acquired = True
-                    self._drain_pending()
-            except RuntimeError:
-                if acquired:
-                    raise  # A real coordinator failure must remain visible.
-                return
+                while True:
+                    acquired=False
+                    try:
+                        with control_lock(self.snapshots.root/'upload-queue.lock',timeout=.2):
+                            acquired=True;self._drain_pending()
+                        break
+                    except RuntimeError:
+                        if acquired:raise
+                        with self.db.connect() as c:
+                            if c.execute("SELECT 1 FROM document_upload_jobs WHERE state='pending' LIMIT 1").fetchone() is None:return
+            finally:coordinator.release()
             # Check only AFTER releasing ownership. A producer may have added
             # work after the drain saw empty but before its busy kick returned.
             # If it commits later, its own kick can acquire the now-free lock.
