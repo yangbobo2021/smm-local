@@ -9,25 +9,26 @@ def add_arguments(actions, project_actions):
     create.add_argument("name")
     project_actions.add_parser("ensure-global", help="取得或创建Hub自有全局项目")
     parser = actions.add_parser(
-        "documents", help="管理Hub自有文档、检索及恢复；设备投影只读"
+        "documents", help="管理Hub自有文档、检索及恢复；设备投影只读",
+        description="支持 .md/.markdown/.txt 和 .docx/.xlsx/.pdf；新格式需创建端安装 documents 依赖组。PDF 优先直接提取文字/表格，需要时使用本端 OCR；用 processing-status --check / processing-configure 检查配置。设备投影只读；安装与使用步骤见本版本仓库的 TRIAL_GUIDE.md。"
     )
     sub = parser.add_subparsers(dest="document_action", required=True)
     document_processing_arguments(sub)
-    retry=sub.add_parser('reprocess',help='只重处理Hub自有且仍获授权的保存原件；设备投影只读')
+    retry=sub.add_parser('reprocess',help='只重处理Hub自有且仍获授权的保存原件；设备投影只读',description='参数取 documents files 同一项的 id 与 retry_target；值过期时重新查看该项。只处理保存原件，设备投影只读。')
     for flag in ('document-id','capture-id','expected-attempt-id'):
-        retry.add_argument('--'+flag,required=True)
+        retry.add_argument('--'+flag,required=True,help='取 documents files 同一项的 '+('id' if flag=='document-id' else 'retry_target.'+('expected_attempt_id' if flag=='expected-attempt-id' else 'capture_id')))
     for flag in ('expected-version','expected-processing-version'):
-        retry.add_argument('--'+flag,type=int,required=True)
+        retry.add_argument('--'+flag,type=int,required=True,help='取 documents files 同一项的 retry_target.'+flag.replace('-','_'))
     for action in ("add", "set"):
-        p = sub.add_parser(action, help="保存配置为pending；需明确refresh")
-        p.add_argument("path" if action == "add" else "source_id")
+        p = sub.add_parser(action, help="保存配置为pending；需明确refresh", description="保存来源配置，不自动采集。支持 .md/.markdown/.txt、.docx/.xlsx/.pdf；新格式需 documents 依赖组，明确 refresh 才处理。")
+        p.add_argument("path" if action == "add" else "source_id", help="Hub所在电脑的文件或目录绝对路径" if action=="add" else "取 documents sources 中Hub自有来源的 id")
         p.add_argument("--project-id", type=int, action="append", default=[])
         p.add_argument("--exclude", action="append", default=[])
         p.add_argument("--no-recursive", action="store_true")
     sub.add_parser("sources", help="列出Hub自有与设备来源及其创建端")
     for action in ("files", "refresh"):
-        p = sub.add_parser(action)
-        p.add_argument("--source-id")
+        p = sub.add_parser(action, description="取 documents sources 中的来源 id；不传时列出全部资料（设备投影只读）。" if action=="files" else "明确采集Hub自有来源，支持 .md/.markdown/.txt、.docx/.xlsx/.pdf。取 documents sources 中Hub自有来源的 id；不传时刷新全部Hub自有来源。新格式需 documents 依赖组，OCR配置见 processing-status --check / processing-configure；活跃同档案服务处理保存原件，无服务时由CLI前景处理。")
+        p.add_argument("--source-id",help="取 documents sources 中来源的 id；refresh只接受Hub自有来源")
     p = sub.add_parser("remove")
     p.add_argument("source_id")
     p = sub.add_parser("search")

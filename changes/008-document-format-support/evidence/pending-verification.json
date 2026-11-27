@@ -105,9 +105,11 @@
     "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
   },
   "pr_review": {
-    "status": "pending fresh final-source PR review",
-    "scope": "Six product fixes now implemented; historical full-PR needs_revision remains until current review and all requirement gaps addressed.",
-    "evidence": "six-fixes-development.json"
+    "head": "3c2c42ccb473b438eb8436f2d277b8635b0f5530",
+    "status": "needs_revision for complete R008",
+    "evidence": "six-fixes-pr-review-3c2c42c.md",
+    "scoped_findings_followup": "F3 visible documentID fixed and independently nativepassed; Hub CLI help independently verified in final-v3. Details in six-fixes-followup.json. Fresh final-source supplement is recorded onPR.",
+    "current_review_source": "See latest clean-context PR conclusion; this file is a versioned snapshot, not an automatically updated pass flag."
   },
   "source_authorization_fix": {
     "status": "passed_scoped",
@@ -445,7 +447,7 @@
     "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
   },
   "snapshot_is_historical": true,
-  "current_checkpoint": "six-fixes-development.json",
+  "current_checkpoint": "six-fixes-followup.json",
   "candidate_reclamation_fix": {
     "status": "passed_scoped_first_exclusive_archive_capacity_case",
     "evidence": "candidate-reclamation-development.json",
@@ -528,16 +530,17 @@
   },
   "six_fixes": {
     "authorization": "User requested fixing six issues; on2026-11-28 permitted all necessary test repair/execution/review rounds without further questions.",
-    "source": "Final product hashes in six-fixes-development.json; base25dec27 plus changes, not the base source itself.",
+    "source": "Processing code3c2c42c plus final-v3 Local visible documentID and Hub CLI help; exact64 hashes and two differences recorded, no false whole-source identity claim.",
     "scope": "Watchdog health, path refresh CAS finalization, Local path details, same-state service CLI handoff, per-DB queue kick, last-use/pin reclamation including copied identity ambiguity.",
     "native": "Scoped F1/GC final-v2 and F2/F3 frozen slice independently passed; final-source F4/F5 five main instances+24 related regressions independently passed as supplemental, not fabricated native green. All exact version differences and SC1 design metadata block remain explicit.",
-    "platform": "Windows final-v2 GC/Job + controls29pass2POSIXskip; Ubuntu22.04 final-v2 Hub full12health targets+5controls and both Local/Hub path12targets each independently passed. Remaining real Ubuntu recovery/Local health batches pending until recovered/reviewed.",
-    "ci": "New-source ordinary CI still pending; all older failed Windows shared argv and earlier Mac failures remain historical, not waived.",
+    "platform": "Six final-v2 processing supplements independently passed: Win recovery29pass2skip; Linux recovery30pass1skip; Linux both paths12targets each; Linux bothhealth12targets+5controls each. Final-v3 UI12+3reg, packages97/18commands, installedMac+twoVM source4help each independently passed; not E/H/X.",
+    "ci": "Per-head official artifact/digest/CRC/JUnit results tracked on stable PR evidence comment; source3c2c42c Ubuntu two batches495pass82skip0fail recovered so far, other jobs running at this versioned snapshot.",
     "not_closed": [
       "Whole R008",
       "Entire SC1/SC10",
       "E/H/X or minimum Python matrix"
     ],
     "evidence": "six-fixes-development.json"
-  }
+  },
+  "ci_evidence_url": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7224981436"
 }

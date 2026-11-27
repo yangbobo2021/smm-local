@@ -92,6 +92,7 @@ def test_path_files_web_details_match_each_saved_capture(tmp_path, monkeypatch):
                         'raw_bytes':len(item['raw']),'version':1,'processing_version':1,
                         'result_sha256':hashlib.sha256(result_raw).hexdigest(),'status':item['status']}
                     assert row['published_snapshot']==saved and state['published_status']==item['status']
+                item['expected_document_id']=doc['id']
                 item['expected_fields']={'published_snapshot':saved,
                     'latest_attempt':{k:latest[k] for k in ('capture_id','attempt_id','status','config_revision','error')},
                     'retry_target':retry}
@@ -122,6 +123,10 @@ def test_path_files_web_details_match_each_saved_capture(tmp_path, monkeypatch):
                     expect(row).to_have_count(1)
                     expect(row).to_contain_text(item['status'])
                     row.get_by_text('查看处理详情与重试比较值', exact=True).click()
+                    identifier=row.get_by_text(item['expected_document_id'],exact=True)
+                    expect(identifier).to_have_count(1)
+                    expect(identifier).to_be_visible()
+                    expect(row).to_contain_text('--document-id')
                     fields = {}
                     for field in ('published_snapshot', 'latest_attempt', 'retry_target'):
                         node = row.locator('pre[data-native-detail="' + field + '"]')
@@ -140,7 +145,7 @@ def test_path_files_web_details_match_each_saved_capture(tmp_path, monkeypatch):
                     name = item['path'].stem + '.png'
                     row.screenshot(path=str(evidence / name))
                     observe('path-web-visible-details', {'document_id': item['entry']['id'],
-                            'path': str(item['path']), 'fields': fields, 'screenshot': name})
+                            'path': str(item['path']), 'visible_document_id':identifier.inner_text(), 'fields': fields, 'screenshot': name})
                 assert box.locator('pre[data-native-detail="latest_attempt"]').count() == len(expected)
                 for other in (i for i in items if i['project'] != project):
                     expect(box).not_to_contain_text(str(other['path']))

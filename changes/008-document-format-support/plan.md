@@ -365,3 +365,8 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 
 
 本轮定点结果（2026-11-28，源码以evidence/six-fixes-development.json逐文件SHA为准）：F1最终Mac Local/Hub各12故障目标完整通过，原生主项各1过与16/15项相关回归、两新上下文passed已登记；GC最终Mac14过1Windows skip、7回归及独立passed已登记。F2两端各12路径目标、F3路径详情12画面已有独立passed，其原生执行源码早于新增复制身份保守分支，保留精确版本，不伪称全源码相同。最终代码的服务交接/跨库队列5实例与24相关回归另捕获29过；原生补跑在业务执行前因SC1整体设计版迁移blocked，未更改状态或伪造新native green，当前独立补充复审另列。Windows最终GC/Job与控制29过2POSIX skip、Ubuntu22.04最终Hub健康12目标及5进度控制共6过，原件已恢复核验并独立passed；Windows两端路径各12目标先前同源切片通过，保留其SHA/身份边界。最终两包构建/全成员/独立安装97映射、18命令及基础文本检索读取独立passed；不替代三OS最低Python/原生OCR安装。剩余Linux补充、普通CI、最终PR审查与完整R008义务继续待办，旧失败/超时不改判。来源与各意见见evidence/six-fixes-development.json。
+
+
+2026-11-28完整PR独审3c2c42c按角色入口及A1–A12核验，发现F3网页详情虽提供三JSON，但缺CLI必填document_id；另指出Hub父层/add/refresh/reprocess帮助缺支持格式/参数取值来源，README→指南路径实际可达，均属局部信息不足而非解析故障。按既有B4/B5/A11补齐：Local nativeDetails以textContent显示当前文档ID并标明--document-id，不增加API字段或网页重试按钮；Hub document_cli仅补argparse help/description，参数/类型/必填/default/dispatch剔除说明后的AST与3c2c42c严格相同。独立DB身份→每个真实页面ID可见/唯一，既有三JSON、coverage、12目标及禁回源/禁解析全部保留；SC1自然设计v4后，旧产品真实缺ID红灯经独立expected_failure，再冻结主项1过+3相关回归、12张本轮PNG/trace并独立passed登记。最早覆盖指针元数据blocked（尚未执行业务）保留，不伪称产品红灯。
+
+本补丁最终v3只改变Local静态HTML及Hub CLI说明，两者相对已验六批v2均明确列SHA差异，不再称全部64源文件仍逐字相同；其余62产品文件相同，Hub CLI除帮助值外AST相同。验证风险限定为页面交接、UTF8帮助和打包资产：Mac真实浏览器12ID/三JSON及3回归；Mac独立安装Hub与Windows/Linux源码各4只读帮助原字节、模块归属、未创建state；两包97源/wheel/安装映射、18命令以及安装后4帮助均经独立复审。没有据此豁免完整E/H/X、最低Python/身份或资源矩阵。完整PR旧报告原样脱敏归档，最终源码新上下文补充审查与每head普通CI结果通过PR持续记录，不用docs-only自引用CI制造循环；公开入口见evidence/six-fixes-followup.json中的稳定PR验收评论链接。

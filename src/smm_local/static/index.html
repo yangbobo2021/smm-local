@@ -295,6 +295,7 @@
     const name=asset.display_name||asset.path;if(!isNative(name))return;
     const label=document.createElement('p');label.textContent='格式 '+nativeFormat(name).toUpperCase()+' · '+(asset.latest_attempt?.status||'pending')+(asset.publication_pending?' · 等待发布':'')+' · 版本 '+asset.version+' · 处理版本 '+asset.processing_version;row.append(label);
     const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='查看处理详情与重试比较值';details.append(summary);
+    const identity=document.createElement('p'),documentId=document.createElement('code');identity.textContent='文档 ID（--document-id）：';documentId.dataset.nativeDocumentId='';documentId.textContent=asset.id;identity.append(documentId);details.append(identity);
     const latest=asset.latest_attempt?Object.fromEntries(['capture_id','attempt_id','status','config_revision','error'].map(k=>[k,asset.latest_attempt[k]])):null;
     for(const [field,title,value] of [['published_snapshot','已发布快照',asset.published_snapshot],['latest_attempt','最新尝试',latest],['retry_target','重试目标（创建端 CLI 使用）',asset.retry_target]]){
       const heading=document.createElement('p'),pre=document.createElement('pre');heading.textContent=title;pre.dataset.nativeDetail=field;pre.textContent=JSON.stringify(value??null,null,2);details.append(heading,pre);
