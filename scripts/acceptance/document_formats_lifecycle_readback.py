@@ -32,6 +32,18 @@ def visible_table(browser, table):
         button = node.locator('[data-cell-text]')
         expect(button).to_be_visible()
         assert button.text_content() == (cell.get('text') or '')
+    header = browser.page.locator('#' + browser.prefix + '-table-header')
+    context = table['header_context']
+    assert header.locator('[data-row][data-column]').count() == len(context['cells'])
+    for cell in context['cells']:
+        node = header.locator('[data-row="' + str(cell['row']) + '"][data-column="' + str(cell['column']) + '"]')
+        expect(node).to_have_count(1)
+        expect(node.locator('[data-cell-text]')).to_be_visible()
+        assert node.locator('[data-cell-text]').text_content() == (cell.get('text') or '')
+        assert node.get_attribute('rowspan') == str(cell['row_span'])
+        assert node.get_attribute('colspan') == str(cell['column_span'])
+    label = {'explicit_header': '显式表头', 'first_content_row': '首内容行', 'none': '无表头'}[context['role']]
+    expect(browser.page.locator('#' + browser.prefix + '-table-meta')).to_contain_text(label)
 
 
 def failed_detail(probe, item, entry, stage):

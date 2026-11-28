@@ -63,7 +63,9 @@ def test_visible_table_checks_real_coordinates_spans_and_text(tmp_path):
     from document_formats_lifecycle_readback import visible_table
     table = {'cells': [{'row': 1, 'column': 1, 'row_span': 1, 'column_span': 2, 'text': '独立表头'},
                        {'row': 2, 'column': 1, 'row_span': 1, 'column_span': 1, 'text': '73428'}]}
+    table['header_context'] = {'role': 'explicit_header', 'cells': [table['cells'][0]]}
     markup = '<table><tbody id="hub-table-cells"><tr><td data-row="1" data-column="1" rowspan="1" colspan="2"><button data-cell-text>独立表头</button></td></tr><tr><td data-row="2" data-column="1" rowspan="1" colspan="1"><button data-cell-text>73428</button></td></tr></tbody></table>'
+    markup = '<p id="hub-table-meta">显式表头</p>' + markup.replace('<table>', '<table><thead id="hub-table-header"><tr><th data-row="1" data-column="1" rowspan="1" colspan="2"><button data-cell-text>独立表头</button></th></tr></thead>')
     with sync_playwright() as runtime:
         browser = runtime.chromium.launch(headless=True, **({'executable_path': os.environ['SMM_008_TEST_BROWSER']} if os.environ.get('SMM_008_TEST_BROWSER') else {}))
         try:
@@ -72,10 +74,13 @@ def test_visible_table_checks_real_coordinates_spans_and_text(tmp_path):
             page.set_content(markup)
             visible_table(probe, table)
             for script in [
-                'document.querySelectorAll("[data-row]")[1].remove()',
-                'document.querySelectorAll("[data-row]")[1].dataset.column="2"',
-                'document.querySelectorAll("[data-row]")[0].colSpan=1',
-                'document.querySelectorAll("[data-row]")[1].querySelector("button").textContent="foreign"',
+                'document.querySelectorAll("tbody [data-row]")[1].remove()',
+                'document.querySelectorAll("tbody [data-row]")[1].dataset.column="2"',
+                'document.querySelectorAll("tbody [data-row]")[0].colSpan=1',
+                'document.querySelectorAll("tbody [data-row]")[1].querySelector("button").textContent="foreign"',
+                'document.querySelector("thead").replaceChildren()',
+                'document.querySelector("thead button").textContent="foreign"',
+                'document.querySelector("#hub-table-meta").textContent="首内容行"',
             ]:
                 page.set_content(markup)
                 page.evaluate(script)
