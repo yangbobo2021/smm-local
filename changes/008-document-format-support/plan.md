@@ -379,3 +379,9 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 共享测试设施`document_formats_platform.py`集中使用Windows CommandLineToArgvW正规化原始str，POSIX列表原样保留，worker按精确模块/任务token识别；restart、retry子进程源读守卫和handoff复用，并记录raw类型。四项真实参数/worker/源读正负控制及Mac/Windows原重启回归分别19过，独立候选复审通过，完整平台/普通CI仍单列。
 
 历史Windows一次SQLite WAL重开I/O错误保留成因未定。Mac8/Windows16次原停止方式未重现该错误；Windows实际记录到venv启动器wait返回时真正Python仍可能存活。只修测试停止证明：先登记实际树，保留原硬停止，重开数据库前另等待全部已登记后代退出；不响应者清理后使测试失败，不能只凭启动器退出宣称已停。新增真实自然退出/不响应后代及外国进程控制，未来SQLite失败保存扩展错误码与停止证据。测试extra显式加入已有固定psutil，默认产品依赖不变，离线lock仅补该extra元数据。Mac和Windows各15项原同步/凭据/混合检索与新控制通过，独立调查/候选复审通过，不宣称历史I/O已确定根因或已修产品数据库错误。精确版本、范围和原件摘要见evidence/completion-checkpoint-20261128.json。
+
+2026-11-28续办：来源取消SC8三项在Mac普通用户前景完成正式3过及独立passed登记；共享C1重启SC7补原半传/首次pending默认配置0，并覆盖每端12目标的partial、empty-success、旧ready加新pending配置1。逐目标冻结CID/AID/config/created_at、独立全文顺序/全表/原件及旧请求存储不变，正式4过44.71秒，新上下文执行复审passed。18次停止中的4次屏障强停与14次正常停止分别保留，不认运行中worker或原生服务恢复。
+
+新增SC10两个有限组件用例：六项真实字面数值边界及加1拒绝，17个真实PDF过滤器/预测器/嵌套Form/压缩对象及reader守卫实例。预测器原件在guard前由原生reader核固定像素；所有真值来自源材料，纯原生文字不强迫渲染。正式分别6过1.44秒、17过1.13秒，新候选和新执行Reviewer均passed。只认各自分配项，不从这些小样关闭完整PDF安全或其他资源预算。原错误和需修订意见保留，脱敏入口evidence/completion-acceptance-20261128.json。
+
+最低Python补充采用独立可移植驱动而保留原Mac专用测试不变：从锁文件导出含hash的documents依赖，两环境分别同步后仅安装对应准确wheel，逐文件核安装资产，实际产品均3.11、-I、非源码cwd、Hub不能import Local；普通/全局每端八份四类文档，完整文本/全表/原件与移除源后的旧引用逐份核对。Mac准备调试5过，正式最低版本与其他OS仍按各次原件/复审记录判断。三OS专用CI使用实际普通身份，Windows新建独立无Administrators组账户，不能拿filtered管理员代替；只把控制端公钥交runner，私钥在启动CI前持久化并解密自检。CI调试/正式证据需官方artifact摘要核验、解密、逐文件打开及独立意见才能认passed。本补充不改变SPEC，不以最低安装替代完整E/H/X。
