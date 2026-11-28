@@ -4,7 +4,7 @@ import json
 import threading
 import time
 
-from ._archive import atomic_json, control_lock, digest
+from ._archive import atomic_json, control_lock, digest, document_stopping
 
 
 class ProcessingService:
@@ -57,10 +57,12 @@ class ProcessingService:
             time.sleep(.05)
 
     def _one(self):
+        if self.stop.is_set() or document_stopping(self.db):return
         acquired=False
         try:
             with control_lock(self.snapshots.root/'upload-queue.lock',timeout=0):
                 acquired=True
+                if self.stop.is_set() or document_stopping(self.db):return
                 with self.db.connect() as c:
                     row=c.execute("SELECT * FROM hub_document_processing_jobs WHERE state='pending' ORDER BY rowid LIMIT 1").fetchone()
                 if row is None:return
@@ -73,6 +75,8 @@ class ProcessingService:
                         if (current is None or current['current_capture']!=token['capture_id']
                                 or current['latest_attempt']!=token['attempt_id'] or not self.snapshots.authorized(c,token['capture_id'])):
                             raise ValueError('交接的原件或处理尝试已失效')
+                    if attempt and attempt['state']=='failed':
+                        raise ValueError('交接的处理尝试已失败，请按当前重试目标明确重试')
                     if attempt and attempt['result_sha256'] and attempt['state'] in {'ready','partial','empty-success'}:
                         token['result_sha256']=attempt['result_sha256']
                     else:self.native(token,value['format'])
@@ -98,7 +102,7 @@ class ProcessingService:
     def _run(self):
         try:
             self.hub.managed_uploads.run_pending()
-            while not self.stop.is_set():
+            while not self.stop.is_set() and not document_stopping(self.db):
                 self._one()
                 self.stop.wait(.05)
         except BaseException as exc:

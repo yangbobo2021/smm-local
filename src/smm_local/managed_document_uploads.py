@@ -196,14 +196,15 @@ class ManagedDocumentUploads:
                 elif backup is not None:self.library._replace(path,backup)
                 raise
     def run_pending(self):
+        from .document_supervisor import stopping
         # Only a coordinator of THIS database can consume its only kick.
         # A sibling archive sharing the byte store/OS lock is not a consumer
         # of this durable queue. Its busy lock must leave a waiting leader.
         coordinator=_coordinator(self.db.db_path)
-        while True:
+        while not stopping(self.db):
             if not coordinator.acquire(blocking=False):return
             try:
-                while True:
+                while not stopping(self.db):
                     acquired=False
                     try:
                         with control_lock(self.snapshots.root/'upload-queue.lock',timeout=.2):
@@ -222,7 +223,8 @@ class ManagedDocumentUploads:
                     return
 
     def _drain_pending(self):
-        while True:
+        from .document_supervisor import stopping
+        while not stopping(self.db):
             with self.db.connect() as c:
                 job=c.execute("SELECT * FROM document_upload_jobs WHERE state='pending' ORDER BY rowid LIMIT 1").fetchone()
                 if job is None:return
@@ -232,6 +234,8 @@ class ManagedDocumentUploads:
                 with self._hold():self._check(value['binding'])
                 with self.db.connect() as c:
                     attempt=c.execute('SELECT * FROM document_processing_attempts WHERE id=?',(token['attempt_id'],)).fetchone()
+                if attempt and attempt['state']=='failed':
+                    raise ValueError('上传处理尝试已失败，请按当前重试目标明确重试')
                 if attempt and attempt['result_sha256'] and attempt['state'] in {'ready','partial'}:
                     token['result_sha256']=attempt['result_sha256'];result=self.snapshots.load_result(token['result_sha256'])
                 else:result=self.snapshots.process(token,token['profile']['format'])

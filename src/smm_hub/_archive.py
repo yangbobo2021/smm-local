@@ -21,3 +21,4 @@ from smm_local.document_transfers import BlobTransfers
 from smm_local.document_results import validate as processed_validate, encode as processed_encode, sha as processed_sha
 
 from smm_local.managed_document_uploads import ManagedDocumentUploads
+from smm_local.document_supervisor import stopping as document_stopping

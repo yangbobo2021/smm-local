@@ -408,6 +408,8 @@ class Snapshots:
             c.execute('BEGIN IMMEDIATE')
             return finish(c)
     def publish(self,c,pk,token,result):
+        from .document_supervisor import require_running
+        require_running(self.db)
         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
         if not state or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id'] or self.config(c)['revision']!=token['config']['revision'] or not self.authorized(c,token['capture_id']) or self.retired('attempts',token['attempt_id']):raise ValueError('捕获/处理/配置或授权已变化，旧结果不能发布')
         changed=state['result_sha256']!=token['result_sha256'] or state['profile_sha256']!=token['profile_sha256']

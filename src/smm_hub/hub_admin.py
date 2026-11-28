@@ -418,10 +418,14 @@ class Hub:
         cfg = self.config()
         token = self.token.read_text(encoding="ascii").strip()
         archive = Archive(self.database)
+        import threading
+        archive._document_shutdown_event = threading.Event()
         sync = VibeInsightSettings(self.root, archive)
-        return uvicorn.Server(uvicorn.Config(create_hub(archive, token, lifespan=sync.lifespan),
+        server = uvicorn.Server(uvicorn.Config(create_hub(archive, token, lifespan=sync.lifespan),
             host=cfg["bind"], port=cfg["port"], ssl_certfile=str(self.certificate),
             ssl_keyfile=str(self.key)))
+        server.smm_stop_documents = archive._document_shutdown_event.set
+        return server
 
     def run(self):
         with (self.root / "hub.log").open("a", encoding="utf-8", buffering=1) as log:

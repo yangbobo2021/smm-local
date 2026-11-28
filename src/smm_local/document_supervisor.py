@@ -15,6 +15,15 @@ TEMP_LIMIT=256*1024*1024
 TIME_LIMIT=300
 
 
+def stopping(db):
+    event=getattr(db,'_document_shutdown_event',None)
+    return event is not None and event.is_set()
+
+
+def require_running(db):
+    if stopping(db):raise ValueError('汇总服务正在停止，本次文档处理已终止；已保存原件可在重启后明确重试')
+
+
 def module_command(module, *arguments):
     if sys.flags.no_site:
         # SCM registers the base interpreter before adding the protected Hub
@@ -269,6 +278,7 @@ def run(db,request,task_directory):
                 preparing={'token':token,'worker':None,'controller':identity(psutil.Process()),'children':[],
                     'status':'preparing','gate_open':False}
                 atomic_json(root/'supervision.json',preparing)
+                require_running(db)
                 command=module_command(__package__+'.document_worker','--task-token',token)
                 if os.name=='nt':
                     from .document_windows import spawn,creation_ticks,kernel
@@ -288,6 +298,7 @@ def run(db,request,task_directory):
                 # Optional parser imports are unreachable before this gate.
                 child.stdin.write(json.dumps(request).encode('utf-8')+b'\n');child.stdin.close()
                 while child.poll() is None:
+                    require_running(db)
                     if watchdog is not None and watchdog.poll() is not None:
                         # Exit 0 is also unexpected while the worker is live.
                         # The owned Popen handle supplies conclusive exit proof
@@ -312,6 +323,7 @@ def run(db,request,task_directory):
                     if active is None or active['latest_attempt']!=token or active['config_revision']!=active['current_revision'] or authorized is None:raise ValueError('处理目标、配置或采集授权已失效')
                     state.update(peak_rss=peak,children=known);atomic_json(lease,state)
                     time.sleep(.05)
+                require_running(db)
                 if child.returncode:raise ValueError('原生解析失败: '+log.read_text(encoding='utf-8',errors='replace')[-2000:])
                 state.update(status='completed',peak_rss=peak,seconds=time.monotonic()-started);atomic_json(root/'supervision.json',state)
                 return Path(request['output']).read_bytes()
