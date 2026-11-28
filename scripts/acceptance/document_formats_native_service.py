@@ -115,17 +115,25 @@ class NativePosixProbe(FormatProbe):
         assert self.service_pid is not None
         self.phase = 'service-control'
         import psutil
+        from document_formats_platform import process_identity
+        from document_formats_native_exit import watch_stop
         process = psutil.Process(self.service_pid)
         members = []
         for member in [process, *process.children(recursive=True)]:
             try:
-                members.append({'pid': member.pid, 'created': member.create_time()})
+                members.append(process_identity(member))
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
-        self.cli('hub', 'disable')
-        stopped([m['pid'] for m in members], [('127.0.0.1', self.ports['hub'])])
+        controller = next(m for m in members if m['pid'] == self.service_pid)
+        self.native_stop_sequence = getattr(self, 'native_stop_sequence', 0) + 1
+        observation = 'native-stop-observation-' + str(self.native_stop_sequence)
+        proof = watch_stop(members, controller, lambda: self.cli('hub', 'disable'),
+            lambda value: self.save(observation, value),
+            own_thread=lambda thread: setattr(self,'pending_native_command_stop',thread))
+        stopped([], [('127.0.0.1', self.ports['hub'])])
         self.service_pid = None
-        event = {'action': 'stopped', 'at': now(), 'members': members, 'port_unbound': True}
+        event = {'action': 'stopped', 'at': now(), 'members': members, 'port_unbound': True,
+                 'observation': observation, 'exit_proof': proof}
         self.service_events.append(event)
         self.save('native-service-events', self.service_events)
         self.phase = 'archive-only'
@@ -166,13 +174,8 @@ class NativePosixProbe(FormatProbe):
 
     def cleanup(self):
         errors = []
-        pending=getattr(self,'pending_native_stop',None)
-        if pending is not None and pending.is_alive():
-            pending.join(timeout=150)
-            if pending.is_alive():
-                self.save('native-service-cleanup',{'errors':[{'step':'wait-owned-stop',
-                    'error':'native stop still running; no concurrent cleanup was issued'}]})
-                raise RuntimeError('Owned native stop did not finish; cleanup deferred without a second disable')
+        from document_formats_native_exit import wait_stop_calls
+        wait_stop_calls(self)
         self.phase = 'cleanup'
         def attempt(label, action):
             try:
