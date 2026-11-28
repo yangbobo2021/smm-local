@@ -1,6 +1,7 @@
 """Explicit isolated HTTP factory and child audit for development restart tests."""
 import json,os,sys,time
 from pathlib import Path
+from document_formats_platform import process_arguments, document_worker_token
 
 
 def audit(event,args):
@@ -13,8 +14,10 @@ def audit(event,args):
     if event=='subprocess.Popen' and (log:=os.environ.get('SMM_008_WEB_READ_ONLY')):
         with open(log,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'subprocess','pid':os.getpid()})+'\n')
         raise AssertionError('read-only browser phase attempted subprocess')
-    if event=='subprocess.Popen' and isinstance(args[1],(list,tuple)) and any('.document_worker' in str(x) for x in args[1]):
-        with open(os.environ['SMM_008_RESTART_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'event':event,'pid':os.getpid(),'argv':list(args[1])})+'\n')
+    if event=='subprocess.Popen':
+        argv=process_arguments(args[1]);token=document_worker_token(argv)
+        if token is not None:
+            with open(os.environ['SMM_008_RESTART_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'event':event,'pid':os.getpid(),'argv':argv,'raw_argv':args[1],'raw_type':type(args[1]).__name__,'task_token':token},ensure_ascii=False)+'\n')
 
 
 def install_audit():sys.addaudithook(audit)

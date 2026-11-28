@@ -3,27 +3,7 @@ import json
 import os
 from pathlib import Path
 import sys
-
-
-def arguments(value):
-    if isinstance(value,(list,tuple)):return list(value)
-    if not isinstance(value,str):raise TypeError('unsupported process argv')
-    if os.name!='nt':raise TypeError('unexpected POSIX process argv string')
-    import ctypes as c
-    from ctypes import wintypes as w
-    shell=c.WinDLL('shell32',use_last_error=True);kernel=c.WinDLL('kernel32',use_last_error=True)
-    shell.CommandLineToArgvW.argtypes=[w.LPCWSTR,c.POINTER(c.c_int)];shell.CommandLineToArgvW.restype=c.POINTER(w.LPWSTR)
-    kernel.LocalFree.argtypes=[c.c_void_p];kernel.LocalFree.restype=c.c_void_p
-    count=c.c_int();pointer=shell.CommandLineToArgvW(value,c.byref(count))
-    if not pointer:raise c.WinError(c.get_last_error())
-    try:return [pointer[i] for i in range(count.value)]
-    finally:kernel.LocalFree(pointer)
-
-
-def worker_token(argv):
-    if len(argv)<6 or argv[1:3]!=['-B','-m'] or argv[3] not in {'smm_local.document_worker','smm_hub._archive.document_worker'} or argv[4]!='--task-token':return None
-    token=argv[5]
-    return token if len(token)==32 and all(c in '0123456789abcdef' for c in token) else None
+from document_formats_platform import process_arguments as arguments, document_worker_token as worker_token
 
 
 def install():

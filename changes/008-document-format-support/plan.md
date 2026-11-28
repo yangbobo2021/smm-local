@@ -370,3 +370,12 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 2026-11-28完整PR独审3c2c42c按角色入口及A1–A12核验，发现F3网页详情虽提供三JSON，但缺CLI必填document_id；另指出Hub父层/add/refresh/reprocess帮助缺支持格式/参数取值来源，README→指南路径实际可达，均属局部信息不足而非解析故障。按既有B4/B5/A11补齐：Local nativeDetails以textContent显示当前文档ID并标明--document-id，不增加API字段或网页重试按钮；Hub document_cli仅补argparse help/description，参数/类型/必填/default/dispatch剔除说明后的AST与3c2c42c严格相同。独立DB身份→每个真实页面ID可见/唯一，既有三JSON、coverage、12目标及禁回源/禁解析全部保留；SC1自然设计v4后，旧产品真实缺ID红灯经独立expected_failure，再冻结主项1过+3相关回归、12张本轮PNG/trace并独立passed登记。最早覆盖指针元数据blocked（尚未执行业务）保留，不伪称产品红灯。
 
 本补丁最终v3只改变Local静态HTML及Hub CLI说明，两者相对已验六批v2均明确列SHA差异，不再称全部64源文件仍逐字相同；其余62产品文件相同，Hub CLI除帮助值外AST相同。验证风险限定为页面交接、UTF8帮助和打包资产：Mac真实浏览器12ID/三JSON及3回归；Mac独立安装Hub与Windows/Linux源码各4只读帮助原字节、模块归属、未创建state；两包97源/wheel/安装映射、18命令以及安装后4帮助均经独立复审。没有据此豁免完整E/H/X、最低Python/身份或资源矩阵。完整PR旧报告原样脱敏归档，最终源码新上下文补充审查与每head普通CI结果通过PR持续记录，不用docs-only自引用CI制造循环；公开入口见evidence/six-fixes-followup.json中的稳定PR验收评论链接。
+
+
+### 2026-11-28 全量剩余验收续办
+
+维护者明确重新开放PR43全部剩余问题和验收，授权必要测试修订、执行与独立复审直接继续，不逐轮询问；完成更新PR但不合并、发布或升级日常实例。旧的保留决定及失败原件继续追溯，不再作为本轮停止依据；SPEC行为与验收条件不降低。继续沿AT-SMM-008当前定义，先修Windows观察与调查数据库停止后错误，再补取消/重启/读取、PDF/回收、最低Python和E/H/X，最后做需求级验收与PR新上下文复审。
+
+共享测试设施`document_formats_platform.py`集中使用Windows CommandLineToArgvW正规化原始str，POSIX列表原样保留，worker按精确模块/任务token识别；restart、retry子进程源读守卫和handoff复用，并记录raw类型。四项真实参数/worker/源读正负控制及Mac/Windows原重启回归分别19过，独立候选复审通过，完整平台/普通CI仍单列。
+
+历史Windows一次SQLite WAL重开I/O错误保留成因未定。Mac8/Windows16次原停止方式未重现该错误；Windows实际记录到venv启动器wait返回时真正Python仍可能存活。只修测试停止证明：先登记实际树，保留原硬停止，重开数据库前另等待全部已登记后代退出；不响应者清理后使测试失败，不能只凭启动器退出宣称已停。新增真实自然退出/不响应后代及外国进程控制，未来SQLite失败保存扩展错误码与停止证据。测试extra显式加入已有固定psutil，默认产品依赖不变，离线lock仅补该extra元数据。Mac和Windows各15项原同步/凭据/混合检索与新控制通过，独立调查/候选复审通过，不宣称历史I/O已确定根因或已修产品数据库错误。精确版本、范围和原件摘要见evidence/completion-checkpoint-20261128.json。

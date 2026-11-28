@@ -1277,6 +1277,7 @@ documents = [
 ]
 test = [
     { name = "httpx" },
+    { name = "psutil" },
     { name = "pytest" },
     { name = "reportlab" },
 ]
@@ -1295,6 +1296,7 @@ requires-dist = [
     { name = "pillow", marker = "extra == 'documents'", specifier = "==13.0.0" },
     { name = "playwright", marker = "extra == 'acceptance'", specifier = ">=1.51" },
     { name = "psutil", marker = "extra == 'documents'", specifier = "==7.2.2" },
+    { name = "psutil", marker = "extra == 'test'", specifier = "==7.2.2" },
     { name = "pycparser", marker = "extra == 'documents'", specifier = "==3.12" },
     { name = "pypdfium2", marker = "extra == 'documents'", specifier = "==5.15.2" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8" },

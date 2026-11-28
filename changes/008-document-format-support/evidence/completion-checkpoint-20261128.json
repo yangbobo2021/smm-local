@@ -1,0 +1,49 @@
+{
+  "status": "in_progress; not full R008 acceptance or merge approval",
+  "baseline": "1899488f30af617252982d5bf356a8fe35f6eeb6",
+  "authorization": "Maintainer reopened all remaining tests and necessary revisions/execution/independent review, no per-round questions; update PR only, do not merge.",
+  "product_source_changed": false,
+  "windows_argv": {
+    "Mac": {
+      "passed": 19,
+      "skipped": 0
+    },
+    "Windows": {
+      "passed": 19,
+      "skipped": 0,
+      "zip_sha256": "02f12de395a1b6afa93ec2f0b62a7882b6a6dfb155e3a1a63b1f62614c5e28dc",
+      "members": 478
+    },
+    "review": "candidate/debug passed; formal/platform acceptance separate"
+  },
+  "sqlite": {
+    "original_hard_stop_probe": {
+      "Mac_trials": 8,
+      "Windows_trials": 16,
+      "io_error_reproduced": false,
+      "Windows_launcher_wait_not_full_exit": true
+    },
+    "fixture_stop_repair": {
+      "Mac_passed": 15,
+      "Windows_passed": 15,
+      "Windows_zip_sha256": "a4ea05ac94dbfc87b561d6a43a526be1d5ef7daeca83a076da3425ae407f1032"
+    },
+    "historical_IO_cause": "unproven; no blind product retry or error waiver",
+    "test_extra": "psutil pinned explicitly; default application dependencies unchanged"
+  },
+  "reports": [
+    {
+      "original": "argv-candidate-independent-review.md",
+      "original_sha256": "f2fce16770e0e8779fca4053f6aaaafcc69c5287af9689b77246c9ec1072948a",
+      "public": "completion-argv-candidate-review.md",
+      "public_sha256": "328e3e6192ade5231019f1729a472be79aa845d500a3a878afa418b3b1817ac9"
+    },
+    {
+      "original": "sqlite-candidate-independent-review.md",
+      "original_sha256": "65e6c78c33f9c7a9ad81e92592cb1e012a7fbb6c51cda21901dd09737983f423",
+      "public": "completion-sqlite-candidate-review.md",
+      "public_sha256": "319b2f40571d0c8cdb2c1fa6c8d411416c02a06b0bca32ec627a088b349afcd1"
+    }
+  ],
+  "remaining": "C1 states/read paths; complete PDF/GC; minimumPython/E/H/X; full evidence/cleanup and final independent acceptance/review"
+}

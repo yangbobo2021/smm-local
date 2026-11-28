@@ -16,7 +16,7 @@ dependencies = ["fastapi==0.162.0", "uvicorn==0.54.0", "mcp==1.30.0", "zstandard
 
 [project.optional-dependencies]
 documents = ["defusedxml==0.7.1", "pdfplumber==0.11.11", "pdfminer.six==20260107", "pypdfium2==5.15.2", "Pillow==13.0.0", "psutil==7.2.2", "cffi==2.1.1", "charset-normalizer==3.5.3", "cryptography==50.0.2", "pycparser==3.12"]
-test = ["pytest>=8", "httpx>=0.27", "reportlab==5.1.0"]
+test = ["pytest>=8", "httpx>=0.27", "reportlab==5.1.0", "psutil==7.2.2"]
 acceptance = ["playwright>=1.51"]
 
 [project.scripts]

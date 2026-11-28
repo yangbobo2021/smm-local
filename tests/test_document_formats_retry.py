@@ -10,7 +10,7 @@ import pytest
 from PIL import Image,ImageDraw,ImageFont
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
-from document_helpers import Fixture,deny_source_reads,observe
+from document_helpers import Fixture,deny_source_reads,observe,ROOT
 from document_formats_fixtures import docx_fixture
 
 ENGINE=os.environ.get('SMM_008_OCR_EXECUTABLE')
@@ -36,9 +36,10 @@ def scan_pdf(anchor):
 def child_source_guard(root,paths,monkeypatch):
     folder=root/'source-audit';folder.mkdir();log=folder/'attempts.jsonl'
     code=r'''import json,os,sys
+from document_formats_platform import process_arguments
 protected={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ['SMM_008_PROTECTED_SOURCES'])}
 def audit(event,args):
-    values=([args[0]] if event=='open' else list(args[1]) if event=='subprocess.Popen' and isinstance(args[1],(list,tuple)) else [])
+    values=([args[0]] if event=='open' else process_arguments(args[1]) if event=='subprocess.Popen' else [])
     for value in values:
         if isinstance(value,(str,bytes)) and os.path.normcase(os.path.abspath(os.fsdecode(value))) in protected:
             with open(os.environ['SMM_008_SOURCE_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'pid':os.getpid(),'event':event,'path':os.fsdecode(value)})+'\n')
@@ -48,7 +49,7 @@ sys.addaudithook(audit)
     (folder/'sitecustomize.py').write_text(code,encoding='utf-8')
     monkeypatch.setenv('SMM_008_PROTECTED_SOURCES',json.dumps(list(map(str,paths))))
     monkeypatch.setenv('SMM_008_SOURCE_AUDIT',str(log))
-    monkeypatch.setenv('PYTHONPATH',str(folder)+os.pathsep+os.environ.get('PYTHONPATH',''))
+    monkeypatch.setenv('PYTHONPATH',os.pathsep.join([str(folder),str(ROOT/'tests'),str(ROOT/'src'),os.environ.get('PYTHONPATH','')]))
     return log
 
 
