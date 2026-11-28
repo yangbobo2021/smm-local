@@ -52,6 +52,9 @@ def test_failure_diagnostic_oracle_rejects_wrong_target_status_and_reason():
 def test_real_web_details_show_each_saved_failure_reason(tmp_path,owner):
     # TC-008-web-failure-diagnostic; no initial-upload or ready-management repair.
     from playwright.sync_api import expect
+    import sys
+    sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts/acceptance'))
+    from document_formats_lifecycle_visual import capture as capture_details
     server=Server(tmp_path/owner,owner)
     if owner=='hub':server.db=server.root/'smm-hub.sqlite3'
     evidence=Path(os.environ.get('ACCEPTANCE_EVIDENCE_DIR',str(tmp_path/'browser-evidence')));evidence.mkdir(exist_ok=True)
@@ -99,13 +102,12 @@ def test_real_web_details_show_each_saved_failure_reason(tmp_path,owner):
                 box=browser.page.locator('#doc-library-list' if owner=='local' else '#hub-library-list')
                 for item in [i for i in items if i['project']['id']==project['id']]:
                     row=box.locator('.result').filter(has_text='文档 '+item['id']);expect(row).to_have_count(1);expect(row).to_be_visible()
-                    row.get_by_text('查看处理详情与重试比较值',exact=True).click()
-                    detail=row.locator('pre[data-native-detail="latest_attempt"]');expect(detail).to_be_visible()
-                    visible=json.loads(detail.inner_text());expect(row).to_contain_text('failed')
-                    screenshot=evidence/(owner+'-'+item['label']+'-failed-detail.png');row.screenshot(path=str(screenshot))
+                    screenshot=evidence/(owner+'-'+item['label']+'-failed-detail.png')
+                    proof=capture_details(browser.page,owner,item['entry'],'pdf',screenshot)
+                    visible=json.loads(proof['after']['fields']['latest_attempt'])
                     try:expected_visible(visible,item['entry']['latest_attempt']);valid=True
                     except AssertionError as exc:valid=False;failures.append({'id':item['id'],'field':str(exc),'expected':item['entry']['latest_attempt'],'visible':visible})
-                    observe('web-diagnostic-visible',{'owner':owner,'document_id':item['id'],'project_id':project['id'],'screenshot':screenshot.name,'visible':visible,'exact_target_reason_visible':valid})
+                    observe('web-diagnostic-visible',{'owner':owner,'document_id':item['id'],'project_id':project['id'],'screenshot':screenshot.name,'capture':proof,'visible':visible,'exact_target_reason_visible':valid})
             assert all(i['path'].read_bytes()==i['raw'] and i['path'].stat().st_mtime_ns==i['mtime'] for i in items)
             assert not failures,{'missing_or_wrong_saved_failure_diagnostics':failures}
     finally:server.stop()
