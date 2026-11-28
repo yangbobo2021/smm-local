@@ -11,10 +11,17 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import inspect
 
 from document_formats_guard_primitives import AUDIT_PRIMITIVES, IDENTITY_SOURCE, actual_identity
 
-HOOK = r'''
+def resume_task_matches(module, name, capture, argv, aid):
+    if module in {'smm_local.document_processing','smm_hub._archive.document_processing'} and name in {'process','_process'}:
+        return isinstance(capture,dict) and capture.get('attempt_id')==aid
+    return '--task-token' in argv and argv[argv.index('--task-token')+1:argv.index('--task-token')+2]==[aid]
+
+
+HOOK = inspect.getsource(resume_task_matches) + r'''
 import ctypes,hashlib,json,os,socket,sys,threading,time
 from pathlib import Path
 def phase():return Path(C['phase']).read_text(encoding='utf-8').strip()
@@ -75,7 +82,10 @@ def profile(frame,event,arg):
  module=frame.f_globals.get('__name__') or '';name=frame.f_code.co_name
  processing_call=(module in {'smm_local.document_processing','smm_hub._archive.document_processing'} and name in {'process','_process'}) or (module.startswith(('smm_local.document_formats.','smm_hub._archive.document_formats.')) and name in {'parse','intermediate','recognize'})
  if processing_call:
-  allowed=phase() in processing;emit('content-processing',module=module,function=name,allowed=allowed)
+  allowed=phase() in processing
+  resume_path=C.get('resume_attempt');resume=Path(resume_path).read_text().strip() if resume_path else ''
+  if resume:allowed=allowed and resume_task_matches(module,name,frame.f_locals.get('capture'),sys.argv,resume)
+  emit('content-processing',module=module,function=name,allowed=allowed)
   if not allowed:raise AssertionError('SMM008 read attempted content processing')
 sys.addaudithook(audit);sys.setprofile(profile);threading.setprofile(profile)
 '''
@@ -87,6 +97,8 @@ def install(probe, owners=('local', 'hub')):
     receipts = []
     wire = probe.out / 'actual-outbound-http'
     wire.mkdir()
+    probe.resume_attempt_path=probe.out/'current-resume-attempt.txt'
+    probe.resume_attempt_path.write_text('')
     assert owners and set(owners) <= {'local', 'hub'}
     for owner in owners:
         source_python = Path(probe.config[owner + '_python'])
@@ -107,7 +119,7 @@ def install(probe, owners=('local', 'hub')):
         config = {'owner': owner, 'phase': str(probe.out / 'phase.txt'), 'sources': str(probe.fixtures),
                   'source_paths': str(probe.source_paths),
                   'log': str(probe.out / (owner + '-protocol-guard.jsonl')),
-                  'wire': str(wire),
+                  'wire': str(wire), 'resume_attempt':str(probe.resume_attempt_path),
                   'mcp_wrapper': str(Path(__file__).with_name('local_documents_mcp_worker.py').resolve()),
                   'local_db': str(probe.db['a']),
                   'mcp_argv': list(map(str,probe.argv('a','smm_local.mcp_server','--db',probe.db['a']))),
@@ -137,12 +149,34 @@ def install(probe, owners=('local', 'hub')):
     probe.save('protocol-guard-installation', receipts)
 
 
-def events(probe):
+def events(probe, *, require_complete=False):
+    import threading
     paths = getattr(probe, 'protocol_guard_paths', None)
     if paths is None:paths = [probe.out / (owner + '-protocol-guard.jsonl') for owner in ('local', 'hub')]
-    return sorted([json.loads(line) for path in paths
-                   for line in Path(path).read_text(encoding='utf-8').splitlines()],
-                  key=lambda event: event['monotonic_ns'])
+    if not hasattr(probe,'_protocol_event_lock'):
+        probe._protocol_event_lock=threading.RLock()
+        probe._protocol_event_positions={}
+        probe._protocol_event_cache=[]
+    with probe._protocol_event_lock:
+        new,positions=[],{}
+        for value in paths:
+            path=Path(value)
+            with path.open('rb') as stream:
+                stat=os.fstat(stream.fileno())
+                previous=probe._protocol_event_positions.get(str(path))
+                offset=previous['offset'] if previous else 0
+                assert stat.st_size>=offset,'observer log truncated'
+                if previous:assert (stat.st_dev,stat.st_ino)==previous['identity'],'observer log replaced'
+                stream.seek(offset);raw=stream.read()
+            end=raw.rfind(b'\n')+1
+            if require_complete:assert end==len(raw),('incomplete observer record after shutdown',str(path),len(raw)-end)
+            new.extend(json.loads(line) for line in raw[:end].decode('utf-8').splitlines())
+            positions[str(path)]={'offset':offset+end,'identity':(stat.st_dev,stat.st_ino)}
+        # A completed record arriving after another file was sampled must not
+        # be sorted back into the already-consumed prefix of a count cursor.
+        probe._protocol_event_cache.extend(sorted(new,key=lambda event:event['monotonic_ns']))
+        probe._protocol_event_positions.update(positions)
+        return list(probe._protocol_event_cache)
 
 
 def assert_read_only(probe, start):

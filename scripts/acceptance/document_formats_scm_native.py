@@ -200,7 +200,10 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
                 args=list(args);destination=self.cli_outputs/(uuid4().hex+'.bin')
                 args[args.index('--original-output')+1]=str(destination)
             value=self.cli('hub',*args,code=request['code'])
-            result={'value':value,'command':self.calls[-1]}
+            command=self.calls[-1]
+            if args[:2]==['documents','refresh']:
+                self.storage_acl_receipt()
+            result={'value':value,'command':command}
             if destination is not None:
                 import base64
                 raw=destination.read_bytes()
@@ -243,6 +246,34 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
             (self.native_shared/'resume-attempt.txt').write_text(aid or '')
             return {'allowed_current_attempt':aid}
         return super().rpc(request)
+
+    def storage_acl_receipt(self):
+        """Read real current storage ACLs; never repair them in acceptance."""
+        import sqlite3
+        paths=[self.hub_state,self.hub_state/'.document-snapshots']
+        with sqlite3.connect(self.hub_db.as_uri()+'?mode=ro',uri=True) as c:
+            captures=c.execute('SELECT id,raw_sha256,raw_bytes FROM document_captures').fetchall()
+        for cid,digest,size in captures:
+            assert re.fullmatch('[0-9a-f]{64}',digest)
+            path=self.hub_state/'.document-snapshots/raw'/digest
+            assert path.resolve().is_relative_to(self.hub_state.resolve())
+            assert path.is_file() and path.stat().st_size==size
+            assert hashlib.sha256(path.read_bytes()).hexdigest()==digest
+            paths.append(path)
+        for name in ('raw','results','reclamation','services','tasks'):
+            path=self.hub_state/'.document-snapshots'/name
+            if path.is_dir():paths.append(path)
+        records=[]
+        for index,path in enumerate(dict.fromkeys(paths)):
+            assert path.resolve().is_relative_to(self.hub_state.resolve())
+            text=self.run('actual-storage-icacls-'+str(index),['icacls.exe',path],role='hub')
+            records.append({'path':str(path),'icacls':text,'command':self.calls[-1]})
+        encoded=json.dumps([str(path) for path in dict.fromkeys(paths)])
+        import base64
+        script="$ErrorActionPreference='Stop';$ProgressPreference='SilentlyContinue';[Console]::OutputEncoding=[Text.UTF8Encoding]::new();$paths=ConvertFrom-Json ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('"+base64.b64encode(encoded.encode()).decode()+"')));$items=@(foreach($p in $paths){$a=Get-Acl -LiteralPath $p;@{path=$p;owner=$a.Owner;sddl=$a.Sddl}});ConvertTo-Json -Depth 6 -InputObject $items -Compress"
+        sddl=json.loads(self.run('actual-storage-sddl',['powershell.exe','-NoProfile','-Command',script],role='hub'))
+        self.save('actual-cli-capture-storage-acl',{'captures':captures,'icacls':records,'actual_sddl':sddl,
+            'policy':'read-only diagnostic; original descriptor and bytes unchanged by acceptance'})
 
     def task_cleanup(self):
         from document_formats_platform import matching_process

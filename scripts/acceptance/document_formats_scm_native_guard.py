@@ -10,14 +10,8 @@ import inspect
 import json
 import subprocess
 
-from document_formats_protocol_guards import HOOK
+from document_formats_protocol_guards import HOOK, resume_task_matches
 from document_formats_guard_primitives import IDENTITY_SOURCE, AUDIT_PRIMITIVES
-
-
-def resume_task_matches(module, name, capture, argv, aid):
-    if module in {'smm_local.document_processing','smm_hub._archive.document_processing'} and name in {'process','_process'}:
-        return isinstance(capture,dict) and capture.get('attempt_id')==aid
-    return '--task-token' in argv and argv[argv.index('--task-token')+1:argv.index('--task-token')+2]==[aid]
 
 
 def install(manager):
@@ -50,18 +44,16 @@ def install(manager):
     needle = "allowed=mode in processing or mode in {'service-control','cleanup'} or transport"
     assert needle in hook
     hook = hook.replace(needle, needle + "\n  invocation=native_argv(effective[1]) if effective is not None and len(effective)>1 else []\n  worker_command=any('document_worker' in str(v) or 'document_watchdog' in str(v) for v in invocation)\n  ocr_command=bool(invocation) and 'tesseract' in str(invocation[0]).lower()\n  maintenance_probe=bool(invocation) and same_image(invocation[0],C['ocr_executable']) and (invocation[1:]==['--version'] or (len(invocation)==4 and invocation[1]=='--tessdata-dir' and invocation[3]=='--list-langs' and any(same_image(invocation[2],p) for p in C['ocr_data_dirs'])))\n  if worker_command or (ocr_command and not maintenance_probe):\n   if not service_actor:emit('native-role-denial',invocation=invocation)\n   assert service_actor,('administrator attempted business processing child',invocation)")
-    needle = "allowed=phase() in processing;emit('content-processing',module=module,function=name,allowed=allowed)"
+    needle = "allowed=phase() in processing\n"
     assert needle in hook
-    hook = hook.replace(needle, "allowed=phase() in processing and service_actor;emit('content-processing',module=module,function=name,allowed=allowed)")
-    needle="allowed=phase() in processing and service_actor;emit('content-processing',module=module,function=name,allowed=allowed)"
-    hook=hook.replace(needle,"allowed=phase() in processing and service_actor\n  resume=Path(C['resume_attempt']).read_text().strip()\n  if resume:allowed=allowed and resume_task_matches(module,name,frame.f_locals.get('capture'),sys.argv,resume)\n  emit('content-processing',module=module,function=name,allowed=allowed)")
+    hook = hook.replace(needle, "allowed=phase() in processing and service_actor\n")
     value = subprocess.run([manager.config['hub_python'],'-I','-c','import sysconfig;print(sysconfig.get_path("purelib"))'],capture_output=True,timeout=20)
     assert value.returncode==0,value.stderr
     site = Path(value.stdout.decode().strip())
     assert site.resolve().is_relative_to(Path(manager.config['hub_python']).parent.parent.resolve())
     module = site/'_smm_008_native_guard.py';startup=site/'_smm_008_native_guard.pth'
     assert not module.exists() and not startup.exists()
-    code = 'import json\nC=json.loads('+repr(json.dumps(config))+')\n'+IDENTITY_SOURCE+'\n'+AUDIT_PRIMITIVES+'\n'+inspect.getsource(resume_task_matches)+'\n'+hook
+    code = 'import json\nC=json.loads('+repr(json.dumps(config))+')\n'+IDENTITY_SOURCE+'\n'+AUDIT_PRIMITIVES+'\n'+hook
     module.write_text(code,encoding='utf-8');startup.write_text('import _smm_008_native_guard\n',encoding='utf-8')
     manager.config['native_observation']={'root':str(shared),'log':str(shared/'hub-guard.jsonl'),
         'maintenance_identity':expected,'service_name':'smm-hub-'+hashlib.sha256(str(manager.hub_state.resolve()).encode()).hexdigest()[:12]}

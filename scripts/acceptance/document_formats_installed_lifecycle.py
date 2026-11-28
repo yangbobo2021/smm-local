@@ -703,7 +703,8 @@ def execute(config_path, output, *, native_service=False):
         probe.phase = 'read-only'
         assert probe.request('hub', '/v1/info')['document_epoch'] == probe.hub_context['document_epoch']
         replay(probe, cases, 'lifecycle-after-restart', references)
-        assert_read_only(probe, observed)
+        if native_service:probe.assert_restart_read_only(observed)
+        else:assert_read_only(probe, observed)
         assert probe.version_bindings() == bindings
         result = {'status': 'passed', 'scope': 'installed lifecycle candidate subset',
             'actual_actor': probe.actor(), 'format_updates': 8, 'saved_candidate_retries': 8,

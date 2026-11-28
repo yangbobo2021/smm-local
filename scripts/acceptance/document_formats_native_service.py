@@ -52,7 +52,7 @@ class NativePosixProbe(FormatProbe):
     def start(self, role):
         if role != 'hub':
             return super().start(role)
-        self.phase = 'service-control'
+        self.phase = 'resume-captured' if getattr(self,'native_resume_aid',None) else 'service-control'
         if not self.service_installed:
             if sys.platform == 'darwin':
                 self.native('sudo-preflight', ['sudo', '-n', 'true'])
@@ -107,7 +107,7 @@ class NativePosixProbe(FormatProbe):
             'created': process.create_time(), 'uid': process.uids().effective,
             'argv': process.cmdline(), 'native_status': actual, 'definition': definition})
         self.save('native-service-events', self.service_events)
-        self.phase = 'prepare'
+        self.phase = 'resume-captured' if getattr(self,'native_resume_aid',None) else 'prepare'
 
     def stop(self, role):
         if role != 'hub':
@@ -131,8 +131,48 @@ class NativePosixProbe(FormatProbe):
         self.phase = 'archive-only'
         return event
 
+    def assert_restart_read_only(self,start):
+        from document_formats_protocol_guards import events
+        all_events=events(self);window=all_events[start:];accepted=[]
+        import pwd
+        user=pwd.getpwuid(os.getuid()).pw_name
+        allowed=[['systemctl','--user','show-environment'],
+            ['loginctl','show-user',user,'-p','Linger','--value'],
+            ['systemctl','--user','daemon-reload'],['systemctl','--user','enable',self.unit],
+            ['systemctl','--user','start',self.unit],['sudo','-v'],
+            ['sudo','launchctl','enable','system/'+self.label],
+            ['sudo','launchctl','print','system/'+self.label],
+            ['sudo','launchctl','bootstrap','system',str(self.plist)],
+            ['sudo','launchctl','kickstart','system/'+self.label]]
+        for event in window:
+            assert event['kind'] not in {'source-open','content-processing'},event
+            if event['kind']=='network-call':assert event['allowed'],event
+            if event['kind']!='child-start':continue
+            identities=[e for e in all_events if e['kind']=='identity' and e['owner']==event['owner']
+                and e['pid']==event['pid'] and e['monotonic_ns']<=event['monotonic_ns']]
+            assert identities;identity=max(identities,key=lambda e:e['monotonic_ns'])
+            assert event['owner']=='hub' and identity['euid']==os.getuid()!=0
+            argv=identity['argv'];assert 'smm_hub.cli' in argv and argv[-1]=='enable'
+            assert Path(argv[argv.index('--state-dir')+1]).resolve()==self.hub_state.resolve()
+            effective=event['effective_arguments'];assert effective is not None and len(effective)>1
+            command=list(map(str,effective[1]));command[0]=Path(command[0]).name
+            install=(len(command)==10 and command[:8]==['sudo','install','-o','root','-g','wheel','-m','644']
+                and command[-1]==str(self.plist) and Path(command[8]).is_absolute())
+            assert command in allowed or install,command
+            accepted.append({'event':event,'actual_maintenance_identity':identity,'exact_native_command':command})
+        assert accepted,'Actual native startup management was not observed'
+        self.save('native-normal-restart-zero-processing',{'events':window,'qualified_native_management':accepted,
+            'unexpected_source_processing_ocr_or_business_child':[]})
+
     def cleanup(self):
         errors = []
+        pending=getattr(self,'pending_native_stop',None)
+        if pending is not None and pending.is_alive():
+            pending.join(timeout=150)
+            if pending.is_alive():
+                self.save('native-service-cleanup',{'errors':[{'step':'wait-owned-stop',
+                    'error':'native stop still running; no concurrent cleanup was issued'}]})
+                raise RuntimeError('Owned native stop did not finish; cleanup deferred without a second disable')
         self.phase = 'cleanup'
         def attempt(label, action):
             try:

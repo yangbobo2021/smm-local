@@ -758,7 +758,11 @@ class FormatProbe(Probe):
 
     def cleanup(self):
         self.phase = 'cleanup'
-        return super().cleanup()
+        result=super().cleanup()
+        if self.config.get('read_guards'):
+            from document_formats_protocol_guards import events
+            events(self,require_complete=True)
+        return result
 
 
 def main():

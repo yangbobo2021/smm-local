@@ -60,6 +60,7 @@ def interrupted_ocr(probe):
             assert time.monotonic() < deadline, 'No actual OCR process observed'
             service = psutil.Process(probe.service_pid)
             for process in service.children(recursive=True):
+                candidate=None
                 try:
                     argv = process.cmdline()
                     if not os.path.samefile(process.exe(), probe.materials['ocr_executable']):continue
@@ -67,17 +68,37 @@ def interrupted_ocr(probe):
                     source = Path(argv[1]).resolve()
                     task = probe.hub_state / '.document-snapshots/tasks' / receipt['attempt_id']
                     if not source.is_relative_to(task.resolve()):continue
-                    process.suspend()
-                    engine = {'stamp': spawn_identity(process), 'argv': argv, 'exe': process.exe(),
+                    candidate = {'stamp': spawn_identity(process), 'argv': argv, 'exe': process.exe(),
                               'uid': process.uids().effective, 'source': str(source)}
-                    assert engine['uid'] == os.getuid() != 0
+                    assert candidate['uid'] == os.getuid() != 0
+                    worker=psutil.Process(process.ppid())
+                    candidate['worker']={'stamp':spawn_identity(worker),'uid':worker.uids().effective,
+                        'exe':worker.exe(),'argv':worker.cmdline()}
+                    assert candidate['worker']['uid']==candidate['uid']
+                    command=candidate['worker']['argv']
+                    assert 'smm_hub._archive.document_worker' in command
+                    assert command[command.index('--task-token')+1]==receipt['attempt_id']
+                    candidate['service']=dict(probe.service_events[-1])
+                    assert service.create_time()==candidate['service']['created']
+                    process.suspend()
+                    assert process.create_time()==candidate['stamp']['created']
+                    probe.save('native-actual-held-ocr-'+receipt['attempt_id'],
+                        {'receipt':receipt,'action':action,'actual_ocr':candidate})
+                    engine=candidate
                     break
-                except (psutil.NoSuchProcess, FileNotFoundError):continue
+                except (psutil.NoSuchProcess, FileNotFoundError):
+                    # Never continue with a partially sampled held process.
+                    # A still-owned suspended OCR must be released first.
+                    if candidate is not None:
+                        held=matching_process(candidate['stamp'])
+                        if held is not None:held.resume()
+                    continue
             if engine is None:time.sleep(.002)
         current = library_entry(probe, 'hub', item['id'])
         assert current['published_snapshot'] is None and current['version'] == current['processing_version'] == 0
         assert current['latest_attempt']['capture_id'] == receipt['capture_id']
         assert current['latest_attempt']['attempt_id'] == receipt['attempt_id']
+        assert current['latest_attempt']['status'] in {'pending','processing'}
         item['path'] = Path(current['path'])
         original_attempt = dict(current['latest_attempt'])
         # Keep a second, independent published document readable while real
@@ -103,28 +124,35 @@ def interrupted_ocr(probe):
             try:probe.stop('hub')
             except BaseException as error:failures.append(error)
         stopper = threading.Thread(target=stop_service)
+        probe.pending_native_stop=stopper
         event_start = len(events(probe))
-        stopper.start()
-        until, dispatch = time.monotonic() + 15, None
-        while dispatch is None:
-            for event in events(probe)[event_start:]:
-                argv = event.get('argv')
-                if event['kind'] != 'child-start' or not isinstance(argv, list):continue
-                if ('launchctl' in argv and 'bootout' in argv and 'system/' + probe.label in argv) or (
-                        'systemctl' in argv and 'disable' in argv and '--now' in argv and probe.unit in argv):
-                    dispatch = event
-                    break
-            assert time.monotonic() < until and not failures, failures
-            if dispatch is None:time.sleep(.01)
-        if action != 'retain':
-            held = matching_process(engine['stamp'])
-            if held is not None:held.resume()
-        # Retain keeps this one-page actual OCR in flight through native stop.
-        # Its real bounded OCR timeout can fail the attempt during graceful
-        # shutdown; that is a supported saved-capture explicit retry path.
-        # No ready publication before restart is accepted as an interruption.
-        stopper.join(timeout=60)
-        assert not stopper.is_alive() and not failures, failures
+        try:
+            if action=='retain':assert matching_process(engine['stamp']) is not None
+            stopper.start()
+            until, dispatch = time.monotonic() + 15, None
+            while dispatch is None:
+                for event in events(probe)[event_start:]:
+                    argv = event.get('argv')
+                    if event['kind'] != 'child-start' or not isinstance(argv, list):continue
+                    if ('launchctl' in argv and 'bootout' in argv and 'system/' + probe.label in argv) or (
+                            'systemctl' in argv and 'disable' in argv and '--now' in argv and probe.unit in argv):
+                        dispatch = event
+                        break
+                assert time.monotonic() < until and not failures, failures
+                if dispatch is None:time.sleep(.01)
+            if action != 'retain':
+                held = matching_process(engine['stamp'])
+                if held is not None:held.resume()
+            # Retain keeps this one-page actual OCR in flight through native stop.
+            # Its real bounded OCR timeout can fail the attempt during graceful
+            # shutdown; that is a supported saved-capture explicit retry path.
+            # No ready publication before restart is accepted as an interruption.
+            stopper.join(timeout=60)
+            assert not stopper.is_alive() and not failures, failures
+        finally:
+            # Finish the owned native stop before outer cleanup can issue a
+            # second disable if an observation assertion fails mid-stop.
+            if stopper.is_alive():stopper.join(timeout=60)
         stopped = matching_process(engine['stamp'])
         assert stopped is None, 'Old OCR process survived actual service stop'
         offline = {row['id']: row for row in probe.cli('hub', 'documents', 'files')}
@@ -139,10 +167,24 @@ def interrupted_ocr(probe):
         else:
             assert offline[item['id']]['published_snapshot']['capture_id'] != receipt['capture_id']
         item['path'].unlink(missing_ok=True)
+        pending=action=='retain' and offline_entry['latest_attempt']['status'] in {'pending','processing'}
+        resume_start=len(events(probe))
+        if pending:
+            pending_ids={row['latest_attempt']['attempt_id'] for row in offline.values()
+                if (row.get('latest_attempt') or {}).get('status') in {'pending','processing'}}
+            assert pending_ids=={receipt['attempt_id']}
+            probe.native_resume_aid=receipt['attempt_id']
+            probe.resume_attempt_path.write_text(receipt['attempt_id'])
         probe.start('hub')
-        probe.phase = 'archive-only'
+        if not pending:probe.phase='archive-only'
         if action == 'retain':
-            finished = wait(probe, 'hub', item['id'])
+            try:finished = wait(probe, 'hub', item['id'])
+            finally:
+                probe.native_resume_aid=None;probe.resume_attempt_path.write_text('');probe.phase='archive-only'
+            resume_events=events(probe)[resume_start:]
+            assert not [event for event in resume_events if event['kind']=='source-open'
+                or (event['kind'] in {'content-processing','child-start','network-call'} and not event['allowed'])],resume_events
+            probe.save('native-resume-observations-'+receipt['attempt_id'],{'events':resume_events,'fixture_denials':[]})
             resume_mode = 'pending_same_attempt'
             if finished['latest_attempt']['status'] == 'failed':
                 assert finished['retry_target']['capture_id'] == receipt['capture_id']
