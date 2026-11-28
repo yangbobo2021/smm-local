@@ -675,12 +675,12 @@ class FormatProbe(Probe):
                 self.save('web-' + phase + '-' + role, {'ids': [i['id'] for i in self.items if i['role'] == role],
                     'events': browser.events, 'errors': browser.errors})
 
-    def browser_uploads(self):
+    def browser_uploads(self, *, roles=('a', 'hub'), project_overrides=None, phase='uploads', label_namespace=''):
         from playwright.sync_api import expect
         self.phase = 'explicit-upload'
-        for role in ('a', 'hub'):
-            with self.browser(role, 'uploads') as browser:
-                for group, project in enumerate(self.projects[role][:2]):
+        for role in roles:
+            with self.browser(role, phase) as browser:
+                for group, project in enumerate((project_overrides or {}).get(role, self.projects[role][:2])):
                     expect(browser.page.locator('#' + browser.prefix + '-upload-files')).to_be_enabled(timeout=45000)
                     browser.project(project, library=True)
                     own = []
@@ -688,8 +688,9 @@ class FormatProbe(Probe):
                         prefix = 'LOCAL' if role == 'a' else 'HUB'
                         variant = 'DELTA' if group == 0 else 'GAMMA'
                         label = prefix + ('SCAN' + variant if kind == 'ocrpdf' else 'WEB' + variant + kind.upper())
+                        label += label_namespace
                         if kind == 'nativepdf':
-                            label = ('L' if role == 'a' else 'H') + 'W' + ('A' if group == 0 else 'B')
+                            label = ('L' if role == 'a' else 'H') + (label_namespace or 'W') + ('A' if group == 0 else 'B')
                         item = self.material(kind, label, ('alpha' if group == 0 else 'beta') if kind == 'ocrpdf' else None)
                         item.update(role=role, project=project, acquisition='chooser' if group == 0 else 'drop')
                         own.append(item)

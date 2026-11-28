@@ -3,10 +3,10 @@ import json,os,sys,time
 from pathlib import Path
 
 
-def install():
-    root=Path(os.environ['SMM_008_ACTIVE_GATE'])
-    raw={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ['SMM_008_ACTIVE_RAW'])}
-    sources={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ['SMM_008_ACTIVE_SOURCES'])}
+def install(gate_root=None,raw_paths=None,source_paths=None):
+    root=Path(gate_root if gate_root is not None else os.environ['SMM_008_ACTIVE_GATE'])
+    raw={os.path.normcase(os.path.abspath(p)) for p in (raw_paths if raw_paths is not None else json.loads(os.environ['SMM_008_ACTIVE_RAW']))}
+    sources={os.path.normcase(os.path.abspath(p)) for p in (source_paths if source_paths is not None else json.loads(os.environ['SMM_008_ACTIVE_SOURCES']))}
     def audit(event,args):
         if event!='open' or not isinstance(args[0],(str,bytes,os.PathLike)):return
         path=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))

@@ -132,7 +132,7 @@ def audit(event,args):
   emit('network',event=event,address=address);raise AssertionError('X receiver attempted outbound network')
 def profile(frame,event,arg):
  if event!='call':return
- module=frame.f_globals.get('__name__','');name=frame.f_code.co_name
+ module=frame.f_globals.get('__name__') or '';name=frame.f_code.co_name
  if ((module=='smm_hub._archive.documents' and name=='_scan') or
      (module=='smm_hub._archive.document_snapshots' and name=='process') or
      (module=='smm_hub._archive.document_processing' and name in {'process','_process'}) or

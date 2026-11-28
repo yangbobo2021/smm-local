@@ -1,0 +1,68 @@
+name: Document formats installed lifecycle acceptance
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths: [.github/workflows/document-formats-installed-lifecycle.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  UV_LINK_MODE: copy
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.acceptance-local/e-browsers
+jobs:
+  content:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-24.04, platform: linux}
+          - {os: macos-15, platform: darwin}
+          - {os: windows-2022, platform: win32}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: '0.13.8', python-version: '3.14'}
+      - name: Install frozen controller dependencies
+        run: |
+          mkdir -p .acceptance-local/e-logs
+          uv sync --frozen --extra test --extra documents --extra acceptance > .acceptance-local/e-logs/sync.stdout 2> .acceptance-local/e-logs/sync.stderr
+      - name: Check native observer channels before expensive business setup
+        run: uv run --frozen --no-sync python -m pytest -q --tb=short tests/test_document_formats_guard_channels.py > .acceptance-local/e-logs/observer.stdout 2> .acceptance-local/e-logs/observer.stderr
+      - name: Prepare actual creator OCR and independent materials
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/e-materials --output .acceptance-local/e-materials.json > .acceptance-local/e-logs/materials.stdout 2> .acceptance-local/e-logs/materials.stderr
+      - name: Build and independently install both products
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_installed_prepare.py --work .acceptance-local/e-work --materials .acceptance-local/e-materials.json > .acceptance-local/e-logs/products.stdout 2> .acceptance-local/e-logs/products.stderr
+      - name: Prepare real browser
+        run: uv run --frozen --no-sync playwright install --with-deps chromium > .acceptance-local/e-logs/browser.stdout 2> .acceptance-local/e-logs/browser.stderr
+      - name: Replay installed lifecycle as POSIX ordinary account
+        if: runner.os != 'Windows'
+        run: uv run --frozen --no-sync python -I -X utf8 scripts/acceptance/document_formats_installed_lifecycle.py --target-config .acceptance-local/e-work/target.json --output .acceptance-local/e-work/platform > .acceptance-local/e-logs/business.stdout 2> .acceptance-local/e-logs/business.stderr
+      - name: Replay installed lifecycle as separate Windows standard account
+        if: runner.os == 'Windows'
+        run: |
+          python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)')
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_installed_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_installed_lifecycle.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/e-work/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/e-work" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/e-logs/business.stdout 2> .acceptance-local/e-logs/business.stderr
+      - name: Preserve installed lifecycle originals
+        if: always()
+        run: |
+          mkdir -p .acceptance-local/e-work/outer-logs
+          cp .acceptance-local/e-logs/* .acceptance-local/e-work/outer-logs/
+          uv run --no-project --python 3.14 python scripts/acceptance/document_formats_cross_os_collect.py --work .acceptance-local/e-work --materials .acceptance-local/e-materials.json --output .acceptance-local/e-evidence --context .acceptance-local/e-context.json --job-key e-lifecycle-${{ matrix.platform }}
+      - name: Encrypt installed lifecycle originals
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/e-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/e-context.json --output .acceptance-local/e.smm-evidence --receipt .acceptance-local/e-generated.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 008-e-lifecycle-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/e.smm-evidence

@@ -15,11 +15,11 @@ import subprocess
 from document_formats_guard_primitives import AUDIT_PRIMITIVES, IDENTITY_SOURCE, actual_identity
 
 HOOK = r'''
-import ctypes,json,os,socket,sys,threading,time
+import ctypes,hashlib,json,os,socket,sys,threading,time
 from pathlib import Path
 def phase():return Path(C['phase']).read_text(encoding='utf-8').strip()
 def emit(kind,**value):
- with Path(C['log']).open('a',encoding='utf-8') as out:out.write(json.dumps({'kind':kind,'pid':os.getpid(),'phase':phase(),'time':time.time(),'monotonic_ns':time.monotonic_ns(),**value},ensure_ascii=False,default=str)+'\n')
+ with Path(C['log']).open('a',encoding='utf-8') as out:out.write(json.dumps({'kind':kind,'owner':C.get('owner'),'pid':os.getpid(),'phase':phase(),'time':time.time(),'monotonic_ns':time.monotonic_ns(),**value},ensure_ascii=False,default=str)+'\n')
 actor={'executable':sys.executable,'prefix':sys.prefix,'argv':sys.argv,'isolated':sys.flags.isolated,'utf8_mode':sys.flags.utf8_mode,'cwd':os.getcwd(),'path':os.environ.get('PATH')}
 actor.update(actual_identity())
 for field in ('sid','session_id','euid','egid'):
@@ -31,11 +31,21 @@ def protected_source(path):
  if path==protected or path.startswith(protected+os.sep):return True
  values=json.loads(Path(C['source_paths']).read_text(encoding='utf-8'))
  return path in values
-processing={'prepare','explicit-refresh','explicit-upload','lifecycle-refresh','lifecycle-update','resume-captured'}
-source_allowed={'explicit-refresh','lifecycle-refresh','guard-source-positive'}
+processing={'prepare','explicit-refresh','explicit-upload','lifecycle-refresh','lifecycle-update','resume-captured','conversation-import'}
+source_allowed={'explicit-refresh','lifecycle-refresh','guard-source-positive','conversation-import'}
 network_endpoints={tuple(endpoint) for endpoint in C['network_endpoints']}
 def audit(event,args):
- if event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
+ if event=='http.client.send':
+  data=args[1]
+  if not isinstance(data,(bytes,bytearray,memoryview)):raise AssertionError('unobserved HTTP client payload representation')
+  raw=bytes(data);digest=hashlib.sha256(raw).hexdigest();target=Path(C['wire'])/digest
+  if not target.exists():
+   temporary=target.with_name(digest+'.'+str(os.getpid())+'.'+str(threading.get_ident())+'.tmp')
+   with temporary.open('xb') as out:out.write(raw)
+   temporary.replace(target)
+  else:assert target.read_bytes()==raw
+  emit('http-send',sha256=digest,bytes=len(raw),host=args[0].host,port=args[0].port)
+ elif event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
   path=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))
   if protected_source(path):
    allowed=phase() in source_allowed;emit('source-open',path=path,allowed=allowed)
@@ -62,7 +72,7 @@ def audit(event,args):
   if not allowed:raise AssertionError('SMM008 read attempted child process')
 def profile(frame,event,arg):
  if event!='call':return
- module=frame.f_globals.get('__name__','');name=frame.f_code.co_name
+ module=frame.f_globals.get('__name__') or '';name=frame.f_code.co_name
  processing_call=(module in {'smm_local.document_processing','smm_hub._archive.document_processing'} and name in {'process','_process'}) or (module.startswith(('smm_local.document_formats.','smm_hub._archive.document_formats.')) and name in {'parse','intermediate','recognize'})
  if processing_call:
   allowed=phase() in processing;emit('content-processing',module=module,function=name,allowed=allowed)
@@ -75,6 +85,8 @@ def install(probe):
     probe.source_paths = probe.out / 'protected-source-paths.json'
     probe.source_paths.write_text('[]\n', encoding='utf-8')
     receipts = []
+    wire = probe.out / 'actual-outbound-http'
+    wire.mkdir()
     for owner in ('local', 'hub'):
         source_python = Path(probe.config[owner + '_python'])
         source_prefix = source_python.parent.parent
@@ -91,9 +103,10 @@ def install(probe):
         hook = site / '_smm_008_private_acceptance.py'
         startup = site / '_smm_008_private_acceptance.pth'
         assert not hook.exists() and not startup.exists(), 'task copy already has this acceptance hook'
-        config = {'phase': str(probe.out / 'phase.txt'), 'sources': str(probe.fixtures),
+        config = {'owner': owner, 'phase': str(probe.out / 'phase.txt'), 'sources': str(probe.fixtures),
                   'source_paths': str(probe.source_paths),
                   'log': str(probe.out / (owner + '-protocol-guard.jsonl')),
+                  'wire': str(wire),
                   'mcp_wrapper': str(Path(__file__).with_name('local_documents_mcp_worker.py').resolve()),
                   'local_db': str(probe.db['a']),
                   'mcp_argv': list(map(str,probe.argv('a','smm_local.mcp_server','--db',probe.db['a']))),
