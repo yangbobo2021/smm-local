@@ -1,6 +1,6 @@
 """Hub document CLI uses the same checked context and storage as the Web API."""
 
-from ._archive import Archive
+from ._archive import Archive, DocumentProcessingConfiguration, document_processing_arguments, write_original_output
 from .documents import HubDocuments
 
 
@@ -9,19 +9,26 @@ def add_arguments(actions, project_actions):
     create.add_argument("name")
     project_actions.add_parser("ensure-global", help="取得或创建Hub自有全局项目")
     parser = actions.add_parser(
-        "documents", help="管理Hub自有文档、检索及恢复；设备投影只读"
+        "documents", help="管理Hub自有文档、检索及恢复；设备投影只读",
+        description="支持 .md/.markdown/.txt 和 .docx/.xlsx/.pdf；新格式需创建端安装 documents 依赖组。PDF 优先直接提取文字/表格，需要时使用本端 OCR；用 processing-status --check / processing-configure 检查配置。设备投影只读；安装与使用步骤见本版本仓库的 TRIAL_GUIDE.md。"
     )
     sub = parser.add_subparsers(dest="document_action", required=True)
+    document_processing_arguments(sub)
+    retry=sub.add_parser('reprocess',help='只重处理Hub自有且仍获授权的保存原件；设备投影只读',description='参数取 documents files 同一项的 id 与 retry_target；值过期时重新查看该项。只处理保存原件，设备投影只读。')
+    for flag in ('document-id','capture-id','expected-attempt-id'):
+        retry.add_argument('--'+flag,required=True,help='取 documents files 同一项的 '+('id' if flag=='document-id' else 'retry_target.'+('expected_attempt_id' if flag=='expected-attempt-id' else 'capture_id')))
+    for flag in ('expected-version','expected-processing-version'):
+        retry.add_argument('--'+flag,type=int,required=True,help='取 documents files 同一项的 retry_target.'+flag.replace('-','_'))
     for action in ("add", "set"):
-        p = sub.add_parser(action, help="保存配置为pending；需明确refresh")
-        p.add_argument("path" if action == "add" else "source_id")
+        p = sub.add_parser(action, help="保存配置为pending；需明确refresh", description="保存来源配置，不自动采集。支持 .md/.markdown/.txt、.docx/.xlsx/.pdf；新格式需 documents 依赖组，明确 refresh 才处理。")
+        p.add_argument("path" if action == "add" else "source_id", help="Hub所在电脑的文件或目录绝对路径" if action=="add" else "取 documents sources 中Hub自有来源的 id")
         p.add_argument("--project-id", type=int, action="append", default=[])
         p.add_argument("--exclude", action="append", default=[])
         p.add_argument("--no-recursive", action="store_true")
     sub.add_parser("sources", help="列出Hub自有与设备来源及其创建端")
     for action in ("files", "refresh"):
-        p = sub.add_parser(action)
-        p.add_argument("--source-id")
+        p = sub.add_parser(action, description="取 documents sources 中的来源 id；不传时列出全部资料（设备投影只读）。" if action=="files" else "明确采集Hub自有来源，支持 .md/.markdown/.txt、.docx/.xlsx/.pdf。取 documents sources 中Hub自有来源的 id；不传时刷新全部Hub自有来源。新格式需 documents 依赖组，OCR配置见 processing-status --check / processing-configure；活跃同档案服务处理保存原件，无服务时由CLI前景处理。")
+        p.add_argument("--source-id",help="取 documents sources 中来源的 id；refresh只接受Hub自有来源")
     p = sub.add_parser("remove")
     p.add_argument("source_id")
     p = sub.add_parser("search")
@@ -33,6 +40,11 @@ def add_arguments(actions, project_actions):
     p.add_argument("--reference", required=True)
     p.add_argument("--start", type=int)
     p.add_argument("--end", type=int)
+    p.add_argument("--view", choices=["text", "table", "original-info"], default="text", help="提取文本、结构表格或准确采集原件信息")
+    p.add_argument("--table-id", help="取search/read中同一快照的table_id")
+    for flag in ("row-start", "row-end", "column-start", "column-end"):
+        p.add_argument("--" + flag, type=int, help="表格窗口：起点1起、终点不含")
+    p.add_argument("--original-output", help="准确采集原件写入本机新文件；拒绝覆盖，与文本范围/表格参数互斥")
     sub.add_parser("recovery-status", help="查看文档保护冲突、影响及不透明state")
     p = sub.add_parser(
         "recover", help="重建文档epoch，使全部旧引用失效；需明确重新采集/选择"
@@ -43,6 +55,14 @@ def add_arguments(actions, project_actions):
 def dispatch(state, args):
     documents = HubDocuments(Archive(state / "smm-hub.sqlite3"))
     action = args.document_action
+    if action in {'refresh','reprocess'}:
+        from .document_execution import ProcessingService
+        processor=ProcessingService(documents)
+        documents.documents.snapshots.process=processor.process
+    if action == 'processing-status':
+        return DocumentProcessingConfiguration(documents.documents.snapshots).status(check=args.check)
+    if action == 'processing-configure':
+        return DocumentProcessingConfiguration(documents.documents.snapshots).configure(expected_revision=args.expected_revision,ocr_executable=args.ocr_executable,ocr_data_dir=args.ocr_data_dir,languages=args.languages)
     if action == "sources":
         return documents.sources()
     if action == "files":
@@ -52,6 +72,8 @@ def dispatch(state, args):
     if action == "recover":
         return documents.recover(args.expected_state)
     context = documents.context()
+    if action == "reprocess":
+        return documents.reprocess({**context,**{key:getattr(args,key) for key in ("document_id","capture_id","expected_attempt_id","expected_version","expected_processing_version")}})
     if action in ("add", "set"):
         body = {
             **context,
@@ -77,15 +99,15 @@ def dispatch(state, args):
             }
         )
     if action == "read":
-        return documents.read(
-            {
-                **context,
-                "reference": args.reference,
-                **{
-                    k: getattr(args, k)
-                    for k in ("start", "end")
-                    if getattr(args, k) is not None
-                },
-            }
-        )
+        table_options={key:getattr(args,key) for key in ('table_id','row_start','row_end','column_start','column_end') if getattr(args,key) is not None}
+        body={**context,'reference':args.reference}
+        if args.original_output is not None:
+            if args.start is not None or args.end is not None or args.view=='table' or table_options:
+                raise ValueError('原件输出与文本范围或表格读取参数互斥')
+            metadata=documents.read({**body,'view':'original-info'})
+            raw=documents.original(body)
+            output=write_original_output(args.original_output,raw,metadata)
+            return {**metadata,'output_path':str(output)}
+        return documents.read({**body,'view':args.view,**table_options,
+            **{key:getattr(args,key) for key in ('start','end') if getattr(args,key) is not None}})
     raise ValueError("未知文档操作")

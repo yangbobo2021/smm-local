@@ -1,0 +1,108 @@
+{
+  "scope": "Scoped development TDD: strictly textless DOCX/XLSX declaring unsupported objects cannot be published as blank success; genuine blank and supported text controls remain usable",
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC9",
+  "case_id": "TC-008-unsupported-object-empty",
+  "base_commit": "8545b60d33eae53595f9dbd72f5a7c84f2e8a96a",
+  "specification": "B2 format support/exclusions and B7 line103 empty-success boundary; inherited current SC9",
+  "test_sha256": "0861e2f45429e11c62dcd884e674f7ab37d316b533b2cb5f22126c5244939e40",
+  "product_sha256": {
+    "src/smm_local/document_results.py": "d0b8386c27b991fc45c4386158e9c3d4bbdc0f188ada9fe42fcf6240f574d473"
+  },
+  "fix": "Pure result validator rejects textless Office results whose declared coverage contains excluded objects. Creator Builder uses the same validator; receive-only Hub still does not parse raw files. PDF behavior unchanged.",
+  "red": {
+    "request": "red-unsupported-object-empty-v1",
+    "result_sha256": "693a297d53e6a566382bc5e4084163e6e3d58d3165b502ad1cc7e6762b68076d",
+    "failed": 4,
+    "input_control_passed": 1,
+    "seconds": 31.4,
+    "actual_bad_object_classifications": 16,
+    "actual_contradictory_results_accepted": 4,
+    "review": "review-unsupported-object-empty-red-v1",
+    "review_status": "expected_failure",
+    "review_registered": true,
+    "reviewer_sha256": "a3907c7cd7eca6d06695c0234ccbb4de81f22901645b776dd82fe3f702862bd6"
+  },
+  "green": {
+    "request": "green-unsupported-object-empty-v1",
+    "result_sha256": "d813ac85b222b1b6b953a32ca0f59561401c68df05b3dacad8fb01ffb3f5786a",
+    "passed": 5,
+    "seconds": 32.59,
+    "regression_passed": 18,
+    "regression_seconds": 64.88,
+    "artifacts_sha256_verified": 210,
+    "artifact_bytes": 2505171,
+    "review": "review-unsupported-object-empty-green-v1",
+    "review_status": "passed",
+    "review_registered": true,
+    "reviewer_sha256": "fe26965f6304558196c8b42ad69488daf4012aec865ae3cc09b386c39f7813ae"
+  },
+  "inputs": {
+    "manifest": "tests/fixtures/document-format-objects/manifest.json",
+    "manifest_sha256": "5c177f00c75a53fa3fb495aae9bbae9cd97ade42809e448e8c2469bba355287d",
+    "generator": "scripts/acceptance/008_generate_object_fixtures.py",
+    "unique_office_originals": 16,
+    "total_original_bytes": 408926,
+    "creator_document_copies": 32,
+    "creators": [
+      "Local CLI",
+      "independent standalone Hub CLI"
+    ],
+    "projects": [
+      "ordinary",
+      "global"
+    ],
+    "object_only": [
+      "DOCX body picture",
+      "DOCX header picture",
+      "DOCX footer picture",
+      "XLSX picture"
+    ],
+    "controls": [
+      "genuinely blank DOCX/XLSX",
+      "supported text plus picture DOCX/XLSX"
+    ],
+    "SDK_versions": {
+      "python-docx": "1.2.0",
+      "openpyxl": "3.1.5",
+      "Pillow": "13.0.0",
+      "lxml": "6.1.3"
+    },
+    "independent_material_checks": [
+      "SDK readonly reopen of all16 files",
+      "186 internal OPC relationship targets",
+      "12 actual nonblank embedded PNGs",
+      "Complete expected text and drawing-part sets"
+    ],
+    "runtime_dependency_note": "Office generator SDKs python-docx/openpyxl stay in a separate material environment. Product and CI tests consume frozen bytes; no runtime/test dependencies added."
+  },
+  "actual_assertions": [
+    "Each owner has16 exact unique document IDs and source paths; readonly source-project associations match chosen roots",
+    "Each capture/attempt/current-capture ID binds the corresponding document and independent source SHA/length; actual saved raw bytes match",
+    "All16 object-only logical documents fail with no publication, V/P0 and a legal captured retry target",
+    "Eight genuine blanks retain empty-success with zero text hits and original references",
+    "Eight supported-text-plus-picture controls retain ready, exact independent text and explicit drawing exclusions",
+    "All16 positive originals actually exported with matching original-info SHA/length and frozen bytes",
+    "All source bytes/mtime remain unchanged",
+    "Four pure validation contradictions rejected while each original blank result remains accepted; no HTTP rejection claim"
+  ],
+  "checkout_control": {
+    "attributes": ".gitattributes",
+    "scope": "Exact generator LF and only this fixture group as binary",
+    "core_autocrlf_true_readback_files": 17,
+    "all_raw_sha256_exact": true,
+    "generator_crlf": 0,
+    "receipt_sha256": "5f9a64e4a9cd70aa84ee2cee137990ce6ab2436c87814ea93f2fb56befbd3885",
+    "limitation": "Controlled Git filter proof on current host, not Windows runtime acceptance"
+  },
+  "review_correction": "Package eagerly parses all XML before Word exclusion scanning. Header/footer drawing was already found; the confirmed defect is classification and result consistency, not the earlier tentative scan-order concern.",
+  "test_repairs": 0,
+  "limitations": [
+    "Current host source CLI/component proof only; all OS CI after this commit remains required",
+    "Only picture-only strictly textless Office variants and these controls; no all-object, whitespace-only text, full B2/B7 format/safety/lifecycle matrix claim",
+    "Unrecognized scanned PDF versus genuine blank still requires its own actual OCR/blank handling proof",
+    "Pure validator rejection is not an HTTP receive rejection test",
+    "No actual system service, installed minimum-version, E/H/X or full R008 pass; maintainer-retained gaps unchanged"
+  ],
+  "redaction": "Synthetic independently generated originals only. Raw task evidence private; no user documents or credentials published."
+}

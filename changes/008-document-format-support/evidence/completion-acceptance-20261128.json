@@ -1,0 +1,98 @@
+{
+  "schema": "smm-008-completion-checkpoint-v1",
+  "date": "2026-11-28",
+  "product_base": "d6023f8b032a2ee59fbca5c22d09765a22652bb4",
+  "product_source_change": false,
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "formal_independently_reviewed": {
+    "source_cancel": {
+      "execute": "execute-completion-sc8-active-v1",
+      "result_sha256": "eb66623911500d4aa9f6219d8f4222dba572f7d047ff57b474f32c662f05b2b8",
+      "registered_review": "review-completion-active-execution-v1",
+      "review_result_sha256": "1d6b8b4e9009ac7dbfa06cbf0c8c4b138ff34b7efc4b2aa5343be6c0cf37e958",
+      "passed_pytest_instances": 3,
+      "seconds": 38.45,
+      "scope": "Mac ordinary foreground only; individual declared checks; not entire scene/R008/E/H/X"
+    },
+    "managed_restart": {
+      "execute": "execute-completion-sc7-restart-v1",
+      "result_sha256": "c9731a48e6d84f54a29850bf4c26fd5b4058e55415f39b7538e8de0f0fd64f96",
+      "registered_review": "review-completion-sc7-restart-execution-v1",
+      "review_result_sha256": "d0b3729d3b22ff2ef3674cc1757e0c5ce550e951debfbd8c4e4c043a8b8ec55e",
+      "passed_pytest_instances": 4,
+      "seconds": 44.71,
+      "scope": "Mac ordinary foreground only; individual declared checks; not entire scene/R008/E/H/X"
+    },
+    "numeric_and_pdf": {
+      "execute": "execute-completion-sc10-boundaries-v1",
+      "result_sha256": "05da6aabdc1194ff4505ac078a8332fe90a98d325627183f9507596f86295802",
+      "registered_review": "review-completion-sc10-boundaries-execution-v1",
+      "review_result_sha256": "c40d9cc7b60a343246a735bfa10de657a594bac60a904d153eff1994761bd586",
+      "passed_pytest_instances": 23,
+      "seconds": null,
+      "scope": "Mac ordinary foreground only; individual declared checks; not entire scene/R008/E/H/X"
+    }
+  },
+  "test_files_sha256": {
+    "tests/document_formats_lifecycle_hook.py": "1b7ba939281c26b33215f951082281fb0f04f9f15e1c76f9eb239e96466df8d8",
+    "tests/test_document_formats_active_source.py": "9f12d6e6bdef98ce5309bd55a4162c393bae5595ae1ee8cf8f9b6132f631903b",
+    "tests/test_document_formats_upload_restart_c1.py": "8c83cd30be8cd234f6678b76a9152726f318091b40993763e578ddaff61248b7",
+    "tests/test_document_formats_numeric_limits.py": "c6d8ef7ef5be588166fb95d58c4be1366b1deec3964b511cb5a9fa87bf0a2483",
+    "tests/document_formats_pdf_safety_cases.py": "117ff3f50ad24262f73014d6ff5e525928cd14177eded42cc192d817c0397293",
+    "tests/test_document_formats_pdf_safety_complete.py": "f337a5bf30d47ed2c354fa870c6919cb4d692fc2889f50c5c20198a12da30425"
+  },
+  "reports": {
+    "active-execution-independent-review.md": {
+      "public_file": "completion-active-execution-independent-review.md",
+      "original_sha256": "89883e583a645279b39077008d841db135f48d68f12cb2d945def7c17f0c6bf3",
+      "public_sha256": "54c2b30dfa143c3b65ebaf8a7ae2ae12d1451346e644a807add94207a70687ca"
+    },
+    "restart-candidate-independent-review-v4.md": {
+      "public_file": "completion-restart-candidate-independent-review-v4.md",
+      "original_sha256": "6a73bf1a2c2cddb6d708f74a294d6650dfaa0ee337b7ce7def062b1fdfca972b",
+      "public_sha256": "bd59f144e9b18c3f96c35b3d7a5bce9d79f17b44eb6ddb48eda777c066533277"
+    },
+    "restart-execution-independent-review.md": {
+      "public_file": "completion-restart-execution-independent-review.md",
+      "original_sha256": "24567acda8594ad728873b7eb03660afd60a3bab1f6a7997b9c8ed83105ca973",
+      "public_sha256": "59dec11b90fea45cb02b519ea0d43ad175c035ed0418c213df0db3e29785d1c2"
+    },
+    "pdf-limits-candidate-review-v3.md": {
+      "public_file": "completion-pdf-limits-candidate-review-v3.md",
+      "original_sha256": "ebc8ca756573acbabb9416ae68362eacda064bae0cbc3510579caaec0a513535",
+      "public_sha256": "6e0974cfb3dd7ece8c24abd64a3a4e2ac371a2e9f2ed2c547d0422d94f7d6ef5"
+    },
+    "pdf-limits-execution-review.md": {
+      "public_file": "completion-pdf-limits-execution-review.md",
+      "original_sha256": "a26743e73235c7cd86959488e302d45ebf8f187d15d4fc25364cdd87be6a15ab",
+      "public_sha256": "d5d940fd48c5a1a33fcc63018e3beb3ac75d57aeb432366a21d52ea94ef8ce83"
+    }
+  },
+  "retained_history": {
+    "restart_v2_v3": "needs_revision, missing frozen identities and original pending config; original reports/records retained",
+    "pdf_v2": "needs_revision, missing source reader precheck for 14 predictor inputs; original records retained",
+    "pdf_preparation": "wrong search anchor and incorrect demand for rasterizer on native text were test faults; source/guard logs preserved"
+  },
+  "minimum_python_preparation": {
+    "Mac": "Portable candidate v3 seven pass19.55sec (five original instances plus two CI diagnostic controls); candidate independent passed+registered. Formal execution pending.",
+    "Windows_Linux": "not yet run for new candidate; CI will require actual independent standard Windows user and nonzero POSIX UID",
+    "scope": "minimum install only; not full E/H/X",
+    "public_key_sha256": "3af8f1312a8487acb2d6e4c398a4de4c762461f8a1f923ea64088fbe0eca8d26",
+    "private_key": "persisted on controller before CI; not committed",
+    "candidate_review": "review-completion-sc11-minimum-candidate-v3",
+    "candidate_report_sha256": "7dae53fbdc232a08cdad819db2d862031a88796ef3e90098eda17e5f7969997c",
+    "early_prepare_failure": "collector now retains original OCR preparation logs even before materials/target manifests; two actual subprocess controls independently reviewed"
+  },
+  "remaining": [
+    "Remaining complete PDF hostile/layout/resource/GC obligations",
+    "Three OS installed ordinary E, actual managed H and six-direction X",
+    "Three OS minimum3.11 actual originals and fresh independent reviews",
+    "Final requirement-level judge, final clean-context PR review and complete CI original recovery"
+  ],
+  "not_authorized": [
+    "merge",
+    "release",
+    "daily instance upgrade"
+  ],
+  "redaction": "No credentials, private key, real user documents, raw databases or browser traces are committed. Full synthetic originals and exact native receipts remain privately available for reviewers."
+}

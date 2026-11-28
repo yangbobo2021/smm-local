@@ -1,0 +1,455 @@
+{
+  "scope": "Follow-up to3c2c42c clean-context fullPR findings; complete R008 still not passed.",
+  "original_full_review": {
+    "head": "3c2c42ccb473b438eb8436f2d277b8635b0f5530",
+    "original_sha256": "d7f424deaea55913698e7b40ca422b56e8b23b22ea497e5ce8d16702fe20de91",
+    "public_file": "six-fixes-pr-review-3c2c42c.md"
+  },
+  "final_product_manifest": "six-fixes-development.json.final_product_sha256",
+  "product_differences_vs3c2c42c": [
+    "src/smm_hub/document_cli.py",
+    "src/smm_local/static/index.html"
+  ],
+  "hub_cli_normalized_ast": {
+    "before_after_excluding_help_description_equal": true,
+    "normalized_ast_sha256": "25fe275fa8088342d380e1366142a089b6d2e532cee3ec16919198d6a8081d10",
+    "old_source_sha256": "48b709a9759672496747f6e5d5aea94feb791c9f2d6cf342c072695d7eff3c64",
+    "new_source_sha256": "68690bc0e48759739966429a2eaaa760513a8db153dc9acdc410da2bf42927a3"
+  },
+  "ui_document_id": {
+    "red": "red-sixfix-path-web-document-id-v2",
+    "red_independent": "review-sixfix-path-web-document-id-red2",
+    "green": "green-sixfix-path-web-document-id-v3",
+    "green_result_sha256": "613a7b70aa6ec4d412aceab63910aca83197e046d4513765a1a6d4d8e6df2b45",
+    "main_summary": "1 passed, 1 warning in 12.02s",
+    "regression_summary": "3 passed, 1 warning in 12.09s",
+    "review": "review-sixfix-path-web-document-id-green3",
+    "review_result_sha256": "9a631bbe11180130318c61af86ac047e34a3fdfb9cfe60db00be60f4ab44cc7b",
+    "visible_document_ids": [
+      {
+        "document_id": "fa75559954cd471e9753635b9f6810a5",
+        "visible_document_id": "fa75559954cd471e9753635b9f6810a5",
+        "screenshot": "pathdetail0ready0.png",
+        "screenshot_sha256": "0e125321648b1b4bd4ebde0de8e560899e001e86273a9c2ad4f2495530111f97",
+        "observation_sha256": "d449e3ff96a7eee5c6196af01a6bd07aaa26c2d36a7982f29a254b41d35cae5f"
+      },
+      {
+        "document_id": "5dc2e8b13bed4092a13b1eccf71be11f",
+        "visible_document_id": "5dc2e8b13bed4092a13b1eccf71be11f",
+        "screenshot": "pathdetail0ready1.png",
+        "screenshot_sha256": "a9aac10b5bf936bc5897ec4561745dd19df5d976b9f0623d197ff69059a74fd1",
+        "observation_sha256": "bf6c573b5c9eb748222e12e2964e164fae9177d3641fb0d878ab28a6d5e2f3f5"
+      },
+      {
+        "document_id": "75b7bed6fad04ee1bfc8807777b8b0f5",
+        "visible_document_id": "75b7bed6fad04ee1bfc8807777b8b0f5",
+        "screenshot": "pathdetail0partial0.png",
+        "screenshot_sha256": "61e6c0d5be29993f9a0aaffd027e87fc9441316ebb7c01d812ac907a586ccb9b",
+        "observation_sha256": "aa4a634821e9d842a27f271d8e22e93c66e95417d44e6999fc120527d800a355"
+      },
+      {
+        "document_id": "9f9a5042d58640fdb4ea56d593e32a0e",
+        "visible_document_id": "9f9a5042d58640fdb4ea56d593e32a0e",
+        "screenshot": "pathdetail0partial1.png",
+        "screenshot_sha256": "efdf9c767c947893b4a2b6f7b8e71dcd88283153d983acaad6f07b23ef5795b4",
+        "observation_sha256": "aaf130d15b7595771d950073d77ded3bb9759bd672d753668834f4e1aa39f4bd"
+      },
+      {
+        "document_id": "6b65e292d65a4d4ba0c32cba18a3f336",
+        "visible_document_id": "6b65e292d65a4d4ba0c32cba18a3f336",
+        "screenshot": "pathdetail0failed0.png",
+        "screenshot_sha256": "ab830255473f2d98c8d19377523c2ecca71de577e3136798b27b4e1e036a7cf5",
+        "observation_sha256": "549213e06c4d3dc5a4d359927d2751717e9f1aa8032019e47f7da5e3bcf4dc2f"
+      },
+      {
+        "document_id": "625da8a7c2e0464797d36700670efb9e",
+        "visible_document_id": "625da8a7c2e0464797d36700670efb9e",
+        "screenshot": "pathdetail0failed1.png",
+        "screenshot_sha256": "9d9b97df0baeab301849489f7485ef7b25ea168f0efd3ec3abdd30e5d112803a",
+        "observation_sha256": "886d9a3594abee4f0c09303b49f13bf5dea0a7040e981f0477796e45702b9713"
+      },
+      {
+        "document_id": "c9cdeb2c6fbd4d449f1f51d91a5a7154",
+        "visible_document_id": "c9cdeb2c6fbd4d449f1f51d91a5a7154",
+        "screenshot": "pathdetail1ready0.png",
+        "screenshot_sha256": "cf8b4968e570f806daff37f487dd045afd2aee8e298729acfbba5be8679a8429",
+        "observation_sha256": "a4589ba5ee56a8fb04ed75d2ac8bbc255f3ef3b1cafbf3b5a8c6fe7a8a2e89d0"
+      },
+      {
+        "document_id": "e848115d3151464493d053d40b597233",
+        "visible_document_id": "e848115d3151464493d053d40b597233",
+        "screenshot": "pathdetail1ready1.png",
+        "screenshot_sha256": "b9334709d30a583a0a5cb7733f6dd9ea52f97aebb28cd31c863719705c1fa541",
+        "observation_sha256": "440e9ea7a1bf2827e104c0570609877e85b14cc54e5c79902601af4a6ad55bdf"
+      },
+      {
+        "document_id": "5e1c4ec3ef3448d3904876c17f3d1381",
+        "visible_document_id": "5e1c4ec3ef3448d3904876c17f3d1381",
+        "screenshot": "pathdetail1partial0.png",
+        "screenshot_sha256": "5da01674e2842c45fd01dc3b1c1c78f748140512477a54c941f253859f9135ca",
+        "observation_sha256": "0c3dce4978da917cd0f3ecc7abeb9faab1d48bd2b0c25e882e4573796719dfcb"
+      },
+      {
+        "document_id": "29e8a0403c954a279c75da06102a14aa",
+        "visible_document_id": "29e8a0403c954a279c75da06102a14aa",
+        "screenshot": "pathdetail1partial1.png",
+        "screenshot_sha256": "3b0d3e0275f71a0ed01dfb498a707766d0df260a0b6bf6be5bcde40a9f64a496",
+        "observation_sha256": "fd75739cad4964ff707c5375742354c7fe4036aee51db606a0e64d513d805d36"
+      },
+      {
+        "document_id": "9ebfe18fc5f344d3b4348d8f8e16825a",
+        "visible_document_id": "9ebfe18fc5f344d3b4348d8f8e16825a",
+        "screenshot": "pathdetail1failed0.png",
+        "screenshot_sha256": "c83eb7e6156df284911409072ea039d3b46380774db2a0410c3081825b610add",
+        "observation_sha256": "afd4e8c06913fdf988e29add10b06c90e27026eb2e35bff0dbd12d4fe771ac6a"
+      },
+      {
+        "document_id": "4271e61058ce4b8d9d031c0ae1cef8fb",
+        "visible_document_id": "4271e61058ce4b8d9d031c0ae1cef8fb",
+        "screenshot": "pathdetail1failed1.png",
+        "screenshot_sha256": "d1984d926c6e24055b572448ce6954830df81820175f8bb65e7cddda8d5d02d3",
+        "observation_sha256": "8198af9dfb1d9bc8d4ee55d025e7102eabefb5ea1be4d281c46b97cb576d9ab9"
+      }
+    ],
+    "scope": "RealMacBrowser12rows independently DB-boundID + full threeJSON/partialcoverage; no new Web retry action or API schema/CLI flags."
+  },
+  "vm_readonly_help": [
+    {
+      "name": "windows-help-final-v3",
+      "scope": "Read-only source CLI help only; UTF8 original bytes and no state creation; not parse/OCR/service/minimumPython/EHX acceptance",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "python": "3.14.10 (main, Nov 11 2026, 00:19:45) [MSC v.1944 64 bit (AMD64)]",
+      "uid": null,
+      "commands": [
+        {
+          "argv": [
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\checkout\\.venv\\Scripts\\python.exe",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\sixfix-help-20261128-e3\\state 中文",
+            "documents",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "9b2a69a1720eda511cf58b3dd01b515fc4884248b2f12ddaf454d45c782393bb",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "documents",
+            "processing-status",
+            "processing-configure"
+          ]
+        },
+        {
+          "argv": [
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\checkout\\.venv\\Scripts\\python.exe",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\sixfix-help-20261128-e3\\state 中文",
+            "documents",
+            "add",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "b221c5362ad90e6370602ae9905a78ab26c2cb5ea2ed106c1d4fdb1eea7de44e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "绝对路径",
+            "refresh"
+          ]
+        },
+        {
+          "argv": [
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\checkout\\.venv\\Scripts\\python.exe",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\sixfix-help-20261128-e3\\state 中文",
+            "documents",
+            "refresh",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "14d85b34535ce0b5ebd3e9ccd2ab008447e1b86b71f35b6f140db127f9defb14",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "documents sources",
+            "Hub自有来源",
+            "同档案服务"
+          ]
+        },
+        {
+          "argv": [
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\checkout\\.venv\\Scripts\\python.exe",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "C:\\Users\\boboy\\smm-008-20261126-a2f6c\\sixfix-help-20261128-e3\\state 中文",
+            "documents",
+            "reprocess",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "62348f947709181560a3157bb276eab643ac1b22859e801b8568617c0af9e11a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            "documents files",
+            "retry_target.capture_id",
+            "retry_target.expected_attempt_id",
+            "retry_target.expected_version",
+            "retry_target.expected_processing_version"
+          ]
+        }
+      ],
+      "state_created": false,
+      "all_final64_source_sha256_matched": true,
+      "zip_sha256": "6af65d36ef24df24a9f7b434cdc0e04b69564a906783c39d65110957830da839",
+      "zip_bytes": 7829,
+      "independent_report_original_sha256": "0243d5bdd543ad3bf2faf579d827dd09e62085c34cd49e4a17563ff1d223519e",
+      "public_review": "six-fixes-windows-help-final-v3-review.json"
+    },
+    {
+      "name": "ubuntu-help-final-v3",
+      "scope": "Read-only source CLI help only; UTF8 original bytes and no state creation; not parse/OCR/service/minimumPython/EHX acceptance",
+      "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+      "python": "3.14.10 (main, Nov 11 2026, 00:18:44) [Clang 23.1.3 ]",
+      "uid": 1000,
+      "commands": [
+        {
+          "argv": [
+            "<LINUX_HOME>/smm-008-20261126-a2f6c/checkout/.venv/bin/python",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "<LINUX_HOME>/smm-sixfix-help-20261128-e3/state 中文",
+            "documents",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "564a307c12d4ad2916867bcb4fed1ebf2bada927caa0d04b203738406b17450e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "documents",
+            "processing-status",
+            "processing-configure"
+          ]
+        },
+        {
+          "argv": [
+            "<LINUX_HOME>/smm-008-20261126-a2f6c/checkout/.venv/bin/python",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "<LINUX_HOME>/smm-sixfix-help-20261128-e3/state 中文",
+            "documents",
+            "add",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "13cd9416c36e51e00fb42c859c9173c1065dfd0c08a74eac3c80e3d02d24a8fe",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "绝对路径",
+            "refresh"
+          ]
+        },
+        {
+          "argv": [
+            "<LINUX_HOME>/smm-008-20261126-a2f6c/checkout/.venv/bin/python",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "<LINUX_HOME>/smm-sixfix-help-20261128-e3/state 中文",
+            "documents",
+            "refresh",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "f7cb0f88679585f2d6ab83b145cdc5e3a53529152a49dacc7d6c1a0bc4630d9c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            ".docx",
+            ".xlsx",
+            ".pdf",
+            "documents sources",
+            "Hub自有来源",
+            "同档案服务"
+          ]
+        },
+        {
+          "argv": [
+            "<LINUX_HOME>/smm-008-20261126-a2f6c/checkout/.venv/bin/python",
+            "-B",
+            "-m",
+            "smm_hub.cli",
+            "hub",
+            "--state-dir",
+            "<LINUX_HOME>/smm-sixfix-help-20261128-e3/state 中文",
+            "documents",
+            "reprocess",
+            "--help"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "87c445569010e9681fcd8d794814e2a0aec8dd0ed8e92eae66dcb7a3f4c0e42f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": [
+            "documents files",
+            "retry_target.capture_id",
+            "retry_target.expected_attempt_id",
+            "retry_target.expected_version",
+            "retry_target.expected_processing_version"
+          ]
+        }
+      ],
+      "state_created": false,
+      "all_final64_source_sha256_matched": true,
+      "zip_sha256": "f2fc54de1492b636a937551f3c4d189277d2c34133169ef1a661ce36fc5375f6",
+      "zip_bytes": 7917,
+      "independent_report_original_sha256": "bcbdac87a23c9a0c6dc0c8cdecd410f61ac263c7c7362f8973bfb7ee3ddc9b3e",
+      "public_review": "six-fixes-ubuntu-help-final-v3-review.json"
+    }
+  ],
+  "installed_mac_help": {
+    "scope": "Installed isolated Mac Hub four read-only help outputs; no state created",
+    "commands": [
+      {
+        "argv": [
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/hub-env/bin/python",
+          "-I",
+          "-X",
+          "utf8",
+          "-m",
+          "smm_hub.cli",
+          "hub",
+          "--state-dir",
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/help-only-state",
+          "documents",
+          "--help"
+        ],
+        "exit_code": 0,
+        "expected": [
+          ".docx",
+          ".xlsx",
+          ".pdf",
+          "documents",
+          "processing-status"
+        ],
+        "stdout_sha256": "564a307c12d4ad2916867bcb4fed1ebf2bada927caa0d04b203738406b17450e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/hub-env/bin/python",
+          "-I",
+          "-X",
+          "utf8",
+          "-m",
+          "smm_hub.cli",
+          "hub",
+          "--state-dir",
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/help-only-state",
+          "documents",
+          "add",
+          "--help"
+        ],
+        "exit_code": 0,
+        "expected": [
+          ".docx",
+          ".xlsx",
+          ".pdf",
+          "绝对路径"
+        ],
+        "stdout_sha256": "13cd9416c36e51e00fb42c859c9173c1065dfd0c08a74eac3c80e3d02d24a8fe",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/hub-env/bin/python",
+          "-I",
+          "-X",
+          "utf8",
+          "-m",
+          "smm_hub.cli",
+          "hub",
+          "--state-dir",
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/help-only-state",
+          "documents",
+          "refresh",
+          "--help"
+        ],
+        "exit_code": 0,
+        "expected": [
+          ".docx",
+          ".xlsx",
+          ".pdf",
+          "documents sources",
+          "Hub自有来源",
+          "同档案服务"
+        ],
+        "stdout_sha256": "f7cb0f88679585f2d6ab83b145cdc5e3a53529152a49dacc7d6c1a0bc4630d9c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/hub-env/bin/python",
+          "-I",
+          "-X",
+          "utf8",
+          "-m",
+          "smm_hub.cli",
+          "hub",
+          "--state-dir",
+          "<WORKTREE>/.acceptance-local/008/six-fixes-20261127/packages-final-v3/help-only-state",
+          "documents",
+          "reprocess",
+          "--help"
+        ],
+        "exit_code": 0,
+        "expected": [
+          "documents files",
+          "retry_target.capture_id",
+          "retry_target.expected_attempt_id",
+          "retry_target.expected_version",
+          "retry_target.expected_processing_version"
+        ],
+        "stdout_sha256": "87c445569010e9681fcd8d794814e2a0aec8dd0ed8e92eae66dcb7a3f4c0e42f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "state_created": false
+  },
+  "final_package_evidence": "six-fixes-development.json.supplementals[packages-final-v3]",
+  "ci_current_evidence_url": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7224981436",
+  "ci_recording_policy": "Per-head official ZIP/digest/CRC/JUnit results are updated on this stable PR evidence comment; source/test artifacts remain immutable locally. Repository evidence is a versioned snapshot, not an automatic CI passed flag.",
+  "remaining": "EntireR008 minimumPython/E/H/X/resources/lifecycle/retained restart/oldWinargv and whole delivery/cleanup remain open; no merge/release/dailyupgrade."
+}

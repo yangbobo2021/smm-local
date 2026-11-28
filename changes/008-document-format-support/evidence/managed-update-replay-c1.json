@@ -1,0 +1,49 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC7",
+  "case_id": "TC-008-managed-update-replay",
+  "status": "scoped_formal_c1_execution_independently_passed",
+  "run": "execute-managed-update-replay-c1-v1",
+  "result_sha256": "89f81c24fa653ce721bc53f9486ab78932abd123b96485a1a5baf8986310df2a",
+  "main": {
+    "summary": "2 passed in 8.59s",
+    "exit_code": 0
+  },
+  "review": {
+    "request_id": "review-managed-update-replay-c1-execution-v1",
+    "status": "passed",
+    "covers": [
+      "managed-update-replay"
+    ],
+    "result_sha256": "2a835976a7137cb02bd3fba4f76b855de20ec9a5719433f9faef6466a5f387ff",
+    "opinion_sha256": "10bcae0b6b1455c9f747987da327e0f2661d4993c42bce0595d738e1700c66b1"
+  },
+  "evidence": {
+    "artifacts": 916,
+    "all_sha256_verified": true,
+    "stored_bytes": 3869736,
+    "input_originals": 24,
+    "download_originals": 24,
+    "http_200": 712,
+    "http_4xx": 80,
+    "current_replays": 16,
+    "old_request_groups": 16,
+    "source_downloads": 104
+  },
+  "dataset": {
+    "projects_each_creator": 2,
+    "targets_each_project": 2,
+    "versions_each_target": 3,
+    "original_source_truth_control": 24,
+    "unassociated_project_empty_controls": 104,
+    "previous_v1_reference_rejected": true
+  },
+  "scope": "Current macOS real creator HTTP processes, pending/ready exact-current upload replay and superseded/removed rejection. Source helper unchanged; active case declaration migrated to expanded C1 file. Preserves original TDD failure/fix record. Not actual network fault injection, this-case restart, full SC7 or E/H/X.",
+  "retained_gaps": [
+    "Managed-upload-restart same-project expansion awaits an extra test round decision.",
+    "SC1 initial Web-upload pending-old-row and visible-ID-set gaps remain retained.",
+    "SC9 deep Web read one-line Response.status correction awaits decision.",
+    "Windows shared observer and remaining platform/whole-feature acceptance remain open."
+  ],
+  "redaction": "Synthetic inputs only. No tokens, signed read references, private runtime absolute paths or raw database rows."
+}

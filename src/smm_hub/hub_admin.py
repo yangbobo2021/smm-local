@@ -197,6 +197,7 @@ class Hub:
     def enable(self):
         cfg = self.config()
         self.service.preflight()
+        self.service.claim_state_owner()
         # Older Windows hubs may store the interpreter of a staged smm-local upgrade.
         if cfg.get("runtime_package") != "smm-hub":
             for key in ("python", "base_python", "version"):
@@ -417,10 +418,14 @@ class Hub:
         cfg = self.config()
         token = self.token.read_text(encoding="ascii").strip()
         archive = Archive(self.database)
+        import threading
+        archive._document_shutdown_event = threading.Event()
         sync = VibeInsightSettings(self.root, archive)
-        return uvicorn.Server(uvicorn.Config(create_hub(archive, token, lifespan=sync.lifespan),
+        server = uvicorn.Server(uvicorn.Config(create_hub(archive, token, lifespan=sync.lifespan),
             host=cfg["bind"], port=cfg["port"], ssl_certfile=str(self.certificate),
             ssl_keyfile=str(self.key)))
+        server.smm_stop_documents = archive._document_shutdown_event.set
+        return server
 
     def run(self):
         with (self.root / "hub.log").open("a", encoding="utf-8", buffering=1) as log:
@@ -438,10 +443,12 @@ def dispatch(args: argparse.Namespace):
     if action in ("status", "run"):
         return getattr(hub, action)()
     hub.root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    if action == 'documents':
+        # Document commands use their own short guards, SQLite CAS and content
+        # slot. An OS administration lock must not span a content worker.
+        from .document_cli import dispatch as dispatch_documents
+        return dispatch_documents(hub.root,args)
     with _service_lock(hub.root / "admin.lock"):
-        if action == 'documents':
-            from .document_cli import dispatch as dispatch_documents
-            return dispatch_documents(hub.root,args)
         if action in ("setup", "upgrade", "project", "vibeinsight"):
             return getattr(hub, action)(args)
         return getattr(hub, action)()

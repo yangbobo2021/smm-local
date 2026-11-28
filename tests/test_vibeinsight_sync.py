@@ -1,11 +1,51 @@
 """Synthetic source fixtures for Hub synchronization through its normal archive."""
 import json
 import os
+import sqlite3
 from pathlib import Path
 
 import pytest
 
 from smm_local.core import Archive
+
+
+def stop_enrolled_test_hub(process, *, timeout=20):
+    """Hard-stop the fixture, then confirm its actual Python tree has exited."""
+    import time
+    import subprocess
+    import psutil
+    from document_formats_platform import process_tree, spawn_identity, terminate_verified
+    from document_formats_exit_observer import waiting_for_owned_exit
+
+    records = {(r['pid'], r['created']): r for r in getattr(process, '_smm_test_members', [])}
+    if process.poll() is None:
+        for record in process_tree(spawn_identity(psutil.Process(process.pid))):
+            records[(record['pid'], record['created'])] = record
+    started = time.monotonic()
+    if process.poll() is None:
+        process.terminate()
+    try:
+        process.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=10)
+    # On Windows the venv redirector can exit before the real interpreter.
+    # Its own Popen handle proves the launcher ended; other enrolled PIDs
+    # require an independent creation-identity-preserving exit observation.
+    children = [r for r in records.values() if r['pid'] != process.pid]
+    until = started + timeout
+    while True:
+        pending = [r for r in children if waiting_for_owned_exit(r)]
+        if not pending or time.monotonic() >= until:
+            break
+        time.sleep(.01)
+    if pending:
+        terminate_verified(pending)
+        raise AssertionError('test Hub descendants did not exit before database reopen')
+    return {'launcher_pid': process.pid, 'launcher_exit': process.returncode,
+            'enrolled': list(records.values()), 'remaining': pending,
+            'seconds_until_complete_exit': time.monotonic() - started}
+
 
 @pytest.fixture
 def record_evidence(request, tmp_path):
@@ -252,19 +292,25 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         service = subprocess.Popen(launcher + ["serve", str(state), str(port)])
         try:
             eventually(lambda: hub_call("info"))
+            import psutil
+            from document_formats_platform import process_tree, spawn_identity
+            service._smm_test_members = process_tree(spawn_identity(psutil.Process(service.pid)))
+            assert service._smm_test_members
+            assert all(r['argv'][1:] == service.args[1:] for r in service._smm_test_members)
         except BaseException:
             stop(service)
             raise
         return service
 
+    runtime_stops = []
     def stop(process):
-        if process.poll() is None:
-            process.terminate()
-        try:
-            process.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            process.wait(timeout=10)
+        receipt = stop_enrolled_test_hub(process)
+        runtime_stops.append(receipt)
+        if directory := os.environ.get('ACCEPTANCE_EVIDENCE_DIR'):
+            output = Path(directory)
+            output.mkdir(parents=True, exist_ok=True)
+            (output / ('vibeinsight-stop-' + str(len(runtime_stops)) + '.json')).write_text(
+                json.dumps(receipt, ensure_ascii=False, indent=2), encoding='utf-8')
 
     def query(word="evidence"):
         result = hub_call("search", {"query": word, "limit": 20})
@@ -304,8 +350,17 @@ def test_managed_hub_credential_restart_and_mixed_project_search(tmp_path, monke
         write_source([alpha, beta, gamma])
         eventually(lambda: any(hit["source_session_id"] == "vibe-C" for hit in query()))
         stop(service)
-        with Archive(state / "smm-hub.sqlite3").connect() as connection:
-            before_restart = [dict(row) for row in connection.execute("SELECT * FROM hub_vibeinsight_cursors")]
+        try:
+            with Archive(state / "smm-hub.sqlite3").connect() as connection:
+                before_restart = [dict(row) for row in connection.execute("SELECT * FROM hub_vibeinsight_cursors")]
+        except sqlite3.Error as error:
+            # Keep extended SQLite evidence in ordinary CI's failure text too.
+            failure = {'code': getattr(error, 'sqlite_errorcode', None),
+                       'name': getattr(error, 'sqlite_errorname', None),
+                       'message': str(error), 'runtime_stops': runtime_stops}
+            error.add_note('SQLite reopen diagnostic: ' + json.dumps(failure, ensure_ascii=False))
+            record_evidence(sqlite_reopen_failure=failure)
+            raise
 
         rows.extend(event(n, "vibe-A", "user" if n % 2 == 0 else "assistant", alpha) for n in range(20, 24))
         rows.append(event(24, "independent", "user", beta))

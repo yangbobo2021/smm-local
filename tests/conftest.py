@@ -20,7 +20,12 @@ def pytest_sessionfinish(session, exitstatus):
         return
     root = Path(directory)
     files = sorted(p for p in root.rglob('*.json') if p.is_file())
-    if sum(p.stat().st_size for p in files) <= 8 * 1024 * 1024:
+    # Screenshots and complete browser traces can consume most of the native
+    # budget even when JSON alone is small. Preserve those assets and package
+    # the original JSON bytes losslessly before the combined evidence is full.
+    total_bytes = sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
+    if (sum(p.stat().st_size for p in files) <= 8 * 1024 * 1024
+            and total_bytes <= 20 * 1024 * 1024):
         return
     manifest = []
     for path in files:

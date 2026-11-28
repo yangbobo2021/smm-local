@@ -1,0 +1,109 @@
+param([Parameter(Mandatory=$true)][string]$Python,[Parameter(Mandatory=$true)][string]$Runner,[Parameter(Mandatory=$true)][string]$Config,[Parameter(Mandatory=$true)][string]$Work,[Parameter(Mandatory=$true)][string]$Workspace,[string]$ReadPath)
+$ErrorActionPreference='Stop'
+$name='Smm008Inst'+[guid]::NewGuid().ToString('N').Substring(0,10)
+$password='Smm!'+[guid]::NewGuid().ToString('N')+'9aA'
+$report=@{purpose='008 installed products actual ordinary-account acceptance';user=$name;started_at=(Get-Date).ToUniversalTime().ToString('o')}
+$startedSecondary=$false
+$child=$null
+$created=$false
+try {
+  $secure=New-Object System.Security.SecureString
+  foreach ($character in $password.ToCharArray()) {$secure.AppendChar($character)}
+  $secure.MakeReadOnly()
+  New-LocalUser -Name $name -Password $secure -AccountNeverExpires|Out-Null
+  $created=$true
+  $report.expected_sid=(Get-LocalUser -Name $name).SID.Value
+  Add-LocalGroupMember -SID 'S-1-5-32-545' -Member $name
+  $account=$env:COMPUTERNAME+'\'+$name
+  & icacls.exe $Work /grant ($account+':(OI)(CI)M') /T|Out-Null
+  if ($LASTEXITCODE -ne 0) {throw 'Task directory ACL grant failed'}
+  & icacls.exe $Workspace /grant ($account+':(OI)(CI)RX')|Out-Null
+  if ($LASTEXITCODE -ne 0) {throw 'Task source/controller read ACL grant failed'}
+  if ($ReadPath) {
+    & icacls.exe $ReadPath /grant ($account+':(OI)(CI)RX') /T|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task program read/execute ACL grant failed'}
+  }
+  $target=Get-Content $Config -Raw|ConvertFrom-Json
+  # Limit ACL normalization to immutable task wheel inputs. A base-only X
+  # receiver intentionally has no local_wheel. Reject link/junction ancestors.
+  $workRoot=[IO.Path]::GetFullPath($Work).TrimEnd('\')
+  $wheelAcls=@()
+  foreach ($wheel in (@($target.local_wheel,$target.hub_wheel)|Where-Object {$_})) {
+    $wheelPath=(Resolve-Path -LiteralPath $wheel).ProviderPath
+    if (![IO.Path]::GetFullPath($wheelPath).StartsWith($workRoot+'\',[StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetExtension($wheelPath) -ne '.whl' -or !(Test-Path -LiteralPath $wheelPath -PathType Leaf)) {throw 'Wheel must be a task-local regular .whl file'}
+    $cursor=$wheelPath
+    while ($true) {
+      $item=Get-Item -LiteralPath $cursor -Force
+      if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {throw 'Wheel path contains a link or junction'}
+      if ([IO.Path]::GetFullPath($cursor).TrimEnd('\') -eq $workRoot) {break}
+      $cursor=Split-Path -Parent $cursor
+      if (!$cursor) {throw 'Wheel path did not reach task root'}
+    }
+    $before=(& icacls.exe $wheelPath|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Original wheel ACL observation failed'}
+    $entry=@{path=$wheelPath;before=$before;status='original-recorded'}
+    $wheelAcls+=$entry
+    $wheelAcls|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 (Join-Path $Work 'wheel-acl-preparation.json')
+    & icacls.exe $wheelPath /reset|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel inheritance reset failed'}
+    & icacls.exe $wheelPath /grant:r ($account+':R')|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel explicit read grant failed'}
+    $after=(& icacls.exe $wheelPath|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Final wheel ACL observation failed'}
+    $entry.after=$after;$entry.status='prepared'
+    $wheelAcls|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 (Join-Path $Work 'wheel-acl-preparation.json')
+  }
+  if (!$target.hub_wheel) {throw 'Hub wheel input is required'}
+  $report.wheel_acls=$wheelAcls
+  $target|Add-Member -NotePropertyName expected_actor_sid -NotePropertyValue $report.expected_sid
+  $target|ConvertTo-Json -Depth 40|Set-Content -Encoding UTF8 $Config
+  foreach ($path in @($target.read_paths)) {
+    & icacls.exe $path /grant ($account+':(OI)(CI)RX') /T|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task source-runtime read grant failed'}
+  }
+  $credential=New-Object System.Management.Automation.PSCredential($account,$secure)
+  $secondary=Get-Service seclogon
+  $startedSecondary=$secondary.Status -ne 'Running'
+  if ($startedSecondary) {Start-Service seclogon}
+  $arguments='-I -X utf8 "'+$Runner+'" --target-config "'+$Config+'" --output "'+(Join-Path $Work 'platform')+'"'
+  $child=Start-Process -FilePath $Python -ArgumentList $arguments -WorkingDirectory $Work -Credential $credential -LoadUserProfile -PassThru -RedirectStandardOutput (Join-Path $Work 'standard-child.stdout') -RedirectStandardError (Join-Path $Work 'standard-child.stderr')
+  $report.controller_pid=$child.Id
+  if (!$child.WaitForExit(6600000)) {throw 'Ordinary-account business probe timed out'}
+  # Start-Process ExitCode may be null for a credentialed child. Require the
+  # worker's actual end-to-end success receipt and its own token observation.
+  $result=Get-Content (Join-Path $Work 'platform/result.json') -Raw|ConvertFrom-Json
+  $actor=Get-Content (Join-Path $Work 'platform/controller-identity.json') -Raw|ConvertFrom-Json
+  if ($result.status -ne 'passed' -or $actor.is_admin -ne $false) {throw 'No ordinary-account business pass receipt'}
+  if ($actor.sid -ne $report.expected_sid) {throw 'Actual client TokenUser differs from the provisioned account'}
+  if ($actor.session_id -le 0 -or $actor.group_sids -contains 'S-1-5-32-544') {throw 'Installed E requires a standard interactive session'}
+  $report.actual_actor=$actor
+  $report.status='passed'
+} catch {$report.status='failed';$report.error=$_.Exception.Message;throw}
+finally {
+  if ($child -and !$child.HasExited) {& taskkill.exe /PID $child.Id /T /F|Out-Null}
+  # Probe's normal cleanup checks its actual services/ports. Also reject and
+  # remove any process still owned by this temporary account before deletion.
+  $remaining=@()
+  foreach ($process in Get-CimInstance Win32_Process) {
+    $owner=Invoke-CimMethod -InputObject $process -MethodName GetOwner -ErrorAction SilentlyContinue
+    if ($owner.User -eq $name) {$remaining+=$process.ProcessId;& taskkill.exe /PID $process.ProcessId /T /F 2>&1|Out-Null}
+  }
+  $report.unexpected_remaining_pids=$remaining
+  $revoke=@($Work,$Workspace,$ReadPath)+@($target.read_paths)
+  foreach ($path in ($revoke|Where-Object {$_}|Select-Object -Unique)) {
+    & icacls.exe $path /remove:g ('*'+$report.expected_sid) /T 2>&1|Out-Null
+    if ($LASTEXITCODE -ne 0) {$report.cleanup_error='Task account ACL removal failed'}
+  }
+  if ($created) {Remove-LocalUser -Name $name -ErrorAction SilentlyContinue}
+  if ($startedSecondary) {Stop-Service seclogon -ErrorAction SilentlyContinue}
+  $report.account_absent=$null -eq (Get-LocalUser -Name $name -ErrorAction SilentlyContinue)
+  $report.secondary_final=(Get-Service seclogon).Status.ToString()
+  if (!$report.account_absent) {$report.cleanup_error='temporary standard account remains'}
+  if ($startedSecondary -and $report.secondary_final -ne 'Stopped') {$report.cleanup_error='temporary Secondary Logon service change remains'}
+  $report.finished_at=(Get-Date).ToUniversalTime().ToString('o')
+  $report|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 (Join-Path $Work 'standard-user-controller.json')
+  $password=$null
+}
+if ($remaining.Count -gt 0) {throw 'Ordinary-account processes survived normal cleanup'}
+
+if ($report.cleanup_error) {throw $report.cleanup_error}

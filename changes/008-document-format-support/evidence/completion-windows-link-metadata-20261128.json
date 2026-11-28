@@ -1,0 +1,94 @@
+{
+  "schema": "smm-008-windows-link-metadata-v1",
+  "scope": "Product correction plus real LocalService metadata and elevated Windows native component; full SCM H pending. Not actual SMB validation.",
+  "previous_real_scm_failure": {
+    "run_id": 46150538060,
+    "head": "3e42c0431091d1f6cd9f7c250084bdc49de15831",
+    "artifact_id": 15265064836,
+    "members": 620,
+    "exact_chain": [
+      "pathlib.lstat",
+      "documents._link",
+      "ManagedDocuments._root",
+      "managed_document_uploads._commit"
+    ],
+    "result": "four committed raw files correct, upload commit 400, no processing publication"
+  },
+  "correction": "GetFileAttributesW for own reparse attributes; narrow error53 UNC share-anchor fallback to prior lstat; no permission expansion or swallowed errors",
+  "actual_components": {
+    "local_service": {
+      "sid": "S-1-5-19",
+      "session": 0,
+      "ancestor_link": false,
+      "state_link": false,
+      "missing": "FileNotFoundError WinError2 filename retained",
+      "ancestor_listing": "PermissionError retained",
+      "service_deleted": true
+    },
+    "elevated_windows": {
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "terminal_seconds": 8.31,
+      "junit_seconds": 8.256,
+      "source_files": 66
+    },
+    "mac_controls": {
+      "passed": 17,
+      "skipped_windows_only": 2
+    }
+  },
+  "historical_failures_retained": [
+    "v8 incomplete recursive component input, collection error",
+    "v9 UNC root spy expected spelling, 14 passed one failed",
+    "four raw CreateFile alternatives denied in actual LocalService v3"
+  ],
+  "primary_reference": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileattributesw",
+  "private_originals": {
+    "windows-link-metadata-candidate-v2.md": {
+      "sha256": "b6dd94d83b0e7c819bc2cbb802c3437aebf4c64ac5bdcfb04948bbacafcf3b22",
+      "bytes": 2919
+    },
+    "windows-link-metadata-component-execution-v1.md": {
+      "sha256": "12c1c442aaa26bc04a8ee9c3ec75f8b92ea1d981120fed9637c5dec5e71a779a",
+      "bytes": 2242
+    },
+    "windows-permission-component-v10-source.zip": {
+      "sha256": "13c937b8adce97582ee55536930e9f33d9229690eca2dd073545bc9c47ee1d41",
+      "bytes": 278717
+    },
+    "windows-permission-component-v10.stdout": {
+      "sha256": "edee0956e85c4ff1095a463e71e2b901c4fb59e91c22188d2a9e9d00ef7e5174",
+      "bytes": 101
+    },
+    "windows-permission-component-v10.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "windows-permission-component-v10.xml": {
+      "sha256": "dd3f82c14653e099fc8cc3320a3c3a86061725dbec63ebab2c743941053ae78f",
+      "bytes": 2684
+    },
+    "windows-permission-component-v10-process.json": {
+      "sha256": "a1f8586f1a64ebaf289e98a8124fdeaae6f34a10eef3279eb5c74c07ebe4017b",
+      "bytes": 462
+    },
+    "windows-ls-storage-metadata-v5/input.zip": {
+      "sha256": "425bdba77afbb6fea8e567ba6edded65b97eaa0a09e539ba9fa5362a6c0b3f80",
+      "bytes": 11230
+    },
+    "windows-ls-storage-metadata-v5/result.zip": {
+      "sha256": "bd28ac7c87c298ceaacdf97d1ecf53f097facc6ba29c614c93ac0b7b1cdb49bd",
+      "bytes": 10881
+    },
+    "attribute-publication-final-local.stdout": {
+      "sha256": "e52272ad816abb0e2c58be4ea4e2eb48f20d714e51b08063588abdfc5d14c6f4",
+      "bytes": 110
+    }
+  },
+  "current_source": {
+    "src/smm_local/document_windows.py": "4d24e77852a5b422dd51290b58c3f106df95d67f3393893b8f5af2e305f5468d",
+    "src/smm_local/documents.py": "ad7eba564111e2d262af466b84e4093d34fdbb83965b10afe2b0dd7b4fca61fe",
+    "tests/test_hub_document_storage_windows.py": "7bfa486343a0f2b37ad5f00f2755fd8cdbba38b4e31c216ec751ac057bd81cc2"
+  }
+}

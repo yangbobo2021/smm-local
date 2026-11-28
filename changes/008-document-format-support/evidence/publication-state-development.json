@@ -1,0 +1,220 @@
+{
+  "scope": "Actual creator browser post-processing/pre-publication success boundary only; no source-cancellation or fullSC1/C1/E/H/X claim",
+  "baseline_commit": "a505ae902c8580cccccabaafc8f95dc4c9f92335",
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "case_id": "TC-008-publication-visible-state",
+  "design": "design-sc1-publication-boundary-v2",
+  "test_sha256": {
+    "tests/test_document_formats_publication_state.py": "1ea66d85dd32a342b33b972be9e8834c02f7a406bfd9e613804a1105f532b05d",
+    "tests/document_formats_publication_hook.py": "916b19b381ecda4b756f745834433db76722cde0ef8b864dec0f0d6c66baf54c"
+  },
+  "behavior": "Extraction success remains the actual attempt status. Detail adds publication_pending by capture AND result SHA. Both creator pages show waiting and continue polling until coherent publication before success. No new DB schema.",
+  "owners": {
+    "local": {
+      "red": {
+        "id": "red-sc1-publication-local-v4",
+        "sha256": "5ca16ad73e2ae1381de7b10b0bbd742f99872981f674cef84dd3686cfef26eb7",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc1-publication-local-v4/result.json"
+      },
+      "red_review": {
+        "id": "review-publication-local-red-v4",
+        "sha256": "09ef780ca508150b72c0f39c1add46dc267208b0d4baf998c86c3e29af640ac2",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-publication-local-red-v4/result.json"
+      },
+      "green": {
+        "id": "green-sc1-publication-local-v3",
+        "sha256": "7873ca16874566ed3163da3e356f01d2f1f79461b412c5023cd238a8230f4d5c",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc1-publication-local-v3/result.json"
+      },
+      "green_review": {
+        "id": "review-publication-local-green-v3",
+        "sha256": "e9e23e6c0e2fc7efb4c27e5a7a91b913f5fa6eca23024077ece41c6c42589837",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-publication-local-green-v3/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "seconds": 56.28,
+        "flows": 24,
+        "state_png": 48,
+        "documents": 8,
+        "phases": [
+          "first",
+          "same capture/new profile",
+          "replacement"
+        ],
+        "applicable_targets": "ordinary/global x ready/partial x two independent targets"
+      },
+      "regression": {
+        "passed": 8,
+        "seconds": 31.43
+      },
+      "artifacts": {
+        "count": 825,
+        "bytes": 11805222,
+        "all_sha256_verified": true
+      },
+      "red_observed": "V/P0 and no published snapshot; actual UI wrongly reports success",
+      "green_observed": "pending/old qualification before publish, then actual V/P1/1 ->1/2 ->2/3, own search/full text/all tables/raw and obsolete refs checked"
+    },
+    "hub": {
+      "red": {
+        "id": "red-sc1-publication-hub-v4",
+        "sha256": "7a20f6f491b936cc9a0adc7af9c27c0c57c3f543d31a3a43516a28d01da1f379",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc1-publication-hub-v4/result.json"
+      },
+      "red_review": {
+        "id": "review-publication-hub-red-v4",
+        "sha256": "c6440bdaf11dc563c88234b43a39928623a729f27845874798ef762a0638ca9a",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-publication-hub-red-v4/result.json"
+      },
+      "green": {
+        "id": "green-sc1-publication-hub-v3",
+        "sha256": "186214ac8ddbd78721981220b0cda0708c835a8d93ee13ba19c00d60677b9cff",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc1-publication-hub-v3/result.json"
+      },
+      "green_review": {
+        "id": "review-publication-hub-green-v3",
+        "sha256": "027c3135046ff14ca4a35610b94163ec04c3d58919aee61c356f770f44af2eab",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-publication-hub-green-v3/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "seconds": 61.23,
+        "flows": 24,
+        "state_png": 48,
+        "documents": 8,
+        "phases": [
+          "first",
+          "same capture/new profile",
+          "replacement"
+        ],
+        "applicable_targets": "ordinary/global x ready/partial x two independent targets"
+      },
+      "regression": {
+        "passed": 2,
+        "seconds": 33.16
+      },
+      "artifacts": {
+        "count": 824,
+        "bytes": 12795359,
+        "all_sha256_verified": true
+      },
+      "red_observed": "V/P0 and no published snapshot; actual UI wrongly reports success",
+      "green_observed": "pending/old qualification before publish, then actual V/P1/1 ->1/2 ->2/3, own search/full text/all tables/raw and obsolete refs checked"
+    }
+  },
+  "joint_review": {
+    "path": ".acceptance-local/008/publication-boundary-20261126/joint-green-review-v3.json",
+    "sha256": "572cba232814c27cecd597e29e339efe07c76a77f342bac273abbeb7f92313b9",
+    "reviewer": "/root/r008_publication_green_review_v1",
+    "kind": "supplementary joint opinion; not a third native execution"
+  },
+  "not_closed": [
+    "Explicitly retained in-flight source cancellation setup gap",
+    "Post-processing publication validation/configuration-change terminal behavior",
+    "Other original upload/management/reader pending items",
+    "All installed minimum/service/native resource/cross-OS matrix cells not proven by this subcase"
+  ],
+  "historical_failures": [
+    {
+      "attempt": "green-sc1-publication-boundary-v1",
+      "result": "Hub complete; Local detached element screenshot; related10passed; failedgreen native review registration rejected, raw independent needs_revision retained"
+    },
+    {
+      "attempt": "green-sc1-publication-boundary-v2",
+      "result": "Local transient empty DOM during screenshot; Hub complete;87PNG exceeded64, regression not started. Original evidence retained; not counted passed."
+    }
+  ],
+  "original_fix_product_sha256": {
+    "src/smm_local/document_snapshots.py": "d77498e7c7671e9287d3535951555cf4c3bd02526afbd357734ef9e5702a49b9",
+    "src/smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b",
+    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
+  },
+  "original_package_build": {
+    "status": "built_and_contents_verified",
+    "installed_business": "not verified by this build",
+    "initial_attempt": "default uv missing from tool PATH; retried with absolute /Users/boboyang/.local/bin/uv",
+    "wheels": {
+      "smm_local-0.4.0-py3-none-any.whl": {
+        "sha256": "5fa6d1485c6407fb3cc8b097763492ec0b740d0979ce3d8fe7984ba70224912b",
+        "bytes": 194086,
+        "members": 52,
+        "new_detail_and_html_equal_source": true
+      },
+      "smm_hub-0.4.0-py3-none-any.whl": {
+        "sha256": "4f45ac1bdf66b44d11d679a453a717afcfaaa839d7d85c1d4b2366ed1925b2ea",
+        "bytes": 178996,
+        "members": 54,
+        "new_detail_and_html_equal_source": true
+      }
+    }
+  },
+  "latest_after_finalization": {
+    "source_version": "6c65bc9 plus frozen5file config-finalization patch, see config-finalization-development.json",
+    "same_approved_test_bytes_no_new_test_repair": true,
+    "portions": {
+      "local": {
+        "green": {
+          "id": "green-sc1-publication-local-after-finalization-v1",
+          "sha256": "f4ac0392700fbc99d2f88209d9d2d60d89c5c8119837970c1047276e3cbfb905"
+        },
+        "review": {
+          "id": "review-publication-local-after-finalization-green-v1",
+          "sha256": "19d088a23648b8507278f09d8f6330810dd554fe87d63e9da9d3a591baf468bf",
+          "status": "passed registered"
+        },
+        "main_passed": 1,
+        "seconds": 53.5,
+        "flows": 24,
+        "state_png": 48,
+        "regression_passed": 2,
+        "regression_seconds": 10.04,
+        "artifacts": 825
+      },
+      "hub": {
+        "green": {
+          "id": "green-sc1-publication-hub-after-finalization-v1",
+          "sha256": "1de4071e617ee668f14e3499b6ca00c3e7cbed93bacc1772136a47a2b3eb1542"
+        },
+        "review": {
+          "id": "review-publication-hub-after-finalization-green-v1",
+          "sha256": "3f381a6cfe4dacfd6e2b53105bf76c05dad63a1f210cc92453956d3c8e3f8cc2",
+          "status": "passed registered"
+        },
+        "main_passed": 1,
+        "seconds": 58.82,
+        "flows": 24,
+        "state_png": 48,
+        "regression_passed": 3,
+        "regression_seconds": 6.07,
+        "artifacts": 823
+      }
+    },
+    "joint_review": {
+      "path": ".acceptance-local/008/publication-boundary-20261126/joint-after-finalization-review-v1.json",
+      "sha256": "65ac985edd27b09308be2567414d613b9bb5bd47b3ba645cb1f391b8f917b662",
+      "reviewer": "/root/r008_publication_green_review_v1"
+    },
+    "totals": {
+      "flows": 48,
+      "state_png": 96,
+      "artifacts": 1648,
+      "bytes": 24586096,
+      "related_regression_executions": 5,
+      "unique_regression_counting": "These2upload+3empty are also among config-finalization27; not32 unique cases."
+    }
+  },
+  "latest_verified_product_sha256": {
+    "src/smm_local/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+    "src/smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b",
+    "src/smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
+  }
+}

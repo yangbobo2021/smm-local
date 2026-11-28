@@ -1,0 +1,90 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "requirement": "R008",
+  "scene": "SC11",
+  "case_id": "TC-008-minimum-installed-mac",
+  "status": "passed_scoped",
+  "product_commit": "366931e78a72f55d5bbfeb28e3193997e5ab75f5",
+  "source_clean_at_build": true,
+  "test_sha256": "717e29a8b0be021a3a6b99149293eacf815c8889700411fceb16aa824ffcffed",
+  "wheels": [
+    {
+      "file": "smm_local-0.4.0-py3-none-any.whl",
+      "bytes": 192128,
+      "sha256": "8ac51ee7ae00fb1ec42165c652e51c4451313eb23867642783f4aca0e36732b8",
+      "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+      "static_sha256": "529fce2ff8f91fcf475f104cdeb543d7aa8228a6d22fad192d16cc0628f751c1",
+      "transfers_sha256": "741e5522a7982e613d8f024acdca750079e30fb979934b977bb0bdc84896cca0",
+      "zip_integrity": true,
+      "matches_source": true
+    },
+    {
+      "file": "smm_hub-0.4.0-py3-none-any.whl",
+      "bytes": 177159,
+      "sha256": "05cc9c2a8bf51947c58d0cdcd627a9ddd52261f9b2a1b4b45f3638f07562bf1e",
+      "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+      "static_sha256": "f0d935106319f9b730da12d5b212c2f0695e357cbf57632264042113b2533f60",
+      "transfers_sha256": "741e5522a7982e613d8f024acdca750079e30fb979934b977bb0bdc84896cca0",
+      "zip_integrity": true,
+      "matches_source": true
+    }
+  ],
+  "build": {
+    "exit_code": 0,
+    "script": "scripts/build_packages.py",
+    "isolated": true
+  },
+  "installation": {
+    "python": "3.11.11",
+    "os": "macOS15.3.1 arm64",
+    "uid": 501,
+    "separate_local_and_hub_env": true,
+    "offline": true,
+    "own_package_and_METADATA_bytes_verified": true,
+    "hub_cannot_import_local": true,
+    "original_process_receipts": 4,
+    "original_pid_and_timestamps_retained": true
+  },
+  "candidate": {
+    "request_id": "debug-minimum-installed-clean-366931e-v1",
+    "main_passed": 2,
+    "seconds": 26.4,
+    "exit_code": 0,
+    "review": "review-minimum-installed-clean-366931e-design-v1",
+    "review_status": "passed",
+    "review_opinion_sha256": "0c7847d454b6c3cd8d5e82ee401d42a13e2de6ab875b3af37153e0bed1226783"
+  },
+  "formal": {
+    "request_id": "execute-minimum-installed-clean-366931e-v1",
+    "result_sha256": "4ebab79d5899d69deb51833e9b88701085bd0bc93b33a06b69cc9526c61bf74d",
+    "main_passed": 2,
+    "seconds": 18.8,
+    "exit_code": 0,
+    "artifacts": 352,
+    "stored_bytes": 2238129,
+    "all_artifact_hashes_verified": true,
+    "review": "review-minimum-installed-clean-366931e-execution-v1",
+    "review_status": "passed",
+    "review_opinion_sha256": "9f83d65981f26b033997f8bfad896b37edfa0d76d56a3cff93d548e62e6e2452"
+  },
+  "actual_business": {
+    "product_cli_invocations": 246,
+    "original_inputs": 16,
+    "full_text_reads": 32,
+    "full_table_reads": 64,
+    "cells": 304,
+    "original_info_reads": 32,
+    "actual_original_downloads": 32,
+    "source_removed_after_capture": true,
+    "old_references_read_after_source_removal": true,
+    "projects": "ordinary and global, each creator four distinct source-defined formats/kinds; unrelated-project negative checks",
+    "protocols": "Installed CLI business only; source driver creates fixtures and observes. Product always installed Python -I in non-source cwd."
+  },
+  "limitations": [
+    "macOS ordinary identity only; not Linux/Windows minimum installed",
+    "No whole SC11 or R008 pass, E/H/X not covered",
+    "No service or browser restart, legacy migration or whole discovery acceptance",
+    "Future product changes require affected checks to be reevaluated; this records exact wheel bytes"
+  ],
+  "redaction": "All inputs synthetic. No secrets, user data or private runtime paths in public evidence."
+}

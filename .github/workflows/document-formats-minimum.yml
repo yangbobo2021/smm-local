@@ -1,0 +1,65 @@
+name: Document formats minimum installed
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths:
+      - src/**
+      - pyproject.toml
+      - uv.lock
+      - scripts/build_packages.py
+      - .github/workflows/document-formats-minimum.yml
+      - scripts/acceptance/document_formats_minimum*
+      - scripts/acceptance/document_formats_completion_evidence.py
+      - scripts/acceptance/document_formats_evidence.py
+      - tests/test_document_formats_evidence_key_format.py
+      - tests/test_document_formats_minimum*
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+jobs:
+  minimum:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.8'
+          python-version: '3.11'
+      - run: uv sync --frozen --extra test --extra documents --extra acceptance
+      - run: uv run --frozen python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/008-minimum-materials --output .acceptance-local/008-minimum-materials.json
+      - run: uv run --frozen python scripts/acceptance/document_formats_minimum.py prepare --work .acceptance-local/008-minimum --materials .acceptance-local/008-minimum-materials.json
+      - name: Run as POSIX ordinary account
+        if: runner.os != 'Windows'
+        run: uv run --frozen python scripts/acceptance/document_formats_minimum_entry.py --target-config .acceptance-local/008-minimum/target.json --output .acceptance-local/008-minimum/platform
+      - name: Run as actual Windows standard account
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $config = Join-Path $env:GITHUB_WORKSPACE '.acceptance-local/008-minimum/target.json'
+          $target = Get-Content $config -Raw | ConvertFrom-Json
+          $python = (uv run --frozen python -c 'import sys;print(sys.executable)').Trim()
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_minimum_standard_user.ps1 -Python $python -Runner (Join-Path $env:GITHUB_WORKSPACE 'scripts/acceptance/document_formats_minimum_entry.py') -Config $config -Work (Split-Path $config) -Workspace $env:GITHUB_WORKSPACE -ReadPath (Split-Path $target.base_python)
+          if ($LASTEXITCODE -ne 0) { throw 'Minimum standard-account acceptance failed' }
+      - name: Collect original receipts
+        if: always()
+        run: uv run --frozen python scripts/acceptance/document_formats_completion_evidence.py --work .acceptance-local/008-minimum --materials .acceptance-local/008-minimum-materials.json --output .acceptance-local/008-minimum-evidence --context .acceptance-local/008-minimum-context.json
+      - name: Encrypt original receipts
+        if: always()
+        run: uv run --frozen python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-minimum-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-minimum-context.json --output .acceptance-local/008-minimum.smm-evidence --receipt .acceptance-local/008-minimum-generated.json
+      - name: Preserve encrypted original receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-minimum-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/008-minimum.smm-evidence

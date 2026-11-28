@@ -1,0 +1,49 @@
+{
+  "scope": "E browser preparation and X application receipt-loss test facilities; no product change",
+  "historical_actual_failures": {
+    "run": 46124818809,
+    "E_windows": "Wheel preflight and sixteen path documents ready; first browser launch looked in the credentialed account default cache, rather than the explicitly prepared task cache.",
+    "X_run": 46124818819,
+    "X_windows_directions": [
+      "linux-to-win32",
+      "darwin-to-win32"
+    ],
+    "X_windows": "Server original logs prove ClientDisconnect while consuming the publication request, before publish. This was not an accepted publication with lost receipt."
+  },
+  "repairs": {
+    "browser": "Persist absolute task cache and grant read access; restore before Playwright driver starts; explicit executable takes priority. Preparation may precede browser installation; actual execution requires existing cache.",
+    "receipt": "Real verified HTTPS reads 200 response headers, then closes without application read/JSON decode of receipt body. Underlying transport may buffer bytes. Independently observe four published documents before idempotent retry."
+  },
+  "actual_controls": {
+    "Mac_explicit_browser": "Actual Chrome launch with invalid unused cache and environment value 0 passed; browser facility only.",
+    "Mac_receiver_v7": {
+      "status": "passed",
+      "scope": "C1 same-OS protocol component only",
+      "x1_qualified": false,
+      "source_platform": "darwin",
+      "actual_receiver_platform": "darwin",
+      "documents": 4,
+      "source_stopped_before_packet": true,
+      "raw_bundle_sha256": "af9aa3b4d5199c1d034c1e4a9d8b33910a8c4bf50108c688e473d99f587d422b",
+      "receiver_processing_calls": 0,
+      "incomplete_raw_rejected": true,
+      "actual_unread_receipt_retry": true,
+      "restart_old_references": true,
+      "finished_at": "2026-11-28T08:33:29.514260+00:00"
+    }
+  },
+  "independent_reports_sha256": {
+    "windows-e-browser-failure-review-v1.md": "aadc2aa843b0c301a49bd8fd75c93080e485b20eadc69d3128f72d7b40e3c548",
+    "windows-e-browser-candidate-review-v1.md": "2244c970664fcf44cce2f601dab222cf14e19d3467a59314e9e23a330fa6dde0",
+    "windows-e-browser-candidate-review-v2.md": "ad898703c4c6f6f649dd693de9c2faf44d34114d467b1077415370888b8ff795",
+    "x-windows-disconnect-failure-review-v1.md": "f417acfdec461e9e320254411aee3b8598c8747d5ee935e8b706bdc7d310b5e5",
+    "x-windows-disconnect-candidate-review-v2.md": "ebd9bf510179662db74cd75255aea40296ca7c92bd449ec8fe0c11e5d098abc2"
+  },
+  "candidate_bindings": {
+    "scripts/acceptance/document_formats_installed_prepare.py": "ce0c8d273888a3417fb6ac8fcb56fdfe40344e918d5b449d2b59cd35760256cf",
+    "scripts/acceptance/document_formats_installed_protocols.py": "1384fa1cab692833c95c6630ef2c37dc997cc76486fd12d0031d947c7221c53c",
+    "scripts/acceptance/document_formats_cross_os.py": "7344783462db214ef0c4b4cb2fdf2e4d3386d53dd202949aad02267bcfa2b449"
+  },
+  "decision": "Independent candidate reviewers ready_for_actual_CI; actual Windows retest and full six-direction evidence review still required.",
+  "redaction": "Raw identities, host paths, tokens, signed references and archive data retained privately; public report excludes them."
+}

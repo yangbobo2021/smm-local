@@ -1,0 +1,148 @@
+{
+  "case_id": "TC-008-managed-replace-retry",
+  "scene": "SC8",
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "base_commit": "2e7a3530e5cd18835bb97487ddd916f35059d192",
+  "status": "development_subcase_independently_passed",
+  "design": "design-sc8-managed-replace-v2",
+  "red": "red-managed-replace-v4",
+  "red_review": "review-managed-replace-red-v3",
+  "green": "green-managed-replace-v4",
+  "green_review": "review-managed-replace-green-v1",
+  "review_file_sha256": "b9ee8a1d856b8cc3155fe102914f38b6fc81f2a488d5e38f58abc912f1f8d8b5",
+  "test_bindings": {
+    "tests/document_formats_fixtures.py": "1695adcd46fe6501c9aae613a6d9afbe654a3a7d1388f9fdcf249fc29db96e1b",
+    "tests/document_formats_managed_empty_fixture.py": "506d4ed57b7db98153d864e7479dc9784b2a6a7f5325ed376389303190990239",
+    "tests/document_formats_partial_fixture.py": "d17b3a2acab517ad5319e6f1cd36c27116b65017d621608e6232969a0abae6df",
+    "tests/document_formats_pdf_fixture.py": "442a91e7dda2fd71070e9d741845005df7676f753fefb212fe9db34b90d1b939",
+    "tests/document_formats_restart_server.py": "1c670a2d12d8714d6f7caec62889be6d5970f2e59761ce5ca68556e67915ce54",
+    "tests/document_formats_sync_observer.py": "d95fd9920fb4be4cf90533d86ddccb49552842906ca76e6a9251390daea06b5a",
+    "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80",
+    "tests/document_formats_upload_fixture.py": "cbac6d35a7c5f84671f6c87958d9c7b1768f85c070ad74e26ac9267e11a99832",
+    "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef",
+    "tests/hub_document_helpers.py": "f2f4a380c1727c500d7bbff35adc30dfc49ec4051b44addf93e36fa1c2254da0",
+    "tests/test_document_formats_managed_empty.py": "4a729350e6b8af2a106ea10f312e3fbc77edf9bf882af401673a2ad2a39e4a15",
+    "tests/test_document_formats_replace.py": "2d8ba13b291ddcbc020540ad3679278f4886ad77e2ba6fd87dd1d8eb9826d4be",
+    "tests/test_document_formats_retry.py": "d8b63247b2c4f35e3ac4571e61b085948da344be229636b311a899a6a75d1f5b",
+    "tests/test_document_formats_upload_restart.py": "8020ef50728a9d4d7ce976743c21ad918c1a5f42373d21893fca94a5cf2c5cf3",
+    "tests/test_document_formats_uploads.py": "e2837770da0dc1991763e48c65a8aec4a969417382d6db32782c05132280043b",
+    "tests/test_hub_documents_contracts.py": "60cddbd2fbeb5c2c0cf5e6a3fff1f4d286bba29b47f5ccefbbcf281074e0f545"
+  },
+  "product_bindings": {
+    "src/smm_hub/_archive.py": "b8b134e7148049b92ac8201c32b9da5662300cabdaa87cea8bd75a841ac87f01",
+    "src/smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+    "src/smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+    "src/smm_hub/document_cli.py": "02ec47302684b6ed4d6490b7eba4a3c5c0f09c61920ad4915f50822a3b449044",
+    "src/smm_hub/documents.py": "c79e299a127ebb927c81780b8f622c22819f28436fefe4e2dd36c1af6fd86c26",
+    "src/smm_hub/hub.py": "fdf9c0d0c81b48bd08c2533665204b9b00ddac9c52c2715c3f27f657f4cb3b57",
+    "src/smm_hub/processed_documents.py": "1697d2d132ba7227b20a1cde37e3f6bf897ce8df1d9ea319850ee313d0d248b4",
+    "src/smm_local/api.py": "d4e5711fb9d5bbba6a70941984f9c84b58d59fbb02af69392711ff55ee550f5a",
+    "src/smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+    "src/smm_local/cli.py": "e14887a9e508d9fc5fad8b5a179a6ec3dd5278e696d33cf8617d81d62035abc2",
+    "src/smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+    "src/smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+    "src/smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+    "src/smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+    "src/smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+    "src/smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+    "src/smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+    "src/smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+    "src/smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+    "src/smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+    "src/smm_local/document_processing.py": "c696f9c55605a76e7e9ffc9f88f02511736aae795dbfd9b2a634778b303729cc",
+    "src/smm_local/document_protocol.py": "1659b3c4bb12eec6d6efe925cc2e893d0fa6d6ad5ca12612b3541c0d709b6aef",
+    "src/smm_local/document_results.py": "44fce7371a73e4687fd8603b938a211e48d68bc4f7c577117bd9b944a40673fa",
+    "src/smm_local/document_search.py": "216bbc5c1b6a0f8b32096c72b009d4803d2462bb6a30011c62ed6ae95dd36fa9",
+    "src/smm_local/document_snapshots.py": "c678117aa61ed538bfffb1a07e8568df30877fc9864d4dc8c00a3b0ce3c50880",
+    "src/smm_local/document_supervisor.py": "1712b750c7b8344df920472c88ca427d943f11761ed742ca262ada925e662dce",
+    "src/smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+    "src/smm_local/document_transfers.py": "85db357245366a9ff58b03188b06e6c99a05597ac02e823f99f1228c6ae9d9b0",
+    "src/smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+    "src/smm_local/documents.py": "ee2381b4365cbeceea47c7ce9f97555d59a318d6a13b38183f5cc32ea7c40d5a",
+    "src/smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+    "src/smm_local/managed_document_uploads.py": "1c129657de16003173f9d198ac6939ddd6380250d9d15987128009860522bc1e",
+    "src/smm_local/managed_documents.py": "58b2e40a8450269c45b3b3b5f4d2b6eff64907f084abbf5437fde9697565d973",
+    "src/smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+    "src/smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+    "src/smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960"
+  },
+  "observed": {
+    "creators": [
+      "Local",
+      "Hub"
+    ],
+    "projects_per_creator": [
+      "ordinary",
+      "global"
+    ],
+    "targets_per_creator": {
+      "ready_pdf": 2,
+      "partial_pdf": 2,
+      "unchanged_docx_control": 1
+    },
+    "new_captures": 8,
+    "saved_candidate_ocr_retries": 8,
+    "downloads_distinct_version_bytes": 18,
+    "http_observations": 1225,
+    "actual_cli_calls": 12,
+    "main": {
+      "passed": 2,
+      "seconds": 44.34
+    },
+    "regression": {
+      "passed": 69,
+      "seconds": 197.84
+    },
+    "artifacts": {
+      "count": 1317,
+      "stored_bytes": 8789880,
+      "observation_json": "native tool gzip; independently decompressed/read; raw original downloads retained"
+    }
+  },
+  "verified": [
+    "Same document ID receives a distinct current CID/AID; missing OCR makes new candidate fail without changing old ready/partial complete publication.",
+    "Per-target stale/foreign capture, attempt, content/processing/source version, stable project and Hub context reject without document/transfer mutation.",
+    "Commit replay keeps current candidate identity and actual terminal state; superseded original upload receipt cannot revive prior capture.",
+    "Creator CLI config revision change does not automatically process documents. Real CLI retry uses latest saved new capture after private source paths are deleted; source reads remain zero.",
+    "New publication V/P2 contains independent complete OCR text, no old native tables, correct single-page OCR coverage/locations, and exact new original bytes. Old references reject and every other document/control remains readable."
+  ],
+  "history": [
+    "red-v1 initial no-OCR coverage expectation was a test error; preserved.",
+    "Two independent red revisions required new-snapshot/table/coverage and both-list assertions, then bounded evidence storage. User approved one-line SHA-deduplicated saved downloads; every real download/body equality remains executed.",
+    "green-v1 timeout420 request blocked before execution.",
+    "green-v2 overall main timed out after Local; regression nonexistent path exit4. Same-byte isolated Hub diagnostic passed15.29s; not a formal pass.",
+    "green-v3 main2passed44.30s;70selected regression timed out300s during legacy compatibility after65passed, including the heavy sync_boundaries case. Preserved and recovered settled.",
+    "green-v4 same tests and products;69remaining regression cases passed. Only already-passed heavy sync_boundaries moved to its prior same-byte evidence. Never claim a70-case joint pass."
+  ],
+  "scope_limits": [
+    "HTTP/CLI source-tree development on current macOS only; no actual browser interaction, no DOCX/XLSX replacements, no full E/H/X or minimum-Python delivery gate.",
+    "Legacy text API isolation, native removal comparisons/V0, managed storage link safety, complete cancellation/authorization/GC/quota and full restart/lost-ack matrix remain required follow-up.",
+    "Windows observer gap retained per user; separate current ordinary CI report records19failures, no Windows delivery pass."
+  ],
+  "redactions": "Synthetic materials only. Relative source paths and hashes retained; private filesystem locations, runtime credentials, identity secrets and source/download bytes omitted from this public summary.",
+  "package_build": {
+    "exit_code": 0,
+    "wheels": [
+      {
+        "name": "smm_hub-0.4.0-py3-none-any.whl",
+        "bytes": 169787,
+        "sha256": "bca9727fdb9675e90c196eb70ef10e6deb766f545faa2db52796bc037fb74591"
+      },
+      {
+        "name": "smm_local-0.4.0-py3-none-any.whl",
+        "bytes": 184430,
+        "sha256": "b8bf5c5d378df26e42631082a558f6be32e18e5dd7c9e2bc9d5e417230763337"
+      }
+    ],
+    "limit": "Build only; not installed-wheel/minimum-Python or service acceptance."
+  },
+  "actual_observation_excerpts": {
+    "path": "managed-replace-observations.json",
+    "sha256": "437e9c0ff66f2cd5325c11c7af5b5becf3292e247deaf58946f28d88bba8d519",
+    "documents": 10,
+    "download_versions": 18,
+    "actual_denial_records": 140,
+    "actual_cli_records": 12,
+    "scope": "Actual synthetic IDs, state transitions, original digests and status excerpts; absolute paths, opaque references and credentials omitted."
+  }
+}

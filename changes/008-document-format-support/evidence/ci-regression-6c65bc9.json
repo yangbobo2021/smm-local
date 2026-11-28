@@ -1,0 +1,140 @@
+{
+  "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+  "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+  "runs": [
+    {
+      "run": "45748718050",
+      "artifact_id": 15085792651,
+      "name": "tests-windows-2022",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "7b9629cd2a3003ea528f0fd52f8b68a6d8a9f61a6db256c41ef38f5cafbf39ed",
+      "official_digest": "sha256:7b9629cd2a3003ea528f0fd52f8b68a6d8a9f61a6db256c41ef38f5cafbf39ed",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 457,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 62,
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "observed": "worker subprocess audit count0 !=2"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "observed": "worker subprocess audit count0 !=2"
+        }
+      ]
+    },
+    {
+      "run": "45748718050",
+      "artifact_id": 15084563868,
+      "name": "tests-macos-15",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "eb6851b1a652f89fb4d217e0709f3e20aef4de57e72b1733f9ea7ad8bc6758a4",
+      "official_digest": "sha256:eb6851b1a652f89fb4d217e0709f3e20aef4de57e72b1733f9ea7ad8bc6758a4",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 63,
+      "failures": []
+    },
+    {
+      "run": "45748718050",
+      "artifact_id": 15084289346,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "64ad7ec71cfc65694e22c6cd43141fe9ee47ba540b291c007aee528b78acb60a",
+      "official_digest": "sha256:64ad7ec71cfc65694e22c6cd43141fe9ee47ba540b291c007aee528b78acb60a",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 63,
+      "failures": []
+    },
+    {
+      "run": "45748711062",
+      "artifact_id": 15086485498,
+      "name": "tests-windows-2022",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "389e2f78a0b2eb70eae933dc86a1fd7fb61278cdd0d356d827469d7c73e5b9ea",
+      "official_digest": "sha256:389e2f78a0b2eb70eae933dc86a1fd7fb61278cdd0d356d827469d7c73e5b9ea",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 457,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 62,
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "observed": "worker subprocess audit count0 !=2"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "observed": "worker subprocess audit count0 !=2"
+        }
+      ]
+    },
+    {
+      "run": "45748711062",
+      "artifact_id": 15085635530,
+      "name": "tests-macos-15",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "99333fdae05dbfee3cf2c16dfc0fbba676ef34863885af39733da4e3bb8338bc",
+      "official_digest": "sha256:99333fdae05dbfee3cf2c16dfc0fbba676ef34863885af39733da4e3bb8338bc",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 63,
+      "failures": []
+    },
+    {
+      "run": "45748711062",
+      "artifact_id": 15084572761,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+      "zip_sha256": "4e106dd52b786a47c5117b608b887826e7c4b2b40238310938f5f24b7953d162",
+      "official_digest": "sha256:4e106dd52b786a47c5117b608b887826e7c4b2b40238310938f5f24b7953d162",
+      "zip_crc_valid": true,
+      "tests": 521,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 63,
+      "failures": []
+    }
+  ],
+  "historical_windows_identity_comparison": [
+    {
+      "run": "45748718050",
+      "previous_failed": 24,
+      "now_failed": 2,
+      "previous_failures_now_actually_passed": 22,
+      "no_omitted_or_skipped_ids_in_fixed_set": true
+    },
+    {
+      "run": "45748711062",
+      "previous_failed": 24,
+      "now_failed": 2,
+      "previous_failures_now_actually_passed": 22,
+      "no_omitted_or_skipped_ids_in_fixed_set": true
+    }
+  ],
+  "retained_failures": "Both legacy managed-upload-restart creator cases fail worker audit count0vs2. Home-VM native diagnostic and independent report identify CPython Windows argv=str observer blind spot. Maintainer explicitly retains further correction; no skip/xfail or suppressed failure.",
+  "limits": [
+    "Mac/Ubuntu each458passed63skipped;Windows each457passed62skipped2failed. Skips are not passed.",
+    "Windows pytest failure prevents later wheel build/install steps in that job; do not infer installed package success from JUnit.",
+    "Same-head push and PR original artifacts retained independently, official digest and ZIPCRC and every testcase classification verified."
+  ]
+}

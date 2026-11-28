@@ -1,0 +1,65 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "requirement": "R008",
+  "scene": "SC8",
+  "case_id": "TC-008-refresh-missing-auth",
+  "status": "independent_passed_native_registration_blocked",
+  "product_base": "341b38913789b6180f4b8ffcdb03ea8463558cf8",
+  "product_file": "src/smm_local/documents.py",
+  "product_sha256": "43c10e7a05671cf39b22fab593898f537d273d7a4467714288607624931c407b",
+  "test_file": "tests/test_document_formats_missing_auth.py",
+  "test_sha256": "612c16e89439c33c266e9ca6d978614b770881c65ec4a0eafd5c4022c701c477",
+  "test_repairs_used": 1,
+  "red": {
+    "request_id": "red-refresh-missing-auth-v2",
+    "main_failed": 2,
+    "seconds": 19.35,
+    "exit_code": 1,
+    "review": "review-refresh-missing-auth-red-v1",
+    "status": "expected_failure",
+    "observation": "Both actual creators changed primary source member from missing to ready after legal saved-byte reprocess supported by an unrefreshed overlap"
+  },
+  "green": {
+    "request_id": "green-refresh-missing-auth-v1",
+    "main_passed": 2,
+    "seconds": 46.5,
+    "exit_code": 0,
+    "regression_passed": 12,
+    "regression_seconds": 48.98,
+    "regression_exit_code": 0,
+    "artifacts": 881,
+    "stored_bytes": 8254577,
+    "all_storage_hashes_verified": true,
+    "review": "review-refresh-missing-auth-green-v1",
+    "review_status": "passed",
+    "review_opinion_sha256": "16dc62bf9497b4659d56b6e330e7711a34fdc25badbd452da0d01d3a8812be48",
+    "result_sha256": "a70cfa49dbe9b74fe1f25e736c5fd6f573e8a248ae705511f05981efd810219e",
+    "native_registration": {
+      "status": "blocked",
+      "reason": "use the current case design for this test scenario",
+      "cause": "Parent advanced SC8 design to unreadable case before registering missing green opinion",
+      "historical_opinion_preserved": true,
+      "next": "After current unreadable TDD, combine missing and unreadable cases in one current design, rerun frozen tests against final affected product and register fresh candidate/formal reviews. Do not rewrite original records."
+    }
+  },
+  "actual": {
+    "creators": [
+      "Local",
+      "Hub"
+    ],
+    "projects": "ordinary/global each2readyDOCX+2partialPDF per creator; unrelated two-control project",
+    "main_targets": 16,
+    "control_documents": 4,
+    "full_text_reads": 56,
+    "full_table_reads": 96,
+    "original_info_reads": 56,
+    "actual_original_downloads": 56,
+    "independent_sha_original_files": 20,
+    "old_reference_rejections": 288,
+    "source_reopen_for_query_or_retry": 0,
+    "source_loss_and_same_byte_recovery": "Both original missing sources stay missing during legal overlap retry; last source refresh removes retry qualification and rejects old requests with unchanged business/storage; explicit same-byte capture restores fresh qualification while old refs stay rejected"
+  },
+  "evidence_note": "18 input-path slots: control1/2 input slots were overwritten by second owner, but all20 distinct original bytes persist as SHA-named actual downloads. Reviewer independently compared20 original synthetic source files against downloads before pytest cleaned temporary source directories, then reverified persistent bytes and source-derived truth. No claim that20 files persist under inputs/.",
+  "scope": "Successful directory enumeration with missing member only. Unreadable branch has separate red case; in-flight cancellation, configuration/remove, GC, complete SC8 and E/H/X remain pending.",
+  "redaction": "Synthetic documents only; no credentials or raw private runtime paths in public summary."
+}

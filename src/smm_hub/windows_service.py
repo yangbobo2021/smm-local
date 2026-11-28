@@ -76,6 +76,9 @@ def serve(name, create_server):
             stopping.set()
             report(3)
             if server is not None:
+                stop_documents = getattr(server, 'smm_stop_documents', None)
+                if stop_documents is not None:
+                    stop_documents()
                 server.should_exit = True
         return 0
 

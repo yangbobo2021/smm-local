@@ -1,0 +1,28 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_ids": [
+    "TC-008-empty-original",
+    "TC-008-managed-empty-original",
+    "TC-008-merged-column-header",
+    "TC-008-processing-version-isolation",
+    "TC-008-reference-hub-cli",
+    "TC-008-reference-local-cli",
+    "TC-008-reference-local-mcp",
+    "TC-008-reference-web",
+    "TC-008-remote-original-routing",
+    "TC-008-table-context",
+    "TC-008-table-context-bounds",
+    "TC-008-table-multiple-hits",
+    "TC-008-table-preview",
+    "TC-008-unsupported-object-empty",
+    "TC-008-web-empty-original"
+  ],
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-008/match/match-sc9-merged-header-local-v1/result.json",
+  "request_id": "match-sc9-merged-header-local-v1",
+  "result_sha256": "b616ae26ad2b044b2ee4530ad92a0c37aa2c51a56dc6912e1a8ba0711a7331c7",
+  "scene": "SC9",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

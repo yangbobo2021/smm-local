@@ -1,0 +1,43 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "scene": "SC1",
+  "case_id": "TC-008-web-native-upload",
+  "status": "needs_revision_retained_by_maintainer",
+  "product_baseline": "f3e6f904881d24ee54990b1112730adb6eec5b41 + uncommitted native-upload Web implementation",
+  "latest_red": {
+    "request_id": "red-web-native-upload-v5",
+    "result_sha256": "a64ffb28d01e81b2f91132e122699d9b3914be2dc8996bff60f0c1a2fed11c45",
+    "exit_code": 1
+  },
+  "latest_review": {
+    "request_id": "review-web-native-upload-red-v6",
+    "target": "red-web-native-upload-v5",
+    "status": {
+      "TC-008-web-native-upload": {
+        "status": "needs_revision",
+        "revision_target": "implementation"
+      }
+    },
+    "result_sha256": "9b0e1aff485cc283738c9e69576c0c1057672150d5813579a5f4c562e01a3b98"
+  },
+  "earlier_implementation_execution": {
+    "request_id": "green-web-native-upload-v1",
+    "status": "blocked",
+    "main_exit_code": 1,
+    "main_summary": "2 failed: nonunique sentence query expected one hit; subsequent approved unique-anchor patch not yet green-verified",
+    "regression_summary": "81 passed",
+    "regression_exit_code": 0
+  },
+  "retained_gaps": [
+    "Second-wave pending state: retained same-project ready rows and details are not rechecked.",
+    "Visible library document-ID set is not checked at project switch, pending and complete states."
+  ],
+  "maintainer_decision": "Retain these gaps and continue independent work; do not apply this additional test repair.",
+  "declined_patch": {
+    "name": "retained-and-project-ui/fix.patch",
+    "sha256": "d13ca2d6bdeef281baa480e03e0e3de6cb392e840440a954908b39aedfd33e58",
+    "applied": false
+  },
+  "scope": "Actual SC9 reader/blank-library tests prepare files before browser opens; they neither execute nor close this SC1 upload case.",
+  "redaction": "No credentials, authorization values, original user data or private runtime paths included. All documents synthetic."
+}

@@ -1,0 +1,112 @@
+{
+  "scope": "G0-I components and complete installed inventory only",
+  "producer_commit": "69ec018ca875cc69fe36706cfe92bcc842ba3067",
+  "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/45469026547",
+  "records": [
+    {
+      "artifact_id": 14955724123,
+      "artifact_sha256": "29b7ba76a5b45999fc4ebcec790fe590ba0b49db2ede7790a6884178fa80aeab",
+      "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "identity": {
+        "platform": "win32",
+        "sid_sha256": "bd8aa4fcd6759de1fc5c0947afa649300d2bbbf5ebda073143fcd2cd59f0a60b",
+        "account": "runner Administrator; not E1 standard account or H-win LocalService",
+        "session_id": 2
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 1761,
+      "installed_links": 0,
+      "versioned_so": []
+    },
+    {
+      "artifact_id": 14955837717,
+      "artifact_sha256": "a99435ed23b1b902808627f17aee95cefa9c08ac096795d9f908a8f473ecc4cf",
+      "python": "3.14.10 (tags/v3.14.10:b703b2c, Oct 25 2026, 17:36:52) [MSC v.1944 64 bit (AMD64)]",
+      "identity": {
+        "platform": "win32",
+        "sid_sha256": "bd8aa4fcd6759de1fc5c0947afa649300d2bbbf5ebda073143fcd2cd59f0a60b",
+        "account": "runner Administrator; not E1 standard account or H-win LocalService",
+        "session_id": 2
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 1761,
+      "installed_links": 0,
+      "versioned_so": []
+    },
+    {
+      "artifact_id": 14955892520,
+      "artifact_sha256": "e011bb1e7eeebce44fd06632c662df148f71154853e803e29b5f2941de28ffea",
+      "python": "3.11.18 (main, Nov 11 2026, 00:16:37) [Clang 23.1.3 ]",
+      "identity": {
+        "platform": "linux",
+        "uid": 1001,
+        "gid": 1001
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 3518,
+      "installed_links": 1279,
+      "versioned_so": [
+        "lib/libkrb5.so.3.3",
+        "lib/libpanelw.so.6.6",
+        "lib/libtinfow.so.6.6",
+        "lib/libgomp.so.1.0.0",
+        "lib/libgssrpc.so.4.2"
+      ]
+    },
+    {
+      "artifact_id": 14957905268,
+      "artifact_sha256": "0739fc48c500f4d78c2f9df1611b659a547f98be560e6f5937816a96dc60c0f7",
+      "python": "3.14.10 (main, Nov 11 2026, 00:18:44) [Clang 23.1.3 ]",
+      "identity": {
+        "platform": "linux",
+        "uid": 1001,
+        "gid": 1001
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 3518,
+      "installed_links": 1279,
+      "versioned_so": [
+        "lib/libgssapi_krb5.so.2.2",
+        "lib/libpsl.so.5.3.8",
+        "lib/libkrb5.so.3.3",
+        "lib/libcom_err.so.3.0",
+        "lib/liblzma.so.5"
+      ]
+    },
+    {
+      "artifact_id": 14958492763,
+      "artifact_sha256": "a9dda042c79b2bce42bf32452e829891de0b29f875266049335e2161763d78ec",
+      "python": "3.14.10 (main, Oct 25 2026, 17:12:00) [Clang 17.0.0 (clang-1700.6.4.2)]",
+      "identity": {
+        "platform": "darwin",
+        "uid": 501,
+        "gid": 20
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 3419,
+      "installed_links": 1233,
+      "versioned_so": []
+    },
+    {
+      "artifact_id": 14958526935,
+      "artifact_sha256": "8b37e9e5587846265efbb8caa1633f909969cd7c1201515208941005870bb3f7",
+      "python": "3.11.9 (v3.11.9:de54cf5be3, Apr  2 2024, 07:12:50) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "identity": {
+        "platform": "darwin",
+        "uid": 501,
+        "gid": 20
+      },
+      "ocr": "文档检索\n\nINVOICE 12345.67\n",
+      "installed_files": 3419,
+      "installed_links": 1233,
+      "versioned_so": []
+    }
+  ],
+  "raw_opened_receipts_sha256": "827910b49ed1b187ae5e963dbf4ddf318587c18766616368a307dbf0d7c92afa",
+  "outstanding": [
+    "Minimum Python installed-wheel business gate on each OS",
+    "All E/H/X application acceptance"
+  ],
+  "redaction": "Omitted private task paths/full Windows SID and raw logs; all original artifacts were downloaded by exact ID, digest verified and actual materials/PNG opened. This is not app acceptance.",
+  "attempts_note": "Initial macOS jobs were cancelled without steps; retried only cancelled jobs. All six actual component artifacts recovered by exact ID, digest verified and opened; workflow aggregate state alone is not used as acceptance evidence."
+}

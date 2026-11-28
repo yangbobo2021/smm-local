@@ -1,5 +1,36 @@
 # 可选实际安装包验收探针
 
+## 008 Word、Excel、PDF（实施中）
+
+依据 [008 SPEC](../../changes/008-document-format-support/spec.md) 和 [PLAN](../../changes/008-document-format-support/plan.md)；当前结果见 [待验与保留缺口](../../changes/008-document-format-support/evidence/pending-verification.json)。以下是已有工具的复跑入口，尚无一条命令完成全部 C1/E/H/X；006/007 探针或组件成功不能代替 008 交付。
+
+从本次提交的独立工作目录运行，使用任务自有档案、材料及全新证据目录。测试只生成合成文档；不要把日常 SMM/Hub 的数据库、项目目录、凭据或用户文件传入验收。维护者于 2026-11-26 恢复家庭 ESXi Windows/Ubuntu 的测试授权。本机、GitHub CI 与这些测试机均可使用；家庭 Ubuntu 22.04 仅作补充，不替代 SPEC 的 Ubuntu 24.04，Windows SSH 管理员也不代替规定的普通客户端或 LocalService 身份。
+
+普通组件回归和构建：
+
+```text
+uv sync --extra test --extra documents
+uv run python -m pytest -q --junitxml=<本轮证据目录>/test-results.xml
+uv run python scripts/build_packages.py
+```
+
+执行前将环境变量 PYTHONPATH 设为本仓库 src 的绝对路径，将 ACCEPTANCE_EVIDENCE_DIR 设为本轮全新私有目录；Windows 可用 PowerShell 的环境变量语法。每条命令分别核退出码，不能在 pytest 失败后把旧 dist 或 JUnit 当作本轮产物。常规 [Test packages](../../.github/workflows/tests.yml) 使用三 OS 的 Python 3.14；pytest 失败会跳过后续构建/独立安装步骤。跳过 OCR/浏览器用例不代表它们通过。
+
+需要真实 OCR 的用例先显式准备离线材料；只有此准备步骤允许下载锁定来源：
+
+```text
+uv run python scripts/acceptance/document_formats_prepare.py prepare --work <任务材料目录> --output <任务材料清单.json>
+uv run python scripts/acceptance/document_formats_component.py --materials <任务材料清单.json> --work <新组件输出目录> --output <新组件结果.json>
+```
+
+按材料清单将 SMM_008_OCR_EXECUTABLE、SMM_008_OCR_DATA、SMM_008_FONT 分别设为 ocr_executable、ocr_data_dir、font.path 的实际绝对路径，再执行所选 tests/test_document_formats_*.py。测试中仍由实际创建端配置并调用本地 OCR，不用伪引擎冒充成功；普通查询不准备或下载材料。需要网页用例时另装 acceptance 依赖和实际 Chromium，设置 PLAYWRIGHT_BROWSERS_PATH 指向本轮浏览器安装位置。用例自身还有入口/平台前置检查，须逐项核 skip 原因。
+
+[Document formats acceptance](../../.github/workflows/document-formats-acceptance.yml) 的 components 模式只测三 OS、Python 3.11/3.14 的依赖、实际渲染/OCR和离线组件安装。它从源码环境运行，不证明独立 wheel 安装后的完整文档业务、普通身份、系统服务或跨 OS 同步。Office 对象分类夹具固定在 [document-format-objects](../../tests/fixtures/document-format-objects/README.md)；CI 只读冻结原件，生成 SDK 不加入产品运行依赖。
+
+实际最低版本独立安装以 tests/test_document_formats_installed_minimum.py 对应轮次的私有配置、wheel 摘要和源码绑定为准；不能用源码 cwd 的成功代替。E/H/X 仍按 PLAN 逐格准备两端包、入口、真实身份、旧引用读取及清理证据。维护者保留的网页上传和 Windows 观察器缺口、未批准的测试修订继续按证据索引展示，不自动重跑或改判。
+
+CI 原件使用 document_formats_recover_evidence.py 下载并核官方 artifact 的 run/commit/name/ID/长度/SHA；加密业务原件再由 document_formats_evidence.py verify 解密、逐文件核对并实际打开，保留 recovered_verified 收据后才交 Reviewer。两脚本 --help 给出必填参数；普通 tests-<OS> 的 JUnit ZIP 不使用业务加密包的格式。私钥只保存在任务私有目录，不上传、提交或放进公开报告。所有失败、缺图/trace/清理及版本不适用项均保留，原始与脱敏副本分别记 SHA。
+
 ## 007 项目文档库与Hub同步
 
 [007 SPEC](../../changes/007-hub-document-search/spec.md)及[实施计划](../../changes/007-hub-document-search/plan.md)当前含36项（28自动TC、8人工项）和A1–A10/E1/E2。[007当前验收证据](../../changes/007-hub-document-search/evidence/README.md)及其逐项索引关联原始材料与独立意见，并区分当前版本和历史记录。原始记录在任务`AT-SMM-007`私有目录；未执行或缺环境项不能计passed，不能用本说明或006历史结果代替007证据。
@@ -8,7 +39,7 @@
 - 包入口：`python scripts/acceptance/hub_documents_packages.py --uv <uv实际路径> --output <全新目录>`。分别构建和安装Local/Hub，逐所有模块/HTML核源码→wheel→安装字节，验证真实CLI/MCP；Hub环境不得安装Local。这只证明对应命令和包，不代替E1浏览器/普通身份或E2服务。
 - 独立判定探针：`python scripts/acceptance/hub_documents_checks.py --selfcheck`。两个独立原件、文本/范围/版本/摘要/项目/来源/资格逐项负控，以及真实PID/端口存活负控均必须拒绝。自检仅表示工具可用于验收。
 - 实际平台按`changes/007-hub-document-search/acceptance/manual-cases.md`逐动作执行：两Local档案、前景Hub、真实CLI/浏览器选择与拖入/stdio、项目完整命中及逐字读取、双端更新/只读归属、生命周期/离线/重启、链接及权限、实际进程/端口清理。平台入口为 `python scripts/acceptance/hub_documents_platform.py --target-config <独立包配置> --output <全新目录>`；Windows须由实际标准账户运行。Hub凭据浏览器观察另用同参数的 `hub_documents_browser_privacy.py`；没有业务原件不能计通过。
-- 维护者已要求不再使用家庭ESXi Windows/Linux，且目前没有其他实机资源，先继续本机与CI。CI环境能力探测独立于产品验收；Ubuntu实际user-systemd能力不等于007服务业务已通过，Windows创建LocalService配置也不等于真实LocalService进程/普通Local已通过。
+- 007 当时按维护者要求停用家庭 ESXi、先做本机与 CI；008 本轮的环境授权见前节 2026-11-26 更新，不据此改写 007 历史结果。CI 环境能力探测独立于产品验收；Ubuntu 实际 user-systemd 能力不等于服务业务通过，Windows 创建 LocalService 配置也不等于真实 LocalService 进程/普通 Local 已通过。
 - 原始输出含合成文档及本地路径。公开前保留原始/脱敏副本双SHA，不公开token、TLS私钥、签名材料、数据库、wheel或原始trace。保护冲突按用户指南明确恢复，不删除保护文件或自动重授权以“修复”测试。
 
 `Selective upload installed-package acceptance` 的 `document-installed-e1` 只复跑三系统E1，明确跳过服务，不代替E2；`document-installed` 继续同时执行适用的真实Ubuntu用户服务和Windows SCM。默认005模式不变。新增模式用于独立重取E1某项证据，不能以它的整体success声称服务或跨机器已验证。
@@ -278,3 +309,14 @@ openssl cms -decrypt -binary -inform DER -in <原件.zip.cms> -inkey <私有目�
 ```
 
 `reviewer-key.pem`只留在该私有目录，不提交或传入workflow。公开证书不含私钥。
+
+
+### 六项修复的跨平台探针约定（2026-11-28）
+
+启动与退出观察分开：启动时用`tests/document_formats_platform.py`核PID、创建时间、完整argv、exe/cwd及实际父子关系，完成归属登记后才注入故障/发送信号；等待退出用`document_formats_exit_observer.py`只读核已登记PID/创建时间和真实退出。退出中的argv/exe可能消失或暂不可读，不用它们重新推断“还是不是自己”；未知身份仍在调用者原截止内等待，绝不据AccessDenied判已退出或向不明进程发信号。Windows原生Job采用原子加入及内核创建时间证明，不能以POSIX退出例代替。
+
+文本与文件就绪分开：协议文本按UTF-8保存原始字节；本机stdout握手按实际系统换行检查。Windows字符串argv用专用`document_formats_handoff_observer.py`调用CommandLineToArgvW，保留原始表示并做正负自检，不用空格split或将字符串当字符数组。`document_formats_fixture_io.py`只为任务自有就绪JSON在原deadline内重试FileNotFoundError/PermissionError；坏JSON立即失败，不用于产品输入、访问权限或空间预算采样。旧共享argv审计缺口未因新handoff观察器修复而关闭。
+
+准备时间与业务时间分开：完整资料保护核对之间可通过当前token/nonce/递增step报告准备进度，只续测试30/60秒idle门；重复、倒退或另一任务消息不能续门。注入前再次核实际worker/helper/watchdog仍活且无门超时。五秒终态/整树/槽位/payload回收计时从已确认的真实监督退出开始，并在该断言位置采样，不把之后旧资料读回时间混入。产品300秒、1GiB、256MiB预算保持；长批次按业务及平台拆分，外层控制器留足实际批次与清理时间，超时结果原样保留，不抬产品额度或删目标来通过。
+
+每个运行输出分别保存命令、源码/材料SHA、身份、退出码、完整JUnit、原stdout/stderr及附件。不同来源观察日志各自保存，不把旧worker审计和新handoff事件混计。远端包先核传输ZIP摘要/CRC，再逐成员核长度与SHA，打开关键原件后独立复审。统一探针和固定材料能减少测试本身的平台差异；平台特有内核/身份/文件系统行为仍需实测。一台机器通过、普通CI通过、管理员源码组件通过分别保留自己的范围，不能替代三OS的最低Python/标准用户/原生服务/E/H/X。

@@ -1,0 +1,85 @@
+{
+  "schema": "smm-008-received-structure-v1",
+  "scope": "17 structural/binding cases, two independent target documents each; partial processed-bundle case, not full SC7/R008.",
+  "source": {
+    "src/smm_local/document_results.py": "142b0d185e0c40834194191f8960c1d40359b02ee0f32f5d6351d6881e1d7344",
+    "tests/test_document_formats_received_validation.py": "10fa7417561d664e535f7742dffaf04e9a2a7f2a2504eb8cff0f00c817a13da5"
+  },
+  "red": {
+    "passed": 13,
+    "failed": 4,
+    "skipped": 0,
+    "seconds": 11.98,
+    "observed_error": "TestClient rethrows KeyError/AttributeError from result validator, not a recorded TCP500",
+    "defects": [
+      "missing table location",
+      "missing table cells",
+      "non-object cell",
+      "missing cell location"
+    ]
+  },
+  "green": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 12.14,
+    "bad_commits_400": 34,
+    "legal_v2_stages_under_observer": 34,
+    "old_bundle_read_repetitions": 204
+  },
+  "regression": {
+    "passed": 12,
+    "skipped": 0,
+    "seconds": 2.69,
+    "formats": [
+      "docx",
+      "xlsx",
+      "native PDF"
+    ]
+  },
+  "correction": "Explicit result shape validation using existing ValueError contract, no broad exception suppression, no receiver parsing.",
+  "independent_scope": "Valid red and same-test green independently reviewed; no complete-bundle or whole-scene passed claim.",
+  "originals": {
+    "processed-bundle-coverage-audit-v1.md": {
+      "sha256": "6904549327303abec5b1259f1652c5b4e373a2d90e26d12e69a973b9f52729b8",
+      "bytes": 7739
+    },
+    "received-structure-red-execution-review-v1.md": {
+      "sha256": "ad46ce927edd2aba4afe7b2ffa72164efd40740a50c7f933bf7d0082ce9d4b6d",
+      "bytes": 5041
+    },
+    "received-structure-green-execution-review-v1.md": {
+      "sha256": "65708e5a349ae1b8d37941aa43577c3eab53433b3ff0db637bab0fc4e157df34",
+      "bytes": 3826
+    },
+    "received-structure-red-v3/stdout.log": {
+      "sha256": "d836e39470a7dd28b0622cf01645e27a35675e4de82db61f222cc0ab0a572018",
+      "bytes": 13255
+    },
+    "received-structure-red-v3/result.xml": {
+      "sha256": "22c0ffbef05947302c9c441c089e6ea311275ac61922223a89c66880d15a9520",
+      "bytes": 16594
+    },
+    "received-structure-green-v1/stdout.log": {
+      "sha256": "882920d70bfe5c00f4fc7c40d0c2c29b2021c3bbd9c31179e6e9c5e8ca59eefe",
+      "bytes": 602
+    },
+    "received-structure-green-v1/result.xml": {
+      "sha256": "65579fbc75930e40d0d0b5e77f84c700fb316f950f168541feaef3ff1b7f525b",
+      "bytes": 3267
+    },
+    "received-shape-format-regression-v1/stdout.log": {
+      "sha256": "85ef476f46c1323bdc0a447d36bf79c4dbff09639eb358b36e9cbffd7d638713",
+      "bytes": 601
+    },
+    "received-shape-format-regression-v1/result.xml": {
+      "sha256": "8fc31adbb00b623722fff70f9494533bbd241ce1e607d3620b8b84dd7fe3c714",
+      "bytes": 1783
+    }
+  },
+  "remaining": [
+    "raw/results >1MiB missing/bad blocks and manifest matrix",
+    "result-ready late authorization/capture races",
+    "full current formal registry and platform independent delivery review"
+  ]
+}

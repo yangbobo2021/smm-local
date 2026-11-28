@@ -1,0 +1,56 @@
+{
+  "schema": "smm-008-quality-and-observer-completion-v1",
+  "date": "2026-11-28",
+  "product_change": [
+    "src/smm_local/document_formats/ocr.py"
+  ],
+  "files_sha256": {
+    "src/smm_local/document_formats/ocr.py": "76f69f3f604228a99e06e177be5171542c0399785a913ac4a6488553c22842fd",
+    "tests/test_document_formats_ocr_body_quality.py": "487be7cafb9757a73c9c1efacf579c88f4d8c64e91282259278b0f177c6412c3",
+    "tests/document_formats_health_hook.py": "95d8d5e372020b981db515ae03ec6f53c0e7b6b476d29b8bcc1c2cce7656fbbf",
+    "tests/test_document_formats_active_source.py": "1c5ec99f17680044521fd8465322d53e86a0c14b476e260898ca9cb51941df88"
+  },
+  "OCR": {
+    "TC": "TC-008-pdf-ocr",
+    "red": "red-completion-sc5-body-quality-v1",
+    "red_review": "review-completion-sc5-body-quality-red-v1",
+    "red_result": "1failed3passed8.00s; critical7 -> /,CER2.0833%",
+    "green": "green-completion-sc5-body-quality-v1",
+    "green_review": "review-completion-sc5-body-quality-green-v1",
+    "green_result": "4passed8.02s; allfourCER0, exact frozen tests and originals",
+    "regression": "13passed13.03s real mixed/native/failed-capture-retry",
+    "scope": "this quality fix only, not fullSC5/E/H/X"
+  },
+  "watch_observer": {
+    "Local_debug": "debug-completion-sc10-watch-local-v1",
+    "Local_review": "review-completion-watch-local-candidate-v1",
+    "Local": "1passed38.32s,12faulttargets",
+    "Hub_debug": "debug-completion-sc10-watch-hub-v1",
+    "Hub_review": "review-completion-watch-hub-candidate-v1",
+    "Hub": "1passed220.63s,12faulttargets",
+    "scope": "candidate evidence on pre-OCR-fix product; final current-version formal proof pending; no product supervision change",
+    "controls": "Mac6passed0.71s,Windows6passed7.65s exact task tree/physical interpreter; Windows SSH admin component only, not E"
+  },
+  "historical_attempts": "Old CI, combined1failed12passed and native34MiB-blocked attempts remain; no relabelled passed. Ubuntu22.04normal32trials onehookassertion, patched40trials0bad with6actualemptyargv; not assertion of exact old24.04CI/kernel cause.",
+  "reports": {
+    "watch-observer-candidate-review.md": {
+      "path": "completion-watch-observer-candidate-review.md",
+      "original_sha256": "c86f9ca53920e233273e44b375fff8c4a7a28475ad3a4c784769fb960cad4643",
+      "public_sha256": "c86f9ca53920e233273e44b375fff8c4a7a28475ad3a4c784769fb960cad4643",
+      "redaction": "private checkout/home/evidence path prefixes and test VM host/address/user paths only"
+    },
+    "ocr-body-red-independent-review.md": {
+      "path": "completion-ocr-body-red-independent-review.md",
+      "original_sha256": "cd444bd93a46018c6216f7422e660ff2fc9cd0fed48c921270a9edccba6d2e91",
+      "public_sha256": "cd444bd93a46018c6216f7422e660ff2fc9cd0fed48c921270a9edccba6d2e91",
+      "redaction": "private checkout/home/evidence path prefixes and test VM host/address/user paths only"
+    },
+    "ocr-body-green-independent-review.md": {
+      "path": "completion-ocr-body-green-independent-review.md",
+      "original_sha256": "36c900fb2501a0c0be1f586b2b88166b44fa9d760a83a36a7be0141ad52e39e8",
+      "public_sha256": "36c900fb2501a0c0be1f586b2b88166b44fa9d760a83a36a7be0141ad52e39e8",
+      "redaction": "private checkout/home/evidence path prefixes and test VM host/address/user paths only"
+    }
+  },
+  "remaining": "Final current-source CI/raw evidence, complete C1/E/H/X and independent requirement/PR review. Do not merge."
+}

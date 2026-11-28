@@ -1,0 +1,49 @@
+{
+  "scope": "development TDD subcases; not SC9/R008/E/H/X completion",
+  "baseline": "fc1ef421eadbe831ac80902df11c09e42af65e86",
+  "checks": {
+    "deep_table": {
+      "red": "red-table-context-v1",
+      "red_review": "review-table-context-red-v1",
+      "green": "green-table-context-v1",
+      "green_review": "review-table-context-green-v1",
+      "main_passed": 3,
+      "regression_passed": 54,
+      "formats": [
+        "docx",
+        "xlsx",
+        "pdf"
+      ],
+      "documents_per_format": 2,
+      "boundary": "Word second table and Excel hidden sheet row243,column11; PDF page2,grid2"
+    },
+    "quotas": {
+      "debug": "debug-table-context-bounds-v1",
+      "review": "review-table-context-bounds-v1",
+      "cell_counts": {
+        "accepted": [
+          1000,
+          1000
+        ],
+        "rejected": 1025
+      },
+      "unicode_codepoints": {
+        "accepted": 16000,
+        "rejected": 16001
+      },
+      "header_in_and_outside_window": true
+    }
+  },
+  "unverified": [
+    "search snippet/context 2000-codepoint complete boundaries",
+    "distant multiple matches",
+    "other CLI/MCP/Web/Hub entries",
+    "final platform E/H/X and installed minimum-Python business"
+  ],
+  "files": {
+    "src/smm_local/document_results.py": "2cd7a681bfe90f802e408d2686d9e5f8013f82afe51c0bd5ee72073120b948d6",
+    "src/smm_local/documents.py": "efad65771818018d4e8089e501d4885dd438f5cbf7bbf48f9667a03db42a3a1d",
+    "tests/test_document_formats_table_context.py": "ea5d172ac9859f1e0b287226f1cbf5651c5ddd378bbe1a8ac32545d614286b72",
+    "tests/document_formats_table_fixture.py": "e76521bfa99d0a8c688f4f41397b9a450d49b68aed23a53ff82b88c673d83b80"
+  }
+}

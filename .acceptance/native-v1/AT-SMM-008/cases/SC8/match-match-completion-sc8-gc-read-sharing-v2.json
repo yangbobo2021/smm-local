@@ -1,0 +1,21 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_ids": [
+    "TC-008-active-source-removal",
+    "TC-008-cached-inflight",
+    "TC-008-first-failure",
+    "TC-008-gc-read-sharing",
+    "TC-008-managed-replace-retry",
+    "TC-008-refresh-missing-auth",
+    "TC-008-refresh-unreadable-auth",
+    "TC-008-web-ready-management"
+  ],
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-008/match/match-completion-sc8-gc-read-sharing-v2/result.json",
+  "request_id": "match-completion-sc8-gc-read-sharing-v2",
+  "result_sha256": "6c94221fd77099b46cd66aae77fb832f3c511c48928152d18f88024f8dde3e9d",
+  "scene": "SC8",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

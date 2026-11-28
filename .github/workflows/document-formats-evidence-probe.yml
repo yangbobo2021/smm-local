@@ -1,0 +1,43 @@
+name: Document evidence custody probe
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths:
+      - .github/workflows/document-formats-evidence-probe.yml
+      - scripts/acceptance/document_formats_evidence*.py
+      - scripts/acceptance/document_formats_recover_evidence.py
+      - changes/008-document-format-support/evidence/ci-public-key.pem
+      - changes/008-document-format-support/evidence/ci-completion-public-key.pem
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+jobs:
+  custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.8'
+          python-version: '3.14'
+      - run: uv sync --frozen --extra test --extra documents --extra acceptance
+      - run: uv run --frozen playwright install --with-deps chromium
+      - run: uv run --frozen python -m pytest -q tests/test_document_formats_evidence.py
+      - name: Capture actual small-sample browser and downloads
+        run: uv run --frozen python scripts/acceptance/document_formats_evidence_probe.py --output .acceptance-local/008-custody/raw --context-output .acceptance-local/008-custody/context.json
+      - name: Encrypt raw evidence with controller public key
+        if: always()
+        run: uv run --frozen python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-custody/raw --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-custody/context.json --output .acceptance-local/008-custody/raw.smm-evidence --receipt .acceptance-local/008-custody/generated.json
+      - name: Preserve encrypted raw evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-evidence-custody-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/008-custody/raw.smm-evidence

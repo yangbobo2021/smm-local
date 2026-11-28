@@ -1,0 +1,308 @@
+{
+  "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+  "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance.",
+  "artifacts": [
+    {
+      "run": "45769770076",
+      "artifact_id": 15095281819,
+      "name": "tests-windows-2022",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "07b0fd91570a211f06dbf71440755ca2ae7020a25389880feb4de5ddc0e1e9f1",
+      "official_digest": "sha256:07b0fd91570a211f06dbf71440755ca2ae7020a25389880feb4de5ddc0e1e9f1",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 464,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 67
+    },
+    {
+      "run": "45769770076",
+      "artifact_id": 15093914177,
+      "name": "tests-macos-15",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "be0286ccf71114c77908e94a52c91556dc93c9a023d410afd8779f9cc01a8eb3",
+      "official_digest": "sha256:be0286ccf71114c77908e94a52c91556dc93c9a023d410afd8779f9cc01a8eb3",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45769770076",
+      "artifact_id": 15093494381,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "5ab2dbe65959d0888549db9f6ac5a94b637f847908321c51968aef35af09bc08",
+      "official_digest": "sha256:5ab2dbe65959d0888549db9f6ac5a94b637f847908321c51968aef35af09bc08",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45769761597",
+      "artifact_id": 15095645197,
+      "name": "tests-windows-2022",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "e2f8128ab488349c80a70be6824975dced276e9c0f2fd74242ba46abe1eb5ac6",
+      "official_digest": "sha256:e2f8128ab488349c80a70be6824975dced276e9c0f2fd74242ba46abe1eb5ac6",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 463,
+      "failed": 3,
+      "errors": 0,
+      "skipped": 67
+    },
+    {
+      "run": "45769761597",
+      "artifact_id": 15094366192,
+      "name": "tests-macos-15",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "2be337cd6f61298e1647c621508a987e00beb9d41e7670777098a251691dfa03",
+      "official_digest": "sha256:2be337cd6f61298e1647c621508a987e00beb9d41e7670777098a251691dfa03",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45769761597",
+      "artifact_id": 15093628397,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+      "zip_sha256": "409993ea20270681187dd766df4b539da6c3eeaa80c5f0181a3f0088adbcdea9",
+      "official_digest": "sha256:409993ea20270681187dd766df4b539da6c3eeaa80c5f0181a3f0088adbcdea9",
+      "zip_crc_valid": true,
+      "tests": 533,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    }
+  ],
+  "new_scoped_cases_in_each_of_six_artifacts": [
+    {
+      "run": "45769770076",
+      "platform": "tests-windows-2022",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    },
+    {
+      "run": "45769770076",
+      "platform": "tests-macos-15",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    },
+    {
+      "run": "45769770076",
+      "platform": "tests-ubuntu-24.04",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    },
+    {
+      "run": "45769761597",
+      "platform": "tests-windows-2022",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    },
+    {
+      "run": "45769761597",
+      "platform": "tests-macos-15",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    },
+    {
+      "run": "45769761597",
+      "platform": "tests-ubuntu-24.04",
+      "tests": {
+        "queue": {
+          "passed": 4,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[processing-hub]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-local]",
+            "test_creator_duplicate_queue_kicks_do_not_disconnect_or_lose_work[empty_handoff-hub]"
+          ]
+        },
+        "remote_original": {
+          "passed": 1,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_pure_hub_original_downloads_via_local_cli_http_and_stdio"
+          ]
+        },
+        "merged_header": {
+          "passed": 2,
+          "skipped": 0,
+          "failed": 0,
+          "tests": [
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[local]",
+            "test_merged_headings_follow_selected_columns_and_exact_unicode_budget[hub]"
+          ]
+        }
+      }
+    }
+  ],
+  "windows_failures": {
+    "both_runs": [
+      "test_document_formats_upload_restart.py::test_real_creator_restart_resumes_chunks_and_pending_captures[local/hub]: retained shared argv observer count0instead2"
+    ],
+    "push_only": {
+      "run": "45769761597",
+      "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
+      "observed": "A PDF task reported WinError5 access denied on its task-owned pdf-* temporary directory instead of expected missing-OCR failure. PR sibling run passed this same test.",
+      "classification": "Unresolved intermittent observation, cause not determined. Not the prior upload-queue disconnect, not a retained gap; do not loosen expected failure or count it passed."
+    }
+  },
+  "regression_boundary": "All six artifacts actually pass4queue,1remote-original,2merged-header cases; skips not counted as passes. Same-parent multiple DB queue risk remains retained/untested, and Windows has actual remaining failure(s)."
+}

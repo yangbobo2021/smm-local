@@ -1,0 +1,82 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "requirement": "R008",
+  "scene": "SC7",
+  "case_id": "TC-008-hub-refresh-reads",
+  "status": "passed_scoped",
+  "product_base_commit": "365f755",
+  "product_files": {
+    "src/smm_local/documents.py": "521f8aa9c0fae8a58b4286a5bce5f9dbed2fdd3e78f9a19e0c1bb2ef984e4459",
+    "src/smm_local/document_snapshots.py": "867d396737d67d8e83b627eb49f032707d9f38aace216e16a49d7b30e1c5f368",
+    "src/smm_hub/documents.py": "66e5c4224c50361c19fef58307245cc61e0a928d73c6cc6ed00a69c3a3184ad3"
+  },
+  "test_files": {
+    "tests/test_document_formats_hub_refresh_reads.py": "f84b1b2f91ce681a2edbc21bf41555e1397a1ad68de3d69ff768ef57f61a7a87",
+    "tests/document_formats_refresh_barrier.py": "cdebde5a056816c5ca8605a2e77a152e52746f615a9b40a0b73a207a834ff012"
+  },
+  "test_repairs_used": 0,
+  "red": {
+    "request_id": "red-hub-refresh-read-v1",
+    "main_failed": 1,
+    "seconds": 13.47,
+    "exit_code": 1,
+    "review": "review-hub-refresh-read-red-v1",
+    "review_status": "expected_failure",
+    "observation": "Actual paused content worker blocked HTTP read of already-valid old control; source CLI and HTTP recovered after release, followed by explicit business assertion failure."
+  },
+  "green": {
+    "request_id": "green-hub-refresh-read-v1",
+    "result_sha256": "c3b5c3ecf867b7b3e5a8c58e102325f5c2e8a4e108542d4821cc8d55da2abfb0",
+    "main_passed": 1,
+    "seconds": 18.65,
+    "exit_code": 0,
+    "regression_passed": 48,
+    "regression_seconds": 277.48,
+    "regression_exit_code": 0,
+    "artifacts": 890,
+    "stored_bytes": 6655575,
+    "all_artifact_hashes_verified": true,
+    "review": "review-hub-refresh-read-green-v1",
+    "review_status": "passed",
+    "review_registered": true,
+    "review_opinion_sha256": "2a4cb7341270b625759639d73fa4a43d14e754065c01d044465234f3229570ae"
+  },
+  "actual": {
+    "platform": "macOS ordinary identity; source-backed CLI and independent authenticated HTTP Hub",
+    "content_worker_barriers": 12,
+    "old_control_documents": 8,
+    "old_states": [
+      "ready DOCX",
+      "partial PDF"
+    ],
+    "projects": [
+      "ordinary",
+      "global"
+    ],
+    "target_documents": "Each project2DOCX+2XLSX+2nativePDF",
+    "http_requests_per_barrier": 46,
+    "all_old_snapshots_correct_before_release": true,
+    "all_final_targets_verified_against_independent_source": true,
+    "input_files": 20,
+    "input_and_download_bytes_independently_compared": true,
+    "source_bytes_and_mtime_unchanged": true,
+    "source_read_and_processing_probe": "Actual positive/negative controls; no later HTTP source open or processing event",
+    "observed_processes_cleaned": 15,
+    "port_cleanup_verified": true
+  },
+  "implementation": [
+    "Freeze the requested Hub source set under checked guard.",
+    "Use checked short mutation contexts at source begin, capture_metadata transaction and final publication.",
+    "Complete source/raw immutable storage and actual content processing outside the control guard.",
+    "Repeat Hub/epoch/own-source checks at mutations and retain existing source revision/refresh_id/AID/config fences.",
+    "Local default private-call behavior and prior Hub refresh return shape unchanged."
+  ],
+  "scope_limits": [
+    "Only old snapshot/status read availability during real path-refresh content workers; no new 5-second product SLA.",
+    "Active-service CLI handoff remains unimplemented; this is not service/H acceptance.",
+    "Write-control/cancel/late task and full-source large publication latency matrix remain unverified.",
+    "No whole SC7/C1/E/H/X pass.",
+    "Cross-unassociated-project same-anchor zero-hit is not claimed by this TC; original project-scope regression assertions were independently inspected."
+  ],
+  "redaction": "Synthetic documents and isolated processes only; no secrets or raw private runtime paths in public summary."
+}

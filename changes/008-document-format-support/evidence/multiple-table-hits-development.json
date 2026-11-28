@@ -1,0 +1,26 @@
+{
+  "scope": "macOS shared API multiple-match and nested-table development debug only",
+  "case_id": "TC-008-table-multiple-hits",
+  "debug": "debug-multiple-table-hits-v3",
+  "review": "review-multiple-table-hits-v3",
+  "main_passed": 4,
+  "documents": 8,
+  "query_groups": 14,
+  "other_table_default_windows": 18,
+  "read_only_states": 4,
+  "test_revisions": [
+    "v1 evidence paths overwrote nested originals; retained needs_revision",
+    "v2 default window end bounds missing; retained needs_revision",
+    "v3 complete original evidence and exact source default window independently passed"
+  ],
+  "not_claimed": [
+    "full SC9/R008/E/H/X",
+    "minimum Python installed packages",
+    "other operating systems"
+  ],
+  "files": {
+    "tests/test_document_formats_multiple_hits.py": "d174aa1817556c93e397a9b4bededdaee048b00fd49f5da62a908bd5b9f215a2",
+    "tests/document_formats_multi_fixture.py": "5c87db74b31ef989cea3158f7b5aa6960d4cea1c3531cba3f092a9ec3404e899"
+  },
+  "baseline": "3453192ac73254890c11259c4220a5637e9b6e39"
+}

@@ -1,0 +1,124 @@
+{
+  "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+  "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
+  "runs": [
+    {
+      "run": "45754512178",
+      "artifact_id": 15086734832,
+      "name": "tests-macos-15",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "8b0735c7f4b4fe2182cc38a1f3f45bca9e60ac646c7533bb7eb4abbe874f8908",
+      "official_digest": "sha256:8b0735c7f4b4fe2182cc38a1f3f45bca9e60ac646c7533bb7eb4abbe874f8908",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 67,
+      "failures": []
+    },
+    {
+      "run": "45754512178",
+      "artifact_id": 15087805317,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "28e0a7111500cdd19eb4e438edebe7159d56beef19c90491d3646fe1e312ed0c",
+      "official_digest": "sha256:28e0a7111500cdd19eb4e438edebe7159d56beef19c90491d3646fe1e312ed0c",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 67,
+      "failures": []
+    },
+    {
+      "run": "45754512178",
+      "artifact_id": 15088093828,
+      "name": "tests-windows-2022",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "e389360028f92a8cb0a81645d0d465b2fc1f3e33066d876d52252b53b70c251a",
+      "official_digest": "sha256:e389360028f92a8cb0a81645d0d465b2fc1f3e33066d876d52252b53b70c251a",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 457,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 66,
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "observed": "worker subprocess audit count0 !=2"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "observed": "worker subprocess audit count0 !=2"
+        }
+      ]
+    },
+    {
+      "run": "45754517560",
+      "artifact_id": 15086694782,
+      "name": "tests-macos-15",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "7b9e9331a2ef79bfd7eef63fe3a711e64ac487025ce5eb73c6cf0f970ccee73c",
+      "official_digest": "sha256:7b9e9331a2ef79bfd7eef63fe3a711e64ac487025ce5eb73c6cf0f970ccee73c",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 67,
+      "failures": []
+    },
+    {
+      "run": "45754517560",
+      "artifact_id": 15087094093,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "5a79978f4c39f82b0ee934e637e9ca018fdf3a63efe9170c08f28954b90d7f84",
+      "official_digest": "sha256:5a79978f4c39f82b0ee934e637e9ca018fdf3a63efe9170c08f28954b90d7f84",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 458,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 67,
+      "failures": []
+    },
+    {
+      "run": "45754517560",
+      "artifact_id": 15087553974,
+      "name": "tests-windows-2022",
+      "source_head": "092ab9d8be112481618ffe158a407103147d2ed0",
+      "zip_sha256": "02eefbb4cbd61c2636b51931915747c28544b301a50c6aad54fb7dc1eedf2c35",
+      "official_digest": "sha256:02eefbb4cbd61c2636b51931915747c28544b301a50c6aad54fb7dc1eedf2c35",
+      "zip_crc_valid": true,
+      "tests": 525,
+      "passed": 457,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 66,
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "observed": "worker subprocess audit count0 !=2"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "observed": "worker subprocess audit count0 !=2"
+        }
+      ]
+    }
+  ],
+  "retained_failures": "Both legacy managed-upload-restart creator cases reach worker audit count0vs2. The shared Windows string-argv observer repair and C1 additional scope were explicitly retained by maintainer; no skip/xfail or dedicated rerun. Ordinary existing CI remains truthful.",
+  "limits": [
+    "Each Mac/Ubuntu458passed67skipped;Windows457passed66skipped2failed. Four new configuration-finalization tests require explicitly prepared OCR materials and skipped in ordinary CI; their separate Mac48-target/27-regression native TDD proof remains scoped.",
+    "Windows pytest failure prevents later wheel build/install in that job.",
+    "All6 official ZIP digests, CRC and JUnit classifications independently inspected, push and PR original artifacts retained."
+  ]
+}

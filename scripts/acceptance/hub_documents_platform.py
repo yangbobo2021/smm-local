@@ -269,7 +269,24 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
         except HTTPError as exc:
             status = exc.code
             raw = exc.read()
-        value = json.loads(raw)
+        # Retain the real HTTP status and bytes before JSON decoding. A plain
+        # 500 error must not erase the very response needed for diagnosis.
+        response_sha = hashlib.sha256(raw).hexdigest()
+        response_file = self.out / 'attachments/http-response-bytes' / response_sha
+        response_file.parent.mkdir(parents=True, exist_ok=True)
+        if response_file.exists():
+            assert response_file.read_bytes() == raw
+        else:
+            response_file.write_bytes(raw)
+        original = {'response_file': response_file.relative_to(self.out).as_posix(),
+                    'response_sha256': response_sha, 'response_bytes': len(raw)}
+        try:
+            value = json.loads(raw)
+        except (ValueError, UnicodeError) as error:
+            self.calls.append({'label': 'http-' + role, 'path': path, 'phase': self.phase,
+                'request': body, 'status': status, **original, 'json_error': str(error)})
+            self.save('commands', self.calls)
+            raise
         self.calls.append(
             {
                 "label": "http-" + role,
@@ -278,6 +295,7 @@ module=sys.argv[1];sys.argv=sys.argv[1:];runpy.run_module(module,run_name='__mai
                 "request": body,
                 "status": status,
                 "response": value,
+                **original,
             }
         )
         self.save("commands", self.calls)

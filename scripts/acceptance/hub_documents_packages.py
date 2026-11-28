@@ -42,11 +42,13 @@ def verify(output,uv):
         if role=='hub':
             shim=(ROOT/'src/smm_hub/_archive.py').read_text().replace('from smm_local.','from .').encode()
             mapping['smm_hub/_archive/__init__.py']=shim
-            pure=['core.py','support.py','archive_protocol.py','references.py','documents.py','document_protocol.py','managed_documents.py']
+            pure=['core.py','support.py','archive_protocol.py','references.py','documents.py','document_protocol.py','managed_documents.py','managed_document_uploads.py','document_results.py','document_snapshots.py','document_transfers.py','document_processing.py','document_supervisor.py','document_windows.py','document_worker.py']
             for name in pure:
                 path=ROOT/'src/smm_local'/name
                 assert path.is_file(),('missing shared product module',name)
                 mapping['smm_hub/_archive/'+name]=path.read_bytes()
+            for file in (ROOT/'src/smm_local/document_formats').rglob('*.py'):
+                if '__pycache__' not in file.parts:mapping['smm_hub/_archive/document_formats/'+file.relative_to(ROOT/'src/smm_local/document_formats').as_posix()]=file.read_bytes()
             for file in (ROOT/'src/smm_local/importers').rglob('*.py'):
                 if '__pycache__' not in file.parts:mapping['smm_hub/_archive/importers/'+str(file.relative_to(ROOT/'src/smm_local/importers')).replace(os.sep,'/')]=file.read_bytes()
         with ZipFile(wheel) as z:

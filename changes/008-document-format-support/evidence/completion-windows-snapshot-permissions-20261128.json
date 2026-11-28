@@ -1,0 +1,58 @@
+{
+  "schema": "completion-windows-snapshot-permissions-20261128-v1",
+  "delivery_ready": false,
+  "merge_authorized": false,
+  "real_defect": {
+    "run_id": 46144145131,
+    "commit": "f50dbbef188ff3d1e1efe92707a01c82ef2a513d",
+    "artifact_id": 15263152656,
+    "original_members_verified": 689,
+    "independent_review": "scm-native-f50-permission-execution-review-v1",
+    "finding": "Actual LocalService worker cannot read administrator CLI captured raw. Snapshot bucket uses owner-relative ACL; the failed raw owner is the administrator while successful Web raw owners are LocalService. Snapshot root retains LS access.",
+    "user_impact": "Hub CLI capture fails to publish; the document cannot be searched or read."
+  },
+  "repair": {
+    "scope": "Managed Windows Hub snapshot directories only. Local, unconfigured foreground Hub, POSIX and legacy managed text storage retain existing policies.",
+    "new_directory": "Handle-relative native directory create with atomic explicit inheritable SYSTEM/Admin full and LocalService modify DACL. Existing entries verified, never rewritten.",
+    "root_owner": "Explicit administrator setup/enable; handle-bound OWNER-only Administrators group assignment, no DACL/recursive operation.",
+    "source_or_blob_migration": false
+  },
+  "component": {
+    "environment": "Home Windows elevated SSH session; component only, not standard interactive E or LocalService H",
+    "attempts": [
+      {
+        "version": 2,
+        "result": "failed",
+        "reason": "Attribute/security-only pin did not prevent rename."
+      },
+      {
+        "version": 3,
+        "result": "2 passed",
+        "scope": "Win32 pinned create variant, later superseded by handle-relative native method."
+      },
+      {
+        "version": 4,
+        "result": "failed",
+        "reason": "Test assumed default administrator file owner is individual SID; host defaults to Administrators group."
+      },
+      {
+        "version": 5,
+        "result": "2 passed",
+        "seconds": 9.04,
+        "scope": "Current handle-relative native method; real ownership/DACL/byte preservation, concurrency, inherited new-file role grants, legacy rejection, rename/reparse/bounds/broad-root controls."
+      }
+    ],
+    "full_H_acceptance": false
+  },
+  "actual_role_validation_pending": [
+    "LocalService actual no-list/no-read-security ancestor compatibility",
+    "standard client direct archive/raw denial",
+    "complete H1-H5 including saved-CID retries and native stop/start"
+  ],
+  "posix_test_repair": {
+    "run_id": 46144145071,
+    "commit": "f50dbbef188ff3d1e1efe92707a01c82ef2a513d",
+    "first_failure": "Only hit.bm25_score changed after corpus growth; old reference text/table/original unchanged.",
+    "normalization": "Only hit.bm25_score; require finite numeric and preserve all other fields. Historical failed attempts remain failed."
+  }
+}

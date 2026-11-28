@@ -1,0 +1,286 @@
+{
+  "scope": "Managed upload + synchronous cached-reprocess post-processing/pre-publication configuration invalidation, Mac ordinary-account foreground only. Partial V2-F2/B9 fix, not fullSC8/EHX.",
+  "source_baseline": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "case_id": "TC-008-postprocess-config-finalization",
+  "design": "design-sc8-config-finalization-v2",
+  "test_sha256": "6404dc7247a6c029f4d88504024fd092dbbe7080ea5933821bf539ca474368a3",
+  "product_files": {
+    "src/smm_local/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+    "src/smm_local/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+    "src/smm_local/managed_document_uploads.py": "54a138d3fbe160f0e7a092205592691dfc62a9dabeffcb1940cc4c89ce8d8433",
+    "src/smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+    "src/smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3"
+  },
+  "implementation": [
+    "Finish publication failure only if document/current CID/latest AID/frozen config revision still match, preserving a newer attempt and earlier parser failure.",
+    "Managed upload finalizes in valid Hub/project context; Local and Hub synchronous reprocess catch publication failures and expose failed/error without changing published V/P.",
+    "Document CLI does not hold the OS admin lock across a content worker; existing document guards/SQLite CAS/content slot remain, other OS administration commands retain their lock. No schema or public argument changes."
+  ],
+  "portions": {
+    "upload-local": {
+      "red": {
+        "id": "red-sc8-config-finalization-upload-local-v2",
+        "sha256": "b0c25382f82587d128435459b41703dd3308faa472f19c07c60aab1b5398de53",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc8-config-finalization-upload-local-v2/result.json"
+      },
+      "red_review": {
+        "id": "review-config-finalization-upload-local-red-v2",
+        "sha256": "ef43fb2e34d78e7a80b635c640661d60fd464d6683166b27ed6dde665017474b",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-upload-local-red-v2/result.json"
+      },
+      "red_reason": "Real config revision changes after result gate; job/CLI fails but latest attempt remains ready/errornull/pendingtrue at line155",
+      "green": {
+        "id": "green-sc8-config-finalization-upload-local-v1",
+        "sha256": "d8e0df498e5bcf6759ff8ecc39aee48f3dbb313c8888d41738cb85520f631bc2",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc8-config-finalization-upload-local-v1/result.json"
+      },
+      "green_review": {
+        "id": "review-config-finalization-upload-local-green-v1",
+        "sha256": "078d61a6e2cec4995737a36e7f14c48d1ea96ec68ac09efc4687df549f0b6f0e",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-upload-local-green-v1/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "targets": 12,
+        "seconds": 39.48,
+        "prestates": [
+          "no published snapshot",
+          "oldready",
+          "oldpartial"
+        ],
+        "per_project_per_prestate": 2,
+        "projects": [
+          "ordinary",
+          "global"
+        ]
+      },
+      "regression": {
+        "passed": 5,
+        "seconds": 10.17
+      },
+      "artifacts": {
+        "count": 3517,
+        "bytes": 13127883,
+        "all_sha256_verified": true
+      },
+      "verified": "Real failure and meaningful error/finite wait; old snapshots and every published non-target preserved at config/failure/retry; deleted management path, same-CID/new-AID saved-byte retry with independent full source text, all tables/coverage/raw; old refs rejected; stale CLI business rejection leaves all doc tables/library unchanged."
+    },
+    "upload-hub": {
+      "red": {
+        "id": "red-sc8-config-finalization-upload-hub-v2",
+        "sha256": "d74d3340278ab59a5dda174003006cd37fab4c902911fc50d55cd331dda22b47",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc8-config-finalization-upload-hub-v2/result.json"
+      },
+      "red_review": {
+        "id": "review-config-finalization-upload-hub-red-v2",
+        "sha256": "456d405e7441ee2c2efebe7b85f21de890074c8eee4072a2599125ad41754123",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-upload-hub-red-v2/result.json"
+      },
+      "red_reason": "Real config revision changes after result gate; job/CLI fails but latest attempt remains ready/errornull/pendingtrue at line155",
+      "green": {
+        "id": "green-sc8-config-finalization-upload-hub-v1",
+        "sha256": "85116c0d4d011aa1bf6e96be1b1f7f0e35343dad13fe61a573857fdbcaaf8c8a",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc8-config-finalization-upload-hub-v1/result.json"
+      },
+      "green_review": {
+        "id": "review-config-finalization-upload-hub-green-v1",
+        "sha256": "c1883174c040915df2a5e3e9dfcf8c71094a484d526c09e1dc1cccd6c0ad10a1",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-upload-hub-green-v1/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "targets": 12,
+        "seconds": 90.39,
+        "prestates": [
+          "no published snapshot",
+          "oldready",
+          "oldpartial"
+        ],
+        "per_project_per_prestate": 2,
+        "projects": [
+          "ordinary",
+          "global"
+        ]
+      },
+      "regression": {
+        "passed": 5,
+        "seconds": 41.24
+      },
+      "artifacts": {
+        "count": 3481,
+        "bytes": 19382349,
+        "all_sha256_verified": true
+      },
+      "verified": "Real failure and meaningful error/finite wait; old snapshots and every published non-target preserved at config/failure/retry; deleted management path, same-CID/new-AID saved-byte retry with independent full source text, all tables/coverage/raw; old refs rejected; stale CLI business rejection leaves all doc tables/library unchanged."
+    },
+    "cache-local": {
+      "red": {
+        "id": "red-sc8-config-finalization-cache-local-v2",
+        "sha256": "4b89c318a085e5ab0bdc48162d1b1b97549f176d219d4dea61d6777c7c949d25",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc8-config-finalization-cache-local-v2/result.json"
+      },
+      "red_review": {
+        "id": "review-config-finalization-cache-local-red-v2",
+        "sha256": "066626ac8665e36d2c1495a9fc9da2351c14d281fc295d1e768b940bf3df39e0",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-cache-local-red-v2/result.json"
+      },
+      "red_reason": "Real config revision changes after result gate; job/CLI fails but latest attempt remains ready/errornull/pendingtrue at line155",
+      "green": {
+        "id": "green-sc8-config-finalization-cache-local-v1",
+        "sha256": "dda9506cacf4c8e116cf86c47e20ef2ef6aed8d5c92b0e94206c26cdece2fdef",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc8-config-finalization-cache-local-v1/result.json"
+      },
+      "green_review": {
+        "id": "review-config-finalization-cache-local-green-v1",
+        "sha256": "0c038b035844a3e5c5ddbd3aa41837ac4c101860e1ec1840b80bb4f22bf09519",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-cache-local-green-v1/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "targets": 12,
+        "seconds": 56.51,
+        "prestates": [
+          "no published snapshot",
+          "oldready",
+          "oldpartial"
+        ],
+        "per_project_per_prestate": 2,
+        "projects": [
+          "ordinary",
+          "global"
+        ]
+      },
+      "regression": {
+        "passed": 6,
+        "seconds": 13.81
+      },
+      "artifacts": {
+        "count": 4461,
+        "bytes": 16510118,
+        "all_sha256_verified": true
+      },
+      "verified": "Real failure and meaningful error/finite wait; old snapshots and every published non-target preserved at config/failure/retry; deleted management path, same-CID/new-AID saved-byte retry with independent full source text, all tables/coverage/raw; old refs rejected; stale CLI business rejection leaves all doc tables/library unchanged."
+    },
+    "cache-hub": {
+      "red": {
+        "id": "red-sc8-config-finalization-cache-hub-v2",
+        "sha256": "70796a42b8a861951b899676e8179e773dfe43bd88f16184b3fc936707a44cb4",
+        "status": "red_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-red/red-sc8-config-finalization-cache-hub-v2/result.json"
+      },
+      "red_review": {
+        "id": "review-config-finalization-cache-hub-red-v2",
+        "sha256": "03272968847a1925cdd2f7fd23faadd4a1cacd267ac2549cf95890a6df58c64a",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-cache-hub-red-v2/result.json"
+      },
+      "red_reason": "Hub processing-status blocked by long admin.lock, line150; no second configuration revision or terminal assertion reached",
+      "green": {
+        "id": "green-sc8-config-finalization-cache-hub-v1",
+        "sha256": "de3c7ed7c9a14617802042e5136edf70ec405043365068594fe932329d410457",
+        "status": "green_observed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/tdd-green/green-sc8-config-finalization-cache-hub-v1/result.json"
+      },
+      "green_review": {
+        "id": "review-config-finalization-cache-hub-green-v1",
+        "sha256": "63e1cfe445710a689e264246c33452549cf4680cef5dfeb552aafd6b59385ba8",
+        "status": "reviewed",
+        "record": ".acceptance-local/native-v1/AT-SMM-008/review/review-config-finalization-cache-hub-green-v1/result.json"
+      },
+      "main": {
+        "passed": 1,
+        "targets": 12,
+        "seconds": 134.73,
+        "prestates": [
+          "no published snapshot",
+          "oldready",
+          "oldpartial"
+        ],
+        "per_project_per_prestate": 2,
+        "projects": [
+          "ordinary",
+          "global"
+        ]
+      },
+      "regression": {
+        "passed": 11,
+        "seconds": 23.77
+      },
+      "artifacts": {
+        "count": 4425,
+        "bytes": 24589203,
+        "all_sha256_verified": true
+      },
+      "verified": "Real failure and meaningful error/finite wait; old snapshots and every published non-target preserved at config/failure/retry; deleted management path, same-CID/new-AID saved-byte retry with independent full source text, all tables/coverage/raw; old refs rejected; stale CLI business rejection leaves all doc tables/library unchanged."
+    }
+  },
+  "totals": {
+    "main_targets": 48,
+    "archives": 4,
+    "documents_including_controls": 52,
+    "real_result_gates": 56,
+    "cache_first_capture_setup_gates": 8,
+    "related_regression_passed": 27,
+    "artifacts": 15884,
+    "artifact_bytes": 73609553
+  },
+  "joint_review": {
+    "path": ".acceptance-local/008/config-finalization-20261126/joint-green-review-v1.json",
+    "sha256": "076d9811cbc3503fb4fdd7328cdc0a7d02680eaaa395771a3fefb009197f1442",
+    "reviewer": "/root/r008_config_finalization_green_v1",
+    "kind": "supplementary joint opinion, not a fifth native execution"
+  },
+  "historical_candidate_failure": {
+    "red": "red-sc8-config-finalization-v1",
+    "review": "review-config-finalization-red-v1",
+    "status": "needs_revision, registered; first unified test repair expanded synchronous endpoint coverage, semantics/all-peer preservation/atomic stale rejection and explicitly retained L3 overlap gap."
+  },
+  "not_closed": [
+    "Path refresh result-produced/prepublication rejection terminal/qualification path not proven or fixed here",
+    "Old-payload versus still-pending newer task overlap, in-flight cancellation, failure/restore/concurrency and committed-candidate GC",
+    "Actual new failure rendering in browser not directly exercised here; existing normal publication UI rerun separately",
+    "System services, installed minimum Python/all platforms, current commit CI and full E/H/X",
+    "Maintainer-retained source cancellation/C1 restart/string-argv observer cases not executed or silently repaired"
+  ],
+  "package_build": {
+    "scope": "build and packaged-source verification only; no installed-business claim",
+    "source_baseline": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209 plus frozen5file finalization patch",
+    "wheels": {
+      "smm_local-0.4.0-py3-none-any.whl": {
+        "sha256": "04ed962628a2a0dcff7f56e0a6932d46a25a7b21064d0132ffd25d4db10ca2da",
+        "bytes": 194412,
+        "verified_member_sha256": {
+          "smm_local/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+          "smm_local/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_local/managed_document_uploads.py": "54a138d3fbe160f0e7a092205592691dfc62a9dabeffcb1940cc4c89ce8d8433",
+          "smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b"
+        }
+      },
+      "smm_hub-0.4.0-py3-none-any.whl": {
+        "sha256": "befd4c780f32b8f7a58abddc3c8dd22dd29f5a296b44a9413f8fd2c86c9495b9",
+        "bytes": 179493,
+        "verified_member_sha256": {
+          "smm_hub/_archive/document_snapshots.py": "05eb006076503bbecc2c6f7b9f5e55edcd2113546c44e42628ebf2110af5434a",
+          "smm_hub/_archive/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_hub/_archive/managed_document_uploads.py": "54a138d3fbe160f0e7a092205592691dfc62a9dabeffcb1940cc4c89ce8d8433",
+          "smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec",
+          "smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+          "smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3"
+        }
+      }
+    }
+  }
+}

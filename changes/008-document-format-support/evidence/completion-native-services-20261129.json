@@ -1,0 +1,56 @@
+{
+  "schema": "smm-008-scoped-native-service-evidence-v1",
+  "date": "2026-11-29",
+  "status": "passed_scoped_at_individual_revisions",
+  "services": [
+    {
+      "platform": "Windows",
+      "head": "035bd884aa52b86bc489c66677f06381967cbbeb",
+      "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/46161790006",
+      "artifact_id": 15269513604,
+      "canonical_verified_members": 2143,
+      "review_scope": "Actual native H1-H5 at the stated revision only; not final R008 or the later full-SHA patch.",
+      "official_artifact_sha256": "b2f7bd850b3222a88fe0813354557eb515e96a31f1baed7e421c4d9c51526eaa",
+      "independent_review_sha256": {
+        ".md": "da94b5751d9d80f48abb3cd973914ddcc29d18126e2817aa5cde4019c0aab9e2",
+        ".json": "742945430736dae995f6340af949e117bd1aa9a34217b8766ec11373632d31eb"
+      }
+    },
+    {
+      "platform": "macOS",
+      "head": "309fa1369a91f3c3357ad364bb1e18438eabcbb1",
+      "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/46157123794",
+      "artifact_id": 15268154085,
+      "canonical_verified_members": 4875,
+      "review_scope": "Actual native H1-H5 at the stated revision only; not final R008 or the later full-SHA patch.",
+      "official_artifact_sha256": "5f68ed4dc68ee9ca6400302cea5d1701679fa6956b6e557d26fde0a015a3aad8",
+      "independent_review_sha256": {
+        ".md": "8bd51234ca9598efbfe200f79e3cf8c8817a2f9e5907e6571ce61eaaeffc9730",
+        ".json": "84cac107c90a87795aae333a5616f1421fb903bc8c9ea96454112b75c2274329"
+      }
+    },
+    {
+      "platform": "Linux",
+      "head": "b443297cb3d1934ac09b1fb5a0a753dc389279a0",
+      "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/46148676553",
+      "artifact_id": 15265775298,
+      "canonical_verified_members": 4858,
+      "review_scope": "Actual native H1-H5 at the stated revision only; not final R008 or the later full-SHA patch.",
+      "independent_review_sha256": {
+        ".md": "6493f2ad49bd97358147100b410315af99461049eecbdd50baf768f48961b3ed",
+        ".json": "346648e63a60673ee7309fd311e2333732694747b7a953d3047de37e8a5298b7"
+      },
+      "official_artifact_sha256": "2b303b3ea908be2352858811f5f22c7cdc6869a65db12abe8a2db3927e29875f"
+    }
+  ],
+  "actual_observations": {
+    "Windows": "Actual LocalService SCM with ordinary interactive client; held OCR stop without releasing its gate completed tree cleanup in 4.6692656 seconds; same CID/new AID explicit retry; actual worker kill failed and cleaned in 0.1401524 seconds. Full text/table/original and retained refs before/after restart plus account/service/firewall/port cleanup verified.",
+    "macOS": "Actual system launchd; retained unfinished same CID/AID resumed after restart. Conservative parent-exit to whole-child-tree cleanup upper bound 0.136202 seconds, separate from launchctl command duration. Full text/table/original before/after and cleanup verified.",
+    "Linux": "Actual ordinary-account user systemd; failed retained task explicitly retried with same CID/new AID; native worker termination, full restart reads, retained refs and cleanup independently verified."
+  },
+  "limits": [
+    "No claim that older active.json PermissionError kernel cause was determined. Windows passing run had no observation retries.",
+    "No claim that these historical exact-version native runs contain later product fixes. Final version matrix, current native records and requirement judgment remain pending.",
+    "Private original artifacts remain authenticated, individually hashed and reconstructible; public evidence omits user paths, account identities, credentials and document contents."
+  ]
+}

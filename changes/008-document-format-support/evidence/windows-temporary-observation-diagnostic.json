@@ -1,0 +1,55 @@
+{
+  "scope": "Windows11 administrator component investigation; not a product fix, accepted product red, CI-cause proof or E/H/X acceptance",
+  "baseline": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+  "trigger": {
+    "evidence": "ci-regression-7c2348a.json",
+    "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
+    "results": "One failed push run and one passed PR sibling run; cause not conclusively identified"
+  },
+  "native_observations": {
+    "normal_removal": "RemoveDirectory while a shared handle remains produced FileNotFoundError; no WinError5 reproduced by that operation",
+    "classic_delete_pending": "Real SetFileInformationByHandle(FileDispositionInfo=4, DeleteFile=BOOLEAN1) caused WinError5 for scandir/cached os.walk while handle remained, then missing directory after final close",
+    "meaning": "Same observable error mechanism is reproducible; not proof that the original CI failure had precisely this cause"
+  },
+  "sampler_attempt": {
+    "id": "red-sc10-live-temp-v1",
+    "result_sha256": "1491a0a29eccd58fcf5a21aa9a2393dd01317b94e36a92fd1d00ad00af190c1f",
+    "status": "red_observed",
+    "review_id": "review-live-temp-red-v1",
+    "review_result_sha256": "74a1308c54ba2cd2617474c445180ec5540e455eafb456e1dedd7c472a676bf2",
+    "independent_conclusion": "needs_revision/design; registered. Test demanded continued sampling after PermissionError, conflicting with current PLAN fail-on-permission-error policy. Not expected_failure and cannot authorize a product fix.",
+    "executed": {
+      "scope": "Windows component temporary-space sampler only",
+      "errors": [
+        {
+          "type": "PermissionError",
+          "errno": 13,
+          "winerror": 5
+        }
+      ],
+      "cleanup": {
+        "all_handles_closed": true,
+        "timer_alive": false,
+        "timer_errors": [],
+        "kept_unchanged": true
+      },
+      "persistent_native_denial": {
+        "type": "PermissionError",
+        "errno": 13,
+        "winerror": 32
+      },
+      "persistent_product_denial": {
+        "type": "PermissionError",
+        "errno": 13,
+        "winerror": 32
+      },
+      "missing_root_rejected": true,
+      "boundary_bytes": [
+        268435456,
+        268435457
+      ]
+    },
+    "unreached": "Successful37-byte transient result and subsequent final scan/retained SHA assertions were not reached; finally cleanup did run."
+  },
+  "policy": "Concrete one-full-rescan clarification proposed separately; awaiting maintainer. No product or confirmed SPEC/PLAN change, no weaker OCR assertion, no skip/xfail. Not a maintainer-retained item at this point."
+}

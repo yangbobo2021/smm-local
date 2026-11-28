@@ -1,0 +1,25 @@
+{
+  "problem": "After an initial processing failure, successful explicit retry published readable content without a collector source ID. Later authorized project synchronization sent null; strict Hub metadata validation rejected that document while other documents synchronized.",
+  "actual_installed_reproduction": "Mac ordinary UID, lifecycle candidate v4: two real publication attempts for one saved/retried document were rejected at processed/begin; actual outbound HTTP fragments and installed wheel/source snapshots independently verified. Five other allowed documents were received.",
+  "repair": "Publish the collector in the same transaction as saved reprocessing. Keep a still-continuously-authorized previous collector; otherwise choose deterministically from current capture authorizations with matching source revision. No valid source causes rollback. Hub validation remains unchanged.",
+  "experimental_archive_recovery": "For an existing experimental publication with a missing/retired collector, explicitly reprocess its current retry_target. Identical raw/profile/result retains the same published snapshot and V/P, and old references remain readable; changed processing results follow the existing version rules. No new implicit sync migration.",
+  "tests": {
+    "first_failure_red": "Existing real OCR saved-capture first-retry case, one added collector assertion: failed None versus valid source, 1.85s.",
+    "component_red_v2": "2 failed missing/retired and 1 passed valid, 1.42s; earlier fixture-error red-v1 retained and not claimed as product reproduction.",
+    "retry_green_v1": "6 passed 4.22s, existing actual OCR retry tests plus initial three collector repair cases.",
+    "component_green_v2": "4 passed 1.94s; missing single/multiple, retired, and valid non-minimum historical collector. Includes deterministic rejection of always-min bug.",
+    "affected_regressions": "10 passed 165.45s: managed replacement, management boundaries, direct-index synchronization. Counts are separate executions with overlap, not summed as distinct coverage."
+  },
+  "independent_reports_sha256": {
+    "completion-retry-sync-defect-review-v1.md": "8263cbb7fd2c7372aa7c820ef84257b94b41568d620053b9c3440a74e87e96e6",
+    "completion-retry-collector-candidate-review-v1.md": "979a366417bdef0ff5ca6b9f7dd4a808b347ef38a5db6f8dbea95f3a3195a731",
+    "completion-retry-collector-candidate-review-v2.md": "05e9c800fab8219ae773b95a239ec659cd55f5aef283c03b92889937a5133cf8"
+  },
+  "bindings": {
+    "src/smm_local/documents.py": "8de686a89b7ba3f54ce70096e1a9c4123a83fc1f8af716af8325d3b202b6261d",
+    "tests/test_document_formats_retry.py": "c65b32d2082b686382b7792043eb9029972c28028fc362a0f263d94030bc964c",
+    "tests/test_document_formats_reprocess_collector.py": "6346583e05d6626c725eb08bf5cdf727dba482d2507dcd6883ccbb5d330e9f9d"
+  },
+  "remaining": "Fresh installed wheels must repeat the complete lifecycle/synchronization candidate. This scoped repair and component regression are not full E/H/X acceptance.",
+  "redaction": "Task account/archive/source IDs, original HTTP, tokens and paths remain private."
+}

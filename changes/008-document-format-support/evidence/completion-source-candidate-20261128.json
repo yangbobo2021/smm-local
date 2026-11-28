@@ -1,0 +1,34 @@
+{
+  "schema": "smm-008-source-candidate-v1",
+  "date": "2026-11-28",
+  "status": "candidate_passed_ready_for_real_CI_debug",
+  "reports": {
+    "source-suite-candidate-review.md": {
+      "public_path": "completion-source-suite-candidate-review.md",
+      "original_sha256": "0968b675234ac3941f099ca010e5df1a41013748f506a6604cbb21790b9375d5",
+      "public_sha256": "0968b675234ac3941f099ca010e5df1a41013748f506a6604cbb21790b9375d5"
+    },
+    "source-suite-candidate-review-v2.md": {
+      "public_path": "completion-source-suite-candidate-review-v2.md",
+      "original_sha256": "8fd02d10fbaff050fb827833afe472831d69815e35b57e1e36b5e8394be24e8a",
+      "public_sha256": "8fd02d10fbaff050fb827833afe472831d69815e35b57e1e36b5e8394be24e8a"
+    },
+    "source-suite-candidate-review-v3.md": {
+      "public_path": "completion-source-suite-candidate-review-v3.md",
+      "original_sha256": "c6205ba9b9fbd474e208bc271d1ade7c03fe2b80abcad96fcada6cea63174e7d",
+      "public_sha256": "c6205ba9b9fbd474e208bc271d1ade7c03fe2b80abcad96fcada6cea63174e7d"
+    }
+  },
+  "source_sha256": {
+    "scripts/acceptance/document_formats_source_suite.py": "a3e58603e891bf1435d7bf651cebc90e645fbd123dccc7a4cc69874df785d0cd",
+    "scripts/acceptance/document_formats_source_standard_user.ps1": "bbb447d2f50d0e7161a12d4a725358d714cd7be412816ff4b91e5dff7a3b9350",
+    "tests/test_document_formats_source_custody.py": "145a16f0e0f7a50a955cf63e08fb65e08e4048bf9a46ac9a0e863871bc3944fd",
+    ".github/workflows/document-formats-source.yml": "58daaec3b7215b6d0a786e90001b059dcbb7d1629b4610c625a0012a3184a9f3",
+    "changes/008-document-format-support/source-ci-request.json": "360f1672bad6d4aec34aa57da3f3cb412045bac82259f799bddbb1c58ad7ae04"
+  },
+  "local_smoke": "9passed1Windows-junction-skip0.17s; original complete work tar includes90 members",
+  "Windows_component": "VM76 actual junction 3passed1POSIX-skip1.13s; SSH administrator component only, not standard E",
+  "Windows_input_sha256": "20e5210fd31818f9d59ccb62ab1bc46b4c82c5624d67f9be746605d595d5bd63",
+  "Windows_result_tar_sha256": "4d24b7a44369d68428c4938377cf90aa8c0e9ac463b46cc154868790d221ad7c",
+  "not_claimed": "full C1, installed E, managed H, cross-OS X or final R008 passed; original failures remain"
+}

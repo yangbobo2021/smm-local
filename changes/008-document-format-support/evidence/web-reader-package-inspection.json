@@ -1,0 +1,33 @@
+{
+  "status": "wheels_generated_and_inspected",
+  "packages": [
+    {
+      "file": "smm_hub-0.4.0-py3-none-any.whl",
+      "bytes": 175934,
+      "sha256": "2d22d30b074c7bd502f3176d2ad6845a3905932126593f7d6c6ea6127b158dd9"
+    },
+    {
+      "file": "smm_local-0.4.0-py3-none-any.whl",
+      "bytes": 190883,
+      "sha256": "656cea5d2d55aaff2df006533b9053fbfe4b734b74d13dd3daa079068327cf8c"
+    }
+  ],
+  "inspection": [
+    {
+      "owner": "local",
+      "static_sha256": "d899922997ef0de2957c568bf001e194746dcc5cf46dd8a7fd697f58ce2cc3a9",
+      "matches_current_source": true,
+      "zip_integrity": true
+    },
+    {
+      "owner": "hub",
+      "static_sha256": "9778fc475c31f4a68039cf1466631738d087873883baf17422f81d30b467e677",
+      "matches_current_source": true,
+      "zip_integrity": true
+    }
+  ],
+  "builder_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "builder_stderr_sha256": "40801af3d3a65b872d6b1aad071270864bc63bb7cf943f3864a1ec6ada1b6f53",
+  "command": "python scripts/build_packages.py --uv <existing absolute uv> --out-dir <isolated acceptance output>",
+  "limits": "Source-tree package construction and ZIP/static content verification only. No installed-runtime, minimum-Python or E/H/X pass. Daily services were not upgraded."
+}

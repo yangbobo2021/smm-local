@@ -38,8 +38,9 @@ def main():
         shared.mkdir()
         shim = (ROOT / "src/smm_hub/_archive.py").read_text(encoding="utf-8")
         (shared / "__init__.py").write_text(shim.replace("from smm_local.", "from ."), encoding="utf-8", newline="\n")
-        for name in ("core.py", "support.py", "archive_protocol.py", "references.py", "documents.py", "managed_documents.py", "document_protocol.py"):
+        for name in ("core.py", "support.py", "archive_protocol.py", "references.py", "documents.py", "managed_documents.py", "managed_document_uploads.py", "document_protocol.py", "document_results.py", "document_snapshots.py", "document_transfers.py", "document_processing.py", "document_supervisor.py", "document_windows.py", "document_worker.py"):
             shutil.copyfile(ARCHIVE / name, shared / name)
+        shutil.copytree(ARCHIVE / "document_formats", shared / "document_formats", ignore=IGNORE_GENERATED)
         shutil.copytree(ARCHIVE / "importers", shared / "importers", ignore=IGNORE_GENERATED)
         for project in (local, hub):
             for path in (project / "src").rglob("*"):

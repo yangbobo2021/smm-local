@@ -1,0 +1,6 @@
+# Preserve the exact generator and Office fixture bytes across checkouts.
+scripts/acceptance/008_generate_object_fixtures.py text eol=lf
+tests/fixtures/document-format-objects/*.docx binary
+tests/fixtures/document-format-objects/*.xlsx binary
+# This historical CLI is fingerprinted against its original LF bytes.
+tests/fixtures/document_legacy_cli.py text eol=lf

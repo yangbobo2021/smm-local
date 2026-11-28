@@ -1,0 +1,77 @@
+{
+  "schema": "smm-008-cross-platform-evidence-diagnostics-v1",
+  "date": "2026-11-28",
+  "product_source_change": false,
+  "first_minimum_ci": {
+    "run_id": 46091817689,
+    "head": "cbe19a2932d607fd508c0fff1be26aebf8da99e8",
+    "url": "https://github.com/yangbobo2021/smm-local/actions/runs/46091817689",
+    "Linux_macOS": "jobs success; not yet strict original recovery/independent platform pass",
+    "Windows": "2fail5pass in3.90seconds; real standard account identified, two business cases failed at global-project Chinese CLI output before document ingestion"
+  },
+  "root_causes_and_repairs": [
+    {
+      "cause": "Test -I suppresses PYTHONUTF8; Python3.11 Windows redirected stdout used cp1252",
+      "repair": "Explicit -X utf8 for isolated product CLI, matching existing shared installed Probe; product behavior not changed",
+      "Windows_verification": "pending next real CI, not inferred from Mac"
+    },
+    {
+      "cause": "Windows checkout converted same public PEM LF to CRLF; producer fingerprinted file bytes, decoder expected canonical LF",
+      "proof": {
+        "LF_sha256": "3af8f1312a8487acb2d6e4c398a4de4c762461f8a1f923ea64088fbe0eca8d26",
+        "Windows_CRLF_sha256": "8c8ae29e739f24be4c77e791da2215cdd27bb122dd11f80d0b93dfda0f442c02",
+        "official_artifact_id": 15242200424,
+        "official_digest": "sha256:bb8642d16d173934b83b44809a4a0a4f3b07af7f1508ae7ec73d1108596dfda2"
+      },
+      "repair": "New envelopes fingerprint decoded public key in canonical PEM; decoder also accepts exact legacy CRLF fingerprint of that same key. GCM/AAD and artifact/manifest checks unchanged."
+    },
+    {
+      "cause": "PowerShell UTF8 JSON includes BOM",
+      "repair": "Read valid leading UTF8-BOM while preserving bytes; malformed JSON including trailing BOM still rejected."
+    },
+    {
+      "cause": "Opaque collector-control bytes used .docx extension although not a ZIP",
+      "repair": "Name that control .bin. Actual supported document business originals and byte expectations unchanged."
+    }
+  ],
+  "historical_Windows_artifact": {
+    "state": "authenticated_bytes_format_inspection_incomplete",
+    "verified_manifest_members": 117,
+    "format_errors_retained": [
+      "two intentionally opaque collector-control files misnamed docx",
+      "PowerShell report leading BOM at original inspection"
+    ],
+    "not_claimed": "No recovered_verified or Windows business pass for this old artifact"
+  },
+  "red_green": {
+    "red": "LF positive passed, actual CRLF decrypt rejected by old code; old source SHA3403b3acec4f931ab57fc1d57a0e447958744a8333d37b5028c148be54d2173c retained",
+    "new_native_candidate": "debug-completion-sc12-text-v4,19pass1skip; skip is optional actual older CI probe without explicit input",
+    "registered_candidate": "review-completion-sc12-text-candidate-v4",
+    "Mac_minimum_v4": "7pass0skip22.437seconds; candidate independently passed and registered",
+    "new_formal_executions": "SC12 text v1 and SC11 minimum v2 completed exit0; fresh execution reviews pending"
+  },
+  "files_sha256": {
+    "scripts/acceptance/document_formats_evidence.py": "cc4e599066d8c26271f32fb17ee87a5be099e97801248a2494e47a2da961ccc1",
+    "tests/test_document_formats_evidence_key_format.py": "c7da164183b8608e712cd9a485c1783b5fb1892d15ce8ad37cd6dde5d9d4ce72",
+    "tests/test_document_formats_minimum_platform.py": "015578e79803db363da4b19d5b0f6b0b77fae0edeefa95d0992d605830c314c6",
+    "tests/test_document_formats_minimum_custody.py": "647a17805b68e09a66bb8a1932650b5a353cc631d65dfcc2d3999b39dafafd93",
+    ".github/workflows/document-formats-minimum.yml": "dbc55130a670abeef805730a2f5b6b0080f16f4bbed32a3992f7646623bfbc04",
+    ".github/workflows/document-formats-evidence-probe.yml": "943444350607f6e9879824fc84274c2d4df929f39b92993725efa30234026249"
+  },
+  "reports": {
+    "minimum-candidate-review-v4.md": {
+      "path": "completion-minimum-candidate-review-v4.md",
+      "original_sha256": "af3ff9c890269cc00f51dd87288bb2e843d72a09d542b92be6e7cc409a29da7c"
+    },
+    "evidence-text-candidate-review-v4.md": {
+      "path": "completion-evidence-text-candidate-review-v4.md",
+      "original_sha256": "8cb51d7af8a745ca8cbf383c11559b9933f12ba7ab951dec4fe38308a0e63685"
+    },
+    "minimum-execution-review.md": {
+      "path": "completion-minimum-execution-review.md",
+      "original_sha256": "6a885afd85eefa090413352f516bcdbe4739217001156ed3e8551983236a2378"
+    }
+  },
+  "boundary": "Only harness/evidence portability. Full R008, remaining C1/E/H/X and final PR review are pending. Do not merge. Raw private keys/credentials/archives omitted.",
+  "material_identity": "Generation recipes, independent source truth and business assertions are unchanged; each attempt freezes and checks its own original bytes/SHA. Office ZIP container metadata can differ between attempts; no cross-attempt whole-byte equality is claimed."
+}

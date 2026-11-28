@@ -1,0 +1,85 @@
+{
+  "scope": "Development raw-only uncommitted upload TTL subset of B5/B7/B9; not whole F3/SC10/R008 acceptance",
+  "base_commit": "0494cdeb7d3dc1e211905207bec5c9fa152a311a",
+  "case": "TC-008-transfer-expiry-raw",
+  "test_sha256": "3c10596d4abcc6d1a558477e2a5acdcf23373d2d9d6b84f6049e6d27a83dc4c4",
+  "product_sha256": {
+    "src/smm_local/document_transfers.py": "d98ef43d861259df8cc3f2202a1c8639ee6f8d71843cd365839e5181b8ab761c",
+    "src/smm_local/document_snapshots.py": "a2e4704d86a9954f0235e3e278b34cfa5552b3a1f1f70019a924f25aec373c4e",
+    "src/smm_local/document_protocol.py": "00256b366633ca01c71f28c184c09a06e40d2fead319fc438e44a5d1647ae79e"
+  },
+  "mechanism": [
+    "Under the existing capacity lock, persist expiration identity before releasing promises or exclusive incoming bytes.",
+    "Keep active shared incoming, canonical raw/results, committed candidates and permanent published blobs.",
+    "Expire admission triggered by begin or saved-byte put; old begin/part/commit stays explicitly expired after a new component process opens the archive.",
+    "Retain state metadata for repeated cleanup; preserve current expiration markers in prepare_restore exclusion."
+  ],
+  "red": {
+    "id": "red-transfer-expiry-raw-v4",
+    "result_sha256": "b3f3ce39291344cb57d1a9519d2b96c524f4d81b4c48ca3084165a04d0ffc9e6",
+    "failed": 2,
+    "seconds": 6.86,
+    "review": "review-transfer-expiry-raw-red-v2",
+    "review_sha256": "994596daf45900db4f46ea4aa61ea3836509f5fac6851e40a3329a73bc9d9c1f",
+    "review_registered": true
+  },
+  "green": {
+    "id": "green-transfer-expiry-raw-v2",
+    "result_sha256": "2647d002dff9f3fe00f0503507c3a0525ae092297d1b06242c23197f06e68fc4",
+    "main_passed": 2,
+    "main_seconds": 10.11,
+    "regression_passed": 23,
+    "regression_seconds": 208.4,
+    "artifacts": 487,
+    "artifact_bytes": 2273327,
+    "all_artifact_sha256_verified": true,
+    "review": "review-transfer-expiry-raw-green-v1",
+    "review_sha256": "15f5c65b20349dc518b06c56b32f8a4eb9598ef0ac980d3b218a4c125c363eb8",
+    "review_registered": true
+  },
+  "additional_regression": {
+    "receipt": ".acceptance-local/008/expiry-staging-regression-v1/result.json",
+    "receipt_sha256": "fee11c2ddd2bce7f8dac61f8cfb5c1eb7d8ffdab6a7c92c7421e3e8acce57ce7",
+    "passed": 6,
+    "business_cases": 2,
+    "fixture_and_observer_controls": 4,
+    "seconds": 187.83,
+    "same_before_after_bindings": true,
+    "artifacts": 247,
+    "artifact_bytes": 1349430,
+    "review_sha256": "0368649245853a9212d5cfefb477dbd5d111c11b4b65c5eaea5c4156221f5e7a",
+    "review_status": "passed",
+    "limitation": "Additional ordinary regression, not independent formal execution of the two historical staging TC IDs."
+  },
+  "tested": {
+    "creators": [
+      "local",
+      "hub"
+    ],
+    "promised_limit_bytes": 268435456,
+    "partial_exclusive_expired_per_creator": 2,
+    "complete_exclusive_uncommitted_expired_per_creator": 2,
+    "active_shared_incoming_prefix_bytes_per_creator": 2097152,
+    "wrong_length_expired_contracts_per_creator": 2,
+    "protected_controls_per_creator": [
+      "published ready DOCX",
+      "authorized committed failed object-only DOCX"
+    ],
+    "clock_fixture": "Task-owned uncommitted created_at backdated 25h, active alias untouched; committed controls also aged, no claim of real 25h wait.",
+    "after_full_refill": "Independent original/shared bytes, current entries, published old-ref text/original still correct; a new unique byte is rejected."
+  },
+  "history_preserved": [
+    "red-v1 ready/partial preparation expectation mistake",
+    "red-v2 pending-versus-terminal receipt expectation mistake",
+    "red-v3 real failure but missing post-refill protection; independent needs_revision",
+    "green-v1 main2pass but combined regression timed out at300s; blocked, lifecycle recover inspect settled and no content worker remained"
+  ],
+  "authorization": "2026-11-26 maintainer resumed partial test/evidence work; the prepared 9-line post-refill protection correction received one additional round. No unlimited repair waiver.",
+  "limitations": [
+    "Raw+results bundle TTL, direct Snapshots.put expired-admission path, crash/fault/concurrency, and actual restore of expiration fences are still separate verification gaps.",
+    "Invalidated committed candidates/results GC and in-flight allocation protection remain unfinished; do not delete canonical bodies merely from current DB references.",
+    "Metadata retention is an implementation choice, not measured long-running performance proof.",
+    "Current-HEAD three-OS, installed-package, service and E/H/X evidence remain required."
+  ],
+  "redaction": "Synthetic documents only; relative source/receipt paths and hashes, no credentials, private key, real documents or raw trace published."
+}

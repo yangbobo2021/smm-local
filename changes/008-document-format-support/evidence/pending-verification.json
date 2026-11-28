@@ -1,0 +1,546 @@
+{
+  "scope": "008 implementation draft; whole requirement R008 is NOT passed; no merge/release approval requested",
+  "snapshot": "4906918d8f1f854da48d4eee21109819781d287c",
+  "acceptance_id": "AT-SMM-008",
+  "baseline": "d8894d429ebe0915e377513a637b5dfc0fc7ea1a",
+  "scoped_passed": [
+    {
+      "area": "Conservative same-SHA transfer reservations",
+      "evidence": "reservation-lengths-development.json",
+      "main_passed": 2,
+      "regression_passed": 19
+    },
+    {
+      "area": "Empty originals through actual creator Web pages",
+      "evidence": "web-empty-original-development.json",
+      "main_passed": 2,
+      "regression_passed": 14
+    },
+    {
+      "area": "Installed macOS Python3.11 creator business",
+      "evidence": "minimum-installed-macos-development.json",
+      "main_passed": 2,
+      "limitation": "Exact earlier wheels only; final current-HEAD rebuild and recheck still required"
+    }
+  ],
+  "ci_checkpoint": {
+    "head": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+    "run": 45661390239,
+    "evidence": "ci-regression-5126cd1.json",
+    "macos": {
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0
+    },
+    "ubuntu": {
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0
+    },
+    "windows": {
+      "passed": 409,
+      "skipped": 27,
+      "failed": 24
+    },
+    "limitation": "Predates this Web/reservation/minimum-test commit; ordinary CI is not E/H/X acceptance"
+  },
+  "retained_by_maintainer": [
+    {
+      "case": "TC-008-web-native-upload",
+      "evidence": "web-upload-retained-gaps.json",
+      "gaps": [
+        "Second-wave pending retained rows status/details",
+        "Visible document ID sets at project switch, pending and completion"
+      ],
+      "patch_applied": false,
+      "current_status": "previously retained; resumed by2026-11-26 instruction; original gap preserved until actual execution/review"
+    },
+    {
+      "area": "Windows stdlib socketpair observer repair",
+      "patch_applied": false,
+      "business_acceptance": "failed or unverified; not waived",
+      "current_status": "previously retained; resumed by2026-11-26 instruction; original gap preserved until actual execution/review"
+    },
+    {
+      "area": "Same-parent distinct SQLite queue ownership",
+      "evidence": "upload-queue-development.json",
+      "decision": "Retain gap; no additional cross-archive testcase/further proposed fix/dedicated rerun",
+      "risk": "Current busy-coalescing patch can miss another database wakeup; statically supported, not reproduced",
+      "not_spec_waiver": true,
+      "current_status": "Reopened by user six-fix instruction; implemented and scoped evidence recorded in six-fixes-development.json. Previous retain decision remains historical, not current stop authorization."
+    },
+    {
+      "case": "TC-008-path-refresh-config-finalization",
+      "evidence": "path-finalization-retained.json",
+      "decision": "Retain Hub search-envelope test gap; no additional repair/dedicated rerun, candidate product patch remains unapplied",
+      "product_defect": "Path refresh publication rejection terminal/failure handling still unresolved in PR",
+      "not_spec_waiver": true,
+      "current_status": "Reopened by user six-fix instruction; implemented and scoped evidence recorded in six-fixes-development.json. Previous retain decision remains historical, not current stop authorization."
+    }
+  ],
+  "pending_test_repair_approvals": [],
+  "remaining_required": [
+    "Full canonical GC purposes beyond the six-fix slice, including complete receiver/inflight/shared staging and restore/replay/numeric matrix; no entireSC10 pass",
+    "Final-source whole ordinary CI and official raw artifact recovery; no old failure reclassified by focused success",
+    "Current minimum-Python installed matrix; present final Mac3.14 independent package evidence is not all3.11 platforms",
+    "Full C1 boundary/lifecycle/cancellation/malformed input/snapshot protection and complete PDF safety/resources",
+    "E installed CLI/Web/MCP/HTTP paths, H actual OS service identity, X six cross-OS directions",
+    "Previously retained active-source cancellation, restart and old shared Windows argv observer branches",
+    "Complete encrypted CI original evidence recovery and cleanup receipts for full delivery",
+    "Fresh full PR review and requirement-level independent acceptance; R008 remains unpassed"
+  ],
+  "environment_constraints": [
+    "Local, GitHub CI and home ESXi Windows/Ubuntu authorized on2026-11-26; Ubuntu22.04 VM is supplementary and does not replace SPEC Ubuntu24.04.",
+    "No daily SMM/Hub/VibeInsight or real user documents; ESXi SSH Windows administrator is diagnostic identity, not ordinary-user acceptance."
+  ],
+  "documentation": {
+    "readme_and_trial_guide": "Updated for development builds, format limits and creator-owned processing; discovery still requires PR review",
+    "acceptance_replay": "008 replay README includes ordinary CI versus components/installed/service/cross-OS boundaries."
+  },
+  "redaction": "Synthetic documents only. Public summaries contain digests/status and no credentials or raw private evidence.",
+  "current_head_minimum_macos": {
+    "product_commit": "366931e78a72f55d5bbfeb28e3193997e5ab75f5",
+    "status": "passed_scoped",
+    "evidence": "minimum-installed-macos-clean-366931e.json",
+    "note": "Same frozen test and current clean wheels, independently reviewed formal execution. OtherOS/fullSC11/E/H/X remain gaps; later product edits need affected checks re-evaluated."
+  },
+  "pr_review": {
+    "head": "3c2c42ccb473b438eb8436f2d277b8635b0f5530",
+    "status": "needs_revision for complete R008",
+    "evidence": "six-fixes-pr-review-3c2c42c.md",
+    "scoped_findings_followup": "F3 visible documentID fixed and independently nativepassed; Hub CLI help independently verified in final-v3. Details in six-fixes-followup.json. Fresh final-source supplement is recorded onPR.",
+    "current_review_source": "See latest clean-context PR conclusion; this file is a versioned snapshot, not an automatically updated pass flag."
+  },
+  "source_authorization_fix": {
+    "status": "passed_scoped",
+    "evidence": "refresh-authorization-combined-development.json",
+    "formal_reviews_registered": true,
+    "scope": "Explicit refresh missing-member and actual POSIX unreadable-member authorization resurrection; not in-flight cancellation/full SC8.",
+    "formal_product_sha256": "42f0ac5f55d295907bc0ce817a1263dc02b5d99b351ab17ec1c0f3e16ddebfb9"
+  },
+  "hub_refresh_read_fix": {
+    "status": "passed_scoped",
+    "evidence": "hub-refresh-availability-development.json",
+    "scope": "Content worker no longer holds Hub global read/control guard; service CLI handoff, write-control/late matrix and whole SC7 remain incomplete."
+  },
+  "cli_format_help": {
+    "status": "verified_development",
+    "evidence": "cli-format-help-development.json",
+    "scope": "Confirmed Local CLI help conflict only; whole discovery still incomplete."
+  },
+  "snapshot_restore_set_fix": {
+    "status": "passed_scoped",
+    "evidence": "snapshot-restore-set-development.json",
+    "scope": "Actual persistent raw/result restore manifest and include/exclude copying with retained current guard conflict; transfers, received projections, managed payload and real service/platform recovery remain unverified."
+  },
+  "latest_ordinary_ci": {
+    "head": "1abe6cd4de5b40fca7bf0152fc17da6fbdda0fcc",
+    "evidence": "ci-1abe6cd.json",
+    "artifacts": "All6 official ZIP digest/length/CRC, fullJUnitSHA andactualcases checked.",
+    "ubuntu_each": "468passed69skipped0failed twice",
+    "macos": "PR468passed69skipped0failed; push466passed69skipped2GCerrorguardfailures.",
+    "windows_each": "468passed67skipped2retained upload-restart audit failures twice",
+    "new_identity_helper": "passed all6 artifacts",
+    "scope": "Both workflows failed. Code includes matching-helper only, excludes uncommitted watchdog-health test/fix. Not E/H/X, service/ordinary-user or installedminimumPython."
+  },
+  "web_failure_diagnostic": {
+    "status": "passed_scoped",
+    "evidence": "web-failure-diagnostic-development.json",
+    "scope": "First managed failure current retry target preserved; actual two-creator details expose corresponding saved error. No complete retry/visible comparison-value or retained initial-upload gap claim."
+  },
+  "unsupported_object_empty_fix": {
+    "status": "passed_scoped",
+    "evidence": "unsupported-object-empty-development.json",
+    "scope": "Strictly textless DOCX/XLSX with declared unsupported objects; true blank/support-text controls and pure result consistency. PDF unrecognized scan/all-object and lifecycle/OS matrices remain gaps."
+  },
+  "resumed_test_repairs": [
+    {
+      "case": "TC-008-reference-web",
+      "gap": "Playwright test uses status_code instead of status",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-managed-upload-restart",
+      "gap": "C1 two applicable documents within each same project and evidence dedup",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-web-ready-management",
+      "gap": "Raw main 2 passed, but 54,253,080-byte evidence exceeds native 25MiB limit; native regression did not start, no green review",
+      "separate_regression_passed": 24,
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    },
+    {
+      "case": "TC-008-managed-update-paths",
+      "gap": "Windows dangling-link self-control namespace representation comparison",
+      "patch_applied": false,
+      "current_status": "resumed by2026-11-26 maintainer instruction; known patch not yet applied unless separately recorded"
+    }
+  ],
+  "transfer_expiry_fix": {
+    "status": "passed_scoped",
+    "evidence": "transfer-expiry-raw-development.json",
+    "main_passed": 2,
+    "regression_passed": 23,
+    "separate_regression": {
+      "passed": 6,
+      "business": 2,
+      "controls": 4
+    },
+    "scope": "Raw-only normal TTL quota and shared/committed protection; full F3/SC10 and other paths still required."
+  },
+  "platform_investigation": {
+    "evidence": "cross-platform-investigation-20261126.json",
+    "status": "Shared facilities Mac11/Windows15/Ubuntu22.04supplement15 passed and independently registered. Original Windows9 recheck7pass2probe failures; further shared string-argv repair explicitly retained."
+  },
+  "current_ci_checkpoint": {
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "evidence": "ci-regression-e8bb1bd.json",
+    "macos_ubuntu_each": "465passed69skipped0failed twice each",
+    "windows_each": "465passed67skipped2retained worker-audit failures twice",
+    "new_sampler_windows": "passed twice, skipped on non-Windows",
+    "six_staging_tests": "passed all6 artifacts,36case instances",
+    "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
+  },
+  "active_source_lifecycle_gap": {
+    "maintainer_decision": "retain gap, 2026-11-26",
+    "case": "TC-008-active-source-removal",
+    "scope": "Candidate did not pass preparation: isolated archives lack OCR configuration required to produce specified pixel-boundary partial sample. Actual cancellation/5-second slot/tree/last authorization were NOT reached.",
+    "latest_debug": "debug-sc8-active-source-removal-v3",
+    "independent_review": "review-active-source-design-v3 registered needs_revision",
+    "prepared_extra_repair_applied": false,
+    "no_further_execution_authorized": true
+  },
+  "publication_state_in_progress": {
+    "status": "passed_scoped",
+    "evidence": "publication-state-development.json",
+    "scope": "Two actual creator browser postprocessing/pre-publication UI boundaries,48flows96statePNG,10relatedregressions; each greenreview registered plus joint report. No fullSC1/E/H/X claim.",
+    "latest_current_source_recheck": "After5file finalization fix, same frozen testcase:Local24flows48PNG+2reg,Hub24flows48PNG+3reg, two newreviews registered plusnewjoint.5reg are subsetof27 above."
+  },
+  "restart_and_audit_retained": {
+    "decision": "retain gaps",
+    "call_id": "call_c6cb87550504411c86bdd14c3db57872",
+    "proposal": ".acceptance-local/008/drafts/restart-and-audit-completion/proposal.md",
+    "sha256": "3a01af4368e00edc7058c6cb8fd651b1f7f3973ba8058d85255fcd5aca32118b",
+    "scope": "C1 restart five findings and shared Windows string-argv audit normalisation; no additional repair/execution round authorised. Do not apply draft patches or run these retained TCs as dedicated acceptance.",
+    "candidate_result": "debug-sc7-managed-restart-c1-mac-v3:1failed4passed; independentreview-managed-restart-c1-design-v1 needs_revision design+implementation",
+    "findings": [
+      "Missing partial/empty/oldpub+pending before restart coverage",
+      "Local files API has no project_ids; wrong test observation",
+      "Final files ID set lacks explicit uniqueness",
+      "Old ref text checks anchors without complete source/order and pre/post fulltext equality",
+      "Dynamic restart_server missing runtime/debug binding",
+      "Windows subprocess audit argv is str; list-only observer misses actual workers"
+    ],
+    "unready_candidate_committed_as_executable_test": false
+  },
+  "historical_latest_ordinary_ci_db798ea": {
+    "head": "db798eadbf341f06489810d09473398de600c0ff",
+    "evidence": "ci-regression-db798ea.json",
+    "push_run": 45703105385,
+    "pr_run": 45703116764,
+    "macos": {
+      "passed": 447,
+      "skipped": 61,
+      "failed": 0
+    },
+    "ubuntu": {
+      "push": {
+        "passed": 446,
+        "skipped": 61,
+        "failed": 1
+      },
+      "pull_request": {
+        "passed": 447,
+        "skipped": 61,
+        "failed": 0
+      },
+      "unresolved": "Hub restart push run observed V=0 instead of published V=1; cause unconfirmed"
+    },
+    "windows": {
+      "passed": 424,
+      "skipped": 60,
+      "failed": 24,
+      "same_failed_identity_set_as_c13de61": true
+    },
+    "limitation": "Ordinary CI only; separate failed/passed same-head runs preserved. Not E/H/X."
+  },
+  "config_finalization_fix": {
+    "status": "passed_scoped",
+    "evidence": "config-finalization-development.json",
+    "main_targets": 48,
+    "related_regression_passed": 27,
+    "four_tdd_reviews_registered": true,
+    "scope": "Macforeground managedupload and synchronouscache reprocess:config invalidation after real result, failed terminal/error, old publication preserved and explicit saved-byte retry. HubCLI status/config no longer refused byOSadminlock while content jobruns. Not pathrefresh/latepayload/L3/GC/services/EHX."
+  },
+  "historical_ordinary_ci_6c65bc9": {
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "ci-regression-6c65bc9.json",
+    "runs": [
+      "45748718050",
+      "45748711062"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 63,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 63,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 62,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI; not E/H/X/required installed-business acceptance; predates new uncommitted config-finalization fixes",
+    "all6_official_digest_crc_xml_verified": true
+  },
+  "remote_query_routing_fix": {
+    "status": "passed_scoped",
+    "evidence": "remote-query-routing-development.json",
+    "scope": "Mac foreground CLI/HTTP/stdio reference handoff:24remote originals,4different-P source documents, exact snapshots and old mixed-ref rejection; not Web UI/installed/OS service/HTTPS/EHX.",
+    "main_passed_each": 1,
+    "related_regression_passed": [
+      12,
+      34
+    ],
+    "both_tdd_reviews_registered": true,
+    "historical_other_findings_at_abf46ca": "Canonical obsolete-candidate GC, merged header context and external-path Web details still need repair.",
+    "current_other_findings": "Exclusive-candidate capacity scoped fixed in candidate-reclamation-development.json. Other canonical GC paths, actual watchdog failure, retained path-refresh terminal handling, external-path Web details, service CLI handoff and full acceptance remain."
+  },
+  "merged_column_header_fix": {
+    "evidence": "merged-column-header-development.json",
+    "status": "Two scoped greens independently passed/registered; full SC9 remains incomplete"
+  },
+  "windows_upload_queue_defect": {
+    "original_evidence": "windows-upload-queue-diagnostic.json",
+    "current_evidence": "upload-queue-development.json",
+    "status": "Single-archive Mac/Windows component tests passed on7c2348a; not whole-queue closure",
+    "remaining": "Same-parent distinct database wakeup static risk retained by maintainer; native green review remains needs_revision/design"
+  },
+  "historical_latest_ordinary_ci_before_header": {
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
+    "runs": [
+      "45754517560",
+      "45754512178"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 66,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
+    "all6_official_digest_crc_xml_verified": true
+  },
+  "historical_pr_review_before_abf46ca": {
+    "status": "needs_revision",
+    "head": "6c65bc9295d49ff8ff13a6cfe07277b0504d7209",
+    "evidence": "pr43-review-v2.md",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7181841042",
+    "findings": [
+      "P1 Local pureHub original download route absent",
+      "P1 postprocess publication-failure terminal inconsistency",
+      "P1 invalid committed canonical candidate GC",
+      "P2 merged header span outside left window",
+      "P2 path-files Web metadata omitted",
+      "P1 same origin/contentV but different processingP/resultSHA can merge into a mixed bundle"
+    ],
+    "prior_findings_status": "v1 concrete auth resurrection/restore/help/object-only/failure-details paths scoped fixed;Hub shortlock and rawTTL partial; fulloriginalscope/EHX incomplete.",
+    "version_isolation_supplement": "processing-version-isolation-review.md",
+    "findings_status_after_remote_fix": {
+      "pure_hub_original": "New real CLI/HTTP/stdio-reference TDD passed and independently registered; Web/other platform entry still unverified.",
+      "processing_version_isolation": "Same-V/different-P, result conflicts and mixed old refs scoped fixed and independently registered; fullSC9/platform matrix remains unverified."
+    }
+  },
+  "queue_fix_checkpoint": {
+    "evidence": "upload-queue-development.json",
+    "status": "native green observed, independent needs_revision/design; same-parent multi-DB risk retained by maintainer",
+    "actual_tests": "Mac4main+8reg passed; Windows5component passed and independently reviewed",
+    "not_complete": "No whole TC/SC1/R008 or E/H/X pass",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
+  },
+  "historical_current_ci_checkpoint_before_queue": {
+    "head": "092ab9d8be112481618ffe158a407103147d2ed0",
+    "evidence": "ci-regression-092ab9d.json",
+    "runs": [
+      "45754517560",
+      "45754512178"
+    ],
+    "each_run": {
+      "macos": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "ubuntu24.04": {
+        "passed": 458,
+        "skipped": 67,
+        "failed": 0
+      },
+      "windows2022": {
+        "passed": 457,
+        "skipped": 66,
+        "failed": 2
+      }
+    },
+    "scope": "Ordinary component/compatibility CI including5file configuration-finalization fix; not native E/H/X or installed business. New remote-routing/version TDD still uncommitted and not part of this CI.",
+    "all6_official_digest_crc_xml_verified": true
+  },
+  "historical_current_ci_checkpoint_before_7c2348a": {
+    "head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+    "evidence": "ci-regression-abf46ca.json",
+    "scope": "Last recovered ordinary CI, not current queue/header source",
+    "macos_ubuntu_each": "459pass68skip0fail twice",
+    "windows_each": "457pass67skip3fail twice",
+    "note": "New queue/header source awaits its ordinary CI; separate Windows source-component supplement does not replace it."
+  },
+  "windows_pdf_temporary_directory_error": {
+    "status": "Approved sampling fix scoped passed and new Windows unit/original6staging source CI passed twice; exact original one-off cause remains unproven.",
+    "evidence": "ci-regression-7c2348a.json",
+    "test": "test_document_formats_staging.py::test_actual_staging_capacity_deduplicates_same_saved_bytes",
+    "retained": false,
+    "investigation_evidence": "windows-temporary-observation-diagnostic.json",
+    "next": "Other required GC/lifecycle/platform work remains; extra home-VM capacity attempt stays incomplete, not retrospectively passed.",
+    "clarification": "Maintainer approved once-immediate-complete-rescan policy on2026-11-26; SPEC/PLAN and native definition v3 saved before product changes.",
+    "definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+    "delivery_evidence": "temporary-observation-development.json",
+    "scope": "Real Windows1 sampler; Mac6 staging; extra Windows6 run incomplete. Not full SC10/E/H/X.",
+    "historical_limitation_before_160124e": "One failed and one passed sibling run; no confirmed cause or product fix. No blind retry or assertion broadening.",
+    "historical_investigation_before_160124e": "Real Windows delete-pending directory and sampler WinError5 reproduced. Independent TDD review needs_revision/design: forced recovery conflicts with PLAN fail-on-permission-error. Not accepted product red; original CI cause not conclusively established.",
+    "current_investigation": "Approved once-full-rescan policy implemented and independently passed at e8bb1bd; exact original CI causal chain remains unproven. Historical v1 design-conflict opinions stay unchanged.",
+    "current_ci": "ci-regression-e8bb1bd.json"
+  },
+  "path_finalization_retained": {
+    "evidence": "path-finalization-retained.json",
+    "status": "Retained by maintainer; path product defect NOT fixed in PR",
+    "candidate_product_applied": false,
+    "test_gap": "Hub search context envelope, no approved extra round",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
+  },
+  "historical_ordinary_ci_7c2348a": {
+    "head": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+    "evidence": "ci-regression-7c2348a.json",
+    "macos_ubuntu_each": "465passed68skipped0failed twice each",
+    "windows_pr": "464passed67skipped2retained failures",
+    "windows_push": "463passed67skipped3failures including new unresolved PDF temporary-directory AccessDenied",
+    "scope": "Ordinary source CI only, predates uncommitted path-finalization work. Not E/H/X, minimum-user/installed business or whole R008 acceptance."
+  },
+  "snapshot_is_historical": true,
+  "current_checkpoint": "six-fixes-followup.json",
+  "candidate_reclamation_fix": {
+    "status": "passed_scoped_first_exclusive_archive_capacity_case",
+    "evidence": "candidate-reclamation-development.json",
+    "main_targets_each_creator": 12,
+    "main_passed_each": 1,
+    "regression_passed_by_attempt": {
+      "local": 9,
+      "hub": 8
+    },
+    "overlap": "Recovery cases overlap between attempts; not17distinct cases",
+    "both_reviews_registered": true,
+    "remaining": "Shared/unknown/legacy ownership, in-flight windows, results/stages, crash/restore and Windows delete safety still need their separate dynamic cases; archive collision/path reuse corrections only statically reviewed."
+  },
+  "supervisor_watchdog_failure": {
+    "status": "actual_unhandled_failure_unresolved",
+    "evidence": "candidate-reclamation-supervisor-failure-v2.md",
+    "attempt": "green-sc10-canonical-capacity-hub-v2",
+    "result_sha256": "dc74109cb07947d7ba753733c950d684f2ee4753afc5fc047ed1600da9b9cdd2",
+    "actual": "watch→matching→cmdline AccessDenied and watchdog exit; diagnostic contaminated expected OCR failure, testcase correctly rejected",
+    "cause": "Normal-exit race is compatible but unproven; no instant status/recheck timeline",
+    "product_changed": false,
+    "not_waived": true,
+    "next": "Separate B9/A10 process-observation and watchdog-health natural cases; no relaxed GC assertion or retained-case repair",
+    "six_fix_update": "Historical entry; resumed scoped repair and final-source evidence are in six-fixes-development.json. Do not treat this earlier state as current source."
+  },
+  "current_gc_ci": {
+    "status": "pending_new_source_commit",
+    "prior_ordinary_evidence": "ci-regression-e8bb1bd.json",
+    "note": "Old source CI does not cover this GC candidate. No platform skip/failure is counted as passed."
+  },
+  "historical_pr_review_e8bb1bd": {
+    "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+    "status": "needs_revision",
+    "evidence": "pr43-review-e8bb1bd.md",
+    "scope": "Fresh independent incremental review: scoped sampling fix/evidence credible, no new material product defect; D1 historical index labels clarified afterwards. Not whole R008 delivery.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7187043311"
+  },
+  "historical_ordinary_ci": [
+    {
+      "head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "evidence": "ci-regression-e8bb1bd.json",
+      "macos_ubuntu_each": "465passed69skipped0failed twice each",
+      "windows_each": "465passed67skipped2retained worker-audit failures twice",
+      "new_sampler_windows": "passed twice, skipped on non-Windows",
+      "six_staging_tests": "passed all6 artifacts,36case instances",
+      "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed."
+    },
+    {
+      "head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "evidence": "ci-3e29255.json",
+      "artifacts": "All six official ZIPs verified against official digest/length, CRC and parsed complete JUnit.",
+      "ubuntu_each": "467passed69skipped0failed twice",
+      "macos": "PR466passed69skipped1failed; push465passed69skipped2failed; new candidate GC error-guard failures, actual error string not present in short trace.",
+      "windows_each": "467passed67skipped2retained upload-restart audit-count failures twice",
+      "scope": "Ordinary source CI only; both workflows failed. Uncommitted helper patch/test excluded. Not E/H/X, service or installed minimum-Python acceptance."
+    }
+  ],
+  "process_identity_helper": {
+    "evidence": "process-identity-development.json",
+    "status": "passed_scoped",
+    "macos": "Frozen primary+6staging actualpass; red+green independent registered.",
+    "windows": "Same-source live identity component actualpass; debug independent registered.",
+    "limitation": "Full watchdog health/root-cause/5secondcleanup remains open; not fullSC10/R008."
+  },
+  "historical_pr_reviews": [
+    {
+      "head": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+      "status": "needs_revision",
+      "evidence": "pr43-review-3e29255.md",
+      "scope": "Fresh independent30file checkpoint: scoped GC TDD credible, no new confirmed deletion/lock defect; actual watchdogP1 and remaining product/evidence gaps stay open. Not full R008.",
+      "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7189860167"
+    }
+  ],
+  "historical_pr_review_before_six_fixes": {
+    "head": "1abe6cd4de5b40fca7bf0152fc17da6fbdda0fcc",
+    "status": "needs_revision",
+    "evidence": "pr43-review-1abe6cd.md",
+    "scope": "Fresh completePR/PLAN/Intent role entry paths/A1-A12 and currentincrement: scoped helper credible, no new substantive matching defect; five actual/static product gaps and fullacceptance remain. CI described as unrecovered at review time; subsequently recovered actualfailedCI is separately indexed.",
+    "comment": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7191515486"
+  },
+  "six_fixes": {
+    "authorization": "User requested fixing six issues; on2026-11-28 permitted all necessary test repair/execution/review rounds without further questions.",
+    "source": "Processing code3c2c42c plus final-v3 Local visible documentID and Hub CLI help; exact64 hashes and two differences recorded, no false whole-source identity claim.",
+    "scope": "Watchdog health, path refresh CAS finalization, Local path details, same-state service CLI handoff, per-DB queue kick, last-use/pin reclamation including copied identity ambiguity.",
+    "native": "Scoped F1/GC final-v2 and F2/F3 frozen slice independently passed; final-source F4/F5 five main instances+24 related regressions independently passed as supplemental, not fabricated native green. All exact version differences and SC1 design metadata block remain explicit.",
+    "platform": "Six final-v2 processing supplements independently passed: Win recovery29pass2skip; Linux recovery30pass1skip; Linux both paths12targets each; Linux bothhealth12targets+5controls each. Final-v3 UI12+3reg, packages97/18commands, installedMac+twoVM source4help each independently passed; not E/H/X.",
+    "ci": "Per-head official artifact/digest/CRC/JUnit results tracked on stable PR evidence comment; source3c2c42c Ubuntu two batches495pass82skip0fail recovered so far, other jobs running at this versioned snapshot.",
+    "not_closed": [
+      "Whole R008",
+      "Entire SC1/SC10",
+      "E/H/X or minimum Python matrix"
+    ],
+    "evidence": "six-fixes-development.json"
+  },
+  "ci_evidence_url": "https://github.com/yangbobo2021/smm-local/pull/43#issuecomment-7224981436"
+}

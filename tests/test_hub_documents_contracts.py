@@ -1115,6 +1115,13 @@ def test_compatibility(w,monkeypatch,tmp_path):
         actual=tool('read_document',{'reference':result['results'][0]['reference']});assert_text(actual,'needle MCP independent 😀\nline2')
         assert document_state(local)==before and local.db.get_settings()==settings and attempts==[]
     # The legacy public regression assertions execute, not merely import.
+    import os
+    if receipt := os.environ.get('SMM_008_C1_ADMIN_LEGACY_RECEIPT'):
+        from scripts.acceptance.document_formats_legacy_roles import standard_batch
+        directory = Path(os.environ['ACCEPTANCE_EVIDENCE_DIR']) / 'legacy-role-batch'
+        ledger = standard_batch(directory, Path(receipt), os.environ['SMM_008_C1_ADMIN_LEGACY_SHA256'])
+        observe('legacy-dialogue-policy-vibeinsight-regression', ledger)
+        return
     command=[sys.executable,'-m','pytest','-q','tests/test_005_contracts.py','tests/test_upload_policy.py','tests/test_upload_isolation.py','tests/test_vibeinsight_sync.py','tests/test_vibeinsight_boundaries.py','tests/test_cli_help.py']
     result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=120)
     observe('legacy-dialogue-policy-vibeinsight-regression',{'argv':command,'exit':result.returncode,'stdout':result.stdout,'stderr':result.stderr})

@@ -1,0 +1,23 @@
+{
+  "case": "TC-008-path-refresh-config-finalization",
+  "decision": "Maintainer explicitly retained Hub search-envelope test gap; no further testcase repair/dedicated rerun or application of the pending envelope patch.",
+  "product_delivery": "Candidate product patch archived, NOT applied/committed. PR product remains7c2348a and the path-refresh terminal defect remains unresolved.",
+  "baseline": "7c2348a8b1dfa9550ce024d1cc42b25eaaaa3fb3",
+  "test_snapshot": {
+    "file": "path-finalization-test-v3.py.txt",
+    "sha256": "e3263f4ac03593d88219fa529ca9796c4a89489d5cb52e4dd10747783049a428",
+    "executable_in_pr": false
+  },
+  "candidate_product_patch": {
+    "file": "path-finalization-product-v1.patch.txt",
+    "sha256": "6fbfd74404a3603cd08615dcdd875de64379b4575032bb6d132d9bbc36f56112",
+    "applied": false
+  },
+  "history": {
+    "v1": "Local real defect but candidate needs_revision; Hub405 from nonexistent API was test fault.",
+    "v2": "Both actual terminal-error red expected_failure registered; Local candidate product green blocked by comparing live providers as immutable table fields;15ordinary regressions passed.",
+    "v3": "Local expected_failure registered; Hub test failed before target processing due context fields located at search root rather than hit, needs_revision registered.",
+    "blocked_green_opinion": "Independent diagnostic needs_revision/implementation retained; blocked target cannot accept formal tdd-green review, not passed."
+  },
+  "scope": "Only continuation evidence; not accepted testcase/product delivery, not a SPEC waiver. Keep unfinished .py outside Git staging."
+}

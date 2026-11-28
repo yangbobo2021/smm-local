@@ -4,6 +4,7 @@ Nothing in this module watches files, calls federation, or sends model requests.
 Only refresh opens source bodies; search and read operate on one SQLite snapshot.
 """
 from __future__ import annotations
+from contextlib import nullcontext
 
 import hashlib
 import json
@@ -23,11 +24,16 @@ MIB = 1024 * 1024
 FILE_LIMIT = 2 * MIB
 SOURCE_LIMIT = 16 * MIB
 CANDIDATE_LIMIT = 1000
-SUFFIXES = {'.md', '.markdown', '.txt'}
+LEGACY_SUFFIXES = {'.md', '.markdown', '.txt'}
+NEW_SUFFIXES = {'.docx', '.xlsx', '.pdf'}
+SUFFIXES = LEGACY_SUFFIXES | NEW_SUFFIXES
 IGNORED_DIRS = {'.git', '.hg', '.svn', 'node_modules', '.venv', 'venv', 'build', 'dist'}
 
 
 def _link(path):
+    if os.name == 'nt':
+        from .document_windows import reparse_point
+        return reparse_point(path)
     s = path.lstat()
     return stat.S_ISLNK(s.st_mode) or bool(getattr(s, 'st_file_attributes', 0) & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0x400))
 
@@ -64,7 +70,7 @@ def _root(value):
     if not (path.is_file() or path.is_dir()) or not os.access(path, os.R_OK):
         raise ValueError('文档来源不是当前账户可读的常规文件或目录')
     if path.is_file() and path.suffix.lower() not in SUFFIXES:
-        raise ValueError('首版仅支持 .md、.markdown、.txt UTF-8文件')
+        raise ValueError('仅支持 .md/.markdown/.txt 与已安装创建端支持的新文档格式')
     return path, 'directory' if path.is_dir() else 'file'
 
 
@@ -142,6 +148,26 @@ def _read_file(path, expected):
     return hashlib.sha256(raw).hexdigest(), text
 
 
+def _read_raw(path, expected):
+    def check():
+        if any(_link(p) for p in [path,*path.parents]):raise ValueError('读取期间路径变为链接或junction')
+        return path.stat()
+    check();fd=os.open(str(path),os.O_RDONLY|getattr(os,'O_BINARY',0)|getattr(os,'O_NOFOLLOW',0))
+    try:
+        opened=os.fstat(fd)
+        if not stat.S_ISREG(opened.st_mode) or _signature(opened)!=_signature(expected):raise ValueError('预算预检后文件已变化')
+        chunks=[];remaining=20*MIB+1
+        while remaining:
+            block=os.read(fd,min(65536,remaining))
+            if not block:break
+            chunks.append(block);remaining-=len(block)
+        raw=b''.join(chunks)
+        if len(raw)>20*MIB:raise ValueError('原文件超过20MiB')
+        if len(raw)!=expected.st_size or _signature(os.fstat(fd))!=_signature(expected) or _signature(check())!=_signature(expected):raise ValueError('读取期间文件已变化')
+        return raw
+    finally:os.close(fd)
+
+
 def _query_scope(con, scope, project_id):
     if scope not in {'all', 'project'}:
         raise ValueError('范围必须是 all 或 project')
@@ -193,6 +219,9 @@ class Documents:
             if 'resume_status' not in {r['name'] for r in con.execute('PRAGMA table_info(document_sources)')}:
                 con.execute("ALTER TABLE document_sources ADD COLUMN resume_status TEXT NOT NULL DEFAULT 'pending'")
                 con.execute("UPDATE document_sources SET resume_status=status WHERE status!='refreshing'")
+
+        from .document_snapshots import Snapshots
+        self.snapshots=Snapshots(archive)
 
     @staticmethod
     def _sources(con):
@@ -256,15 +285,73 @@ class Documents:
             self._prune(con)
         return {'removed':source_id,'message':'已取消此来源；独占材料退出检索/读取，原文件未改变'}
 
+    def original_fields(self, con, document, archive_id, key, *, stamps=None):
+        """Bind list original refs to the same database snapshot as their row."""
+        details=self.snapshots.detail(con,document['pk'])
+        if stamps is None:
+            stamps=[dict(row) for row in con.execute("SELECT s.id,s.revision,m.qualification FROM document_memberships m JOIN document_sources s ON s.id=m.source_id WHERE m.document_pk=? AND m.status='ready' AND s.status IN ('ready','partial') ORDER BY s.id",(document['pk'],))]
+        published=details.get('published_snapshot')
+        details.update(original_reference=None,original_available=False)
+        if published is not None and stamps and document['version']>0:
+            payload={'format':1,'kind':'document','archive_id':archive_id,'document_id':document['id'],'version':document['version'],'sources':stamps,'start':0,'end':min(document['text_length'],2000),'processing_version':published['processing_version'],'result_sha256':published['result_sha256'],'raw_sha256':document['sha256']}
+            details.update(original_reference=sign(payload,key),original_available=True)
+        elif stamps and document['version']>0:details['original_reason']='legacy_original_not_captured'
+        else:details['original_reason']='no_current_snapshot'
+        return details
+
     def files(self, source_id=None):
+        archive_id,key=references.material(self.db)
         with self.db.connect() as con:
             con.execute('BEGIN')
             if source_id is not None and not con.execute('SELECT 1 FROM document_sources WHERE id=?',(source_id,)).fetchone():
                 raise ValueError('文档来源不存在')
-            rows=con.execute('SELECT m.source_id,m.relative_path,m.status,m.qualification,m.error,d.id,d.path,d.version,d.sha256,d.text_length,d.captured_at,d.captured_by_source_id FROM document_memberships m JOIN documents d ON d.pk=m.document_pk'+(' WHERE m.source_id=?' if source_id else '')+' ORDER BY d.path,m.source_id', (source_id,) if source_id else ())
-            return [dict(row) for row in rows]
+            available={source['id']:source for source in self._sources(con) if source['status'] in {'ready','partial'}}
+            qualified={}
+            for member in con.execute("SELECT document_pk,source_id,qualification FROM document_memberships WHERE status='ready'"):
+                source=available.get(member['source_id'])
+                if source is not None:
+                    qualified.setdefault(member['document_pk'],[]).append({'id':member['source_id'],'revision':source['revision'],'qualification':member['qualification']})
+            rows=con.execute('SELECT d.pk,m.source_id,m.relative_path,m.status,m.qualification,m.error,d.id,d.path,d.version,d.sha256,d.text_length,d.captured_at,d.captured_by_source_id FROM document_memberships m JOIN documents d ON d.pk=m.document_pk'+(' WHERE m.source_id=?' if source_id else '')+' ORDER BY d.path,m.source_id', (source_id,) if source_id else ())
+            result=[]
+            for row in rows:
+                item=dict(row);pk=item.pop('pk')
+                item.update(self.original_fields(con,row,archive_id,key,stamps=sorted(qualified.get(pk,[]),key=lambda stamp:stamp['id'])))
+                result.append(item)
+            return result
 
-    def _scan(self, source):
+    def reprocess(self,document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version):
+        token=self.snapshots.retry(document_id,capture_id,expected_attempt_id,expected_version,expected_processing_version)
+        try:
+            result=self.snapshots.process(token,token['profile']['format'])
+            return self._publish_reprocess(token,result)
+        except (OSError,ValueError,RuntimeError) as exc:
+            self.snapshots.fail_current(token,exc)
+            raise
+
+    def _publish_reprocess(self,token,result):
+        with self.db.connect() as con:
+            con.execute('BEGIN IMMEDIATE');pk=token['document_pk']
+            self.snapshots.publish(con,pk,token,result)
+            doc=con.execute('SELECT * FROM documents WHERE pk=?',(pk,)).fetchone()
+            sources=[r[0] for r in con.execute('SELECT a.source_id FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision ORDER BY a.source_id',(token['capture_id'],))]
+            if not sources:raise ValueError('保存原件已失去连续有效采集授权')
+            collector=doc['captured_by_source_id'] if doc['captured_by_source_id'] in sources else sources[0]
+            version=doc['version']+int(doc['sha256']!=token['raw_sha256'])
+            sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
+            con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,text_sha256=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?',(version,token['raw_sha256'],result['text'],len(result['text']),hashlib.sha256(result['text'].encode('utf-8')).hexdigest(),utcnow(),collector,sequence,pk))
+            con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(result['text']))))
+            for sid in sources:
+                con.execute("UPDATE document_memberships SET qualification=qualification+(status!='ready'),status='ready',error=NULL WHERE document_pk=? AND source_id=?",(pk,sid))
+                failures=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status!='ready'",(sid,)).fetchone()[0]
+                status='partial' if failures else 'ready'
+                counts=json.loads(con.execute('SELECT counts FROM document_sources WHERE id=?',(sid,)).fetchone()[0])
+                counts['ready']=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status='ready'",(sid,)).fetchone()[0]
+                counts['failed']=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status='failed'",(sid,)).fetchone()[0]
+                con.execute('UPDATE document_sources SET status=?,resume_status=?,counts=? WHERE id=?',(status,status,json.dumps(counts),sid))
+            detail=self.snapshots.detail(con,pk)
+        return {'document_id':doc['id'],**detail}
+
+    def _scan(self, source, *, mutation_context=None):
         root=Path(source['path']);counts={'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0,'ignored_format':0,'ignored_excluded':0,'ignored_links':0}
         candidates=[];patterns=[(x.endswith('/'),_glob(x)) for x in source['exclude']]
         if _link(root):
@@ -274,8 +361,11 @@ class Documents:
             try:
                 info=path.stat()
                 if not stat.S_ISREG(info.st_mode):raise ValueError('候选不是常规文件')
-                if info.st_size<=FILE_LIMIT:counts['billed_bytes']+=info.st_size
-                error='文件超过2MiB' if info.st_size>FILE_LIMIT else None
+                new=path.suffix.lower() in NEW_SUFFIXES;limit=20*MIB if new else FILE_LIMIT
+                if info.st_size<=limit:
+                    if new:counts['new_raw_bytes']=counts.get('new_raw_bytes',0)+info.st_size
+                    else:counts['billed_bytes']+=info.st_size
+                error=('文件超过20MiB' if new else '文件超过2MiB') if info.st_size>limit else None
             except (OSError,ValueError) as exc:info=None;error='stat失败: '+str(exc)
             candidates.append({'path':path,'relative_path':relative,'stat':info,'error':error})
         def walk(directory,prefix=''):
@@ -310,40 +400,68 @@ class Documents:
             else:walk(root)
         except OSError as exc:
             return {'error':'目录枚举失败: '+str(exc),'counts':counts,'files':[]}
-        if counts['candidates']>CANDIDATE_LIMIT or counts['billed_bytes']>SOURCE_LIMIT:
+        if counts['candidates']>CANDIDATE_LIMIT or counts['billed_bytes']>SOURCE_LIMIT or counts.get('new_raw_bytes',0)>128*MIB:
             return {'error':'来源超过1000候选或16MiB累计预算','counts':counts,'files':[]}
         for item in candidates:
             if item['error'] is None:
-                try:item['sha256'],item['text']=_read_file(item['path'],item['stat'])
-                except (OSError,ValueError) as exc:item['error']=str(exc)
+                try:
+                    if item['path'].suffix.lower() in NEW_SUFFIXES:
+                        raw=_read_raw(item['path'],item['stat'])
+                        if mutation_context is None:
+                            token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:])
+                        else:
+                            token=self.snapshots.capture(source,item['path'],raw,item['path'].suffix.lower()[1:],mutation_context=mutation_context)
+                        # Parsing failure still has a legal saved-byte retry.
+                        item['captured_id']=token['capture_id']
+                        result=self.snapshots.process(token,item['path'].suffix.lower()[1:])
+                        item.update(snapshot_token=token,processed_result=result,sha256=token['raw_sha256'],text=result['text'])
+                        from .document_results import encode
+                        counts['processed_result_bytes']=counts.get('processed_result_bytes',0)+len(encode(result))
+                    else:item['sha256'],item['text']=_read_file(item['path'],item['stat'])
+                except (OSError,ValueError,RuntimeError) as exc:item['error']=str(exc)
             counts['failed' if item['error'] else 'ready']+=1
+        if counts.get('processed_result_bytes',0)>128*MIB:return {'error':'来源完整处理结果超过128MiB','counts':counts,'files':[]}
         return {'error':None,'counts':counts,'files':candidates}
 
-    def refresh(self, source_id=None):
+    def refresh(self, source_id=None, *, mutation_context=None):
         ids=[s['id'] for s in self.sources()] if source_id is None else [source_id]
         results=[]
         for ident in ids:
-            with self.db.connect() as con:
-                con.execute('BEGIN IMMEDIATE');source=next((s for s in self._sources(con) if s['id']==ident),None)
-                if source is None:raise ValueError('文档来源不存在')
-                sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
-                source.update(refresh_id=uuid4().hex,request_seq=sequence)
-                con.execute("UPDATE document_sources SET resume_status=CASE WHEN status='refreshing' THEN resume_status ELSE status END,status='refreshing',refresh_id=?,request_seq=?,started_at=? WHERE id=?",(source['refresh_id'],sequence,utcnow(),ident))
-            try:scan=self._scan(source)
+            with (mutation_context() if mutation_context is not None else nullcontext()):
+                with self.db.connect() as con:
+                    con.execute('BEGIN IMMEDIATE');source=next((s for s in self._sources(con) if s['id']==ident),None)
+                    if source is None:raise ValueError('文档来源不存在')
+                    sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
+                    source.update(refresh_id=uuid4().hex,request_seq=sequence)
+                    con.execute("UPDATE document_sources SET resume_status=CASE WHEN status='refreshing' THEN resume_status ELSE status END,status='refreshing',refresh_id=?,request_seq=?,started_at=? WHERE id=?",(source['refresh_id'],sequence,utcnow(),ident))
+            try:
+                scan=self._scan(source) if mutation_context is None else self._scan(source,mutation_context=mutation_context)
             except (OSError,ValueError) as exc:scan={'error':str(exc),'files':[],'counts':{'ready':0,'failed':0,'candidates':0,'billed_bytes':0,'ignored_entries':0}}
-            results.append(self._publish(source,scan))
+            with (mutation_context() if mutation_context is not None else nullcontext()):
+                results.append(self._publish(source,scan,settle_rejections=True))
         return {'sources':results,'message':'仅明确刷新读取文件；失败原因见来源和文件状态'}
 
-    def _publish(self, source, scan):
+    def _publish(self, source, scan, *, settle_rejections=False):
         with self.db.connect() as con:
             con.execute('BEGIN IMMEDIATE')
             current=con.execute('SELECT * FROM document_sources WHERE id=?',(source['id'],)).fetchone()
             if current is None or current['revision']!=source['revision'] or current['refresh_id']!=source['refresh_id']:
                 return {'id':source['id'],'published':False,'message':'旧刷新已被新配置、刷新或移除取代'}
             if scan['error']:
+                con.execute('UPDATE document_capture_authorizations SET active=0 WHERE source_id=?',(source['id'],))
                 con.execute("UPDATE document_memberships SET status='failed',error=? WHERE source_id=?",(scan['error'],source['id']))
                 status='failed'
             else:
+                if settle_rejections:
+                    # An older refresh must not turn a newer attempt into a
+                    # failed membership. Validate every frozen target before
+                    # applying any part of this source's publication.
+                    for item in scan['files']:
+                        token=item.get('snapshot_token')
+                        if token is None:continue
+                        state=con.execute('SELECT current_capture,latest_attempt FROM document_snapshot_state WHERE document_pk=?',(token['document_pk'],)).fetchone()
+                        if state is None or state['current_capture']!=token['capture_id'] or state['latest_attempt']!=token['attempt_id']:
+                            return {'id':source['id'],'published':False,'message':'旧刷新已被新候选或处理尝试取代'}
                 seen=set()
                 for item in scan['files']:
                     path=str(item['path']);key=os.path.normcase(path)
@@ -356,17 +474,46 @@ class Documents:
                         error='较新文件快照已退出；请重新刷新，不能发布旧内容'
                         scan['counts']['ready']-=1;scan['counts']['failed']+=1
                     if not error and document['publish_seq']<=source['request_seq']:
-                        changed=document['sha256']!=item['sha256']
-                        version=document['version']+int(changed)
-                        # Re-reading identical bytes preserves content version;
-                        # capture metadata still records this successful collection.
-                        captured=utcnow();collector=source['id']
-                        con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
-                        con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
-                        con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
+                        token=item.get('snapshot_token')
+                        if token is not None:
+                            try:
+                                if settle_rejections and token.get('reused'):
+                                    # This is an already-approved snapshot, not
+                                    # a new result under the changed config.
+                                    state=con.execute('SELECT published_capture,result_sha256 FROM document_snapshot_state WHERE document_pk=?',(pk,)).fetchone()
+                                    if state['published_capture']!=token['capture_id'] or state['result_sha256']!=token['result_sha256'] or not self.snapshots.authorized(con,token['capture_id']):
+                                        raise ValueError('原快照或连续采集授权已变化，不能复用')
+                                else:self.snapshots.publish(con,pk,token,item['processed_result'])
+                            except ValueError as exc:
+                                # Managed upload jobs retain their existing
+                                # exception contract and queue finalization.
+                                if not settle_rejections:raise
+                                error=str(exc)
+                                scan['counts']['ready']-=1;scan['counts']['failed']+=1
+                        if not error:
+                            changed=document['sha256']!=item['sha256']
+                            version=document['version']+int(changed)
+                            # Re-reading identical bytes preserves content version;
+                            # capture metadata still records this successful collection.
+                            captured=utcnow();collector=source['id']
+                            con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?', (version,item['sha256'],item['text'],len(item['text']),captured,collector,source['request_seq'],pk))
+                            con.execute('UPDATE documents SET text_sha256=? WHERE pk=?',(hashlib.sha256(item['text'].encode('utf-8')).hexdigest(),pk))
+                            con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(item['text']))))
+                    if error:
+                        if settle_rejections and 'snapshot_token' in item:
+                            self.snapshots.fail_current(item['snapshot_token'],error,connection=con)
+                        # No completed capture means this source can no longer
+                        # authorize its previous bytes. Preserve only a newly
+                        # captured candidate whose parser failed, not stale copies.
+                        con.execute('UPDATE document_capture_authorizations SET active=0 WHERE source_id=? AND capture_id IN (SELECT id FROM document_captures WHERE document_pk=?) AND capture_id!=?',(source['id'],pk,item.get('captured_id','')))
                     con.execute('INSERT INTO document_memberships VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,document_pk) DO UPDATE SET relative_path=excluded.relative_path,status=excluded.status,qualification=excluded.qualification,error=excluded.error',(source['id'],pk,item['relative_path'],'failed' if error else 'ready',qualification,error))
                 for row in con.execute('SELECT document_pk FROM document_memberships WHERE source_id=?',(source['id'],)).fetchall():
-                    if row[0] not in seen:con.execute("UPDATE document_memberships SET status='missing',error='本轮未在来源范围发现' WHERE source_id=? AND document_pk=?",(source['id'],row[0]))
+                    if row[0] not in seen:
+                        # A successful enumeration is explicit evidence that this
+                        # source no longer authorizes its captured bytes. Other
+                        # continuously valid overlapping sources remain active.
+                        con.execute('UPDATE document_capture_authorizations SET active=0 WHERE source_id=? AND capture_id IN (SELECT id FROM document_captures WHERE document_pk=?)',(source['id'],row[0]))
+                        con.execute("UPDATE document_memberships SET status='missing',error='本轮未在来源范围发现' WHERE source_id=? AND document_pk=?",(source['id'],row[0]))
                 status='partial' if scan['counts']['failed'] else 'ready'
             con.execute('UPDATE document_sources SET status=?,resume_status=?,finished_at=?,error=?,counts=? WHERE id=?',(status,status,utcnow(),scan['error'],json.dumps(scan['counts']),source['id']))
             self._prune(con)
@@ -411,6 +558,16 @@ class Documents:
                 payload={'format':1,'kind':'document','archive_id':identity,'document_id':row['id'],'version':row['version'],'sources':stamps,'start':start,'end':end}
                 result={k:row[k] for k in ['id','path','version','sha256','text_sha256','text_length','captured_at','captured_by_source_id']}
                 result['display_name']=self._display_name(con,row['id'],row['path'])
+                metadata,processed=self.snapshots.metadata(con,row['pk'])
+                if processed is not None:
+                    result.update(metadata)
+                    payload.update(processing_version=metadata['processing_version'],result_sha256=metadata['result_sha256'],raw_sha256=row['sha256'])
+                    from .document_results import hit_context
+                    context,anchor,preview=hit_context(processed,point)
+                    if context is not None:
+                        result['table_context']=context
+                        start=max(0,point-min(200,preview//4));end=min(len(text),start+preview)
+                        payload.update(table_anchor=anchor,start=start,end=end)
                 results.append({**result,**_range(text,start,end),'source_ids':[s['id'] for s in stamps],
                                 'project_ids':sorted({p for stamp in stamps for p in available[stamp['id']]['project_ids']}),
                                 'reference':sign(payload,key),'bm25_score':-row['score'],'rank':len(results)+1,'snapshot_kind':'采集版本（仅本机）'})
@@ -426,7 +583,10 @@ class Documents:
             if row:return row[0]
         return Path(path).name
 
-    def read(self, reference, *, start=None, end=None):
+    def read(self, reference, *, start=None, end=None, view='text',table_id=None,row_start=None,row_end=None,column_start=None,column_end=None,_raw=False):
+        if view not in {'text','table','original-info'}:raise ValueError('不支持的文档读取模式')
+        if view!='text' and (start is not None or end is not None):raise ValueError('表格/原件信息与文本范围互斥')
+        if view!='table' and any(x is not None for x in (table_id,row_start,row_end,column_start,column_end)):raise ValueError('表格参数须与table视图一起使用')
         payload=references.decode(self.db,reference)
         from .document_protocol import identity,integer
         if type(payload.get('format')) is not int:raise ValueError('文档引用格式无效')
@@ -450,5 +610,20 @@ class Documents:
             if not valid:raise ValueError('当次来源资格已失效或正在刷新，请稍后重新检索')
             result={k:row[k] for k in ['id','path','version','sha256','text_sha256','text_length','captured_at','captured_by_source_id']}
             result['display_name']=self._display_name(con,row['id'],row['path'])
+            metadata,processed=self.snapshots.metadata(con,row['pk'])
+            if processed is not None:
+                if payload.get('processing_version')!=metadata['processing_version'] or payload.get('result_sha256')!=metadata['result_sha256'] or payload.get('raw_sha256')!=row['sha256']:raise ValueError('处理快照已失效，请重新检索')
+                result.update(metadata)
+            if _raw:return self.snapshots.original(con,row['pk'])
+            if view=='original-info':
+                state,_=self.snapshots.result(con,row['pk'])
+                return {**{k:v for k,v in result.items() if k not in {'locations','tables','coverage'}},'available':state is not None,'bytes':state['raw_bytes'] if state else None,'reason':None if state else 'legacy_original_not_captured','source_ids':valid}
+            if view=='table':
+                if processed is None:raise ValueError('旧文本没有表格结构')
+                from .document_results import table_view
+                return {**{k:v for k,v in result.items() if k not in {'locations','tables'}},**table_view(processed,table_id,row_start=row_start,row_end=row_end,column_start=column_start,column_end=column_end,anchor=payload.get('table_anchor')),'source_ids':valid}
             return {**result,**_range(row['text'],payload['start'] if start is None else start,payload['end'] if end is None else end),
                     'source_ids':valid,'snapshot_kind':'采集版本（仅本机）'}
+
+    def original(self,reference):
+        return self.read(reference,_raw=True)

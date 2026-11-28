@@ -1,0 +1,102 @@
+{
+  "scope": "Ordinary CI only; predates merged-header patch; not E/H/X or installed-business evidence",
+  "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+  "artifacts": [
+    {
+      "run": "45759887102",
+      "artifact_id": 15090405845,
+      "name": "tests-macos-15",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "d86891052e2af596200b1d6e060da241d83c5f6bb74d8d5b263b8a462669eff3",
+      "official_digest": "sha256:d86891052e2af596200b1d6e060da241d83c5f6bb74d8d5b263b8a462669eff3",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 459,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45759887102",
+      "artifact_id": 15090168635,
+      "name": "tests-windows-2022",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "40a3303b47e1426b0a19a4ff77938db6823bb62cfc6f673990732b9af58e4dfc",
+      "official_digest": "sha256:40a3303b47e1426b0a19a4ff77938db6823bb62cfc6f673990732b9af58e4dfc",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 457,
+      "failed": 3,
+      "errors": 0,
+      "skipped": 67
+    },
+    {
+      "run": "45759887102",
+      "artifact_id": 15089463374,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "e8d06fc2bd7cf8e4f659fa7d03aab4d6c422d6f6b46b442801a324cdd7176532",
+      "official_digest": "sha256:e8d06fc2bd7cf8e4f659fa7d03aab4d6c422d6f6b46b442801a324cdd7176532",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 459,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45759878324",
+      "artifact_id": 15090521280,
+      "name": "tests-windows-2022",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "0b354d5e9a4cb31c556887858fda7defdc592611bc030c20840ba0d8c93fdfba",
+      "official_digest": "sha256:0b354d5e9a4cb31c556887858fda7defdc592611bc030c20840ba0d8c93fdfba",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 457,
+      "failed": 3,
+      "errors": 0,
+      "skipped": 67
+    },
+    {
+      "run": "45759878324",
+      "artifact_id": 15090007208,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "63fae48c0d2185da34ee3f70cbf1ce020b3c6f0d035ff896308a31862aae888a",
+      "official_digest": "sha256:63fae48c0d2185da34ee3f70cbf1ce020b3c6f0d035ff896308a31862aae888a",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 459,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    },
+    {
+      "run": "45759878324",
+      "artifact_id": 15089788306,
+      "name": "tests-macos-15",
+      "source_head": "abf46cab699f07214af07038b0ae5a22b1389a2d",
+      "zip_sha256": "0550f7b3e6d5406520ed2606821890dff5734c2d4527a705a66172c9e137b78e",
+      "official_digest": "sha256:0550f7b3e6d5406520ed2606821890dff5734c2d4527a705a66172c9e137b78e",
+      "zip_crc_valid": true,
+      "tests": 527,
+      "passed": 459,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 68
+    }
+  ],
+  "windows_failures": {
+    "retained": {
+      "test": "test_document_formats_upload_restart.py::test_real_creator_restart_resumes_chunks_and_pending_captures[local/hub]",
+      "count": 2,
+      "reason": "Existing worker audit expected2/observed0; shared Windows argv observer retained by maintainer"
+    },
+    "new": {
+      "test": "test_document_formats_remote_original.py::test_pure_hub_original_downloads_via_local_cli_http_and_stdio",
+      "reason": "Preparation HTTP disconnect, before original read assertions; appears in both runs",
+      "status": "New product defect investigated separately; not waived"
+    }
+  }
+}

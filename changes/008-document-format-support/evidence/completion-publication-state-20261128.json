@@ -1,0 +1,47 @@
+{
+  "scope": "SC1 publication first state, same capture new attempt and replacement state only, both actual creator browsers; not entire SC1/E/H/X",
+  "actual_formal": {
+    "local": {
+      "native_id": "execute-completion-sc1-publication-notice-local-v5",
+      "result_sha256": "07445a8cf91ae77bce318a2a13e920dc1b6e737860ef05b6ba17973af5a1c046",
+      "tests_passed": 4,
+      "seconds": 49.51,
+      "attachments": 815,
+      "pngs": 58,
+      "review": "review-completion-sc1-publication-notice-local-execution-v5",
+      "status": "passed_registered"
+    },
+    "hub": {
+      "native_id": "execute-completion-sc1-publication-notice-hub-v5",
+      "result_sha256": "14932477f94f73e76c89bd45acd6c8a7e94ede492ecc3686221b253de8e7cb17",
+      "tests_passed": 4,
+      "seconds": 53.84,
+      "attachments": 801,
+      "pngs": 52,
+      "review": "review-completion-sc1-publication-notice-hub-execution-v5",
+      "status": "passed_registered"
+    }
+  },
+  "per_creator_business": {
+    "flows": 24,
+    "accepted_state_pngs": 48,
+    "full_text_reads": 48,
+    "full_table_reads": 72,
+    "original_downloads": 48
+  },
+  "observer": "Bind the same actual ElementHandle before/screenshot/after; retry only its measured detachment. A completed image requires that handle still connected and stable absolute geometry. Rejected original PNGs retained; live hidden errors propagate. Real independent controls validate offscreen target pixels, actual post-screenshot replacement and wait-time replacement, and rejection of stuck/wrong completion notices.",
+  "proof_boundary": "Original pending future-reference requests are rejected and identical references succeed after publication; old-reference rejection is supported by frozen actual-request assertions and successful execution, not invented separate raw400 logs. Notice text verified in real trace; target PNGs are row screenshots.",
+  "source_bindings": {
+    "src/smm_local/static/index.html": "a94ea17162da087fe463726d516225148b2f85c589597b4859d71a6d10724eeb",
+    "src/smm_hub/static/index.html": "2d90e31af1b1900b08280ee718583d5a22d4b01491a04c8ca6bd9fa01af5a6fe",
+    "tests/test_document_formats_publication_state.py": "311c738a955499b5ebe95fd7a62ade874feda3df813f1c80b8cf97e9923dfe92"
+  },
+  "reviews": {
+    "publication-notice-native-candidate-review-v5.md": "73d715cea07f80902b52143fd76f3be6c3471e633ff8e1ad48d2d13e53c29911",
+    "publication-notice-native-candidate-review-v5.json": "36204e92cd619083e032623af9372902fff5096d3c97ca5d3a6d7f07dfeec679",
+    "publication-notice-formal-execution-review-v5.md": "a34d3efacf8509ef2dff9cf7716ec28d0a049a8d74c2c6d7dca34e4956552951",
+    "publication-notice-formal-execution-review-v5.json": "54069c360f1f651b104ee37cb8caafa4ca8b1a27c6806390926f806b9b28e3c2"
+  },
+  "history": "v1/v3 wrong clip images, v2 detached error, v4 Local formal screenshot error retained as needs_revision. Hub v4 private execution review passed but native registration blocked after premature shared-source edit; blocked record preserved; v5 both formally rerun and reviews registered before any later source change. No rollback or historical rewrite.",
+  "redaction": "No task identities, absolute host paths, credentials, archive signing or TLS private keys in this public summary; originals and full audits remain task-private."
+}

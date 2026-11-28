@@ -1,0 +1,55 @@
+{
+  "schema": "smm-008-scoped-processed-protocol-evidence-v1",
+  "date": "2026-11-29",
+  "status": "passed_scoped_development_components",
+  "suites": [
+    {
+      "evidence_id": "processed-chunks-v1",
+      "passed": 8,
+      "skipped": 0,
+      "binding_equal": true,
+      "scope": "First/replacement, both cold targets, raw/results: wrong chunk SHA, gap, short block, exact replay and changed replay.",
+      "source_bindings_sha256": "7775022a013d46ebe523e45633d1ec29451d68b600dbfe9919518097edc36966",
+      "independent_review_sha256": {
+        ".md": "ca4473b0c89544f1492d4636df15d742e3d856b7f30fad86722912e293ec4d0a",
+        ".json": "9f10a8907089b1aa3701ad8a3f55eab3bfaa8962adc69f7e519ecfaab84f6250"
+      }
+    },
+    {
+      "evidence_id": "processed-manifest-v1",
+      "passed": 12,
+      "skipped": 0,
+      "binding_equal": true,
+      "scope": "Complete declared-but-unstaged member, metadata mismatch, duplicate ID, old control/source, exact nonce replay and changed payload with fresh-nonce positive.",
+      "source_bindings_sha256": "d8734d36bdaa8be092bbe274de6c8417888d0ce50a74dba459ef4d5a614d2ca3",
+      "independent_review_sha256": {
+        ".md": "5636952175fbd800ab72326744a158bd2cb36b6d2b199dcc63eb44f785ee5fe8",
+        ".json": "99c3c12c78b0e45ed6845dbcc4c7ce48c7ba0b679c969c4af132eb9c3620f67e"
+      }
+    },
+    {
+      "evidence_id": "processed-binding-v1",
+      "passed": 8,
+      "skipped": 0,
+      "binding_equal": true,
+      "scope": "Begin nonce cannot rebind capture identity; same document V/P rejects different raw/result/profile while correct fresh nonce stages and publishes.",
+      "source_bindings_sha256": "6698cc0c641755b663066b3b0ce033ae0d77a17acd43c0883fb4c03168c71f26",
+      "independent_review_sha256": {
+        ".md": "e6b9dc369bafc25b593e4ef7dc2e580b0313be52aa055f207c44c1d053f05b76",
+        ".json": "62a1dc31e56adf27ea970d2750054ac29b0bf14ac7ee31b674531ad8a3d6acc1"
+      }
+    }
+  ],
+  "shared_assertions": [
+    "Actual creator processing and independent Word XML truth before receiver guards; two independent cold target bodies >1MiB plus retained gamma.",
+    "Before complete publication, future text/table/info/original reads reject; legal complete manifest publishes atomically and the same future references read full text windows, all table structure/cells/location, original info and exact original bytes.",
+    "Retained old reference content/table/original and target V/P/origin stay correct; expected same-source gamma receive time is validated separately.",
+    "No business source-file open, processor import/call, OCR subprocess or external network in receiver window; actual source-open negative controls precede it."
+  ],
+  "limits": [
+    "Not whole SC7, whole TC, R008 or final platform matrix. Late CID/AID/config/source/receipt, crash/TTL recovery and resource obligations retain separate evidence.",
+    "SQL stage equality was actually asserted; manifest/binding suites did not separately persist raw before/after SQL frames. The later capacity diagnostic does persist its own frames.",
+    "Each named suite binds its frozen sources; later helper/product revisions require current-version regression, not retrospective rebinding.",
+    "Combined development directories exceed native per-attempt limits and are not relabeled as formal execution."
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_id": "TC-008-web-ready-management",
+  "status": "blocked_evidence_limit_not_passed",
+  "source_checkpoint": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+  "candidate_state": "Web product and its test remain uncommitted work in progress; backend checkpoint is pushed. Exact file digests below distinguish this candidate.",
+  "scope": "macOS isolated foreground Local and authenticated Hub creator Web; ordinary/global each three native formats. HTTP seeded data; ready same-format update and terminal removal only. Not initial upload acceptance, all lifecycle states, TLS/services or other OS.",
+  "definitions_sha256": "3cb55956c42617a68775c52cd0dcfbfc97d713fb2e36fc671328691f1e6bcf3d",
+  "test_sha256": "e5a159f0e1427452757aef6c0367c2830f428b421c9e055f7bbf77fbe1760a59",
+  "static_sha256": {
+    "local": "529fce2ff8f91fcf475f104cdeb543d7aa8228a6d22fad192d16cc0628f751c1",
+    "hub": "f0d935106319f9b730da12d5b212c2f0695e357cbf57632264042113b2533f60"
+  },
+  "design": "design-sc8-web-ready-management-v2",
+  "match": "match-web-ready-management-v3",
+  "red": {
+    "target": "red-web-ready-management-v3",
+    "result_sha256": "d98bc190ec2e19680a34a8e9d08e0d293c6a9ebe53f314ac5823e01b54ed7f8d",
+    "main": "2 failed 11.03s; real chooser selected replacement DOCX; both creators sent legacy text PUT and got400 binary NUL",
+    "review": "review-web-ready-management-red-v2",
+    "status": "expected_failure_registered"
+  },
+  "green_attempt": {
+    "target": "green-web-ready-management-v1",
+    "result_sha256": "46f1c6043457a746081aca36e7a5ad091ec6c01b57c5acead6d5553329fdfab6",
+    "native_status": "blocked",
+    "native_reason": "evidence exceeds the per-attempt byte or image limit",
+    "raw_main": {
+      "passed": 2,
+      "seconds": 35.55,
+      "stdout_sha256": "4ede409f6149d595d0e89852210ad74f5550bd957b861597711a9393a39193a6",
+      "exit_code": null,
+      "exit_code_note": "Blocked native record did not retain command exit code; raw pytest stdout reports2passed. Do not infer a successful native run from it."
+    },
+    "native_regression_started": false,
+    "artifact_inventory_sha256": "b2d0a0b37ea15a4c3eb56d8ce57e431b7a753dec7320f967cee75e75d0c85d35",
+    "artifact_count": 1494,
+    "artifact_bytes": 54253080,
+    "png_count": 36,
+    "png_bytes": 33360945,
+    "trace_count": 2,
+    "trace_bytes": 16725185,
+    "review_status": "not submitted as a successful green record; awaiting concrete test-evidence repair authorization"
+  },
+  "supplemental_regression": {
+    "record": "web-management-regression-v1",
+    "passed": 24,
+    "seconds": 169.12,
+    "exit_code": 0,
+    "stdout_sha256": "222d9b97fd50f4c1f5f4f8bb7c97ec37e0350634b4371c40ab9697f1db496414",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "note": "Original tdd-green halted before regression. This additional subprocess run is a separate regression observation and does not override the blocked native record."
+  },
+  "packages": {
+    "build_exit_code": 0,
+    "inspection": [
+      {
+        "file": "smm_local-0.4.0-py3-none-any.whl",
+        "bytes": 191834,
+        "sha256": "1edba0048f15fb0069a374a8f8e0428057bb3321024d7682c206c156b354110a",
+        "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+        "static_sha256": "529fce2ff8f91fcf475f104cdeb543d7aa8228a6d22fad192d16cc0628f751c1",
+        "zip_integrity": true,
+        "matches_source": true
+      },
+      {
+        "file": "smm_hub-0.4.0-py3-none-any.whl",
+        "bytes": 176860,
+        "sha256": "9e7e75b0e1a0bd9e335c67227425873a4e728fe9f78632a5f46a4dacdbd5bad4",
+        "receipt_module_sha256": "7308411f46f924bf779752539a64006e516a6ba7ab74fe6f905e2ffc26354e88",
+        "static_sha256": "f0d935106319f9b730da12d5b212c2f0695e357cbf57632264042113b2533f60",
+        "zip_integrity": true,
+        "matches_source": true
+      }
+    ],
+    "daily_installation_changed": false
+  },
+  "proposed_evidence_repair": {
+    "patch": "drafts/web-ready-management-evidence-scope/fix.patch",
+    "sha256": "90cdd4b694f48b0e9999f4f7921d28e4fc2c108e08fc7248938dff557a0fa3ae",
+    "applied": false,
+    "status": "awaiting user answer; no assertions, sources, network, raw downloads or trace removed"
+  },
+  "retained_gaps": [
+    "SC1 upload pending old-row and visible ID-set checks explicitly retained by user; declined patch not applied",
+    "SC9 deep text/table Web one-line Playwright response repair awaits separate approval",
+    "Windows observer gap explicitly retained; no ESXi used",
+    "Full pending/partial/failed/stale-page management, task lifecycle and E/H/X remain unverified"
+  ],
+  "redaction": "Only synthetic observations, counters, exact digests and repository-relative evidence identifiers published; no credentials, browser bearer headers, private keys or raw user materials."
+}

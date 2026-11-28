@@ -1,0 +1,554 @@
+{
+  "kind": "ordinary_ci_regression",
+  "run_id": 45550603863,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45550603863",
+  "source": "cb008dda5ea43d14a2f3fb89fb0e22fc8f40271a",
+  "conclusion": "failure",
+  "recovered_verified": true,
+  "evidence": "JUnit XML opened after archive length and SHA verification; failed job log actually read. No raw browser or platform-delivery originals provided by this ordinary workflow.",
+  "platforms": [
+    {
+      "platform": "tests-windows-2022",
+      "artifact_id": 14994682575,
+      "archive_sha256": "b0c6726a5839f56dff213d443f8f5bb79ec5aa48b2af28cbc2f6bd44d828a9a0",
+      "bytes": 21324,
+      "tests": 438,
+      "passed": 394,
+      "skipped": 25,
+      "failed": 19,
+      "failures": [
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_query_observer_controls",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_empty_source_files_have_exact_originals_without_text_hits",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "classification": "mcp_initialize_closed_cause_unconfirmed"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[docx]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[pdf]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_nested_table_hit_does_not_borrow_parent_coordinates",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_sync",
+          "name": "test_sync_observer_known_positive_and_negative_controls",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[docx-deep_word]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_combined_window_header_cell_and_unicode_quotas",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_table_preview",
+          "name": "test_search_table_header_summaries_have_exact_shared_budget",
+          "classification": "observer_socketpair_false_positive"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+          "classification": "test_path_case_comparison"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[local]",
+          "classification": "test_launcher_pid_identity_mismatch"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+          "classification": "test_launcher_pid_identity_mismatch"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "classification": "test_launcher_pid_identity_mismatch"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "classification": "test_launcher_pid_identity_mismatch"
+        }
+      ],
+      "new_cases": [
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_views_and_exact_originals_for_each_document",
+          "time": "13.758",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_state_guard_rejects_body_sha_and_version_changes",
+          "time": "0.427",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_metadata_and_terminal_oracles_reject_other_targets",
+          "time": "0.005",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_source_audit_has_known_controls",
+          "time": "0.179",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_cached_reprocess_keeps_old_views_for_ready_and_partial",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_managed_empty_inputs_have_no_body_or_table_cells",
+          "time": "0.189",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+          "time": "3.458",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[hub]",
+          "time": "5.803",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "time": "0.001",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "time": "2.029",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[local]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[hub]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+          "time": "0.138",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[local]",
+          "time": "1.417",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+          "time": "1.327",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "time": "1.303",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "time": "1.295",
+          "failed": true,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "time": "0.030",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "time": "16.798",
+          "failed": false,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "platform": "tests-ubuntu-24.04",
+      "artifact_id": 14994520634,
+      "archive_sha256": "be1c66714c2b1052eba8f216d1f671ec118b44b7f17588638e1eaef4ae561427",
+      "bytes": 10672,
+      "tests": 438,
+      "passed": 412,
+      "skipped": 26,
+      "failed": 0,
+      "failures": [],
+      "new_cases": [
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_views_and_exact_originals_for_each_document",
+          "time": "5.424",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_state_guard_rejects_body_sha_and_version_changes",
+          "time": "0.044",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_metadata_and_terminal_oracles_reject_other_targets",
+          "time": "0.003",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_source_audit_has_known_controls",
+          "time": "0.079",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_cached_reprocess_keeps_old_views_for_ready_and_partial",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_managed_empty_inputs_have_no_body_or_table_cells",
+          "time": "0.117",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+          "time": "1.246",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[hub]",
+          "time": "1.826",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "time": "0.001",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "time": "0.973",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[local]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[hub]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+          "time": "0.059",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[local]",
+          "time": "0.521",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+          "time": "0.560",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "time": "5.406",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "time": "5.927",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "time": "0.015",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "time": "5.465",
+          "failed": false,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "platform": "tests-macos-15",
+      "artifact_id": 14993643029,
+      "archive_sha256": "963bdb6fad9c97c7494822339fd7a3b603cac726bf221e76f1a4ec0e8ddfd787",
+      "bytes": 10827,
+      "tests": 438,
+      "passed": 412,
+      "skipped": 26,
+      "failed": 0,
+      "failures": [],
+      "new_cases": [
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_views_and_exact_originals_for_each_document",
+          "time": "7.782",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_hub_cli",
+          "name": "test_hub_cli_state_guard_rejects_body_sha_and_version_changes",
+          "time": "0.050",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_metadata_and_terminal_oracles_reject_other_targets",
+          "time": "0.004",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_inflight_source_audit_has_known_controls",
+          "time": "0.111",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_inflight",
+          "name": "test_cached_reprocess_keeps_old_views_for_ready_and_partial",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_managed_empty_inputs_have_no_body_or_table_cells",
+          "time": "0.484",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+          "time": "1.841",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_managed_empty",
+          "name": "test_each_managed_empty_document_has_files_and_library_original_refs[hub]",
+          "time": "2.697",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "time": "0.001",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "time": "1.379",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[local]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_replace",
+          "name": "test_managed_replace_failed_candidate_retries_saved_new_bytes[hub]",
+          "time": "0.000",
+          "failed": false,
+          "skipped": true
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+          "time": "0.080",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[local]",
+          "time": "0.899",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+          "time": "0.722",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "time": "6.500",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "time": "6.872",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "time": "0.018",
+          "failed": false,
+          "skipped": false
+        },
+        {
+          "classname": "tests.test_document_formats_uploads",
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "time": "8.921",
+          "failed": false,
+          "skipped": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Not formal E/H/X acceptance or ordinary-account service proof.",
+    "OCR-dependent explicit-asset tests skipped in this workflow and do not prove OCR quality/retry.",
+    "Windows shared observer repair remains unapplied per user. 13 observers fail in standard-library socketpair setup.",
+    "Windows 4 isolated restart entries fail before business steps at parent-launcher vs serving-process PID assertion; no Windows restart success is claimed. One restart audit control fails normalized-vs-original case-sensitive path string comparison.",
+    "Windows MCP initialize closes; child stderr absent so root cause unconfirmed.",
+    "The two new managed replacement parameters explicitly skip in all ordinary CI jobs because no real OCR assets are configured; their independent source-tree macOS asset-backed pass is recorded separately, not inferred from CI."
+  ],
+  "redactions": "Only synthetic fixture names, counts, artifact metadata and test classification. Token, user material, secret keys and raw internal machine paths excluded."
+}

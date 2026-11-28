@@ -9,8 +9,9 @@ from pathlib import Path
 
 from .core import Archive, shared_db_path
 from .documents import Documents
+from .document_processing import Configuration, configuration_arguments
 from .document_sync import DocumentSync,schedule as schedule_documents,hub_sources,hub_projects
-from .document_search import search as search_documents,read as read_document
+from .document_search import search as search_documents,read as read_document,original as original_document
 from .federation import (configure_and_start, read_archive, search_archive, upload_status,
                          choose_upload, upload_control, hub_config, project_status, _request)
 from .upload import LocalUpload
@@ -133,8 +134,12 @@ def main() -> None:
     project_create = project_actions.add_parser('create', help='创建普通本机项目；可同名，不推断目录/对话/关联')
     project_create.add_argument('name', help='非空显示名称；返回本机ID和stable_key，用于documents --project-id')
     project_actions.add_parser("ensure-global", help="创建或取得唯一全局项目；全局不是所有项目检索")
-    documents = sub.add_parser('documents', help='项目文档采集、独立同步选择及联合检索；路径来源需明确refresh', description='本机明确采集 .md/.markdown/.txt；源正文不改写。项目文档同步默认关闭，以sync-policy独立允许；默认联合检索，--local仅本机。保存来源后明确refresh。')
+    documents = sub.add_parser('documents', help='项目文档采集、独立同步选择及联合检索；路径来源需明确refresh', description='本机明确采集 .md/.markdown/.txt/.docx/.xlsx/.pdf；创建端需安装[documents]依赖。PDF文字优先，OCR先用processing-configure及processing-status --check准备本地组件。源正文不改写。项目文档同步默认关闭，以sync-policy独立允许；默认联合检索，--local仅本机。保存来源后明确refresh。')
     document_actions = documents.add_subparsers(dest='document_action', required=True)
+    configuration_arguments(document_actions)
+    doc_retry=document_actions.add_parser('reprocess',help='只重处理files给出的合法保存原件，不重开源路径')
+    for flag in ('document-id','capture-id','expected-attempt-id'):doc_retry.add_argument('--'+flag,required=True)
+    for flag in ('expected-version','expected-processing-version'):doc_retry.add_argument('--'+flag,type=int,required=True)
     for action in ['add','set']:
         doc = document_actions.add_parser(action, help='添加来源（pending）' if action=='add' else '完整替换配置并使旧来源资格失效', description='来源项目ID用 smm projects 取得，无项目时先 smm project create 名称。名单可重复，省略即空名单；省略--no-recursive即递归。保存只为pending，随后运行 smm documents refresh。')
         doc.add_argument('path' if action=='add' else 'source_id',help='服务器所在本机的可读绝对文件/目录路径（非链接）' if action=='add' else 'smm documents sources 返回的来源id；不能改变根路径')
@@ -149,7 +154,7 @@ def main() -> None:
     doc_sync=document_actions.add_parser('sync',help='重试采集档案和撤回，不扫描源文件；手动不改变全局暂停');doc_sync.add_argument('--project-key')
     doc_files = document_actions.add_parser('files',help='查看已发现文件元信息、ready/failed/missing及原因，不返回正文')
     doc_files.add_argument('--source-id',help='来源id取自documents sources，省略看全部')
-    doc_refresh = document_actions.add_parser('refresh',help='明确读取并刷新采集快照；旧版本ref失效，失败后可重试',description='仅此操作读取来源正文。每文件2MiB、每来源1000候选和16MiB；个别失败partial，枚举/来源预算失败failed。修复后再次明确刷新。')
+    doc_refresh = document_actions.add_parser('refresh',help='明确读取并刷新采集快照；旧版本ref失效，失败后可重试',description='仅明确刷新读取来源正文。旧 TXT/Markdown 单文件2MiB、每来源累计16MiB；DOCX/XLSX/PDF 原件单份20MiB、每来源原件及处理结果各累计128MiB；各格式共同计入每来源1000候选。创建端须安装 [documents]；PDF 本地OCR先用 processing-configure 和 processing-status --check 准备。个别失败见 files/sources，已保存合法原件按 retry_target 明确 reprocess。')
     doc_refresh.add_argument('--source-id',help='来源id取自documents sources，省略逐来源刷新全部')
     doc_remove = document_actions.add_parser('remove',help='取消来源；独占材料立即退出检索/读取，不删除原文件')
     doc_remove.add_argument('source_id',help='来源id取自documents sources；其他有效重叠来源继续保留当前版本')
@@ -160,10 +165,15 @@ def main() -> None:
     doc_search.add_argument('--local',action='store_true',help='仅查本机和本机关联；不连接Hub')
     doc_search.add_argument('--hub-project-id',type=int,help='projects --hub取得的Hub根ID，与--project-id互斥')
     doc_search.add_argument('--limit',type=int,default=5,help='1至50，默认5；按文件去重和词法相关性排序')
-    doc_read = document_actions.add_parser('read',help='按搜索返回的reference准确读取采集版本',description='缺省读命中片段。start/end是整个规范化采集文本的Unicode码点 [start,end)，非字节或UTF-16；最多16000字符。仅去BOM并CRLF/CR转LF，其他原样。旧版本/来源资格失效须重新检索，不读历史版本。')
+    doc_read = document_actions.add_parser('read',help='按搜索返回的reference准确读取采集版本',description='缺省读命中片段。start/end是整个规范化采集文本的Unicode码点 [start,end)，非字节或UTF-16；最多16000字符。旧 TXT/Markdown 只去BOM并将CRLF/CR转LF；DOCX/XLSX/PDF 返回创建端提取文本和覆盖信息，不等同原始文件。原字节用 --view original-info 核对、--original-output 导出；表格用 --view table 和同次返回的 table_id。旧版本/来源资格失效须重新检索，不读历史版本。')
     doc_read.add_argument('--reference',required=True,help='原样复制documents search返回的reference，不能用对话ID')
     doc_read.add_argument('--start',type=int,help='Unicode起始码点（含，0开始）')
     doc_read.add_argument('--end',type=int,help='Unicode结束码点（不含）')
+    doc_read.add_argument('--view',choices=['text','table','original-info'],default='text',help='提取文本、表格窗口或已保存原件信息；默认text')
+    doc_read.add_argument('--table-id',help='取自本次命中/普通read的tables定位')
+    for flag in ('row-start','row-end','column-start','column-end'):
+        doc_read.add_argument('--'+flag,type=int,help='表格行列窗口，1起、终点不含；仅table视图')
+    doc_read.add_argument('--original-output',help='将准确采集原件保存到本机新文件；拒绝覆盖，与文本范围/表格参数互斥')
     assign = project_actions.add_parser("assign-conversation", help="用本机搜索的会话 ID 预览归属变更，核对后 --confirm 提交")
     assign.add_argument("conversation_id", type=int)
     assign.add_argument("--project-id", type=int, required=True, help="smm projects 返回的目标本机项目 ID")
@@ -272,7 +282,10 @@ def main() -> None:
         elif args.command == 'documents':
             documents = Documents(db)
             action = args.document_action
-            if action == 'add':
+            if action == 'processing-status':result=Configuration(documents.snapshots).status(check=args.check)
+            elif action == 'processing-configure':result=Configuration(documents.snapshots).configure(expected_revision=args.expected_revision,ocr_executable=args.ocr_executable,ocr_data_dir=args.ocr_data_dir,languages=args.languages)
+            elif action == 'reprocess':result=documents.reprocess(args.document_id,args.capture_id,args.expected_attempt_id,args.expected_version,args.expected_processing_version)
+            elif action == 'add':
                 result = documents.add(args.path, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)
             elif action == 'set':
                 result = documents.set(args.source_id, project_ids=args.project_id, exclude=args.exclude, recursive=not args.no_recursive)
@@ -284,7 +297,17 @@ def main() -> None:
             elif action == 'sync-policy':result=DocumentSync(db).choose(args.project_key,args.enabled=='yes',args.expected_hub_id,args.expected_generation)
             elif action == 'sync':result=DocumentSync(db).sync(project_key=args.project_key)
             elif action == 'search': result = search_documents(db,args.query,scope=args.scope,project_id=args.project_id,hub_project_id=args.hub_project_id,limit=args.limit,local=args.local)
-            else: result = read_document(db,args.reference,start=args.start,end=args.end)
+            else:
+                table_options={key:getattr(args,key) for key in ('table_id','row_start','row_end','column_start','column_end') if getattr(args,key) is not None}
+                if args.original_output is not None:
+                    if args.start is not None or args.end is not None or args.view=='table' or table_options:
+                        raise ValueError('原件输出与文本范围或表格读取参数互斥')
+                    from .document_protocol import write_original_output
+                    metadata=read_document(db,args.reference,view='original-info')
+                    raw=original_document(db,args.reference)
+                    output=write_original_output(args.original_output,raw,metadata)
+                    result={**metadata,'output_path':str(output)}
+                else:result=read_document(db,args.reference,start=args.start,end=args.end,view=args.view,**table_options)
             if action in {'add','set','remove','refresh'}:schedule_documents(db)
         elif args.command == "resolve-project":
             result = db.resolve_project(args.cwd)

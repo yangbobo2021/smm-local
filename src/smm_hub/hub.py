@@ -9,6 +9,8 @@ import heapq
 import hmac
 import json
 from collections import defaultdict
+from contextlib import asynccontextmanager
+import threading
 from typing import Literal
 from uuid import uuid4
 
@@ -194,8 +196,20 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
         if not hmac.compare_digest(authorization.encode("utf-8"), ("Bearer " + token).encode("ascii")):
             raise HTTPException(401, "需要有效的汇总服务凭证")
 
+    @asynccontextmanager
+    async def document_lifespan(app):
+        from .document_execution import ProcessingService
+        # The processor consumes saved-byte jobs only. Startup never scans
+        # source paths, and a CLI on another archive cannot use this lease.
+        with ProcessingService(documents).serve():
+            if lifespan is None:
+                yield
+            else:
+                async with lifespan(app):
+                    yield
+
     app = FastAPI(title="SMM Hub", docs_url=None, redoc_url=None, openapi_url=None,
-                  lifespan=lifespan)
+                  lifespan=document_lifespan)
     install_documents(app,documents,token)
 
     def require_hub(expected: str) -> None:
@@ -204,7 +218,7 @@ def create_hub(db: Archive, token: str, *, lifespan=None) -> FastAPI:
 
     @app.get("/v1/info")
     def info():
-        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1", "documents-v1"], **documents.context()}
+        return {"protocol": 1, "hub_id": hub_id, "capabilities": ["projects", "upload-policy-v1", "query-scope-v1", "scope-reference-v1", "full-candidates-v1", "documents-v1", "processed_documents_v1"], "processed_documents": {"schemas":["processed_documents_v1"], "formats":["docx","xlsx","pdf"]}, **documents.context()}
 
     @app.post("/v1/query-scope")
     def query_scope(req: QueryScope):

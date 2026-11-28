@@ -1,0 +1,41 @@
+{
+  "schema": "smm-008-windows-native-acl-observation-v1",
+  "date": "2026-11-29",
+  "status": "passed_scoped_home_admin_component",
+  "old_failure": {
+    "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/46161772059",
+    "head": "035bd884aa52b86bc489c66677f06381967cbbeb",
+    "cause_observed": "Windows PowerShell Get-Acl module autoload failed before reading any target descriptor. Specific module-search-path root cause was not determined.",
+    "result": "1failed667passed110skipped; this old raw CI failure remains failed."
+  },
+  "change": "Only the test descriptor helper uses direct GetNamedSecurityInfoW for owner/group/DACL and SDDL conversion, saves each real observation, and frees both native allocations. All ACL, hardlink, directory rename, junction and UNC safety assertions are preserved. Product permission policy is unchanged.",
+  "actual_execution": {
+    "platform": "Home Windows11 VM76",
+    "role": "Actual elevated administrator SSH component; not standard interactive installed E or LocalService SCM H",
+    "passed": 15,
+    "skipped": 0,
+    "pytest_seconds": 3.05,
+    "controller_seconds": 4.505926609039307,
+    "source_file_count": 66,
+    "source_before_after_equal": true,
+    "source_bundle_sha256": "d341904034da41567270495601aa7618c6996d7e01e3c43a5d5e7decfefe090a",
+    "original_zip_sha256": "b044f0e2a8c6ff6fb41a0db5266d4f8c91494bbe1ccc2506efa0b9afe1001ad3",
+    "original_member_count": 21,
+    "actual_descriptor_observations": 15
+  },
+  "independent_review_sha256": {
+    "windows-native-descriptor-candidate-review-v1": {
+      ".md": "08e309bc3aabe2b78d4fde086ab4ad8a80fe3e8cdf72d80470ef9b0abf168ed2",
+      ".json": "91d77f085d0a9a29cad2813fb36644d667b7981949b838b64ffab1bd17bfaf31"
+    },
+    "windows-native-descriptor-execution-review-v1": {
+      ".md": "da15bf6d96f38d569fca9ea3b5bd662b40ee1c409885a6e281d594314a6f84c3",
+      ".json": "bcd98c05751bf1a87162c3759438ddd27b05734389aa244a87b2cc17c620c069"
+    }
+  },
+  "limits": [
+    "Scoped to frozen66-file source bundle, exact final test helper and Windows permission modules. Subsequent processed_documents/document_transfers edits are separately tested and not retrospectively part of this component run.",
+    "Final all-platform CI still required; no claim of standard-account, actual SCM service, full C1 or R008 acceptance from this component alone.",
+    "Public report omits raw machine/user paths and SIDs; private descriptors, controller receipts, source bundle and full originals preserved."
+  ]
+}

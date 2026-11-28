@@ -1,0 +1,835 @@
+{
+  "scope": "Ordinary source CI only; not E/H/X, minimum Python installed business or home-VM completion. All six official ZIP digests, lengths, CRC and actual JUnit parsed.",
+  "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+  "runs": [
+    {
+      "id": 45785047681,
+      "event": "pull_request",
+      "head_sha": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45785035171,
+      "event": "push",
+      "head_sha": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "status": "completed",
+      "conclusion": "failure"
+    }
+  ],
+  "artifacts": [
+    {
+      "run": "45785047681",
+      "artifact_id": 15102078023,
+      "name": "tests-windows-2022",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 16106,
+      "zip_sha256": "8fa977d8f11bfb3ba13ba930c2409e27cc7d9a99662c7468620ab8a55aa5458b",
+      "official_digest": "sha256:8fa977d8f11bfb3ba13ba930c2409e27cc7d9a99662c7468620ab8a55aa5458b",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 67,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "passed",
+          "seconds": "0.451"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "155.282"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "145.028"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "10.281"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.011"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.049"
+        }
+      ],
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "classification": "Maintainer-retained shared Windows string-argv worker-audit 0 == 2",
+          "original_failure_sha256": "0d08c5218b1a5157d2435fff5472f7fc3c7ce9e70a5203e4efb7bd6d858495fb"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "classification": "Maintainer-retained shared Windows string-argv worker-audit 0 == 2",
+          "original_failure_sha256": "3f78efacbf453df638b59e5a20463c90374efcf0bb29466abfd17f50d25f7ed1"
+        }
+      ]
+    },
+    {
+      "run": "45785047681",
+      "artifact_id": 15101206287,
+      "name": "tests-macos-15",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 13543,
+      "zip_sha256": "594748b91347fca077053ac3efb5f28d128c285749b1e43bac527781d1f1119c",
+      "official_digest": "sha256:594748b91347fca077053ac3efb5f28d128c285749b1e43bac527781d1f1119c",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "116.623"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "93.684"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "6.338"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.008"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.002"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.044"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "run": "45785047681",
+      "artifact_id": 15099459648,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 13294,
+      "zip_sha256": "24c9d19541e403957ad9226a1b9ec10202739542c90b7d44f304dc444d68c10c",
+      "official_digest": "sha256:24c9d19541e403957ad9226a1b9ec10202739542c90b7d44f304dc444d68c10c",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "60.837"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "56.954"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "4.066"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.002"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.011"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "run": "45785035171",
+      "artifact_id": 15101434028,
+      "name": "tests-windows-2022",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 16140,
+      "zip_sha256": "e04141068fbfd54bd353bbe92b8c4a2b351b9f45316263cac5c633af4fcd906b",
+      "official_digest": "sha256:e04141068fbfd54bd353bbe92b8c4a2b351b9f45316263cac5c633af4fcd906b",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 67,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "passed",
+          "seconds": "0.412"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "249.348"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "232.094"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "17.067"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.012"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.054"
+        }
+      ],
+      "failures": [
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+          "classification": "Maintainer-retained shared Windows string-argv worker-audit 0 == 2",
+          "original_failure_sha256": "0d08c5218b1a5157d2435fff5472f7fc3c7ce9e70a5203e4efb7bd6d858495fb"
+        },
+        {
+          "class": "tests.test_document_formats_upload_restart",
+          "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+          "classification": "Maintainer-retained shared Windows string-argv worker-audit 0 == 2",
+          "original_failure_sha256": "3f78efacbf453df638b59e5a20463c90374efcf0bb29466abfd17f50d25f7ed1"
+        }
+      ]
+    },
+    {
+      "run": "45785035171",
+      "artifact_id": 15101385019,
+      "name": "tests-ubuntu-24.04",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 13439,
+      "zip_sha256": "ddebb294eca29410ea9b5aa38c5dba311f48fc6180c19d5ede517140eadf93f2",
+      "official_digest": "sha256:ddebb294eca29410ea9b5aa38c5dba311f48fc6180c19d5ede517140eadf93f2",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "45.168"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "40.642"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "2.528"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.002"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.012"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "run": "45785035171",
+      "artifact_id": 15100946918,
+      "name": "tests-macos-15",
+      "source_head": "e8bb1bd322507a3c405dd1d9ec470a22731ffa4c",
+      "zip_bytes": 13520,
+      "zip_sha256": "0872123e49f879546878ac73c76dcb8b08b917b4f47e8ae2d9134bcab8ee74ed",
+      "official_digest": "sha256:0872123e49f879546878ac73c76dcb8b08b917b4f47e8ae2d9134bcab8ee74ed",
+      "zip_crc_valid": true,
+      "tests": 534,
+      "passed": 465,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 69,
+      "selected_cases": [
+        {
+          "class": "tests.test_document_formats_live_temporary",
+          "name": "test_live_temporary_deletion_keeps_exact_supervision",
+          "status": "skipped",
+          "seconds": "0.000"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_capacity_deduplicates_same_saved_bytes",
+          "status": "passed",
+          "seconds": "110.697"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_actual_staging_plus_one_rejects_before_writing_new_bytes",
+          "status": "passed",
+          "seconds": "99.080"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_exact_large_pdf_is_legal_and_below_other_budgets",
+          "status": "passed",
+          "seconds": "6.795"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_physical_storage_observer_detects_unreferenced_or_corrupt_bytes",
+          "status": "passed",
+          "seconds": "0.005"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_missing_ocr_diagnostic_control_allows_sha256_in_trace",
+          "status": "passed",
+          "seconds": "0.001"
+        },
+        {
+          "class": "tests.test_document_formats_staging",
+          "name": "test_before_accept_write_observer_has_real_positive_and_negative_controls",
+          "status": "passed",
+          "seconds": "0.034"
+        }
+      ],
+      "failures": []
+    }
+  ],
+  "jobs": [
+    {
+      "run": 45785047681,
+      "jobs": [
+        {
+          "id": 139789595660,
+          "name": "tests (ubuntu-24.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 139789595886,
+          "name": "tests (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 139789596345,
+          "name": "tests (windows-2022)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": 45785035171,
+      "jobs": [
+        {
+          "id": 139789552258,
+          "name": "tests (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 139789552567,
+          "name": "tests (windows-2022)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 139789552711,
+          "name": "tests (ubuntu-24.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve repository source bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv sync --extra test --extra documents",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python -m pytest -q --junitxml=test-results.xml",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run uv run python scripts/build_packages.py",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels separately",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@v6",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "new_windows_sampler": "Passed in both actual Windows2022 CI runs; intentionally skipped on Mac/Ubuntu, not counted as passed.",
+    "staging": "All six original tests passed in all six artifacts, including exact256MiB/dedup/+1 and OCR-diagnostic controls. Assertions unchanged.",
+    "remaining_windows_failures": "Both runs retain exactly the two shared argv audit failures; no skip/xfail or weakening applied. Windows subsequent wheel build/install steps skipped after pytest failure, not presumed passed.",
+    "causality": "Native controlled delete-pending mechanism and current regressions support the recovery fix; original one-off CI exact causal chain is still not asserted as conclusively reconstructed.",
+    "extra_home_windows": "Earlier240second extra whole-suite watchdog abort remains incomplete; current CI does not retroactively mark that run passed."
+  }
+}

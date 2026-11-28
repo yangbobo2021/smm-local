@@ -1,0 +1,103 @@
+name: Document formats source acceptance
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths:
+      - src/**
+      - pyproject.toml
+      - uv.lock
+      - tests/test_document*.py
+      - tests/document*.py
+      - tests/test_hub_documents*.py
+      - .github/workflows/document-formats-source.yml
+      - scripts/acceptance/document_formats_source*
+      - changes/008-document-format-support/source-ci-request.json
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  UV_LINK_MODE: copy
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.acceptance-local/008-source-browsers
+jobs:
+  source:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.8'
+          python-version: '3.14'
+      - name: Install source regression dependencies
+        run: |
+          mkdir -p .acceptance-local/008-source/logs
+          uv sync --frozen --extra test --extra documents --extra acceptance > .acceptance-local/008-source/logs/sync.stdout 2> .acceptance-local/008-source/logs/sync.stderr
+      - name: Prepare actual OCR and source materials
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/008-source-materials --output .acceptance-local/008-source-materials.json > .acceptance-local/008-source/logs/materials.stdout 2> .acceptance-local/008-source/logs/materials.stderr
+      - name: Prepare actual browser runtime
+        run: uv run --frozen --no-sync playwright install --with-deps chromium > .acceptance-local/008-source/logs/browser.stdout 2> .acceptance-local/008-source/logs/browser.stderr
+      - name: Bind source regression inputs
+        run: |
+          legacy_args=()
+          if [ "$RUNNER_OS" = Windows ]; then
+            uv run --frozen --no-sync python scripts/acceptance/document_formats_legacy_roles.py --prepare-admin --output .acceptance-local/008-source-admin-legacy > .acceptance-local/008-source/logs/legacy-admin.stdout 2> .acceptance-local/008-source/logs/legacy-admin.stderr
+            legacy_args=(--admin-legacy .acceptance-local/008-source-admin-legacy)
+          fi
+          uv run --frozen --no-sync python scripts/acceptance/document_formats_source_suite.py --prepare --work .acceptance-local/008-source --materials .acceptance-local/008-source-materials.json --browsers .acceptance-local/008-source-browsers "${legacy_args[@]}" > .acceptance-local/008-source/logs/prepare.stdout 2> .acceptance-local/008-source/logs/prepare.stderr
+      - name: Run source C1 as POSIX ordinary account
+        if: runner.os != 'Windows'
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_source_suite.py --target-config .acceptance-local/008-source/target.json --output .acceptance-local/008-source/platform > .acceptance-local/008-source/logs/outer.stdout 2> .acceptance-local/008-source/logs/outer.stderr
+      - name: Run source C1 as actual Windows standard account
+        if: runner.os == 'Windows'
+        run: |
+          python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)' 2> .acceptance-local/008-source/logs/python-discovery.stderr)
+          printf '%s' "$python_path" > .acceptance-local/008-source/logs/python-discovery.stdout
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_source_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_source_suite.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/008-source/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/008-source" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/008-source/logs/outer.stdout 2> .acceptance-local/008-source/logs/outer.stderr
+      - name: Preserve administrator-role originals after ordinary child exits
+        if: always() && runner.os == 'Windows'
+        run: |
+          if [ -d .acceptance-local/008-source-admin-legacy ]; then
+            cp -R .acceptance-local/008-source-admin-legacy .acceptance-local/008-source/administrator-legacy-originals
+            uv run --frozen --no-sync python scripts/acceptance/document_formats_legacy_roles.py --verify-admin-originals --output .acceptance-local/008-source/administrator-legacy-originals --target-config .acceptance-local/008-source/target.json --verification-receipt .acceptance-local/008-source/administrator-originals-verified.json
+          else
+            exit 1
+          fi
+      - name: Preserve compact original triage separately
+        if: always()
+        run: uv run --no-project --python 3.14 python scripts/acceptance/document_formats_source_suite.py --collect-triage --work .acceptance-local/008-source --output .acceptance-local/008-source-triage --context .acceptance-local/008-source-triage-context.json
+      - name: Encrypt compact original triage
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-source-triage --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-source-triage-context.json --output .acceptance-local/008-source-triage.smm-evidence --receipt .acceptance-local/008-source-triage-generated.json
+      - name: Upload compact encrypted original triage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-source-triage-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/008-source-triage.smm-evidence
+      - name: Preserve per-case raw evidence and source bindings
+        if: always()
+        run: uv run --no-project --python 3.14 python scripts/acceptance/document_formats_source_suite.py --collect --work .acceptance-local/008-source --materials .acceptance-local/008-source-materials.json --output .acceptance-local/008-source-evidence --context .acceptance-local/008-source-context.json
+      - name: Encrypt original evidence
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-source-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-source-context.json --output .acceptance-local/008-source.smm-evidence --receipt .acceptance-local/008-source-generated.json
+      - name: Upload encrypted original evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-source-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/008-source.smm-evidence

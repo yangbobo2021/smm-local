@@ -1,0 +1,273 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case": "TC-008-process-identity-observation",
+  "scene": "SC10",
+  "status": "passed_scoped_only",
+  "product_base": "3e29255ea57701d03997ef3212f3cb314d1347ec",
+  "product_change": "Only matching: after creation-time verification, a cmdline AccessDenied may classify a separately confirmed exited/zombie process as absent. Live or unreadable state still raises. No budget, wait, whole-task retry, watchdog health or service change.",
+  "source": {
+    "src/smm_local/document_supervisor.py": "cc721d70af94f391ef025af49d25d6e9fc64baf6131609d2977c6e03885798a3",
+    "tests/test_document_formats_process_observation.py": "2a5bb383c12f1c093d8dbc027bed10d88125a4ef2a934e413281079b5d569171",
+    "tests/document_formats_platform.py": "14ae1319ba82ba6e44eeb3a0f845f293b9fc9d434cf7776193d39c177465187b"
+  },
+  "receipts": [
+    {
+      "id": "red-sc10-process-observation-v3",
+      "operation": "tdd-red",
+      "sha256": "414d0d211aa8ab28709e7aed28a9e73f4d7eea082866e148a88af149afb984e8",
+      "status": "red_observed",
+      "artifacts": 18,
+      "bindings": 64
+    },
+    {
+      "id": "review-process-observation-red-v3",
+      "operation": "review",
+      "sha256": "d03838cc49b2b05387349aecef40727b5f286569ae97e9f097f2444d4cab794b",
+      "status": "reviewed",
+      "artifacts": 2,
+      "bindings": 64
+    },
+    {
+      "id": "green-sc10-process-observation-v3",
+      "operation": "tdd-green",
+      "sha256": "272434a63a7be61403e05faea870ff7cc4e04730e4b77aba4d3c3046d8f04326",
+      "status": "green_observed",
+      "artifacts": 23,
+      "bindings": 68
+    },
+    {
+      "id": "review-process-observation-green-v3",
+      "operation": "review",
+      "sha256": "8fa3614db744ad79102eb46b4af5e05655c4ecfac60be15c895cae57de07d573",
+      "status": "reviewed",
+      "artifacts": 2,
+      "bindings": 68
+    },
+    {
+      "id": "debug-sc10-process-observation-win-v2",
+      "operation": "debug",
+      "sha256": "69f9c2372845b76e175569955f93c17a3d0608ac7db108ad65fb35888d6b42d9",
+      "status": "debugged",
+      "artifacts": 36,
+      "bindings": 69
+    },
+    {
+      "id": "review-process-observation-win-v2",
+      "operation": "review",
+      "sha256": "5362c6342d74259c3668890e7598bc42207868447cea93b96652a1074ef9abce",
+      "status": "reviewed",
+      "artifacts": 2,
+      "bindings": 69
+    }
+  ],
+  "macos": {
+    "python": "3.14.2",
+    "red": "Original supervisor: real POSIX exited zombie cmdline AccessDenied; independent expected_failure registered.",
+    "green": "Same frozen primary command/test: 1 passed in0.61s; original staging6 passed in140.43s, no skip. Fresh independent passed registered.",
+    "controls": "Two actual owned identities; correct identity, wrong time/token; live cmdline denial with readable status and live cmdline+status denial; both real zombie classifications; exit0/no forced cleanup/errors empty.",
+    "regression_errors": "Independent review read all214 JSON;27 retained errors consistently missing configured OCR component, no watchdog/AccessDenied mixed into this run."
+  },
+  "windows": {
+    "environment": "Home ESXi VM76 Win11 SSH administrator, source component only; Python3.14.10. VM73 remains off; no VM/service/firewall operations.",
+    "result": "Same frozen test1passed2.26s; debug independent passed registered.",
+    "identities": [
+      {
+        "launcher_pid": 6120,
+        "actual_pid": 14748
+      },
+      {
+        "launcher_pid": 10928,
+        "actual_pid": 13552
+      }
+    ],
+    "controls": "Both real launcher/descendant tree, ctime/full argv/physical exe/cwd verified. Correct/wrong identities, both live denial controls, four registered identities gone, exit0/no escalation, final matching targetNone.",
+    "source_delivery": "67 declared source files in68 tar members, actual remote13 files checksummed/recovered; live controls only, POSIX zombie not applicable."
+  },
+  "history": {
+    "windows_v1": "Failed preparation before product matching: PopenPID1472 versus actualPID10372. Independent needs_revision preserved, not a product failure. Later read-only query PID10372 gone does not prove original cleanup completeness.",
+    "test_repairs": 2,
+    "repair1": "Reused verified platform tree/ctime/argv/exe/cwd; red-v2 still product failure but independent rejected fixture exception cleanup.",
+    "repair2": "Register ownership immediately after Popen; retain historical members before assertions; always recheck after launcher.wait and record cleanup errors; red-v3 accepted.",
+    "green_v2": "Earlier helper green with naive launcher fixture passed only Mac; regression had actual mixed watchdog AccessDenied. Kept historical, not root-cause closure."
+  },
+  "limits": [
+    "This is a helper-level fault injection on real independently observed process states, not reproduction of original kernel denial or proof its cause was zombie.",
+    "Watchdog unexpected-exit detection, full5second task-tree/slot cleanup and all SC10/R008/E/H/X requirements remain open.",
+    "Windows source component is not installed package, ordinary-user, Job Object or service acceptance.",
+    "Committed3e current CI has separate failures; this uncommitted helper slice is not included in those runs.",
+    "Retained cancellation/C1/shared argv/cross-database queue/path-refresh cases not repaired or dedicated-rerun."
+  ],
+  "build": {
+    "scope": "Wheel build/source and HTML byte verification only; no installed business claim.",
+    "wheels": [
+      {
+        "wheel": "smm_hub-0.4.0-py3-none-any.whl",
+        "sha256": "533e71d4a79d334a442c932594bc594925d581e0b19d3f079e3e81869b2ec752",
+        "bytes": 182432,
+        "zip_crc_valid": true,
+        "source_and_html_exact": {
+          "smm_hub/__init__.py": "91d7cacc46318f62c5dd9ed205869391722f09a22f5a2df69fae33e1b92153e2",
+          "smm_hub/cli.py": "afb9ebdd6d7f3d59e4eaee51d026dab2e98e9ffdbe3300cf57b9d4d3df5a8ff8",
+          "smm_hub/document_api.py": "ff5a4735184b8be0484fea5979c4ebdf8bac638b639ec9a1cbe9e13a70e98bee",
+          "smm_hub/document_cli.py": "02ec47302684b6ed4d6490b7eba4a3c5c0f09c61920ad4915f50822a3b449044",
+          "smm_hub/documents.py": "3f4a035f935eae2f7d532c8880833799dd233a651caed23b195dc85119f06589",
+          "smm_hub/hub.py": "fdf9c0d0c81b48bd08c2533665204b9b00ddac9c52c2715c3f27f657f4cb3b57",
+          "smm_hub/hub_admin.py": "96a52b29b4352bf2367cb22c650709f4ad8ef9536d6780ebac0164fc757590f3",
+          "smm_hub/hub_os.py": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+          "smm_hub/processed_documents.py": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+          "smm_hub/projects.py": "a57bfbf034808a24452b05580e3d197bb8df84168b7e004159525b88df9e0ba9",
+          "smm_hub/upload.py": "c31f809e13cb7823f5e6e7c139a72daf9cb27cae99f8d21ac19b6ba1bdc37be7",
+          "smm_hub/vibeinsight.py": "03751f3856addf1ef71815f79e81330333cfdab5a745298db44318046eba2f47",
+          "smm_hub/vibeinsight_settings.py": "c5e1518e4c7123a81c0f7e47bc0e81b33c9e78ce092d13cb0281027371ec53df",
+          "smm_hub/windows_service.py": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+          "smm_hub/_archive/__init__.py": "4462436281dd47116c4a4e277b51ff853d05553e3d384734efeb1af21d601dfd",
+          "smm_hub/_archive/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_hub/_archive/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_hub/_archive/document_processing.py": "50a1acbd9431a3e24759e62ba11e64be2c3adb459e79568b4add9b1da88d1a1b",
+          "smm_hub/_archive/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+          "smm_hub/_archive/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+          "smm_hub/_archive/document_snapshots.py": "5b87230f9367d1f892a6a9a9b12235cb05c41c766ffedba3549d69a3dcc3fbb9",
+          "smm_hub/_archive/document_supervisor.py": "cc721d70af94f391ef025af49d25d6e9fc64baf6131609d2977c6e03885798a3",
+          "smm_hub/_archive/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+          "smm_hub/_archive/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_hub/_archive/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_hub/_archive/managed_document_uploads.py": "8694ee21d4c7fea094f4fd829a32a54e90cfd0a7efa4659e06bda1c49cfc45b5",
+          "smm_hub/_archive/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_hub/_archive/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_hub/_archive/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_hub/_archive/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+          "smm_hub/_archive/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_hub/_archive/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_hub/_archive/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_hub/_archive/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_hub/_archive/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_hub/_archive/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_hub/_archive/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_hub/_archive/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_hub/_archive/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+          "smm_hub/_archive/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_hub/_archive/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+          "smm_hub/_archive/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_hub/_archive/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_hub/_archive/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_hub/_archive/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_hub/_archive/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_hub/_archive/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_hub/static/index.html": "7acc55a752cc508678b073d2fc12a19d853ef9b262e258e32582910740afe9ec"
+        }
+      },
+      {
+        "wheel": "smm_local-0.4.0-py3-none-any.whl",
+        "sha256": "fb34b70296bbc6426f6396989c49bfbfaba6f50d2cf5f42383ba41763b88db6a",
+        "bytes": 198293,
+        "zip_crc_valid": true,
+        "source_and_html_exact": {
+          "smm_local/__init__.py": "47e3dec8f0a4f2b6bd43b9c6befe3da06cb28a74060bf71f5a63b0777ff73842",
+          "smm_local/api.py": "d9463af06415253f80ffd262b6881d67eca4cd65822e1e898cf8f17792e2c337",
+          "smm_local/archive_protocol.py": "1f6e9109939cced4dbbf226fbb6d6bff9375ce5c4828a6f52a982dabc1587927",
+          "smm_local/cli.py": "5d1997fd7143245c66883d758441748dd4cd80d687fe183c302e52deee24f244",
+          "smm_local/core.py": "407768207e195e7e474d709f1bd06f3536e9651b78415481630456b90401cd39",
+          "smm_local/document_processing.py": "50a1acbd9431a3e24759e62ba11e64be2c3adb459e79568b4add9b1da88d1a1b",
+          "smm_local/document_protocol.py": "ec92e229b688c19cfb8912593f63e4996d77ede8687fffec6db676e96af238b6",
+          "smm_local/document_results.py": "f9063b07a980e0e4e3644ec104774ca8705f23fa0595285f7564e3a070a25350",
+          "smm_local/document_search.py": "185b4486513f863607c336139970b8f8d51e8359541cdd5f845cf5463a6b4ff3",
+          "smm_local/document_snapshots.py": "5b87230f9367d1f892a6a9a9b12235cb05c41c766ffedba3549d69a3dcc3fbb9",
+          "smm_local/document_supervisor.py": "cc721d70af94f391ef025af49d25d6e9fc64baf6131609d2977c6e03885798a3",
+          "smm_local/document_sync.py": "f77743cc72b21feee29080428ef9ca640b032cee017021e4f7485cf590daa7bd",
+          "smm_local/document_transfers.py": "7f3bd9271ab183140a6d9a9670f28bd743f11b671718ef4f873da11d78a7c86f",
+          "smm_local/document_worker.py": "0d0865ab27bcc04a7f9f8917bb3335510748e47f1d26fc0dd585cd5e0cade95a",
+          "smm_local/documents.py": "92b0fdb4bae9a9be7a4cc5f947e70fd0284ccedc2410985c1cc2e009f0a79023",
+          "smm_local/federation.py": "6e2feebdbaa35d047eb30b0c56ab243b76288a0667aa78c339760793039756f4",
+          "smm_local/installation.py": "09f3eb7eeb7a3455080a37b536948ad5bbec8dde5b9bd2c58b7251d8cc26d784",
+          "smm_local/login_service.py": "4fa2502616fb847da11eb191f5729d4fe7715bab1c972db6bfc87d0ec05139f0",
+          "smm_local/managed_document_uploads.py": "8694ee21d4c7fea094f4fd829a32a54e90cfd0a7efa4659e06bda1c49cfc45b5",
+          "smm_local/managed_documents.py": "a22e2c03ab068dc57db331c5169acd67f2d024b1f8b502abfe07b50cafedc96f",
+          "smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+          "smm_local/project_control.py": "995ee77aff5a07f0aff40608baf5cbcc6a0c5fbe8627b2b86751fab333cc99fe",
+          "smm_local/references.py": "362e251450d5f0ec8eeb06af664e36ae8971de2136ed2c3bc1700bea54910980",
+          "smm_local/search_merge.py": "27ac863b9fb35c6f0c85b2f407c59268a4f9a8aa797342c8c400aeb8efae028b",
+          "smm_local/service.py": "896e6644ea4e50fc69ed70f63722bbc8f5fc07919a5d1ef608f16883fd026fae",
+          "smm_local/support.py": "90a98cdeb07caad64a60048adc12634c19cb2fae5bacf403ae85f5034981d960",
+          "smm_local/upload.py": "e11d4d233238e3c50d32adc70842bbcd013b8783ca29b307a2bc43e53221f4f2",
+          "smm_local/document_formats/__init__.py": "929d288348b6e5b714e7a972fb0ae6d8ee63aa94abd35105fb4f8814f9f9f4d5",
+          "smm_local/document_formats/ocr.py": "4077d0d00a30299e6d2fdca3b138f4338539cf40b825a5c42f2faa02ff0f550e",
+          "smm_local/document_formats/ooxml.py": "f6a6174fa7e63da24735ef7fbb5950286837988a8386d8eb31f8a730d62815f1",
+          "smm_local/document_formats/pdf.py": "cb6501f262923545c524be76a7f1f027d8e7ac1ecbfe31eb0bc3d9771d62310b",
+          "smm_local/document_formats/pdf_filters.py": "fdd91043600b0e3fd4538f2366fd57b57488cb68152e405c1c9afc7f1b6b4c89",
+          "smm_local/document_formats/pdf_guard.py": "86e8444c8e6bbbca965347b35ebcde0f3a155f0b29d4e3d290e75549675f2053",
+          "smm_local/document_formats/pdf_images.py": "1c646f0984c37795635c5ef8b57ebdc1ec65d8c3adee6206c2a573527d478846",
+          "smm_local/document_formats/spreadsheet.py": "bb9cf2fa839e68d379507871e250023c3c5437397b183aec6340ecec82266ca2",
+          "smm_local/document_formats/word.py": "40821564bd82060fdcad16217531347be04284b845fa7257b339085b1bd95182",
+          "smm_local/importers/__init__.py": "4ea6d80022a3c33234044ec41f7ddb1158b8dd82959bcf40bda706a9c10ceb91",
+          "smm_local/importers/base.py": "74f822a319249d302f2e2aec223b622b622ccd85dad7f165ad92e11e552db80c",
+          "smm_local/importers/claude_code.py": "03163dbad894126532f3bfae452594c13ddc49492992ae4d65fc190d7dfdfa6e",
+          "smm_local/importers/codex.py": "4516d68fdb78c00dcd167e13fd930adfff35252b40322cfade7e14a0b2339fdc",
+          "smm_local/importers/plugin.py": "78014f7184273593595e863aaa9b1bc7c5b2dfe46157a20f119e8ba292694dee",
+          "smm_local/importers/plugin_scope.py": "0d3fd11354e64d91e63dd53393ebbbb5ab335fc941552325625dfd3423087081",
+          "smm_local/importers/registry.py": "0a74c1479dd649ad1a4cda2c4c893d815e1d25510d754210399f7197bb6390c0",
+          "smm_local/importers/source_io.py": "a9aee91040273f1054a6721a1ff3dd913d5a246c187ee14bbc87d8fcd99fb577",
+          "smm_local/importers/zcode_fixture.py": "d99fabdda0c1f957ee75dc0cf0e1ada9912f6113c09394a6145ba07b9da4b965",
+          "smm_local/static/index.html": "5bab9e4485734a1ecd54bd4c3de688341c5e915c76c47717d0f4c2d96013731b"
+        }
+      }
+    ]
+  },
+  "remote_root_cleanup": {
+    "scope": "Only the two unique process-observation roots. Source tar bound before removal; original temp files individually recovered and SHA checked; no signals/VM/service/firewall operations. Does not retrospectively establish v1 original cleanup completeness.",
+    "roots": [
+      {
+        "attempt": "win-v1",
+        "source_tar_sha256": "b2e6ea17f0f7f1d9559f137ece95397c63af3a33068385b38fa51035ee60eda8",
+        "files_recovered": 3,
+        "all_file_hashes_matched": true,
+        "process_observations": [
+          {
+            "pid": 1472,
+            "state": "pid_gone"
+          },
+          {
+            "pid": 10372,
+            "state": "pid_gone"
+          }
+        ],
+        "signals_sent": false,
+        "root_absent_observed": true,
+        "probe_sha256": "eef63bc227c1b02bdcf52dcb478e650bce0c970872e31aa9faec8ee7a24e1c24",
+        "remove_receipt_sha256": "3fb80e3d5a2efa009feb0f4b82a1c8c57fb4ca6bdc26ef64663b7b0d5c416e08"
+      },
+      {
+        "attempt": "win-v2",
+        "source_tar_sha256": "e77435e31b96fbcc63d0ee500651807ba17d352ab561593e90072e98a27bab62",
+        "files_recovered": 6,
+        "all_file_hashes_matched": true,
+        "process_observations": [
+          {
+            "pid": 10928,
+            "state": "pid_gone"
+          },
+          {
+            "pid": 13552,
+            "state": "pid_gone"
+          },
+          {
+            "pid": 6120,
+            "state": "pid_gone"
+          },
+          {
+            "pid": 14748,
+            "state": "pid_gone"
+          }
+        ],
+        "signals_sent": false,
+        "root_absent_observed": true,
+        "probe_sha256": "9499dd81ccf513e8f6999d88536c3385a0bc47ac3831592a30e07d06fd6761dc",
+        "remove_receipt_sha256": "3fb80e3d5a2efa009feb0f4b82a1c8c57fb4ca6bdc26ef64663b7b0d5c416e08"
+      }
+    ],
+    "preserved_transport_failures": [
+      "Initial recursive scp dereferenced pytest current alias; file-set mismatch blocked removal.",
+      "Next v1 root removed after exact individual-file checks; v2 probe hit PowerShell command-length limit before removal.",
+      "Final v2 probe sends only pid/ctime needed for read-only absence check, retains full original stamps in sealed evidence; exact copies/root absence succeeded."
+    ]
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "source_commit": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+  "run_id": 45661390239,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45661390239",
+  "status": "completed_failure",
+  "note": "Backend checkpoint only. Uncommitted Web changes and installed-minimum test are not in this CI. Ordinary Python3.14 regression is not the E/H/X acceptance matrix.",
+  "os_results": [
+    {
+      "archive": "tests-macos-15.zip",
+      "total": 460,
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0,
+      "zip_sha256": "f4ce0f7b2b86a04ea30a5e57d005ea5b7fa2226d5ea1e7e693f56c8c0e34b64f",
+      "xml_sha256": "d9b1ee88c8bb930af2a4adb0eb7c171a41b886ca032ab007a41d263c2b5e09b2",
+      "new_case_results": [
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[file]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[parent]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[root]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[empty-directory]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        }
+      ],
+      "artifact": [
+        {
+          "id": 15046631784,
+          "size_in_bytes": 11319,
+          "digest": "sha256:f4ce0f7b2b86a04ea30a5e57d005ea5b7fa2226d5ea1e7e693f56c8c0e34b64f",
+          "expires_at": "2027-02-23T17:07:40Z"
+        }
+      ]
+    },
+    {
+      "archive": "tests-windows-2022.zip",
+      "total": 460,
+      "passed": 409,
+      "skipped": 27,
+      "failed": 24,
+      "zip_sha256": "841c3f4588055e5c5f2a069e7e786f99f7596322051e6e4668d5246d149972d9",
+      "xml_sha256": "f059a3d60ee7126751bb1b3c8def7cc0a2f22ff7ba86cfde836bdaa27a2a6bfc",
+      "new_case_results": [
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[file]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[parent]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[root]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[empty-directory]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "failed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "failed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "failed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "failed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "failed"
+        }
+      ],
+      "artifact": [
+        {
+          "id": 15047068039,
+          "size_in_bytes": 24836,
+          "digest": "sha256:841c3f4588055e5c5f2a069e7e786f99f7596322051e6e4668d5246d149972d9",
+          "expires_at": "2027-02-23T17:07:40Z"
+        }
+      ]
+    },
+    {
+      "archive": "tests-ubuntu-24.04.zip",
+      "total": 460,
+      "passed": 432,
+      "skipped": 28,
+      "failed": 0,
+      "zip_sha256": "25663b011583447e54760ff79f030695682eb630e3a90a36495b88595bd837c2",
+      "xml_sha256": "ba14bfed123a10567caf83d475bb399244cbb730a19cd89f28a6c22de92e1ba0",
+      "new_case_results": [
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[file]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[parent]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_actual_link_setup_preserves_target_and_restores_regular_path[root]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[empty-directory]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[file-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[parent-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-local]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_native_update_rejects_linked_target_before_external_write[root-hub]",
+          "class": "tests.test_document_formats_update_paths",
+          "status": "passed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay",
+          "status": "passed"
+        },
+        {
+          "name": "test_update_replay_materials_have_independent_full_source_truth",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        },
+        {
+          "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+          "class": "tests.test_document_formats_update_replay_c1",
+          "status": "passed"
+        }
+      ],
+      "artifact": [
+        {
+          "id": 15046236927,
+          "size_in_bytes": 11098,
+          "digest": "sha256:25663b011583447e54760ff79f030695682eb630e3a90a36495b88595bd837c2",
+          "expires_at": "2027-02-23T17:07:40Z"
+        }
+      ]
+    }
+  ],
+  "pending": [
+    "Windows retained observer/PID/audit defects and unconfirmed MCP initialize disconnect",
+    "Additional dangling-link self-control repair awaits user approval",
+    "Final candidate CI and full E/H/X/minimum otherOS"
+  ],
+  "retained_windows_observer_patch_applied": false,
+  "esxi_used": false,
+  "conclusion": "failure",
+  "windows_failure_groups": {
+    "stdlib_socketpair_observer": 13,
+    "mcp_initialize_connection_closed_unconfirmed": 1,
+    "windows_namespace_in_self_control": 1,
+    "launcher_vs_serving_pid_probe": 8,
+    "normcase_audit_path_expectation": 1
+  },
+  "windows_failures": [
+    {
+      "class": "tests.test_document_formats_empty",
+      "name": "test_query_observer_controls",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_empty",
+      "name": "test_empty_source_files_have_exact_originals_without_text_hits",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_managed_empty",
+      "name": "test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_mcp",
+      "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+      "category": "mcp_initialize_connection_closed_unconfirmed"
+    },
+    {
+      "class": "tests.test_document_formats_multiple_hits",
+      "name": "test_multiple_matches_keep_one_truthful_default_window[docx]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_multiple_hits",
+      "name": "test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_multiple_hits",
+      "name": "test_multiple_matches_keep_one_truthful_default_window[pdf]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_multiple_hits",
+      "name": "test_nested_table_hit_does_not_borrow_parent_coordinates",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_sync",
+      "name": "test_sync_observer_known_positive_and_negative_controls",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_table_context",
+      "name": "test_deep_table_hit_context_and_default_window[docx-deep_word]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_table_context",
+      "name": "test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_table_context",
+      "name": "test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_table_context",
+      "name": "test_combined_window_header_cell_and_unicode_quotas",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_table_preview",
+      "name": "test_search_table_header_summaries_have_exact_shared_budget",
+      "category": "stdlib_socketpair_observer"
+    },
+    {
+      "class": "tests.test_document_formats_update_paths",
+      "name": "test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+      "category": "windows_namespace_in_self_control"
+    },
+    {
+      "class": "tests.test_document_formats_update_replay",
+      "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_update_replay",
+      "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_update_replay_c1",
+      "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_update_replay_c1",
+      "name": "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_upload_restart",
+      "name": "test_restart_source_audit_has_actual_positive_and_negative_controls",
+      "category": "normcase_audit_path_expectation"
+    },
+    {
+      "class": "tests.test_document_formats_upload_restart",
+      "name": "test_isolated_http_server_factory_and_cleanup[local]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_upload_restart",
+      "name": "test_isolated_http_server_factory_and_cleanup[hub]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_upload_restart",
+      "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+      "category": "launcher_vs_serving_pid_probe"
+    },
+    {
+      "class": "tests.test_document_formats_upload_restart",
+      "name": "test_real_creator_restart_resumes_chunks_and_pending_captures[hub]",
+      "category": "launcher_vs_serving_pid_probe"
+    }
+  ],
+  "windows_change_since_f3e6f90": {
+    "old_failed": 19,
+    "new_failed": 24,
+    "added": [
+      [
+        "tests.test_document_formats_update_paths",
+        "test_external_tree_oracle_detects_nonfile_members[dangling-link]"
+      ],
+      [
+        "tests.test_document_formats_update_replay",
+        "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]"
+      ],
+      [
+        "tests.test_document_formats_update_replay",
+        "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]"
+      ],
+      [
+        "tests.test_document_formats_update_replay_c1",
+        "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]"
+      ],
+      [
+        "tests.test_document_formats_update_replay_c1",
+        "test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]"
+      ]
+    ],
+    "removed": []
+  },
+  "windows_main_path_guards": {
+    "passed": 6,
+    "note": "Actual file, parent, root link/junction native-update cases passed on both creators; one independent dangling-link oracle failed raw namespace-prefix string equality. NoWindows receipt protocol pass: four new replay tests fail at pre-existing server-PID probe before business."
+  },
+  "windows_dangling_patch": {
+    "path": "drafts/windows-dangling-target-identity/fix.patch",
+    "sha256": "0870e8b6cd774e8927f62529dfe5d9291a1a74f9919af08058fe4f0a8e5a4e66",
+    "applied": false
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "schema": "smm-008-completion-platform-proof-v1",
+  "date": "2026-11-28",
+  "candidate_head": "6811238688674fbf156c0b0b7ee4af5ab58609ca",
+  "minimum_run": {
+    "id": 46093625455,
+    "url": "https://github.com/yangbobo2021/smm-local/actions/runs/46093625455",
+    "platforms": {
+      "Windows": {
+        "review_status": "passed",
+        "review_report": "completion-minimum-windows-ci-independent-review.md",
+        "raw_recovery_file_sha256": "ea33fb02c23bca7521173b156222922c556eb93845a2752e73f9d05ef7616ac5",
+        "recovery_status": "recovered_verified",
+        "artifact_id": 15242352409,
+        "artifact_sha256": "7538d102720afe5d6c5d5096656dec6fd3c0cf19139afa1cc135217a3a3efcd8",
+        "counts": {
+          "manifest_members": 574,
+          "json_opened": 372,
+          "office_files_opened": 40,
+          "wheel_opened": 2,
+          "zip_inner_members": 389,
+          "pdf_files_opened": 40,
+          "pdf_pages_rendered": 60,
+          "raw_other_members_read": 119,
+          "source_files": 16,
+          "source_tables": 32,
+          "source_cells": 152,
+          "cli_responses": 246,
+          "fulltext_reads": 32,
+          "table_reads": 64,
+          "returned_cells": 304,
+          "original_info_reads": 32,
+          "actual_downloads": 32,
+          "old_refs_preserved": 16,
+          "task_cleanup_receipts": 16,
+          "junit_tests": 7,
+          "junit_errors": 0,
+          "junit_failures": 0,
+          "junit_skipped": 0,
+          "junit_seconds": 49.001
+        },
+        "manifest_sha256": "66cd0f31819f61108459256e24e6983826ba337d26c8b3fafc5526bf1c593b31"
+      },
+      "Linux": {
+        "review_status": "passed",
+        "review_report": "completion-minimum-linux-ci-independent-review.md",
+        "raw_recovery_file_sha256": "cc36b0e464633bb75711337eb1bd36c2660662f6e5a956e47e7e77c5e7278b6c",
+        "recovery_status": "recovered_verified",
+        "artifact_id": 15242620319,
+        "artifact_sha256": "36a3eb9cba48b3fc4b5cabd543b3a8b7bfb558da9ccdad5cf4dfc4e6da8a1fa0",
+        "counts": {
+          "manifest_members": 573,
+          "manifest_opened": {
+            "json": 371,
+            "zip_office_wheel": 42,
+            "pdf": 40,
+            "binary": 120
+          },
+          "pytest_tests": 7,
+          "pytest_skips": 0,
+          "pytest_failures": 0,
+          "pytest_errors": 0,
+          "pytest_seconds": 30.835,
+          "cli": 246,
+          "documents": 16,
+          "fulltexts": 32,
+          "tables": 64,
+          "table_cells": 304,
+          "original_info": 32,
+          "actual_original_downloads": 32,
+          "searches": 64,
+          "ocr_sources_visually_inspected": 4
+        },
+        "manifest_sha256": "17d60bffc87cbc6712d0372cd03e1784afc1d7dec0bfd864b9a1a0efc25213a4"
+      },
+      "macOS": {
+        "review_status": "passed_scoped",
+        "review_report": "completion-minimum-macos-ci-independent-review.md",
+        "raw_recovery_file_sha256": "992ea1d9d062d91031ecb4810d7bd9c2be4fc99e72eb30a53bbc8187c0b83cfa",
+        "recovery_status": "recovered_verified",
+        "artifact_id": 15242154313,
+        "artifact_sha256": "0ad5876cd210612b9ebd766dfec2d0c185de7c1d4c8a115594db70e79b09cb89",
+        "counts": {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "7",
+          "time": "39.292",
+          "timestamp": "2026-11-28T01:33:37.747418+00:00",
+          "hostname": "sjc20-bb661-385522c3-2b07-4349-a06e-bf0cce78c7e5-1E9C6711420A.local"
+        },
+        "manifest_sha256": "52a842e56dc04ca210a76c72af8460a84f85bd4c57d57015fd09bbfa9095b5c8"
+      }
+    },
+    "scope": "Python3.11 independently installed Local/Hub packages; CLI minimum business only, not full E/H/X"
+  },
+  "custody_run": {
+    "id": 46093625422,
+    "artifact_id": 15242560065,
+    "zip_sha256": "578181e1627fb415bed0527b937529ff7818f29ac191419e989478f465588063",
+    "recovered_files": 9,
+    "formal_execute": "execute-completion-sc12-custody-v1",
+    "formal_review": "review-completion-sc12-custody-execution-v1",
+    "result": "passed14/no skip",
+    "scope": "one toy HTTP server listener and its serving thread; not H service proof"
+  },
+  "Mac_minimum_formal": {
+    "execute": "execute-completion-sc11-minimum-v2",
+    "review": "review-completion-sc11-minimum-execution-v2",
+    "result": "7passed0skip19.051s"
+  },
+  "text_formal": {
+    "execute": "execute-completion-sc12-text-v1",
+    "review": "review-completion-sc12-text-execution-v1",
+    "result": "19passed1optional-sample-skip1.02s"
+  },
+  "reports": {
+    "minimum-execution-review-v2.md": {
+      "path": "completion-minimum-execution-review-v2.md",
+      "original_sha256": "79bdfb412ce61951971a9c8dfd4b51306900086ea5ca42d804bfaaea34e80d64",
+      "public_sha256": "79bdfb412ce61951971a9c8dfd4b51306900086ea5ca42d804bfaaea34e80d64",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "evidence-text-execution-review.md": {
+      "path": "completion-evidence-text-execution-review.md",
+      "original_sha256": "bd4eb83f7214d46769aef0481b6b15cf173946c78861efb7fcd170c12751674c",
+      "public_sha256": "bd4eb83f7214d46769aef0481b6b15cf173946c78861efb7fcd170c12751674c",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "custody-live-candidate-review.md": {
+      "path": "completion-custody-live-candidate-review.md",
+      "original_sha256": "765e20cf074e252b321459a20ee101cc48854da4d886a3849ff6eb6bf2669615",
+      "public_sha256": "765e20cf074e252b321459a20ee101cc48854da4d886a3849ff6eb6bf2669615",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "custody-live-execution-review.md": {
+      "path": "completion-custody-live-execution-review.md",
+      "original_sha256": "e7d4101366fb502628036f91619ca34cb49cfde0716a4e05c2254c5b9e665d8b",
+      "public_sha256": "e7d4101366fb502628036f91619ca34cb49cfde0716a4e05c2254c5b9e665d8b",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "minimum-windows-ci-independent-review.md": {
+      "path": "completion-minimum-windows-ci-independent-review.md",
+      "original_sha256": "860507cbc451a5a4579cdc298f20302409ffeee0b8561be0f1b2fc40a977b871",
+      "public_sha256": "b42434d5976a31fcd9f53e692d2a833cee5bdc1e1ecfb944c1bc06b79f1d3714",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "minimum-linux-ci-independent-review.md": {
+      "path": "completion-minimum-linux-ci-independent-review.md",
+      "original_sha256": "2306e067c4a7459f5fd42a0541b7059f217cc670894ae777e2f299df71b59509",
+      "public_sha256": "2306e067c4a7459f5fd42a0541b7059f217cc670894ae777e2f299df71b59509",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    },
+    "minimum-macos-ci-independent-review.md": {
+      "path": "completion-minimum-macos-ci-independent-review.md",
+      "original_sha256": "d2ededb8c02ede1b590296f98d2be53787f8e6542f95146739399f1dfa799525",
+      "public_sha256": "d2ededb8c02ede1b590296f98d2be53787f8e6542f95146739399f1dfa799525",
+      "redaction": "local checkout/home/private evidence path prefixes only"
+    }
+  },
+  "remaining": "Full C1 with real dependencies, E/H/X, final requirement/PR review remain open; do not merge",
+  "historical_failures": "Old Windows CI failure/format recovery errors and all old opinions remain unchanged."
+}

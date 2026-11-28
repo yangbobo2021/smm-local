@@ -527,7 +527,11 @@ class LocalUpload:
             self.guard.write(value)
         document_files=None
         with self.db.connect() as con:has_documents=con.execute("SELECT 1 FROM sqlite_master WHERE name='local_document_sync'").fetchone()
-        if has_documents:
+        # Native captures can predate Hub configuration, so the sync table
+        # is not evidence that this archive has (or lacks) persistent files.
+        parent = self.db.db_path.resolve().parent
+        has_document_files = any((parent / name).exists() for name in ('.documents', '.document-snapshots'))
+        if has_documents or has_document_files:
             from .document_protocol import DocumentGuard
             document_files=DocumentGuard(self.db,('local_document_sync',)).prepare_restore()
         result = {"body_stopped": True, "archive_id": self.archive_id, "control_epoch": value["control_epoch"],

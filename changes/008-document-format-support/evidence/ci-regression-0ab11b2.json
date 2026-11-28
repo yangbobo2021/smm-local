@@ -1,0 +1,165 @@
+{
+  "source_commit": "0ab11b207855f67f466d9e1c85a7b70f0b7b00a4",
+  "run": {
+    "id": 45528161011,
+    "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45528161011"
+  },
+  "kind": "Ordinary package regression, not formal E/H/X delivery",
+  "platforms": {
+    "tests-ubuntu-24.04": {
+      "artifact_id": 14983423711,
+      "artifact_bytes": 10409,
+      "artifact_sha256": "sha256:27e18abb964984c924596e838a97c79ce072b3ad1af1fcaaaddd56cc47b1343d",
+      "tests": 426,
+      "passed": 402,
+      "skipped": 24,
+      "failed": 0,
+      "new_upload_and_mcp_cases": [
+        {
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "passed": true
+        },
+        {
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "passed": true
+        },
+        {
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "passed": true
+        },
+        {
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "passed": true
+        }
+      ],
+      "raw_zip_and_xml": "downloaded, SHA/length verified, XML opened"
+    },
+    "tests-macos-15": {
+      "artifact_id": 14984390329,
+      "artifact_bytes": 10538,
+      "artifact_sha256": "sha256:963d10bf5372a0c867293de59c7b908ac78a7aa92c93df8c42c0e1ed8a70f7c3",
+      "tests": 426,
+      "passed": 402,
+      "skipped": 24,
+      "failed": 0,
+      "new_upload_and_mcp_cases": [
+        {
+          "name": "test_mcp_source_cell_and_metadata_oracles_reject_wrong_views",
+          "passed": true
+        },
+        {
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "passed": true
+        },
+        {
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "passed": true
+        },
+        {
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "passed": true
+        }
+      ],
+      "raw_zip_and_xml": "downloaded, SHA/length verified, XML opened"
+    },
+    "tests-windows-2022": {
+      "status": "completed",
+      "conclusion": "failure",
+      "artifact_id": 14984726092,
+      "artifact_bytes": 16788,
+      "artifact_sha256": "sha256:77921e26470636aa2c8e222840e873bf80b4069a992bb5564658034613ce822f",
+      "tests": 426,
+      "passed": 390,
+      "skipped": 23,
+      "failed": [
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_query_observer_controls",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_empty",
+          "name": "test_empty_source_files_have_exact_originals_without_text_hits",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_mcp",
+          "name": "test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+          "message": "McpError('Connection closed') [single exception in ExceptionGroup]"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[docx]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_multiple_matches_keep_one_truthful_default_window[pdf]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_multiple_hits",
+          "name": "test_nested_table_hit_does_not_borrow_parent_coordinates",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_sync",
+          "name": "test_sync_observer_known_positive_and_negative_controls",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[docx-deep_word]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_table_context",
+          "name": "test_combined_window_header_cell_and_unicode_quotas",
+          "message": "AssertionError: receiver attempted processing or external call"
+        },
+        {
+          "class": "tests.test_document_formats_table_preview",
+          "name": "test_search_table_header_summaries_have_exact_shared_budget",
+          "message": "AssertionError: receiver attempted processing or external call"
+        }
+      ],
+      "classification": {
+        "shared_observer": 12,
+        "mcp_initialization_connection_closed": 1,
+        "mcp_cause": "Inner child stderr was not included in ordinary CI artifacts. Connection closed at initialize; no functional MCP assertions reached. Do not infer same root cause or product failure from this alone."
+      },
+      "new_upload_cases": [
+        {
+          "name": "test_upload_sources_are_complete_and_distinct",
+          "passed": true
+        },
+        {
+          "name": "test_managed_native_uploads_are_searchable_on_each_creator",
+          "passed": true
+        }
+      ],
+      "raw_zip_and_xml": "downloaded, SHA/length verified, XML opened; failed job log opened"
+    }
+  },
+  "limits": [
+    "Normal regression uploads JUnit only; does not supply formal original/trace recovery or service identity evidence",
+    "24 skipped cases per completed platform remain skipped; no pass inferred",
+    "This commit predates the subsequent creator startup queue resume changes",
+    "Prior Windows socketpair observer gap is retained by maintainer; its four-file candidate repair is not applied"
+  ]
+}

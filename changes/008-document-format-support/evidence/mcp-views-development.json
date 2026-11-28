@@ -1,0 +1,42 @@
+{
+  "scope": "macOS Local Word actual stdio MCP document views development TDD only",
+  "baseline": "983578435d4f84aac7569294fe6f34d71756b621",
+  "case_id": "TC-008-reference-local-mcp",
+  "red": "red-mcp-views-v5",
+  "red_review": "review-mcp-views-red-v5",
+  "green": "green-mcp-views-v1",
+  "green_review": "review-mcp-views-green-v1",
+  "main_passed": 2,
+  "regression_passed": 89,
+  "documents": 2,
+  "tables": 6,
+  "stdio_calls": 46,
+  "specified_table_windows": 28,
+  "checks": [
+    "signed nonzero text window, Unicode and LF lines",
+    "text/table/original-info preserve identity and processing version",
+    "all source tables, cell set uniqueness, spans and real source headers",
+    "independently nondefault row and column start/end",
+    "original-info contains neither frozen original base64",
+    "foreign table ID rejected",
+    "source deletion and unchanged final business state with empty query audit"
+  ],
+  "history": [
+    "v1 missing nondefault rows/response identities/cell uniqueness/metadata payload boundary",
+    "v2 metadata boundary missed another frozen original",
+    "v3 column end did not differ from default",
+    "v4 added request but window expectation remained hardcoded",
+    "v5 authorized one-line correction; valid red and same-byte green independently passed"
+  ],
+  "not_claimed": [
+    "other formats or Hub MCP transport",
+    "all Windows/Linux business",
+    "full SC9/R008/E/H/X"
+  ],
+  "files": {
+    "src/smm_local/mcp_server.py": "86ed13f761451e82784c15434a07e592775f56ec64bd1e87bf086ce13ae3123e",
+    "tests/test_document_formats_mcp.py": "5f20da41e5b564518238ac46ec24d0280dd3bceb875d8e486691fa9cdcf2d9c5",
+    "tests/test_document_formats_cli.py": "70ac786c05cad0f1d965b1bfd94d752ddd55785a52dcb8a3fce895847ef4f242",
+    "tests/document_formats_cli_observer.py": "e697cbe83e131f0816079474b8c247ea2b20d94761c0365dcb2dac0f51fd77b3"
+  }
+}

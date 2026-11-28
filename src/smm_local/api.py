@@ -6,10 +6,10 @@ import threading
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from importlib.resources import files
-from typing import Callable
+from typing import Callable, Literal
 
-from fastapi import Body, FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi import BackgroundTasks, Body, FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field, ConfigDict, StrictInt
 
 from .core import Archive, shared_db_path, utcnow
@@ -20,8 +20,9 @@ from .project_control import change as change_project
 from . import references
 from .documents import Documents
 from .managed_documents import ManagedDocuments
+from .managed_document_uploads import ManagedDocumentUploads
 from .document_sync import DocumentSync, schedule as schedule_documents, hub_projects, hub_sources, combined_listing
-from .document_search import search as search_documents,read as read_document
+from .document_search import search as search_documents,read as read_document,original as original_document
 
 
 class DocumentConfig(BaseModel):
@@ -88,6 +89,9 @@ class LibraryRemove(BaseModel):
     project_key: str | None = None
     expected_version: StrictInt
     expected_revision: StrictInt
+    expected_processing_version: StrictInt | None = None
+    capture_id: str | None = None
+    expected_attempt_id: str | None = None
     submission_id: str | None = None
 
 
@@ -96,6 +100,17 @@ class DocumentRead(BaseModel):
     reference: str
     start: StrictInt | None = None
     end: StrictInt | None = None
+    view: Literal['text','table','original-info'] = 'text'
+    table_id: str | None = None
+    row_start: StrictInt | None = None
+    row_end: StrictInt | None = None
+    column_start: StrictInt | None = None
+    column_end: StrictInt | None = None
+
+
+class DocumentOriginal(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    reference: str
 
 
 class SearchRequest(BaseModel):
@@ -185,6 +200,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     references.material(db)
     documents = Documents(db)
     library = ManagedDocuments(db)
+    native_uploads = ManagedDocumentUploads(library)
     stop = threading.Event()
     run_lock = threading.Lock()
     active: SyncJob | None = None
@@ -263,6 +279,8 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         stop.clear()
+        processing_worker = threading.Thread(target=native_uploads.run_pending, name="smm-document-resume", daemon=True)
+        processing_worker.start()
         worker = None
         if auto_sync:
             if sync_on_start:
@@ -277,6 +295,7 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
                 stop.set()
                 pending.clear()
                 job = active
+            processing_worker.join(timeout=2)
             if worker:
                 worker.join(timeout=2)
             if job:
@@ -381,6 +400,20 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @app.post('/api/documents/sync')
     def document_sync(body: DocumentSyncRequest):return document_call(DocumentSync(db).sync, **body.model_dump())
 
+    @app.post('/api/documents/uploads')
+    def document_upload_begin(body: dict = Body(...)):
+        return document_call(native_uploads.begin, body)
+
+    @app.put('/api/documents/uploads/{upload_id}/parts/{index}')
+    async def document_upload_part(upload_id: str, index: int, request: Request):
+        return document_call(native_uploads.part, upload_id, index, await request.body(), request.headers.get('X-Chunk-SHA256'))
+
+    @app.post('/api/documents/uploads/{upload_id}/commit')
+    def document_upload_commit(upload_id: str, background_tasks: BackgroundTasks, body: dict = Body(...)):
+        result = document_call(native_uploads.commit, upload_id, body)
+        background_tasks.add_task(native_uploads.run_pending)
+        return result
+
     @app.get('/api/documents/library')
     def library_list(project_id: int | None = None):
         return document_call(library.list, project_id)
@@ -420,6 +453,13 @@ def create_app(archive: Archive | None = None, *, auto_sync: bool = True,
     @app.post('/api/documents/refresh')
     def document_refresh(body: DocumentRefresh):
         return document_mutation(documents.refresh, body.source_id)
+
+    @app.post('/api/documents/original')
+    def document_original(body: DocumentOriginal):
+        raw=document_call(original_document,db,body.reference)
+        def chunks():
+            for offset in range(0,len(raw),65536):yield raw[offset:offset+65536]
+        return StreamingResponse(chunks(),media_type='application/octet-stream',headers={'Content-Disposition':'attachment; filename="captured-original"','Content-Length':str(len(raw))})
 
     @app.post('/api/documents/search')
     def document_search(body: DocumentQuery):

@@ -1,0 +1,147 @@
+{
+  "case": "TC-008-live-temporary-observation",
+  "scope": "Approved once-immediate-complete-rescan recovery; real Windows11 source-component sampler plus six Mac ordinary staging regressions. Not full SC10/R008, installed/service/E/H/X or conclusive original-CI-cause proof.",
+  "baseline": "160124e0f0e41c77082ae4ab31779a54f908783d",
+  "confirmed_definition": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "product": {
+    "path": "src/smm_local/document_supervisor.py",
+    "sha256": "e4af95b631dbeb558c2678dbdbce4ba5e43aebc00d94ef46536299f04e8c8d23",
+    "behavior": "First child PermissionError discards partial sample and immediately starts one complete rescan; persistent denial, unreadable/missing root, unknown/outside error paths fail closed. No sleep, quota change or whole-task retry."
+  },
+  "test": {
+    "path": "tests/test_document_formats_live_temporary.py",
+    "sha256": "24595e406d304d030d271401be30673774f48cfb142a37602f8394a3927a7742",
+    "red_green_same_bytes": true
+  },
+  "history": [
+    {
+      "id": "red-sc10-live-temp-v1",
+      "result_sha256": "1491a0a29eccd58fcf5a21aa9a2393dd01317b94e36a92fd1d00ad00af190c1f",
+      "status": "red_observed"
+    },
+    {
+      "id": "review-live-temp-red-v1",
+      "result_sha256": "74a1308c54ba2cd2617474c445180ec5540e455eafb456e1dedd7c472a676bf2",
+      "status": "reviewed"
+    },
+    {
+      "id": "red-sc10-live-temp-v2",
+      "result_sha256": "1b92ef90e479ded98bdc7abe9fe9d8eba88fed7430247e00c9225d31d506ca03",
+      "status": "red_observed"
+    },
+    {
+      "id": "review-live-temp-red-v2-format",
+      "result_sha256": "bc19250c7159aa208c3ad0dde93a51689f7505a8bfb21fcfee577079b3323c57",
+      "status": "reviewed"
+    },
+    {
+      "id": "green-sc10-live-temp-v1",
+      "result_sha256": "09ffd6263172a2170baf5d8b9d875a03df194cd9347497ca309c99445ed3180c",
+      "status": "blocked"
+    },
+    {
+      "id": "green-sc10-live-temp-v2",
+      "result_sha256": "af0d9ae017dd37375372bd18340037d6a0c8bddb7c26c4f0a78928f4de2d442e",
+      "status": "blocked"
+    },
+    {
+      "id": "green-sc10-live-temp-v3",
+      "result_sha256": "7acc792cac28652021f8498773ed87f656bb85fb9210eba04b9d4c594f4d686d",
+      "status": "green_observed"
+    },
+    {
+      "id": "review-live-temp-green-v3",
+      "result_sha256": "328bdcf3f3322ee91de417414811bf1edd338b11a25e18f718481bd87d1ac478",
+      "status": "reviewed"
+    }
+  ],
+  "failed_attempts": {
+    "v1": "Product main passed but regression launcher lacked evidence directory; no project regression executed. Blocked, not passed.",
+    "v2": "Same frozen main passed and Mac6passed, combined two-OS regression exceeded300seconds before Windows recovery. Blocked, not passed. Frozen tests/product were unchanged for v3; split invocations only."
+  },
+  "actual_main_observations": {
+    "scope": "Windows component temporary-space sampler only",
+    "errors": [
+      {
+        "type": "PermissionError",
+        "errno": 13,
+        "winerror": 5
+      }
+    ],
+    "cleanup": {
+      "all_handles_closed": true,
+      "kept_unchanged": true
+    },
+    "persistent_native_denial": {
+      "type": "PermissionError",
+      "errno": 13,
+      "winerror": 32
+    },
+    "persistent_walks": 2,
+    "persistent_product_denial": {
+      "type": "PermissionError",
+      "errno": 13,
+      "winerror": 32
+    },
+    "inaccessible_root_walks": 1,
+    "inaccessible_root_rejected": true,
+    "missing_root_rejected": true,
+    "boundary_bytes": [
+      268435456,
+      268435457
+    ],
+    "after_deletion_bytes": 48,
+    "complete_walks": 2,
+    "retained_sha256": "4ac8f962f65e19a05ad8aeeaa582723a4f7f773c9ef7b409b0b7453ec4b5eb1b"
+  },
+  "formal_regression": {
+    "platform": "macOS",
+    "passed": 6,
+    "skipped": 0,
+    "failed": 0,
+    "stdout_seconds": 134.9,
+    "test": "tests/test_document_formats_staging.py",
+    "ocr_failure_assertion_unchanged": true
+  },
+  "integrity": {
+    "artifacts": 274,
+    "artifact_bytes": 1413750,
+    "bindings": 280,
+    "all_current_sha256_verified": true
+  },
+  "extra_windows_staging": {
+    "status": "Incomplete, not a maintainer-retained testcase decision and not passed",
+    "recovered": {
+      "verified_files": 27,
+      "transfer": {
+        "exit_code": 15,
+        "bytes": 45315,
+        "zip_sha256": "317ea07a663d4b907da048eb36c3af6e3a7f30af2f1c93ed9ef5fdc176f886a8"
+      },
+      "exit_code": 15,
+      "timed_out": true,
+      "cleanup_errors": [],
+      "elapsed": 240.1891734600067,
+      "junit_exists": false
+    },
+    "interpretation": "240second test watchdog ended extra home-VM run with no JUnit completion; frozen product per-task300second budget was not changed. Current source CI must separately report these tests."
+  },
+  "build": {
+    "status": "exit0, source/CRC check only; no installed-business claim",
+    "wheels": {
+      "smm_hub-0.4.0-py3-none-any.whl": {
+        "bytes": 180087,
+        "sha256": "0ce4dc275f8365e427b887ad5040c2e2f0475fb0df0b3095a2b42608ff252a6b",
+        "source_member_count": 47,
+        "transformed_shim_verified": true
+      },
+      "smm_local-0.4.0-py3-none-any.whl": {
+        "bytes": 195987,
+        "sha256": "eb235697645323eb732f6ef8bd9033257808b2b65915752ad7f83e3999e75ff6",
+        "source_member_count": 46,
+        "transformed_shim_verified": false
+      }
+    }
+  },
+  "remaining": "Retained cancellation/C1/shared-argv/cross-archive queue/path-envelope scopes unchanged. GC, Web path details, service handoff and full acceptance still open."
+}

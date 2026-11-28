@@ -1,0 +1,37 @@
+{
+  "acceptance": "AT-SMM-008",
+  "case_id": "TC-008-reference-hub-cli",
+  "scope": "macOS source-checkout Hub CLI text/table/original-info and original-output development subpath",
+  "red": "red-hub-cli-views-v6",
+  "red_review": "review-hub-cli-red-v4",
+  "green": "green-hub-cli-views-v1",
+  "green_sha256": "5c9a9f8f74112792852cfb5b6a3f1aeec84b3243d88e5aa3959024e3455481f9",
+  "green_review": "review-hub-cli-green-v1",
+  "reviewer": "/root/r008_hub_cli_green_review_v1",
+  "result": {
+    "main": "1 passed in 17.45s",
+    "regression": "38 passed in 196.76s",
+    "independent_review": "passed",
+    "independent_originals": 2,
+    "actual_original_outputs": 2
+  },
+  "checks": [
+    "Actual Hub state directory, native Hub/archive identity, two DOCX with nonBMP and source-defined complete table cells/spans",
+    "Default real nonzero hit window, explicit complete text and Unicode/LF slice",
+    "All three tables per document, real headers and nondefault windows distinguish all four independent row/column parameters",
+    "Metadata-only original-info, exact new-file original-output, existing-file refusal and independent start/end/table-id/four row-column mutual exclusion",
+    "External source files deleted before guarded CLI calls; complete documents/document_*/hub_document_* state unchanged and no source/parser/process/network attempts"
+  ],
+  "history": [
+    "Earlier candidate omitted documents from state audit; added two-document six-mutation controls",
+    "Earlier candidate used default row-start/column-end; design and tests revised on existing tables",
+    "Maintainer explicitly approved one additional four-input original-output mutual-exclusion revision; same approved test bytes used for green"
+  ],
+  "runner": "Native operations CLI used the same request stdin and business/regression argv in a separately logged process, after a real runtime/settled launcher probe, avoiding interactive MCP timeout without changing the verification command.",
+  "not_covered": [
+    "Other formats and installed minimum Python business",
+    "Full platform/service/browser/TLS/cross-OS matrix",
+    "Hub reprocess command and wider lifecycle remain independent work",
+    "Maintainer-retained Windows observer and MCP initialization gaps"
+  ]
+}

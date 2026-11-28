@@ -1,0 +1,63 @@
+{
+  "scope": "Creator managed Windows SCM cancellation fix and source components; full actual SCM rerun remains required.",
+  "actual_red": {
+    "run_id": 46155842626,
+    "artifact_id": 15268110399,
+    "canonical_members": 1066,
+    "failure": "SCM shutdown did not signal the active document supervisor. The CLI stop exceeded its 25-second wait while the suspended OCR reached its own 30-second timeout.",
+    "fault_cleanup_seconds": 0.333491
+  },
+  "implementation": {
+    "signal": "fresh private per-server shutdown Event; SCM callback only sets signal then requests server exit",
+    "supervisor": "stop checks before worker spawn, during owned supervision and after completion; existing job/tree cleanup",
+    "publication_linearization": "A stop already observed at publish entry rejects the new result. A complete short atomic publication already past that check may finish.",
+    "pending": "unstarted durable jobs remain pending for fresh startup; terminal failed AID requires explicit new-AID retry",
+    "lease": "live processor lease retained through actual application lifespan shutdown, preventing interactive fallback during drain"
+  },
+  "current_source_sha256": {
+    "src/smm_hub/_archive.py": "97880a1040b915a08ba03dc157fead2c15b3887796f605e8bca140a09e2c1107",
+    "src/smm_hub/document_execution.py": "6bccedcebb4a6e4478cc99d67260cb6c6b6c91c3d97a07295ae936c6a076995c",
+    "src/smm_hub/hub_admin.py": "50a0ed016e5a0fae5871de6204d5c7a33be1520f4d399be1553cdd35240e048b",
+    "src/smm_hub/windows_service.py": "4e89152ee6327edafeb16bc2e0f6393dbcf289ffd78d91c3f9a74400ac8f062f",
+    "src/smm_local/document_snapshots.py": "f3214c5671a5c1cde311983cb05cd5fd08cb25e2daf690d091d1daf69ff0bb57",
+    "src/smm_local/document_supervisor.py": "ada1e6a3fe1ba89bf326eff3964b6cde42998386208ca6196eef2ea7b7b57d8b",
+    "src/smm_local/managed_document_uploads.py": "cdd47f980e6898ed442da986b60e0d9ee67d0af02d0128184f825cd49ba61807"
+  },
+  "component_tests": {
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 30.52,
+    "source_binding_count": 309,
+    "source_unchanged": true,
+    "checks": [
+      "pre-stopped no worker and saved-byte retry",
+      "actual in-flight worker tree reclaimed within five seconds",
+      "both untouched pending jobs consumed by fresh app/archive",
+      "processor lease retained during drain",
+      "managed failed ticket cannot implicitly restart old AID",
+      "Hub failed handoff ticket cannot restart old AID",
+      "actual result ready then managed replacement publication cancelled; old complete reference bundle remains readable; explicit saved-CID retry succeeds"
+    ],
+    "bindings_before_sha256": "54441020bd4d076bb2bd71aebe400ca425cb5e855d597b710189fc36bc477835",
+    "junit_sha256": "d1426a91eb86867f9dd90632c1e3fa263976684c8e7b0015c7e924b603706e94"
+  },
+  "limitations": [
+    "Source components are not actual SCM/OCR H1-H5 execution.",
+    "Earlier test failures and actual failed CI runs are retained, never relabelled as passed."
+  ],
+  "wheels": [
+    {
+      "product": "local",
+      "wheel": "smm_local-0.4.0-py3-none-any.whl",
+      "sha256": "e4c73c7d936729aef79850f29766449d3c6c30fd1a785857e2d9ba72119baa24",
+      "shared_and_product_modules_equal_source": true
+    },
+    {
+      "product": "hub",
+      "wheel": "smm_hub-0.4.0-py3-none-any.whl",
+      "sha256": "0360829e4808ef138e08b56f69f4fef1143e327add214d28b2f5a30f9dafa0a1",
+      "shared_and_product_modules_equal_source": true
+    }
+  ]
+}

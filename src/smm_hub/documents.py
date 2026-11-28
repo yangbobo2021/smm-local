@@ -1,6 +1,7 @@
 """Hub-owned document management and device publication, separate from dialogues."""
 
 from __future__ import annotations
+from contextlib import contextmanager
 import json
 from pathlib import Path
 from uuid import uuid4
@@ -26,8 +27,10 @@ from .projects import HubProjects
 class HubDocuments:
     def __init__(self, db):
         self.db = db
+        from .document_storage_windows import configure
+        configure(db)
         self.documents = Documents(db)
-        self.library = ManagedDocuments(db)
+        self.library = ManagedDocuments(db, project_check=self._own_project)
         self.projects = HubProjects(db)
         with db.connect() as c:
             pristine = not c.execute(
@@ -86,6 +89,10 @@ class HubDocuments:
             ),
         )
         self.guard.initialize(pristine)
+        from .processed_documents import ProcessedDocuments
+        self.processed = ProcessedDocuments(self)
+        from ._archive import ManagedDocumentUploads
+        self.managed_uploads = ManagedDocumentUploads(self.library, guard=self.guard, context_check=self._context, project_check=self._own_project)
 
     def context(self):
         with self.db.connect() as c:
@@ -273,33 +280,102 @@ class HubDocuments:
 
     def files(self, source_id=None):
         with control_lock(self.guard.lock):
-            sources = {s["id"]: s for s in self.sources(locked=True)}
-            rows = self.documents.files(source_id)
-            with self.db.connect() as c:
-                metadata = {
-                    r["id"]: dict(r)
-                    for r in c.execute(
-                        "SELECT d.id,d.text_sha256,COALESCE(o.display_name,l.display_name) AS display_name FROM documents d LEFT JOIN hub_document_origins o ON o.document_id=d.id LEFT JOIN document_library l ON l.document_id=d.id"
-                    )
-                }
-            for row in rows:
-                source = sources[row["source_id"]]
-                origin, received = self._origin(row["id"])
-                row.update(
-                    origin=origin,
-                    **self._origin_display(origin, received),
-                    received_at=received,
-                    source_origin=dict(source["origin"]),
-                    project_ids=list(source["project_ids"]),
-                    archive_scope="hub",
-                    **self._snapshot_metadata([row["source_id"]], sources),
-                    **metadata[row["id"]],
+            return self._files(source_id)
+
+    def _files(self, source_id=None):
+        sources = {s["id"]: s for s in self.sources(locked=True)}
+        rows = self.documents.files(source_id)
+        with self.db.connect() as c:
+            metadata = {
+                r["id"]: dict(r)
+                for r in c.execute(
+                    "SELECT d.id,d.text_sha256,COALESCE(o.display_name,l.display_name) AS display_name FROM documents d LEFT JOIN hub_document_origins o ON o.document_id=d.id LEFT JOIN document_library l ON l.document_id=d.id"
                 )
+            }
+        for row in rows:
+            source = sources[row["source_id"]]
+            origin, received = self._origin(row["id"])
+            row.update(
+                origin=origin,
+                **self._origin_display(origin, received),
+                received_at=received,
+                source_origin=dict(source["origin"]),
+                project_ids=list(source["project_ids"]),
+                archive_scope="hub",
+                **self._snapshot_metadata([row["source_id"]], sources),
+                **metadata[row["id"]],
+            )
+        for row in rows:
+            if row.get('original_reference'):
+                published=row.get('published_snapshot') or {}
+                metadata={**row,**{key:published[key] for key in ('processing_version','result_sha256') if key in published}}
+                row['original_reference']=self._wrap_reference(row['original_reference'],metadata,row['origin'])
+        return rows
+
+    def library_list(self, project_id=None):
+        with control_lock(self.guard.lock):
+            rows=self.library.list(project_id)
+            files={(row['id'],row['source_id']):row for row in self._files()}
+            for row in rows:
+                saved=files.get((row['id'],row['source_id']),{})
+                for key in ('original_reference','original_available','original_reason'):
+                    if key in saved:row[key]=saved[key]
             return rows
+
+    def reprocess(self,body):
+        fields=('document_id','capture_id','expected_attempt_id','expected_version','expected_processing_version')
+        if not isinstance(body,dict) or set(body)!={'hub_id','document_epoch',*fields}:raise ValueError('重处理需要当前Hub及资料的完整比较值')
+        for key in fields[:3]:document_identity(body[key],key)
+        for key in fields[3:]:document_integer(body[key],key,minimum=0)
+        with self.guard.hold():
+            self._context(body)
+            with self.db.connect() as c:
+                document=c.execute('SELECT pk FROM documents WHERE id=?',(body['document_id'],)).fetchone()
+                if document is None:raise ValueError('文档不存在')
+                sources=[r[0] for r in c.execute('SELECT source_id FROM document_capture_authorizations WHERE capture_id=? AND active=1',(body['capture_id'],))]
+            if not sources:raise ValueError('当前捕获没有有效采集来源')
+            for sid in sources:self._own_source(sid)
+            token=self.documents.snapshots.retry(*(body[key] for key in fields))
+        # No Hub protection/control lock spans a parser/OCR child process.
+        try:
+            result=self.documents.snapshots.process(token,token['profile']['format'])
+            with self.guard.hold():
+                self._context(body)
+                for sid in sources:self._own_source(sid)
+                return self.documents._publish_reprocess(token,result)
+        except (OSError,ValueError,RuntimeError) as exc:
+            with self.guard.hold():
+                try:
+                    self._context(body)
+                    for sid in sources:self._own_source(sid)
+                except (OSError,ValueError,RuntimeError):pass
+                else:self.documents.snapshots.fail_current(token,exc)
+            raise
+
+    def _refresh_native(self, context, body, source_id):
+        project_id=body.get('project_id');project_key=body.get('project_key')
+        # Freeze the requested source set, without spanning body I/O or workers.
+        with self.guard.hold():
+            self._context(context)
+            if source_id is not None:self._own_source(source_id)
+            if project_id is not None:self._own_project(project_id,project_key)
+            ids=[source_id] if source_id is not None else [s['id'] for s in self.sources(locked=True) if s['origin']['kind']=='hub']
+        def refresh_one(ident):
+            @contextmanager
+            def mutation():
+                with self.guard.hold():
+                    self._context(context);self._own_source(ident)
+                    if project_id is not None:self._own_project(project_id,project_key)
+                    yield
+            return self.documents.refresh(ident,mutation_context=mutation)
+        if source_id is not None:return refresh_one(source_id)
+        return {'sources':[refresh_one(ident) for ident in ids]}
 
     def native(self, action, body=None, source_id=None):
         body = dict(body or {})
         context = {k: body.pop(k, None) for k in ("hub_id", "document_epoch")}
+        if action == "refresh":
+            return self._refresh_native(context,body,source_id)
         with self.guard.hold():
             self._context(context)
             if source_id is not None:
@@ -317,16 +393,6 @@ class HubDocuments:
                 return getattr(self.documents, action)(
                     *([source_id] if action == "set" else []), **body
                 )
-            if action == "refresh":
-                if source_id is not None:
-                    return self.documents.refresh(source_id)
-                return {
-                    "sources": [
-                        self.documents.refresh(s["id"])
-                        for s in self.sources(locked=True)
-                        if s["origin"]["kind"] == "hub"
-                    ]
-                }
             if action == "remove":
                 return self.documents.remove(source_id)
             raise ValueError("未知来源操作")
@@ -350,7 +416,7 @@ class HubDocuments:
                     raise ValueError("项目不匹配")
             try:
                 return getattr(self.library, action)(
-                    *([ident] if ident is not None else []), **body
+                    *([ident] if ident is not None else []), project_key=key, **body
                 )
             except TypeError as exc:
                 raise ValueError("未知或缺失的文档管理字段") from exc
@@ -573,7 +639,10 @@ class HubDocuments:
                 "qualification",
             }
             for item in p["files"]:
-                if not isinstance(item, dict) or set(item) != fields:
+                from .processed_documents import PROCESSED_FIELDS
+                processed_item = isinstance(item, dict) and item.get('schema') == 'processed_documents_v1'
+                required_fields = fields | PROCESSED_FIELDS if processed_item else fields
+                if not isinstance(item, dict) or set(item) != required_fields:
                     raise ValueError("清单字段无效")
                 ident = document_identity(item["document_id"])
                 document_integer(item["qualification"])
@@ -582,13 +651,16 @@ class HubDocuments:
                 if ident in seen:
                     raise ValueError("重复文件成员")
                 seen.add(ident)
-                staged = c.execute(
-                    "SELECT payload FROM hub_document_stages WHERE device_id=? AND archive_id=? AND document_id=? AND version=?",
-                    (p["device_id"], p["archive_id"], ident, item["version"]),
-                ).fetchone()
-                if not staged:
-                    raise ValueError("完整清单含未暂存的正文")
-                value = document_validate(json.loads(staged[0]))
+                if processed_item:
+                    value = self.processed.staged(c, p, item)
+                else:
+                    staged = c.execute(
+                        "SELECT payload FROM hub_document_stages WHERE device_id=? AND archive_id=? AND document_id=? AND version=?",
+                        (p["device_id"], p["archive_id"], ident, item["version"]),
+                    ).fetchone()
+                    if not staged:
+                        raise ValueError("完整清单含未暂存的正文")
+                    value = document_validate(json.loads(staged[0]))
                 if (
                     any(
                         value[k] != item[k]
@@ -613,13 +685,18 @@ class HubDocuments:
                 current = c.execute(
                     "SELECT * FROM documents WHERE id=?", (hub_ident,)
                 ).fetchone()
+                if processed_item and current:
+                    current_state = c.execute('SELECT processing_version,result_sha256 FROM document_snapshot_state WHERE document_pk=?', (current['pk'],)).fetchone()
+                    if current['version'] == item['version'] and current_state:
+                        if current_state['processing_version'] > item['processing_version'] or (current_state['processing_version'] == item['processing_version'] and current_state['result_sha256'] != item['result_sha256']):
+                            raise ValueError('旧处理版本或同V/P异结果不得覆盖当前快照')
                 if current and (
                     current["version"] > item["version"]
                     or (
                         current["version"] == item["version"]
                         and (
                             current["sha256"] != item["sha256"]
-                            or current["text_sha256"] != item["text_sha256"]
+                            or (not processed_item and current["text_sha256"] != item["text_sha256"])
                         )
                     )
                 ):
@@ -703,6 +780,8 @@ class HubDocuments:
                             value["display_name"],
                         ),
                     )
+                    if value.get('schema') == 'processed_documents_v1':
+                        self.processed.install(c, pk, value, p)
                     c.execute("DELETE FROM document_fts WHERE rowid=?", (pk,))
                     c.execute(
                         "INSERT INTO document_fts(rowid,text) VALUES(?,?)",
@@ -778,6 +857,13 @@ class HubDocuments:
             ),
         }
 
+    def _wrap_reference(self, reference, metadata, origin):
+        archive,key=reference_material(self.db)
+        return sign({'format':1,'kind':'hub_document','archive_id':archive,**self.context(),
+            'origin':origin,'reference':reference,
+            **{name:metadata[name] for name in ('version','sha256','text_sha256','text_length')},
+            **{name:metadata[name] for name in ('processing_version','result_sha256') if name in metadata}},key)
+
     def search(self, body):
         self._context(body)
         with self.guard.hold():
@@ -813,7 +899,6 @@ class HubDocuments:
                 options["scope"] = "all"
             result = self.documents.search(**options)
             sources = {s["id"]: s for s in self.sources(locked=True)}
-            archive, key = reference_material(self.db)
             for hit in result["results"]:
                 with self.db.connect() as c:
                     display = c.execute(
@@ -836,21 +921,7 @@ class HubDocuments:
                     }
                     for s in hit["source_ids"]
                 ]
-                hit["reference"] = sign(
-                    {
-                        "format": 1,
-                        "kind": "hub_document",
-                        "archive_id": archive,
-                        **self.context(),
-                        "origin": origin,
-                        "reference": hit["reference"],
-                        "version": hit["version"],
-                        "sha256": hit["sha256"],
-                        "text_sha256": hit["text_sha256"],
-                        "text_length": hit["text_length"],
-                    },
-                    key,
-                )
+                hit['reference']=self._wrap_reference(hit['reference'],hit,origin)
             result["coverage"]["sources"] = [
                 sources[item["id"]] for item in result["coverage"]["sources"]
             ]
@@ -869,7 +940,7 @@ class HubDocuments:
             document_integer(payload.get("text_length"), "引用长度", minimum=0)
             value = self.documents.read(
                 payload.get("reference"),
-                **{k: body[k] for k in ("start", "end") if k in body},
+                **{k: body[k] for k in ("start", "end", "view", "table_id", "row_start", "row_end", "column_start", "column_end") if k in body},
             )
             origin, received = self._origin(value["id"])
             with self.db.connect() as c:
@@ -901,6 +972,15 @@ class HubDocuments:
                 "archive_scope": "hub",
                 **self.context(),
             }
+
+
+    def original(self, body):
+        self.read({**body, 'view': 'original-info'})
+        with self.guard.hold():
+            self._context(body)
+            payload = reference_decode(self.db, body.get('reference'))
+            self._context(payload)
+            return self.documents.original(payload['reference'])
 
     def recovery_status(self):
         with control_lock(self.guard.lock):

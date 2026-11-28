@@ -1,0 +1,85 @@
+{
+  "scope": "Development ordinary CI checkpoint; not E/H/X or full installed-format acceptance",
+  "head": "c13de611316dcaabe6f75c39550604d95a1ac2ed",
+  "run": 45689519175,
+  "url": "https://github.com/yangbobo2021/smm-local/actions/runs/45689519175",
+  "platforms": [
+    {
+      "platform": "macos-15",
+      "passed": 439,
+      "skipped": 56,
+      "failed": 0,
+      "zip_sha256": "2da9207787576a97032ca46f984dcaeeffbc2577bcb06ca6bbaf6703dc0e291a",
+      "xml_sha256": "f97fcc1bf95f6bd4cf7ed5fab2a1d365b12ea9b31f6a89d1b792c95751dfd715",
+      "official_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    {
+      "platform": "windows-2022",
+      "passed": 416,
+      "skipped": 55,
+      "failed": 24,
+      "zip_sha256": "a50678bb35d9c1d32bbcfc719b08d5a336b566c944b5b475b2e1338b98e8db30",
+      "xml_sha256": "e1a4965e5d8fa73daa367dc3d8052793569271a895d50ceac2dc0200acc4da39",
+      "official_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    {
+      "platform": "ubuntu-24.04",
+      "passed": 439,
+      "skipped": 56,
+      "failed": 0,
+      "zip_sha256": "544c0888b94990e4bd17533ae4fc936930c83e376a8aba4468962393fd57bc16",
+      "xml_sha256": "f7aa6cc3c6513bab9d0b6ab8f33391f04780ff8c2dcdd924ccfa319b54ac51f4",
+      "official_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  ],
+  "windows": {
+    "status": "completed_failure",
+    "passed": 416,
+    "skipped": 55,
+    "failed": 24,
+    "retained_observer_gap": true,
+    "failed_test_identity_set_unchanged_from": "5126cd1328e2f6ff46d4d3e56ea49e40cc308bde",
+    "classification": {
+      "socketpair_observer": 13,
+      "launcher_vs_serving_pid_probe": 8,
+      "normcase_audit_oracle": 1,
+      "dangling_namespace_oracle": 1,
+      "mcp_initialize_connection_closed_cause_unconfirmed": 1
+    },
+    "all_actual_failed_cases": [
+      "tests.test_document_formats_empty::test_query_observer_controls",
+      "tests.test_document_formats_empty::test_empty_source_files_have_exact_originals_without_text_hits",
+      "tests.test_document_formats_managed_empty::test_each_managed_empty_document_has_files_and_library_original_refs[local]",
+      "tests.test_document_formats_mcp::test_stdio_mcp_document_views_preserve_snapshot_and_source_locations",
+      "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[docx]",
+      "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[xlsx]",
+      "tests.test_document_formats_multiple_hits::test_multiple_matches_keep_one_truthful_default_window[pdf]",
+      "tests.test_document_formats_multiple_hits::test_nested_table_hit_does_not_borrow_parent_coordinates",
+      "tests.test_document_formats_sync::test_sync_observer_known_positive_and_negative_controls",
+      "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[docx-deep_word]",
+      "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[xlsx-deep_xlsx]",
+      "tests.test_document_formats_table_context::test_deep_table_hit_context_and_default_window[pdf-deep_pdf]",
+      "tests.test_document_formats_table_context::test_combined_window_header_cell_and_unicode_quotas",
+      "tests.test_document_formats_table_preview::test_search_table_header_summaries_have_exact_shared_budget",
+      "tests.test_document_formats_update_paths::test_external_tree_oracle_detects_nonfile_members[dangling-link]",
+      "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+      "tests.test_document_formats_update_replay::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+      "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[local]",
+      "tests.test_document_formats_update_replay_c1::test_committed_update_can_reopen_own_identity_but_not_supersede_newer_state[hub]",
+      "tests.test_document_formats_upload_restart::test_restart_source_audit_has_actual_positive_and_negative_controls",
+      "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[local]",
+      "tests.test_document_formats_upload_restart::test_isolated_http_server_factory_and_cleanup[hub]",
+      "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[local]",
+      "tests.test_document_formats_upload_restart::test_real_creator_restart_resumes_chunks_and_pending_captures[hub]"
+    ],
+    "note": "No failure reclassified as passed. Test identity sets compared from original JUnit; same names do not prove an unobserved common root cause."
+  },
+  "limitations": [
+    "Heavy local assets, real browser, minimum-installed and controlled content-worker tests are skipped without explicit fixture assets; ordinary CI passes do not fill those acceptance gaps.",
+    "Restore-manifest tests are local uncommitted work after this exact checkpoint."
+  ],
+  "redaction": "Synthetic inputs only. No tokens or private evidence published."
+}

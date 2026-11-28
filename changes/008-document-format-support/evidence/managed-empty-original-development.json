@@ -1,0 +1,40 @@
+{
+  "acceptance": "AT-SMM-008",
+  "case_id": "TC-008-managed-empty-original",
+  "scope": "macOS source-checkout HTTP development: blank managed DOCX/XLSX/native PDF originals from Local/Hub files and project libraries",
+  "red": "red-managed-empty-original-v3",
+  "red_review": "review-managed-empty-red-v1",
+  "green": "green-managed-empty-original-v1",
+  "green_sha256": "d80161f3321876955a2a4aa91348f0a66e735486ffe781f678916e89e0c7f6fd",
+  "green_review": "review-managed-empty-green-v1",
+  "reviewer": "/root/r008_managed_empty_green_review_v1",
+  "result": {
+    "main": "2 passed in 12.17s",
+    "regression": "62 passed in 280.08s",
+    "independent_review": "passed",
+    "distinct_originals": 12,
+    "actual_downloads": 24
+  },
+  "checks": [
+    "Two legitimate empty originals per format per creator, ordinary/global projects, real empty-success and V/P1, zero canonical text",
+    "No source reopening after managed copies deleted, no parser/worker/network attempts during query, full document business state unchanged",
+    "Files and each project library separately provide complete/unique current document sets and readable original refs",
+    "Every original-info and actual download preserves correct persisted device/Hub plus archive identity, source, V/P and independent format/raw SHA/length",
+    "Hub files/library use the same existing Hub-bound outer envelope as search, retaining context and qualification validation"
+  ],
+  "implementation": [
+    "Local files and library share original_fields on one database snapshot",
+    "Hub search/files share original reference envelope signing; Hub library copies the matching Hub-bound file ref under the existing control lock",
+    "Read validators, parser responsibilities, old required list fields and uncaptured legacy original behavior preserved"
+  ],
+  "history": [
+    "v1 test omitted existing empty-success terminal, polled until harness timeout/evidence budget; blocked attempt retained and settled",
+    "v2 had wrong expected Local device identity in an archive connected to synthetic Hub; corrected to independently persisted device ID before valid v3 red",
+    "No test changes between valid red and green"
+  ],
+  "not_covered": [
+    "Legacy managed text originals and full external-path/lifecycle matrix",
+    "All platform, service, browser, CLI/MCP blank cases or E/H/X",
+    "Maintainer-retained Windows probe and MCP initialization gaps"
+  ]
+}

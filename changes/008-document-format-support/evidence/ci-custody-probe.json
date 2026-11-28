@@ -1,0 +1,79 @@
+{
+  "scope": "008 CI evidence custody small sample only; no SMM E/H/X or full R008 pass",
+  "producer_commit": "69ec018ca875cc69fe36706cfe92bcc842ba3067",
+  "run_url": "https://github.com/yangbobo2021/smm-local/actions/runs/45469026571",
+  "job_id": 138711602080,
+  "artifact_id": 14955812699,
+  "artifact_sha256": "ae78f53a1993b7054441d5b40440a994af596e6ed4dd570f2b161ce664f439e6",
+  "expires_at": "2026-12-24T19:20:46Z",
+  "manifest_sha256": "6ccc7c9d1d86d7e4cbce47e144f12521f30a84d0daf969ad7194d0a5682828e4",
+  "public_key_sha256": "9b46fda78d5e0dd3f2061a7c9aa38742d326d26134daf0b84cfadc274c6796e9",
+  "key_verified_before_ci": true,
+  "opened": {
+    "cleanup.json": {
+      "reader": "JSON",
+      "root_type": "dict"
+    },
+    "downloads/alpha.docx": {
+      "reader": "zip/XML/trace-JSON",
+      "members": 8,
+      "traces": 0
+    },
+    "downloads/beta.pdf": {
+      "reader": "PDFium",
+      "pages": 2
+    },
+    "index.html": {
+      "reader": "binary",
+      "bytes": 220
+    },
+    "observations.json": {
+      "reader": "JSON",
+      "root_type": "dict"
+    },
+    "originals/alpha.docx": {
+      "reader": "zip/XML/trace-JSON",
+      "members": 8,
+      "traces": 0
+    },
+    "originals/beta.pdf": {
+      "reader": "PDFium",
+      "pages": 2
+    },
+    "trace.zip": {
+      "reader": "zip/XML/trace-JSON",
+      "members": 9,
+      "traces": 1
+    },
+    "visible-probe.png": {
+      "reader": "Pillow",
+      "size": [
+        1280,
+        720
+      ]
+    }
+  },
+  "raw_receipts": {
+    "recovery": "af12637a415b8ddf82821d15d39fa141485cc3765b64202c736520284e731a63",
+    "artifact_metadata": "580662c760dbf2197a3d3b3c714f44373b200ee9d34890c5de068067536138d9",
+    "job": "466bf552b00281c192d3084cd7c5eeed4e98d4a4a5606a8178fe58e8db3061e5",
+    "execution": "8b2a7255ac8d15947237fde6aac39cba962ffc7833208c51a39e0881d4d10e43",
+    "execution_review": "3c4f5101812b4303a3da219e000cd5d07a927871524aa28afa1dfbbdf3b77a09"
+  },
+  "native": {
+    "acceptance": "AT-SMM-008",
+    "scene": "SC12",
+    "case": "TC-008-evidence-recovery",
+    "execution": "execution-evidence-recovery-v1",
+    "review": "review-evidence-custody-execution-v1",
+    "status": "passed only for allocated evidence-recovery check",
+    "subtests": 14,
+    "artifacts": 139
+  },
+  "redaction": "Public summary omits controller private key, private task paths, raw browser trace/database and raw command logs. Original files and full raw receipts are retained privately; public content is a selected structured projection, not a replacement for raw evidence.",
+  "outstanding": [
+    "Formal SMM E/H/X/C1 application results and their raw artifacts",
+    "Full operating-system identity and service cleanup matrix",
+    "Final candidate module/wheel installation fingerprints"
+  ]
+}

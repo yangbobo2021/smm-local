@@ -55,14 +55,14 @@
     <div class="card" id="reader-card" hidden><h2>对话原文</h2><div id="reader"></div></div>
   </section>
   <section id="documents">
-    <div class="card"><h2>项目文档</h2><p>检索明确采集的本机与 Hub 文档。文档与对话共用项目及双向直接一层关联；项目文档同步默认关闭，独立于对话选择。支持严格 UTF-8 的 .md、.markdown、.txt；Word、Excel、PDF、图片尚不支持。</p><p class="muted">只有明确“刷新”读取外部来源；网页上传/更新明确保存并采集 SMM 副本。保存路径配置、搜索、读取及重启不会刷新；源文件不改写。内容只去 BOM 并把 CRLF/CR 转 LF，其他字符保留。每文件 2MiB，每来源 1000 候选及 16MiB。个别文件错误为 partial，来源枚举/预算错误为 failed。</p></div>
+    <div class="card"><h2>项目文档</h2><p>检索明确采集的本机与 Hub 文档。文档与对话共用项目及双向直接一层关联；项目文档同步默认关闭，独立于对话选择。支持严格 UTF-8 的 .md、.markdown、.txt，以及 Word .docx、Excel .xlsx、PDF .pdf；图片暂不支持。新格式由项目创建端处理，本机同步到 Hub 时同时发送原件与处理结果。</p><p class="muted">只有明确“刷新”读取外部来源；网页上传/更新明确保存并采集 SMM 副本。保存路径配置、搜索、读取及重启不会刷新；源文件不改写。旧文本内容只去 BOM 并把 CRLF/CR 转 LF，其他字符保留。旧文本每份2MiB、每来源累计16MiB；新格式原件每份20MiB、文本8MiB及完整结果16MiB，每来源另计原件与结果各128MiB；每来源总候选仍1000。个别文件错误为 partial，来源枚举/预算错误为 failed。</p></div>
     <div class="card"><h3>创建普通本机项目</h3><div class="row"><label for="doc-project-name">项目名称</label><input id="doc-project-name" type="text" placeholder="例如：产品资料"><button id="doc-project-create" class="secondary">创建项目</button></div><p class="muted">项目可同名，以 #ID 区分。需要全局项目时，在“项目”页创建；全局与普通项目同级，不自动加入其他项目。</p></div>
-    <div class="card"><h3>上传到本机项目文档库</h3><p class="muted">本机创建的项目只在本机管理；Hub 上的副本只读。上传保存到 SMM 专用副本库，不改你的原文件。</p><div class="row"><label for="doc-library-project">本机项目</label><select id="doc-library-project"></select><label for="doc-upload-files">选择文档</label><input id="doc-upload-files" type="file" multiple accept=".md,.markdown,.txt"></div><ul id="doc-upload-results" aria-live="polite"></ul><div id="doc-upload-drop" tabindex="0" role="group" aria-label="拖入本机文档" style="border:2px dashed #9bc9c8;padding:20px">将文档拖到这里上传到所选本机项目；或使用上面的文件选择器。</div><button id="doc-library-reload" class="secondary">查看项目文档库</button><div id="doc-library-list"></div></div>
+    <div class="card"><h3>上传到本机项目文档库</h3><p class="muted">本机创建的项目只在本机管理；Hub 上的副本只读。上传保存到 SMM 专用副本库，不改你的原文件。</p><div class="row"><label for="doc-library-project">本机项目</label><select id="doc-library-project"></select><label for="doc-upload-files">选择文档</label><input id="doc-upload-files" type="file" multiple accept=".md,.markdown,.txt,.docx,.xlsx,.pdf"></div><ul id="doc-upload-results" aria-live="polite"></ul><div id="doc-upload-drop" tabindex="0" role="group" aria-label="拖入本机文档" style="border:2px dashed #9bc9c8;padding:20px">将文档拖到这里上传到所选本机项目；或使用上面的文件选择器。</div><button id="doc-library-reload" class="secondary">查看项目文档库</button><div id="doc-library-list"></div></div>
     <div class="card"><h3>项目文档同步选择</h3><p class="muted">允许后同步该项目已采集及未来明确纳入的文档。暂停保留 Hub 快照；发现删除/失效仍撤回。共享文件经其他获准项目更新时，暂停项目的连续资格仍可能读到新文件版本。</p><button id="doc-sync-status" class="secondary">重新查看选择</button><button id="doc-sync-now" class="primary">重试文档同步</button><div id="doc-sync-projects"></div></div>
     <div class="card"><h3 id="doc-config-title">添加文档来源</h3><form id="doc-config"><div class="row"><label for="doc-path">本机绝对路径</label><input id="doc-path" type="text" placeholder="SMM 服务所在电脑的实际文件或目录路径" required></div><div class="row"><label for="doc-projects">绑定本机项目</label><select id="doc-projects" multiple size="4" aria-label="绑定本机项目"></select><span class="muted">可多选；不选仅参加全部文档查询。ID 也可在“项目”页取得。</span></div><div class="row"><label for="doc-exclude">排除模式</label><input id="doc-exclude" type="text" placeholder="每行一个相对 POSIX 模式（也可用分号分隔）"></div><p class="muted">* 匹配单段，? 匹配单字符，** 匹配零或多层目录，尾 / 排除目录；禁止绝对路径、.. 和反斜杠。默认跳过隐藏、版本库与构建目录；不跟随符号链接/junction。可另行明确添加其中的实际文件或子目录。</p><div class="row"><label><input id="doc-recursive" type="checkbox" checked> 递归子目录</label><button id="doc-save" class="primary">保存来源（尚未刷新）</button><button id="doc-cancel" type="button" class="secondary" hidden>取消编辑</button></div><p class="muted">修改来源会完整替换项目、排除与递归配置，使其旧材料立即退出检索/读取并回到 pending；根路径不能更改。按新配置刷新后生效。</p></form></div>
     <div class="card"><h3>来源与覆盖</h3><button id="doc-refresh-all" class="primary">刷新全部文档来源</button><button id="doc-reload" class="secondary">查看最新状态</button><div id="doc-source-list" class="source-table"></div><div id="doc-file-list"></div></div>
     <div class="card"><h3>检索采集文档</h3><p id="doc-hub-management" class="muted" hidden>Hub创建的项目文档只在创建端管理。<a id="doc-hub-manage" target="_blank" rel="noopener noreferrer">打开Hub管理文档</a>；请向Hub维护者取得当前凭据文件，打开后在Hub页面明确选择。本机不会通过链接传递凭据。</p><form id="doc-search-form"><div class="row"><input id="doc-query" type="search" placeholder="查询正文中的中英文词" aria-label="文档查询词" required><button id="doc-search-submit" class="primary">搜索文档</button></div><div class="row"><label for="doc-archive-mode">档案范围</label><select id="doc-archive-mode"><option value="combined">本机与 Hub</option><option value="local">仅本机</option></select><label for="doc-root-kind">项目端</label><select id="doc-root-kind"><option value="local">本机项目</option><option value="hub">Hub 项目（只读）</option></select><select id="doc-hub-project" aria-label="文档Hub项目根"></select><label for="doc-scope">项目范围</label><select id="doc-scope"><option value="all">全部文档</option><option value="project">指定项目及直接一层关联</option></select><select id="doc-search-project" aria-label="文档检索项目"></select><label for="doc-limit">数量</label><select id="doc-limit"><option>5</option><option>10</option><option>20</option><option>50</option></select></div></form><p id="doc-coverage" class="muted"></p><div id="doc-results"></div></div>
-    <div class="card" id="doc-reader" hidden><h3>文档原文 · 采集版本</h3><p id="doc-reader-meta" class="paths"></p><pre id="doc-reader-text"></pre><div class="row"><label for="doc-read-start">起始码点</label><input id="doc-read-start" type="number" min="0"><label for="doc-read-end">结束码点</label><input id="doc-read-end" type="number" min="1"><button id="doc-read-range" class="secondary">按范围读取</button></div><p class="muted">范围针对整个采集文本，Unicode 码点从 0 开始，左含右不含；不是字节或 UTF-16，一次最多 16000 字符。内容/配置/连续资格失效后旧引用拒绝，须重新搜索；首版不读历史版本。其他重叠有效来源可保留当前文件级快照，移除最后来源退出检索/读取。</p></div>
+    <div class="card" id="doc-reader" hidden><h3>文档 · 保存的采集快照</h3><p id="doc-reader-meta" class="paths"></p><pre id="doc-reader-text"></pre><div class="row"><label for="doc-read-start">起始码点</label><input id="doc-read-start" type="number" min="0"><label for="doc-read-end">结束码点</label><input id="doc-read-end" type="number" min="1"><button id="doc-read-range" class="secondary">按范围读取</button></div><p class="muted">范围针对整个采集文本，Unicode 码点从 0 开始，左含右不含；不是字节或 UTF-16，一次最多 16000 字符。内容/配置/连续资格失效后旧引用拒绝，须重新搜索；首版不读历史版本。其他重叠有效来源可保留当前文件级快照，移除最后来源退出检索/读取。</p></div>
   </section>
   <section id="settings">
     <div class="card"><h2>对话上传</h2><p id="upload-target" class="muted"></p><p id="upload-state" role="status"></p><div class="row"><label for="upload-mode">上传规则</label><select id="upload-mode"><option value="">待选择，不上传正文</option><option value="all">全部项目</option><option value="only">仅指定项目</option><option value="except">排除指定项目</option><option value="none">全部不上传</option></select></div><fieldset id="upload-projects"><legend>项目选择（仅指定 / 排除指定）</legend></fieldset><p class="muted">仅指定的空名单不上传；排除指定的空名单全部上传。新项目按所选规则处理。首版上传仅支持 Codex、Claude Code，其他已归档来源仍参与本机检索。</p><button class="primary" id="upload-save">保存上传规则</button><button class="secondary" id="upload-diff">查看与 Hub 的规则差异</button><div id="upload-difference" hidden><h3>规则差异</h3><p id="upload-difference-text"></p><button class="secondary" id="upload-use-hub">采用 Hub 当前规则</button><button class="secondary" id="upload-use-local">重新提交上面所示的本机规则</button></div><p class="muted">保存与 Hub 确认分别显示。停止仅影响后续上传，旧副本继续可检索和读原文；重新允许会补齐全部未确认历史。</p></div>
@@ -138,7 +138,7 @@
     $('doc-source-list').innerHTML=documentSources.length?`<table><thead><tr><th>来源与项目</th><th>状态与最近刷新</th><th>配置</th><th>操作</th></tr></thead><tbody>${documentSources.map(s=>`<tr><td><code>${esc(s.id)}</code><div class="paths">${esc(s.path)}</div><small>项目 ${s.project_ids.map(p=>'#'+p).join('、')||'未绑定，仅全部查询'}</small></td><td><strong>${esc(s.status)}</strong><div>成功 ${s.counts.ready||0} / 失败 ${s.counts.failed||0} / 忽略 ${s.counts.ignored_entries||0}</div><small>${esc(s.finished_at||'尚未刷新')}</small>${s.error?`<p class="error">${esc(s.error)}</p>`:''}</td><td>配置版本 ${s.revision} · ${s.recursive?'递归':'仅根目录'}<div>${s.exclude.map(esc).join('<br>')||'无自定义排除'}</div></td><td><button class="secondary" data-doc-refresh="${s.id}">刷新</button> <button class="secondary" data-doc-edit="${s.id}">编辑配置</button> <button class="secondary" data-doc-files="${s.id}">文件状态</button> <button class="secondary" data-doc-remove="${s.id}">移除来源</button></td></tr>`).join('')}</tbody></table>`:'尚无文档来源。先明确添加本机文件或目录，再刷新。';
     $('doc-source-list').querySelectorAll('[data-doc-refresh]').forEach(b=>b.onclick=()=>refreshDocumentSource(b.dataset.docRefresh,b));
     $('doc-source-list').querySelectorAll('[data-doc-edit]').forEach(b=>b.onclick=()=>{const s=documentSources.find(s=>s.id===b.dataset.docEdit);documentEditing=s.id;$('doc-config-title').textContent='完整替换来源配置 · '+s.id;$('doc-path').value=s.path;$('doc-path').readOnly=true;[...$('doc-projects').options].forEach(o=>o.selected=s.project_ids.includes(Number(o.value)));$('doc-exclude').value=s.exclude.join(';');$('doc-recursive').checked=s.recursive;$('doc-cancel').hidden=false;$('doc-config').scrollIntoView({behavior:'smooth'});});
-    $('doc-source-list').querySelectorAll('[data-doc-files]').forEach(b=>b.onclick=async()=>{try{const files=await request('/api/documents/files?source_id='+encodeURIComponent(b.dataset.docFiles));$('doc-file-list').innerHTML='<h3>文件状态（不含正文）</h3>'+files.map(f=>`<p class="paths">${esc(f.path)} · ${esc(f.status)} · 版本 ${f.version}${f.error?`<br><span class="error">${esc(f.error)}</span>`:''}</p>`).join('');}catch(e){notice(e.message,true)}});
+    $('doc-source-list').querySelectorAll('[data-doc-files]').forEach(b=>b.onclick=async()=>{try{const files=await request('/api/documents/files?source_id='+encodeURIComponent(b.dataset.docFiles));const box=$('doc-file-list');box.replaceChildren();const heading=document.createElement('h3');heading.textContent='文件状态（不含正文）';box.append(heading);for(const file of files){const row=document.createElement('div');row.className='result';const path=document.createElement('h4');path.className='paths';path.textContent=file.path;row.append(path);const status=document.createElement('p');status.textContent=file.status+' · 版本 '+file.version;row.append(status);if(file.error){const error=document.createElement('p');error.className='error';error.textContent=file.error;row.append(error);}nativeDetails(row,file);box.append(row);}}catch(e){notice(e.message,true)}});
     $('doc-source-list').querySelectorAll('[data-doc-remove]').forEach(b=>b.onclick=async()=>{const s=documentSources.find(s=>s.id===b.dataset.docRemove);if(!confirm(`移除来源 ${s.path}？它独占的材料将立即退出检索和原文读取；其他有效重叠来源保留当前版本。原文件不会删除。`))return;try{await request('/api/documents/sources/'+s.id,{method:'DELETE'});if(documentEditing===s.id)clearDocumentForm();await refreshDocuments();notice('文档来源已移除，原文件未改变');}catch(e){notice(e.message,true)}});
   }
   async function refreshDocumentSource(id,button){
@@ -152,13 +152,128 @@
   $('doc-refresh-all').onclick=()=>refreshDocumentSource(null,$('doc-refresh-all'));
   $('doc-reload').onclick=()=>refreshDocuments().catch(e=>notice(e.message,true));
   function documentProvenance(d,reading=false){const o=d.origin||{},kind=d.origin_kind==='hub'?'Hub自有':d.origin_kind==='device'?'设备 '+(d.device_name||o.device_id||'未知'):'本机采集';const side=({local:'本机',hub:'Hub',combined:'本机与Hub'})[d.archive_scope]||d.archive_scope||'未知';return `${reading?'实际读取端':'命中端'}：${side} · ${kind} · 原设备 ${o.device_id||'未知'} · 档案 ${o.archive_id||'未知'} · 文档 ${o.document_id||d.id} · 项目 ${(d.project_ids||[]).map(id=>'#'+id).join('、')||'见查询范围'} · ${d.received_at?'Hub接收 '+d.received_at:'原端采集 '+(d.captured_at||'未知')} · ${d.snapshot_kind||'采集版本'}${(d.sync_states||[]).length?' · 同步资格 '+d.sync_states.map(s=>`${s.source_id}：${({paused:'暂停保留',allowed:'允许同步',native:'Hub自有',conflict:'需处理冲突'})[s.state]||s.state}`).join('；'):''}`;}
-  async function readDocument(index,range){
-    const reference=index===null?documentReference:documentResults[index].reference;
-    try{const d=await request('/api/documents/read',{method:'POST',body:JSON.stringify({reference,...range})});documentReference=reference;$('doc-reader').hidden=false;$('doc-reader-text').textContent=d.text;$('doc-reader-meta').textContent=`${documentProvenance(d,true)} · ${d.display_name||d.path} · ${d.path} · 采集版本 ${d.version} · ${d.captured_at} · 原字节 SHA-256 ${d.sha256} · 字符 [${d.start},${d.end}) · 行 ${d.start_line}–${d.end_line}`;$('doc-read-start').value=d.start;$('doc-read-end').value=d.end;notice('文档采集原文已读取');}
-    catch(e){$('doc-reader').hidden=true;documentReference=null;notice(e.message,true);}
+  // Snapshot values are rendered as text; document content never becomes markup.
+  function documentReader(prefix, options){
+    const make=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
+    const host=$(options.host),add=(tag,id,text)=>{const e=make(tag,text);if(id)e.id=prefix+'-'+id;return e;};
+    const details=add('details','extraction-details'),summary=make('summary','提取覆盖与当前文字位置');
+    const coverage=add('pre','read-coverage'),locations=add('pre','read-locations');
+    details.append(summary,make('p','保存的提取覆盖'),coverage,make('p','当前文字范围对应的源位置'),locations);host.append(details);
+    const tables=add('div','tables'),pick=add('select','table-select'),defaultButton=make('button','读取命中默认窗口');
+    pick.setAttribute('aria-label','选择文档表格');defaultButton.id=prefix+'-table-default';defaultButton.type='button';
+    const chooser=make('div');chooser.className='row';chooser.append(make('label','表格'),pick,defaultButton);tables.append(make('h3','表格视图'),chooser);
+    const range=make('div');range.className='row';const inputs={};
+    for(const [key,label] of [['row-start','起始行'],['row-end','结束行（包含）'],['column-start','起始列'],['column-end','结束列（包含）']]){
+      const input=add('input','table-'+key);input.type='number';input.min='1';const caption=make('label',label);caption.htmlFor=input.id;inputs[key]=input;range.append(caption,input);
+    }
+    const rangeButton=add('button','table-read-range','读取指定表格范围');rangeButton.type='button';range.append(rangeButton);tables.append(range);
+    tables.append(make('p','行列从 1 开始，结束值包含在内。窗口连同必要表头最多 1000 格、16000 字符。请缩小范围或核对采集原件。'));
+    const tableMeta=add('p','table-meta'),tableLocation=add('pre','table-location');
+    const scroller=make('div');scroller.style.overflow='auto';const grid=make('table'),header=add('thead','table-header'),body=add('tbody','table-cells');grid.append(header,body);scroller.append(grid);
+    const cellLabel=add('p','cell-label','点击单元格查看源位置和属性'),cellDetails=add('pre','cell-details');
+    tables.append(tableMeta,tableLocation,scroller,cellLabel,cellDetails);host.append(tables);
+    const original=make('div'),infoButton=add('button','original-info-load','查看采集原件信息'),downloadButton=add('button','original-download','下载采集原件'),infoPanel=add('pre','original-info');
+    infoButton.type=downloadButton.type='button';downloadButton.disabled=true;original.append(make('h3','采集原件'),infoButton,downloadButton,infoPanel);host.append(original);
+    let reference=null,current=null,hint=null,generation=0,textOrder=0,tableOrder=0,infoOrder=0;
+    const json=(element,value)=>{element.textContent=JSON.stringify(value??null,null,2);};
+    const action=f=>async()=>{try{await f()}catch(error){notice(error.message,true)}};
+    const locationText=value=>JSON.stringify(value||{});
+    const method=value=>{
+      if(value?.location?.method)return value.location.method;
+      const part=value?.location?.part;
+      const units=current?.coverage?.units||[];
+      return [...new Set(units.filter(u=>!part||u.part===part).map(u=>u.method).filter(Boolean))].join(' / ')||'未记录';
+    };
+    function inspect(cell){
+      const fields=['row','column','row_span','column_span','type','location','sheet_state','row_hidden','column_hidden'];
+      json(cellDetails,Object.fromEntries(fields.filter(k=>k in cell).map(k=>[k,cell[k]])));
+      cellLabel.textContent='单元格 '+cell.row+' 行 '+cell.column+' 列 · '+method({location:cell.location})+
+        (cell.sheet_state&&cell.sheet_state!=='visible'?' · 隐藏工作表':'')+(cell.row_hidden?' · 隐藏行':'')+(cell.column_hidden?' · 隐藏列':'');
+    }
+    function drawCells(parent,cells,window,headerRow=false){
+      parent.replaceChildren();
+      const rows=new Map();
+      for(const cell of cells){if(!rows.has(cell.row))rows.set(cell.row,[]);rows.get(cell.row).push(cell);}
+      for(const [number,values] of [...rows].sort((a,b)=>a[0]-b[0])){
+        const tr=make('tr'),axis=make('th',String(number));axis.scope='row';tr.append(axis);let column=window.column_start;
+        for(const cell of values.sort((a,b)=>a.column-b.column)){
+          if(cell.column>column){const gap=make('td');gap.colSpan=cell.column-column;tr.append(gap);}
+          const td=make(headerRow?'th':'td');td.dataset.row=cell.row;td.dataset.column=cell.column;td.rowSpan=cell.row_span;td.colSpan=cell.column_span;
+          const value=make('button',cell.text??'');value.type='button';value.dataset.cellText='';value.className='secondary';value.onclick=()=>inspect(cell);td.append(value);tr.append(td);column=cell.column+cell.column_span;
+        }
+        parent.append(tr);
+      }
+    }
+    function renderTable(value){
+      const w=value.window,role=value.header_context?.role;
+      tableMeta.textContent='显示表格 '+value.table_id+' · 共 '+value.rows+' 行 '+value.columns+' 列 · '+method(value)+' · '+(role==='explicit_header'?'显式表头':role==='first_content_row'?'首内容行':'无表头')+' · 当前 '+w.row_start+'–'+(w.row_end-1)+' 行 / '+w.column_start+'–'+(w.column_end-1)+' 列';
+      json(tableLocation,value.location);
+      for(const [name,key,adjust] of [['row-start','row_start',0],['row-end','row_end',-1],['column-start','column_start',0],['column-end','column_end',-1]])inputs[name].value=w[key]+adjust;
+      drawCells(header,value.header_context?.cells||[],w,true);drawCells(body,value.cells,w);
+      cellDetails.textContent='';cellLabel.textContent='点击单元格查看源位置和属性';
+    }
+    async function table(explicit){
+      if(!reference||!pick.value)throw Error('请先读取文档并选择表格');
+      const ref=reference,id=pick.value,epoch=generation,order=++tableOrder;
+      const bounds={};
+      if(explicit)for(const [field,key,adjust] of [['row-start','row_start',0],['row-end','row_end',1],['column-start','column_start',0],['column-end','column_end',1]]){
+        const value=inputs[field].valueAsNumber;if(!Number.isSafeInteger(value)||value<1)throw Error('行列必须是从 1 开始的整数');bounds[key]=value+adjust;
+      }
+      const value=await options.read({reference:ref,view:'table',table_id:id,...bounds});
+      if(epoch!==generation||order!==tableOrder)return;
+      renderTable(value);notice('已读取保存的表格窗口');
+    }
+    defaultButton.onclick=action(()=>table(false));rangeButton.onclick=action(()=>table(true));
+    async function info(){
+      if(!reference)throw Error('请先读取文档');
+      const ref=reference,epoch=generation,order=++infoOrder;
+      const value=await options.read({reference:ref,view:'original-info'});
+      if(epoch!==generation||order!==infoOrder)return;
+      downloadButton.disabled=!value.available;
+      const publicInfo=Object.fromEntries(['id','origin','version','processing_version','format','available','reason','bytes','sha256','archive_scope','source_ids'].filter(k=>k in value).map(k=>[k,value[k]]));
+      infoPanel.textContent=value.available?'已保存采集原件\n'+JSON.stringify(publicInfo,null,2):'未保存采集原件 · '+(value.reason||'不可用')+'\n'+JSON.stringify(publicInfo,null,2);
+      return value;
+    }
+    infoButton.onclick=action(info);downloadButton.onclick=action(()=>options.download(reference,current?.display_name));
+    function clear(){
+      generation++;reference=null;current=null;hint=null;host.hidden=true;downloadButton.disabled=true;infoPanel.textContent='';pick.replaceChildren();body.replaceChildren();header.replaceChildren();
+    }
+    async function open(ref,range={},context){
+      const fresh=ref!==reference;
+      if(fresh){clear();reference=ref;hint=context?.table_id||null;}
+      const epoch=generation,order=++textOrder;
+      const value=await options.read({reference:ref,...range});
+      if(epoch!==generation||order!==textOrder)return;
+      current=value;host.hidden=false;$(options.text).textContent=value.text;
+      const extraction=(value.coverage?.units||[]).some(u=>u.method==='ocr')?'提取文本（含 OCR 识别文字）':'提取文本';
+      $(options.meta).textContent=options.provenance(value)+' · '+(value.display_name||'文档 '+value.id)+' · 格式 '+String(value.format||'text').toUpperCase()+' · 版本 '+value.version+' · 处理版本 '+(value.processing_version??'未记录')+' · '+(value.processing_status||'已采集')+' · '+extraction+' · 原字节 SHA-256 '+value.sha256+' · 字符 ['+value.start+','+value.end+') · 行 '+value.start_line+'–'+value.end_line;
+      $(prefix+'-read-start').value=value.start;$(prefix+'-read-end').value=value.end;
+      json(coverage,value.coverage||{});json(locations,(value.locations||[]).filter(l=>l.start<value.end&&l.end>value.start));
+      const selected=fresh?hint:pick.value;pick.replaceChildren();
+      for(const table of value.tables||[]){const option=make('option',table.table_id+' · '+locationText(table.location));option.value=table.table_id;pick.append(option);}
+      if([...pick.options].some(o=>o.value===selected))pick.value=selected;
+      tables.hidden=!pick.options.length;
+      if(fresh){body.replaceChildren();header.replaceChildren();tableMeta.textContent='请选择读取命中默认窗口，或指定行列范围。';tableLocation.textContent='';cellDetails.textContent='';downloadButton.disabled=!value.original_available;}
+      notice('已读取保存的'+extraction);
+    }
+    $(prefix+'-read-range').onclick=action(()=>{if(!reference)throw Error('请先读取文档');const start=$(prefix+'-read-start').valueAsNumber,end=$(prefix+'-read-end').valueAsNumber;if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end))throw Error('字符范围必须为整数码点');return open(reference,{start,end});});
+    return {open,clear};
   }
-  $('doc-read-range').onclick=()=>{if(documentReference)readDocument(null,{start:Number($('doc-read-start').value),end:Number($('doc-read-end').value)});};
-  $('doc-search-form').onsubmit=async e=>{e.preventDefault();try{const scope=$('doc-scope').value;const root=scope==='project'?($('doc-root-kind').value==='hub'?{hub_project_id:Number($('doc-hub-project').value)}:{project_id:Number($('doc-search-project').value)}):{};const d=await request('/api/documents/search',{method:'POST',body:JSON.stringify({query:$('doc-query').value,scope,...root,local:$('doc-archive-mode').value==='local',limit:Number($('doc-limit').value)})});documentResults=d.results;$('doc-coverage').textContent=`本机 ${({complete:'已检索',partial:'部分覆盖'})[d.coverage.local]||d.coverage.local}；Hub ${({complete:'已检索',partial:'部分覆盖',unavailable:'不可用',unsupported:'不支持文档能力',not_requested:'本次未请求'})[d.coverage.hub]||d.coverage.hub}。${d.fallback_reason||''} ${(d.candidate_failures||[]).join('；')} 这是采集快照；Hub有 ${(d.coverage.hub_sources||[]).filter(s=>s.retained_snapshot).length} 个暂停后保留的来源。仅对两端正常返回片段在本机排序。`;$('doc-results').innerHTML=d.results.length?d.results.map((h,i)=>`<div class="result"><h3 class="paths">${esc(h.display_name||h.path)}</h3><p class="muted">${esc(documentProvenance(h))} · 采集版本 ${h.version} · ${esc(h.captured_at)} · 来源 ${h.source_ids.map(esc).join('、')} · 行 ${h.start_line}–${h.end_line}</p><pre>${esc(h.text)}</pre><button class="secondary" data-doc-read="${i}">读取原文</button></div>`).join(''):'没有匹配的文档。请同时核对来源覆盖状态。';$('doc-results').querySelectorAll('[data-doc-read]').forEach(b=>b.onclick=()=>readDocument(Number(b.dataset.docRead),{}));notice(`文档搜索完成：${d.results.length} 个命中`);}catch(e){notice(e.message,true)}};
+  async function downloadDocumentOriginal(reference,name){
+    if(!reference)throw Error('没有可用的采集原件引用，请重新查看资料');
+    const response=await fetch('/api/documents/original',{method:'POST',redirect:'error',cache:'no-store',headers:{'Content-Type':'application/json','X-SMM-UI':'1'},body:JSON.stringify({reference})});
+    if(!response.ok){let data;try{data=await response.json()}catch{throw Error('采集原件下载失败：'+response.status)}throw Error(typeof data.detail==='string'?data.detail:JSON.stringify(data.detail||data));}
+    const blob=await response.blob(),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=String(name||'captured-original').replace(/[\\/\u0000-\u001f\u007f]/g,'_');a.hidden=true;document.body.append(a);
+    try{a.click()}finally{a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  }
+  const localDocumentReader=documentReader('doc',{host:'doc-reader',text:'doc-reader-text',meta:'doc-reader-meta',read:body=>request('/api/documents/read',{method:'POST',body:JSON.stringify(body)}),download:downloadDocumentOriginal,provenance:value=>documentProvenance(value,true)});
+  async function readDocument(index,range={}){
+    const hit=index===null?null:documentResults[index],reference=hit?.reference||documentReference;
+    if(!reference)return;
+    try{await localDocumentReader.open(reference,range,hit?.table_context);documentReference=reference;}catch(error){notice(error.message,true)}
+  }
+  $('doc-search-form').onsubmit=async e=>{e.preventDefault();try{const scope=$('doc-scope').value;const root=scope==='project'?($('doc-root-kind').value==='hub'?{hub_project_id:Number($('doc-hub-project').value)}:{project_id:Number($('doc-search-project').value)}):{};const d=await request('/api/documents/search',{method:'POST',body:JSON.stringify({query:$('doc-query').value,scope,...root,local:$('doc-archive-mode').value==='local',limit:Number($('doc-limit').value)})});documentResults=d.results;localDocumentReader.clear();documentReference=null;$('doc-coverage').textContent=`本机 ${({complete:'已检索',partial:'部分覆盖'})[d.coverage.local]||d.coverage.local}；Hub ${({complete:'已检索',partial:'部分覆盖',unavailable:'不可用',unsupported:'不支持文档能力',not_requested:'本次未请求'})[d.coverage.hub]||d.coverage.hub}。${d.fallback_reason||''} ${(d.candidate_failures||[]).join('；')} 这是采集快照；Hub有 ${(d.coverage.hub_sources||[]).filter(s=>s.retained_snapshot).length} 个暂停后保留的来源。仅对两端正常返回片段在本机排序。`;$('doc-results').innerHTML=d.results.length?d.results.map((h,i)=>`<div class="result"><h3 class="paths">${esc(h.display_name||h.path)}</h3><p class="muted">${esc(documentProvenance(h))} · 采集版本 ${h.version} · ${esc(h.captured_at)} · 来源 ${h.source_ids.map(esc).join('、')} · 行 ${h.start_line}–${h.end_line}</p><pre>${esc(h.text)}</pre><button class="secondary" data-doc-read="${i}">读取原文</button></div>`).join(''):'没有匹配的文档。请同时核对来源覆盖状态。';$('doc-results').querySelectorAll('[data-doc-read]').forEach(b=>b.onclick=()=>readDocument(Number(b.dataset.docRead),{}));notice(`文档搜索完成：${d.results.length} 个命中`);}catch(e){notice(e.message,true)}};
   function updateDocumentRoot(){
     const onlyLocal=$('doc-archive-mode').value==='local';
     $('doc-root-kind').querySelector('option[value=hub]').disabled=onlyLocal;
@@ -172,6 +287,78 @@
   let documentLibrary=[];
   const documentSubmissions=new WeakMap();
   const submissionId=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(16)+Math.random().toString(16).slice(2);
+
+  const nativeFormat=name=>String(name).split('.').pop().toLowerCase();
+  const isNative=name=>['docx','xlsx','pdf'].includes(nativeFormat(name));
+  const shaBuffer=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+  function nativeDetails(row,asset){
+    const name=asset.display_name||asset.path;if(!isNative(name))return;
+    const label=document.createElement('p');label.textContent='格式 '+nativeFormat(name).toUpperCase()+' · '+(asset.latest_attempt?.status||'pending')+(asset.publication_pending?' · 等待发布':'')+' · 版本 '+asset.version+' · 处理版本 '+asset.processing_version;row.append(label);
+    const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='查看处理详情与重试比较值';details.append(summary);
+    const identity=document.createElement('p'),documentId=document.createElement('code');identity.textContent='文档 ID（--document-id）：';documentId.dataset.nativeDocumentId='';documentId.textContent=asset.id;identity.append(documentId);details.append(identity);
+    const latest=asset.latest_attempt?Object.fromEntries(['capture_id','attempt_id','status','config_revision','error'].map(k=>[k,asset.latest_attempt[k]])):null;
+    for(const [field,title,value] of [['published_snapshot','已发布快照',asset.published_snapshot],['latest_attempt','最新尝试',latest],['retry_target','重试目标（创建端 CLI 使用）',asset.retry_target]]){
+      const heading=document.createElement('p'),pre=document.createElement('pre');heading.textContent=title;pre.dataset.nativeDetail=field;pre.textContent=JSON.stringify(value??null,null,2);details.append(heading,pre);
+    }
+    if(asset.published_snapshot?.status==='partial'&&asset.original_reference){
+      const caption=document.createElement('p'),coverage=document.createElement('pre');caption.textContent='已发布快照的提取覆盖与未处理原因';coverage.dataset.nativeDetail='coverage';coverage.textContent='展开后读取保存的覆盖记录';details.append(caption,coverage);let loaded=false;
+      details.addEventListener('toggle',async()=>{if(!details.open||loaded)return;loaded=true;try{const value=await request('/api/documents/read',{method:'POST',body:JSON.stringify({reference:asset.original_reference})});coverage.textContent=JSON.stringify(value.coverage,null,2);}catch(error){loaded=false;coverage.textContent='覆盖读取失败：'+error.message;}});
+    }
+    const hint=document.createElement('p');hint.textContent='PDF 优先提取原生文字和表格，需要时使用本端本地 OCR。OCR 程序及语言数据仅由维护者通过本端 CLI 的 documents processing-status / processing-configure 配置；网页不设置程序或服务端路径。';details.append(hint);row.append(details);
+  }
+  function showUploadOutcomes(box,outcomes){box.replaceChildren();for(const o of outcomes){const li=document.createElement('li');li.textContent=o.name+'：'+o.status+' · '+o.detail;box.append(li)}}
+  const updateSubmissions=new WeakMap();
+  function nativeComparison(asset){
+    const binding={expected_version:asset.version,expected_processing_version:asset.processing_version,expected_revision:asset.source_revision};
+    const latest=asset.latest_attempt;
+    if(latest?.capture_id&&latest?.attempt_id){binding.capture_id=latest.capture_id;binding.expected_attempt_id=latest.attempt_id;}
+    return binding;
+  }
+  async function updateNativeOriginal(file,asset,binding,send,part,refresh,box,newId){
+    if(nativeFormat(file.name)!==nativeFormat(asset.display_name))throw Error('更新必须使用同格式文件；跨格式请新纳入资料');
+    const target={...binding,document_id:asset.id},scope=JSON.stringify(target);
+    let submission=updateSubmissions.get(file);
+    if(!submission||submission.scope!==scope){submission={scope,id:newId()};updateSubmissions.set(file,submission);}
+    const saved=await sendNativeOriginal(file,submission.id,target,send,part);
+    const outcome={name:asset.display_name,status:saved.status||'pending',documentId:asset.id,detail:'原件已接收，等待本端处理'};
+    showUploadOutcomes(box,[outcome]);await refresh();
+    while(true){
+      const rows=await send('/documents/library?project_id='+encodeURIComponent(binding.project_id));
+      const row=rows.find(r=>r.id===asset.id),latest=row?.latest_attempt;
+      if(!row||latest?.capture_id!==saved.capture_id||latest?.attempt_id!==saved.attempt_id)throw Error('更新已被移除或新尝试取代，请重新查看资料库');
+      const stage=row.publication_pending?'publishing':latest.status;
+      outcome.status=({publishing:'等待发布',ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
+      outcome.detail='项目 #'+binding.project_id+' · 文档 '+asset.id+' · '+stage+' · 版本 '+row.version+' / 处理版本 '+row.processing_version;
+      showUploadOutcomes(box,[outcome]);await refresh();
+      if(['ready','partial','failed','empty-success'].includes(stage)){
+        notice(outcome.status+'：'+outcome.detail+'；请重新检索取得当前引用',!['ready','empty-success'].includes(stage));return;
+      }
+      notice('更新原件已接收，正在本端处理；完成前不将其视为成功。');
+      await new Promise(resolve=>setTimeout(resolve,200));
+    }
+  }
+  async function sendNativeOriginal(file,submission,binding,send,part){
+    if(file.size>20*1024*1024)throw Error('每份新格式原件最多20MiB');
+    const bytes=await file.arrayBuffer();
+    const begun=await send('/documents/uploads',{...binding,name:file.name,submission_id:submission,sha256:await shaBuffer(bytes),bytes:bytes.byteLength});
+    if(!Number.isInteger(begun.block_bytes)||begun.block_bytes<=0||begun.block_bytes>1024*1024||!Array.isArray(begun.received_parts))throw Error('上传分块响应无效，请重新查看状态');
+    const received=new Set(begun.received_parts);
+    for(let index=0,offset=0;offset<bytes.byteLength;index++,offset+=begun.block_bytes){if(received.has(index))continue;const chunk=bytes.slice(offset,offset+begun.block_bytes);await part('/documents/uploads/'+begun.upload_id+'/parts/'+index,chunk,await shaBuffer(chunk));}
+    return send('/documents/uploads/'+begun.upload_id+'/commit',Object.fromEntries(['hub_id','document_epoch'].filter(k=>binding[k]!==undefined).map(k=>[k,binding[k]])));
+  }
+  async function trackNativeUploads(outcomes,send,projectId,refresh,box){
+    const pending=outcomes.filter(o=>o.documentId);if(!pending.length)return;
+    while(true){
+      const rows=await send('/documents/library?project_id='+encodeURIComponent(projectId));let waiting=false;
+      for(const o of pending){const row=rows.find(r=>r.id===o.documentId),stage=row?.publication_pending?'publishing':(row?.latest_attempt?.status||'pending');
+        o.status=({publishing:'等待发布',ready:'成功',partial:'部分完成',failed:'失败','empty-success':'空内容成功'})[stage]||stage;
+        o.detail='项目 #'+projectId+' · 文档 '+o.documentId+' · '+stage+' · 版本 '+(row?.version??0)+' / 处理版本 '+(row?.processing_version??0);
+        if(!['ready','partial','failed','empty-success'].includes(stage))waiting=true;
+      }
+      showUploadOutcomes(box,outcomes);await refresh();if(!waiting)return;
+      notice('原件已接收，正在本端处理；处理完成后再按项目检索。');await new Promise(resolve=>setTimeout(resolve,200));
+    }
+  }
   async function fileBase64(file){if(file.size>2*1024*1024)throw Error('每份文档最多2MiB');return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(Error('无法读取所选文件'));reader.readAsDataURL(file)});}
   async function refreshHubRoots(){
     try{const list=await request('/api/projects?include_hub=true');if(list.coverage&&list.coverage.hub!=='complete')throw Error(list.fallback_reason||'Hub项目当前不可得');for(const id of ['doc-hub-project','search-hub-project']){const selected=$(id).value;$(id).innerHTML=list.hub.map(p=>`<option value="${p.id}">${esc(p.name)} · Hub #${p.id} · ${esc(p.source)}</option>`).join('');if(list.hub.some(p=>String(p.id)===selected))$(id).value=selected;}}
@@ -186,22 +373,45 @@
       for(const [enabled,label] of [[true,'允许项目文档同步'],[false,'暂停项目文档同步']]){const button=document.createElement('button');button.className='secondary';button.textContent=label;button.disabled=!status.hub_id||project.project_id===null;button.onclick=async()=>{try{await request('/api/documents/sync-policy',{method:'POST',body:JSON.stringify({...frozen,enabled})});await refreshDocumentChoices();notice('选择已保存在本机；请核对Hub确认状态');}catch(error){notice(error.message,true)}};row.append(button)}container.append(row);
     }
   }
+  let documentLibraryRequest=0;
   async function refreshDocumentLibrary(){
-    const value=$('doc-library-project').value;const container=$('doc-library-list');container.replaceChildren();if(!value)return;
-    documentLibrary=await request('/api/documents/library?project_id='+encodeURIComponent(value));
-    for(const asset of documentLibrary){const row=document.createElement('div');row.className='result';const label=document.createElement('p');label.textContent=`${asset.display_name} · 文档 ${asset.id} · 版本 ${asset.version} / 来源 ${asset.source_revision}`;row.append(label);
-      const change=document.createElement('input');change.type='file';change.accept='.md,.markdown,.txt';change.setAttribute('aria-label','更新文档 '+asset.display_name);change.onchange=async()=>{if(!change.files[0])return;try{await request('/api/documents/library/'+asset.id,{method:'PUT',body:JSON.stringify({project_id:Number(value),project_key:projectData.find(p=>String(p.id)===value)?.stable_key,expected_version:asset.version,expected_revision:asset.source_revision,submission_id:submissionId(),content_base64:await fileBase64(change.files[0])})});await refreshDocuments();notice('管理副本已更新；请重新检索取得新引用');}catch(error){notice(error.message,true)}};row.append(change);
-      const remove=document.createElement('button');remove.className='secondary';remove.textContent='移除文档';remove.setAttribute('aria-label','移除文档 '+asset.display_name);remove.onclick=async()=>{if(!confirm('移除此文档资格？Hub撤回可能仍待确认，副本保留。'))return;try{await request('/api/documents/library/'+asset.id,{method:'DELETE',body:JSON.stringify({project_id:Number(value),project_key:projectData.find(p=>String(p.id)===value)?.stable_key,expected_version:asset.version,expected_revision:asset.source_revision})});await refreshDocuments();notice('本机文档已移除；请核对Hub撤回确认');}catch(error){notice(error.message,true)}};row.append(remove);container.append(row);
+    const requestId=++documentLibraryRequest,value=$('doc-library-project').value;const container=$('doc-library-list');if(container.dataset.project!==value){container.replaceChildren();container.dataset.project=value;documentLibrary=[]}if(!value)return;
+    const listed=await request('/api/documents/library?project_id='+encodeURIComponent(value));if(requestId!==documentLibraryRequest||$('doc-library-project').value!==value)return;container.replaceChildren();documentLibrary=listed;
+    for(const asset of documentLibrary){const row=document.createElement('div');row.className='result';const label=document.createElement('p');label.textContent=`${asset.display_name} · 文档 ${asset.id} · 版本 ${asset.version} / 来源 ${asset.source_revision}`;row.append(label);nativeDetails(row,asset);
+      const original=document.createElement('button');original.className='secondary';original.textContent='下载采集原件';original.disabled=!asset.original_reference;original.onclick=()=>downloadDocumentOriginal(asset.original_reference,asset.display_name).catch(error=>notice(error.message,true));row.append(original);
+      const native=isNative(asset.display_name),projectBinding={project_id:Number(value),project_key:projectData.find(p=>String(p.id)===value)?.stable_key};
+      const frozen={...projectBinding,...(native?nativeComparison(asset):{expected_version:asset.version,expected_revision:asset.source_revision})};
+      const change=document.createElement('input');change.type='file';change.accept=native?'.'+nativeFormat(asset.display_name):'.md,.markdown,.txt';change.setAttribute('aria-label','更新文档 '+asset.display_name);
+      change.onchange=async()=>{const file=change.files[0];if(!file)return;change.disabled=true;try{
+        if(native)await updateNativeOriginal(file,asset,frozen,localNativeSend,localNativePart,async()=>{if($('doc-library-project').value===value)await refreshDocumentLibrary()},$('doc-upload-results'),submissionId);
+        else{await request('/api/documents/library/'+asset.id,{method:'PUT',body:JSON.stringify({...frozen,submission_id:submissionId(),content_base64:await fileBase64(file)})});await refreshDocuments();notice('管理副本已更新；请重新检索取得新引用');}
+      }catch(error){notice('更新状态待确认：'+error.message+'；请重新查看资料库。',true)}finally{change.disabled=false}};row.append(change);
+      const remove=document.createElement('button');remove.className='secondary';remove.textContent='移除文档';remove.setAttribute('aria-label','移除文档 '+asset.display_name);
+      remove.onclick=async()=>{if(!confirm('移除此文档的检索和原文资格？Hub撤回可能仍待确认。'))return;try{await request('/api/documents/library/'+asset.id,{method:'DELETE',body:JSON.stringify(frozen)});await refreshDocuments();notice('本机文档已移除；请核对Hub撤回确认');}catch(error){notice(error.message,true)}};row.append(remove);container.append(row);
     }
   }
-  async function uploadLocalDocuments(files, initialOutcomes=[]){
-    const result=$('doc-upload-results');result.replaceChildren();const project=Number($('doc-library-project').value),selected=projectData.find(p=>p.id===project),key=selected?.stable_key;const outcomes=[...initialOutcomes];
-    if(!key){for(const file of files)outcomes.push({name:file.name,status:'未处理',detail:'请先创建并选择本机项目'});}else{
-      for(const file of files){try{let submission=documentSubmissions.get(file);if(!submission||submission.project!==key){submission={project:key,id:submissionId()};documentSubmissions.set(file,submission)}const saved=await request('/api/documents/library',{method:'POST',body:JSON.stringify({project_id:project,project_key:key,name:file.name,content_base64:await fileBase64(file),submission_id:submission.id})});outcomes.push({name:file.name,status:'成功',detail:`文档 ${saved.id} · 版本 ${saved.version}`});}catch(error){outcomes.push({name:file.name,status:'失败',detail:error.message})}}
-    }
-    let reloadError='';try{await refreshDocuments()}catch(error){reloadError='资料库刷新未完成：'+error.message}
-    for(const outcome of outcomes){const row=document.createElement('li');row.textContent=`${outcome.name}：${outcome.status} · ${outcome.detail}`;result.append(row)}
-    const failed=outcomes.filter(o=>o.status!=='成功').length;notice((failed?`批次处理完成：${outcomes.length-failed} 成功，${failed} 失败或未处理。`:'文档副本已保存并采集；可立即按项目检索。是否上传Hub由项目选择决定。')+reloadError,Boolean(failed||reloadError));
+  let localUploadBusy=false;
+  const localNativeSend=(path,body)=>request('/api'+path,body===undefined?{}:{method:'POST',body:JSON.stringify(body)});
+  const localNativePart=(path,bytes,digest)=>request('/api'+path,{method:'PUT',body:bytes,headers:{'X-SMM-UI':'1','Content-Type':'application/octet-stream','X-Chunk-SHA256':digest}});
+  async function uploadLocalDocuments(files,initialOutcomes=[]){
+    if(localUploadBusy){notice('当前上传批次尚未完成，请稍后重试',true);return}
+    localUploadBusy=true;$('doc-upload-files').disabled=true;
+    const box=$('doc-upload-results'),project=Number($('doc-library-project').value),selected=projectData.find(p=>p.id===project),key=selected?.stable_key,outcomes=[...initialOutcomes];showUploadOutcomes(box,outcomes);notice('正在接收文档；新格式需要在本端完成处理后才能检索。');
+    try{
+      if(!key){for(const file of files)outcomes.push({name:file.name,status:'未处理',detail:'请先创建并选择本机项目'});}else{
+        const binding={project_id:project,project_key:key};
+        for(const file of files){try{
+          let submission=documentSubmissions.get(file);if(!submission||submission.project!==key){submission={project:key,id:submissionId()};documentSubmissions.set(file,submission)}
+          if(isNative(file.name)){const saved=await sendNativeOriginal(file,submission.id,binding,localNativeSend,localNativePart);outcomes.push({name:file.name,status:saved.status||'pending',documentId:saved.document_id,detail:'项目 #'+project+' · 文档 '+saved.document_id+' · 原件已接收，待处理'});await refreshDocumentLibrary();}
+          else{const saved=await request('/api/documents/library',{method:'POST',body:JSON.stringify({...binding,name:file.name,content_base64:await fileBase64(file),submission_id:submission.id})});outcomes.push({name:file.name,status:'成功',detail:'文档 '+saved.id+' · 版本 '+saved.version});}
+        }catch(error){outcomes.push({name:file.name,status:'失败',detail:error.message})}showUploadOutcomes(box,outcomes);}
+        await trackNativeUploads(outcomes,localNativeSend,project,async()=>{if(Number($('doc-library-project').value)===project)await refreshDocumentLibrary()},box);
+      }
+      let reloadError='';try{await refreshDocuments()}catch(error){reloadError='资料库刷新未完成：'+error.message}
+      showUploadOutcomes(box,outcomes);const failed=outcomes.filter(o=>o.status!=='成功').length;
+      notice((failed?'批次处理完成：'+(outcomes.length-failed)+' 成功，'+failed+' 失败、部分完成或未处理。':'文档副本已保存并采集；可立即按项目检索。是否上传Hub由项目选择决定。')+reloadError,Boolean(failed||reloadError));
+    }catch(error){showUploadOutcomes(box,outcomes);notice('上传处理状态待确认：'+error.message+'；请重新查看资料库。',true)}
+    finally{localUploadBusy=false;$('doc-upload-files').disabled=false;}
   }
   $('doc-upload-files').onchange=()=>uploadLocalDocuments([...$('doc-upload-files').files]);
   $('doc-upload-drop').ondragover=event=>event.preventDefault();$('doc-upload-drop').ondrop=event=>{event.preventDefault();const files=[],outcomes=[];const items=[...event.dataTransfer.items].filter(item=>item.kind==='file');if(items.length){for(const item of items){const entry=item.webkitGetAsEntry?.();if(entry?.isDirectory){outcomes.push({name:entry.name,status:'未处理',detail:'文件夹未上传。请在“添加文档来源”填写本机 SMM 服务所在电脑的目录，保存后明确刷新；不使用浏览器中的目录路径。'});}else{const file=item.getAsFile();if(file)files.push(file)}}}else files.push(...event.dataTransfer.files);uploadLocalDocuments(files,outcomes)};

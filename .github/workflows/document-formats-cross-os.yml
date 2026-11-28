@@ -1,0 +1,142 @@
+name: Document formats genuine cross-OS acceptance
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths:
+      - src/**
+      - tests/**
+      - scripts/acceptance/**
+      - scripts/build_packages.py
+      - pyproject.toml
+      - packaging/hub/pyproject.toml
+      - uv.lock
+      - .github/workflows/document-formats-cross-os.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  UV_LINK_MODE: copy
+jobs:
+  creator:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-24.04, platform: linux}
+          - {os: macos-15, platform: darwin}
+          - {os: windows-2022, platform: win32}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: '0.13.8', python-version: '3.14'}
+      - name: Install frozen controller dependencies
+        run: |
+          mkdir -p .acceptance-local/x-logs
+          uv sync --frozen --extra test --extra documents --extra acceptance > .acceptance-local/x-logs/sync.stdout 2> .acceptance-local/x-logs/sync.stderr
+      - name: Check native observer channels before expensive business setup
+        run: uv run --frozen --no-sync python -m pytest -q --tb=short tests/test_document_formats_guard_channels.py > .acceptance-local/x-logs/observer.stdout 2> .acceptance-local/x-logs/observer.stderr
+      - name: Prepare actual creator OCR and independent materials
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/x-materials --output .acceptance-local/x-materials.json > .acceptance-local/x-logs/materials.stdout 2> .acceptance-local/x-logs/materials.stderr
+      - name: Build and independently install both products
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_installed_prepare.py --work .acceptance-local/x-work --materials .acceptance-local/x-materials.json > .acceptance-local/x-logs/products.stdout 2> .acceptance-local/x-logs/products.stderr
+      - name: Bind creator operation
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_cross_os_entry.py --target-config .acceptance-local/x-work/target.json --bind produce --bundle .acceptance-local/x-work/transfer.zip
+      - name: Create actual results as POSIX ordinary account
+        if: runner.os != 'Windows'
+        run: uv run --frozen --no-sync python -I -X utf8 scripts/acceptance/document_formats_cross_os_entry.py --target-config .acceptance-local/x-work/target.json --output .acceptance-local/x-work/platform > .acceptance-local/x-logs/business.stdout 2> .acceptance-local/x-logs/business.stderr
+      - name: Create actual results as separate Windows standard account
+        if: runner.os == 'Windows'
+        run: |
+          python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)')
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_installed_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_cross_os_entry.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/x-work/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/x-work" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/x-logs/business.stdout 2> .acceptance-local/x-logs/business.stderr
+      - name: Publish only the synthetic raw/result transfer packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-x-transfer-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: .acceptance-local/x-work/transfer.zip
+      - name: Preserve creator original receipts
+        if: always()
+        run: |
+          mkdir -p .acceptance-local/x-work/outer-logs
+          cp .acceptance-local/x-logs/* .acceptance-local/x-work/outer-logs/
+          uv run --no-project --python 3.14 python scripts/acceptance/document_formats_cross_os_collect.py --work .acceptance-local/x-work --materials .acceptance-local/x-materials.json --output .acceptance-local/x-evidence --context .acceptance-local/x-context.json --job-key x-creator-${{ matrix.platform }}
+      - name: Encrypt creator originals
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/x-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/x-context.json --output .acceptance-local/x.smm-evidence --receipt .acceptance-local/x-generated.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 008-x-creator-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/x.smm-evidence
+  receiver:
+    needs: creator
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-24.04, platform: linux, source: darwin}
+          - {os: ubuntu-24.04, platform: linux, source: win32}
+          - {os: macos-15, platform: darwin, source: linux}
+          - {os: macos-15, platform: darwin, source: win32}
+          - {os: windows-2022, platform: win32, source: linux}
+          - {os: windows-2022, platform: win32, source: darwin}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: '0.13.8', python-version: '3.14'}
+      - name: Install controller dependencies separately from the product
+        run: |
+          mkdir -p .acceptance-local/x-logs
+          uv sync --frozen --extra test --extra documents --extra acceptance > .acceptance-local/x-logs/sync.stdout 2> .acceptance-local/x-logs/sync.stderr
+      - name: Check native observer channels before receiver setup
+        run: uv run --frozen --no-sync python -m pytest -q --tb=short tests/test_document_formats_guard_channels.py > .acceptance-local/x-logs/observer.stdout 2> .acceptance-local/x-logs/observer.stderr
+      - name: Prepare locked base-only receiver
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_receiver_prepare.py --work .acceptance-local/x-work > .acceptance-local/x-logs/products.stdout 2> .acceptance-local/x-logs/products.stderr
+      - uses: actions/download-artifact@v4
+        with:
+          name: 008-x-transfer-${{ matrix.source }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .acceptance-local/x-work/input
+      - name: Bind real different-OS input
+        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_cross_os_entry.py --target-config .acceptance-local/x-work/target.json --bind receive --bundle .acceptance-local/x-work/input/transfer.zip --source-platform ${{ matrix.source }}
+      - name: Receive through actual HTTPS as POSIX ordinary account
+        if: runner.os != 'Windows'
+        run: uv run --frozen --no-sync python -I -X utf8 scripts/acceptance/document_formats_cross_os_entry.py --target-config .acceptance-local/x-work/target.json --output .acceptance-local/x-work/platform > .acceptance-local/x-logs/business.stdout 2> .acceptance-local/x-logs/business.stderr
+      - name: Receive through actual HTTPS as separate Windows standard account
+        if: runner.os == 'Windows'
+        run: |
+          python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)')
+          powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_installed_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_cross_os_entry.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/x-work/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/x-work" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/x-logs/business.stdout 2> .acceptance-local/x-logs/business.stderr
+      - name: Preserve receiver original receipts
+        if: always()
+        run: |
+          mkdir -p .acceptance-local/x-work/outer-logs
+          cp .acceptance-local/x-logs/* .acceptance-local/x-work/outer-logs/
+          uv run --no-project --python 3.14 python scripts/acceptance/document_formats_cross_os_collect.py --work .acceptance-local/x-work --materials .acceptance-local/no-receiver-ocr-materials.json --output .acceptance-local/x-evidence --context .acceptance-local/x-context.json --job-key x-${{ matrix.source }}-to-${{ matrix.platform }}
+      - name: Encrypt receiver originals
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/x-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/x-context.json --output .acceptance-local/x.smm-evidence --receipt .acceptance-local/x-generated.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 008-x-${{ matrix.source }}-to-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/x.smm-evidence

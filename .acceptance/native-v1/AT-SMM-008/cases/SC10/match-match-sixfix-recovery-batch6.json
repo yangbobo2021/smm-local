@@ -1,0 +1,24 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_ids": [
+    "TC-008-budgets",
+    "TC-008-candidate-last-use-recovery",
+    "TC-008-canonical-candidate-capacity",
+    "TC-008-live-temporary-observation",
+    "TC-008-managed-update-paths",
+    "TC-008-process-identity-observation",
+    "TC-008-reservation-lengths",
+    "TC-008-staging-dedup",
+    "TC-008-staging-plus-one",
+    "TC-008-transfer-expiry-raw",
+    "TC-008-watchdog-health"
+  ],
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-008/match/match-sixfix-recovery-batch6/result.json",
+  "request_id": "match-sixfix-recovery-batch6",
+  "result_sha256": "9f8313c41459998e96d0b89c70f4b69276f6bfc6cc899c18c4d39ca8356e51f6",
+  "scene": "SC10",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}

@@ -1,0 +1,319 @@
+{
+  "schema": 1,
+  "generator_sha256": "ae9df625f920559cfcc9563bf9f762629a0b1b498001220cc1c3d91a90f6c91b",
+  "sdk_versions": {
+    "python-docx": "1.2.0",
+    "openpyxl": "3.1.5",
+    "Pillow": "13.0.0",
+    "lxml": "6.1.3"
+  },
+  "sources": [
+    "https://pypi.org/project/python-docx/1.2.0/",
+    "https://pypi.org/project/openpyxl/3.1.5/",
+    "https://python-docx.readthedocs.io/en/latest/api/section.html",
+    "https://openpyxl.readthedocs.io/en/stable/images.html"
+  ],
+  "scope": "Synthetic SDK-created OPC files; independent SDK reopen, all internal relationship targets, actual PNG content and text/drawing parts verified. No standalone image product support. Committed bytes remain fixed between CI runs.",
+  "items": [
+    {
+      "file": "ordinarybodydocx.docx",
+      "project": "ordinary",
+      "format": "docx",
+      "kind": "body",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "b6fdf5298d3cf512a13ce9ba7fa0da61fed06594eed9c24d637d78523ca259f8",
+      "bytes": 37199,
+      "drawing_parts": [
+        "word/document.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "7b3974cd710afa0ed4187dd70cfeaf468bd48c9e31deaabd5da6fb914430ab7a"
+        }
+      ]
+    },
+    {
+      "file": "ordinaryheaderdocx.docx",
+      "project": "ordinary",
+      "format": "docx",
+      "kind": "header",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "afeb1d2b82782c2d950d00ecd0670bcf3ee0b2390a50349d171dc79cf1af5123",
+      "bytes": 38033,
+      "drawing_parts": [
+        "word/header1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "079aad25a7a61b0c34204af78c1051a23c10239e1e656a547c6622742549f8f2"
+        }
+      ]
+    },
+    {
+      "file": "ordinaryfooterdocx.docx",
+      "project": "ordinary",
+      "format": "docx",
+      "kind": "footer",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "078715136b4a0b63447fe16c1859655e2b0c21832cf5090c489c909d23be2f8d",
+      "bytes": 38033,
+      "drawing_parts": [
+        "word/footer1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "cc06cd32e6a0b04f592a33e30c0d64a9c3de6439f52637ebd05f814e197b1ecc"
+        }
+      ]
+    },
+    {
+      "file": "ordinaryblankdocx.docx",
+      "project": "ordinary",
+      "format": "docx",
+      "kind": "blank",
+      "text": "",
+      "expected_status": "empty-success",
+      "sha256": "5f222811dd64f0ba71aea36b1731ae4187888c19b47c1ba1f951a6a7ae00d725",
+      "bytes": 36588,
+      "drawing_parts": [],
+      "supported_text_nodes": [],
+      "images": []
+    },
+    {
+      "file": "ordinarytextdocx.docx",
+      "project": "ordinary",
+      "format": "docx",
+      "kind": "text",
+      "text": "ordinarytextdocx supported value",
+      "expected_status": "ready",
+      "sha256": "fc0d78074819ad6be57bf6407e36c40a7600fdf7b35a5231d5f4bca1bba33f2d",
+      "bytes": 37231,
+      "drawing_parts": [
+        "word/document.xml"
+      ],
+      "supported_text_nodes": [
+        "ordinarytextdocx supported value"
+      ],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "c5016f3b94dbff7e00e0aad0420af48f1252a20f0882b0b5d7b79993772ad7b1"
+        }
+      ]
+    },
+    {
+      "file": "ordinaryobjectxlsx.xlsx",
+      "project": "ordinary",
+      "format": "xlsx",
+      "kind": "object",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "4ecc33a25e3a2c15227ea714744a7d6655e9aba36015762f7b186e71ffdc7c87",
+      "bytes": 6248,
+      "drawing_parts": [
+        "xl/worksheets/sheet1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "xl/media/image1.png",
+          "sha256": "599e261cfbbecfcbd447cc90537358bb0cfb4550d511f05d8971b7df5210a713"
+        }
+      ]
+    },
+    {
+      "file": "ordinaryblankxlsx.xlsx",
+      "project": "ordinary",
+      "format": "xlsx",
+      "kind": "blank",
+      "text": "",
+      "expected_status": "empty-success",
+      "sha256": "7e096cb09c92e46081c151c7f8766d0a4ecec1007ca8e81623196df2d9b4d0ce",
+      "bytes": 4831,
+      "drawing_parts": [],
+      "supported_text_nodes": [],
+      "images": []
+    },
+    {
+      "file": "ordinarytextxlsx.xlsx",
+      "project": "ordinary",
+      "format": "xlsx",
+      "kind": "text",
+      "text": "ordinarytextxlsx supported value",
+      "expected_status": "ready",
+      "sha256": "1959096269117c813187d404d797478d82e7fa799cb2b5883e909bb33b78d33c",
+      "bytes": 6302,
+      "drawing_parts": [
+        "xl/worksheets/sheet1.xml"
+      ],
+      "supported_text_nodes": [
+        "ordinarytextxlsx supported value"
+      ],
+      "images": [
+        {
+          "part": "xl/media/image1.png",
+          "sha256": "9dbefc28e1f7860502267c3beb4fb6bc79cc88eb611d9a036a43a0a0553302dd"
+        }
+      ]
+    },
+    {
+      "file": "globalbodydocx.docx",
+      "project": "global",
+      "format": "docx",
+      "kind": "body",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "1b5a4d8ae6ef0ced4ea0b17b27dc0e65586eead8b1e0604d50e7393505ed9985",
+      "bytes": 37202,
+      "drawing_parts": [
+        "word/document.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "ed4d2959bfada135d7503c07a511e9def266298a09c1c6fa84df366c8df33564"
+        }
+      ]
+    },
+    {
+      "file": "globalheaderdocx.docx",
+      "project": "global",
+      "format": "docx",
+      "kind": "header",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "eda954db32a9e87f949ef604591c64b6a4956a1b5bf5e68e01d29e5e25a4b42d",
+      "bytes": 38035,
+      "drawing_parts": [
+        "word/header1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "09ef81e3c8eaca218fbae3674e6c8f1facec0365e9327d693dc6d03d26cb538a"
+        }
+      ]
+    },
+    {
+      "file": "globalfooterdocx.docx",
+      "project": "global",
+      "format": "docx",
+      "kind": "footer",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "40d70eb23d4177328521384d09c7b578fe9f917f39fbf26fb3bf7c75701eda93",
+      "bytes": 38028,
+      "drawing_parts": [
+        "word/footer1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "ed8a19f9122ae07605ad4fcc9790665d4068a8bca83cf9bbf2a5218200c3cf43"
+        }
+      ]
+    },
+    {
+      "file": "globalblankdocx.docx",
+      "project": "global",
+      "format": "docx",
+      "kind": "blank",
+      "text": "",
+      "expected_status": "empty-success",
+      "sha256": "45e2f0060fa750795357964827b2689be8fc577640ff7ac0d27baf4b3df2a470",
+      "bytes": 36587,
+      "drawing_parts": [],
+      "supported_text_nodes": [],
+      "images": []
+    },
+    {
+      "file": "globaltextdocx.docx",
+      "project": "global",
+      "format": "docx",
+      "kind": "text",
+      "text": "globaltextdocx supported value",
+      "expected_status": "ready",
+      "sha256": "361c2a2b0a1e9430c64ce66cd91665253270f84a368e842efdcff3395804057e",
+      "bytes": 37232,
+      "drawing_parts": [
+        "word/document.xml"
+      ],
+      "supported_text_nodes": [
+        "globaltextdocx supported value"
+      ],
+      "images": [
+        {
+          "part": "word/media/image1.png",
+          "sha256": "bdfd0ba6da9cccb991da96987c8f679b4f0323e314a8931e1957622049606a16"
+        }
+      ]
+    },
+    {
+      "file": "globalobjectxlsx.xlsx",
+      "project": "global",
+      "format": "xlsx",
+      "kind": "object",
+      "text": "",
+      "expected_status": "failed",
+      "sha256": "34cd72b46d9ee6b425f6bae6cf5ec1137e267f75e0bff9bae4f688d427a63bde",
+      "bytes": 6246,
+      "drawing_parts": [
+        "xl/worksheets/sheet1.xml"
+      ],
+      "supported_text_nodes": [],
+      "images": [
+        {
+          "part": "xl/media/image1.png",
+          "sha256": "7bb32263a09f60b0001e0049800cc44223ca2fe16c1685fe0287ecce0c2f9a4b"
+        }
+      ]
+    },
+    {
+      "file": "globalblankxlsx.xlsx",
+      "project": "global",
+      "format": "xlsx",
+      "kind": "blank",
+      "text": "",
+      "expected_status": "empty-success",
+      "sha256": "a15215f744571c9d9d87374f30b8eed02365d05ccf34cb6815ea2986b0293b89",
+      "bytes": 4830,
+      "drawing_parts": [],
+      "supported_text_nodes": [],
+      "images": []
+    },
+    {
+      "file": "globaltextxlsx.xlsx",
+      "project": "global",
+      "format": "xlsx",
+      "kind": "text",
+      "text": "globaltextxlsx supported value",
+      "expected_status": "ready",
+      "sha256": "cdd425442d5876b35d1772c25065b49396321e58b34124c69640f0e00aa4f8d0",
+      "bytes": 6301,
+      "drawing_parts": [
+        "xl/worksheets/sheet1.xml"
+      ],
+      "supported_text_nodes": [
+        "globaltextxlsx supported value"
+      ],
+      "images": [
+        {
+          "part": "xl/media/image1.png",
+          "sha256": "d737e263b1017317639e106ee22cf8cd20b90370f9adfb368c9a82d7e7420ec2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+"""C1 same-project expansion; original service helper stays unchanged."""
+import hashlib,json,time
+from pathlib import Path
+import pytest
+from document_helpers import observe
+from document_formats_upload_fixture import upload_input
+from test_document_formats_retry import keep
+from test_document_formats_upload_restart import Server
+
+@pytest.mark.parametrize('owner',['local','hub'])
+def test_real_creator_restart_resumes_chunks_and_pending_captures(tmp_path,owner):
+    # TC-008-managed-upload-restart: four targets per creator, two in each project.
+    server=Server(tmp_path/owner,owner);items=[]
+    try:
+        server.start()
+        if owner=='local':
+            projects=[server.call('POST','/projects',{'name':'restart ordinary'}).json(),server.call('POST','/projects/global').json()]
+        else:
+            projects=[server.call('POST','/projects',{**server.context,'name':'restart '+kind,'kind':kind}).json() for kind in ('ordinary','global')]
+        for key,project in (('alpha',projects[0]),('beta',projects[0]),('gamma',projects[1]),('delta',projects[1])):
+            label=owner+'restart'+key;raw,truth=upload_input('docx',label)
+            keep('inputs/'+label+'.docx',raw);keep('truth/'+label+'.json',json.dumps(truth,ensure_ascii=False).encode())
+            body={**server.context,'project_id':project['id'],'project_key':project['stable_key'] if owner=='local' else project['source_key'],'submission_id':label,'name':'same.docx','sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
+            start=server.call('POST','/documents/uploads',body).json();size=start['block_bytes'];assert len(raw)>size and start['received_parts']==[]
+            chunk=raw[:size];part=server.call('PUT','/documents/uploads/'+start['upload_id']+'/parts/0',raw=chunk,headers={'X-Chunk-SHA256':hashlib.sha256(chunk).hexdigest()}).json()
+            assert part['received_parts']==[0]
+            items.append({'raw':raw,'truth':truth,'body':body,'upload':start['upload_id'],'size':size,'project':project,'label':label})
+        assert server.call('GET','/documents/files').json()==[]
+        stopped=server.stop();assert stopped['forced'] is False and stopped['audit']==[]
+        server.start(pause=True)
+        for item in items:
+            start=server.call('POST','/documents/uploads',item['body']).json()
+            assert start['upload_id']==item['upload'] and start['received_parts']==[0] and start['block_bytes']==item['size']
+            for index,offset in enumerate(range(item['size'],len(item['raw']),item['size']),1):
+                chunk=item['raw'][offset:offset+item['size']]
+                server.call('PUT','/documents/uploads/'+item['upload']+'/parts/'+str(index),raw=chunk,headers={'X-Chunk-SHA256':hashlib.sha256(chunk).hexdigest()})
+            item['receipt']=server.call('POST','/documents/uploads/'+item['upload']+'/commit',server.context).json()
+        listed=server.call('GET','/documents/files').json();assert len(listed)==4
+        assert len({item['receipt']['document_id'] for item in items})==4
+        for item in items:
+            row=next(row for row in listed if row['id']==item['receipt']['document_id'])
+            assert row['published_snapshot'] is None and row['version']==row['processing_version']==0
+            assert row['latest_attempt']['status']=='pending' and row['latest_attempt']['attempt_id']==item['receipt']['attempt_id'] and row['latest_attempt']['capture_id']==item['receipt']['capture_id']
+            assert row['original_reference'] is None and row['original_available'] is False
+            item['path']=Path(row['path'])
+        for project in projects:
+            own={i['receipt']['document_id'] for i in items if i['project']['id']==project['id']};assert len(own)==2
+            assert {e['id'] for e in listed if project['id'] in e['project_ids']}==own
+        stopped=server.stop();assert stopped['pause_events'] and stopped['audit']==[]
+        for item in items:item['path'].unlink()
+        server.start(deny=[item['path'] for item in items])
+        until=time.monotonic()+45
+        while True:
+            listed=server.call('GET','/documents/files').json()
+            if len(listed)==4 and all((row.get('latest_attempt') or {}).get('status')=='failed' or (row.get('published_snapshot') is not None and (row.get('latest_attempt') or {}).get('status') in {'ready','partial'} and row['published_snapshot']['capture_id']==row['latest_attempt']['capture_id']) for row in listed):break
+            assert time.monotonic()<until,{'phase':'captured jobs did not resume after actual process restart','files':listed}
+            time.sleep(.1)
+        def verify_all(phase):
+            listed=server.call('GET','/documents/files').json()
+            assert {row['id'] for row in listed}=={item['receipt']['document_id'] for item in items}
+            for item in items:
+                ident=item['receipt']['document_id'];entry=next(row for row in listed if row['id']==ident)
+                assert entry['version']==entry['processing_version']==1 and entry['published_snapshot']['status']=='ready'
+                assert entry['latest_attempt']['attempt_id']==item['receipt']['attempt_id'] and entry['latest_attempt']['capture_id']==item['receipt']['capture_id']
+                assert entry['latest_attempt']['status']=='ready' and entry['latest_attempt']['finished_at'] and entry['latest_attempt']['error'] is None
+                hits=server.call('POST','/documents/search',{**server.context,'query':item['label'],'scope':'project','project_id':item['project']['id'],**({'local':True} if owner=='local' else {})}).json()['results']
+                assert len(hits)==1 and hits[0]['id']==ident and hits[0]['version']==hits[0]['processing_version']==1
+                other=projects[1] if item['project']['id']==projects[0]['id'] else projects[0]
+                assert server.call('POST','/documents/search',{**server.context,'query':item['label'],'scope':'project','project_id':other['id'],**({'local':True} if owner=='local' else {})}).json()['results']==[]
+                hit=hits[0];assert hit['sha256']==hashlib.sha256(item['raw']).hexdigest()
+                reference=item.setdefault('reference',hit['reference'])
+                read=server.call('POST','/documents/read',{**server.context,'reference':reference,'start':0,'end':hit['text_length']}).json()
+                assert read['id']==ident and all(word in read['text'] for word in item['truth']['words']) and all(word not in read['text'] for word in item['truth']['excluded'])
+                assert len(read['tables'])==len(item['truth']['tables'])
+                for expected in item['truth']['tables']:
+                    table=next(t for t in read['tables'] if all(t['location'].get(k)==v for k,v in expected['location'].items()))
+                    view=server.call('POST','/documents/read',{**server.context,'reference':reference,'view':'table','table_id':table['table_id'],'row_start':1,'row_end':expected['rows']+1,'column_start':1,'column_end':expected['columns']+1}).json()
+                    actual=[(c['row'],c['column'],c['text'],c['row_span'],c['column_span']) for c in view['cells']]
+                    assert (view['rows'],view['columns'])==(expected['rows'],expected['columns']) and len(actual)==len(expected['cells']) and set(actual)==set(expected['cells'])
+                response=server.call('POST','/documents/original',{**server.context,'reference':reference})
+                actual_sha=hashlib.sha256(response.content).hexdigest()
+                keep('downloads/'+actual_sha+'.docx',response.content);assert response.content==item['raw']
+                observe('restart-original-download',{'owner':owner,'phase':phase,'document_id':ident,'sha256':actual_sha,'bytes':len(response.content),'source_label':item['label']})
+                receipt=server.call('POST','/documents/uploads/'+item['upload']+'/commit',server.context).json()
+                assert all(receipt[k]==item['receipt'][k] for k in ('document_id','capture_id','attempt_id')) and receipt['status']=='ready'
+            assert len(server.call('GET','/documents/library').json())==4
+            assert not any(event['event']=='open' for event in server.events())
+        verify_all('resumed')
+        stopped=server.stop();assert len([e for e in stopped['audit'] if e['event']=='subprocess.Popen'])==4
+        server.start(deny=[item['path'] for item in items]);verify_all('stable-restart')
+        stopped=server.stop();assert stopped['forced'] is False and stopped['audit']==[]
+    finally:server.stop()

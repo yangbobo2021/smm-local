@@ -1,0 +1,118 @@
+"""Explicit isolated HTTP factory and child audit for development restart tests."""
+import contextvars,json,os,sys,time
+from pathlib import Path
+from document_formats_platform import process_arguments, document_worker_token
+
+# sitecustomize imports this module before ``-m`` executes it as __main__.
+# Both module instances must use the same request context.
+if not hasattr(sys,'_smm_008_query_context'):
+    sys._smm_008_query_context=contextvars.ContextVar('smm_008_query_context',default=False)
+QUERY_CONTEXT=sys._smm_008_query_context
+
+
+def read_guard_active():
+    return not os.environ.get('SMM_008_QUERY_SCOPED_GUARD') or QUERY_CONTEXT.get()
+
+
+def audit(event,args):
+    if event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
+        value=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))
+        blocked={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ.get('SMM_008_RESTART_DENY','[]'))}
+        if value in blocked and read_guard_active():
+            with open(os.environ['SMM_008_RESTART_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'event':event,'path':value,'pid':os.getpid()})+'\n')
+            raise RuntimeError('restart source read denied')
+    if event=='subprocess.Popen' and (log:=os.environ.get('SMM_008_WEB_READ_ONLY')) and read_guard_active():
+        with open(log,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'subprocess','pid':os.getpid()})+'\n')
+        raise AssertionError('read-only browser phase attempted subprocess')
+    if event=='subprocess.Popen':
+        argv=process_arguments(args[1]);token=document_worker_token(argv)
+        if token is not None:
+            with open(os.environ['SMM_008_RESTART_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'event':event,'pid':os.getpid(),'argv':argv,'raw_argv':args[1],'raw_type':type(args[1]).__name__,'task_token':token},ensure_ascii=False)+'\n')
+
+
+def install_audit():sys.addaudithook(audit)
+
+
+def make_app():
+    from smm_local.core import Archive
+    path=Path(os.environ['SMM_008_TEST_DB']);assert path.is_absolute()
+    db=Archive(path);empty=path.parent/'empty-agent';empty.mkdir(exist_ok=True)
+    db.set_settings(codex_root=str(empty),claude_root=str(empty))
+    if gate:=os.environ.get('SMM_008_WEB_PROCESSING_GATE'):
+        from smm_local.managed_document_uploads import ManagedDocumentUploads
+        original=ManagedDocumentUploads.run_pending
+        def gated(self,*args,**kwargs):
+            def event(kind):
+                with open(gate+'.events','a',encoding='utf-8') as out:out.write(json.dumps({'event':kind,'pid':os.getpid()})+'\n')
+            event('enter')
+            while not Path(gate).exists():time.sleep(.02)
+            try:return original(self,*args,**kwargs)
+            finally:event('exit')
+        ManagedDocumentUploads.run_pending=gated
+    if pause:=os.environ.get('SMM_008_RESTART_PAUSE'):
+        from smm_local.managed_document_uploads import ManagedDocumentUploads
+        original=ManagedDocumentUploads.run_pending
+        def blocked(self,*args,**kwargs):
+            with self.db.connect() as c:jobs=[dict(r) for r in c.execute('SELECT document_id,state FROM document_upload_jobs ORDER BY document_id')]
+            with open(pause,'a',encoding='utf-8') as out:out.write(json.dumps({'pid':os.getpid(),'jobs':jobs})+'\n')
+            while True:time.sleep(.05)
+            return original(self,*args,**kwargs)
+        ManagedDocumentUploads.run_pending=blocked
+    if os.environ['SMM_008_TEST_OWNER']=='local':
+        from smm_local.api import create_app
+        app=create_app(db,auto_sync=False,sync_on_start=False)
+    else:
+        from smm_hub.hub import create_hub
+        app=create_hub(db,os.environ['SMM_008_TEST_TOKEN'])
+    if readonly:=os.environ.get('SMM_008_WEB_READ_ONLY'):
+        from smm_local.document_snapshots import Snapshots
+        from smm_local import document_processing
+        def guarded(original):
+            def call(*args,**kwargs):
+                if not read_guard_active():return original(*args,**kwargs)
+                with open(readonly,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'processing','pid':os.getpid()})+'\n')
+                raise AssertionError('read-only browser phase attempted processing')
+            return call
+        Snapshots.process=guarded(Snapshots.process);document_processing.process=guarded(document_processing.process)
+        if os.environ.get('SMM_008_QUERY_SCOPED_GUARD'):
+            @app.middleware('http')
+            async def query_scope(request,call_next):
+                read=request.method=='GET' or request.url.path.rsplit('/',1)[-1] in {'search','read','original','__test_processing_probe'}
+                token=QUERY_CONTEXT.set(read)
+                try:return await call_next(request)
+                finally:QUERY_CONTEXT.reset(token)
+        @app.post('/__test_processing_probe')
+        def processing_probe():
+            import subprocess
+            blocked=[]
+            try:Snapshots.process(None,None,'docx')
+            except AssertionError:blocked.append('processing')
+            try:child=subprocess.Popen([sys.executable,'-c','raise SystemExit(19)']);child.wait(timeout=5)
+            except AssertionError:blocked.append('subprocess')
+            if os.environ.get('SMM_008_QUERY_SCOPED_GUARD'):
+                protected=json.loads(os.environ['SMM_008_RESTART_DENY'])
+                assert protected
+                try:Path(protected[0]).read_bytes()
+                except RuntimeError:blocked.append('source')
+            return {'blocked':blocked,'pid':os.getpid()}
+    @app.get('/__test_identity')
+    def actual_identity():return {'pid':os.getpid(),'archive':str(db.db_path.resolve()),'owner':os.environ['SMM_008_TEST_OWNER'],'nonce':os.environ['SMM_008_TEST_NONCE']}
+    return app
+
+
+if __name__=='__main__':
+    import argparse
+    import uvicorn
+    from fastapi import Request,HTTPException
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--port',type=int,required=True)
+    args=parser.parse_args()
+    app=make_app()
+    server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=args.port,timeout_graceful_shutdown=1))
+    @app.post('/__test_shutdown')
+    async def shutdown(request:Request):
+        if request.headers.get('X-SMM-Test-Nonce')!=os.environ['SMM_008_TEST_NONCE']:
+            raise HTTPException(403,'wrong task identity')
+        server.should_exit=True
+        return {'stopping':True,'pid':os.getpid()}
+    server.run()

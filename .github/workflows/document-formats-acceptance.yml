@@ -1,0 +1,55 @@
+name: Document formats acceptance
+on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths:
+      - .github/workflows/document-formats-acceptance.yml
+      - scripts/acceptance/document_formats_prepare.py
+      - scripts/acceptance/document_formats_component.py
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: Explicit acceptance phase
+        required: true
+        type: choice
+        options: [components]
+        default: components
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+jobs:
+  components:
+    name: Components ${{ matrix.os }} Python ${{ matrix.python }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.8'
+          python-version: ${{ matrix.python }}
+      - run: uv sync --extra test --extra documents
+      - run: uv run --frozen python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/008-ci/materials --output .acceptance-local/008-ci/materials.json
+      - run: uv run --frozen python scripts/acceptance/document_formats_component.py --materials .acceptance-local/008-ci/materials.json --work .acceptance-local/008-ci/component --output .acceptance-local/008-ci/component-result.json
+      - name: Preserve raw component evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-components-${{ matrix.os }}-py${{ matrix.python }}
+          retention-days: 30
+          include-hidden-files: true
+          path: |
+            .acceptance-local/008-ci/materials.json
+            .acceptance-local/008-ci/component-result.json
+            .acceptance-local/008-ci/component/
+            .acceptance-local/008-ci/materials/logs/
+            .acceptance-local/008-ci/materials/offline-explicit.txt
+            .acceptance-local/008-ci/materials/materials/font/
+            .acceptance-local/008-ci/materials/tessdata/

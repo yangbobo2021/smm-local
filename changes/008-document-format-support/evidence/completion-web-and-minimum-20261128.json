@@ -1,0 +1,130 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "product_head": "0320622918bcca3779d7d9ba3b4b7f32a584d91d",
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "status": "partial-completion-not-merge-ready",
+  "web_upload": {
+    "design": "design-completion-sc1-web-ui-v1",
+    "match": "match-completion-sc1-web-ui-v4",
+    "runtime": "runtime-completion-sc1-web-ui-v3",
+    "formal": [
+      {
+        "owner": "local",
+        "execute": "execute-completion-sc1-web-ui-local-v1",
+        "result_sha256": "eae90e4069d903d129cd2e4d8031ee494ded7c15bd53a9f0ae12e907a1f52d94",
+        "actual_exit": 0,
+        "started_at": "2026-11-28T04:53:05.046000+00:00",
+        "finished_at": "2026-11-28T04:53:19.593000+00:00",
+        "review": "review-completion-sc1-web-ui-local-execution-v1",
+        "independent_status": "passed",
+        "actual_pytest_passed": 4,
+        "documents": 12,
+        "independent_source_truth": true,
+        "source_runtime_bindings": 113,
+        "scope": "creator-web-native-upload only; source foreground Mac real browser, not E/H/X"
+      },
+      {
+        "owner": "hub",
+        "execute": "execute-completion-sc1-web-ui-hub-v1",
+        "result_sha256": "39c6f7dc30e13377a1455ff3e7b5734143f8972e2e37fbb6b36e4db27ad2c58e",
+        "actual_exit": 0,
+        "started_at": "2026-11-28T04:54:09.893000+00:00",
+        "finished_at": "2026-11-28T04:54:32.915000+00:00",
+        "review": "review-completion-sc1-web-ui-hub-execution-v1",
+        "independent_status": "passed",
+        "actual_pytest_passed": 4,
+        "documents": 12,
+        "independent_source_truth": true,
+        "source_runtime_bindings": 113,
+        "scope": "creator-web-native-upload only; source foreground Mac real browser, not E/H/X"
+      }
+    ],
+    "checks": [
+      "chooser/drop ordinary/global two waves DOCX XLSX nativePDF",
+      "empty/pending/ready/final project-switch complete DOM ID set and uniqueness",
+      "while new wave pending all three retained published snapshots/status/details/full text/all tables/raw originals unchanged",
+      "per-document origin/V/P/format/raw SHA and exact chunks/project identity",
+      "observer rejects missing/duplicate/foreign/malformed rows",
+      "actual normal owned service exits and closed ports"
+    ],
+    "historical_attempts": "Local v1 and Hub v1/v2 blocked by25MiB; Local v2 debugged. V3 retains all originals with verified lossless JSON gzip and actual113 dependency bindings. No old failure relabeled.",
+    "ui_observation": "Hub polling clears library DOM before awaiting response; some full-page screenshots captured that transient blank. Independent reviewer opened matching real trace snapshots and raw assertions to verify complete pending rows/details; no claim of continuous every-frame display."
+  },
+  "minimum_python": {
+    "run_id": 46107496120,
+    "url": "https://github.com/yangbobo2021/smm-local/actions/runs/46107496120",
+    "actual_source_head": "0320622918bcca3779d7d9ba3b4b7f32a584d91d",
+    "platforms": {
+      "Linux": {
+        "passed": 7,
+        "skipped": 0,
+        "original_members": 573
+      },
+      "Windows": {
+        "passed": 7,
+        "skipped": 0,
+        "original_members": 574
+      },
+      "macOS": {
+        "passed": 7,
+        "skipped": 0,
+        "original_members": 573
+      }
+    },
+    "opened_members": 1720,
+    "independent_status": "passed all3 minimum only",
+    "per_platform": {
+      "documents": 16,
+      "complete_text_reads": 32,
+      "table_reads": 64,
+      "source_cell_comparisons": 304,
+      "raw_original_downloads": 32
+    },
+    "not_covered": "CompleteE/H/X; POSIX no independent final tree/port sweep. Exact historical scope only, do not relabel later test revisions."
+  },
+  "public_reports": [
+    {
+      "source_file": "minimum-032-independent-review.md",
+      "original_sha256": "7c3b8997a18b2225a0e03185ddb0aea1394330e3095f86b19d104767c9c2e66e",
+      "public_file": "completion-minimum-032-review-20261128.md",
+      "public_sha256": "7e1c6d064c9c9d2d9bfe0da9a515e3ce2e5ed3c6f6cab80cddf04d6350bbe83e",
+      "redactions": [
+        "task absolute workspace prefix",
+        "Windows complete machine/user SID"
+      ]
+    },
+    {
+      "source_file": "web-ui-candidate-review-v3.md",
+      "original_sha256": "fa8e3221bfdeda0b069516b15fe314dab2e93feb39eae072528b56ffa132c25b",
+      "public_file": "completion-web-upload-candidate-review-20261128.md",
+      "public_sha256": "05a501b51bc3140a5edceb46969eb4ba19d4cb76362c10adcb3a2cb0af1b1abe",
+      "redactions": [
+        "task absolute workspace prefix",
+        "Windows complete machine/user SID"
+      ]
+    },
+    {
+      "source_file": "web-ui-formal-execution-review-v1.md",
+      "original_sha256": "a3be90ba7274ad063a53bd0749bf5e79a2925a13fe2e05f02c732913a73bceec",
+      "public_file": "completion-web-upload-execution-review-20261128.md",
+      "public_sha256": "b2922f9dc14ace99334ed6fd8d1f310e7ee769182e0f84fe7713748be729c446",
+      "redactions": [
+        "task absolute workspace prefix",
+        "Windows complete machine/user SID"
+      ]
+    }
+  ],
+  "still_required": [
+    "current complete C1 source CI originals and independent results",
+    "full E all3OS with lifecycle/sync/resources and all real read entries",
+    "H all3 real native services H1-H5",
+    "X six actualOS directions base-only receiver",
+    "final R008 judgment and clean-context PR Review"
+  ],
+  "forbidden_actions": [
+    "merge",
+    "release",
+    "daily SMM upgrade"
+  ],
+  "recorded_time_ns": 1795842354255917000
+}
