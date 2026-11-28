@@ -86,6 +86,16 @@ class ProcessedDocuments:
         self._allowed(binding)
         # Hash/schema checks and blob I/O happen before the short publication lock.
         binding, result = self.transfers.commit(transfer_id, self._validate_finished)
+        try:
+            return self._stage(binding)
+        except ValueError:
+            # The body is complete, but no domain stage was accepted. Revoke
+            # this nonce durably; never delete potentially shared blobs here.
+            # Both the Hub guard and SQLite transaction have already exited.
+            self.transfers.retire(transfer_id)
+            raise
+
+    def _stage(self, binding):
         value = binding['document']
         with self.hub.guard.hold(), self.hub.db.connect() as c:
             c.execute('BEGIN IMMEDIATE')

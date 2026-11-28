@@ -1,0 +1,82 @@
+{
+  "schema": "smm-008-rejected-processed-capacity-evidence-v1",
+  "date": "2026-11-29",
+  "status": "passed_scoped_development_component",
+  "problem": "A complete raw/result transfer rejected by the Hub V/P domain check retained internal committed protection despite having no accepted stage. Its exclusive result could indefinitely consume unpublished capacity and block new admission.",
+  "red": {
+    "evidence_id": "processed-capacity-red-v2",
+    "failed": 2,
+    "passed": 0,
+    "skipped": 0,
+    "pytest_seconds": 5.09,
+    "physical_bytes_per_mode": 7785989,
+    "unreceived_reserved_bytes_per_mode": 260649467,
+    "total_bytes": 268435456,
+    "exclusive_unqualified_result_bytes": 1261470,
+    "observation": "After aging only task-owned persisted transfer timestamps to25h, actual fresh1B begin still400 capacity; no OS clock changes or cache deletion by tests."
+  },
+  "change": "Retire only a processed transfer whose body validation succeeded but domain staging raised ValueError. Persist nonce invalidation after leaving Hub/SQLite locks, then use existing admission-time shared-owner GC. No direct blob deletion in the rejection callback; no global TTL for valid committed failed candidates.",
+  "green": {
+    "evidence_id": "processed-capacity-green-v1",
+    "passed": 2,
+    "skipped": 0,
+    "pytest_seconds": 17.44,
+    "scope": "First/replacement; two valid staged targets, retained gamma, legitimate failed managed candidate and unfinished live alias sharing the rejected alpha result.",
+    "observation": "Exclusive beta result is legitimately reclaimed eagerly before filling. Physical6524519 + cold promises261910937 =268435456. The added1B at that new valid cap correctly rejects. Legal stages and samefuture full reads succeed; expired rejected nonce begin/part/commit reject; failed managed candidate raw/receipt, shared alias and old publication text/table/actual original survive."
+  },
+  "source_changes": {
+    "src/smm_hub/processed_documents.py": {
+      "red": "92f6defe477b4dc98a1683acf7c27d06b11616fa8de8b24de8799fcfee5bb8ea",
+      "green": "3b67117f2e1721330f7f3ec885de8b4eb2e6771996b366422d4ac18cbda5fce2"
+    },
+    "src/smm_local/document_transfers.py": {
+      "red": "2317e941232e0ebc4867251002a5ec80bf7de322e166a74b022b19547786248f",
+      "green": "5e08a881cfc941d6ecc8231dc278f08e283fbfaf7b4286b13b9198800f05b320"
+    }
+  },
+  "independent_review_sha256": {
+    "processed-capacity-design-review-v1": {
+      ".md": "5976b7bf2fb58a1ba6ab19e3c8370e8f0a073b4f1f1d303d3c3feedea31c6148",
+      ".json": "675ac566711c25943bd50be417543325c50eae2407e7f1278ba37bfb8efc1fa6"
+    },
+    "processed-capacity-red-execution-review-v1": {
+      ".md": "5fcf73aa37492cf2b1a82fc0183ab3ba2d2b9b8cc3246a5e8f168cb37204129f",
+      ".json": "1f7c10b2f1c621f8660a3e0fd7965f881074df83042480e1b66011f611f5e1f6"
+    },
+    "processed-capacity-green-execution-review-v1": {
+      ".md": "0537e5c4c211bc41ed2adac80560a8c608b54b94d93a781ee039cfe1d16fcbba",
+      ".json": "3640c96cb1106fab1ef9741e75a2db69177416d9075ad387fe4191b7b0bd5596"
+    }
+  },
+  "wheels": [
+    {
+      "file": "smm_hub-0.4.0-py3-none-any.whl",
+      "sha256": "7c0632c462acf5b0bd1b30f32b9d068bcac811a092762f8583b8799ce4da10d7",
+      "modules": {
+        "smm_hub/processed_documents.py": "3b67117f2e1721330f7f3ec885de8b4eb2e6771996b366422d4ac18cbda5fce2",
+        "smm_hub/_archive/document_transfers.py": "5e08a881cfc941d6ecc8231dc278f08e283fbfaf7b4286b13b9198800f05b320"
+      }
+    },
+    {
+      "file": "smm_local-0.4.0-py3-none-any.whl",
+      "sha256": "ea12cc806828c99aa3558027ce226e82dd895b40e3ec083a0b8d8bf13a2b4e56",
+      "modules": {
+        "smm_local/document_transfers.py": "5e08a881cfc941d6ecc8231dc278f08e283fbfaf7b4286b13b9198800f05b320"
+      }
+    }
+  ],
+  "related_regression": {
+    "evidence_id": "processed-capacity-protocol-regression-v1",
+    "passed": 40,
+    "skipped": 0,
+    "pytest_seconds": 256.23,
+    "binding_equal": true,
+    "scope": "FullSHA/prefix/canonical guard, chunks, manifest/CAS, begin/V-P, managed raw TTL/current candidate preservation. Independent regression review pending at this evidence revision."
+  },
+  "limits": [
+    "Real shared physical+reservation ceiling, not a256MiB fully transmitted body matrix.",
+    "Normal domain-rejection recovery only; hard crash between inner committed body persistence and outer stage or retire marker remains a separate recovery investigation.",
+    "Old publication text/table/actual original were read directly; old original-info was not separately requested by this capacity subcase. New future refs include original-info.",
+    "Not final SC2/SC7/R008, native passed record or final cross-platform product acceptance."
+  ]
+}

@@ -35,8 +35,38 @@ def test_managed_hub_atomic_role_directories_and_existing_acl_safety(tmp_path):
     from smm_hub.hub_os import Service
     from smm_local.document_processing import execution_identity
     def descriptor(path):
-        expression = "(Get-Acl -LiteralPath '" + str(path).replace("'", "''") + "').Sddl"
-        return subprocess.check_output(['powershell.exe', '-NoProfile', '-Command', expression])
+        # Read the real descriptor independently of the product's handle-based
+        # implementation. Windows PowerShell module discovery can inherit a
+        # PowerShell 7 PSModulePath and fail before any ACL is inspected.
+        from ctypes import wintypes
+        security = ctypes.WinDLL('advapi32', use_last_error=True)
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        security.GetNamedSecurityInfoW.argtypes = [wintypes.LPWSTR, wintypes.DWORD,
+            wintypes.DWORD, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p,
+            ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+        security.GetNamedSecurityInfoW.restype = wintypes.DWORD
+        security.ConvertSecurityDescriptorToStringSecurityDescriptorW.argtypes = [
+            ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD,
+            ctypes.POINTER(wintypes.LPWSTR), ctypes.POINTER(wintypes.ULONG)]
+        security.ConvertSecurityDescriptorToStringSecurityDescriptorW.restype = wintypes.BOOL
+        kernel.LocalFree.argtypes = [ctypes.c_void_p]
+        kernel.LocalFree.restype = ctypes.c_void_p
+        descriptor = ctypes.c_void_p();text = wintypes.LPWSTR()
+        error = security.GetNamedSecurityInfoW(str(path), 1, 7, None, None, None, None,
+                                             ctypes.byref(descriptor))
+        if error: raise ctypes.WinError(error)
+        try:
+            if not security.ConvertSecurityDescriptorToStringSecurityDescriptorW(
+                    descriptor, 1, 7, ctypes.byref(text), None):
+                raise ctypes.WinError(ctypes.get_last_error())
+            value = text.value.encode('ascii')
+            from document_helpers import observe
+            observe('windows-real-security-descriptor', {'path': str(path),
+                'method': 'GetNamedSecurityInfoW/SDDL owner+group+DACL', 'sddl': value.decode('ascii')})
+            return value
+        finally:
+            if text: kernel.LocalFree(ctypes.cast(text, ctypes.c_void_p))
+            kernel.LocalFree(descriptor)
     root = tmp_path / 'managed'
     root.mkdir()
     subprocess.run(['icacls.exe', str(root), '/inheritance:r', '/grant:r',

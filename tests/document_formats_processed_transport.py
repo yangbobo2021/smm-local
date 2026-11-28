@@ -55,6 +55,14 @@ def large_material(label, version):
 
 
 class TransportReceiver(Receiver):
+    def files_without_expected_extras(self):
+        rows = self.w.remote('GET', '/documents/files')
+        assert len(rows) == len({row['id'] for row in rows})
+        expected = getattr(self, 'expected_extra_files', {})
+        actual = {row['id']: row for row in rows if row['id'] in expected}
+        assert actual == expected
+        return [row for row in rows if row['id'] not in expected]
+
     def read(self, item, *, reference=None):
         value = super().read(item, reference=reference)
         response = self.w.hub.post('/v1/documents/original',
@@ -135,7 +143,7 @@ class TransportReceiver(Receiver):
 
     def unpublished(self, phase):
         expected = {item['meta']['document_id']: item['meta'] for item in self.items}
-        rows = self.w.remote('GET', '/documents/files')
+        rows = self.files_without_expected_extras()
         assert len(rows) == len(expected)
         for row in rows:
             origin = row['origin'];m = expected[origin['document_id']]
@@ -155,8 +163,8 @@ class TransportReceiver(Receiver):
             'future_references': self.future, 'baseline_document_ids': sorted(expected),
             'future_queries_and_all_read_views_rejected': True})
 
-    def finish(self):
-        self.w.publish(self.manifest(self.final_items, sequence=2))
+    def finish(self, *, publish=True):
+        if publish: self.w.publish(self.manifest(self.final_items, sequence=2))
         for item in self.next:
             m = item['meta'];expected = item['result'];reference = self.future[item['label']]
             hits = self.w.search_hub(expected['text'].split()[0], limit=50)['results']
@@ -210,7 +218,7 @@ class TransportReceiver(Receiver):
                                    {'view': 'table', 'table_id': item['result']['tables'][0]['table_id']}):
                         self.w.reject_remote('POST', '/documents/read', {**body, **fields})
                     self.w.reject_remote('POST', '/documents/original', body)
-        rows = self.w.remote('GET', '/documents/files')
+        rows = self.files_without_expected_extras()
         actual_ids = [r['origin']['document_id'] for r in rows]
         assert len(actual_ids) == len(set(actual_ids)) == len(self.final_items)
         assert set(actual_ids) == {i['meta']['document_id'] for i in self.final_items}

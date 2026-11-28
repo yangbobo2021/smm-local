@@ -232,6 +232,22 @@ class BlobTransfers:
         with control_lock(self.snapshots.root / 'capacity.lock'):
             return self._load(transfer_id)[1]['binding']
 
+    def retire(self, transfer_id):
+        """Fence a domain-rejected transfer before later shared-byte GC.
+
+        Successful blob validation alone does not grant permanent ownership
+        when the receiving domain rejects the completed submission. Published
+        bundles, accepted stages and other live owners still protect shared
+        bytes; physical reclamation uses the existing admission-time GC.
+        """
+        with control_lock(self.snapshots.root / 'capacity.lock'):
+            self._folder(transfer_id)
+            marker = _expired_marker(self.snapshots, transfer_id)
+            if marker.exists():
+                return
+            self._load(transfer_id)
+            atomic_json(marker, {'rejected': True})
+
     def part(self, transfer_id, kind, offset, raw, expected_sha):
         if kind not in {'raw', 'results'} or type(offset) is not int or offset < 0 or offset % BLOCK_LIMIT:
             raise ValueError('传输块类型/起点无效')
