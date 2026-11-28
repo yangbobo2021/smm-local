@@ -209,7 +209,7 @@ class BlobTransfers:
                     self._read_blob(folder, kind, item)
                 else:
                     required += item['bytes']
-            folder.mkdir(mode=0o700)
+            self.snapshots._directory('transfers/'+transfer_id)
             state = {'binding': binding, 'blobs': blobs, 'created_at': time.time(), 'committed': False}
             try:
                 atomic_json(folder / 'state.json', state)

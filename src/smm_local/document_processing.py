@@ -19,7 +19,7 @@ def _process(snapshots,capture):
         state=c.execute('SELECT * FROM document_snapshot_state WHERE document_pk=?',(capture['document_pk'],)).fetchone()
         if state is None or state['current_capture']!=cid or state['latest_attempt']!=aid or not snapshots.authorized(c,cid) or snapshots.retired('attempts',aid):raise ValueError('捕获或尝试已失效')
         c.execute("UPDATE document_processing_attempts SET state='processing' WHERE id=?",(aid,))
-    directory=snapshots._directory('tasks')/aid;directory.mkdir(mode=0o700,exist_ok=True)
+    directory=snapshots._directory('tasks/'+aid)
     output=directory/'result.json'
     config=dict(capture['config'])
     with snapshots.db.connect() as c:

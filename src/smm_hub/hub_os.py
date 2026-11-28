@@ -61,6 +61,13 @@ class Service:
             # The archive and private key are readable only by administrators and the service account.
             command("icacls.exe", str(self.root), "/inheritance:r", "/grant:r",
                     "*S-1-5-32-544:(OI)(CI)F", "*S-1-5-18:(OI)(CI)F", "*S-1-5-19:(OI)(CI)M")
+            self.claim_state_owner()
+
+    def claim_state_owner(self):
+        if sys.platform == "win32":
+            from .document_storage_windows import Directories
+            # Explicit root only, handle-bound; no child ACL/owner propagation.
+            Directories(self.root).claim_owner()
 
     def new_runtime_directory(self):
         import os

@@ -35,6 +35,8 @@ def install(manager):
         'network_endpoints':[['127.0.0.1',manager.ports['hub']]], 'expected_identity':expected,
         'ocr_executable':manager.materials['ocr_executable'],
         'ocr_data_dirs':[manager.materials['ocr_data_dir'],str(shared/'languages')],
+        'storage_ancestor':str(manager.storage_ancestor),
+        'storage_root':str(manager.hub_state),
         'resume_attempt':str(shared/'resume-attempt.txt')}
     (shared/'resume-attempt.txt').write_text('')
     original = "for field in ('sid','session_id','euid','egid'):\n if field in C['expected_identity']:assert actor[field]==C['expected_identity'][field],('wrong product process identity',field,actor)"
@@ -54,6 +56,26 @@ def install(manager):
     module = site/'_smm_008_native_guard.py';startup=site/'_smm_008_native_guard.pth'
     assert not module.exists() and not startup.exists()
     code = 'import json\nC=json.loads('+repr(json.dumps(config))+')\n'+IDENTITY_SOURCE+'\n'+AUDIT_PRIMITIVES+'\n'+hook
+    code += '''
+if service_actor:
+ import ctypes as _c
+ from ctypes import wintypes as _w
+ _k=_c.WinDLL('kernel32',use_last_error=True)
+ _k.CreateFileW.argtypes=[_w.LPCWSTR,_w.DWORD,_w.DWORD,_c.c_void_p,_w.DWORD,_w.DWORD,_w.HANDLE]
+ _k.CreateFileW.restype=_w.HANDLE
+ _k.CloseHandle.argtypes=[_w.HANDLE]
+ _results=[]
+ for _name,_path,_access,_denied in [('ancestor-list',C['storage_ancestor'],1,True),
+    ('ancestor-security',C['storage_ancestor'],0x20000,True),
+    ('state-list-and-security',C['storage_root'],0x20081,False)]:
+  _handle=_k.CreateFileW(_path,_access,7,None,3,0x02200000,None)
+  _failed=_handle==_c.c_void_p(-1).value
+  _error=_c.get_last_error() if _failed else 0
+  if not _failed:_k.CloseHandle(_handle)
+  _results.append({'check':_name,'desired_access':_access,'denied':_failed,'winerror':_error})
+  assert _failed is _denied and (not _denied or _error==5),_results
+ emit('native-storage-ancestor-control',checks=_results)
+'''
     module.write_text(code,encoding='utf-8');startup.write_text('import _smm_008_native_guard\n',encoding='utf-8')
     manager.config['native_observation']={'root':str(shared),'log':str(shared/'hub-guard.jsonl'),
         'maintenance_identity':expected,'service_name':'smm-hub-'+hashlib.sha256(str(manager.hub_state.resolve()).encode()).hexdigest()[:12]}

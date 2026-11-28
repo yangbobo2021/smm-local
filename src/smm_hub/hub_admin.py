@@ -197,6 +197,7 @@ class Hub:
     def enable(self):
         cfg = self.config()
         self.service.preflight()
+        self.service.claim_state_owner()
         # Older Windows hubs may store the interpreter of a staged smm-local upgrade.
         if cfg.get("runtime_package") != "smm-hub":
             for key in ("python", "base_python", "version"):

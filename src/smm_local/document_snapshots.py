@@ -39,6 +39,8 @@ class Snapshots:
         path=self.root/name
         for part in [path,*path.parents]:
             if part.exists() and (part.is_symlink() or bool(getattr(part.lstat(),'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400))):raise ValueError('快照存储路径不能经过链接或junction')
+        factory=getattr(self.db,'_document_snapshot_directory',None)
+        if factory is not None:return factory(path)
         path.mkdir(parents=True,exist_ok=True,mode=0o700);return path
     def blob(self,kind,digest):
         if len(digest)!=64 or any(c not in '0123456789abcdef' for c in digest):raise ValueError('快照摘要无效')

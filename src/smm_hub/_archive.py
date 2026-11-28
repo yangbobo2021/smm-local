@@ -14,6 +14,7 @@ from smm_local.document_protocol import DocumentGuard, document as document_vali
 from smm_local.core import utcnow
 
 from smm_local.document_processing import Configuration as DocumentProcessingConfiguration, configuration_arguments as document_processing_arguments
+from smm_local.document_processing import execution_identity as document_execution_identity
 
 from smm_local.document_snapshots import Snapshots as DocumentSnapshots
 from smm_local.document_transfers import BlobTransfers

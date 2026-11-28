@@ -27,7 +27,17 @@ def upload(probe, item, raw, **kwargs):
 
 
 def unchanged_publication(actual, expected):
+    import math
     assert actual['reference'] == expected['reference']
+    def publication(value):
+        hit = dict(value['hit'])
+        if 'bm25_score' in hit:
+            score = hit['bm25_score']
+            assert type(score) in (float, int) and math.isfinite(score)
+            # Relevance depends on the whole current corpus. Adding another
+            # document may change this score without changing this snapshot.
+            hit['bm25_score'] = 0
+        return {**value, 'hit': hit}
     def without_issued_references(value):
         if isinstance(value, dict):
             return {key: without_issued_references(item) for key, item in value.items() if key != 'reference'}
@@ -35,7 +45,7 @@ def unchanged_publication(actual, expected):
         return value
     # A new search may issue a new opaque string. The explicit old reference
     # was read above, and every identity/content/qualification field is kept.
-    assert without_issued_references(actual) == without_issued_references(expected)
+    assert without_issued_references(publication(actual)) == without_issued_references(publication(expected))
 
 
 

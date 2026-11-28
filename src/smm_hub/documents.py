@@ -27,6 +27,8 @@ from .projects import HubProjects
 class HubDocuments:
     def __init__(self, db):
         self.db = db
+        from .document_storage_windows import configure
+        configure(db)
         self.documents = Documents(db)
         self.library = ManagedDocuments(db, project_check=self._own_project)
         self.projects = HubProjects(db)

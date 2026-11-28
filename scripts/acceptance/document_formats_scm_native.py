@@ -79,6 +79,17 @@ def cli_arguments(args, child_output):
 class NativeAdministrator(FormatsAdministrator):
     def __init__(self,config,output):
         super().__init__(config,output)
+        # LocalService may traverse an administrator's parent directory
+        # without being allowed to list it or read its security descriptor.
+        # Exercise that real boundary; never broaden ancestor permissions to
+        # accommodate the product's private snapshot directory implementation.
+        parent=self.out/'traverse-only-state';parent.mkdir()
+        state=parent/'hub'
+        self.hub_state.rename(state)
+        self.hub_state=state;self.hub_db=state/'smm-hub.sqlite3'
+        self.storage_ancestor=parent
+        self.run('protect-storage-ancestor',['icacls.exe',parent,'/inheritance:r','/grant:r',
+            '*S-1-5-32-544:(OI)(CI)F','*S-1-5-18:(OI)(CI)F','*S-1-5-19:(X,RA)'])
         self.client_timeout_seconds=1800
         from document_formats_scm_native_guard import install
         install(self)
