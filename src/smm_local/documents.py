@@ -330,11 +330,13 @@ class Documents:
             con.execute('BEGIN IMMEDIATE');pk=token['document_pk']
             self.snapshots.publish(con,pk,token,result)
             doc=con.execute('SELECT * FROM documents WHERE pk=?',(pk,)).fetchone()
+            sources=[r[0] for r in con.execute('SELECT a.source_id FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision ORDER BY a.source_id',(token['capture_id'],))]
+            if not sources:raise ValueError('保存原件已失去连续有效采集授权')
+            collector=doc['captured_by_source_id'] if doc['captured_by_source_id'] in sources else sources[0]
             version=doc['version']+int(doc['sha256']!=token['raw_sha256'])
             sequence=con.execute("UPDATE document_meta SET value=value+1 WHERE key='request_seq' RETURNING value").fetchone()[0]
-            con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,text_sha256=?,captured_at=?,publish_seq=? WHERE pk=?',(version,token['raw_sha256'],result['text'],len(result['text']),hashlib.sha256(result['text'].encode('utf-8')).hexdigest(),utcnow(),sequence,pk))
+            con.execute('UPDATE documents SET version=?,sha256=?,text=?,text_length=?,text_sha256=?,captured_at=?,captured_by_source_id=?,publish_seq=? WHERE pk=?',(version,token['raw_sha256'],result['text'],len(result['text']),hashlib.sha256(result['text'].encode('utf-8')).hexdigest(),utcnow(),collector,sequence,pk))
             con.execute('DELETE FROM document_fts WHERE rowid=?',(pk,));con.execute('INSERT INTO document_fts(rowid,text) VALUES(?,?)',(pk,' '.join(tokens(result['text']))))
-            sources=[r[0] for r in con.execute('SELECT a.source_id FROM document_capture_authorizations a JOIN document_sources s ON s.id=a.source_id WHERE a.capture_id=? AND a.active=1 AND a.revision=s.revision',(token['capture_id'],))]
             for sid in sources:
                 con.execute("UPDATE document_memberships SET qualification=qualification+(status!='ready'),status='ready',error=NULL WHERE document_pk=? AND source_id=?",(pk,sid))
                 failures=con.execute("SELECT count(*) FROM document_memberships WHERE source_id=? AND status!='ready'",(sid,)).fetchone()[0]

@@ -114,6 +114,10 @@ def test_first_ocr_failure_retries_each_saved_capture(tmp_path,monkeypatch):
         published=current[name]['published_snapshot']
         assert published['version']==published['processing_version']==1
         assert published['capture_id']==target['capture_id']
+        # First publication through a saved-capture retry needs the same
+        # collector identity as an ordinary capture. Hub validates this field
+        # before it accepts the original/result pair for an allowed project.
+        assert current[name]['captured_by_source_id']==source['id']
         assert current[name]['latest_attempt']['attempt_id']!=target['expected_attempt_id']
         hits=f.search('ALPHA BETA',scope='project',project_id=project,local=True,limit=50)['results']
         assert len(hits)==len(completed) and {Path(h['path']).name for h in hits}==completed
