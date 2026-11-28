@@ -54,6 +54,12 @@ def prepare(work, materials, uv, python, browser=None):
     if browser is not None:
         assert browser.is_absolute() and browser.is_file()
         config['browser'] = str(browser)
+    browser_cache = os.environ.get('PLAYWRIGHT_BROWSERS_PATH') if browser is None else None
+    if browser_cache:
+        # The browser installer runs after this preparation. Bind its location
+        # now, without requiring the not-yet-downloaded directory to exist.
+        assert browser_cache != '0', 'Use an explicit task browser cache'
+        config['browsers'] = str(Path(browser_cache).resolve())
     run('base-python', [python, '-I', '-X', 'utf8', '-c',
         'import json,sys;print(json.dumps({"executable":sys.executable,"base_executable":getattr(sys,"_base_executable",sys.executable),"base_prefix":sys.base_prefix,"version":sys.version}))'])
     base = json.loads((work / 'base-python.stdout').read_text(encoding='utf-8'))
@@ -62,6 +68,7 @@ def prepare(work, materials, uv, python, browser=None):
         read_paths=sorted({str(ROOT / '.venv'), str(Path(base['base_executable']).parent),
             str(Path(material_data['ocr_executable']).parent.parent),
             str(Path(material_data['ocr_data_dir'])), str(Path(material_data['font']['path']).parent),
+            *([config['browsers']] if browser_cache else []),
             *([str(browser.parent)] if browser else [])}))
     for owner in ('local', 'hub'):
         prefix = work / 'packages' / (owner + '-env')

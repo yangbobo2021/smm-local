@@ -125,6 +125,13 @@ class FormatProbe(Probe):
     def __init__(self, config, out):
         if config.get("expected_actor_sid"):
             assert self.actor()["sid"] == config["expected_actor_sid"]
+        if config.get('browsers') and not config.get('browser'):
+            browser_cache = Path(config['browsers'])
+            assert browser_cache.is_absolute() and browser_cache.is_dir(), 'Prepare the bound browser cache before execution'
+            # Credentialed Windows starts do not inherit the preparing user's
+            # custom environment. Restore the actual prepared cache before the
+            # Playwright driver starts; explicit browser executables still win.
+            os.environ['PLAYWRIGHT_BROWSERS_PATH'] = str(browser_cache)
         super().__init__(config, out)
         self.materials = json.loads(Path(config['materials']).read_text(encoding='utf-8'))
         os.environ.update(SMM_008_OCR_EXECUTABLE=self.materials['ocr_executable'],

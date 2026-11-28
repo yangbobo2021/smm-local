@@ -334,12 +334,23 @@ def receive(config,output,bundle,expected_source,*,component_only=False):
             assert_unpublished(probe,packet,project,future,item['label']+'-staged')
         manifest={**binding,'control_sequence':1,'source_id':packet['source_id'],'revision':packet['source_revision'],'sequence':1,'submission_id':uuid.uuid4().hex,
             'files':[{**i['metadata'],'relative_path':i['relative_path'],'qualification':i['qualification']} for i in packet['documents']]}
-        # Real TLS client sends the full publication and closes without reading
-        # a response. Confirm its actual effect before the idempotent retry.
+        # Read HTTP headers to establish that the server consumed the complete
+        # request. Discard the application receipt body without consuming it;
+        # closing immediately after send can abort the request on Windows TLS.
+        # Confirm publication independently before the idempotent retry.
         import http.client,ssl
-        conn=http.client.HTTPSConnection('127.0.0.1',probe.ports['hub'],context=ssl.create_default_context(cafile=str(probe.ca)))
-        raw=canonical(manifest);conn.request('POST','/v1/documents/publish',body=raw,headers={'Authorization':'Bearer '+probe.token,'Content-Type':'application/json'});conn.close()
-        probe.save('actual-discarded-publication-response',{'request_sha256':sha(raw),'bytes':len(raw),'response_read':False,'transport':'actual verified HTTPS; close after sending complete body'})
+        conn=http.client.HTTPSConnection('127.0.0.1',probe.ports['hub'],context=ssl.create_default_context(cafile=str(probe.ca)),timeout=15)
+        raw=canonical(manifest)
+        response=None
+        try:
+            conn.request('POST','/v1/documents/publish',body=raw,headers={'Authorization':'Bearer '+probe.token,'Content-Type':'application/json'})
+            response=conn.getresponse()
+            assert response.status==200, response.status
+            response_status=response.status
+        finally:
+            if response is not None:response.close()
+            conn.close()
+        probe.save('actual-discarded-publication-response',{'request_sha256':sha(raw),'bytes':len(raw),'response_status':response_status,'headers_read':True,'body_read':False,'transport':'actual verified HTTPS; headers consumed, application receipt body discarded without read/JSON decoding; underlying buffering may prefetch bytes'})
         until=time.monotonic()+15
         while True:
             found=probe.request('hub','/v1/documents/files')
