@@ -10,6 +10,19 @@ PIXELS=16000000
 class PageFailure(ValueError):pass
 
 
+def binary_threshold(image):
+    """Choose a bounded grayscale split from the actual page's ink/background."""
+    histogram=image.histogram();total=sum(histogram)
+    intensity=sum(level*count for level,count in enumerate(histogram))
+    weight=0;partial=0;best=-1;threshold=127
+    for level,count in enumerate(histogram):
+        weight+=count;partial+=level*count
+        if not weight or weight==total:continue
+        score=(partial*total-intensity*weight)**2/(weight*(total-weight))
+        if score>best:best=score;threshold=level
+    return threshold
+
+
 def clusters(values,tolerance=3):
     groups=[]
     for value in values:
@@ -92,7 +105,7 @@ def component_profile(config):
     try:languages={name:Configuration._file_hash(Path(config['ocr_data_dir'])/(name+'.traineddata')) for name in config['languages'].split('+')}
     except (OSError,ValueError) as exc:raise PageFailure('OCR语言不可读取: '+str(exc)) from exc
     if languages!=probe.get('language_data'):raise PageFailure('OCR语言数据自探测后变化，请重新配置/检查')
-    return {'executable':executable,'version':probe['component']['version'],'language_data':languages,'languages':config['languages'],'pipeline':'grid3-body11-binary180-connected-v2'}
+    return {'executable':executable,'version':probe['component']['version'],'language_data':languages,'languages':config['languages'],'pipeline':'grid3-body11-otsu-connected-v3'}
 
 
 def page_events(document,number,page,config,*,native_boxes=(),regions=None):
@@ -128,7 +141,8 @@ def page_events(document,number,page,config,*,native_boxes=(),regions=None):
         xs,ys=table['xs'],table['ys']
         for y in ys:draw.rectangle((xs[0]-3,y-3,xs[-1]+3,y+3),fill='white')
         for x in xs:draw.rectangle((x-3,ys[0]-3,x+3,ys[-1]+3),fill='white')
-    clean=clean.convert('L').point(lambda value:255 if value>180 else 0)
+    clean=clean.convert('L');threshold=binary_threshold(clean)
+    clean=clean.point(lambda value:255 if value>threshold else 0)
     # Grid cells share one OCR pass per complete table. Body text uses a
     # separate remaining-ink block; no per-cell processes or guessed columns.
     crops=[];outside=clean.copy();outside_draw=ImageDraw.Draw(outside)
@@ -179,4 +193,4 @@ def page_events(document,number,page,config,*,native_boxes=(),regions=None):
     for items in lines.values():
         value=text(items);bounds=rect(items)
         events.append((bounds[1]/height,bounds[0]/width,'ocr-text',{'text':value,'location':location(bounds,items)},None))
-    return events,{'page':number,'method':'ocr','status':'ready','regions':allowed,'languages':config['languages'],'preprocessing':{'threshold':180,'grid_lines_removed':True,'table_psm':3,'body_psm':11,'dpi_target':300},'warning':'识别文字，可能有误；质量承诺为清晰水平简体中文/英文印刷文字','elapsed_seconds':time.monotonic()-started}
+    return events,{'page':number,'method':'ocr','status':'ready','regions':allowed,'languages':config['languages'],'preprocessing':{'threshold':threshold,'binarization':'between-class-variance','grid_lines_removed':True,'table_psm':3,'body_psm':11,'dpi_target':300},'warning':'识别文字，可能有误；质量承诺为清晰水平简体中文/英文印刷文字','elapsed_seconds':time.monotonic()-started}

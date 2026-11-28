@@ -3,6 +3,12 @@ on:
   push:
     branches: [codex/008-document-formats-impl]
     paths:
+      - src/**
+      - pyproject.toml
+      - uv.lock
+      - tests/test_document*.py
+      - tests/document*.py
+      - tests/test_hub_documents*.py
       - .github/workflows/document-formats-source.yml
       - scripts/acceptance/document_formats_source*
       - changes/008-document-format-support/source-ci-request.json

@@ -110,10 +110,21 @@ def install():
     def observed(process):
         result=original(process)
         if process.pid!=state['worker']['pid']:return result
-        assert process.create_time()==state['worker']['created'] and token in result
-        live={'token':token,'nonce':setup['nonce'],'watcher':watcher,
-              'worker':{'pid':process.pid,'created':process.create_time(),'argv':result,
-                        'exe':process.exe(),'cwd':process.cwd()},'status':process.status()}
+        created=process.create_time()
+        if created!=state['worker']['created'] or token not in result:
+            # The real reader can return an empty argv during normal exit.
+            # Observation must preserve that result, not invent a fault.
+            write(control/('watch-transition-'+token+'.json'),
+                  {'pid':process.pid,'created':created,'expected_created':state['worker']['created'],'argv':result})
+            return result
+        try:
+            live={'token':token,'nonce':setup['nonce'],'watcher':watcher,
+                  'worker':{'pid':process.pid,'created':created,'argv':result,
+                            'exe':process.exe(),'cwd':process.cwd()},'status':process.status()}
+        except (psutil.NoSuchProcess,psutil.ZombieProcess,psutil.AccessDenied):
+            # Extra metadata is for the test's enrollment only; its absence
+            # must not turn a successful cmdline read into a product error.
+            return result
         command=control/('fault-'+token+'.json')
         if not command.exists():
             write(control/('watch-live-'+token+'.json'),live)

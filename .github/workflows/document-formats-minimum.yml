@@ -3,6 +3,10 @@ on:
   push:
     branches: [codex/008-document-formats-impl]
     paths:
+      - src/**
+      - pyproject.toml
+      - uv.lock
+      - scripts/build_packages.py
       - .github/workflows/document-formats-minimum.yml
       - scripts/acceptance/document_formats_minimum*
       - scripts/acceptance/document_formats_completion_evidence.py

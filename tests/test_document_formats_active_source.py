@@ -4,7 +4,7 @@ from pathlib import Path
 from uuid import uuid4
 import psutil,pytest
 from document_helpers import ROOT,observe
-from document_formats_platform import process_identity,spawn_identity,process_tree,terminate_verified,matching_process,utf8_environment,preserve_diagnostics
+from document_formats_platform import process_identity,spawn_identity,process_tree,terminate_verified,matching_process,utf8_environment,preserve_diagnostics,same_existing_path
 from document_formats_exit_observer import waiting_for_owned_exit
 from document_formats_partial_fixture import partial_pdf
 from test_document_formats_management import native_input
@@ -31,7 +31,15 @@ def test_active_worker_barrier_and_source_deny_have_real_controls(tmp_path,monke
         until=time.monotonic()+10;entry=root/'probe.json'
         while not entry.exists() and child.poll() is None and time.monotonic()<until:time.sleep(.01)
         assert entry.exists() and child.poll() is None
-        value=json.loads(entry.read_bytes());assert value['pid']==child.pid and value['created']==stamp['created'] and value['sha256']==raw.name and value['token']=='probe'
+        value=json.loads(entry.read_bytes())
+        members={p['pid']:p for p in process_tree(stamp)}
+        assert value['pid'] in members, 'gate entered outside the owned launcher tree'
+        worker=members[value['pid']]
+        assert value['created']==worker['created'] and value['argv']==worker['argv']
+        assert value['argv'][1:]==child.args[1:]
+        assert same_existing_path(value['exe'],worker['exe'])
+        assert any(same_existing_path(value['exe'],p) for p in (sys.executable,getattr(sys,'_base_executable',sys.executable),psutil.Process().exe()))
+        assert value['sha256']==raw.name and value['token']=='probe' and value['path']==os.path.normcase(str(raw.resolve()))
     finally:
         (root/'probe.release').touch()
         try:out,err=child.communicate(timeout=10)
@@ -46,7 +54,7 @@ def test_active_worker_barrier_and_source_deny_have_real_controls(tmp_path,monke
     events=[json.loads(line) for line in (root/'source-opens.jsonl').read_text(encoding='utf-8').splitlines()]
     assert events==[{'path':os.path.normcase(str(source.resolve())),'pid':events[0]['pid']}]
     assert raw.read_bytes()==b'known raw bytes' and source.read_bytes()==b'forbidden source'
-    observe('active-gate-controls',{'normal_exit':normal.returncode,'different_exit':different.returncode,'worker':value,'released_exit':child.returncode,'denied_exit':denied.returncode,'denied_events':events})
+    observe('active-gate-controls',{'normal_exit':normal.returncode,'different_exit':different.returncode,'launcher':stamp,'owned_members':members,'worker':value,'released_exit':child.returncode,'denied_exit':denied.returncode,'denied_events':events})
 
 
 @pytest.mark.skipif(os.name!='posix' or not all((ENGINE,DATA,FONT)),reason='this candidate is actual POSIX foreground development only; no Windows or service claim')
