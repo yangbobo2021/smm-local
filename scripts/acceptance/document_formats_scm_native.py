@@ -234,6 +234,18 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
         if operation=='native_arm_fault':
             assert set(request)=={'operation'}
             (self.gate/'armed').write_text(hashlib.sha256(self.fault_raw.read_bytes()).hexdigest());return {'armed':True}
+        if operation=='native_hold_fault':
+            assert set(request)=={'operation','attempt_id'}
+            _,sample,state,stamps=self.fault_worker(identifier(request['attempt_id']))
+            value={'attempt_id':request['attempt_id'],'worker':sample,'supervision':state,'stamps':stamps}
+            self.save('native-fault-held-before-read',value);return value
+        if operation=='native_release_fault':
+            assert set(request)=={'operation','attempt_id'}
+            aid=request['attempt_id']
+            if aid is not None:identifier(aid)
+            (self.gate/'armed').unlink(missing_ok=True)
+            (self.gate/((aid+'.release') if aid else 'abort')).touch()
+            return {'released_attempt':aid,'armed':False}
         if operation=='native_fault':
             assert set(request)=={'operation','attempt_id'}
             return self.kill_fault(identifier(request['attempt_id']))
@@ -357,7 +369,7 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
             'elapsed':time.monotonic()-start,'ocr_gone':True}
         self.save('native-ocr-stop-'+aid,value);return value
 
-    def kill_fault(self,aid):
+    def fault_worker(self,aid):
         import psutil
         from document_formats_platform import matching_process,spawn_identity
         deadline=time.monotonic()+30
@@ -378,8 +390,15 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
         assert state['rss_limit']==1024**3 and state['temp_limit']==256*1024**2 and state['seconds_limit']==300
         assert state['gate_open'] and state['windows_job']['atomic']
         stamps=[spawn_identity(p) for p in [process,*process.children(recursive=True)]]
-        started=time.monotonic();process.kill()
+        return process,sample,state,stamps
+
+    def kill_fault(self,aid):
+        from document_formats_platform import matching_process
         try:
+            root=self.hub_state/'.document-snapshots/tasks'
+            process,sample,state,stamps=self.fault_worker(aid)
+            service=sample_process(__import__('psutil').Process(self.service_pid))
+            started=time.monotonic();process.kill()
             proof=root/aid/'cleanup.json'
             terminal=None
             while True:
@@ -601,16 +620,22 @@ def worker_failure(probe):
     frozen=probe.rpc('native_fault_raw');raw=base64.b64decode(frozen['raw_base64']);assert hashlib.sha256(raw).hexdigest()==frozen['sha256']
     control=next(i for i in probe.items if i['role']=='hub' and i['kind']=='docx')
     stable=snapshot(probe,control)
-    probe.rpc('native_arm_fault')
-    item={'role':'hub','project':probe.projects['hub'][0],'label':'NATIVEWORKERFAULT','format':'docx'}
-    receipt=upload(probe,item,raw,await_terminal=False)
-    probe.phase='archive-only'
-    # Read while the real worker is held, before killing it.
-    unchanged_publication(snapshot(probe,control,reference=stable['reference']),stable)
-    observation=probe.rpc('native_fault',attempt_id=receipt['attempt_id'])
-    failed=wait(probe,'hub',receipt['document_id'],timeout=5)
-    assert failed['latest_attempt']['status']=='failed' and failed['published_snapshot'] is None
-    unchanged_publication(snapshot(probe,control,reference=stable['reference']),stable)
+    receipt=None
+    try:
+        probe.rpc('native_arm_fault')
+        item={'role':'hub','project':probe.projects['hub'][0],'label':'NATIVEWORKERFAULT','format':'docx'}
+        receipt=upload(probe,item,raw,await_terminal=False)
+        held=probe.rpc('native_hold_fault',attempt_id=receipt['attempt_id'])
+        assert held['attempt_id']==receipt['attempt_id']
+        probe.phase='archive-only'
+        # Read while the real worker is held, before killing it.
+        unchanged_publication(snapshot(probe,control,reference=stable['reference']),stable)
+        observation=probe.rpc('native_fault',attempt_id=receipt['attempt_id'])
+        failed=wait(probe,'hub',receipt['document_id'],timeout=5)
+        assert failed['latest_attempt']['status']=='failed' and failed['published_snapshot'] is None
+        unchanged_publication(snapshot(probe,control,reference=stable['reference']),stable)
+    finally:
+        probe.rpc('native_release_fault',attempt_id=receipt['attempt_id'] if receipt else None)
     item=probe.material('docx','NATIVENEXTLEGAL');item.update(role='hub',project=probe.projects['hub'][0],version=1,processing_version=1)
     ready=upload(probe,item,item['raw']);assert ready['latest_attempt']['status']=='ready'
     item.update(id=ready['id'],entry=ready,path=Path(ready['path']));probe.items.append(item);probe.register_source_paths();snapshot(probe,item)
