@@ -64,13 +64,16 @@ def validate(value):
     ids=set()
     for table in value['tables']:
         if not isinstance(table,dict) or not isinstance(table.get('table_id'),str) or table['table_id'] in ids:raise ValueError('表格身份重复/无效')
-        ids.add(table['table_id']);location(table['location'])
+        ids.add(table['table_id']);location(table.get('location'))
         if any(type(table.get(k)) is not int or table[k]<1 for k in ('rows','columns')):raise ValueError('表格尺寸无效')
+        cells=table.get('cells')
+        if not isinstance(cells,list):raise ValueError('表格单元格须为列表')
         coords=set()
-        for cell in table['cells']:
+        for cell in cells:
+            if not isinstance(cell,dict):raise ValueError('单元格须为对象')
             row,column=cell.get('row'),cell.get('column')
             if type(row) is not int or type(column) is not int or not 1<=row<=table['rows'] or not 1<=column<=table['columns'] or (row,column) in coords:raise ValueError('单元格重复/越界')
-            coords.add((row,column));location(cell['location'])
+            coords.add((row,column));location(cell.get('location'))
             if cell.get('text') is not None and not isinstance(cell['text'],str):raise ValueError('单元格文字类型无效')
             if not cell.get('merged_into'):
                 if any(type(cell.get(k)) is not int or cell[k]<1 for k in ('row_span','column_span')) or row+cell['row_span']>table['rows']+1 or column+cell['column_span']>table['columns']+1:raise ValueError('合并跨度越界')
