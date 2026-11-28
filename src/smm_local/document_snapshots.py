@@ -45,18 +45,32 @@ class Snapshots:
         return self.root/kind/digest
     def _gc_path(self,name):
         return self._directory('reclamation')/name
+    @contextmanager
+    def _gc_metadata_lock(self):
+        # Separate from capacity.lock: query readers never wait for content
+        # processing or network I/O.  Writers hold this only during atomic JSON
+        # replacement, preventing Windows readers from blocking that rename.
+        lock=self._directory('reclamation')/'metadata.lock'
+        if os.path.lexists(lock):
+            state=lock.lstat()
+            if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):
+                raise ValueError('回收元信息锁不能经过链接或特殊文件')
+        with control_lock(lock):yield
     def _gc_read(self,name,default):
         path=self.root/'reclamation'/name
         directory=path.parent
-        if os.path.lexists(directory):
-            state=directory.lstat()
-            if not stat.S_ISDIR(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):
-                raise ValueError('回收元信息目录不能经过链接或特殊文件')
-        if not os.path.lexists(path):return default
-        state=path.lstat()
-        if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):
-            raise ValueError('回收元信息不能经过链接或特殊文件')
-        return json.loads(path.read_text(encoding='utf-8'))
+        if not os.path.lexists(directory):return default
+        state=directory.lstat()
+        if not stat.S_ISDIR(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):
+            raise ValueError('回收元信息目录不能经过链接或特殊文件')
+        with self._gc_metadata_lock():
+            if not os.path.lexists(path):return default
+            state=path.lstat()
+            if not stat.S_ISREG(state.st_mode) or bool(getattr(state,'st_file_attributes',0)&getattr(stat,'FILE_ATTRIBUTE_REPARSE_POINT',0x400)):
+                raise ValueError('回收元信息不能经过链接或特殊文件')
+            return json.loads(path.read_text(encoding='utf-8'))
+    def _gc_write(self,name,value):
+        with self._gc_metadata_lock():atomic_json(self._gc_path(name),value)
     def _gc_owner(self,c=None):
         if c is None:
             with self.db.connect() as con:return self._gc_owner(con)
@@ -73,7 +87,7 @@ class Snapshots:
         if owner is None:return
         if owner not in values:
             owners[key]=sorted(values|{owner})
-            atomic_json(self._gc_path('owners.json'),owners)
+            self._gc_write('owners.json',owners)
     def retired(self,kind,ident):
         return ident in self._gc_read('retired.json',{}).get(kind,[])
     def _register_gc_owner(self):
@@ -83,7 +97,7 @@ class Snapshots:
         archives=self._gc_read('archives.json',{})
         value={'archive_id':archive,'database':str(self.db.db_path.resolve())}
         if archives.get(owner)!=value:
-            archives[owner]=value;atomic_json(self._gc_path('archives.json'),archives)
+            archives[owner]=value;self._gc_write('archives.json',archives)
         return owner
 
     def _foreign_gc_uses(self,owner,cids,aids):
@@ -262,7 +276,7 @@ class Snapshots:
         # Qualification fences precede every physical deletion, and are kept
         # outside SQLite so restoring an older DB cannot resurrect an identity.
         updated={'captures':sorted(cids),'attempts':sorted(aids)}
-        if updated!=retired:atomic_json(self._gc_path('retired.json'),updated)
+        if updated!=retired:self._gc_write('retired.json',updated)
         for folder,state in _states(self):
             if _expired(self,folder,state,time.time()):continue
             binding=state['binding']

@@ -14,7 +14,10 @@ def observe_open(event,args):
     digest=Path(path).name;token=sys.argv[sys.argv.index('--task-token')+1]
     entry=root/(digest+'.json')
     if not entry.exists():
-        entry.write_text(json.dumps({'path':path,'sha256':digest,'token':token,'pid':os.getpid(),'ppid':os.getppid(),'argv':sys.argv,'executable':sys.executable,'uid':os.getuid(),'entered_at':time.time()}),encoding='utf-8')
+        import psutil
+        pending=entry.with_suffix('.pending')
+        pending.write_text(json.dumps({'path':path,'sha256':digest,'token':token,'pid':os.getpid(),'created':psutil.Process().create_time(),'ppid':os.getppid(),'argv':sys.argv,'executable':sys.executable,'actual_executable':psutil.Process().exe(),'cwd':os.getcwd(),'uid':os.getuid(),'entered_at':time.time()}),encoding='utf-8')
+        pending.replace(entry)
     until=time.monotonic()+90
     while not (root/(digest+'.release')).exists() and not (root/'abort').exists():
         if time.monotonic()>until:raise RuntimeError('test raw gate release deadline exceeded')

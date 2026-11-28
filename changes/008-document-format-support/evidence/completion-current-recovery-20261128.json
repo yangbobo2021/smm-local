@@ -1,0 +1,126 @@
+{
+  "schema": "smm-008-current-recovery-completion-v1",
+  "date": "2026-11-28",
+  "previous_head": "e23384869f37c83c7b687e279b311f841b3bca29",
+  "product_change": {
+    "path": "src/smm_local/document_snapshots.py",
+    "sha256": "6ab3b0984577280f5a7cff8f5cb8808797157be8bcf1bda9b83b7aa94c5009fc",
+    "reason": "Windows own GC metadata reader can prevent atomic JSON replacement, causing a legitimate document update to fail while retaining the old publication.",
+    "change": "Short common metadata read/write lock for archives/owners/retired; no parser/network work under that lock, no capacity-lock reentry, existing restore exclusion covers reclamation."
+  },
+  "GC_TDD": {
+    "red": "red-completion-sc8-gc-read-sharing-v2",
+    "red_review": "review-completion-sc8-gc-read-sharing-red-v2",
+    "actual_red": "Windows 3 failed (each real WinError5 at publication) and1 real sharing-control passed,11.71s",
+    "green": "green-completion-sc8-gc-read-sharing-v1",
+    "green_review": "review-completion-sc8-gc-read-sharing-green-v1",
+    "actual_green": "Windows4passed12.95s; Mac relevant regression22passed2Windows-onlyskipped46.67s",
+    "scope": "C1 component. SSH Windows component actor was administrator; not E/H ordinary-client identity or actual Web update acceptance.",
+    "history": "red-v1 actual test faults/exe casing+collector symlink rejection was independently needs_revision, never expected_failure; runtime-v2 output-directory collision blocked, preserved; red-v2/green source and frozen tests independently verified."
+  },
+  "watch_formal": {
+    "local": "execute-completion-sc10-watch-local-v1 and review-completion-watch-local-execution-v1 passed41.41s",
+    "hub_v1": "insufficient_evidence: request used native default60s, raw remains; exact task orphan normalshutdown/tree+port absence independently documented",
+    "hub_v2": "execute-completion-sc10-watch-hub-v2 timeout300 and review-completion-watch-hub-execution-v2 passed241.79s",
+    "scope": "Full12-target watchdog-health matrix per creator, source=e233848 plus frozen test helper, before GC product change. Not proof on later changed source or fullSC10/E/H/X."
+  },
+  "minimum_current": {
+    "run": 46101806180,
+    "head": "e23384869f37c83c7b687e279b311f841b3bca29",
+    "result": "All3 actualOS Python3.11 minimum-installed scopes independently passed,1720 manifest originals verified. Each16 documents/208source text units/32source tables/152source cells;32fulltext/64table/304cell comparisons/32original downloads.",
+    "scope": "Before GC product change. Windows actual standard account+cleanup. POSIX only minimalCLI completion/source removal; no independent finaltree/ports sweep. Not fullE/H/X."
+  },
+  "source_repairs": {
+    "candidate_review": "source-repairs-candidate-review-v2.md passed scoped",
+    "actual": "source-repair-per-item-v3:28passed216.99sec;286before/end source bytes equal, separate per-item rawtrace namespace",
+    "scope": "Before GC product change. Covers service-owned refresh/reprocess read guards, published CID/AID barriers, exact download response, attempt.error, restore separators, existing historical LF bytes, actual launcher-tree identity; not proof of all Windows fixes.",
+    "UV_preparation": "Task-only copied build tool and SHA-bound controller PATH; design reviewed, actual Windows prepare/build still pending final CI.",
+    "history": "oldfullsource4edd:Linux345pass8fail14skip,Mac6fail,Windows15fail; allofficialZIP/GCM/rawtar retained. Frozen-single-dir v1 14pass1fail at publication barrier and overwritten old traces not relabelled."
+  },
+  "installed_protocol_candidate": {
+    "review": "installed-protocols-candidate-review-v3.md passed scopedF1-F7",
+    "actual": "Mac ordinary311 ready32-doc path/chooser/drop;32fulltext/72complete tables oracle positives +316negative mutations, allCLI/HTTP/realstdio/browser reads and normal no-pending restart withsource guards.",
+    "scope": "e233848 wheels; candidate ready/read subdomain only, not fullE/H/X."
+  },
+  "records": {
+    "red-completion-sc8-gc-read-sharing-v2": {
+      "operation": "tdd-red",
+      "sha256": "98dfe1acea853e666d7aeca0f37171603f7e646507370979c14a05473b7e281f",
+      "status": "red_observed",
+      "product_files": 64,
+      "test_files": 163,
+      "artifacts": 287
+    },
+    "green-completion-sc8-gc-read-sharing-v1": {
+      "operation": "tdd-green",
+      "sha256": "322fbcd1542c9eaf576f15821dde09898d10aa53548c069f588cd7e321bf5f27",
+      "status": "green_observed",
+      "product_files": 64,
+      "test_files": 163,
+      "artifacts": 293
+    },
+    "execute-completion-sc10-watch-local-v1": {
+      "operation": "execute",
+      "sha256": "da5d1649a77476571c98f2e4d2539bd35b7558f4669b21270c28cb743d501a50",
+      "status": "executed",
+      "product_files": 0,
+      "test_files": 0,
+      "artifacts": 6208
+    },
+    "execute-completion-sc10-watch-hub-v1": {
+      "operation": "execute",
+      "sha256": "60ed485c1516e5827a1868e354e3f8ad273bedef44435f3295054519adef9306",
+      "status": "executed",
+      "product_files": 0,
+      "test_files": 0,
+      "artifacts": 2026
+    },
+    "execute-completion-sc10-watch-hub-v2": {
+      "operation": "execute",
+      "sha256": "7e389a37361b534773a25f13b9f1b0951195c88dc2c6dfbc619d2e00375233f4",
+      "status": "executed",
+      "product_files": 0,
+      "test_files": 0,
+      "artifacts": 5963
+    }
+  },
+  "reports": {
+    "minimum-current-ci-independent-review.md": {
+      "path": "completion-current-minimum-current-ci-independent-review.md",
+      "original_sha256": "b4b8405fdbc1a7c95544f23ed1e5de374ed44e1da58138a47d0b7f0bb9cb3646",
+      "public_sha256": "b4b8405fdbc1a7c95544f23ed1e5de374ed44e1da58138a47d0b7f0bb9cb3646",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    },
+    "watch-formal-execution-review.md": {
+      "path": "completion-current-watch-formal-execution-review.md",
+      "original_sha256": "24e42438ddcbfd79c5468544d56ac193ebb5a2f4c006a93688719ae9767c6cc7",
+      "public_sha256": "24e42438ddcbfd79c5468544d56ac193ebb5a2f4c006a93688719ae9767c6cc7",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    },
+    "gc-sharing-red-review-v2.md": {
+      "path": "completion-current-gc-sharing-red-review-v2.md",
+      "original_sha256": "83559b6620b5e3fe92beb2057302b8632924e589212ee939649519745723b04e",
+      "public_sha256": "83559b6620b5e3fe92beb2057302b8632924e589212ee939649519745723b04e",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    },
+    "gc-sharing-green-review-v1.md": {
+      "path": "completion-current-gc-sharing-green-review-v1.md",
+      "original_sha256": "494a7a585713a5a5fc3b7100552647843711852bb5598a79a5835463bca9d22e",
+      "public_sha256": "494a7a585713a5a5fc3b7100552647843711852bb5598a79a5835463bca9d22e",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    },
+    "source-repairs-candidate-review-v2.md": {
+      "path": "completion-current-source-repairs-candidate-review-v2.md",
+      "original_sha256": "76290ffc039723f22256cc251a6a51a2a6433673ccd7e56acb8647a85af8dd7c",
+      "public_sha256": "76290ffc039723f22256cc251a6a51a2a6433673ccd7e56acb8647a85af8dd7c",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    },
+    "installed-protocols-candidate-review-v3.md": {
+      "path": "completion-current-installed-protocols-candidate-review-v3.md",
+      "original_sha256": "659aa891af4b8123e4a83c9422159eba17aeab8893026f7d7f4520294206a33d",
+      "public_sha256": "659aa891af4b8123e4a83c9422159eba17aeab8893026f7d7f4520294206a33d",
+      "redaction": "Only private checkout/home/test-host path prefixes; original unmodified reports and raw evidence remain private"
+    }
+  },
+  "remaining": "Current-source actual Web/Windows repairs and fullC1 CI/raw recovery; fullE1 threeOS lifecycle/relations/sync/deep windows/resource branches; H1-H5 three real services; X1 six actualOS directions; final requirement/PR independent review. PR remains draft, do not merge."
+}

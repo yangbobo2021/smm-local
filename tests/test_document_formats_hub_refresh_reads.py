@@ -5,7 +5,8 @@ from pathlib import Path
 import httpx,psutil,pytest
 from document_helpers import observe,ROOT
 from document_formats_partial_fixture import partial_pdf
-from document_formats_refresh_barrier import prepare_gate
+from document_formats_refresh_barrier import HOOK,prepare_gate
+from document_formats_platform import process_tree
 from test_document_formats_management import native_input
 from test_document_formats_retry import ENGINE,DATA,FONT,keep
 from test_document_formats_upload_restart import Server
@@ -56,8 +57,14 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
                     (controls if category=='controls' else targets).append(item);all_items.append(item)
                     keep('inputs/'+item['name'],raw);keep('truth/'+item['name']+'.json',json.dumps(truth,ensure_ascii=False).encode())
     assert len(controls)==8 and len(targets)==12 and len({i['sha256'] for i in all_items})==20
+    # Refresh/reprocess now execute in the actual Hub service.  Install the raw
+    # worker barrier before starting that service, not only in the CLI caller.
+    gate=server.root/'raw-gate';env=prepare_gate(gate,[server.root/'.document-snapshots'/'raw'/i['sha256'] for i in targets])
+    monkeypatch.setenv('SMM_008_QUERY_SCOPED_GUARD','1')
+    for name in ('SMM_008_REFRESH_GATE','SMM_008_REFRESH_RAW_PATHS'):monkeypatch.setenv(name,env[name])
+    (server.hooks/'sitecustomize.py').write_text('from document_formats_restart_server import install_audit\ninstall_audit()\n'+HOOK,encoding='utf-8')
     cli_prefix=[sys.executable,'-B','-m','smm_hub.cli','hub','--state-dir',str(server.root),'documents']
-    cli_runs=[];failed=[];observations=[];seen=set();baseline_readonly=None;baseline_source=None
+    cli_runs=[];failed=[];observations=[];seen=set();worker_tokens=set();baseline_readonly=None;baseline_source=None
     def cli(*args):
         argv=cli_prefix+list(map(str,args));r=subprocess.run(argv,cwd=server.root,capture_output=True,text=True,encoding='utf-8',timeout=90)
         observe('refresh-setup-cli',{'argv':argv,'exit':r.returncode,'stdout':r.stdout,'stderr':r.stderr});assert r.returncode==0,r.stderr
@@ -99,7 +106,7 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
         return True
     try:
         server.start(deny=[i['path'] for i in all_items]);server.client.timeout=httpx.Timeout(3)
-        probe=server.client.post('/__test_processing_probe');assert probe.status_code==200 and probe.json()=={'blocked':['processing','subprocess'],'pid':server.serving_pid}
+        probe=server.client.post('/__test_processing_probe');assert probe.status_code==200 and probe.json()=={'blocked':['processing','subprocess','source'],'pid':server.serving_pid}
         baseline_readonly=readonly.read_text();assert len(baseline_readonly.splitlines())==2
         baseline_source=server.log.read_text() if server.log.exists() else ''
         cli('processing-configure','--expected-revision',0,'--ocr-executable',ENGINE,'--ocr-data-dir',DATA,'--languages','chi_sim+eng')
@@ -115,7 +122,9 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
         for item in controls:
             assign_identity(item);hit,item['snapshot']=complete(item);item['reference']=hit['reference']
         assert len({i['id'] for i in controls})==8
-        gate=server.root/'raw-gate';env=prepare_gate(gate,[server.root/'.document-snapshots'/'raw'/i['sha256'] for i in targets])
+        # Product CLI must request execution from the enrolled service; the
+        # service's own environment carries the gate to its real content child.
+        env=dict(os.environ)
         by_sha={i['sha256']:i for i in targets}
         with ThreadPoolExecutor(max_workers=1) as pool:
             for source,group_items in sources:
@@ -131,7 +140,11 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
                             time.sleep(.02)
                         assert entry is not None,{'exit':process.poll(),'seen':sorted(seen)}
                         state=json.loads(entry.read_text());digest=state['sha256'];assert digest in by_sha and by_sha[digest] in group_items
-                        item=by_sha[digest];worker=psutil.Process(state['pid']);assert state['ppid']==worker.ppid()==process.pid and worker.is_running()
+                        item=by_sha[digest];worker=psutil.Process(state['pid']);tree=process_tree(server.serving_stamp)
+                        assert any(p['pid']==state['pid'] and p['created']==state['created'] for p in tree)
+                        assert state['ppid']==worker.ppid()==server.serving_pid and worker.is_running()
+                        assert state['created']==worker.create_time() and state['actual_executable']==worker.exe()
+                        assert Path(state['cwd']).resolve()==(server.root/'.document-snapshots/tasks'/state['token']).resolve()
                         assert Path(state['argv'][0]).resolve()==(ROOT/'src/smm_local/document_worker.py').resolve() and state['uid']==os.getuid()!=0
                         with sqlite3.connect('file:'+str(server.db)+'?mode=ro',uri=True) as c:
                             actual=c.execute('SELECT a.state,x.raw_sha256,d.path FROM document_processing_attempts a JOIN document_captures x ON x.id=a.capture_id JOIN documents d ON d.pk=x.document_pk WHERE a.id=?',(state['token'],)).fetchone()
@@ -143,7 +156,7 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
                             if not early:(gate/'abort').write_text('release remaining workers')
                             (gate/(digest+'.release')).write_text('release')
                         observe('refresh-before-release',{'worker':state,'controller_pid':process.pid,'controller_created':created,'control_ids':sorted(i['id'] for i in controls),'completed_correctly_before_release':early,'error':error})
-                        observations.append(early);seen.add(digest)
+                        observations.append(early);seen.add(digest);worker_tokens.add(state['token'])
                         if not early:failed.append(error);break
                 finally:
                     (gate/'abort').write_text('cleanup') if failed or sys.exc_info()[0] is not None else None
@@ -161,7 +174,10 @@ def test_hub_refresh_keeps_all_existing_control_reads_available(tmp_path,monkeyp
         for item in targets:assign_identity(item);complete(item)
         assert len({i['id'] for i in all_items})==20
         assert readonly.read_text()==baseline_readonly
-        assert (server.log.read_text() if server.log.exists() else '')==baseline_source
+        source_events=[e for e in server.events() if e['event']=='open']
+        assert source_events==[json.loads(line) for line in baseline_source.splitlines()]
+        worker_events=[e for e in server.events() if e['event']=='subprocess.Popen']
+        assert len(worker_tokens)==12 and worker_tokens<={e['task_token'] for e in worker_events}
         for item in all_items:assert item['path'].stat().st_mtime_ns==item['mtime_ns'] and item['path'].read_bytes()==item['raw']
         observe('refresh-all-controls-available',{'target_workers':len(seen),'old_control_documents':len(controls),'ready_and_partial':True,'ordinary_and_global':True,'all_old_refs_unchanged':True,'original_inputs_unchanged':20,'http_source_opens':0,'http_processing_events_after_positive_control':0})
     finally:

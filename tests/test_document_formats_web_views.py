@@ -54,7 +54,12 @@ def prepare(server,monkeypatch,*,empty=False):
             receipt=server.call('POST','/documents/uploads/'+started['upload_id']+'/commit',server.context).json();until=time.monotonic()+35
             while True:
                 entry=next(e for e in server.call('GET','/documents/library').json() if e['id']==receipt['document_id'])
-                if entry['latest_attempt']['status'] in {'ready','partial','failed','empty-success'}:break
+                attempt=entry['latest_attempt'];published=entry['published_snapshot']
+                assert attempt['capture_id']==receipt['capture_id'] and attempt['attempt_id']==receipt['attempt_id']
+                assert attempt['status']!='failed',entry
+                if (published and published['capture_id']==receipt['capture_id'] and
+                    attempt['status'] in {'ready','partial','empty-success'} and
+                    not entry['publication_pending'] and entry['version']==entry['processing_version']==1):break
                 assert time.monotonic()<until,entry;time.sleep(.05)
             status='empty-success' if empty else 'ready'
             assert entry['latest_attempt']['status']==entry['published_snapshot']['status']==status

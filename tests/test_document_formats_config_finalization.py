@@ -101,7 +101,9 @@ def test_configuration_changed_after_processing_has_terminal_failure_and_saved_b
             for marker in gate.glob('*.json'):
                 m=json.loads(marker.read_bytes())
                 if m['raw_sha256']!=hashlib.sha256(raw).hexdigest() or (gate/(m['attempt_id']+'.release')).exists() or (attempt and m['attempt_id']!=attempt):continue
-                if child is None:assert m['pid']==server.serving_pid
+                if child is None or owner=='hub':
+                    assert m['pid']==server.serving_stamp['pid'] and m['created']==server.serving_stamp['created']
+                    assert m['argv']==server.serving_stamp['argv']
                 else:
                     tree=process_tree(stamp);assert any(v['pid']==m['pid'] and v['created']==m['created'] for v in tree)
                     assert m['argv'][1:]==child.args[1:]

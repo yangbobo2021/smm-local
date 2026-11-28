@@ -1,17 +1,27 @@
 """Explicit isolated HTTP factory and child audit for development restart tests."""
-import json,os,sys,time
+import contextvars,json,os,sys,time
 from pathlib import Path
 from document_formats_platform import process_arguments, document_worker_token
+
+# sitecustomize imports this module before ``-m`` executes it as __main__.
+# Both module instances must use the same request context.
+if not hasattr(sys,'_smm_008_query_context'):
+    sys._smm_008_query_context=contextvars.ContextVar('smm_008_query_context',default=False)
+QUERY_CONTEXT=sys._smm_008_query_context
+
+
+def read_guard_active():
+    return not os.environ.get('SMM_008_QUERY_SCOPED_GUARD') or QUERY_CONTEXT.get()
 
 
 def audit(event,args):
     if event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
         value=os.path.normcase(os.path.abspath(os.fsdecode(args[0])))
         blocked={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ.get('SMM_008_RESTART_DENY','[]'))}
-        if value in blocked:
+        if value in blocked and read_guard_active():
             with open(os.environ['SMM_008_RESTART_AUDIT'],'a',encoding='utf-8') as out:out.write(json.dumps({'event':event,'path':value,'pid':os.getpid()})+'\n')
             raise RuntimeError('restart source read denied')
-    if event=='subprocess.Popen' and (log:=os.environ.get('SMM_008_WEB_READ_ONLY')):
+    if event=='subprocess.Popen' and (log:=os.environ.get('SMM_008_WEB_READ_ONLY')) and read_guard_active():
         with open(log,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'subprocess','pid':os.getpid()})+'\n')
         raise AssertionError('read-only browser phase attempted subprocess')
     if event=='subprocess.Popen':
@@ -57,10 +67,20 @@ def make_app():
     if readonly:=os.environ.get('SMM_008_WEB_READ_ONLY'):
         from smm_local.document_snapshots import Snapshots
         from smm_local import document_processing
-        def denied(*args,**kwargs):
-            with open(readonly,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'processing','pid':os.getpid()})+'\n')
-            raise AssertionError('read-only browser phase attempted processing')
-        Snapshots.process=denied;document_processing.process=denied
+        def guarded(original):
+            def call(*args,**kwargs):
+                if not read_guard_active():return original(*args,**kwargs)
+                with open(readonly,'a',encoding='utf-8') as out:out.write(json.dumps({'event':'processing','pid':os.getpid()})+'\n')
+                raise AssertionError('read-only browser phase attempted processing')
+            return call
+        Snapshots.process=guarded(Snapshots.process);document_processing.process=guarded(document_processing.process)
+        if os.environ.get('SMM_008_QUERY_SCOPED_GUARD'):
+            @app.middleware('http')
+            async def query_scope(request,call_next):
+                read=request.method=='GET' or request.url.path.rsplit('/',1)[-1] in {'search','read','original','__test_processing_probe'}
+                token=QUERY_CONTEXT.set(read)
+                try:return await call_next(request)
+                finally:QUERY_CONTEXT.reset(token)
         @app.post('/__test_processing_probe')
         def processing_probe():
             import subprocess
@@ -69,6 +89,11 @@ def make_app():
             except AssertionError:blocked.append('processing')
             try:child=subprocess.Popen([sys.executable,'-c','raise SystemExit(19)']);child.wait(timeout=5)
             except AssertionError:blocked.append('subprocess')
+            if os.environ.get('SMM_008_QUERY_SCOPED_GUARD'):
+                protected=json.loads(os.environ['SMM_008_RESTART_DENY'])
+                assert protected
+                try:Path(protected[0]).read_bytes()
+                except RuntimeError:blocked.append('source')
             return {'blocked':blocked,'pid':os.getpid()}
     @app.get('/__test_identity')
     def actual_identity():return {'pid':os.getpid(),'archive':str(db.db_path.resolve()),'owner':os.environ['SMM_008_TEST_OWNER'],'nonce':os.environ['SMM_008_TEST_NONCE']}

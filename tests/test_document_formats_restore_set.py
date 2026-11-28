@@ -89,7 +89,7 @@ def test_restore_manifest_copies_all_saved_snapshots_and_keeps_current_fence(tmp
         before=metadata(db)
         assert ('local_document_sync' in before)==(variant=='local-sync')
         snapshot=root/'.document-snapshots';assert snapshot.is_dir()
-        durable={str(p.relative_to(root)):p.read_bytes() for kind in ('raw','results','transfers') for p in (snapshot/kind).rglob('*') if p.is_file()}
+        durable={p.relative_to(root).as_posix():p.read_bytes() for kind in ('raw','results','transfers') for p in (snapshot/kind).rglob('*') if p.is_file()}
         assert len([p for p in durable if '/raw/' in p])==6
         assert len([p for p in durable if '/results/' in p])==4
         assert all(hashlib.sha256(raw).hexdigest()==Path(name).name for name,raw in durable.items() if '/raw/' in name or '/results/' in name)

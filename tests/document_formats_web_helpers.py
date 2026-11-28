@@ -79,13 +79,19 @@ class Browser:
     def info(self):return self.action('original-info',self.page.locator('#'+self.prefix+'-original-info-load').click)
     def screenshot(self,name):self.page.screenshot(path=str(self.evidence/(self.owner+'-'+name+'.png')),full_page=True)
     def download(self,button,item):
-        with self.page.expect_download() as happened:button.click()
+        # A download event can precede the response observer finishing its body.
+        # Bind to this click's response rather than the last previous download.
+        url=self.base+self.server.prefix+'/documents/original'
+        with self.page.expect_response(lambda r:r.url==url and r.request.method=='POST') as response:
+            with self.page.expect_download() as happened:button.click()
+        original=response.value
         download=happened.value;assert download.failure() is None
         raw=Path(download.path()).read_bytes();assert raw==item['raw']
         assert hashlib.sha256(raw).hexdigest()==item['sha256'];keep('downloads/'+item['sha256']+'.'+item['format'],raw)
         assert download.suggested_filename and '/' not in download.suggested_filename and chr(92) not in download.suggested_filename
-        req=next(e for e in reversed(self.events) if e['method']=='POST' and e['path']==self.server.prefix+'/documents/original')
-        assert req['status']==200 and req['bytes']==len(raw) and req['sha256']==item['sha256']
+        response_raw=original.body()
+        assert original.status==200 and response_raw==raw and hashlib.sha256(response_raw).hexdigest()==item['sha256']
+        req={'status':original.status,'bytes':len(response_raw),'sha256':hashlib.sha256(response_raw).hexdigest(),'request':json_body(original.request)}
         observe('web-real-download',{'owner':self.owner,'document_id':item['id'],'sha256':item['sha256'],'bytes':len(raw),'suggested_filename':download.suggested_filename,'request_reference':req['request']['reference']})
         return req['request']['reference']
     def __exit__(self,kind,error,tb):

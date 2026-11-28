@@ -97,7 +97,7 @@ def assert_ui_snapshot(page,owner,entry,format):
     if row.locator('details').get_attribute('open') is None:row.locator('summary').click()
     for field in ('published_snapshot','latest_attempt','retry_target'):
         expected=entry[field]
-        if field=='latest_attempt':expected={k:expected[k] for k in ('capture_id','attempt_id','status','config_revision')}
+        if field=='latest_attempt':expected={k:expected[k] for k in ('capture_id','attempt_id','status','config_revision','error')}
         actual=json.loads(row.locator('[data-native-detail='+field+']').inner_text())
         assert actual==expected
     return row
@@ -191,7 +191,12 @@ def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypa
                 deadline=time.monotonic()+45
                 while True:
                     listing=server.call('GET','/documents/library?project_id='+str(project['id'])).json()
-                    if len(listing)==3*wave and all((e.get('latest_attempt') or {}).get('status') in {'ready','partial','failed'} for e in listing):break
+                    assert all((e.get('latest_attempt') or {}).get('status')!='failed' for e in listing),listing
+                    if len(listing)==3*wave and all(
+                        (e.get('latest_attempt') or {}).get('status')=='ready' and
+                        e.get('published_snapshot') and not e['publication_pending'] and
+                        e['published_snapshot']['capture_id']==e['latest_attempt']['capture_id']
+                        for e in listing):break
                     assert not any('失败' in s for s in page.locator('#'+prefix+'-upload-results li').all_text_contents()),events
                     assert time.monotonic()<deadline,listing;page.wait_for_timeout(100)
                 assert {e['sha256'] for e in listing}=={i['sha256'] for i in project_items+items}

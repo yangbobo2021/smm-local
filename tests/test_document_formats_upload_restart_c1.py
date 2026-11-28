@@ -146,7 +146,12 @@ def test_restart_preserves_partial_empty_and_old_publication_with_pending_replac
         until=time.monotonic()+45
         while True:
             current=listed()
-            if all(row['latest_attempt']['status'] in {'ready','partial','empty-success','failed'} for row in current.values()):return current
+            terminal=all(row['latest_attempt']['status'] in {'ready','partial','empty-success','failed'} for row in current.values())
+            published=all(row['latest_attempt']['status']=='failed' or (
+                row['published_snapshot'] and not row['publication_pending'] and
+                row['published_snapshot']['capture_id']==row['latest_attempt']['capture_id']
+            ) for row in current.values())
+            if terminal and published:return current
             assert time.monotonic()<until,'saved state matrix did not settle'
             time.sleep(.03)
     def check_lists():

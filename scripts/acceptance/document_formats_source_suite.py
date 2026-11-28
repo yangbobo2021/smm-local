@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import shutil
 import stat
 import subprocess
 import sys
@@ -35,11 +36,21 @@ def prepare(work, materials, browsers, test_files=None):
     work = work.resolve()
     work.mkdir(parents=True, exist_ok=True)
     assert not (work / 'target.json').exists(), 'target inputs already bound'
+    # A credentialed Windows child does not inherit setup-uv's updated PATH.
+    # Give this task its own exact tool copy, without granting access to an
+    # administrator profile or relying on the child's login environment.
+    uv = Path(shutil.which('uv') or (Path.home() / '.local/bin/uv')).resolve()
+    assert uv.is_file(), 'prepare the build tool before source regression'
+    tools = work / 'tools'
+    tools.mkdir()
+    executable = tools / ('uv.exe' if os.name == 'nt' else 'uv')
+    shutil.copy2(uv, executable)
     actual_head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     config = {'purpose': 'C1 source only; not installed E/H/X', 'head': actual_head,
               'expected_system': platform.system(), 'materials': str(materials.resolve()),
               'browsers': str(browsers.resolve()), 'bindings': bindings(), 'test_files': test_files or [],
               'selection': 'explicit orchestration smoke subset' if test_files else 'all document source tests',
+              'uv_tool': {'path': str(executable), 'sha256': hashlib.sha256(executable.read_bytes()).hexdigest()},
               'read_paths': [str(ROOT / '.venv'), str(materials.resolve().with_suffix('')),
                              str(browsers.resolve()), str(Path(getattr(sys, '_base_executable', sys.executable)).parent)]}
     write(work / 'target.json', config)
@@ -80,6 +91,10 @@ def run_checked(config_path, output):
            'SMM_CLAUDE_ROOT': str(empty), 'SMM_008_OCR_EXECUTABLE': materials['ocr_executable'],
            'SMM_008_OCR_DATA': materials['ocr_data_dir'], 'SMM_008_FONT': materials['font']['path'],
            'PLAYWRIGHT_BROWSERS_PATH': config['browsers']}
+    if tool := config.get('uv_tool'):
+        executable = Path(tool['path'])
+        assert hashlib.sha256(executable.read_bytes()).hexdigest() == tool['sha256']
+        env['PATH'] = str(executable.parent) + os.pathsep + env.get('PATH', '')
     argv = [sys.executable, '-I', '-X', 'utf8', str(Path(__file__).resolve()), '--inner',
             '--target-config', str(config_path.resolve()), '--output', str(output.resolve())]
     try:
@@ -96,7 +111,8 @@ def run_checked(config_path, output):
         raise
 
 
-def inner(output, config_path):
+def item_evidence(output):
+    """One raw namespace per actual pytest item, including targeted replays."""
     import pytest
     mapping = {}
 
@@ -119,6 +135,16 @@ def inner(output, config_path):
                 else:
                     os.environ['ACCEPTANCE_EVIDENCE_DIR'] = old
 
+    return PerItem()
+
+
+def inner(output, config_path):
+    # This controller deliberately runs under -I.  Source contract tests may
+    # import the repository's scripts namespace; product installation probes
+    # keep their own isolated environments and never inherit this path.
+    sys.path.insert(0, str(ROOT))
+    import pytest
+
     config = json.loads(config_path.read_text(encoding='utf-8-sig'))
     selected = ([ROOT / p for p in config['test_files']] if config['test_files'] else
                 sorted({*ROOT.joinpath('tests').glob('test_document*.py'), *ROOT.joinpath('tests').glob('test_hub_documents*.py')}))
@@ -126,7 +152,7 @@ def inner(output, config_path):
     args = ['-q', '--tb=short', '--junitxml', str(output / 'junit.xml'), '--basetemp', str(output.parent / 'pytest-tmp'),
             *[str(p) for p in selected]]
     write(output / 'pytest-selection.json', {'argv': args, 'files': [p.relative_to(ROOT).as_posix() for p in selected]})
-    raise SystemExit(pytest.main(args, plugins=[PerItem()]))
+    raise SystemExit(pytest.main(args, plugins=[item_evidence(output)]))
 
 
 def collect(work, materials, output, context_path):

@@ -5,6 +5,7 @@ from pathlib import Path
 
 HOOK = r'''
 import json,os,sys,time
+import psutil
 from pathlib import Path
 protected={os.path.normcase(os.path.abspath(p)) for p in json.loads(os.environ['SMM_008_INFLIGHT_SOURCES'])}
 def audit(event,args):
@@ -17,7 +18,8 @@ original=document_supervisor.run
 def paused(db,request,task_directory):
     signal=Path(os.environ['SMM_008_INFLIGHT_ENTERED'])
     temporary=signal.with_suffix('.pending')
-    temporary.write_text(json.dumps({'task_token':request['task_token'],'raw_sha256':request['raw_sha256'],'raw':request['raw'],'format':request['format'],'pid':os.getpid()}),encoding='utf-8')
+    actor=psutil.Process()
+    temporary.write_text(json.dumps({'task_token':request['task_token'],'raw_sha256':request['raw_sha256'],'raw':request['raw'],'format':request['format'],'pid':actor.pid,'created':actor.create_time(),'argv':actor.cmdline(),'exe':actor.exe()}),encoding='utf-8')
     os.replace(temporary,signal)
     release=Path(os.environ['SMM_008_INFLIGHT_RELEASE']);deadline=time.monotonic()+30
     while not release.exists():

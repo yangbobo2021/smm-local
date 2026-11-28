@@ -9,6 +9,8 @@ import subprocess
 import sys
 import time
 import pytest
+import psutil
+from document_formats_platform import spawn_identity,process_tree,same_existing_path
 from document_helpers import Fixture, observe, deny_source_reads
 from document_formats_fixtures import docx_fixture
 from document_formats_partial_fixture import partial_pdf
@@ -141,13 +143,19 @@ def test_cached_reprocess_keeps_old_views_for_ready_and_partial(tmp_path,monkeyp
         for field in ('capture_id','expected_attempt_id','expected_version','expected_processing_version'):
             command+=['--'+field.replace('_','-'),str(target[field])]
         process=subprocess.Popen(command,env=env,cwd=f.root,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8',start_new_session=os.name!='nt')
+        launcher=spawn_identity(psutil.Process(process.pid))
         stdout=stderr=''
         try:
             deadline=time.monotonic()+20
             while not entered.exists() and process.poll() is None and time.monotonic()<deadline:time.sleep(.01)
             assert entered.exists(),{'exit':process.poll(),'phase':'CLI never reached actual supervisor barrier'}
             request=json.loads(entered.read_text())
-            assert request['pid']==process.pid and request['raw_sha256']==entry['sha256']
+            members=process_tree(launcher)
+            worker=next(p for p in members if p['pid']==request['pid'] and p['created']==request['created'])
+            assert request['argv']==worker['argv'] and request['argv'][1:]==command[1:]
+            assert same_existing_path(request['exe'],worker['exe'])
+            assert any(same_existing_path(request['exe'],p) for p in (sys.executable,getattr(sys,'_base_executable',sys.executable),psutil.Process().exe()))
+            assert request['raw_sha256']==entry['sha256']
             assert Path(request['raw']).name==entry['sha256'] and not any(Path(request['raw'])==value['path'] for value in all_items.values())
             during={value['id']:value for value in f.files(source)}[entry['id']]
             assert during['published_snapshot']==entry['published_snapshot']
