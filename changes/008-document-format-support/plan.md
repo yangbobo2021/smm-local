@@ -445,3 +445,5 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 2026-11-28 服务导入红灯闭环：10d真实SCM Word复验46133972702完整191成员认证回收并取得独立执行passed，实际服务Job worker完成发布，标准账户检索/读回正确，原失败保留。仅关闭该导入缺陷，不认完整H；防火墙前后0只证明无残留，未冒称删除了存在规则。
 
 继续新增统一安装态生命周期与原生服务驱动，普通E沿用同一业务/断言，由真实三OS身份分别执行；POSIX H使用实际system launchd/user-systemd而非前景等价。新Web创建项目四资料用独立命名，不复写已有fixture原件；缺语言期间读原生三格式和已接收扫描件，真实OCR进程与native stop发出相配，停后启前须未发布才认中断，pending同AID或failed按公共retry_target同CID新AID恢复分别记录。测试设施调整：HTTP解析前持久保存原status/bytes；详情截图绑定同一handle展开及JSON/几何前后，拒收图原字节保留；任务门由.pth显式绑定参数以适配服务无登录环境；默认关闭检查历代正文/身份/结构文件名，授权前先全SHA验证接收缓存，合法received全offset复用不强制重发，冷raw/result仍实际观测且逐origin公开完整读回不减。E7实际SQLite I/O根因未定；E8重绘折叠、E9文件名桥接、E10过严缓存重发控制分别独审为设施问题，均保留失败，不改判整E通过。完整E、H三服务、当前CI原件及最终PR Review/需求判定继续；入口evidence/completion-lifecycle-native-candidates-20261128.json。
+
+2026-11-28 生命周期设施续修：项目归属拒绝测试通过真实sources的source_id→revision映射取比较值，不要求files提供未约定字段；完整读回增加独立Unicode/LF窗口公式，实际网页选择合法limit=50，并核可见全文和逐格坐标/跨度/文本全集。可选Playwright导入移到实际浏览器测试函数内，普通CI无acceptance依赖时仍可收集并明确skip，不能用该skip代替E/H。真实Chrome正文/表格观察正反控制另运行。E12已进入真实重启后的读回，但本机SQLite I/O/Tracing.stop ENOSPC造成未完成，原失败、不可正常打开的trace和实际PNG均保留，不改判通过；已结束环境及浏览器证据完整SHA校验后无损归档到任务私有测试机，后续以提交冻结的真实三OS CI重验，避免本机空间继续干扰。方法增强不修改SPEC义务。

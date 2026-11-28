@@ -16,6 +16,8 @@ def verify(probe, projected):
         if (s.get('origin') or {}).get('device_id') == probe.device_identities['a']
         and projected['id'] in s['project_ids'])
     before = {role: rows(probe, role) for role in ('a', 'hub')}
+    source_revisions = {role: {source['id']: source['revision']
+        for source in probe.cli(role, 'documents', 'sources')} for role in ('a', 'hub')}
     snapshots = {i['id']: snapshot(probe, {**i, 'version': i.get('version', 1),
         'processing_version': i.get('processing_version', 1)}) for i in (local, native)}
     probe.phase = 'read-only'
@@ -42,7 +44,7 @@ def verify(probe, projected):
         key = target_project['source_key'] if role == 'hub' else target_project['stable_key']
         comparison = dict(project_id=target_project['id'], project_key=key,
             expected_version=item.get('version', 1), expected_processing_version=item.get('processing_version', 1),
-            expected_revision=creator['source_revision'], capture_id=capture,
+            expected_revision=source_revisions['a' if role == 'hub' else 'hub'][creator['source_id']], capture_id=capture,
             expected_attempt_id=latest['attempt_id'])
         denied = probe.request(role, probe.path(role, '/documents/library/' + item['id']),
             probe.body(role, **comparison), method='DELETE', code=400)

@@ -17,6 +17,23 @@ def fields(value, keys):
     return {key: value[key] for key in keys if key in value}
 
 
+def visible_table(browser, table):
+    """Check actual rendered cell coordinates, spans and text, not HTTP alone."""
+    from playwright.sync_api import expect
+    root = browser.page.locator('#' + browser.prefix + '-table-cells')
+    expect(root).to_be_visible()
+    nodes = root.locator('[data-row][data-column]')
+    assert nodes.count() == len(table['cells'])
+    for cell in table['cells']:
+        node = root.locator('[data-row="' + str(cell['row']) + '"][data-column="' + str(cell['column']) + '"]')
+        expect(node).to_have_count(1)
+        assert node.get_attribute('rowspan') == str(cell['row_span'])
+        assert node.get_attribute('colspan') == str(cell['column_span'])
+        button = node.locator('[data-cell-text]')
+        expect(button).to_be_visible()
+        assert button.text_content() == (cell.get('text') or '')
+
+
 def failed_detail(probe, item, entry, stage):
     """Inspect the actual visible failure and the exact retry comparison values."""
     from playwright.sync_api import expect
@@ -142,6 +159,7 @@ def replay(probe, cases, phase, saved=None):
         assert output.read_bytes() == case['item']['raw']
     for role in ('a', 'hub'):
         with probe.browser(role, phase) as browser:
+            browser.page.locator('#' + browser.prefix + '-limit').select_option('50')
             for case in (case for case in cases if case['role'] == role):
                 item, key = case['item'], case['key']
                 result = browser.search(case['project'], item['query'], remote=case['remote'])
@@ -161,8 +179,13 @@ def replay(probe, cases, phase, saved=None):
                         browser.page.locator('#' + browser.prefix + '-table-select').select_option(body['table_id'])
                         value = browser.table_range((body['row_start'], body['row_end'] - 1,
                             body['column_start'], body['column_end'] - 1))
+                        visible_table(browser, wanted)
                     else:
                         value = browser.text_range(body['start'], body['end'])
+                        from playwright.sync_api import expect
+                        node = browser.page.locator('#doc-reader-text' if role == 'a' else '#hub-read-text')
+                        expect(node).to_be_visible()
+                        assert node.text_content() == wanted['text']
                     assert fields(value, keys) == fields(wanted, keys), (key, body)
                 browser.download(browser.page.locator('#' + browser.prefix + '-original-download'), item)
                 if saved:

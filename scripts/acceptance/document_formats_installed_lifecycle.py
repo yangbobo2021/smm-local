@@ -120,6 +120,12 @@ def snapshot(probe, item, *, reference=None):
         reference=ref, start=0, end=hit['text_length']))
     for key in ('origin', 'format', 'sha256', 'text_sha256', 'result_sha256', 'version', 'processing_version', 'processing_status'):
         assert value[key] == hit[key]
+    assert value['text'] and value['text_length'] == len(value['text'])
+    assert (value['start'], value['end']) == (0, len(value['text']))
+    assert (value['start_line'], value['end_line']) == (1, 1 + value['text'].count('\n', 0, len(value['text']) - 1))
+    assert hit['text'] == value['text'][hit['start']:hit['end']]
+    assert hit['start_line'] == 1 + value['text'].count('\n', 0, hit['start'])
+    assert hit['end_line'] == 1 + value['text'].count('\n', 0, hit['end'] - 1)
     if item.get('status') == 'partial':
         assert value['text'] == item['truth']['anchor']
         assert {unit['page'] for unit in value['coverage']['units']} == {1, 2}

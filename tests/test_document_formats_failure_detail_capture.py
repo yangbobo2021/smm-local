@@ -6,7 +6,6 @@ import os
 from pathlib import Path
 import sys
 
-from playwright.sync_api import ElementHandle, sync_playwright
 import pytest
 
 from document_helpers import observe
@@ -18,6 +17,7 @@ pytestmark = pytest.mark.skipif(not (os.environ.get('SMM_008_TEST_BROWSER') or o
 
 
 def test_capture_reopens_actual_replacement_and_rejects_wrong_panel(tmp_path, monkeypatch):
+    from playwright.sync_api import ElementHandle, sync_playwright
     entry = {'id': 'failure-detail-control', 'display_name': 'same.docx', 'version': 0, 'processing_version': 0,
         'published_snapshot': None, 'latest_attempt': {'capture_id': 'c', 'attempt_id': 'a', 'status': 'failed',
             'config_revision': 1, 'error': 'independent missing language'}, 'retry_target': {'capture_id': 'c'}}
@@ -54,4 +54,31 @@ def test_capture_reopens_actual_replacement_and_rejects_wrong_panel(tmp_path, mo
                     patch.setattr(ElementHandle, 'screenshot', wrong_screenshot)
                     with pytest.raises(AssertionError):capture(page, owner, entry, 'docx', tmp_path / (owner + '-wrong.png'))
                 observe('actual-detail-capture-controls-' + owner, result)
+        finally:browser.close()
+
+
+def test_visible_table_checks_real_coordinates_spans_and_text(tmp_path):
+    from playwright.sync_api import sync_playwright
+    from types import SimpleNamespace
+    from document_formats_lifecycle_readback import visible_table
+    table = {'cells': [{'row': 1, 'column': 1, 'row_span': 1, 'column_span': 2, 'text': '独立表头'},
+                       {'row': 2, 'column': 1, 'row_span': 1, 'column_span': 1, 'text': '73428'}]}
+    markup = '<table><tbody id="hub-table-cells"><tr><td data-row="1" data-column="1" rowspan="1" colspan="2"><button data-cell-text>独立表头</button></td></tr><tr><td data-row="2" data-column="1" rowspan="1" colspan="1"><button data-cell-text>73428</button></td></tr></tbody></table>'
+    with sync_playwright() as runtime:
+        browser = runtime.chromium.launch(headless=True, **({'executable_path': os.environ['SMM_008_TEST_BROWSER']} if os.environ.get('SMM_008_TEST_BROWSER') else {}))
+        try:
+            page = browser.new_page()
+            probe = SimpleNamespace(page=page, prefix='hub')
+            page.set_content(markup)
+            visible_table(probe, table)
+            for script in [
+                'document.querySelectorAll("[data-row]")[1].remove()',
+                'document.querySelectorAll("[data-row]")[1].dataset.column="2"',
+                'document.querySelectorAll("[data-row]")[0].colSpan=1',
+                'document.querySelectorAll("[data-row]")[1].querySelector("button").textContent="foreign"',
+            ]:
+                page.set_content(markup)
+                page.evaluate(script)
+                with pytest.raises(AssertionError):visible_table(probe, table)
+            page.screenshot(path=str(tmp_path/'actual-render-control.png'))
         finally:browser.close()
