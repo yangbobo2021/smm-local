@@ -103,6 +103,46 @@ def assert_ui_snapshot(page,owner,entry,format):
     return row
 
 
+def assert_ui_ids(page,owner,expected,stage,*,timeout=20):
+    """Read every rendered row, including duplicates and foreign-project rows."""
+    expected=sorted(expected);assert len(expected)==len(set(expected))
+    selector='#doc-library-list .result' if owner=='local' else '#hub-library-list .result'
+    deadline=time.monotonic()+timeout
+    while True:
+        labels=page.locator(selector).evaluate_all('(rows)=>rows.map(row=>row.querySelector(":scope > p")?.textContent)')
+        matches=[re.fullmatch(r'.* · 文档 (\S+) · 版本 \d+ / 来源 \d+',label or '') for label in labels]
+        actual=sorted(match[1] for match in matches if match is not None)
+        if len(actual)==len(labels) and actual==expected:break
+        assert time.monotonic()<deadline,{'stage':stage,'expected':expected,'labels':labels,'actual':actual}
+        page.wait_for_timeout(50)
+    observe('web-library-ui-id-set',{'owner':owner,'stage':stage,'expected':expected,'actual':actual,'labels':labels})
+
+
+def test_web_library_id_observer_rejects_incomplete_duplicate_and_foreign_rows():
+    from playwright.sync_api import sync_playwright
+    # Synthetic DOM only exercises the observer; product paths run below.
+    with sync_playwright() as pw:
+        browser=pw.chromium.launch(headless=True)
+        try:
+            page=browser.new_page()
+            for owner,box in (('local','doc-library-list'),('hub','hub-library-list')):
+                def rows(ids):
+                    page.set_content('<div id="'+box+'">'+''.join('<div class="result"><p>same.docx · 文档 '+id+' · 版本 1 / 来源 1</p></div>' for id in ids)+'</div>')
+                rows(['beta','alpha']);assert_ui_ids(page,owner,['alpha','beta'],'positive',timeout=0)
+                rejected=0
+                for ids in (['alpha'],['beta'],['alpha','alpha'],['alpha','beta','foreign'],['alpha','foreign'],['alpha','beta','beta']):
+                    rows(ids)
+                    with pytest.raises(AssertionError):assert_ui_ids(page,owner,['alpha','beta'],'negative',timeout=0)
+                    rejected+=1
+                rows(['alpha'])
+                with pytest.raises(AssertionError):assert_ui_ids(page,owner,[],'stale-project',timeout=0)
+                page.set_content('<div id="'+box+'"><div class="result"><p>invalid</p></div></div>')
+                with pytest.raises(AssertionError):assert_ui_ids(page,owner,[],'unparseable-row',timeout=0)
+                rows([]);assert_ui_ids(page,owner,[],'empty-positive',timeout=0)
+                observe('web-library-id-observer-controls',{'owner':owner,'positive':2,'rejected':rejected+2})
+        finally:browser.close()
+
+
 @pytest.mark.parametrize('owner',['local','hub'])
 def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypatch):
     # TC-008-web-native-upload: real app, ordinary chooser/global drag, two inputs per format.
@@ -156,6 +196,7 @@ def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypa
             page.wait_for_load_state('networkidle')
             expect(page.locator(selector)).to_have_value(str(project['id']))
             project_items=[]
+            assert_ui_ids(page,owner,[],variant+'-project-selected-empty')
             for wave in (1,2):
                 gate.unlink(missing_ok=True);items=[];event_start=len(events)
                 for format in ('docx','xlsx','pdf'):
@@ -185,6 +226,12 @@ def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypa
                     row=assert_ui_snapshot(page,owner,entry,item['format'])
                     assert not re.search(r'\bready\b|已可检索|可立即.*检索',row.inner_text()+' '+page.locator('#notice').inner_text()+' '+page.locator('#'+prefix+'-upload-results').inner_text())
                     assert server.call('POST','/documents/search',{**server.context,'query':item['truth']['words'][0].split()[0],'scope':'project','project_id':project['id'],**({'local':True} if owner=='local' else {})}).json()['results']==[]
+                assert_ui_ids(page,owner,[i['entry']['id'] for i in project_items+items],variant+'-'+str(wave)+'-pending')
+                for retained in project_items:
+                    current=next(e for e in pending if e['id']==retained['entry']['id'])
+                    assert current==retained['entry']
+                    assert_ui_snapshot(page,owner,retained['entry'],retained['format'])
+                    verify_original(server,retained,project)
                 assert_upload_events(items,events[event_start:],responses,project,server.context,owner)
                 page.screenshot(path=str(evidence/(owner+'-'+variant+'-'+str(wave)+'-pending.png')),full_page=True)
                 gate.touch()
@@ -207,6 +254,7 @@ def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypa
                     assert_ui_snapshot(page,owner,entry,item['format'])
                 for retained in project_items:
                     assert_ui_snapshot(page,owner,retained['entry'],retained['format'])
+                assert_ui_ids(page,owner,[i['entry']['id'] for i in project_items+items],variant+'-'+str(wave)+'-ready')
                 page.screenshot(path=str(evidence/(owner+'-'+variant+'-'+str(wave)+'.png')),full_page=True);all_items.extend(items);project_items.extend(items)
                 for old in all_items:
                     current=next(e for e in server.call('GET','/documents/library').json() if e['id']==old['entry']['id'])
@@ -218,6 +266,11 @@ def test_web_creators_select_and_drop_each_native_format(tmp_path,owner,monkeypa
                     assert time.monotonic()<until,gates;page.wait_for_timeout(50)
                 assert not errors,errors
         assert len({i['entry']['id'] for i in all_items})==12
+        for project in (ordinary,global_project):
+            page.locator(selector).select_option(str(project['id']))
+            expect(page.locator(selector)).to_have_value(str(project['id']))
+            page.wait_for_load_state('networkidle')
+            assert_ui_ids(page,owner,[i['entry']['id'] for i in all_items if i['project']['id']==project['id']],'final-switch-'+str(project['id']))
         assert {e['id'] for e in server.call('GET','/documents/files').json()}=={i['entry']['id'] for i in all_items}
         for item in all_items:verify_original(server,item,item['project'])
         assert all(urlsplit(base+e['path']).hostname=='127.0.0.1' and 'token=' not in e['path'] for e in events)
