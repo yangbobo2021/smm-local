@@ -58,12 +58,12 @@ finally {
     if ($owner.User -eq $name) {$remaining+=$process.ProcessId;& taskkill.exe /PID $process.ProcessId /T /F 2>&1|Out-Null}
   }
   $report.unexpected_remaining_pids=$remaining
-  if ($created) {Remove-LocalUser -Name $name -ErrorAction SilentlyContinue}
   $revoke=@($Work,$Workspace,$ReadPath)+@($target.read_paths)
   foreach ($path in ($revoke|Where-Object {$_}|Select-Object -Unique)) {
-    & icacls.exe $path /remove:g ($env:COMPUTERNAME+'\'+$name) /T 2>&1|Out-Null
+    & icacls.exe $path /remove:g ('*'+$report.expected_sid) /T 2>&1|Out-Null
     if ($LASTEXITCODE -ne 0) {$report.cleanup_error='Task account ACL removal failed'}
   }
+  if ($created) {Remove-LocalUser -Name $name -ErrorAction SilentlyContinue}
   if ($startedSecondary) {Stop-Service seclogon -ErrorAction SilentlyContinue}
   $report.account_absent=$null -eq (Get-LocalUser -Name $name -ErrorAction SilentlyContinue)
   $report.secondary_final=(Get-Service seclogon).Status.ToString()
