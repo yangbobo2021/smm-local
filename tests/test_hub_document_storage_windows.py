@@ -90,6 +90,9 @@ def test_managed_hub_atomic_role_directories_and_existing_acl_safety(tmp_path):
     junction = snapshots.root / 'junction'
     subprocess.run(['cmd.exe', '/c', 'mklink', '/J', str(junction), str(root)], check=True, capture_output=True)
     try:
+        from smm_local.documents import _link
+        assert _link(junction) is True and _link(root) is False
+        with pytest.raises(FileNotFoundError):_link(root / 'missing')
         with pytest.raises(ValueError, match='junction'):
             snapshots._directory('junction/escape')
         assert not (root / 'escape').exists()
@@ -103,3 +106,45 @@ def test_managed_hub_atomic_role_directories_and_existing_acl_safety(tmp_path):
     with pytest.raises(ValueError, match='权限|所有者'):
         Directories(broad).create(broad / '.document-snapshots' / 'raw')
     assert not (broad / '.document-snapshots').exists()
+
+
+@pytest.mark.parametrize('path,expected', [
+    (r'\\server\share',True),('\\\\server\\share\\',True),
+    ('\\\\?\\UNC\\server\\share\\',True),(r'\\?\unc\server\share',True),
+    (r'\\server\share\child',False),(r'\\.\C:',False),(r'\\.\pipe',False),
+    (r'\\?\C:\\',False),(r'\\server\share:ads',False),(r'C:\\',False),
+    (r'\\server\..',False),(r'\\server\sha?re',False),
+])
+def test_unc_fallback_excludes_descendants_devices_and_streams(path,expected):
+    from smm_local.document_windows import _unc_share_root
+    assert _unc_share_root(path) is expected
+
+
+@pytest.mark.skipif(sys.platform != 'win32', reason='requires Windows error classification')
+def test_windows_link_attribute_errors_and_unc_fallback(monkeypatch):
+    import ctypes
+    from types import SimpleNamespace
+    import smm_local.document_windows as module
+    class MissingAttributes:
+        def __call__(self,name):return 0xffffffff
+    monkeypatch.setattr(module,'kernel',lambda:SimpleNamespace(GetFileAttributesW=MissingAttributes()))
+    code=[53];monkeypatch.setattr(ctypes,'get_last_error',lambda:code[0])
+    calls=[]
+    def lstat(path):
+        calls.append(str(path));return SimpleNamespace(st_file_attributes=0x400)
+    monkeypatch.setattr(Path,'lstat',lstat)
+    root=r'\\server\share'
+    assert module.reparse_point(root) is True and calls==[str(Path(root))]
+    calls.clear()
+    for name in (r'\\server\share\child',r'\\.\pipe',r'\\?\C:\\',r'\\server\share:ads'):
+        with pytest.raises(OSError) as error:module.reparse_point(name)
+        assert error.value.winerror==53 and error.value.filename==name and not calls
+    for number,expected in ((5,PermissionError),(2,FileNotFoundError)):
+        code[0]=number
+        with pytest.raises(expected) as error:module.reparse_point(root)
+        assert error.value.winerror==number and error.value.filename==root and not calls
+    code[0]=53;failure=PermissionError('fallback denied')
+    def denied(path):raise failure
+    monkeypatch.setattr(Path,'lstat',denied)
+    with pytest.raises(PermissionError) as error:module.reparse_point(root)
+    assert error.value is failure

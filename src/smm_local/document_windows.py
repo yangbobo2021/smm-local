@@ -46,6 +46,46 @@ def identity_exited(pid,ticks):
     finally:k.CloseHandle(h)
 
 
+def _unc_share_root(name):
+    """Limit the documented BAD_NETPATH fallback to a UNC share anchor."""
+    import ntpath
+    drive,tail=ntpath.splitdrive(name)
+    if drive.lower().startswith('\\\\?\\unc\\'):share=drive[8:]
+    elif drive.startswith('\\\\') and not drive.startswith(('\\\\?\\','\\\\.\\')):share=drive[2:]
+    else:return False
+    parts=share.split('\\')
+    return (tail in ('','\\','/') and len(parts)==2
+        and all(part and part not in ('.','..') and not any(ord(c)<32 or c in '<>:"/\\|?*' for c in part)
+                for part in parts))
+
+
+def reparse_point(path):
+    """Read the entry's own link attribute without a full Windows lstat.
+
+    Some service ancestors permit traversal and attributes but reject the
+    additional metadata access used by lstat. GetFileAttributesW reports a
+    reparse entry itself, without opening or following its target.
+    """
+    import ctypes as c
+    from ctypes import wintypes as w
+    name=os.fspath(path)
+    if '\x00' in name:raise ValueError('embedded null character')
+    k=kernel()
+    k.GetFileAttributesW.argtypes=[w.LPCWSTR]
+    k.GetFileAttributesW.restype=w.DWORD
+    attributes=k.GetFileAttributesW(name)
+    if attributes==0xffffffff:
+        code=c.get_last_error()
+        # This API cannot query a UNC share root (ERROR_BAD_NETPATH). Preserve
+        # the previous lstat behavior only at that exact anchor; descendants
+        # and every other error retain the original Windows failure.
+        if code==53 and _unc_share_root(name):
+            from pathlib import Path
+            return bool(Path(name).lstat().st_file_attributes&0x400)
+        error=c.WinError(code);error.filename=name;raise error
+    return bool(attributes&0x400)
+
+
 class Child:
     def __init__(self,handle,pid,args,stdin):
         self._handle=handle;self.pid=pid;self.args=args;self.stdin=stdin;self.returncode=None

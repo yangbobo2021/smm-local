@@ -31,6 +31,9 @@ IGNORED_DIRS = {'.git', '.hg', '.svn', 'node_modules', '.venv', 'venv', 'build',
 
 
 def _link(path):
+    if os.name == 'nt':
+        from .document_windows import reparse_point
+        return reparse_point(path)
     s = path.lstat()
     return stat.S_ISLNK(s.st_mode) or bool(getattr(s, 'st_file_attributes', 0) & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0x400))
 
