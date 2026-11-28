@@ -32,7 +32,7 @@ def bindings():
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 
 
-def prepare(work, materials, browsers, test_files=None):
+def prepare(work, materials, browsers, test_files=None, admin_legacy=None):
     work = work.resolve()
     work.mkdir(parents=True, exist_ok=True)
     assert not (work / 'target.json').exists(), 'target inputs already bound'
@@ -53,6 +53,16 @@ def prepare(work, materials, browsers, test_files=None):
               'uv_tool': {'path': str(executable), 'sha256': hashlib.sha256(executable.read_bytes()).hexdigest()},
               'read_paths': [str(ROOT / '.venv'), str(materials.resolve().with_suffix('')),
                              str(browsers.resolve()), str(Path(getattr(sys, '_base_executable', sys.executable)).parent)]}
+    if admin_legacy is not None:
+        assert os.name == 'nt' and not test_files
+        from document_formats_legacy_roles import verify_admin_originals
+        verify_admin_originals(admin_legacy.resolve())
+        receipt = admin_legacy.resolve() / 'receipt.json'
+        data = json.loads(receipt.read_text(encoding='utf-8'))
+        assert data['head'] == actual_head and data['bindings'] == config['bindings']
+        assert data['actor']['is_admin'] is True
+        config['admin_legacy'] = {'path': str(receipt), 'sha256': hashlib.sha256(receipt.read_bytes()).hexdigest()}
+        config['read_paths'].append(str(receipt))
     write(work / 'target.json', config)
 
 
@@ -91,6 +101,9 @@ def run_checked(config_path, output):
            'SMM_CLAUDE_ROOT': str(empty), 'SMM_008_OCR_EXECUTABLE': materials['ocr_executable'],
            'SMM_008_OCR_DATA': materials['ocr_data_dir'], 'SMM_008_FONT': materials['font']['path'],
            'PLAYWRIGHT_BROWSERS_PATH': config['browsers']}
+    if legacy := config.get('admin_legacy'):
+        assert os.name == 'nt' and hashlib.sha256(Path(legacy['path']).read_bytes()).hexdigest() == legacy['sha256']
+        env.update(SMM_008_C1_ADMIN_LEGACY_RECEIPT=legacy['path'], SMM_008_C1_ADMIN_LEGACY_SHA256=legacy['sha256'])
     if tool := config.get('uv_tool'):
         executable = Path(tool['path'])
         assert hashlib.sha256(executable.read_bytes()).hexdigest() == tool['sha256']
@@ -101,6 +114,11 @@ def run_checked(config_path, output):
         with (output / 'run.stdout').open('wb') as stdout, (output / 'run.stderr').open('wb') as stderr:
             p = subprocess.run(argv, cwd=ROOT, env=env, stdout=stdout, stderr=stderr, timeout=6600)
         unchanged = all(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == sha for name, sha in config['bindings'].items())
+        if config.get('admin_legacy'):
+            ledgers = list((output / 'attachments').glob('*/legacy-role-batch/role-ledger.json'))
+            assert len(ledgers) == 1, 'complete original legacy role-union proof is required'
+            ledger = json.loads(ledgers[0].read_text(encoding='utf-8'))
+            assert ledger['status'] == 'passed' and ledger['administrator_receipt_sha256'] == config['admin_legacy']['sha256']
         result = {'status': 'passed' if p.returncode == 0 and unchanged else 'failed', 'exit_code': p.returncode,
                   'head': config['head'], 'actor': actor, 'source_unchanged': unchanged, 'argv': argv,
                   'scope': 'C1 source tests only; skips and E/H/X obligations remain separately accounted'}
@@ -288,9 +306,10 @@ def main():
     p.add_argument('--context', type=Path)
     p.add_argument('--output', type=Path)
     p.add_argument('--test-file', action='append')
+    p.add_argument('--admin-legacy', type=Path)
     a = p.parse_args()
     if a.prepare:
-        prepare(a.work, a.materials, a.browsers, a.test_file)
+        prepare(a.work, a.materials, a.browsers, a.test_file, a.admin_legacy)
     elif a.collect:
         collect(a.work, a.materials, a.output, a.context)
     elif a.collect_triage:

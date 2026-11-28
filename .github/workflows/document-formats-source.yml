@@ -46,7 +46,13 @@ jobs:
       - name: Prepare actual browser runtime
         run: uv run --frozen --no-sync playwright install --with-deps chromium > .acceptance-local/008-source/logs/browser.stdout 2> .acceptance-local/008-source/logs/browser.stderr
       - name: Bind source regression inputs
-        run: uv run --frozen --no-sync python scripts/acceptance/document_formats_source_suite.py --prepare --work .acceptance-local/008-source --materials .acceptance-local/008-source-materials.json --browsers .acceptance-local/008-source-browsers > .acceptance-local/008-source/logs/prepare.stdout 2> .acceptance-local/008-source/logs/prepare.stderr
+        run: |
+          legacy_args=()
+          if [ "$RUNNER_OS" = Windows ]; then
+            uv run --frozen --no-sync python scripts/acceptance/document_formats_legacy_roles.py --prepare-admin --output .acceptance-local/008-source-admin-legacy > .acceptance-local/008-source/logs/legacy-admin.stdout 2> .acceptance-local/008-source/logs/legacy-admin.stderr
+            legacy_args=(--admin-legacy .acceptance-local/008-source-admin-legacy)
+          fi
+          uv run --frozen --no-sync python scripts/acceptance/document_formats_source_suite.py --prepare --work .acceptance-local/008-source --materials .acceptance-local/008-source-materials.json --browsers .acceptance-local/008-source-browsers "${legacy_args[@]}" > .acceptance-local/008-source/logs/prepare.stdout 2> .acceptance-local/008-source/logs/prepare.stderr
       - name: Run source C1 as POSIX ordinary account
         if: runner.os != 'Windows'
         run: uv run --frozen --no-sync python scripts/acceptance/document_formats_source_suite.py --target-config .acceptance-local/008-source/target.json --output .acceptance-local/008-source/platform > .acceptance-local/008-source/logs/outer.stdout 2> .acceptance-local/008-source/logs/outer.stderr
@@ -56,6 +62,15 @@ jobs:
           python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)' 2> .acceptance-local/008-source/logs/python-discovery.stderr)
           printf '%s' "$python_path" > .acceptance-local/008-source/logs/python-discovery.stdout
           powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_source_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_source_suite.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/008-source/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/008-source" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/008-source/logs/outer.stdout 2> .acceptance-local/008-source/logs/outer.stderr
+      - name: Preserve administrator-role originals after ordinary child exits
+        if: always() && runner.os == 'Windows'
+        run: |
+          if [ -d .acceptance-local/008-source-admin-legacy ]; then
+            cp -R .acceptance-local/008-source-admin-legacy .acceptance-local/008-source/administrator-legacy-originals
+            uv run --frozen --no-sync python scripts/acceptance/document_formats_legacy_roles.py --verify-admin-originals --output .acceptance-local/008-source/administrator-legacy-originals --target-config .acceptance-local/008-source/target.json --verification-receipt .acceptance-local/008-source/administrator-originals-verified.json
+          else
+            exit 1
+          fi
       - name: Preserve compact original triage separately
         if: always()
         run: uv run --no-project --python 3.14 python scripts/acceptance/document_formats_source_suite.py --collect-triage --work .acceptance-local/008-source --output .acceptance-local/008-source-triage --context .acceptance-local/008-source-triage-context.json
