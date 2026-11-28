@@ -162,6 +162,13 @@ class BlobTransfers:
         with path.open('rb') as source:
             raw = source.read(item['bytes'] + 1)
         if len(raw) != item['bytes'] or sha(raw) != item['sha256']:
+            # Callers hold capacity.lock. A complete wrong body cannot be a
+            # resumable prefix and must not poison the shared SHA namespace
+            # for a fresh legitimate transfer. Never remove a canonical blob
+            # or an incomplete prefix on this validation failure.
+            if path != target and len(raw) == item['bytes']:
+                _regular(path)
+                path.unlink()
             raise ValueError('传输内容不完整或摘要错误')
         return raw
 

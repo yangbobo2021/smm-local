@@ -1,0 +1,84 @@
+{
+  "scope": "Wrong full-body SHA recovery plus resumable-prefix and canonical-object protection. Component/source evidence, not complete SC7 or formal requirement pass.",
+  "user_impact": "A rejected complete raw/result upload could leave incorrect shared incoming bytes. Fresh legitimate submissions for the true same SHA failed on their final chunk until cleanup, even though published documents remained intact.",
+  "fix": {
+    "source": "src/smm_local/document_transfers.py",
+    "source_sha256": "2317e941232e0ebc4867251002a5ec80bf7de322e166a74b022b19547786248f",
+    "change": "Under the existing capacity lock, remove only the noncanonical incoming body whose complete declared length was received and whose whole SHA is proven wrong. Preserve incomplete prefixes, immutable canonical blobs, binding checks, limits and TTL."
+  },
+  "red": {
+    "cases_failed": 4,
+    "cases_passed": 6,
+    "skipped": 0,
+    "seconds": 32.78,
+    "cold_failing_targets": 8,
+    "failure": "Correct new submissions fail at the last block after an earlier wrong-body full-SHA rejection. Prefix and canonical controls already pass on the old code."
+  },
+  "green": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 56.83,
+    "frozen_source_files": 332,
+    "only_changed_red_to_green": [
+      "src/smm_local/document_transfers.py"
+    ],
+    "full_sha_targets_recovered": 8,
+    "prefix_targets_resumed_by_only_the_tail": 8,
+    "future_refs_after_complete_publication": 16,
+    "bounded_fulltext_windows_checked": 1296,
+    "complete_table_views": 16,
+    "original_info_views": 16,
+    "unpublished_future_read_rejections": 192,
+    "old_replaced_reference_view_rejections": 32,
+    "receive_cases_guarded": 8,
+    "negative_source_open_controls_per_case": 9,
+    "business_source_open_attempts": 0,
+    "receiver_processing_attempts": 0,
+    "canonical_controls": 2,
+    "canonical_boundary": "The test injects a bit error into its own canonical raw/result, verifies failure does not remove the diagnostic bytes, then explicitly restores its injected fault and verifies the prior reference. Product does not auto-repair canonical corruption.",
+    "retained_non_target": "Old reference/content/tables/raw/origin/V/P remain exact. Legal same-source manifest may update the receive timestamp; each actual new ISO timestamp must have timezone, never move backward and match across hit/text/tables. Corpus BM25 remains finite and dynamic."
+  },
+  "regression": {
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 74.39,
+    "groups": [
+      "17 received-structure negatives",
+      "4 concurrent upload-queue cases",
+      "2 real expiry quota/current-body retention cases",
+      "3 legacy synchronization publication/retry/boundary cases"
+    ],
+    "source_unchanged": true,
+    "independent_review_sha256": {
+      "processed-transfer-regression-execution-review-v1.md": "7fc3c568faf1b291182db393a5637498e1f640f507d92061c3b675c21a7a5c29",
+      "processed-transfer-regression-execution-review-v1.json": "5ca652991d74eb770908e200393e79af846ee9a403db0a4d4061f235c7688358"
+    }
+  },
+  "wheels": [
+    {
+      "product": "local",
+      "sha256": "74b262fa29bcdd60e6e2e968e33974f98b041fa76060bf6fa0737f4a25362f8b",
+      "transfer_module_equals_source": true
+    },
+    {
+      "product": "hub",
+      "sha256": "5e576ff20f87e1c80cdf7a5d1ace9e5bf96dcb5677033b459d11006effed100c",
+      "transfer_module_equals_source": true
+    }
+  ],
+  "independent_component_review_sha256": {
+    "processed-full-sha-green-execution-review-v1.md": "314e870b68584d39dc652b180553e19f24eb3a9141142a415e63115c569c8f60",
+    "processed-full-sha-green-execution-review-v1.json": "15972cd45acdec7edb2c2428fcfb4ea03bbd16a29f61b5aaf08d47118530bc34"
+  },
+  "evidence_budget": "The complete 10-node development collection is not submitted as a single formal 25MiB TC. Formal runs must use separate natural first/replacement full-SHA and prefix-resume cases, two body kinds each, plus the canonical component, each with its own measured budget and evidence.",
+  "preserved_failed_runs": [
+    "red-v1 lacked exact helper byte custody and is historical only; later red-v2/v3/v4 have exact source byte snapshots.",
+    "green-v1 4 failures after successful transfer/publication: non-target comparison incorrectly required immutable received_at on a new same-source manifest; original failures retained."
+  ],
+  "still_pending": [
+    "Independent current-platform installed validation and formal registration.",
+    "Other bad chunk, submission/V-P binding, manifest/CAS, receipt/restart and late-action matrices; no full TC/SC7 pass claimed."
+  ]
+}
