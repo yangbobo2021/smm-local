@@ -1,0 +1,26 @@
+{
+  "schema": "smm-008-scm-worker-module-path-20261128",
+  "status": "real_windows_red_repaired_pending_same_version_scm_green",
+  "red": {
+    "run_id": 46133002388,
+    "head": "3ef7562df690b7ed97fa6d0b0d3521447dd5e5cb",
+    "artifact_id": 15258334469,
+    "bytes": 1193557,
+    "official_sha256": "a07fd5d855e513bb4e98b0e4b5b6d145dcd4a7e415e8038c2df98ccf88af2fbe",
+    "recovered_members": 188,
+    "actor": "actual standard non-admin interactive session2",
+    "service": "actual LocalService S-1-5-19 session0",
+    "result": "Upload and commit accepted; actual worker failed ModuleNotFoundError smm_hub; no publication",
+    "independent_status": "valid_execution_product_defect_red"
+  },
+  "fix": "For a site-disabled parent, launch the same actual base interpreter with -I -S and explicitly add only the protected installed package root before runpy module execution. Foreground module invocation unchanged; Job, stdin gate and supervision limits retained.",
+  "local_controls": {
+    "platform": "Darwin",
+    "actual_no_site_parent_hostile_cwd_pythonpath_and_normal_entry": "passed",
+    "related_execution": "3 passed / 1 Windows-only skipped",
+    "scope": "module entry and process-observation controls; not Windows business green"
+  },
+  "candidate_independent_review": "ready_for_actual_rebuild_and_scm_ci",
+  "complete_H1_H5": false,
+  "actual_same_version_scm_green_pending": true
+}

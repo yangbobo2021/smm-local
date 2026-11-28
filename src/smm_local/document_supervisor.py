@@ -15,6 +15,21 @@ TEMP_LIMIT=256*1024*1024
 TIME_LIMIT=300
 
 
+def module_command(module, *arguments):
+    if sys.flags.no_site:
+        # SCM registers the base interpreter before adding the protected Hub
+        # environment's site directory. A new base interpreter does not inherit
+        # that sys.path. Bootstrap only this installed package root explicitly;
+        # -I excludes the task cwd, user site and PYTHONPATH from module lookup.
+        installed = Path(__file__).resolve().parents[len(__package__.split('.'))]
+        bootstrap = ('import runpy,site,sys; '
+                     'site.addsitedir(sys.argv.pop(1)); '
+                     'module=sys.argv.pop(1); '
+                     'runpy.run_module(module,run_name="__main__",alter_sys=True)')
+        return [sys.executable, '-I', '-S', '-B', '-c', bootstrap, str(installed), module, *arguments]
+    return [sys.executable, '-B', '-m', module, *arguments]
+
+
 def temporary_bytes(root):
     """Return a complete sample, retrying one transient child-path denial."""
     task = Path(os.path.abspath(root))
@@ -254,7 +269,7 @@ def run(db,request,task_directory):
                 preparing={'token':token,'worker':None,'controller':identity(psutil.Process()),'children':[],
                     'status':'preparing','gate_open':False}
                 atomic_json(root/'supervision.json',preparing)
-                command=[sys.executable,'-B','-m',__package__+'.document_worker','--task-token',token]
+                command=module_command(__package__+'.document_worker','--task-token',token)
                 if os.name=='nt':
                     from .document_windows import spawn,creation_ticks,kernel
                     job=WindowsJob()
@@ -268,7 +283,7 @@ def run(db,request,task_directory):
                         'worker_ticks':creation_ticks(child._handle)}
                 atomic_json(lease,state);atomic_json(root/'supervision.json',state)
                 if os.name!='nt':
-                    watchdog=subprocess.Popen([sys.executable,'-B','-m',__package__+'.document_supervisor','--watch',str(root/'supervision.json')],stdin=subprocess.DEVNULL,stdout=output,stderr=watch_errors,cwd=root,start_new_session=True)
+                    watchdog=subprocess.Popen(module_command(__package__+'.document_supervisor','--watch',str(root/'supervision.json')),stdin=subprocess.DEVNULL,stdout=output,stderr=watch_errors,cwd=root,start_new_session=True)
                 state['gate_open']=True;atomic_json(root/'supervision.json',state)
                 # Optional parser imports are unreachable before this gate.
                 child.stdin.write(json.dumps(request).encode('utf-8')+b'\n');child.stdin.close()
