@@ -1,0 +1,27 @@
+{
+  "change": "Same-project document library refresh preserves displayed rows while the real HTTP response is pending; switching projects still clears previous rows immediately and out-of-order old responses cannot overwrite the selected project. Applies to Local and Hub.",
+  "scope": "Small UI robustness improvement during remaining acceptance; not declared a previous SPEC violation, and not proof of the unique cause of screenshot clip errors. No API/authorization/processing/reference change.",
+  "red": {
+    "actual_result": "two owners failed: displayed old project rows became empty while actual unmodified HTTP response was delayed",
+    "test_sha256": "1d1518164d46b2d165973ff706b760ba5cd9d0b188c6d30eb71643fddf4b76c6",
+    "junit_sha256": "2d0fe536c41ec1764cdb42c36107a624bb86f10beaf962c99ea25dc8f6bbbf0a"
+  },
+  "green": {
+    "actual_result": "same frozen test two passed; real response bytes untouched, both project-isolation controls completed",
+    "junit_sha256": "663013e2bfe73cd437fb792dd0c6a941ceaf29324d342137bf35873a6d8abe4f",
+    "independent_review": "passed limited to three UI boundaries",
+    "actual_pngs_opened": 4
+  },
+  "product_bindings": {
+    "src/smm_local/static/index.html": "a94ea17162da087fe463726d516225148b2f85c589597b4859d71a6d10724eeb",
+    "src/smm_hub/static/index.html": "2d90e31af1b1900b08280ee718583d5a22d4b01491a04c8ca6bd9fa01af5a6fe"
+  },
+  "reviews": {
+    "library-refresh-red-independent-v1.md": "5c6c16b26e2734777d474ce4a1b018c89186517ceacbadd72667c55c5e487e01",
+    "library-refresh-red-independent-v1.json": "ac36efa46143d7e84fd73d174ef3869c74377c96f52eb1a900ad8008fe1a7043",
+    "library-refresh-green-independent-v1.md": "0ef8eb9ae350f6858ed2e1a1471f1669a8cd06fae2240a147979ebf7047f12c4",
+    "library-refresh-green-independent-v1.json": "6e1ad0108a2d9fbc732775d708ba9271af571365033b0a0c4a49f77d774f5356"
+  },
+  "publication_acceptance": "Separate native 24 flows/48 business PNG per creator: v4 candidates both independently passed; Local formal v4 failed in screenshot observer before completing all flows, new independent review pending; Hub formal v4 exit0 but exact originals still awaiting separate independent execution review. No formal overall pass claimed.",
+  "redaction": "Only behavior, scoped counts and SHA published; task paths, actor identities, credentials and keys remain private."
+}

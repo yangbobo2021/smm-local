@@ -424,3 +424,6 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 
 
 2026-11-28安装内容子域续证：新增installed_extended与独立执行入口，在原32份基础上补两端各两复杂XLSX（两日期制）、243行深Word/深XLSX及混合PDF共10份。Mac普通UID在精确restore修复wheel、冻结v4探针完成42份各入口与源文件移除后旧引用/正常重启读回；独立候选v2 passed仅该子域。2983真实命令原字节181787323在结束后无损gzip，保留双SHA/长度、10原trace/130PNG及全部原始响应/下载；不因压缩删减观察。工作进程仍是产品原有-B/-m并实际isolated=0，入口才是-I，均记真实prefix/cwd/身份。新document-formats-installed-content.yml在三实际OS复跑同内容子域，不能冒全E/H/X；Windows普通账户清理改为按已保存SID先撤ACL再删账户。真实Windows小控逐根/子文件核SID已去、其他ACL保持、账户/目录实际消失，独立候选v2通过；刻意先删账户后的旧SID实验1332失败保留。实际三OS业务、完整原件回收及独立执行意见另列。冻结Mac结果早于后续网页刷新稳定性改动，不称最终全部资产同版。入口evidence/completion-installed-content-20261128.json。
+
+
+2026-11-28网页稳定性补充：真实状态采证另观察到两端资料库在同项目刷新请求发出后、响应返回前先清空旧行。用真实服务响应route.fetch后仅延迟交付（字节不改）的双项目浏览器控制取得两端红灯，独立意见确认有效UI复现，未据此签成原SPEC失败或错clip唯一根因。两HTML改为同项目await期间保留旧行，切项目立即清空；最新响应校验后同步重绘，陈旧响应继续拒绝。同冻结测试两端2过，另实际验证切B待答旧A不出现、先回B后回A仍为B，独立绿灯passed，4原PNG/原trace已打开。该小型健壮性修复不改变业务授权/引用或SPEC边界，Hub只读与无项目分支仅静态核对。完整发布24流程/48图每端继续单独原生执行和新上下文复审；候选passed不代替正式结果。入口evidence/completion-library-refresh-20261128.json。

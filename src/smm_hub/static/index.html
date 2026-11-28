@@ -102,10 +102,10 @@
  }
  let hubLibraryRequest=0;
  async function renderLibrary(){
-  const requestId=++hubLibraryRequest,box=$('hub-library-list');box.replaceChildren();if(!projects.length){$('hub-write-controls').hidden=true;$('hub-owner-note').textContent='尚无项目。请创建 Hub 项目。';return}
-  const project=currentProject();const writable=own(project);$('hub-write-controls').hidden=!writable;$('hub-owner-note').textContent=writable?'这是 Hub 创建的项目，文档只在 Hub 管理。':'这是创建端的只读投影；请回原电脑或来源系统管理。关联不授予写权限。';
-  if(!writable){box.append(node('p','可在下方检索并读取该项目及关联项目文档。','muted'));return}
-  const frozen=projectContext(project);const assets=await request('/v1/documents/library?project_id='+project.id);if(requestId!==hubLibraryRequest||String(currentProject().id)!==String(project.id))return;
+  const requestId=++hubLibraryRequest,box=$('hub-library-list');if(!projects.length){box.replaceChildren();box.dataset.project='';$('hub-write-controls').hidden=true;$('hub-owner-note').textContent='尚无项目。请创建 Hub 项目。';return}
+  const project=currentProject();if(box.dataset.project!==String(project.id)){box.replaceChildren();box.dataset.project=String(project.id)}const writable=own(project);$('hub-write-controls').hidden=!writable;$('hub-owner-note').textContent=writable?'这是 Hub 创建的项目，文档只在 Hub 管理。':'这是创建端的只读投影；请回原电脑或来源系统管理。关联不授予写权限。';
+  if(!writable){box.replaceChildren(node('p','可在下方检索并读取该项目及关联项目文档。','muted'));return}
+  const frozen=projectContext(project);const assets=await request('/v1/documents/library?project_id='+project.id);if(requestId!==hubLibraryRequest||String(currentProject().id)!==String(project.id))return;box.replaceChildren();
   for(const asset of assets){const row=node('div',undefined,'result');row.append(node('p',`${asset.display_name} · 文档 ${asset.id} · 版本 ${asset.version} / 来源 ${asset.source_revision}`));nativeDetails(row,asset);
    const original=button('下载采集原件',()=>downloadDocumentOriginal(asset.original_reference,asset.display_name));original.disabled=!asset.original_reference;row.append(original);
    const native=isNative(asset.display_name),compared={...frozen,...(native?nativeComparison(asset):{expected_version:asset.version,expected_revision:asset.source_revision})};

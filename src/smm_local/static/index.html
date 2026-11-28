@@ -375,8 +375,8 @@
   }
   let documentLibraryRequest=0;
   async function refreshDocumentLibrary(){
-    const requestId=++documentLibraryRequest,value=$('doc-library-project').value;const container=$('doc-library-list');container.replaceChildren();if(!value)return;
-    const listed=await request('/api/documents/library?project_id='+encodeURIComponent(value));if(requestId!==documentLibraryRequest||$('doc-library-project').value!==value)return;documentLibrary=listed;
+    const requestId=++documentLibraryRequest,value=$('doc-library-project').value;const container=$('doc-library-list');if(container.dataset.project!==value){container.replaceChildren();container.dataset.project=value;documentLibrary=[]}if(!value)return;
+    const listed=await request('/api/documents/library?project_id='+encodeURIComponent(value));if(requestId!==documentLibraryRequest||$('doc-library-project').value!==value)return;container.replaceChildren();documentLibrary=listed;
     for(const asset of documentLibrary){const row=document.createElement('div');row.className='result';const label=document.createElement('p');label.textContent=`${asset.display_name} · 文档 ${asset.id} · 版本 ${asset.version} / 来源 ${asset.source_revision}`;row.append(label);nativeDetails(row,asset);
       const original=document.createElement('button');original.className='secondary';original.textContent='下载采集原件';original.disabled=!asset.original_reference;original.onclick=()=>downloadDocumentOriginal(asset.original_reference,asset.display_name).catch(error=>notice(error.message,true));row.append(original);
       const native=isNative(asset.display_name),projectBinding={project_id:Number(value),project_key:projectData.find(p=>String(p.id)===value)?.stable_key};
