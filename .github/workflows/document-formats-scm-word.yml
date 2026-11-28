@@ -1,5 +1,8 @@
 name: Document formats actual SCM Word capability
 on:
+  push:
+    branches: [codex/008-document-formats-impl]
+    paths: [.github/workflows/document-formats-scm-word.yml]
   workflow_dispatch:
 permissions:
   contents: read
