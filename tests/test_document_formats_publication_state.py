@@ -27,6 +27,97 @@ def assert_finished_notice(page, timeout=10000):
     return text
 
 
+def capture_target_row(target, path):
+    from playwright.sync_api import Error
+    deadline = time.monotonic() + 10
+    rejected = 0
+    geometry = """node=>{const b=node.getBoundingClientRect();return {
+        connected:node.isConnected,text:node.innerText,x:b.x+scrollX,y:b.y+scrollY,
+        width:b.width,height:b.height}}"""
+    while True:
+        assert time.monotonic() < deadline, 'target row never remained stable for a screenshot'
+        handle = target.element_handle(timeout=max(1, int((deadline-time.monotonic())*1000)))
+        assert handle is not None
+        try:
+            before = handle.evaluate(geometry)
+            if not before['connected']:
+                continue
+            try:
+                handle.screenshot(path=str(path), timeout=max(1, int((deadline-time.monotonic())*1000)))
+            except Error:
+                # Error wording varies when an element is replaced during font
+                # or stability waits. Only this same handle's actual detachment
+                # may retry. A genuinely hidden/invalid live node still fails.
+                if handle.evaluate('node=>node.isConnected'):
+                    raise
+                continue
+            after = handle.evaluate(geometry)
+            stable = after['connected'] and all(abs(before[k]-after[k]) <= .5 for k in ('x','y','width','height'))
+            if stable:
+                return after
+            rejected += 1
+            rejected_path = path.with_name(path.stem + '.rejected-' + str(rejected) + path.suffix)
+            path.replace(rejected_path)
+            observe('publication-rejected-capture', {'before':before,'after':after,
+                'path':rejected_path.name,'sha256':hashlib.sha256(rejected_path.read_bytes()).hexdigest(),
+                'reason':'same captured handle detached or changed document geometry; original PNG retained'})
+        finally:
+            handle.dispose()
+
+
+@pytest.mark.skipif(not os.environ.get('PLAYWRIGHT_BROWSERS_PATH'), reason='requires prepared browser for screenshot observer control')
+def test_publication_row_capture_keeps_offscreen_target_pixels(tmp_path):
+    from playwright.sync_api import sync_playwright
+    from PIL import Image
+    with sync_playwright() as runtime:
+        browser = runtime.chromium.launch(headless=True)
+        try:
+            page = browser.new_page(viewport={'width': 800, 'height': 600})
+            page.set_content('<div style="height:2400px">unrelated controls</div><div id="target" style="width:400px;height:120px;background:rgb(17,29,43);color:white">independent target</div>')
+            path = tmp_path / 'actual-target.png'
+            observed = capture_target_row(page.locator('#target'), path)
+            assert observed['connected'] and observed['text'] == 'independent target'
+            with Image.open(path) as image:
+                assert image.size == (400, 120)
+                assert image.convert('RGB').getpixel((200, 100)) == (17, 29, 43)
+            keep('publication-screenshot-observer-target.png', path.read_bytes())
+            observe('publication-row-capture-observer-control', {'purpose': 'synthetic DOM only; screenshot bytes from real offscreen target', 'geometry': observed})
+        finally:
+            browser.close()
+
+
+@pytest.mark.skipif(not os.environ.get('PLAYWRIGHT_BROWSERS_PATH'), reason='requires prepared actual Chromium')
+def test_publication_capture_rejects_replaced_handle_after_actual_screenshot(tmp_path, monkeypatch):
+    from playwright.sync_api import ElementHandle, sync_playwright
+    from PIL import Image
+    actual = ElementHandle.screenshot
+    replaced = []
+    def screenshot(handle, **options):
+        raw = actual(handle, **options)
+        if not replaced:
+            handle.evaluate("node=>{const next=node.cloneNode(true);next.style.background='rgb(17,29,43)';next.textContent='replacement target';node.replaceWith(next)}")
+            replaced.append(True)
+        return raw
+    with sync_playwright() as runtime:
+        browser = runtime.chromium.launch(headless=True)
+        try:
+            page = browser.new_page()
+            page.set_content('<div id="target" style="width:400px;height:120px;background:rgb(71,17,29);color:white">old target</div>')
+            monkeypatch.setattr(ElementHandle, 'screenshot', screenshot)
+            path = tmp_path / 'target.png'
+            observed = capture_target_row(page.locator('#target'), path)
+            assert observed['connected'] and observed['text'] == 'replacement target'
+            rejected = path.with_name('target.rejected-1.png')
+            for saved, expected in ((rejected, (71,17,29)), (path, (17,29,43))):
+                with Image.open(saved) as image:
+                    assert image.size == (400,120) and image.convert('RGB').getpixel((200,100)) == expected
+                keep('observer-' + saved.name, saved.read_bytes())
+            observe('publication-same-handle-observer-control', {'actual_replacement_after_real_screenshot':True,
+                'old_red_image_rejected_and_retained':True,'actual_new_blue_image_accepted':True})
+        finally:
+            browser.close()
+
+
 @pytest.mark.skipif(not os.environ.get('PLAYWRIGHT_BROWSERS_PATH'), reason='requires prepared real browser for observer controls')
 def test_publication_notice_observer_waits_for_async_finish_and_rejects_stuck_or_wrong_notice():
     from playwright.sync_api import sync_playwright
@@ -152,8 +243,9 @@ def test_browser_waits_for_actual_publication_of_each_new_attempt(tmp_path,owner
         finally:visible.dispose()
         assert '文档 '+item['id'] in observed['text'] and observed['bottom']>0 and observed['top']<observed['height']
         path=evidence/(owner+'-'+item['key']+'-'+name+'.png')
-        browser.page.screenshot(path=str(path),full_page=False)
-        observe('publication-viewport-capture',{'owner':owner,'document_id':item['id'],'name':name,'visible_dom':observed,'path':path.name})
+        captured=capture_target_row(row(browser,item),path)
+        assert captured['connected'] and '文档 '+item['id'] in captured['text']
+        observe('publication-viewport-capture',{'owner':owner,'document_id':item['id'],'name':name,'visible_dom':observed,'captured_row':captured,'path':path.name,'method':'actual locator screenshot, no image alteration'})
     def pending(browser,item,marker,phase,event_start):
         e=entry(item);assert e['latest_attempt']['attempt_id']==marker['attempt_id'] and e['latest_attempt']['capture_id']==marker['capture_id']
         assert marker['result_status']==item['status'] and marker['profile']['config_revision']==marker['config_revision']

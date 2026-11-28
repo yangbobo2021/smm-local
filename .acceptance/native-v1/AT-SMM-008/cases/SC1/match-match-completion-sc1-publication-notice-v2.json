@@ -1,0 +1,24 @@
+{
+  "acceptance_id": "AT-SMM-008",
+  "case_ids": [
+    "TC-008-hub-cli-service-handoff",
+    "TC-008-managed-native-upload",
+    "TC-008-native-management-fence",
+    "TC-008-path-refresh-config-finalization",
+    "TC-008-path-web-details",
+    "TC-008-processing-config",
+    "TC-008-publication-visible-state",
+    "TC-008-upload-queue-archive-isolation",
+    "TC-008-upload-queue-coalescing",
+    "TC-008-web-failure-diagnostic",
+    "TC-008-web-native-upload"
+  ],
+  "definitions_sha256": "16154976ac894fc68f2abcd148273bcea3e506391192896b262d6a78cba69633",
+  "operation": "match",
+  "record": ".acceptance-local/native-v1/AT-SMM-008/match/match-completion-sc1-publication-notice-v2/result.json",
+  "request_id": "match-completion-sc1-publication-notice-v2",
+  "result_sha256": "601082996b26768e425a7bc66712d3c411739eeabeecd34a87573796b05707c5",
+  "scene": "SC1",
+  "schema": "acceptance-native-attempt-index-v1",
+  "status": "matched"
+}
