@@ -24,6 +24,37 @@ try {
     if ($LASTEXITCODE -ne 0) {throw 'Task program read/execute ACL grant failed'}
   }
   $target=Get-Content $Config -Raw|ConvertFrom-Json
+  # Limit ACL normalization to immutable task wheel inputs. A base-only X
+  # receiver intentionally has no local_wheel. Reject link/junction ancestors.
+  $workRoot=[IO.Path]::GetFullPath($Work).TrimEnd('\')
+  $wheelAcls=@()
+  foreach ($wheel in (@($target.local_wheel,$target.hub_wheel)|Where-Object {$_})) {
+    $wheelPath=(Resolve-Path -LiteralPath $wheel).ProviderPath
+    if (![IO.Path]::GetFullPath($wheelPath).StartsWith($workRoot+'\',[StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetExtension($wheelPath) -ne '.whl' -or !(Test-Path -LiteralPath $wheelPath -PathType Leaf)) {throw 'Wheel must be a task-local regular .whl file'}
+    $cursor=$wheelPath
+    while ($true) {
+      $item=Get-Item -LiteralPath $cursor -Force
+      if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {throw 'Wheel path contains a link or junction'}
+      if ([IO.Path]::GetFullPath($cursor).TrimEnd('\') -eq $workRoot) {break}
+      $cursor=Split-Path -Parent $cursor
+      if (!$cursor) {throw 'Wheel path did not reach task root'}
+    }
+    $before=(& icacls.exe $wheelPath|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Original wheel ACL observation failed'}
+    $entry=@{path=$wheelPath;before=$before;status='original-recorded'}
+    $wheelAcls+=$entry
+    $wheelAcls|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 (Join-Path $Work 'wheel-acl-preparation.json')
+    & icacls.exe $wheelPath /reset|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel inheritance reset failed'}
+    & icacls.exe $wheelPath /grant:r ($account+':R')|Out-Null
+    if ($LASTEXITCODE -ne 0) {throw 'Task wheel explicit read grant failed'}
+    $after=(& icacls.exe $wheelPath|Out-String)
+    if ($LASTEXITCODE -ne 0) {throw 'Final wheel ACL observation failed'}
+    $entry.after=$after;$entry.status='prepared'
+    $wheelAcls|ConvertTo-Json -Depth 8|Set-Content -Encoding UTF8 (Join-Path $Work 'wheel-acl-preparation.json')
+  }
+  if (!$target.hub_wheel) {throw 'Hub wheel input is required'}
+  $report.wheel_acls=$wheelAcls
   $target|Add-Member -NotePropertyName expected_actor_sid -NotePropertyValue $report.expected_sid
   $target|ConvertTo-Json -Depth 40|Set-Content -Encoding UTF8 $Config
   foreach ($path in @($target.read_paths)) {

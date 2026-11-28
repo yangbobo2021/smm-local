@@ -22,6 +22,8 @@ if args.bind:
     args.target_config.write_text(json.dumps(config, indent=2), encoding='utf-8')
 else:
     assert args.output
+    from document_formats_wheel_preflight import verify_wheel_inputs
+    verify_wheel_inputs(config, args.target_config.resolve().parent)
     if config['cross_os_phase'] == 'produce':
         produce(config, args.output.resolve(), Path(config['bundle']))
     else:

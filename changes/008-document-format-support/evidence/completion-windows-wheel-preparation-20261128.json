@@ -1,0 +1,25 @@
+{
+  "change": "Task-only wheel ACL preparation and actual controller wheel-read diagnostics, before E/X business",
+  "cause_confirmed": "Both df7 Windows E/X actual standard controllers failed reading the prepared Local wheel after installed module verification and before starting document business. Original failed wheel ACL was not collected; deny/protected-ACL/build-tool mechanism remains unproven.",
+  "preparation": "Only configured existing regular .whl files inside task Work, no reparse ancestor; Local optional and Hub required. Preserve ACL before/after wheel-only reset/explicit read. Never change Hub product security policy or remove installation verification.",
+  "actual_preflight": "Same controller records real identity, actual icacls raw stdout/stderr, original wheel byte length/SHA and comparison with prepared SHA before Probe. Expected Windows SID/non-admin/session>0 remains enforced.",
+  "candidate_bindings": {
+    "scripts/acceptance/document_formats_installed_standard_user.ps1": "90bbabd16d52be839f8530fa98e9a5b4b88f32806ef8a083f309e40ed87de68a",
+    "scripts/acceptance/document_formats_wheel_preflight.py": "ed2b285eb4beda0ef185a9eeba5ce4bb9c73a5ed529c44a1b081577244aef061",
+    "scripts/acceptance/document_formats_installed_extended_run.py": "9f53ed1300c6d7d1e73d6601efd83e34af9e4fffb51626144cf7d1cf82731671",
+    "scripts/acceptance/document_formats_cross_os_entry.py": "318616644a7996f2b80e12b568f75ff3e71cec14a64d329dbe80e01a1c9d3834"
+  },
+  "actual_controls": {
+    "mac": "ordinary UID dual exact2, hub-only exact1 and wrong prepared SHA rejected",
+    "home_windows": "Candidate parser and wheel preparation executed, but separate private session0 process micro did not produce completion. Not an ACL read pass and no startup cause inferred. Private NoNewWindow attempt does not change the real CI provisioner.",
+    "real_windows_CI": "pending. Independent reviewer ready_for_actual_CI=true, not business pass; existing actual session2 startup evidence enables a direct retest."
+  },
+  "review_hashes": {
+    "windows-installed-wheel-acl-failure-review-v1.md": "350ad5d57ad156f4881c0fc2934204e2739fe86d3709f6bc39153b67d8e1f259",
+    "windows-installed-wheel-acl-failure-review-v1.json": "7380b6409466b3b84a328c062396a22534142629530a712fb054937a503c28f4",
+    "windows-installed-wheel-acl-candidate-static-review-v1.md": "b11cb98e8fd4fd5ab373b1de7dc2ceed113d4a8c1c04af2849f638dc38e38a30",
+    "windows-installed-wheel-acl-candidate-static-review-v1.json": "5c43998b75e152c4a621c9147d8f525f8d88b8a4e89b91caa9f4dd6566554bb5"
+  },
+  "limitations": "All Windows E business and all six X directions still require actual run, full original recovery and independent execution review. Private failed micro and prior CI originals are retained.",
+  "redaction": "Private account identities, host paths, original responses and task secrets excluded; exact original receipts retained privately."
+}

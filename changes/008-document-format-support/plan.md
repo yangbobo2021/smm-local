@@ -430,3 +430,6 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 
 
 2026-11-28发布状态采证补齐：原两端各24流程/48业务画面及各48全文/72全表/48原件不减。实际Locator截图成功仍可能是已替换节点的错clip，故观察设施v5显式绑定同一ElementHandle的before/screenshot/after；仅实际断开可重取，成功还须同Handle连接和绝对文档几何稳定，已生成的拒收PNG原字节另存，不改图或抹去。真实静态离屏像素、首截图后实际DOM替换红→蓝、独立等待中替换及连接但隐藏时原错传播均有正反控制。候选两端逐图/逐原件passed后，同源正式Local4过49.51秒、Hub4过53.84秒，新上下文执行Reviewer分别核815/801附件、58/52PNG及115冻结源，三publication分配passed均已原生登记。原错图、detached、v4 Local正式失败及Hub旧私有passed但因提前改公共源导致native登记blocked均保留；v5在全部登记前不再动所绑源。只关闭该子域，不认整个SC1或E/H/X；精确源/意见/限定证据入口evidence/completion-publication-state-20261128.json。
+
+
+2026-11-28 Windows E/X准备修订：df7真实标准账户SID/session2已启动，安装Local资产核验exit0后控制器读取原wheel遇PermissionError，两条都尚未开始文档业务。原失败未留ACL，不推断protected DACL/deny ACE或uv机制。新入口复用minimum的wheel-only ACL处理，限定本任务Work内实际.whl且拒link/reparse祖先；Local可缺、Hub必有，以兼容基础receiver。即时记录通用Work grant之后、wheel修订前后ACL；E/X实际业务控制器在Probe之前另记录同SID/session/实际ACL与整wheel字节SHA，继续保留原安装校验。Mac实际双包/Hub-only正控及错误预备SHA拒绝；HomeWin私有session0子进程微控未取得completion，保留失败，不据此认ACL可读或猜启动原因，也不豁免正式session>0。独立静态和Mac控制意见认为ready_for_actual_CI，后续以真实CI普通token继续取证；私有NoNewWindow探针不带入正式入口。仅改变测试材料准备/诊断，不改产品权限规则、SPEC或E/H/X验收义务。入口evidence/completion-windows-wheel-preparation-20261128.json。

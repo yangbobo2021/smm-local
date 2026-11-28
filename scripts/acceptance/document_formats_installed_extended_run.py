@@ -124,6 +124,8 @@ def browser(probe, items, phase):
 
 def execute(config_path, output, smoke=False):
     config = json.loads(config_path.read_text(encoding='utf-8-sig'))
+    from document_formats_wheel_preflight import verify_wheel_inputs
+    verify_wheel_inputs(config, config_path.parent)
     probe = FormatProbe(config, output)
     cwd = output / 'non-source-cwd'; cwd.mkdir(); os.chdir(cwd)
     bindings = probe.version_bindings()
