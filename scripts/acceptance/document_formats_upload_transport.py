@@ -18,10 +18,24 @@ def wait(probe, role, ident, *, timeout=60):
     deadline = time.monotonic() + timeout
     while True:
         entry = rows(probe, role)[ident]
-        if entry['latest_attempt']['status'] in {'ready', 'partial', 'failed'}:
+        if published_or_failed(entry):
             return entry
         assert time.monotonic() < deadline, entry
         time.sleep(.05)
+
+
+def published_or_failed(entry):
+    """Extraction completion precedes publication; queries require the latter."""
+    attempt=entry.get('latest_attempt') or {}
+    if attempt.get('status')=='failed':return True
+    if attempt.get('status') not in {'ready','partial','empty-success'}:return False
+    saved=entry.get('published_snapshot') or {}
+    return (entry.get('publication_pending') is False and entry.get('original_available') is True
+        and saved.get('capture_id')==attempt.get('capture_id') and bool(saved.get('capture_id'))
+        and saved.get('status')==attempt['status'] and saved.get('sha256')==entry.get('sha256')
+        and bool(saved.get('result_sha256'))
+        and all(type(entry.get(key)) is int and entry[key]>0 and saved.get(key)==entry[key]
+                for key in ('version','processing_version')))
 
 
 def upload(probe, item, raw, *, replacement=None, await_terminal=True):

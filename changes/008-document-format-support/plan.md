@@ -467,3 +467,5 @@ POSIX f50中断恢复另实际取得原CID显式重试成功、旧引用原文/�
 SCM最小祖先控制补闭环：.pth中的AssertionError可能被Python打印后继续，不靠启动没崩推定权限控制正确。观察器先保存每个真实LS启动的三检查结果，交付前逐main/worker实际identity与同PID下一次启动边界要求唯一完整收据、实际六身份字段及精确desired-access/denial/WinError；少/重复/错权限/错身份/PID复用及错服务/state都拒绝。此仅测试/采证增强；旧b443无消费的调试不补判为新版控制passed。
 
 后续b443真实SCM在最小祖先条件下四份网页原件start/part成功、commit均400，错误仅提供祖先WinError5。原始传输state均committed且四份raw SHA/长度正确，最终无source/job/capture/worker，不能将此定为NtCreateFile失败或仅凭filename定到legacy `_root`。Home另运行真实LocalService/session0、独立ProgramData副本runtime和一次性SCM元数据诊断：祖先stat/lstat/resolve/is_symlink与相同legacy `_root`方法均成功，list真实拒绝；当前native factory及实际LS写raw均成功。此只证明该环境组件，不代CI或H。测试新增窄trace，仅记录真实LS中filename精确等任务祖先的PermissionError发生模块/函数/行号，原错误/业务返回不改；新冻结CI据原栈定位，不通过扩大祖先授权消除错误。
+
+2026-11-28 发布等待测试修订：b443真实macOS system launchd原件确认 HubNEXTLEGAL 的处理状态先ready，但publication_pending=true、V/P0且published_snapshot为空；测试此时立即检索得到空结果，最终数据库及同SHA原件/正文/全表已正常发布。此轮仍失败，不反推产品搜索失败。共享上传等待改为成功状态必须当前CID/SHA/V/P/状态的发布快照一致、result SHA非空、original_available且pending=false；failed仍立即返回，原截止时间/5秒故障要求不增加。错CID/SHA/版本/状态/未发布及超时正反控制7过1Windows专属skip，独立候选复核就绪；新真实两平台原生服务重验另执行，旧Linux b443成功原件独立回收中，不以候选控制代H通过。
