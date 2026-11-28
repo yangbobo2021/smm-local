@@ -77,7 +77,10 @@ def pack(source,public_key,context,output):
                 bundle.write(source/name,name)
                 if sha(source/name)!=expected['sha256'] or (source/name).stat().st_size!=expected['bytes']:raise ValueError('evidence changed while packing')
         ephemeral=X25519PrivateKey.generate();salt=os.urandom(32);nonce=os.urandom(12)
-        header={'schema':'smm-008-envelope-v1','context':context,'manifest_sha256':hashlib.sha256(manifest_raw).hexdigest(),'public_key_sha256':sha(public_key),'ephemeral_public':b64(ephemeral.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)),'salt':b64(salt),'nonce':b64(nonce)}
+        # A Git checkout may convert PEM LF to CRLF on Windows. Identify the
+        # decoded public key in one canonical serialization, not file newlines.
+        canonical_public=public.public_bytes(serialization.Encoding.PEM,serialization.PublicFormat.SubjectPublicKeyInfo)
+        header={'schema':'smm-008-envelope-v1','context':context,'manifest_sha256':hashlib.sha256(manifest_raw).hexdigest(),'public_key_sha256':hashlib.sha256(canonical_public).hexdigest(),'ephemeral_public':b64(ephemeral.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)),'salt':b64(salt),'nonce':b64(nonce)}
         header_raw=canonical(header);aad=MAGIC+struct.pack('>I',len(header_raw))+header_raw
         encryptor=Cipher(algorithms.AES(derive(ephemeral,public,salt)),modes.GCM(nonce)).encryptor();encryptor.authenticate_additional_data(aad)
         with output.open('xb') as out,zipped.open('rb') as payload:
@@ -100,7 +103,11 @@ def decrypt(envelope,private_key,output,expected_context):
         size=struct.unpack('>I',size_raw)[0]
         if not 1<=size<=65536:raise ValueError('invalid envelope header length')
         header_raw=source.read(size);header=json.loads(header_raw)
-        if header['schema']!='smm-008-envelope-v1' or header['public_key_sha256']!=hashlib.sha256(expected_public).hexdigest():raise ValueError('wrong evidence key')
+        # Preserve already uploaded v1 envelopes whose producer hashed a
+        # checked-out CRLF PEM. Both fingerprints bind this exact public key;
+        # authenticated decryption below still verifies the untouched header.
+        fingerprints={hashlib.sha256(raw).hexdigest() for raw in (expected_public,expected_public.replace(b'\n',b'\r\n'))}
+        if header['schema']!='smm-008-envelope-v1' or header['public_key_sha256'] not in fingerprints:raise ValueError('wrong evidence key')
         if header['context']!=expected_context:raise ValueError('evidence context mismatch')
         start=source.tell();source.seek(0,2);end=source.tell();remaining=end-start-16
         if remaining<0:raise ValueError('truncated envelope')
@@ -143,7 +150,7 @@ def open_evidence(path):
                 for line in bundle.read(name).splitlines():json.loads(line)
             return {'reader':'zip/XML/trace-JSON','members':len(names),'traces':len(traces)}
     if suffix=='.json':
-        with path.open(encoding='utf-8') as stream:value=json.load(stream)
+        with path.open(encoding='utf-8-sig') as stream:value=json.load(stream)
         return {'reader':'JSON','root_type':type(value).__name__}
     # Read every byte even for formats that need later human review.
     with path.open('rb') as stream:
@@ -188,7 +195,7 @@ def verify(artifact,metadata,private_key,context,destination,cleanup=None):
             if cleanup:
                 safe_name(cleanup)
                 if cleanup not in manifest['files']:raise ValueError('missing cleanup evidence')
-                value=json.loads((recovered/cleanup).read_text(encoding='utf-8'))
+                value=json.loads((recovered/cleanup).read_text(encoding='utf-8-sig'))
                 if value.get('status')!='verified' or not value.get('checks') or any(c.get('before') is None or c.get('after') is None or c.get('passed') is not True for c in value['checks']):raise ValueError('incomplete cleanup evidence')
             (recovered/'evidence-manifest.json').write_bytes(manifest_raw)
         receipt={'status':'recovered_verified','artifact_id':metadata['id'],'run_id':int(context['run_id']),'artifact_sha256':sha(artifact),'manifest_sha256':header['manifest_sha256'],'context':context,'opened':opened,'cleanup':cleanup,'recovered_at':now(),'artifact_expires_at':metadata.get('expires_at'),'retained_copy_after_expiry':metadata.get('expired',False)}

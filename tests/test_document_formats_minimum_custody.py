@@ -21,7 +21,7 @@ def collect(tmp_path, prepared):
         materials.write_text('{"ocr":"fixture"}')
         downloads = work / 'platform' / 'attachments' / 'downloads'
         downloads.mkdir(parents=True)
-        (downloads / 'source.docx').write_bytes(b'exact synthetic original bytes')
+        (downloads / 'source.bin').write_bytes(b'exact synthetic original bytes')
     output = tmp_path / 'evidence'
     context = tmp_path / 'context.json'
     env = {**os.environ, 'GITHUB_RUN_ID': '123', 'GITHUB_SHA': 'a' * 40,
@@ -48,5 +48,5 @@ def test_minimum_collector_retains_failure_before_any_target_or_material_manifes
 def test_minimum_collector_keeps_business_failure_and_exact_download_with_setup_logs(tmp_path):
     output = collect(tmp_path, True)
     assert json.loads((output / 'failure.json').read_text())['status'] == 'failed'
-    assert (output / 'platform/attachments/downloads/source.docx').read_bytes() == b'exact synthetic original bytes'
+    assert (output / 'platform/attachments/downloads/source.bin').read_bytes() == b'exact synthetic original bytes'
     assert json.loads((output / 'materials.json').read_text()) == {'ocr': 'fixture'}

@@ -138,7 +138,9 @@ def test_installed_minimum_python_can_capture_search_and_read_all_formats(tmp_pa
         own_sid=list(csv.reader(io.StringIO(subprocess.check_output(['whoami.exe','/user','/fo','csv','/nh'],text=True,encoding='utf-8'))))[-1][1]
         assert package['actor']=={'sid':own_sid,'administrator_group':False}
     else:assert package['actor']=={'uid':os.getuid()} and os.getuid()!=0
-    prefix=[str(python),'-I','-m','smm_'+owner+'.cli']+(['--db',str(state/'local.sqlite3')] if owner=='local' else ['hub','--state-dir',str(state)])
+    # -I intentionally ignores PYTHONUTF8; carry the UTF-8 protocol setting as
+    # an interpreter flag, like the shared installed-platform runner does.
+    prefix=[str(python),'-I','-X','utf8','-m','smm_'+owner+'.cli']+(['--db',str(state/'local.sqlite3')] if owner=='local' else ['hub','--state-dir',str(state)])
     def command(*args):
         argv=prefix+list(map(str,args));result=subprocess.run(argv,cwd=run_cwd,env=env,capture_output=True,text=True,encoding='utf-8',timeout=70)
         observe('minimum-installed-cli',{'owner':owner,'argv':argv,'exit':result.returncode,'stdout':result.stdout,'stderr':result.stderr})

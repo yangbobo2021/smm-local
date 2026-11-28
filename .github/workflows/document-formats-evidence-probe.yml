@@ -7,6 +7,7 @@ on:
       - scripts/acceptance/document_formats_evidence*.py
       - scripts/acceptance/document_formats_recover_evidence.py
       - changes/008-document-format-support/evidence/ci-public-key.pem
+      - changes/008-document-format-support/evidence/ci-completion-public-key.pem
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,7 +31,7 @@ jobs:
         run: uv run --frozen python scripts/acceptance/document_formats_evidence_probe.py --output .acceptance-local/008-custody/raw --context-output .acceptance-local/008-custody/context.json
       - name: Encrypt raw evidence with controller public key
         if: always()
-        run: uv run --frozen python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-custody/raw --public-key changes/008-document-format-support/evidence/ci-public-key.pem --context .acceptance-local/008-custody/context.json --output .acceptance-local/008-custody/raw.smm-evidence --receipt .acceptance-local/008-custody/generated.json
+        run: uv run --frozen python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-custody/raw --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-custody/context.json --output .acceptance-local/008-custody/raw.smm-evidence --receipt .acceptance-local/008-custody/generated.json
       - name: Preserve encrypted raw evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -4,9 +4,11 @@ on:
     branches: [codex/008-document-formats-impl]
     paths:
       - .github/workflows/document-formats-minimum.yml
-      - scripts/acceptance/document_formats_minimum*.py
+      - scripts/acceptance/document_formats_minimum*
       - scripts/acceptance/document_formats_completion_evidence.py
-      - tests/test_document_formats_minimum_platform.py
+      - scripts/acceptance/document_formats_evidence.py
+      - tests/test_document_formats_evidence_key_format.py
+      - tests/test_document_formats_minimum*
   workflow_dispatch:
 permissions:
   contents: read
