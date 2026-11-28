@@ -1,0 +1,44 @@
+{
+  "scope": "Actual SCM fault-observer metadata readiness only; no product, ACL or runtime budget change.",
+  "actual_failed_run": {
+    "run_id": 46160451783,
+    "artifact_id": 15268744586,
+    "sha256": "fd8bc50bf6f909f6704f254317a306eef4b21330fdd7b5d2c7d28b69de22ce89",
+    "canonical_members": 1003,
+    "independently_verified_nonsensitive_members": 994,
+    "sensitive_members_not_opened_by_reviewer": 9,
+    "first_failure": "Administrator observer read of the active task JSON raised PermissionError errno13 before actual worker kill. No winerror or immediate second read was retained; persistent ACL denial versus an atomic-open transient is not proven.",
+    "reached": "Finally released the task gate; real Word worker completed in 0.5308842 seconds, became ready V/P1 and cleaned up. Finalizer service stop took 2.643407 seconds, after task completion.",
+    "not_reached": [
+      "actual kill receipts and next-legal fault assertion",
+      "H3 suspended OCR retain/remove/replace; prior product shutdown fix still needs that same stimulus"
+    ]
+  },
+  "test_change": {
+    "same_deadline": "Original absolute 30-second fault-enrollment deadline, never reset",
+    "retry": "Only PermissionError/FileNotFoundError opening this owned observation snapshot; preserve all error attributes and timestamps, recheck enrolled PID/creation identity before retry and after actual read",
+    "reject": "Persistent IO failure raises original error, malformed complete JSON fails immediately, process identity change fails, read or evidence-save after deadline fails",
+    "remaining_checks": "Same actual AID/token, worker identity, atomic Windows Job, gate, service ancestor and original resource budgets still required before hold/kill",
+    "no_kernel_cause_claim": true
+  },
+  "controls": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "platform": "macOS source controls, not actual Windows SCM",
+    "pytest_seconds": 0.35,
+    "bindings": {
+      "scripts/acceptance/document_formats_live_json.py": "8fae6b2d9a08b07456c5c6f5928f897a92486d4a164c3a5b668a63e500f5a868",
+      "scripts/acceptance/document_formats_scm_native.py": "3a83d08dab474bdb2a41f681fb181d103f580d08950961cf355d5ea6af96a61a",
+      "tests/test_document_formats_live_json.py": "5fb47a41e60ee702568ba5163ab69ee3ea28fc8eac2c586ddb1a722fc3b90b00",
+      "tests/document_formats_platform.py": "ad372fb601d184ab90c0856f3f6812a07c6eb78a4dda742279a5da452506ea39",
+      "tests/document_helpers.py": "8454a4b28ff7881da4e649f8735be0648e66a7cda2266c4611d329af05f7d3ef"
+    },
+    "junit_sha256": "7f0778478bbbfe766236bc22b212ea8d3fe27f40b3edd7d7309dc3a088f71b6e"
+  },
+  "independent_candidate_review": {
+    "status": "ready_for_frozen_actual_scm_rerun",
+    "md_sha256": "39a4dda1b30e768e201e6709096ee271434da150515ac2f41275fc096fec0b31",
+    "json_sha256": "a75f9388002308e307b30f37f8a03b97769b4b7fdfaf6463ff2285f5233708ba"
+  }
+}

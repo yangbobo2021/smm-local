@@ -385,7 +385,13 @@ print(json.dumps({'case_equivalent_source_read_rejected':True}))
         assert 'smm_hub._archive.document_worker' in sample['argv'] and sample['argv'][sample['argv'].index('--task-token')+1]==aid
         service=sample_process(psutil.Process(self.service_pid));assert service['creation_filetime']==self.sampled_service['creation_filetime']
         assert self.service_pid in [p.pid for p in process.parents()]
-        state=json.loads((root/'active.json').read_text())
+        from document_formats_live_json import read_live_json
+        def current():
+            actual=matching_process({'pid':process.pid,'created':record['created']})
+            assert actual is not None,'enrolled fault worker exited before observation'
+        state=read_live_json(root/'active.json',deadline,current=current,
+            observe=lambda value:self.save('native-fault-active-read-'+aid,value))
+        assert state['token']==aid
         assert state['worker']=={'pid':process.pid,'created':process.create_time()}
         assert state['rss_limit']==1024**3 and state['temp_limit']==256*1024**2 and state['seconds_limit']==300
         assert state['gate_open'] and state['windows_job']['atomic']
