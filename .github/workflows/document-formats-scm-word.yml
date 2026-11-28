@@ -1,0 +1,48 @@
+name: Document formats actual SCM Word capability
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  UV_LINK_MODE: copy
+jobs:
+  scm-word:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: '0.13.8', python-version: '3.14'}
+      - name: Install frozen controller dependencies
+        run: |
+          mkdir -p .acceptance-local/scm-word-logs
+          uv sync --frozen --extra test --extra documents --extra acceptance > .acceptance-local/scm-word-logs/sync.stdout 2> .acceptance-local/scm-word-logs/sync.stderr
+      - name: Prepare actual task materials and installed products
+        run: |
+          uv run --frozen --no-sync python scripts/acceptance/document_formats_prepare.py prepare --work .acceptance-local/scm-word-materials --output .acceptance-local/scm-word-materials.json > .acceptance-local/scm-word-logs/materials.stdout 2> .acceptance-local/scm-word-logs/materials.stderr
+          uv run --frozen --no-sync python scripts/acceptance/document_formats_installed_prepare.py --work .acceptance-local/scm-word-products --materials .acceptance-local/scm-word-materials.json > .acceptance-local/scm-word-logs/products.stdout 2> .acceptance-local/scm-word-logs/products.stderr
+      - name: Exercise stock SCM Word worker with real standard HTTP client
+        run: uv run --frozen --no-sync python -I -X utf8 scripts/acceptance/document_formats_scm_word.py --target-config .acceptance-local/scm-word-products/target.json --output .acceptance-local/scm-word-business > .acceptance-local/scm-word-logs/business.stdout 2> .acceptance-local/scm-word-logs/business.stderr
+      - name: Preserve actual service and actor originals
+        if: always()
+        run: |
+          mkdir -p .acceptance-local/scm-word-products/business .acceptance-local/scm-word-products/outer-logs
+          if [ -d .acceptance-local/scm-word-business ]; then cp -R .acceptance-local/scm-word-business/. .acceptance-local/scm-word-products/business/; fi
+          cp .acceptance-local/scm-word-logs/* .acceptance-local/scm-word-products/outer-logs/
+          uv run --no-project --python 3.14 python scripts/acceptance/document_formats_cross_os_collect.py --work .acceptance-local/scm-word-products --materials .acceptance-local/scm-word-materials.json --output .acceptance-local/scm-word-evidence --context .acceptance-local/scm-word-context.json --job-key scm-word-win32
+      - name: Encrypt component originals
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/scm-word-evidence --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/scm-word-context.json --output .acceptance-local/scm-word.smm-evidence --receipt .acceptance-local/scm-word-generated.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 008-scm-word-win32-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/scm-word.smm-evidence

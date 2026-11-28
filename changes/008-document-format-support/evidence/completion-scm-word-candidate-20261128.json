@@ -1,0 +1,61 @@
+{
+  "schema": "smm-008-scm-word-candidate-20261128",
+  "acceptance_id": "AT-SMM-008",
+  "scope": "Current small stock SCM/LocalService DOCX worker capability candidate, static review only",
+  "status": "ready_for_actual_windows_ci",
+  "actual_scm_business_passed": false,
+  "complete_h1_h5_passed": false,
+  "candidate_frozen_files": {
+    "scripts/acceptance/document_formats_scm_word.py": {
+      "sha256": "ce617d8a7b57344a6ea020fb44099e0d705eb4ee8a220bdf5a8f5235bc7ecd00",
+      "bytes": 3983
+    },
+    "scripts/acceptance/hub_documents_scm_platform.py": {
+      "sha256": "081b464b9054edefbe7aad362011c6be5e9dcf912ba00933a1fb97e2f378ccd7",
+      "bytes": 20704
+    },
+    "scripts/acceptance/document_formats_upload_transport.py": {
+      "sha256": "0132aa6cf6668ea852005769b48323893a3bde6e4776f92e65a3d6b48f73d31b",
+      "bytes": 3493
+    },
+    ".github/workflows/document-formats-scm-word.yml": {
+      "sha256": "ee20a1a6bf5a844f59b6e929e54d083413637a9906867a0683e1e70b6daf1e1e",
+      "bytes": 3359
+    },
+    "scripts/acceptance/document_formats_installed_standard_user.ps1": {
+      "sha256": "90bbabd16d52be839f8530fa98e9a5b4b88f32806ef8a083f309e40ed87de68a",
+      "bytes": 7264
+    },
+    "scripts/acceptance/document_formats_installed_prepare.py": {
+      "sha256": "ce0c8d273888a3417fb6ac8fcb56fdfe40344e918d5b449d2b59cd35760256cf",
+      "bytes": 5713
+    },
+    "scripts/acceptance/document_formats_cross_os_collect.py": {
+      "sha256": "d15e5888bc952f29ade813b390c920020fff0210685c2693a4ae9e6f691bc9c2",
+      "bytes": 2753
+    },
+    "src/smm_hub/hub_os.py": {
+      "sha256": "ee1c09a09dd14705b2770684b6572357804dbcdf2e27aea9efab41c2c1b4ae43",
+      "bytes": 8575
+    },
+    "src/smm_hub/windows_service.py": {
+      "sha256": "2dec18e7dca01a1e1dfefc6d12d35d0f8d9b45d887bc536a2b2b55d85d6e725a",
+      "bytes": 4345
+    }
+  },
+  "independent_reviewer": "/root/completion_cross_os_full_execution_review",
+  "resolved": [
+    {
+      "id": "SCMWORD-V1-01",
+      "status": "resolved",
+      "reason": "Word source ce617d8a freezes only parts as sorted list for JSON; runtime independent truth remains intact. Independently repeated fixture JSON round-trip preserves parts set, words, and table JSON values."
+    },
+    {
+      "id": "SCMWORD-V1-02",
+      "status": "resolved",
+      "reason": "Latest shared template 081b464b captures every native command receipt and raw stdout/stderr; actual before/after SCM/firewall queries determine absence, and true deletion/query failure enters failures and raises."
+    }
+  ],
+  "actual_execution_pending": true,
+  "private_identity_and_tokens_in_public_report": false
+}

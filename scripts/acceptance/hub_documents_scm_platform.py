@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import ssl
 import subprocess
 import sys
@@ -235,8 +236,49 @@ def ordinary_worker(config, out):
     probe.save("result", result)
 
 
-def administrator(config, out):
-    manager = Administrator(config, out)
+def cleanup_command(manager, label, argv):
+    """Preserve the actual native exit and byte streams, including absence."""
+    details = {}
+    try:
+        result = subprocess.run(list(map(str, argv)), capture_output=True, env=manager.env('hub'), timeout=60)
+        stdout, stderr, code = result.stdout, result.stderr, result.returncode
+    except subprocess.TimeoutExpired as error:
+        stdout, stderr, code = error.stdout or b'', error.stderr or b'', None
+        details = {'timed_out': True, 'timeout_seconds': 60}
+    except OSError as error:
+        stdout, stderr, code = b'', str(error).encode('utf-8'), None
+        details = {'launch_error': type(error).__name__}
+    # A failed cleanup action must not prevent the remaining owned resources
+    # from being cleaned and queried. The caller propagates failed outcomes.
+    (manager.out / (label + '.stdout')).write_bytes(stdout)
+    (manager.out / (label + '.stderr')).write_bytes(stderr)
+    record = {'argv': list(map(str, argv)), 'exit_code': code, **details,
+            'stdout_sha256': hashlib.sha256(stdout).hexdigest(),
+            'stderr_sha256': hashlib.sha256(stderr).hexdigest()}
+    manager.save(label, record)
+    return record, stdout
+
+
+def cleanup_snapshot(manager, label):
+    assert re.fullmatch(r'smm-hub-[0-9a-f]{12}', manager.service_name)
+    service, _ = cleanup_command(manager, label + '-scm', ['sc.exe', 'query', manager.service_name])
+    script = ("$ErrorActionPreference='Stop';"
+        "$rules=@(Get-NetFirewallRule -ErrorAction Stop | Where-Object {$_.DisplayName -eq '" + manager.service_name + "'});"
+        "@{count=$rules.Count;rules=@($rules|Select-Object Name,DisplayName,Enabled,Direction,Action)}|ConvertTo-Json -Depth 5 -Compress")
+    firewall, raw = cleanup_command(manager, label + '-firewall', ['powershell.exe', '-NoProfile', '-Command', script])
+    if firewall['exit_code'] != 0:
+        raise RuntimeError('Cannot query owned firewall rule; original byte streams preserved')
+    rules = json.loads(raw.decode('utf-8-sig'))
+    assert type(rules['count']) is int and rules['count'] == len(rules['rules'])
+    snapshot = {'service': service, 'firewall': firewall, 'firewall_state': rules}
+    manager.save(label, snapshot)
+    if service['exit_code'] not in {0, 1060}:
+        raise RuntimeError('Cannot query owned SCM service; original command receipt preserved')
+    return snapshot
+
+
+def administrator(config, out, *, manager_factory=None, runner=None, wrapper=None):
+    manager = (manager_factory or Administrator)(config, out)
     manager.service_name = (
         "smm-hub-"
         + hashlib.sha256(str(manager.hub_state.resolve()).encode()).hexdigest()[:12]
@@ -321,9 +363,21 @@ def administrator(config, out):
                 "control": str(client / "control"),
             },
         }
+        if wrapper is not None:
+            # The 008 provisioner confines wheel ACL preparation to its Work.
+            # Preserve exact bytes under that client's task directory only.
+            import shutil
+            wheels = client / 'wheels'
+            wheels.mkdir()
+            for role in ('local', 'hub'):
+                source = Path(config[role + '_wheel'])
+                target_wheel = wheels / source.name
+                shutil.copyfile(source, target_wheel)
+                assert target_wheel.read_bytes() == source.read_bytes()
+                worker[role + '_wheel'] = str(target_wheel)
         target = client / "target.json"
         target.write_text(json.dumps(worker), encoding="utf-8")
-        wrapper = Path(__file__).with_name("hub_documents_ci_standard_user.ps1")
+        wrapper = wrapper or Path(__file__).with_name("hub_documents_ci_standard_user.ps1")
         log = open(out / "standard-user.stdout", "wb")
         error = open(out / "standard-user.stderr", "wb")
         args = [
@@ -336,7 +390,7 @@ def administrator(config, out):
             "-Python",
             sys.executable,
             "-Runner",
-            str(Path(__file__).resolve()),
+            str(runner or Path(__file__).resolve()),
             "-Config",
             str(target),
             "-Work",
@@ -415,22 +469,27 @@ def administrator(config, out):
                     )
             except Exception as exc:
                 failures.append(str(exc))
-            deleted = subprocess.run(
-                ["sc.exe", "delete", manager.service_name], capture_output=True
-            )
-            if deleted.returncode:
-                failures.append(deleted.stdout.decode(errors="replace"))
-            subprocess.run(
-                [
-                    "netsh.exe",
-                    "advfirewall",
-                    "firewall",
-                    "delete",
-                    "rule",
-                    "name=" + manager.service_name,
-                ],
-                capture_output=True,
-            )
+            before = None
+            try:
+                before = cleanup_snapshot(manager, 'service-removal-before')
+            except Exception as exc:
+                failures.append(str(exc))
+            deleted, _ = cleanup_command(manager, 'service-delete', ['sc.exe', 'delete', manager.service_name])
+            firewall, _ = cleanup_command(manager, 'firewall-delete',
+                ['netsh.exe', 'advfirewall', 'firewall', 'delete', 'rule', 'name=' + manager.service_name])
+            manager.save('service-removal-commands', {'service': deleted, 'firewall': firewall})
+            if deleted['exit_code'] not in {0, 1060}:
+                failures.append('SCM deletion command failed: ' + str(deleted['exit_code']))
+            if firewall['exit_code'] is None:
+                failures.append('Owned firewall deletion could not complete; command receipt preserved')
+            elif before and before['firewall_state']['count'] and firewall['exit_code'] != 0:
+                failures.append('Owned firewall rule deletion command failed: ' + str(firewall['exit_code']))
+            try:
+                after = cleanup_snapshot(manager, 'service-removal-after')
+                if after['service']['exit_code'] != 1060 or after['firewall_state']['count'] != 0:
+                    failures.append('Owned service or firewall rule remains after cleanup')
+            except Exception as exc:
+                failures.append(str(exc))
         manager.save(
             "service-cleanup",
             {"service": manager.service_name, "failures": failures, "at": now()},
