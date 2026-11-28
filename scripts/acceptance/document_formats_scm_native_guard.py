@@ -58,6 +58,17 @@ def install(manager):
     code = 'import json\nC=json.loads('+repr(json.dumps(config))+')\n'+IDENTITY_SOURCE+'\n'+AUDIT_PRIMITIVES+'\n'+hook
     code += '''
 if service_actor:
+ def _storage_trace(frame,event,arg):
+  if event=='call':
+   module=frame.f_globals.get('__name__') or ''
+   return _storage_trace if module.startswith(('smm_hub.','pathlib','ntpath')) else None
+  if event=='exception' and isinstance(arg[1],PermissionError):
+   filename=getattr(arg[1],'filename',None)
+   if filename and os.path.normcase(os.path.abspath(filename))==os.path.normcase(os.path.abspath(C['storage_ancestor'])):
+    emit('native-storage-path-denial',module=frame.f_globals.get('__name__'),function=frame.f_code.co_name,
+      line=frame.f_lineno,error=str(arg[1]),filename=filename)
+  return _storage_trace
+ sys.settrace(_storage_trace);threading.settrace(_storage_trace)
  import ctypes as _c
  from ctypes import wintypes as _w
  _k=_c.WinDLL('kernel32',use_last_error=True)
