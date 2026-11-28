@@ -51,7 +51,8 @@ def sample_process(process):
     after = (process.pid, process.create_time(), process.exe(), process.cmdline(), process.ppid())
     assert before == after and process.is_running(), 'process identity changed during token sampling'
     assert token['pid'] == before[0] and abs(token['created'] - before[1]) < .001
-    return {**token, 'executable': before[2], 'argv': before[3], 'parent_pid': before[4]}
+    return {**token, 'kernel_created': token['created'], 'created': before[1],
+            'executable': before[2], 'argv': before[3], 'parent_pid': before[4]}
 
 
 def validate_chain(ocr, worker, service, *, sid, session, attempt_id, ancestors):

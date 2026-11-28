@@ -402,7 +402,7 @@ def administrator(config, out, *, manager_factory=None, runner=None, wrapper=Non
         ]
         process = subprocess.Popen(args, stdout=log, stderr=error, env=manager.env())
         seen = set()
-        deadline = time.monotonic() + 660
+        deadline = time.monotonic() + getattr(manager, 'client_timeout_seconds', 660)
         while process.poll() is None:
             assert time.monotonic() < deadline, "ordinary SCM client timed out"
             for request in sorted((client / "control").glob("*.request.json")):

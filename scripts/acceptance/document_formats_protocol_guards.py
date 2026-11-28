@@ -81,13 +81,14 @@ sys.addaudithook(audit);sys.setprofile(profile);threading.setprofile(profile)
 '''
 
 
-def install(probe):
+def install(probe, owners=('local', 'hub')):
     probe.source_paths = probe.out / 'protected-source-paths.json'
     probe.source_paths.write_text('[]\n', encoding='utf-8')
     receipts = []
     wire = probe.out / 'actual-outbound-http'
     wire.mkdir()
-    for owner in ('local', 'hub'):
+    assert owners and set(owners) <= {'local', 'hub'}
+    for owner in owners:
         source_python = Path(probe.config[owner + '_python'])
         source_prefix = source_python.parent.parent
         target = probe.out / 'programs' / (owner + '-env')
@@ -137,8 +138,10 @@ def install(probe):
 
 
 def events(probe):
-    return sorted([json.loads(line) for owner in ('local', 'hub')
-                   for line in (probe.out / (owner + '-protocol-guard.jsonl')).read_text(encoding='utf-8').splitlines()],
+    paths = getattr(probe, 'protocol_guard_paths', None)
+    if paths is None:paths = [probe.out / (owner + '-protocol-guard.jsonl') for owner in ('local', 'hub')]
+    return sorted([json.loads(line) for path in paths
+                   for line in Path(path).read_text(encoding='utf-8').splitlines()],
                   key=lambda event: event['monotonic_ns'])
 
 
@@ -148,6 +151,31 @@ def assert_read_only(probe, start):
     assert not [e for e in actual if e['kind'] in denied_kinds], actual
     assert not [e for e in actual if e['kind']=='network-call' and not e['allowed']], actual
     probe.save('read-only-observation-' + str(start), {'events': actual, 'unexpected_content_work': []})
+
+
+def control_observations(probe, start, owner, argv):
+    """Separate this real -c interpreter from already-running service traffic."""
+    window = events(probe)[start:]
+    identities = [event for event in window if event['kind']=='identity' and event['owner']==owner
+                  and event['argv']==argv]
+    assert len(identities)==1, identities
+    identity = identities[0]
+    assert identity['isolated']==1 and identity['utf8_mode']==1
+    expected=probe.config.get(owner+'_expected_identity')
+    if expected is None:expected=actual_identity()
+    for field in ('sid','session_id','euid','egid','is_admin'):
+        if field in expected:assert identity[field]==expected[field]
+    python=Path(probe.config[owner+'_python'])
+    assert os.path.normcase(os.path.abspath(identity['executable']))==os.path.normcase(os.path.abspath(python))
+    assert Path(identity['prefix']).resolve()==python.parent.parent.resolve()
+    own = [event for event in window if event['pid']==identity['pid'] and event['owner']==owner]
+    # Legitimate configured-Hub HTTP can continue in a live service. Keep all
+    # original events; another process doing forbidden work is still failure.
+    foreign = [event for event in window if event not in own and
+               (event['kind'] in {'source-open','content-processing','child-start'} or
+                (event['kind']=='network-call' and not event['allowed']))]
+    assert not foreign, foreign
+    return own
 
 
 def controls(probe):
@@ -170,7 +198,7 @@ def controls(probe):
             probe.keep('guards/' + owner + '-source-negative-' + str(index) + '.stdout', p.stdout)
             probe.keep('guards/' + owner + '-source-negative-' + str(index) + '.stderr', p.stderr)
             assert p.returncode != 0 and b'SMM008 read attempted original source' in p.stderr
-            actual = [e for e in events(probe)[before:] if e['kind'] != 'identity']
+            actual = [e for e in control_observations(probe, before, owner, ['-c', str(protected)]) if e['kind'] != 'identity']
             assert len(actual) == 1 and actual[0]['kind'] == 'source-open' and actual[0]['allowed'] is False
         probe.phase = 'read-only'
         positive = subprocess.run([python, '-I', '-X', 'utf8', '-c', 'from pathlib import Path;import sys;assert Path(sys.argv[1]).read_bytes()==b"independent allowed bytes"', str(allowed)], capture_output=True, timeout=20)
@@ -182,8 +210,9 @@ def controls(probe):
             probe.keep('guards/' + owner + '-' + marker.replace(' ', '-') + '.stdout', p.stdout)
             probe.keep('guards/' + owner + '-' + marker.replace(' ', '-') + '.stderr', p.stderr)
             assert p.returncode != 0 and ('SMM008 read attempted ' + marker).encode() in p.stderr
-            actual = [e for e in events(probe)[before:] if e['kind'] != 'identity']
-            assert len(actual) == 1 and actual[0]['allowed'] is False
+            actual = [e for e in control_observations(probe, before, owner, ['-c', str(protected)]) if e['kind'] != 'identity']
+            expected_kind='content-processing' if marker=='content processing' else 'child-start'
+            assert len(actual) == 1 and actual[0]['kind']==expected_kind and actual[0]['allowed'] is False
         child_controls = [('system', 'import os;os.system("exit 0" if os.name=="nt" else ":")'),
             ('spawn', 'import os,sys;os.spawnv(os.P_WAIT,sys.executable,[sys.executable,"-c","pass"])'),
             ('mcp-actual-mismatch', 'import _smm_008_private_acceptance as g,sys;namespace={"argv":g.C["mcp_argv"],"sys":sys};exec(compile("import subprocess\\nsubprocess.run([sys.executable,\\"-I\\",\\"-c\\",\\"print(73428)\\"])" ,g.C["mcp_wrapper"],"exec"),namespace)')]
@@ -195,7 +224,7 @@ def controls(probe):
             probe.keep('guards/' + owner + '-child-' + name + '.stdout', denied.stdout)
             probe.keep('guards/' + owner + '-child-' + name + '.stderr', denied.stderr)
             assert denied.returncode != 0 and b'SMM008 read attempted child process' in denied.stderr, (name, denied.stderr)
-            observed = [e for e in events(probe)[before:] if e['kind'] == 'child-start']
+            observed = [e for e in control_observations(probe, before, owner, ['-c']) if e['kind'] == 'child-start']
             assert len(observed) == 1 and observed[0]['allowed'] is False
         # Real socketpair must remain available to asyncio/stdio on Windows;
         # no blanket loopback whitelist is used for application connections.
@@ -220,7 +249,7 @@ def controls(probe):
             probe.keep('guards/' + owner + '-network-' + name + '.stdout', denied.stdout)
             probe.keep('guards/' + owner + '-network-' + name + '.stderr', denied.stderr)
             assert denied.returncode != 0 and b'SMM008 attempted network outside configured task endpoints' in denied.stderr
-            observed = [e for e in events(probe)[before:] if e['kind']=='network-call']
+            observed = [e for e in control_observations(probe, before, owner, ['-c']) if e['kind']=='network-call']
             assert len(observed) == 1 and observed[0]['allowed'] is False
     probe.save('protocol-guard-controls', {'owners': ['local', 'hub'], 'actual_allowed_source_and_cache': True,
                                         'actual_source_processing_child_denied_per_owner': 4,
