@@ -249,10 +249,37 @@ def collect(work, materials, output, context_path):
     write(context_path, context)
 
 
+def collect_triage(work, output, context_path):
+    """A small encrypted original subset; never a full recovery/pass claim."""
+    output.mkdir(parents=True, exist_ok=False)
+    names = ['platform/' + name for name in ('junit.xml', 'run.stdout', 'run.stderr',
+             'case-map.json', 'result.json', 'failure.json', 'controller-identity.json')]
+    names += ['logs/' + name for name in ('prepare.stdout', 'prepare.stderr', 'outer.stdout', 'outer.stderr')]
+    files, missing = {}, []
+    for name in names:
+        source = work / name
+        if not source.is_file():
+            missing.append(name)
+            continue
+        raw = source.read_bytes()
+        target = output / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw)
+        assert target.read_bytes() == raw
+        files[name] = {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+    context = {'run_id': os.environ['GITHUB_RUN_ID'], 'job_key': 'source-triage-' + os.environ['RUNNER_OS'],
+               'commit': os.environ['GITHUB_SHA'],
+               'artifact_name': '008-source-triage-' + os.environ['RUNNER_OS'] + '-' + os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT']}
+    write(output / 'triage-index.json', {'scope': 'Selected original diagnostic files only; full encrypted source archive remains required for acceptance.',
+                                      'files': files, 'missing': missing, 'context': context})
+    write(context_path, context)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--prepare', action='store_true')
     p.add_argument('--collect', action='store_true')
+    p.add_argument('--collect-triage', action='store_true')
     p.add_argument('--inner', action='store_true')
     p.add_argument('--materials', type=Path)
     p.add_argument('--browsers', type=Path)
@@ -266,6 +293,8 @@ def main():
         prepare(a.work, a.materials, a.browsers, a.test_file)
     elif a.collect:
         collect(a.work, a.materials, a.output, a.context)
+    elif a.collect_triage:
+        collect_triage(a.work, a.output, a.context)
     elif a.inner:
         inner(a.output, a.target_config)
     else:

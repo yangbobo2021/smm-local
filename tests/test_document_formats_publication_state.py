@@ -16,6 +16,37 @@ from test_document_formats_upload_restart import Server
 def save(name,value):keep(name,json.dumps(value,ensure_ascii=False,indent=2).encode('utf-8'))
 
 
+def assert_finished_notice(page, timeout=10000):
+    from playwright.sync_api import expect
+    notice = page.locator('#notice')
+    expect(notice).not_to_contain_text(re.compile(r'正在.*处理|处理中|待发布|等待.*发布|处理完成后'), timeout=timeout)
+    expect(notice).to_contain_text(re.compile(r'已|成功|完成|检索'), timeout=timeout)
+    text = notice.inner_text()
+    assert not re.search(r'正在.*处理|处理中|待发布|等待.*发布|处理完成后', text)
+    assert re.search(r'已|成功|完成|检索', text)
+    return text
+
+
+@pytest.mark.skipif(not os.environ.get('PLAYWRIGHT_BROWSERS_PATH'), reason='requires prepared real browser for observer controls')
+def test_publication_notice_observer_waits_for_async_finish_and_rejects_stuck_or_wrong_notice():
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as runtime:
+        browser = runtime.chromium.launch(headless=True)
+        try:
+            page = browser.new_page()
+            page.set_content('<p id="notice">原件已接收，正在本端处理；处理完成后再按项目检索。</p>')
+            page.evaluate("setTimeout(()=>document.querySelector('#notice').textContent='已保存，可在项目检索',300)")
+            assert assert_finished_notice(page) == '已保存，可在项目检索'
+            for wrong in ('原件已接收，正在本端处理；处理完成后再按项目检索。', '发生错误'):
+                page.locator('#notice').evaluate('(node,value)=>node.textContent=value', wrong)
+                with pytest.raises(AssertionError):
+                    assert_finished_notice(page, timeout=150)
+            observe('publication-notice-observer-controls', {'purpose': 'synthetic DOM observer only, separate from real product flows',
+                    'async_final': True, 'stuck_processing_rejected': True, 'wrong_final_rejected': True})
+        finally:
+            browser.close()
+
+
 class PublicationBrowser(Browser):
     def open(self):
         super().open();self.context.tracing.stop()
@@ -207,7 +238,7 @@ def test_browser_waits_for_actual_publication_of_each_new_attempt(tmp_path,owner
                     if phase=='cache':browser.project(projects[1-item['group']],library=True);browser.project(item['project'],library=True)
                     if phase!='cache':
                         outcome=browser.page.locator('#'+browser.prefix+'-upload-results li').filter(has_text=item['name']);expect(outcome).to_contain_text('：'+('成功' if item['status']=='ready' else '部分完成'))
-                        notice=browser.page.locator('#notice').inner_text();assert not re.search(r'正在.*处理|处理中|待发布|等待.*发布|处理完成后',notice) and re.search(r'已|成功|完成|检索',notice),notice
+                        notice=assert_finished_notice(browser.page)
                     label=row(browser,item).locator(':scope > p').filter(has_text='格式 '+item['format'].upper());expect(label).to_contain_text(item['status']);shown=label.inner_text();assert re.search(r'(?<!处理)版本\s*'+str(version)+r'(?!\d)',shown) and re.search(r'处理版本\s*'+str(processing)+r'(?!\d)',shown);capture(browser,item,phase+'-published')
                     observe('publication-after-release',{'owner':owner,'phase':phase,'marker':marker,'published':published,'label':label.inner_text(),'version':version,'processing_version':processing})
     finally:

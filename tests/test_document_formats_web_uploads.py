@@ -89,18 +89,58 @@ def assert_upload_events(items,events,responses,project,context,owner):
 def assert_ui_snapshot(page,owner,entry,format):
     from playwright.sync_api import expect
     row=page.locator('#doc-library-list .result' if owner=='local' else '#hub-library-list .result').filter(has_text=entry['id'])
-    expect(row).to_have_count(1);expect(row).to_contain_text(entry['display_name'])
-    expect(row).to_contain_text(re.compile(r'格式\s*'+format.upper()+r'(?![A-Z])'))
-    expect(row).to_contain_text(re.compile(r'(?<!处理)版本\s*'+str(entry['version'])+r'(?!\d)'))
-    expect(row).to_contain_text(re.compile(r'处理版本\s*'+str(entry['processing_version'])+r'(?!\d)'))
-    expect(row).to_contain_text(entry['latest_attempt']['status'])
-    if row.locator('details').get_attribute('open') is None:row.locator('summary').click()
+    deadline=time.monotonic()+20
+    while True:
+        expect(row).to_have_count(1)
+        if row.locator('details').get_attribute('open') is None:row.locator('summary').click()
+        # Polling can replace the row after the click. Take visibility, label
+        # and all three JSON panels in one browser turn; reopen only if this
+        # generation is closed/detached, never retry incorrect panel values.
+        snapshot=row.evaluate('''row=>({connected:row.isConnected,open:row.querySelector('details')?.open,
+            text:row.innerText,fields:Object.fromEntries([...row.querySelectorAll('[data-native-detail]')]
+                .map(node=>[node.dataset.nativeDetail,node.textContent]))})''')
+        if snapshot['connected'] and snapshot['open']:break
+        assert time.monotonic()<deadline,snapshot
+        page.wait_for_timeout(50)
+    text=snapshot['text'];assert entry['display_name'] in text
+    assert re.search(r'格式\s*'+format.upper()+r'(?![A-Z])',text)
+    assert re.search(r'(?<!处理)版本\s*'+str(entry['version'])+r'(?!\d)',text)
+    assert re.search(r'处理版本\s*'+str(entry['processing_version'])+r'(?!\d)',text)
+    assert entry['latest_attempt']['status'] in text
     for field in ('published_snapshot','latest_attempt','retry_target'):
         expected=entry[field]
         if field=='latest_attempt':expected={k:expected[k] for k in ('capture_id','attempt_id','status','config_revision','error')}
-        actual=json.loads(row.locator('[data-native-detail='+field+']').inner_text())
+        actual=json.loads(snapshot['fields'][field])
         assert actual==expected
+    observe('web-visible-row-snapshot',{'owner':owner,'document_id':entry['id'],'snapshot':snapshot})
     return row
+
+
+def test_web_row_observer_reopens_replaced_details_and_rejects_wrong_values():
+    from copy import deepcopy
+    from html import escape
+    from playwright.sync_api import sync_playwright
+    entry={'id':'observer-self-control','display_name':'same.docx','version':1,'processing_version':1,
+        'published_snapshot':{'capture_id':'capture'},'latest_attempt':{'capture_id':'capture','attempt_id':'attempt','status':'ready','config_revision':1,'error':None},
+        'retry_target':{'capture_id':'capture'}}
+    def markup(value):
+        fields=''.join('<pre data-native-detail="'+k+'">'+escape(json.dumps(value[k]))+'</pre>' for k in ('published_snapshot','latest_attempt','retry_target'))
+        return '<div class="result"><p>same.docx · 文档 observer-self-control · 格式 DOCX · 版本 1 · 处理版本 1 · ready</p><details><summary>详情</summary>'+fields+'</details></div>'
+    with sync_playwright() as pw:
+        browser=pw.chromium.launch(headless=True)
+        try:
+            page=browser.new_page()
+            for owner,box in (('local','doc-library-list'),('hub','hub-library-list')):
+                page.set_content('<div id="'+box+'">'+markup(entry)+'</div>')
+                page.evaluate('''({box,html})=>{document.querySelector('#'+box+' summary').addEventListener('click',()=>{
+                    document.getElementById(box).innerHTML=html;window.replaced=true;},{once:true})}''',{'box':box,'html':markup(entry)})
+                assert_ui_snapshot(page,owner,entry,'docx');assert page.evaluate('window.replaced') is True
+                for field in ('published_snapshot','latest_attempt','retry_target'):
+                    wrong=deepcopy(entry);wrong[field]['capture_id']='foreign'
+                    page.set_content('<div id="'+box+'">'+markup(wrong)+'</div>')
+                    with pytest.raises(AssertionError):assert_ui_snapshot(page,owner,entry,'docx')
+                observe('web-row-observer-controls',{'owner':owner,'actual_replacement_reopened':True,'wrong_capture_panels_rejected':3})
+        finally:browser.close()
 
 
 def assert_ui_ids(page,owner,expected,stage,*,timeout=20):

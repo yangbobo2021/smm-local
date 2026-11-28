@@ -56,6 +56,21 @@ jobs:
           python_path=$(uv run --frozen --no-sync python -c 'import sys;sys.stdout.write(sys.executable)' 2> .acceptance-local/008-source/logs/python-discovery.stderr)
           printf '%s' "$python_path" > .acceptance-local/008-source/logs/python-discovery.stdout
           powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/acceptance/document_formats_source_standard_user.ps1 -Python "$python_path" -Runner "$GITHUB_WORKSPACE/scripts/acceptance/document_formats_source_suite.py" -Config "$GITHUB_WORKSPACE/.acceptance-local/008-source/target.json" -Work "$GITHUB_WORKSPACE/.acceptance-local/008-source" -Workspace "$GITHUB_WORKSPACE" > .acceptance-local/008-source/logs/outer.stdout 2> .acceptance-local/008-source/logs/outer.stderr
+      - name: Preserve compact original triage separately
+        if: always()
+        run: uv run --no-project --python 3.14 python scripts/acceptance/document_formats_source_suite.py --collect-triage --work .acceptance-local/008-source --output .acceptance-local/008-source-triage --context .acceptance-local/008-source-triage-context.json
+      - name: Encrypt compact original triage
+        if: always()
+        run: uv run --no-project --python 3.14 --with cryptography==50.0.2 python scripts/acceptance/document_formats_evidence.py pack --source .acceptance-local/008-source-triage --public-key changes/008-document-format-support/evidence/ci-completion-public-key.pem --context .acceptance-local/008-source-triage-context.json --output .acceptance-local/008-source-triage.smm-evidence --receipt .acceptance-local/008-source-triage-generated.json
+      - name: Upload compact encrypted original triage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 008-source-triage-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          include-hidden-files: true
+          path: .acceptance-local/008-source-triage.smm-evidence
       - name: Preserve per-case raw evidence and source bindings
         if: always()
         run: uv run --no-project --python 3.14 python scripts/acceptance/document_formats_source_suite.py --collect --work .acceptance-local/008-source --materials .acceptance-local/008-source-materials.json --output .acceptance-local/008-source-evidence --context .acceptance-local/008-source-context.json

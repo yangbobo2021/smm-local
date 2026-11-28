@@ -1,0 +1,126 @@
+{
+  "schema": "smm-008-current-c1-repairs-evidence-v1",
+  "date": "2026-11-28",
+  "head_before_changes": "3042dfa9dd8d2b2ad91773ff3395836e1dab1391",
+  "product_module_sha256": {
+    "src/smm_local/document_protocol.py": "afe2b1015443955495ac6a7c8ce7b171b1a5078fa711935a32ab3e35f9fba53f"
+  },
+  "scope": "Current atomic browser-row observer and live processing service lease restore fix. Not complete E/H/X or final R008 pass.",
+  "official_source_run": {
+    "run": 46107496051,
+    "head": "0320622918bcca3779d7d9ba3b4b7f32a584d91d",
+    "Linux": {
+      "passed": 357,
+      "failed": 1,
+      "skipped": 15,
+      "custody": "Full original envelope and every outer member recovered; old UI row observer failure."
+    },
+    "macOS": {
+      "passed": 356,
+      "failed": 2,
+      "skipped": 15,
+      "custody": "Authenticated original selected triage, not full member recovery; same old UI row on both creators."
+    },
+    "Windows": {
+      "passed": 347,
+      "failed": 3,
+      "skipped": 23,
+      "custody": "Authenticated original selected triage plus 283 original publication/restore details; not full member recovery.",
+      "remaining_old_failures": [
+        "Local old row observer",
+        "Hub final notice observation preceded actual final notice by59.443ms",
+        "Hub restore manifest included live services lock"
+      ]
+    },
+    "history_policy": "Failed old jobs remain failed. Actual Windows GC four component cases and both real web update/removal cases passed in original JUnit; not expanded into full E/H."
+  },
+  "repairs": {
+    "atomic_rows": "One connected/open visible row snapshot reads all3JSON panels in a single browser evaluation; entire-row replacement reopens, wrong values still reject. Both new formal cases independently passed.",
+    "restore_runtime": "Public prepare_restore excludes whole services runtime directory. Actual Windows mandatory-lock PermissionError and Mac stale registration red; same frozen tests green6perOS plus18related regression passed/1Windows-specific skip. Raw/results/transfers/DB/current protection remain byte-exact. Windows identity is admin component, not E/H.",
+    "notice": "Unchanged not-processing/success conditions now boundedly await actual asynchronous final notice; stuck and wrong final controls reject. Candidate independently passed; full new publication formal still pending.",
+    "compact_triage": "Separate small encrypted subset of original diagnostic files for quick failure diagnosis. Full raw archive and original encrypted upload remain mandatory. Collection never business or full recovery pass."
+  },
+  "native": {
+    "execute-completion-sc1-web-row-local-v1": {
+      "operation": "execute",
+      "status": "executed",
+      "result_sha256": "6c7b72bb919b9f595d5465e6b484d3cb66ba56fa3704c522e22a141a241ac2cb"
+    },
+    "execute-completion-sc1-web-row-hub-v1": {
+      "operation": "execute",
+      "status": "executed",
+      "result_sha256": "b02147780b7114c8ef5366049777afbaa8a81d2eaf3e09e616aea6817362fbb1"
+    },
+    "review-completion-sc1-web-row-local-execution-v1": {
+      "operation": "review",
+      "status": "reviewed",
+      "result_sha256": "8b9eb4ed151f6078ce1af999ff91239d971dc1af38efa63d38eac5908d472c1e"
+    },
+    "review-completion-sc1-web-row-hub-execution-v1": {
+      "operation": "review",
+      "status": "reviewed",
+      "result_sha256": "00a9aa17fad396bffcb6d7e1d586903889ae7f15a1b4227df309431c70790f89"
+    },
+    "review-completion-sc11-runtime-lease-red-v2": {
+      "operation": "review",
+      "status": "reviewed",
+      "result_sha256": "b016fa0fdfeb0b048c07599ec27b4833ef607ccd4a1b056bdbb2c303a5b5ff54"
+    },
+    "review-completion-sc11-runtime-lease-green-v1": {
+      "operation": "review",
+      "status": "reviewed",
+      "result_sha256": "ca3847fd2513ad1b1db9b7cc8ce032453933834a63adcc29788aa1f4ff9ab9f9"
+    },
+    "red-completion-sc11-runtime-lease-v1": {
+      "operation": "tdd-red",
+      "status": "blocked",
+      "result_sha256": "dc0fa0cd561546fc48660aa8c27ba5facad1ffbbfef679afcdbc63ad319a1100"
+    },
+    "red-completion-sc11-runtime-lease-v2": {
+      "operation": "tdd-red",
+      "status": "red_observed",
+      "result_sha256": "fe4f60b575de7be4542d0b264f1de8f9bb321542f2815f4801edc1d50d3fe0d9"
+    },
+    "green-completion-sc11-runtime-lease-v1": {
+      "operation": "tdd-green",
+      "status": "green_observed",
+      "result_sha256": "2107bb813eb8bca4e40aaf7210eb88a03505366f0b96c1d436a6017904d8e13f"
+    }
+  },
+  "reports": {
+    "completion-web-row-candidate-review-20261128.md": {
+      "original_sha256": "e42c6b8ecb114441fb70bf26f147b4bdb1c1ce6ff517f4049c17c852fdc8697c",
+      "public_sha256": "ff261c1eca32b232fa71533102ad80e37de4d07e832d0c8d374c1d42042c1843",
+      "redaction": "Task absolute paths, private test hosts and full unique account SIDs only; findings, counters, artifact/target hashes and scope retained."
+    },
+    "completion-web-row-execution-review-20261128.md": {
+      "original_sha256": "5d4823e38317637051eb64a7d0704b8fd6544a311e1be9e0aadea7853af9aa8d",
+      "public_sha256": "c14e6a02e7fd86f99331f27410ff47a8341acc00dc335d0bd590e3504a28e25b",
+      "redaction": "Task absolute paths, private test hosts and full unique account SIDs only; findings, counters, artifact/target hashes and scope retained."
+    },
+    "completion-restore-lease-red-review-20261128.md": {
+      "original_sha256": "849b008c07edb6ec5cbc393d73f879b87fa149556235bc6f31a0ab4a04641bfc",
+      "public_sha256": "849b008c07edb6ec5cbc393d73f879b87fa149556235bc6f31a0ab4a04641bfc",
+      "redaction": "Task absolute paths, private test hosts and full unique account SIDs only; findings, counters, artifact/target hashes and scope retained."
+    },
+    "completion-restore-lease-green-review-20261128.md": {
+      "original_sha256": "214cf01c96e069bdca99628723d8bc09ad427c09dfe2fc9616557387d30a93b1",
+      "public_sha256": "214cf01c96e069bdca99628723d8bc09ad427c09dfe2fc9616557387d30a93b1",
+      "redaction": "Task absolute paths, private test hosts and full unique account SIDs only; findings, counters, artifact/target hashes and scope retained."
+    },
+    "completion-publication-compact-candidate-review-20261128.md": {
+      "original_sha256": "760d10c05c8c5e79204801e64309556903139b963e0183ba808edfc153d06a4b",
+      "public_sha256": "695ef843a103f11797a2718ccfd44218100e9ba839a6458b9c49cd1e98c0ef88",
+      "redaction": "Task absolute paths, private test hosts and full unique account SIDs only; findings, counters, artifact/target hashes and scope retained."
+    }
+  },
+  "remaining": [
+    "Current three-OS source rerun and full required original recovery/independent review",
+    "Installed E content candidate and guarded replay; lifecycle/sync/resource and remaining OS coverage",
+    "H1-H5 actual launchd/user-systemd/SCM and cleanup",
+    "X1 six genuine source-to-different-OS base-only receivers",
+    "Final package/current CI/R008 and clean-context PR review"
+  ],
+  "merge": "PR43 remains draft; no merge authorized this task",
+  "version_boundary": "Atomic-row formal executed before the services-only product patch; its original per-module bindings remain authoritative. Restore green binds the patch. No assertion that these two scopes executed on an identical complete source tree; current source CI follows."
+}

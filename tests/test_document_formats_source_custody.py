@@ -93,3 +93,31 @@ def test_source_collector_prunes_actual_windows_junction(tmp_path, monkeypatch):
         assert (outside / 'must-not-collect.docx').read_bytes() == b'outside sentinel, never a source member'
     finally:
         link.rmdir()
+
+
+def test_compact_triage_is_exact_selected_originals_without_claiming_full_recovery(tmp_path, monkeypatch):
+    from scripts.acceptance.document_formats_source_suite import collect_triage
+    for key, value in {'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '2',
+                       'GITHUB_SHA': 'a' * 40, 'RUNNER_OS': 'Windows'}.items():
+        monkeypatch.setenv(key, value)
+    work = tmp_path / 'work'
+    (work / 'platform').mkdir(parents=True)
+    original = {'platform/junit.xml': b'<testsuite failures="1"/>',
+                'platform/run.stdout': b'\xff\x00\r\n original',
+                'platform/failure.json': '{"error":"中文"}'.encode('utf-8')}
+    for name, raw in original.items(): (work / name).write_bytes(raw)
+    (work / 'platform' / 'task-token').write_bytes(b'not an allowed diagnostic input')
+    output = tmp_path / 'compact'
+    context = tmp_path / 'context.json'
+    collect_triage(work, output, context)
+    index = json.loads((output / 'triage-index.json').read_bytes())
+    assert set(index['files']) == set(original)
+    for name, raw in original.items():
+        assert (output / name).read_bytes() == raw
+        assert index['files'][name] == {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+    assert not (output / 'platform/task-token').exists()
+    assert 'platform/result.json' in index['missing']
+    assert 'full encrypted source archive remains required' in index['scope']
+    ctx = json.loads(context.read_bytes())
+    assert ctx == index['context'] and ctx['artifact_name'] == '008-source-triage-Windows-123-2'
+    assert ctx['commit'] == 'a' * 40
