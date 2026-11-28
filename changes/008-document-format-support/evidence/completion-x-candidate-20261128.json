@@ -1,0 +1,71 @@
+{
+  "status": "candidate_review_passed_only",
+  "reviewer": "/root/completion_cross_os_candidate_review",
+  "reviewed_at": "2026-11-28T07:23:38.548521+00:00",
+  "source_head": "47078938ba592ca6ba8a8d025cc03fa439cb4f1f",
+  "candidate_bindings": {
+    "changes/008-document-format-support/spec.md": "99f0acc008f5be8201c12ff1a620457a17e4e79754131b23e829f76f38fa7986",
+    ".github/workflows/document-formats-cross-os.yml": "ea5ec87225cc4d88b37f6be09b200615519af149e53d0cef718e0fbd5af8b8e3",
+    "scripts/acceptance/document_formats_cross_os.py": "a211dd09bec527b46555c3c5a6680a764c32ab6002ebaf0acb85920f8ba817c9",
+    "scripts/acceptance/document_formats_cross_os_entry.py": "22aeb4062357b61d32d2b6acb098e5ad0ed51ca5dee83278e4a461c99c28becc",
+    "scripts/acceptance/document_formats_cross_os_collect.py": "d15e5888bc952f29ade813b390c920020fff0210685c2693a4ae9e6f691bc9c2",
+    "scripts/acceptance/document_formats_receiver_prepare.py": "b78aa40e9e75ddd2d3679cffc9182d68d75c2a4c80d5b8763dbb30bffa19d9a6",
+    "scripts/acceptance/document_formats_receiver_absence.py": "07132a07ea4a87b64826e5d9af32e312437d51c55c88aefc63ba6f034ef3451f",
+    "scripts/acceptance/document_formats_guard_primitives.py": "8086f94331655db791a6f8ab0863b16d97267fee38547db0aba8b3978372bcd8",
+    "scripts/acceptance/document_formats_protocol_guards.py": "9283faacf292bb0dfe3994d8bcd278ecd64a472b06e773a8e16333333528eda0",
+    "scripts/acceptance/document_formats_installed_prepare.py": "80fd5a9313b1e3ac9979690039a766c5bfc39ee5eeb392ac9571ffeba1669e4f",
+    "scripts/acceptance/document_formats_installed_standard_user.ps1": "faf69501185609ebb21bc997375af630a1473bf8411fd43c6f3ecf78a34c49e7",
+    "scripts/acceptance/document_formats_installed_protocols.py": "4478bb7e25ecb71a45c255f3e0f48d20810580dbf3c747efc687638ed2c3983f",
+    "scripts/acceptance/hub_documents_platform.py": "85f13cfe36d99ad9a374e31e10a232fb56ae7909da4e2e7b5a10e9aff175507c",
+    "scripts/acceptance/hub_documents_packages.py": "2c9204504da050a82f89a960368e77f1f4fca1cdf09b89bcbe74eb5022f76cc2",
+    "tests/test_document_formats_guard_channels.py": "664f4a8f1bf872957359c22ef545bcbaa70536343bb3cef100d523c10f5ba3c7"
+  },
+  "review_original_sha256": "20a85f766548d7aa942289d4d1e910120d3ca82818aa40f7e4ad7413e4e5a806",
+  "v1_findings": [
+    {
+      "id": "X-CAND-01",
+      "status": "addressed",
+      "reason": "真实私有Hubprefix以-I、产品env和相同身份执行OCR_ABSENCE_SOURCE；检查whole prefix、PATH、OCR/TESSDATA变量与常规OS路径，presence/errors/env任一成立拒绝，原stdout/stderr及结构结果保留。其缺失证明按明确执行环境范围判定，不再把configured=false或调用被禁当作未安装。"
+    },
+    {
+      "id": "X-CAND-02",
+      "status": "addressed",
+      "reason": "half raw、missing result与staged每阶段检查空files/library/逐份search，并用合法目标未来signed refs逐份拒绝text、每一表、original-info及download；真实HTTPS发布后相同签名逐项成功。最终及重启后核4份唯一id/origin完整集合。只读取得测试Hub签名材料用作观察，不写DB、不绕过产品接收、签名key不公开。"
+    },
+    {
+      "id": "X-CAND-03",
+      "status": "addressed",
+      "reason": "共享PROCESS_EVENTS覆盖Popen/system/spawn/fork/exec/Windows native事件，NETWORK_EVENTS覆盖stream/UDP/DNS。X无子进程白名单；stdlib socketpair通过真实frame/socket对严格允许，server reply限任务listener上的已连接stream。E例外校验完整C[mcp_argv]和实际命令，Windows native fallback仅信任即时canonical Popen._execute_child的code及globals，保留原事件与effective参数；direct private API仍被拒绝。"
+    },
+    {
+      "id": "X-CAND-04",
+      "status": "addressed",
+      "reason": "actual_identity真实读取Windows TokenUser SID/session（POSIX uid/gid/euid/egid）；PS保存创建账户SID注入target，actor校验SID/no-admin/session，receiver hook对每个真实解释器进程与预期SID/session进行比较。完整身份仍仅私有证据，transfer只保留creator身份收据SHA。"
+    },
+    {
+      "id": "X-CAND-O1",
+      "status": "addressed",
+      "reason": "workflow paths现在包含src/**、tests/**、scripts/acceptance/**、build_packages.py、两包pyproject、uv.lock与本workflow。"
+    }
+  ],
+  "actual_controls": {
+    "mac": {
+      "passed": 29,
+      "skipped": 1,
+      "skip": "native Windows private API absent on macOS"
+    },
+    "windows": {
+      "passed": 24,
+      "skipped": 6,
+      "skip": "native POSIX APIs and sendmsg absent on Windows",
+      "identity": "administrator SSH component only; not standard-account E/H/X"
+    }
+  },
+  "same_os_component": {
+    "documents": 4,
+    "actual_protocol": "HTTPS chunks/stage/publish, same valid future refs unavailable before publish and usable after publish; ACK retry and real restart",
+    "x1_qualified": false
+  },
+  "six_direction_execution": "pending; candidate and component results do not constitute X1 delivery",
+  "custody": "Original source manifests, raw requests/responses, downloads, actual process identities, failures and reviews retained in task-private durable evidence. Public file excludes task credentials, account paths, private keys and signing material."
+}

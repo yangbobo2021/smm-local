@@ -416,3 +416,8 @@ Ubuntu实机健康补证705.87秒批次13过1失败的原始记录保留：Local
 同轮Windows另一失败为实际备份复制PermissionError：Hub正在持有的services/hub-processing锁被公开prepare-restore误列作可恢复数据。新增真实活Hub租约并按公开清单复制，与原三分支、六资料和旧布局一起执行；有效红灯Mac1失败5过、Windows2失败4过并独立expected_failure。产品仅在运行排除集合加入services，不在测试里跳锁；冻结同版绿灯Mac6过28.75秒、Windows6过90.82秒，另18相关回归过/1Windows专属跳过，新上下文独审passed登记。各分支持久raw/results/transfers、数据库、当前保护逐字一致；Windows SSH管理员身份只证明锁组件，不认E/H普通客户端或原生服务。
 
 发布提示的旧Windows原trace另核实：上传结果先显示成功，随后await资料列表刷新，通知在同步读取后59.443ms真正变为完成。保留原24流程/端及48状态图，最终通知使用原拒绝/成功表达式有界等待，另真浏览器控制拒绝永久processing或错误终态；候选独审通过，完整新执行另列。为避免每次诊断都必须下载数百MiB整体，源码CI新增固定名单的原始诊断小集合并独立加密上传，逐原字节/SHA保留，准备失败也列missing。完整归档、认证、上传及验收实际打开原件要求不减少，小集合不能认full recovery或业务passed。上述两项是观察/采证方法调整，不修改产品行为或SPEC。脱敏入口evidence/completion-c1-browser-and-restore-20261128.json；E/H/X及最终交付继续，不合并。
+
+
+2026-11-28 X1候选方法补齐：使用三个实际OS creator与六个不同OS基础Hub receiver独立CI，传输包仅含合成原件/创建端结果/独立真值/实际平台与身份收据摘要；token、DB、签名材料和完整身份仅在私有原件。接收端在实际-I产品解释器中先核处理库不可导入、产品prefix/PATH/显式OCR变量/常规OS路径中无OCR和语言数据，再安装任务私有观察hook；不能以configured=false或禁止调用代替未安装证明。少块、缺结果与stage阶段用同一组合法未来引用逐份核text/table/info/original拒绝，正式发布后相同引用成功，并核完整唯一文档/origin全集、丢回执重试及真实重启；签名只从任务独立库只读取得用于观察，不写库或绕过HTTP接收。
+
+共享E/X观察设施增加实际system/spawn/fork/exec、UDP/stream/DNS通道，stdlib socketpair及任务已accept的stream回复采用真实调用帧/套接字端点限定。MCP仅放行冻结完整实际argv与准确DB；实测Windows3.14.10原生CreateProcess事件命令行损坏，因此仅在即时canonical subprocess.Popen._execute_child代码对象/模块全同的调用帧中读取实际参数，原始事件原样保留，直接private API及错命令仍拒绝。Mac29过1Windows专属跳过、真实Windows管理员SSH24过6API缺席跳过，独立候选v2 passed；同OS协议组件4资料passed但明确x1_qualified=false。三creator/六receiver均待实际CI、完整原件回收和独立执行意见，不认X1或整R008已通过。只调整验证方法，不改变SPEC行为；入口evidence/completion-x-candidate-20261128.json。

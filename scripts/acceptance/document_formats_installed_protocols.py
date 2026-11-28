@@ -1,13 +1,16 @@
 """008 installed products: real creator CLI, browser and MCP protocols.
 
 Uses only new task archives. Fixture generation may import checkout helpers;
-product processes always use the independently installed wheels with -I.
+CLI/Web/MCP entry interpreters use the independently installed wheels with -I.
+Workers retain the product launch flags; their actual prefixes, cwd and identity
+are observed separately.
 """
 from __future__ import annotations
 
 import argparse
 import asyncio
 import base64
+from collections import deque
 import hashlib
 import json
 import os
@@ -20,6 +23,7 @@ import traceback
 import shutil
 from types import SimpleNamespace
 from urllib.request import Request
+from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -27,7 +31,100 @@ from hub_documents_platform import Probe, now, sha
 
 
 class FormatProbe(Probe):
+    @staticmethod
+    def actor():
+        value = Probe.actor()
+        from document_formats_guard_primitives import actual_identity
+        value.update(actual_identity())
+        if os.name == 'nt':
+            import ctypes
+            import re
+            session = ctypes.c_ulong()
+            assert ctypes.windll.kernel32.ProcessIdToSessionId(os.getpid(), ctypes.byref(session))
+            value['session_id'] = session.value
+            raw = subprocess.check_output(['whoami.exe', '/groups', '/fo', 'csv', '/nh'])
+            value['group_sids'] = sorted({sid.decode('ascii') for sid in re.findall(rb'S-\d-(?:\d+-)*\d+', raw)})
+            value['groups_original_base64'] = base64.b64encode(raw).decode('ascii')
+            assert 'S-1-5-32-544' not in value['group_sids'], 'E requires a separate non-administrator account'
+            assert value['session_id'] > 0, 'E requires an actual interactive session, not session0'
+        else:
+            assert value['euid'] == value['uid'] != 0
+        return value
+
+    def save(self, name, value):
+        if name == 'commands':
+            # Capture each real call once, at observation time. Rewriting a
+            # growing list costs quadratic I/O and can destroy the previous
+            # complete log when storage fills. Raw stdout/base64 fields remain
+            # intact in the append-only stream, including non-UTF8 controls.
+            path = self.out / 'commands.jsonl'
+            if not hasattr(self, '_commands_digest'):
+                assert not path.exists()
+                self._commands_digest = hashlib.sha256()
+                self._commands_bytes = self._commands_count = 0
+                self._commands_pending = deque()
+                self._commands_dirty = False
+            observed = self._commands_count + len(self._commands_pending)
+            assert len(value) >= observed, 'command observations must be append-only'
+            # Freeze even the not-yet-durable observations. A caller changing a
+            # request object after an I/O error cannot rewrite its earlier call.
+            self._commands_pending.extend(
+                (json.dumps(record, ensure_ascii=False, separators=(',', ':'), default=str) + '\n').encode('utf-8')
+                for record in value[observed:])
+            with path.open('r+b' if path.exists() else 'x+b', buffering=0) as stream:
+                if self._commands_dirty:
+                    # A failed write/fsync may leave an incomplete or complete
+                    # unconfirmed tail. Keep and verify the last durable prefix,
+                    # then discard only that unconfirmed tail before replay.
+                    stream.seek(0)
+                    prefix = hashlib.sha256()
+                    remaining = self._commands_bytes
+                    while remaining:
+                        raw = stream.read(min(1048576, remaining))
+                        assert raw, 'durable command prefix was truncated'
+                        prefix.update(raw)
+                        remaining -= len(raw)
+                    assert prefix.digest() == self._commands_digest.digest(), 'durable command prefix changed'
+                    stream.truncate(self._commands_bytes)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                    self._commands_dirty = False
+                stream.seek(0, os.SEEK_END)
+                assert stream.tell() == self._commands_bytes, 'unexpected command log tail'
+                while self._commands_pending:
+                    raw = self._commands_pending[0]
+                    self._commands_dirty = True
+                    remaining = memoryview(raw)
+                    while remaining:
+                        written = stream.write(remaining)
+                        if not written:
+                            raise OSError('command log write made no progress')
+                        remaining = remaining[written:]
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                    self._commands_digest.update(raw)
+                    self._commands_bytes += len(raw)
+                    self._commands_count += 1
+                    self._commands_pending.popleft()
+                    self._commands_dirty = False
+            value = {'schema': 'smm-008-command-jsonl-v1', 'path': 'commands.jsonl',
+                     'records': self._commands_count, 'bytes': self._commands_bytes,
+                     'sha256': self._commands_digest.hexdigest(),
+                     'semantics': 'one frozen real request/response per line; original stdout/stderr base64 preserved'}
+        target = self.out / (name + '.json')
+        temporary = target.with_name(target.name + '.' + uuid4().hex + '.tmp')
+        try:
+            with temporary.open('x', encoding='utf-8') as stream:
+                stream.write(json.dumps(value, ensure_ascii=False, indent=2, default=str) + '\n')
+                stream.flush()
+                os.fsync(stream.fileno())
+            temporary.replace(target)
+        finally:
+            temporary.unlink(missing_ok=True)
+
     def __init__(self, config, out):
+        if config.get("expected_actor_sid"):
+            assert self.actor()["sid"] == config["expected_actor_sid"]
         super().__init__(config, out)
         self.materials = json.loads(Path(config['materials']).read_text(encoding='utf-8'))
         os.environ.update(SMM_008_OCR_EXECUTABLE=self.materials['ocr_executable'],
@@ -51,7 +148,35 @@ class FormatProbe(Probe):
 
     def run(self, label, argv, **options):
         if label == 'openssl':
-            argv = [shutil.which('openssl'), *argv[1:]]
+            # Controller-owned test TLS works without an interactive PATH or
+            # a platform-specific openssl installation. Product TLS is real.
+            from datetime import datetime, timedelta, timezone
+            from ipaddress import ip_address
+            from cryptography import x509
+            from cryptography.hazmat.primitives import hashes, serialization
+            from cryptography.hazmat.primitives.asymmetric import rsa
+            from cryptography.x509.oid import NameOID
+            key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+            name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, 'localhost')])
+            current = datetime.now(timezone.utc)
+            cert = (x509.CertificateBuilder().subject_name(name).issuer_name(name)
+                    .public_key(key.public_key()).serial_number(x509.random_serial_number())
+                    .not_valid_before(current - timedelta(minutes=1)).not_valid_after(current + timedelta(days=2))
+                    .add_extension(x509.BasicConstraints(ca=True, path_length=None), critical=True)
+                    .add_extension(x509.SubjectKeyIdentifier.from_public_key(key.public_key()), critical=False)
+                    .add_extension(x509.AuthorityKeyIdentifier.from_issuer_public_key(key.public_key()), critical=False)
+                    .add_extension(x509.KeyUsage(digital_signature=True, content_commitment=False,
+                        key_encipherment=True, data_encipherment=False, key_agreement=False,
+                        key_cert_sign=True, crl_sign=True, encipher_only=False, decipher_only=False), critical=True)
+                    .add_extension(x509.SubjectAlternativeName([x509.DNSName('localhost'), x509.IPAddress(ip_address('127.0.0.1'))]), critical=False)
+                    .sign(key, hashes.SHA256()))
+            self.key.write_bytes(key.private_bytes(serialization.Encoding.PEM, serialization.PrivateFormat.PKCS8,
+                                                    serialization.NoEncryption()))
+            self.ca.write_bytes(cert.public_bytes(serialization.Encoding.PEM))
+            self.save('task-tls-generation', {'implementation': 'controller cryptography',
+                'certificate_sha256': sha(self.ca.read_bytes()), 'names': ['localhost', '127.0.0.1'],
+                'purpose': 'isolated test service TLS; private key stays in private task evidence'})
+            return ''
         return super().run(label, argv, **options)
 
     def version_bindings(self):
@@ -453,8 +578,10 @@ class FormatProbe(Probe):
                                  prefix='/api' if role == 'a' else '/v1', token=self.token)
         evidence = self.out / 'browser' / phase / role
         evidence.mkdir(parents=True)
-        public = subprocess.run(['openssl', 'x509', '-in', str(self.ca), '-pubkey', '-noout'], capture_output=True, check=True).stdout
-        der = subprocess.run(['openssl', 'pkey', '-pubin', '-outform', 'der'], input=public, capture_output=True, check=True).stdout
+        from cryptography import x509
+        from cryptography.hazmat.primitives import serialization
+        der = x509.load_pem_x509_certificate(self.ca.read_bytes()).public_key().public_bytes(
+            serialization.Encoding.DER, serialization.PublicFormat.SubjectPublicKeyInfo)
         pin = base64.b64encode(hashlib.sha256(der).digest()).decode()
 
         class InstalledBrowser(Browser):
