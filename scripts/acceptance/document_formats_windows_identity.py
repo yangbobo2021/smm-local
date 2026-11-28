@@ -61,3 +61,30 @@ def validate_chain(ocr, worker, service, *, sid, session, attempt_id, ancestors)
     assert ocr['parent_pid'] == worker['pid'] and service['pid'] in ancestors
     assert 'smm_hub._archive.document_worker' in worker['argv']
     assert worker['argv'][worker['argv'].index('--task-token') + 1] == attempt_id
+
+
+def validate_worker_enrollment(executing, registered, controller, state, *, sid, session,
+        attempt_id, module, declared_python, base_python):
+    """Bind the real interpreter to its atomically enrolled venv redirector."""
+    import os
+    assert state['token'] == attempt_id and state['windows_job']['atomic'] is True
+    assert state['worker'] == {'pid': registered['pid'], 'created': registered['created']}
+    assert state['controller'] == {'pid': controller['pid'], 'created': controller['created']}
+    assert registered['parent_pid'] == controller['pid']
+    assert controller['sid'] == sid and controller['session_id'] == session
+    assert state['windows_job']['worker_ticks'] == registered['creation_filetime']
+    assert state['windows_job']['controller_ticks'] == controller['creation_filetime']
+    tail = ['-B', '-m', module, '--task-token', attempt_id]
+    for sample in (executing, registered):
+        assert sample['sid'] == sid and sample['session_id'] == session
+        assert sample['argv'][1:] == tail
+        assert os.path.samefile(sample['argv'][0], declared_python)
+        assert {'pid': sample['pid'], 'created': sample['created']} in state['children']
+    assert os.path.samefile(registered['executable'], declared_python)
+    if executing['pid'] != registered['pid']:
+        assert executing['parent_pid'] == registered['pid']
+        assert executing['created'] >= registered['created']
+        assert os.path.samefile(executing['executable'], base_python)
+    else:
+        assert executing['creation_filetime'] == registered['creation_filetime']
+        assert os.path.samefile(executing['executable'], registered['executable'])

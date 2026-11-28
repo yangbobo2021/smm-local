@@ -558,46 +558,70 @@ def actual_worker_exception(probe):
         probe.phase = 'explicit-upload'
         armed = probe.gate_root / 'armed'
         armed.write_text(probe.fault_sha, encoding='utf-8')
-        item = {'role': role, 'project': probe.projects[role][0], 'label': role + '-fault', 'format': 'docx'}
-        receipt = upload(probe, item, probe.fault_raw, await_terminal=False)
-        deadline = time.monotonic() + 30
-        while True:
-            files = [p for p in probe.gate_root.glob('*.json')]
-            candidates = [json.loads(p.read_text()) for p in files]
-            own = [entry for entry in candidates if entry['token'] == receipt['attempt_id']]
-            if own:
-                assert len(own) == 1
-                worker = own[0]
-                break
-            assert time.monotonic() < deadline, receipt
-            time.sleep(.02)
-        process = psutil.Process(worker['pid'])
-        assert process.create_time() == worker['created']
-        assert process.exe() == worker['exe'] and process.cmdline() == worker['argv']
-        assert worker['token'] in process.cmdline()
-        expected_module = 'smm_hub._archive.document_worker' if role == 'hub' else 'smm_local.document_worker'
-        assert expected_module in process.cmdline()
-        stamp = spawn_identity(process)
-        children = [spawn_identity(child) for child in process.children(recursive=True)]
-        parent = probe.hub_state if role == 'hub' else probe.db['a'].parent
-        root = parent / '.document-snapshots/tasks'
-        while True:
-            state = json.loads((root / 'active.json').read_text())
-            if state.get('peak_rss', 0) > 0:
-                break
-            assert time.monotonic() < deadline
-            time.sleep(.02)
-        assert state['worker'] == {'pid': worker['pid'], 'created': worker['created']}
-        assert state['rss_limit'] == 1024 * 1024 * 1024 and state['temp_limit'] == 256 * 1024 * 1024
-        assert state['seconds_limit'] == 300 and state['gate_open'] is True
-        if psutil.WINDOWS:
-            assert state['windows_job']['atomic'] is True
-        control = next(i for i in probe.items if i['role'] == role and i['kind'] == 'docx' and i.get('version') == 2)
-        probe.phase = 'archive-only'
-        saved = snapshot(probe, control)
-        started = time.monotonic()
-        process.kill()
+        receipt = None
         try:
+            item = {'role': role, 'project': probe.projects[role][0], 'label': role + '-fault', 'format': 'docx'}
+            receipt = upload(probe, item, probe.fault_raw, await_terminal=False)
+            deadline = time.monotonic() + 30
+            while True:
+                files = [p for p in probe.gate_root.glob('*.json')]
+                candidates = [json.loads(p.read_text()) for p in files]
+                own = [entry for entry in candidates if entry['token'] == receipt['attempt_id']]
+                if own:
+                    assert len(own) == 1
+                    worker = own[0]
+                    break
+                assert time.monotonic() < deadline, receipt
+                time.sleep(.02)
+            process = psutil.Process(worker['pid'])
+            assert process.create_time() == worker['created']
+            assert process.exe() == worker['exe'] and process.cmdline() == worker['argv']
+            assert worker['token'] in process.cmdline()
+            expected_module = 'smm_hub._archive.document_worker' if role == 'hub' else 'smm_local.document_worker'
+            assert expected_module in process.cmdline()
+            stamp = spawn_identity(process)
+            children = [spawn_identity(child) for child in process.children(recursive=True)]
+            parent = probe.hub_state if role == 'hub' else probe.db['a'].parent
+            root = parent / '.document-snapshots/tasks'
+            while True:
+                state = json.loads((root / 'active.json').read_text())
+                if state.get('peak_rss', 0) > 0 and stamp in state.get('children', []):
+                    break
+                assert time.monotonic() < deadline
+                time.sleep(.02)
+            supervised_stamp = state['worker']
+            supervised = matching_process(supervised_stamp)
+            assert supervised is not None
+            if psutil.WINDOWS:
+                from document_formats_windows_identity import sample_process, validate_worker_enrollment
+                actual_sample, registered_sample = sample_process(process), sample_process(supervised)
+                controller = matching_process(state['controller'])
+                assert controller is not None
+                launcher = probe.processes[role]
+                assert launcher.poll() is None
+                launcher_stamp = spawn_identity(psutil.Process(launcher.pid))
+                assert controller.pid == launcher.pid or launcher.pid in [p.pid for p in controller.parents()]
+                controller_sample = sample_process(controller)
+                actor = probe.actor()
+                enrollment = {'executing': actual_sample, 'registered': registered_sample,
+                    'controller': controller_sample, 'owned_server_launcher': launcher_stamp,
+                    'supervision': state, 'actor': actor}
+                probe.save('actual-worker-enrollment-'+receipt['attempt_id'], enrollment)
+                validate_worker_enrollment(actual_sample, registered_sample, controller_sample, state,
+                    sid=actor['sid'], session=actor['session_id'], attempt_id=receipt['attempt_id'],
+                    module=expected_module, declared_python=probe.config['hub_python' if role=='hub' else 'local_python'],
+                    base_python=probe.config['base_python']['base_executable'])
+            else:
+                assert supervised_stamp == {'pid': worker['pid'], 'created': worker['created']}
+            assert state['rss_limit'] == 1024 * 1024 * 1024 and state['temp_limit'] == 256 * 1024 * 1024
+            assert state['seconds_limit'] == 300 and state['gate_open'] is True
+            if psutil.WINDOWS:
+                assert state['windows_job']['atomic'] is True
+            control = next(i for i in probe.items if i['role'] == role and i['kind'] == 'docx' and i.get('version') == 2)
+            probe.phase = 'archive-only'
+            saved = snapshot(probe, control)
+            started = time.monotonic()
+            process.kill()
             entry = wait(probe, role, receipt['document_id'], timeout=5)
             assert entry['latest_attempt']['status'] == 'failed'
             assert entry['published_snapshot'] is None
@@ -607,7 +631,7 @@ def actual_worker_exception(probe):
                 assert time.monotonic() < until
                 time.sleep(.02)
             assert time.monotonic() - started <= 5
-            for member in [stamp, *children]:
+            for member in [supervised_stamp, stamp, *children]:
                 while matching_process(member) is not None:
                     assert time.monotonic() < until
                     time.sleep(.02)
@@ -627,14 +651,16 @@ def actual_worker_exception(probe):
             probe.items.append(next_item)
             probe.register_source_paths()
             observations.append({'role': role, 'worker': worker, 'actual_enrollment': stamp,
-                'children': children, 'supervision': state, 'failed_attempt': entry['latest_attempt'],
+                'supervised_root': supervised_stamp, 'children': children, 'supervision': state, 'failed_attempt': entry['latest_attempt'],
                 'cleanup': json.loads(proof.read_text()), 'seconds_to_terminal_cleanup': terminal_elapsed,
                 'subsequent_document_id': next_item['id'], 'old_document_read_while_held_and_after': True})
         finally:
-            (probe.gate_root / (worker['token'] + '.release')).touch()
+            if receipt is not None:
+                (probe.gate_root / (receipt['attempt_id'] + '.release')).touch()
+            else:
+                (probe.gate_root / 'abort').touch()
             armed.unlink(missing_ok=True)
     probe.save('lifecycle-actual-worker-exception', observations)
-
 
 def execute(config_path, output, *, native_service=False):
     import os

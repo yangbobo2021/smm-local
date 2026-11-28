@@ -73,8 +73,9 @@ if service_actor:
   _error=_c.get_last_error() if _failed else 0
   if not _failed:_k.CloseHandle(_handle)
   _results.append({'check':_name,'desired_access':_access,'denied':_failed,'winerror':_error})
-  assert _failed is _denied and (not _denied or _error==5),_results
- emit('native-storage-ancestor-control',checks=_results)
+ emit('native-storage-ancestor-control',checks=_results,identity=actor)
+ assert all(row['denied']==(row['check']!='state-list-and-security') and
+    (not row['denied'] or row['winerror']==5) for row in _results),_results
 '''
     module.write_text(code,encoding='utf-8');startup.write_text('import _smm_008_native_guard\n',encoding='utf-8')
     manager.config['native_observation']={'root':str(shared),'log':str(shared/'hub-guard.jsonl'),
@@ -82,3 +83,30 @@ if service_actor:
     manager.save('native-guard-installation',{'hook':str(module),'hook_sha256':hashlib.sha256(module.read_bytes()).hexdigest(),
         'startup':str(startup),'startup_sha256':hashlib.sha256(startup.read_bytes()).hexdigest(),
         'config':config,'maintenance_identity':actor,'scope':'actual maintenance allowed; actual content processing restricted to LocalService19/session0'})
+
+
+def validate_storage_access(observations, *, service_name, state):
+    """A .pth import error may be printed and swallowed: require every receipt."""
+    identities=[(index,event) for index,event in enumerate(observations)
+        if event['kind']=='identity' and event['owner']=='hub' and event.get('sid')=='S-1-5-19'
+        and event.get('session_id')==0]
+    assert identities,'No actual LocalService startup identity'
+    accepted=[];main=False;worker=False
+    for index,identity in identities:
+        end=next((offset for offset,event in enumerate(observations[index+1:],index+1)
+            if event['kind']=='identity' and event['pid']==identity['pid'] and event['owner']=='hub'),len(observations))
+        controls=[event for event in observations[index+1:end]
+            if event['kind']=='native-storage-ancestor-control' and event['owner']=='hub' and event['pid']==identity['pid']]
+        assert len(controls)==1,('Missing/duplicate service-process storage access receipt',identity,controls)
+        control=controls[0]
+        for field in ('sid','session_id','argv','executable','prefix','cwd'):
+            assert control['identity'][field]==identity[field],(field,identity,control)
+        assert control['checks']==[
+            {'check':'ancestor-list','desired_access':1,'denied':True,'winerror':5},
+            {'check':'ancestor-security','desired_access':0x20000,'denied':True,'winerror':5},
+            {'check':'state-list-and-security','desired_access':0x20081,'denied':False,'winerror':0}],control
+        main|=identity['argv']==['-c',service_name,str(state)]
+        worker|='smm_hub._archive.document_worker' in identity['argv']
+        accepted.append({'startup_identity':identity,'actual_control':control})
+    assert main and worker,'Both actual SCM service and actual document worker controls are required'
+    return accepted

@@ -739,6 +739,10 @@ def ordinary(config,output):
         restart_read_only(probe,restart_start)
         replay(probe,cases,'native-after-restart',refs);assert_read_only(probe,start)
         observation=probe.rpc('formats_ocr_observations');assert not observation['errors'],observation['errors']
+        from document_formats_scm_native_guard import validate_storage_access
+        access=validate_storage_access(events(probe),service_name=probe.config['native_observation']['service_name'],
+            state=probe.hub_state)
+        probe.save('actual-service-worker-storage-access',access)
         probe.rpc('native_task_cleanup')
         assert probe.version_bindings()==bindings
         result={'status':'passed','scope':'dedicated actual SCM H1-H4 with standard Local/browser; H5 administrator cleanup separately required',
